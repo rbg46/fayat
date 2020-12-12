@@ -1,0 +1,345 @@
+﻿$color_1: rgb(0, 82, 160);
+$color_2: #fff;
+$color_3: rgb(103,117,127);
+$background_color_1: rgb(0,82,160);
+$background_color_2: rgb(242, 246, 250);
+$background_color_3: rgb(157,187,97);
+$background_color_4: rgb(222,63,126);
+$background_color_5: rgb(234,112,13);
+
+.no-pr {
+    padding-right: 0;
+}
+
+.no-pad {
+    padding: 0;
+}
+
+.container-fluid.CI {
+    margin-bottom: 0;
+
+    .btns {
+        display: flex;
+    }
+}
+
+.CI {
+    fred-side {
+        width: 510px;
+        left: -510px;
+
+        icon {
+            color: $color_1;
+        }
+
+        main {
+            padding: 5px;
+            height: calc(100vh - 200px);
+            max-height: 100%;
+
+            .selection_filters {
+                height: 45px;
+
+                .lbl_l {
+                    display: table;
+                    height: 100%;
+
+                    .lbl_txt {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        height: 100%;
+                    }
+                }
+
+                .sm_pad_r {
+                    padding-right: 4px;
+                }
+            }
+        }
+    }
+}
+
+.CI-list {
+    table {
+        position: relative;
+        overflow: hidden;
+        border-collapse: collapse;
+
+        tbody {
+            tr {
+                cursor: pointer;
+            }
+        }
+    }
+
+    thead {
+        position: relative;
+        display: block;
+        overflow-x: visible;
+
+        tr {
+            th {
+                height: 30px;
+                background-color: $background_color_1;
+                color: $color_2;
+                font-size: 11px;
+                font-weight: 700;
+                padding-left: 5px;
+            }
+        }
+    }
+
+    tbody {
+        position: relative;
+        display: block;
+        overflow: auto;
+    }
+
+    .col-1 {
+        width: 170px;
+        min-width: 170px;
+    }
+
+    .col-2 {
+        width: 280px;
+        min-width: 280px;
+    }
+
+    .col-3 {
+        width: 170px;
+        min-width: 170px;
+    }
+
+    .col-4 {
+        width: 170px;
+        min-width: 170px;
+    }
+
+    .col-5 {
+        width: 170px;
+        min-width: 170px;
+    }
+
+    .col-6 {
+        width: 170px;
+        min-width: 170px;
+    }
+
+    .col-7 {
+        width: 280px;
+        min-width: 280px;
+    }
+
+    .col-8 {
+        width: 170px;
+        min-width: 170px;
+    }
+
+    .col-9 {
+        width: 170px;
+        min-width: 170px;
+    }
+
+    .col-10 {
+        width: 50px;
+        min-width: 50px;
+    }
+
+    .col-11 {
+        width: 50px;
+        min-width: 50px;
+    }
+}
+
+/* spécifique à firefox */
+@-moz-document url-prefix() {
+    .table-container table thead tr {
+        padding-right: 16px;
+    }
+}
+
+.material-icons.clic_detail {
+    color: $color_3;
+    font-size: 20px;
+}
+
+.filter-container {
+    input {
+        width: 100%;
+    }
+}
+
+#containerTableauCI {
+    td {
+        padding: 0 0 0 8px;
+        height: 30px;
+        font-size: 11px;
+
+        &:first-child {
+            position: relative;
+            background-color: $background_color_2;
+        }
+
+        .tile-fes-biz {
+            font-size: 11px;
+            background-color: $background_color_3;
+            color: $color_2;
+            padding: 1px 6px;
+            width: 100px;
+            display: inline-block;
+        }
+
+        .tile-fes-study {
+            font-size: 11px;
+            background-color: $background_color_4;
+            color: $color_2;
+            padding: 1px 6px;
+            width: 100px;
+            display: inline-block;
+        }
+
+        .tile-fes-section {
+            font-size: 11px;
+            background-color: $background_color_5;
+            color: $color_2;
+            padding: 1px 6px;
+            width: 100px;
+            display: inline-block;
+        }
+    }
+
+    td.fes-biz {
+        &::before {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 2%;
+            content: "";
+            background-color: $background_color_3;
+        }
+    }
+
+    td.fes-study {
+        &::before {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 2%;
+            content: "";
+            background-color: $background_color_4;
+        }
+    }
+
+    td.fes-section {
+        &::before {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 2%;
+            content: "";
+            background-color: $background_color_5;
+        }
+    }
+}
+
+#fixedTable {
+    thead {
+        tr {
+            th {
+                &:first-child {
+                    position: relative;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+    .container-fluid.CI {
+        .input-group-btn {
+            .y_search {
+                height: 23px;
+            }
+        }
+    }
+
+    #containerTableauCI {
+        td {
+            height: 34px;
+            padding: 0;
+            padding-left: 8px;
+        }
+    }
+
+    .CI-list {
+        .col-1 {
+            width: 80px;
+            min-width: 80px;
+        }
+
+        .col-2 {
+            width: 210px;
+            min-width: 210px;
+        }
+
+        .col-3 {
+            width: 140px;
+            min-width: 140px;
+        }
+
+        .col-4 {
+            width: 100px;
+            min-width: 100px;
+        }
+
+        .col-5 {
+            width: 110px;
+            min-width: 110px;
+        }
+
+        .col-6 {
+            width: 100px;
+            min-width: 100px;
+        }
+
+        .col-7 {
+            width: 230px;
+            min-width: 230px;
+        }
+
+        .col-8 {
+            width: 112px;
+            min-width: 112px;
+        }
+
+        .col-9 {
+            width: 112px;
+            min-width: 112px;
+        }
+
+        .col-10 {
+            width: 50px;
+            min-width: 50px;
+        }
+
+        .col-11 {
+            width: 50px;
+            min-width: 50px;
+        }
+    }
+
+    .material-icons {
+        font-size: 23px;
+    }
+
+    .material-icons.clic_detail {
+        font-size: 25px;
+    }
+}

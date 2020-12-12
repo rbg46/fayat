@@ -1,0 +1,8 @@
+﻿<div class="notifs alert alert-info alert-dismissible fade in" ng-show="$ctrl.canShowNotification()" style="visibility:hidden">
+  <a href="#" class="close-notif" data-dismiss="alert" aria-label="close" ng-click="$ctrl.onClose()">&times;</a>
+  {{ $ctrl.message }}
+  <div class="read-close">
+    <button ng-click="$ctrl.markAsRead()">{{$ctrl.resources.txtNotificationRead}}</button>
+    <button ng-click="$ctrl.onClose()">{{$ctrl.resources.txtNotificationClose}}</button>
+  </div>
+</div>

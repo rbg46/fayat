@@ -1,0 +1,1534 @@
+﻿@charset "UTF-8";
+/* .pointages-personnels {
+    padding-bottom: 50px;
+} */
+/* Tableau */
+/* Toolbar */
+/* Bandeau */
+/* Footer bandeau */
+/* Pop Up modal */
+/* CHECKBOXES */
+/* Stepper */
+/*Container Latéral Droite*/
+/* Code de déplacement plus favorable et code zone de déplacement saisi manuellement */
+/* Date-Picker */
+/* Cards Statut de Validation */
+.no-p {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.no-pl {
+    padding-left: 0;
+}
+
+.no-pr {
+    padding-right: 0;
+}
+
+.pl5 {
+    padding-left: 5px;
+}
+
+.pl12 {
+    padding-left: 12px;
+}
+
+.pl25 {
+    padding-left: 25px;
+}
+
+.pointages-personnels h1 {
+    margin-bottom: 20px;
+}
+
+.pointages-personnels .panel-default {
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.pointages-personnels .panel-default > .panel-heading {
+    border: none;
+    cursor: default;
+    background-color: #e1e3e5;
+}
+
+.pointages-personnels .filter input[type="text"] {
+    height: 30px;
+}
+
+.pointages-personnels .filter.no-pr {
+    padding-right: 0;
+    display: flex;
+}
+
+.pointages-personnels .filter.no-pr .btn {
+    font-size: 11px;
+    margin-top: 0;
+    height: 30px;
+}
+
+.pointages-personnels .filter.no-pr .fred-button.white-star {
+    background-color: #ff0066;
+    color: #fff;
+    padding: 0 12px;
+    margin-top: 0;
+    width: 30px;
+    height: 30px;
+}
+
+.pointages-personnels .filter.no-pr .fred-button.white-star:hover {
+    background-color: #fff;
+    color: #ff0066;
+}
+
+.pointages-personnels .infofilter {
+    font-weight: 400;
+    color: #757575;
+    display: block;
+}
+
+.pointages-personnels .pick-multi .preLook {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.separateur {
+    border-left: 1px #67757f solid;
+    padding-left: 30px;
+}
+
+.input-group.date {
+    height: 30px;
+    width: 90%;
+    margin-right: auto;
+    margin-left: 0;
+}
+
+.input-group.date .input-group-addon {
+    padding-bottom: 4px;
+}
+
+.boutons {
+    padding-top: 29px;
+    padding-right: 40px;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+.form-group.first {
+    padding-left: 30px;
+}
+
+.bloc-liste {
+    margin-top: 15px;
+}
+
+.pointages {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+    font-size: 11px;
+}
+
+.pointages thead {
+    flex: 0 0 auto;
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+}
+
+.pointages thead tr {
+    border-top: 5px solid #09ada6;
+}
+
+.pointages th {
+    text-align: center;
+    font-size: 13px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #e1e3e5;
+    color: #0052a0;
+}
+
+.pointages th:first-child {
+    border-left: 1px solid #aeaeae;
+}
+
+.pointages tbody tr {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+}
+
+.pointages tbody .line {
+    height: 49px;
+    border-left: 1px solid #aeaeae;
+}
+
+.pointages tbody.body-list {
+    flex: 1 1 auto;
+    display: block;
+    overflow-y: auto;
+    width: calc(100% + 9px);
+    height: calc(100vh - 270px);
+}
+
+.pointages td {
+    text-align: center;
+}
+
+.pointages td input {
+    height: 32px;
+}
+
+.pointages td input[type="number"] {
+    width: 76%;
+    text-align: center;
+}
+
+.pointages td .input-number {
+    width: 76%;
+    text-align: center;
+}
+
+.pointages td input[type="text"] {
+    text-align: center;
+    width: 80%;
+}
+
+.pointages .niv3-headers {
+    border-bottom: 1px solid #aeaeae;
+}
+
+.pointages .niv3-headers td {
+    background-color: #e7e9ea;
+    color: #0052a0;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.pointages .niv3-headers td .total-time {
+    font-weight: 600;
+    display: inline-block;
+    width: 76%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.pointages .niv3-headers td span {
+    border: 1px solid #0052a0;
+    padding: 2px 8px;
+}
+
+.pointages .niv3-headers td span.alerte {
+    border: none;
+}
+
+.pointages .icons-actions {
+    text-align: right;
+}
+
+.pointages .icons-actions .conteneur2 {
+    position: relative;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pointages .icons-actions .fa-copy {
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+.pointages .icons-actions .material-icons {
+    cursor: pointer;
+}
+
+.pointages .niv2-headers td {
+    font-size: 11px;
+    background-color: #e7e9ea;
+    color: #0052a0;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.pointages .niv2-headers td:first-child {
+    border-left: 1px solid #aeaeae;
+    border-right: 1px solid #aeaeae;
+}
+
+.pointages .multi-rows {
+    vertical-align: top;
+    padding-top: 0;
+    padding-right: 5px;
+    position: relative;
+}
+
+.pointages .multi-rows .data {
+    display: inline-block;
+}
+
+.pointages .multi-rows .data.col1 {
+    padding-top: 16px;
+}
+
+.pointages .multi-rows .flaticon-add-2 {
+    font-size: 25px;
+    font-weight: bold;
+    vertical-align: middle;
+    cursor: pointer;
+    padding-right: 7px;
+    padding-top: 7px;
+}
+
+.pointages .single-row {
+    vertical-align: top;
+    text-align: center;
+    background-color: #fff;
+    border-left: 1px solid #aeaeae;
+    border-right: 1px solid #aeaeae;
+}
+
+.pointages .single-row .data {
+    display: inline-block;
+}
+
+.pointages .single-row .flaticon-add-2 {
+    font-size: 25px;
+    font-weight: bold;
+    vertical-align: middle;
+    cursor: pointer;
+    padding-right: 7px;
+    height: 33px;
+    margin-left: 7px;
+}
+
+.pointages .data.CI {
+    float: left;
+    margin-left: 9%;
+    line-height: 25px;
+}
+
+.pointages .even td {
+    background-color: #f6f7f7;
+}
+
+.pointages .even .single-row {
+    background-color: #fff;
+    border-left: 1px solid #aeaeae;
+    border-right: 1px solid #aeaeae;
+}
+
+.pointages .odd td {
+    background-color: #f0f1f2;
+}
+
+.pointages .odd .single-row {
+    background-color: #fff;
+    border-left: 1px solid #aeaeae;
+    border-right: 1px solid #aeaeae;
+}
+
+.pointages .bank {
+    background-color: #ffc000;
+}
+
+.pointages .bank .single-row.dateOdd .conteneur1 {
+    position: relative;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.pointages .bank .single-row.dateOdd .conteneur1:before {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 8%;
+    content: "";
+    background-color: #53a8c1;
+}
+
+.pointages .bank .single-row.dateEven .conteneur1:before {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 8%;
+    content: "";
+    background-color: #87c3d5;
+}
+
+.pointages .weekend {
+    background-color: #e7e9ea;
+}
+
+.pointages .weekend .single-row.dateOdd .conteneur1 {
+    position: relative;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.pointages .weekend .single-row.dateOdd .conteneur1:before {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 8%;
+    content: "";
+    background-color: #53a8c1;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 8%;
+    content: "";
+    background-color: #df5089;
+}
+
+.pointages .weekend .single-row.dateEven .conteneur1:before {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 8%;
+    content: "";
+    background-color: #db8cab;
+}
+
+.pointages .single-row.dateOdd .conteneur1 {
+    position: relative;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.pointages .single-row.dateOdd .conteneur1:before {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 8%;
+    content: "";
+    background-color: #53a8c1;
+}
+
+.pointages .single-row.dateEven .conteneur1 {
+    position: relative;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.pointages .single-row.dateEven .conteneur1:before {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 8%;
+    content: "";
+    background-color: #87c3d5;
+}
+
+.pointages .conteneur1 .preLook {
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+.pointages .conteneur1 .preLook .inputPL {
+    border: none;
+}
+
+.pointages .conteneur1 .preLook .inputPL .material-icons {
+    border: 1px solid #000000;
+}
+
+.pointages .conteneur1 .focused {
+    border: none;
+}
+
+.pointages .fa-refresh {
+    vertical-align: text-bottom;
+    cursor: pointer;
+}
+
+.pointages .cbox {
+    margin-left: 5px;
+}
+
+.pointages .limited {
+    white-space: nowrap;
+    width: 80%;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+}
+
+.pointages .bd-r {
+    border-right: 1px solid #aeaeae;
+}
+
+.pointages .bd-l {
+    border-left: 1px solid #aeaeae;
+}
+
+.pointages .bd-b {
+    border-bottom: 1px solid #aeaeae;
+}
+
+.pointages .bd-t {
+    border-top: 1px solid #aeaeae;
+}
+
+.pointages .copy-icon {
+    padding-top: 3px;
+    padding-right: 0;
+}
+
+.pointages .hmaj-data {
+    font-size: 11px;
+}
+
+.pointages .tab-icons .fa-copy {
+    cursor: pointer;
+}
+
+.pointages .tab-icons .material-icons {
+    cursor: pointer;
+}
+
+.pointages .preLook {
+    width: 76%;
+    margin-right: 15px;
+}
+
+.pointages .verrou {
+    float: left;
+    margin-left: 2%;
+    cursor: pointer;
+}
+
+.pointages .verrou.consult {
+    font-size: 18px;
+}
+
+.pointages .verrou.locked {
+    color: #09ada6;
+}
+
+.pointages .alerte {
+    float: left;
+    margin-left: 5%;
+    cursor: pointer;
+    color: #df5089;
+}
+
+.pointages label {
+    margin-bottom: 0;
+}
+
+.pointages .primes {
+    font-weight: normal;
+}
+
+.pointages .focused {
+    border: 2px solid #09ada6;
+}
+
+.pointages .type1 {
+    width: 6%;
+}
+
+.pointages .type1.no-dep {
+    width: 8%;
+}
+
+.pointages .type2 {
+    width: 22%;
+}
+
+.pointages .type2.no-dep {
+    width: 28%;
+}
+
+.pointages .code-deplacement-defavorable {
+    width: 15px;
+    height: 10px;
+    display: inline-block;
+    vertical-align: text-bottom;
+}
+
+.pointages .code-deplacement-favorable {
+    width: 15px;
+    height: 10px;
+    display: inline-block;
+    vertical-align: text-bottom;
+    border-right: 10px solid #4cff00;
+}
+
+.pointages .code-zone-deplacement-saisi-manuellement {
+    width: 15px;
+    height: 10px;
+    display: inline-block;
+    vertical-align: text-bottom;
+    border-right: 10px solid #ffc000;
+}
+
+.pointages .code-zone-deplacement-calcule {
+    width: 15px;
+    height: 10px;
+    display: inline-block;
+    vertical-align: text-bottom;
+}
+
+.withoutScroll {
+    padding-right: 0.5%;
+}
+
+@-moz-document url-prefix() {
+    .pointages tbody.body-list {
+        width: calc(100% + 17px);
+    }
+    .withoutScroll {
+        padding-right: 1.1%;
+    }
+}
+
+.anyErrorPopOverList {
+    color: black;
+}
+
+.lockDay {
+    filter: brightness(60%);
+}
+
+.lockPointage td:nth-child(1n+2) {
+    filter: brightness(60%);
+    background-color: lightgray;
+}
+
+.preLook {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+fred-toolbar .date-section {
+    width: 25%;
+}
+
+fred-toolbar .date-section .radio-btns {
+    float: right;
+}
+
+fred-toolbar .date-section .radio-btns input {
+    margin-top: 0;
+}
+
+fred-toolbar .date-section .radio-btns label {
+    font-size: 12px;
+    margin-bottom: 0;
+    color: #000000;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+fred-toolbar .date-section .radio-btns .lbl-month {
+    margin-right: 10px;
+}
+
+fred-toolbar .date-section .input-group.date {
+    width: 100%;
+}
+
+fred-toolbar #picklist-section {
+    margin-left: 1%;
+    width: 20%;
+    display: flex;
+}
+
+fred-toolbar #picklist-section .picklist-section {
+    width: 100%;
+}
+
+fred-toolbar #picklist-section .picklist-section #personnel-pickList .inner-addon.right-addon {
+    position: relative;
+    cursor: pointer;
+}
+
+fred-toolbar #picklist-section .picklist-section #personnel-pickList .inner-addon.right-addon .chev.material-icons {
+    position: absolute;
+    display: inline-block;
+    line-height: .7;
+    pointer-events: none;
+    background-color: #09ada6;
+    height: 29px;
+    width: 30px;
+    text-align: center;
+    color: #fff;
+    font-size: 25px;
+    right: 0;
+    padding-top: 6px;
+    cursor: pointer;
+}
+
+fred-toolbar #picklist-section .inner-addon.right-addon {
+    width: 100%;
+}
+
+fred-toolbar #picklist-section .inner-addon.right-addon .preLook {
+    width: 100%;
+}
+
+fred-toolbar .export-section {
+    margin-left: 1%;
+}
+
+fred-toolbar .export-section .fred-button.white-star {
+    background-color: #ff0066;
+    margin-left: 0;
+}
+
+fred-toolbar .lockin-section {
+    margin-left: 1%;
+}
+
+fred-toolbar .lockin-section .btn {
+    font-size: 11px;
+    height: 30px;
+    margin-top: 0;
+}
+
+fred-toolbar .lockin-section .bloc-auth {
+    display: block;
+}
+
+.bandeau {
+    padding-bottom: 70px;
+    -webkit-box-shadow: 0 -1px 44px -2px rgba(0, 0, 0, 0.52);
+    -moz-box-shadow: 0 -1px 44px -2px rgba(0, 0, 0, 0.52);
+    box-shadow: 0 -1px 44px -2px rgba(0, 0, 0, 0.52);
+}
+
+.bandeau .panneau-ligne {
+    height: 80%;
+    overflow-x: hidden;
+}
+
+.bandeau .panneau-ligne .cadre-panneau {
+    max-width: 751px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.bandeau .preLook {
+    margin-left: 0;
+    width: 100%;
+}
+
+.bandeau .box-line {
+    margin-top: 25px;
+}
+
+.bandeau .box-line .box .pl5 {
+    padding-left: 5px;
+}
+
+.bandeau .box {
+    border: 1px solid #eeeeee;
+    padding-top: 10px;
+    margin-bottom: 15px;
+    height: 149px;
+    background-color: #fafafa;
+}
+
+.bandeau .box .bandeau-delete {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.bandeau .box .comments {
+    padding-left: 5px;
+    margin-top: 5px;
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.bandeau .box .comments .box-libelle {
+    display: inline-block;
+    float: left;
+    margin-right: 20px;
+}
+
+.bandeau .box .comments textarea {
+    width: 230px;
+    height: 4.5em;
+    resize: none;
+    margin-top: 5px;
+}
+
+.bandeau .box.pt0 {
+    padding-top: 0;
+}
+
+.bandeau .box.no-x {
+    padding-top: 22px;
+}
+
+.bandeau .fa-refresh {
+    cursor: pointer;
+}
+
+.bandeau .box.prime-task {
+    border: 10px solid #fafafa;
+    background-color: #fff;
+    padding-top: 0;
+    display: table;
+    text-align: center;
+    width: 100%;
+}
+
+.bandeau .box.prime-task .square {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.bandeau .box.prime-task .square .flaticon-add-2 {
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.bandeau .box.pl5-pr5 {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.bandeau .box-libelle {
+    font-size: 10px;
+    padding-top: 7px;
+    margin-bottom: 15px;
+}
+
+.bandeau textarea {
+    margin-left: 5px;
+    margin-top: 15px;
+    width: 90%;
+    height: 85%;
+    resize: none;
+}
+
+.bandeau .box-data label {
+    margin-bottom: 0;
+    padding-top: 6px;
+}
+
+.bandeau .box-data .boutons {
+    padding-top: 0;
+    padding-right: 0;
+}
+
+.bandeau .box-data .boutons lookup .material-icons {
+    cursor: pointer;
+    margin: 0;
+}
+
+.bandeau .box-data input {
+    width: 50px;
+    height: 32px;
+}
+
+.bandeau .boutons lookup .inputPL {
+    align-items: center;
+    width: 100%;
+}
+
+.bandeau .boutons lookup .inputPL .inputPLSearch {
+    width: 75%;
+}
+
+.bandeau .boutons lookup .inputPL .inputPLSearch .inputPLLabel {
+    padding-left: 0;
+}
+
+.bandeau .boutons lookup .inputPL .cross-bloc {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.bandeau .boutons lookup .inputPL .cross-bloc .rm-but {
+    width: 100%;
+}
+
+.bandeau .boutons lookup .inputPLRemove {
+    position: relative;
+    top: initial;
+    right: initial;
+    left: initial;
+    padding: 0;
+    margin: initial;
+    width: 100%;
+    height: 100%;
+}
+
+.bandeau .box-data.mb10 {
+    margin-bottom: 10px;
+}
+
+.bandeau .chevron-status {
+    font-size: 35px;
+    font-weight: 500;
+    color: #ffd900;
+    vertical-align: bottom;
+}
+
+.bandeau .bandeau-status {
+    color: #555555;
+    font-size: 15px;
+    font-weight: 600;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.bandeau .validators-bloc {
+    margin-bottom: 15px;
+}
+
+.bandeau .validators-bloc .validator-box {
+    border: 1px solid #eeeeee;
+    margin-bottom: 15px;
+}
+
+.bandeau .validators-title {
+    margin-top: 6px;
+    margin-bottom: 13px;
+    color: #808080;
+}
+
+.bandeau .validators-title span {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.bandeau .validators-author {
+    font-weight: 500;
+}
+
+.bandeau .validators-author span {
+    line-height: 8px;
+    color: #aeaeae;
+    font-weight: normal;
+}
+
+.bandeau .validators-author .author {
+    margin-right: 100px;
+    font-size: 11px;
+}
+
+.bandeau .validators-date {
+    font-weight: 500;
+}
+
+.bandeau .validators-date span {
+    line-height: 8px;
+    color: #aeaeae;
+    font-weight: normal;
+}
+
+.bandeau .validators-date .date {
+    margin-right: 110px;
+    font-size: 11px;
+}
+
+.bandeau .footer {
+    background: #e1e3e5;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    width: 100%;
+    z-index: 4;
+}
+
+.bandeau .footer .validation {
+    background-color: #0070c0;
+    color: #fff;
+}
+
+.bandeau .footer .cancel {
+    border: 1px solid #aeaeae;
+    background-color: #fff;
+    color: #aeaeae;
+}
+
+.opened {
+    -webkit-animation-name: transition_open;
+    -moz-animation-name: transition_open;
+    -o-animation-name: transition_open;
+    animation-name: transition_open;
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+}
+
+.bandeau.opened {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    z-index: 1199;
+    background-color: #fff;
+    width: 750px;
+}
+
+.bandeau.closed {
+    display: none;
+}
+
+.bandeau-header {
+    background-color: #e1e3e5;
+    padding: 15px;
+    text-align: center;
+}
+
+.bandeau-header .flaticon-calendar-1 {
+    font-size: 50px;
+}
+
+.bandeau-headline {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.bandeau-headline ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.bandeau-headline ul li a {
+    color: #808080;
+}
+
+.bandeau-headline ul li a h3 {
+    color: #808080;
+}
+
+.bandeau-headline ul .active a {
+    color: #2c77ba;
+}
+
+.bandeau-headline ul .active a h3 {
+    color: #2c77ba;
+}
+
+.bandeau-headline .tab-titles {
+    display: inline-block;
+    margin-right: 150px;
+}
+
+.bandeau-headline .tab-titles .tab1 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.bandeau-headline .tab-titles .tab2 {
+    font-size: 20px;
+}
+
+.bandeau-headline .tab-titles.no-mr {
+    margin-right: 0;
+}
+
+.bandeau-headline .verrou-bandeau {
+    float: left;
+    font-size: 30px;
+    padding-right: 10px;
+}
+
+.bandeau-headline h3 {
+    font-weight: 600;
+}
+
+.bandeau-body .data {
+    font-weight: 600;
+}
+
+.libelle {
+    display: inline-block;
+    font-size: 11px;
+}
+
+.libelle.mb {
+    margin-bottom: 10px;
+    display: block;
+    padding-top: 4px;
+}
+
+.modal .input-group.date {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+}
+
+.modal .preLook {
+    margin-left: 0;
+    width: 100%;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + label {
+    font-size: 14px;
+}
+
+input[type="checkbox"] + label span {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: 0 4px 0 0;
+    vertical-align: middle;
+    cursor: pointer;
+    -moz-border-radius: 20%;
+    border-radius: 20%;
+    background-color: #fcfcfc;
+    border: 3px #78C1DD solid;
+    -webkit-transition: background-color 0.4s linear;
+    -o-transition: background-color 0.4s linear;
+    -moz-transition: background-color 0.4s linear;
+    transition: background-color 0.4s linear;
+}
+
+input[type="checkbox"] + label .coche {
+    margin-left: 0;
+    margin-top: 4px;
+}
+
+input[type="checkbox"]:checked + label span {
+    border: 3px #2c77ba solid;
+    background-image: url("/medias/images/ico/checked.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-transition: background-color 0.4s linear;
+    -o-transition: background-color 0.4s linear;
+    -moz-transition: background-color 0.4s linear;
+    transition: background-color 0.4s linear;
+}
+
+.stepper {
+    padding-top: 10px;
+    padding-bottom: 30px;
+    float: right;
+}
+
+.stepper .step {
+    position: relative;
+    min-height: 114px;
+}
+
+.stepper .step > div:last-child {
+    margin-left: 32px;
+    padding-left: 16px;
+}
+
+.stepper .step .step-heading {
+    position: static;
+    color: #fff;
+    padding-bottom: 50px;
+    cursor: pointer;
+}
+
+.stepper .step .step-heading .circle {
+    background: #fff;
+    border: 1px solid #aeaeae;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 16px;
+    position: relative;
+    color: #fff;
+    text-align: center;
+    float: left;
+}
+
+.stepper .step .step-heading .title {
+    display: none;
+    line-height: 32px;
+    padding-left: 15px;
+    float: left;
+}
+
+.stepper .step .step-heading.active .circle {
+    background: #fff;
+}
+
+.stepper .step .body {
+    display: none;
+    padding-bottom: 30px;
+}
+
+.stepper .step .line {
+    position: absolute;
+    border-left: 10px solid #aeaeae;
+    left: 11px;
+    bottom: 0;
+    top: 32px;
+}
+
+.stepper .step .btn {
+    color: #fff !important;
+    display: none;
+}
+
+.stepper .step .btn.btn-bg {
+    background: #E0E0E0;
+}
+
+.side-bar-overlay {
+    z-index: 1198;
+    background-color: #898989;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+}
+
+.show-overlay {
+    visibility: visible;
+    display: block;
+}
+
+.hide-overlay {
+    visibility: hidden;
+    display: none;
+}
+
+.bootstrap-datetimepicker-widget table td span {
+    height: 20px;
+    line-height: 20px;
+}
+
+.div-datePicker-disabled {
+    pointer-events: none;
+}
+
+.div-PrimeAstreinte-disabled {
+    pointer-events: none;
+}
+
+cards {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+}
+
+cards card {
+    width: 310px;
+    padding: 10px;
+    border: 1px solid #097da0;
+    margin-bottom: 5px;
+}
+
+cards card titre {
+    font-weight: 500;
+}
+
+cards card infos {
+    display: flex;
+    flex-direction: column;
+}
+
+cards card infos info {
+    display: flex;
+    padding-bottom: 5px;
+}
+
+cards card infos info fred-label {
+    width: 30%;
+    font-size: 12px;
+    color: #aeaeae;
+}
+
+cards card infos info fred-val {
+    width: 70%;
+    font-size: 12px;
+}
+
+cards card infos info fred-val input {
+    width: 25%;
+    border: 1px solid #E1E3E5;
+}
+
+cards card action {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 3px;
+}
+
+cards card action fred-button {
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 20px;
+    font-size: 11px;
+}
+
+card.active {
+    border-color: #097da0;
+    border-left: 5px solid #097da0;
+}
+
+card.inactive {
+    border-color: #aeaeae;
+    background-color: rgba(225, 227, 229, 0.1);
+}
+
+card.next {
+    border-color: #DE3F7E;
+}
+
+card.archive {
+    border-color: #E1E3E5;
+}
+
+.sortieAstreinteInline {
+    display: inline !important;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .pointages-personnels h1 {
+        margin-bottom: 15px;
+    }
+    .pointages-personnels .infofilter {
+        font-size: 11px;
+    }
+    .pointages-personnels .filter input[type="text"] {
+        height: 25px;
+        font-size: 12px;
+        margin-bottom: 0;
+    }
+    .pointages-personnels .input-group.date {
+        height: 25px;
+    }
+    .pointages-personnels .input-group.date .input-group-addon {
+        padding: 0;
+        width: 25px;
+    }
+    .pointages-personnels .filter.no-pr span {
+        height: 25px;
+    }
+    .pointages-personnels .filter.no-pr .btn {
+        font-size: 9px;
+        padding: 0 12px;
+        margin-top: 0;
+        height: 25px;
+    }
+    .bloc-liste {
+        margin-top: 10px;
+    }
+    .pointages {
+        font-size: 11px;
+    }
+    .pointages .hmaj-data {
+        font-size: 11px;
+    }
+    .pointages .primes {
+        font-size: 11px;
+        font-weight: normal;
+        margin-bottom: 0;
+    }
+    .pointages .single-row .flaticon-add-2 {
+        font-size: 13px;
+        margin-top: 15px;
+        margin-left: 5px;
+        padding-right: 4px;
+    }
+    .pointages th {
+        font-size: 10px;
+    }
+    .pointages .niv2-headers td {
+        font-size: 10px;
+    }
+    .pointages tbody.body-list {
+        height: calc(100vh - 300px);
+    }
+    .pointages tbody .line {
+        height: 31px;
+    }
+    .pointages .bank .single-row.dateOdd .conteneur1 {
+        height: 32px;
+    }
+    .pointages .weekend .single-row.dateOdd .conteneur1 {
+        height: 32px;
+    }
+    .pointages .single-row.dateOdd .conteneur1 {
+        height: 32px;
+    }
+    .pointages .single-row.dateEven .conteneur1 {
+        height: 32px;
+    }
+    .pointages .icons-actions .conteneur2 {
+        height: 31px;
+        padding-left: 5px;
+    }
+    .pointages .verrou {
+        font-size: 18px;
+    }
+    .pointages .alerte {
+        font-size: 18px;
+    }
+    .pointages td input {
+        height: 25px;
+    }
+    .pointages label {
+        margin-bottom: 0;
+    }
+    .pointages .data.CI {
+        line-height: initial;
+        font-size: 10px;
+        padding-top: 3px;
+    }
+    .pointages .conteneur1 .data {
+        font-size: 10px;
+    }
+    .pointages .conteneur1 .preLook {
+        margin-right: 3px;
+        margin-left: 5px;
+        width: initial;
+    }
+    .pointages .conteneur1 .preLook .inputPL .inputPLSearch {
+        padding-top: 6px;
+        padding-left: 0;
+    }
+    .pointages .conteneur1 .preLook .inputPL .inputPLSearch .material-icons {
+        font-size: 17px;
+    }
+    fred-toolbar .export-section .btn {
+        width: 25px;
+        height: 25px;
+    }
+    fred-toolbar .lockin-section .btn {
+        height: 25px;
+    }
+    .bandeau.opened {
+        padding-bottom: 70px;
+        width: 768px;
+    }
+    .bandeau-header .flaticon-calendar-1 {
+        font-size: 35px;
+    }
+    .bandeau-headline .tab-titles .tab1 {
+        font-size: 15px;
+    }
+    .bandeau-headline .tab-titles .tab2 {
+        font-size: 15px;
+    }
+    .libelle {
+        font-size: 9px;
+    }
+    .bandeau-body {
+        font-size: 11px;
+    }
+    .bandeau-body .data {
+        font-size: 11px;
+    }
+    .formulaire lookup .inputPL .inputPLSearch {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .formulaire.long .inputPL .inputPLLabel {
+        font-size: 11px;
+    }
+    .bandeau .box-libelle {
+        font-size: 8px;
+    }
+    .bandeau .box-data input {
+        height: 25px;
+    }
+    .bandeau .box-data input[type="checkbox"] + label .coche {
+        margin-left: -8px;
+    }
+    .bandeau .validators-author {
+        font-size: 11px;
+    }
+    .bandeau .validators-author .author {
+        font-size: 9px;
+    }
+    .bandeau .validators-date {
+        font-size: 11px;
+    }
+    .bandeau .validators-date .date {
+        font-size: 9px;
+    }
+    .bandeau .validators-title {
+        font-size: 11px;
+    }
+    .bandeau .box.prime-task .square .flaticon-add-2 {
+        font-size: 25px;
+    }
+    .bandeau .box .comments textarea {
+        height: 6em;
+    }
+    .bandeau .footer {
+        padding: 5px;
+    }
+    .bandeau .footer .cancel {
+        padding: 3px 6px;
+        font-size: 11px;
+    }
+    .bandeau .footer .validation {
+        padding: 3px 6px;
+        font-size: 11px;
+    }
+    .boutons lookup .inputPL .inputPLSearch {
+        height: 25px;
+    }
+    .boutons lookup .inputPL .inputPLSearch .inputPLLabel {
+        font-size: 11px;
+    }
+    .boutons lookup .material-icons {
+        padding: 0;
+        text-align: center;
+    }
+    .boutons lookup .inputPLRemove {
+        left: -22px;
+    }
+    .stepper .step {
+        min-height: 100px;
+    }
+    .stepper .step .step-heading .circle {
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+    }
+    .stepper .step .line {
+        left: 8px;
+        bottom: -1px;
+        top: 24px;
+    }
+}

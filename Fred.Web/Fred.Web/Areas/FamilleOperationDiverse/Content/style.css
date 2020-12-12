@@ -1,0 +1,745 @@
+﻿@charset "UTF-8";
+/*Couleurs*/
+/*toolbar*/
+fred-toolbar .btn {
+    margin-top: 0;
+    font-size: 11px;
+    height: 30px;
+}
+
+fred-toolbar .btn.btn-link {
+    background-color: #fff !important;
+    color: #0052a0;
+}
+
+fred-toolbar .btn.btn-link:hover {
+    background-color: #0052a0 !important;
+    color: #fff;
+}
+
+fred-toolbar .btn.param-cont {
+    width: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+    background-color: #ffa90d;
+    color: #fff;
+}
+
+fred-toolbar .btn.param-cont .material-icons {
+    background-color: #fff;
+    color: #ffa90d;
+    border-radius: 4px;
+}
+
+fred-toolbar .excel-icon {
+    background-image: url(/medias/images/ico/excel-icon.png);
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-right: 3px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+fred-toolbar .picklist-section {
+    width: 33%;
+}
+
+fred-toolbar .picklist-section .inner-addon {
+    width: 100%;
+    cursor: pointer;
+}
+
+fred-toolbar .picklist-section .inner-addon .chev.material-icons {
+    position: absolute;
+    display: inline-block;
+    line-height: 0.7;
+    pointer-events: none;
+    background-color: #09ada6;
+    height: 29px;
+    width: 30px;
+    text-align: center;
+    color: #fff;
+    font-size: 25px;
+    right: 0;
+    padding-top: 6px;
+    cursor: pointer;
+}
+
+fred-toolbar .action-section {
+    margin-left: 1%;
+}
+
+fred-toolbar .export-section {
+    margin-left: 1%;
+}
+
+.od-journ-bloc {
+    width: 100%;
+    display: flex;
+}
+
+.od-journ-bloc .od-bloc {
+    width: 69%;
+}
+
+.od-journ-bloc .od-bloc fred-toolbar .text-search-section {
+    width: 50%;
+}
+
+.od-journ-bloc .od-bloc fred-toolbar .text-search-section fred-section-controls .input-group.input-search {
+    width: 100%;
+}
+
+.od-journ-bloc .od-bloc .od-table {
+    width: 100%;
+}
+
+.od-journ-bloc .od-bloc .od-table thead {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.od-journ-bloc .od-bloc .od-table thead.header1 {
+    background-color: #bdd7ee;
+    color: #fff;
+    font-size: 11px;
+    height: 40px;
+}
+
+.od-journ-bloc .od-bloc .od-table thead.header1 th {
+    height: 40px;
+}
+
+.od-journ-bloc .od-bloc .od-table thead.header1 .col1 {
+    width: 5%;
+    background-color: #097da0;
+}
+
+.od-journ-bloc .od-bloc .od-table thead.header1 .col1 .lbl {
+    font-size: 9px;
+    background-color: #097da0;
+    height: 40px;
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+}
+
+.od-journ-bloc .od-bloc .od-table thead.header1 .col2 {
+    width: 5%;
+}
+
+.od-journ-bloc .od-bloc .od-table thead.header1 .col3 {
+    width: 45%;
+}
+
+.od-journ-bloc .od-bloc .od-table thead.header1 .col4 {
+    width: 35%;
+}
+
+.od-journ-bloc .od-bloc .od-table thead.header1 .col5 {
+    width: 5%;
+}
+
+.od-journ-bloc .od-bloc .od-table thead.header2 {
+    background-color: #097da0;
+    color: #fff;
+    font-size: 11px;
+    height: 40px;
+}
+
+.od-journ-bloc .od-bloc .od-table thead.header2 th {
+    height: 40px;
+    text-align: center;
+}
+
+.od-journ-bloc .od-bloc .od-table thead.header2 .col1 {
+    width: 5%;
+    background-color: #097da0;
+}
+
+.od-journ-bloc .od-bloc .od-table thead.header2 .col1 .lbl {
+    font-size: 9px;
+    background-color: #097da0;
+    height: 40px;
+    display: flex;
+    align-items: flex-start;
+    text-align: center;
+}
+
+.od-journ-bloc .od-bloc .od-table thead.header2 .col2 {
+    width: 5%;
+}
+
+.od-journ-bloc .od-bloc .od-table thead.header2 .col3 {
+    width: 50%;
+    padding-left: 15px;
+    text-align: left;
+}
+
+.od-journ-bloc .od-bloc .od-table thead.header2 .col4 {
+    width: 35%;
+}
+
+.od-journ-bloc .od-bloc .od-table thead.header2 .col5 {
+    width: 5%;
+}
+
+.od-journ-bloc .od-bloc .od-table tbody {
+    display: block;
+    height: calc(100vh - 460px);
+}
+
+.od-journ-bloc .od-bloc .od-table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-top: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.od-journ-bloc .od-bloc .od-table tbody tr.selected {
+    background-color: #fee599;
+}
+
+.od-journ-bloc .od-bloc .od-table tbody tr td {
+    font-size: 11px;
+    height: 30px;
+    text-align: center;
+}
+
+.od-journ-bloc .od-bloc .od-table tbody tr td .tiles {
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.od-journ-bloc .od-bloc .od-table tbody tr td .tiles .btn-tile {
+    background-color: #097da0;
+    color: #fff;
+    margin: 2px;
+    font-size: 11px;
+    height: 24px;
+    width: 90px;
+    border: none;
+}
+
+.od-journ-bloc .od-bloc .od-table tbody tr td .tiles .btn-compta {
+    background-color: #9DBB61;
+    color: #fff;
+    margin: 2px;
+    font-size: 11px;
+    height: 24px;
+    width: 90px;
+    border: none;
+}
+
+.od-journ-bloc .od-bloc .od-table tbody tr .col1 {
+    width: 5%;
+    background-color: #097da0;
+}
+
+.od-journ-bloc .od-bloc .od-table tbody tr .col2 {
+    width: 5%;
+    text-transform: uppercase;
+}
+
+.od-journ-bloc .od-bloc .od-table tbody tr .col3 {
+    width: 45%;
+    padding-left: 10px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.od-journ-bloc .od-bloc .od-table tbody tr .col3 .more-inf {
+    text-transform: capitalize;
+}
+
+.od-journ-bloc .od-bloc .od-table tbody tr .col3 .lb {
+    color: #67757f;
+    font-size: 9px;
+}
+
+.od-journ-bloc .od-bloc .od-table tbody tr .col4 {
+    width: 33%;
+}
+
+.od-journ-bloc .od-bloc .od-table tbody tr .col5 {
+    width: 5%;
+    text-align: end;
+}
+
+.od-journ-bloc .od-bloc .od-table tbody tr .col-compta {
+    width: 12%;
+}
+
+.od-journ-bloc .od-bloc .od-table tbody tr .col5 .material-icons {
+    color: #a5a5a5;
+    cursor: pointer;
+}
+
+.od-journ-bloc .journ-bloc {
+    width: 30%;
+    margin-left: 1%;
+}
+
+.od-journ-bloc .journ-bloc fred-toolbar .text-search-section {
+    width: 100%;
+}
+
+.od-journ-bloc .journ-bloc fred-toolbar .text-search-section fred-section-controls .input-group.input-search {
+    width: 100%;
+}
+
+.od-journ-bloc .journ-bloc .journ-table {
+    width: 100%;
+}
+
+.od-journ-bloc .journ-bloc .journ-table thead {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.od-journ-bloc .journ-bloc .journ-table thead.header1 {
+    background-color: #c6e0b4;
+    color: #000000;
+    font-size: 11px;
+    height: 40px;
+}
+
+.od-journ-bloc .journ-bloc .journ-table thead.header1 th {
+    height: 40px;
+}
+
+.od-journ-bloc .journ-bloc .journ-table thead.header1 .col1 {
+    width: 10%;
+    background-color: #548235;
+}
+
+.od-journ-bloc .journ-bloc .journ-table thead.header1 .col1.sel-all {
+    text-align: center;
+}
+
+.od-journ-bloc .journ-bloc .journ-table thead.header1 .col2 {
+    width: 20%;
+    text-align: center;
+}
+
+.od-journ-bloc .journ-bloc .journ-table thead.header1 .col3 {
+    width: 70%;
+}
+
+.od-journ-bloc .journ-bloc .journ-table thead.header1 .col2-sel-all {
+    width: 30%;
+    text-align: center;
+}
+
+.od-journ-bloc .journ-bloc .journ-table thead.header2 {
+    background-color: #548235;
+    color: #fff;
+    font-size: 11px;
+    height: 40px;
+}
+
+.od-journ-bloc .journ-bloc .journ-table thead.header2 th {
+    height: 40px;
+    text-align: center;
+}
+
+.od-journ-bloc .journ-bloc .journ-table thead.header2 .col1 {
+    width: 10%;
+    background-color: #548235;
+}
+
+.od-journ-bloc .journ-bloc .journ-table thead.header2 .col2 {
+    width: 10%;
+}
+
+.od-journ-bloc .journ-bloc .journ-table thead.header2 .col3 {
+    width: 80%;
+    padding-left: 15px;
+    text-align: left;
+}
+
+.od-journ-bloc .journ-bloc .journ-table tbody {
+    display: block;
+    height: calc(100vh - 460px);
+}
+
+.od-journ-bloc .journ-bloc .journ-table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-top: 1px solid #ddd;
+}
+
+.od-journ-bloc .journ-bloc .journ-table tbody tr.selected {
+    background-color: #fee599;
+}
+
+.od-journ-bloc .journ-bloc .journ-table tbody tr td {
+    font-size: 11px;
+    height: 30px;
+    text-align: center;
+}
+
+.od-journ-bloc .journ-bloc .journ-table tbody tr .col1 {
+    width: 10%;
+    background-color: #548235;
+}
+
+.od-journ-bloc .journ-bloc .journ-table tbody tr .col2 {
+    width: 10%;
+    text-transform: uppercase;
+}
+
+.od-journ-bloc .journ-bloc .journ-table tbody tr .col3 {
+    width: 80%;
+    padding-left: 15px;
+    text-align: left;
+}
+
+/*Bloc nature*/
+.od-journ-bloc .nature-bloc {
+width: 30%;
+margin-left: 1%;
+}
+
+.od-journ-bloc .nature-bloc fred-toolbar .text-search-section {
+width: 100%;
+}
+
+.od-journ-bloc .nature-bloc fred-toolbar .text-search-section fred-section-controls .input-group.input-search {
+width: 100%;
+}
+
+.od-journ-bloc .nature-bloc .nature-table {
+width: 100%;
+}
+
+.od-journ-bloc .nature-bloc .nature-table thead {
+display: table;
+table-layout: fixed;
+width: 100%;
+}
+
+.od-journ-bloc .nature-bloc .nature-table thead.header1 {
+background-color: #FEDBA4;
+color: #000000;
+font-size: 11px;
+height: 40px;
+}
+
+.od-journ-bloc .nature-bloc .nature-table thead.header1 th {
+    height: 40px;
+}
+
+.od-journ-bloc .nature-bloc .nature-table thead.header1 .col1 {
+    width: 10%;
+    background-color: #FEBB5F;
+}
+
+    .od-journ-bloc .nature-bloc .nature-table thead.header1 .col1.sel-all {
+        text-align: center;
+    }
+
+.od-journ-bloc .nature-bloc .nature-table thead.header1 .col2 {
+    width: 20%;
+    text-align: center;
+}
+
+    .od-journ-bloc .nature-bloc .nature-table thead.header1 .col2-sel-all {
+        width: 30%;
+        text-align: center;
+    }
+
+.od-journ-bloc .nature-bloc .nature-table thead.header1 .col3 {
+    width: 70%;
+}
+
+.od-journ-bloc .nature-bloc .nature-table thead.header2 {
+background-color: #FEBB5F;
+color: #fff;
+font-size: 11px;
+height: 40px;
+}
+
+.od-journ-bloc .nature-bloc .nature-table thead.header2 th {
+    height: 40px;
+    text-align: center;
+}
+
+.od-journ-bloc .nature-bloc .nature-table thead.header2 .col1 {
+    width: 10%;
+    background-color: #FEBB5F;
+}
+
+.od-journ-bloc .nature-bloc .nature-table thead.header2 .col2 {
+    width: 10%;
+}
+
+.od-journ-bloc .nature-bloc .nature-table thead.header2 .col3 {
+    width: 80%;
+    padding-left: 15px;
+    text-align: left;
+}
+
+.od-journ-bloc .nature-bloc .nature-table tbody {
+display: block;
+height: calc(100vh - 460px);
+}
+
+.od-journ-bloc .nature-bloc .nature-table tbody tr {
+display: table;
+width: 100%;
+table-layout: fixed;
+border-top: 1px solid #ddd;
+}
+
+.od-journ-bloc .nature-bloc .nature-table tbody tr.selected {
+    background-color: #fee599;
+}
+
+.od-journ-bloc .nature-bloc .nature-table tbody tr td {
+    font-size: 11px;
+    height: 30px;
+    text-align: center;
+}
+
+.od-journ-bloc .nature-bloc .nature-table tbody tr .col1 {
+    width: 10%;
+    background-color: #FEBB5F;
+}
+
+.od-journ-bloc .nature-bloc .nature-table tbody tr .col2 {
+    width: 10%;
+    text-transform: uppercase;
+}
+
+.od-journ-bloc .nature-bloc .nature-table tbody tr .col3 {
+    width: 80%;
+    padding-left: 15px;
+    text-align: left;
+}
+/* Fin bloc nature*/
+
+/* Bandeau droit */
+.options .field {
+    margin-bottom: 20px;
+}
+
+/* checkboxes */
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + label {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+input[type="checkbox"] + label span {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    cursor: pointer;
+    -moz-border-radius: 20%;
+    border-radius: 20%;
+    background-color: #fcfcfc;
+    border: 3px #78C1DD solid;
+    -webkit-transition: background-color 0.4s linear;
+    -o-transition: background-color 0.4s linear;
+    -moz-transition: background-color 0.4s linear;
+    transition: background-color 0.4s linear;
+}
+
+input[type="checkbox"]:checked + label span {
+    border: 3px #2c77ba solid;
+    background-image: url("/medias/images/ico/checked.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-transition: background-color 0.4s linear;
+    -o-transition: background-color 0.4s linear;
+    -moz-transition: background-color 0.4s linear;
+    transition: background-color 0.4s linear;
+}
+
+/* modal */
+.modal.exp-exc .excel-choice-container {
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    flex-flow: wrap;
+}
+
+.modal.exp-exc .excel-choice-container .importButton {
+    width: 130px;
+    height: 100px;
+    border: 1px solid #BBBBBB;
+    font-size: 11px;
+    color: #67757F;
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    margin-right: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.modal.exp-exc .excel-choice-container .importButton.selected {
+    border: 1px solid #09ada6;
+    color: #09ada6;
+}
+
+.modal.exp-exc .excel-choice-container .importButton .importButton-txt {
+    cursor: pointer;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 30%;
+    font-weight: normal;
+}
+
+.modal.exp-exc .excel-choice-container .importButton .inner-triangle {
+    border-left: 15px solid transparent;
+    border-right: 15px solid #09ada6;
+    border-bottom: 15px solid transparent;
+    height: 0;
+    width: 0;
+    position: absolute;
+    right: 0px;
+    z-index: 2;
+}
+
+.modal.exp-exc .excel-choice-container .or {
+    margin-left: 15px;
+    margin-right: 15px;
+    height: 100px;
+    width: 5px;
+    color: #757575;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.modal-err-parametrage .modal-dialog {
+    width: 900px;
+    top: 15%;
+}
+
+.modal.modal-err-parametrage .modal-dialog .mod-error-table {
+    width: 100%;
+}
+
+.modal.modal-err-parametrage .modal-dialog .mod-error-table thead {
+    width: calc( 100% - 9px);
+    background-color: #0052a0;
+    color: #fff;
+    font-size: 11px;
+    height: 30px;
+    display: table;
+    table-layout: fixed;
+}
+
+.modal.modal-err-parametrage .modal-dialog .mod-error-table thead th {
+    height: 30px;
+    text-align: center;
+}
+
+.modal.modal-err-parametrage .modal-dialog .mod-error-table tbody {
+    display: block;
+    height: 303px;
+}
+
+.modal.modal-err-parametrage .modal-dialog .mod-error-table tbody tr {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    border-top: 1px solid #ddd;
+}
+
+.modal.modal-err-parametrage .modal-dialog .mod-error-table tbody tr td {
+    font-size: 11px;
+    font-weight: normal;
+    height: 30px;
+    text-align: left;
+    padding-left: 15px;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+}
+
+.modal.modal-err-parametrage .modal-dialog .mod-error-table .col1 {
+    width: 12.5%;
+}
+
+.modal.modal-err-parametrage .modal-dialog .mod-error-table .col2 {
+    width: 12.5%;
+}
+
+.modal.modal-err-parametrage .modal-dialog .mod-error-table .col3 {
+    width: 25%;
+}
+
+.modal.modal-err-parametrage .modal-dialog .mod-error-table .col4 {
+    width: 50%;
+}
+
+.modal.modal-err-parametrage .modal-dialog .modal-footer .btn.btn-default.pull-left {
+    background-image: url(/medias/images/ico/excel-icon.png);
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    margin-top: 0;
+    margin-right: 5px;
+    cursor: pointer;
+    font-size: 0.1px;
+}
+
+.modal-duplicateParametrage {
+    z-index: 1300 !important;
+}
+
+.modal-duplicateParametrage.modal-footer .btn-link {
+    margin-top: 0;
+    height: 30px;
+}
+
+/* Résolution 1366*768 */
+@media (max-width: 1366px) and (max-height: 768px) {
+    fred-toolbar .picklist-section .inner-addon .chev.material-icons {
+        height: 24px;
+        font-size: 18px;
+    }
+    fred-toolbar .action-section .btn {
+        height: 25px;
+    }
+    fred-toolbar .action-section .btn .material-icons {
+        font-size: 18px;
+    }
+    fred-toolbar .export-section .excel-icon {
+        width: 25px;
+        height: 25px;
+        margin-right: 0;
+    }
+    .text-search-section .button-search {
+        height: 25px;
+    }
+}

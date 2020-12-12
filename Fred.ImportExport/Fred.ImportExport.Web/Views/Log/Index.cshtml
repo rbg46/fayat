@@ -1,0 +1,87 @@
+﻿@model List<Fred.ImportExport.Entities.NLogFredIeEnt>
+@using Fred.ImportExport.Web.Extentions;
+@{
+    ViewBag.Title = "Logs";
+    var grid = new WebGrid(canPage: true, rowsPerPage: 10);
+    grid.Bind(source: Model, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
+}
+@section styles {
+    @Styles.Render("~/Content/jquery-ui-timepicker-addon.css")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/Scripts/Common/order.js")
+    @Scripts.Render("~/Scripts/Common/datetimepicker.js")
+    @Scripts.Render("~/Scripts/jquery-ui-timepicker-addon.js")
+    <script>
+        $('.log-table > tbody > tr').each(function (index, tr) {
+            var level = $(tr).find('.col-level').text();
+            var bkgColor = '';
+
+            switch (level) {
+                case 'Fatal': bkgColor = '#e57373'; break;
+                case 'Error': bkgColor = '#ffcdd2'; break;
+                case 'Warn': bkgColor = '#FFF9C4'; break;
+                case 'Info': bkgColor = '#B3E5FC'; break;
+                case 'Debug': bkgColor = '#C8E6C9'; break;
+                case 'Trace': bkgColor = '#CFD8DC'; break;
+            }
+
+            $(tr).find('.col-level').css('background-color', bkgColor);
+        });
+    </script>
+}
+<div class="container-fluid log">
+    <div class="navbar navbar-default search-bar">
+        @using (Html.BeginForm("index", "Log", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+        {
+            <div class="form-group">
+                <input type="text" name="search" value="@ViewBag.search" class="form-control" placeholder="Recherche..." style="width: 500px" />
+            </div>
+            <div class="form-group" style="padding-right: 10px">
+                @Html.DropDownList("level", ViewBag.Levels as IEnumerable<SelectListItem>, new { @class = "form-control" })
+            </div>
+            <button type="submit" value="Search" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
+            <div class="form-group" style="padding-left: 16px">
+                <input name="startDate" placeholder="De date-heure" id="fdate" type="text" value="@ViewBag.startDate" style="height: 37px"/>
+                <input name="endDate" placeholder="À date-heure" id="tdate" type="text" value="@ViewBag.endDate" style="height: 37px"/>
+            </div>
+            <div class="form-group">
+                @Html.DropDownList("fluxCode", ViewBag.FluxCodes as IEnumerable<SelectListItem>, new { @class = "form-control" })
+            </div>
+        }
+        @using (Html.BeginForm("ChangeLogLevel", "Log", FormMethod.Get, new { @class = "navbar-form navbar-right" }))
+        {
+            <span class="panel-title padding-right">Niv. logs: Fred IE => @ViewBag.MinLogLevel, Fred IE API => @ViewBag.ApiMinLogLevel</span>
+            <div class="form-group">
+                @Html.DropDownList("niveauLog", ViewBag.minloglevels as IEnumerable<SelectListItem>, new { @class = "form-control" })
+            </div>
+            <button type="submit" value="ChangeLogLevel" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Changer niveau Logs</button>
+        }
+    </div>
+        <div>
+            @grid.Table(
+                tableStyle: "table table-responsive table-bordered log-table",
+                columns: grid.Columns(
+                grid.Column("Application", "Application"),
+                grid.Column("Logged", "Date", (i) => i.Logged.ToLocalTime()),
+                grid.Column("Level", "Niveau", null, "col-level"),
+                grid.Column("Message", "Message"),
+                grid.Column("UserName", "Login"),
+                grid.Column("Url", "Url"),
+                grid.Column("Logger", "Logger"),
+                grid.Column("Callsite", "Callsite"),
+                grid.Column("Exception", "Exception", null, "col-exception")
+                )
+                )
+            <div class="row">Nombre de lignes : @ViewBag.TotalRows</div>
+            <div class="row">
+                <div class="col-sm-6">
+                    @grid.PagerList(mode: WebGridPagerModes.All, paginationStyle: "pagination pagination-small pagination-right")
+                </div>
+            </div>
+            @Html.Hidden("dir", grid.SortDirection)
+            @Html.Hidden("col", grid.SortColumn)
+        </div>
+ </div>

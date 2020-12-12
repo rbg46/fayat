@@ -1,0 +1,89 @@
+﻿.inputPL {
+    border: 1px solid #d9d9d9;
+    display: flex;
+    width: 100%;
+    height: 30px;
+}
+
+.inputPL .inputPLSearch {
+    border: none;
+    background: none;
+    vertical-align: central;
+    padding-top: 0.27em;
+    padding-bottom: 0.7em;
+    padding-right: 0.7em;
+    width: 100%;
+}
+
+.inputPL button:hover span {
+    color: #626262;
+}
+
+.inputPL .inputPLRemove {
+    border: none;
+    background: none;
+    vertical-align: central;
+    padding-top: 0.27em;
+    padding-bottom: 0.7em;
+    padding-left: 0;
+    padding-right: 0.7em;
+    width: 40px;
+    height: 39px;
+    cursor: pointer;
+}
+
+.inputPL *:focus {
+    outline: 0 !important;
+}
+
+.inputPL .inputPLLabel {
+    text-align: left;
+    margin-right: 2em;
+    font-style: normal;
+    color: #7d7d7d;
+}
+
+.inputPL .glyphicon {
+    color: #c4c4c4;
+    float: right;
+}
+
+.inputPLSearchInherit {
+    width: 80%;
+    height: inherit;
+    text-align: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    margin: inherit;
+    font: inherit;
+    color: inherit;
+    border: none;
+    background: inherit;
+    padding: 0;
+}
+
+.inputPLInherit {
+    border: none;
+    background: inherit;
+}
+
+.inputPLLabelInherit {
+    width: 100%;
+    display: inline-block;
+}
+
+.inputPLRemoveInherit {
+    border: none;
+    background: none;
+    vertical-align: central;
+    width: 20%;
+    height: 2%;
+    float: right;
+    top: 0px !important;
+    padding: 0px !important;
+}
+
+.inputPLRemoveInherit .glyphicon {
+    font-size: 0.7em;
+}

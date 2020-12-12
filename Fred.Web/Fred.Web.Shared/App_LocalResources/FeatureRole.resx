@@ -1,0 +1,498 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Role_Index_ModalSeuil_Role" xml:space="preserve">
+    <value>Rôles</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalSeuil_Seuil" xml:space="preserve">
+    <value>Seuil</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_DetailSeuil_Devise" xml:space="preserve">
+    <value>Devise</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_DetailSeuil" xml:space="preserve">
+    <value>Informations sur le seuil sélectionné</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_DetailModule" xml:space="preserve">
+    <value>Informations sur le module sélectionné</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalModule_FonctionnalitesAssociees" xml:space="preserve">
+    <value>Fonctionnalités associées au module:</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_DetailModule_Fonctionnalite" xml:space="preserve">
+    <value>Fonctionnalités</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_DetailModule_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_DetailSeuil_Montant" xml:space="preserve">
+    <value>Montant</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalRole_Code" xml:space="preserve">
+    <value>Code</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Bouton_RoleDupliquer_Tooltip" xml:space="preserve">
+    <value>Cliquer pour dupliquer le rôle</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Bouton_RoleEditer_Tooltip" xml:space="preserve">
+    <value>Cliquer pour éditer le rôle</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalRole_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_SousTitre_Module" xml:space="preserve">
+    <value>Modules</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Rechercher_Role_Placeholder" xml:space="preserve">
+    <value>Rechercher un rôle ...</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Rechercher_Seuil_Placeholder" xml:space="preserve">
+    <value>Rechercher un seuil ...</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Titre" xml:space="preserve">
+    <value>Administration des rôles</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Service_Control_ModuleRequis_Erreur" xml:space="preserve">
+    <value>Un module doit être sélectionné</value>
+    <comment>role.service.js</comment>
+  </data>
+  <data name="Role_Index_Bouton_SeuilEditer_Tooltip" xml:space="preserve">
+    <value>Cliquer pour éditer le seuil</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Service_Control_Alphanumeric_Erreur" xml:space="preserve">
+    <value>Le code et le libellé doivent être composés de chiffres et de lettres</value>
+    <comment>role.service.js</comment>
+  </data>
+  <data name="Role_Index_Bouton_ModuleAjouter_Tooltip" xml:space="preserve">
+    <value>Cliquer pour ajouter un module</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Bouton_ModuleSupprimer_Tooltip" xml:space="preserve">
+    <value>Cliquer pour supprimer le module</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Bouton_RoleAjouter_Tooltip" xml:space="preserve">
+    <value>Cliquer pour ajouter un rôle</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Bouton_RoleSupprimer_Tooltip" xml:space="preserve">
+    <value>Cliquer pour supprimer le rôle</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Bouton_SeuilAjouter_Tooltip" xml:space="preserve">
+    <value>Cliquer pour ajouter un seuil</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Bouton_SeuilDupliquer_Tooltip" xml:space="preserve">
+    <value>Cliquer pour dupliquer le seuil</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Bouton_SeuilSupprimer_Tooltip" xml:space="preserve">
+    <value>Cliquer pour supprimer le seuil</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_DetailModule_FonctionnaliteHorsOrganisation" xml:space="preserve">
+    <value>Hors Organisation</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Detail_Tooltip" xml:space="preserve">
+    <value>Cliquer pour obtenir plus d'informations</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalModule_FonctionnaliteHorsOrganisation" xml:space="preserve">
+    <value>Hors Organisation</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalModule_Module" xml:space="preserve">
+    <value>Module</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalModule_Role" xml:space="preserve">
+    <value>Rôle</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalModule_Titre_Ajouter" xml:space="preserve">
+    <value>Ajouter un Module</value>
+    <comment>role.service.js</comment>
+  </data>
+  <data name="Role_Index_ModalRole_Code_Placeholder" xml:space="preserve">
+    <value>Code</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalRole_Libelle_Placeholder" xml:space="preserve">
+    <value>Libellé</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalRole_Titre_Ajouter" xml:space="preserve">
+    <value>Création d'un nouveau rôle</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalRole_Titre_Modifier" xml:space="preserve">
+    <value>Modifier le rôle</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalSeuil_Devise" xml:space="preserve">
+    <value>Devise</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalSeuil_Titre_Ajouter" xml:space="preserve">
+    <value>Ajouter un seuil</value>
+    <comment>role.service.js</comment>
+  </data>
+  <data name="Role_Index_ModalSeuil_Titre_Modifier" xml:space="preserve">
+    <value>Modifier le seuil</value>
+    <comment>role.service.js</comment>
+  </data>
+  <data name="Role_Index_Rechercher_Module_Placeholder" xml:space="preserve">
+    <value>Rechercher un module ...</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_SousTitre_Detail" xml:space="preserve">
+    <value>Informations des éléments sélectionnés</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_SousTitre_Role" xml:space="preserve">
+    <value>Rôles</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_SousTitre_Seuil" xml:space="preserve">
+    <value>Seuil</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_TitreOnglet" xml:space="preserve">
+    <value>Gérer les rôles</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Service_Control_CodeAlphanumeric_Erreur" xml:space="preserve">
+    <value>Le code doit être composé de chiffres et de lettres.</value>
+    <comment>role.service.js</comment>
+  </data>
+  <data name="Role_Service_Control_CodeUnique_Erreur" xml:space="preserve">
+    <value>Le code utilisé est déjà attribué, veuillez en choisir un autre</value>
+    <comment>role.service.js</comment>
+  </data>
+  <data name="Role_Service_Control_DeviseDejaAffecte_Erreur" xml:space="preserve">
+    <value>Un seuil a déjà la même devise !</value>
+    <comment>role.service.js</comment>
+  </data>
+  <data name="Role_Service_Control_DeviseRequis_Erreur" xml:space="preserve">
+    <value>La devise est obligatoire !</value>
+    <comment>role.service.js</comment>
+  </data>
+  <data name="Role_Service_Control_SeuilFormat_Erreur" xml:space="preserve">
+    <value>Le seuil doit être un nombre entier !</value>
+    <comment>role.service.js</comment>
+  </data>
+  <data name="Role_Service_Control_SeuilMax_Erreur" xml:space="preserve">
+    <value>Le seuil doit être inferieur à 9 999 999 !</value>
+    <comment>role.service.js</comment>
+  </data>
+  <data name="Role_Service_Control_SeuilMin_Erreur" xml:space="preserve">
+    <value>Le seuil doit être superieur à zero !</value>
+    <comment>role.service.js</comment>
+  </data>
+  <data name="Role_Service_Control_SeuilRequis_Erreur" xml:space="preserve">
+    <value>Le seuil est obligatoire !</value>
+    <comment>role.service.js</comment>
+  </data>
+  <data name="Role_Index_Message_Selection" xml:space="preserve">
+    <value>Sélectionner une société pour paramétrer les rôles</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Message_NoRole" xml:space="preserve">
+    <value>Aucun rôle trouvé pour l'instant pour cette société. Vous pouvez créer vous-même le plan de rôle ou bien copier un plan déjà mis en oeuvre sur une autre société</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Tile_Create" xml:space="preserve">
+    <value>Créer manuellement vos rôles</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Tile_ExportCurrency" xml:space="preserve">
+    <value>Exporter les seuils et devises</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Tile_ExportPriv" xml:space="preserve">
+    <value>Exporter les fonctionnalités et privilèges</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Tile_Select" xml:space="preserve">
+    <value>Sélectionner une société pour copier ses rôles</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Tile_Title_Create" xml:space="preserve">
+    <value>En sélectionnant cette option, vous pourrez créer vous-même les différents rôles fonctionnels</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Tile_Title_ExportCurrency" xml:space="preserve">
+    <value>En sélectionnant cette option, les devises et seuils seront également exportés</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Tile_Title_ExportPriv" xml:space="preserve">
+    <value>En sélectionnant cette option, les fonctionnalités et les privilèges seront également exportés</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Tile_Title_Select" xml:space="preserve">
+    <value>En sélectionnant cette option, vous pouvez importer les rôles d’une autre société</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Tile_Validate" xml:space="preserve">
+    <value>Valider</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalRole_Ordre_Compta" xml:space="preserve">
+    <value>Ordre Compta</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalRole_Ordre_Paie" xml:space="preserve">
+    <value>Ordre Paie</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalRole_Copy_Fonc_Priv" xml:space="preserve">
+    <value>Copier les fonctionnalités et les privilèges</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalRole_Copy_Options" xml:space="preserve">
+    <value>Options de copie</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalRole_Copy_Seuils" xml:space="preserve">
+    <value>Copier les seuils (devise et montant)</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalRole_Duplicate_Confirm" xml:space="preserve">
+    <value>Confirmation de la copie d'un rôle</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalRole_New_Role_Info" xml:space="preserve">
+    <value>Information sur le nouveau rôle</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_Titre_Filtre" xml:space="preserve">
+    <value>Sélectionner votre organisation</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Role_Index_ModalRole_Titre_Actif" xml:space="preserve">
+    <value>Actif</value>
+  </data>
+  <data name="Role_Index_ModalRole_Titre_InActif" xml:space="preserve">
+    <value>Inactif</value>
+  </data>
+  <data name="Role_Index_Bouton_FonctionnaliteAjouter_Tooltip" xml:space="preserve">
+    <value>Cliquer pour ajouter une fonctionnalité</value>
+  </data>
+  <data name="Role_Index_Bouton_FonctionnaliteSupprimer_Tooltip" xml:space="preserve">
+    <value>Cliquer pour supprimer la fonctionnalité</value>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_Fonctionnalite" xml:space="preserve">
+    <value>Fonctionnalité</value>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_Modules" xml:space="preserve">
+    <value>Modules</value>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_SelectionnerModule" xml:space="preserve">
+    <value>Sélectionner un module</value>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_Titre" xml:space="preserve">
+    <value>Ajouter une fonctionnalité</value>
+  </data>
+  <data name="Role_Index_Rechercher_Fonctionnalites_Placeholder" xml:space="preserve">
+    <value>Fonctionnalités</value>
+  </data>
+  <data name="Role_Index_SousTitre_Fonctionnalites" xml:space="preserve">
+    <value>Fonctionnalités</value>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_Error_Conflict_AlreadyExist" xml:space="preserve">
+    <value>Le lien entre le role et la fonctionnalite existe déjà.</value>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_Privilege" xml:space="preserve">
+    <value>Privilège</value>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_PrivilegeRead" xml:space="preserve">
+    <value>Lecture seule</value>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_PrivilegeUnAffected" xml:space="preserve">
+    <value>Non affecté</value>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_PrivilegeWrite" xml:space="preserve">
+    <value>Modification</value>
+  </data>
+  <data name="Role_Index_FonctionnaliteSupprimer_Message" xml:space="preserve">
+    <value>Confirmez-vous la suppression de ce rôle ?&lt;br&gt;En supprimant ce rôle, les utilisateurs ayant ce rôle ne pourront plus accéder à cette fonctionnalité.</value>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_Detail_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_Detail_Fonctionnalite" xml:space="preserve">
+    <value>Fonctionnalité</value>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_Detail_Module" xml:space="preserve">
+    <value>Module</value>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_Detail_Privilege" xml:space="preserve">
+    <value>Privilège</value>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_Detail_Titre" xml:space="preserve">
+    <value>Détail de la fonctionnalité</value>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_SelectionnerFonctionnalite" xml:space="preserve">
+    <value>Sélectionner une fonctionnalité</value>
+  </data>
+  <data name="Role_TreeStateToggle_Modified" xml:space="preserve">
+    <value>Les utilisateurs ayant ce rôle pourront modifier les informations. Pour retirer ce droit, cliquer une fois. Pour donner juste les droits de lecture, cliquer deux fois.</value>
+    <comment>fred-tree-state-toggle.tpl.html</comment>
+  </data>
+  <data name="Role_TreeStateToggle_Readonly" xml:space="preserve">
+    <value>Cette fonctionnalité sera uniquement en lecture seule. Cliquer une fois pour donner un privilège plus élevé, sinon deux fois pour retirer les droits.</value>
+    <comment>fred-tree-state-toggle.tpl.html</comment>
+  </data>
+  <data name="Role_TreeStateToggle_Unaffected" xml:space="preserve">
+    <value>Cette fonctionnalité n’est pas disponible. Cliquer une fois pour donner les droits en lecture et deux fois pour donner un privilège plus élevé, en modification.</value>
+    <comment>fred-tree-state-toggle.tpl.html</comment>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_PrivilegeRead_Description" xml:space="preserve">
+    <value>Cette fonctionnalité sera uniquement en lecture seule</value>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_PrivilegeUnAffected_Description" xml:space="preserve">
+    <value>Cette fonctionnalité n’est pas disponible</value>
+  </data>
+  <data name="Role_Index_ModalFonctionnalite_PrivilegeWrite_Description" xml:space="preserve">
+    <value>Cette fonctionnalité sera en lecture et en écriture</value>
+  </data>
+  <data name="Role_Index_ModalRole_CodeSystem" xml:space="preserve">
+    <value>Code Systeme</value>
+  </data>
+</root>

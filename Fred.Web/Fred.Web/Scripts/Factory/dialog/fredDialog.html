@@ -1,0 +1,37 @@
+﻿<div class="modal-header">
+    <h2 class="modal-title">
+        <i class="{{$ctrl.titleIcon}}"></i>
+        {{$ctrl.title}}
+    </h2>
+    <span class="modal-title ng-binding flaticon flaticon-multiply close-modal pull-right" ng-click="$ctrl.close();" title="Annuler"></span>
+</div>
+
+<div class="modal-body">
+    <div class="modal-body-content" style="{{$ctrl.bodyContentStyle}}">
+        <b bind-unsafe-html="$ctrl.message"></b>
+    </div>
+</div>
+
+<div class="modal-footer">
+
+    <button type="button" class="btn btn-lg btn-default pull-left"
+            ng-show="$ctrl.leftTextButon"
+            ng-click="$ctrl.leftActionButon(); $ctrl.close();"
+            title="Valider">
+        {{$ctrl.leftTextButon}}
+    </button>
+
+    <button type="button" class="btn btn-lg btn-default pull-left"
+            ng-show="$ctrl.optionTextButon" 
+            ng-click="$ctrl.optionActionButon(); $ctrl.close();"
+            title="Option">
+        {{$ctrl.optionTextButon}}
+    </button>
+
+  <button type="button" class="btn btn-lg btn-link pull-right"
+          ng-show="$ctrl.rightTextButon"
+          ng-click="$ctrl.rightActionButon(); $ctrl.close();"
+          title="Annuler">
+      {{$ctrl.rightTextButon}}
+  </button>
+</div>

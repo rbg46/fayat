@@ -1,0 +1,93 @@
+= Guide des tests unitaires
+
+== Prequel
+
+A lire :
+
+https://docs.microsoft.com/fr-fr/dotnet/core/testing/unit-testing-best-practices
+
+https://docs.microsoft.com/fr-fr/dotnet/core/testing/unit-testing-with-mstest
+
+https://github.com/Moq/moq4/wiki/Quickstart
+
+https://fluentassertions.com/introduction
+
+== Glossaire
+
+> Classe de test ou TestClass : une classe de test qui contient des méthodes censées représenter les TUs. 
+Ces classes sont prefixées de l'attribut [TestClass]. Les méthodes sont préfixées de [TestMethod]
+
+> Un Mock : une classe représentant des faux jeu de données.
+
+> Un Shim : Terme microsoft représentant une configuration de mapping permettant de remplacer la référence 
+d'une méthode vers une autre renvoyant un résultat consistant. Utile pour les tests sur des assembly dont 
+nous ne possédons pas le code source.
+
+> Actual : L'instance de la classe testée. L'actual est la vraie classe, celle-ci n'est jamais mockée dans la
+classe de test. Pour tester la classe, on passe par les methodes de l'Actual. (ex: Actual.DoSomething();)
+
+> Builder : Design Pattern permettant d'encapsuler la logique de creation d'un objet dans une classe separée.
+
+> Fluent ou fluent interface : Structure de méthode dans une classe qui permet de chainer les methodes pour 
+un souci de visibilité. (Ex: instance.methode().filtre().get()). Typiquement, la library Linq se base sur 
+du chainage de methode. L'implementation des methodes fluent se represente de la meme maniere :
+1) la méthode retourne un objet du meme type que celui de la classe.
+2) dans la méthode, écrire les instructions a effectuer
+3) on renvoie l'instance en cours (return this);
+
+> Assert ou assertion : L'assertion est la vérification entre le résultat attendu et les données envoyées a l'actual.
+
+== Getting started
+
+=== TestClass avec *BaseTu<T>*.
+
+Hériter votre classe de test de *BaseTu<T>* où T représente la classe à tester.
+
+Exemple : 
+[source, c#]
+----
+public class PersonnelManagerTest: BaseTu<PersonnelManager>
+----
+
+=== TestInitialize.
+
+Si vous avez besoin d'injecter des instances non mockées:
+
+Utiliser *SubstituteConstructorArgument()* pour injecter un argument dans le contructeur.
+
+Utiliser *SubstituteProperty()* pour remplacer une propriété en protected.
+
+Si vous avez besoin de shim un mock :
+Utiliser *GetMocked<T>* où T représente une interface.
+
+Des shims (setup) de méthode des interfaces mockées sont nécessaires lorsqu'ils sont appelés dans *Actual*.
+
+=== TestMethod with *FluentAssertions* and *ModelDataBuilder<T>*.
+
+[source, c#]
+----
+Invoking()
+----
+
+Lancer la méthode à tester à partir de Actual pour récupérer l'action elle-même afin de contrôler les exceptions. 
+
+[source, c#]
+----
+Should()
+----
+
+Utiliser *FluentAssertions*.
+
+Exemple :
+
+[source,c#]
+----
+Invoking(() => Actual.Create(new SocieteClassificationEnt())).Should().Throw<ValidationException>().Which.Errors.Should().Contain(x => x.ErrorMessage.Contains(FeatureSociete.SocieteClassification_Code_Required))
+Actual.GetOnlyActive().Should().OnlyContain(c => c.Active)
+----
+
+== In a nutshell
+
+Recommandation:
+
+* Personnaliser les builders permet de les ré-utiliser dans d'autres classes de test.

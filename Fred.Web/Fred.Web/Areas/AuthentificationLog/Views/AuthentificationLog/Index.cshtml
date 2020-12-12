@@ -1,0 +1,123 @@
+﻿
+@{
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+  @Styles.Render("~/AuthentificationLogIndexBundle.css")
+}
+
+@section scripts {
+
+  @Scripts.Render("~/AuthentificationLogIndexBundle.js")
+  @this.RenderResources("AuthentificationLog")
+}
+
+<div class="container authentificationLog" ng-controller="authentificationLogController as authentificationLogCtrl">
+
+  <!-- START : Titre de la page -->
+  <h1>{{authentificationLogCtrl.resources.AuthentificationLog_Controller_Index_Title}}</h1>
+  <!--END : Titre de la page -->
+
+  <div id="PanelMain">
+
+    <label class="infoFilter">{{authentificationLogCtrl.resources.Global_RechercheAffiner}}</label>
+
+    <div class="filter-container">
+      <div class="row">
+        <!--BEGIN : Recherche -->
+        <div class="col-md-6 col-lg-6 no-padding">
+          <div class="filter">
+            <div class="input-group">
+              <input class="form-control txt" type="text" id="txtRecherche" name="Recherche"
+                     placeholder="{{authentificationLogCtrl.resources.CodeDeplacement_PanelMain_Recherche_Placeholder}}"
+                     ng-model-options="{ debounce: 500 }"
+                     ng-model="authentificationLogCtrl.loginText"
+                     ng-change="authentificationLogCtrl.getByLogin()"
+                     aria-label="rechercher un code déplacement" />
+              <span class="input-group-btn">
+                <button class="btn btn-secondary y_search"
+                        title="{{authentificationLogCtrl.resources.Global_RechercheAffiner_Tooltip}}"
+                        type="button"
+                        ng-click="authentificationLogCtrl.handleSearch()">
+                  <i class="material-icons">search</i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <button ng-click="authentificationLogCtrl.deleteAll()"
+                ng-disabled="authentificationLogCtrl.isBusy"
+                title="{{authentificationLogCtrl.resources.Global_Bouton_Supprimer_Tooltip}}"
+                class="btn btn-default pull-right">
+          {{authentificationLogCtrl.resources.Global_Bouton_Supprimer}}
+        </button>
+        <button ng-click="authentificationLogCtrl.selectAll()"
+                ng-disabled="authentificationLogCtrl.isBusy"
+                title="{{authentificationLogCtrl.resources.Global_Bouton_Selectionner}}"
+                class="btn btn-default pull-right">
+          {{authentificationLogCtrl.resources.Global_Bouton_Selectionner}}
+        </button>
+      </div>
+    </div>
+    <!--END : Recherche -->
+    <!--LISTE : START-->
+    <div class="table-container log-list">
+      <table class="table table-hover table-fixed">
+        <thead>
+          <tr>
+            <!--Affichage du tableau en mode Extra small devices (col-xs) -->
+            <th class="col-xs-5 visible-xs">{{authentificationLogCtrl.resources.AuthentificationLog_Controller_Index_Table_Header_Login}}</th>
+            <th class="col-xs-5 visible-xs">{{authentificationLogCtrl.resources.AuthentificationLog_Controller_Index_Table_Header_ErrorType}}</th>
+
+            <!--Affichage du tableau en mode Small (col-sm)-->
+            <th class="col-sm-4 visible-sm">{{authentificationLogCtrl.resources.AuthentificationLog_Controller_Index_Table_Header_DateCreation}}</th>
+            <th class="col-sm-4 visible-sm">{{authentificationLogCtrl.resources.AuthentificationLog_Controller_Index_Table_Header_Login}}</th>
+            <th class="col-sm-4 visible-sm">{{authentificationLogCtrl.resources.AuthentificationLog_Controller_Index_Table_Header_Error}}</th>
+            @*<th class="col-sm-3 visible-sm"></th>*@
+
+            <!--Affichage du tableau en mode Medium + Large (col-md + col-lg )-->
+            <th class="col-md-1 visible-md visible-lg">{{authentificationLogCtrl.resources.AuthentificationLog_Controller_Index_Table_Header_DateCreation}}</th>
+            <th class="col-md-2 visible-md visible-lg">{{authentificationLogCtrl.resources.AuthentificationLog_Controller_Index_Table_Header_Login}}</th>
+            <th class="col-md-3 visible-md visible-lg">{{authentificationLogCtrl.resources.AuthentificationLog_Controller_Index_Table_Header_Error}}</th>
+            <th class="col-md-1 visible-md visible-lg">{{authentificationLogCtrl.resources.AuthentificationLog_Controller_Index_Table_Header_ErrrorOrigin}}</th>
+            <th class="col-md-1 visible-md visible-lg">{{authentificationLogCtrl.resources.AuthentificationLog_Controller_Index_Table_Header_AdressIp}}</th>
+            <th class="col-md-3 visible-md visible-lg">{{authentificationLogCtrl.resources.AuthentificationLog_Controller_Index_Table_Header_RequestUrl}}</th>
+            <th class="col-md-1 visible-md visible-lg"></th>
+
+          </tr>
+        </thead>
+        <tbody id="authentificationLogList" class="fred-scroll">
+          <tr ng-repeat="log in authentificationLogCtrl.authentificationLogs"
+              ng-class="{ 'authentification-log-selected': log.isSelected}"
+              ng-click="authentificationLogCtrl.select(log)"
+              ng-dblclick="authentificationLogCtrl.showDetail(log)"
+              ng-disabled="authentificationLogCtrl.isBusy">
+
+            <!--Affichage du tableau en mode Extra small devices (col-xs) -->
+            <td class="col-xs-5 visible-xs">{{log.Login}}</td>
+            <td class="col-xs-5 visible-xs">{{log.Error}}</td>
+
+            <!--Affichage du tableau en mode Small (col-sm)-->
+            <td class="col-sm-4 visible-sm">{{log.DateCreation | date :'dd-MM-yyyy HH:mm:ss'}}</td>
+            <td class="col-sm-4 visible-sm">{{log.Login}}</td>
+            <td class="col-sm-4 visible-sm">{{log.Error}}</td>
+
+            <!--Affichage du tableau en mode Medium + Large (col-md + col-lg )-->
+            <td class="col-md-1 visible-md visible-lg">{{log.DateCreation | date :'dd-MM-yyyy HH:mm:ss'}}</td>
+            <td class="col-md-2 visible-md visible-lg">{{log.Login}}</td>
+            <td class="col-md-3 visible-md visible-lg">{{log.Error}}</td>
+            <td class="col-md-1 visible-md visible-lg">{{log.OriginText}}</td>
+            <td class="col-md-1 visible-md visible-lg">{{log.AdressIp}}</td>
+            <td class="col-md-3 visible-md visible-lg">{{log.RequestedUrl}}</td>
+            <td class="col-md-1 visible-md visible-lg td-btn">
+              <i class="material-icons" ng-click="authentificationLogCtrl.deleteLog(log)" ng-disabled="authentificationLogCtrl.isBusy" title="{{authentificationLogCtrl.resources.Global_Bouton_Supprimer_Tooltip}}">clear</i>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--LISTE : END-->
+  </div>
+</div>

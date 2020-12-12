@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D3D12F17-3BA4-4B4C-BD9E-2E3FD0923049}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fred.ImportExport.Database</RootNamespace>
+    <AssemblyName>Fred.ImportExport.Database</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Fred.ImportExport.Database.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Fred.ImportExport.Database.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'SpeedDebug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\SpeedDebug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>Fred.ImportExport.Database.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="dbup-core, Version=4.2.0.0, Culture=neutral, PublicKeyToken=4b419c53bdfd4cbf, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\dbup-core.4.2.0\lib\net45\dbup-core.dll</HintPath>
+    </Reference>
+    <Reference Include="dbup-sqlserver, Version=4.2.0.0, Culture=neutral, PublicKeyToken=4b419c53bdfd4cbf, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\dbup-sqlserver.4.2.0\lib\net35\dbup-sqlserver.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ImportExport\Migrations\201709041551170_Init.cs" />
+    <Compile Include="ImportExport\Migrations\201709041551170_Init.Designer.cs">
+      <DependentUpon>201709041551170_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\201801151629254_AddTranspoCodeEmploiToRessourceEnt.cs" />
+    <Compile Include="ImportExport\Migrations\201801151629254_AddTranspoCodeEmploiToRessourceEnt.Designer.cs">
+      <DependentUpon>201801151629254_AddTranspoCodeEmploiToRessourceEnt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\201802201023424_UpdateJobEnt.cs" />
+    <Compile Include="ImportExport\Migrations\201802201023424_UpdateJobEnt.Designer.cs">
+      <DependentUpon>201802201023424_UpdateJobEnt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\201812061026083_DeleteColumnConnexionChaineSourceAndAddIndexUniqueCodeInTableFluxEntMigration.cs" />
+    <Compile Include="ImportExport\Migrations\201812061026083_DeleteColumnConnexionChaineSourceAndAddIndexUniqueCodeInTableFluxEntMigration.Designer.cs">
+      <DependentUpon>201812061026083_DeleteColumnConnexionChaineSourceAndAddIndexUniqueCodeInTableFluxEntMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\201903271052343_AddWorkflowLogicielTiersEtLogicielTiersEnt.cs" />
+    <Compile Include="ImportExport\Migrations\201903271052343_AddWorkflowLogicielTiersEtLogicielTiersEnt.Designer.cs">
+      <DependentUpon>201903271052343_AddWorkflowLogicielTiersEtLogicielTiersEnt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\201904080823097_AddFluxToWorkflowLogicielTiersSupprimeVersionDansLogicielTiers.cs" />
+    <Compile Include="ImportExport\Migrations\201904080823097_AddFluxToWorkflowLogicielTiersSupprimeVersionDansLogicielTiers.Designer.cs">
+      <DependentUpon>201904080823097_AddFluxToWorkflowLogicielTiersSupprimeVersionDansLogicielTiers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\201904080843549_AddNomServeurDansLogicielTiers.cs" />
+    <Compile Include="ImportExport\Migrations\201904080843549_AddNomServeurDansLogicielTiers.Designer.cs">
+      <DependentUpon>201904080843549_AddNomServeurDansLogicielTiers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\201903280814520_MergeAddWorkflowLogicielTiersEtLogicielTiersEnt.cs" />
+    <Compile Include="ImportExport\Migrations\201903280814520_MergeAddWorkflowLogicielTiersEtLogicielTiersEnt.Designer.cs">
+      <DependentUpon>201903280814520_MergeAddWorkflowLogicielTiersEtLogicielTiersEnt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\201904081326576_MergeAddFluxAndAddServerName.cs" />
+    <Compile Include="ImportExport\Migrations\201904081326576_MergeAddFluxAndAddServerName.Designer.cs">
+      <DependentUpon>201904081326576_MergeAddFluxAndAddServerName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\201905030839563_UpdatePKWorkflowLogicielTiersEnt.cs" />
+    <Compile Include="ImportExport\Migrations\201905030839563_UpdatePKWorkflowLogicielTiersEnt.Designer.cs">
+      <DependentUpon>201905030839563_UpdatePKWorkflowLogicielTiersEnt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\201905060957404_DeleteTransfertDepenseEntMigration.cs" />
+    <Compile Include="ImportExport\Migrations\201905060957404_DeleteTransfertDepenseEntMigration.Designer.cs">
+      <DependentUpon>201905060957404_DeleteTransfertDepenseEntMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\201905211437260_AddWorkFlowPointageEntMigration.cs" />
+    <Compile Include="ImportExport\Migrations\201905211437260_AddWorkFlowPointageEntMigration.Designer.cs">
+      <DependentUpon>201905211437260_AddWorkFlowPointageEntMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\201906172023535_AddColumnRapportIdToWorkFlowPointageEntMigration.cs" />
+    <Compile Include="ImportExport\Migrations\201906172023535_AddColumnRapportIdToWorkFlowPointageEntMigration.Designer.cs">
+      <DependentUpon>201906172023535_AddColumnRapportIdToWorkFlowPointageEntMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\201909040820117_AddSocieteCodeImportMaterielEnt.cs" />
+    <Compile Include="ImportExport\Migrations\201909040820117_AddSocieteCodeImportMaterielEnt.Designer.cs">
+      <DependentUpon>201909040820117_AddSocieteCodeImportMaterielEnt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\201910030908082_FakeAddTableNLogMigration.cs" />
+    <Compile Include="ImportExport\Migrations\201910030908082_FakeAddTableNLogMigration.Designer.cs">
+      <DependentUpon>201910030908082_FakeAddTableNLogMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\201910052133425_FakeAddTableNlog2Migration.cs" />
+    <Compile Include="ImportExport\Migrations\201910052133425_FakeAddTableNlog2Migration.Designer.cs">
+      <DependentUpon>201910052133425_FakeAddTableNlog2Migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\202001211128353_Us3465AddImportExportInterfaceTransfertDonneeTable.cs" />
+    <Compile Include="ImportExport\Migrations\202001211128353_Us3465AddImportExportInterfaceTransfertDonneeTable.Designer.cs">
+      <DependentUpon>202001211128353_Us3465AddImportExportInterfaceTransfertDonneeTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\202001211457435_FluxGroupCode.cs" />
+    <Compile Include="ImportExport\Migrations\202001211457435_FluxGroupCode.Designer.cs">
+      <DependentUpon>202001211457435_FluxGroupCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\Migrations\Configuration.cs" />
+    <Compile Include="ImportExport\StairContext.cs" />
+    <Compile Include="ImportExport\StairMigrations\201809101532161_InitialCreate.cs" />
+    <Compile Include="ImportExport\StairMigrations\201809101532161_InitialCreate.Designer.cs">
+      <DependentUpon>201809101532161_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\StairMigrations\201809281134404_AddcolonnesContactRecipientsandUserRecipientsMigration.cs" />
+    <Compile Include="ImportExport\StairMigrations\201809281134404_AddcolonnesContactRecipientsandUserRecipientsMigration.Designer.cs">
+      <DependentUpon>201809281134404_AddcolonnesContactRecipientsandUserRecipientsMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\StairMigrations\201810021358140_CreateTableSTAIRPlanActionsMigration.cs" />
+    <Compile Include="ImportExport\StairMigrations\201810021358140_CreateTableSTAIRPlanActionsMigration.Designer.cs">
+      <DependentUpon>201810021358140_CreateTableSTAIRPlanActionsMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\StairMigrations\201811271310191_AddTableSphinxFormulaireQuestionReponse.cs" />
+    <Compile Include="ImportExport\StairMigrations\201811271310191_AddTableSphinxFormulaireQuestionReponse.Designer.cs">
+      <DependentUpon>201811271310191_AddTableSphinxFormulaireQuestionReponse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\StairMigrations\201905280828229_UpdateNumeroQuestionnaireSuprUnderScoreStairMigration.cs" />
+    <Compile Include="ImportExport\StairMigrations\201905280828229_UpdateNumeroQuestionnaireSuprUnderScoreStairMigration.Designer.cs">
+      <DependentUpon>201905280828229_UpdateNumeroQuestionnaireSuprUnderScoreStairMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\StairMigrations\201909051627381_AddForeignKeyTableSphinxQuestionReponse.cs" />
+    <Compile Include="ImportExport\StairMigrations\201909051627381_AddForeignKeyTableSphinxQuestionReponse.Designer.cs">
+      <DependentUpon>201909051627381_AddForeignKeyTableSphinxQuestionReponse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\StairMigrations\Configuration.cs" />
+    <Compile Include="MigrationHelper.cs" />
+    <Compile Include="Securite\IdentityContext.cs" />
+    <Compile Include="ImportExport\ImportExportContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Securite\Migrations\201709041553385_Init.cs" />
+    <Compile Include="Securite\Migrations\201709041553385_Init.Designer.cs">
+      <DependentUpon>201709041553385_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Securite\Migrations\Configuration.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\Fred.Web\Fred.Analysis\LogicalFredIEArchitecture.layerdiagram">
+      <Link>LogicalFredIEArchitecture.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
+    <AdditionalFiles Include="..\..\Fred.Web\Fred.Analysis\LogicalWebArchitecture.layerdiagram">
+      <Link>LogicalWebArchitecture.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DeployReferential.ps1" />
+    <None Include="DeployReferential_Local.ps1" />
+    <None Include="Fred.ImportExport.Database.ruleset" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.10.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
+    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.10.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\Google.Protobuf.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\SonarAnalyzer.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ImportExport\Migrations\201709041551170_Init.resx">
+      <DependentUpon>201709041551170_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Migrations\201801151629254_AddTranspoCodeEmploiToRessourceEnt.resx">
+      <DependentUpon>201801151629254_AddTranspoCodeEmploiToRessourceEnt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Migrations\201802201023424_UpdateJobEnt.resx">
+      <DependentUpon>201802201023424_UpdateJobEnt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Migrations\201812061026083_DeleteColumnConnexionChaineSourceAndAddIndexUniqueCodeInTableFluxEntMigration.resx">
+      <DependentUpon>201812061026083_DeleteColumnConnexionChaineSourceAndAddIndexUniqueCodeInTableFluxEntMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Migrations\201903271052343_AddWorkflowLogicielTiersEtLogicielTiersEnt.resx">
+      <DependentUpon>201903271052343_AddWorkflowLogicielTiersEtLogicielTiersEnt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Migrations\201903280814520_MergeAddWorkflowLogicielTiersEtLogicielTiersEnt.resx">
+      <DependentUpon>201903280814520_MergeAddWorkflowLogicielTiersEtLogicielTiersEnt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Migrations\201904080823097_AddFluxToWorkflowLogicielTiersSupprimeVersionDansLogicielTiers.resx">
+      <DependentUpon>201904080823097_AddFluxToWorkflowLogicielTiersSupprimeVersionDansLogicielTiers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Migrations\201904080843549_AddNomServeurDansLogicielTiers.resx">
+      <DependentUpon>201904080843549_AddNomServeurDansLogicielTiers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Migrations\201904081326576_MergeAddFluxAndAddServerName.resx">
+      <DependentUpon>201904081326576_MergeAddFluxAndAddServerName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Migrations\201905030839563_UpdatePKWorkflowLogicielTiersEnt.resx">
+      <DependentUpon>201905030839563_UpdatePKWorkflowLogicielTiersEnt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Migrations\201905060957404_DeleteTransfertDepenseEntMigration.resx">
+      <DependentUpon>201905060957404_DeleteTransfertDepenseEntMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Migrations\201905211437260_AddWorkFlowPointageEntMigration.resx">
+      <DependentUpon>201905211437260_AddWorkFlowPointageEntMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Migrations\201906172023535_AddColumnRapportIdToWorkFlowPointageEntMigration.resx">
+      <DependentUpon>201906172023535_AddColumnRapportIdToWorkFlowPointageEntMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Migrations\201909040820117_AddSocieteCodeImportMaterielEnt.resx">
+      <DependentUpon>201909040820117_AddSocieteCodeImportMaterielEnt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Migrations\201910030908082_FakeAddTableNLogMigration.resx">
+      <DependentUpon>201910030908082_FakeAddTableNLogMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Migrations\201910052133425_FakeAddTableNlog2Migration.resx">
+      <DependentUpon>201910052133425_FakeAddTableNlog2Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Migrations\202001211128353_Us3465AddImportExportInterfaceTransfertDonneeTable.resx">
+      <DependentUpon>202001211128353_Us3465AddImportExportInterfaceTransfertDonneeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Migrations\202001211457435_FluxGroupCode.resx">
+      <DependentUpon>202001211457435_FluxGroupCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\StairMigrations\201809101532161_InitialCreate.resx">
+      <DependentUpon>201809101532161_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\StairMigrations\201809281134404_AddcolonnesContactRecipientsandUserRecipientsMigration.resx">
+      <DependentUpon>201809281134404_AddcolonnesContactRecipientsandUserRecipientsMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\StairMigrations\201810021358140_CreateTableSTAIRPlanActionsMigration.resx">
+      <DependentUpon>201810021358140_CreateTableSTAIRPlanActionsMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\StairMigrations\201811271310191_AddTableSphinxFormulaireQuestionReponse.resx">
+      <DependentUpon>201811271310191_AddTableSphinxFormulaireQuestionReponse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\StairMigrations\201905280828229_UpdateNumeroQuestionnaireSuprUnderScoreStairMigration.resx">
+      <DependentUpon>201905280828229_UpdateNumeroQuestionnaireSuprUnderScoreStairMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\StairMigrations\201909051627381_AddForeignKeyTableSphinxQuestionReponse.resx">
+      <DependentUpon>201909051627381_AddForeignKeyTableSphinxQuestionReponse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Securite\Migrations\201709041553385_Init.resx">
+      <DependentUpon>201709041553385_Init.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Fred.Web\Fred.Entities\Fred.Entities.csproj">
+      <Project>{d84768f7-f096-4e6d-997e-ac1d9232b47a}</Project>
+      <Name>Fred.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Fred.Web\Fred.Framework\Fred.Framework.csproj">
+      <Project>{92478535-02C7-44E0-975E-E31D77E78CCA}</Project>
+      <Name>Fred.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.ImportExport.Entities\Fred.ImportExport.Entities.csproj">
+      <Project>{3800678c-0906-458a-bc65-8cbbd1a3aa99}</Project>
+      <Name>Fred.ImportExport.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Referential\001-Common\00010_TRANSPO_CODE_EMPLOI_TO_RESSOURCE.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Referential\001-Common\00040_FLUX_V0013.sql" />
+    <Content Include="Referential\001-Common\00040_FLUX_V0012.sql" />
+    <Content Include="Referential\001-Common\00010_TRANSPO_CODE_EMPLOI_TO_RESSOURCE_GEO_V0001.sql" />
+    <Content Include="Referential\001-Common\00010_TRANSPO_CODE_EMPLOI_TO_RESSOURCE_LHE_V0001.sql" />
+    <Content Include="Referential\001-Common\00010_TRANSPO_CODE_EMPLOI_TO_RESSOURCE_MBTP_V0002.sql" />
+    <Content Include="Referential\001-Common\00010_TRANSPO_CODE_EMPLOI_TO_RESSOURCE_RZB_V0002.sql" />
+    <Content Include="Referential\001-Common\00063_New_Code_Societe_Import_Mat_FTP_V0001.sql" />
+    <Content Include="Referential\001-Common\00062_Transco_Code_Emploi_Ressources_V0001.sql" />
+    <Content Include="Referential\001-Common\00061_delete_roles_logins_V0001.sql" />
+    <Content Include="Referential\001-Common\00060_ImportCtrInterimairePixidGRZB_V0001.sql" />
+    <Content Include="Referential\001-Common\00040_FLUX_V0011.sql" />
+    <Content Include="Referential\001-Common\00050_SocieteCodeImportMateriel_V0002.sql" />
+    <Content Include="Referential\001-Common\00050_SocieteCodeImportMateriel_V0001.sql" />
+    <Content Include="Referential\001-Common\00040_FLUX_V0010.sql" />
+    <Content Include="Referential\001-Common\00040_FLUX_V0009.sql" />
+    <Content Include="Referential\001-Common\00040_FLUX_V0008.sql" />
+    <Content Include="Referential\001-Common\00040_FLUX_V0007.sql" />
+    <Content Include="Referential\001-Common\00060_Flux_GroupCode.sql" />
+    <EmbeddedResource Include="Referential\001-Common\00010_TRANSPO_CODE_EMPLOI_TO_RESSOURCE_MBTP.sql" />
+    <Content Include="Referential\001-Common\00040_FLUX.sql" />
+    <Content Include="Referential\001-Common\00040_FLUX_V0002.sql" />
+    <Content Include="Referential\001-Common\00040_FLUX_V0001.sql" />
+    <Content Include="Referential\001-Common\00030_CHECK_DATA.sql" />
+    <Content Include="Referential\001-Common\00040_FLUX_V0003.sql" />
+    <Content Include="Referential\001-Common\00040_FLUX_V0006.sql" />
+    <Content Include="Referential\001-Common\00040_FLUX_V0005.sql" />
+    <Content Include="Referential\001-Common\00040_FLUX_V0004.sql" />
+    <EmbeddedResource Include="Referential\001-Common\00020_ECRITURE_COMPTABLE_RZB_OFF.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

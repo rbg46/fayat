@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Fred.ImportExport.Business.Common.AbstractBusiness">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\AbstractBusiness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fred.ImportExport.Business.Common.AbstractFluxManager">
+    <Position X="6.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAEAAAAAQgAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Common\AbstractFluxManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FluxManager" />
+      <Property Name="Flux" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Fred.ImportExport.Business.Flux.FluxManager" Collapsed="true">
+    <Position X="3.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAABAAAAAgAIAAAgAAA=</HashCode>
+      <FileName>Flux\FluxManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fred.ImportExport.Entities.ImportExport.FluxEnt" Collapsed="true">
+    <Position X="9.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Fred.ImportExport.Business.Depense.DepenseFluxManager" Collapsed="true">
+    <Position X="6" Y="5.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EIAAgAAIEAwAAAAQAgCAABAIIhAAIAQAAAAAAQIAgAA=</HashCode>
+      <FileName>Depense\DepenseFluxManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="transfertDepenseManager" />
+      <Field Name="destinationDatabase" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="farList" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Fred.Entities.ExternalService.Anael.FarEnt" Collapsed="true">
+    <Position X="9.5" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Fred.ImportExport.Business.Depense.TransfertDepenseManager" Collapsed="true">
+    <Position X="0.75" Y="2.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AIYAAAAAAAgAAAAACABABCAEAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Depense\TransfertDepenseManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fred.ImportExport.DataAccess.Common.Database" Collapsed="true">
+    <Position X="9.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

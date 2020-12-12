@@ -1,0 +1,107 @@
+= Gestion des droits
+
+== Vocabulaire de base
+
+=== Fonctionnalité
+
+Les fonctionalités sont porteuses des *permissions*, donc des accès aux différents menus et contrôles de l’application.
+
+=== Modules
+
+Les modules sont des *regroupements de fonctionnalités pour les sociétés* ; il s’agit juste d’une simplification la gestion des droits, sans impact fonctionnel.
+
+=== Rôles
+
+Les rôles sont *liés aux fonctionnalités et aux sociétés* ; ils sont ensuite *affectés aux utilisateurs*.
+
+=== Personnel
+
+Personne qui apparaît dans Fred mais n’a pas accès à l’application (par exemple, les intérimaires).
+
+=== Utilisateurs
+
+Personne ayant accès à l’application, et pouvant donc effectuer des opérations.
+
+
+== Gérer les droits d’un utilisateur
+
+Comme vu précédemment, nous allons affecter ou supprimer un rôle à un utilisateur ; c’est ce dernier qui contiendra les droits en question. +
+Pour cela, en tant qu’administrateur :
+
+[arabic]
+. Aller dans le menu *``Administration > Gérer le personnel``*
+
+image:./Images/GestionDroits/MenuPersonnelClassique.jpg[Menu Classique]
+ou dans la colonne *``Ressources humaines > Gérer les personnel``*.
+
+image:./Images/GestionDroits/MenuPersonnelModerne.jpg[Menu Moderne]
+
+image:./Images/GestionDroits/Personnel.jpg[Gestion du personnel]
+
+[arabic, start=2]
+. Rechercher la personne à qui ajouter les droits ; cliquer dessus.
+. Déplier la section *``Habilitations``* ; la liste des rôles de l’utilisateur d’affiche.
+. Pour
+* *ajouter un nouveau rôle*, commencer par cliquer sur *``Sélectionner une Société``* et … sélectionner une société ; puis cliquer sur *``Ajouter un nouveau rôle``* et sélectionner le rôle à ajouter.
+* *étendre un rôle* à une autre organisation de la société, il suffit de cliquer sur *``Ajouter une nouvelle organisation``* et de sélectionner cette dernière.
+* *supprimer un rôle*, il suffit de cliquer sur la croix à droite de ce dernier.
+
+
+
+== Gérer les rôles
+
+Aller dans l’écran dédié en cliquant sur *``Administration > Gérer les rôles`` (colonne ``Habilitations``)*.
+
+image:./Images/GestionDroits/MenuRoles.jpg[Menu des rôles]
+
+image:./Images/GestionDroits/GestionRoles.jpg[Gestion des rôles] 
+
+. Sélectionner la société pour laquelle gérer les rôles. 
+.. La liste des rôles apparaît à gauche ; cliquer sur l’un d’eux le sélectionne. 
+* image:./Images/GestionDroits/Creer.jpg[Ajouter] sert à créer un nouveau rôle. 
+* image:./Images/GestionDroits/Inactifs.jpg[Inactifs] sert à afficher / masquer les rôles inactifs. 
+* image:./Images/GestionDroits/Masquer.jpg[Masquer] sert à afficher / masquer les fonctionnalités et les seuils. 
+* image:./Images/GestionDroits/Dupliquer.jpg[Dupliquer] sert à copier un rôle.
+* image:./Images/GestionDroits/Supprimer.jpg[Supprimer] sert à supprimer un rôle.
+* image:./Images/GestionDroits/Modifier.jpg[Modifier] sert à modifier un rôle, notamment en l’activant ou le désactivant.
+
+. Sur chaque fonctionnalité d’un rôle, le privilège apparaît et peut être modifié en cliquant dessus :
+image:./Images/GestionDroits/NonAffecte.jpg[Non affecté] =>
+image:./Images/GestionDroits/LectureSeule.jpg[Lecture seule] =>
+image:./Images/GestionDroits/Modification.jpg[Modification]
+* *``Non affecté``* signifie que le droit n’est pas donné par le rôle.
+* *``Lecture seule``* implique que l’utilisateur ne pourra pas modifier les données liées à cette fonctionnalité, juste les voir.
+* *``Modification``* permet donc de modifier les données.
+* image:./Images/GestionDroits/Ajouter.jpg[Ajouter] permet d’ajouter une fonctionnalité au rôle.
+* image:./Images/GestionDroits/Supprimer.jpg[Supprimer] sert à retirer une fonctionnalité du rôle.
+
+. Un couple rôle-fonctionnalité peut avoir un seuil monétaire. Pour le rajouter, il suffit de cliquer sur image:./Images/GestionDroits/Ajouter.jpg[Ajouter un seuil], de sélectionner la devise et le montant.
+
+
+== Gérer les modules et les fonctionnalités
+
+Aller dans l’écran dédié en cliquant sur *``Administration > Gérer les modules`` (colonne ``Habilitations``)*.
+
+image:./Images/GestionDroits/MenuModules.jpg[Menu des modules]
+
+image:./Images/GestionDroits/GestionModules.jpg[Gestion des modules]
+
+[arabic]
+. Sélectionner une société à laquelle les modules sont rattachés.
+. La liste des modules apparaît sur la gauche.
+* image:./Images/GestionDroits/Ajouter.jpg[Ajouter un module] permet d’ajouter un nouveau module à la société.
+* image:./Images/GestionDroits/Propager.jpg[Rendre disponible] sert à rendre le module disponible pour toutes les organisations de la société.
+* image:./Images/GestionDroits/Modifier.jpg[Modifier un module] permet de modifier un module, notamment en l’activant ou le désactivant.
+* image:./Images/GestionDroits/Supprimer.jpg[Supprimer un module] sert à retirer une fonctionnalité du rôle.
+* image:./Images/GestionDroits/Visibilite.jpg[Visibilité du module] permet de gérer simplement la visibilité du module, *aussi bien pour la société sélectionnée que pour les autres du même groupe*.
+. Pour la liste des fonctionnalités :
+* image:./Images/GestionDroits/Ajouter.jpg[Ajouter une fonctionnalité]
+permet d’ajouter une nouvelle fonctionnalité au module. Si la vase
+*``Hors Organisation``* est cochée, la fonctionnalité sera accessible à toutes les organisations.
+* image:./Images/GestionDroits/Propager.jpg[Rendre disponible] sert à rendre la fonctionnalité disponible pour toutes les organisations.
+* image:./Images/GestionDroits/Modifier.jpg[Modifier une fonctionnalité] permet de modifier un module.
+* image:./Images/GestionDroits/Supprimer.jpg[Supprimer une fonctionnalité] sert à supprimer une fonctionnalité.
+* image:./Images/GestionDroits/Visibilite.jpg[Visibilité de la fonctionnalité] permet de gérer simplement la visibilité de la fonctionnalité, *aussi bien pour la société sélectionnée que pour les autres du même groupe*.
+. La section *``Contrôle UI``* indique sur quels contrôles porte la fonctionnalité.
+
+A droite se trouve un panneau récapitulant le paramétrage de ce qui est sélectionné.

@@ -1,0 +1,168 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeaturePersonnel.Personnel_Index_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/PersonnelIndexBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/PersonnelIndexBundle.js")
+    @this.RenderResources("FeaturePersonnel", "FeatureFavori")
+}
+
+<div class="personnel container"
+     ng-controller="PersonnelController as personnel"
+     ng-init="personnel.loadPage('@ViewBag.favoriId')">
+
+    <fred-ui-titre title="{{ personnel.personnelListOpt.length}} {{personnel.resources.Personnel_Index_Sur}} {{personnel.countPersonnel}} {{personnel.resources.Personnel_Index_NbrPersonnel}}"></fred-ui-titre>
+
+
+    <fred-toolbar ng-show="displaySearch" class="row">
+        <fred-section class="col-sm-7 pick-pers">
+            <fred-section-title>Rechercher un personnel par son nom, son prénom ou une autre information (matricule, société ou établissement)</fred-section-title>
+            <fred-section-controls>
+                <personnel-search-filter-component filter="personnel.filter" favori-id="personnel.favoriId" resource="{{personnel.resources}}"></personnel-search-filter-component>
+            </fred-section-controls>
+        </fred-section>
+        <fred-section class="col-sm-4 new-pers">
+            <fred-section-title>Nouveau personnel</fred-section-title>
+            <fred-section-controls>
+                <fred-button class="default text" ng-click="personnel.handleRedirectAddPersonnel('externe')" title="{{personnel.resources.Personnel_Index_Bouton_AjouterPersonnelExterne_Tooltip}}">
+                    <span class="material-icons">add</span> {{personnel.resources.Personnel_Index_Bouton_AjouterPersonnelExterne}}
+                </fred-button>
+                <fred-button class="default text" ng-click="personnel.handleRedirectAddPersonnel('interimaire')" title="{{personnel.resources.Personnel_Index_Bouton_AjouterPersonnelInterimaire_Tooltip}}">
+                    <span class="material-icons">add</span> {{personnel.resources.Personnel_Index_Bouton_AjouterPersonnelInterimaire}}
+                </fred-button>
+                <fred-authorization key="{{personnel.permissionKeys.AffichageBoutonExportReceptionInterimaire}}">
+                    <fred-button class="default text" data-toggle="modal" data-target="#receptionInterimaireModal" title="{{personnel.resources.Personnel_Index_Bouton_Export_Reception_Interim}}">
+                        {{personnel.resources.Personnel_Index_Bouton_Export_Reception_Interim}}
+                    </fred-button>
+                </fred-authorization>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Export -->
+        <fred-section class="export-section">
+            <fred-section-title>Export</fred-section-title>
+            <fred-section-controls>
+                <button type="button" class="btn button-excel" ng-click="personnel.onExportExcel()" title="{{personnel.resources.Global_Bouton_ExportExcel_Tooltip}}">
+                </button>
+                <!--Habilitation-->
+                <div class="habilitation-margin">
+                    <input id="chkIsOuvrier" type="checkbox" ng-model="personnel.haveHabilitation" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                    <label for="chkIsOuvrier" class="ng-binding"><span></span>{{personnel.resources.Personnel_Habilitation}}</label>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+
+        <!--Action-->
+        <fred-section class="actions-section">
+            <fred-section-title>{{personnel.resources.Global_Actions}}</fred-section-title>
+            <fred-section-controls>
+                <!--Favoris-->
+                <fred-button class="fred-button white-star" type="button" ng-click="personnel.handleAddFilter2Favoris()" title="{{personnel.resources.Button_Save_Favorite_Title}}">
+                    <i class="material-icons">star</i>
+                </fred-button>
+            </fred-section-controls>
+        </fred-section>
+    </fred-toolbar>
+
+    <table class="personnel-table" id="tableFixed" fred-table fred-fixed-col="1,2" fred-table-resize-trigger="{{personnel.personnelList.length > 0}}">
+        <thead>
+            <tr class="inactive">
+                <th class="cln1"><!--Societe--></th>
+                <th class="cln2"><!--Matricule--></th>
+                <th class="cln3"><!--Nom--></th>
+                <th class="cln4"><!--Prenom--></th>
+                <th class="cln5"><!--EtablissementPaie--></th>
+                <th class="cln6"><!--TypeProfil--></th>
+                <th class="cln7 bkg-blue" colspan="2">Date</th>
+                @*<th class="col8">DateSortie</th>*@
+                <th class="cln9"><!----></th>
+            </tr>
+            <tr class="main">
+                <th class="cln1 bkg-blue">{{personnel.resources.Personnel_Index_Table_Entete_Societe}}</th>
+                <th class="cln2 bkg-blue">{{personnel.resources.Personnel_Index_Table_Entete_Matricule}}</th>
+                <th class="cln3 bkg-blue">{{personnel.resources.Personnel_Index_Table_Entete_Nom}}</th>
+                <th class="cln4 bkg-blue">{{personnel.resources.Personnel_Index_Table_Entete_Prenom}}</th>
+                <th class="cln5 bkg-blue">{{personnel.resources.Personnel_Index_Table_Entete_EtablissementPaie}}</th>
+                <th class="cln6 bkg-blue">{{personnel.resources.Personnel_Index_Table_Entete_TypeProfil}}</th>
+                <th class="cln7 bkg-blue-light1">{{personnel.resources.Personnel_Index_Table_Entete_DateEntree}}</th>
+                <th class="cln8 bkg-blue-light1">{{personnel.resources.Personnel_Index_Table_Entete_DateSortie}}</th>
+                <th class="cln9 bkg-blue"></th>
+            </tr>
+        </thead>
+        <tbody id="listPersonnel" class="fred-scroll">
+            <tr ng-repeat="p in personnel.personnelListOpt" ng-click="personnel.handleRedirectDetailPersonnel(p)">
+                <td class="cln1  bkg-blue-light4">
+                    <fred-ui-detail ng-click="personnel.handleRedirectDetailPersonnel(p)" title="{{personnel.resources.Personnel_Index_Bouton_Detail_Tooltip}}"></fred-ui-detail>
+                    {{p.Societe}}
+                </td>
+                <td class="cln2">{{p.Matricule}}</td>
+                <td class="cln3">{{p.Nom}}</td>
+                <td class="cln4">{{p.Prenom}}</td>
+                <td class="cln5">{{p.EtablissementPaie}}</td>
+                <td class="cln6">
+                    <span class="active" ng-show="p.IsActif">{{personnel.resources.Global_Actif}}</span>
+                    <span class="inactive" ng-show="!p.IsActif">{{personnel.resources.Global_Inactif}}</span>
+                    <span class="intern" ng-show="p.IsInterne">{{personnel.resources.Global_Interne}}</span>
+                    <span class="outsider" ng-show="!p.IsInterne && !p.IsInterimaire">{{personnel.resources.Global_Externe}}</span>
+                    <span class="user" ng-show="p.UtilisateurId && p.IsActivedExtDirectory">{{personnel.resources.Global_UtilisateurFred}}</span>
+                    <span class="user_inactif" ng-show="p.UtilisateurId && !p.IsActivedExtDirectory">{{personnel.resources.Global_UtilisateurFred}}</span>
+                    <span class="temporary" ng-show="p.IsInterimaire">{{personnel.resources.Global_Interimaire}}</span>
+                </td>
+                <td class="cln7 bkg-blue-light2 center">{{p.DateEntree | date:'dd/MM/yyyy'}}</td>
+                <td class="cln8 bkg-blue-light2 center">{{p.DateSortie | date:'dd/MM/yyyy'}}</td>
+                <td class="cln9 actions">
+                    <i ng-click="$event.stopPropagation(); personnel.handleRedirectPersonnelIndemnite(p)" title="{{personnel.resources.Personnel_Index_Bouton_Indemnite_Tooltip}}" class="action-icone material-icons" aria-hidden="true">directions_car</i>
+                    <fred-ui-close ng-show="!p.DateSuppression && !p.DateSortie && !p.IsInterne && !p.IsInterimaire" ng-click="$event.stopPropagation(); personnel.handleDeletePersonnel(p.PersonnelId)" title="{{personnel.resources.Personnel_Index_Bouton_Supprimer_Tooltip}}"></fred-ui-close>
+                    <fred-ui-detail ng-click="personnel.handleRedirectDetailPersonnel(p)" title="{{personnel.resources.Personnel_Index_Bouton_Detail_Tooltip}}"></fred-ui-detail>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="modal fade" id="receptionInterimaireModal" tabindex="-1" aria-hidden="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i>{{personnel.resources.Personnel_Index_Titre_Modal_Export}}</h2>
+                    <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{personnel.resources.Personnel_Index_Bouton_Annuler}}"></i>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>{{personnel.resources.Personnel_Index_Selection_Societes}}</label>
+                        </div>
+                        <div class="col-md-12 group-list fred-scroll">
+                            <div ng-repeat="groupe in personnel.societes">
+                                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#G_{{groupe.GroupeId}}" aria-expanded="false">
+                                    <span class="material-icons">add</span>
+                                </button>
+                                <label>{{groupe.Libelle}}</label>
+                                <div id="G_{{groupe.GroupeId}}" class="collapse soc-list">
+                                    <div ng-repeat="societe in groupe.Societes">
+                                        <div class="chbx-tab">
+                                            <input type="checkbox"
+                                                   id="chbxTab_{{societe.SocieteId}}"
+                                                   ng-model="societe.Selected" />
+                                            <label for="chbxTab_{{societe.SocieteId}}"><span></span>{{societe.Libelle}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">{{personnel.resources.Personnel_Index_Bouton_Annuler}}</button>
+                    <button type="submit" ng-click="personnel.exportReceptionInterim()" data-dismiss="modal" class="btn btn-default">{{personnel.resources.Personnel_Index_Bouton_Exporter}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+﻿<div ng-show="$ctrl.isOpen"
+     fred-lookup-overlay-show-On="$ctrl.isOpen"
+     fred-lookup-overlay-hide-On="!$ctrl.isOpen && !$ctrl.panelAgenceIsVisible">
+    <div ng-click="$ctrl.handleCancel()"
+         style="z-index: 60000;"
+         id="lookupOverLay">
+    </div>
+    <div class="lookupPane"
+         style="z-index: 60001;"
+         ng-keydown="$ctrl.handleKeyDown($event)">
+        <span class="grey-closing pull-right"
+              title="Cliquer pour fermer"
+              ng-click="$ctrl.handleCancel()">close</span>
+        <div id="lookupHeader custom-header"
+             class="lookup-header">
+            <label>{{$ctrl.resources.Global_ReferentielFournisseur}}</label>
+            <div>
+                <i class=""></i>
+                <!-- 1er champ de recherche (champ par défaut) -->
+                <input type="text"
+                       id="premier"
+                       fred-select-me-on="$ctrl.isOpen"
+                       ng-keypress="($event.which === 13)?$ctrl.enterKeyPress($event):0"
+                       ng-model-options="{debounce: 700 }"
+                       ng-change="$ctrl.handleChangeSearchText()"
+                       ng-model="$ctrl.searchText"
+                       class="form-control searchLookupPanelRight"
+                       placeholder="Début du nom du fournisseur..."
+                       title="{{$ctrl.resources.Commande_Holder_Saisie_Nom}}" />
+                <!-- 2eme champ de recherche (champ optionnel) -->
+                <input type="text"
+                       ng-keypress="($event.which === 13)?$ctrl.enterKeyPress($event):0"
+                       ng-model-options="{debounce: 700 }"
+                       ng-change="$ctrl.handleChangeSearchText()"
+                       ng-model="$ctrl.searchText2"
+                       class="form-control searchLookupPanelRight"
+                       placeholder="{{$ctrl.resources.Commande_Holde_Autreinfo}}" />
+            </div>
+        </div>
+        <div id="divScroll"
+             class="fred-scroll"
+             ng-class="$ctrl.scrollName">
+            <div ng-show="$ctrl.busy && !$ctrl.scrolling"
+                 class="text-center">
+                <img src="../../../../Content/images/loader.gif" />
+            </div>
+            <div ng-hide="$ctrl.busy && !$ctrl.scrolling"
+                 class="lookupBody">
+                <p class="error"
+                   ng-show="$ctrl.error">{{$ctrl.error}}</p>
+                <p ng-show="$ctrl.message">{{::$ctrl.resources.AucunReferentielTrouve_lb}}</p>
+
+                <fred-lookup-fournisseur-item-component ng-repeat="ref in $ctrl.items track by $index"
+                                                        ng-class="{selected : $ctrl.selectedFournisseur == ref}"
+                                                        textsToHighlight="$ctrl.textsToHighlight"
+                                                        show-button-agence="true"
+                                                        fournisseur="ref">
+                </fred-lookup-fournisseur-item-component>
+            </div>
+        </div>
+    </div>
+    <fred-lookup-agence-tab-component selected-fournisseur="$ctrl.selectedFournisseur">
+    </fred-lookup-agence-tab-component>
+</div>

@@ -1,0 +1,720 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D4DCFE97-9577-487A-BF16-70216B74C445}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fred.Referential</RootNamespace>
+    <AssemblyName>Fred.Referential</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Fred.Referential.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Fred.Referential.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'SpeedDebug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\SpeedDebug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>Fred.Referential.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\Fred.Analysis\LogicalWebArchitecture.layerdiagram">
+      <Link>LogicalWebArchitecture.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
+    <AdditionalFiles Include="..\Fred.Analysis\LogicalFredIEArchitecture.layerdiagram">
+      <Link>LogicalFredIEArchitecture.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
+    <None Include="DeployReferential_Local.ps1" />
+    <None Include="DeployReferential.ps1" />
+    <None Include="Fred.Referential.ruleset">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Synchronisation\Fred.IE\Sync_Dev_Fred_IE_HangFire_to_Local.dcmp" />
+    <None Include="Synchronisation\Fred.IE\Sync_Dev_Fred_IE_Web_to_Local.dcmp" />
+    <None Include="Synchronisation\Fred.IE\Sync_Inte_Fred_IE_HangFire_to_Local.dcmp" />
+    <None Include="Synchronisation\Fred.IE\Sync_Inte_Fred_IE_Web_to_Local.dcmp" />
+    <None Include="Synchronisation\Fred.IE\Sync_PreProd_Fred_IE_HangFire_to_Local.dcmp" />
+    <None Include="Synchronisation\Fred.IE\Sync_PreProd_Fred_IE_Web_to_Local.dcmp" />
+    <None Include="Synchronisation\Fred.Web\Sync_Dev_Fred_Web_to_Local.dcmp" />
+    <None Include="Synchronisation\Fred.Web\Sync_Inte_Fred_Web_to_Local.dcmp" />
+    <None Include="Synchronisation\Fred.Web\Sync_PreProd_Fred_Web_to_Local.dcmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Documentation\" />
+    <Folder Include="Referential\002-Developpement\002-Fred-FakeData\" />
+    <Folder Include="Referential\003-Recette\002-Fred-Ref-RZB\" />
+    <Folder Include="Referential\003-Recette\008-Fred-Ref-GFTP\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Referential\001-Common\001-Fred-Ref\00020_FRED_CARBURANT_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00040_FRED_COMMANDE_TYPE_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00050_FRED_DEPENSE_STATUT_RAPPROCHEMENT_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00060_FRED_DEVISE_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00070_FRED_EXTERNALDIRECTORY_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00120_FRED_GROUPE_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00100_FRED_HOLDING_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00220_FRED_IMAGE_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00090_FRED_ORGANISATION_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00190_FRED_PARAMETRE_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00130_FRED_PAYS_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00200_FRED_PERSONNEL_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00110_FRED_POLE_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00150_FRED_RAPPORT_STATUT_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00160_FRED_ROLE_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00170_FRED_STATUT_COMMANDE_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00080_FRED_TYPE_ORGANISATION_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00180_FRED_TYPE_RESSOURCE_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00010_FRED_UNITE_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00210_FRED_UTILISATEUR_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00060_FRED_RZB_CHAPITRE_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00070_FRED_RZB_CODE_ABSENCE_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00080_FRED_RZB_CODE_DEPLACEMENT_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00090_FRED_RZB_CODE_MAJORATION_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00100_FRED_RZB_CODE_ZONE_DEPLACEMENT_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00120_FRED_RZB_ETABLISSEMENT_COMPTABLE_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00110_FRED_RZB_ETABLISSEMENT_PAIE_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00030_FRED_RZB_GROUPE_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00130_FRED_RZB_JOURNAL_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00140_FRED_RZB_NATURE_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00020_FRED_RZB_ORGANISATION_GENERIQUE_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00010_FRED_RZB_ORGANISATION_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00210_FRED_RZB_PARAMETRE_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00150_FRED_RZB_PRIME_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00180_FRED_RZB_RESSOURCE_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00050_FRED_RZB_ROLE_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00160_FRED_RZB_SOCIETE_DEVISE_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00170_FRED_RZB_SOUS_CHAPITRE_V1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0037.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00021.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01017_FRED_OPERATION_DIVERSE_UpdateDate_Ticket_14873.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00820_FRED_FONCTIONNALITE_0001.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00820_FRED_FONCTIONNALITE_0002.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01007_FRED_REDRESSEMENT_DONNEES_Cas1_Ticket_14328_V2.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01007_FRED_SYSTEM_EXTERNE_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01012_FRED_VALORISATION_Creation_Valos_Positives_Ticket_14752.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01010_FRED_VALORISATION_Creation_Valos_Positives_Ticket_14586.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01013_FRED_DEPENSE_ACHAT_Cas2_Ticket_14752.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01013_FRED_DEPENSE_ACHAT_Cas1_Ticket_14752.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01011_FRED_REDRESSEMENT_DONNEES_Ticket_14586_V002.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01010_FRED_REDRESSEMENT_DONNEES_Ticket_14586.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0020_Ticket_13816.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01016_FRED_DEPENSE_ACHAT_Delete_Ticket_14703.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\US_13085_Script_initialisation_parametrage.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01014_FRED_VALORISATION_Delete_Montant_Zero.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01015_FRED_VALORISATION_Creation_Valos_Positives_Ticket_14895.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01010_FRED_FAMILLE_OD_Insert_LibelleCourt.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00804_FRED_RESSOURCE_13083.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01008_FRED_CI_NEW_CI_ABSENCE_V0003.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01008_FRED_CI_NEW_CI_ABSENCE_V0002.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01008_FRED_CI_NEW_CI_ABSENCE_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01009_FRED_REDRESSEMENT_DONNEES_Ticket_14141.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00803_FRED_VALORISATION_CORRECT_TACHE_ECART_INTERIM_13746.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0019_Ticket_14328.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01007_FRED_REDRESSEMENT_DONNEES_Cas1_Ticket_14328.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01007_FRED_REDRESSEMENT_DONNEES_Cas2_Ticket_14328.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01006_FRED_ECRITURECOMPTABLE_DATA_CORRECTION_BUG_14225.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01006_FRED_DEPENSE_ACHAT_SUPPR_DOUBLONS_RECEPTIONS.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\1001_FRED_GFTP_AddLogoBPE_V0001.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\10011_FRED_GFTP_ADD_FONCTIONNALITE_UPDATE_ZONES_V0001.sql" />
+    <Content Include="Referential\004-Production\004-Reprises-Donnees\00012_REPRISE_MAT_EXTERNE_ISSTORM_FALSE.sql" />
+    <Content Include="Referential\004-Production\004-Reprises-Donnees\00011_REPRISE_DEPENSE_ACHAT_SUPPR_ERREUR.sql" />
+    <Content Include="Referential\004-Production\004-Reprises-Donnees\14273_RemoveDeleteFlagFromReceptionWithVisa.sql" />
+    <Content Include="Referential\006-ProductionNightly\InsertTestUsers.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00240_FRED_FACTURATION_TYPE_V4.sql" />
+    <Content Include="OneShoot\Personnel\00010_FRED_FES_PERSONNEL_MANAGER_V0001.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00800_FRED_STATUT_COMMANDE_V2.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0035.sql" />
+    <None Include="Referential\000-PreDeploy\Warning_ReadMe.md" />
+    <Content Include="Referential\000-PreDeploy\010_PreDeployRecette\300_EfCore_M3_V300.sql" />
+    <Content Include="Referential\000-PreDeploy\010_PreDeployRecette\200_EfCore_M2_V200.sql" />
+    <Content Include="Referential\000-PreDeploy\010_PreDeployRecette\100_EfCore_M1_V100.sql" />
+    <Content Include="Referential\000-PreDeploy\020_PreDeployProd\100_EfCore_P1_V100.sql" />
+    <Content Include="Referential\000-PreDeploy\020_PreDeployProd\200_EfCore_P2_V100.sql" />
+    <Content Include="Referential\000-PreDeploy\020_PreDeployProd\400_EfCore_P4_V100.sql" />
+    <Content Include="Referential\000-PreDeploy\020_PreDeployProd\300_EfCore_P3_V100.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00240_FRED_FACTURATION_TYPE_V5.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00380_FRED_TACHE_V0004.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00380_FRED_TACHE_V0003.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_EnteteCommandeDelete.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_FilterReceptionDelete.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0002.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0007.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0008.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0005.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0004.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0009.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0006.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0003.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0010.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0012.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0013.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0018.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0017.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0016.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0015.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0014.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V0011.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00970_FRED_DROITS_HABILITATIONS_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00220_FRED_IMAGE_V5.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00220_FRED_IMAGE_V4.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00220_FRED_IMAGE_V3.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00220_FRED_IMAGE_V7.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00220_FRED_IMAGE_V6.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0018.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0021.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0025.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0023.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0030.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0029.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0028.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0027.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0026.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0033.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0034.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0032.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00380_FRED_TACHE_V0002.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0036.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00014.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00016.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00015.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00020.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00019.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00940_FRED_PERMISSION_V0032.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01000_FRED_STATUT_COMMANDE_CORRECTION_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01003_FRED_PickList_GetPersonnels_Update.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01004_FRED_VALORISATION_SUPPR_DOUBLONS_MAT_V0002.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01004_FRED_VALORISATION_SUPPR_DOUBLONS_MAT.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01005_FRED_DEPENSE_REDRESSEMENT_VALO_SUPPRIMEES.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01004_FRED_VALORISATION_SUPPR_DOUBLONS_PERSO_V0002.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01004_FRED_VALORISATION_SUPPR_DOUBLONS_PERSO.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01003_FRED_VALORISATION_TACHE_INTERIMAIRE.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01002_FRED_ADD_LOGO_LINK_SOCIETE.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01001_FRED_PERMISSION_V0033.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00710_FRED_VALORISATION_V0004.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01003_FRED_PickList_GetPersonnels.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01006_FRED_VALORISATION_MAJ_REFETENDU_MATERIEL_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01006_FRED_VALORISATION_MAJ_REFETENDU_PERSO_V0001.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00320_FRED_FAMILLE_OPERATION_DIVERSE_V0009.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00350_FRED_TACHE_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\01002_FRED_DEPENSE_ACHAT_MAJ_TACHEID_LITIGE.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00720_FRED_ECRITURE_COMPTABLE_V0006.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00720_FRED_ECRITURE_COMPTABLE_V0005.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00720_FRED_ECRITURE_COMPTABLE_V0004.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00740_FRED_SYSTEME_IMPORT_Add_Items.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00980_FRED_GROUPE_Update_SystemeInterime.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00980_FRED_ETAT_CONTRAT_INTERIMAIRE_Init_Data.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00970_FRED_ROLE_V2.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00750_FRED_PERMISSION_V0022.sql" />
+    <EmbeddedResource Include="Referential\001-Common\001-Fred-Ref\00870_FRED_ORGANISATION_CORRECTIF_DRN.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00890_FRED_FAVORI_UTILISATEUR.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00830_FRED_FEATURE_FLIPPING_V00012.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00017.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00018.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00660_FRED_SOCIETE_V6.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00013.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0022.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0020.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00790_FRED_SOCIETE_FRED_IMAGE_LOGO_CGA_V2.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00750_FRED_PERMISSION_V0021.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00770_FRED_TACHE_V3.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00750_FRED_PARAM_KEY_ADD_AVANCEMENT_ECART_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00740_FRED_PERMISSION_V0020.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0019.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0017.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0016.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0009.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0008.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0010.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0011.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0012.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0013.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00720_FRED_PERMISSION_V0021.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00013.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_VALORISATION_V1.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00670_FRED_BUDGET_INIT_DATE_DELETE_NOTIF_NEWTASK.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00730_FRED_COMMANDE_LIGNE_V1.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00660_FRED_SOCIETE_V5.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00660_FRED_SOCIETE_V4.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00620_FRED_PERMISSION_V0018.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00610_FRED_PERMISSION_V0017.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0015.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0014.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00290_FRED_CI_TYPE_V2.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00012.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00005.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00004.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00003.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00002.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00007.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00006.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00009.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00490_FRED_CORRECTION_SOCIETE_V00001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00580_FRED_POLE_V2.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00570_FRED_PAYS_V2 .sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00560_FRED_HOLDING_V2.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00550_FRED_DEVISE_V2.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00520_FRED_GROUPE_V2.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00500_FRED_SOCIETE_V2.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00510_FRED_SOCIETE_V3.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00490_FRED_TACHE_V2.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00470_FRED_CLEAN_SUPER_ADMIN_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00480_FRED_VIEW_EXCEL_V2_V1.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00520_FRED_INDEMNITE_DEPLACEMENT_CALCUL_TYPE_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00550_FRED_PERMISSION_V0015.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00590_FRED_FEATURE_FLIPPING_V00007.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00600_FRED_FEATURE_FLIPPING_V00008.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00620_FRED_FEATURE_FLIPPING_V00010.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00640_FRED_FAVORI_UTILISATEUR_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00630_FRED_PERMISSION_V0019 .sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00650_FRED_FEATURE_FLIPPING_V00011.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00590_DOUBLONS_RAPPORT_LIGNE_PRIME_ASTREINTE.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00620_CORRECTION_PRIME_ASTREINTE_WEEKEND_V3.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00610_CORRECTION_PRIME_ASTREINTE_WEEKEND_V2.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00600_CORRECTION_PRIME_ASTREINTE_WEEKEND.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00680_FRED_BUDGET_T4_RESSOURCE_CORRECTION_QUANTITESD.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00700_FRED_RAPPORT_LIGNE_PRIME_CORRECTION_HEURE_PRIME.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00690_FRED_AVANCEMENT_CORRECTION_QUANTITE.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_PERMISSION_V0018.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00780_FRED_TYPE_PARTENAIRE_SEP_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00710_FRED_SOCIETE_FRED_IMAGE_LOGO_CGA.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00730_FRED_SOCIETE_FRED_IMAGE_LOGO_CGA_MBTP.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00720_FRED_SOCIETE_FRED_IMAGE_LOGO_CGA_MBTP.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00810_FRED_TYPE_ENERGIE_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00820_FRED_FONCTIONNALITE.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00840_FRED_TYPE_SOCIETE_V0002.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00850_FRED_PARAM_KEY_ADD_AVANCEMENT_TYPE_DYNAMIQUE_V0002.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0031.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00900_FRED_FONCTIONNALITE_FRED_PERMISSION.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00870_FRED_NOTIFICATION_UTILISATEUR_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00860_FRED_FEATURE_FILTRE_FLIPPING_MO_MATERIEL.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00870_FRED_FONCTIONNALITE_FRED_PERMISSION.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00880_FRED_VIEW_EXCEL_V3_V1.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00910_FRED_FONCTIONNALITE_FRED_PERMISSION_V00002.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00920_FRED_PARAM_KEY_ADD_BUDGET_SAISIE_RECETTE_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00930_FRED_BUDGET_T4_RESSOURCE_UPDATE_INVALID_MONTANT_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00940_FRED_VALORISATION_LIGNE_SUPP_DELETE_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00970_FRED_TYPE_ORGANISATION_LIST.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00960_FRED_CI_CORRECTION_CHAMP_CHANTIERFRED.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00950_FRED_VALORISATION_PURGE_DOUBLON_V0001.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00160_FRED_RZB_SOCIETE_DEVISE_V2.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00991_FRED_ACTION_STATUS_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00990_FRED_ACTION_TYPE_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00980_FRED_OPERATION_DIVERSE_V0001.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00320_FRED_FAMILLE_OPERATION_DIVERSE_V0008.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00320_FRED_FAMILLE_OPERATION_DIVERSE_V0007.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00320_FRED_FAMILLE_OPERATION_DIVERSE_V0006.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00320_FRED_FAMILLE_OPERATION_DIVERSE_V0005.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00320_FRED_FAMILLE_OPERATION_DIVERSE_V0004.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00770_FRED_TYPE_SOCIETE_V0001.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00340_FRED_GRZB_PARAM_V1.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00320_FRED_FAMILLE_OPERATION_DIVERSE_V0003.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00540_FRED_ORGANISATION_GENERIQUE_V1.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00320_FRED_FAMILLE_OPERATION_DIVERSE_V0006.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00330_FRED_JOURNAL_V0005.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00330_FRED_JOURNAL_V0004.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00330_FRED_JOURNAL_V0003.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00710_FRED_VALORISATION_V0002.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00710_FRED_VALORISATION_V0003.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00720_FRED_ECRITURE_COMPTABLE_V0001.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00720_FRED_ECRITURE_COMPTABLE_V0002.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00720_FRED_ECRITURE_COMPTABLE_V0003.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00730_FRED_SYSTEM_EXTERNE_V3.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00802_FRED_DEPENSE_ACHAT_CORRECT_TACHE_ECART_INTERIM.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00801_Reprise_Donnees_Commande_Reception_Tache_Interim.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00800_FRED_DEPENSE_ACHAT_CORRECT_TACHE_LITIGE.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00750_FRED_DepenseAchat_Correct_ReceptionAbonnementV002.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00750_FRED_DepenseAchat_Correct_ReceptionAbonnement.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00170_FRED_FON_GROUPE.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00040_FRED_DROITS_HABILITATIONS_V0017.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0022.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00230_FRED_POINTAGE_Redressement_Rapports_Doublon.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00390_FRED_BAREME_EXPLOITATION_CI_V0001.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\10010_FRED_GFTP_UPDATE_FONCTIONNALITES_MODULES_V0004.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00220_FRED_FES_REFERENCIEL_RH.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\001-Fred-ToolBox-Core\00001_Fred_ToolBox_Functions_V4.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00530_DELETE_DOUBLON_VALORISATION.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\004-Fred-ToolBox-Ressources\00005_Fred_ToolBox_Relations_Nat_Rsc_V3.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\007-Fred-Toolbox-Habilitations\00002_Fred_ToolBox_Extract_Role_Fonctionnalite_V2.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\007-Fred-Toolbox-Habilitations\00002_Fred_ToolBox_Role_Fonctionnalite_V2.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00001_FRED_FEATURE_FLIPPING_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00030_FRED_GFES_RESSOURCES_V8.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00030_FRED_GFES_RESSOURCES_V7.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00030_FRED_GFES_RESSOURCES_V5.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00030_FRED_GFES_RESSOURCES_V6.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00030_FRED_GFES_RESSOURCES_V4.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00030_FRED_GFES_RESSOURCES_V3.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00040_FRED_DROITS_HABILITATIONS_V0006.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00040_FRED_DROITS_HABILITATIONS_V0007.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00040_FRED_DROITS_HABILITATIONS_V0008.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00040_FRED_DROITS_HABILITATIONS_V0009.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00040_FRED_DROITS_HABILITATIONS_V0010.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00040_FRED_DROITS_HABILITATIONS_V0011.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00040_FRED_DROITS_HABILITATIONS_V0014.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00040_FRED_DROITS_HABILITATIONS_V0012.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00040_FRED_DROITS_HABILITATIONS_V0016.SQL" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00050_FRED_PERSONNEL_UTIL_V0002.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00051_FRED_PERSONNEL_UTIL_V0003.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00070_FRED_CODE_ABSENCES_V0003.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00070_FRED_CODE_ABSENCES_V0004.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00070_FRED_CODE_MAJORATION_V0002.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0015.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0014.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0013.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0012.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0011.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0016.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0017.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0018.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0020.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0019.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0021.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00113_FRED_GFES_UPDATE_ORGANISATIONS_V0002.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00114_FRED_GFES_UPDATE_CODE_ABSENCES_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00114_FRED_GFES_UPDATE_CODE_ABSENCES_V0002.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00114_FRED_GFES_UPDATE_CODE_ABSENCES_V0003.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00114_FRED_GFES_UPDATE_CODE_MAJORATION_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0006.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0007.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0009.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0008.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0010.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00100_FRED_GFES_CODE_ASTREINTE_V0002.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00114_FRED_GFES_UPDATE_CODE_ASTREINTE_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00101_GFES_MOYEN_FRED_AFFECTATION_MOYEN_TYPE_V0003.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00108_FRED_GFES_PRIMES_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00107_FRED_GFES_ETABLISSEMENT_PAIE_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00051_FRED_PERSONNEL_UTIL_V0002.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00070_FRED_CODE_ABSENCES_V0002.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00070_FRED_CODE_MAJORATION_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0002.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0005.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0003.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00080_FRED_GFES_PARAM_V0004.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00100_FRED_GFES_CODE_ASTREINTE_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00100_GFES_MOYEN_FRED_FAMILLE_V0001_.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00101_GFES_MOYEN_FRED_AFFECTATION_MOYEN_TYPE_V0002.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00101_GFES_MOYEN_FRED_AFFECTATION_MOYEN_TYPE_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00102_GFES_MOYEN_FRED_SITE_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00103_GFES_MOYEN_CHAPITRE_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00104_GFES_MOYEN_FRED_SOUS_CHAPITRE_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00105_GFES_MOYEN_RESSOURCE_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00106_FRED_GFES_PERMISSION_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00108_FRED_GFES_PRIMES_V0002.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00108_FRED_GFES_PRIMES_V0003.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00114_FRED_GFES_UPDATE_PRIMES_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00111_FRED_GFES_Referentiel_Prime_V0002.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00112_FRED_GFES_MANAGER_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00113_FRED_GFES_UPDATE_ORGANISATIONS_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00114_FRED_GFES_UPDATE_CODE_DEPLACEMENT_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00114_FRED_GFES_UPDATE_CODE_ZONE_DEPLACEMENT_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00114_FRED_GFES_UPDATE_PRIMES_V0002.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00115_FRED_GFES_UPDATE_ETABLISSEMENT_PAIE_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00115_FRED_GFES_UPDATE_ETABLISSEMENT_PAIE_V0002.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00115_FRED_GFES_UPDATE_ETABLISSEMENT_PAIE_V0003.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00115_FRED_GFES_UPDATE_ETABLISSEMENT_PAIE_V0004.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00116_FRED_GFES_CLEAN_REFERENTIEL_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00117_FRED_GFES_UPDATE_ALL_CHAPITRES_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00118_FRED_GFES_UPDATE_RESOURCES_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00119_FRED_GFES_ADD_NATURE_LINK_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00120_FRED_GFES_UPDATE_SOCIETES_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00121_FRED_GFES_DELETE_CODE_PRIMES_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00122_FRED_GFES_UPDATE_FONCTIONNALITES_MODULES_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00122_FRED_GFES_UPDATE_FONCTIONNALITES_MODULES_V0002.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00122_FRED_GFES_UPDATE_FONCTIONNALITES_MODULES_V0003.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00123_FRED_GFES_UPDATE_ROLE_SPECIFICATION_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00124_FRED_GFES_UPDATE_Affectation_Moyen_Type_CiCode_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00125_FRED_GFES_UPDATE_EtablissementPaie_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00126_FRED_GFES_UPDATE_RAPPORT_LIGNE_SET_ISGENERATED.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00126_FRED_GFES_DELETE_DOUBLONS_RAPPORT.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00200_FRED_GFES_RESYNCHRO_CI_SOUS_CI.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00210_FRED_GFES_UPDATE_CODEEXTERNE_CI.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00030_FRED_GFTP_PERSONNEL_V2.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00060_FRED_GFTP_FIXE_V0003.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00040_FRED_DROITS_HABILITATIONS_V0005.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00080_FRED_GFTP_PARAM_V0001.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00380_FRED_TACHE_V0003.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00380_FRED_TACHE_V0002.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00380_FRED_TACHE_V0001.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00320_FRED_FAMILLE_OPERATION_DIVERSE_V0002.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00320_FRED_FAMILLE_OPERATION_DIVERSE_V0001.sql" />
+    <Content Include="Referential\001-Common\010-Stored-Procedure\00010_GetOrganisations_V0003.sql" />
+    <Content Include="Referential\001-Common\010-Stored-Procedure\00010_GetOrganisations_V0002.sql" />
+    <Content Include="Referential\001-Common\010-Stored-Procedure\00010_GetOrganisations_V0001.sql" />
+    <Content Include="Referential\001-Common\010-Stored-Procedure\00020_DeleteSociete_V00001.sql" />
+    <None Include="Referential\001-Common\010-Stored-Procedure\00031_FRED_collecteCommande_fromBuyer.sql" />
+    <None Include="Referential\001-Common\010-Stored-Procedure\00032_FRED_countCommande_fromBuyer.sql" />
+    <None Include="Referential\001-Common\010-Stored-Procedure\00034_FRED_saveCommandeLigne_fromBUYER.sql" />
+    <None Include="Referential\001-Common\010-Stored-Procedure\00033_FRED_saveCommande_fromBUYER.sql" />
+    <None Include="Referential\001-Common\010-Stored-Procedure\00035_ImportCodeAbsFromHolding.sql" />
+    <None Include="Referential\001-Common\010-Stored-Procedure\00037_VerifDependance.sql" />
+    <None Include="Referential\001-Common\010-Stored-Procedure\00038_VerificationDeDependance.sql" />
+    <None Include="Referential\001-Common\010-Stored-Procedure\00030_Splitstring.sql" />
+    <None Include="Referential\001-Common\010-Stored-Procedure\00036_tablesAVerifier.sql" />
+    <Content Include="Referential\001-Common\011-Fred-Ref-MBTP\00320_FRED_FAMILLE_OPERATION_DIVERSE_V0002.sql" />
+    <Content Include="Referential\001-Common\011-Fred-Ref-MBTP\00330_FRED_JOURNAL_V0002.sql" />
+    <Content Include="Referential\001-Common\011-Fred-Ref-MBTP\00330_FRED_JOURNAL_V0001.sql" />
+    <Content Include="Referential\001-Common\011-Fred-Ref-MBTP\00320_FRED_FAMILLE_OPERATION_DIVERSE_V0001.sql" />
+    <Content Include="Referential\001-Common\011-Fred-Ref-MBTP\00330_FRED_JOURNAL_V0003.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00300_FRED_CI_V0001.sql" />
+    <Content Include="Referential\001-Common\011-Fred-Ref-MBTP\00340_FRED_ECRITURE_COMPTABLE_V0003.sql" />
+    <Content Include="Referential\001-Common\011-Fred-Ref-MBTP\00340_FRED_ECRITURE_COMPTABLE_V0002.sql" />
+    <Content Include="Referential\001-Common\011-Fred-Ref-MBTP\00340_FRED_ECRITURE_COMPTABLE_V0001.sql" />
+    <Content Include="Referential\001-Common\011-Fred-Ref-MBTP\00350_FRED_DepenseAchat_Correct_ReceptionAbonnementV002.sql" />
+    <Content Include="Referential\001-Common\011-Fred-Ref-MBTP\00350_FRED_DepenseAchat_Correct_ReceptionAbonnement.sql" />
+    <Content Include="Referential\001-Common\011-Fred-Ref-MBTP\00360_FRED_VALORISATION_V0001.sql" />
+    <Content Include="Referential\003-Recette\001-Fred-Ref\00200_FRED_UTILISATEUR_V0001.sql" />
+    <None Include="Referential\004-Production\001-Fred-Ref\00200_FRED_UTILISATEUR_V0001.sql" />
+    <Content Include="Referential\004-Production\002-Fred-Ref-RZB\00011_FRED_UPDATEDEPENSES.sql" />
+    <Content Include="Referential\004-Production\002-Fred-Ref-RZB\00010_FRED_UPDATEDEPENSES.sql" />
+    <Content Include="Referential\004-Production\004-Reprises-Donnees\00010_REPRISE_COMMANDE_AVENANTS_V1.sql" />
+    <Content Include="Referential\004-Production\004-Reprises-Donnees\00010_REPRISE_ACHAT_V1.sql" />
+    <Content Include="Referential\005-Preprod\001-Reprises-Donnees\00010_REPRISE_ACHAT_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00420_FRED_REFERENTIEL_ETENDU_ACHATS_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00040_FRED_COMMANDE_TYPE_V2.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00220_FRED_IMAGE_V2.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\002701_FRED_PERMISSION_V0003.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0005.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00231_FRED_MODULE_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0005.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0006.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0007.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00400_FRED_MOTIF_REMPLACEMENT_V0002.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00370_FRED_BUDGET_ETAT_V0002.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00360_FRED_PERMISSION_V0006.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00320_FRED_PERMISSION_V0005.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00330_FRED_BUDGET_ETAT_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00340_FRED_AVANCEMENT_ETAT_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00350_FRED_MOTIF_REMPLACEMENT_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00380_FRED_TACHE_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00390_FRED_FACTURATION_V1.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00410_FRED_MOTIF_REMPLACEMENT_V0003.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00430_FRED_VIEW_EXCEL_V2.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00450_FRED_FEATURE_FLIPPING_V00001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00440_FRED_COMMANDE_TYPE_V3.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00040_FRED_RZB_SOCIETE_V3.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00040_FRED_RZB_SOCIETE_V4.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00270_FRED_SYSTEM_IMPORT_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00280_FRED_SYSTEM_EXTERNE_TYPE_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00290_FRED_SYSTEM_EXTERNE_V1.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00110_FRED_RZB_ETABLISSEMENT_PAIE_V5.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00240_FRED_TRANSCO_IMPORT_V3.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00320_FRED_FAMILLE_OPERATION_DIVERSE_V0002.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00320_FRED_FAMILLE_OPERATION_DIVERSE_V0001.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00310_FRED_SYSTEM_EXTERNE_V2.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00330_FRED_JOURNAL_V0002.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00330_FRED_JOURNAL_V0001.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00300_FRED_CI_V0001.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00100_FRED_FON_CODE_MAJORATION_V2.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00110_FRED_FON_CODE_ZONE_DEPLACEMENT_V2.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00140_FRED_FON_PERSONNEL_V2.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00140_FRED_FON_PERSONNEL_V3.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00160_FRED_FON_UTILISATEUR.sql" />
+    <Content Include="Referential\001-Common\004-Fred-Ref-FES\00010_FRED_FES_ORGANISATION_V1.sql" />
+    <Content Include="Referential\001-Common\004-Fred-Ref-FES\00010_FRED_FES_ORGANISATION_V2.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\004-Fred-ToolBox-Ressources\00005_Fred_ToolBox_Relations_Nat_Rsc_V2.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\007-Fred-Toolbox-Habilitations\00002_Fred_ToolBox_Extract_Role_Fonctionnalite_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\007-Fred-Toolbox-Habilitations\00002_Fred_ToolBox_Role_Fonctionnalite_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\007-Fred-Toolbox-Habilitations\00001_Fred_Roles_V2.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00040_FRED_DROITS_HABILITATIONS_V0003.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\001-Fred-ToolBox-Core\00001_Fred_ToolBox_Functions_V3.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\002-Fred-ToolBox-Organisations\00004_Fred_ToolBox_EtablissementComptable_V2.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\005-Fred-ToolBox-Personnels\00001_Fred_ToolBox_Personnel_V2.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00030_FRED_GFES_PERSONNEL_V2.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00040_FRED_DROITS_HABILITATIONS_V0004.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00070_FRED_CODE_ABSENCES_V0001.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\10000_FRED_GFTP_MATERIEL_V0001.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00010_FRED_GFTP_ORGANISATION_V3.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00030_FRED_GFTP_PERSONNEL.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00060_FRED_GFTP_FIXE_V0002.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00900FRED_GFTP_POST_DEPLOY_V1.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00060_FRED_GFTP_FIXE_V0001.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00030_FRED_GFTP_RESSOURCES.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00020_FRED_GFTP_CODE_RH.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00010_FRED_GFTP_ORGANISATION_V2.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\001-Fred-ToolBox-Core\00001_Fred_ToolBox_Functions_V2.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\001-Fred-ToolBox-View\00001_Fred_ToolBox_View_Get_Ressources_By_Groupe_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\001-Fred-ToolBox-View\00001_Fred_ToolBox_View_Get_Sous-Chapitre_By_Groupe_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\003-Fred-ToolBox-Code-RH\00001_Fred_ToolBox_Code_Majoration__V2.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\003-Fred-ToolBox-Code-RH\00002_Fred_ToolBox_Code_ZoneDeplacement_V2.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\003-Fred-ToolBox-Code-RH\00003_Fred_ToolBox_Code_Prime_V2.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\004-Fred-ToolBox-Ressources\00003_Fred_ToolBox_Ressources_V2.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\007-Fred-Toolbox-Habilitations\00001_Fred_Roles_V1.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00030_FRED_GFES_RESSOURCES_V2.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00040_FRED_DROITS_HABILITATIONS_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00040_FRED_DROITS_HABILITATIONS_V0002.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00050_FRED_PERSONNEL_UTIL_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00051_FRED_PERSONNEL_UTIL_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00061_FRED_RESPONSABLES_CI_V0001.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00060_FRED_CI_V0001.sql" />
+    <Content Include="Referential\001-Common\008-Fred-Ref-GFTP\00030_FRED_GFTP_USER_ADMIN.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\006-Fred-ToolBox-CI\00001_Fred_ToolBox_Ci_V2.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\900-Fred-ToolBox-Checkin\00901_Fred_ToolBox_Checking_Organisations_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\900-Fred-ToolBox-Checkin\00902_Fred_ToolBox_Checking_Ressources_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\001-Fred-ToolBox-Core\00001_Fred_ToolBox_Functions_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\002-Fred-ToolBox-Organisations\00001_Fred_ToolBox_Pole_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\002-Fred-ToolBox-Organisations\00002_Fred_ToolBox_Groupe_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\002-Fred-ToolBox-Organisations\00003_Fred_ToolBox_Societe_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\002-Fred-ToolBox-Organisations\00004_Fred_ToolBox_EtablissementComptable_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\002-Fred-ToolBox-Organisations\00005_Fred_ToolBox_EtablissementPaie_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\003-Fred-ToolBox-Code-RH\00001_Fred_ToolBox_Code_Majoration__V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\003-Fred-ToolBox-Code-RH\00002_Fred_ToolBox_Code_ZoneDeplacement_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\003-Fred-ToolBox-Code-RH\00003_Fred_ToolBox_Code_Prime_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\003-Fred-ToolBox-Code-RH\00004_Fred_ToolBox_Code_Deplacement_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\003-Fred-ToolBox-Code-RH\00005_Fred_ToolBox_Code_Absence_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\006-Fred-ToolBox-CI\00001_Fred_ToolBox_Ci_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\005-Fred-ToolBox-Personnels\00001_Fred_ToolBox_Personnel_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\004-Fred-ToolBox-Ressources\00001_Fred_ToolBox_Chapitre_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\004-Fred-ToolBox-Ressources\00002_Fred_ToolBox_Sous_Chapitre_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\004-Fred-ToolBox-Ressources\00004_Fred_ToolBox_Natures_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\004-Fred-ToolBox-Ressources\00005_Fred_ToolBox_Relations_Nat_Rsc_V1.sql" />
+    <Content Include="Referential\001-Common\006-Fred-Toolbox\004-Fred-ToolBox-Ressources\00003_Fred_ToolBox_Ressources_V1.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00030_FRED_GFES_PERSONNEL_V1.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00030_FRED_GFES_CI_V1.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00030_FRED_GFES_RESSOURCES_V1.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00020_FRED_GFES_CODES_RH_V1.sql" />
+    <Content Include="Referential\001-Common\007-Fred-Ref-GFES\00010_FRED_GFES_ORGANISATION.sql" />
+    <Content Include="Referential\001-Common\009-Fred-Ref-RZB-ByToolBox\00010_FRED_RESSOURCES_NATURES_V0001.sql" />
+    <Content Include="Referential\003-Recette\001-Fred-Ref\00100_FRED_HOLDING_V1.sql" />
+    <Content Include="Referential\003-Recette\003-Fred-Ref-FON\00200_FRED_FON_RESSOURCES_V2.sql" />
+    <Content Include="Referential\004-Production\003-Fred-Ref-FON\00130_FRED_FON_PRIME_V2.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00240_FRED_FACTURATION_TYPE_V2.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00250_FRED_DEPENSE_TYPE_V2.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00240_FRED_FACTURATION_TYPE_V3.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00310_FRED_TYPE_ORGANISATION_V2.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00271_FRED_PERMISSION_V0001.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0003.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00271_FRED_PERMISSION_V0002.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00300_FRED_VIEW_EXCEL_V1.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00272_FRED_PERMISSION_V0004.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00230_FRED_DROITS_HABILITATIONS_V4.sql" />
+    <Content Include="Referential\001-Common\004-Fred-Ref-FES\00020_FRED_DROITS_HABILITATIONS_V0001.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00230_FRED_DROITS_HABILITATIONS_V6.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00260_FRED_SOCIETE_INTERIMAIRE.sql" />
+    <None Include="InCaseOfNotEmptyDatabase\2- ForceDataHistoryTableBecauseDataAlreadyExist - DevOnly.sql" />
+    <None Include="InCaseOfNotEmptyDatabase\1- ForceDataHistoryTableBecauseDataAlreadyExist.sql" />
+    <Content Include="Referential\001-Common\004-Fred-Ref-FES\00020_FRED_DROITS_HABILITATIONS_V0002.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00010_FRED_FON_ORGANISATION_V1.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00020_FRED_FON_IMAGE_V1.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00030_FRED_FON_CHAPITRE_V1.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00040_FRED_FON_SOUS_CHAPITRE_V1.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00050_FRED_FON_RESSOURCE_V1.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00060_FRED_FON_NATURE_V1.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00070_FRED_FON_SOCIETE_RESSOURCE_NATURE_V1.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00080_FRED_FON_CODE_ABSENCE_V1.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00090_FRED_FON_CODE_DEPLACEMENT_V1.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00100_FRED_FON_CODE_MAJORATION_V1.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00110_FRED_FON_CODE_ZONE_DEPLACEMENT_V1.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00120_FRED_FON_ETABLISSEMENT_PAIE_V1.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00130_FRED_FON_PRIME_V1.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00140_FRED_FON_PERSONNEL_V1.sql" />
+    <Content Include="Referential\001-Common\003-Fred-Ref-FON\00150_FRED_FON_CI_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00240_FRED_TRANSCO_IMPORT_V2.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00040_FRED_RZB_SOCIETE_V2.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00150_FRED_RZB_PRIME_V2.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00070_FRED_RZB_CODE_ABSENCE_V3.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00230_FRED_DROITS_HABILITATIONS_V3.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00120_FRED_RZB_ETABLISSEMENT_COMPTABLE_V2.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00110_FRED_RZB_ETABLISSEMENT_PAIE_V4.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00270_FRED_PERMISSION_V8.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00270_FRED_PERMISSION_V7.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00290_FRED_CI_TYPE_V1.sql" />
+    <Content Include="Referential\001-Common\002-Fred-Ref-RZB\00210_FRED_RZB_ETABLISSEMENT_PAIE_V2.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00270_FRED_PERMISSION_V9.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\002701_FRED_PERMISSION_V0002.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00240_FRED_SOCIETE_INTERIMAIRE.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00070_FRED_RZB_CODE_ABSENCE_V3.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00120_FRED_RZB_ETABLISSEMENT_COMPTABLE_V2.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00280_FRED_PARAMETRE_V2.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00240_FRED_TRANSCO_IMPORT_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00270_FRED_PERMISSION_V6.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00230_FRED_DROITS_HABILITATIONS_V2.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00070_FRED_RZB_CODE_ABSENCE_V2.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00110_FRED_RZB_ETABLISSEMENT_PAIE_V3.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00080_FRED_RZB_CODE_DEPLACEMENT_V2.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00180_FRED_RZB_RESSOURCE_V3.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00230_FRED_DROITS_HABILITATIONS.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00110_FRED_RZB_ETABLISSEMENT_PAIE_V2.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00220_FRED_SOCIETE_RESSOURCE_NATURE_V1.sql" />
+    <None Include="Referential\004-Production\001-Fred-Ref\00100_FRED_HOLDING_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00210_FRED_UTILISATEUR_V2.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00180_FRED_RZB_RESSOURCE_V2.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00230_FRED_PERMISSION_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00140_FRED_SOCIETE_V1.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00040_FRED_RZB_SOCIETE_V1.sql" />
+    <None Include="OneShoot\Habilitation-2018-01\ResetReferentialHistoryAndRoleDev.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00050_FRED_RZB_ROLE_V2.sql" />
+    <None Include="OneShoot\Habilitation-2018-01\ResetReferentialHistoryAndRoleIntegrationPreprod.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00230_FRED_PERMISSION_V2.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00050_FRED_RZB_ROLE_V3.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00010_FRED_UNITE_V2.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00250_FRED_DEPENSE_TYPE_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00240_FRED_FACTURATION_TYPE_V1.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00010_FRED_UNITE_V3.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00010_FRED_UNITE_V4.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00010_FRED_UNITE_V5.sql" />
+    <Content Include="Referential\001-Common\001-Fred-Ref\00260_FRED_PERMISSION_V3.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00270_FRED_PERMISSION_V4.sql" />
+    <None Include="Referential\001-Common\002-Fred-Ref-RZB\00180_FRED_RZB_RESSOURCE_V2.sql" />
+    <None Include="Referential\001-Common\001-Fred-Ref\00270_FRED_PERMISSION_V5.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.10.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
+    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.10.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\Google.Protobuf.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\SonarAnalyzer.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

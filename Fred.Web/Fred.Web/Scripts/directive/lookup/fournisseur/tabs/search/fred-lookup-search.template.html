@@ -1,0 +1,27 @@
+﻿<div id="lookupHeader custom-header"
+     class="lookup-header">
+    <label>{{$ctrl.title}}</label>
+    <div>
+        <i class=""></i>
+        <!-- 1er champ de recherche (champ par défaut) -->
+        <input type="text"
+               id="premier"
+               fred-select-me-on="$ctrl.isOpen"
+               ng-keypress="($event.which === 13)?$ctrl.enterKeyPress($event):0"
+               ng-model-options="{debounce: 700 }"
+               ng-change="$ctrl.searchTextChanged($ctrl.searchText)"
+               ng-model="$ctrl.searchText"
+               class="form-control searchLookupPanelRight"
+               placeholder="{{$ctrl.placeholder1}}"
+               title="{{$ctrl.title1}}" />
+        <!-- 2eme champ de recherche (champ optionnel) -->
+        <input type="text"
+               ng-keypress="($event.which === 13)?$ctrl.enterKeyPress($event):0"
+               ng-model-options="{debounce: 700 }"
+               ng-change="$ctrl.searchTextChanged()"
+               ng-model="$ctrl.searchText2"
+               class="form-control searchLookupPanelRight"
+               placeholder="{{$ctrl.placeholder1}}"
+               title="{{$ctrl.title1}}" />
+    </div>
+</div>

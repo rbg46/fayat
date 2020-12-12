@@ -1,0 +1,516 @@
+﻿.no_padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.no_pl {
+    padding-left: 0;
+}
+
+.no_pr {
+    padding-right: 0;
+}
+
+.lists {
+    border-right: 1px solid #ccc;
+}
+
+.list-content {
+    overflow-x: initial;
+    height: calc(100vh - 340px);
+    overflow-y: auto;
+}
+
+.list-content .active {
+    background-color: #f5f5f5;
+}
+
+.list-content .ligne {
+    border-top: 1px solid #ddd;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 8px;
+}
+
+.list-content .ligne:hover {
+    background: #e8e8e8;
+    color: #333333;
+}
+
+.list-content .ligne .firstCell {
+    height: 35px;
+}
+
+.list-content .ligne .orderCell {
+    text-align: center;
+    font-size: 12px;
+    display: flex;
+    height: 35px;
+}
+
+.list-content .ligne .orderCell span {
+    margin: auto;
+}
+
+.list-content .ligne .lb {
+    font-size: 10px;
+    color: #b3b3b3;
+    line-height: 14px;
+}
+
+.list-content .selected .ligne .lb {
+    color: #fff;
+}
+
+.list-content .selected .ligne:hover .lb {
+    color: #b3b3b3;
+}
+
+.list-content .data {
+    cursor: pointer;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.list-content .data .val {
+    overflow: hidden;
+    width: 250px;
+    white-space: nowrap;
+    display: block;
+    text-overflow: ellipsis;
+}
+
+.list-content .badge-notify {
+    color: #ffa90d;
+    padding-left: 5px;
+}
+
+.btn {
+    margin-right: 0;
+    margin-top: 0;
+}
+
+.input-group {
+    width: 100%;
+}
+
+.input-group-addon {
+    padding: 0;
+    width: 30px;
+    position: relative;
+}
+
+.input-group-addon.button-search .material-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+.roles .pickFilter {
+    margin-top: 10px;
+}
+
+.roles .search-container .orderTh {
+    text-align: center;
+    font-size: 12px;
+    color: #67757f;
+}
+
+.roles .add {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.roles .add button {
+    padding: 0;
+    margin-left: 3px;
+    width: 30px;
+}
+
+.roles .add .material-icons {
+    font-size: 25px !important;
+    padding-top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.roles .add .btn-primary.focus {
+    background-color: #097da0;
+    border: 1px #097da0;
+}
+
+.btn-primary:focus {
+    background-color: #097da0;
+    border: 1px #097da0;
+}
+
+.information {
+    padding-top: 45px;
+    padding-bottom: 45px;
+}
+
+.information .icon {
+    text-align: right;
+}
+
+.information .icon span {
+    font-size: 60px;
+    font-style: normal;
+}
+
+.role-tiles {
+    display: flex;
+    height: 300px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.role-tiles-left {
+    display: flex;
+    flex-flow: row wrap;
+    width: 350px;
+    justify-content: flex-end;
+}
+
+.role-tiles-right {
+    display: flex;
+    flex-flow: row wrap;
+    width: 350px;
+    justify-content: flex-start;
+}
+
+.role-tiles-tile {
+    width: 150px;
+    height: 150px;
+    border: 2px solid #a6a6a6;
+    color: #a6a6a6;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.role-tiles-tile .help-tool {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    color: #a6a6a6;
+}
+
+.role-tiles-tile .text {
+    margin: auto;
+    width: 100px;
+}
+
+.role-tiles-tile.selected-tile {
+    color: #09ADA6;
+    border-color: #09ADA6;
+}
+
+.role-tiles-tile.selected-tile::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 0.8em;
+    border-right-color: #09ADA6;
+    border-top-color: #09ADA6;
+}
+
+.role-tiles-tile.company {
+    border: 2px solid #09ADA6;
+    background-color: #09ADA6;
+    color: #fff;
+}
+
+.role-tiles-tile.validate {
+    border: 2px solid #0052a0;
+    background-color: #0052a0;
+    color: #fff;
+}
+
+fred-tree-state-toggle-component {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 34px;
+}
+
+fred-tree-state-toggle-component .unaffected {
+    border: none;
+    background-color: #d8d8d8;
+    color: #8c8d8d;
+}
+
+fred-tree-state-toggle-component .readonly {
+    border: none;
+    background-color: #0052a0;
+    color: #fff;
+}
+
+fred-tree-state-toggle-component .modified {
+    border: none;
+    background-color: #ffc000;
+    color: #fff;
+}
+
+.modal-header .modal-title .material-icons {
+    padding-right: 15px;
+}
+
+.modal-body h4 {
+    font-size: 15px;
+    border-bottom: none;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.modal-body .marginTop {
+    margin-top: 10px;
+}
+
+.modal-body .mod_fonc {
+    padding-left: 5px;
+}
+
+.modal-body textarea {
+    resize: none;
+}
+
+.modal-body .row label.switch {
+    position: relative;
+    display: inline-block;
+    width: 55px;
+    height: 28px;
+    margin-top: 2px;
+}
+
+.no_org {
+    color: red;
+}
+
+.mod_fonc {
+    background-color: lightgray;
+    color: darkslategrey;
+}
+
+.selected {
+    background-color: #428bca;
+    border-color: #357ebd;
+    color: #ffffff;
+}
+
+.selected .material-icons {
+    color: #fff;
+}
+
+.selected .flaticon-multiply {
+    color: #fff;
+}
+
+.selected .flaticon-add-3 {
+    color: #fff;
+}
+
+.selected .ligne:hover .material-icons {
+    color: #333333;
+}
+
+.selected .ligne:hover .flaticon-multiply {
+    color: #333333;
+}
+
+.selected .ligne:hover .flaticon-add-3 {
+    color: #333333;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + label {
+    font-size: 14px;
+}
+
+input[type="checkbox"] + label span {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: 0 4px 0 0;
+    vertical-align: middle;
+    cursor: pointer;
+    -moz-border-radius: 20%;
+    border-radius: 20%;
+    background-color: #fcfcfc;
+    border: 3px #78C1DD solid;
+    -webkit-transition: background-color 0.4s linear;
+    -o-transition: background-color 0.4s linear;
+    -moz-transition: background-color 0.4s linear;
+    transition: background-color 0.4s linear;
+}
+
+input[type="checkbox"]:checked + label span {
+    border: 3px #2c77ba solid;
+    background-image: url("/medias/images/ico/checked.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-transition: background-color 0.4s linear;
+    -o-transition: background-color 0.4s linear;
+    -moz-transition: background-color 0.4s linear;
+    transition: background-color 0.4s linear;
+}
+
+/* --------------------------------  SLIDER CHECKBOX --------------------------------------*/
+/* The switch - the box around the slider */
+/* Hide default HTML checkbox */
+/* The slider */
+.chBox label {
+    display: block;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .roles .filter button[type="button"] {
+        height: 25px !important;
+    }
+    .roles .add .material-icons {
+        font-size: 18px;
+    }
+    .roles .search-container .orderTh {
+        font-size: 9px;
+    }
+    .filter .inner-addon.right-addon .material-icons {
+        width: 23px;
+        height: 23px;
+        padding-left: 0;
+        font-size: 24px;
+    }
+    .search-container .input-search input {
+        height: 25px;
+        padding: 0;
+        padding-left: 10px;
+        font-size: 11px;
+    }
+    .input-group-addon {
+        height: 25px;
+        width: 25px;
+    }
+    .input-group-addon.button-search .material-icons {
+        font-size: 17px;
+    }
+    .list-content .ligne {
+        font-size: 11px;
+        padding: 0;
+    }
+    .list-content .ligne .firstCell {
+        padding-left: 10px;
+        height: 30px;
+    }
+    .list-content .ligne .lb {
+        font-size: 7px;
+        line-height: 7px;
+    }
+    .list-content .ligne .orderCell {
+        font-size: 10px;
+        height: 30px;
+    }
+    .list-content .data {
+        padding-top: 5px;
+    }
+    span.button-action.material-icons {
+        font-size: 18px !important;
+        padding-top: 8px;
+        width: 25px !important;
+        height: 25px !important;
+    }
+    .button-action.material-icons.pt {
+        padding-top: 8px;
+    }
+    .information {
+        padding-top: 0;
+        padding-bottom: 10px;
+    }
+    .information .icon span {
+        font-size: 45px;
+    }
+    .information .msg h3 {
+        font-size: 17px;
+        margin-top: 10px;
+    }
+    .role-tiles-tile {
+        width: 120px;
+        height: 120px;
+    }
+    .role-tiles-tile .text {
+        font-size: 10px;
+    }
+    .role-tiles-tile .help-tool {
+        font-size: 17px;
+    }
+    .role-tiles-tile.selected-tile::after {
+        border-width: 0.5em;
+    }
+    .switch {
+        width: 38px;
+        height: 23px;
+        margin: 0;
+    }
+    .slider:before {
+        height: 15px;
+        width: 15px;
+    }
+    input:checked + .slider:before {
+        -webkit-transform: translateX(15px);
+        -ms-transform: translateX(15px);
+        transform: translateX(15px);
+    }
+}

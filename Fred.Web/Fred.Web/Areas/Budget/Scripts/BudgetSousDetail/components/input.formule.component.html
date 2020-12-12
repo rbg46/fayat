@@ -1,0 +1,11 @@
+﻿<div>
+    <input type="text"
+           ng-model="$ctrl.displayedText"
+           ng-focus="$ctrl.focusIn()"
+           ng-blur="$ctrl.focusOut()"
+           ng-change="$ctrl.parseFormule()"
+           title="{{($ctrl.formule == null) ? ($ctrl.exactValue == null ? $ctrl.displayedText : $ctrl.exactValue) : $ctrl.tooltipFormule + ': ' + $ctrl.formule}}"
+           ng-class="$ctrl.cssClass"
+           ng-disabled="$ctrl.disabled"
+           ng-trim="false" />
+</div>

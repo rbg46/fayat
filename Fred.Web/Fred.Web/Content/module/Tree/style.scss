@@ -1,0 +1,180 @@
+﻿$color_1: white;
+$color_2: #09ADA6;
+$color_3: #0253A2;
+$color_4: #0990B7;
+$color_5: #6A6C8C;
+$color_6: black;
+$background_color_1: #F5F5F5;
+$background_color_2: #276AC5;
+$background_color_3: #CCCCCC;
+$background_color_4: rgb(225,227,229);
+
+
+.tree {
+    height: 600px;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 300px;
+
+    &::-webkit-scrollbar-track {
+        background-color: $background_color_1;
+    }
+
+    &::-webkit-scrollbar {
+        width: 5px;
+        background-color: $background_color_1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $background_color_2;
+    }
+}
+
+.level1 {
+    background-image: url('/medias/images/picto/tree/level1.png');
+
+    .detail {
+        .label2 {
+            color: $color_3;
+            font-weight: 500;
+        }
+    }
+}
+
+.level2 {
+    background-image: url('/medias/images/picto/tree/level2.png');
+
+    .detail {
+        .label2 {
+            color: $color_2;
+        }
+    }
+}
+
+.level3 {
+    background-image: url('/medias/images/picto/tree/level3.png');
+
+    .detail {
+        .label2 {
+            color: $color_4;
+        }
+    }
+}
+
+.level4 {
+    background-image: url('/medias/images/picto/tree/level4.png');
+
+    .nbr {
+        color: $color_2;
+    }
+
+    .detail {
+        .label2 {
+            color: $color_5;
+        }
+    }
+}
+
+.level5 {
+    background-image: url('/medias/images/picto/tree/level5.png');
+}
+
+.level6 {
+    background-image: url('/medias/images/picto/tree/level6.png');
+}
+
+.level7 {
+    background-image: url('/medias/images/picto/tree/level7.png');
+}
+
+.level8 {
+    background-image: url('/medias/images/picto/tree/level8.png');
+}
+
+.level9 {
+    background-image: url('/medias/images/picto/tree/level9.png');
+}
+
+.level10 {
+    background-image: url('/medias/images/picto/tree/level10.png');
+}
+
+.level1s {
+    background-image: url('/medias/images/picto/tree/level1s.png');
+}
+
+.level2s {
+    background-image: url('/medias/images/picto/tree/level2s.png');
+}
+
+.level3s {
+    background-image: url('/medias/images/picto/tree/level3s.png');
+}
+
+.level4s {
+    background-image: url('/medias/images/picto/tree/level4s.png');
+}
+
+.level {
+    width: 300px;
+    display: flex;
+    background-repeat: repeat-y;
+    background-position: left;
+    cursor: pointer;
+
+    .nbr {
+        padding-top: 15px;
+        width: 80px;
+        text-align: right;
+        font-size: 15px;
+        font-weight: 400;
+        color: $color_1;
+        padding-right: 5px;
+        vertical-align: middle;
+    }
+
+    .infos {
+        padding-left: 15px;
+        display: flex;
+        width: 300px;
+        padding-right: 15px;
+
+        &:hover {
+            background-color: $background_color_4;
+        }
+    }
+
+    .detail {
+        label {
+            font-size: 13px;
+            font-style: normal;
+            font-weight: 400;
+            padding-left: 5px;
+        }
+    }
+}
+
+.separateur {
+    width: 300px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 1px;
+    background-color: $background_color_3;
+}
+
+.limiteur {
+    border-bottom: #CCCCCC 1px solid;
+}
+
+.compteur {
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 45px;
+    border-radius: 20rem;
+    height: 20px;
+    font-weight: 400;
+    color: $color_6;
+    margin-top: 10px;
+    background-color: $background_color_4;
+}

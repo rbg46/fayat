@@ -1,0 +1,46 @@
+﻿<div class="log-details">
+    <div class="log-details-header">
+        <div class="log-details-title">
+            <span class="flaticon flaticon-login"></span>
+            {{resources.AuthentificationLog_Controller_Index_Table_Header_Title}}
+        </div>
+        <span class="flaticon flaticon-multiply close" ng-click="close()" title="{{resources.Global_Bouton_Fermer}}"></span>
+    </div>
+    <div class="log-details-body">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6">
+                <p class="log-details-label">{{resources.AuthentificationLog_Controller_Index_Table_Header_DateCreation}} :</p>
+                <p class="log-details-data">{{model.DateCreation | date :'dd-MM-yyyy HH:mm:ss'}}</p>
+            </div>
+            <div class="col-xs-6 col-sm-6">
+                <p class="log-details-label">{{resources.AuthentificationLog_Controller_Index_Table_Header_Login}} :</p>
+                <p class="log-details-data">{{model.Login}}</p>
+            </div>
+            <div class="col-xs-6 col-sm-6">
+                <p class="log-details-label">{{resources.AuthentificationLog_Controller_Index_Table_Header_Error}} :</p>
+                <p class="log-details-data">{{model.Error}}</p>
+            </div>
+            <div class="col-xs-6 col-sm-6">
+                <p class="log-details-label">{{resources.AuthentificationLog_Controller_Index_Table_Header_ErrrorOrigin}} :</p>
+                <p class="log-details-data">{{model.OriginText}}</p>
+            </div>
+            <div class="col-xs-6 col-sm-6">
+                <p class="log-details-label">{{resources.AuthentificationLog_Controller_Index_Table_Header_AdressIp}} :</p>
+                <p class="log-details-data">{{model.AdressIp}}</p>
+            </div>
+            <div class="col-xs-6 col-sm-6">
+                <p class="log-details-label">{{resources.AuthentificationLog_Controller_Index_Table_Header_RequestUrl}} :</p>
+                <p class="log-details-data">{{model.RequestedUrl}}</p>
+            </div>
+            <div class="col-xs-6 col-sm-6">
+                <p class="log-details-label">{{resources.AuthentificationLog_Controller_Index_Table_Header_TechnicalError}} :</p>
+                <p class="log-details-data">{{model.TechnicalError}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="log-details-footer">
+        <button ng-click="close()" title="{{resources.Global_Bouton_Fermer}}" class="btn btn-link">
+            {{resources.Global_Bouton_Fermer}}
+        </button>
+    </div>
+</div>

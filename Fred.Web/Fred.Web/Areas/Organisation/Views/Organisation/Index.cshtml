@@ -1,0 +1,131 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+  ViewBag.Title = FeatureOrganisation.Organisation_Index_TitreOnglet;
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+  @Styles.Render("~/OrganisationIndexBundle.css")
+}
+
+@section scripts {
+  @Scripts.Render("~/OrganisationIndexBundle.js")
+  @this.RenderResources("FeatureOrganisation")
+
+  <style>
+    .modal {
+      z-index: 1300 !important;
+    }
+  </style>
+}
+
+<div class="organisation container-fluid" ng-controller="OrganisationController as ctrl">
+
+  <div class="row">
+    <div class="col-md-10"><h1>{{ctrl.resources.Organisation_Index_Titre}}</h1></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 col-lg-12">
+      <fred-section>{{ctrl.resources.Organisation_Index_SousTitre_Organisation}}</fred-section>
+      <div class="row search-container large">
+        <div class="inner-addon right-addon">
+          <i class="material-icons chevron-search">chevron_right</i>
+          <lookup
+                  ng-model="ctrl.selectedOrganisation"
+                  search-placeholder="{{ctrl.resources.Global_ReferentielOrganisation_Placeholder}}"
+                  search-title="{{ctrl.resources.Global_ReferentielOrganisation}}"
+                  on-select="ctrl.handlePickListSelectedItem('Organisation', item)"
+                  url="/api/Organisation/SearchLightOrganisation/?typeOrganisation=GROUPE,SOCIETE,PUO,UO,ETABLISSEMENT,CI&">
+
+            <input type="text" class="form-control"
+                   ng-value="ctrl.selectedOrganisation.CodeLibelle"
+                   placeholder="{{ctrl.resources.Global_ReferentielOrganisation_Placeholder}}"
+                   title="{{ctrl.selectedOrganisation.CodeLibelle}}" />
+          </lookup>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" ng-show="ctrl.selectedOrganisation !== null">
+    <div class="col-md-12 lists">
+      <div class="row">
+
+        @*---------------------------------------------------------- RÔLES ----------------------------------------------------------*@
+        <div class="col-md-6 col_roles">
+          <div class="row">
+            <div class="toolbar">
+              <fred-section>{{ctrl.resources.Organisation_Index_SousTitre_ListeRole}}</fred-section>
+              <div class="controls">
+                <div class="input-group input-search">
+                  <input type="text" placeholder="{{ctrl.resources.Organisation_Index_Search_Role_Placeholder}}" ng-model="ctrl.searchRole" class="form-control">
+                  <span class="input-group-addon button-search"><span class="material-icons">search</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="list-content">
+              <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6 no_padding" ng-repeat="role in ctrl.roleList | codeLibelleFilter: ctrl.searchRole" ng-class="{selected: role.RoleId === ctrl.selectedRole.RoleId, active: role.RoleId !== ctrl.selectedRole.RoleId && $index % 2 == 0}">
+                <div class="row ligne" ng-click="ctrl.handleSelectRole(role)">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no_padding">
+                    @* TODO : span à styler*@
+                    <div class="data">
+                      {{ role.Code }} | {{ role.Libelle }}
+                      <span class="arrow" title="{{ctrl.resources.Organisation_Index_TableRole_Fleche_Tooltip}}"></span>
+                      <span class="pull-right" ng-show="role.roleOrganisationDeviseCount===0" ng-class="{noDevise: role.roleOrganisationDeviseCount === 0}" title="{{ctrl.resources.Organisation_Index_TableRole_Tuile_AucuneDevise_Tooltip}}">{{ctrl.resources.Organisation_Index_TableRole_Tuile_AucuneDevise}}</span>
+                      <span class="pull-right" ng-show="role.roleOrganisationDeviseCount===1" ng-class="{hasDevise: role.roleOrganisationDeviseCount > 0}" title="{{role.LibelleDeviseCount}} {{ctrl.resources.Organisation_Index_TableRole_Tuile_UneDevise_Tooltip}}">{{role.roleOrganisationDeviseCount}} {{ctrl.resources.Organisation_Index_TableRole_Tuile_UneDevise}}</span>
+                      <span class="pull-right" ng-show="role.roleOrganisationDeviseCount>1" ng-class="{hasDevise: role.roleOrganisationDeviseCount > 0}" title="{{role.LibelleDeviseCount}} {{ctrl.resources.Organisation_Index_TableRole_Tuile_PlusieursDevises_Tooltip}}">{{role.roleOrganisationDeviseCount}} {{ctrl.resources.Organisation_Index_TableRole_Tuile_PlusieursDevises}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        @*---------------------------------------------------------- DEVISES ----------------------------------------------------------*@
+        <div class="col-md-6 col_currency">
+          <div class="row">
+            <div class="toolbar">
+              <fred-section>{{ctrl.resources.Organisation_Index_SousTitre_ListeDevise}}</fred-section>
+              <div class="controls">
+                <div class="col-md-10 col-lg-10 no-pl">
+                  <div class="input-group input-search">
+                  <input type="text" placeholder="{{ctrl.resources.Organisation_Index_Search_Devise_Placeholder}}" ng-model="ctrl.searchCurrency" class="form-control">
+                  <span class="input-group-addon button-search"><span class="material-icons">search</span></span>
+                </div>
+                </div>
+                <div class="col-md-2 col-lg-2 no-pr">
+                  <div class="add">
+                    <button ng-show="ctrl.selectedRole" class="btn btn-default btn-circle" ng-click="ctrl.handleAddOrUpdateSeuilValidation()" title="{{ctrl.resources.Organisation_Index_TableDevise_Bouton_Ajouter_Tooltip}}"><span class="material-icons">add</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="list-content">
+              <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6 no_padding" ng-repeat="roleOrgaCurrency in ctrl.roleOrganisationCurrencyList | deviseCodeLibelleFilter: ctrl.searchCurrency" ng-class="{selected: roleOrgaCurrency.DeviseId === ctrl.selectedCurrency.DeviseId, active: roleOrgaCurrency.DeviseId !== ctrl.selectedCurrency.DeviseId && $index % 2 == 0}">
+                <div class="row ligne" ng-click="ctrl.handleSelectCurrency(roleOrgaCurrency)">
+                  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 no_padding">
+                    <div class="data">
+                      {{roleOrgaCurrency.Devise.Libelle}} | {{roleOrgaCurrency.Seuil}}
+                    </div>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 no_padding">
+                    <span class="button-action material-icons pt pull-right" ng-click="ctrl.handleAddOrUpdateSeuilValidation(roleOrgaCurrency)" title="{{ctrl.resources.Organisation_Index_TableDevise_Bouton_Modifier_Tooltip}}">more_vert</span>
+                    <span class="button-action flaticon flaticon-multiply pull-right" ng-click="ctrl.handleDeleteSeuilValidation(roleOrgaCurrency, $index)" title="{{ctrl.resources.Organisation_Index_TableDevise_Bouton_Supprimer_Tooltip}}"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

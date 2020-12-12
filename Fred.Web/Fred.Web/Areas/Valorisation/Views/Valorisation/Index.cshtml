@@ -1,0 +1,77 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = "Valorisation";
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/ValorisationIndexBundle.css")
+}
+
+@section scripts {
+
+    @Scripts.Render("~/ValorisationIndexBundle.js")
+}
+
+<div class="valorisationCtrl container"
+     ng-controller="ValorisationController as valorisationCtrl"
+     ng-init="valorisationCtrl.loadPage('@ViewBag.id')">
+
+    <fred-ui-titre title="Valorisation"></fred-ui-titre>
+
+
+    <fred-toolbar ng-show="displaySearch" class="row">
+        <fred-section class="col-sm-2">
+            <fred-section-title>Selection de la période</fred-section-title>
+            <fred-section-controls>
+              <app-date-picker id="periode" ng-model="valorisationCtrl.periode" initial-date="{{valorisationCtrl.periode}}" format="MM/YYYY" lang="fr" placeholder="Période" ng-change="valorisationCtrl.changePeriode()"></app-date-picker>
+            </fred-section-controls>
+        </fred-section>
+        <fred-section class="col-sm-2">
+            <fred-section-title>Sélection du CI</fred-section-title>
+            <fred-section-controls>
+              <div class="inner-addon right-addon">
+                <lookup ng-model="valorisationCtrl.ci" search-placeholder="{{valorisationCtrl.resources.Global_ReferentielCI_Placeholder}}" 
+                        search-title="{{valorisationCtrl.resources.Global_ReferentielCI}}"
+                        custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                        on-select="valorisationCtrl.changeCI()" url="/api/CI/SearchLight">
+                  <input type="text" class="form-control" ng-value="valorisationCtrl.ci.CodeLibelle" placeholder="{{valorisationCtrl.resources.Global_ReferentielCI_Placeholder}}"
+                         title="{{valorisationCtrl.ci.Libelle}}" />
+                  <i class="chev material-icons">chevron_right</i>
+                </lookup>
+              </div>
+            </fred-section-controls>
+        </fred-section>
+    </fred-toolbar>
+
+
+    <table id="tableFixed" fred-table fred-fixed-col="1,2" fred-table-resize-trigger="{{valorisationCtrl.valorisationList.length > 0}}">
+        <thead>
+            <tr class="main">
+                <th class="cln1 bkg-blue">Date Pointage</th>
+                <th class="cln2 bkg-blue">Ressource</th>
+                <th class="cln3 bkg-blue">Personnel</th>
+                <th class="cln4 bkg-blue">Materiel</th>
+                <th class="cln5 bkg-blue">PUHT</th>
+                <th class="cln6 bkg-blue">Quantite</th>
+                <th class="cln7 bkg-blue-light1">Montant</th>
+                <th class="cln8 bkg-blue">Date Création</th>
+                <th class="cln9 bkg-blue">Date Modification</th>
+            </tr>
+        </thead>
+        <tbody id="valorisationList" class="fred-scroll">
+            <tr ng-repeat="valo in valorisationCtrl.valorisationList" ng-click="valorisationCtrl.handleRedirectDetailPersonnel(valo)">
+                <td class="cln1 bkg-blue-light4">{{valo.Date | date:'dd/MM/yyyy'}}</td>
+                <td class="cln2">{{valo.ReferentielEtendu.Ressource.CodeLibelle}}</td>
+                <td class="cln3 bkg-blue-light4">{{valo.Personnel.MatriculeNomPrenom}}</td>
+                <td class="cln4">{{valo.Materiel.LibelleLong}}</td>
+                <td class="cln5 bkg-blue-light4">{{valo.PUHT}}</td>
+                <td class="cln6">{{valo.Quantite}}</td>
+                <td class="cln7 bkg-blue-light4">{{valo.Montant}}</td>
+                <td class="cln8">{{valo.DateCreation | date:'dd/MM/yyyy'}}</td>
+                <td class="cln9" bkg-blue-light4>{{valo.DateModification | date:'dd/MM/yyyy'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

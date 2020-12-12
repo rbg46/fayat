@@ -1,0 +1,33 @@
+﻿(function () {
+    'use strict';
+
+    angular.module('Fred').service('CommandeLigneLockService', CommandeLigneLockService);
+
+    CommandeLigneLockService.$inject = ['OrganisationRelatedFeatureService'];
+
+    function CommandeLigneLockService(OrganisationRelatedFeatureService) {
+
+        var userIsInSocieteWithThisFonctionnalite = false;
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////INIT AU CHARGEMENT DE LA PAGE////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        this.initializeHasFeatureToLockUnlockCommandeLigne = async function () {
+            var isEnabledForCurrentUserResult = await OrganisationRelatedFeatureService.IsEnabledForCurrentUser('lock.unlock.commandeLigne', false);
+            if (isEnabledForCurrentUserResult && isEnabledForCurrentUserResult.data) {
+                userIsInSocieteWithThisFonctionnalite = true;
+            }
+        };
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////  AFFICHAGE VERROU      /////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        this.canShowLockButton = function (commandeLigne) {
+            return commandeLigne.IsVerrou && userIsInSocieteWithThisFonctionnalite;
+        };
+
+    }
+})();

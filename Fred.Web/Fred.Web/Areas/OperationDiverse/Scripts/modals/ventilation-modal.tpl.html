@@ -1,0 +1,182 @@
+﻿
+<div class="modal-header">
+    <h2 class="modal-title">
+        <span class="sapicon-E02C"></span>
+        {{$ctrl.resources.Ventilation_Title}}
+    </h2>
+    <i class="flaticon flaticon-multiply close pull-right"
+       aria-label="Close"
+       ng-click="$ctrl.close()"
+       title="{{$ctrl.resources.Global_Bouton_Annuler_Tooltip}}"></i>
+</div>
+
+<div class="modal-body">
+    <div class="infobar">
+        <div class="period">
+            <div class="lbl">{{$ctrl.resources.Global_Period}}</div>
+            <div class="val">{{$ctrl.periodLabel}}</div>
+        </div>
+
+        <div class="ecarts vent">
+            <span class="sapicon-E1A7"></span>
+            <div class="amount">
+                <span class="txt">{{$ctrl.resources.Ventilation_EcartDejaVentile}}</span>
+                <span class="data">{{$ctrl.EcartVentille | currency}}</span>
+            </div>
+        </div>
+
+        <div class="ecarts anael">
+            <span class="sapicon-E158"></span>
+            <div class="amount">
+                <span class="txt">{{$ctrl.ventilationMontantComptaLibelle}}</span>
+                <span class="data">{{$ctrl.family.AccountingAmount | currency}}</span>
+            </div>
+        </div>
+
+        <div class="ecarts dispatch">
+            <span class="sapicon-E02F"></span>
+            <div class="amount">
+                <span class="txt">{{$ctrl.resources.Ventilation_EcartPeriodeADispatcher}}</span>
+                <span class="data">{{$ctrl.family.GapAmount | currency}}</span>
+            </div>
+        </div>
+        <button class="ecarts add-rep" ng-disabled="loading" ng-click="$ctrl.Add()">
+            <span class="material-icons">add</span>
+            <div class="amount">
+                <span class="txt">{{$ctrl.resources.Ventilation_AjouterRepartition}}</span>
+            </div>
+        </button>
+    </div>
+    <div class="ecart-list row">
+        <form id="formVentilation" name="formVentilation">
+            <table class="table-fixed">
+                <thead>
+                    <tr>
+                        <th class="col-md-2 large">{{$ctrl.resources.Libelle_lb}}</th>
+                        <th class="col-md-2 super-large">{{$ctrl.resources.Global_Resource}}</th>
+                        <th class="col-md-2 super-large">{{$ctrl.resources.Global_Task}}</th>
+                        <th class="col-md-1 small">{{$ctrl.resources.Quantite_lb}}</th>
+                        <th class="col-md-2 super-large">{{$ctrl.resources.Unite_lb}}</th>
+                        <th class="col-md-1 medium">{{$ctrl.resources.Global_PUHTEuros}}</th>
+                        <th class="col-md-1 medium">{{$ctrl.resources.Global_AmountHTEuros}}</th>
+                        <th class="col-md-5 extra-large">{{$ctrl.resources.Global_Comment}}</th>
+                        <th class="col-md-1"></th>
+                    </tr>
+                </thead>
+                <tbody class="fred-scroll">
+                    <tr ng-repeat="(ventilationId, ventilation) in $ctrl.operationDiverses">
+                        <td class="col-md-2" ng-hide="true">{{ventilation.VentilationId}}</td>
+                        <td class="col-md-2 large" ng-show="!ventilation.Modified">{{ventilation.Libelle}}</td>
+                        <td class="col-md-2 super-large" ng-show="!ventilation.Modified">{{ventilation.ResourceName}}</td>
+                        <td class="col-md-2 super-large" ng-show="!ventilation.Modified">{{ventilation.TaskName}}</td>
+                        <td class="col-md-1 small" ng-show="!ventilation.Modified">{{ventilation.Quantity}}</td>
+                        <td class="col-md-2 super-large" ng-show="!ventilation.Modified">{{ventilation.UnitName}}</td>
+                        <td class="col-md-1 medium" ng-show="!ventilation.Modified">{{ventilation.PUHT}}</td>
+                        <td class="col-md-1 medium amount-txt" ng-show="!ventilation.Modified">{{ventilation.Amount}}</td>
+                        <td class="col-md-5 extra-large" ng-show="!ventilation.Modified">{{ventilation.Commentaire}}</td>
+
+                        <td class="col-md-2 large" ng-show="ventilation.Modified">
+                            <input name="Libelle" class="form-control inputText" type="text" ng-model="ventilation.Libelle" required value="{{ventilation.Libelle}}" />
+                        </td>
+                        <td class="col-md-2 super-large" ng-class="{'has-error' : formVentilation.$submitted && formVentilation.Resource.$error.required}" ng-show="ventilation.Modified">
+                            <span class="text-danger error" ng-show="formVentilation.$submitted && formVentilation.Resource.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                            <lookup-standalone ng-model="ventilation.ResourceName"
+                                               name="Resource"
+                                               text="ventilation.ResourceName"
+                                               search-title="{{$ctrl.resources.Global_ReferentielRessource}}"
+                                               search-placeholder="{{$ctrl.resources.Global_ReferentielResource_Placeholder}}"
+                                               on-click="$ctrl.showLookUpResource();"
+                                               on-select="$ctrl.selectResource(ventilation, item);"
+                                               show-delete-button="false"
+                                               tooltip="ventilation.ResourceName"
+                                               class="formulaire middle lookup"
+                                               placeholder="Sélectionner une Ressource ...  "
+                                               required>
+                            </lookup-standalone>
+                        <td class="col-md-2 super-large" ng-class="{'has-error' : formVentilation.$submitted && formVentilation.Task.$error.required}" ng-show="ventilation.Modified">
+                            <span class="text-danger error" ng-show="formVentilation.$submitted && formVentilation.Task.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                            <lookup-standalone ng-model="ventilation.TaskName"
+                                               name="Task"
+                                               text="ventilation.TaskName"
+                                               search-title="{{$ctrl.resources.Global_ReferentielTache}}"
+                                               search-placeholder="{{$ctrl.resources.Global_ReferentielTache_Placeholder}}"
+                                               on-select="$ctrl.selectTask(ventilation, item);"
+                                               url="/api/Tache/Search/?ciId={{$ctrl.ciSelected.CiId}}&"
+                                               show-delete-button="false"
+                                               tooltip="ventilation.TaskName"
+                                               class="formulaire middle lookup"
+                                               custom-template-url="/Scripts/directive/Lookup/custom-templates/tache.template.html"
+                                               placeholder=" Sélectionner une Tâche ...  "
+                                               required>
+                            </lookup-standalone>
+                        </td>
+
+                        <td class="col-md-1 small" ng-show="ventilation.Modified">
+                            <input class="form-control inputText"
+                                   ng-model="ventilation.Quantity"
+                                   type="text"
+                                   select-on-click
+                                   fred-input-number="2"
+                                   fred-input-default-value="1"
+                                   ng-change="$ctrl.onChange(ventilation)"
+                                   required />
+                        </td>
+
+                        <td class="col-md-2 super-large" ng-class="{'has-error' : formVentilation.$submitted && formVentilation.Unit.$error.required}" ng-show="ventilation.Modified">
+                            <span class="text-danger error" ng-show="formVentilation.$submitted && formVentilation.Unit.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                            <lookup-standalone ng-model="ventilation.UnitName"
+                                               name="Unit"
+                                               text="ventilation.UnitName"
+                                               search-title="{{$ctrl.resources.Global_ReferentielUnite}}"
+                                               search-placeholder="{{$ctrl.resources.Global_ReferentielUnite_Placeholder}}"
+                                               on-click="$ctrl.showLookUpUnit();"
+                                               on-select="$ctrl.selectUnit(ventilation, item);"
+                                               show-delete-button="false"
+                                               tooltip="ventilation.UnitName"
+                                               class="formulaire middle lookup"
+                                               placeholder=" Sélectionner une Unité ...  "
+                                               required>
+                            </lookup-standalone>
+                        </td>
+                        <td class="col-md-1 medium" ng-show="ventilation.Modified">
+                            <input class="form-control inputText"
+                                   ng-model="ventilation.PUHT"
+                                   type="text"
+                                   select-on-click
+                                   fred-input-number="2"
+                                   fred-input-default-value="1"
+                                   ng-change="$ctrl.onChange(ventilation)"
+                                   required />
+                        </td>
+                        <td class="col-md-1 medium amount-txt" ng-show="ventilation.Modified">
+                            <p>{{ventilation.Amount | number : 2}}</p>
+                        </td>
+                        <td class="col-md-5 extra-large" ng-show="ventilation.Modified">
+                            <input class="form-control inputText" ng-model="ventilation.Commentaire" type="text" value="{{ventilation.Commentaire}}" maxlength="150" />
+                        </td>
+                        <td class="col-md-1">
+                            <div class="edit-icons">
+                                <button class="sapicon-E038" ng-show="ventilation.VentilationId !==0" ng-click="$ctrl.SaveOrUpdate(ventilation)"></button>
+                                <button class="material-icons" type="submit" ng-show="ventilation.VentilationId === 0" ng-click="$ctrl.SaveOrUpdate(ventilation)">check</button>
+                                <button class="material-icons" ng-click="$ctrl.Delete(ventilation)">clear</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default pull-left"
+            ng-show="$ctrl.canShow()"
+            ng-disabled="!$ctrl.canSave()"
+            ng-click="$ctrl.save()">
+        {{$ctrl.resources.Global_Bouton_Valider}}
+    </button>
+    <button class="btn btn-link pull-right"
+            ng-click="$ctrl.close()"
+            data-dismiss="modal">
+        {{$ctrl.resources.Global_Bouton_Fermer}}
+    </button>
+</div>

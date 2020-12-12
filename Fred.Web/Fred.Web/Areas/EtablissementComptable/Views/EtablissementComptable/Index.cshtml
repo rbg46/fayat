@@ -1,0 +1,309 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureEtablissementComptable.EtablissementComptable_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/EtablissementComptableIndexBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/EtablissementComptableIndexBundle.js")
+    @this.RenderResources("FeatureEtablissementComptable")
+}
+
+<div class="container" ng-controller="EtablissementComptableController">
+
+    <div class="toleft" id="PanelMain">
+
+        <!-- START : Titre de la page -->
+        <h1>{{resources.EtablissementComptable_PanelMain_Titre}}</h1>
+        <!--END : Titre de la page -->
+
+        <div class="row">
+            <!--BEGIN : Picklist Societe -->
+            <div class="col-md-5">
+                <label class="infoFilter">{{resources.Global_SelectionnerSociete}}</label>
+                <div class="filter">
+                    <div class="inner-addon right-addon">
+                        <i class="chev material-icons">chevron_right</i>
+                        <lookup ng-model="societe"
+                                search-placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+                                search-title="{{resources.Global_ReferentielSociete}}"
+                                on-select="loadData()"
+                                url="/api/Societe/SearchLightForRoles">
+                            <input type="text"
+                                   class="form-control"
+                                   ng-value="societe.CodeLibelle"
+                                   placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+                                   title="{{societe.CodeLibelle}}" />
+                        </lookup>
+                    </div>
+                </div>
+            </div>
+            <!--END : Picklist Societe -->
+            <!--BEGIN : Recherche -->
+            <div class="col-md-5" ng-if="societeId != undefined">
+                <label class="infoFilter">{{resources.Global_RechercheAffiner}}</label>
+                <div class="filter">
+                    <div class="input-group">
+                        <input class="form-control txt" type="text"
+                               id="txtRecherche"
+                               name="Recherche"
+                               ng-model-options="{ debounce: 500 }"
+                               placeholder="{{resources.EtablissementComptable_PanelMain_Recherche_Placeholder}}"
+                               ng-model="recherche"
+                               ng-change="handleSearch(recherche)" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary y_search"
+                                    title="{{resources.Global_RechercheAffiner_Tooltip}}"
+                                    type="button"
+                                    ng-click="handleSearch(recherche)">
+                                <i class="material-icons">search</i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--END : Recherche -->
+            <!--BEGIN : Bouton pour ajouter Items -->
+            <div class="col-md-2 add-search" ng-if="societeId != undefined">
+                <span class="pull-right">
+                    <label class="infoFilter">{{resources.Global_Ajouter}}</label>
+                    <i class="flaticon flaticon-add  icoplus " title="{{resources.Global_Bouton_AjouterReference_Tooltip}}" ng-click="handleClickCreateNew()"></i>
+                </span>
+            </div>
+            <!--END : Bouton pour ajouter Items -->
+        </div>
+
+        <!--LISTE : START-->
+        <div class="row results" id="Table" ng-if="societeId != undefined">
+            <div class="col-md-12 refs-list">
+                <div ng-repeat="item in items">
+                    <div class="row line" ng-click="handleSelect(item)">
+                        <div class="col-md-2">
+                            <span class="t1">{{item.Code}}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="lb">{{resources.EtablissementComptable_PanelMain_Table_Libelle}}</div>
+                            <span class="t2">{{item.Libelle}}</span>
+                        </div>
+                        <div class="col-md-2 hidden-sm">
+                            <div class="lb">{{resources.EtablissementComptable_PanelMain_Table_Commande}}</div>
+                            <div class="val ng-binding">
+                                <span ng-if="item.ModuleCommandeEnabled">{{resources.Global_Oui}}</span>
+                                <span ng-if="!item.ModuleCommandeEnabled">{{resources.Global_Non}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 hidden-sm">
+                            <div class="lb">{{resources.EtablissementComptable_PanelMain_Table_Production}}</div>
+                            <div class="val ng-binding">
+                                <span ng-if="item.ModuleProductionEnabled">{{resources.Global_Oui}}</span>
+                                <span ng-if="!item.ModuleProductionEnabled">{{resources.Global_Non}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="bdg actif" ng-if="!item.IsDeleted">{{resources.Global_Actif}}</div>
+                            <div class="bdg inactif" ng-if="item.IsDeleted">{{resources.Global_Inactif}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--LISTE : END-->
+
+    </div>
+
+
+    <div ng-class="checkDisplayOptions" class="blockScreen"></div>
+    <div class="options" id="PanelRight" ng-class="checkDisplayOptions + ' ' + checkFormatOptions">
+
+        <!-- HEADER TOOLBAR : BEGIN -->
+        <div class="toolbar">
+            <div class="flaticon flaticon-home-2 grandicone"></div>
+        </div>
+        <!-- HEADER TOOLBAR : END -->
+        <!-- Titre : BEGIN -->
+        <div class="form-header" id="Titre">
+            <h2>
+                <span ng-if="etablissementComptable.EtablissementComptableId == 0">{{resources.EtablissementComptable_PanelMain_Titre_Ajouter}}</span>
+                <span ng-if="etablissementComptable.EtablissementComptableId != 0">{{resources.EtablissementComptable_PanelMain_Titre_Modifier}}</span>
+            </h2>
+            <label class="legend">{{resources.Global_LegendeAsterisque}}</label>
+        </div>
+        <!-- Titre : END -->
+
+        <div class="form fred-scroll">
+            <!--Formulaire: START-->
+            <form name="formEtablissementComptable" autocomplete="off" novalidate>
+                <!--FIELD IsDeleted: START-->
+                <div class="col-md-offset-8 chb_r">
+                    <input id="chkActif" type="checkbox"
+                           ng-model="etablissementComptable.IsDeleted"
+                           ng-true-value="false"
+                           ng-false-value="true" /><label for="chkActif"><span></span>{{resources.Global_Actif}}</label>
+                </div>
+                <!--FIELD IsDeleted: END-->
+                <!--FIELD Code: START-->
+                <div class="form-group" ng-class="{ 'has-error' : (formEtablissementComptable.Code.$invalid && formEtablissementComptable.$submitted) || formEtablissementComptable.Code.$error.exist || formEtablissementComptable.Code.$error.pattern}">
+                    <label for="txtCode">{{resources.EtablissementComptable_PanelRight_Code}} *</label>
+                    <span class="text-danger" ng-show="formEtablissementComptable.Code.$error.required && formEtablissementComptable.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <span class="text-danger" ng-show="formEtablissementComptable.Code.$error.exist">{{resources.Global_Control_Code_ExistInSociete_Erreur}}</span>
+                    <span class="text-danger" ng-show="formEtablissementComptable.Code.$error.pattern">{{resources.Global_Control_Code_FormatAlphanumeric_Erreur}}</span>
+                    <input class="form-control" ng-pattern='/^[a-zA-Z0-9]+$/' type="text" id="txtCode" name="Code" ng-change="handleChangeCode()" required placeholder="{{resources.EtablissementComptable_PanelRight_Code_Placeholder}}" ng-model="etablissementComptable.Code" maxlength="20" />
+                </div>
+                <!--FIELD Code: END-->
+                <!--FIELD Libelle: START-->
+                <div class="form-group" ng-class="{ 'has-error' : formEtablissementComptable.Libelle.$invalid && formEtablissementComptable.$submitted}">
+                    <label for="txtLibelle">{{resources.EtablissementComptable_PanelRight_Libelle}} *</label>
+                    <span class="text-danger" ng-show="formEtablissementComptable.Libelle.$invalid && formEtablissementComptable.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <input class="form-control" type="text" id="txtLibelle" name="Libelle" required placeholder="{{resources.EtablissementComptable_PanelRight_Libelle_Placeholder}}" ng-model="etablissementComptable.Libelle" maxlength="500" />
+                </div>
+                <!--FIELD Libelle: END-->
+                <!--FIELD Adresse : START-->
+                <div class="form-group" ng-if='!isCurrentUserFes' ng-class="{ 'has-error' : formEtablissementComptable.Adresse.$invalid && formEtablissementComptable.$submitted}">
+                    <label for="txtAdresse">{{resources.EtablissementComptable_PanelRight_Adresse}} *</label>
+                    <span class="text-danger" ng-show="formEtablissementComptable.Adresse.$invalid && formEtablissementComptable.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <input class="form-control" type="text" id="txtAdresse" name="Adresse" required placeholder="{{resources.EtablissementComptable_PanelRight_Adresse_Placeholder}}" ng-model="etablissementComptable.Adresse" maxlength="500" />
+                </div>
+                <!--FIELD Adresse : END-->
+                <!--FIELD Ville : START-->
+                <div class="form-group" ng-if='!isCurrentUserFes' ng-class="{ 'has-error' : formEtablissementComptable.Ville.$invalid && formEtablissementComptable.$submitted}">
+                    <label for="txtVille">{{resources.EtablissementComptable_PanelRight_Ville}} *</label>
+                    <span class="text-danger" ng-show="formEtablissementComptable.Ville.$invalid && formEtablissementComptable.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <input class="form-control" type="text" id="txtVille" name="Ville" required placeholder="{{resources.EtablissementComptable_PanelRight_Ville_Placeholder}}" ng-model="etablissementComptable.Ville" maxlength="500" />
+                </div>
+                <!--FIELD Ville : END-->
+                <!--FIELD Code Postal : START-->
+                <div class="form-group" ng-if='!isCurrentUserFes' ng-class="{ 'has-error' : formEtablissementComptable.CodePostal.$invalid && formEtablissementComptable.$submitted}">
+                    <label for="txtCodePostal">{{resources.EtablissementComptable_PanelRight_CodePostal}} *</label>
+                    <span class="text-danger" ng-show="formEtablissementComptable.CodePostal.$invalid && formEtablissementComptable.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <input class="form-control" type="text" id="txtCodePostal" name="CodePostal" required placeholder="{{resources.EtablissementComptable_PanelRight_CodePostal_Placeholder}}" ng-model="etablissementComptable.CodePostal" maxlength="20" />
+                </div>
+                <!--FIELD Code Postal : END-->
+                <!--FIELD Pays : START-->
+                <div class="form-group" ng-if='!isCurrentUserFes' ng-class="{ 'has-error' : formEtablissementComptable.Pays.$invalid && formEtablissementComptable.$submitted}">
+                    <label for="txtPays">{{resources.EtablissementComptable_PanelRight_Pays}} *</label>
+                    <span class="text-danger" ng-show="formEtablissementComptable.Pays.$invalid && formEtablissementComptable.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <lookup-standalone id="Pays"
+                                       name="Pays"
+                                       ng-model="etablissementComptable.Pays"
+                                       text="etablissementComptable.Pays.CodeLibelle"
+                                       search-title="Référentiel des Pays"
+                                       search-placeholder="Rechercher un Pays..."
+                                       url="/api/Pays/SearchLight"
+                                       on-select="etablissementComptable.PaysId = item.IdRef"
+                                       on-delete="etablissementComptable.PaysId = null; etablissementComptable.Pays = null;"
+                                       class="formulaire long"
+                                       ng-required="true">
+                    </lookup-standalone>
+                </div>
+                <!--FIELD Pays : END-->
+                <!--FIELD Commande et Production : START-->
+                <div class="form-group">
+                    <div>
+                        <div class="col-md-6 chb_l">
+                            <input id="chkCommande" type="checkbox"
+                                   ng-model="etablissementComptable.ModuleCommandeEnabled"
+                                   ng-change="handleChangeModuleCommande()"/>
+                            <label for="chkCommande"><span></span>{{resources.EtablissementComptable_PanelRight_Commande}}</label>
+                        </div>
+                        <div class="col-md-6 chb_r">
+                            <input id="chkProduction" type="checkbox" ng-model="etablissementComptable.ModuleProductionEnabled" /><label for="chkProduction"><span></span>{{resources.EtablissementComptable_PanelRight_Production}}</label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="col-md-12">
+                            <input id="chkRessourcesRecommandees" type="checkbox" ng-model="etablissementComptable.RessourcesRecommandeesEnabled" /><label for="chkRessourcesRecommandees"><span></span>{{resources.EtablissementComptable_PanelRight_RessourcesRecommandees}}</label>
+                        </div>
+                    </div>
+                </div>
+                <!--FIELD ModuleCommandeEnabled: END -->
+
+                <!--ZONES LIBRES MODÈLES DE COMMANDE : START-->
+                <fred-authorization key="{{permissionKeys.ModifierZonesLibresModelesCommande}}" style="overflow: hidden; width: 100%;">
+                    <div ng-show="etablissementComptable.ModuleCommandeEnabled"
+                         class="zones-libres-commande form-group text-center">
+                        <div ng-click="ZLMC.isOpen = !ZLMC.isOpen" class="title text-left">
+                            <div class="material-icons">{{ZLMC.isOpen ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</div>
+                            <div>{{resources.EtablissementComptable_Zones_Libres_Modeles_de_Commande}}</div>
+                        </div>
+                        <div ng-show="ZLMC.isOpen" class="content">
+                            @*FACTURATION*@
+                            <div class="text-left d-grid">
+                                <label for="facturation-text-area">
+                                    {{resources.EtablissementComptable_Zones_Facturation}}
+                                </label>
+                                <textarea id="facturation-text-area"
+                                          ng-model="etablissementComptable.Facturation"
+                                          placeholder="{{resources.EtablissementComptable_Zones_FacturationPlaceholder}}"
+                                          cols="30" rows="4" maxlength="500" style="resize: none"></textarea>
+                            </div>
+                            @*PAIEMENT*@
+                            <div class="text-left d-grid">
+                                <label for="paiement-text-area">
+                                    {{resources.EtablissementComptable_Zones_Paiement}}
+                                </label>
+                                <textarea id="paiement-text-area"
+                                          ng-model="etablissementComptable.Paiement"
+                                          placeholder="{{resources.EtablissementComptable_Zones_PaiementPlaceholder}}"
+                                          cols="30" rows="4" maxlength="500" style="resize: none"></textarea>
+                            </div>
+
+                            @*CONDITIONS GÉNERALES D'ACHAT*@
+                            <div class="text-left">
+                                <label for="CGA">{{resources.EtablissementComptable_Zones_Conditions_Generales_Achat}}</label>
+                                <div id="CGA">
+                                    <div ng-repeat="cga in ZLMC.CGATypes" class="row">
+                                        <div class="col-md-6 p-0">
+                                            <label class="btn btn-default" for="file-upload-{{cga}}"
+                                                   ng-switch="cga">
+                                                <span ng-switch-when="CGAFourniture">{{resources.EtablissementComptable_Zones_Choisir_CGA_Fourniture}}</span>
+                                                <span ng-switch-when="CGALocation">{{resources.EtablissementComptable_Zones_Choisir_CGA_Location}}</span>
+                                                <span ng-switch-when="CGAPrestation">{{resources.EtablissementComptable_Zones_Choisir_CGA_Prestation}}</span>
+                                            </label>
+                                            <input type="file" name="{{cga}}" id="file-upload-{{cga}}"
+                                                   onchange="angular.element(this).scope().handleCGAChange(name, event)"
+                                                   accept="{{ZLMC.acceptFiles}}">
+                                        </div>
+                                        <div ng-show="etablissementComptable[cga+'FileName'] != null"
+                                             ng-class="{'clickable': etablissementComptable[cga+'FilePath'] != null || etablissementComptable[cga+'FileName'] != null}"
+                                             class="col-md-6 p-0"
+                                             ng-click="downloadCGAFile(cga)">
+                                            <i class="material-icons">attach_file</i>
+                                            <div class="ellipsis"
+                                                 title="{{etablissementComptable[cga+'FileName'] != null ? etablissementComptable[cga+'FileName'] : ''}}">
+                                                {{etablissementComptable[cga+'FileName'] != null ? etablissementComptable[cga+'FileName'] : ''}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fred-authorization>
+                <!--ZONES LIBRES MODÈLES DE COMMANDE : END-->
+
+                <!--FOOTER TOOLBAR : BEGIN -->
+                <div class="footer">
+                    <div class="buttons">
+                        <button class="btn btn-default" type="submit" ng-click="handleClickAddOrUpdate();" title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">{{resources.Global_Bouton_Enregistrer}}</button>
+                        <button class="btn btn-primary" type="submit" ng-click="handleClickAddOrUpdateAndNew();" title="{{resources.Global_Bouton_EnregistrerEtNouveau_Tooltip}}">{{resources.Global_Bouton_EnregistrerEtNouveau}}</button>
+                        <button ng-hide="etablissementComptable.EtablissementComptableId==0" class="btn" type="submit" ng-click="handleClickDelete(etablissementComptable);" title="{{resources.Global_Bouton_Supprimer_Tooltip}}">{{resources.Global_Bouton_Supprimer}}</button>
+                        <button class="btn btn-link" type="submit" ng-click="handleClickCancel();" title="{{resources.Global_Bouton_Annuler_Tooltip}}">{{resources.Global_Bouton_Annuler}}</button>
+                    </div>
+                    <div class="close_panel" ng-click="handleClickCancel();" title="{{resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i> <span>{{resources.Global_Bouton_RefermerPanneau}}</span>
+                    </div>
+                </div>
+                <!--FOOTER TOOLBAR : END-->
+
+            </form>
+            <!--Formulaire: END -->
+
+        </div>
+    </div>
+</div>

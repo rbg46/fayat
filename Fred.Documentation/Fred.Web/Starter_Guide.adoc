@@ -1,0 +1,624 @@
+= STARTER GUIDE FOR FRED DEVELOPPER
+
+
+== Introduction
+
+Ce document a pour objectif de décrire la procédure afin d’ajouter une nouvelle page sur le projet FRED. Il s’agit là plus d’un ``Hello World'' qui indique les bonnes pratiques qui doivent être suivies lors de tout développement sous FRED
+
+== Gestion des entités sous FRED
+
+=== Ajout d’une nouvelle entité
+
+L’ajout d’une nouvelle entité doit se faire au niveau de la couche «*Shared* » du projet FRED WEB, dans le projet « *Fred.Entities* ». Le projet est divisé par dossiers qui correspondent à un domaine métier(ex. le dossier Budget contiens l’ensemble des entités relatives à la
+gestion du budget dans FRED). Si ce dernier n’existe pas, il convient alors de le créer. Le nommage d’une entité doit se faire de la manière suivante : Nom de la table sous FRED auquel ajouter le suffixe « Ent ». 
+
+Par exemple si l’on souhaite ajouter une table commande, l’entité portera obligatoirement le nom « CommandeEnt.cs ».
+
+NOTE: sauf indication contraire, le nom de table déclarée dans l’entité sera forcément préfixé
+par « FRED_ » ce qui donne dans notre exemple « FRED_COMMANDE ».
+
+=== Modification d’une entité existante
+
+Si l’on souhaite modifier une entité il suffit simplement d’effectuer les modifications voulues et de refaire une nouvelle migration.
+
+Attention cependant aux modifications de taille d’une colonne, dans ce cas merci de voir le chapitre
+link:#modification-dune-taille-de-colonne[Modification d’une taille de colonne]
+
+== Migration sous FRED
+
+FRED est un projet qui utilise EntityFramework en mode dit « Code First ». Cela signifie que c’est l’application (par le biais des entités) qui va générer le modèle de données. De ce fait, il est impossible de faire des modifications de schéma de base de données directement, faute de
+quoi l’application ne pourra pas fonctionner. Au lancement de l’application, cette dernière va générer la base de données grâce au fichier migration présent dans le répertoire Fred.EntityFramework/Migrations.
+
+=== Ajout d’une Migration
+
+Avant toute chose il faut déclarer la nouvelle entité dans le contexte de FRED (FredDbContext.cs), dans notre exemple cela donne la ligne suivante :
+
+[source,csharp]
+----
+Public DbSet<CommandeEnt> Commande {get ; set ;}
+----
+
+Une fois que l’on a ajouté une ou plusieurs entités, il va falloir les intégrer dans la base de données. Pour cela il faut passer par la console de gestionnaire de paquet (Package Manager Console), se positionner sur le projet (dans la console) Fred.EntityFramework et taper la commande suivante : Add-Migration suivit du nom de fichier de Migration. Attention, il convient de respecter les règles de nommage suivantes : 
+
+- Le nom du fichier doit être PascalBase 
+- Le nom doit être unique et explicite 
+- Indiquer s’il s’agit d’un CREATE/ADD/DELETE etc. 
+- Le nom doit avoir « *AndDataLoss* » à la fin en cas de suppression de
+données. 
+- Le nom doit se terminer par migration.
+
+Dans l’exemple de la table commande il faut donc taper «`+Add-Migration AddCommandeEntMigration+` ». 
+
+Une fois la migration faite (cela prend un peu de temps), un fichier est ajouté dans le dossier
+Migration du projet Fred.EntityFramework. Le nom de ce fichier est horodaté (YYYYMMDDhhmmss) et contient la commande que l’on a tapée au moment du Add-Migration.
+
+A l’intérieur de ce fichier, on trouve deux méthodes : Up et Down. Si le contenu de ces méthodes est vide c’est qu’une étape a été ratée plus haut. La méthode Up est jouée pendant la mise à jour de la base de données et la méthode down est jouée quand il y a un rollback de cette migration.
+
+NOTE: Vous devez tester le down en faisant un rollback, en effet en cas de problème en production, il doit être possible de faire un rollback. +
+Cf Readme.md dans Fred.EntityFramework
+
+Une fois la migration terminée, la base de données sera mise à jour au prochain lancement de l’application, cependant il est possible de générer un script SQL de la migration. Pour cela il suffit de taper la commande suivante : `+Update-Database -Script+` . Il est possible de
+jouer cette commande sans l’attribut Script, dans ce cas, la commande `+Update-Database+` mettra à jour la base de données sans qu’il y ai besoin de lancer l’application FRED.
+
+=== Modification/Suppression d’une migration
+
+On ne modifie pas et on ne supprime pas une migration. A partir du moment où l’on doit apporter des modifications à une suppression, il faut alors modifier la couche entité et refaire une nouvelle migration.
+
+=== Modification d’une taille de colonne
+
+L’attribut MaxLength n’est pas pris en compte pour la génération des migrations. Pour pallier à ce problème il faut créer un fichier de «configuration » dans le dossier Configuration du projet
+Fred.EntityFramework. Ce fichier devra être générer à la main et sera nommé sous la forme NomdemonEntitéConfiguration.cs, ce qui donne dans notre cas CommandeEntConfiguration.cs.
+
+=== Remarques importantes
+
+Pour que les migrations fonctionnent correctement il est nécessaire que le projet de démarrage soit le projet FRED.Web. En effet, c’est ce dernier qui contiens la chaine de connexion (actuellement
+FredConnection).
+
+== Couche d’accès aux données (FRED.DataAccess)
+
+La couche d’accès aux données (appelé également Repo car il s’agit du pattern
+https://www.supinfo.com/articles/single/881-pattern-repository[Repository]) permet *uniquement* de faire du CRUD (Create / Read / Update / Delete),
+et ne doit contenir *aucunes règles métier*. Comme pour la couche entité, le projet est découpé par dossier qui regroupent les différents bloc métier. Le nom de la classe devra respecter la norme de nommage suivante _NomdeMonEntité**Repository**.cs_ ce qui donne CommandeRepository.cs si l’on suit notre exemple. 
+
+Cette classe devra implémenter son interface (nommé de la façon suivante **I**CommandeRepository.cs) et devra dériver de la classe FredRepository qui prendra comme type l’entité que l’on a créé précédemment.
+
+[source,csharp]
+----
+public class CommandeRepository : FredRepository<CommandeEnt>, ICommandeRepository
+----
+
+WARNING: comme pour la classe, l’interface devra être dérivée de l’interface IFredRepository
+
+== Couche Métier (FRED.Business)
+
+La couche métier (appelé également Manager en référence au pattern
+https://docs.microsoft.com/en-us/previous-versions/msp-n-p/dn223671(v%3dpandp.30)[Unity])
+va contenir l’ensemble des règles métier. Il faut obligatoirement passer par le manager pour avoir accès aux données.
+
+Un doit manager doit obligatoirement respecter les règles suivantes :
+
+- Définir une interface 
+- Hériter de Manager<TEntity, TRepository> 
+- Valider les données et les règles de gestion dans une classe IValidator
+- Etre testé avec des TUs automatisés (si possible mocké sans accès à la base) +
+_Objectif : 80% de couverture de code_
+
+Un manager ne doit pas 
+
+- Ne pas retourner un IQueryable 
+- Utiliser directement un repository qui ne correspond pas à son entité. Pour
+accéder à une autre entité, un manager doit appeler un autre manager, car c’est le manager qui contiens toutes les règles métier. Si l’on venait à appeler directement le repository que l’on veut, les règles de gestion ne seront pas appliquées.
+
+=== Validator
+
+La Validator est un librairie externe qui permet de vérifier de manière simple un ensemble de règles métier. *son utilisation est OBLIGATOIRE* et reste très simple d’utilisation.
+
+La classe Validator doit être nommée de la manière suivante _NomDeMonEntitéValidator.cs_ et doit obligatoirement dériver de la classe _AbstractValidator_ et implémenter sa propre interface.
+L’interface derivée de _IValidator_. +
+Dans notre exemple cela nous donnera donc pour l’interface :
+
+[source,csharp]
+----
+public interface ICommandeValidator : IValidator<CommandeEnt>
+{
+    ...
+}
+----
+
+et pour notre classe
+
+[source,csharp]
+----
+public class CommandeValidator : AbstractValidator<CommandeEnt>, ICommandeValidator
+{
+    ...
+}
+----
+
+C’est dans le constructeur de notre classe Validator qu’il va falloir mettre toutes nos règles métiers. Afin d’éviter d’avoir un constructeur trop lourd, il faut regrouper les différentes règles en 3 parties : 
+
+- Gestion des règles techniques 
+- Gestion des règles métier 
+- Gestion des règles en cascade
+
+Notre constructeur rassemblera donc à ceci : 
+[source,csharp]
+----
+ public
+CommandeValidator() \{ //Règles de gestion techniques
+AddChildTechnicalRules();
+
+....
+ //Règles de gestion métiers
+ AddBusinessRules();
+ 
+ //Règles de gestion en cascade.
+ AddChildRules();
+....
+
+} 
+----
+
+
+Voyons maintenant comment appliquer nos règles. Pour cela il suffit d’appeler la méthode (statique) RuleFor et de lui spécifier la propriété de la classe que l’on souhaite vérifier, de lui indiquer la condition à vérifier et pour finir d’indiquer le message a afficher en code non validation.
+
+[source,csharp]
+----
+ private void AddBusinessRules()
+{
+   // RG [NUM] [Short description]
+   RuleFor(x => x.Montant).LessThanOrEqualsTo(0)
+   .WithMessage(Commande.Montant_MustBePositive);
+
+}
+----
+
+Comme on peux le constater l’implémentation de notre règles est très simple. Il est bien sur possible de combiner plusieurs règles, pour plus de détails la documentation officielle se trouve
+https://fluentvalidation.net/start[ici]
+
+Il est également possible de créer ces propres règles en passant par des méthodes anonymes.
+
+[source,csharp]
+----
+ private void AddBusinessRules()
+{
+   RuleFor(x => x.Numero).Must((c,numero) => !string.IsNullOrEmpty(numero))
+   .When(x => x.CommandeManuelle && x.CommandeId == 0)
+   .WithMessage(COmmande.CommandNumber_IsMandatory);
+
+}
+----
+
+Ou alors en passant par une méthode
+
+[source,csharp]
+----
+private bool Validate_RG_1132_004(TacheRecetteEnt tacheRecetteEnt, double? recette)
+{
+    const double max = 999999999999.99;
+    if (!recette.HasValue)
+    {
+        return true;
+    }
+    return recette.Value >= -max && recette <= max;
+}
+
+private void AddBusinessRules()
+{
+    RuleFor(e => e.Recette).Must(Validate_RG_1132_004)
+    .WithMessage(Commande_Recette_IsMandatory);
+}
+----
+
+Il est également possible de faire de la validation dites en cascade. Pour cela le constructeur devra accepter comme argument l’interface du Validator enfant.
+
+[source,csharp]
+----
+ public CommandeValidator(ILigneCommandeValidator ligneValidator)
+ {
+     this.validatorLigne = ligneValidator;
+     //Règles de gestion techniques
+     AddChildTechnicalRules();
+     
+     //Règles de gestion métiers
+     AddBusinessRules();
+     
+     //Règles de gestion en cascade.
+     AddChildRules();
+ }
+----
+
+Et dans la méthode _AddChildRules_ on aura donc la validation des enfants
+
+[source,csharp]
+----
+ private void AddChildRules()
+ {
+     if(this.validatorLigne != null)
+     {
+        // Pour chaque objet de ma commande
+        RuleFor(l => l.Sku)
+        //StopOnFirstFailure permet de remonter au front uniquement la premiere que le validator enfant va trouver.
+        //Dans la contraire c'est l'ensemble des règles qui vont être remontées au niveau du front
+        .Cascade(CascadeMode.StopOnFirstFailure)
+        .SetCollectionValidator(lv =>this.validatorLigne);
+     }
+ }
+----
+
+Comme notre validator dérive de la classe AbstractValidator, il faudra également penser à écrire la méthode Validate.
+
+[source,csharp]
+----
+public override ValidationResult Validate(CommandeEnt instance)
+{
+    return base.Validate(instance);
+}
+----
+
+== Couche Front
+
+FRED est un site en MVC qui s’appuie sur https://angularjs.org/[AngularJS] (à ne pas confondre avec Angular qui est une version plus récente du Framework). L’utilisation d’AngularJS au sein de FRED modifie quelque peu le fonctionnement classique d’un site MVC. En effet, la vue est découpée elle aussi en MVC.
+
+=== MVC .Net
+
+La partie vue sera détaillée dans le chapitre _MVC AngularJS_. 
+
+Concernant le contrôleur, c’est à ce niveau qu’il faudra gérer les différentes permissions. 
+
+La gestion des permissions est détaillée dans le chapitre _Gestion des permissions_.
+
+Concernant la déclaration du modèle, ce dernier doit se faire au niveau du projet *FRED.Web.Shared*. Attention cependant, par défaut le namespace de votre modèle sera Fred.Web.Shared.Models._VotreModèle_.
+Afin de respecter l’historique du projet, il vous faudra modifier ce dernier en supprimant le _Shared_ de votre namespace, ce qui doit donner (si on reprend notre exemple de commande) _Fred.Web.Models.Commande_.
+
+=== AutoMapper
+
+Afin de faire le lien entre notre modèle et la couche entité, il existe un _AutoMapper_, qui va faire le lien automatiquement en se basant sur le nom des propriétés. *Si le mapping doit comporter des règles spécifiques, il faut alors créer un mapper personnalisé* Pour que l’autoMapper soit fonctionnel, il faut le renseigner dans le fichier de configuration _AutoMapperConfig.cs_ qui se trouve dans le projet _Fred.Web.Bootstrapper_. La configuration se déclare de la manière
+suivante :
+
+[source,csharp]
+----
+cfg.CreateMap<Entité,Modèle>().ReverseMap();
+----
+
+Ce qui donne pour notre exemple la ligne suivante :
+
+[source,csharp]
+----
+cfg.CreateMap<CommandeEnt,CommandeModel>().ReverseMap();
+----
+
+NOTE: l’ordre n’as pas d’importance car la méthode ReverseMap() permet de faire le mapping dans l’autre sens.
+
+=== 6.3 MVC AngularJs
+
+Comme indiqué précédemment, la vue de FRED utilise AngularJS. AngularJs est un Framework développé par Google qui reprends les bonnes pratiques que l’on trouve dans le monde du Web. De ce fait, AngularJs s’appuie sur, une architecture MVC, le data Binding, l’injection de dépendances
+et la manipulation du DOM. 
+
+https://www.madewithangular.com/[Ici] vous pouvez trouver des exemples de site fait en AngularJs.
+
+Le principe qui va s’appliquer pour la partie front de FRED est celui de la structure par
+https://msdn.microsoft.com/fr-fr/library/ee671793(v=vs.100).aspx[_Aera
+fonctionnelles_]. Une area doit donc faire référence à un domaine fonctionnel et se compose au minimum de : 
+
+- Un contrôleur MVC.Net (qui va contenir une signature de méthode par page (route) ainsi que les
+éventuels autorisations) 
+- Deux fichiers Js (le contrôleur AngularJs et le service AngularJs) 
+- Un index (Index.cshtml qui contient la structure classique d’une page Web ainsi que le data binding d’AngularJS).
+
+==== Contrôleur MVC.Net
+
+Comme indiqué en introduction de ce chapitre, c’est au niveau du contrôleur MVC que l’on va définir les autorisations d’accès à tel ou tel page ainsi que les routes. 
+
+Pour plus de détails sur la gestion des permissions, se référer au chapitre link:#gestion-des-permissions[Gestion des permissions]
+
+==== Index
+
+L’index est un fichier cshtml, c’est à dire qu’il va à la fois contenir l’HTML classique de la page ainsi que le data binding d’AngularJS. Imaginons que l’on souhaite créer une page (simple) qui va permettre de de créer une nouvelle commande, il va falloir faire appel au contrôleur AngularJs.
+
+L’appel au contrôleur AngularJs se fait par le biais de directive.
+
+Une directive va modifier ou transformer le DOM. Elle permet également d’ajouter des attributs HTML a certains éléments. L’ensemble des directives AngularJs est disponible
+https://www.w3schools.com/angular/angular_directives.asp[ici] mais il est également possible de créer ces https://openclassrooms.com/fr/courses/2516051-developpez-vos-applications-web-avec-angularjs/2521751-les-directives[propres
+directives]. Supposons que l’on souhaite maintenant créer une page (simple) qui doit permettre de créer une nouvelle commande, pour cela il va falloir déclarer certains éléments.
+
+Tout d’abord il faut rattacher un contrôleur AngularJs à notre page, pour cela, il suffit simplement d’ajouter la directive _ng-controller_ à une balise _<div>_, ce qui donne le code suivant
+
+[source,html]
+----
+<div class="myCustomCssClass" ng-controller="CommandeController">
+----
+
+Attention il est possible de déclarer plusieurs contrôleurs au sein d’une même page (c’est le cas avec le layout du menu qui injecte le code de notre vue) mais cela n’est pas une bonne pratique, il vaut mieux rester sur du code simple (et plus facilement maintenable) Un Index = un contrôleur (dans le mesure du possible).
+
+Maintenant que notre contrôleur est attaché à notre vue, nous allons ajouter un bouton qui va permettre d’effectuer l’ajout d’une commande au moment d’un clic sur un bouton. Pour cela nous allons utiliser la directive _ng-click_ suivi de l’action qui est déclarée au niveau de notre contrôleur.
+
+[source,html]
+----
+<button ng-click="actionAjouter()">Nouvelle Commande</button>
+----
+
+Et c’est tout :D.
+
+Si je reprends donc le code en entier cela donne :
+
+`+html <div class="myCustomCssClass" ng-controller="CommandeController">     <button ng-click="actionAjouter()">Nouvelle Commande</button> </div>+`
+
+Maintenant pour que la page soit conforme avec les autres il faut
+rajouter les éléments suivants : 
+
+- le Layout
+"~/Views/Shared/_Layout.new.cshtml" qui contient le menu de FRED 
+- le css et le js du Bundle Factory 
+- et les ressources relatives à notre page.
+
+NOTE: les ressources sont déclarées dans le projet FRED.Web.Shared dans le dossier _App_LocalRessources_ et sont appelées avec la ligne suivante directement dans la vue : 
+@this.RenderResources("CommandeRessource")
+
+Voici donc le code de notre page avec un peu plus de détails
+
+[source,csharp]
+----
+
+@using Fred.Web.Shared.App_LocalResources
+@{
+  ViewBag.Title = CommandeRessources.CommandeRessources_Index_Titre; // Titre de la page
+  Layout = "~/Views/Shared/_Layout.new.cshtml"; // Menu de FRED
+}
+@section styles {
+  @Styles.Render("~/CommndeIndexBundleFactory.css") // Les css déclarés dans le Bundle Factory
+}
+
+@section scripts {
+
+  @Scripts.Render("~/CommndeIndexBundleFactory.js") //  Les Js déclarés dans le Bundle Factory
+
+  @this.RenderResources("Commande") // Les ressources propres à notre pages
+}
+
+<div class="myCustomCssClass" ng-controller="CommandeController">
+    <button ng-click="actionAjouterCommander()">{{ressources.Nouvelle_Commande_Bouton_Texte}}</button> 
+    //Ici on pourrait mettre le texte "Nouveau" directement en dur, mais cela donne la façon de faire 
+    //pour interroger les ressources de l'application.
+</div>
+----
+
+NOTE: La variable ressources est déclarée par le biais de la ligne _@this.RenderResources_. En effet cette méthode va déclarer, si elle n’existe pas, une variable ressource que va contenir l’ensemble des éléments qui sont déclarés dans le fichier _.resx._. Si cette variable existe déjà, la méthode va ajouter les nouvelles ressources aux ressources déjà existantes.
+
+Notre vue est maintenant prête, il ne reste plus que le contrôleur ainsi que le service d’AngularJS.
+
+==== Contrôleur AngularJs
+
+Le contrôleur AngularJs va contenir l’ensemble des Handler (gestion des événements et appel de telle ou telle action) et des actions (Appel à la Web API, traitement UI). Si l’on reprend notre exemple de notre entité commande, il va donc falloir ajouter l’action qui y correspond.
+
+Avant toute chose il faut indiquer à AngularJs que notre fichier est bien un contrôleur (contrairement à MVC .Net qui recherche le nom _controller_ pour déterminer s’il s’agit d’un contrôleur. Sous AngularJs un contrôleur peux porter n’importe quel nom, mais, pour des raisons
+évidentes, il convient de mettre controller dans le nom du fichier) .
+Pour cela il est nécessaire d’écrit l’instruction suivante :
+
+[source,javascript]
+----
+angular.module('Fred').controller('CommandeController', CommandeController);
+----
+
+Ceci étant fait, il faut maintenant déclarer nos actions.
+
+[source,javascript]
+----
+$scope.actionAjouter() = function(){
+    /*Code Ici */
+}
+----
+
+Le https://openclassrooms.com/fr/courses/2516051-developpez-vos-applications-web-avec-angularjs/2521706-scope-et-watch[*_$scope_*] est une dépendance qui est propre à chaque contrôleur qui permet
+d’exposer le contrôleur à la vue, c’est grâce à cette dépendance que s’effectue le data-binding.
+
+NOTE: Il est possible de faire de l’injection de dépendance au sein d’un contrôleur par le biais d’un mot clé *$inject*
+[source,javascript]
+----
+CommandeControler.$inject = ['$http','$scope','CommandeService',etc...]
+----
+
+L'injection est indispensable si l'on souhaite faire appel au service. De plus il est nécessaire de faire l'injection de *$scope* afin de permettre la minification.
+
+*L'ancienne façon de faire était de passer par des handler qui allaient eux-même appeler les actions, aujourd'hui il n'est plus nécessaire de passer par un handler.*
+
+En résumé, la vue va faire appel une action qui va faire un appel à l'API par le biais d'un service, donc, si on continue avec notre exemple de commande notre contrôleur AngularJs va donc avoir la structure suivante :
+[source,javascript]
+----
+(function () {
+  'use strict';
+    angular.module('Fred').controller('CommandeController',CommandeController);
+    CommandeControler.$inject = ['$http','$scope','CommandeService'];
+    $scope.actionAjouterCommander = function (){
+      /*Code Ici
+      Ou alors
+      Appel à la Web API en passant par le service Commande Service
+      CommandeService.Ajouter();
+      */
+    };
+})(angular);
+----
+
+==== Service AngularJs
+
+Un service AngularJs mets à disposition des appels à la Web API de FRED. le code doit être générique afin de permettre un factorisation future et le service doit être injecté dans le contrôleur correspondant.
+
+Comme pour le contrôleur, il faut indiquer à AngularJs que ce fichier est un fichier service.
+
+[source,javascript]
+----
+angular.module('Fred').service('CommandeService',CommandeService);
+----
+
+On doit déclarer dans un service les appels à l’API se rapportant au domaine fonctionnel qu’il couvre. Si l’on reprend notre exemple de commande notre service aura donc la structure suivante :
+
+[source,javascript]
+----
+function CommandeService($http){
+ return {
+        Ajouter: function() { 
+        return $http.put('/api/Commande/')
+    },
+    etc...
+    }
+}
+----
+
+En résumé, le service permet de faire le ``lien'' entre AngularJs et notre contrôleur .Net, donc, si l’on écrit l’ensemble de notre service avec notre exemple de commande on obtient donc le code suivant :
+
+[source,javascript]
+----
+(function )(){
+    'use strict';
+    angular.module('Fred').service('CommandeServivce',CommandeService);
+    CommandeService.$inject = ['$http'];
+
+    function CommandeService($http) {
+        return {
+            Ajouter: function () {
+                return $http.put('/api/Commande')
+            }
+        };
+    }
+})();
+----
+
+== Bundle Factory
+
+Le Bundle Factory (comme son nom l’indique) va permettre de regrouper l’ensemble des css et des Js qui sont nécessaire à notre contrôleur AngularJs. Cela évite de faire des includes dans notre contrôleur et permet un code plus lisible et plus maintenable. Le fichier doit être
+créé dans le répertoire App_Start/BundlesFactories du projet Fred.Web.
+
+Une fois notre fichier créé, il faut penser à l’ajouter à la configuration (Fred.Web/App_Start/BundleConfig.cs).
+
+== Gestion des permissions
+
+Il est parfois (quasiment toujours) nécessaire de devoir restreinte l’accès à une page. Pour cela il faut définir des droits d’accès.
+
+Voici les actions à exécuter pour mettre les autorisations sur une page.
+
+[arabic]
+. Rajouter un menu avec la clé permissionKey
+
+``$\Fred.Web\Scripts\Controllers\menu\fred-menu.component.js ``
+
+
+[source,javascript]
+----
+{
+  "ModuleId": 1,
+  "libelle": "Commande",
+  "ShortDescription": "Commande",
+  "position": "left",
+  "Features": [
+      {
+        "permissionKey": PERMISSION_KEYS.AfficherMenuAjouterCommande
+        Index,
+        "Type": "Feature",
+        "URI": "/Commande/Commande",
+        "icon": "flaticon flaticon-notebook-4",
+        "ShortDescription": "Gérer les commandes",
+        "LongDescription": "Gérer les commandes",
+        "KeyWords": "Commande"
+      }
+  ]
+},
+----
+
+[arabic, start=2]
+. Rajouter une clé dans le fichier
+
+``$\Fred.Web\Scripts\module\authorization\permissionKeys.js``
+
+Ici _AffichageMenuCommandeIndex_
+
+[source,javascript]
+----
+var PERMISSION_KEYS = {
+  AffichageMenuCommandeIndex: 'menu.show.commande.index',
+}
+----
+
+[arabic, start=3]
+. Faire de même côté back
+
+``$\Fred.Web\Fred.Entities\Permission\PermissionKeys.cs``
+
+
+Attention la valeur de la clé doit être la même côté Back et front.
+
+[source,csharp]
+----
+namespace Fred.Entities.Permission
+{
+#pragma warning disable SA1600 // Elements must be documented
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+  /// <summary>
+  /// classe const de tous les codes possible pour une Permission
+  /// </summary>
+  public class PermissionKeys
+  {
+    public const string AffichageMenuAuthentificationLogIndex = "menu.show.authentificationlog.index";
+    [...]
+    public const string AffichageMenuCommandeIndex = "menu.show.commande.index";
+    [...]
+    /// <summary>
+    /// ctor
+    /// </summary>
+    protected PermissionKeys()
+    {
+      //empty
+    }
+  }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+#pragma warning restore SA1600 // Elements must be documented
+}
+----
+
+[arabic, start=4]
+. Rajouter l’attribut Authorize et FredAspAuthorize sur le contrôleur
+Asp.net
+
+``$\Fred.Web\Areas\OperationDiverse\Controllers\CommandeController.cs``
+
+[source,csharp]
+----
+using Fred.Entities.Permission;
+using Fred.Web.Modules.Authorization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+ 
+namespace Fred.Web.Areas.Commande.Controllers
+{
+  [Authorize()]
+  public class CommandeController : Controller
+  {
+    // GET: Commande/Commande
+    [FredAspAuthorize(globalPermissionKey: PermissionKeys.AffichageMenuCommandeIndex)]
+    public ActionResult Index()
+    {
+      return View();
+    }
+  }
+}
+----
+
+[arabic, start=5]
+. Et enfin :
+
+Faire un script pour insérer 1 entrée dans la base. Il faut mettre ce nouveau script dans le dossier
+
+``$\Fred.Web\Fred.Referential\Referential\001-Common\001-Fred-Ref``
+
+WARNING: la valeur de la clé doit être la même que les autres.
+Fred.Web.Referential\001-Common\001-Fred-Ref\00230_FRED_PERMISSION_VXX.sql*
+
+[source,sql]
+----
+SET IDENTITY_INSERT [dbo].[FRED_PERMISSION] ON
+ INSERT INTO[dbo].[FRED_PERMISSION] ([PermissionId], [PermissionKey], [PermissionType], [Code], [Libelle], [PermissionContextuelle]) VALUES(41,'menu.show.commande.index',1,'0041','Affichage du menu / Accès à la page ''Gérer les commandes''.',0)
+
+SET IDENTITY_INSERT [dbo].[FRED_PERMISSION] OFF
+----

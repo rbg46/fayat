@@ -1,0 +1,84 @@
+﻿
+@using Fred.Web.Models.Module;
+
+@{
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+  @Styles.Render("~/DatesCalendrierPaieIndexBundle.css")
+}
+
+@section scripts {
+  @Scripts.Render("~/DatesCalendrierPaieIndexBundle.js")
+  @this.RenderResources("FeatureDatesCalendrierPaie")
+}
+
+<div class="param_cloture_paie container-fluid" ng-controller="DatesCalendrierPaieController">
+  <h1>{{resources.tit_DatesCloturePaie_lb}}</h1>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!--Panneau calendrier (gauche): START-->
+      <div class="col-md-9">
+        <div class="row">
+          <div ng-repeat="calendrierMensuel in calendrierAnnuel">
+            <div class="col-md-3">
+              <div id="calendar{{calendrierMensuel.Mois}}" class="custom-kendo-calendar" kendo-calendar="calendar{{calendrierMensuel.Mois}}" k-options="calendrierMensuel.kendoCalendarOptions" ng-model="calendrierMensuel.JourSaisi" k-rebind="calendrierMensuel.JourSaisi" ng-change="handleClickOnChangeDate(this)"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Panneau calendrier (gauche): END-->
+      <!--Panneau paramétrage (droite): START-->
+      <div class="col-md-3">
+        <form autocomplete="off">
+          <div class="form-group">
+            {{resources.tit_DatesCalendrierPaie_lb}}
+            <div class="input-group">
+              <input type="number" class="form-control" ng-model="anneeCourante" min="{{minAnnee}}">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="handleClickUpdateYear()"><span class="material-icons">search</span></button>
+              </span>
+            </div>
+
+            <br />
+            <div>
+              <label>{{resources.Societe_lb}}</label><br />
+              <div class="pickListCallerDeviseRefContainer">            
+
+                <lookup-standalone 
+                                 ng-model="selectedRef"
+                                 text="societe.Libelle"
+                                 search-title="Référentiels des sociétés"
+                                 search-placeholder="Recherchez une société"
+                                 on-click="showPickList('Societe', 'societe')"
+                                 on-select="loadData(item)"
+                                 on-delete="handleDeletePickListItem()"
+                                 class="formulaire long">
+                </lookup-standalone>
+              </div>
+            </div>
+            <br />
+
+            <div class="radio radio-primary" ng-class="{'radio-selected' : radioTypeSaisie == 0}">
+              <input type="radio" id="radio1" name="rdTypeSaisie" ng-model="radioTypeSaisie" value="0"><label for="radio1">{{resources.Radio_ChoixArretPointages_lb}}</label>
+            </div>
+
+            <div class="radio radio-danger" ng-class="{'radio-selected' : radioTypeSaisie == 1}">
+              <input type="radio" id="radio2" name="rdTypeSaisie" ng-model="radioTypeSaisie" value="1"><label for="radio2">{{resources.Radio_ChoixTransfertPointages_lb}}</label>
+            </div>
+
+            <br />
+
+            <div>
+              <button type="button" class="btn btn-default" ng-click="handleClickReset()">{{resources.Btn_Annuler_lb}}</button>
+              <button type="button" class="btn btn-primary" ng-click="handleClickValidate()">{{resources.Btn_Valider_lb}}</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!--Panneau paramétrage (droite): END-->
+    </div>
+  </div>
+</div>

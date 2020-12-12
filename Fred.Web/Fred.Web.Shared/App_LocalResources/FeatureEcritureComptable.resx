@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="EcritureCompable_Erreur_DateComptable_Obligatoire" xml:space="preserve">
+    <value>La date comptable est obligatoire</value>
+  </data>
+  <data name="EcritureCompable_Erreur_DateCreation_Obligatoire" xml:space="preserve">
+    <value>La date de création est obligatoire</value>
+  </data>
+  <data name="EcritureCompable_Erreur_Libelle_Obligatoire" xml:space="preserve">
+    <value>Le libellé est obligatoire</value>
+  </data>
+  <data name="EcritureComptableImportHelper_ErrorFormatNumeroPiece" xml:space="preserve">
+    <value>Numéro de pièce comptable non renseigné.</value>
+  </data>
+  <data name="EcritureComptableImportHelper_ErrorFormatRetrieveCi" xml:space="preserve">
+    <value>Le CI avec le code {0} n'a pas pu être trouvé dans la base de Fred.</value>
+  </data>
+  <data name="EcritureComptableImportHelper_ErrorFormatRetrieveDevise" xml:space="preserve">
+    <value>La devise avec le {0} n'a pas pu etre recuperée dans la base Fred.</value>
+  </data>
+  <data name="EcritureComptableImportHelper_ErrorFormatRetrieveJournal" xml:space="preserve">
+    <value>Le journal avec le code {0} n'a pas pu être trouvé dans la base de Fred.</value>
+  </data>
+  <data name="EcritureComptableImportHelper_ErrorFormatRetrieveNature" xml:space="preserve">
+    <value>La nature avec le code {0} n'a pas pu être trouvée dans la base de Fred</value>
+  </data>
+  <data name="EcritureComptableImportHelper_ErrorFormatRetrieveODFamily" xml:space="preserve">
+    <value>Impossible de trouver la famille associée à l'écriture comptable.</value>
+  </data>
+  <data name="EcritureComptableImportHelper_ErrorFormatRetrieveRessource" xml:space="preserve">
+    <value>La ressource n'a pas pu être trouvée dans la base de Fred.</value>
+  </data>
+  <data name="EcritureComptableImportHelper_ErrorFormatRetrieveRessourceObligatoire" xml:space="preserve">
+    <value>La ressource est obligatoire</value>
+  </data>
+  <data name="EcritureComptableImportHelper_ErrorFormatRetrieveRessourceUnknow" xml:space="preserve">
+    <value>La ressource avec le code {0} n'a pas pu être trouvée dans la base de Fred.</value>
+  </data>
+  <data name="EcritureComptableImportHelper_ErrorFormatRetrieveUnite" xml:space="preserve">
+    <value>L'unité avec le code {0} n'a pas pu être trouvée dans la base de Fred.</value>
+  </data>
+  <data name="EcritureComptable_Erreur_CodeGroupeInvalide" xml:space="preserve">
+    <value>Le code du groupe est invalide</value>
+  </data>
+  <data name="EcritureComptable_Erreur_CodeGroupeObligatoire" xml:space="preserve">
+    <value>Le code du groupe est obligatoire</value>
+  </data>
+  <data name="EcritureComptable_Erreur_CodeNatureAnalytique_Inconnu" xml:space="preserve">
+    <value>Le code nature avec le code {0} est inconnu </value>
+  </data>
+  <data name="EcritureComptable_Erreur_CodeNatureAnalytique_Obligatoire" xml:space="preserve">
+    <value>Le code nature analytique est obligatoire</value>
+  </data>
+  <data name="EcritureComptable_Erreur_CodeSocieteInvalide" xml:space="preserve">
+    <value>Le code de la société est invalide</value>
+  </data>
+  <data name="EcritureComptable_Erreur_CodeSociete_Invalide" xml:space="preserve">
+    <value>La société avec le code {0} n' as pas pu être trouvé en base</value>
+  </data>
+  <data name="EcritureComptable_Erreur_DeviseInterne_Obligatoire" xml:space="preserve">
+    <value>La devise interne est obligatoire</value>
+  </data>
+  <data name="EcritureComptable_Erreur_FamilleOperationDiverse_Inconnue" xml:space="preserve">
+    <value>La famille d'OD n'as pu être trouvée</value>
+  </data>
+  <data name="EcritureComptable_Erreur_FamilleOperationDiverse_Indeterminee" xml:space="preserve">
+    <value>La famille d'OD n'as pas pu être determinée</value>
+  </data>
+  <data name="EcritureComptable_Erreur_MontantDeviseInterne_Obligatoire" xml:space="preserve">
+    <value>Le montant en devise interne est obligatoire</value>
+  </data>
+  <data name="EcritureComptable_Erreur_MontantTransactionDevise_Obligatoire" xml:space="preserve">
+    <value>Le montant en devise transaction est obligatoire</value>
+  </data>
+  <data name="EcritureComptable_Erreur_TypeFamilleTypeValoIncoherent" xml:space="preserve">
+    <value>Incohérence entre le type de famille et le type de valorisation</value>
+  </data>
+  <data name="EcritureComptable_Erreur_UniteDifferente" xml:space="preserve">
+    <value>L'unité entre la valorisation et l'écriture comptable ne correspond pas</value>
+  </data>
+  <data name="Ecriture_Comptable_Erreur_CI_Obligatoire" xml:space="preserve">
+    <value>Le code du CI est obligatoire</value>
+  </data>
+  <data name="Ecriture_Comptable_Erreur_DeviseTransaction_Obligatoire" xml:space="preserve">
+    <value>La devise de transaction est obligatoire</value>
+  </data>
+  <data name="Ecriture_Comptable_Erreur_NumeroCommande_Obligatoire" xml:space="preserve">
+    <value>Le numéro de commande est obligatoire</value>
+  </data>
+  <data name="Ecriture_Comptable_Erreur_NumeroCommande_Vide" xml:space="preserve">
+    <value>Le numéro de commande doit être vide</value>
+  </data>
+  <data name="Ecriture_Comptable_Erreur_NumeroLigneDePointage_Obligatoire" xml:space="preserve">
+    <value>Le numéro de ligne de pointage est obligatoire</value>
+  </data>
+  <data name="Ecriture_Comptable_Erreur_NumeroLigneDePointage_Vide" xml:space="preserve">
+    <value>Le numéro de ligne de pointage doit être vide</value>
+  </data>
+  <data name="Ecriture_Comptable_Erreur_NumeroPiece_Obligatoire" xml:space="preserve">
+    <value>Le numéro de pièce est obligatoire</value>
+  </data>
+  <data name="Ecriture_Comptable_Erreur_Quantite_Obligatoire" xml:space="preserve">
+    <value>La quantité est obligatoire</value>
+  </data>
+  <data name="Ecriture_Comptable_Erreur_Unite_Obligatoire" xml:space="preserve">
+    <value>L'unité est obligatoire</value>
+  </data>
+</root>

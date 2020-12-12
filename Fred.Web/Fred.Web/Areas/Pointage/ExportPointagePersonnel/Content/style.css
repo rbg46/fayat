@@ -1,0 +1,15 @@
+﻿.glyphicon-calendar {
+    float: left;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .input-group.date .input-group-addon {
+        padding: 0;
+        height: 25px;
+        width: 25px;
+    }
+    .input-group.date .input-group-addon .glyphicon-calendar {
+        float: none;
+        font-size: 12px;
+    }
+}

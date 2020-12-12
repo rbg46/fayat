@@ -1,0 +1,105 @@
+﻿-- --------------------------------------------------
+-- FRED 2017 - R3 - JUILLET 2018 
+-- INJECTION DES DONNES POUR FRED - FAYAT FONDATIONS
+-- CREATION DES CODES ZONE DEPLACEMENT POUR SEFI ET FRANKI
+-- --------------------------------------------------
+
+
+DECLARE @SOCIETE_ORGANISATION_ID_SEFI INT;
+DECLARE @SOCIETE_ORGANISATION_ID_FRANKI INT;
+
+-- SOCIETE  FRANKI
+SET @SOCIETE_ORGANISATION_ID_FRANKI = (SELECT SocieteId FROM  FRED_SOCIETE  WHERE Code = '700')
+
+-- SOCIETE  SEFI
+SET @SOCIETE_ORGANISATION_ID_SEFI = (SELECT SocieteId FROM  FRED_SOCIETE  WHERE Code = '500')
+
+PRINT @SOCIETE_ORGANISATION_ID_FRANKI;
+PRINT @SOCIETE_ORGANISATION_ID_SEFI;
+
+
+
+
+
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('01','Repas',0,100,0,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('02','Repas + Trajet',0,100,0,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('03','Repas+Trajet+Transport',0,100,0,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('04','Trajet',0,100,0,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('05','Trajet+Transport',0,100,0,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('06','IPD ZONE 3 CADRES',0,50,0,1,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('07','IPD CADRE DRN',0,100,0,1,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('08','IPD FORFAITAIRE ZONE 5',0,9999,0,1,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('11','IPD BAGNOLS',0,9999,0,1,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('12','TRANSPORT SEUL',0,9999,0,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('20','MISSION GRANDS TRAVAUX',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('25','REPAS MISSION GRANDS TRAV',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('26','I.G.D.',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('27','IGD WE GRANDS TRAVAUX',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('28','IGD + MAJ - 300KM',101,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('29','IGD REPAS + MAJ -300 KM',101,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('30','IGD + Maj + 300km',101,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('31','IGD REPAS + MAJ +300KM',101,99999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('32','IGD Pl+ majo 5.43€+ 2x33€',50,300,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('33','IGD Pl+ majo 8.40€+ 2x33€',300,9000,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('40','IGD 51-100 KM',51,100,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('45','REPAS 51 - 100 KM',51,100,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('50','I.G.D.',50,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('51','IGD ETANCHEITE',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('52','IGD CORSE',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('53','IGD CORSE',100,10000,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('54','IGD APPRENTI',0,500,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('55','REPAS DU > 100 KM',50,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('56','Repas du code 26',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('57','IGD PARME',100,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('60','I.G.D. Réduite',121,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('61','IGD ETAN',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('62','IGD RED POSTE GALERIE',51,1200,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('65','IGD de repos',101,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('70','IGD + 2 IGD WE',101,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('71','EBL IGD + 2 IGD WE',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('72','IGD PARME +2 IGD PARME WE',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('75','IGD Repos + WE',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_FRANKI);
+
+
+
+
+
+
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('01','Repas',0,100,0,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('02','Repas + Trajet',0,100,0,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('03','Repas+Trajet+Transport',0,100,0,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('04','Trajet',0,100,0,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('05','Trajet+Transport',0,100,0,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('06','IPD ZONE 3 CADRES',0,50,0,1,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('07','IPD CADRE DRN',0,100,0,1,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('08','IPD FORFAITAIRE ZONE 5',0,9999,0,1,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('11','IPD BAGNOLS',0,9999,0,1,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('12','TRANSPORT SEUL',0,9999,0,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('20','MISSION GRANDS TRAVAUX',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('25','REPAS MISSION GRANDS TRAV',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('26','I.G.D.',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('27','IGD WE GRANDS TRAVAUX',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('28','IGD + MAJ - 300KM',101,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('29','IGD REPAS + MAJ -300 KM',101,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('30','IGD + Maj + 300km',101,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('31','IGD REPAS + MAJ +300KM',101,99999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('32','IGD Pl+ majo 5.43€+ 2x33€',50,300,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('33','IGD Pl+ majo 8.40€+ 2x33€',300,9000,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('40','IGD 51-100 KM',51,100,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('45','REPAS 51 - 100 KM',51,100,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('50','I.G.D.',50,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('51','IGD ETANCHEITE',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('52','IGD CORSE',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('53','IGD CORSE',100,10000,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('54','IGD APPRENTI',0,500,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('55','REPAS DU > 100 KM',50,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('56','Repas du code 26',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('57','IGD PARME',100,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('60','I.G.D. Réduite',121,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('61','IGD ETAN',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('62','IGD RED POSTE GALERIE',51,1200,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('65','IGD de repos',101,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('70','IGD + 2 IGD WE',101,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('71','EBL IGD + 2 IGD WE',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('72','IGD PARME +2 IGD PARME WE',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);
+INSERT INTO  FRED_CODE_DEPLACEMENT ( Code, Libelle, KmMini, KmMaxi, IGD, IndemniteForfaitaire, Actif, SocieteId ) VALUES ('75','IGD Repos + WE',0,9999,1,0,1,@SOCIETE_ORGANISATION_ID_SEFI);

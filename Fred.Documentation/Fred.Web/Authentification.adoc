@@ -1,0 +1,163 @@
+= Authentification
+
+Problematique : Il faut que FredWeb permette une authentification par
+cookie et par token.
+
+== Authentification par cookie
+
+C’est le systeme classique d’authentification par cookie.
+
+Ce systeme permet d’acceder au pages de l’application et aux ApiConctrollers apres une authentification.
+
+Il y a d’abord la configuration dans le fichier :
+
+Fred.Web_Start.cs
+
+[source,csharp]
+----
+var cookieAuthOptions = new CookieAuthenticationOptions
+{
+  AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+  CookieHttpOnly = true,
+  ExpireTimeSpan = TimeSpan.FromMinutes(60),
+  SlidingExpiration = true,
+  CookieSecure = CookieSecureOption.SameAsRequest,
+  LoginPath = new PathString("/Authentication/Connect"),
+  LogoutPath = new PathString("/Authentication/Logout"),
+};
+app.UseCookieAuthentication(cookieAuthOptions);
+----
+
+Ici la page de connexion est /Authentication/Connect. C’est dans cette page que la gestion de l’authentification est faite.
+
+Voir le fichier :
+
+Fred.Web.cs
+
+[source,csharp]
+----
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<ActionResult> Connect(ConnectViewModel model, string returnUrl)
+{
+    if (!ModelState.IsValid)
+        return View(model);
+
+    var manager = new FayatOwinUserManager(this.utilMgr, this.authManager);
+    var user = await manager.FindAsync(model.UserName, model.Password);
+
+    if (user.Status.Success == true)
+    {
+        await manager.SignInAsync(user, isPersistent: false);
+        return RedirectToLocal(returnUrl);
+    }
+    else
+    {
+        model.Status = user.Status;
+    }
+
+    return View(model);
+}
+----
+
+Ici nous utilisons un systeme custom de gestion des utilisateurs `FayatOwinUserManager`. C’est cette classe qui va permettre la connexion d’un utilisateur avec la méthode `SignInAsync`
+
+Pour une explication plus complète voir ce lien :
+
+https://www.upnxt.com/blog/simple-cookie-based-owin-authentication
+
+Pour tester il suffit d’aller sur le lien d’une page sans s’être connecté.
+Vous devez être rediriger vers la page de connexion.
+
+== Authentification par token
+
+L’application Fred comporte une partie Mobile Xamarin. L’application Mobile utilise un systeme Oauth avec token.
+
+[source,csharp]
+----
+var utilisateurManager = container.Resolve<Business.Utilisateur.IUtilisateurManager>();
+var mapper = container.Resolve<IMapper>();
+var oAuthServerOptions = new OAuthAuthorizationServerOptions()
+{
+  AllowInsecureHttp = true,
+  TokenEndpointPath = new PathString("/token"),
+  AccessTokenExpireTimeSpan = TimeSpan.FromDays(30),
+  Provider = new Modules.FayatAuthorizationServerProvider(utilisateurManager)
+};
+
+// Token Generation
+app.UseOAuthAuthorizationServer(oAuthServerOptions);
+app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+----
+
+* Le principe de Oauth est de demmander une clé au serveur avec les login/mot de passe.
+* Le serveur renvoie une clé.
+* Cette clé doit être alors placée dans le header `Authorization` de chaque appel vers les webApi.
+
+Pour tester la connexion par token, il est possible d’utiliser POSTAM, par exemple :
+
+* Nous devons faire un POST sur l’url http://localhost:6870/token
+* Avoir un Header Content-Type avec pour valeur application/x-www-form-urlencoded
+et dans le Body, 3 clés valeurs, par exemple :
+* UserName : cmartageix
+* Password : fci
+* grant_type : password
+
+En retour, l’api retourne un json :
+
+[source,json]
+----
+{
+  "access_token": "nzn2JSL9RI3Hjmv8p7QxVKez0vtM3kqqL672ZEet4PJ9_EBUN-uHLNifI7XPRUItb89cy9MX1H1W6riX3v90p1NPfhRu-eQluP2ajH286Njc_C9fMPCH_7igcDqyu_YAxEff5vNE3wxtVyllE-otVv4uV-151DQgW3OgDGLnsB1xq8drQ0SrrvlHgMoLMrGcUnWFzdT9Bm70xWhPELkI6hYhyhhB76ZfkZSMX0HIffBXVr5hq_uNj360ohtpIOjisJUGd0VF2zXeO2AeGNpMayg2-5Mqn56ZJuT463ZdIYs",
+  "token_type": "bearer",
+  "expires_in": 2591999,
+  "UserId": "7",
+  ".issued": "Tue, 18 Apr 2017 13:21:53 GMT",
+  ".expires": "Thu, 18 May 2017 13:21:53 GMT"
+}
+----
+
+La valeur doit être placée dans le Header `Authorization` de tous appels vers les webApi de la solution FredWeb.
+
+Par exemple :
+
+Authorization bearer
+nzn2JSL9RI3Hjmv8p7QxVKez0vtM3kqqL672ZEet4PJ9_EBUN-uHLNifI7XPRUItb89cy9MX1H1W6riX3v90p1NPfhRu-eQluP2ajH286Njc_C9fMPCH_7igcDqyu_YAxEff5vNE3wxtVyllE-otVv4uV-151DQgW3OgDGLnsB1xq8drQ0SrrvlHgMoLMrGcUnWFzdT9Bm70xWhPELkI6hYhyhhB76ZfkZSMX0HIffBXVr5hq_uNj360ohtpIOjisJUGd0VF2zXeO2AeGNpMayg2-5Mqn56ZJuT463ZdIYs
+
+Ne pas oublier de mettre `bearer` avant la clé.
+
+== Sécurisation des contrôleurs.
+
+=== Sécurisation des contrôleurs asp.net (cookie).
+
+Pour la sécurisation des contrôleurs Asp.net classiques, le choix a été fait de mettre le l’attribut `AuthorizeAttribute` sur tous les contrôleurs.
+
+Il ne faut donc pas oublier de mettre cet attribut sur les nouveaux contrôleurs.
+
+NOTE: Attention : Ce n'est pas le même attribut que pour les web api :
+_packages.AspNet.Mvc.5.2.345.Web.Mvc.dll_
+
+=== Sécurisation des contrôleurs webApi (token).
+
+Pour sécuriser les controlleurs web api, un filtre a été ajouter de maniere globale sur tous les controlleurs.
+
+Fichier : Fred.Web_Start.cs
+
+[source,csharp]
+----
+//Mise en place sur tous les controlleurs d`un filtre qui demande d`être connecté pour acceder aux ressources.
+config.Filters.Add(new AuthorizeAttribute());
+----
+
+Ce filtre ne marche que pour les webApi car il vient du packages.AspNet.WebApi.Core.5.2.345.Web.Http.dll
+
+== Mise en place du SSL.
+
+Pour que la sécurisation de l’application soit complete il faut mettre en place le SSL.
+
+Pour tester en developpement, il faut dans les `properties` mettre `SSL Enabled` à True.
+
+Puis dans les properties du projet Fred.Web changer l’url par https://localhost:443/ par exemple.
+
+Voir :
+https://www.codeproject.com/Tips/723357/Enabling-SSL-with-IIS-Express-in-Visual-Studio

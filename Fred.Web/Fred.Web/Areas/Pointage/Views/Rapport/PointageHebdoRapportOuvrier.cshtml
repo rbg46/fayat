@@ -1,0 +1,99 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureRapportHebdo.RapportHebdo_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/RapportHebdoBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/RapportHebdoBundle.js")
+    @this.RenderResources("FeatureRapport", "FeatureRapportHebdo", "FeatureFavori", "FeatureCI")
+
+    @Scripts.Render("~/Scripts/module/BarreRecherche/barre-recherche.js")
+}
+
+<div class="container pointage-hebdo" ng-controller="PointageHebdoOuvrierController as $ctrl">
+
+    <!-- START : Titre de la page -->
+    <h1>{{$ctrl.resources.Rapport_Hebdo_Title}} {{$ctrl.resources.Rapport_Hebdo_Title_Ouvrier}}</h1>
+
+    <!--START : Barre de recherche + Barre d'outils-->
+    <fred-toolbar ng-show="!$ctrl.isShowRapport">
+
+        <!--Période-->
+        <fred-section class="date-section">
+            <fred-section-title>{{$ctrl.resources.Rapport_Hebdo_Select_Date}}</fred-section-title>
+            <fred-section-controls>
+                <span class="material-icons cl" ng-click="$ctrl.handleChangeWeek(false)">chevron_left</span>
+                <div class="label_date">
+                    <div class="label_date_text">{{$ctrl.selectedWeek}}</div>
+                    <div class="labe_date_date_selector">
+                        <app-date-picker id="dateRapportEntree"
+                                         name="dateRapportEntree"
+                                         format="DD/MM/YYYY"
+                                         lang="fr"
+                                         placeholder="Date du rapport hebdomadaire"
+                                         initial-date="{{$ctrl.selectedDate}}"
+                                         ng-model="$ctrl.selectedDate"
+                                         ng-change="$ctrl.handleChangeCalendarDate()"
+                                         calendar-weeks="true"
+                                         input-hiden="true"
+                                         is-week-calendar="true"></app-date-picker>
+                    </div>
+                </div>
+                <span class="material-icons cr" ng-click="$ctrl.handleChangeWeek(true)">chevron_right</span>
+            </fred-section-controls>
+        </fred-section>
+        <fred-section class="selection-section">
+            <fred-section-title>{{$ctrl.resources.Rapport_Hebdo_Select_Affichage}}</fred-section-title>
+            <fred-section-controls>
+                <button ng-class="{ 'btn btn-default': !$ctrl.isAffichageCi, 'btn btn-link': $ctrl.isAffichageCi}"
+                        ng-click="$ctrl.handleToggleAffichage(false)">
+                    {{$ctrl.resources.Rapport_Hebdo_Voir_Equipe}}
+                </button>
+                <button ng-class="{'btn btn-default': $ctrl.isAffichageCi, 'btn btn-link': !$ctrl.isAffichageCi}"
+                        ng-click="$ctrl.handleToggleAffichage(true)">
+                    {{$ctrl.resources.Rapport_Hebdo_Voir_Affaire}}
+                </button>
+            </fred-section-controls>
+        </fred-section>
+        <!--Validation-->
+        <fred-section class="action-section">
+            <fred-section-title>Action</fred-section-title>
+            <fred-section-controls class="action-controls">
+                <button ng-click="$ctrl.handleShowRapport()"
+                        class="btn btn-default">
+                    {{$ctrl.resources.Rapport_Hebdo_Voir_Rapport}}
+                </button>
+            </fred-section-controls>
+        </fred-section>
+
+    </fred-toolbar>
+
+    <!--liste-->
+    <div class="row" ng-show="!$ctrl.isShowRapport">
+        <!-- CI -->
+        <pointage-hebdo-entree-par-affaire-component ng-show="$ctrl.isAffichageCi"
+                                                     resources="$ctrl.resources"
+                                                     ci-list="$ctrl.ciList">
+        </pointage-hebdo-entree-par-affaire-component>
+
+        <div class="col-lg-1 col-md-1" ng-show="$ctrl.isAffichageCi"></div>
+
+        <!--Personnel-->
+        <pointage-hebdo-entree-par-ouvrier-component resources="$ctrl.resources"
+                                                     ouvrier-list="$ctrl.ouvrierList"
+                                                     ouvrier-list-grouped="$ctrl.ouvrierListGrouped"
+                                                     ouvrier-list-by-mode="$ctrl.ouvrierListByMode"
+                                                     is-affichage-ci="$ctrl.isAffichageCi">
+        </pointage-hebdo-entree-par-ouvrier-component>
+    </div>
+    <div class="row" ng-show="$ctrl.isShowRapport">
+        <pointage-hebdo-rapport-component resources="$ctrl.resources">
+        </pointage-hebdo-rapport-component>
+    </div>
+</div>

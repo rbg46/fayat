@@ -1,0 +1,1353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Personnel_PartialContact_Adresse1" xml:space="preserve">
+    <value>Adresse 1</value>
+    <comment>_PartialContact.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContact_Adresse1_Placeholder" xml:space="preserve">
+    <value>Adresse du personnel</value>
+    <comment>_PartialContact.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContact_Adresse2" xml:space="preserve">
+    <value>Adresse 2</value>
+    <comment>_PartialContact.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContact_Adresse2_Placeholder" xml:space="preserve">
+    <value>Adresse du personnel</value>
+    <comment>_PartialContact.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContact_Adresse3" xml:space="preserve">
+    <value>Adresse 3</value>
+    <comment>_PartialContact.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContact_Adresse3_Placeholder" xml:space="preserve">
+    <value>Adresse du personnel</value>
+    <comment>_PartialContact.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_DateDerniereConnexion" xml:space="preserve">
+    <value>Date de dernière connexion</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_DateEntree" xml:space="preserve">
+    <value>Date d'entrée</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_DateExpiration" xml:space="preserve">
+    <value>Date d'expiration du compte</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_DateSortieInferieurDateEntree_Erreur" xml:space="preserve">
+    <value>La date d'entrée doit être strictement inférieure à la date de sortie.</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_DateSortie" xml:space="preserve">
+    <value>Date de sortie</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_DateSortie_Placeholder" xml:space="preserve">
+    <value>Date de sortie</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialHabilitation_Bouton_AjouterOrganisation_Tootlip" xml:space="preserve">
+    <value>Cliquer pour ajouter une Organisation</value>
+    <comment>_PartialHabilitation.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_CompteActif_Info" xml:space="preserve">
+    <value>En désactivant  ce compte, l'utilisateur ne pourra plus accéder à FRED</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_CompteActif" xml:space="preserve">
+    <value>Compte Utilisateur Actif </value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_MotDePasse_Placeholder" xml:space="preserve">
+    <value>Mot de passe</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_MotDePasse_Info" xml:space="preserve">
+    <value>Définir le mot de passe avec 6 caractères minimum</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_MotDePasse" xml:space="preserve">
+    <value>Mot de passe</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Nom" xml:space="preserve">
+    <value>Nom</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Nom_Placeholder" xml:space="preserve">
+    <value>Nom du personnel...</value>
+    <comment>_PartialGeneral.cshtml; personnel-search-filter.tpl.html</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Prenom" xml:space="preserve">
+    <value>Prénom</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Prenom_Placeholder" xml:space="preserve">
+    <value>Prénom du  personnel...</value>
+    <comment>_PartialGeneral.cshtml; personnel-search-filter.tpl.html</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Societe" xml:space="preserve">
+    <value>Société</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContact_Telephone1" xml:space="preserve">
+    <value>Téléphone 1</value>
+    <comment>_PartialContact.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContact_Telephone1_Placeholder" xml:space="preserve">
+    <value>Téléphone 1</value>
+    <comment>_PartialContact.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContact_Telephone2" xml:space="preserve">
+    <value>Téléphone 2</value>
+    <comment>_PartialContact.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContact_Telephone2_Placeholder" xml:space="preserve">
+    <value>Téléphone 2</value>
+    <comment>_PartialContact.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialInterim_Avertissement_AucuneETT" xml:space="preserve">
+    <value>L'intérimaire n'est affecté à aucune ETT.</value>
+    <comment>_PartialInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialHabilitation_Bouton_AjouterDevise_Tootlip" xml:space="preserve">
+    <value>Cliquer pour ajouter une Devise</value>
+    <comment>_PartialHabilitation.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialHabilitation_Bouton_SupprimerRole_Tootlip" xml:space="preserve">
+    <value>Cliquer pour supprimer le Rôle</value>
+    <comment>_PartialHabilitation.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialHabilitation_Titre" xml:space="preserve">
+    <value>Habilitations</value>
+    <comment>_PartialHabilitation.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialHabilitation_Role_Placeholder" xml:space="preserve">
+    <value>Rechercher et Ajouter un Rôle</value>
+    <comment>_PartialHabilitation.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Bouton_AjouterPersonnelExterne" xml:space="preserve">
+    <value>Personnel Externe</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Edit_Titre" xml:space="preserve">
+    <value>Gestion du personnel</value>
+    <comment>Edit.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialHabilitation_Bouton_SupprimerDevise_Tootlip" xml:space="preserve">
+    <value>Cliquer pour supprimer la Devise</value>
+    <comment>_PartialHabilitation.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialHabilitation_Bouton_SupprimerOrganisation_Tootlip" xml:space="preserve">
+    <value>Cliquer pour supprimer l'Organisation</value>
+    <comment>_PartialHabilitation.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Rechercher_Placeholder" xml:space="preserve">
+    <value>Rechercher un Personnel</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_SousTitre_AuthentificationPersonnelExterne" xml:space="preserve">
+    <value>Gérer l'authentification du personnel Externe</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_SousTitre_AuthentificationPersonnelInterne" xml:space="preserve">
+    <value>Gérer l'authentification du personnel Interne</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_LoginExistant_Erreur" xml:space="preserve">
+    <value>Désolé, ce login est déjà utilisé</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_EtablissementPaie" xml:space="preserve">
+    <value>Etablissement paie</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_EtablissementRattachement" xml:space="preserve">
+    <value>Lieu de rattachement</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_TypeRattachement" xml:space="preserve">
+    <value>Type de rattachement</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContact_Titre" xml:space="preserve">
+    <value>Coordonnées</value>
+    <comment>_PartialContact.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_Titre" xml:space="preserve">
+    <value>Informations utilisateur</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_Folio" xml:space="preserve">
+    <value>Folio/Trigramme</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_FolioExistant_Erreur" xml:space="preserve">
+    <value>Ce trigramme est déjà utilisé par un utilisateur</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_CommandeManuelle" xml:space="preserve">
+    <value>Commande manuelle</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_NbrPersonnel" xml:space="preserve">
+    <value>résultat(s) trouvé(s)</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_SousTitre_ListePersonnel" xml:space="preserve">
+    <value>Liste du Personnel</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Table_Entete_TypeProfil" xml:space="preserve">
+    <value>Type de profil</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Search_SousTitre_ActifSeulement" xml:space="preserve">
+    <value>Actifs seulement</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Personnel_Search_SousTitre_InterimaireSeulement" xml:space="preserve">
+    <value>Intérimaires seulement</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Personnel_Search_SousTitre_InterneSeulement" xml:space="preserve">
+    <value>Internes seulement</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Personnel_Search_SousTitre_UtilisateurSeulement" xml:space="preserve">
+    <value>Utilisateurs seulement</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Personnel_Edit_RetourIndex_Tooltip" xml:space="preserve">
+    <value>Cliquer pour retourner à la liste du personnel</value>
+    <comment>Edit.cshtml</comment>
+  </data>
+  <data name="Personnel_Edit_RetourIndex" xml:space="preserve">
+    <value>Retourner à la liste du personnel</value>
+    <comment>Edit.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialInterim_HistoriqueAffectation" xml:space="preserve">
+    <value>Historique des affectations à une ETT</value>
+    <comment>_PartialInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialInterim_Titre" xml:space="preserve">
+    <value>Affectation intérimaire</value>
+    <comment>_PartialInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialInterim_AjouterAffectation" xml:space="preserve">
+    <value>Ajouter une nouvelle affectation</value>
+    <comment>_PartialInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_ModalAffectation_FournisseurETT" xml:space="preserve">
+    <value>Fournisseur ETT</value>
+    <comment>affectation-interim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalAffectation_SocietePartenaire" xml:space="preserve">
+    <value>Société partenaire</value>
+    <comment>affectation-interim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalAffectation_Avertissement_AffectationDesactiveAuto" xml:space="preserve">
+    <value>Le rattachement actuellement actif sera désactivé automatiquement.</value>
+    <comment>affectation-interim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalDesaffectation_Energie" xml:space="preserve">
+    <value>Energie</value>
+    <comment>affectation-interim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalAffectation_Titre_Modification" xml:space="preserve">
+    <value>Modification de l'affectation</value>
+    <comment>affectation-interim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalAffectation_Titre_Ajouter" xml:space="preserve">
+    <value>Nouvelle affectation</value>
+    <comment>affectation-interim-modal.html</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_DateCreation" xml:space="preserve">
+    <value>Date de création</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_DateModification" xml:space="preserve">
+    <value>Date de modification</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_ModalDesaffectation_Confirmation" xml:space="preserve">
+    <value>Confirmez-vous la suppression de l'affectation ?</value>
+    <comment>desaffectation-interim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalDesaffectation_Titre" xml:space="preserve">
+    <value>Supprimer le rattachement</value>
+    <comment>desaffectation-interim-modal.html</comment>
+  </data>
+  <data name="Personnel_PartialInterim_TableETT_Bouton_Desaffecter_Tooltip" xml:space="preserve">
+    <value>Cliquer pour désactiver le rattachement</value>
+    <comment>_PartialInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_SousTitre_DroitCommande" xml:space="preserve">
+    <value>Droits sur commande</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialInterim_Avertissement_AucuneAffectation" xml:space="preserve">
+    <value>Veuillez ajouter une affectation pour finaliser le paramètrage du personnel intérimaire.</value>
+    <comment>_PartialInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Avertissement_NomPrenomExistant" xml:space="preserve">
+    <value>Ce nom et prénom est déjà utilisé</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Ressource" xml:space="preserve">
+    <value>Ressource</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_Edit_InterimaireInactif" xml:space="preserve">
+    <value>Intérimaire inactif</value>
+    <comment>Edit.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_StatutCadre" xml:space="preserve">
+    <value>Cadre</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Categorie" xml:space="preserve">
+    <value>Catégorie</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_StatutEtamChantier" xml:space="preserve">
+    <value>ETAM Chantier</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Horaire" xml:space="preserve">
+    <value>Horaire</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Mensuel" xml:space="preserve">
+    <value>Mensuel</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_StatutOuvrier" xml:space="preserve">
+    <value>Ouvrier</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_DateExpirationSup_Erreur" xml:space="preserve">
+    <value>La date d'expiration doit être supérieure à aujourd'hui.</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_MotDePasseConforme" xml:space="preserve">
+    <value>Mot de passe conforme.</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_MotDePasseTailleMin_Erreur" xml:space="preserve">
+    <value>Le mot de passe doit comprendre au moins 6 caractères.</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_MotDePasseLettre_Erreur" xml:space="preserve">
+    <value>Le mot de passe doit comprendre au moins une lettre.</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_MotDePasseNumeric_Erreur" xml:space="preserve">
+    <value>Le mot de passe doit comprendre au moins un chiffre.</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_FolioNbrLettre_Erreur" xml:space="preserve">
+    <value>Le folio doit comprendre exactement 3 lettres.</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_Search_TitreOnglet" xml:space="preserve">
+    <value>Rechercher Personnels</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_TitreOnglet" xml:space="preserve">
+    <value>Liste du Personnel</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Bouton_AjouterPersonnelExterne_Tooltip" xml:space="preserve">
+    <value>Cliquer pour Ajouter un nouveau personnel Externe</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Bouton_AjouterPersonnelInterimaire" xml:space="preserve">
+    <value>Personnel intérimaire</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Bouton_AjouterPersonnelInterimaire_Tooltip" xml:space="preserve">
+    <value>Cliquer pour Ajouter un nouveau personnel Intérimaire</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Edit_TitreOnglet" xml:space="preserve">
+    <value>Gestion du Personnel</value>
+    <comment>Edit.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Bouton_Detail_Tooltip" xml:space="preserve">
+    <value>Détail du Personnel</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Bouton_Indemnite_Tooltip" xml:space="preserve">
+    <value>Gérer les Indemnités</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Bouton_Supprimer_Tooltip" xml:space="preserve">
+    <value>Supprimer le Personnel</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Table_Entete_DateEntree" xml:space="preserve">
+    <value>Date d'entrée</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Table_Entete_DateSortie" xml:space="preserve">
+    <value>Date de sortie</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Table_Entete_EtablissementPaie" xml:space="preserve">
+    <value>Etablissement de Paie</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Table_Entete_Matricule" xml:space="preserve">
+    <value>Matricule</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Table_Entete_Nom" xml:space="preserve">
+    <value>Nom</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Table_Entete_Prenom" xml:space="preserve">
+    <value>Prénom</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Table_Entete_Societe" xml:space="preserve">
+    <value>Société</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Edit_Login" xml:space="preserve">
+    <value>Login</value>
+    <comment>Edit.cshtml</comment>
+  </data>
+  <data name="Personnel_Edit_Matricule" xml:space="preserve">
+    <value>Matricule</value>
+    <comment>Edit.cshtml</comment>
+  </data>
+  <data name="Personnel_Edit_Nom" xml:space="preserve">
+    <value>Nom</value>
+    <comment>Edit.cshtml</comment>
+  </data>
+  <data name="Personnel_Edit_Prenom" xml:space="preserve">
+    <value>Prénom</value>
+    <comment>Edit.cshtml</comment>
+  </data>
+  <data name="Personnel_Edit_Societe" xml:space="preserve">
+    <value>Société</value>
+    <comment>Edit.cshtml</comment>
+  </data>
+  <data name="Personnel_Edit_Bouton_NouvelInterimaire" xml:space="preserve">
+    <value>Nouvel Intérimaire</value>
+    <comment>Edit.cshtml</comment>
+  </data>
+  <data name="Personnel_Edit_Bouton_NouvelInterimaire_Tooltip" xml:space="preserve">
+    <value>Cliquer créer un nouveau personnel intérimaire</value>
+    <comment>Edit.cshtml</comment>
+  </data>
+  <data name="Personnel_Edit_FournisseurETT" xml:space="preserve">
+    <value>Fournisseur ETT</value>
+    <comment>Edit.cshtml</comment>
+  </data>
+  <data name="Personnel_Edit_Identifiant" xml:space="preserve">
+    <value>Identifiant</value>
+    <comment>Edit.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Titre" xml:space="preserve">
+    <value>Informations générales</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Avertissement_Detail_Tooltip" xml:space="preserve">
+    <value>Afficher le détail</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_DateEntree_Placeholder" xml:space="preserve">
+    <value>Date d'entrée</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Statut" xml:space="preserve">
+    <value>Statut</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialInterim_TableETT_Bouton_Modifier_Tooltip" xml:space="preserve">
+    <value>Cliquer pour modifier le rattachement</value>
+    <comment>_PartialInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialInterim_TableETT_Entete_Action" xml:space="preserve">
+    <value>Actions</value>
+    <comment>_PartialInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialInterim_TableETT_Entete_DateEntree" xml:space="preserve">
+    <value>Date d'entrée</value>
+    <comment>_PartialInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialInterim_TableETT_Entete_DateSortie" xml:space="preserve">
+    <value>Date de sortie</value>
+    <comment>_PartialInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialInterim_TableETT_Entete_Energie" xml:space="preserve">
+    <value>Energie</value>
+    <comment>_PartialInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialInterim_TableETT_Entete_Etat" xml:space="preserve">
+    <value>Etat</value>
+    <comment>_PartialInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialInterim_TableETT_Entete_Fournisseur" xml:space="preserve">
+    <value>Fournisseur ETT</value>
+    <comment>_PartialInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialInterim_TableETT_Entete_SirenCodeFournisseur" xml:space="preserve">
+    <value>SIREN / Code fournisseur</value>
+    <comment>_PartialInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialInterim_TableETT_Entete_SocietePartenaire" xml:space="preserve">
+    <value>Société partenaire</value>
+    <comment>_PartialInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_SuperAdmin_Info" xml:space="preserve">
+    <value>Indique si l'utilisateur est super admin</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_UtilisateurActif_Info" xml:space="preserve">
+    <value>Indique si le personnel est utilisateur FRED</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_SuperAdmin" xml:space="preserve">
+    <value>SuperAdmin</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_UtilisateurActif" xml:space="preserve">
+    <value>Utilisateur FRED</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_ControllerEdit_Notification_CreationInterimaire_Success" xml:space="preserve">
+    <value>Création du personnel intérimaire effectuée avec succès sous le matricule :</value>
+    <comment>personnel-edit.controller.js</comment>
+  </data>
+  <data name="Personnel_ControllerEdit_Notification_DeviseDejaAffecter_Erreur" xml:space="preserve">
+    <value>Vous ne pouvez pas choisir 2 fois la même devise</value>
+    <comment>personnel-edit.controller.js</comment>
+  </data>
+  <data name="Personnel_ControllerEdit_Notification_OrganisationDejaAffecter_Erreur" xml:space="preserve">
+    <value>Vous ne pouvez pas choisir 2 fois la même organisation</value>
+    <comment>personnel-edit.controller.js</comment>
+  </data>
+  <data name="Personnel_ControllerEdit_Notification_RedirectionPersonnel" xml:space="preserve">
+    <value>Redirection vers ce personnel en mode modification ...</value>
+    <comment>personnel-edit.controller.js</comment>
+  </data>
+  <data name="Personnel_ControllerEdit_Notification_RoleDejaAffecter_Erreur" xml:space="preserve">
+    <value>Vous ne pouvez pas choisir 2 fois le même rôle</value>
+    <comment>personnel-edit.controller.js</comment>
+  </data>
+  <data name="Personnel_ControllerEdit_Notification_VerificationFolio_Erreur" xml:space="preserve">
+    <value>Erreur de vérification du Folio</value>
+    <comment>personnel-edit.controller.js</comment>
+  </data>
+  <data name="Personnel_ControllerEdit_Notification_VerificationLogin_Erreur" xml:space="preserve">
+    <value>Erreur de vérification du Login</value>
+    <comment>personnel-edit.controller.js</comment>
+  </data>
+  <data name="Personnel_ModalAffectation_DateEntree" xml:space="preserve">
+    <value>Date d'entrée</value>
+    <comment>affectation-interim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalAffectation_DateEntree_Placeholder" xml:space="preserve">
+    <value>Date d'entrée</value>
+    <comment>affectation-interim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalAffectation_DateSortie" xml:space="preserve">
+    <value>Date de sortie</value>
+    <comment>affectation-interim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalAffectation_DateSortie_Placeholder" xml:space="preserve">
+    <value>Date de sortie</value>
+    <comment>affectation-interim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalAffectation_Ressource" xml:space="preserve">
+    <value>Ressource</value>
+    <comment>affectation-interim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalDesaffectation_DateSortie" xml:space="preserve">
+    <value>Date de Sortie</value>
+    <comment>desaffectation-interim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalDesaffectation_DateSortie_Placeholder" xml:space="preserve">
+    <value>Date de Sortie</value>
+    <comment>desaffectation-interim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalDesaffectation_VerificationDateEntree_Erreur" xml:space="preserve">
+    <value>La date d'entrée doit être inférieure à la date de sortie</value>
+    <comment>affectation-interim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalDesaffectation_VerificationDateSortie_Erreur" xml:space="preserve">
+    <value>La date de sortie doit être supérieure à la date d'entrée.</value>
+    <comment>desaffectation-interim-modal.html</comment>
+  </data>
+  <data name="Personnel_PartialUtilisateur_DateExpiration_Placeholder" xml:space="preserve">
+    <value>Date d'expiration du compte</value>
+    <comment>_PartialUtilisateur.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_MaterielParDefaut" xml:space="preserve">
+    <value>Matériel par défaut (pointages)</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_MaterielParDefaut_PlaceHPersonnel_PartialGeneral_MaterielParDefaut_PlaceHolder" xml:space="preserve">
+    <value>Rechercher un matériel</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_EtablissementRattachement_Confirmation" xml:space="preserve">
+    <value>Le lieu de rattachement sera supprimé. &lt;br/&gt;Confirmez-vous le changement de type de rattachement ?</value>
+  </data>
+  <data name="Personnel_PartialContact_IndemniteDeplacement_Bouton" xml:space="preserve">
+    <value>Indemnités Déplacement</value>
+    <comment>_PartialContact.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContact_IndemniteDeplacement_ToolTip" xml:space="preserve">
+    <value>Cliquer pour visualiser les codes de déplacements du personnel</value>
+    <comment>_PartialContact.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Sur" xml:space="preserve">
+    <value>sur</value>
+  </data>
+  <data name="Personnel_PartialGeneral_StatutEtamArticle36" xml:space="preserve">
+    <value>ETAM Article 36</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_StatutEtamBureau" xml:space="preserve">
+    <value>ETAM Bureau</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Avertissement_SocieteMatriculeExistant" xml:space="preserve">
+    <value>Ce matricule est déjà utilisé dans cette société</value>
+  </data>
+  <data name="Personnel_Index_TitreGestionEquipe" xml:space="preserve">
+    <value>Gérer son équipe favorite</value>
+    <comment>Equipe.cshtml</comment>
+  </data>
+  <data name="Title_Gerer_Equipe_Chercher_Ouvrier" xml:space="preserve">
+    <value>Rechercher un ouvrier</value>
+  </data>
+  <data name="Equipe_Affectations" xml:space="preserve">
+    <value>Affectations</value>
+    <comment>Equipe.cshtml</comment>
+  </data>
+  <data name="Equipe_Gestion_Titre" xml:space="preserve">
+    <value>Gestion de l'équipe favorite</value>
+    <comment>Equipe.cshtml</comment>
+  </data>
+  <data name="Equipe_Notification_Ouvrier_Existant" xml:space="preserve">
+    <value>Cet ouvrier existe déja dans l'équipe</value>
+    <comment>Equipe.cshtml</comment>
+  </data>
+  <data name="Ouvrier_Error_Ajout" xml:space="preserve">
+    <value>Erreur lors de l'ajout de l'ouvrier</value>
+    <comment>Equipe.cshtml</comment>
+  </data>
+  <data name="Title_Ouvrier" xml:space="preserve">
+    <value>Ouvriers</value>
+    <comment>Equipe.cshtml</comment>
+  </data>
+  <data name="Personnel_Interimaire" xml:space="preserve">
+    <value>Intérimaire</value>
+    <comment>Equipe.cshtml</comment>
+  </data>
+  <data name="Personnel_Interne" xml:space="preserve">
+    <value>Interne</value>
+    <comment>Equipe.cshtml</comment>
+  </data>
+  <data name="Personnel_InterneStatus" xml:space="preserve">
+    <value>Interne / Intérimaire</value>
+    <comment>Equipe.csthml</comment>
+  </data>
+  <data name="Personnel_Matricule" xml:space="preserve">
+    <value>Matricule</value>
+    <comment>Equipe.cshtml</comment>
+  </data>
+  <data name="Personnel_Nom" xml:space="preserve">
+    <value>Nom</value>
+    <comment>Equipe.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialDelegation_TableETT_Entete_Action" xml:space="preserve">
+    <value>Action</value>
+    <comment>_PartialDelegation.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialDelegation_TableETT_Entete_DateDeDebut" xml:space="preserve">
+    <value>Date de début</value>
+    <comment>_PartialDelegation.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialDelegation_TableETT_Entete_DateDeFin" xml:space="preserve">
+    <value>Date de fin</value>
+    <comment>_PartialDelegation.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialDelegation_TableETT_Entete_Personnel" xml:space="preserve">
+    <value>Personnel</value>
+    <comment>_PartialDelegation.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialDelegation_TableETT_Entete_Statut" xml:space="preserve">
+    <value>Statut</value>
+    <comment>_PartialDelegation.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialDelegation_TableETT_Entete_StatutRH" xml:space="preserve">
+    <value>Statut RH</value>
+    <comment>_PartialDelegation.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialDelegation_TableETT_Entete_TypeDeDelegation" xml:space="preserve">
+    <value>Type de délégation</value>
+    <comment>_PartialDelegation.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialDelegation_Titre" xml:space="preserve">
+    <value>Gestion des délégations</value>
+    <comment>_PartialDelegation.cshtml</comment>
+  </data>
+  <data name="Personnel_ModalDelegation_Commentaire" xml:space="preserve">
+    <value>Commentaire</value>
+    <comment>formulaire-delegation-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalDelegation_DateDeDebut" xml:space="preserve">
+    <value>Date de début</value>
+    <comment>formulaire-delegation-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalDelegation_DateDeFin" xml:space="preserve">
+    <value>Date de fin</value>
+    <comment>formulaire-delegation-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalDelegation_PersonnelDelegue" xml:space="preserve">
+    <value>Personnel recevant les droits</value>
+    <comment>formulaire-delegation-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalDelegation_Titre_Creation" xml:space="preserve">
+    <value>Création d'une délégation</value>
+    <comment>formulaire-delegation-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalDelegation_Titre_Modification" xml:space="preserve">
+    <value>Modification d'une délégation</value>
+    <comment>formulaire-delegation-modal.html</comment>
+  </data>
+  <data name="Personnel_PartialDelegation_Active" xml:space="preserve">
+    <value>Active</value>
+    <comment>_PartialDelegation.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialDelegation_EmettreDelegation" xml:space="preserve">
+    <value>Émettre une délégation</value>
+    <comment>_PartialDelegation.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialDelegation_Emise" xml:space="preserve">
+    <value>Émise</value>
+    <comment>_PartialDelegation.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialDelegation_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+    <comment>_PartialDelegation.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialDelegation_Recue" xml:space="preserve">
+    <value>Reçue</value>
+    <comment>_PartialDelegation.cshtml</comment>
+  </data>
+  <data name="Personnel_ModalDelegation_Confirmation_Annulation_part1" xml:space="preserve">
+    <value>Souhaitez-vous annuler la délégation émise pour </value>
+    <comment>suppression-delegation-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalDelegation_Confirmation_Annulation_part2" xml:space="preserve">
+    <value>Cette annulation supprimera la ligne et prendra effet immédiatement.</value>
+    <comment>suppression-delegation-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalDelegation_Confirmation_Desactivation_part1" xml:space="preserve">
+    <value>Souhaitez-vous désactiver la délégation émise pour </value>
+    <comment>suppression-delegation-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalDelegation_Confirmation_Desactivation_part2" xml:space="preserve">
+    <value>Cette désactivation prendra effet immédiatement.</value>
+    <comment>suppression-delegation-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalDelegation_Titre_Annulation" xml:space="preserve">
+    <value>Annulation d'une délégation</value>
+    <comment>suppression-delegation-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalDelegation_Titre_Desactivation" xml:space="preserve">
+    <value>Désactivation d'une délégation</value>
+    <comment>suppression-delegation-modal.html</comment>
+  </data>
+  <data name="Personnel_PartialDelegation_TableETT_Entete_Commentaire" xml:space="preserve">
+    <value>Commentaire</value>
+    <comment>_PartialDelegation.cshtml</comment>
+  </data>
+  <data name="Personnel_ModalDelegation_Notify_Error_Validation" xml:space="preserve">
+    <value>Cette personne a déjà émise une délégation dans la période donnée ou la personne recevant a déjà reçue une délégation dans cette période</value>
+    <comment>formulaire-delegation-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_CentreImputation" xml:space="preserve">
+    <value>Centre d'imputation</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_DateDeDebut" xml:space="preserve">
+    <value>Date de début de contrat</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_DateDeFin" xml:space="preserve">
+    <value>Date de fin de contrat </value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Energie" xml:space="preserve">
+    <value>Énergie</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_FournisseurETT" xml:space="preserve">
+    <value>Fournisseur ETT</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_ImputationContractuelle" xml:space="preserve">
+    <value>Imputation contractuelle (Info)</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Motif" xml:space="preserve">
+    <value>Motif</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_NumeroContrat" xml:space="preserve">
+    <value>Numéro de contrat</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_PersonnelRemplace" xml:space="preserve">
+    <value>Personnel remplacé</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Qualification" xml:space="preserve">
+    <value>Qualification</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Ressource" xml:space="preserve">
+    <value>Ressource</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_SocieteContractante" xml:space="preserve">
+    <value>Société contractante</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Souplesse" xml:space="preserve">
+    <value>Jour(s) de souplesse</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Source" xml:space="preserve">
+    <value>Source</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Statut" xml:space="preserve">
+    <value>Statut</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_TarifUnitaire" xml:space="preserve">
+    <value>Tarif unitaire facturé</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Titre_Commentaire" xml:space="preserve">
+    <value>Commentaire</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Titre_InformationsContrat" xml:space="preserve">
+    <value>Informations sur le contrat de mise à disposition</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Titre_Remplacement" xml:space="preserve">
+    <value>Remplacement</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Titre_SuiviCommande" xml:space="preserve">
+    <value>Suivi des commandes FRED (Automatique)</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Titre_Valorisation" xml:space="preserve">
+    <value>Valorisation</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Unite" xml:space="preserve">
+    <value>Unité</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Valorisation" xml:space="preserve">
+    <value>Valorisation</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_PartialContratInterim_Titre" xml:space="preserve">
+    <value>Suivi des contrats d'intérim</value>
+    <comment>_PartialContratInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContratIterim_Actif" xml:space="preserve">
+    <value>Actif</value>
+    <comment>_PartialContratInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContratIterim_AjoutContratInterim" xml:space="preserve">
+    <value>Ajout d'un contrat d'intérim</value>
+    <comment>_PartialContratInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContratIterim_Cloture" xml:space="preserve">
+    <value>Clôturé</value>
+    <comment>_PartialContratInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContratIterim_TableETT_Entete_Action" xml:space="preserve">
+    <value>Action</value>
+    <comment>_PartialContratInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContratIterim_TableETT_Entete_DateDeDebut" xml:space="preserve">
+    <value>Date de début</value>
+    <comment>_PartialContratInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContratIterim_TableETT_Entete_DateDeFin" xml:space="preserve">
+    <value>Date de fin</value>
+    <comment>_PartialContratInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContratIterim_TableETT_Entete_Etat" xml:space="preserve">
+    <value>État</value>
+    <comment>_PartialContratInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContratIterim_TableETT_Entete_FournisseurETT" xml:space="preserve">
+    <value>Fournisseur ETT</value>
+    <comment>_PartialContratInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContratIterim_TableETT_Entete_NumeroContrat" xml:space="preserve">
+    <value>Numéro de Contrat</value>
+    <comment>_PartialContratInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContratIterim_TableETT_Entete_Societe" xml:space="preserve">
+    <value>Société Partenaire</value>
+    <comment>_PartialContratInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContratIterim_TableETT_Entete_Source" xml:space="preserve">
+    <value>Source</value>
+    <comment>_PartialContratInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_DateDeDebut_Placeholder" xml:space="preserve">
+    <value>Date de début de contrat</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_DateDeFin_Placeholder" xml:space="preserve">
+    <value>Date de fin de contrat</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_FournisseurETT_Placeholder" xml:space="preserve">
+    <value>Sélectionner votre fournisseur</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_ImputationContractuelle_Placeholder" xml:space="preserve">
+    <value>Sélectionner le CI</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Motif_Placeholder" xml:space="preserve">
+    <value>Motif de remplacement</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_NumeroContrat_Placeholder" xml:space="preserve">
+    <value>Saisir un numéro de contrat</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_PersonnelRemplace_Placeholder" xml:space="preserve">
+    <value>Sélectionner le personnel remplacé</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Qualification_Placeholder" xml:space="preserve">
+    <value>Saisir la qualification du contrat</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Ressource_Placeholder" xml:space="preserve">
+    <value>Sélectionner la ressource</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_SocieteContractante_Placeholder" xml:space="preserve">
+    <value>Sélectionner votre société</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Souplesse_Placeholder" xml:space="preserve">
+    <value>Saisir le nombre de jours de souplesse</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Source_Placeholder" xml:space="preserve">
+    <value>Sélectionner une source (Manuelle, Pixid)</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Statut_Placeholder" xml:space="preserve">
+    <value>Sélectionner le statut (Cadre...)</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_TarifUnitaire_Placeholder" xml:space="preserve">
+    <value>Saisir le taux unitaire du contrat</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Titre_Creation" xml:space="preserve">
+    <value>Ajout d'un contrat d'intérim</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Titre_Modification" xml:space="preserve">
+    <value>Modification d'un contrat d'intérim</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Valorisation_Placeholder" xml:space="preserve">
+    <value>Saisir le taux moyen estimé</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_ZoneDeTravail_Ajout" xml:space="preserve">
+    <value>Cliquer pour ajouter un nouvel établissement à la zone de travail</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_ZoneDeTravail_Titre" xml:space="preserve">
+    <value>Zone de travail</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_PartialContratIterim_Planifie" xml:space="preserve">
+    <value>Planifié</value>
+    <comment>_PartialContratInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Motif_Accroissement_Activite" xml:space="preserve">
+    <value>Accroissement d'activité</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Motif_Qualification_Rare" xml:space="preserve">
+    <value>Qualification rare</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Motif_Remplacement_Salarie" xml:space="preserve">
+    <value>Remplacement de salarié</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Motif_Travaux_Urgents" xml:space="preserve">
+    <value>Travaux urgents</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Source_Manuel" xml:space="preserve">
+    <value>Manuel</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Source_Pixid" xml:space="preserve">
+    <value>Pixid</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Statut_Cadre" xml:space="preserve">
+    <value>Cadre</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Statut_ETAM_Article_36" xml:space="preserve">
+    <value>ETAM Article 36</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Statut_ETAM_Bureau" xml:space="preserve">
+    <value>ETAM Bureau</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Statut_ETAM_Chantier" xml:space="preserve">
+    <value>ETAM Chantier</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Statut_Ouvrier" xml:space="preserve">
+    <value>Ouvrier</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_VerificationDateDebut_Erreur" xml:space="preserve">
+    <value>La date de début doit être inférieure à la date de fin</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_VerificationValorisation_Erreur" xml:space="preserve">
+    <value>La valorisation doit être supérieur au tarif unitaire</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Confirmation_Suppression_part1" xml:space="preserve">
+    <value>Souhaitez-vous supprimer le contrat intérimaire n°</value>
+    <comment>suppression-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Confirmation_Suppression_part2" xml:space="preserve">
+    <value>Cette suppression supprimera la ligne et prendra effet immédiatement.</value>
+    <comment>suppression-contartInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Titre_Suppression" xml:space="preserve">
+    <value>Suppression d'un contrat intérimaire</value>
+    <comment>suppression-contartInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Notify_Error_ContratExist" xml:space="preserve">
+    <value>Cet intérimaire est déjà associé à un contrat dans cette période donnée</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Notify_Error_NumeroExist" xml:space="preserve">
+    <value>Ce numéro de contrat existe déjà</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_PartialContratInterim_TableETT_Bouton_Dupliquer_Tooltip" xml:space="preserve">
+    <value>Cliquer pour dupliquer le contrat d'intérim</value>
+    <comment>_PartialContratInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContratInterim_TableETT_Bouton_Modifier_Tooltip" xml:space="preserve">
+    <value>Cliquer pour modifier le contrat d'intérim</value>
+    <comment>_PartialContratInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialContratInterim_TableETT_Bouton_Supprimer_Tooltip" xml:space="preserve">
+    <value>Cliquer pour supprimer le contrat d'intérim</value>
+    <comment>_PartialContratInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Notify_Error_CiDevise" xml:space="preserve">
+    <value>La devise de référence du ci n'est pas configurée. Veuillez la configurer pour enregistrer le contrat.</value>
+    <comment>_PartialContratInterim.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_StatutEtam" xml:space="preserve">
+    <value>ETAM</value>
+  </data>
+  <data name="Personnel_PartialGeneral_manager" xml:space="preserve">
+    <value>Responsable hiérarchique</value>
+  </data>
+  <data name="Personnel_PartialGeneral_defaultCi" xml:space="preserve">
+    <value>CI par defaut</value>
+  </data>
+  <data name="Personnel_PartialGeneral_Matricule_SAP" xml:space="preserve">
+    <value>Matricule SAP</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Matricule_SAP_Placeholder" xml:space="preserve">
+    <value>Matricule SAP</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Matricule_SAP_Erreur" xml:space="preserve">
+    <value>Ce matricule SAP est déjà utilisé</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Confirmation_Validation_part1" xml:space="preserve">
+    <value>Confirmez-vous la création du contrat n°</value>
+    <comment>validation-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Confirmation_Validation_part2" xml:space="preserve">
+    <value> concernant le fournisseur </value>
+    <comment>validation-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Confirmation_Validation_part3" xml:space="preserve">
+    <value> pour l’intérimaire </value>
+    <comment>validation-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Confirmation_Validation_part4" xml:space="preserve">
+    <value> à la date du </value>
+    <comment>validation-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Confirmation_Validation_part5" xml:space="preserve">
+    <value> au </value>
+    <comment>validation-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_Confirmation_Validation_Titre" xml:space="preserve">
+    <value>Validation du contrat d'intérim</value>
+    <comment>validation-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_FournisseurSiren_Erreur" xml:space="preserve">
+    <value>Le fournisseur ETT sélectionné a un SIREN invalide</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_Filter_Autres_Criteres" xml:space="preserve">
+    <value>Autres critères</value>
+    <comment>personnel-search-filter.tpl.html</comment>
+  </data>
+  <data name="Personnel_Filter_Autre_Information_Placeholder" xml:space="preserve">
+    <value>Autre information...(matricule, société, étab.)</value>
+    <comment>personnel-search-filter.tpl.html</comment>
+  </data>
+  <data name="Personnel_Filter_Etablissement_Paie" xml:space="preserve">
+    <value>Etablissement de paie</value>
+    <comment>personnel-search-filter.tpl.html</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_FournisseurETT_Placeholder2" xml:space="preserve">
+    <value>Autres informations...(Adresse, Code, SIREN)</value>
+    <comment>formulaire-contratInterim-modal.html</comment>
+  </data>
+  <data name="Personnel_ControllerEdit_Label_Subscribe_To_Email_Summary" xml:space="preserve">
+    <value>Activer l'email de rappel quotidien</value>
+  </data>
+  <data name="Personnel_ControllerEdit_Label_Subscribe_To_Email_Summary_Empty_info" xml:space="preserve">
+    <value>L'utilisateur recevra les emails à l'adresse #ADRESSE MANQUANTE#</value>
+  </data>
+  <data name="Personnel_ControllerEdit_Label_Subscribe_To_Email_Summary_Info" xml:space="preserve">
+    <value>L'utilisateur recevra les emails à l'adresse</value>
+  </data>
+  <data name="Personnel_PartialUtilisateur_Erreur_Email_quotidien" xml:space="preserve">
+    <value>Vous devez renseignez votre email pour recevoir l'email de rappel quotidien.</value>
+  </data>
+  <data name="Personnel_PartialUtilisateur_Erreur_Email_quotidien_already_checked" xml:space="preserve">
+    <value>Vous devez décocher la case d'activation du mail quotidien</value>
+  </data>
+  <data name="Personnel_PartialGeneral_DateDebut" xml:space="preserve">
+    <value>Date de début</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_DateDebutInferieur" xml:space="preserve">
+    <value>La date de début doit être inférieure à la date de fin</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_DateDebut_Placeholder" xml:space="preserve">
+    <value>Date de début</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_HeuresInsertion" xml:space="preserve">
+    <value>Heures d'insertion</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="String1Personnel_PartialGeneral_DateFin" xml:space="preserve">
+    <value>Date de fin</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="String1Personnel_PartialGeneral_DateFin_Placeholder" xml:space="preserve">
+    <value>Date de fin</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Bouton_Export_Reception_Interim" xml:space="preserve">
+    <value>Exporter les réceptions intérimaires</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Export_Fail" xml:space="preserve">
+    <value>Echec de l'exportation des réceptions intérimaires</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Export_Success" xml:space="preserve">
+    <value>Exportation des réceptions intérimaires réussie</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Bouton_Annuler" xml:space="preserve">
+    <value>Annuler</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Bouton_Exporter" xml:space="preserve">
+    <value>Exporter</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Selection_Societes" xml:space="preserve">
+    <value>Sélectionner les sociétés à exporter pour les réceptions intérimaires :</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_Index_Titre_Modal_Export" xml:space="preserve">
+    <value>Export Réception Intérimaire</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_NonPointablePersonnel" xml:space="preserve">
+    <value>Personnel non pointable</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Personnel_Search_SousTitre_NonPointablesPersonnels" xml:space="preserve">
+    <value>Non pointables seulement</value>
+  </data>
+  <data name="Personnel_ContratInterim_Error_CompteInterneSepId_IsNull" xml:space="preserve">
+    <value>Il n’est pas possible de lier le contrat à ce CI car son compte de passage n’est pas paramétré : veuillez contacter votre administrateur fonctionnel.</value>
+    <comment>US6472 =&gt; RG_6472_002b :  Vérification du compte de passage du CI s’il est de type SEP</comment>
+  </data>
+  <data name="Personnel_ModalContratInterim_HeuresInsertion" xml:space="preserve">
+    <value>Heures d’insertion</value>
+  </data>
+  <data name="Personnel_Habilitation" xml:space="preserve">
+    <value>Habilitation</value>
+  </data>
+</root>

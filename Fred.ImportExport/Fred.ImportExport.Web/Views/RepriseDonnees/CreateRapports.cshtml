@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "import des rapports journaliers simplifiés";
+}
+@section styles {
+    @Styles.Render("~/bundles/reprisedonnees.css")
+}
+@section scripts {
+    @Scripts.Render("~/bundles/reprisedonnees.js")
+}
+@model Fred.ImportExport.Web.Models.RepriseDonneesModel
+<h2>Création des rapports et rapports lignes</h2>
+@using (Html.BeginForm("CreateRapports", "RepriseDonnees", FormMethod.Post, new { encType = "multipart/form-data" }))
+{
+
+    @Html.DropDownListFor(m => m.SelectedGroupe, Model.Groupes, "Selection du groupe")
+
+
+    <br /><br />
+
+    @Html.TextBoxFor(m => m.Files, new { type = "file", name = "Files" })<br /><br />
+
+    <div>
+        <label for="file">
+            Lancer l'import
+        </label>
+    </div>
+
+
+    <input type="submit"
+           value="Importer"
+           name="submitme"
+           id="submitme" />
+}
+<br /><br />
+@if (Model.Errors.Count > 0)
+{
+
+    <table id="myTable"
+           class="table"
+           cellspacing="0"
+           style="border-collapse: collapse;width: 100%;table-layout: fixed;margin-top: 30px;font-family: Arial, Helvetica, sans-serif;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black;height: 35px;background-color: rgb(221,235,247);">
+                    Erreurs
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var erreur in Model.Errors)
+            {
+                <tr>
+                    <td style="border: 1px solid black;text-align: left;height: 35px;">
+                        @erreur
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<strong>@ViewBag.Message</strong>

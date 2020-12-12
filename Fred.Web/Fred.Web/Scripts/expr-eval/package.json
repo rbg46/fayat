@@ -1,0 +1,111 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "expr-eval",
+        "scope": null,
+        "escapedName": "expr-eval",
+        "name": "expr-eval",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "D:\\projects\\fayat\\js\\js"
+    ]
+  ],
+  "_from": "expr-eval@latest",
+  "_id": "expr-eval@1.0.0",
+  "_inCache": true,
+  "_location": "/expr-eval",
+  "_nodeVersion": "6.9.1",
+  "_npmOperationalInternal": {
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/expr-eval-1.0.0.tgz_1483386831169_0.6428212849423289"
+  },
+  "_npmUser": {
+    "name": "silentmatt",
+    "email": "email@matthewcrumley.com"
+  },
+  "_npmVersion": "3.10.8",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "expr-eval",
+    "scope": null,
+    "escapedName": "expr-eval",
+    "name": "expr-eval",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/expr-eval/-/expr-eval-1.0.0.tgz",
+  "_shasum": "0a5ef2cd7d0d745c3a490d2cf53bca3400b2965d",
+  "_shrinkwrap": null,
+  "_spec": "expr-eval",
+  "_where": "D:\\projects\\fayat\\js\\js",
+  "author": {
+    "name": "Matthew Crumley"
+  },
+  "bugs": {
+    "url": "https://github.com/silentmatt/expr-eval/issues"
+  },
+  "dependencies": {},
+  "description": "Mathematical expression evaluator",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.4.0",
+    "eslint-config-semistandard": "^7.0.0-beta.0",
+    "eslint-config-standard": "^6.0.0",
+    "eslint-plugin-promise": "^3.3.1",
+    "eslint-plugin-standard": "^2.0.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.1.0",
+    "rollup": "^0.36.0",
+    "rollup-plugin-uglify": "^1.0.1"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dist": {
+    "shasum": "0a5ef2cd7d0d745c3a490d2cf53bca3400b2965d",
+    "tarball": "https://registry.npmjs.org/expr-eval/-/expr-eval-1.0.0.tgz"
+  },
+  "files": [
+    "dist/"
+  ],
+  "gitHead": "fb3b840b409e3db6f7e9335a6431a1338a1fca5e",
+  "homepage": "https://github.com/silentmatt/expr-eval#readme",
+  "keywords": [
+    "expression",
+    "math",
+    "evaluate",
+    "eval",
+    "function",
+    "parser"
+  ],
+  "license": "MIT",
+  "main": "dist/bundle.js",
+  "maintainers": [
+    {
+      "name": "silentmatt",
+      "email": "email@matthewcrumley.com"
+    }
+  ],
+  "name": "expr-eval",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silentmatt/expr-eval.git"
+  },
+  "scripts": {
+    "build": "rollup -c rollup.config.js && rollup -c rollup-min.config.js",
+    "coverage": "npm run build && istanbul cover _mocha",
+    "lint": "eslint parser.js test rollup.config.js rollup-min.config.js",
+    "prepublish": "npm run build",
+    "test": "npm run build && mocha"
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,664 @@
+﻿.no-p {
+    padding: 0;
+}
+
+.no-pr {
+    padding-right: 0;
+}
+
+.no-pl {
+    padding-left: 0;
+}
+
+.infobar {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.infobar .period .lbl {
+    font-size: 11px;
+}
+
+.infobar .period .val {
+    font-size: 18px;
+    text-align: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.infobar .anael {
+    margin-left: 1%;
+    width: 200px;
+    height: 44px;
+    background-color: #9dbb61;
+    color: #fff;
+    padding-right: 5px;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.infobar .ecarts .sapicon-E158 {
+    margin-right: 20px;
+}
+
+.infobar .ecarts .sapicon-E158::before {
+    font-size: 25px;
+}
+
+.infobar .ecarts .sapicon-E1A7 {
+    margin-right: 20px;
+}
+
+.infobar .ecarts .sapicon-E1A7::before {
+    font-size: 25px;
+}
+
+.infobar .ecarts .sapicon-E02F {
+    margin-right: 20px;
+}
+
+.infobar .ecarts .sapicon-E02F::before {
+    font-size: 25px;
+}
+
+.infobar .ecarts .material-icons {
+    margin-right: 20px;
+}
+
+.infobar .ecarts .material-icons::before {
+    font-size: 25px;
+}
+
+.infobar .ecarts .amount {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.infobar .ecarts .amount .txt {
+    text-align: left;
+    font-size: 11px;
+}
+
+.infobar .ecarts .amount .data {
+    text-align: right;
+    font-size: 10px;
+}
+
+.infobar .linked {
+    margin-left: 1%;
+    width: 180px;
+    height: 44px;
+    background-color: #4080b8;
+    color: #fff;
+    padding-right: 5px;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.infobar .unlinked {
+    margin-left: 1%;
+    width: 180px;
+    height: 44px;
+    background-color: #ea700d;
+    color: #fff;
+    padding-right: 5px;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.infobar .to-affect {
+    margin-left: 1%;
+    width: 180px;
+    height: 44px;
+    background-color: #de3f7e;
+    color: #fff;
+    padding-right: 5px;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.infobar .ci-infos {
+    margin-left: auto;
+}
+
+.search-label {
+    font-size: 12px;
+    font-weight: 400;
+    color: #757575;
+}
+
+.main-search {
+    width: 30%;
+}
+
+.autres-frais-lists {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 30px;
+}
+
+.autres-frais-lists .list {
+    width: 29%;
+    position: relative;
+}
+
+.autres-frais-lists .list .list-search .input-group.input-search {
+    width: 100%;
+}
+
+.autres-frais-lists .list .list-header {
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.autres-frais-lists .list .list-header .action {
+    width: 35px;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.autres-frais-lists .list .list-header .sap {
+    font-size: 25px;
+}
+
+.autres-frais-lists .list .list-header .txt {
+    font-size: 15px;
+    margin-left: 15px;
+}
+
+.autres-frais-lists .list .list-filt {
+    position: relative;
+    width: 100%;
+    background-color: #f2f2f2;
+    padding: 7px;
+}
+
+.autres-frais-lists .list .list-filt .tiles {
+    margin-top: 15px;
+}
+
+.autres-frais-lists .list .list-filt .tiles .tiles-title {
+    font-size: 11px;
+    color: #a6acc3;
+}
+
+.autres-frais-lists .list .ec-compt-list-content {
+    padding: 7px 10px 0 10px;
+    border-bottom: 3px solid #9dbb61;
+    background-color: #dbe6c4;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .date {
+    font-size: 11px;
+    color: #7f7f7f;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .amounts {
+    color: #0055a0;
+    display: flex;
+    align-items: center;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .amounts .lbl {
+    font-size: 11px;
+    width: 48%;
+    margin-left: 2%;
+    color: #000000;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .amounts .dollar-sap {
+    margin-left: 1%;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .amounts .amount {
+    margin-left: 5%;
+    font-size: 11px;
+    color: #000000;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .amounts .indic {
+    font-size: 13px;
+    background-color: #fff;
+    color: #9dbb61;
+    border-radius: 50%;
+    border: 2px solid #9dbb61;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .datas {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .datas .lbl-nat {
+    font-size: 11px;
+    width: 42%;
+    margin-left: 23%;
+    color: #000000;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .datas .warn {
+    color: #de3f7e;
+    margin-left: 1%;
+    font-size: 20px;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .datas .warn-txt {
+    color: #de3f7e;
+    margin-right: 10%;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .datas .next {
+    font-size: 35px;
+    color: #d8d8d8;
+    cursor: pointer;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .datas .datas-sap.green {
+    color: #9dbb61;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .datas .amount.green {
+    color: #9dbb61;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .datas .datas-sap.orange {
+    color: #ea700d;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .datas .amount.orange {
+    color: #ea700d;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .datas .datas-sap.pink {
+    color: #de3f7e;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .datas .amount.pink {
+    color: #de3f7e;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .sommes {
+    color: #0055a0;
+    display: flex;
+    align-items: center;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .sommes .lbl {
+    font-size: 11px;
+    width: 45%;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .sommes .sommes-sap {
+    margin-left: 1%;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .sommes .amount {
+    margin-left: 5%;
+}
+
+.autres-frais-lists .list .ec-compt-list-content .sommes .next {
+    font-size: 35px;
+    color: #d8d8d8;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.autres-frais-lists .list .ec-compt-list-content.selected {
+    background-color: #ffd486;
+}
+
+.autres-frais-lists .list .ec-compt-list-content.selected .datas .next {
+    color: #0055a0;
+}
+
+.autres-frais-lists .list .od-list-content .date {
+    font-size: 11px;
+    color: #000000;
+}
+
+.autres-frais-lists .list .od-list-content .labels {
+    padding-left: 47px;
+    display: flex;
+    align-items: center;
+}
+
+.autres-frais-lists .list .od-list-content .labels .lbl {
+    font-size: 11px;
+    color: #000000;
+    width: 70%;
+    margin-left: 4%;
+}
+
+.autres-frais-lists .list .od-list-content .labels .unplug.on {
+    font-size: 25px;
+    margin-left: auto;
+    color: #de3f7e;
+}
+
+.autres-frais-lists .list .od-list-content .labels .plug.on {
+    font-size: 25px;
+    margin-left: auto;
+    color: #de3f7e;
+}
+
+.autres-frais-lists .list .od-list-content .labels .unplug.off {
+    font-size: 25px;
+    margin-left: auto;
+    color: #a5a5a5;
+}
+
+.autres-frais-lists .list .od-list-content .labels .plug.off {
+    font-size: 25px;
+    margin-left: auto;
+    color: #a5a5a5;
+}
+
+.autres-frais-lists .list .od-list-content .data {
+    font-size: 11px;
+    color: #000000;
+    margin-top: 3px;
+}
+
+.autres-frais-lists .list .od-list-content .data .archive {
+    display: inline;
+    margin-left: 20px;
+}
+
+.autres-frais-lists .list .od-list-content .data .task {
+    margin-left: 47px;
+    margin-top: 3px;
+}
+
+.autres-frais-lists .list .od-list-content .amounts {
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    margin-top: 5px;
+    padding-left: 20px;
+}
+
+.autres-frais-lists .list .od-list-content .amounts .col {
+    display: flex;
+    flex-direction: column;
+}
+
+.autres-frais-lists .list .od-list-content .amounts .col .lbl {
+    color: #000000;
+}
+
+.autres-frais-lists .list .od-list-content .amounts .col .val {
+    color: #000000;
+}
+
+.autres-frais-lists .list .od-list-content .amounts .col.unit {
+    margin-left: 7%;
+    min-width: 35px;
+}
+
+.autres-frais-lists .list .od-list-content .amounts .col.quant {
+    min-width: 50px;
+}
+
+.autres-frais-lists .list .od-list-content .amounts .col.quant .val {
+    text-align: right;
+}
+
+.autres-frais-lists .list .od-list-content .amounts .col.pu {
+    margin-left: 10%;
+    min-width: 50px;
+}
+
+.autres-frais-lists .list .od-list-content .amounts .col.pu .val {
+    text-align: right;
+}
+
+.autres-frais-lists .list .od-list-content .amounts .col.mont {
+    margin-left: 10%;
+    min-width: 70px;
+}
+
+.autres-frais-lists .list .od-list-content .amounts .col.mont .val {
+    text-align: right;
+}
+
+.autres-frais-lists .list .od-list-content .amounts .col.edit {
+    margin-left: auto;
+}
+
+.autres-frais-lists .list .od-list-content .amounts .col.edit .material-icons {
+    cursor: pointer;
+}
+
+.autres-frais-lists .list.ec-compt .list-header {
+    background-color: #9dbb61;
+    color: #fff;
+}
+
+.autres-frais-lists .list.ec-compt .list-select-all {
+    height: 25px;
+    padding-left: 10px;
+    background-color: #9dbb61;
+    color: #fff;
+}
+
+.autres-frais-lists .list-bloc {
+    height: calc(100vh - 355px);
+    overflow-y: scroll;
+}
+
+.autres-frais-lists .list-bloc .amounts .line-select {
+    display: inline-block;
+}
+
+.autres-frais-lists .list-bloc .amounts .date {
+    display: inline-block;
+    margin-left: 2%;
+    color: #000000;
+}
+
+.autres-frais-lists .list.od-linked .list-header {
+    background-color: #4080b8;
+    color: #fff;
+}
+
+.autres-frais-lists .list.od-linked .list-header button {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    color: #31859b;
+    font-size: 11px;
+    border: none;
+    margin-left: auto;
+    margin-right: 5px;
+}
+
+.autres-frais-lists .list.od-linked .list-header button .material-icons {
+    margin-left: 5px;
+}
+
+.autres-frais-lists .list.od-linked .list-select-all {
+    height: 25px;
+    padding-left: 10px;
+    background-color: #4080b8;
+    color: #fff;
+}
+
+.autres-frais-lists .list.od-linked .od-list-content {
+    padding: 7px 10px;
+    border-bottom: 3px solid #4080b8;
+    background-color: #c4d8ea;
+}
+
+.autres-frais-lists .list.od-linked .od-list-content .amounts .col.edit {
+    color: #4080b8;
+}
+
+.autres-frais-lists .list.od-linked .od-list-content.selected {
+    background-color: #ffd486;
+}
+
+.autres-frais-lists .list.od-unlinked .od-list-content {
+    padding: 7px 10px;
+    border-bottom: 3px solid #ea700d;
+    background-color: #fbd9bd;
+}
+
+.autres-frais-lists .list.od-unlinked .od-list-content .amounts .col.edit {
+    color: #ea700d;
+}
+
+.autres-frais-lists .list.od-unlinked .od-list-content.selected {
+    background-color: #ffd486;
+}
+
+.autres-frais-lists .list.od-unlinked .list-header {
+    background-color: #ea700d;
+    color: #fff;
+}
+
+.autres-frais-lists .list.od-unlinked .list-header button {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    color: #ea700d;
+    font-size: 11px;
+    border: none;
+    margin-left: auto;
+    margin-right: 5px;
+}
+
+.autres-frais-lists .list.od-unlinked .list-header button .material-icons {
+    margin-left: 5px;
+}
+
+.autres-frais-lists .list.od-unlinked .list-select-all {
+    height: 25px;
+    padding-left: 10px;
+    background-color: #ea700d;
+    color: #fff;
+}
+
+.tie-untie {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    height: 420px;
+    align-items: center;
+}
+
+.tie-untie .tie-untie-btns {
+    margin: auto;
+}
+
+.tie-untie .tie-untie-btns .tie {
+    width: 95px;
+    height: 35px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 10px;
+    transform: rotate(180deg);
+    background-color: #ea700d;
+}
+
+.tie-untie .tie-untie-btns .untie {
+    width: 95px;
+    height: 35px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    background-color: #4080b8;
+}
+
+.c-box {
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+
+.c-box label {
+    margin-bottom: 0;
+}
+
+.c-box input[type="checkbox"] + label span {
+    margin-right: 15px !important;
+}
+
+.options .montant {
+    width: 50%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: #9dbb61;
+    font-size: 20px;
+}
+
+.options textarea {
+    display: block;
+    width: 100%;
+    height: 100px;
+    resize: none;
+}
+
+.options .btn-danger {
+    background-color: #c05046;
+    border-color: #c05046;
+}
+
+.options .btn-danger:hover {
+    color: #fff;
+}
+
+input[type="checkbox"] + label {
+    font-size: 11px;
+}
+
+.od-list-content input[type="checkbox"] + label {
+    margin-bottom: 0;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .autres-frais-lists .list-bloc {
+        height: calc(100vh - 280px);
+    }
+    .autres-frais-lists .list .ec-compt-list-content .date {
+        font-size: 9px;
+    }
+    .autres-frais-lists .list .ec-compt-list-content .amounts .lbl {
+        font-size: 9px;
+    }
+    .autres-frais-lists .list .ec-compt-list-content .amounts .amount {
+        font-size: 9px;
+    }
+    .autres-frais-lists .list .ec-compt-list-content .datas .amount {
+        font-size: 11px;
+    }
+    .autres-frais-lists .list .od-list-content .amounts .col .val {
+        font-size: 9px;
+    }
+}

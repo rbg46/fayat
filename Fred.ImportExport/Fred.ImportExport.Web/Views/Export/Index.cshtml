@@ -1,0 +1,383 @@
+﻿@model Fred.ImportExport.Web.Models.ExportViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Exports";
+}
+
+@section scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("time.timeago").timeago();
+        });
+
+        function ComputeActionUrl(baseUrl, isBypassDateControlId) {
+            var actionUrl = baseUrl + '?';
+
+            if (isBypassDateControlId) {
+                var isBypassDate = document.getElementById(isBypassDateControlId).checked;
+                actionUrl += '&byPassDate=' + isBypassDate;
+            }
+
+            location.href = actionUrl;
+        };
+
+
+        function OnCheckBypassDate(e, exportNowControlId) {
+            var btn = document.getElementById(exportNowControlId);
+
+            if (e.checked) {
+                btn.innerHTML = 'Export <b>Complet</b> Maintenant <span class="glyphicon glyphicon-warning-sign" style="color:red;"></span>';
+            }
+            else {
+                btn.innerHTML = "Exporter Maintenant";
+            }
+        }
+    </script>
+}
+
+    <div class="container export">
+        <h2 class="align-center">Exports</h2>
+
+        <div class="row display-flex">
+
+            <div class="col-md-6">
+                @******************************************************EXPORT KLM******************************************************@
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="glyphicon glyphicon-user padding-right"></span><strong>Export KLM</strong>
+                            <span class="pull-right">
+                                @if (Model != null && Model.KlmFlux != null && Model.KlmFlux.DateDerniereExecution.HasValue)
+                                {
+                                    <span class="glyphicon glyphicon-time"></span>
+                                    <time class="timeago" datetime="@Model.KlmFlux.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.KlmFlux.DateDerniereExecution.Value.ToLocalTime()"></time>
+                                }
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            <ul>
+                                @if (Model.KlmRecurringJob != null)
+                                {
+                                    <li>Type d'export : <b>Récurrent</b></li>
+                                    <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.KlmRecurringJob)</b></li>
+                                    <li>Cron : <code>@Model.KlmRecurringJob.Cron</code></li>
+                                }
+                                else
+                                {
+                                    <li>Type d'export : <b>Manuel</b></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button class="btn btn-primary" onclick="location.href='@Url.Action("ExportKlm", "Export", new { byPassDate = true })'">Exporter maintenant</button>
+
+                        @if (Model.KlmRecurringJob == null)
+                        {
+                            <button class="btn btn-warning pull-right" onclick="location.href='@Url.Action("ToggleScheduleExportKlm", "Export", new { activate = true })'">Planifier</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("ToggleScheduleExportKlm", "Export", new { activate = false })'">Déplanifier</button>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                @******************************************************EXPORT RECEPTION INTERIMAIRE******************************************************@
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="glyphicon glyphicon-user padding-right"></span><strong>EXPORT RECEPTION INTERIMAIRE</strong>
+                            <span class="pull-right">
+                                @if (Model != null && Model.ReceptionInterimaireFlux != null && Model.ReceptionInterimaireFlux.DateDerniereExecution.HasValue)
+                                {
+                                    <span class="glyphicon glyphicon-time"></span>
+                                    <time class="timeago" datetime="@Model.ReceptionInterimaireFlux.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.ReceptionInterimaireFlux.DateDerniereExecution.Value.ToLocalTime()"></time>
+                                }
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            <ul>
+                                @if (Model.ReceptionInterimaireRecurringJob != null)
+                                {
+                                    <li>Type d'export : <b>Récurrent</b></li>
+                                    <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.ReceptionInterimaireRecurringJob)</b></li>
+                                    <li>Cron : <code>@Model.ReceptionInterimaireRecurringJob.Cron</code></li>
+                                }
+                                else
+                                {
+                                    <li>Type d'export : <b>Manuel</b></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#receptionInterimaireModal">Exporter maintenant</button>
+
+
+                        @*<button class="btn btn-primary" onclick="location.href='@Url.Action("ExportReceptionInterimaire", "Export", new { byPassDate = true })'">Exporter maintenant</button>*@
+
+
+                        @if (Model.ReceptionInterimaireRecurringJob == null)
+                        {
+                            <button class="btn btn-warning pull-right" onclick="location.href='@Url.Action("ToggleScheduleExportReceptionInterimaire", "Export", new { activate = true })'">Planifier</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("ToggleScheduleExportReceptionInterimaire", "Export", new { activate = false })'">Déplanifier</button>
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row display-flex">
+            <div class="col-md-6">
+                @******************************************************EXPORT STAIR PERSONNEL******************************************************@
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="glyphicon glyphicon-user padding-right"></span><strong>EXPORT STAIR PERSONNEL</strong>
+                            <span class="pull-right">
+                                @if (Model != null && Model.StairPersonnelFlux != null && Model.StairPersonnelFlux.DateDerniereExecution.HasValue)
+                                {
+                                    <span class="glyphicon glyphicon-time"></span>
+                                    <time class="timeago" datetime="@Model.StairPersonnelFlux.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.StairPersonnelFlux.DateDerniereExecution.Value.ToLocalTime()"></time>
+                                }
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            <ul>
+                                @if (Model.StairPersonnelRecurringJob != null)
+                                {
+                                    <li>Type d'export : <b>Récurrent</b></li>
+                                    <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.StairPersonnelRecurringJob)</b></li>
+                                    <li>Cron : <code>@Model.StairPersonnelRecurringJob.Cron</code></li>
+                                }
+                                else
+                                {
+                                    <li>Type d'export : <b>Manuel</b></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button class="btn btn-primary" onclick="location.href='@Url.Action("ExportStairPersonnel", "Export", new { byPassDate = true })'">Exporter maintenant</button>
+
+                        @if (Model.StairPersonnelRecurringJob == null)
+                        {
+                            <button class="btn btn-warning pull-right" onclick="location.href='@Url.Action("ToggleScheduleExportStairPersonnel", "Export", new { activate = true })'">Planifier</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("ToggleScheduleExportStairPersonnel", "Export", new { activate = false })'">Déplanifier</button>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                @******************************************************EXPORT STAIR CI******************************************************@
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="glyphicon glyphicon-user padding-right"></span><strong>EXPORT STAIR CI</strong>
+                            <span class="pull-right">
+                                @if (Model != null && Model.StairCIFlux != null && Model.StairCIFlux.DateDerniereExecution.HasValue)
+                                {
+                                    <span class="glyphicon glyphicon-time"></span>
+                                    <time class="timeago" datetime="@Model.StairCIFlux.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.StairCIFlux.DateDerniereExecution.Value.ToLocalTime()"></time>
+                                }
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            <ul>
+                                @if (Model.StairCIRecurringJob != null)
+                                {
+                                    <li>Type d'export : <b>Récurrent</b></li>
+                                    <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.StairCIRecurringJob)</b></li>
+                                    <li>Cron : <code>@Model.StairCIRecurringJob.Cron</code></li>
+                                }
+                                else
+                                {
+                                    <li>Type d'export : <b>Manuel</b></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button class="btn btn-primary" onclick="location.href='@Url.Action("ExportStairCI", "Export", new { byPassDate = true })'">Exporter maintenant</button>
+
+                        @if (Model.StairCIRecurringJob == null)
+                        {
+                            <button class="btn btn-warning pull-right" onclick="location.href='@Url.Action("ToggleScheduleExportStairCI", "Export", new { activate = true })'">Planifier</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("ToggleScheduleExportStairCI", "Export", new { activate = false })'">Déplanifier</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row display-flex">
+            <div class="col-md-6">
+                @******************************************************EXPORT RECEPTION MATERIEL EXTERNE******************************************************@
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="glyphicon glyphicon-user padding-right"></span><strong>EXPORT RECEPTION MATERIEL EXTERNE</strong>
+                            <span class="pull-right">
+                                @if (Model != null && Model.ReceptionMaterielExterneFlux != null && Model.ReceptionMaterielExterneFlux.DateDerniereExecution.HasValue)
+                                {
+                                    <span class="glyphicon glyphicon-time"></span>
+                                    <time class="timeago" datetime="@Model.ReceptionMaterielExterneFlux.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.ReceptionMaterielExterneFlux.DateDerniereExecution.Value.ToLocalTime()"></time>
+                                }
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            <ul>
+                                @if (Model.ReceptionMaterielExterneRecurringJob != null)
+                                {
+                                    <li>Type d'export : <b>Récurrent</b></li>
+                                    <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.ReceptionMaterielExterneRecurringJob)</b></li>
+                                    <li>Cron : <code>@Model.ReceptionMaterielExterneRecurringJob.Cron</code></li>
+                                }
+                                else
+                                {
+                                    <li>Type d'export : <b>Manuel</b></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button class="btn btn-primary" onclick="location.href='@Url.Action("ExportReceptionMaterielExterne", "Export", new { byPassDate = true })'">Exporter maintenant</button>
+
+                        @if (Model.ReceptionMaterielExterneRecurringJob == null)
+                        {
+                            <button class="btn btn-warning pull-right" onclick="location.href='@Url.Action("ToggleScheduleExportReceptionMaterielExterne", "Export", new { activate = true })'">Planifier</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("ToggleScheduleExportReceptionMaterielExterne", "Export", new { activate = false })'">Déplanifier</button>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                @******************************************************EXPORT PERSONNEL FES FIGGO******************************************************@
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="glyphicon glyphicon-user padding-right"></span><strong>EXPORT PERSONNEL FES (FIGGO)</strong>
+                            <span class="pull-right">
+                                @if (Model != null && Model.PersonnelFesFlux != null && Model.PersonnelFesFlux.DateDerniereExecution.HasValue)
+                                {
+                                    <span class="glyphicon glyphicon-time"></span>
+                                    <time class="timeago" datetime="@Model.PersonnelFesFlux.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.PersonnelFesFlux.DateDerniereExecution.Value.ToLocalTime()"></time>
+                                }
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            <ul>
+                                @if (Model.PersonnelFesRecurringJob != null)
+                                {
+                                    <li>Type d'export : <b>Récurrent</b></li>
+                                    <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.PersonnelFesRecurringJob)</b></li>
+                                    <li>Cron : <code>@Model.PersonnelFesRecurringJob.Cron</code></li>
+                                }
+                                else
+                                {
+                                    <li>Type d'export : <b>Manuel</b></li>
+                                }
+                                <li><input type="checkbox" onclick="OnCheckBypassDate(this, 'exportPersonnelFes')" id="isByPassDatePersonnel" /><label for="isByPassDatePersonnel">&nbsp; Export complet</label></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button class="btn btn-primary" id="exportPersonnelFes" onclick="ComputeActionUrl('/Export/ExportPersonnelFesToTibco','isByPassDatePersonnel')">Exporter maintenant</button>
+
+                        @if (Model.PersonnelFesRecurringJob == null)
+                        {
+                            <button class="btn btn-warning pull-right" onclick="location.href='@Url.Action("ToggleScheduleExportPersonnelFesToTibco", "Export", new { activate = true })'">Planifier</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("ToggleScheduleExportPersonnelFesToTibco", "Export", new { activate = false })'">Déplanifier</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="receptionInterimaireModal" tabindex="-1" aria-hidden="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                @using (Html.BeginForm("ExportReceptionInterimaire", "Export", new { byPassDate = true }, FormMethod.Post, new { role = "form" }))
+                {
+                    <div class="modal-header" style="background-color:#f5f5f5; padding:5px">
+                        <div class="col-md-11">
+                            <h5 class="modal-title" style="color:#212121; font-weight:500">Export Réception Intérimaire</h5>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin:0">
+                                <span style="color:#212121; font-weight:500; line-height:1">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-body" style="padding-top:5px; height: 170px">
+                        <div class="col-md-12">
+                            <h6>Sélectionner les sociétés à exporter pour les réceptions intérimaires :</h6>
+                        </div>
+                        <div class="col-md-12" style="padding-left:25px; overflow-y:auto; height:120px">
+
+                            @for (var i = 0; i < Model.GroupeInterimaire.Count; i++)
+                            {
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#@Model.GroupeInterimaire[i].GroupeId" aria-expanded="false" style="padding: 1px 4px; line-height:1.3">
+                                        <span class="glyphicon glyphicon-plus" style="font-size:10px; padding-left: 1px"></span>
+                                    </button>
+                                    <label style="padding-left:5px">@Model.GroupeInterimaire[i].Libelle</label>
+
+                                    <div class="collapse" id="@Model.GroupeInterimaire[i].GroupeId" style="padding-left: 20px">
+                                        @for (var j = 0; j < Model.GroupeInterimaire[i].SocieteNotInterimaires.Count; j++)
+                                        {
+                                            <div>
+                                                @Html.CheckBoxFor(x => x.GroupeInterimaire[i].SocieteNotInterimaires[j].Checked)
+                                                <label>@Model.GroupeInterimaire[i].SocieteNotInterimaires[j].Libelle</label>
+                                                @Html.HiddenFor(x => x.GroupeInterimaire[i].SocieteNotInterimaires[j].SocieteId)
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="background-color:#f5f5f5; padding:10px 15px">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="padding: 3px 6px">Annuler</button>
+                        <button type="submit" class="btn btn-primary" style="padding: 3px 6px">Exporter</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+

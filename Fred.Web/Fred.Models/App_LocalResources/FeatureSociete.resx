@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Action_Cancel" xml:space="preserve">
+    <value>Action annulée.</value>
+  </data>
+  <data name="Action_Create_Fail" xml:space="preserve">
+    <value>Création de la société échouée.</value>
+  </data>
+  <data name="Action_Create_Success" xml:space="preserve">
+    <value>Création de la société réussie.</value>
+  </data>
+  <data name="Action_Update_Fail" xml:space="preserve">
+    <value>Modification de la société échouée.</value>
+  </data>
+  <data name="Action_Update_Success" xml:space="preserve">
+    <value>Modification de la société réussie.</value>
+  </data>
+  <data name="Active_error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Active_help" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Active_lb" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Active_placeholder" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Adresse_error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Adresse_help" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Adresse_lb" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="Adresse_placeholder" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="Button_Add_lb" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="Button_Cancel_lb" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Button_Update_lb" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="CodePostal_error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CodePostal_help" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CodePostal_lb" xml:space="preserve">
+    <value>Code postal</value>
+  </data>
+  <data name="CodePostal_placeholder" xml:space="preserve">
+    <value>Code postal</value>
+  </data>
+  <data name="CodeSocieteComptable_error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CodeSocieteComptable_help" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CodeSocieteComptable_lb" xml:space="preserve">
+    <value>Code société comptable</value>
+  </data>
+  <data name="CodeSocieteComptable_placeholder" xml:space="preserve">
+    <value>Code société comptable</value>
+  </data>
+  <data name="CodeSocietePaye_error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CodeSocietePaye_help" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CodeSocietePaye_lb" xml:space="preserve">
+    <value>Code société paie</value>
+  </data>
+  <data name="CodeSocietePaye_placeholder" xml:space="preserve">
+    <value>Code société paie</value>
+  </data>
+  <data name="Code_error" xml:space="preserve">
+    <value />
+    <comment>Le code société est obligatoire.</comment>
+  </data>
+  <data name="Code_help" xml:space="preserve">
+    <value />
+    <comment>Veuillez saisir un code société sur deux caractères.</comment>
+  </data>
+  <data name="Code_lb" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Code_placeholder" xml:space="preserve">
+    <value>Code de la société</value>
+  </data>
+  <data name="Data_Load_Fail" xml:space="preserve">
+    <value>Erreur durant le chargement des données.</value>
+  </data>
+  <data name="Data_Load_Success" xml:space="preserve">
+    <value>Données chargées avec succès.</value>
+  </data>
+  <data name="Data_required" xml:space="preserve">
+    <value>Champs obligatoire</value>
+  </data>
+  <data name="ExercicePaie_lb" xml:space="preserve">
+    <value>Période d'exercice paie</value>
+  </data>
+  <data name="Externe_error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Externe_help" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Externe_placeholder" xml:space="preserve">
+    <value>Externe</value>
+  </data>
+  <data name="GenerationAutoSamediCP_lb" xml:space="preserve">
+    <value>Génération automatique des samedis en CP</value>
+  </data>
+  <data name="LibelleSociete_error" xml:space="preserve">
+    <value />
+    <comment>Le libellé de la société est obligatoire.</comment>
+  </data>
+  <data name="LibelleSociete_help" xml:space="preserve">
+    <value />
+    <comment>Veuillez saisir un libellé de société.</comment>
+  </data>
+  <data name="LibelleSociete_lb" xml:space="preserve">
+    <value>Libellé</value>
+  </data>
+  <data name="LibelleSociete_placeholder" xml:space="preserve">
+    <value>Libellé de la société</value>
+  </data>
+  <data name="MoisDebutAnneeCourante_lb" xml:space="preserve">
+    <value>Mois début année courante</value>
+  </data>
+  <data name="MoisFinAnneeSuivante_lb" xml:space="preserve">
+    <value>Mois fin année suivante</value>
+  </data>
+  <data name="NomSociete_lb" xml:space="preserve">
+    <value>Nom societé</value>
+  </data>
+  <data name="RechercherSociete_placeholder" xml:space="preserve">
+    <value>Rechercher une société...</value>
+  </data>
+  <data name="SIRET_error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SIRET_help" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SIRET_lb" xml:space="preserve">
+    <value>SIRET</value>
+  </data>
+  <data name="SIRET_placeholder" xml:space="preserve">
+    <value>SIRET</value>
+  </data>
+  <data name="Societe_lb" xml:space="preserve">
+    <value>Societé</value>
+  </data>
+  <data name="Title_Societe" xml:space="preserve">
+    <value>Gestion des sociétés</value>
+  </data>
+  <data name="Ville_error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ville_help" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ville_lb" xml:space="preserve">
+    <value>Ville</value>
+  </data>
+  <data name="Ville_placeholder" xml:space="preserve">
+    <value>Ville</value>
+  </data>
+  <data name="ErreurTechnique_error" xml:space="preserve">
+    <value>Erreur technique</value>
+  </data>
+  <data name="IdSocieteNull_error" xml:space="preserve">
+    <value>Aucune société selectionnée</value>
+  </data>
+  <data name="RattachementEffectue_error" xml:space="preserve">
+    <value>Le rattachement a été effectué</value>
+  </data>
+  <data name="SocieteNull_error" xml:space="preserve">
+    <value>Aucune société selectionnée</value>
+  </data>
+  <data name="AjouterSociete_lb" xml:space="preserve">
+    <value>Ajouter une société</value>
+  </data>
+  <data name="Title_Societes_lb" xml:space="preserve">
+    <value>Sociétés</value>
+  </data>
+  <data name="ModifierSociete_lb" xml:space="preserve">
+    <value>Modifier une société</value>
+  </data>
+  <data name="LibelleSocietesTrouves_lb" xml:space="preserve">
+    <value>société(s)</value>
+  </data>
+  <data name="ListeSociete_lb" xml:space="preserve">
+    <value>Liste de sociétés</value>
+  </data>
+  <data name="TypeProfil_lb" xml:space="preserve">
+    <value>Type</value>
+  </data>
+</root>

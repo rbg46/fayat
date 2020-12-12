@@ -1,0 +1,276 @@
+﻿$color_1: white;
+$color_2: rgb(166,166,166);
+$color_3: dodgerblue;
+$color_4: black;
+$background_color_1: rgb(225, 241, 255);
+
+
+.display-list {
+    table {
+        position: relative;
+        width: 800px;
+        overflow: hidden;
+        border-collapse: collapse;
+
+        thead {
+            th {
+                .material-icons {
+                    font-size: 15px;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                .material-icons {
+                    color: $color_2;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    thead {
+        position: relative;
+        display: block;
+        overflow-x: visible;
+
+        th {
+            width: 800px;
+            height: 21px;
+            font-weight: normal;
+            font-size: 10px;
+            color: $color_1;
+            vertical-align: middle;
+            padding-left: 5px;
+
+            &:nth-child(1) {
+                position: relative;
+                -webkit-box-shadow: 5px 0 37px -9px white;
+                -moz-box-shadow: 5px 0 37px -9px white;
+                box-shadow: 5px 0 37px -9px white;
+                width: 150px !important;
+                min-width: 150px;
+            }
+
+            &:nth-child(2) {
+                position: relative;
+                -webkit-box-shadow: 5px 0 37px -9px white;
+                -moz-box-shadow: 5px 0 37px -9px white;
+                box-shadow: 5px 0 37px -9px white;
+                width: 200px !important;
+                min-width: 200px;
+            }
+        }
+
+        .col10 {
+            color: $color_4;
+        }
+
+        .col11 {
+            color: $color_4;
+        }
+    }
+
+    tbody {
+        position: relative;
+        display: block;
+        width: 800px;
+        overflow: auto;
+        overflow-x: visible;
+
+        td {
+            min-width: 120px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        tr {
+            height: 20px;
+
+            td {
+                &:nth-child(1) {
+                    position: relative;
+                    width: 150px !important;
+                    min-width: 150px;
+                }
+
+                &:nth-child(2) {
+                    position: relative;
+                    width: 200px !important;
+                    min-width: 200px;
+                }
+
+                padding-left: 5px;
+                border-bottom: 0.5px solid rgb(221, 221, 221);
+
+                &:nth-child(1).col1 {
+                    font-size: 9px;
+                    background-color: $background_color_1;
+                }
+
+                &:nth-child(2).col2 {
+                    font-size: 9px;
+                    background-color: $background_color_1;
+                }
+            }
+        }
+    }
+
+    .col2 {
+        width: 179px !important;
+        min-width: 179px;
+
+        span {
+            font-weight: 600;
+            float: left;
+        }
+    }
+
+    .col3 {
+        width: 179px !important;
+        min-width: 179px;
+    }
+
+    .col4 {
+        width: 179px !important;
+        min-width: 179px;
+    }
+
+    .col5 {
+        width: 179px !important;
+        min-width: 179px;
+    }
+
+    .col6 {
+        width: 179px !important;
+        min-width: 179px;
+        text-align: center;
+        border-bottom: solid white 1px;
+        width: 120px !important;
+        min-width: 120px;
+    }
+
+    .col7 {
+        width: 179px !important;
+        min-width: 179px;
+        text-align: center;
+        border-bottom: solid white 1px;
+        width: 120px !important;
+        min-width: 120px;
+        border-left: rgb(4, 63, 118) 0.5px solid;
+    }
+
+    .col8 {
+        width: 179px !important;
+        min-width: 179px;
+        text-align: center;
+        border-bottom: solid white 1px;
+        width: 120px !important;
+        min-width: 120px;
+        border-left: rgb(4, 63, 118) 0.5px solid;
+    }
+
+    .col9 {
+        width: 179px !important;
+        min-width: 179px;
+        text-align: center;
+        border-bottom: solid white 1px;
+        width: 120px !important;
+        min-width: 120px;
+        border-left: rgb(4, 63, 118) 0.5px solid;
+    }
+
+    .col10 {
+        width: 179px !important;
+        min-width: 179px;
+        text-align: center;
+        border-bottom: solid white 1px;
+        width: 120px !important;
+        min-width: 120px;
+        border-left: rgb(4, 63, 118) 0.5px solid;
+    }
+
+    .col11 {
+        width: 179px !important;
+        min-width: 179px;
+        text-align: center;
+        border-bottom: solid white 1px;
+        width: 120px !important;
+        min-width: 120px;
+        border-left: rgb(4, 63, 118) 0.5px solid;
+    }
+
+    .col12 {
+        width: 179px !important;
+        min-width: 179px;
+        width: 240px !important;
+        min-width: 240px;
+    }
+
+    .col13 {
+        width: 179px !important;
+        min-width: 179px;
+        width: 80px !important;
+        min-width: 80px;
+    }
+
+    .col14 {
+        width: 179px !important;
+        min-width: 179px;
+    }
+
+    .colSep {
+        width: 10px;
+        min-width: 10px;
+    }
+
+    .actions {
+        text-align: right;
+        padding-right: 15px;
+    }
+
+    .open {
+        font-size: 14px;
+        float: left;
+    }
+
+    .col1 {
+        .nested {
+            display: flex;
+            height: 100%;
+            align-items: center;
+            padding-right: 5px;
+        }
+
+        .badge-statut {
+            font-weight: 600;
+            float: left;
+            padding: 0 5px 0 5px;
+            width: 60px !important;
+            min-width: 60px;
+        }
+
+        .abo-icon {
+            font-size: 18px;
+            margin-left: auto;
+        }
+
+        .ico-materielExterne {
+            width: 20px;
+            height: 20px;
+            margin-left: auto;
+            background-image: url('/medias/images/ico/materielexterne-black.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+
+        .pj-icon {
+            font-size: 18px;
+            margin-left: auto;
+            color: $color_3;
+        }
+    }
+}

@@ -1,0 +1,73 @@
+﻿.input-select {
+    background-color: #09ada6;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+
+.input-select input {
+    background-color: #fafafa;
+    border: 1px solid #BBBBBB;
+    border-right: none;
+    color: #67757f;
+    height: 30px;
+    padding: 0 10px;
+    flex: 1;
+    cursor: pointer;
+    font-family: Roboto, sans-serif;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: 400;
+}
+
+.input-select input::placeholder {
+    font-size: 14px;
+    font-style: italic;
+    color: darkGray;
+    font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.input-select .input-select-icon {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: normal;
+    max-height: 28px;
+    max-width: 28px;
+    min-height: 28px;
+    min-width: 28px;
+    color: white;
+    font-family: "Material Icons";
+    line-height: inherit;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .input-select {
+        height: 25px;
+    }
+    .input-select input {
+        height: 25px;
+    }
+    .input-select .input-select-icon {
+        font-size: 17px;
+        max-height: 25px;
+        max-width: 24px;
+        min-height: 25px;
+        min-width: 24px;
+    }
+}

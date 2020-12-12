@@ -1,0 +1,229 @@
+﻿@*--------------------------------------------------------------------------------------------------------------*@
+@*                                          PARAMETRAGE GENERAL                                                 *@
+@*--------------------------------------------------------------------------------------------------------------*@
+<div class="panel panel-default">
+
+  <div class="panel-heading " data-toggle="collapse" data-target="#collapse-general" data-parent="#ci-accordion" id="panel-heading-general"><i class="chevron fa fa-fw"></i> {{ctrl.resources.CI_Detail_General_Titre}}</div>
+  <div id="collapse-general" class="panel-collapse collapse in">
+    <div class="panel-body">
+      <!--BEGIN  > FORMULAIRE-->
+      <form name="ctrl.formParamGeneral" autocomplete="off">
+          <div class="row">
+              <div class="col-md-4 no_paddingleft" ng-class="{ 'has-error' : ctrl.formParamGeneral.Libelle.$invalid && ctrl.formParamGeneral.$submitted }">
+                  <label class="control-label">{{ctrl.resources.CI_Detail_General_Libelle}} *</label>
+                  <input type="text" name="Libelle" required class="form-control" placeholder="{{ctrl.resources.CI_Detail_General_Libelle_Placeholder}}" ng-model="ctrl.panels.general.data.Libelle" ng-disabled="true" />
+              </div>
+              <div class="col-md-3">
+                  <label class="control-label">{{ctrl.resources.CI_Detail_General_Societe}}</label>
+                  <br />
+                  <input type="text" id="txtSociete" placeholder="{{ctrl.resources.CI_Detail_General_Societe_Placeholder}}" ng-model="ctrl.panels.general.data.Societe.CodeLibelle" class="form-control" ng-disabled="true" />
+              </div>
+              <div class="col-md-3">
+                  <label class="control-label">{{ctrl.resources.CI_Detail_General_EtablissementComptable}}</label>
+                  <input type="text" name="EtabComptable" class="form-control" placeholder="{{ctrl.resources.CI_Detail_General_EtablissementComptable_Placeholder}}" ng-model="ctrl.panels.general.data.EtablissementComptable.CodeLibelle" ng-disabled="true" />
+              </div>              
+              <div class="col-md-2" ng-if="ctrl.panels.general.data.Societe.TypeSocieteId === ctrl.typeSocieteSep.TypeSocieteId">
+                  <label class="control-label">{{ctrl.resources.CI_Detail_General_CompteInterneSep}}</label>
+                  <lookup-standalone ng-model="ctrl.panels.general.data.CompteInterneSep"
+                                     text="ctrl.panels.general.data.CompteInterneSep.CodeLibelle"
+                                     placeholder="{{ctrl.resources.CI_Detail_General_CompteInterneSep}}"
+                                     search-title="{{ctrl.resources.Global_ReferentielCI}}"
+                                     search-placeholder="{{ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                     url="/api/CI/SearchLight/CompteInterneSep?ciId={{ctrl.ciId}}&"
+                                     on-select="ctrl.handlePickListSelection('CompteInterneSep', item);"
+                                     on-delete="ctrl.handlePickListDeletion('CompteInterneSep');"
+                                     class="no-padding formulaire long">
+                  </lookup-standalone>
+              </div>
+          </div>
+        <div class="row">
+          <div class="col-md-4 no_paddingleft">
+            <div id="search-field" fred-Display-Handler="ctrl.panels.general.data.Societe.Organisation.OrganisationId" display="hidden" >
+              <label class="control-label">{{ctrl.resources.CI_Detail_General_ResponsableAdministratif}}</label><br />
+              <lookup-standalone ng-model="ctrl.panels.general.data.ResponsableAdministratif"
+                                 text="ctrl.panels.general.data.ResponsableAdministratif.CodeSocieteMatriculePrenomNom"
+                                 search-title="{{ctrl.resources.Global_ReferentielPersonnel}}"
+                                 search-placeholder="{{ctrl.resources.Global_ReferentielPersonnel_Placeholder}}"
+                                 url="/api/Personnel/SearchLight2?ciId={{ctrl.ciId}}&onlySocieteGerante=true&"
+                                 on-select="ctrl.handlePickListSelection('ResponsableAdministratif', item);"
+                                 on-delete="ctrl.handlePickListDeletion('ResponsableAdministratif');"
+                                 class="no-padding formulaire long">
+              </lookup-standalone>
+            </div>
+          </div>
+          <div class="col-md-4" id="Ci-General" fred-display-handler="userOrganizationId" display="hidden">
+            <label class="control-label">{{ctrl.resources.CI_Detail_General_ResponsableChantier}}</label>
+            <lookup-standalone class="no-padding formulaire long"
+                               ng-model="ctrl.panels.general.data.PersonnelResponsableChantier"
+                               text="ctrl.panels.general.data.PersonnelResponsableChantier.CodeSocieteMatriculePrenomNom"
+                               search-title="{{ctrl.resources.Global_ReferentielPersonnel}}"
+                               search-placeholder="{{ctrl.resources.Global_ReferentielPersonnel_Placeholder}}"
+                               url="/api/Personnel/SearchLight2?ciId={{ctrl.ciId}}&onlySocieteGerante=true&"
+                               on-select="ctrl.handlePickListSelection('ResponsableChantier', item);"
+                               on-delete="ctrl.handlePickListDeletion('ResponsableChantier');">
+            </lookup-standalone>
+          </div>
+        </div>
+        <div class="row">
+        </div>
+        <div class="row">
+          <div class="col-md-4 no_paddingleft" id="Ci-General" fred-display-handler="userOrganizationId" display="hidden" ng-class="{'has-error': ctrl.formParamGeneral.DureeChantier.$error.pattern} ">
+            <label class="control-label">{{ctrl.resources.CI_Detail_General_DureeChantier}}</label><br>
+            <span class="text-danger" ng-show="ctrl.formParamGeneral.DureeChantier.$error.pattern">{{ctrl.resources.CI_Detail_General_ErrorDureeChantier}}</span>
+            <input name="DureeChantier" class="form-control" min="0" id="DureeChantier" type="text" fred-input-number="0" ng-model="ctrl.panels.general.data.DureeChantier">
+          </div>
+          @*HEURES*@
+          <div class="col-md-4 heureMinute-Container" id="Ci-General" fred-display-handler="userOrganizationId" display="hidden">
+              <label class="control-label">{{ctrl.resources.CI_Detail_General_Horaires}}</label>
+              <br />
+              <input type="text"
+                     ui-mask="99:99"
+                     ui-mask-placeholder
+                     ui-mask-placeholder-char='-'
+                     ng-pattern="/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"
+                     ng-model="ctrl.HoraireDebutM"
+                     ng-change="ctrl.handleHorairesValidation()"
+                     name="HoraireDebutM"
+                     class="heureMinute" />
+              <span class="glyphicon glyphicon-play"></span>
+              <input type="text"
+                     ui-mask="99:99"
+                     ui-mask-placeholder
+                     ui-mask-placeholder-char='-'
+                     ng-pattern="/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"
+                     ng-model="ctrl.HoraireFinM"
+                     ng-change="ctrl.handleHorairesValidation()"
+                     name="HoraireFinM"
+                     class="heureMinute" />
+
+              &nbsp;&nbsp;&nbsp;
+
+              <input type="text"
+                     ui-mask="99:99"
+                     ui-mask-placeholder
+                     ui-mask-placeholder-char='-'
+                     ng-pattern="/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"
+                     ng-model="ctrl.HoraireDebutS"
+                     ng-change="ctrl.handleHorairesValidation()"
+                     name="HoraireDebutS"
+                     class="heureMinute" />
+              <span class="glyphicon glyphicon-play"></span>
+              <input type="text"
+                     ui-mask="99:99"
+                     ui-mask-placeholder
+                     ui-mask-placeholder-char='-'
+                     ng-pattern="/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"
+                     ng-model="ctrl.HoraireFinS"
+                     ng-change="ctrl.handleHorairesValidation()"
+                     name="HoraireFinS"
+                     class="heureMinute" />
+
+              <span class="text-danger" ng-show="ctrl.formParamGeneral.HoraireDebutM.$invalid || ctrl.formParamGeneral.HoraireFinM.$invalid
+                                                      || ctrl.formParamGeneral.HoraireDebutS.$invalid || ctrl.formParamGeneral.HoraireFinS.$invalid">
+                  {{ctrl.resources.CI_Detail_General_Horaires_ErrorFormat}}
+              </span>
+              <span class="text-danger" ng-show="ctrl.formParamGeneral.$error.trancheNotOk">
+                  {{ctrl.resources.CI_Detail_General_Horaires_TrancheInvalide}}
+              </span>
+              <span class="text-danger" ng-show="ctrl.formParamGeneral.$error.premiereTrancheManquante">
+                  {{ctrl.resources.CI_Detail_General_Horaires_PremiereTrancheManquante}}
+              </span>
+          </div>
+          <div class="col-md-4" id="type-ci" ng-show="false">
+            <label class="control-label">{{ctrl.resources.CI_Detail_General_TypeCI}}</label><br />
+            <input type="radio" name="rbtnTypeChantier" ng-model="ctrl.panels.general.data.TypeCI" id="rbtnTypeChantier" value="Chantier"><label for="rbtnTypeChantier" class="control-label"><span></span>{{ctrl.resources.CI_Detail_General_TypeChantier}}</label>
+            <input type="radio" name="rbtnTypeMateriel" ng-model="ctrl.panels.general.data.TypeCI" id="rbtnTypeMateriel" value="Materiel"><label for="rbtnTypeMateriel" class="control-label"><span></span>{{ctrl.resources.CI_Detail_General_TypeMateriel}}</label>
+            <input type="radio" name="rbtnTypeFraisGeneraux" ng-model="ctrl.panels.general.data.TypeCI" id="rbtnTypeFraisGeneraux" value="Frais Generaux"><label for="rbtnTypeFraisGeneraux" class="control-label"><span></span>{{ctrl.resources.CI_Detail_General_TypeFraisGeneraux}}</label>
+            <input type="radio" name="rbtnTypeAutre" ng-model="ctrl.panels.general.data.TypeCI" id="rbtnTypeAutre" value="Autre"><label for="rbtnTypeAutre" class="control-label"><span></span>{{ctrl.resources.CI_Detail_General_TypeAutre}}</label>
+            <input type="radio" name="rbtnTypeInvisible" ng-model="ctrl.panels.general.data.TypeCI" id="rbtnTypeInvisible" value="null"><label for="rbtnTypeInvisible" class="control-label"><span ng-show="false"></span></label>
+          </div>
+          <div class="col-md-4" id="type-ci" ng-show="ctrl.isGFes">
+            <label class="control-label">{{ctrl.resources.CI_Detail_General_TypeCI}}</label><br />
+            <input type="radio" name="rbtnTypeAffaire" ng-model="ctrl.panels.general.data.TypeCI" id="rbtnTypeAffaire" value="CI_Search_CIType_Affaire" ng-disabled="true"><label for="rbtnTypeAffaire" class="control-label"><span></span>Affaire</label>
+            <input type="radio" name="rbtnTypeEtude" ng-model="ctrl.panels.general.data.TypeCI" id="rbtnTypeEtude" value="CI_Search_CIType_Etude" ng-disabled="true"><label for="rbtnTypeEtude" class="control-label"><span></span>Etude</label>
+            <input type="radio" name="rbtnTypeSection" ng-model="ctrl.panels.general.data.TypeCI" id="rbtnTypeSection" value="CI_Search_CIType_Section" ng-disabled="true"><label for="rbtnTypeSection" class="control-label"><span></span>Section</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 no_paddingleft">
+            <label class="control-label">{{ctrl.resources.CI_Detail_General_DateOuverture}}</label>
+            <div class="form-group">
+              <span class="text-danger" ng-show="ctrl.formParamGeneral.DateOuverture.$error.datesNotOk">{{ctrl.resources.CI_Detail_General_DateOuverture_ErrorLogique}}</span>
+              <app-date-picker id="dtPkOuverture"
+                               name="DateOuverture"
+                               format="DD/MM/YYYY"
+                               lang="fr"
+                               placeholder="{{ctrl.resources.CI_Detail_General_DateOuverture_Placeholder}}"
+                               initial-date="{{ctrl.panels.general.data.DateOuverture}}"
+                               ng-model="ctrl.panels.general.data.DateOuverture"
+                               ng-change="ctrl.handleDateValidation()" />
+            </div>
+          </div>
+          <div class="col-md-2">
+            <label class="control-label">{{ctrl.resources.CI_Detail_General_DateFermeture}}</label>
+            <div class="form-group">
+              <app-date-picker id="dtPkFermeture"
+                               name="DateFermeture"
+                               format="DD/MM/YYYY"
+                               lang="fr"
+                               placeholder="{{ctrl.resources.CI_Detail_General_DateFermeture_Placeholder}}"
+                               initial-date="{{ctrl.panels.general.data.DateFermeture}}"
+                               ng-model="ctrl.panels.general.data.DateFermeture"
+                               ng-change="ctrl.handleDateValidation()" />
+            </div>
+          </div>
+          <div class="col-md-4" id="Ci-General" fred-display-handler="userOrganizationId" display="hidden">
+            <label class="control-label">{{ctrl.resources.CI_Detail_General_MontantHT}}</label><br />
+            <input type="text" fred-input-number class="form-control" min="0" id="MontantHT" name="MontantHT" ng-model="ctrl.panels.general.data.MontantHT" />
+            <span class="text-danger" ng-show="ctrl.formParamGeneral.MontantHT.$error.pattern">{{ctrl.resources.CI_Detail_General_MontantHT_ErrorFormat}}</span>
+          </div>
+          <div class="col-md-4 no_paddingright" id="Ci-General" fred-display-handler="userOrganizationId" display="hidden">
+            <label class="control-label">{{ctrl.resources.CI_Detail_General_DeviseMontantHT}}</label><br />
+            <select id="ddlMontantDevise" class="form-control input-filter"
+                    ng-model="ctrl.panels.general.data.MontantDeviseId"
+                    ng-disabled="!ctrl.panels.general.data.MontantHT || (ctrl.panels.devise.data.ciDeviseList.length === 0 && !ctrl.panels.devise.data.reference)"
+                    ng-options="item.Devise.DeviseId as item.Devise.CodeLibelle group by item.typeDevise for item in ctrl.panels.devise.data.ciDeviseList | orderBy:'+typeDevise'"
+                    ng-selected="ctrl.panels.general.data.MontantDeviseId === item.Devise.DeviseId"
+                    ng-change="ctrl.handleChangeMontantDevise()"></select>
+          </div>
+        </div>
+        <div class="row" id="Ci-General" fred-display-handler="userOrganizationId" display="hidden">
+          <div class="col-md-4 no_paddingleft" ng-class="{'has-error': ctrl.formParamGeneral.FraisGeneraux.$invalid}">
+            <label class="control-label">{{ctrl.resources.CI_Detail_General_FraisGeneraux}}</label>
+            <span class="text-danger" ng-show="ctrl.formParamGeneral.FraisGeneraux.$invalid">{{ctrl.resources.CI_Detail_General_FraisGeneraux_ErrorFormat}}</span>
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" fred-input-number class="form-control" id="FraisGeneraux" name="FraisGeneraux" placeholder="{{ctrl.resources.CI_Detail_General_FraisGeneraux_Placeholder}}" min="0" max="100" ng-model="ctrl.panels.general.data.FraisGeneraux">
+                <div class="input-group-addon">%</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4" ng-class="{'has-error': ctrl.formParamGeneral.TauxHoraire.$invalid}">
+            <label class="control-label">{{ctrl.resources.CI_Detail_General_TauxHoraire}}</label>
+            <span class="text-danger" ng-show="ctrl.formParamGeneral.TauxHoraire.$invalid">{{ctrl.resources.CI_Detail_General_TauxHoraire_ErrorFormat}}</span>
+            <div class="form-group">
+              <input type="text" fred-input-number class="form-control" id="TauxHoraire" name="TauxHoraire" placeholder="{{ctrl.resources.CI_Detail_General_TauxHoraire_Placeholder}}" min="0" ng-model="ctrl.panels.general.data.TauxHoraire">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label class="control-label">{{ctrl.resources.CI_Detail_General_ObjectifHeuresInsertion}}</label>
+            <div class="form-group">
+              <input type="text" fred-input-number="0" class="form-control" id="ObjectifHeuresInsertion" name="ObjectifHeuresInsertion" placeholder="{{ctrl.resources.CI_Detail_General_ObjectifHeuresInsertion_Placeholder}}" min="0" ng-model="ctrl.panels.general.data.ObjectifHeuresInsertion"
+              ng-change="ctrl.handleVerifObjectifHeureInsertion()">
+            </div>
+          </div>
+        </div>
+        <br />
+
+      </form>
+      <!--END > FORMULAIRE-->
+    </div>
+    <div class="panel-footer">
+      <!--BEGIN  > BOUTONS-->
+      <button class="btn btn-link pull-right" ng-click="ctrl.handleCancel(ctrl.panels.general)" title="{{resources.Global_Bouton_Annuler_Tooltip}}">{{ctrl.resources.Global_Bouton_Annuler}}</button>
+      <button type="submit" class="btn btn-default  pull-left" ng-click="ctrl.handleSave(ctrl.panels.general)" ng-disabled="ctrl.formParamGeneral.$invalid" title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">{{ctrl.resources.Global_Bouton_Enregistrer}}</button>
+      <!--END  > BOUTONS-->
+    </div>
+
+  </div>
+</div>

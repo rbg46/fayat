@@ -1,0 +1,139 @@
+﻿table#tableFixed {
+    width: 800px;
+    overflow: hidden;
+    border-collapse: collapse;
+}
+
+table#tableFixed thead {
+    position: relative;
+    display: block;
+    width: 800px;
+    overflow-x: visible;
+}
+
+table#tableFixed thead tr.inactive {
+    background-color: #f1f5ff;
+}
+
+table#tableFixed thead th {
+    width: 800px;
+    height: 21px;
+    font-weight: normal;
+    font-size: 10px;
+    color: white;
+    vertical-align: middle;
+    padding-left: 5px;
+    background: #0052A0;
+}
+
+table#tableFixed thead th:nth-child(1) {
+    position: relative;
+    padding-top: 8px;
+    -webkit-box-shadow: 5px 0px 37px -9px white;
+    -moz-box-shadow: 5px 0px 37px -9px white;
+    box-shadow: 5px 0px 37px -9px white;
+    width: 190px !important;
+    min-width: 190px;
+}
+
+table#tableFixed thead tr th:nth-child(1) {
+    background: #0052A0;
+}
+
+table#tableFixed thead tr th.lighted {
+    background: #4c86bc;
+    border-right: white 1px solid;
+}
+
+table#tableFixed thead tr th.lighted.primary {
+    background: #097da0;
+}
+
+table#tableFixed thead tr th.lighted.secondary {
+    background: #adcb60;
+}
+
+table#tableFixed thead tr th.lighted.important {
+    background: #ffa90d;
+}
+
+table#tableFixed thead tr th.lighted.warning {
+    background: #de3f7e;
+}
+
+table#tableFixed thead tr th.lighted.last {
+    border-right: none;
+}
+
+table#tableFixed tbody {
+    position: relative;
+    display: block;
+    width: 800px;
+    overflow: auto;
+    overflow-x: visible;
+    overflow-x: visible;
+}
+
+table#tableFixed tbody tr {
+    height: 35px;
+}
+
+table#tableFixed tbody tr td {
+    font-size: 11px;
+    cursor: pointer;
+    padding-left: 5px;
+    border-bottom: 0.5px solid #dddddd;
+}
+
+table#tableFixed tbody tr td:nth-child(1) {
+    position: relative;
+    width: 190px !important;
+    min-width: 190px;
+    border-bottom: 1px solid #dddddd !important;
+}
+
+table#tableFixed tbody tr td:nth-child(1) .cln1 {
+    width: 150px !important;
+    font-size: 9px;
+}
+
+table#tableFixed tbody tr td.lighted {
+    background: #ccdcec;
+    border-bottom-color: white;
+    border-right: white 1px solid;
+}
+
+table#tableFixed tbody tr td.lighted.primary {
+    background: #9dcbd9;
+}
+
+table#tableFixed tbody tr td.lighted.secondary {
+    background: #d6e5af;
+}
+
+table#tableFixed tbody tr td.lighted.important {
+    background: rgba(255, 169, 13, 0.2);
+}
+
+table#tableFixed tbody tr td.lighted.warning {
+    background: #f8d9e5;
+}
+
+table#tableFixed tbody tr td.lighted.last {
+    border-right: none;
+}
+
+.colSep {
+    width: 10px;
+    min-width: 10px;
+}
+
+.actions {
+    text-align: right;
+    padding-right: 15px;
+}
+
+.border-white {
+    border-left: white 1px solid;
+    border-bottom-color: white !important;
+}

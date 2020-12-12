@@ -1,0 +1,506 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Contient les clefs du web.config qui doivent être modifiées en fonction des environnements Dev / Int / PreProd / Prod -->
+
+<parameters>
+
+  <!-- Parametrage d'Hangfire -->
+  <parameter
+      name="HangfireStart"
+      description="Active ou désactive le démarrage d'Hangfire"
+      defaultvalue="__HangfireStart__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+          match="/configuration/appSettings/add[@key='Hangfire:Start']/@value">
+    </parameterentry>
+  </parameter>
+
+  <!-- Parametrage du serveur de mail-->
+
+  <parameter
+      name="EmailServerAddress"
+      description="Adresse du server SMTP"
+      defaultvalue="__EmailServerAddress__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='eMail:Server:Adress']/@value">
+    </parameterentry>
+  </parameter>
+
+
+  <parameter
+  name="EmailServerPort"
+  description="Port du server SMTP"
+  defaultvalue="__EmailServerPort__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='eMail:Server:Port']/@value">
+    </parameterentry>
+  </parameter>
+
+  <!-- Parametrage des chaines de connection ANAEL-->
+
+  <parameter
+      name="AnaelConnectionStringGroupeRzb"
+      description="Chaine de connexion à Anael pour le groupe RZB"
+      defaultvalue="__ANAELConnectionStringGroupeRZB__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='ANAEL:ConnectionString:Groupe:GRZB']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="AnaelConnectionStringGroupeFes"
+    description="Chaine de connexion à Anael pour le groupe FES"
+    defaultvalue="__ANAELConnectionStringGroupeFES__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='ANAEL:ConnectionString:Groupe:GFES']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="AnaelConnectionStringGroupeFon"
+    description="Chaîne de connexion à Anael pour le groupe FON"
+    defaultvalue="__ANAELConnectionStringGroupeFON__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='ANAEL:ConnectionString:Groupe:GFON']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+      name="AnaelConnectionStringGroupeFtp"
+      description="Chaîne de connexion à Anael pour le groupe FTP"
+      defaultvalue="__ANAELConnectionStringGroupeFTP__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='ANAEL:ConnectionString:Groupe:GFTP']/@value">
+    </parameterentry>
+  </parameter>
+
+  <!-- Parametrage des chaines de connection RVG-->
+
+  <parameter
+      name="RvgConnectionStringGroupeRzb"
+      description="Chaine de connexion à RVG pour le groupe RZB"
+      defaultvalue="__RVGConnectionStringGroupeRZB__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='RVG:ConnectionString:Groupe:GRZB']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+  name="RvgConnectionStringGroupeFtp"
+  description="Chaine de connexion à RVG pour le groupe FTP"
+  defaultvalue="__RVGConnectionStringGroupeFTP__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='RVG:ConnectionString:Groupe:GFTP']/@value">
+    </parameterentry>
+  </parameter>
+
+  <!-- Parametrage du dossier des exports des Far -->
+
+  <parameter
+  name="ExportFarFolder"
+  description="Dossier où sont enregistrés les exports Far"
+  defaultvalue="__ExportFarFolder__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='shared:folder:exportFar']/@value">
+    </parameterentry>
+  </parameter>
+
+
+  <!-- Parametrage d'AppInsight -->
+  <parameter
+      name="FredAppInsightKey"
+      description="Clé API pour l'environnement"
+      defaultvalue="__FredAppInsightKey__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+          match="/configuration/appSettings/add[@key='Microsoft:ApplicationInsight:Key']/@value">
+    </parameterentry>
+  </parameter>
+
+
+  <!-- Parametrage des logs -->
+  <parameter
+      name="LogFilePath"
+      description="Chemin du fichier de log"
+      defaultvalue="__LogFilePath__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/nlog/targets/target[@name='logfile']/@fileName">
+    </parameterentry>
+  </parameter>
+
+
+  <!-- Parametrage des Api Storm-->
+
+  <parameter
+    name="StormApiUrl"
+    description="Url des api Storm"
+    defaultvalue="__StormWebApiUrl__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Storm:WebApiUrl']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="StormApiLogin"
+    description="Login des api Storm"
+    defaultvalue="__StormLogin__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Storm:Login']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="StormApiPassword"
+    description="Password des api Storm"
+    defaultvalue="__StormPassword__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Storm:Password']/@value">
+    </parameterentry>
+  </parameter>
+
+
+
+  <!-- Fred Import/Export API Endpoints -->
+  <parameter
+    name="FredIEWebApiUrl"
+    description="Adresse du service FredIE Api"
+    defaultvalue="__FredIEWebApiUrl__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/@url">
+    </parameterentry>
+  </parameter>
+
+  <!-- Fred Import/Export Service Accounts -->
+
+  <parameter
+    name="FredIEServiceAccountLogin"
+    description="Nom du compte de service FredIE Api"
+    defaultvalue="__FredIEServiceAccountLogin__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/serviceAccounts/add[@groupCode='Default']/@username">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="FredIEServiceAccountPassword"
+    description="Mot de passe du compte de service FredIE Api"
+    defaultvalue="__FredIEServiceAccountPassword__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/serviceAccounts/add[@groupCode='Default']/@password">
+    </parameterentry>
+  </parameter>
+
+  <!--
+  <parameter
+    name="FredIEServiceAccountLoginFES"
+    description="Nom du compte de service FredIE Api FES"
+    defaultvalue="__FredIEServiceAccountLoginFES__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/serviceAccounts/add[@groupCode='GFES']/@username">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="FredIEServiceAccountPasswordFES"
+    description="Mot de passe du compte de service FredIE Api FES"
+    defaultvalue="__FredIEServiceAccountPasswordFES__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/serviceAccounts/add[@groupCode='GFES']/@password">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="FredIEServiceAccountLoginFTP"
+    description="Nom du compte de service FredIE Api FTP"
+    defaultvalue="__FredIEServiceAccountLoginFTP__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/serviceAccounts/add[@groupCode='GFTP']/@username">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="FredIEServiceAccountPasswordFTP"
+    description="Mot de passe du compte de service FredIE Api FTP"
+    defaultvalue="__FredIEServiceAccountPasswordFTP__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/serviceAccounts/add[@groupCode='GFTP']/@password">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="FredIEServiceAccountLoginRZB"
+    description="Nom du compte de service FredIE Api RZB"
+    defaultvalue="__FredIEServiceAccountLoginRZB__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/serviceAccounts/add[@groupCode='GRZB']/@username">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="FredIEServiceAccountPasswordRZB"
+    description="Mot de passe du compte de service FredIE Api RZB"
+    defaultvalue="__FredIEServiceAccountPasswordRZB__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/serviceAccounts/add[@groupCode='GRZB']/@password">
+    </parameterentry>
+  </parameter>-->
+
+  <!-- Parametrage des Api Storm GROUPE RAZEL-BEC-->
+
+  <parameter
+    name="StormApiUrlGroupeRazelBec"
+    description="Url des api Storm GROUPE RAZEL-BEC"
+    defaultvalue="__StormWebApiUrlGroupeRazelBec__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Storm:WebApiUrl:Groupe:GRZB']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="StormApiLoginGroupeRazelBec"
+    description="Login des api Storm GROUPE RAZEL-BEC"
+    defaultvalue="__StormLoginGroupeRazelBec__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Storm:Login:Groupe:GRZB']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="StormApiPasswordGroupeRazelBec"
+    description="Password des api Storm GROUPE RAZEL-BEC"
+    defaultvalue="__StormPasswordGroupeRazelBec__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Storm:Password:Groupe:GRZB']/@value">
+    </parameterentry>
+  </parameter>
+
+  <!-- Parametrage des Api Storm GROUPE FAYAT TP-->
+
+  <parameter
+    name="StormApiUrlGroupeFayatTp"
+    description="Url des api SAP GROUPE FAYAT TP"
+    defaultvalue="__StormWebApiUrlGroupeFayatTp__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Storm:WebApiUrl:Groupe:GFTP']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="StormApiLoginGroupeFayatTp"
+    description="Login des api SAP GROUPE FAYAT TP"
+    defaultvalue="__StormLoginGroupeFayatTp__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Storm:Login:Groupe:GFTP']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="StormApiPasswordGroupeFayatTp"
+    description="Password des api SAP GROUPE FAYAT TP"
+    defaultvalue="__StormPasswordGroupeFayatTp__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Storm:Password:Groupe:GFTP']/@value">
+    </parameterentry>
+  </parameter>
+
+
+  <!-- Parametrage des Api Bridge-->
+
+  <parameter
+    name="BridgeApiUrl"
+    description="Url des api Bridge"
+    defaultvalue="__BridgeWebApiUrl__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Bridge:WebApiUrl']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="BridgeApiLogin"
+    description="Login des api Bridge"
+    defaultvalue="__BridgeLogin__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Bridge:Login']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="BridgeApiPassword"
+    description="Password des api Bridge"
+    defaultvalue="__BridgePassword__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Bridge:Password']/@value">
+    </parameterentry>
+  </parameter>
+
+  <!-- Paramétrage pour TIBCO -->
+
+  <parameter
+   name="TibcoExportPointageMoyen"
+   description="Tibco export pointage moyen"
+   defaultvalue="__TibcoExportPointageMoyen__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Tibco:ExportPointageMoyen']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+   name="TibcoExportPersonnel"
+   description="Tibco export personnel"
+   defaultvalue="__TibcoExportPersonnel__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Tibco:ExportPersonnel']/@value">
+    </parameterentry>
+  </parameter>
+
+
+  <!-- Paramétrage pour Stair -->
+
+  <parameter
+  name="StairImportIndicateursPathIn"
+  description="StairImportIndicateursPathIn"
+  defaultvalue="__StairImportIndicateursPathIn__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Stair:ImportIndicateurs:PathIn']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+  name="StairImportIndicateursPathErr"
+  description="StairImportIndicateursPathErr"
+  defaultvalue="__StairImportIndicateursPathErr__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Stair:ImportIndicateurs:PathErr']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+  name="StairImportIndicateursPathArchive"
+  description="StairImportIndicateursPathArchive"
+  defaultvalue="__StairImportIndicateursPathArchive__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Stair:ImportIndicateurs:PathArchive']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+  name="StairExportPathOutput"
+  description="StairExportPathOutput"
+  defaultvalue="__StairExportPathOutput__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='Stair:Export:PathOutput']/@value">
+    </parameterentry>
+  </parameter>
+
+  <!-- Parametrage pour acces aux Apis de Fred web-->
+
+  <parameter
+    name="FredWebRootUrl"
+    description="Url des api Fred web"
+    defaultvalue="__FredWebRootUrl__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='FredWeb:RootUrl']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+   name="FredWebServiceAccountLogin"
+   description="Login pour acces aux apis fred web"
+   defaultvalue="__FredWebServiceAccountLogin__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='FredWeb:ServiceAccount:Login']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+ name="FredWebServiceAccountPassword"
+ description="Password pour acces aux apis fred web"
+ defaultvalue="__FredWebServiceAccountPassword__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/appSettings/add[@key='FredWeb:ServiceAccount:Password']/@value">
+    </parameterentry>
+  </parameter>
+
+</parameters>

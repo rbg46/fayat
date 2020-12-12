@@ -1,0 +1,35 @@
+﻿<div>
+  <br />
+  <br />
+  <br />
+  <div>Avec le flag 'show-in-popup'</div>
+  <lookup-standalone class="PETRIT"
+                     ng-model="$ctrl.CILookup3"
+                     show-in-popup="true"
+                     text="$ctrl.CILookup3.Code"
+                     search-title="{{$ctrl.searchTitle}}"
+                     search-placeholder="{{$ctrl.Placeholder}}"
+                     on-click="$ctrl.initLookup3()"
+                     on-select="$ctrl.onSelectLookup3('lookup3', selectedRef)"
+                     on-delete="$ctrl.onDeleteLookup3()"
+                     >
+  </lookup-standalone>
+  <br />
+  <br />
+  <br />
+  <div>Sans le flag 'show-in-popup'</div>
+  <lookup-standalone class="PETRIT"
+                     ng-model="$ctrl.CILookup3"
+                   
+                     text="$ctrl.CILookup3.Code"
+                     search-title="{{$ctrl.searchTitle}}"
+                     search-placeholder="{{$ctrl.Placeholder}}"
+                     on-click="$ctrl.initLookup3()"
+                     on-select="$ctrl.onSelectLookup3('lookup3', selectedRef)"
+                     on-delete="$ctrl.onDeleteLookup3()"
+                    >
+  </lookup-standalone>
+  <br />
+  <br />
+  <br />
+</div>

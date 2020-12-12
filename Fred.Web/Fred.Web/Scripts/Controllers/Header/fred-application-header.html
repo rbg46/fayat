@@ -1,0 +1,97 @@
+﻿<nav class="appbar desktop low-res" ng-class="{'modern': $ctrl.modeMenu=='modern'}" style="z-index:1101">
+    <!--Icone pour ouvrir le menu type modern-->
+    <div class="modernMenu" ng-click="$ctrl.openCloseModernMenu()" title="{{menumodern}}">
+        <span class="sapicon-E071" id="menu-icon"></span>
+    </div>
+
+    <!--Logo de la société-->
+    <div class="logo">
+        <a href="/Home/Index">
+            <img class="imgLogoHeader"
+                 id="FRED_LOGO"
+                 ng-src="{{$ctrl.logoSrc}}"
+                 alt="image du logo"
+                 height="55"
+                 width="150" />
+        </a>
+    </div>
+
+    <div class="titre">
+        <span class="version-title">v. {{$ctrl.version}}</span>
+    </div>
+
+    <div id="blocScreen"></div>
+
+    <!--Informations de debug-->
+    <debug-angular-watchers-counter resources="$ctrl.resources">
+    </debug-angular-watchers-counter>
+
+    <div class="user_panel ng-scope">
+        <div class="panel_user">
+            <div class="infoUserRedux">
+                <div class="user-notif">
+                    <span class="counter" ng-show="$ctrl.numberOfNotifications > 0"> {{$ctrl.numberOfNotifications}}</span>
+                    <span class="sapicon-E23A not-bell" title={{$ctrl.resources.Notification_Number_Alert}} ng-click="$ctrl.openNotificationLoockup()"></span>
+                </div>
+
+                <div class="user-pic">
+                    <img class="profil-image" ng-src="{{$ctrl.photoProfilSrc}}" ng-click="$ctrl.openUserPanel()" />
+                    <div class="user-identity">
+                        <span class="firstname">{{$ctrl.user.Personnel.Prenom}}</span>
+                        <span class="lastname">{{$ctrl.user.Personnel.Nom}} </span>
+                        <br />
+                        <span class="company">{{$ctrl.user.Personnel.Societe.Libelle}}</span>
+                    </div>
+                </div>
+
+                <fred-authorization key="{{permissionKeys.AffichageBoutonFredTuto}}" style="overflow: hidden">
+                    <div class="user-notif" style="width:35px">
+                        <span class="sapicon-E1C4 not-bell" ng-click="$ctrl.openTuto()" style="cursor: pointer"></span>
+                    </div>
+                </fred-authorization>
+
+                <!--Icone plus pour afficher détail-->
+                <i title="Cliquer pour vous deconnecter ou gérer vos préférences"
+                   ng-click="$ctrl.openUserPanel()"
+                   class="icon-menu material-icons">more_vert</i>
+            </div>
+
+        </div>
+
+    </div>
+    <div>
+        <!-- <div class="time-box timer">
+          <i class="flaticon flaticon-clock-1 ico"></i>
+          <div>
+           <fred-horloge></fred-horloge>
+          </div>
+        </div> -->
+    </div>
+</nav>
+
+<!--NOTIFICATIONS PANEL : START-->
+<div ng-class="$ctrl.isNotificationLoockupOpenCss ? 'notif-blockscreen' : ''"></div>
+<div class="notif-tab" ng-show="$ctrl.isNotificationLoockupOpen">
+
+    <div class="notif-tab-header">
+      <label for="">{{$ctrl.resources.Notification_LockUp_Header}}</label>
+        <input type="text" class="form-control" placeholder={{$ctrl.resources.Notification_LockUp_PlaceHolder}}  ng-model="$ctrl.searchText" ng-change="$ctrl.handleChangeSearchText()">
+        <button ng-click="$ctrl.handleCloseLoockUpNotifications()">{{$ctrl.resources.Notification_LockUp_Close_Action}}</button>
+        <button class="pull-right" ng-click="$ctrl.handleDeleteAllNotifications()">{{$ctrl.resources.Notification_LockUp_DeleteAndClose_Action}}</button>
+    </div>
+
+    <div class="notif-tab-body fred-scroll">
+      <div ng-repeat="notif in $ctrl.notifications | filter:{IsDeleted:false} track by $index">
+        <div class="notif-tab-body-bloc">
+          <div class="infos-line">
+            <span class="date">{{$ctrl.handleDateNotification(notif.DateCreation)}}</span>
+            <span class="sapicon-E0B1 sap-icon" title={{$ctrl.resources.Notification_LockUp_NonViewHover_Message}} ng-show="!{{notif.EstConsulte}}"></span>
+            <span class="material-icons" ng-click="$ctrl.handleDeleteNotification(notif)">close</span>
+          </div>
+          <div class="notif-mess" fred-wrap-in-tag="{{notif.Message}}" words="$ctrl.searchText">
+            {{notif.Message}}
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

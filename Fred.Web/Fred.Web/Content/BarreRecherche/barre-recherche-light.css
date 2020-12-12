@@ -1,0 +1,125 @@
+﻿.filter {
+    background-color: #E1E3E5;
+    padding: 7px;
+    background-repeat: no-repeat;
+    margin-bottom: 5px;
+}
+
+.filter .btn {
+    height: 30px;
+    margin-top: 0;
+}
+
+.filter INPUT {
+    width: 100%;
+    height: 43px;
+    background-color: #fafafa;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    color: #67757f;
+    background-repeat: no-repeat;
+    background-position: 99% center;
+    background-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+}
+
+.filter INPUT:focus {
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+}
+
+.filter .input-group {
+    width: 100%;
+}
+
+.filter .input-group-btn {
+    border: 1px solid #BBBBBB;
+    border-left: none;
+    width: 30px;
+}
+
+.filter .input-group-btn .btn.btn-secondary.y_search {
+    height: 28px;
+    width: 30px;
+    padding: 0;
+    background-color: #ffde0e;
+    color: #555555;
+    margin: 0;
+}
+
+.filter .input-group-btn .btn.btn-secondary.y_search:hover {
+    border: 1px solid #ffde0e;
+    color: #555555;
+}
+
+.filter .input-group-btn .btn.btn-secondary.y_search .material-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter input.form-control.txt[type="text"] {
+    cursor: text;
+}
+
+.filter input:focus::-webkit-input-placeholder {
+    color: transparent;
+    opacity: 0;
+}
+
+.filter input:focus:-moz-placeholder {
+    color: transparent;
+    opacity: 0;
+}
+
+.filter input:focus::-moz-placeholder {
+    color: transparent;
+    opacity: 0;
+}
+
+.filter input:focus:-ms-input-placeholder {
+    color: transparent;
+    opacity: 0;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .filter {
+        padding: 7px 15px;
+        height: initial;
+    }
+    .filter .input-group-btn {
+        width: 25px;
+    }
+    .filter .input-group-btn .btn.btn-secondary.y_search {
+        height: 23px !important;
+        width: 25px;
+    }
+    .filter .input-group-btn .btn.btn-secondary.y_search .glyphicon-search {
+        position: absolute;
+        top: 3px;
+        right: 5px;
+    }
+    .filter .input-group-btn .btn.btn-secondary.y_search .material-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+    }
+    .form-control::-webkit-input-placeholder {
+        font-size: 10px;
+    }
+    .form-control:-moz-placeholder {
+        font-size: 10px;
+    }
+    .form-control::-moz-placeholder {
+        font-size: 10px;
+    }
+    .form-control:-ms-input-placeholder {
+        font-size: 10px;
+    }
+}

@@ -1,0 +1,242 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+  ViewBag.Title = FeatureFacture.Facture_Search_TitreOnglet;
+}
+
+@Styles.Render("~/Content/BarreRecherche/barre-recherche.css")
+@Scripts.Render("~/Scripts/module/BarreRecherche/barre-recherche.js")
+
+<div class="overlay"></div>
+
+<div class="container-fluid liste_factures">
+  <div class="filter-container">
+    <div class="row">
+
+      <div class="col-md-4 col-sm-4 no_padding">
+
+        <div class="input-group">
+          <input type="text" class="form-control" ng-model="filter.ValueText" on-enter="applyFilter(filter)" placeholder="{{filterPlaceholder}}">
+          <span class="input-group-btn">
+            <button class="btn btn-secondary y_search" type="button" ng-click="applyFilter(filter)"><i class="material-icons">search</i></button>
+          </span>
+        </div>
+
+        <button class="btn btn-sm btn-white filter visible-xs pull-right" data-toggle="collapse" data-target="#demo"><span class="flaticon-funnel"></span></button>
+
+      </div>
+
+      <div class="col-md-7 col-sm-7">
+        <!-- Sélections -->
+        <button type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="filter.Organisation" ng-click="filter.Organisation=null; filter.OrganisationId=0; applyFilter(filter)">{{filter.Organisation.CodeLibelle}} <i class="flaticon-multiply"></i></button>
+        <button type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="filter.SeulementMesFactures" ng-click="filter.SeulementMesFactures=false; applyFilter(filter)">{{resources.Facture_Search_Tuile_MesFactures}} <i class="flaticon-multiply"></i></button>
+        <button type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="filter.AfficherFacturesRapprochees" ng-click="filter.AfficherFacturesRapprochees=false; applyFilter(filter)">{{resources.Facture_Search_Tuile_NonRapprochees}} <i class="flaticon-multiply"></i></button>
+        <button type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="filter.AfficherFacturesCachees" ng-click="filter.AfficherFacturesCachees=false; applyFilter(filter)">{{resources.Facture_Search_Tuile_NonCachees}} <i class="flaticon-multiply"></i></button>
+        <!-- Dates -->
+        <button type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="filter.DateComptableFrom" ng-click="filter.DateComptableFrom=null; applyFilter(filter)">{{resources.Facture_Search_Tuile_DateComptable}} : {{filter.DateComptableFrom | toLocaleDate | date : 'MM/yy'}}<i class="flaticon-multiply"></i></button>
+        <button type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="filter.DateGestionFrom" ng-click="filter.DateGestionFrom=null; applyFilter(filter)">{{resources.Facture_Search_Tuile_DateGestion}} >= {{filter.DateGestionFrom | toLocaleDate | date : 'dd/MM/yyyy'}}<i class="flaticon-multiply"></i></button>
+        <button type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="filter.DateGestionTo" ng-click="filter.DateGestionTo=null; applyFilter(filter)">{{resources.Facture_Search_Tuile_DateGestion}} <= {{filter.DateGestionTo | toLocaleDate | date : 'dd/MM/yyyy'}}<i class="flaticon-multiply"></i></button>
+        <button type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="filter.DateFactureFrom" ng-click="filter.DateFactureFrom=null; applyFilter(filter)">{{resources.Facture_Search_Tuile_DateFacture}} >= {{filter.DateFactureFrom | toLocaleDate | date : 'dd/MM/yyyy'}}<i class="flaticon-multiply"></i></button>
+        <button type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="filter.DateFactureTo" ng-click="filter.DateFactureTo=null; applyFilter(filter)">{{resources.Facture_Search_Tuile_DateFacture}} <= {{filter.DateFactureTo | toLocaleDate | date : 'dd/MM/yyyy'}}<i class="flaticon-multiply"></i></button>
+        <button type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="filter.DateEcheanceFrom" ng-click="filter.DateEcheanceFrom=null; applyFilter(filter)">{{resources.Facture_Search_Tuile_DateEcheance}} >= {{filter.DateEcheanceFrom | toLocaleDate | date : 'dd/MM/yyyy'}}<i class="flaticon-multiply"></i></button>
+        <button type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="filter.DateEcheanceTo" ng-click="filter.DateEcheanceTo=null; applyFilter(filter)">{{resources.Facture_Search_Tuile_DateEcheance}} <= {{filter.DateEcheanceTo | toLocaleDate | date : 'dd/MM/yyyy'}}<i class="flaticon-multiply"></i></button>
+        <!-- Montants -->
+        <button type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="filter.MontantHTFrom" ng-click="filter.MontantHTFrom=null; applyFilter(filter)">{{resources.Facture_Search_Tuile_MontantHT}} >= {{filter.MontantHTFrom}} <i class="flaticon-multiply"></i></button>
+        <button type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="filter.MontantHTTo" ng-click="filter.MontantHTTo=null; applyFilter(filter)">{{resources.Facture_Search_Tuile_MontantHT}} <= {{filter.MontantHTTo}} <i class="flaticon-multiply"></i></button>
+        <button type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="filter.MontantTVAFrom" ng-click="filter.MontantTVAFrom=null; applyFilter(filter)">{{resources.Facture_Search_Tuile_MontantTVA}} >= {{filter.MontantTVAFrom}} <i class="flaticon-multiply"></i></button>
+        <button type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="filter.MontantTVATo" ng-click="filter.MontantTVATo=null; applyFilter(filter)">{{resources.Facture_Search_Tuile_MontantTVA}} <= {{filter.MontantTVATo}} <i class="flaticon-multiply"></i></button>
+        <button type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="filter.MontantTTCFrom" ng-click="filter.MontantTTCFrom=null; applyFilter(filter)">{{resources.Facture_Search_Tuile_MontantTTC}} >= {{filter.MontantTTCFrom}} <i class="flaticon-multiply"></i></button>
+        <button type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="filter.MontantTTCTo" ng-click="filter.MontantTTCTo=null; applyFilter(filter)">{{resources.Facture_Search_Tuile_MontantTTC}} <= {{filter.MontantTTCTo}} <i class="flaticon-multiply"></i></button>
+      </div>
+
+      <div class="col-md-1 col-sm-1 no_pad_r">
+        <button class="btn btn-sm btn-white filter hidden-xs pull-right" data-toggle="collapse" data-target="#demo4" ng-click="buttonFilterClicked = !buttonFilterClicked">
+          <span ng-class="{'fa fa-filter' :!buttonFilterClicked  ,'material-icons closing' :buttonFilterClicked}"
+                title="{{!buttonFilterClicked ? ctrl.resources.Global_Filtre_Titre : ctrl.resources.Global_Bouton_Fermer}}">
+            <span ng-show="buttonFilterClicked">clear</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="demo4" class="collapse filters_bloc folding">
+      <h3><span class="fa fa-filter title"></span> {{resources.Global_Filtre_Titre}}</h3>
+      <div class="row">
+        <!-- FILTRE : Bloc Sélections -->
+        <div class="col-md-4">
+          <div class="legend">{{resources.Global_Filtre_SousTitre_Selection}} :</div>
+          <!-- Organisation -->
+          <div class="selection_filters">
+            <div class="col-lg-3 col-md-3 lbl_l">
+              <label for="" class="control-label lbl lbl_txt">{{resources.Facture_Search_Organisation}}</label>
+            </div>
+            <div class="col-lg-9 col-md-9 lbl_r no_pad_r">
+              <lookup-standalone ng-model="filter.Organisation"
+                                 text="filter.Organisation.CodeLibelle"
+                                 search-title="{{resources.Global_ReferentielOrganisation_Placeholder}}"
+                                 search-placeholder="{{resources.Global_ReferentielOrganisation_Placeholder}}"
+                                 url="/api/Organisation/SearchLightOrganisation/?typeOrganisation=SOCIETE,UO,PUO,ETABLISSEMENT&"
+                                 on-select="handleLookupSelection('Organisation', item)"
+                                 on-delete="filter.Organisation = null; filter.OrganisationId = 0;"
+                                 class="no-padding formulaire long"
+                                 style-parent="true">
+              </lookup-standalone>
+            </div>
+          </div>
+
+          <br />
+          <!-- SeulementMesFactures -->
+          <div class="selection_filters">
+            <label class="pull-left lbl chbx-lbl">
+              {{resources.Facture_Search_SeulementMesFactures}}
+            </label>
+            <div class="pull-right">
+              <label class="switch">
+                <input type="checkbox" name="SeulementMesFactures" ng-model="filter.SeulementMesFactures" />
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+          <!-- AfficherFacturesRapprochees -->
+          <div class="selection_filters">
+            <label class="pull-left lbl chbx-lbl">
+              {{resources.Facture_Search_SeulementNonRapprochees}}
+            </label>
+            <div class="pull-right">
+              <label class="switch">
+                <input type="checkbox" name="AfficherFacturesRapprochees" ng-model="filter.AfficherFacturesRapprochees" />
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+          <!-- AfficherFacturesCachees -->
+          <div class="selection_filters">
+            <label class="pull-left lbl chbx-lbl">
+              {{resources.Facture_Search_SeulementNonCachees}}
+            </label>
+            <div class="pull-right">
+              <label class="switch">
+                <input type="checkbox" name="AfficherFacturesCachees" ng-model="filter.AfficherFacturesCachees" />
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- FILTRE : Bloc Dates -->
+        <div class="col-md-4">
+          <div class="legend">{{resources.Global_Filtre_SousTitre_Date}} :</div>
+          <div class="col-lg-12 col-md-12 no_pad_l no_pad_r">
+            <!-- DateComptable -->
+            <div class="row">
+              <div class="selection_filters">
+                <div class="col-lg-4 col-md-4 lbl_l">
+                  <label for="" class="control-label lbl lbl_txt">{{resources.Facture_Search_DateComptable}}</label>
+                </div>
+                <div class="col-lg-4 col-md-4 no_pad_l sm_pad_r">
+                  <app-date-picker id="DateComptableFrom" ng-model="filter.DateComptableFrom" format="MM/YYYY" lang="fr" placeholder="{{resources.Facture_Search_DateComptable_Placeholder}}"></app-date-picker>
+                </div>
+              </div>
+            </div>
+            <!-- DateGestion -->
+            <div class="row">
+              <div class="selection_filters">
+                <div class="col-lg-4 col-md-4 lbl_l">
+                  <label for="" class="control-label lbl lbl_txt">{{resources.Facture_Search_DateGestion}}</label>
+                </div>
+                <div class="col-lg-4 col-md-4 no_pad_l sm_pad_r">
+                  <app-date-picker id="DateGestionFrom" ng-model="filter.DateGestionFrom" format="DD/MM/YYYY" lang="fr" placeholder="{{resources.Facture_Search_DateDebut_Placeholder}}"></app-date-picker>
+                </div>
+                <div class="col-lg-4 col-md-4 no_pad_r sm_pad_l">
+                  <app-date-picker id="DateGestionTo" ng-model="filter.DateGestionTo" format="DD/MM/YYYY" lang="fr" placeholder="{{resources.Facture_Search_DateFin_Placeholder}}"></app-date-picker>
+                </div>
+              </div>
+            </div>
+            <!-- DateFacture -->
+            <div class="row">
+              <div class="selection_filters">
+                <div class="col-lg-4 col-md-4 lbl_l">
+                  <label for="" class="control-label lbl lbl_txt">{{resources.Facture_Search_DateFacture}}</label>
+                </div>
+                <div class="col-lg-4 col-md-4 no_pad_l sm_pad_r">
+                  <app-date-picker id="DateFactureFrom" ng-model="filter.DateFactureFrom" format="DD/MM/YYYY" lang="fr" placeholder="{{resources.Facture_Search_DateDebut_Placeholder}}"></app-date-picker>
+                </div>
+                <div class="col-lg-4 col-md-4 no_pad_r sm_pad_l">
+                  <app-date-picker id="DateFactureTo" ng-model="filter.DateFactureTo" format="DD/MM/YYYY" lang="fr" placeholder="{{resources.Facture_Search_DateFin_Placeholder}}"></app-date-picker>
+                </div>
+              </div>
+            </div>
+            <!-- DateEcheance -->
+            <div class="row">
+              <div class="selection_filters">
+                <div class="col-lg-4 col-md-4 lbl_l">
+                  <label for="" class="control-label lbl lbl_txt">{{resources.Facture_Search_DateEcheance}}</label>
+                </div>
+                <div class="col-lg-4 col-md-4 no_pad_l sm_pad_r">
+                  <app-date-picker id="DateEcheanceFrom" ng-model="filter.DateEcheanceFrom" format="DD/MM/YYYY" lang="fr" placeholder="{{resources.Facture_Search_DateDebut_Placeholder}}"></app-date-picker>
+                </div>
+                <div class="col-lg-4 col-md-4 no_pad_r sm_pad_l">
+                  <app-date-picker id="DateEcheanceTo" ng-model="filter.DateEcheanceTo" format="DD/MM/YYYY" lang="fr" placeholder="{{resources.Facture_Search_DateFin_Placeholder}}"></app-date-picker>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- FILTRE : Bloc Montants -->
+        <div class="col-md-4">
+          <div class="legend">{{resources.Global_Filtre_SousTitre_Montant}} :</div>
+          <div class="col-lg-12 col-md-12 no_pad_l no_pad_r">
+            <!-- MontantHT -->
+            <div class="row">
+              <div class="selection_filters">
+                <div class="col-lg-4 col-md-4 lbl_l">
+                  <label for="" class="control-label lbl lbl_txt">{{resources.Facture_Search_MontantHT}}</label>
+                </div>
+                <div class="col-lg-4 col-md-4 no_pad_l sm_pad_r">
+                  <input type="text" id="MontantHTFrom" ng-model="filter.MontantHTFrom" class="form-control input-filter" placeholder="{{resources.Facture_Search_MontantMin_Placeholder}}">
+                </div>
+                <div class="col-lg-4 col-md-4 no_pad_r sm_pad_l">
+                  <input type="text" id="MontantHTTo" ng-model="filter.MontantHTTo" class="form-control input-filter" placeholder="{{resources.Facture_Search_MontantMax_Placeholder}}">
+                </div>
+              </div>
+            </div>
+            <!-- MontantTVA -->
+            <div class="row">
+              <div class="selection_filters">
+                <div class="col-lg-4 col-md-4 lbl_l">
+                  <label for="" class="control-label lbl lbl_txt">{{resources.Facture_Search_MontantTVA}}</label>
+                </div>
+                <div class="col-lg-4 col-md-4 no_pad_l sm_pad_r">
+                  <input type="text" id="MontantTVAFrom" ng-model="filter.MontantTVAFrom" class="form-control input-filter" placeholder="{{resources.Facture_Search_MontantMin_Placeholder}}">
+                </div>
+                <div class="col-lg-4 col-md-4 no_pad_r sm_pad_l">
+                  <input type="text" id="MontantTVATo" ng-model="filter.MontantTVATo" class="form-control input-filter" placeholder="{{resources.Facture_Search_MontantMax_Placeholder}}">
+                </div>
+              </div>
+            </div>
+            <!-- MontantTTC -->
+            <div class="row">
+              <div class="selection_filters">
+                <div class="col-lg-4 col-md-4 lbl_l">
+                  <label for="" class="control-label lbl lbl_txt">{{resources.Facture_Search_MontantTTC}}</label>
+                </div>
+                <div class="col-lg-4 col-md-4 no_pad_l sm_pad_r">
+                  <input type="text" id="MontantTTCFrom" ng-model="filter.MontantTTCFrom" class="form-control input-filter" placeholder="{{resources.Facture_Search_MontantMin_Placeholder}}">
+                </div>
+                <div class="col-lg-4 col-md-4 no_pad_r sm_pad_l">
+                  <input type="text" id="MontantTTCTo" ng-model="filter.MontantTTCTo" class="form-control input-filter" placeholder="{{resources.Facture_Search_MontantMax_Placeholder}}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row buttons_row">
+
+        <button type="button" class="btn btn-primary btn-grand pull-right" ng-click="applyFilter(filter)"> {{resources.Global_Filtre_Bouton_Appliquer}} </button>
+        <button type="button" class="btn btn-gold btn-grand pull-right" ng-click="addFilter2Favoris(filter)"> {{resources.Global_Filtre_Bouton_AjouterFavoris}}</button>
+        <button type="button" class="btn btn-gray btn-grand pull-right" ng-click="resetFilter()"> {{resources.Global_Filtre_Bouton_Reinitialiser}} </button>
+
+      </div>
+    </div>
+
+  </div>
+</div>

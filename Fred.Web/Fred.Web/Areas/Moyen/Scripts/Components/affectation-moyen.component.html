@@ -1,0 +1,136 @@
+﻿<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i>Affecter à</h2>
+            <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" aria-label="Close" title="Cliquer pour annuler et fermer"></i>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="text-danger" ng-show="$ctrl.isCheckErrorExistingStartDates && $ctrl.isErrorExistingStartDate">
+                        {{$ctrl.resources.Moyen_Warning_Nouvelle_Date_Debut}}
+                    </span>
+                    <br />
+                    <div class="chkb">
+                        <input id="chbxCi" type="checkbox" ng-model="$ctrl.isCiSelection"
+                               ng-change="$ctrl.handleToggleCiPersonnelSelection(true)">
+                        <label for="chbxCi" class="ng-binding"><span></span>CI</label>
+                        <span class="text-danger" ng-show="$ctrl.isCiSelection && !$ctrl.affectationModel.Ci">Merci de choisir un centre d'imputation .</span>
+                    </div>
+                    <div class="inner-addon right-addon lk">
+                        <lookup-standalone ng-model="$ctrl.affectationModel.Ci"
+                                           text="$ctrl.affectationModel.Ci.CodeLibelle"
+                                           search-title="{{$ctrl.resources.Global_ReferentielCI}}"
+                                           search-placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                           custom-template-url="/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                           url="/api/CiForAffectationMoyen/SearchLight/"
+                                           on-select="$ctrl.handleLookupSelection('CI', item)"
+                                           on-delete="$ctrl.handleLookupDeletion('CI')"
+                                           class="no-padding formulaire long"
+                                           style-parent="true"
+                                           show-in-popup="true"
+                                           placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                           ng-disabled="!$ctrl.isCiSelection">
+                        </lookup-standalone>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="chkb">
+                        <input id="chbxPers" type="checkbox" ng-model="$ctrl.isPersonnelSelection"
+                               ng-change="$ctrl.handleToggleCiPersonnelSelection(false)">
+                        <label for="chbxPers" class="ng-binding"><span></span>{{$ctrl.resources.Moyen_Personnel}}</label>
+                        <span class="text-danger" ng-show="$ctrl.isPersonnelSelection && !$ctrl.affectationModel.Personnel">Merci de choisir un personnel .</span>
+                    </div>
+                    <div class="inner-addon right-addon lk">
+                        <lookup-standalone ng-model="$ctrl.affectationModel.Personnel"
+                                           text="$ctrl.affectationModel.Personnel.LibelleRef"
+                                           search-title="{{$ctrl.resources.Global_ReferentielPersonnel}}"
+                                           search-placeholder="{{$ctrl.resources.Global_ReferentielPersonnel_Placeholder}}"
+                                           url="/api/PersonnelForAffectationMoyen/SearchLight/"
+                                           on-select="$ctrl.handleLookupSelection('Personnel', item)"
+                                           on-delete="$ctrl.handleLookupDeletion('Personnel')"
+                                           placeholder="Choix d'un personnel"
+                                           class="formulaire long"
+                                           show-in-popup="true"
+                                           ng-disabled="!$ctrl.isPersonnelSelection">
+                        </lookup-standalone>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row dp">
+                <div class="col-md-12">
+                    <label class="control-label">Date de début</label>
+                    <span class="text-danger" ng-show="$ctrl.isCheckDateDebutActif && $ctrl.dateDebuInvalid">
+                        {{$ctrl.resources.Moyen_Warning_Nouvelle_Date_Debut}}
+                    </span>
+                    <span class="text-danger" ng-show="$ctrl.isDateDebut">
+                        {{$ctrl.resources.Moyen_Warning_DateDebut}}
+                    </span>
+                    <span class="text-danger" ng-show="$ctrl.dateFinInvalid">{{$ctrl.resources.Moyen_Warning_Date_Posterieure}}</span>
+                    <span class="text-danger" ng-show="$ctrl.isDateDebutWeekend">Merci de saisir la date d'un jour ouvré.</span>
+                    <div class="input-group date">
+                        <app-date-picker id="dtPkStartAffectation"
+                                         name="DateOuverture"
+                                         format="DD/MM/YYYY"
+                                         lang="fr"
+                                         placeholder="Date de début"
+                                         initial-date="{{$ctrl.affectationModel.DateDebut}}"
+                                         ng-model="$ctrl.affectationModel.DateDebut"
+                                         ng-change="$ctrl.handleDateValidation()" />
+                    </div>
+                    <fred-authorization is-to-adjust-css-no-margin="true" key="{{$ctrl.resources.PermissionShowDateFinAffectationMoyens}}">
+                        <label class="control-label">Date de fin</label>
+                        <span class="text-danger" ng-show="$ctrl.isDateFinWeekend">Merci de saisir la date d'un jour ouvré.</span>
+                        <div class="input-group date">
+                            <app-date-picker id="dtPkEndAffectation"
+                                             name="DateFin"
+                                             format="DD/MM/YYYY"
+                                             lang="fr"
+                                             placeholder="Date de fin"
+                                             initial-date="{{$ctrl.affectationModel.DateFin}}"
+                                             ng-model="$ctrl.affectationModel.DateFin"
+                                             ng-change="$ctrl.handleDateValidation()" />
+                        </div>
+
+                        <button class="btn btn-default pull-left"
+                                ng-click="$ctrl.handleClearDateFin()">
+                            Réinitialiser date de fin
+                        </button>
+                    </fred-authorization>
+                </div>
+            </div>
+
+            <div class="row dp">
+                <div class="col-md-5">
+                    <label><span></span>Conducteur</label>
+                    <lookup-standalone ng-model="$ctrl.affectationModel.Conducteur"
+                                       text="$ctrl.affectationModel.Conducteur.LibelleRef"
+                                       search-title="{{$ctrl.resources.Global_ReferentielPersonnel}}"
+                                       search-placeholder="{{$ctrl.resources.Global_ReferentielPersonnel_Placeholder}}"
+                                       url="/api/Personnel/SearchLight/"
+                                       on-select="$ctrl.handleLookupSelection('Conducteur', item)"
+                                       on-delete="$ctrl.handleLookupDeletion('Conducteur')"
+                                       placeholder="Choix d'un conducteur"
+                                       class="formulaire long"
+                                       show-in-popup="true">
+                    </lookup-standalone>
+                </div>
+                <div class="col-md-7">
+                    <textarea class="form-control" ng-model="$ctrl.affectationModel.Commentaire" placeholder="Commentaire"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default pull-left" data-dismiss="modal"
+                    ng-click="$ctrl.handleFormValidation()"
+                    ng-disabled="$ctrl.isFormDataInValid">
+                {{$ctrl.resources.Moyen_Enregistrer}}
+            </button>
+            <button class="btn btn-link pull-right" data-dismiss="modal">{{$ctrl.resources.Moyen_Retour}}</button>
+        </div>
+    </div>
+</div>

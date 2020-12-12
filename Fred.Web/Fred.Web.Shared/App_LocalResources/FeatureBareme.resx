@@ -1,0 +1,435 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BaremeExploitationCI_Titre" xml:space="preserve">
+    <value>Gestion des barèmes exploitation CI</value>
+  </data>
+  <data name="BaremeExploitationCI_TitrePage" xml:space="preserve">
+    <value>Barème exploitation CI</value>
+  </data>
+  <data name="BaremeExploitationOrga_Titre" xml:space="preserve">
+    <value>Gestion des barèmes exploitation organisation</value>
+  </data>
+  <data name="BaremeExploitationOrga_TitrePage" xml:space="preserve">
+    <value>Barème exploitation organisation</value>
+  </data>
+  <data name="BaremeExploitation_Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="BaremeExploitation_AnnulationImpossibleSurLaPeriode" xml:space="preserve">
+    <value>Vous ne pouvez pas annuler sur la période donnée</value>
+  </data>
+  <data name="BaremeExploitation_Annuler" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="BaremeExploitation_BaremeExploitation" xml:space="preserve">
+    <value>Barème exploitation</value>
+  </data>
+  <data name="BaremeExploitation_ChargementErreur" xml:space="preserve">
+    <value>Erreur de chargement</value>
+  </data>
+  <data name="BaremeExploitation_Chauffeur" xml:space="preserve">
+    <value>Chauffeur</value>
+  </data>
+  <data name="BaremeExploitation_Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="BaremeExploitation_ComposantesOriginales" xml:space="preserve">
+    <value>Composantes originales</value>
+  </data>
+  <data name="BaremeExploitation_Conduite" xml:space="preserve">
+    <value>Conduite</value>
+  </data>
+  <data name="BaremeExploitation_ConfirmationAnnulation" xml:space="preserve">
+    <value>Etes-vous certain de vouloir annuler ?</value>
+  </data>
+  <data name="BaremeExploitation_Devise" xml:space="preserve">
+    <value>Devise</value>
+  </data>
+  <data name="BaremeExploitation_EnregistrementBaremeErreur" xml:space="preserve">
+    <value>Le barème comporte des erreurs, veuillez les corriger avant d'enregistrer</value>
+  </data>
+  <data name="BaremeExploitationCI_EnregistrementConfirmation" xml:space="preserve">
+    <value>Attention, vous allez revaloriser cet élément à partir de la dernière période non clôturée, voulez-vous continuer ?</value>
+  </data>
+  <data name="BaremeExploitation_EnregistrementEffectue" xml:space="preserve">
+    <value>Enregistrement effectué</value>
+  </data>
+  <data name="BaremeExploitation_EnregistrementErreur" xml:space="preserve">
+    <value>Erreur d'enregistrement</value>
+  </data>
+  <data name="BaremeExploitation_EnregistrementImpossible_SurchargeComposantesIdentiques" xml:space="preserve">
+    <value>Les composantes de la surcharge sont identiques à celles de la ressource parente</value>
+  </data>
+  <data name="BaremeExploitation_EnregistrementImpossible_PrixChauffeurManquantOuZero" xml:space="preserve">
+    <value>Le prix chauffeur doit être renseigné et être différent de zéro</value>
+  </data>
+  <data name="BaremeExploitation_EnregistrementImpossible_PrixConduiteZero" xml:space="preserve">
+    <value>Le prix conduite doit être vide ou être différent de zéro</value>
+  </data>
+  <data name="BaremeExploitation_EnregistrementImpossible_PrixManquantOuZero" xml:space="preserve">
+    <value>Le prix doit être renseigné et être différent de zéro</value>
+  </data>
+  <data name="BaremeExploitation_EnregistrementImpossible_UniteManquante" xml:space="preserve">
+    <value>L'unité doit être renseignée</value>
+  </data>
+  <data name="BaremeExploitation_EnregistrementImpossibleSurLaPeriode" xml:space="preserve">
+    <value>Vous ne pouvez pas enregistrer sur la période donnée</value>
+  </data>
+  <data name="BaremeExploitation_Enregistrer" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="BaremeExploitation_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+  </data>
+  <data name="BaremeExploitation_MaterielDejaEnSurcharge" xml:space="preserve">
+    <value>Le matériel sélectionné est déjà surchargé dans le chapitre '{0}', sous-chapitre '{1}', ressource '{2}'. Veuillez supprimer cette surcharge avant d'en ajouter une autre avec ce matériel</value>
+  </data>
+  <data name="BaremeExploitation_PasDeComposanteOriginale" xml:space="preserve">
+    <value>Pas de composante originale</value>
+  </data>
+  <data name="BaremeExploitation_PasDeModificationAEnregistrer" xml:space="preserve">
+    <value>Pas de modification à enregistrer</value>
+  </data>
+  <data name="BaremeExploitation_PeriodeComptable" xml:space="preserve">
+    <value>Période comptable</value>
+  </data>
+  <data name="BaremeExploitation_PersonnelDejaEnSurcharge" xml:space="preserve">
+    <value>Le personnel sélectionné est déjà surchargé dans le chapitre '{0}', sous-chapitre '{1}', ressource '{2}'. Veuillez supprimer cette surcharge avant d'en ajouter une autre avec ce personnel</value>
+  </data>
+  <data name="BaremeExploitation_Prix" xml:space="preserve">
+    <value>Prix</value>
+  </data>
+  <data name="BaremeExploitation_RappelBaremeOrganisation" xml:space="preserve">
+    <value>Rappel du barème organisation</value>
+  </data>
+  <data name="BaremeExploitation_Rechercher_Placeholder" xml:space="preserve">
+    <value>Personnel, matériel, ressources</value>
+  </data>
+  <data name="BaremeExploitation_Ressource" xml:space="preserve">
+    <value>Ressource</value>
+  </data>
+  <data name="BaremeExploitation_RessourceModifiee" xml:space="preserve">
+    <value>Ressources modifiée</value>
+  </data>
+  <data name="BaremeExploitationCI_SelectionnerAffaireEtPeriodePourAfficher" xml:space="preserve">
+    <value>Veuillez sélectionner une affaire et une période pour afficher le barème CI</value>
+  </data>
+  <data name="BaremeExploitation_SelectionnerCI" xml:space="preserve">
+    <value>Sélectionnez votre CI</value>
+  </data>
+  <data name="BaremeExploitation_SelectionnerOrganisation" xml:space="preserve">
+    <value>Sélectionnez votre organisation</value>
+  </data>
+  <data name="BaremeExploitation_Unite" xml:space="preserve">
+    <value>Unité</value>
+  </data>
+  <data name="BaremeExploitation_Validation" xml:space="preserve">
+    <value>Validation</value>
+  </data>
+  <data name="BaremeExploitationOrga_SelectionnerOrganisationEtPeriodePourAfficher" xml:space="preserve">
+    <value>Veuillez sélectionner une organisation et une période pour afficher le barème organisation</value>
+  </data>
+  <data name="BaremeExploitation_Etablissement" xml:space="preserve">
+    <value>Etablissement</value>
+  </data>
+  <data name="BaremeExploitation_Groupe" xml:space="preserve">
+    <value>Groupe</value>
+  </data>
+  <data name="BaremeExploitation_Societe" xml:space="preserve">
+    <value>Société</value>
+  </data>
+  <data name="BaremeExploitation_UO" xml:space="preserve">
+    <value>UO</value>
+  </data>
+  <data name="BaremeExploitationOrga_ConfirmerModificationsPerdues" xml:space="preserve">
+    <value>Les modifications en cours seront perdues, voulez-vous continuer ?</value>
+  </data>
+  <data name="BaremeExploitation_MaterielSansRessource" xml:space="preserve">
+    <value>Le matériel sélectionné n'a pas de ressource associée</value>
+  </data>
+  <data name="BaremeExploitation_PersonnelSansRessource" xml:space="preserve">
+    <value>Le personnel sélectionné n'a pas de ressource associée</value>
+  </data>
+  <data name="BaremeExploitation_EnregistrementImpossible_PeriodePrecedenteOverte" xml:space="preserve">
+    <value>Impossible d'enregistrer sur la période courante, la précédente n'est pas encore clôturée</value>
+  </data>
+  <data name="BaremeExploitation_AppliquerAuxEnfants" xml:space="preserve">
+    <value>Appliquer aux enfants</value>
+  </data>
+  <data name="BaremeExploitation_PrixChauffeur" xml:space="preserve">
+    <value>Prix chauffeur</value>
+  </data>
+  <data name="BaremeExploitation_PrixConduite" xml:space="preserve">
+    <value>Prix conduite</value>
+  </data>
+  <data name="BaremeExploitationOrga_EnregistrementConfirmation" xml:space="preserve">
+    <value>Etes-vous certain de vouloir enregistrer ?</value>
+  </data>
+  <data name="BaremeExploitationCI_RessourceStormLectureSeule_TooltipIcon" xml:space="preserve">
+    <value>Cette ressource ne peut être modifiée du fait que le barème est géré par STORM et  défini au niveau de l’établissement.</value>
+  </data>
+  <data name="BaremeExploitationCI_RessourceStormLectureSeule_TooltipChamp" xml:space="preserve">
+    <value>Le barème de la ressource est en lecture seule. Votre CI est paramétré pour utiliser uniquement le barème du parc matériel de STORM.</value>
+  </data>
+  <data name="BaremeExploitationCI_AjoutSurchargeMateriel" xml:space="preserve">
+    <value>Cliquer pour ajouter un matériel</value>
+  </data>
+  <data name="BaremeExploitationCI_AjoutSurchargeMaterielHorsStorm" xml:space="preserve">
+    <value>Cliquer pour ajouter un matériel (hors STORM)</value>
+  </data>
+  <data name="BaremeExploitationCI_AjoutSurchargePersonnel" xml:space="preserve">
+    <value>Cliquer pour ajouter une personne</value>
+  </data>
+  <data name="BaremeExploitationCI_RessourceStormLectureSeule_TooltipAddSurchargeMateriel" xml:space="preserve">
+    <value>L’ajout d’une exception ou d’une surcharge n’est pas possible. Votre CI  est paramétré pour utiliser uniquement le parc matériel de STORM.</value>
+  </data>
+  <data name="BaremeExploitationCI_EnregistrementImpossible_BaremeCourantInvalide" xml:space="preserve">
+    <value>Impossible d'enregistrer car le barème courant est invalide</value>
+  </data>
+  <data name="BaremeExploitationCI_EnregistrementImpossible_PeriodeCloturee" xml:space="preserve">
+    <value>Impossible d'enregistrer le barème car le CI est cloturé sur la période donnée</value>
+  </data>
+  <data name="BaremeExploitationOrga_EnregistrementImpossible_PeriodeCouranteObligatoire" xml:space="preserve">
+    <value>La barème ne peut être enregistré que sur la période courante</value>
+  </data>
+  <data name="BaremeExploitationCI_EnregistrementImpossible_PasDeClotureComptable" xml:space="preserve">
+    <value>Impossible d'enregistrer car le CI ne possède pas de clôture comptable</value>
+  </data>
+  <data name="BaremeExploitationOrga_EnregistrementImpossible_MauvaisePeriode" xml:space="preserve">
+    <value>Impossible d'enregistrer car la période indiquée n'est pas la période courante</value>
+  </data>
+  <data name="Bareme_ModalConfirmationSynchro_MessageConfirmation" xml:space="preserve">
+    <value>La synchronisation va écraser le barème courant, êtes-vous sur de vouloir continuer ?</value>
+  </data>
+  <data name="BaremeExploitation_BaremeIncompletModal_AffecterValeurParDefaut" xml:space="preserve">
+    <value>Affecter les valeurs par défaut</value>
+  </data>
+  <data name="BaremeExploitation_BaremeIncompletModal_CompleterLeBareme" xml:space="preserve">
+    <value>Compléter le barème</value>
+  </data>
+  <data name="BaremeExploitation_BaremeIncompletModal_Message" xml:space="preserve">
+    <value>Attention, certaines composantes ne sont pas saisies. Souhaitez-vous affecter les valeurs par défaut ou compléter le barème ?</value>
+  </data>
+  <data name="BaremeExploitation_BaremeIncompletModal_Titre" xml:space="preserve">
+    <value>Barème incomplet</value>
+  </data>
+  <data name="BaremeExploitation_Historique_ToolTipIcon" xml:space="preserve">
+    <value>Voir l'historique</value>
+  </data>
+  <data name="BaremeExploitation_Historique_Header" xml:space="preserve">
+    <value>Historique des barèmes d'exploitation</value>
+  </data>
+  <data name="BaremeExploitation_Materiel" xml:space="preserve">
+    <value>Matériel</value>
+  </data>
+  <data name="BaremeExploitation_Personnel" xml:space="preserve">
+    <value>Personnel</value>
+  </data>
+  <data name="BaremeExploitation_Historique_Aucun" xml:space="preserve">
+    <value>Il n'y a pas d'historique</value>
+  </data>
+  <data name="BaremeExploitation_Historique_BaremeApplique" xml:space="preserve">
+    <value>Barème appliqué</value>
+  </data>
+  <data name="BaremeExploitation_Historique_BaremeArchive" xml:space="preserve">
+    <value>Barème(s) archivé(s)</value>
+  </data>
+  <data name="BaremeExploitation_Historique_Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="BaremeExploitation_Historique_Fermer" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="BaremeExploitation_Historique_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+  </data>
+  <data name="BaremeExploitation_Historique_Materiel" xml:space="preserve">
+    <value>Matériel</value>
+  </data>
+  <data name="BaremeExploitation_Historique_Personnel" xml:space="preserve">
+    <value>Personnel</value>
+  </data>
+  <data name="BaremeExploitation_Historique_Prix" xml:space="preserve">
+    <value>Prix</value>
+  </data>
+  <data name="BaremeExploitation_Historique_PrixChauffeur" xml:space="preserve">
+    <value>Prix chauffeur</value>
+  </data>
+  <data name="BaremeExploitation_Historique_PrixConduite" xml:space="preserve">
+    <value>Prix conduite</value>
+  </data>
+  <data name="BaremeExploitation_Historique_RappelInformations" xml:space="preserve">
+    <value>Rappel des informations</value>
+  </data>
+  <data name="BaremeExploitation_Historique_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="BaremeExploitation_Historique_Exception" xml:space="preserve">
+    <value>Exception</value>
+  </data>
+  <data name="BaremeExploitation_Historique_Surcharge" xml:space="preserve">
+    <value>Surcharge</value>
+  </data>
+  <data name="BaremeExploitationCI_SynchronisationEchec" xml:space="preserve">
+    <value>Echec de la synchronisation</value>
+  </data>
+  <data name="BaremeExploitationCI_SynchronisationTerminee" xml:space="preserve">
+    <value>Synchronisation terminée</value>
+  </data>
+  <data name="BaremeExploitationCI_SupprimerSurcharge_TootipIcon" xml:space="preserve">
+    <value>Cliquer pour supprimer la surcharge ou l'exception</value>
+  </data>
+  <data name="BaremeExploitation_Synchroniser" xml:space="preserve">
+    <value>Synchroniser le barème</value>
+  </data>
+  <data name="BaremeExploitationCI_EnregistrementImpossible_AvantBaremeInitial" xml:space="preserve">
+    <value>Impossible d'enregistrer sur une période antérieure au barème initial.</value>
+  </data>
+  <data name="BaremeExploitation_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="BaremeExploitation_AppliquerAuxEnfantsComposanteVideModal_Appliquer" xml:space="preserve">
+    <value>Appliquer</value>
+  </data>
+  <data name="BaremeExploitation_AppliquerAuxEnfantsComposanteVideModal_Ignorer" xml:space="preserve">
+    <value>Ignorer</value>
+  </data>
+  <data name="BaremeExploitation_AppliquerAuxEnfantsComposanteVideModal_Message" xml:space="preserve">
+    <value>Certaines composantes ne sont pas renseignées, souhaitez-vous les appliquer quand même ou les ignorer ?</value>
+  </data>
+  <data name="BaremeExploitation_AppliquerAuxEnfantsComposanteVideModal_Titre" xml:space="preserve">
+    <value>Composante vide</value>
+  </data>
+  <data name="BaremeExploitationOrga_ModalBody" xml:space="preserve">
+    <value>Quel niveau souhaitez-vous extraire?</value>
+  </data>
+  <data name="BaremeExploitationOrga_ModalTitle" xml:space="preserve">
+    <value>Edition barème organisation</value>
+  </data>
+  <data name="BaremeExploitation_ErrorExportMsg" xml:space="preserve">
+    <value>Erreur lors de l'export excel</value>
+  </data>
+  <data name="BaremeExploitation_Valider" xml:space="preserve">
+    <value>Valider</value>
+  </data>
+  <data name="BaremeExploitation_ErrorExportPdfMsg" xml:space="preserve">
+    <value>Erreur lors de l'export PDF</value>
+  </data>
+</root>

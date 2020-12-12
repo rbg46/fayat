@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="OperationDiverse_centre_d_imputation" xml:space="preserve">
+    <value>Sélectionner votre organisation</value>
+  </data>
+  <data name="OperationDiverse_Ecart" xml:space="preserve">
+    <value>Ecart</value>
+  </data>
+  <data name="OperationDiverse_import_des_od_comptables" xml:space="preserve">
+    <value>Importer les écritures</value>
+  </data>
+  <data name="OperationDiverse_materiel" xml:space="preserve">
+    <value>Matériel</value>
+  </data>
+  <data name="Ventilation_AjouterRepartition" xml:space="preserve">
+    <value>Ajouter répartition</value>
+  </data>
+  <data name="Ventilation_EcartPeriodeADispatcher" xml:space="preserve">
+    <value>Ecart restant à dispatcher</value>
+  </data>
+  <data name="Ventilation_EcartDejaVentile" xml:space="preserve">
+    <value>Ecarts déjà ventilés</value>
+  </data>
+  <data name="OperationDiverse_ModalRessource_Titre" xml:space="preserve">
+    <value>Ressource</value>
+  </data>
+  <data name="OperationDiverse_ModalTache_Titre" xml:space="preserve">
+    <value>Tâche</value>
+  </data>
+  <data name="OperationDiverse_ModalTitre" xml:space="preserve">
+    <value>Répartition de l'écart</value>
+  </data>
+  <data name="OperationDiverse_Modal_Variation_periode_en_cours" xml:space="preserve">
+    <value>Variation période en cours</value>
+  </data>
+  <data name="OperationDiverse_Modal_variation_restant_dispatcher" xml:space="preserve">
+    <value>Variation restant à dispatcher</value>
+  </data>
+  <data name="OperationDiverse_total_Compta" xml:space="preserve">
+    <value>Total issu d'Anael</value>
+  </data>
+  <data name="OperationDiverse_total_Compta_FTP" xml:space="preserve">
+    <value>Total issu de SAP</value>
+  </data>
+  <data name="OperationDiverse_selectionner_une_date" xml:space="preserve">
+    <value>Sélectionner une période</value>
+  </data>
+  <data name="OperationDiverse_total_debourse" xml:space="preserve">
+    <value>TOTAL</value>
+  </data>
+  <data name="OperationDiverse_total_Fred" xml:space="preserve">
+    <value>Total issu de FRED</value>
+  </data>
+  <data name="OperationDiverse_valorisation_rectifiee" xml:space="preserve">
+    <value>Valorisation rectifiée</value>
+  </data>
+  <data name="OperationDiverse_Notification_Pas_de_devise" xml:space="preserve">
+    <value>Votre centre d'imputation n'a pas de devise.</value>
+  </data>
+  <data name="OperationDiverse_Main_Title" xml:space="preserve">
+    <value>Gestion des OD</value>
+  </data>
+  <data name="OperationDiverse_Etat_Periode" xml:space="preserve">
+    <value>Etat</value>
+  </data>
+  <data name="OperationDiverse_Etat_Periode_Cloture" xml:space="preserve">
+    <value>Clôturé</value>
+  </data>
+  <data name="OperationDiverse_Etat_Periode_EnCours" xml:space="preserve">
+    <value>En cours</value>
+  </data>
+  <data name="OperationDiverse_Erreur_Familles" xml:space="preserve">
+    <value>Impossible de charger les familles pour la société </value>
+  </data>
+  <data name="Libelle_MontantCompta" xml:space="preserve">
+    <value>Montant ANAEL</value>
+  </data>
+  <data name="Libelle_MontantCompta_FTP" xml:space="preserve">
+    <value>Montant SAP</value>
+  </data>
+  <data name="Ventilation_Title" xml:space="preserve">
+    <value>Gestion de la répartition des écarts (Dépense de type \"Ventilation OD\")</value>
+  </data>
+  <data name="OperationDiverse_AutreFrais_Title" xml:space="preserve">
+    <value>Gestion des autres Frais</value>
+  </data>
+  <data name="OperationDiverse_Immo_Title" xml:space="preserve">
+    <value>Gestion des Immobilisations</value>
+  </data>
+  <data name="OperationDiverse_Import_Impossible_Cumul" xml:space="preserve">
+    <value>Action impossible en mode cumul</value>
+  </data>
+  <data name="OperationDiverse_PeriodeDebut" xml:space="preserve">
+    <value>Période comptable début</value>
+  </data>
+  <data name="OperationDiverse_PeriodeFin" xml:space="preserve">
+    <value>Période comptable fin</value>
+  </data>
+  <data name="RapprochementComptaGestion_Main_Title" xml:space="preserve">
+    <value>Rapprochement Compta/Gestion</value>
+  </data>
+  <data name="OperationDiverse_chargement_excel_des_ecarts" xml:space="preserve">
+    <value>Réaffecter en masse à partir d'Excel</value>
+  </data>
+  <data name="OperationDiverse_chargement_excel_des_ecarts_title" xml:space="preserve">
+    <value>Réaffecter en masse les écarts</value>
+  </data>
+  <data name="OperationDiverse_NoEcritureComptableSelected_Error" xml:space="preserve">
+    <value>Veuillez sélectionner une écriture comptable</value>
+  </data>
+  <data name="OperationDiverse_Annuler" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="OperationDiverse_Continuer" xml:space="preserve">
+    <value>Continuer</value>
+  </data>
+  <data name="OperationDiverse_Importer" xml:space="preserve">
+    <value>Importer un fichier</value>
+  </data>
+  <data name="OperationDiverse_Ouvrir" xml:space="preserve">
+    <value>Ouvrir un fichier exemple</value>
+  </data>
+  <data name="OperationDiverse_QuestionAction" xml:space="preserve">
+    <value>Que souhaitez-vous faire ?</value>
+  </data>
+  <data name="OperationDiverse_Fermer" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="OperationDiverse_FichierChargerEchec" xml:space="preserve">
+    <value>Le fichier sélectionné n’a pas pu être chargé car une ou plusieurs anomalies ont été détectées</value>
+  </data>
+  <data name="OperationDiverse_FichierChargerEchecBouton" xml:space="preserve">
+    <value>Ouvrir le rapport d’anomalies</value>
+  </data>
+  <data name="OperationDiverse_FichierChargerEchecTitle" xml:space="preserve">
+    <value>Anomalie(s) détectée(s)</value>
+  </data>
+  <data name="OperationDiverse_FichierChargerSucces" xml:space="preserve">
+    <value>Fichier chargé avec succès</value>
+  </data>
+  <data name="OperationDiverse_FichierChargerSuccesTitle" xml:space="preserve">
+    <value>Importation réussie</value>
+  </data>
+  <data name="OperationDiverse_AucunFichier" xml:space="preserve">
+    <value>Aucun fichier sélectionné</value>
+  </data>
+  <data name="EcartModal_AutomaticTreatement" xml:space="preserve">
+    <value>Passer la totalité des écarts en OD (ré-ouvrir et clôturer la période)</value>
+  </data>
+  <data name="EcartModal_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="EcartModal_GapOnPeriod" xml:space="preserve">
+    <value>Des écarts ont été constatés sur des périodes clôturées sur la période du {0} au {1}</value>
+  </data>
+  <data name="EcartModal_ManualTreatement" xml:space="preserve">
+    <value>Traiter manuellement les écarts (ré-ouvrir) la période</value>
+  </data>
+  <data name="EcartModal_NoRights" xml:space="preserve">
+    <value>Vous ne disposez pas des habilitations nécessaires pour clôturer/déclôturer une période comptable</value>
+    <comment>ecart-modal.tpl.html</comment>
+  </data>
+  <data name="EcartModal_ODAutoOption" xml:space="preserve">
+    <value>Passer la totalité des écarts en OD</value>
+  </data>
+  <data name="EcartModal_ODManualOption" xml:space="preserve">
+    <value>Traiter manuellement les écarts</value>
+  </data>
+  <data name="EcartModal_Option" xml:space="preserve">
+    <value>Deux options possibles :</value>
+  </data>
+  <data name="EcartModal_PeriodesClosedWithGap" xml:space="preserve">
+    <value>Périodes clôturées avec un écart</value>
+  </data>
+  <data name="EcartModal_RefreshRequired" xml:space="preserve">
+    <value>Le traitement des écarts tournera en tâche de fond. Il sera nécessaire d'actualiser la recherche.</value>
+    <comment>ecart-modal.tpl.html</comment>
+  </data>
+  <data name="EcartModal_Title" xml:space="preserve">
+    <value>Traitement des périodes clôturées</value>
+  </data>
+  <data name="EcartModal_Validate" xml:space="preserve">
+    <value>Valider</value>
+  </data>
+  <data name="AutreFrais_AttachedOd" xml:space="preserve">
+    <value>OD rattachées</value>
+  </data>
+  <data name="AutreFrais_Ecart_Aleardy_Attached" xml:space="preserve">
+    <value>Ecarts déjà rattachés</value>
+  </data>
+  <data name="AutreFrais_Ecart_Not_Attached" xml:space="preserve">
+    <value>Ecarts non rattachés</value>
+  </data>
+  <data name="AutreFrais_Ecart_Wait_ToBeAffected" xml:space="preserve">
+    <value>Ecarts restants à affecter</value>
+  </data>
+  <data name="AutreFrais_Not_AttachedOd" xml:space="preserve">
+    <value>OD non rattachées</value>
+  </data>
+  <data name="AutreFrais_Title" xml:space="preserve">
+    <value>Gestion des autres frais</value>
+  </data>
+  <data name="OperationDiverse_ImportationEcritureCompatble_CiNotExist" xml:space="preserve">
+    <value>Importation impossible vous devez sélectionner un centre d'imputation.</value>
+  </data>
+  <data name="OperationDiverse_FichierChargerFailed" xml:space="preserve">
+    <value>Importation Impossible</value>
+  </data>
+  <data name="OperationDiverse_Importation_ClosedDate" xml:space="preserve">
+    <value>Importation Impossible  car au moins une période concernée est déjà clôturée</value>
+  </data>
+  <data name="OperationDiverse_Valider" xml:space="preserve">
+    <value>Valider</value>
+  </data>
+  <data name="OperationDiverseDetaillee_IconeAbonnement" xml:space="preserve">
+    <value>OD d'abonnement</value>
+  </data>
+  <data name="OperationDiverse_AucuneOperationDiverseSelectionnee" xml:space="preserve">
+    <value>Veuillez sélectionner une OD</value>
+  </data>
+  <data name="OperationDiverse_MultipleEcrituresComptablesSelected_Error" xml:space="preserve">
+    <value>Veuillez sélectionner une seule écriture comptable</value>
+  </data>
+  <data name="OperationDiverse_Rechercher_Immo_Non_Rattachee" xml:space="preserve">
+    <value>Rechercher une immobilisation non rattachée</value>
+  </data>
+  <data name="OperationDiverse_Rechercher_Immo_Rattachee" xml:space="preserve">
+    <value>Rechercher une immobilisation rattachée</value>
+  </data>
+  <data name="OperationDiverse_Rechercher_OD_Non_Rattachee" xml:space="preserve">
+    <value>Rechercher une OD non rattachée</value>
+  </data>
+  <data name="OperationDiverse_Rechercher_OD_Rattachee" xml:space="preserve">
+    <value>Rechercher une OD rattachée</value>
+  </data>
+  <data name="OperationDiverse_AjoutImpossible_MoisCloturer" xml:space="preserve">
+    <value>Impossible de rajouter des OD sur un mois clôturé.</value>
+  </data>
+  <data name="OperationDiverse_OD_Annulation_GenererAutomatique" xml:space="preserve">
+    <value>Annulation : N/A - OD générée automatiquement</value>
+  </data>
+  <data name="OperationDiverse_OD_GenererAutomatique" xml:space="preserve">
+    <value>N/A - OD générée automatiquement</value>
+  </data>
+  <data name="AutreFrais_Date_Deniere_Generation_OD_Abonnement" xml:space="preserve">
+    <value>Date dernière OD (prév)</value>
+  </data>
+  <data name="AutreFrais_Date_Premiere_Generation_OD_Abonnement" xml:space="preserve">
+    <value>Date première génération OD</value>
+  </data>
+  <data name="AutreFrais_Date_Prochaine_Generation_OD_Abonnement" xml:space="preserve">
+    <value>Date prochaine génération OD</value>
+  </data>
+  <data name="AutreFrais_Libelle_Abonnement" xml:space="preserve">
+    <value>Abonnement</value>
+  </data>
+  <data name="AutreFrais_Nombre_OD_Generer_Abonnement" xml:space="preserve">
+    <value>Nombre d'OD à générer</value>
+  </data>
+  <data name="AutreFrais_Periodicite_Abonnement" xml:space="preserve">
+    <value>Périodicité abonnement</value>
+  </data>
+  <data name="OperationDiverse_Confirmation_Doublon_Abonnnement" xml:space="preserve">
+    <value>La modification pourrait entrainer des doublons. Continuer ?</value>
+  </data>
+  <data name="OperationDiverse_Oui" xml:space="preserve">
+    <value>Oui</value>
+  </data>
+  <data name="EcartModal_GapOnPeriodCumulee" xml:space="preserve">
+    <value>Des écarts ont été constatés sur la période cumulée au {0}</value>
+  </data>
+  <data name="LibelleFamilyTooltip_OuvrirDepense" xml:space="preserve">
+    <value>Visualiser les dépenses</value>
+  </data>
+</root>

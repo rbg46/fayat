@@ -1,0 +1,29 @@
+﻿@using System.Globalization;
+@using Fred.Business.Template.Models.CommandeValidation
+@using Fred.Web.Shared.App_LocalResources
+
+@model CommandeValidationTemplateModel
+
+<html>
+<head>
+</head>
+<body>
+    <div style="padding-top: 5px;padding-bottom: 5px;">@ResourceMails.MailTemplate_Bonjour</div>
+
+    <div style="padding-top: 5px;padding-bottom: 5px;">
+        @ResourceMails.MailTemplateCommande  @Model.Numero
+    </div>
+    <div>
+        @ResourceMails.MailTemplate_Cordialement
+    </div>
+    <br />
+    <div>
+        @ResourceMails.MailTemplate_Equipe_Fred
+    </div>
+    <br />
+    <div style="font-size: 0.85rem;">@ResourceMails.MailTemplate_Ceci_est_un_email_automatique</div>
+    <br />
+    <br />
+    <br />
+</body>
+</html>

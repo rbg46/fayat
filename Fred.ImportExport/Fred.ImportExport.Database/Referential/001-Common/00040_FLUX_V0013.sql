@@ -1,0 +1,2 @@
+﻿UPDATE importExport.Flux SET Description = 'Import des écritures comptables d ANAEL RAZEL vers FRED', Libelle ='Import des écritures comptables d ANAEL RAZEL vers FRED' WHERE CODE = 'ECRITURE_COMPTABLE_RZB'
+UPDATE importExport.Flux SET Description = 'Import des écritures comptables d ANAEL Moulins vers FRED', Libelle ='Import des écritures comptables d ANAEL Moulins vers FRED' WHERE CODE = 'ECRITURE_COMPTABLE_MOULINS'

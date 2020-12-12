@@ -1,0 +1,929 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CI_Detail_Paie_Adresse" xml:space="preserve">
+    <value>Adresse 1</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_SousTitre_Facturation" xml:space="preserve">
+    <value>Adresse de facturation des commandes</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_SousTitre_Livraison" xml:space="preserve">
+    <value>Adresse de livraison des commandes</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Devise_SousTitre_AutresDevises" xml:space="preserve">
+    <value>Autres devises</value>
+    <comment>_PartialDevise.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_TableCarburant_Cloture" xml:space="preserve">
+    <value>Clôturé</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Index_TableCI_Entete_CodeCI" xml:space="preserve">
+    <value>Code CI</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="CI_Index_TableCI_Entete_CodeEtab" xml:space="preserve">
+    <value>Code Etablissement</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_CodePostal" xml:space="preserve">
+    <value>Code Postal</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Devise_SousTitre_DeviseRef" xml:space="preserve">
+    <value>Devise de référence</value>
+    <comment>_PartialDevise.cshtml</comment>
+  </data>
+  <data name="CI_Search_DateOuverture_Placeholder" xml:space="preserve">
+    <value>Date d'ouverture après le :</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="CI_Search_DateFermeture_Placeholder" xml:space="preserve">
+    <value>Date de fermeture avant le :</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Livraison_Entete" xml:space="preserve">
+    <value>Entête</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Factutation_Choix2" xml:space="preserve">
+    <value>Etablissement</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Index_TableCI_Entete_LibelleCI" xml:space="preserve">
+    <value>Libellé CI</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="CI_Index_TableCI_Entete_LibelleEtab" xml:space="preserve">
+    <value>Libellé Etablissement</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="CI_Index_TableCI_Entete_LibelleSoc" xml:space="preserve">
+    <value>Libellé Société</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="CI_Index_SousTitre_ListeCI" xml:space="preserve">
+    <value>Liste des CI</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_LocalisationAffaire" xml:space="preserve">
+    <value>Localisation affaire</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Devise_Titre" xml:space="preserve">
+    <value>Paramétrage des devises</value>
+    <comment>_PartialDevise.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_Titre" xml:space="preserve">
+    <value>Paramétrage de la paye</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Index_TableCI_Entete_SEP" xml:space="preserve">
+    <value>SEP</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Societe_Titre" xml:space="preserve">
+    <value>Sociétés partenaires</value>
+    <comment>_PartialSociete.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_Ville" xml:space="preserve">
+    <value>Ville</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_Libelle_Placeholder" xml:space="preserve">
+    <value>Libellé CI</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Index_TableCI_Entete_DateFermeture" xml:space="preserve">
+    <value>Date de fermeture</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="CI_Index_TableCI_Entete_DateOuverture" xml:space="preserve">
+    <value>Date d'ouverture</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="CI_Controller_ErrorMetier_DoubleSelectionDevise" xml:space="preserve">
+    <value>Vous ne pouvez pas sélectionner deux fois la même devise</value>
+    <comment>ci-detail.controller.js</comment>
+  </data>
+  <data name="CI_Detail_General_Titre" xml:space="preserve">
+    <value>Paramétrage général</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_FraisGeneraux" xml:space="preserve">
+    <value>Taux de frais généraux (%)</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_ResponsableChantier" xml:space="preserve">
+    <value>Responsable chantier</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_TauxHoraire" xml:space="preserve">
+    <value>Taux horaire moyen</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_FraisGeneraux_Placeholder" xml:space="preserve">
+    <value>Frais généraux</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_TauxHoraire_Placeholder" xml:space="preserve">
+    <value>Taux horaire</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_ResponsableAdministratif" xml:space="preserve">
+    <value>Responsable administratif</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_TypeAutre" xml:space="preserve">
+    <value>Autre</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_TypeChantier" xml:space="preserve">
+    <value>Chantier</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_TypeCI" xml:space="preserve">
+    <value>Type CI</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_TypeFraisGeneraux" xml:space="preserve">
+    <value>Frais Généraux</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_TypeMateriel" xml:space="preserve">
+    <value>Matériel</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_FraisGeneraux_ErrorFormat" xml:space="preserve">
+    <value>Pas plus de 2 décimales, pas de négatif et limité à 100</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_DateOuverture_ErrorLogique" xml:space="preserve">
+    <value>La date de fermeture doit être postérieure à la date d'ouverture</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_MontantHT_ErrorFormat" xml:space="preserve">
+    <value>Pas plus de 2 décimales, pas de négatif</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_MontantHT" xml:space="preserve">
+    <value>Montant du marché HT</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Index_Titre" xml:space="preserve">
+    <value>Gérer les CI</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="CI_Index_Table_SelectionLigne" xml:space="preserve">
+    <value>Cliquer pour accéder au détail du centre d'imputation #</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="CI_Search_SeulementSEP" xml:space="preserve">
+    <value>Seulement les SEP</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="CI_Search_InclureClotures" xml:space="preserve">
+    <value>Inclure les CI clôturés</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_DeviseMontantHT" xml:space="preserve">
+    <value>Devise du marché</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_EtablissementComptable_Placeholder" xml:space="preserve">
+    <value>Etablissement comptable</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_Societe_Placeholder" xml:space="preserve">
+    <value>Société</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_Societe" xml:space="preserve">
+    <value>Société</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_Horaires" xml:space="preserve">
+    <value>Horaires</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_DateFermeture" xml:space="preserve">
+    <value>Date de fermeture</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_DateOuverture" xml:space="preserve">
+    <value>Date d'ouverture</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Titre" xml:space="preserve">
+    <value>Administration du Centre d'Imputation</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_Horaires_ErrorFormat" xml:space="preserve">
+    <value>Le format horaire doit être HH:MM</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_SousTitre_Majoration" xml:space="preserve">
+    <value>Paramétrer la majoration des heures pointées</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_SousTitre_Prime" xml:space="preserve">
+    <value>Paramétrer les primes</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_Latitude" xml:space="preserve">
+    <value>Latitude</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_Longitude" xml:space="preserve">
+    <value>Longitude</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_EtablissementComptable" xml:space="preserve">
+    <value>Etablissement comptable</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Controller_ErrorMetier_RedirectionCI" xml:space="preserve">
+    <value>. Redirection vers les CI...</value>
+    <comment>ci-detail.controller.js</comment>
+  </data>
+  <data name="CI_Controller_ErrorMetier_QuotePartTotal" xml:space="preserve">
+    <value>Le total de quote-parts doit être de 100%</value>
+    <comment>ci-detail.controller.js</comment>
+  </data>
+  <data name="CI_Controller_ErrorMetier_DuplicateSociete" xml:space="preserve">
+    <value>La société est déjà présente dans la liste des partenaires</value>
+    <comment>ci-detail.controller.js</comment>
+  </data>
+  <data name="CI_Controller_ErrorMetier_DuplicateTypeParticipation" xml:space="preserve">
+    <value>Impossible d'avoir plusieurs sociétés Mandataire ou Gérante</value>
+    <comment>ci-detail.controller.js</comment>
+  </data>
+  <data name="CI_Detail_Paie_ZoneModifiable" xml:space="preserve">
+    <value>Zone Modifiable</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_ActiverCarburant" xml:space="preserve">
+    <value>Activer la prise en compte du carburant dans l'exploitation</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_TableCarburant_ErrorPeriodeUnique" xml:space="preserve">
+    <value>Un carburant ne peut avoir qu'un prix par période et par devise.</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_TableRessource_ConsommationCI" xml:space="preserve">
+    <value>Consommation CI</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_TableRessource_ConsommationDefaut" xml:space="preserve">
+    <value>Consommation par défaut</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_TableRessource_ErrorConsommationPositive" xml:space="preserve">
+    <value>La consommation doit être positive.</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_Titre" xml:space="preserve">
+    <value>Paramétrage du carburant</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_SousTitre_ParametrageConsommationRessource" xml:space="preserve">
+    <value>Paramétrage de la consommation des ressources matérielles</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_SousTitre_ParametragePrixCarburant" xml:space="preserve">
+    <value>Paramétrage du prix des carburants</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_TableCarburant_PeriodeApplication" xml:space="preserve">
+    <value>Période d'application (à partir de)</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_TableCarburant_ErrorPrixDecimal" xml:space="preserve">
+    <value>5 décimales maximum.</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_TableCarburant_ErrorPrixPositif" xml:space="preserve">
+    <value>Le prix doit être positif.</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_TableCarburant_Prix" xml:space="preserve">
+    <value>Prix</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_SelectionDevise" xml:space="preserve">
+    <value>Sélectionner une devise</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_RetourListeCI" xml:space="preserve">
+    <value>Retour à la liste des CI</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_TableRessource_ErrorConsommationDecimal" xml:space="preserve">
+    <value>2 décimales maximum.</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Controller_ErrorMetier_PrixObligatoire" xml:space="preserve">
+    <value>Enregistrement impossible : dans le paramétrages des carburants, toutes les valeurs du champ Prix doivent être renseignées.</value>
+    <comment>ci-detail.controller.js</comment>
+  </data>
+  <data name="CI_Controller_ErrorMetier_DeviseDejaReference" xml:space="preserve">
+    <value>La devise sélectionnée est déjà la devise de référence.</value>
+    <comment>ci-detail.controller.js</comment>
+  </data>
+  <data name="CI_Controller_ErrorMetier_DeviseDejaSecondaire" xml:space="preserve">
+    <value>La devise sélectionnée est déjà une devise secondaire.</value>
+    <comment>ci-detail.controller.js</comment>
+  </data>
+  <data name="CI_Controller_ErrorMetier_NbrMaxDevise" xml:space="preserve">
+    <value>Nombre maximum de devises atteint</value>
+    <comment>ci-detail.controller.js</comment>
+  </data>
+  <data name="CI_Controller_ErrorMetier_RequiredReferenceDevise" xml:space="preserve">
+    <value>Devise de référence requise</value>
+    <comment>ci-detail.controller.js</comment>
+  </data>
+  <data name="CI_Controller_Reference" xml:space="preserve">
+    <value>Référence</value>
+    <comment>ci-detail.controller.js</comment>
+  </data>
+  <data name="CI_Controller_Secondaires" xml:space="preserve">
+    <value>Secondaires</value>
+    <comment>ci-detail.controller.js</comment>
+  </data>
+  <data name="CI_Detail_Carburant_TableCarburant_Action" xml:space="preserve">
+    <value>Action</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_TableCarburant_ErrorPrixObligatoire" xml:space="preserve">
+    <value>Prix obligatoire.</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_TableRessource_Carburant" xml:space="preserve">
+    <value>Carburant</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_TableRessource_Code" xml:space="preserve">
+    <value>Code</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Carburant_TableRessource_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+    <comment>_PartialCarburant.cshtml</comment>
+  </data>
+  <data name="CI_Detail_CodeLibelle" xml:space="preserve">
+    <value>Code / Libellé</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_CopierFacturation" xml:space="preserve">
+    <value>Copier l'adresse de facturation</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Facturation_Adresse" xml:space="preserve">
+    <value>Adresse</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Facturation_Adresse_Placeholder" xml:space="preserve">
+    <value>Adresse</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Facturation_CodePostal" xml:space="preserve">
+    <value>Code Postal</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Facturation_CodePostal_Placeholder" xml:space="preserve">
+    <value>Code Postal</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Facturation_Pays" xml:space="preserve">
+    <value>Pays</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Facturation_Pays_Placeholder" xml:space="preserve">
+    <value>Pays</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Facturation_Ville" xml:space="preserve">
+    <value>Ville</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Facturation_Ville_Placeholder" xml:space="preserve">
+    <value>Ville</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Factutation_Choix1" xml:space="preserve">
+    <value>Chantier/Plateforme</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Livraison_Adresse" xml:space="preserve">
+    <value>Adresse</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Livraison_Adresse_Placeholder" xml:space="preserve">
+    <value>Adresse</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Livraison_CodePostal" xml:space="preserve">
+    <value>Code Postal</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Livraison_CodePostal_Placeholder" xml:space="preserve">
+    <value>Code Postal</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Livraison_Entete_Placeholder" xml:space="preserve">
+    <value>Entête</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Livraison_Pays" xml:space="preserve">
+    <value>Pays</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Livraison_Pays_Placeholder" xml:space="preserve">
+    <value>Pays</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Livraison_Ville" xml:space="preserve">
+    <value>Ville</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Livraison_Ville_Placeholder" xml:space="preserve">
+    <value>Ville</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Commande_Titre" xml:space="preserve">
+    <value>Paramétrage du module commande</value>
+    <comment>_PartialFacturation.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Description" xml:space="preserve">
+    <value>Description</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Devise_TableDevise_AjouterDevise" xml:space="preserve">
+    <value>Ajouter une devise</value>
+    <comment>_PartialDevise.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Devise_TableDevise_Devise" xml:space="preserve">
+    <value>Devise</value>
+    <comment>_PartialDevise.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_DateFermeture_Placeholder" xml:space="preserve">
+    <value>Date de fermeture</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_DateOuverture_Placeholder" xml:space="preserve">
+    <value>Date d'ouverture</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_DureeChantier" xml:space="preserve">
+    <value>Durée du chantier (mois)</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_ErrorDureeChantier" xml:space="preserve">
+    <value>Nombre entier, pas de négatif</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_Libelle" xml:space="preserve">
+    <value>Libellé CI</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_SEP" xml:space="preserve">
+    <value>SEP</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_TauxHoraire_ErrorFormat" xml:space="preserve">
+    <value>Pas plus de 2 décimales, pas de négatif et limité à 100</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_Adresse_Placeholder" xml:space="preserve">
+    <value>Adresse 1</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_CodePostal_Placeholder" xml:space="preserve">
+    <value>Code Postal</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_Latitude_Placeholder" xml:space="preserve">
+    <value>Latitude</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_Longitude_Placeholder" xml:space="preserve">
+    <value>Longitude</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_Pays" xml:space="preserve">
+    <value>Pays</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_Pays_Placeholder" xml:space="preserve">
+    <value>Pays</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_Ville_Placeholder" xml:space="preserve">
+    <value>Ville</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Societe" xml:space="preserve">
+    <value>Société</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Societe_Table_Entete_AjouterSociete" xml:space="preserve">
+    <value>Ajouter une société partenaire</value>
+    <comment>_PartialSociete.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Societe_Table_Entete_QuotePart" xml:space="preserve">
+    <value>Quote-part</value>
+    <comment>_PartialSociete.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Societe_Table_Entete_Societe" xml:space="preserve">
+    <value>Société</value>
+    <comment>_PartialSociete.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Societe_Table_Entete_TypeParticipation" xml:space="preserve">
+    <value>Type participation</value>
+    <comment>_PartialSociete.cshtml</comment>
+  </data>
+  <data name="CI_Index_Table_SelectionIconeSEP" xml:space="preserve">
+    <value>Centre d'imputation est une SEP</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="CI_Controller_ErrorMetier_DroitsInsuffisants" xml:space="preserve">
+    <value>Vous n'avez pas les droits suffisants pour accéder à cet élément</value>
+    <comment>ci-detail.controller.js</comment>
+  </data>
+  <data name="CI_Detail_Devise_TableDevise_SupprimerDevise" xml:space="preserve">
+    <value>Supprimer la devise secondaire</value>
+    <comment>_PartialDevise.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_TableMajoration_Entete_Affecter" xml:space="preserve">
+    <value>Affecter</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_TableMajoration_Entete_Code" xml:space="preserve">
+    <value>Code</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_TableMajoration_Entete_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_TableMajoration_Entete_Public" xml:space="preserve">
+    <value>Public</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_TablePrime_Entete_Affecter" xml:space="preserve">
+    <value>Affecter</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_TablePrime_Entete_Code" xml:space="preserve">
+    <value>Code</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_TablePrime_Entete_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_TablePrime_Entete_Public" xml:space="preserve">
+    <value>Public</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Societe_Table_Supprimer" xml:space="preserve">
+    <value>Supprimer la société partenaire</value>
+    <comment>_PartialSociete.cshtml</comment>
+  </data>
+  <data name="CI_Detail_TitreOnglet" xml:space="preserve">
+    <value>Detail CI</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="CI_Index_TitreOnglet" xml:space="preserve">
+    <value>Centre d'Imputation</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="CI_Search_TitreOnglet" xml:space="preserve">
+    <value>Recherche CI</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_Adresse2" xml:space="preserve">
+    <value>Adresse 2</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_Adresse3" xml:space="preserve">
+    <value>Adresse 3</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_Adresse_Placeholder2" xml:space="preserve">
+    <value>Adresse 2</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_Adresse_Placeholder3" xml:space="preserve">
+    <value>Adresse 3</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Controller_ErrorMetier_QuotePart" xml:space="preserve">
+    <value>Une quote-part ne peut être négative.</value>
+  </data>
+  <data name="CI_Search_CIType_Affaire" xml:space="preserve">
+    <value>Affaire</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="CI_Search_CIType_Etude" xml:space="preserve">
+    <value>Etude</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="CI_Search_CIType_Section" xml:space="preserve">
+    <value>Section</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="CI_Index_TableCI_Entete_TypeCI" xml:space="preserve">
+    <value>Type</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_Click_To_Manage_Astreints" xml:space="preserve">
+    <value>Cliquer pour gérer les astreintes au niveau du CI</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_Click_To_Stop_Managing_Astreints" xml:space="preserve">
+    <value>Cliquer pour ne plus gérer les astreintes</value>
+    <comment>_PartialTeam.cshtmls</comment>
+  </data>
+  <data name="CI_Detail_Team_ManageAstreints" xml:space="preserve">
+    <value>Gérer les astreintes</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_ShowAll" xml:space="preserve">
+    <value>Tout afficher</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_Title" xml:space="preserve">
+    <value>Paramétrage des équipes et affectations</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_Search_PlaceHolder" xml:space="preserve">
+    <value>Rechercher une personne</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_Astreinte" xml:space="preserve">
+    <value>Astreinte</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_Click_To_Add_To_FavoriteTeam" xml:space="preserve">
+    <value>Cliquer pour ajouter ce personnel dans mon équipe favorite</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_Click_To_Remove_From_FavoriteTeam" xml:space="preserve">
+    <value>Cliquer pour supprimer ce personnel dans mon équipe favorite</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_Personnel" xml:space="preserve">
+    <value>Personnel</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_Status" xml:space="preserve">
+    <value>Statut</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_WithoutAstreinte" xml:space="preserve">
+    <value>Sans Astreinte</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_Import" xml:space="preserve">
+    <value>Importer équipe</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_Personnel_Has_Delegation" xml:space="preserve">
+    <value>Ce personnel a une délégation sur l'affaire</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_Select_Personnel" xml:space="preserve">
+    <value>Référentiel des Personnels</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_Error_Affecation" xml:space="preserve">
+    <value>Erreur lors de l'affectation du personnel </value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_Notification_Personnel_Existant" xml:space="preserve">
+    <value>Ce personnel est déja affecté à ce centre d'imputation</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Details_Team_Confirm_Desactivate_Managing_Astreintes" xml:space="preserve">
+    <value>Confirmez-vous la désactivation des astreintes sur ce centre d'imputation ? toutes les astreintes seront annulées.</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_Matricul" xml:space="preserve">
+    <value>Matricule</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_Confirm_Import_All_Team_Members" xml:space="preserve">
+    <value>Voulez-vous affecter tous les membres de votre équipe favorite à ce centre d'imputation ?</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Details_Team_Only_Workers_Can_Be_In_Team" xml:space="preserve">
+    <value>L’équipe favorite ne peut contenir que des ouvriers.</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Details_Team_Worker" xml:space="preserve">
+    <value>Ouvrier</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Team_Notification_Managing_Astreintes_IsOnlyFor_Affaire_Type" xml:space="preserve">
+    <value>La gestion des astreintes s'applique uniquement pour les CI du type \"Affaire\"</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Details_Team_Workers" xml:space="preserve">
+    <value>ouvriers</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="Pointage_IAC_AbsenceSaisie_Error" xml:space="preserve">
+    <value>Les valeurs admises sont ‘0.5’ et ‘1’</value>
+  </data>
+  <data name="Pointage_IAC_TacheSaisie_Error" xml:space="preserve">
+    <value>Les valeurs admises sont ‘0.25’, ‘0.5’, ‘0.75’ et ‘1’</value>
+  </data>
+  <data name="CI_Affectation_Delete_Affectation_Message" xml:space="preserve">
+    <value>Le personnel ne peut être supprimé, car il a effectué des pointages sur ce CI</value>
+    <comment>ci-detail.controller.js</comment>
+  </data>
+  <data name="CI_Search_Tuile_ClotureOk" xml:space="preserve">
+    <value>CI Cloturés</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="CI_Search_Tuile_DateFermeture" xml:space="preserve">
+    <value>Date Fermeture &lt;=</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="CI_Search_Tuile_DateOuverture" xml:space="preserve">
+    <value>Date Ouverture &gt;=</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="CI_Search_Tuile_SEP" xml:space="preserve">
+    <value>SEP</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="CI_Search_Favori_Tooltip" xml:space="preserve">
+    <value>Cliquer pour enregistrer les critères de recherche comme favori</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="CI_Detail_Paie_TablePrime_Entete_Societe" xml:space="preserve">
+    <value>Société</value>
+    <comment>_PartialPaie.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_CompteInterneSep" xml:space="preserve">
+    <value>Compte Interne Sep</value>
+  </data>
+  <data name="CI_Detail_General_Horaires_PremiereTrancheManquante" xml:space="preserve">
+    <value>La première tranche Horaires est obligatoire.</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="CI_Detail_General_Horaires_TrancheInvalide" xml:space="preserve">
+    <value>La ou les tranches horaires ne sont pas saisies correctement</value>
+    <comment>_PartialGeneral.cshtml</comment>
+  </data>
+  <data name="Gestion_CI_Disable_Atreintes_Warning" xml:space="preserve">
+    <value>La gestion d'astreinte ne peut pas être désactivée car il existe au moins une astreinte d'affectée</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Affectation_Astreintes_Verouiller" xml:space="preserve">
+    <value>L’astreinte ne peut pas être mise à jour car le pointage est verrouillé</value>
+  </data>
+  <data name="CI_Detail_General_ObjectifHeuresInsertion" xml:space="preserve">
+    <value>Objectif heures d'insertion du chantier (heures)</value>
+  </data>
+  <data name="CI_Detail_General_ObjectifHeuresInsertion_Placeholder" xml:space="preserve">
+    <value>Objectif heures d'insertion du chantier (heures)</value>
+  </data>
+  <data name="CI_Detail_Team_Handle_Pointage_Restrictions" xml:space="preserve">
+    <value>Activer les restrictions de pointage</value>
+    <comment>_PartialTeam.cshtml</comment>
+  </data>
+  <data name="CI_Partial_Team_Personnel_Filter_Autre_Information_Placeholder" xml:space="preserve">
+    <value>Autres informations...</value>
+  </data>
+  <data name="CI_Partial_Team_Personnel_Nom_Placeholder" xml:space="preserve">
+    <value>Nom du personnel...</value>
+  </data>
+  <data name="CI_Partial_Team_Personnel_Prenom_Placeholder" xml:space="preserve">
+    <value>Prénom du personnel...</value>
+  </data>
+  <data name="CI_Desaffectation_Astreintes_Verouiller" xml:space="preserve">
+    <value>Impossible de désaffecter une astreinte sur un pointage verrouillé</value>
+  </data>
+</root>

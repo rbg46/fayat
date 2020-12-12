@@ -1,0 +1,68 @@
+﻿<!--BEGIN : Menu Modern-->
+
+<div class="nav-overlay" ng-show="$ctrl.modernMenuIsOpen" style="z-index:1100"></div>
+<div class="navigation" ng-show="$ctrl.modernMenuIsOpen" style="z-index:1101">
+    <div class="nav-conteneur">
+        <div class="nav-toolbar">
+            <div class="nav-toolbar-left" ng-click="$ctrl.openCloseModernMenu()">
+                <i span class="material-icons" id="menu-icon">close</i>
+            </div>
+            <div class="nav-toolbar-search">
+                <input class="form-control" placeholder="Rechercher une fonctionnalité" ng-model="criteria" />
+            </div>
+        </div>
+
+        <div class="nav-features">            
+            <img class="background-img" ng-src="{{::$ctrl.backgroundImgUrl}}" />
+            
+            <fred-menu-home class="padd-top" criteria="criteria" modules-autorized="$ctrl.modulesAutorized" home="false"></fred-menu-home>
+        </div>
+    </div>
+</div>
+<!--END : Menu Modern-->
+<!--BEGIN : Menu Classic-->
+<nav class="menu low-res"
+     ng-class="{'setMenu':$ctrl.headerMobileIsOpen===true, 'unsetMenu':$ctrl.headerMobileIsOpen===false}"
+     ng-if="$ctrl.modeMenu=='classic'"
+     id="MENU"
+     style="z-index:1100">
+    <fred-back-button></fred-back-button>
+
+    <div class="dropdown" style="float:left;"
+         ng-show="::module.isVisible"
+         ng-repeat="module in $ctrl.modulesAutorized | filter: { position: 'left' } track by $index">
+        <div class="dropbtn">{{::module.libelle}}</div>
+        <div class="dropdown-content" style="left:0;">
+            <a ng-repeat="feature in  ::module.Features"
+               ng-if="::feature.isVisible"
+               href="{{::feature.URI}}">
+                <i class="{{::feature.icon}}" aria-hidden="true"></i>
+                <span title="{{::feature.ShortDescription}}">{{::feature.ShortDescription}}</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="entry complex set-right" id="entryADMIN" ng-if="::$ctrl.menuAdminIsVisible">
+        <a class="module" href="#">Administration</a>
+        <div class="features set-right" id="featuresADMIN">
+            <div class="group"
+                 ng-if="::module.isVisible"
+                 ng-repeat="module in $ctrl.modulesAutorized | filter: { position: 'right' } track by $index">
+                <div class="header">{{::module.libelle}}</div>
+                <ul>
+                    <li class="prev_hi_todo"
+                        ng-if="::feature.isVisible"
+                        ng-repeat="feature in  ::module.Features">
+                        <a href="{{::feature.URI}}">
+                            <i class="{{::feature.icon}}"
+                               aria-hidden="true">
+                            </i>
+                            <span>{{::feature.ShortDescription}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<!--END : Menu Classic-->

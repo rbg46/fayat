@@ -1,0 +1,26 @@
+﻿
+
+<div class="component-lookup-panel" ng-keydown="$ctrl.handleKeyDown($event)">
+
+    <ng-include src="$ctrl.templateHeader"></ng-include>
+
+    <div class="component-lookup-panel-scroll" on-scroll-end="$ctrl.handleLoadMore()">
+
+        <ng-include src="$ctrl.templateNewItem"></ng-include>
+
+        <div ng-show="!$ctrl.busy && $ctrl.items.length<1" class="alignCenter txt-size-200 bold flex1 color-grey2">
+            Aucun élément trouvé
+        </div>
+
+        <!--########  Liste des items  ########-->
+        <div ng-repeat="item in $ctrl.items track by $index">
+            <div ng-click="$ctrl.handleSelectItem(item)" ng-if="$ctrl.templateItem" ng-include="$ctrl.templateItem"></div>
+        </div>
+
+        <!--########  Loader  ########-->
+        <div ng-show="$ctrl.busy && $ctrl.items.length<1" class="component-lookup-panel-scroll-busy">
+            <img src="../../../../Content/images/loader.gif" />
+        </div>
+
+    </div>
+</div>

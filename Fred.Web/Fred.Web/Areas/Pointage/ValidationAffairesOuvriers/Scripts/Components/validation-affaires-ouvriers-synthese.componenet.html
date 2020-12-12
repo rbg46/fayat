@@ -1,0 +1,107 @@
+﻿<div class="ValidationAffairesOuvriers container" ng-controller="ValidationAffairesOuvriersSyntheseController as $ctrl" ng-init="initData()">
+
+    <!-- START : Titre de la page -->
+    <h1>{{::$ctrl.resources.ValidationAffaires_Title}}</h1>
+    <!--END : Titre de la page -->
+    <!--START : Barre de recherche + Barre d'outils-->
+    <fred-toolbar>
+
+        <!-- START : Sélectionner une date -->
+        <fred-section class="date-section">
+            <fred-section-title>{{::$ctrl.resources.RapportHebdo_Select_Semaine}}</fred-section-title>
+            <fred-section-controls>
+            <span class="material-icons cl" ng-click="$ctrl.handleChangeWeek(false)">chevron_left</span>
+            <div class="label_date">
+                <div class="label_date_text">{{$ctrl.selectedWeek}}</div>
+                <div class="labe_date_date_selector">
+                    <app-date-picker id="dateRapportEntree"
+                                     name="dateRapportEntree"
+                                     format="DD/MM/YYYY"
+                                     lang="fr"
+                                     placeholder="Date"
+                                     initial-date="{{$ctrl.selectedDate}}"
+                                     ng-model="$ctrl.selectedDate"
+                                     ng-change="$ctrl.handleChangeCalendarDate()"
+                                     calendar-weeks="true"
+                                     input-hiden="true"
+                                     is-week-calendar="true"></app-date-picker>
+                </div>
+            </div>
+            <span class="material-icons cr" ng-click="$ctrl.handleChangeWeek(true)">chevron_right</span>
+            </fred-section-controls>
+        </fred-section>
+        <!-- END : Sélectionner une date -->
+        <!-- Action -->
+        <fred-section class="action-section">
+            <fred-section-title>Action</fred-section-title>
+            <fred-section-controls>
+                <button class="btn btn-default" ng-click="$ctrl.ViewRapportHebdoForAllCi()" >Voir mes affaires</button>
+                <button class="btn btn-validate" ng-click="$ctrl.ValidateAndGetAffairesbyResponsable()">Valider</button>
+            </fred-section-controls>
+        </fred-section>
+    </fred-toolbar>
+
+    <!--START LISTE-->
+    <div class="my-biz-bloc">
+        <table class="my-biz-table">
+            <thead class="header1">
+                <tr>
+                    <th class="col1 sel-all">
+                        <div class="chb">
+                            <input type="checkbox" id="s-all"
+                                   ng-model="$ctrl.IsAllCiSelected"
+                                   ng-change="$ctrl.handleSelectAllCi($ctrl.IsAllCiSelected)">
+                            <label for="s-all"><span></span></label>
+                        </div>
+                    </th>
+                    <th class="col2">{{::$ctrl.resources.ValidationAffaires_Select_Ci}}</th>
+                    <th class="col3"></th>
+                </tr>
+            </thead>
+            <thead class="header2">
+                <tr>
+                    <th class="col1"></th>
+                    <th class="col2">{{::$ctrl.resources.ValidationAffaires_Code_Societe}}</th>
+                    <th class="col3">{{::$ctrl.resources.ValidationAffaires_Code_Societe_comptable}}</th>
+                    <th class="col4">{{::$ctrl.resources.ValidationAffaires_CI_CodeAndLibelle}}</th>
+                    <th class="col5">{{::$ctrl.resources.ValidationAffaires_CI_Statut}}</th>
+                    <th class="col6">{{::$ctrl.resources.RapportHebdo_Total_Heure}}</th>
+                    <th class="col7">{{::$ctrl.resources.RapportHebdo_Total_Heure_Sup}}</th>
+                    <th class="col8">{{::$ctrl.resources.RapportHebdo_TotalPrime}}</th>
+                    <th class="col9">{{::$ctrl.resources.ValidationAffaires_Total_Heure_Astreinte}}</th>
+                    <th class="col10">{{::$ctrl.resources.ValidationAffaires_Total_Heure_Absence}}</th>
+                    <th class="col11"></th>
+                </tr>
+            </thead>
+            <tbody class="fred-scroll">
+                <tr ng-repeat="ci in $ctrl.listCi">
+                    <td class="col1">
+                        <div class="chb">
+                            <input type="checkbox"
+                                   id="chbxTab_{{ci.CiId}}"
+                                   ng-change=""
+                                   ng-model="ci.IsSelected">
+                            <label for="chbxTab_{{ci.CiId}}"><span></span></label>
+                        </div>
+                    </td>
+                    <td class="col2">
+                        <span class="sapicon-E165 sap-biz"></span>
+                        <span class="lbl">{{ci.CodeSociete}}</span>
+                    </td>
+                    <td class="col3">{{ci.CodeEtabComptable}}</td>
+                    <td class="col4">{{ci.CodeCi_Libelle}}</td>
+                    <td class="col5">{{ci.Statut}}</td>
+                    <td class="col6">{{ci.TotalHeure}}</td>
+                    <td class="col7">{{ci.TotalHeureSup}}</td>
+                    <td class="col8">{{ci.TotalNbrePrime}}</td>
+                    <td class="col9">{{ci.TotalHeureAstreinte}}</td>
+                    <td class="col10">{{ci.TotalHeureAbsence}}</td>
+                    <td class="col11">
+                        <button class="btn-tile" ng-click="$ctrl.ViewRapportHebdoForCi(ci)">{{::$ctrl.resources.RapportHebdo_Synthese_Voir}}</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--END LISTE-->
+</div>

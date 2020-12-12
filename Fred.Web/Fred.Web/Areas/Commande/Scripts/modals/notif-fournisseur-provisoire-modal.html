@@ -1,0 +1,15 @@
+﻿<div class="modal-content">
+    <form name="$ctrl.form" ng-submit="$ctrl.handleConfirm()">
+        <div class="modal-header">
+            <h2 class="modal-title">
+                <i>{{$ctrl.resources.Notif_Brouillon_With_Fournisseur_Provisoire}}</i>
+            </h2>
+            <div>
+                {{$ctrl.resources.Notif_Brouillon_With_Fournisseur_Provisoire_Message}}
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="$ctrl.isLoading" type="button" class="btn btn-link pull-right" ng-click="$ctrl.handleCancel()">{{$ctrl.resources.Commande_ValidateCommande_Cancel}}</button>
+        </div>
+    </form>
+</div> 

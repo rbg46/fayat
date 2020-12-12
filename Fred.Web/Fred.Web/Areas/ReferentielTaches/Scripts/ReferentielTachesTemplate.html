@@ -1,0 +1,572 @@
+﻿<div class="container-fluid referentiel_taches" >
+    <h1 ng-show="!$ctrl.showTaskLevelFour">{{resources.ReferencielTache_Template_Titre}}</h1>
+
+    <div class="row" ng-show="!$ctrl.showTaskLevelFour">
+        <div class="col-lg-12 col-md-12 col-xs-12">
+            <fred-section ng-show="!$ctrl.showTaskLevelFour">{{resources.ReferencielTache_Template_CI_SousTitre}}</fred-section>
+            <div class="row search-container large">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no-pl">
+                    <div class="inner-addon right-addon">
+                        <i class="material-icons chevron-search">chevron_right</i>
+
+                        <lookup ng-model="filters.CI"
+                                search-placeholder="{{resources.Global_ReferentielCI_Placeholder}}"
+                                search-title="{{resources.Global_ReferentielCI}}"
+                                on-select="loadData()"
+                                url="/api/CI/SearchLight"
+                                custom-template-url="/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                >
+
+                            <input type="text"
+                                   class="form-control"
+                                   ng-value="filters.CI.CodeLibelle"
+                                   placeholder="{{resources.Global_ReferentielCI_Placeholder}}"
+                                   title="{{filters.CI.LibelleRef}}"
+                                   readonly />
+
+                        </lookup>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 no-pl">
+                    <button type="button" ng-disabled="!(filters.CI!=null)  || ($ctrl.HasPermissionToModifie())" class="btn btn-default cop" data-toggle="modal" data-target="#copy-tasks" ng-click="$ctrl.showmodal()">{{resources.ReferentielTache_Btn_CopyTache}}</button>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 tasks_plan_btn no-pr" ng-show="filters.CI" ng-class="{'button_bdg': $ctrl.showTaskLevelFour}">
+
+                    <div class="xpand-buttons">
+
+                        <div>
+                            <label>{{resources.ReferencielTache_Template_PlanDeTache_Niveau1}}</label>
+                            <button class="btn btn-primary btn-options" ng-disabled="!ciId" ng-click="handleOpenAll('t1')" title="{{resources.Global_Bouton_ToutDeplier}}">
+                                <i class="material-icons xpand">expand_more</i>
+                            </button>
+                            <button class="btn btn-default btn-options" ng-disabled="!ciId" ng-click="handleCloseAll('t1')" title="{{resources.Global_Bouton_ToutReplier}}">
+                                <i class="material-icons xpand">expand_less</i>
+                            </button>
+                        </div>
+
+                        <div>
+                            <label>{{resources.ReferencielTache_Template_PlanDeTache_Niveau2}}</label>
+                            <button class="btn btn-primary btn-options" ng-disabled="!ciId" ng-click="handleOpenAll('t2')" title="{{resources.Global_Bouton_ToutDeplier}}">
+                                <i class="material-icons xpand">expand_more</i>
+                            </button>
+                            <button class="btn btn-default btn-options" ng-disabled="!ciId" ng-click="handleCloseAll('t2')" title="{{resources.Global_Bouton_ToutReplier}}">
+                                <i class="material-icons xpand">expand_less</i>
+                            </button>
+                        </div>
+
+                        <div ng-if="$ctrl.showTaskLevelFour">
+                            <label>{{resources.ReferencielTache_Template_PlanDeTache_Niveau3}}</label>
+                            <button class="btn btn-primary btn-options" ng-disabled="!ciId" ng-click="handleOpenAll('t3')" title="{{resources.Global_Bouton_ToutDeplier}}">
+                                <i class="material-icons xpand">expand_more</i>
+                            </button>
+                            <button class="btn btn-default btn-options" ng-disabled="!ciId" ng-click="handleCloseAll('t3')" title="{{resources.Global_Bouton_ToutReplier}}">
+                                <i class="material-icons xpand">expand_less</i>
+                            </button>
+                        </div>
+
+                        <div>
+                            <label>{{resources.ReferentielTache_Template_Tout}}</label>
+                            <button class="btn btn-primary btn-options" ng-disabled="!ciId" ng-click="handleOpenAll()" title="{{resources.Global_Bouton_ToutDeplier}}">
+                                <i class="material-icons xpand">expand_more</i>
+                            </button>
+                            <button class="btn btn-default btn-options" ng-disabled="!ciId" ng-click="handleCloseAll()" title="{{resources.Global_Bouton_ToutReplier}}">
+                                <i class="material-icons xpand">expand_less</i>
+                            </button>
+                        </div>
+
+                        <div>
+                            <button class="btn white-star btn-options" type="button" ng-click="addFilter2Favoris()" title="{{ resources.Button_Save_Favorite_Title }}">
+                                <i class="material-icons">star</i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!--TEMP-->
+
+    <div class="row information" ng-show="!filters.CI">
+        <div class="col-md-4 icon">
+            <i class="flaticon flaticon-warning"></i>
+        </div>
+        <div class="col-md-4 msg">
+            <h3>{{resources.ReferencielTache_Template_SelectionnerSocietePourCommencer}}</h3>
+        </div>
+    </div>
+
+    <div class="row" ng-class="{'add_marg': $ctrl.showTaskLevelFour}" ng-show="filters.CI">
+
+        <div class="tasks_plan" ng-class="{'col-lg-12 col-md-12' : !$ctrl.viewSplitted || $ctrl.viewSplitted==null, 'col-lg-5 col-md-5' : $ctrl.viewSplitted}" ng-show="$ctrl.viewArbo">
+            <fred-section ng-show="$ctrl.showTaskLevelFour">{{resources.ReferencielTache_Template_PlanDeTache_SousTitre}}</fred-section>
+            <!--BEGIN : BARRE DE RECHERCHE PARTIE TREE-->
+            <div ng-show="$ctrl.showTaskLevelFour" class="row  search-container">
+                <div class="col-lg-6 col-md-6 no-pl">
+                    <div class="input-group input-search task_plan">
+                        <input type="text" placeholder="{{resources.ReferencielTache_Template_PlanDeTache_Tache_Placeholder}}" ng-model="filters.searchTache" class="form-control">
+                        <span class="input-group-addon button-search" ng-click="search()"><i class="material-icons">search</i></span>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 tasks_plan_btn no-pr" ng-class="{'button_bdg': $ctrl.showTaskLevelFour}">
+                    <div class="xpand-buttons">
+
+                        <div>
+                            <label>{{resources.ReferencielTache_Template_PlanDeTache_Niveau1}}</label>
+                            <button class="btn btn-primary btn-options" ng-disabled="!ciId" ng-click="handleOpenAll('t1')" title="{{resources.Global_Bouton_ToutDeplier}}">
+                                <i class="material-icons xpand">expand_more</i>
+                            </button>
+                            <button class="btn btn-default btn-options" ng-disabled="!ciId" ng-click="handleCloseAll('t1')" title="{{resources.Global_Bouton_ToutReplier}}">
+                                <i class="material-icons xpand">expand_less</i>
+                            </button>
+                        </div>
+
+                        <div>
+                            <label>{{resources.ReferencielTache_Template_PlanDeTache_Niveau2}}</label>
+                            <button class="btn btn-primary btn-options" ng-disabled="!ciId" ng-click="handleOpenAll('t2')" title="{{resources.Global_Bouton_ToutDeplier}}">
+                                <i class="material-icons xpand">expand_more</i>
+                            </button>
+                            <button class="btn btn-default btn-options" ng-disabled="!ciId" ng-click="handleCloseAll('t2')" title="{{resources.Global_Bouton_ToutReplier}}">
+                                <i class="material-icons xpand">expand_less</i>
+                            </button>
+                        </div>
+
+                        <div ng-if="$ctrl.showTaskLevelFour">
+                            <label>{{resources.ReferencielTache_Template_PlanDeTache_Niveau3}}</label>
+                            <button class="btn btn-primary btn-options" ng-disabled="!ciId" ng-click="handleOpenAll('t3')" title="{{resources.Global_Bouton_ToutDeplier}}">
+                                <i class="material-icons xpand">expand_more</i>
+                            </button>
+                            <button class="btn btn-default btn-options" ng-disabled="!ciId" ng-click="handleCloseAll('t3')" title="{{resources.Global_Bouton_ToutReplier}}">
+                                <i class="material-icons xpand">expand_less</i>
+                            </button>
+                        </div>
+
+                        <div>
+                            <label>{{resources.ReferentielTache_Template_Tout}}</label>
+                            <button class="btn btn-primary btn-options" ng-disabled="!ciId" ng-click="handleOpenAll()" title="{{resources.Global_Bouton_ToutDeplier}}">
+                                <i class="material-icons xpand">expand_more</i>
+                            </button>
+                            <button class="btn btn-default btn-options" ng-disabled="!ciId" ng-click="handleCloseAll()" title="{{resources.Global_Bouton_ToutReplier}}">
+                                <i class="material-icons xpand">expand_less</i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <!--END : BARRE DE RECHERCHE PARTIE TREE-->
+            <!--Liste Arborescence Complète :  BEGIN-->
+            <div class="niveau-container-horizontal">
+                <!--Entete du tableau avec les colonnes : BEGIN-->
+                <div class="niveau0">
+                    <div></div> <!--1-->
+                    <div>{{resources.ReferencielTache_Template_Entete_Arbo_ColonneCode}}</div> <!--2-->
+                    <div>{{resources.ReferencielTache_Template_Entete_Arbo_ColonneLibelle}}</div> <!--3-->
+                    <div>{{resources.ReferencielTache_Template_Entete_Arbo_ColonneInactif}}</div> <!--4-->
+                    <div>{{resources.ReferencielTache_Template_Entete_Arbo_ColonneSupprimer}}</div> <!--5-->
+                    <div>{{resources.ReferencielTache_Template_Entete_Arbo_ColonneEditer}}</div> <!--6-->
+                    <div>
+                        <div onclick="event.stopPropagation();" ng-click="addTask1()" title="{{resources.ReferencielTache_Template_TacheNiveau1_Ajouter_Tooltip}}">
+                            {{resources.ReferencielTache_Template_PlanDeTache_Niveau1}}
+                            <fred-btn-ico class="material-icons">add</fred-btn-ico>
+                        </div>
+                    </div> <!--7-->
+                </div>
+                <!--Entete du tableau avec les colonnes : END-->
+                <div class="niveau-container-vertical" id="#accordion">
+                    <div ng-repeat="tache1 in mainList  | filterCodeAndLibelleAllLevel: filters.searchTache : 1 | orderBy: 'Code'">
+                        <!--Niveau 1 : BEGIN-->
+                        <div class="niveau1" aria-expanded="true" ng-click="select(tache1)" data-toggle="collapse" data-target="#t1-{{tache1.TacheId}}">
+                            <div class="chevron" ng-attr-data-children="{{ tache1.TachesEnfants.length!=0 ? 'true' : 'false' }}"></div>
+                            <div>{{tache1.Code}}</div>
+                            <div>
+                                <i class="material-icons" aria-hidden="true" ng-if="isDefaultTaskOrParentOf(tache1)">vpn_key</i>
+                                {{tache1.Libelle | truncateText:letterLimit }}
+                            </div>
+                            <div onclick="event.stopPropagation();"><fred-btn-ico class="material-icons" title="{{resources.ReferencielTache_Template_PlanDeTache_Desativer_Tooltip}}" ng-show="!tache1.Active">done</fred-btn-ico></div>
+                            <div onclick="event.stopPropagation();" ng-if="!isDefaultTaskOrParentOf(tache1)" ng-click="deleteTask1(tache1)"><fred-btn-ico class="material-icons" title="{{resources.Global_Bouton_Supprimer_Tooltip}}">clear</fred-btn-ico></div>
+                            <div onclick="event.stopPropagation();" ng-if="isDefaultTaskOrParentOf(tache1)"></div>
+                            <div onclick="event.stopPropagation();" ng-click="editTask1(tache1)"><fred-btn-ico class="material-icons" title="{{resources.Global_Bouton_Modifier_Tooltip}}">more_vert</fred-btn-ico></div>
+                            <div>
+                                <div onclick="event.stopPropagation();" ng-click="addTask2(tache1)" title="{{resources.ReferencielTache_Template_PlanDeTache_AjouterTacheNiveau2_Tooltip}}">
+                                    {{resources.ReferencielTache_Template_PlanDeTache_Niveau2}}
+                                    <fred-btn-ico class="material-icons">add</fred-btn-ico>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Niveau 1 : END-->
+                        <!--Loop du Niveau 1 : BEGIN-->
+                        <div id="t1-{{tache1.TacheId}}" class="panel-collapse collapse in">
+                            <div ng-repeat="tache2 in tache1.TachesEnfants  | filterCodeAndLibelleAllLevel: filters.searchTache : 2 | orderBy: 'Code' ">
+                                <!--Niveau 2 : END-->
+                                <div class="niveau2" data-toggle="collapse" aria-expanded="true" data-target="#t2-{{tache2.TacheId}}" ng-click="select(tache2)">
+                                    <div class="chevron" ng-attr-data-children="{{ tache2.TachesEnfants.length!=0 ? 'true' : 'false' }}"></div>
+                                    <div>{{tache2.Code}}</div>
+                                    <div>
+                                        <i class="material-icons" aria-hidden="true" ng-if="isDefaultTaskOrParentOf(tache2)">vpn_key</i>
+                                        {{tache2.Libelle | truncateText:letterLimit }}
+                                    </div>
+                                    <div onclick="event.stopPropagation();"><fred-btn-ico class="material-icons" title="{{resources.ReferencielTache_Template_PlanDeTache_Desativer_Tooltip}}" ng-show="!tache2.Active">done</fred-btn-ico></div>
+                                    <div onclick="event.stopPropagation();" ng-if="!isDefaultTaskOrParentOf(tache2)" ng-click="deleteTask2(tache2)"><fred-btn-ico class="material-icons" title="{{resources.Global_Bouton_Supprimer_Tooltip}}">clear</fred-btn-ico></div>
+                                    <div onclick="event.stopPropagation();" ng-if="isDefaultTaskOrParentOf(tache2)"></div>
+                                    <div onclick="event.stopPropagation();" ng-click="editTask2(tache2)"><fred-btn-ico class="material-icons" title="{{resources.Global_Bouton_Modifier_Tooltip}}">more_vert</fred-btn-ico></div>
+                                    <div>
+                                        <div onclick="event.stopPropagation();" ng-click="addTask3(tache1, tache2)" title="{{resources.ReferencielTache_Template_PlanDeTache_AjouterTacheNiveau3_Tooltip}}">
+                                            {{resources.ReferencielTache_Template_PlanDeTache_Niveau3}}
+                                            <fred-btn-ico class="material-icons">add</fred-btn-ico>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Niveau 2 : END-->
+                                <!--Loop du Niveau 2 : BEGIN-->
+                                <div id="t2-{{tache2.TacheId}}" class="panel-collapse collapse in">
+                                    <div ng-repeat="tache3 in tache2.TachesEnfants  | filterCodeAndLibelleAllLevel: filters.searchTache : 3| orderBy: 'Code'">
+                                        <!--Niveau 3 : BEGIN-->
+                                        <div class="niveau3" data-toggle="collapse" aria-expanded="true" data-target="#t3-{{tache3.TacheId}}" ng-click="select(tache3)">
+                                            <div class="chevron" ng-attr-data-children="{{tache3.TachesEnfants.length!=0 && $ctrl.showTaskLevelFour ? 'true' : 'false' }}" ng-attr-data-voir-niveau4="{{tache3.TachesEnfants.length!=0 ? 'true' : 'false' }}"></div>
+                                            <div>{{tache3.Code}}</div>
+                                            <div>
+                                                <i class="material-icons" aria-hidden="true" ng-if="isDefaultTaskOrParentOf(tache3)">vpn_key</i>
+                                                {{tache3.Libelle | truncateText:letterLimit }}
+                                            </div>
+                                            <div onclick="event.stopPropagation();"><fred-btn-ico class="material-icons" title="{{resources.ReferencielTache_Template_PlanDeTache_Desativer_Tooltip}}" ng-show="!tache3.Active">done</fred-btn-ico></div>
+                                            <div onclick="event.stopPropagation();" ng-if="!isDefaultTaskOrParentOf(tache3)" ng-click="deleteTask3(tache3)"><fred-btn-ico class="material-icons" title="{{resources.Global_Bouton_Supprimer_Tooltip}}">clear</fred-btn-ico></div>
+                                            <div onclick="event.stopPropagation();" ng-if="isDefaultTaskOrParentOf(tache3)"></div>
+                                            <div onclick="event.stopPropagation();" ng-click="editTask3(tache3)"><fred-btn-ico class="material-icons" title="{{resources.Global_Bouton_Modifier_Tooltip}}">more_vert</fred-btn-ico></div>
+                                            <div>
+                                                <div ng-if="$ctrl.showTaskLevelFour" onclick="event.stopPropagation();" ng-click="addTask4(tache1, tache2,tache3)" title="Cliquer pour ajouter une tâche de niveau 4">
+                                                    {{resources.ReferencielTache_Template_PlanDeTache_Niveau4}}
+                                                    <fred-btn-ico class="material-icons">add</fred-btn-ico>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Niveau 3 : END-->
+                                        <!--Loop du Niveau 3 : BEGIN-->
+                                        <div id="t3-{{tache3.TacheId}}" class="panel-collapse collapse in" ng-if="$ctrl.showTaskLevelFour">
+                                            <div ng-repeat="tache4 in tache3.TachesEnfants  | filterCodeAndLibelleAllLevel: filters.searchTache : 4| orderBy: 'Code'">
+                                                <!--Niveau 4 : BEGIN-->
+                                                <div class="niveau4" ng-click="select(tache4)">
+                                                    <div></div>
+                                                    <div>{{tache4.Code}}</div>
+                                                    <div>{{tache4.Libelle | truncateText:letterLimit }}</div>
+                                                    <div onclick="event.stopPropagation();"><fred-btn-ico class="material-icons" title="{{resources.ReferencielTache_Template_PlanDeTache_Desativer_Tooltip}}" ng-show="!tache4.Active">done</fred-btn-ico></div>
+                                                    <div onclick="event.stopPropagation();" ng-click="deleteTask4(tache4)"><fred-btn-ico class="material-icons" title="{{resources.Global_Bouton_Supprimer_Tooltip}}">clear</fred-btn-ico></div>
+                                                    <div onclick="event.stopPropagation();" ng-click="editTask4(tache4)"><fred-btn-ico class="material-icons" title="{{resources.Global_Bouton_Modifier_Tooltip}}">more_vert</fred-btn-ico></div>
+                                                    <div></div>
+                                                </div>
+                                                <!--Niveau 4 : END-->
+                                            </div>
+                                        </div>
+                                        <!--Loop du Niveau 3 : END-->
+                                    </div>
+                                </div>
+                                <!--Loop du Niveau 2 : END-->
+                            </div>
+                        </div>
+                        <!--Loop du Niveau 1 : END-->
+                    </div>
+                </div>
+            </div>
+            <!--Liste Arborescence Complète :  BEGIN-->
+
+
+        </div>
+        <!--END : ARBO COMPLETE-->
+
+        <div class="tasks_group" ng-class="{'col-lg-12 col-md-12' : !$ctrl.viewArbo, 'col-lg-7 col-md-7' : $ctrl.viewArbo}" ng-show="$ctrl.viewSplitted">
+            <div class="row">
+                <!--BEGIN : LISTE TACHE NIVEAU 1 -->
+                <div class="tasks_level1" ng-class="{'col-lg-3 col-md-3' : $ctrl.showTaskLevelFour, 'col-lg-4 col-md-4' : !$ctrl.showTaskLevelFour}">
+                    <fred-section>{{resources.ReferencielTache_Template_TacheNiveau1_SousTitre}}</fred-section>
+                    <div class="row  search-container">
+                        <div class="col-lg-9 col-md-9">
+                            <div class="input-group input-search">
+                                <input type="text" placeholder="{{resources.ReferencielTache_Template_TacheNiveau1_Search_Placeholder}}" ng-model="searchLevel1" class="form-control">
+                                <span class="input-group-addon button-search"><i class="material-icons">search</i></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <button class="btn btn-primary pull-right task_add" ng-show="ciId > 0" ng-click="addTask1()" title="{{resources.ReferencielTache_Template_TacheNiveau1_Ajouter_Tooltip}}"><span class="flaticon flaticon-add"></span></button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="list-content">
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6 no_padding" ng-repeat="tache in list1  | filterCodeAndLibelle: searchLevel1 | orderBy: 'Code'"
+                                 ng-class="{selectedTache1: tache.TacheId === selectedTask1.TacheId, active: tache.TacheId !== selectedTask1.TacheId && $index % 2 == 0}">
+                                <div class="row ligne" ng-click="select(tache)" title="{{resources.ReferencielTache_Template_TacheNiveau1_List_ToolTip}}">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no_padding">
+                                        <div class="lb">{{resources.ReferencielTache_Template_TacheNiveau1_List_Code}}</div>
+                                        <div class="val">{{tache.Code}}</div>
+                                    </div>
+                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 no_padding">
+                                        <div class="lb">{{resources.ReferencielTache_Template_TacheNiveau1_List_Libelle}}</div>
+                                        <div class="val">{{tache.Libelle | truncateText:letterLimit }}</div>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                                        <span class="action-icone flaticon flaticon-multiply" ng-click="deleteTask1(tache)" title="{{resources.Global_Bouton_Supprimer_Tooltip}}"></span>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                                        <span class="action-icone material-icons" aria-hidden="true" ng-click="editTask1(tache)" title="{{resources.Global_Bouton_Modifier_Tooltip}}">more_vert </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--END : LISTE TACHE NIVEAU 1 -->
+                <!--BEGIN : LISTE TACHE NIVEAU 2 -->
+                <div class="tasks_level2" ng-class="{'col-lg-3 col-md-3' : $ctrl.showTaskLevelFour, 'col-lg-4 col-md-4' : !$ctrl.showTaskLevelFour}">
+                    <fred-section>{{resources.ReferencielTache_Template_TacheNiveau2_SousTitre}}</fred-section>
+                    <div class="row  search-container">
+                        <div class="col-lg-9 col-md-9">
+                            <div class="input-group input-search">
+                                <input type="text" placeholder="{{resources.ReferencielTache_Template_TacheNiveau2_Search_Placeholder}}" ng-model="searchLevel2" class="form-control">
+                                <span class="input-group-addon button-search"><i class="material-icons">search</i></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <button class="btn btn-primary pull-right task_add" ng-show="selectedTask1" ng-click="addTask2(selectedTask1)" title="{{resources.ReferencielTache_Template_TacheNiveau2_Ajouter_Tooltip}}"><span class="flaticon flaticon-add"></span></button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="list-content">
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6 no_padding" ng-repeat="tache in list2 | orderBy: 'Code' | filterCodeAndLibelle: searchLevel2"
+                                 ng-class="{selectedTache2: tache.TacheId === selectedTask2.TacheId, active: tache.TacheId !== selectedTask2.TacheId && $index % 2 == 0}">
+                                <div class="row ligne" ng-click="select(tache)" title="{{resources.ReferencielTache_Template_TacheNiveau2_List_ToolTip}}">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no_padding">
+                                        <div class="lb">{{resources.ReferencielTache_Template_TacheNiveau2_List_Code}}</div>
+                                        <div class="val">{{tache.Code}}</div>
+                                    </div>
+                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 no_padding">
+                                        <div class="lb">{{resources.ReferencielTache_Template_TacheNiveau2_List_Libelle}}</div>
+                                        <div class="val">{{tache.Libelle | truncateText:letterLimit }}</div>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                                        <span class="action-icone flaticon flaticon-multiply" ng-click="deleteTask2(tache)" title="{{resources.Global_Bouton_Supprimer_Tooltip}}"></span>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                                        <span class="action-icone material-icons" aria-hidden="true" ng-click="editTask2(tache)" title="{{resources.Global_Bouton_Modifier_Tooltip}}">more_vert</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--END : LISTE TACHE NIVEAU 2 -->
+                <!--BEGIN :LISTE TACHE NIVEAU 3  -->
+                <div class="tasks_level3" ng-class="{'col-lg-3 col-md-3' : $ctrl.showTaskLevelFour, 'col-lg-4 col-md-4' : !$ctrl.showTaskLevelFour}">
+                    <fred-section>{{resources.ReferencielTache_Template_TacheNiveau3_SousTitre}}</fred-section>
+                    <div class="row  search-container">
+                        <div class="col-lg-9 col-md-9">
+                            <div class="input-group input-search">
+                                <input type="text" placeholder="{{resources.ReferencielTache_Template_TacheNiveau3_Search_Placeholder}}" ng-model="searchLevel3" class="form-control">
+                                <span class="input-group-addon button-search"><i class="material-icons">search</i></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <button class="btn btn-primary pull-right task_add" ng-show="selectedTask2" ng-click="addTask3(selectedTask1, selectedTask2)" title="{{resources.ReferencielTache_Template_TacheNiveau3_Ajouter_Tooltip}}"><span class="flaticon flaticon-add"></span></button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="list-content">
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6 no_padding" ng-repeat="tache in list3  | orderBy: 'Code' | filterCodeAndLibelle: searchLevel3"
+                                 ng-class="{selectedTache3: tache.TacheId === selectedTask3.TacheId, active: tache.TacheId !== selectedTask3.TacheId && $index % 2 == 0}">
+                                <div class="row ligne" ng-click="select(tache)" title="{{resources.ReferencielTache_Template_TacheNiveau3_List_ToolTip}}">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no_padding">
+                                        <div class="lb">{{resources.ReferencielTache_Template_TacheNiveau3_List_Code}}</div>
+                                        <div class="val">{{tache.Code}}</div>
+                                    </div>
+                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 no_padding">
+                                        <div class="lb">{{resources.ReferencielTache_Template_TacheNiveau3_List_Libelle}}</div>
+                                        <div class="val">{{tache.Libelle | truncateText:letterLimit }}</div>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                                        <span class="action-icone flaticon flaticon-multiply" ng-click="deleteTask3(tache)" title="{{resources.Global_Bouton_Supprimer_Tooltip}}"></span>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                                        <span class="action-icone  material-icons" aria-hidden="true" ng-click="editTask3(tache)" title="{{resources.Global_Bouton_Modifier_Tooltip}}">more_vert </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--END :LISTE TACHE NIVEAU 3  -->
+                <!--BEGIN :LISTE TACHE NIVEAU 4  -->
+                <div class="tasks_level3" ng-show="$ctrl.showTaskLevelFour" ng-class="{'col-lg-3 col-md-3' : $ctrl.showTaskLevelFour, 'col-lg-4 col-md-4' : !$ctrl.showTaskLevelFour}">
+                    <fred-section>Tâches niveau 4</fred-section>
+                    <div class="row  search-container">
+                        <div class="col-lg-9 col-md-9">
+                            <div class="input-group input-search">
+                                <input type="text" placeholder="{{resources.ReferencielTache_Template_TacheNiveau4_Search_Placeholder}}" ng-model="searchLevel4" class="form-control">
+                                <span class="input-group-addon button-search"><i class="material-icons">search</i></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <button class="btn btn-primary pull-right task_add" ng-show="selectedTask3" ng-click="addTask4(selectedTask1,selectedTask2, selectedTask3)" title="{{resources.ReferencielTache_Template_TacheNiveau4_Ajouter_Tooltip}}"><span class="flaticon flaticon-add"></span></button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="list-content">
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6 no_padding" ng-repeat="tache in list4  | orderBy: 'Code' | filterCodeAndLibelle: searchLevel4"
+                                 ng-class="{selectedTache4: tache.TacheId === selectedTask4.TacheId, active: tache.TacheId !== selectedTask4.TacheId && $index % 2 == 0}">
+                                <div class="row ligne" ng-click="select(tache)" title="{{resources.ReferencielTache_Template_TacheNiveau4_List_ToolTip}}">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no_padding">
+                                        <div class="lb">{{resources.ReferencielTache_Template_TacheNiveau4_List_Code}}</div>
+                                        <div class="val">{{tache.Code}}</div>
+                                    </div>
+                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 no_padding">
+                                        <div class="lb">{{resources.ReferencielTache_Template_TacheNiveau4_List_Libelle}}</div>
+                                        <div class="val">{{tache.Libelle | truncateText:letterLimit }}</div>
+                                    </div>
+
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                                        <span class="action-icone flaticon flaticon-multiply" ng-click="deleteTask4(tache)" title="{{resources.Global_Bouton_Supprimer_Tooltip}}"></span>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                                        <span class="action-icone  material-icons" aria-hidden="true" ng-click="editTask4(tache)" title="{{resources.Global_Bouton_Modifier_Tooltip}}">more_vert </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--END :LISTE TACHE NIVEAU 4  -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pop in copie des tâches -->
+    <div class="copy-tasks-modal modal fade" id="copy-tasks" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i>Copie des tâches</h2>
+                    <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" aria-label="Close"
+                        title="Cliquer pour annuler et fermer">
+                    </i>
+                </div>
+                <div class="modal-body">
+                    <div class="bloc-stepper">
+                        <div class="stepper-line">
+                            <div id="stepper1" class="stepper-step selected">1</div>
+                            <div id="stepper2" class="stepper-step">2</div>
+                            <div id="stepper3" class="stepper-step">3</div>
+                        </div>
+                        <div class="stepper-bloc-text">
+                            <div class="stepper-text left">Choisir le CI</div>
+                            <div class="stepper-text central">{{resources.ReferentielTache_txt_TypeCopy}}</div>
+                            <div class="stepper-text">{{resources.ReferentielTache_txt_PatialCopy_ChoiceTask}}</div>
+                        </div>
+                    </div>
+
+                    <!-- SElection du CI -->
+                    <div class="picklist-bloc" ng-show="$ctrl.Step1">
+                        <div class="picklist-bloc-title">
+                            <span>{{resources.ReferentielTache_txt_SlectionCI}}</span>
+                        </div>
+                        <div class="inner-addon right-addon">
+                            <lookup ng-model="filters.CiSource"
+                                    search-placeholder="{{resources.Global_ReferentielCI_Placeholder}}"
+                                    search-title="{{resources.Global_ReferentielCI}}"
+                                    on-select="selectCISource()"
+                                    url="/api/CI/SearchLight"
+                                   show-in-popup="true">
+                                <input type="text"
+                                       class="form-control"
+                                       ng-value="filters.CiSource.CodeLibelle"
+                                       placeholder="{{resources.Global_ReferentielCI_Placeholder}}"
+                                       title="{{filters.CI.LibelleRef}}"
+                                       readonly />
+                            </lookup>
+                        </div>
+                    </div>
+
+                    <!-- choix d’un type de copie -->
+                    <div class="bloc-ed-dep-tiles" ng-show="$ctrl.Step2">
+                        <div id="copieTotal" class="detail-tile" ng-click="$ctrl.clickToTotalCopy()">
+                            <span class="detail-tile-txt">{{resources.ReferntielTache_txt_TotalCopy}}</span>
+                        </div>
+
+                        <div id="copiePartial" class="detail-tile" ng-click="$ctrl.clickToPartialCopy()">
+                            <span class="detail-tile-txt">{{resources.ReferentileTache_txt_PartialCopy}}</span>
+                        </div>
+                    </div>
+
+                    <!-- Sélection des tâches à copier -->
+                    <div class="select-tasks-bloc" ng-show="$ctrl.Step3">
+                        <div class="select-tasks-bloc-title">
+                            <span>{{resources.ReferentielTache_txt_TaskToCopy}}</span>
+                        </div>
+
+                        <div class="tasks-bloc">
+                            <!--Liste Arborescence Complète :  BEGIN-->
+                            <div class="niveau-container-horizontal">
+                                <div class="niveau0">
+                                    <div class="chbx">
+                                    </div>
+                                    <div>{{resources.ReferencielTache_Template_Entete_Arbo_ColonneCode}}</div>
+                                    <div>{{resources.ReferencielTache_Template_Entete_Arbo_ColonneLibelle}}</div>
+                                </div>
+
+                                <div class="niveau-container-vert fred-scroll min-height-display" id="#accordion">
+                                    <div ng-repeat="tache1 in $ctrl.listTacheLevel1  | filterCodeAndLibelleAllLevel: filters.searchTache : 1 | orderBy: 'Code'">
+                                        <!--Niveau 1 : BEGIN-->
+                                        <div class="niveau1">
+                                            <div class="chbx">
+                                                <input id="ch{{tache1.TacheId}}" type="checkbox" ng-click="$ctrl.onCheckTache(tache1.TacheId)" ng-model="tache1.Selected">
+                                                <label for="ch{{tache1.TacheId}}"><span></span></label>
+                                            </div>
+                                            <div>{{tache1.Code}}</div>
+                                            <div>{{tache1.Libelle | truncateText:letterLimit }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button class="btn btn-link pull-left" data-dismiss="modal" ng-show="$ctrl.btnAnnuler" ng-click="$ctrl.cancelCopy()">
+                        {{$ctrl.resources.Global_Bouton_Annuler}}
+                    </button>
+                    <button class="btn btn-link pull-left" ng-show="$ctrl.btnReturnToStep1" ng-click="$ctrl.returnToStep1()">
+                        &#60; &#60; Retour
+                    </button>
+                    <button class="btn btn-link pull-left" ng-show="$ctrl.btnReturnToStep2" ng-click="$ctrl.returnToStep2()">
+                        &#60; &#60; Retour
+                    </button>
+
+                    <button class="btn btn-default pull-right" ng-show="$ctrl.btnContinuerToStep2" ng-click="$ctrl.ToStep2()">
+                        Continuer &#62; &#62;
+                    </button> 
+                    <button class="btn btn-default pull-right" ng-show="$ctrl.btnContinuerToStep3" ng-click="$ctrl.ToStep3()">
+                        Continuer &#62; &#62;
+                    </button>
+
+                    <button class="btn btn-default pull-right" ng-show="$ctrl.btnValider" ng-click="$ctrl.copyCI()">
+                        {{$ctrl.resources.Global_Bouton_Valider}}
+                    </button>
+                        <button class="btn btn-default pull-right" ng-show="$ctrl.btnValider2" ng-click="$ctrl.copyPartialTache()" ng-disabled="!listIdTache.length > 0">
+                            {{$ctrl.resources.Global_Bouton_Valider}}
+                        </button>
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

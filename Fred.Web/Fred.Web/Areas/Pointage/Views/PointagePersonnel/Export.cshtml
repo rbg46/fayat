@@ -1,0 +1,188 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = "Export pointages personnels";
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/ExportPointagePersonnelBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/ExportPointagePersonnelBundle.js")
+    @this.RenderResources("FeatureRapport")
+}
+
+<div class="container-fluid pointages-personnels" id="main" ng-controller="ExportController as $ctrl">
+
+    <h1>{{resources.Pointage_Export_Titre}}</h1>
+
+    <div ng-class="{ 'hide-overlay': !$ctrl.displayBanner, 'show-overlay' : $ctrl.displayBanner}" class="side-bar-overlay" ng-click="$ctrl.displayBanner= !$ctrl.displayBanner; $ctrl.actionToggleSidebar(false)"></div>
+
+    @*Modal d'export du pointage personnel'*@
+    <div class="modal fade" id="exp-exc" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h2 class="modal-title" ng-show="$ctrl.export.TypePersonnel == $ctrl.exportPointagePersonnelField0"><i class="flaticon flaticon-send"></i>{{$ctrl.resources.Pointage_Export_Personnel_Titre}}</h2>
+                    <h2 class="modal-title" ng-show="$ctrl.export.TypePersonnel == $ctrl.exportPointageInterimaireField1"><i class="flaticon flaticon-send"></i>{{$ctrl.resources.Pointage_Export_Interimaire_Titre}}</h2>
+                    <h2 class="modal-title" ng-show="$ctrl.export.TypePersonnel == $ctrl.exportChallengeSecuriteField2"><i class="flaticon flaticon-send"></i>{{$ctrl.resources.Pointage_Export_Challenge_Securite_Titre}}</h2>
+                    <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+                </div>
+
+                <form name="$ctrl.exportForm">
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>{{$ctrl.resources.Pointage_Export_ChoixExport}} </label>
+                                <select class="form-control" name="" id="" ng-model="$ctrl.export.TypePersonnel" ng-change="$ctrl.clear()">
+                                    <option value="{{$ctrl.exportPointagePersonnelField0}}">{{$ctrl.resources.Pointage_Export_Personnel}}</option>
+                                    <option value="{{$ctrl.exportPointageInterimaireField1}}">{{$ctrl.resources.Pointage_Export_Interimaire}}</option>
+                                    <option value="{{$ctrl.exportChallengeSecuriteField2}}">{{$ctrl.resources.Pointage_Export_Challenge_Securite}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>{{$ctrl.resources.Pointage_Export_ChoixPerimetre}}</label>
+                                <span class="text-danger" ng-show="$ctrl.exportForm.$submitted && $ctrl.exportForm.OrganisationPersonnel.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                <lookup-standalone ng-model="$ctrl.export.Organisation"
+                                                   text="$ctrl.export.Organisation.CodeLibelle"
+                                                   search-title="{{$ctrl.resources.Global_ReferentielOrganisation}}"
+                                                   search-placeholder="{{$ctrl.resources.Global_ReferentielOrganisation_Placeholder}}"
+                                                   url="/api/Organisation/SearchLightOrganisation/?typeOrganisation=ETABLISSEMENT,CI&"
+                                                   on-select="$ctrl.handleSelectedItem(item, 'Organisation')"
+                                                   on-delete="$ctrl.handleDelete('Organisation')"
+                                                   placeholder="{{$ctrl.resources.Pointage_Export_ChoixPerimetrePersonnel_Placeholder}}"
+                                                   name="OrganisationPersonnel"
+                                                   show-in-popup="true"
+                                                   class="formulaire long no-padding"
+                                                   style-parent="true"
+                                                   ng-required="true">
+                                </lookup-standalone>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>{{$ctrl.resources.Pointage_Export_Periode}} </label>
+                                <div class="col-md-12">
+                                    <div class="row" ng-show="$ctrl.export.TypePersonnel == $ctrl.exportPointagePersonnelField0 || $ctrl.export.TypePersonnel == $ctrl.exportChallengeSecuriteField2">
+                                        <div class="col-md-6">
+                                            <label>{{$ctrl.resources.Pointage_Export_DateComptable}} </label>
+                                            <span class="text-danger" ng-show="$ctrl.exportForm.$submitted && $ctrl.exportForm.DateComptable.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                            <app-date-picker id="DateComptable"
+                                                             format="MM/YYYY"
+                                                             lang="fr"
+                                                             placeholder="{{$ctrl.resources.Pointage_Export_DateComptable_Placeholder}}"
+                                                             ng-model="$ctrl.export.DateComptable"
+                                                             name="DateComptable"
+                                                             ng-change="$ctrl.resetPeriode()"
+                                                             ng-disabled="$ctrl.export.TypePersonnel == $ctrl.exportChallengeSecuriteField2"
+                                                             ng-required="$ctrl.dateComptableRequired">
+                                            </app-date-picker>
+                                        </div>
+                                    </div>
+
+                                    <label ng-show="$ctrl.export.TypePersonnel == $ctrl.exportPointagePersonnelField0 || $ctrl.export.TypePersonnel == $ctrl.exportChallengeSecuriteField2">{{$ctrl.resources.Pointage_Export_Ou}} </label>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>{{$ctrl.resources.Pointage_Export_Du}}</label>
+                                            <span class="text-danger" ng-show="$ctrl.exportForm.$submitted && $ctrl.exportForm.DateDebut.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                            <span class="text-danger" ng-show="$ctrl.exportForm.$submitted && $ctrl.exportForm.DateDebut.$error.RangeError">{{$ctrl.resources.Pointage_Export_VerificationDateDebut_Erreur}}</span>
+                                            <app-date-picker id="DateDebut"
+                                                             format="DD/MM/YYYY"
+                                                             lang="fr"
+                                                             placeholder="{{$ctrl.resources.Pointage_Export_DateDu_Placeholder}}"
+                                                             ng-model="$ctrl.export.DateDebut"
+                                                             name="DateDebut"
+                                                             ng-change="$ctrl.handleDateValidation()"
+                                                             ng-required="$ctrl.datePeriodeRequired">
+                                            </app-date-picker>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>{{$ctrl.resources.Pointage_Export_Au}}</label>
+                                            <span class="text-danger" ng-show="$ctrl.exportForm.$submitted && $ctrl.exportForm.DateFin.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                            <app-date-picker id="DateFin"
+                                                             format="DD/MM/YYYY"
+                                                             lang="fr"
+                                                             placeholder="{{$ctrl.resources.Pointage_Export_DateAu_Placeholder}}"
+                                                             ng-model="$ctrl.export.DateFin"
+                                                             name="DateFin"
+                                                             ng-change="$ctrl.handleDateValidation()"
+                                                             ng-required="$ctrl.datePeriodeRequired">
+                                            </app-date-picker>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" ng-show="$ctrl.export.TypePersonnel == $ctrl.exportPointagePersonnelField0 || $ctrl.export.TypePersonnel == $ctrl.exportChallengeSecuriteField2">
+                            <div class="col-md-12">
+                                <label>{{$ctrl.resources.Pointage_Export_ChoixPersonnel}}</label>
+                                <lookup-standalone ng-model="$ctrl.export.Personnel"
+                                                   text="$ctrl.export.Personnel.PrenomNom"
+                                                   search-title="{{$ctrl.resources.Global_ReferentielPersonnel}}"
+                                                   search-placeholder="{{$ctrl.resources.Personnel_PartialGeneral_Nom_Placeholder}}"
+                                                   search-placeholder2="{{$ctrl.resources.Personnel_PartialGeneral_Prenom_Placeholder}}"
+                                                   search-placeholder3="{{$ctrl.resources.Personnel_Filter_Autre_Information_Placeholder}}"
+                                                   active-second-search-input="true"
+                                                   active-third-search-input="true"
+                                                   url="/api/Personnel/SearchLight2"
+                                                   on-select="$ctrl.handleSelectedItem(item, 'Personnel')"
+                                                   on-delete="$ctrl.handleDelete('Personnel')"
+                                                   name="Personnel"
+                                                   show-in-popup="true"
+                                                   class="formulaire long no-padding"
+                                                   style-parent="true">
+                                </lookup-standalone>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>{{$ctrl.resources.Pointage_Export_FiltrePar}}</label>
+                                <div class="row">
+                                    <!--Option Mes rapports verrouillés -->
+                                    <div class="col-md-6">
+                                        <input type="radio" id="txttriRadioNom" name="triRadioNom" ng-model="$ctrl.export.Rapport" ng-value="0">
+                                        <label for="txttriRadioNom"><span></span>{{$ctrl.resources.Pointage_Export_MesRapportsVerrouilles}}</label>
+                                    </div>
+                                    <!--Option Tous les rapports verrouillés -->
+                                    <div class="col-md-6">
+                                        <input type="radio" id="txttriRadioNom" name="triRadioNom" ng-model="$ctrl.export.Rapport" ng-value="1">
+                                        <label for="txttriRadioNom"><span></span>{{$ctrl.resources.Pointage_Export_TousRapportsVerrouilles}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" ng-show="($ctrl.export.TypePersonnel == $ctrl.exportPointagePersonnelField0 || $ctrl.export.TypePersonnel == $ctrl.exportChallengeSecuriteField2) && $ctrl.exportForm.$submitted && $ctrl.errorDate">
+                            <div class="col-md-12">
+                                <span class="text-danger">{{$ctrl.resources.Pointage_Export_VerificationDate_Erreur}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn  button-pdf pull-left" ng-show="$ctrl.export.TypePersonnel == $ctrl.exportPointageInterimaireField1"
+                                title="{{$ctrl.resources.Global_Bouton_ExportPDF_Tooltip}}" ng-click="$ctrl.exportPointage(1)">
+                        </button>
+                        <!--Export Excel-->
+                        <button type="submit" class="btn button-excel pull-left" ng-click="$ctrl.exportPointage(0)" title="{{$ctrl.resources.Global_Bouton_ExportExcel_Tooltip}}">
+                        </button>
+                        <button type="button" class="btn  btn-link pull-right" data-dismiss="modal" title="{{$ctrl.resources.Global_Bouton_Fermer_Tooltip}}">{{$ctrl.resources.Global_Bouton_Fermer}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

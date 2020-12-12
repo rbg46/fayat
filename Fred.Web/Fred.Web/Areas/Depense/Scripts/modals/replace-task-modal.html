@@ -1,0 +1,47 @@
+﻿<div class="modal-content">
+  <div class="modal-header">
+    <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i>{{$ctrl.resources.RT_Title}}</h2>
+    <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" ng-click="$ctrl.handleCancel()" title="{{resources.Global_Modal_Annuler_Tooltip}}"></i>
+  </div>
+  <div class="modal-body">
+
+    <div class="row">
+      <div class="col-md-12">
+        <span class="label-txt">{{$ctrl.resources.RT_VeuillezSelec}}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <label>{{$ctrl.resources.RT_TacheRemplacement}}</label>
+      </div>
+      <div class="col-sm-8 lbl_r no-pl">
+        <lookup-standalone ng-model="$ctrl.Tache"
+                           text="$ctrl.Tache.CodeLibelle"
+                           show-in-popup="true"
+                           search-title="{{$ctrl.resources.Global_ReferentielTache}}"
+                           search-placeholder="{{$ctrl.resources.Global_ReferentielTache_Placeholder}}"
+                           url="/api/Tache/SearchLight/?ciId={{$ctrl.ciId}}&"
+                           placeholder="{{$ctrl.resources.Global_ReferentielTache_Placeholder}}"
+                           on-select="$ctrl.btnReplaceDisabled=false"
+                           show-delete-button="false"
+                           tooltip="$ctrl.Tache.CodeLibelle"
+                           class="formulaire long"
+                           custom-template-url="../../Scripts/directive/Lookup/custom-templates/tache.template.html">
+        </lookup-standalone>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <span class="label-txt">({{$ctrl.selectedDepenses.length}} {{$ctrl.resources.RT_DepensesSelec}}</span>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn  btn-link pull-left" data-dismiss="modal" ng-click="$ctrl.handleCancel()" title="Annuler">Annuler</button>
+    <button type="button" class="btn  btn-default pull-right" ng-disabled="$ctrl.btnReplaceDisabled" data-dismiss="modal" ng-click="$ctrl.handleValidate()" title="Remplacer les tâches">Remplacer les tâches</button>
+  </div>
+</div>

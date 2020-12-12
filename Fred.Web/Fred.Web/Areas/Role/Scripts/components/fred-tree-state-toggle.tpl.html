@@ -1,0 +1,11 @@
+﻿<div ng-click="$ctrl.toggle()" ng-class="{'fred-tree-state-toggle-busy' : $ctrl.isBusy }">
+	<div ng-show="$ctrl.currentValue === $ctrl.stepOne.value">
+		<button class="unaffected" ng-disabled="$ctrl.isBusy" title="{{$ctrl.resources.Role_TreeStateToggle_Unaffected}}">{{$ctrl.stepOne.text}}</button>	
+	</div>
+	<div ng-show="$ctrl.currentValue === $ctrl.stepTwo.value">
+		<button class="readonly" ng-disabled="$ctrl.isBusy" title="{{$ctrl.resources.Role_TreeStateToggle_Readonly}}">{{$ctrl.stepTwo.text}}</button>
+	</div>
+	<div ng-show="$ctrl.currentValue === $ctrl.stepTree.value">
+		<button class="modified" ng-disabled="$ctrl.isBusy" title="{{$ctrl.resources.Role_TreeStateToggle_Modified}}">{{$ctrl.stepTree.text}}</button>
+	</div>
+</div>

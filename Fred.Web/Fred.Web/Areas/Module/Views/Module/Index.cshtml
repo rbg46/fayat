@@ -1,0 +1,300 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+  ViewBag.Title = FeatureModule.Module_Index_TitreOnglet;
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+  @Styles.Render("~/ModuleIndexBundle.css")
+  @Styles.Render("~/Content/BarreRecherche/barre-recherche-light.css")
+  <style>
+    .isPartial {
+      background-color: palevioletred;
+    }
+  </style>
+}
+
+@section scripts {
+  @Scripts.Render("~/ModuleIndexBundle.js")
+  @this.RenderResources("FeatureModule", "FeaturePermission")
+}
+
+<div class="modules container-fluid" ng-controller="ModuleController" ng-init="init()">
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <h1>{{resources.Module_Index_Titre}}</h1>
+    </div>
+  </div>
+
+  <div class="row pickFilter">
+    <div class="col-md-5 col-lg-5">
+      <fred-section>{{resources.Module_Index_Titre_Filtre}}</fred-section>
+      <div class="filter">
+        <div class="inner-addon right-addon">
+          <lookup-standalone ng-model="societeSelected"
+                             name="Societe"
+                             text="societeSelected.CodeLibelle"
+                             search-title="{{resources.Global_ReferentielSociete}}"
+                             search-placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+                             url="/api/Societe/SearchLightForRoles/"
+                             on-select="onSelectSocieteLookup(item)"
+                             on-delete="onDeleteSocieteLookup()"
+                             class="formulaire long no-padding">
+          </lookup-standalone>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row information"
+       ng-show="!societeSelected">
+    <div class="col-md-4 icon">
+      <span class="flaticon flaticon-warning"></span>
+    </div>
+    <div class="col-md-4 msg">
+      <h3>
+        {{resources.Module_Index_Selectionnez_Organisation}}
+      </h3>
+    </div>
+  </div>
+
+
+  <div class="row" ng-show="societeSelected">
+
+    <div class="col-lg-10 col-md-10 no_pl lists">
+      <div class="row">
+        <div class="col-lg-4 col-md-4">
+          <fred-section>{{resources.Module_Index_SousTitre_Module}}</fred-section>
+          <!--BEGIN : BARRE RECHERCHE MODULES-->
+          <div class="row search-container">
+            <div class="col-lg-10 col-md-10 controls">
+              <div class="input-group input-search">
+                <input type="text" placeholder="{{resources.Module_Index_Rechercher_Module_Placeholder}}" ng-model="searchModule" class="form-control">
+                <span class="input-group-addon button-search"><i class="material-icons">search</i></span>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-2 pull-right add no_pr">
+              <button class="btn btn-default pull-right" ng-click="handleCreateModule(moduleList, this)"
+                      title="{{resources.Module_Index_Bouton_ModuleAjouter_Tooltip}}">
+                <span class="material-icons">add</span>
+              </button>
+            </div>
+          </div>
+          <!--END : BARRE RECHERCHE MODULES-->
+          <!--BEGIN : LISTE MODULES-->
+          <div class="row">
+            <div class="list-content">
+              <div class="col-lg-12 col-md-12 no_padding" ng-repeat="module in moduleList | codeLibelleFilter: searchModule | orderBy:'+Code'"
+                   ng-class="{selected: module.ModuleId === selectedModuleId, active: module.ModuleId !== selectedModuleId && $index % 2 == 0}">
+                <div class="row ligne">
+                  <div class="col-lg-8 col-md-8 no_padding">
+                    <div class="data"
+                         ng-click="handleSelectModule(module)">
+                      <div class="lb">{{module.Code}}</div>
+                      <div class="val">{{module.Libelle}}</div>
+                    </div>
+                  </div>
+                  <div class="col-lg-1 col-md-1 no_padding">
+                    <span ng-if="module.isPartiallyDesactived"
+                          class="button-action material-icons radio unavailable"
+                          title="{{resources.Module_Index_Bouton_NoModule_For_All_Tooltip}}">radio_button_checked</span>
+                    <span ng-if="!module.isPartiallyDesactived"
+                          class="button-action material-icons radio"
+                          title="{{resources.Module_Index_Bouton_Module_For_All_Tooltip}}">radio_button_unchecked</span>
+                  </div>
+
+                  <div class="col-lg-1 col-md-1 no_padding">
+                    <span class="button-action material-icons"
+                          ng-click="handleEditModule(module, this)"
+                          title="{{resources.Module_Index_Bouton_ModuleEditer_Tooltip}}">more_vert</span>
+                  </div>
+                  <div class="col-lg-1 col-md-1 no_padding">
+                    <span class="button-action material-icons"
+                          ng-click="handleDeleteModule(module.ModuleId)"
+                          title="{{resources.Module_Index_Bouton_ModuleSupprimer_Tooltip}}">clear</span>
+                  </div>
+                  <div class="col-lg-1 col-md-1 no_padding">
+                    <span class="button-action material-icons"
+                          ng-click="openArboWithModule(module)"
+                          title="{{resources.Module_Index_Bouton_Visibility_Tooltip}}">chevron_right</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--END : LISTE MODULES-->
+        </div>
+
+        <div class="col-lg-4 col-md-4">
+          <fred-section>{{resources.Module_Index_SousTitre_Fonctionalite}}</fred-section>
+          <!--BEGIN : BARRE RECHERCHE FONCTIONNALITES-->
+          <div class="row search-container">
+            <div class="col-lg-10 col-md-10 controls">
+              <div class="input-group input-search">
+                <input type="text"
+                       placeholder="{{resources.Module_Index_Rechercher_Fonctionnalite_Placeholder}}"
+                       ng-model="searchFeature"
+                       class="form-control">
+                <span class="input-group-addon button-search">
+                  <i class="material-icons">search</i>
+                </span>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-2 pull-right add no_pr">
+              <button class="btn btn-default pull-right"
+                      ng-show="selectedModuleId"
+                      ng-click="handleCreateFeature(moduleList, featureList, selectedModule, this)"
+                      title="{{resources.Module_Index_Bouton_FonctionnaliteAjouter_Tooltip}}">
+                <span class="material-icons">add</span>
+              </button>
+            </div>
+          </div>
+          <!--END : BARRE RECHERCHE FONCTIONNALITES-->
+          <!--BEGIN: LISTE FONCTIONNALITES-->
+          <div class="row">
+            <div class="list-content">
+              <div class="col-lg-12 col-md-12 no_padding"
+                   ng-repeat="feature in featureList | codeLibelleFilter: searchFeature | orderBy: '+Code'"
+                   ng-class="{selected: feature.FonctionnaliteId === selectedFeatureId, active: feature.FonctionnaliteId !== selectedFeatureId && $index % 2 == 0}">
+                <div class="row ligne">
+                  <div class="col-lg-8 col-md-8 no_padding">
+                    <div class="data"
+                         ng-click="handleSelectFeature(feature)">
+                      <div class="lb">{{feature.Code}}</div>
+                      <div class="val">{{feature.Libelle}}</div>
+                    </div>
+                  </div>
+                  <div class="col-lg-1 col-md-1 no_padding">
+                    <span ng-if="feature.isPartiallyDesactived"
+                          class="button-action material-icons radio unavailable"
+                          title="{{resources.Module_Index_Bouton_NoFonctionnalite_For_All_Tooltip}}">radio_button_checked</span>
+                    <span ng-if="!feature.isPartiallyDesactived"
+                          class="button-action material-icons radio"
+                          title="{{resources.Module_Index_Bouton_Fonctionnalite_For_All_Tooltip}}">radio_button_unchecked</span>
+                  </div>
+                  @*<div class="col-lg-1 col-md-1 no_padding">
+                      <span ng-show="feature.HorsOrga" class="material-icons badge-notify"
+                            title="{{resources.Module_Index_FonctionnaliteHorsOrganisation_Tooltip}}">warning</span>
+                    </div>*@
+                  <div class="col-lg-1 col-md-1 no_padding">
+                    <span class="button-action material-icons"
+                          ng-click="handleEditFeature(feature, selectedModule, this)"
+                          title="{{resources.Module_Index_Bouton_FonctionnaliteEditer_Tooltip}}">more_vert</span>
+                  </div>
+                  <div class="col-lg-1 col-md-1 no_padding">
+                    <span class="button-action material-icons"
+                          ng-click="handleDeleteFeature(feature.FonctionnaliteId)"
+                          title="{{resources.Module_Index_Bouton_FonctionnaliteSupprimer_Tooltip}}">clear</span>
+                  </div>
+                  <div class="col-lg-1 col-md-1 no_padding">
+                    <span class="button-action material-icons"
+                          ng-click="openArboWithFeature(feature)"
+                          title="{{resources.Module_Index_Bouton_Visibility_Tooltip}}">chevron_right</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--END : LISTE FONCTIONNALITES-->
+        </div>
+
+
+        <div class="col-lg-4 col-md-4">
+          <fred-section>{{resources.Module_Index_SousTitre_ControleUI}}</fred-section>
+          <!--BEGIN : BARRE RECHERCHE PERMISSIONS_FONCTIONNALITE-->
+          <div class="row search-container">
+            <div class="col-lg-10 col-md-10 controls">
+              <div class="input-group input-search">
+                <input type="text"
+                       placeholder="{{resources.Module_Index_Rechercher_ControleUI_Placeholder}}"
+                       ng-model="searchPermissionFunctionnalite"
+                       class="form-control">
+                <span class="input-group-addon button-search">
+                  <i class="material-icons">search</i>
+                </span>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-2 pull-right add no_pr">
+              <lookup ng-model="ctrl.permissionSelected"
+                      ng-show="selectedFeatureId"
+                      search-placeholder="{{ctrl.resources.Global_ReferentielControleUI_Placeholder}}"
+                      search-title="{{ctrl.resources.Global_ReferentielControleUI}}"
+                      ng-disabled="isBusy"
+                      url="/api/Module/GetUnusedPermissions/"
+                      on-select="onSelectLookupPermission(item)">
+                <button class="btn btn-default pull-right"
+                        ng-disabled="isBusy"
+                        title="{{resources.Module_Index_Bouton_ControleUIAjouter_Tooltip}}">
+                  <span class="material-icons">add</span>
+                </button>
+              </lookup>
+            </div>
+          </div>
+          <!--END : BARRE RECHERCHE PERMISSIONS_FONCTIONNALITE-->
+          <!--BEGIN: LISTE PERMISSIONS_FONCTIONNALITE-->
+          <div class="row">
+            <div class="list-content"
+                 ng-show="selectedFeatureId">
+              <div class="col-lg-12 col-md-12 no_padding"
+                   ng-repeat="permissionFonctionnalite in permissionFonctionnaliteList | codeLibelleFilter: searchPermissionFunctionnalite | orderBy: '+Code'"
+                   ng-class="{selected: permissionFonctionnalite.PermissionFonctionnaliteId === selectedPermissionFonctionnaliteId, active:permissionFonctionnalite.PermissionFonctionnaliteId !== selectedPermissionFonctionnaliteId && $index % 2 == 0}">
+                <div class="row ligne">
+                  <div class="col-lg-11 col-md-11 no_padding"
+                       ng-click="selectPermissionFonctionnaliteId(permissionFonctionnalite)">
+                    <div class="data">
+                      <div class="lb">{{permissionFonctionnalite.Permission.Code}}</div>
+                      <div class="val">{{permissionFonctionnalite.Permission.Libelle}}</div>
+                    </div>
+                  </div>
+                  <div class="col-lg-1 col-md-1 no_padding">
+                    <span class="button-action material-icons"
+                          ng-disabled="!canDeletePermissionFonctionnalite(permissionFonctionnalite)"
+                          ng-click="deletePermissionFonctionnalite(permissionFonctionnalite)"
+                          title="{{resources.Module_Index_Bouton_ControleUISupprimer_Tooltip}}">clear</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--END : LISTE PERMISSIONS_FONCTIONNALITE-->
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-2 col-md-2 summary">
+      <fred-section>{{resources.Module_Index_SousTitre_Detail}}</fred-section>
+
+      <!--BEGIN : INFORMATION DETAIL FONCTIONNALITES-->
+      <p ng-show="selectedFeatureId != null">
+        <label class="t1">{{resources.Module_Detail_Fonctionnalite}}</label>
+        <label class="t2a">{{resources.Module_Detail_Code}}</label>
+        <label class="t2b">{{selectedFeature.Code}}</label>
+        <label class="t2a">{{resources.Module_Detail_Libelle}}</label>
+        <label class="t2b">{{selectedFeature.Libelle}}</label>
+        <label class="t2a">{{resources.Module_Detail_Description}}</label>
+        <label class="t2b">{{selectedFeature.Description}}</label>
+      </p>
+      <p>
+        <label class="t1">{{resources.Module_Detail_Module}}</label>
+        <label class="t2a">{{resources.Module_Detail_Code}}</label>
+        <label class="t2b">{{selectedModule.Code}}</label>
+        <label class="t2a">{{resources.Module_Detail_Libelle}}</label>
+        <label class="t2b">{{selectedModule.Libelle}}</label>
+        <label class="t2a">{{resources.Module_Detail_Description}}</label>
+        <label class="t2b">{{selectedFeature.Description}}</label>
+
+        <span ng-show="selectedFeature.HorsOrga"><b class="no_org">{{resources.Module_Index_Detail_FonctionnaliteHorsOrganisation}}</b></span>
+      </p>
+      <!--END : INFORMATION DETAIL FONCTIONNALITES-->
+    </div>
+
+  </div>
+
+
+  <module-arbo-component ng-show="societeSelected"></module-arbo-component>
+</div>
+

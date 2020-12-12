@@ -1,0 +1,46 @@
+= Gestion des libellés par groupe
+
+== Objectif
+
+Les différents groupes de Fayat ont parfois des termes spécifiques à leur domaine fonctionnel. Il faut donc *gérer les libellés affichés dans les pages en fonction du groupe de la société de l’utilisateur connecté*.
+
+== Fichiers contenant les ressources
+
+Ces fichiers sont stockés dans *07-Shared Layer/Fred.Web.Shared/App_LocalResources* sour forme de fichiers .resx.
+*Ces fichiers doivent contenir tous les libellés génériques.*
+
+Pour définir un libellé spécifique pour un groupe, il faut : 
+
+* Créer un fichier ressource suffixé par un underscore et le code du groupe.+
+Exemples : _FIT, _RB, _GFES …
+
+CAUTION: le code du groupe est celui
+contenu dans la base de données !! (table FRED_GROUPE) 
+
+* En utilisant les mêmes clefs que dans le fichier de base, saisir la valeur spécifique
+au groupe.
+
+CAUTION: une entrée d’un fichier spécifique n’existant pas dans le
+fichier de base ne sera pas prise en compte !!! (cela sera amélioré
+ultérieurement).
+
+== Chargement des ressources dans le front
+
+Il y a deux façons de charger les ressources.
+
+[arabic]
+. A des fins de rétro-compatibilité, a méthode actuelle a été mise à niveau. Donc, le code suivant fonctionne toujours :
+
+[source,csharp]
+----
+@Scripts.Render("/api/resource/FeatureFavori")
+@Scripts.Render("/api/resource/FeatureHome")
+----
+
+[arabic, start=2]
+. Toutefois, afin d’améliorer les performances, il est recommandé de remplacer ces lignes par
+
+[source,csharp]
+----
+@this.RenderResources("FeatureFavori", "FeatureHome")
+----

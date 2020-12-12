@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Fred.Entities.ValidationPointage.LotPointageEnt">
+    <Position X="7.5" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>EAAQABAAAAAAAAAAAEAAAACAAAAAAEAABAEAAAAAAAA=</HashCode>
+      <FileName>ValidationPointage\LotPointageEnt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fred.Entities.Personnel.PersonnelEnt" Collapsed="true">
+    <Position X="7.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ggQwSEUUnG0AECCACQCsCIAAMGEwAAADACEIwRhAoME=</HashCode>
+      <FileName>Personnel\PersonnelEnt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fred.Entities.Rapport.RapportLigneEnt" Collapsed="true">
+    <Position X="4" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>HATgLASEEMgCAWAABABAIAAgAEMUQQCqCAFxgYBEIOM=</HashCode>
+      <FileName>Rapport\RapportLigneEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="LotPointage" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Fred.Entities.ValidationPointage.ControlePointageEnt">
+    <Position X="10.75" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAGAAAEEEAAAEBAAAAAAAACgAAAAgAAAAAEQAAAAAAA=</HashCode>
+      <FileName>ValidationPointage\ControlePointageEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="LotPointage" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Fred.Entities.ValidationPointage.ControlePointageErreurEnt">
+    <Position X="10.5" Y="6.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAEIAAAAAAAAEAAAABABACAAAAIAAAAAA=</HashCode>
+      <FileName>ValidationPointage\ControlePointageErreurEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ControlePointage" />
+      <Property Name="Personnel" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Fred.Entities.ValidationPointage.RemonteeVracEnt">
+    <Position X="0.5" Y="8" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>EAAAABEEEAAAABAAAAAAAACAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ValidationPointage\RemonteeVracEnt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fred.Entities.ValidationPointage.RemonteeVracErreurEnt">
+    <Position X="4" Y="5.75" Width="2.25" />
+    <AssociationLine Name="EtablissementPaie" Type="Fred.Entities.Referential.EtablissementPaieEnt" FixedToPoint="true">
+      <Path>
+        <Point X="4" Y="6.75" />
+        <Point X="2.25" Y="6.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AABABAAAGAEAABAAAACACACAAAAgwAACAAAAAAAAAIA=</HashCode>
+      <FileName>ValidationPointage\RemonteeVracErreurEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="RemonteeVrac" />
+      <Property Name="Societe" />
+      <Property Name="EtablissementPaie" />
+      <Property Name="Personnel" />
+      <Property Name="CodeAbsence" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Fred.Entities.Referential.EtablissementPaieEnt" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAQAAEUAQAAAACCoCAAAFAAwAAAAAACAQAAQgAg=</HashCode>
+      <FileName>Referential\EtablissementPaieEnt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fred.Entities.Referential.CodeAbsenceEnt" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAYAAEAwAEAAAAACCAgABgAIAAgQAAAAAGAQEAAAAA=</HashCode>
+      <FileName>Referential\CodeAbsenceEnt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fred.Entities.Societe.SocieteEnt" Collapsed="true">
+    <Position X="0.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AARAAEZIIAFAACgEQCSqEAAQEAFBAAAiEACQWABAOgA=</HashCode>
+      <FileName>Societe\SocieteEnt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

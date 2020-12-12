@@ -1,0 +1,306 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+@{
+    ViewBag.Title = "Détail";
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+    @Styles.Render("~/CommandeEnergieDetailBundle.css")
+}
+@section scripts {
+    @Scripts.Render("~/CommandeEnergieDetailBundle.js")
+    @this.RenderResources("FeatureCommandeEnergie")
+}
+<div class="container commande-energie-list" ng-controller="CommandeEnergieDetailController as $ctrl" ng-init="$ctrl.handleInit('@ViewBag.id')">
+    <!--START : Titre de la page-->
+    <h1>{{$ctrl.resources.Titre_Commande_Energie}}</h1>
+    <div class="toolbar-large">
+        <div class="toolbar-large-division entete">
+            <div class="toolbar-large-section-title">{{$ctrl.resources.Entete_Commande_Energie}}</div>
+            <div class="toolbar-large-section">
+                <div class="toolbar-large-section-bloc num">
+                    <div class="lbl">{{$ctrl.resources.Numero_Commande_Energie}}</div>
+                    <span>{{$ctrl.commande.NumeroCommandeExterne}}</span>
+                </div>
+                <div class="toolbar-large-section-bloc type">
+                    <div class="lbl">{{$ctrl.resources.Type_Energie_Commande_Energie}}</div>
+                    <span class="tile {{$ctrl.typeEnergieStyles[$ctrl.commande.TypeEnergie.Code].class}}">{{$ctrl.commande.TypeEnergie.Libelle}}</span>
+                </div>
+                <div class="toolbar-large-section-bloc day">
+                    <div class="lbl">{{$ctrl.resources.Global_Period}}</div>
+                    <span class="val">{{$ctrl.commande.Date | date:'MM/yyyy'}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="toolbar-large-division biz">
+            <div class="toolbar-large-section-title">{{$ctrl.resources.Global_Affaire}}</div>
+            <div class="toolbar-large-section">
+                <div class="toolbar-large-section-bloc">
+                    <div class="txt">{{$ctrl.commande.CI.Code}}</div>
+                    <div class="txt">{{$ctrl.commande.CI.Libelle}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="toolbar-large-division biz prov">
+            <div class="toolbar-large-section-title">{{$ctrl.resources.Global_Fournisseur}}</div>
+            <div class="toolbar-large-section fournisseur">
+                <div class="toolbar-large-section-bloc">
+                    <div class="txt">{{$ctrl.commande.Fournisseur.Code}}</div>
+                    <div class="txt">{{$ctrl.commande.Fournisseur.Libelle}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @************************** LIGNES DE COMMANDE **************************@
+    <div class="commande-lignes pull-right ligneCommandeRow">
+        <div class="command-line-bloc">
+            <div class="subtitle pull-left collapsed">
+                <i class="fa fa-angle-right"></i>
+                <span>{{$ctrl.resources.Titre_Pointage_Ajustement}}</span>
+            </div>
+        </div>
+        <div id="pointAdj">
+            <table class="table table-hover borderless nopadding">
+                <thead>
+                    <tr class="headerPointAdj">
+                        <th class="col1">{{$ctrl.resources.Libelle_Designation}}</th>
+                        <th class="col2">{{$ctrl.resources.Global_Resource}}</th>
+                        <th class="col3">{{$ctrl.resources.Libelle_Unite_Pointage}}</th>
+                        <th class="col4">{{$ctrl.resources.Libelle_Quantite_Pointee}}</th>
+                        <th class="col5">{{$ctrl.resources.Libelle_Unite_Bareme}}</th>
+                        <th class="col6">{{$ctrl.resources.Libelle_Quantite_Convertie}}</th>
+                        <th class="col7 gr">{{$ctrl.resources.Libelle_Quantite_Ajustee}}</th>
+                        <th class="col8">{{$ctrl.resources.Libelle_Bareme}}</th>
+                        <th class="col9 gr">{{$ctrl.resources.Libelle_PUHT_Ajuste}}</th>
+                        <th class="col10">{{$ctrl.resources.Libelle_Montant_Valorise}}</th>
+                        <th class="col11 gr">{{$ctrl.resources.Libelle_Montant_Energie}}</th>
+                        <th class="col12">{{$ctrl.resources.Libelle_Commentaire}}</th>
+                    </tr>
+                </thead>
+                <tbody id="commande-energie-table" class="fred-scroll">
+                    <tr ng-repeat="ligneEnergie in $ctrl.commande.Lignes | filter: $ctrl.commandeEnergieLigneFilter">
+                        <td class="col1">{{ligneEnergie.Libelle}}</td>
+                        <td class="col2">{{ligneEnergie.Ressource.CodeLibelle}}</td>
+                        <td class="col3">{{ligneEnergie.Unite.Code}}</td>
+                        <td class="col4">{{ligneEnergie.QuantitePointee | number:2}}</td>
+                        <td class="col5">{{ligneEnergie.UniteBareme.Code}}</td>
+                        <td class="col6">{{ligneEnergie.QuantiteConvertie | number:2}}</td>
+                        <td class="col7">
+                            <input type="text"
+                                   fred-input-number="3"
+                                   class="inputCommandeLigne fill adj"
+                                   ng-model="ligneEnergie.Quantite"
+                                   ng-change="$ctrl.handleOnUpdateCommandeLigne(ligneEnergie)"
+                                   ng-disabled="$ctrl.display.readOnly" />
+                            <span class="diff" ng-show="ligneEnergie.EcartQuantite">{{ligneEnergie.EcartQuantite > 0 ? '+' : ''}} {{ligneEnergie.EcartQuantite | number:2}}</span>
+                        </td>
+                        <td class="col8">{{ligneEnergie.Bareme}}</td>
+                        <td class="col9">
+                            <input type="text"
+                                   fred-input-number="3"
+                                   class="inputCommandeLigne fill adj"
+                                   ng-model="ligneEnergie.PUHT"
+                                   ng-change="$ctrl.handleOnUpdateCommandeLigne(ligneEnergie)"
+                                   ng-disabled="$ctrl.display.readOnly" />
+                            <span class="diff" ng-show="ligneEnergie.EcartPu">{{ligneEnergie.EcartPu > 0 ? '+' : ''}} {{ligneEnergie.EcartPu | number:3}}</span>
+                        </td>
+                        <td class="col10">{{ligneEnergie.MontantValorise | number:2}}</td>
+                        <td class="col11">
+                            {{ligneEnergie.MontantHT | number:2}}
+                            <span class="diff" ng-show="ligneEnergie.EcartMontant">{{ligneEnergie.EcartMontant > 0 ? '+' : ''}} {{ligneEnergie.EcartMontant | number:2}}</span>
+                        </td>
+                        <td class="col12">
+                            <input type="text"
+                                   class="inputCommandeLigne fill"
+                                   ng-model="ligneEnergie.Commentaire"
+                                   ng-change="$ctrl.handleOnUpdateCommandeLigne(ligneEnergie)"
+                                   ng-disabled="$ctrl.display.readOnly" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="command-line-bloc">
+            <div class="subtitle pull-left collapsed">
+                <i class="fa fa-angle-right"></i>
+                <span>{{$ctrl.resources.Titre_Lignes_Supplementaires}}</span>
+            </div>
+            <!--Bouton d'ajout d'une ligne de commande-->
+            <div class="pull-right">
+                <div class="bloc-auth">
+                    <button type="button" class="btn btn-sm btn-primary more_add"
+                            ng-click="$ctrl.handleAddAdditionalCommandeLigne()"
+                            ng-show="$ctrl.display.showBtnAddRow">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        {{$ctrl.resources.Bouton_Ajout_Ligne}}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="com-line">
+            <table class="table table-hover borderless nopadding">
+                <thead>
+                    <tr class="headerCommandeLigne">
+                        <th id="D">{{$ctrl.resources.Libelle_Designation}}</th>
+                        <th id="R">{{$ctrl.resources.Global_Resource}}</th>
+                        <th id="T">{{$ctrl.resources.Global_Task}}</th>
+                        <th id="Q" class="maths">{{$ctrl.resources.Quantite_lb}}</th>
+                        <th id="U" class="maths">{{$ctrl.resources.Unite_lb}}</th>
+                        <th class="maths" id="P">{{$ctrl.resources.Global_PUHTEuros}}</th>
+                        <th class="maths" id="M">{{$ctrl.resources.Global_AmountHTEuros}}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="ligne in $ctrl.commande.Lignes | filter: $ctrl.additionalCommandeEnergieLigneFilter">
+                        <td class="col-md-3" headers="D">
+                            <input class="inputCommandeLigne fill"
+                                   ng-model="ligne.Libelle"
+                                   ng-change="$ctrl.handleOnUpdateCommandeLigne(ligne)"
+                                   ng-disabled="$ctrl.display.readOnly" />
+                        </td>
+                        <td class="col-md-2" headers="R">
+                            <lookup-standalone ng-model="ligne.Ressource"
+                                               text="ligne.Ressource.CodeLibelle"
+                                               search-title="{{$ctrl.resources.Global_ReferentielRessource}}"
+                                               search-placeholder="{{$ctrl.resources.Global_ReferentielRessource_Placeholder}}"
+                                               url="/api/Ressource/SearchLight/?societeId={{$ctrl.commande.CI.SocieteId}}&achats=true&"
+                                               on-select="$ctrl.handleCommandeLigneLookupSelection('Ressource', item, ligne);"
+                                               on-delete="$ctrl.handleCommandeLigneLookupDeletion('Ressource', ligne)"
+                                               ng-show="$ctrl.commande.CI"
+                                               class="formulaire middle"
+                                               placeholder="Sélectionner une Ressource"
+                                               ng-disabled="$ctrl.display.readOnly">
+                            </lookup-standalone>
+                        </td>
+                        <td class="col-md-2" headers="T">
+                            <lookup-standalone ng-model="ligne.Tache"
+                                               text="ligne.Tache.CodeLibelle"
+                                               search-title="{{$ctrl.resources.Global_ReferentielTache}}"
+                                               search-placeholder="{{$ctrl.resources.Global_ReferentielTache_Placeholder}}"
+                                               url="/api/Tache/SearchLight/?ciId={{$ctrl.commande.CiId}}&"
+                                               on-select="$ctrl.handleCommandeLigneLookupSelection('Tache', item, ligne);"
+                                               on-delete="$ctrl.handleCommandeLigneLookupDeletion('Tache', ligne)"
+                                               ng-show="$ctrl.commande.CI"
+                                               class="formulaire middle"
+                                               custom-template-url="~/Scripts/directive/Lookup/custom-templates/tache.template.html"
+                                               placeholder="Sélectionner une Tâche"
+                                               ng-disabled="$ctrl.display.readOnly">
+                            </lookup-standalone>
+                        </td>
+                        <td class="col-md-1" headers="Q">
+                            <input type="text"
+                                   fred-input-number="3"
+                                   fred-input-default-value="0"
+                                   class="inputCommandeLigne fill"
+                                   ng-model="ligne.Quantite"
+                                   ng-change="$ctrl.handleOnUpdateCommandeLigne(ligne)"
+                                   ng-disabled="$ctrl.display.readOnly" />
+                        </td>
+                        <td class="col-md-1" headers="U">
+                            <lookup-standalone name="unite"
+                                               ng-model="ligne.Unite"
+                                               text="ligne.Unite.Code"
+                                               search-title="{{$ctrl.resources.Global_ReferentielUnite}}"
+                                               search-placeholder="{{$ctrl.resources.Global_ReferentielUnite_Placeholder}}"
+                                               url="/api/Unite/SearchLightBySocieteAndRessourceId/?ciId={{$ctrl.commande.CiId}}&ressourceId={{ligne.RessourceId}}&"
+                                               show-delete-button="false"
+                                               on-select="$ctrl.handleCommandeLigneLookupSelection('Unite', item, ligne)"
+                                               on-delete="$ctrl.handleCommandeLigneLookupDeletion('Unite', ligne)"
+                                               class="formulaire middle"
+                                               ng-show="$ctrl.commande.CI"
+                                               ng-disabled="!ligne.RessourceId || $ctrl.display.readOnly"
+                                               placeholder="Sélectionner une Unité">
+                            </lookup-standalone>
+                        </td>
+                        <td class="col-md-1" headers="P">
+                            <input type="text"
+                                   fred-input-number
+                                   fred-input-default-value="0"
+                                   class="inputCommandeLigne fill"
+                                   ng-model="ligne.PUHT"
+                                   ng-change="$ctrl.handleOnUpdateCommandeLigne(ligne)"
+                                   ng-disabled="$ctrl.display.readOnly" />
+                        </td>
+                        <td class="col-md-1" headers="M">
+                            <label class="inputCommandeLigne">{{ligne.MontantHT | number:2}}</label>
+                        </td>
+                        <td class="col-md-1">
+                            <div class="action-icons">
+                                <div class="bloc-auth">
+                                    <span class="clicable material-icons"
+                                          title="{{$ctrl.resources.Global_Bouton_Dupliquer_Tooltip}}"
+                                          ng-click="$ctrl.handleDuplicateAdditionalCommandeLigne(ligne)"
+                                          ng-show="$ctrl.display.showBtnDuplicateRow">content_copy</span>
+                                    &nbsp;
+                                    <span ng-click="$ctrl.handleDeleteAdditionalCommandeLigne(ligne)"
+                                          class="clicable material-icons"
+                                          title="{{$ctrl.resources.Commande_Detail_Ligne_Table_Bouton_Supprimer}}"
+                                          ng-show="$ctrl.display.showBtnDeleteRow">clear</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row bottom-toolbar">
+        <div class="col-sm-12 btn-toolbar nopadding">
+            <button type="button"
+                    class="btn btn-success"
+                    title="{{$ctrl.resources.Global_Bouton_Enregistrer_Tooltip}}"
+                    ng-click="$ctrl.handleSave()"
+                    ng-show="$ctrl.display.showBtnSave">
+                {{$ctrl.resources.Global_Bouton_Enregistrer}}
+            </button>
+            <button type="button"
+                    class="btn btn-default"
+                    title="{{$ctrl.resources.Global_Bouton_Supprimer_Tooltip}}"
+                    ng-click="$ctrl.handleDelete()"
+                    ng-show="$ctrl.commande.CommandeId > 0 && $ctrl.display.showBtnDelete">
+                {{$ctrl.resources.Global_Bouton_Supprimer}}
+            </button>
+            <button type="button"
+                    class="btn btn-return"
+                    title="{{$ctrl.resources.Bouton_Retour_Liste_Commande_Energie_Tooltip}}"
+                    ng-click="$ctrl.handleBackToList()">
+                {{$ctrl.resources.Bouton_Retour_Liste_Commande_Energie}}
+            </button>
+            <button type="button"
+                    class="btn btn-default"
+                    title="{{$ctrl.resources.Global_Bouton_Imprimer_Tooltip}}"
+                    ng-show="$ctrl.commande.CommandeId > 0"
+                    ng-click="$ctrl.handleExportExcel()">
+                {{$ctrl.resources.Global_Bouton_Imprimer}}
+            </button>
+            <span class="material-icons error-icon"
+                  ng-if="$ctrl.commandeErrors.length > 0"
+                  popover-title="{{$ctrl.resources.Commande_Detail_ListeErreurs}}"
+                  uib-popover-template="'popoverTemplate'"
+                  popover-trigger="'mouseenter'"
+                  popover-placement="top-left">warning</span>
+            <fred-authorization key="{{$ctrl.permissionKeys.AffichageBoutonValidationCommandeEnergie}}" style="margin-left: auto;">
+                <button type="button"
+                        class="btn btn-gene"
+                        ng-disabled="$ctrl.display.disabledBtnValidate"
+                        ng-show="$ctrl.display.showBtnValidate"
+                        title="{{$ctrl.resources.Bouton_Valider_Commande_Energie_Tooltip}}"
+                        ng-click="$ctrl.handleValidate()">
+                    {{$ctrl.resources.Bouton_Valider_Commande_Energie}}
+                </button>
+            </fred-authorization>
+        </div>
+        <div class="footer-datas">
+            <div class="lbl">{{$ctrl.resources.Global_AmountHTEuros}}</div>
+            <div class="digits">{{$ctrl.commande.MontantHT | number:2}} €</div>
+        </div>
+    </div>
+    <!-- Popover Liste d'erreurs de validation-->
+    <script type="text/ng-template" id="popoverTemplate">
+        <ul class="popoverList" ng-if="$ctrl.commandeErrors.length > 0">
+            <li ng-repeat="erreur in $ctrl.commandeErrors track by $index">
+                {{erreur}}
+            </li>
+        </ul>
+    </script>
+</div>

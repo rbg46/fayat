@@ -1,0 +1,87 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+  ViewBag.Title = FeatureRapport.Pointage_Popup_TitreOnglet;
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+<div class="modal fade" id="myModal" role="dialog">
+  <form name="formModal" autocomplete="off" novalidate>
+    <div class="modal-dialog" style="width:60%">
+
+      <!-- Modal content START-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">{{resources.Pointage_Popup_Titre}}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-4" for="txtDateComptable">{{resources.Pointage_Popup_DateComptable}}</label>
+              <div class="col-sm-8">
+                <div class="input-group">
+                  <input type="month" class="form-control" id="txtDateComptable" name="DateComptable" ng-required="true" ng-model="dateComptable.value">
+                  <span class="text-danger" style="margin-left:1em; font-size:0.8em; font-style:italic" ng-show="!IsValid && formModal.DateComptable.$error.required">* {{resources.Global_Control_DataRequired_Erreur}}</span>
+                  <span class="input-group-addon"> <i class="glyphicon glyphicon-calendar"> </i> </span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="radio-inline">
+                <label class="col-sm-12"><input type="radio" id="txtRadioPerimetre" name="RadioPerimetre" ng-model="prRadioValue" ng-value="false" ng-change="refreshModal()" ng-required="true">{{resources.Pointage_Popup_MonPerimetre}}</label>
+                <span class="text-danger" style="margin-left:1em; font-size:0.8em; font-style:italic" ng-show="!IsValid">* {{resources.Global_Control_DataRequired_Erreur}}</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-4"><input type="radio" class="radio-inline" id="txtRadioAutres" name="RadioAutres" ng-model="prRadioValue" ng-value="true" ng-required="true">{{resources.Pointage_Popup_Autres}}</label>
+
+              <div ng-show="false">
+                <input type="text" class="form-control" id="txtOrganisationId" placeholder="OrganisationId" ng-model="Organisation.OrganisationId">
+              </div>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="txtTypeOrganisation" placeholder="{{resources.Pointage_Popup_TypeOrganisation}}" ng-model="Organisation.TypeOrganisation.Libelle">
+              </div>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="txtOrganisation" placeholder="{{resources.Organisation_lb}}" ng-dblclick="initPickList('Organisation')" ng-model="Organisation.Libelle" ng-required="prRadioValue == true">
+                <span class="text-danger" style="margin-left:1em; font-size:0.8em; font-style:italic" ng-show="!IsValid && prRadioValue == true">* {{resources.Global_Control_DataRequired_Erreur}}</span>
+              </div>
+              <span class="text-danger" style="margin-left:1em; font-size:0.8em; font-style:italic" ng-show="!IsValid">* {{resources.Global_Control_DataRequired_Erreur}}</span>
+            </div>
+
+            <br />
+            <div class="form-group">
+              <label class="col-sm-4" for="txtDateComptable">{{resources.Pointage_Popup_Tri}}</label>
+              <div class="col-sm-8">
+                <label class="radio-inline">
+                  <input type="radio" id="txttriRadioNom" name="triRadioNom" ng-model="triRadioValue" ng-value="false" ng-required="true">{{resources.Pointage_Popup_Nom}}
+                  <span class="text-danger" style="margin-left:1em; font-size:0.8em; font-style:italic" ng-show="!IsValid">* {{resources.Global_Control_DataRequired_Erreur}}</span>
+
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" id="txttriRadioMatricule" name="triRadioMatricule" ng-model="triRadioValue" ng-value="true" ng-required="true">{{resources.Global_Matricule}}
+                  <span class="text-danger" style="margin-left:1em; font-size:0.8em; font-style:italic" ng-show="!IsValid">* {{resources.Global_Control_DataRequired_Erreur}}</span>
+                </label>
+              </div>
+            </div>
+            <br />
+            <div class="form-group">
+              <label class="col-sm-4" for="txtDateComptable">{{resources.Pointage_Popup_Extract}}</label>
+              <div class="col-sm-4">
+                <a href="#" class="btn btn-lg btn-danger" ng-click="exportPDF(formModal)"><span class="glyphicon glyphicon-export"></span>{{resources.Global_Bouton_ExportPDF}}</a>
+              </div>
+              <div class="col-sm-4">
+                <a href="#" class="btn btn-lg btn-success" ng-click="exportExcel(formModal)"><span class="glyphicon glyphicon-export"></span>{{resources.Global_Bouton_ExportExcel}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeModal()">{{resources.Global_Bouton_Fermer}}</button>
+        </div>
+      </div>
+      <!-- Modal content END-->
+
+    </div>
+  </form>
+</div>

@@ -1,0 +1,137 @@
+﻿$color_1: rgb(0, 112, 192);
+$background_color_1: #fcfcfc;
+$background_color_2: #1F98C7;
+$background_color_3: rgb(255,212,134);
+
+
+.copier-deplacer-T4-dialog.modal {
+    .modal-dialog {
+        top: 5%;
+        width: 50%;
+    }
+}
+
+.copier-deplacer-T4-dialog {
+    .modal-body-separate {
+        border-top: 1px solid #e5e5e5;
+    }
+
+    .parametre {
+        height: 38px;
+    }
+
+    input[type="radio"] {
+        display: none;
+
+        & + label {
+            font-size: 14px;
+
+            span {
+                border-radius: 50%;
+                cursor: pointer;
+                display: inline-block;
+                height: 19px;
+                margin: -1px 4px 0 0;
+                vertical-align: middle;
+                width: 19px;
+                background-color: $background_color_1;
+                border: 3px #2c77ba solid;
+                -moz-transition: background-color 0.4s linear;
+                -o-transition: background-color 0.4s linear;
+                -webkit-transition: background-color 0.4s linear;
+                transition: background-color 0.4s linear;
+            }
+        }
+
+        &:checked {
+            & + label {
+                span {
+                    background-color: $background_color_2;
+                    border: 3px #78C1DD solid;
+                    -moz-transition: background-color 0.4s linear;
+                    -o-transition: background-color 0.4s linear;
+                    -webkit-transition: background-color 0.4s linear;
+                    transition: background-color 0.4s linear;
+                }
+            }
+        }
+    }
+
+    input[type="checkbox"] {
+        display: none;
+
+        & + label {
+            font-size: 14px;
+
+            span {
+                display: inline-block;
+                width: 19px;
+                height: 19px;
+                margin: 0 4px 0 0;
+                vertical-align: middle;
+                cursor: pointer;
+                -moz-border-radius: 20%;
+                border-radius: 20%;
+                background-color: $background_color_1;
+                border: 3px #78C1DD solid;
+                -webkit-transition: background-color 0.4s linear;
+                -o-transition: background-color 0.4s linear;
+                -moz-transition: background-color 0.4s linear;
+                transition: background-color 0.4s linear;
+            }
+        }
+
+        &:checked {
+            & + label {
+                span {
+                    border: 3px #2c77ba solid;
+                    background-image: url('/medias/images/ico/checked.png');
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    -webkit-transition: background-color 0.4s linear;
+                    -o-transition: background-color 0.4s linear;
+                    -moz-transition: background-color 0.4s linear;
+                    transition: background-color 0.4s linear;
+                }
+            }
+        }
+    }
+
+    .taches4 {
+        margin-top: 10px;
+        height: 120px;
+        overflow-y: scroll;
+        border: 1px solid black;
+
+        table {
+            width: 100%;
+            overflow-y: hidden;
+        }
+
+        td {
+            height: 30px;
+            cursor: pointer;
+        }
+
+        .col-check {
+            width: 5%;
+            text-align: center;
+        }
+
+        .col-tache-with-check {
+            width: 90%;
+        }
+
+        .col-tache-without-check {
+            width: 100%;
+        }
+    }
+
+    .tache4-selected {
+        background-color: $background_color_3;
+    }
+
+    .tache4span {
+        color: $color_1;
+    }
+}

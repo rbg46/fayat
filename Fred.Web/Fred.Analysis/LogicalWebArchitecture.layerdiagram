@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="7fe29b91-6441-4a76-824f-0accfa112e81" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <comments>
+    <comment Id="e6454ec2-bd92-40c3-a65f-3de832c8233c" name="Comment1">
+      <body>	Externals
+
+Fred.ImportExport.Api</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="386fdc80-be19-429d-92ca-a03279321fe3" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+  </comments>
+  <layers>
+    <layer Id="8b1456cb-2ab7-466e-8ab8-e9b32d0c3d8d" name="Couche de traitement métier">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="329c4885-3963-4bfd-8d84-39ae8185e793" direction="Forward">
+          <layerMoniker Id="180a8195-492a-48b7-97f7-87dd864fe111" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="581fc2fc-1f88-4c70-9379-fccc8ee84ad8" name="Fred.Business" forbiddenNamespaceDependencies="Fred.DataAccess.ExternalService">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="3d2a01e5-08d9-485c-9890-a7ef0fcc628c" direction="Forward">
+              <layerMoniker Id="21fbdbd4-0ecc-4265-8925-6b4f6206ae3a" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="89e0ea28-1886-44fd-bf00-6903b83f96a4" name="Fred.Business">
+              <ArtifactNode Label="Fred.Business" Category="CodeSchema_Project" Id="(Assembly=../Fred.Business/Fred.Business.csproj)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=Fred.Business)" Label="Fred.Business.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Produces" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="9561f2ba-1203-4c55-b081-594a486d0080" name="Fred.Business.ExternalService">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="c79ec6ca-23d5-4b7e-ad46-39d390a47836" direction="Forward">
+              <layerMoniker Id="386fdc80-be19-429d-92ca-a03279321fe3" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="749e55c9-963c-4a9d-96ee-be0f8556d0aa" direction="Forward">
+              <layerMoniker Id="581fc2fc-1f88-4c70-9379-fccc8ee84ad8" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="20ba2b54-2c46-473d-978e-c717f8c6a2c0" name="Fred.Business.ExternalService">
+              <ArtifactNode Label="Fred.Business.ExternalService" Category="CodeSchema_Project" Id="(Assembly=../Fred.Business.ExternalService/Fred.Business.ExternalService.csproj)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=Fred.Business.ExternalService)" Label="Fred.Business.ExternalService.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Produces" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="331ab8f1-88b3-444d-a7d0-c2cfbfb5b914" name="Couche d'exposition&#xD;&#xA;(Presentation Layer)">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="a525d0f7-0aa7-442f-97dc-67dc650b0991" direction="Forward">
+          <layerMoniker Id="8b1456cb-2ab7-466e-8ab8-e9b32d0c3d8d" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="24468d6f-a1e8-41ac-8b89-68217f235c87" direction="Forward">
+          <layerMoniker Id="180a8195-492a-48b7-97f7-87dd864fe111" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="9cbcd838-7440-468c-97cd-c23fd0fc2cbd" name="Fred.Web">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="32572bac-5dc0-4c74-90cc-8aaf7bda0afa" direction="Forward">
+              <layerMoniker Id="6db970da-05c8-4566-93a0-1efb55fedf85" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="34d31788-c269-4648-90fe-285772e4f140" name="Fred.Web">
+              <ArtifactNode Label="Fred.Web" Category="CodeSchema_Project" Id="(Assembly=../Fred.Web/Fred.Web.csproj)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=Fred.Web)" Label="Fred.Web.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Produces" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="180a8195-492a-48b7-97f7-87dd864fe111" name="Couches partagées">
+      <childLayers>
+        <layer Id="e65942c6-6f2d-4aec-b405-3495f450f14b" name="Fred.Entities">
+          <references>
+            <reference Id="a6ba586e-fc27-49dc-b711-3c09bcb50fda" name="Fred.Entities">
+              <ArtifactNode Label="Fred.Entities" Category="CodeSchema_Project" Id="(Assembly=../Fred.Entities/Fred.Entities.csproj)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=Fred.Entities)" Label="Fred.Entities.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Produces" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="2b24bb4d-2a5b-4d3e-8454-937956e3efb1" name="Fred.Framework" requiredNamespace="Fred.Framework">
+          <references>
+            <reference Id="95c1fe33-a5e7-4c7f-8f5e-a753e67a4c8d" name="Fred.Framework">
+              <ArtifactNode Label="Fred.Framework" Category="CodeSchema_Project" Id="(Assembly=../Fred.Framework/Fred.Framework.csproj)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=Fred.Framework)" Label="Fred.Framework.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Produces" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="e52ccf07-9b30-4e13-aa48-399404fa0aaf" name="Fred.Web.Shared">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="7832e664-839b-4578-9dcf-63f9c6fd9114" direction="Forward">
+              <layerMoniker Id="e65942c6-6f2d-4aec-b405-3495f450f14b" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="8f0df6da-d7f8-43c4-86f8-118996fe92b6" name="Fred.Web.Shared">
+              <ArtifactNode Label="Fred.Web.Shared" Category="CodeSchema_Project" Id="(Assembly=../Fred.Web.Shared/Fred.Web.Shared.csproj)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=Fred.Web.Shared)" Label="Fred.Web.Shared.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Produces" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="22eb39b8-1399-4e03-a0aa-5941ec890531" name="Couche d'accès à la donnée">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="773bdd35-478d-454e-b120-59bbd353848c" direction="Forward">
+          <layerMoniker Id="180a8195-492a-48b7-97f7-87dd864fe111" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="21fbdbd4-0ecc-4265-8925-6b4f6206ae3a" name="Fred.DataAccess">
+          <description>Couche permettant d'accéder à de la données issues des bases de données</description>
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="96ef8c35-fa54-4ea0-ac9d-f9bf52fad575" direction="Forward">
+              <layerMoniker Id="b5131d19-18c7-4f56-be07-47150531f91b" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="80333238-3ebd-4aba-8d89-b582e7f0bce2" name="05-Data Access Layer">
+              <ArtifactNode Label="05-Data Access Layer" Category="CodeSchema_Project" Id="(Assembly=../05-Data%2520Access%2520Layer)">
+                <Category Ref="CodeMap_SolutionFolder" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=Fred.DataAccess)" Label="Fred.DataAccess.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="386fdc80-be19-429d-92ca-a03279321fe3" name="Fred.DataAccess.ExternalService">
+          <references>
+            <reference Id="747dad87-5543-42f1-82bd-8ef268162b16" name="Fred.DataAccess.ExternalService">
+              <ArtifactNode Label="Fred.DataAccess.ExternalService" Category="CodeSchema_Project" Id="(Assembly=../Fred.DataAccess.ExternalService/Fred.DataAccess.ExternalService.csproj)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=Fred.DataAccess.ExternalService)" Label="Fred.DataAccess.ExternalService.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Produces" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="e52ac461-716d-4c55-be97-b859c7dfaf7d" name="Couche de persistance de la donnée">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="9649c0eb-1ac7-44c1-9881-fb1a20f353f7" direction="Forward">
+          <layerMoniker Id="180a8195-492a-48b7-97f7-87dd864fe111" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="b5131d19-18c7-4f56-be07-47150531f91b" name="Fred.Database">
+          <references>
+            <reference Id="9c48f6c5-66f5-4958-bce7-bf6e47d71355" name="Fred.Database">
+              <ArtifactNode Label="Fred.Database" Category="CodeSchema_Project" Id="(Assembly=../Fred.Database/Fred.Database.sqlproj)">
+                <Category Ref="File" />
+              </ArtifactNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="6db970da-05c8-4566-93a0-1efb55fedf85" name="Infrastructure">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="e176b471-62a8-430b-b0ac-0b589c0ea6eb" direction="Forward">
+          <layerMoniker Id="180a8195-492a-48b7-97f7-87dd864fe111" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="28deaa43-6066-461f-9df4-2abc63f47848" direction="Forward">
+          <layerMoniker Id="8b1456cb-2ab7-466e-8ab8-e9b32d0c3d8d" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="b965e32f-668a-4531-87de-2480748a236f" direction="Forward">
+          <layerMoniker Id="22eb39b8-1399-4e03-a0aa-5941ec890531" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="2340d149-a7d3-4a99-8208-daa53684e7f7" name="Fred.Web.Bootstrapper" forbiddenNamespaceDependencies="Fred.DataAccess.ExternalService">
+          <references>
+            <reference Id="385939de-f78e-4410-843f-c6668e412680" name="Fred.Web.Bootstrapper">
+              <ArtifactNode Label="Fred.Web.Bootstrapper" Category="CodeSchema_Project" Id="(Assembly=../Bootstrapper/Fred.Web.Bootstrapper.csproj)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=Bootstrapper)" Label="Bootstrapper.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Produces" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+    </layer>
+  </layers>
+</layerModel>

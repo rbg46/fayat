@@ -1,0 +1,326 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureCloturesPeriodes.CloturePeriodes_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/CloturesPeriodesIndexBundle.css")
+}
+
+@section scripts {
+
+    @Scripts.Render("~/CloturesPeriodesIndexBundle.js")
+    @this.RenderResources("FredResource", "FeatureCloturesPeriodes")
+}
+
+<div class="container CloturesPeriodes" ng-controller="CloturesPeriodesController as ctrl">
+
+    <!-- START : Titre de la page -->
+    <h1>{{ctrl.resources.Titre}}</h1>
+
+    <!--START : Barre de recherche + Barre d'outils-->
+    <fred-toolbar>
+
+        <!--Sélection de la période-->
+        <fred-section class="period-section">
+
+            <fred-section-title>{{ctrl.resources.Global_SelectionnerPeriode}}</fred-section-title>
+            <fred-section-controls>
+                <span class="input-group date">
+                    <app-date-picker id="periode"
+                                     ng-model="ctrl.periode"
+                                     initial-date="{{ctrl.periode}}"
+                                     format="MM/YYYY"
+                                     lang="fr"
+                                     placeholder="{{ctrl.resources.Global_Period}}"
+                                     on-update="ctrl.onChangePeriod()">
+                    </app-date-picker>
+                </span>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Sélection de l'organisation-->
+        <fred-section class="orga-section">
+
+            <fred-section-title>{{ctrl.resources.Selection_Organisation_lb}}</fred-section-title>
+
+            <fred-section-controls>
+                <div class="row row-lookup">
+                    <lookup-standalone ng-model="ctrl.filter.organisation"
+                                       text="ctrl.filter.organisation.Libelle"
+                                       search-placeholder="{{ctrl.resources.Global_ReferentielOrganisation_Placeholder}}"
+                                       search-title="{{ctrl.resources.Global_ReferentielOrganisation_Placeholder}}"
+                                       on-select="ctrl.lookupOrganisationSelection(item);"
+                                       on-delete="ctrl.lookupOrganisationDeletion();"
+                                       placeholder="{{ctrl.resources.Global_ReferentielOrganisation_Placeholder}}"
+                                       url="/api/organisation/SearchLightOrganisation/?typeOrganisation=UO,ETABLISSEMENT,CI&"
+                                       class="formulaire long">
+                    </lookup-standalone>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Recherche avancée-->
+        <fred-section class="text-search-section">
+
+            <fred-section-title>{{ctrl.resources.Recherche_Avancee_lb}}</fred-section-title>
+            
+                
+                <div class="search-bloc">
+                    <!-- BEGIN : Barre de Recherche -->
+                    <div class="search-field no-pad">
+                        <div class="input-group input-search">
+                            <fred-section-controls class="action-field">
+                                <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" ng-model="ctrl.filter.centreImputation" on-enter="ctrl.storeCentreImputationAndApplyFilter();" placeholder="{{ctrl.resources.Global_ReferentielCI_Placeholder}}">
+                                <fred-button type="button" class="btn-rechercher" ng-disabled="ctrl.isBusy" ng-click="ctrl.storeCentreImputationAndApplyFilter();">
+                                    <span class="input-group-addon button-search">
+                                        <i class="material-icons">search</i>
+                                    </span>
+                                </fred-button>
+                                
+                            </fred-section-controls>
+                        </div>
+                        <clotures-periodes-filter-component resources="ctrl.resources" child-filter="ctrl.filter" class="fil-ti">
+
+                        </clotures-periodes-filter-component>
+
+                        <div class="act-btns">
+                            <fred-button type="button" class="white icon" ng-disabled="ctrl.isBusy" ng-click="ctrl.isFiltered=!ctrl.isFiltered;">
+                                <span class="chip" ng-hide="ctrl.displayFilterState()"></span>
+                                <span  class="fa fa-filter" title="">
+                                    <span ng-show="ctrl.isFiltered"></span>
+                                </span>
+                            </fred-button>
+                        </div>
+                        
+                    </div>
+                    <!-- END : Barre de Recherche -->
+                </div>
+                
+            
+
+            <!-- BEGIN : Bloc de Filtre -->
+            <fred-overlay ng-click="ctrl.isFiltered=false;" ng-class="{'open' :ctrl.isFiltered  ,'close' :!ctrl.isFiltered}"></fred-overlay>
+
+            <fred-side ng-init="ctrl.isFiltered=false;" ng-class="{'open' :ctrl.isFiltered  ,'close' :!ctrl.isFiltered}" esc-key="Test()">
+
+                <!--En tete-->
+                <header>
+                    <icon><label>{{ctrl.resources.Affiner_Recherche_lb}}</label></icon>
+                </header>
+                
+
+                
+                <!-- Body -->
+                <main class="fred-scroll" style="padding: 5px;">
+
+                    <clotures-periodes-filter-component resources="ctrl.resources" child-filter="ctrl.filter" ng-show="ctrl.isFiltered">
+                    </clotures-periodes-filter-component>
+
+                    <div>
+
+                        <section-title></section-title>
+
+                        <section-content>
+
+                            <!-- Transfert FAR -->
+                            <div class="row">
+                                <div class="selection_filters">
+                                    <div class="col-sm-4 lb_l">
+                                        <label class="control-label">{{ctrl.resources.Filtre_Transfert_Far_lb}}</label>
+                                    </div>
+                                    <div class="col-sm-8 lbl_r">
+                                        <select id="ddlStatus" class="form-control input-ctrl.filters" ng-model="ctrl.filter.transfertFar" style="height: 32px;">
+                                            <option value="" selected disabled hidden>{{ctrl.resources.Filtre_Tiret_Tous_cb}}</option>
+                                            <option ng-repeat="option in ctrl.items.transfertFarItems" value="{{option}}">{{option.libelle}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Clôture Dépenses -->
+                            <div class="row">
+                                <div class="selection_filters">
+                                    <div class="col-sm-4 lb_l">
+                                        <label class="control-label">{{ctrl.resources.Filtre_Cloture_Depenses_lb}}</label>
+                                    </div>
+                                    <div class="col-sm-8 lbl_r">
+                                        <select id="ddlStatus" class="form-control input-ctrl.filters" ng-model="ctrl.filter.clotureDepenses" style="height: 32px;">
+                                            <option value="" selected disabled hidden>{{ctrl.resources.Filtre_Tiret_Tous_cb}}</option>
+                                            <option ng-repeat="option in ctrl.items.clotureDepensesItems" value="{{option}}">{{option.libelle}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Validation Avancement -->
+                            <div class="row">
+                                <div class="selection_filters">
+                                    <div class="col-sm-4 lb_l">
+                                        <label class="control-label">{{ctrl.resources.Filtre_Validation_Avancement_lb}}</label>
+                                    </div>
+                                    <div class="col-sm-8 lbl_r">
+                                        <select id="ddlStatus" class="form-control input-ctrl.filters" ng-model="ctrl.filter.validationAvancement" style="height: 32px;">
+                                            <option value="" selected disabled hidden>{{ctrl.resources.Filtre_Tiret_Tous_cb}}</option>
+                                            <option ng-repeat="option in ctrl.items.validationAvancementItems" value="{{option}}">{{option.Libelle}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Validation Contrôle budgétaire -->
+                            <div class="row">
+                                <div class="selection_filters">
+                                    <div class="col-sm-4 lb_l">
+                                        <label class="control-label">{{ctrl.resources.Filtre_Validation_Controle_Budgetaire_lb}}</label>
+                                    </div>
+                                    <div class="col-sm-8 lbl_r">
+                                        <select id="ddlStatus" class="form-control input-ctrl.filters" ng-model="ctrl.filter.validationControleBudgetaire" style="height: 32px;">
+                                            <option value="" selected disabled hidden>{{ctrl.resources.Filtre_Tiret_Tous_cb}}</option>
+                                            <option ng-repeat="option in ctrl.items.validationControleBudgetaireItems" value="{{option}}">{{option.libelle}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CI clôturé sur la période -->
+                            <div class="row">
+                                <div class="selection_filters">
+                                    <div class="col-sm-4 lb_l">
+                                        <label class="control-label">{{ctrl.resources.Filtre_Ci_Cloture_Sur_La_Periode_lb}}</label>
+                                    </div>
+                                    <div class="col-sm-8 lbl_r">
+                                        <select id="ddlStatus" class="form-control input-ctrl.filters" ng-model="ctrl.filter.clotureSurLaPeriode" style="height: 32px;">
+                                            <option value="" selected disabled hidden>{{ctrl.resources.Filtre_Tiret_Tous_cb}}</option>
+                                            <option ng-repeat="option in ctrl.items.clotureSurLaPeriodeItems" value="{{option}}">{{option.libelle}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Voir aussi les CI terminés -->
+                            <div class="row">
+                                <div class="selection_filters">
+                                    <div class="col-sm-8 lbl_l">
+                                        <label class="control-label lbl_txt">{{ctrl.resources.Filtre_Voir_Aussi_Ci_Termines_lb}}</label>
+                                    </div>
+                                    <div class="col-sm-4 no-pad">
+                                        <label class="switch">
+                                            <input type="checkbox" ng-model="ctrl.filter.dejaTermine" name="cbDejaTermine" id="cbDejaTermine" />
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                        </section-content>
+
+                    </div>
+                </main>
+
+                <!-- Footer -->
+                <footer>
+                    <!--BEGIN : Bouton Start-->
+                    <action>
+                        <button type="button" class="fred-button primary" ng-disabled="ctrl.isBusy" ng-click="ctrl.applyFilter();ctrl.isFiltered=false;">{{ctrl.resources.Global_Filtre_Bouton_Appliquer}}</button>
+                        <button type="button" class="fred-button reset" ng-disabled="ctrl.isBusy" ng-click="ctrl.resetFilter();ctrl.isFiltered=true;"> {{ctrl.resources.Global_Filtre_Bouton_Reinitialiser}} </button>
+                        <button type="button" class="fred-button cancel" ng-disabled="ctrl.isBusy" ng-click="ctrl.isFiltered=false;">{{ctrl.resources.Global_Bouton_Annuler}}</button>
+                    </action>
+                    <!--END : Bouton Start-->
+                    <close>
+                        <div class="close_panel" ng-click="ctrl.isFiltered=false;" title="{{ctrl.resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+                            <icon /><label>{{ctrl.resources.Global_Bouton_RefermerPanneau}}</label>
+                        </div>
+                    </close>
+                </footer>
+            </fred-side>
+        </fred-section>
+
+        @* Masquage du bloc à la demande du bug 11380 *@
+        @*<fred-section class="export-section">
+
+            <fred-section-title>Export</fred-section-title>
+            <fred-section-controls>
+                <button type="button" class="btn button-excel" ng-disabled="ctrl.isBusy" title="{{ctrl.resources.Global_Bouton_ExportExcel_Tooltip}}"></button>
+            </fred-section-controls>
+        </fred-section>*@
+    </fred-toolbar>
+
+    <!--END : Barre de recherche + Barre d'outils-->
+    <!--START : Tableau liste des réceptions-->
+    <div class="display-list">
+
+        <!--En-têtes-->
+        <div class="head head1">
+            <div class="col1"></div>
+            <div class="fill1"></div>
+            <div class="col-sep"></div>
+            <div class="col-btns">
+                <button type="button" class="sel-all" ng-disabled="ctrl.isBusy" ng-click="ctrl.toggleLstFiltreDccPourUpdateDepenses(true);">{{ctrl.resources.Chk_BlocDepensesToutSelectionner_lb}}</button>
+                <button type="button" class="sel-all" ng-disabled="ctrl.isBusy" ng-click="ctrl.toggleLstFiltreDccPourUpdateDepenses(false);">{{ctrl.resources.Chk_BlocDepensesToutDeselectionner_lb}}</button>
+                <button type="button" class="gen" ng-disabled="ctrl.isBusy" ng-click="ctrl.cloturerDepenses();">{{ctrl.resources.Btn_CloturerDepenses_lb}}</button>
+                <fred-super-admin-authorization>
+                    <button type="button" class="dec" ng-disabled="ctrl.isBusy" ng-click="ctrl.decloturerDepenses();">{{ctrl.resources.Btn_DecloturerDepenses_lb}}</button>
+                </fred-super-admin-authorization>
+            </div>
+            <div class="fill2"></div>
+            <div class="colScroll"></div>
+        </div>
+        <div class="head head2">
+            <div class="col1 blue"></div>
+            <div class="col3 blue">{{ctrl.resources.Transfert_FAR_lb}}</div>
+            <div class="col-sep"></div>
+            <div class="col4 blue">{{ctrl.resources.Cloture_Depenses_lb}}</div>
+            <div class="col5 blue">{{ctrl.resources.Validation_Avancement_lb}}</div>
+            <div class="col6 blue">{{ctrl.resources.Validation_Controle_Budgetaire}}</div>
+            <div class="col7 blue"></div>
+            <div class="colScroll blue"></div>
+        </div>
+
+        <!--Liste déroulante-->
+        <div class="list-bloc fred-scroll" id="list-bloc-ci">
+
+            <div class="list-line" id="ligne{{$index}}" ng-repeat="dcc in ctrl.dccList track by $index"
+                 ng-class="ctrl.dccList.IsActive ? '' : 'odd'">
+                <div class="col1">
+                    <div class="org-data">
+                        <span class="txt">{{dcc.Societe.Code}} - {{dcc.Code}} - {{dcc.Libelle}} </span>
+                    </div>
+                </div>
+                <div class="col3 tiled">
+                    <span ng-show="dcc.DateTransfertFAR" class="tile done">{{dcc.DateTransfertFAR | date:"dd/MM/yyyy" }}</span>
+                    <span ng-show="!dcc.DateTransfertFAR" class="tile undone">{{ctrl.resources.Non_Fait_lb}}</span>
+                </div>
+                <div class="col-sep">
+                    <input type="checkbox" ng-show="!dcc.DateCloture" ng-model="dcc.isDccSelectionneePourCloturerDepenses" ng-change="ctrl.toggleFiltreDccPourUpdateClotureDepenses(dcc)" id="cbxCloture{{$index}}" />
+                    <label ng-show="!dcc.DateCloture" for="cbxCloture{{$index}}"><span></span></label>
+                    <fred-super-admin-authorization>
+                        <input type="checkbox" ng-show="dcc.DateCloture" ng-model="dcc.isDccSelectionneePourDecloturerDepenses" ng-change="ctrl.toggleFiltreDccPourUpdateDeclotureDepenses(dcc)" id="cbxDecloture{{$index}}" />
+                        <label ng-show="dcc.DateCloture" for="cbxDecloture{{$index}}"><span></span></label>
+                    </fred-super-admin-authorization>
+                </div>
+                <div class="col4 tiled">
+                    <div class="tile done cloture clickable" ng-show="dcc.DateCloture" ng-if="dcc.DateCloture" ng-click="ctrl.decloturerDepense(dcc)">
+                        <span class="fa fa-unlock-alt"></span><span>{{dcc.DateCloture | date:"dd/MM/yyyy" }}</span>
+                    </div>
+                    <div class="tile undone reopen clickable" ng-show="!dcc.DateCloture" ng-if="!dcc.DateCloture" ng-click="ctrl.cloturerDepense(dcc)">
+                        <span class="fa fa-lock"></span><span>{{ctrl.resources.Non_Fait_lb}}</span>
+                    </div>
+                </div>
+                <div class="col5 tiled">
+                    <span class="tile undone">@*{{ctrl.resources.Non_Fait_lb}}*@</span>
+                </div>
+                <div class="col6 tiled">
+                    <span class="tile undone">@*{{ctrl.resources.Non_Fait_lb}}*@</span>
+                </div>
+                <div class="col7 tiled">
+                    <span ng-show="dcc.DateTransfertFAR && dcc.DateCloture" class="tile closed">{{ctrl.resources.Ci_Cloture_lb}}</span>
+                    <span ng-show="!dcc.DateTransfertFAR || !dcc.DateCloture" class="tile open">{{ctrl.resources.Ci_Ouvert_lb}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

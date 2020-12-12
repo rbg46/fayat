@@ -1,0 +1,212 @@
+﻿@*--------------------------------------------------------------------------------------------------------------*@
+@*                                                 CONTACT                                                      *@
+@*--------------------------------------------------------------------------------------------------------------*@
+<div class="panel panel-default" id="personnel-coordonnes" fred-display-handler="personnelEdit.userOrganisationId" display="hidden" ng-show="personnelEdit.map && !personnelEdit.JustDelegationShow">
+    <div class="panel-heading collapsed"
+         ng-click="personnelEdit.handleOpenContactPanel()"
+         data-toggle="collapse" data-parent="#personnel-accordion" data-target="#collapse-contact" id="panel-heading-contact">
+        <i class="chevron fa fa-fw"></i> {{personnelEdit.resources.Personnel_PartialContact_Titre}}
+        <span class="fill-space"></span>
+        <a ng-click="$event.stopPropagation()"
+           href="/IndemniteDeplacement/IndemniteDeplacement/Index/{{personnelEdit.Personnel.PersonnelId}}"
+           class="btn btn-primary pull-right btn-indemnite btn-xs"
+           role="button"
+           title="{{personnelEdit.resources.Personnel_PartialContact_IndemniteDeplacement_ToolTip}}">
+            {{personnelEdit.resources.Personnel_PartialContact_IndemniteDeplacement_Bouton}}
+        </a>
+    </div>
+    <div id="collapse-contact" class="panel-collapse collapse" ng-class="{'in': personnelEdit.Personnel.PersonnelId === 0}">
+        <form class="form-horizontal" autocomplete="off" role="form" name="personnelEdit.formContact" novalidate>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>{{personnelEdit.resources.Personnel_PartialContact_Adresse1}}</label>
+                        <input type="text"
+                               class="form-control inputText"
+                               id="txtAdresse1"
+                               name="Adresse1"
+                               ng-model="personnelEdit.persoForContact.Adresse1"
+                               placeholder="{{personnelEdit.resources.Personnel_PartialContact_Adresse1_Placeholder}}" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>{{personnelEdit.resources.Personnel_PartialContact_Adresse2}}</label>
+                        <input type="text"
+                               class="form-control inputText"
+                               id="txtAdresse2"
+                               name="Adresse2"
+                               ng-model="personnelEdit.persoForContact.Adresse2"
+                               placeholder="{{personnelEdit.resources.Personnel_PartialContact_Adresse2_Placeholder}}" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>{{personnelEdit.resources.Personnel_PartialContact_Adresse3}}</label>
+                        <input type="text"
+                               class="form-control inputText"
+                               id="txtAdresse3"
+                               name="Adresse3"
+                               ng-model="personnelEdit.persoForContact.Adresse3"
+                               placeholder="{{personnelEdit.resources.Personnel_PartialContact_Adresse3_Placeholder}}" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>{{personnelEdit.resources.Global_CodePostal}}</label>
+                        <input type="text"
+                               class="form-control inputText"
+                               id="txtCodePostal"
+                               name="CodePostal"
+                               maxlength="20"
+                               ng-model="personnelEdit.persoForContact.CodePostal"
+                               placeholder="{{personnelEdit.resources.Global_CodePostal_Placeholder}}" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>{{personnelEdit.resources.Global_Ville}}</label>
+                        <input type="text"
+                               class="form-control inputText"
+                               id="txtVille"
+                               name="Ville"
+                               ng-model="personnelEdit.persoForContact.Ville"
+                               placeholder="{{personnelEdit.resources.Global_Ville_Placeholder}}" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>{{personnelEdit.resources.Global_Pays}}</label>
+                        <span class="text-danger" ng-show="personnelEdit.formContact.$submitted && personnelEdit.formContact.Pays.$invalid">{{personnelEdit.resources.Global_Control_DataRequired_Erreur}}</span>
+                        <lookup-standalone id="txtPays"
+                                           name="Pays"
+                                           ng-model="personnelEdit.persoForContact.Pays"
+                                           text="personnelEdit.persoForContact.Pays.CodeLibelle"
+                                           search-title="Référentiel des Pays"
+                                           search-placeholder="Rechercher un Pays..."
+                                           url="/api/Pays/SearchLight"
+                                           on-select="personnelEdit.persoForContact.PaysId = item.IdRef"
+                                           on-delete="personnelEdit.persoForContact.PaysId = null; personnelEdit.persoForContact.Pays = null;"
+                                           class="formulaire long"
+                                           ng-required="personnelEdit.persoForContact.Adresse1 || personnelEdit.persoForContact.Adresse2 || personnelEdit.persoForContact.Adresse3 || personnelEdit.persoForContact.CodePostal || personnelEdit.persoForContact.Ville">
+                        </lookup-standalone>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 search-add">
+                        <div class="btn btn-default pull-left"
+                             ng-click="personnelEdit.handleCheckGps()">
+                            {{personnelEdit.resources.Rechercher_lb}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>{{personnelEdit.resources.Personnel_PartialContact_Telephone1}}</label>
+                        <input type="text" class="form-control inputText"
+                               id="txtTelephone1"
+                               ng-model="personnelEdit.persoForContact.Telephone1"
+                               placeholder="{{personnelEdit.resources.Personnel_PartialContact_Telephone1_Placeholder}}" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>{{personnelEdit.resources.Personnel_PartialContact_Telephone2}}</label>
+                        <input type="text" class="form-control inputText"
+                               id="txtTelephone2"
+                               ng-model="personnelEdit.persoForContact.Telephone2"
+                               placeholder="{{personnelEdit.resources.Personnel_PartialContact_Telephone2_Placeholder}}" />
+                    </div>
+                    <div class="col-md-4" ng-class="{'has-error': personnelEdit.formContact.$submitted && personnelEdit.formContact.Email.$invalid}">
+                        <label>{{personnelEdit.resources.Global_Email}}</label><br />
+                        <span class="text-danger" ng-show="personnelEdit.formContact.$submitted && personnelEdit.formContact.Email.$error.email">Le format d'adresse mail n'est pas valide.</span>
+                        <span class="text-danger" ng-show="personnelEdit.formIsSubmitted() && personnelEdit.formContact.Email.$error.required">{{personnelEdit.resources.Global_Control_DataRequired_Erreur}}</span>
+                        <input class="form-control inputText"
+                               type="email"
+                               id="txtEmail"
+                               name="Email"
+                               ng-required="personnelEdit.handleGetEmailRequired()"
+                               ng-model="personnelEdit.persoForContact.Email"
+                               placeholder="{{personnelEdit.resources.Global_Email_Placeholder}}" />
+                    </div>
+                </div>
+                @*CALCUL COORDONNEES GPS*@
+                <div class="row">
+                    <div class="row">
+                        <div class="col-md-12 add-proposal">
+                            <label ng-show="personnelEdit.showAddressList">{{personnelEdit.resources.Global_GoogleMap_Proposition}}</label>
+                            <div class="autocomplete">
+                                <ul ng-show="personnelEdit.showAddressList" role="menu" class="inputSelectItems" title="{{personnelEdit.resources.Global_GoogleMap_Selection}}">
+                                    <li ng-repeat="item in personnelEdit.addressList" class="inputSelectItem list-unstyled" ng-click="personnelEdit.handleChangeSelectAdress(item)">
+                                        <div class="address" title="{{personnelEdit.resources.Global_GoogleMap_Adresse}}">{{item.Adresse.Adresse1}}</div>
+                                        <div class="address" title="{{personnelEdit.resources.Global_GoogleMap_Adresse}}">{{item.Adresse.Adresse2}}</div>
+                                        <div class="address" title="{{personnelEdit.resources.Global_GoogleMap_Adresse}}">{{item.Adresse.Adresse3}}</div>
+                                        <div class="zip-code-city">
+                                            <span class="zip-code" title="{{personnelEdit.resources.Global_GoogleMap_CodePostal}}">{{item.Adresse.CodePostal}}</span>
+                                            <span class="city" title="{{personnelEdit.resources.Global_GoogleMap_Ville}}">{{item.Adresse.Ville}}</span>
+                                        </div>
+                                        <div class="country" title="{{personnelEdit.resources.Global_GoogleMap_Pays}}">{{item.Adresse.Pays}}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>{{personnelEdit.resources.Global_Latitude}}</label>
+                            <input type="text" class="form-control inputText" id="txtLatitude" ng-model="personnelEdit.persoForContact.LatitudeDomicile" ng-readonly="true" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>{{personnelEdit.resources.Global_Longitude}}</label>
+                            <input type="text" class="form-control inputText" id="txtLongitude" ng-model="personnelEdit.persoForContact.LongitudeDomicile" ng-readonly="true" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ng-map default-style="true" id="map" center="[{{personnelEdit.carto.latitude}}, {{personnelEdit.carto.longitude}}]" zoom="10">
+                                <marker position="{{personnelEdit.persoForContact.LatitudeDomicile}}, {{personnelEdit.persoForContact.LongitudeDomicile}}"
+                                        title="{{personnelEdit.resources.Global_GoogleMap_Position}}: {{personnelEdit.persoForContact.LatitudeDomicile}}, {{personnelEdit.persoForContact.LongitudeDomicile}}"
+                                        id="personnelMap"
+                                        on-click="personnelEdit.map.showInfoWindow('mapDetail')">
+                                </marker>
+                                <marker position="{{personnelEdit.mapSelector.Latitude}}, {{personnelEdit.mapSelector.Longitude}}"
+                                        icon="https://maps.google.com/mapfiles/ms/icons/green-dot.png"
+                                        title="{{personnelEdit.resources.Global_GoogleMap_Position}}: {{personnelEdit.mapSelector.Latitude}}, {{personnelEdit.mapSelector.Longitude}}"
+                                        id="mapSelectorMap"
+                                        on-click="personnelEdit.map.showInfoWindow('selectorDetail')">
+                                </marker>
+                                <info-window id="mapDetail" visible-on-marker="personnelMap">
+                                    <div ng-non-bindable>
+                                        <b>{{personnelEdit.resources.Global_GoogleMap_Adresse}}</b>: {{personnelEdit.persoForContact.Adresse1}}<br />
+                                        <b>{{personnelEdit.resources.Global_GoogleMap_CodePostal}}</b>: {{personnelEdit.persoForContact.CodePostal}}<br />
+                                        <b>{{personnelEdit.resources.Global_GoogleMap_Ville}}</b>: {{personnelEdit.persoForContact.Ville}}<br />
+                                        <b>{{personnelEdit.resources.Global_GoogleMap_Pays}}</b>: {{personnelEdit.persoForContact.Pays}}<br />
+                                        <b>{{personnelEdit.resources.Global_GoogleMap_Latitude}}</b>: {{personnelEdit.persoForContact.LatitudeDomicile}}<br />
+                                        <b>{{personnelEdit.resources.Global_GoogleMap_Longitude}}</b>: {{personnelEdit.persoForContact.LongitudeDomicile}}<br />
+                                    </div>
+                                </info-window>
+                                <info-window id="selectorDetail" visible-on-marker="mapSelectorMap">
+                                    <div ng-non-bindable>
+                                        <b>{{personnelEdit.resources.Global_GoogleMap_Latitude}}</b>: {{personnelEdit.mapSelector.Latitude}}<br />
+                                        <b>{{personnelEdit.resources.Global_GoogleMap_Longitude}}</b>: {{personnelEdit.mapSelector.Longitude}}<br />
+                                    </div>
+                                </info-window>
+                            </ng-map>
+                            <br />
+                        </div>
+                    </div>
+                    @*FIN CALCUL COORDONNEES GPS FIN*@
+                </div>
+            </div>
+            <div class="panel-footer">
+                <!--BEGIN  > BOUTONS-->
+                <button type="submit" class="btn btn-default pull-left"
+                        ng-click="personnelEdit.handleSave('contact')"
+                        ng-disabled="personnelEdit.formIsSubmitted() && personnelEdit.formContact.$invalid"
+                        ng-show="personnelEdit.Personnel.PersonnelId > 0"
+                        title="{{personnelEdit.resources.Global_Bouton_Enregistrer_Tooltip}}">
+                    {{personnelEdit.resources.Global_Bouton_Enregistrer}}
+                </button>
+                <button type="button" class="btn btn-link pull-right" ng-click="personnelEdit.handleCancel('contact')"
+                        title="{{personnelEdit.resources.Global_Bouton_Annuler_Tooltip}}">
+                    {{personnelEdit.resources.Global_Bouton_Annuler}}
+                </button>
+                <!--END  > BOUTONS-->
+            </div>
+        </form>
+    </div>
+</div>

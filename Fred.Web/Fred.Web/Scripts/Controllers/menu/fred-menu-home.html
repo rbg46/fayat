@@ -1,0 +1,43 @@
+﻿<!--BEGIN : Menu Modern-->
+<div class="home-page-content h">
+  <div class="col fonc" ng-repeat="module in $ctrl.modulesAutorized  | filter: $ctrl.criteria">
+    <div class="bloc mod">
+      <div class="bloc-icon">
+        <span class="sapicon-E0C4 icon"></span>
+      </div>
+      <div class="bloc-lbl">
+        <span>{{::module.libelle}}</span>
+      </div>
+    </div>
+    <div class="bloc entFonc" ng-repeat="feature in ::module.Features | filter: $ctrl.criteria" ng-show="::feature.isVisible" title="{{::feature.ShortDescription}}">
+      <a href="{{::feature.URI}}">
+        <div class="bloc-icon"><span class="{{::feature.icon}}"></span></div>
+        <div class="bloc-lbl">{{::feature.ShortDescription}}</div>
+      </a>
+    </div>
+  </div>
+  <div class="col fav">
+
+    <div class="bloc mod">
+      <div class="bloc-icon">
+        <span class="sapicon-E065 icon star"></span>
+      </div>
+      <div class="bloc-lbl">
+        <span>Mes favoris</span>
+      </div>
+    </div>
+    <div  ng-repeat="favori in $ctrl.favoris | filter: $ctrl.criteria" style="display: flex" ng-mouseleave="$ctrl.hideDeleteFavoris($ctrl.favoris.indexOf(favori))">
+      <div class="bloc favs1" ng-mouseover="$ctrl.showDeleteFavoris($ctrl.favoris.indexOf(favori))" title="{{::favori.Libelle}}">
+        <a href="{{::favori.UrlFavori}}{{::favori.FavoriId}}">
+          <div class="bloc-icon"><span class="sapicon-E065 icon star" ng-style="::{'color' : favori.Couleur}"></span></div>
+          <div class="bloc-lbl">{{::favori.Libelle | limitTo : 15}}</div>
+        </a>
+      </div>
+      <div class="bloc favoris-delete" ng-attr-id="{{$ctrl.home ? 'favori' + $ctrl.favoris.indexOf(favori) : 'fav' + $ctrl.favoris.indexOf(favori)}}" style="height: 32px; width: 32px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; display: none">
+        <span class="material-icons delete" ng-click="$ctrl.openDeleteFavori(favori)">clear</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--END : Menu Modern-->

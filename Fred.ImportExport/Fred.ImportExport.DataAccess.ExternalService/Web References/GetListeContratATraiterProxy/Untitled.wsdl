@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.fayatit.com/FRED-TIBCO/Interfaces/GetListeContratATraiter" xmlns:ns1="http://www.tibco.com/schemas/PaieRH.Pixid.IO.BW/BusinessProcesses/SubProcesses/Interimaire/RazelBec/GetListeContratATraiter/Schema.xsd2" xmlns:ns0="http://www.tibco.com/schemas/PaieRH.Pixid.IO.BW/BusinessProcesses/SubProcesses/Interimaire/RazelBec/GetListeContratATraiter/Schema.xsd" name="Untitled" targetNamespace="http://www.fayatit.com/FRED-TIBCO/Interfaces/GetListeContratATraiter" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema xmlns="http://www.tibco.com/schemas/PaieRH.Pixid.IO.BW/BusinessProcesses/SubProcesses/Interimaire/RazelBec/GetListeContratATraiter/Schema.xsd" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.tibco.com/schemas/PaieRH.Pixid.IO.BW/BusinessProcesses/SubProcesses/Interimaire/RazelBec/GetListeContratATraiter/Schema.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="GetListeContratATraiterIn">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="systeme_import" type="xs:string" />
+            <xs:element name="organisation" type="xs:string" />
+            <xs:element name="last_run_date" type="xs:dateTime" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns="http://www.tibco.com/schemas/PaieRH.Pixid.IO.BW/BusinessProcesses/SubProcesses/Interimaire/RazelBec/GetListeContratATraiter/Schema.xsd2" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.tibco.com/schemas/PaieRH.Pixid.IO.BW/BusinessProcesses/SubProcesses/Interimaire/RazelBec/GetListeContratATraiter/Schema.xsd2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="GetListeContratATraiterOut">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="message" type="xs:string" />
+            <xs:element name="messageCode" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Record">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="transfert_contrat_id" type="xs:int" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="GetListeContratATraiterIn">
+    <wsdl:part name="parameters" element="ns0:GetListeContratATraiterIn" />
+  </wsdl:message>
+  <wsdl:message name="GetListeContratATraiterOut">
+    <wsdl:part name="parameters" element="ns1:GetListeContratATraiterOut" />
+  </wsdl:message>
+  <wsdl:portType name="portType">
+    <wsdl:operation name="GetListeContratATraiterOp">
+      <wsdl:input message="tns:GetListeContratATraiterIn" />
+      <wsdl:output message="tns:GetListeContratATraiterOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="intfwsGetListeContratATraiterEndpointBinding" type="tns:portType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetListeContratATraiterOp">
+      <soap:operation soapAction="/BusinessProcesses/Interfaces/GetListeContratATraiter/intfGetListeContratATraiter-service.serviceagent/intfwsGetListeContratATraiterEndpoint1/GetListeContratATraiterOp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" parts="parameters" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="parameters" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="intfGetListeContratATraiter-service">
+    <wsdl:port name="intfwsGetListeContratATraiterEndpoint" binding="tns:intfwsGetListeContratATraiterEndpointBinding">
+      <soap:address location="http://frsacpvt01v.fr.rz.lan:1614/BusinessProcesses/Interfaces/GetListeContratATraiter/intfGetListeContratATraiter-service.serviceagent/intfwsGetListeContratATraiterEndpoint" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

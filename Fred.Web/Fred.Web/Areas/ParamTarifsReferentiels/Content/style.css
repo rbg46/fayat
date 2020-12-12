@@ -1,0 +1,542 @@
+﻿@charset "UTF-8";
+.no-pl {
+    padding-left: 0;
+}
+
+.no-pr {
+    padding-right: 0;
+}
+
+.glyphicon-export {
+    margin-right: 10px;
+}
+
+.form-control:read-only {
+    background-color: #fafafa;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.form-control.unit {
+    padding-left: 2px;
+    padding-right: 2px;
+    width: 50px;
+}
+
+.form-control.amount {
+    margin-bottom: 0;
+    margin-right: 0;
+    display: inline-block;
+}
+
+.input-search {
+    float: left;
+    font-weight: normal;
+    margin-bottom: -1px;
+    width: 100%;
+}
+
+.input-group-addon {
+    background-color: transparent;
+    border-radius: 0;
+}
+
+.header-referentiel-etendu {
+    background-color: #0052A0;
+    color: #fff;
+    font-size: 19px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.header-unite {
+    background-color: #80a9d0;
+    font-size: 19px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.header-societe {
+    background-color: #4d86be;
+    font-size: 19px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.synthese {
+    background-color: #1b64ab;
+    font-size: 19px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.badge-notify {
+    background: none;
+    color: #ffa90d;
+    position: relative;
+}
+
+.badge-notify.warned {
+    top: 6px;
+    margin-right: 5px;
+}
+
+.folded {
+    margin-left: 20px;
+}
+
+.folded .btn {
+    height: 30px;
+    margin-top: 0;
+    font-size: 11px;
+}
+
+.devises .btn-default.sec {
+    min-width: 43px;
+    min-height: 30px;
+    background-color: #b5e2e1;
+    color: #09ada6;
+}
+
+.devises .btn-default.sec.active {
+    background-color: #b5e2e1;
+    border-bottom: 5px solid #09ada6 !important;
+    color: #fff;
+    height: 30px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.devises .btn-default.ref {
+    min-width: 43px;
+    min-height: 30px;
+    background-color: #85b6e5;
+    color: #0052a0;
+}
+
+.devises .btn-default.ref.active {
+    background-color: #85b6e5;
+    border-bottom: 5px solid #0052A0 !important;
+    color: #fff;
+    height: 30px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+    height: 67px;
+}
+
+.table > tbody > tr > .no_pr {
+    padding-right: 0;
+}
+
+.table tbody > tr > th {
+    padding: 8px 8px;
+}
+
+.code {
+    padding-left: 10px;
+}
+
+.libelle {
+    padding-left: 10px;
+}
+
+.warning table td:nth-child(1) {
+    border-top-width: 0;
+    vertical-align: middle;
+}
+
+.warning table td:nth-child(2) {
+    border-top-width: 0;
+}
+
+.warning table .badge-notify {
+    margin-right: 10px;
+}
+
+#accordion table {
+    margin-bottom: 0;
+}
+
+#accordion table tbody .warning {
+    padding-right: 10px;
+}
+
+#accordion table.level0 col:nth-child(1) {
+    width: 40%;
+}
+
+#accordion table.level0 col:nth-child(2) {
+    width: 11%;
+}
+
+#accordion table.level0 col:nth-child(3) {
+    width: 10%;
+}
+
+#accordion table.level0 col:nth-child(4) {
+    width: 10%;
+}
+
+#accordion table.level0 col:nth-child(5) {
+    width: 10%;
+}
+
+#accordion table.level0 col:nth-child(6) {
+    width: 10%;
+}
+
+#accordion table.level0 col:nth-child(7) {
+    width: 8%;
+}
+
+#accordion .panel {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    border-radius: 0;
+    border-width: 0;
+    box-shadow: none;
+    margin-bottom: -5px;
+}
+
+#accordion .panel .panel-heading {
+    background-color: #fff;
+    border-top: 1px solid #dddddd;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-width: 0;
+    padding: 10px 6px;
+}
+
+#accordion .panel .panel-heading table {
+    width: 100%;
+}
+
+#accordion .panel .panel-heading.level1 {
+    background-color: #fcfcfc;
+    background-image: url(/medias/images/picto/tree/miniLevels1.png);
+    background-position: left;
+    background-repeat: repeat-y;
+    border-top: 1px solid #dddddd;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+#accordion .panel .panel-heading.level1 col:nth-child(1) {
+    width: 1%;
+}
+
+#accordion .panel .panel-heading.level1 col:nth-child(2) {
+    width: 10%;
+}
+
+#accordion .panel .panel-heading.level1 col:nth-child(3) {
+    width: 19%;
+}
+
+#accordion .panel .panel-heading.level1 col:nth-child(4) {
+    width: 5%;
+}
+
+#accordion .panel .panel-heading.level1 col:nth-child(5) {
+    width: 20%;
+}
+
+#accordion .panel .panel-body {
+    border: none;
+    padding: 0;
+}
+
+#accordion .panel .panel-body .level3 {
+    background-color: #fcfcfc;
+    background-image: url(/medias/images/picto/tree/miniLevels3.png);
+    background-position: left;
+    background-repeat: repeat-y;
+    overflow: auto;
+}
+
+#accordion .panel .panel-body .level3 td {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    height: initial;
+}
+
+#accordion .panel .panel-heading.level2 {
+    background-color: #fcfcfc;
+    background-image: url(/medias/images/picto/tree/miniLevels2.png);
+    background-position: left;
+    background-repeat: repeat-y;
+    color: #333;
+    border-top: 1px solid #dddddd;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+#accordion .panel .panel-heading.level2 col:nth-child(1) {
+    width: 1%;
+}
+
+#accordion .panel .panel-heading.level2 col:nth-child(2) {
+    width: 10%;
+}
+
+#accordion .panel .panel-heading.level2 col:nth-child(3) {
+    width: 19%;
+}
+
+#accordion .panel .panel-heading.level2 col:nth-child(4) {
+    width: 5%;
+}
+
+#accordion .panel .panel-heading.level2 col:nth-child(5) {
+    width: 20%;
+}
+
+#accordion .panel .panel-body.level3 .table_first col:nth-child(1) {
+    width: 2%;
+}
+
+#accordion .panel .panel-body.level3 .table_first col:nth-child(2) {
+    width: 7%;
+}
+
+#accordion .panel .panel-body.level3 .table_first col:nth-child(3) {
+    width: 27%;
+}
+
+#accordion .panel .panel-body.level3 .table_first col:nth-child(4) {
+    width: 10%;
+}
+
+#accordion .panel .panel-body.level3 .table_first col:nth-child(5) {
+    width: 9%;
+}
+
+#accordion .panel .panel-body.level3 .table_first col:nth-child(6) {
+    width: 9%;
+}
+
+#accordion .panel .panel-body.level3 .table_first col:nth-child(7) {
+    width: 9%;
+}
+
+#accordion .panel .panel-body.level3 .table_first col:nth-child(8) {
+    width: 9%;
+}
+
+#accordion .panel .panel-body.level3 .table_first col:nth-child(9) {
+    width: 6%;
+}
+
+#accordion .panel .panel-body.level3 .table_second col:nth-child(1) {
+    width: 2%;
+}
+
+#accordion .panel .panel-body.level3 .table_second col:nth-child(2) {
+    width: 7%;
+}
+
+#accordion .panel .panel-body.level3 .table_second col:nth-child(3) {
+    width: 27%;
+}
+
+#accordion .panel .panel-body.level3 .table_second col:nth-child(4) {
+    width: 10%;
+}
+
+#accordion .panel .panel-body.level3 .table_second col:nth-child(5) {
+    width: 9%;
+}
+
+#accordion .panel .panel-body.level3 .table_second col:nth-child(6) {
+    width: 9%;
+}
+
+#accordion .panel .panel-body.level3 .table_second col:nth-child(7) {
+    width: 9%;
+}
+
+#accordion .panel .panel-body.level3 .table_second col:nth-child(8) {
+    width: 9%;
+}
+
+#accordion .panel .panel-body.level3 .table_second col:nth-child(9) {
+    width: 6%;
+}
+
+#accordion .level0 tbody tr th {
+    padding: 4px 8px;
+    font-size: 14px;
+}
+
+#display .table {
+    cursor: pointer;
+}
+
+.inline-header {
+    color: #67757f;
+    font-size: 11px;
+    font-style: normal;
+    margin: 0 0 -2px;
+}
+
+.inline-desctiption {
+    margin: 0;
+}
+
+.font-referentiel-etendu {
+    color: #1a75d0;
+}
+
+.selected {
+    background-color: #e6e6e6;
+    border-color: #dddddd;
+    color: #000000;
+}
+
+.badge-notify-empty {
+    background: white;
+    border: 2px solid red;
+    color: red;
+    position: relative;
+}
+
+.bg-gray {
+    background-color: #f1f1f1;
+}
+
+.unit {
+    background-color: #f5f5f5;
+}
+
+.price {
+    background-color: #f2f2f2;
+}
+
+.amountHT {
+    background-color: #ebebeb;
+}
+
+.panel-heading .accordion-toggle {
+    display: block;
+    padding-left: 7px;
+    width: 17px;
+}
+
+.panel-heading .accordion-toggle:after {
+    color: #fff;
+    content: "\f107";
+    float: left;
+    font-family: "FontAwesome";
+}
+
+.panel-heading .accordion-toggle.collapsed:after {
+    content: "\f105";
+}
+
+.panel-heading.level2 .accordion-toggle:after {
+    color: #fff;
+    content: "\f107";
+    float: left;
+    font-family: "FontAwesome";
+}
+
+.panel-heading.level2 .accordion-toggle.collapsed:after {
+    content: "\f105";
+}
+
+.formulaire lookup .inputPL {
+    width: 90px;
+}
+
+.fred-scroll {
+    overflow: auto;
+}
+
+.fred-scroll::-webkit-scrollbar {
+    width: 9px;
+}
+
+.information {
+    padding-top: 45px;
+}
+
+.information .icon {
+    text-align: right;
+}
+
+.information .icon I {
+    font-size: 60px;
+    font-style: normal;
+    text-align: right;
+}
+
+.information .message {
+    font-size: 60px;
+    font-style: normal;
+    text-align: left;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .search-container .btn-success {
+        font-size: 11px;
+        height: 25px;
+        padding: 0 6px;
+    }
+    .search-container .btn-default {
+        font-size: 11px;
+        height: 25px;
+        padding: 0 6px;
+    }
+    .search-container .btn-link {
+        font-size: 11px;
+        height: 25px;
+        padding: 0 6px;
+    }
+    .folded .btn {
+        font-size: 11px;
+        height: 25px;
+        padding: 0 6px;
+        font-size: 11px;
+        height: 25px;
+        padding: 0 6px;
+    }
+    .devises .btn-default.sec {
+        height: 25px;
+        min-height: 25px;
+        width: 30px;
+        min-width: 30px;
+        font-size: 11px;
+    }
+    .devises .btn-default.sec.active {
+        height: 25px;
+        min-height: 25px;
+        width: 30px;
+        min-width: 30px;
+        font-size: 11px;
+    }
+    .devises .btn-default.ref {
+        height: 25px;
+        min-height: 25px;
+        width: 30px;
+        min-width: 30px;
+        font-size: 11px;
+    }
+    .devises .btn-default.ref.active {
+        height: 25px;
+        min-height: 25px;
+        width: 30px;
+        min-width: 30px;
+        font-size: 11px;
+    }
+}
+
+/* spécifique à firefox */
+@-moz-document url-prefix() {
+    #accordion .ff-hack {
+        padding-right: 17px;
+    }
+}

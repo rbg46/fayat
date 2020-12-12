@@ -1,0 +1,93 @@
+﻿ <!--BEGIN : Panel Contextuel pour sélection une image en fond d'écran-->
+<div class="options" id="optionRightPanel">
+    <!--HEADER TOOLBAR : BEGIN-->
+    <div class="toolbar">
+        <div class="flaticon flaticon flaticon-share-2 grandicone"></div>
+    </div>
+    <!--HEADER TOOLBAR : END-->
+    <!-- Titre : BEGIN -->
+    <div class="form-header">
+        <h2>
+            Gestion de l'image en fond d'écran de connexion {{societe.SocieteId}}
+        </h2>
+        <label class="legend">{{resources.Global_LegendeAsterisque}}</label>
+    </div>
+    <!-- Titre : END -->
+
+
+    <div class="form">
+        <!--Formulaire: START-->
+        <div>
+
+            <!--Image utilisée : START-->
+            <div class="row subheader">
+                <h3 data-toggle="collapse" data-target="#divImageScreenUsed">
+                    <i class="material-icons chevron"
+                       aria-hidden="true">keyboard_arrow_right</i>
+                    {{$ctrl.resources.societeImageselectorComponent_Image_actuellement_utilisee}}
+                </h3>
+            </div>
+            <div id="divImageScreenUsed">
+                <input id="imgAlpha"
+                       type="radio"
+                       name="image-screen-dispo"
+                       value="imgAlpha" />
+                <label class="imgcard-cc" for="imgAlpha"
+                       ng-style="{'background-image':'url('+$ctrl.imageSelected.Path+')'}">
+
+                </label>
+            </div>
+            <!--Image utilisée : END-->
+            <!--LISTES DES IMAGES : START-->
+            <div class="row subheader">
+                <h3 data-toggle="collapse"
+                    data-target="#divImageScreenDisponibles">
+                    <i class="material-icons chevron"
+                       aria-hidden="true">
+                        keyboard_arrow_right
+                    </i>{{$ctrl.resources.societeImageselectorComponent_Images_disponibles}}
+                </h3>
+            </div>
+            <div id="divImageScreenDisponibles">
+                <div class="cc-selector fred-scroll">
+                    <div ng-repeat="image in $ctrl.images">
+                        <input id="img{{$index}}"
+                               type="radio"
+                               name="image-screen-dispo"
+                               ng-click="$ctrl.selectImage(image)"
+                               value="img{{$index}}" />
+                        <label class="imgcard-cc"
+                               for="img{{$index}}"
+                               ng-style="{'background-image':'url('+image.Path+')'}"></label>
+                    </div>
+                </div>
+
+            </div>
+            <!--LISTES DES IMAGES : END-->
+            <!--FOOTER TOOLBAR : BEGIN-->
+            <div class="footer">
+                <div class="buttons-bar">
+                    <button class="btn btn-default" type="submit"
+                            ng-click="$ctrl.save();"
+                            ng-disabled="!$ctrl.canSave()"
+                            title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">
+                        {{$ctrl.resources.Global_Bouton_Enregistrer}}
+                    </button>
+                    <button class="btn btn-link" type="button" ng-click="$ctrl.closePanel()"
+                            title="{{resources.Global_Bouton_Annuler_Tooltip}}">
+                        {{$ctrl.resources.Global_Bouton_Annuler}}
+                    </button>
+                </div>
+
+                <div ng-click="$ctrl.closePanel();" title="{{$ctrl.resources.Global_Bouton_RefermerPanneau_Tooltip}}" class="close-text">
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    <span>{{$ctrl.resources.Global_Bouton_RefermerPanneau}}</span>
+                </div>
+
+            </div>
+            <!--FOOTER TOOLBAR : END-->
+
+        </div>
+    </div>
+</div>
+<!--BEGIN : Panel Contextuel pour sélection une image en fond d'écran-->

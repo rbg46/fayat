@@ -1,0 +1,211 @@
+﻿.no_padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.lists {
+    border-right: 1px solid #ccc;
+}
+
+.btn-circle {
+    font-size: 12px;
+    height: 34px;
+    margin: 0;
+    width: 34px;
+}
+
+.btn-excel {
+    margin-bottom: 30px;
+}
+
+.list-content {
+    overflow-x: hidden;
+    height: calc(100vh - 265px);
+    overflow-y: auto;
+}
+
+.list-content .ligne {
+    border-top: 1px solid #ddd;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 8px;
+}
+
+.list-content .ligne:hover {
+    background: #e8e8e8;
+}
+
+.list-content .data {
+    max-width: 100%;
+    padding-top: 8px;
+    word-wrap: break-word;
+}
+
+.list-content .badge-notify {
+    color: #ffa90d;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+.selected {
+    background-color: #428bca;
+    border-color: #357ebd;
+    color: #ffffff;
+}
+
+.selected .button-action.flaticon {
+    color: #fff;
+}
+
+.selected .button-action.material-icons {
+    color: #fff;
+}
+
+.selected .lb {
+    color: white;
+}
+
+.selected .val {
+    color: white;
+}
+
+.selected:hover .lb {
+    color: #67757f;
+}
+
+.selected:hover .val {
+    color: #333333;
+}
+
+.modal-content {
+    border-radius: 0;
+}
+
+.modal-body .row:nth-child(7) {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.toolbar {
+    display: block;
+    margin-top: 5px;
+    padding-top: 3px;
+}
+
+.toolbar label {
+    color: #67757f;
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.toolbar .controls {
+    background-color: #e1e3e5;
+    display: block;
+    margin-bottom: 5px;
+    min-height: 44px;
+    height: 44px;
+    padding: 7px;
+}
+
+.toolbar .controls .add {
+    text-align: right;
+}
+
+.toolbar .controls .add i {
+    font-size: 14px;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+}
+
+.toolbar .controls .add .btn {
+    width: 30px;
+    height: 30px;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+}
+
+.input-search {
+    float: left;
+    font-weight: normal;
+    height: 30px;
+    width: 70%;
+}
+
+.input-search input {
+    height: 30px;
+}
+
+.input-group-addon {
+    border-color: #bbbbbb;
+}
+
+.referentiel_fixe .toolbar .button-search {
+    padding: 0;
+    width: 30px;
+}
+
+.summary-bloc {
+    margin-top: 30px;
+}
+
+.modal .flaticon-multiply {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 25px;
+    cursor: pointer;
+    color: #e1e3e5;
+}
+
+.lb {
+    color: #67757f;
+    font-size: 9px;
+}
+
+.val {
+    color: #333333;
+    font-size: 14px;
+}
+
+@media (min-width: 360px) and (max-width: 991px) {
+    .lists {
+        border: none;
+    }
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .btn-excel {
+        font-size: 11px;
+        padding: 3px 6px;
+    }
+    .toolbar .controls {
+        height: initial;
+        min-height: 39px;
+        padding: 7px;
+    }
+    .toolbar .controls .add .btn {
+        padding: 0;
+        width: 25px;
+        height: 25px;
+        font-size: 14px;
+    }
+    .toolbar .controls .add .btn .flaticon-add {
+        font-size: 14px;
+    }
+    .toolbar .controls .add .btn .flaticon-add:before {
+        font-size: 14px;
+    }
+    .input-search {
+        height: 25px;
+    }
+    .input-group .form-control {
+        height: 25px;
+    }
+    .referentiel_fixe .toolbar .button-search {
+        height: 25px;
+        width: 25px;
+    }
+}

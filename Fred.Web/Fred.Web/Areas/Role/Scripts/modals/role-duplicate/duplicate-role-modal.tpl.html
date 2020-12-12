@@ -1,0 +1,87 @@
+﻿<form name="roleModalForm" novalidate>
+  <div class="modal-header">
+    <h2 class="modal-title">
+      <span class="material-icons">content_copy</span>
+      {{resources.Role_Index_ModalRole_Duplicate_Confirm}}
+    </h2>
+    <i class="flaticon flaticon-multiply close pull-right"
+       data-dismiss="modal"
+       title="{{resources.Global_Modal_Annuler_Tooltip}}" ng-click="close()"></i>
+  </div>
+
+  <div class="modal-body">
+
+    <div ng-show="ErrorMessage.length > 0"
+         class="alert alert-warning">
+      {{ErrorMessage}}
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h4>{{resources.Role_Index_ModalRole_New_Role_Info}}</h4>
+        <input type="hidden" ng-model="clone.RoleId" />
+        <div class="col-md-4 no_pl">
+          <label for="txtCodeReferentiel">{{resources.Role_Index_ModalRole_Code}}</label>
+          <span class="text-danger"
+                ng-show="roleModalForm.$submitted && roleModalForm.code.$error.required">{{resources.Global_Control_DataRequired_Erreur}}</span>
+          <input type="text"
+                 name="code"
+                 id="txtCodeReferentiel"
+                 class="form-control"
+                 ng-model="clone.CodeNomFamilier"
+                 maxlength="5"
+                 required
+                 placeholder="{{resources.Role_Index_ModalRole_Code_Placeholder}}" autofocus>
+        </div>
+        <div class="col-md-8">
+          <label for="txtLabelReferentiel">{{resources.Role_Index_ModalRole_Libelle}}</label>
+          <span class="text-danger"
+                ng-show="roleModalForm.$submitted && roleModalForm.libelle.$invalid">{{resources.Global_Control_DataRequired_Erreur}}</span>
+          <input type="text"
+                 id="txtLabelReferentiel"
+                 name="libelle"
+                 class="form-control"
+                 ng-model="clone.Libelle"
+                 maxlength="125"
+                 required
+                 placeholder="{{resources.Role_Index_ModalRole_Libelle_Placeholder}}">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class="marginTop">{{resources.Role_Index_ModalRole_Copy_Options}}</h4>
+        <div>
+          <input id="chkFonc" type="checkbox" ng-model="copyFeature" />
+          <label for="chkFonc">
+            <span>
+            </span>{{resources.Role_Index_ModalRole_Copy_Fonc_Priv}}
+          </label>
+        </div>
+        <div>
+          <input id="chkSeuil" type="checkbox" ng-model="copythreshold" />
+          <label for="chkSeuil">
+            <span>
+            </span>{{resources.Role_Index_ModalRole_Copy_Seuils}}
+          </label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn  btn-default  pull-left"
+            ng-click="save()"
+            title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">
+      {{resources.Global_Bouton_Valider}}
+    </button>
+    <button class="btn btn-link pull-right"
+            ng-click="close()"
+            title="{{resources.Global_Bouton_Annuler_Tooltip}}">
+      {{resources.Global_Bouton_Annuler}}
+    </button>
+  </div>
+</form>

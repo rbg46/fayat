@@ -1,0 +1,73 @@
+﻿<form name="$ctrl.formTachesBudget" autocomplete="off" novalidate>
+  <div ng-show="$ctrl.serverError">
+    <div class="taskError" ng-show="$ctrl.serverError">{{$ctrl.serverError}}</div>
+  </div>
+
+  <div>
+    <div ng-repeat="tache in $ctrl.taches track by $index">
+      <tache-budget-component tache="tache"
+                              task-selected="$ctrl.taskSelected"
+                              is-large-list="$ctrl.isLargeList"
+                              devise-selected="$ctrl.deviseSelected"
+                              buget-revision-statut="$ctrl.bugetRevisionStatut"
+                              resources="$ctrl.resources">
+      </tache-budget-component>
+    </div>
+  </div>
+
+  <footer>
+    <div class="action_buttons" ng-show="$ctrl.view === 'taskPlanView'">
+      <button class="btn cancel pull-left"
+              ng-disabled="$ctrl.isBusy"
+              ng-click="$ctrl.handleShowBudget()">
+        {{$ctrl.resources.index_Retour_au_budget}}
+
+      </button>
+
+    </div>
+    <div class="action_buttons" ng-show="$ctrl.view === 'listingView'">
+      <!--SHOW TASK PLANS-->
+      <button ng-show="$ctrl.bugetRevisionStatut !== 'Valide'"
+              class="btn cancel pull-left"
+              ng-disabled="$ctrl.isBusy "
+              ng-click="$ctrl.handleShowTasksPlan()">
+        {{$ctrl.resources.index_Plans_des_taches}}
+
+      </button>
+      <!--DO VALIDATION-->
+      <button class="btn validate pull-right"
+              ng-show="$ctrl.bugetRevisionStatut === 'Brouillon'"
+              ng-disabled="$ctrl.isBusy || $ctrl.formTachesBudget.$invalid"
+              ng-click="$ctrl.handleDoVadidBudget()">
+        {{$ctrl.resources.index_Demande_de_validation}}
+
+      </button>
+      <!--VALIDATION-->
+      <button class="btn validate pull-right"
+              ng-show="$ctrl.bugetRevisionStatut === 'AValider'"
+              ng-disabled="$ctrl.isBusy || $ctrl.formTachesBudget.$invalid"
+              ng-click="$ctrl.handleVadidBudget()">
+        {{$ctrl.resources.index_Valider_le_Budget}}
+
+      </button>
+      <!--REJECT-->
+      <button class="btn validate pull-right"
+              ng-show="$ctrl.bugetRevisionStatut === 'Valide'"
+              ng-disabled="$ctrl.isBusy || $ctrl.formTachesBudget.$invalid"
+              ng-click="$ctrl.handleRejectBudget()">
+        {{$ctrl.resources.index_rejeter_le_Budget}}
+
+      </button>
+
+      <!--SAVE-->
+      <button ng-show="$ctrl.bugetRevisionStatut !== 'Valide'"
+              class="btn save pull-right"
+              ng-disabled="$ctrl.isBusy || $ctrl.formTachesBudget.$invalid"
+              ng-click="$ctrl.handleSaveTasks()">
+        {{$ctrl.resources.index_Enregistrer}}
+
+      </button>
+
+    </div>
+  </footer>
+</form>

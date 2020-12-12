@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	<RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\201912021447317_Us8769AddTypeAbsenceInRapportLigneTable.cs" />
+    <Compile Remove="Migrations\201912021447317_Us8769AddTypeAbsenceInRapportLigneTable.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Migrations\201912021447317_Us8769AddTypeAbsenceInRapportLigneTable.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Data\DeleteBaremeCiStorm.sql" />
+    <None Remove="Data\TacheEcartEtDefaut.sql" />
+    <None Remove="Data\TacheInterim.sql" />
+    <None Remove="Data\TacheParDefaut.sql" />
+    <None Remove="Data\UpdateRecettePK.sql" />
+    <None Remove="Schema\Tools\AddLinkedServer.sql" />
+    <None Remove="Schema\Tools\InitForeignKeys.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data\DeleteBaremeCiStorm.sql" />
+    <EmbeddedResource Include="Data\TacheEcartEtDefaut.sql" />
+    <EmbeddedResource Include="Data\TacheInterim.sql" />
+    <EmbeddedResource Include="Data\TacheParDefaut.sql" />
+    <EmbeddedResource Include="Data\UpdateRecettePK.sql" />
+    <EmbeddedResource Include="Schema\Tools\AddLinkedServer.sql" />
+    <EmbeddedResource Include="Schema\Tools\InitForeignKeys.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dbup-core" Version="4.2.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fred.Entities\Fred.Entities.csproj" />
+    <ProjectReference Include="..\Fred.Framework\Fred.Framework.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,288 @@
+﻿/* Couleurs */
+
+$orange1: rgb(255,169,13);
+$orange2: rgb(255,212,134);
+$orange3: rgb(255,191,74);
+$orange4: rgb(255,223,164);
+
+$white: #fff;
+
+$blue: rgb(128,170,208);
+
+$grey1: #BBBBBB;
+$grey2: #808080;
+
+$green: rgb(146,208,80);
+$green2: rgb(201,232,168);
+
+$turquoise: rgb(9,173,166);
+$turquoise2: rgb(71,194,188);
+$turquoise3: rgb(209,240,238);
+
+$indianred: rgb(192,80,70);
+
+/* Toolbar */
+fred-toolbar {
+
+    fred-section {
+
+        &.orga-section {
+            width: 30%;
+
+            .formulaire.long {
+                width: 100%;
+                position: relative;
+
+                .form-control {
+                    cursor: pointer;
+                }
+
+                .chev.material-icons {
+                    top: 1px;
+                    right: 0;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &.devise-section {
+            margin-left: 1%;
+
+            .devise-section-controls {
+                width: 120px;
+                justify-content: space-between;
+
+                .currency {
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #fff;
+                    color: rgb(191,191,191);
+                    font-size: 18px;
+                    font-weight: normal;
+                    border: 1px solid #ccc;
+                    cursor: pointer;
+
+                    &.active {
+                        background-color: rgb(9,173,166);
+                        border: 1px solid rgb(9,173,166);
+                        color: #fff;
+                    }
+                }
+            }
+        }
+
+        &.period-section {
+            margin-left: 1%;
+
+            .glyphicon-calendar {
+                float: left;
+            }
+        }
+
+        &.action-section {
+            margin-left: auto;
+        }
+    }
+}
+
+/* liste */
+
+.AvancementRecette-list {
+    padding-bottom: 50px;
+
+    .bloc1 {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+
+        .bloc2 {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+
+            .colm-col {
+                display: flex;
+                width: 17%;
+                flex-direction: column;
+
+                .cell {
+                    display: flex;
+                    width: 100%;
+                    margin-top: 6px;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    height: 40px;
+                    align-items: center;
+
+                    .lbl {
+                        font-size: 12px;
+                        width: 60%;
+                    }
+
+                    .val {
+                        font-size: 15px;
+                        width: 50%;
+                        display: flex;
+                        justify-content: flex-end;
+                    }
+
+                    .form-control {
+                        height: 25px;
+                        text-align: right;
+                        background-color: $white;
+                        color: initial;
+                    }
+
+                    span {
+                        display: flex;
+                        justify-content: flex-end;
+                        width: 50%
+                    }
+
+                    .amount:after {
+                        content: '€';
+                        font-size: 15px;
+                        justify-content: flex-end;
+                    }
+
+                    .percent:after {
+                        content: '%';
+                        font-size: 14px;
+                        justify-content: flex-end;
+                    }
+
+                    &.first {
+                        background-color: $blue;
+                        color: $white;
+                    }
+
+                    &.second,
+                    &.third,
+                    &.fourth {
+                        border: 1px solid $grey1;
+                        color: $grey2;
+                    }
+
+                    &.fifth {
+                        background-color: $green;
+                        color: $white;
+                    }
+                }
+
+                .col-items {
+                    display: flex;
+
+                    .warn {
+                        font-size: 14px;
+                        padding-top: 5px;
+                        margin-right: 5px;
+                        color: $indianred;
+                        cursor: pointer;
+                    }
+
+                    .edit {
+                        background-color: $turquoise;
+                        color: $white;
+                        font-size: 20px;
+                        padding: 3px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .bloc3 {
+            @extend .bloc2;
+
+            .colm-col {
+                display: flex;
+                width: 17%;
+                flex-direction: column;
+
+                .cell {
+                    display: flex;
+                    width: 100%;
+                    margin-top: 6px;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    height: 40px;
+
+                    &.first {
+                        background-color: $orange1;
+                        color: $white;
+                    }
+
+                    &.second {
+                        background-color: $orange2;
+                        color: $grey2;
+
+                        &.b {
+                            background-color: $orange3;
+
+                            .form-control {
+                                background-color: $orange4;
+                            }
+                        }
+
+                        &.c {
+                            background-color: $orange1;
+                            color: $white;
+                        }
+                    }
+
+                    &.third {
+                        @extend .second;
+                    }
+
+                    &.fourth {
+                        @extend .second;
+                    }
+
+                    &.fifth {
+                        background-color: $green2;
+                        color: $grey2;
+                    }
+                }
+            }
+        }
+
+        .bloc4 {
+            @extend .bloc2;
+
+            .colm-col {
+                display: flex;
+                width: 17%;
+                flex-direction: column;
+
+                .cell {
+                    display: flex;
+                    width: 100%;
+                    margin-top: 6px;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    height: 40px;
+                    background-color: $turquoise2;
+                    color: $white;
+
+
+                    .form-control {
+                        background-color: $turquoise3;
+                    }
+
+                    .lbl {
+                        width: 75%;
+                    }
+
+                    span {
+                        display: flex;
+                        justify-content: flex-end;
+                        width: 25%
+                    }
+                }
+            }
+        }
+    }
+}

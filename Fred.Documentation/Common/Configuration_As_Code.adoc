@@ -1,0 +1,540 @@
+﻿= Configuration, Infrastructure et déploiement
+
+
+
+== Principes
+
+Fred étant déployé sur de nombreux serveurs, la gestion des déploiements est effectuée suivant le principe DevOps de Configuration as Code et d’Infrastructure as Code.
+
+
+
+== Configuration as Code
+
+Toutes les valeurs configurations sont écrites dans un fichier qui les différencie en fonction des différentes applications, des différents environnements, des bases de données, des users, des urls, etc.
+
+
+
+== Infrastructure as Code
+
+La configuration des serveurs est aussi décrite dans un fichier. Elle est appliquée via ``DSC`` :
+https://docs.microsoft.com/en-us/powershell/dsc/overview[Desired State Configuration]. 
+
+DSC est un système qui permet de décrire un état désiré, c’est à dire une configuration, puis de l’appliquer sur un serveur. DSC s’assure alors que le système est dans l’état désiré, s’il ne l’est pas (par exemple si la configuration a été modifiée par inadvertance) alors DSC rétablie la configuration. 
+
+Sur Fred, DSC gère actuellement : 
+
+* Configuration de SQL Server 
+** Prérequis et Installation 
+** Base de données 
+** Utilisateurs 
+** Compte de service 
+* Configuration de IIS 
+** App Pool 
+** Sites déployés 
+** Compte de service
+
+== Projet Fred.Infrastructure
+
+Ce projet applique les principes ci-dessus. Il est composé d’un ensemble de scripts powershell qui effectue les déploiements. Il permet de : 
+
+* Installer les prerequis
+* Appliquer la configuration DSC
+* Configurer les Web Configs 
+* Déployer les sites
+* Déployer le référenciel de données.
+* Générer une documentation htlm sur l'état de la configuration
+
+
+
+== Déploiement de Fred via TFS
+
+
+NOTE: Fichier : Build\PicOrchestrator.ps1
+
+IMPORTANT: Toutes les opérations de configuration/déploiement etc doivent être effectuées avec le compte de service suivant : `FAYAT\FRED_SVC_ADMIN`.
+Ce compte est administrateur local des machines.
+
+
+Pour déployer Fred, on utilise Release Management dans TFS (en Français Mise en Production). C’est le fichier `+PicOrchestrator.ps1+` qui est exécuté par TFS. Ce fichier est le point d’entrée principale, il appele tous les autres éléments du projet.
+
+Ce fichier prend en argument l’environnement à déployer et la branche. Puis il effectue les étapes suivantes qui seront détaillées plus loin :
+
+. Export de la configuration 
+. Exécution de DSC 
+. Déploiement de l’environnement
+
+== Configuration
+
+
+NOTE: Fichier : Config\ConfigurationData.psd1
+
+Ce fichier contient toute la configuration. C’est un fichier au format PowerShell Data, une sorte de tableau json.
+
+
+
+=== Les noeuds
+
+Le fichier contient plusieurs noeuds, un noeud pour la configuration SQL, un autre pour la configuration de Fred.Web, de Fred.IE, etc etc. Les noeuds en powershell sont comme des tableaux, ils peuvent contenir plusieurs éléments, des sous-élements, et ils peuvent être requêtés.
+
+Il y a deux noeuds particuliers :
+
+____
+CommonConfig
+____
+
+Ce noeud contient des variables communes à tous les environnements.
+
+____
+AllNodes
+____
+
+Ce noeud contient la descriptions de chaque serveur physique. Le nom de ce noeud ne peut-être changé, il est utilisé par DSC pour appliquer la configuration sur chaqun des serveurs présents dans ce noeud.
+
+
+
+=== La notion de DeploymentId
+
+Les données sont organisées par environnement et par la notion de `+DeploymentId+`.
+
+Un déploiement correspond à l’installation des sites sur un environnement. DeploymentId est une sorte de clef primaire pour toutes les autres configurations. Le nommage de DeploymentId est purement fictif, ça pourrait être un numéro, c’est ici du texte pour être plus simple a identifier.
+
+WARNING: DeploymentId doit être unique.
+
+Le noeud *DeploymentConfig* liste les différents déploiements possibles et permet d’en ajouter par la suite. Les configurations FredWebConfig, FredIeConfig etc, décrivent le contenu de chaque déploiement. Les configurations Storm, Anael etc, décrivent la configuration a utiliser pour chaque déploiement.
+
+NOTE: Donc, à chaque section de configuration, doit correspondre une configuration qui correspond à l’Id de se déploiement.
+
+
+Par exemple, si l’on regarde FredWebConfig et FredIdConfig, on s’apperçoit que : 
+
+* la branche de dev est déployée deux fois sur le serveur de dev, et deux fois sur le serveur d’intégration :
+** 
+[source,powershell]
+----
+        @{
+            DeploymentId    = "[Branch:Dev][Env:Dev]"
+            Environment     = "Developpement"
+        }
+        @{ 
+            DeploymentId    = "[Branch:Dev][Env:Dev][DeployTest]"
+            Environment     = "Developpement"
+        }
+        @{
+            DeploymentId    = "[Branch:Dev][Env:Int]"
+            Environment     = "Integration"
+        }
+        @{
+            DeploymentId    = "[Branch:Dev][Env:Int][Qualif]"
+            Environment     = "Integration"
+        }
+----
+* la branche de prod est déployée sur le serveur de dev, formation, preproduction, production
+[source,powershell]
+----
+        @{
+            DeploymentId    = "[Branch:Prod][Env:Dev]"
+            Environment     = "Developpement"
+        }
+        @{
+            DeploymentId    = "[Branch:Prod][Env:Formation]"
+            Environment     = "Formation"
+        }
+        @{
+            DeploymentId    = "[Branch:Prod][Env:PreProd]"
+            Environment     = "PreProduction"
+        }
+        @{
+            DeploymentId    = "[Branch:Prod][Env:Prod]"
+            Environment     = "Production"
+        }
+----
+
+
+
+*Nom du site :* 
+Le nom d’un site et le nom de base de données doivent être unique sur chaque serveur. Par exemple, si FredWeb est déployé plusieurs fois sur le serveur de dev, il faut créer un site IIS et une base de données pour chacun des déploiements FredWeb_Branch_Dev, FredWeb_Branch_Prod,
+FredWeb_Fess, FredWeb_Testeurs, etc etc
+
+WARNING: Veuillez donc à indiquer un nom de site et un non de base unique pour
+chaque combinaison de site / environnement
+
+
+*Exception :*
+Les configurations des machines, de IIS et de SqlServer ne sont pas dépendantes d’un déploiement, mais d’un environnement. Le clef primaire de ces configurations est donc ``Environnement``
+
+
+
+== Accéder aux paramètres
+
+NOTE: Fichier : Config\ParameterRepository.psm1
+
+
+Ce fichier contient une classe qui permet de lire les informations contenues dans le fichier `+ConfigurationData.psd1+` La classe prend comme argument : un site, l’environnement, la branche, puis ensuite lit les informations dans le fichier de configuration en appliquant les filtres. Les filtres peuvent être changés pour lire d’autres configurations.
+
+Voici un exemple d’utilisation :
+
+[source,powershell]
+----
+<# Création d'un object repo #>
+$Config = [ParameterRepository]::new('Developpement', 'Dev', 'fichierConfigurationData.psd1')
+
+<# Id du déploiement #>
+$Config.SetCurrentDeploymentId('[Branch:Dev][Env:Dev]')
+
+<# Type de site : Fred Web #>
+$Config.SetCurrentSiteType('FredWeb')
+
+<# Exemple : récupération de l'url #> 
+$Url  = $Config.GetSiteUrl()
+
+<# Changement de site : Fred IE#>
+$Config.SetCurrentSiteType('FredIE')
+
+<# Exemple2 : récupération de l'url #>
+$Url2  = $Config.GetSiteUrl()
+----
+
+Autre exemple : faire une boucle sur tous les sites de type FredWeb dans tous les déploiements
+
+[source,powershell]
+----
+$Config = [ParameterRepository]::new('Developpement', 'Dev', 'fichierConfigurationData.psd1')
+
+foreach ($Deployment in $Config.GetDeploymentsConfig())
+{
+    $Config.SetCurrentDeploymentId($Deployment.DeploymentId)    
+
+    foreach($Site in $Config.GetFredWebDeployments())
+    {
+        $Url  = $Config.GetSiteUrl()
+    }
+}
+----
+
+
+
+== Génération de la documentation
+
+NOTE: Fichier : Config\ExportConfiguration.psm1
+
+
+La classe ExportConfiguration permet de parcourir l’intégralité du fichier `ConfigurationData.psd1` via `ParameterRepository.psm1`.
+
+Elle permet de générer un fichier html résumant la configuration. Ce fichier est ensuite déployé sur le serveur de Dev sur un mini site accessible depuis l’url suivante :
+http://filibfreddevwbv:8090/ConfigurationReport.html
+
+
+IMPORTANT: Les informations sensibles, comme les paramètres de la prod, ne sont pas affichées dans le fichier.
+
+
+== DSC : Installation / Configuration des serveurs
+
+
+NOTE: Fichier DSC\DscConfiguration.psd1
+
+Ce fichier décrit l’infrastructure des serveurs. Il va lire les informations dans ConfigurationData.psd1 et l’applique sur les serveurs.
+
+
+
+=== Fonctionnement de DSC
+
+Pour utiliser DSC, il faut d’abord configurer le serveur DSC.
+
+[source,powershell]
+----
+ConfigurationLCM -ConfigurationData $ConfigurationFile -OutputPath $MofPath -Verbose
+----
+
+[source,powershell]
+----
+<#=====================
+ Configuration DSC LocalConfigurationManager
+ LCM est le moteur DSC
+ C'est lui qui execute la configuration désirée.
+ Il est actuellement paramètré en mode PUSH.
+ La configuration est vérifiée et si besoin appliquée toutes les 30 minutes.
+=====================#>
+[DSCLocalConfigurationManager()]
+Configuration ConfigurationLCM
+{
+    Write-LogSubTitle "[LCM] ConfigurationLCM  |$Environment"
+
+    node $AllNodes.Where({$_.Environment -contains $Environment}).NodeName
+    {
+        Write-LogInfo "[LCM] ConfigurationLCM  |$Environment`t|$($Node.NodeName)"
+        Settings {
+            AllowModuleOverwrite = $true
+            ConfigurationMode    = 'ApplyAndAutoCorrect'
+            RefreshMode          = 'Push'
+            RebootNodeIfNeeded   = $true
+            RefreshFrequencyMins = 30
+        }
+    }
+
+    Write-LogSubTitle "[LCM] ConfigurationLCM  | Terminée"
+}
+----
+
+Ce qui est important de noter ici c’est *node $AllNodes.Where...*
+
+Cette ligne est en fait un foreach sur tous les enfants du noeud AllNodes du fichier `+ConfigurationData.psd1+` filtré sur la clef ``Environnement``. Ce code va activer DSC sur les serveurs et va vérifier l’état de la configuration désirée toutes les 30 minutes.
+
+Ensuite, il faut décrire la configuration désirée pour chaque serveur (noeud).
+
+[source,powershell]
+----
+     <# Génération de la configuration IIS #>
+     ConfigurationEnvironmentIIS -ConfigurationData $ConfigurationFile -OutputPath $MofPath -Verbose
+
+     <# Génération de la configuration BDD #>
+     ConfigurationEnvironmentBDD -ConfigurationData $ConfigurationFile -OutputPath $MofPath -Verbose
+----
+
+Cette configuration est d’abord compilée ce qui produit des fichiers `+Mof+`.
+
+[source,powershell]
+----
+DscConfiguration.ps1 -Environment $Environment -MofPath...
+----
+
+C’est ensuite ces fichiers qui sont déployés sur les serveurs.
+
+[source,powershell]
+----
+Start-DSCConfiguration -Path $MofPath 
+----
+
+Pour savoir si un serveur est dans l’état désiré, on utilise :
+
+[source,powershell]
+----
+Test-DscConfiguration -ComputerName $Server.NodeName -Detailed
+----
+
+Toutes ces actions sont orchestrées dans la classe ``DscManager.psm1``
+
+
+=== Debugger DSC
+
+il facile de debugger la génération des fichiers mofs. Si cette étape ne passe pas sur le poste de développement, elle ne passera pas sur TFS.
+Pour cela voir le chapitre `+Debuger les Scripts+`
+
+Pour tester l’application de la configuration, c’est plus difficile. Il faut créer un environnement de test avec une VM ActiveDirectory et une ou plusieurs VM qui correspondent au fichier ConfigurationData.psd1. Le contenu du noeud AllNode peut être modifié pour correspondre à cet environnement de test.
+
+Avant d’en arriver là, en règle général, si la génération des fichier mofs passent, alors le déploiement tfs passera aussi.
+
+
+
+=== Documentation
+
+Pour plus d’information sur DSC, voir les liens suivants :
+
+* https://docs.microsoft.com/en-us/powershell/dsc/overview[Documentation]
+* https://github.com/PowerShell/SqlServerDsc[SqlServer Dsc]
+* https://github.com/PowerShell/xWebAdministration[IIS DscC]
+
+
+
+== WebDeploy
+
+NOTE: WebDeploy\DeployWebSiteManager.psm1
+
+
+Cette classe permet d’appeler WebDeploy sur un serveur cible et donc de déployer un site. Elle va d’abord générer le fichier Web.Config en fontion des paramètres de l’environnement, puis effectuer le déploiement. Les mécanismes utilisés ici sont les mécanismes standards d’un projet Asp.Net.
+
+.Comment ça marche ?
+****
+
+[source, xml]
+----
+1) Fred.Web / Web.Config 
+    Une entrée qu'il faut paramétrer, par exemple 
+    <add key="FredIE:WebApiUrl" value="localhost:20525" />
+
+
+2) Fred.Web / Parameters.xml
+    Il faut ajouter un xpath pour indiquer que cette valeur doit être modifiée pendant le déploiement, ce qui donne : 
+        <parameter
+            name="FredIEWebApiUrl"
+            description="Adresse du service FredIE Api"
+            defaultvalue="__FredIE:WebApiUrl__" tags="">
+            <parameterentry
+                kind="XmlFile"
+                scope="\\web.config$"
+                match="/configuration/appSettings/add[@key='FredIE:WebApiUrl']/@value">
+            </parameterentry>
+        </parameter>
+
+
+3) Fred.Web / Fred.Web.SetParameters.xml
+    Ce fichier est généré par le pic via MsBuild lorsque l'on demande de créer un package de déploiement du site : /p:WebPublishMethod=Package
+    Ce fichier contient les valeurs à paramétrer dans le Web.Config indiquées par le fichier parameters.xml
+    <setParameter name="FredIEWebApiUrl" value="__FredIE:WebApiUrl__" />
+----
+****
+
+
+
+
+== DbUp
+
+NOTE: Fichier : DbUp\DpUpDeployReferential.ps1
+
+Ce script permet d’exécuter les fichiers sql du référentiel de données de Fred Web et Fred IE. Il importe la DLL C# de Dbup. L’appel est orchestré par la classe DbUpManager.psm1
+
+
+
+
+== How To
+
+=== Ajouter un environnement
+
+Vous désirez par exemple créer un environnement appelé Recette. Pour cela, il y a plusieurs étapes : modifier le fichier de configuration, et ajouter l’environnement dans Tfs.
+
+[arabic]
+. *Ajouter l’environnement dans le fichier ConfigurationData.psd* +
+Indiquez les serveurs dans le noeud `+AllNode+`, voir le paragraphe ``Ajouter un Serveur``. +
+Dans tous le fichier, indiquez l’environnement pour chacun des noeuds qui possède la variable Environment.
+
+. *Ajouter l’environnement dans les scripts powershell* +
+Les scripts powershell valident les différents paramètres qui leur sont passés. L’environnement fait parti de ces validations. Dans tous les fichiers du projet Fred.Infrastructure, recherchez l’élément suivant, et ajoutez le nouvel environnement à l’attribut
+[ValidateSet] :
+
+[source,powershell]
+----
+param(
+        <# Environnement à configurer #>
+        [Parameter(Mandatory=$true, Position=1)]
+        [ValidateNotNullOrEmpty()]
+        [ValidateSet("Developpement", "Integration", "Formation", "PreProduction", "Production")]
+        [string]$Environment,
+----
+
+
+[arabic, start=3]
+. *Ajouter l’environnement dans TFS* +
+Dans TFS, editez la (les) release sur laquelle ajouter l’environnement. +
+Par exemple pour
+http://fcistgweb-dev01v.fci.lan:8080/tfs/fred/Projet%20FRED/Projet%20FRED%20Team/_apps/hub/ms.vss-releaseManagement-web.hub-explorer?definitionId=11&_a=environments-editor[Fred-Dev]
+: +
+Cliquez sur ``Ajouter un environnement`` et choisir le template Vide. +
+Nommer exactement de la même façon l’environnement, dans notre exemple ``Recette`` +
+Ajouter une tâche PowerShell et mettre les informations suivantes :
+
+[source,powershell]
+----
+Script Filename : $(System.DefaultWorkingDirectory)/Fred - Dev/drop/Fred.Infrastructure/Build/PicOrchestrator.ps1
+Arguments : -Environment $(Release.EnvironmentName) -Branch $(Branch) -RunDsc $(RunDsc) -SimulationMode $(SimulationMode) -VisualStudioMode False -ReportFile $(ReportFile)
+----
+
+
+
+=== Ajouter un serveur
+
+Pour ajouter un serveur dans la ferme, il faut installer les prerequis puis décrire son rôle dans le fichier Config.psd. Une fois ces actions réalisées, lorsque qu’un déploiement sera demandé, alors le PicOrchestrator.ps1 prendra en compte le nouveau serveur : DSC sera appliqué ainsi que les déploiements.
+
+
+[arabic]
+. *Installation des prerequis automatiques* +
+Pour installer les prerequis, il faut executer le script powershell `+Config\PrerequisiteManager.ps1+`. Ce script va se connecter sur les serveurs à distance et installer les éléments contenus dans le fichier `+Config\PrerequisiteExecutor.ps1+`, entre autre :
+
+* Installation des modules powershell pour DSC
+* Décompression de l’iso de l’installation de Sql Server (pour les serveurs de bdd)
+
+[arabic, start=2]
+. *Installation des prerequis manuels* +
+Certains éléments ne sont pas installés automatiquement:
+* Le driver DB2 pour As400 est a installer manuellement, les binaires et
+la documentation se trouve
+https://fayatsas.sharepoint.com/sites/FRED860/Documents%20partages/Forms/AllItems.aspx?id=%2Fsites%2FFRED860%2FDocuments%20partages%2F70%2DBascule%2FDocumentations[ici]. +
+* Si le site a déployer sur le serveur est en https, alors il faut installer un certificat. Cette opération est à faire après l’exécution des scripts par TFS. En effet, il faut d’abord exécuter DSC pour installer IIS.
+
+. *Ajout du serveur dans la configuration* +
+Dans le fichier `+ConfigurationData.psd1+`, allez dans le noeud AllNode à la fin du fichier, et ajoutez une entrée correspondant au nouveau serveur.
+
+* Décrire son rôle : Serveur Web ou Serveur de Base de données ?
+* Indiquer les applications à installer dessus : Fred.Web, Fred.IE ?
+* Indiquer l’environnement auquel il est destiné.
+
+[arabic, start=4]
+. *Execution par TFS* +
+Une fois les prerequis installés et le fichier de configuration à jour, il faut jouer les scripts via TFS (ou directement sur le serveur) pour exécuter DSC qui va configurer le serveur : par exemple installation de SQL Server ou l'installation de IIS. +
+Lors de la première exécution, l’ensemble des scripts ne passeront pas, c’est normal. Par exemple, après l’installation de Sql Server, la machine reboot automatiquement, ce qui fait que les scripts de création des bases échoues. Il faut donc relancer les scripts une deuxième
+fois. +
+Une fois que tout est passé, il faut installer manuellement un certificat https si besoin.
+
+
+=== Ajouter un déploiement
+
+Un déploiement correspond à l’installation des sites sur un environnement. +
+Voir le chapitre ``Notion de DeploymentId``. +
+Le deploiementId est une notion centrale dans le fichier de configuration.
+
+Pour ajouter un déploiement, il faut le décrire dans le noeud DeploymentConfig et lui donner une clef unique. Ensuite, décrire les paramètres dans tous les noeuds qui possèdent la variable DeploymentId.
+
+Liste non exhaustive :
+
+* Noeud FredWeb
+* Noeud FredIe
+* Noeud Buyer
+* Noeud Storm
+* etc…
+
+
+
+=== Ajouter une entrée dans un fichier Web.Config
+
+TIPS: Pour plus de détail voir le chapitre WebDeploy.psm1
+
+
+Les paramètres des fichiers Web.Config changent en fonction de l’environnement sur lequel est déployé le site. Etape fréquente, elle doit se faire de la façon suivante :
+
+
+. Ajoutez la clef dans le fichier Web.Config
+. Modifiez le fichier du site Parameters.xml
+. Dans le fichier ConfigurationData.psd1, ajoutez les différentes valeurs du paramètre en fonction de l’environnement
+. Exécutez en local le fichier GenerateDocumentation.ps1 +
+Cette dernière étape permet de vérifier que le fichier généré de report html contient bien l’attendu. En effet, à la fin du fichier se trouve les éléments qui seront injectés dans le Web.Config sur le serveur. Vous pouvez aussi exécuter en mode simulation le fichier PicOrchestrator.ps1.
+
+
+=== Debuger les scripts
+
+* Ouvrir le projet dans Visual Studio Code
+* Mettre des points d’arrêts.
+* Lancer le fichier PicOrchestrator.ps1 en debug
+* Mettre comme paramètre :
+** SimulationMode : true => n’effectue aucune modification
+** VisualStudioMode : true => change le chemin de répertoire vers les fichiers web.config car ils sont différents sur la pic.
+
+PicOrchestrator va dérouler les actions localements et en mode simulation.
+
+TIP: Si vous avez modifié des paramètres consultez le fichier html que vous avez indiqué dans la variable ReportFile. Ce fichier exporte la configuration en html et vous permettra de vérifier qu’elle correspond bien à l’attendu.
+
+
+
+=== Désactiver DSC
+
+Pour désactiver DSC sur un serveur effectuer les opérations suivantes en mode admin :
+
+[source,powershell]
+----
+Stop-DscConfiguration
+Remove-DscConfigurationDocument -Stage Current, Pending, Previous -Verbose
+----
+
+puis vérifier qu’il n’y pas d’autres fichiers que les suivants :
+
+[source,powershell]
+----
+Get-ChildItem -Path 'C:\Windows\System32\Configuration' -File -Force
+
+    Directory: C:\Windows\System32\Configuration
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----       2015-06-01     04:52            558 DSCEngineCache.mof
+-a----       2015-06-01     04:51           1006 DSCResourceStateCache.mof
+-a----       2015-06-01     04:52           4004 DSCStatusHistory.mof
+-a----       2015-06-01     04:24           1332 MetaConfig.mof
+----

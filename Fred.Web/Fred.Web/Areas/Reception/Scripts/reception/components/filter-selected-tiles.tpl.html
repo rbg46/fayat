@@ -1,0 +1,138 @@
+﻿
+<span type="button"
+      class="btn btn-sm btn-primary btn-tile"
+      ng-show="$ctrl.filter.Fournisseur">
+    Fourn. : {{$ctrl.filter.Fournisseur.Code}}
+    <span class="ico-filter flaticon-multiply"
+          ng-click="$ctrl.deleteFournisseur($ctrl.filter)">
+    </span>
+</span>
+
+<span type="button"
+      class="btn btn-sm btn-primary btn-tile"
+      ng-show="$ctrl.filter.Agence">
+    Agence : {{$ctrl.filter.Agence.Code}}
+    <span class="ico-filter flaticon-multiply"
+          ng-click="$ctrl.deleteAgence($ctrl.filter)">
+    </span>
+</span>
+
+<span type="button"
+      class="btn btn-sm btn-primary btn-tile"
+      ng-show="$ctrl.filter.CI">
+    CI. : {{$ctrl.filter.CI.Code}}
+    <span class="ico-filter flaticon-multiply"
+          ng-click="$ctrl.deleteCI($ctrl.filter)">
+    </span>
+</span>
+
+<span type="button"
+      class="btn btn-sm btn-primary btn-tile"
+      ng-show="$ctrl.filter.Ressource">
+    Ress. : {{$ctrl.filter.Ressource.Code}}
+    <span class="ico-filter flaticon-multiply"
+          ng-click="$ctrl.deleteRessource($ctrl.filter)">
+    </span>
+</span>
+
+<span type="button"
+      class="btn btn-sm btn-primary btn-tile"
+      ng-show="$ctrl.filter.Tache">
+    Tâche : {{$ctrl.filter.Tache.Code}}
+    <span class="ico-filter flaticon-multiply"
+          ng-click="$ctrl.deleteTache($ctrl.filter)">
+    </span>
+</span>
+<span type="button"
+      class="btn btn-sm btn-primary btn-tile"
+      ng-show="$ctrl.filter.DateFrom">
+    Début. : {{$ctrl.filter.DateFrom  | date :'dd/MM/yyyy'}}
+    <span class="ico-filter flaticon-multiply"
+          ng-click="$ctrl.deleteDateFrom($ctrl.filter)">
+    </span>
+</span>
+<span type="button"
+      class="btn btn-sm btn-primary btn-tile"
+      ng-show="$ctrl.filter.DateTo">
+    Fin : {{$ctrl.filter.DateTo | date :'dd/MM/yyyy' }}
+    <span class="ico-filter flaticon-multiply"
+          ng-click="$ctrl.deleteDateTo($ctrl.filter)">
+    </span>
+</span>
+<span type="button"
+      class="btn btn-sm btn-primary btn-tile"
+      ng-show="$ctrl.filter.AuteurCreation">
+    Crée par: {{$ctrl.filter.AuteurCreation.Code}}
+    <span class="ico-filter flaticon-multiply"
+          ng-click="$ctrl.deleteAuteurCreation($ctrl.filter)">
+    </span>
+</span>
+
+<span type="button"
+      class="btn btn-sm btn-primary btn-tile"
+      ng-show="$ctrl.filter.TypeCodes.indexOf('F') > -1">
+    Fourniture
+    <span class="ico-filter flaticon-multiply"
+          ng-click="$ctrl.deleteFouniture($ctrl.filter)">
+    </span>
+</span>
+
+<span type="button"
+      class="btn btn-sm btn-primary btn-tile"
+      ng-show="$ctrl.filter.TypeCodes.indexOf('P') > -1">
+    Prestation
+    <span class="ico-filter flaticon-multiply"
+          ng-click="$ctrl.deletePrestation($ctrl.filter)">
+    </span>
+</span>
+
+<span type="button"
+      class="btn btn-sm btn-primary btn-tile"
+      ng-show="$ctrl.filter.TypeCodes.indexOf('L') > -1">
+    Location
+    <span class="ico-filter flaticon-multiply"
+          ng-click="$ctrl.deleteLocation($ctrl.filter)">
+    </span>
+</span>
+
+<span type="button"
+      class="btn btn-sm btn-primary btn-tile"
+      ng-show="$ctrl.filter.IsAbonnement">
+    Abonnement
+    <span class="ico-filter flaticon-multiply"
+          ng-click="$ctrl.deleteIsAbonnement($ctrl.filter)">
+    </span>
+</span>
+
+<span type="button"
+      class="btn btn-sm btn-primary btn-tile"
+      ng-show="$ctrl.filter.IsMaterielAPointer">
+    Matériels à pointer
+    <span class="ico-filter flaticon-multiply"
+          ng-click="$ctrl.deleteIsMaterielAPointer($ctrl.filter)">
+    </span>
+</span>
+<span type="button"
+      class="btn btn-sm btn-primary btn-tile"
+      ng-show="$ctrl.filter.IsEnergie">
+    Energies
+    <span class="ico-filter flaticon-multiply"
+          ng-click="$ctrl.deleteIsEnergie($ctrl.filter)">
+    </span>
+</span>
+<span type="button"
+      class="btn btn-sm btn-primary btn-tile"
+      ng-show="$ctrl.filter.IsSoldee">
+    Soldée
+    <span class="ico-filter flaticon-multiply"
+          ng-click="$ctrl.deleteIsSoldee($ctrl.filter)">
+    </span>
+</span>
+<span type="button"
+      class="btn btn-sm btn-primary btn-tile"
+      ng-show="$ctrl.filter.OnlyCommandeWithAtLeastOneCommandeLigneLocked">
+    Verrouillées
+    <span class="ico-filter flaticon-multiply"
+          ng-click="$ctrl.deleteOnlyCommandeWithAtLeastOneCommandeLigneLocked($ctrl.filter)">
+    </span>
+</span>

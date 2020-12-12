@@ -1,0 +1,649 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Col_Absence_lb" xml:space="preserve">
+    <value>Absence</value>
+  </data>
+  <data name="Col_Arret_lb" xml:space="preserve">
+    <value>Arrêt</value>
+  </data>
+  <data name="Col_Code_lb" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Col_Deplacement_lb" xml:space="preserve">
+    <value>Déplacement</value>
+  </data>
+  <data name="Col_Entreprise_lb" xml:space="preserve">
+    <value>Entreprise</value>
+  </data>
+  <data name="Col_HeuresNormales_lb" xml:space="preserve">
+    <value>H. norm</value>
+  </data>
+  <data name="Col_HeuresNuit_lb" xml:space="preserve">
+    <value>H. nuit</value>
+  </data>
+  <data name="Col_HeuresTotalesTravaillees_lb" xml:space="preserve">
+    <value>H. totales travaillées</value>
+  </data>
+  <data name="Col_Heures_lb" xml:space="preserve">
+    <value>Heures</value>
+  </data>
+  <data name="Col_NumSemaineIntemperie_lb" xml:space="preserve">
+    <value>N° Sem Int</value>
+  </data>
+  <data name="Col_IVD_lb" xml:space="preserve">
+    <value>IVD</value>
+  </data>
+  <data name="Col_Majoration_lb" xml:space="preserve">
+    <value>Majoration</value>
+  </data>
+  <data name="Col_Marche_lb" xml:space="preserve">
+    <value>Marche</value>
+  </data>
+  <data name="Col_Materiel_lb" xml:space="preserve">
+    <value>Matériel</value>
+  </data>
+  <data name="Col_Matricule_lb" xml:space="preserve">
+    <value>Matricule</value>
+  </data>
+  <data name="Col_Nom_lb" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="Col_Panne_lb" xml:space="preserve">
+    <value>Panne</value>
+  </data>
+  <data name="Col_Primes_lb" xml:space="preserve">
+    <value>Primes</value>
+  </data>
+  <data name="Col_Taches_lb" xml:space="preserve">
+    <value>Tâches</value>
+  </data>
+  <data name="Col_Zone_lb" xml:space="preserve">
+    <value>Zone</value>
+  </data>
+  <data name="Col_Majorees_lb" xml:space="preserve">
+    <value>Majorées</value>
+  </data>
+  <data name="AjouterLigne_lb" xml:space="preserve">
+    <value>Ajouter une ligne</value>
+  </data>
+  <data name="AjouterPrime_lb" xml:space="preserve">
+    <value>Ajouter une prime</value>
+  </data>
+  <data name="AjouterTache_lb" xml:space="preserve">
+    <value>Ajouter une tâche</value>
+  </data>
+  <data name="PrimeExisteDeja_warning" xml:space="preserve">
+    <value>La prime existe déjà</value>
+  </data>
+  <data name="TacheExisteDeja_warning" xml:space="preserve">
+    <value>La tâche existe déjà</value>
+  </data>
+  <data name="NbMaxPrimeAtteint_warning" xml:space="preserve">
+    <value>Nombre maximum de prime atteint</value>
+  </data>
+  <data name="UneTacheMinimum_warning" xml:space="preserve">
+    <value>Il est nécessaire de paramétrer au moins une tâche</value>
+  </data>
+  <data name="UneLigneMinimum_warning" xml:space="preserve">
+    <value>Il est nécessaire de paramétrer au moins une ligne de pointage</value>
+  </data>
+  <data name="AjouterCodeAbsence_lb" xml:space="preserve">
+    <value>Ajouter un code d'absence</value>
+  </data>
+  <data name="AjouterCodeDeplacement_lb" xml:space="preserve">
+    <value>Ajouter un code déplacement</value>
+  </data>
+  <data name="AjouterCodeMajorartion_lb" xml:space="preserve">
+    <value>Ajouter un code majoration</value>
+  </data>
+  <data name="HNormAndHMajoNotMatchWithHTaches_warning" xml:space="preserve">
+    <value>Le nombre d'heures travaillées ne correspond pas à la somme des heures affectées aux tâches</value>
+  </data>
+  <data name="Ligne_lb" xml:space="preserve">
+    <value>Ligne</value>
+  </data>
+  <data name="PasDePersonnel_warning" xml:space="preserve">
+    <value>Veuillez renseigner une personne</value>
+  </data>
+  <data name="TacheSansHeure_warning" xml:space="preserve">
+    <value>Il n'y pas d'heures affectées à la tâche {0}</value>
+  </data>
+  <data name="EnregistrementRapport_success" xml:space="preserve">
+    <value>Enregistrement du rapport effectué avec succès !</value>
+  </data>
+  <data name="HMajoration0_warning" xml:space="preserve">
+    <value>Les heures majorées ne sont pas paramétrées</value>
+  </data>
+  <data name="HAbsence0_warning" xml:space="preserve">
+    <value>Les heures d'absence ne sont pas paramétrées</value>
+  </data>
+  <data name="MaxHeuresTravailleesJourDepasse_warning" xml:space="preserve">
+    <value>Le nombre d'heures maximales travaillées ({0}h) a été dépassé</value>
+  </data>
+  <data name="PersonnelExistant_warning" xml:space="preserve">
+    <value>Rappel non bloquant: la personne suivante a déjà été saisie : {0}</value>
+  </data>
+  <data name="CIObligatoire_warning" xml:space="preserve">
+    <value>Le CI est obligatoire</value>
+  </data>
+  <data name="ChampRecherche_lb" xml:space="preserve">
+    <value>Champs de recherche</value>
+  </data>
+  <data name="JourneeRapport_lb" xml:space="preserve">
+    <value>Journée</value>
+  </data>
+  <data name="NumeroRapport_lb" xml:space="preserve">
+    <value>Rapport n°</value>
+  </data>
+  <data name="RapportListeRecherche_placeholder" xml:space="preserve">
+    <value>Chercher un rapport</value>
+  </data>
+  <data name="RapportListe_lb" xml:space="preserve">
+    <value>Liste des rapports</value>
+  </data>
+  <data name="RechercheCodeCI_lb" xml:space="preserve">
+    <value>Code CI</value>
+  </data>
+  <data name="RechercheLibelleCI_lb" xml:space="preserve">
+    <value>Libelle CI</value>
+  </data>
+  <data name="RechercheRedacteurCI_lb" xml:space="preserve">
+    <value>Rédacteur</value>
+  </data>
+  <data name="RechercheValideur_lb" xml:space="preserve">
+    <value>Valideur</value>
+  </data>
+  <data name="RedacteurRapport_lb" xml:space="preserve">
+    <value>Rédacteur : </value>
+  </data>
+  <data name="SaisieRapport_lb" xml:space="preserve">
+    <value>Saisie </value>
+  </data>
+  <data name="SemaineRapport_lb" xml:space="preserve">
+    <value>Semaine</value>
+  </data>
+  <data name="Statut_lb" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="ValidationRapport_lb" xml:space="preserve">
+    <value>Validation le :</value>
+  </data>
+  <data name="ValideurRapport_lb" xml:space="preserve">
+    <value>Valideur : </value>
+  </data>
+  <data name="NonSaisieHeureTravailleeNiHeureAbsence_warning" xml:space="preserve">
+    <value>Il est nécessaire de saisir des heures de travail ou d'absence</value>
+  </data>
+  <data name="DateRapport_lb" xml:space="preserve">
+    <value>Date du rapport</value>
+  </data>
+  <data name="Detail_lb" xml:space="preserve">
+    <value>Voir le rapport</value>
+  </data>
+  <data name="HeuresInvalides_warning" xml:space="preserve">
+    <value>Les heures saisies sont invalides</value>
+  </data>
+  <data name="Btn_Annuler_lb" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Btn_Suppression_lb" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="ConfirmationSuppression_lb" xml:space="preserve">
+    <value>Voulez-vous vraiment supprimer le rapport : {0}?</value>
+  </data>
+  <data name="SuppressionRapportModal_Tit" xml:space="preserve">
+    <value>Suppression d'un rapport</value>
+  </data>
+  <data name="SuppressionRapport_success" xml:space="preserve">
+    <value>Suppression du rapport effectuée avec succès !</value>
+  </data>
+  <data name="DuplicationRapport_success" xml:space="preserve">
+    <value>Duplication du rapport effectué avec succès !</value>
+  </data>
+  <data name="Col_EntrepriseMateriel_lb" xml:space="preserve">
+    <value>Entreprise</value>
+  </data>
+  <data name="Col_NomMateriel_lb" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="Col_NumInterneMateriel_lb" xml:space="preserve">
+    <value>N° interne</value>
+  </data>
+  <data name="Col_ListePointagesPersonnelsDate_lb" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Col_AjoutPointage_lb" xml:space="preserve">
+    <value>Ajout</value>
+  </data>
+  <data name="Col_DeplierListeTache_lb" xml:space="preserve">
+    <value>Tâches</value>
+  </data>
+  <data name="Col_Ci_lb" xml:space="preserve">
+    <value>CI</value>
+  </data>
+  <data name="Col_CodeAbsence_lb" xml:space="preserve">
+    <value>Code Abs</value>
+  </data>
+  <data name="Col_CodeDeplacement_lb" xml:space="preserve">
+    <value>Code Dep</value>
+  </data>
+  <data name="Col_CodeMajoration_lb" xml:space="preserve">
+    <value>Code Maj</value>
+  </data>
+  <data name="Col_HeureAbsence_lb" xml:space="preserve">
+    <value>HAbs</value>
+  </data>
+  <data name="Col_HeureMajoration_lb" xml:space="preserve">
+    <value>HMaj</value>
+  </data>
+  <data name="Col_HeureNormale_lb" xml:space="preserve">
+    <value>HNorm</value>
+  </data>
+  <data name="Col_Total_lb" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="ValidationRapport_success" xml:space="preserve">
+    <value>Validation du rapport effectuée avec succès !</value>
+  </data>
+  <data name="Pointages_lb" xml:space="preserve">
+    <value>Pointages</value>
+  </data>
+  <data name="Autres_lb" xml:space="preserve">
+    <value>Autres</value>
+  </data>
+  <data name="ChampObligatoire_lb" xml:space="preserve">
+    <value>Champ obligatoire</value>
+  </data>
+  <data name="DateComptable_lb" xml:space="preserve">
+    <value>Date comptable</value>
+  </data>
+  <data name="Extract_lb" xml:space="preserve">
+    <value>Extract :</value>
+  </data>
+  <data name="Matricule_lb" xml:space="preserve">
+    <value>Matricule</value>
+  </data>
+  <data name="MonPerimetre_lb" xml:space="preserve">
+    <value>Mon périmetre</value>
+  </data>
+  <data name="Nom_lb" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="Organisation_lb" xml:space="preserve">
+    <value>Organisation</value>
+  </data>
+  <data name="PointageTitleExport_lb" xml:space="preserve">
+    <value>&lt;b&gt;Controle des pointages&lt;/b&gt; réels manquants</value>
+  </data>
+  <data name="Tri_lb" xml:space="preserve">
+    <value>Tri :</value>
+  </data>
+  <data name="TypeOrganisation_lb" xml:space="preserve">
+    <value>Type Organisation</value>
+  </data>
+  <data name="SaisiePointageAnticipe_lb" xml:space="preserve">
+    <value>Création de pointage anticipé</value>
+  </data>
+  <data name="SaisiePointageReel_lb" xml:space="preserve">
+    <value>Création de pointage réel</value>
+  </data>
+  <data name="Button_Genere_lb" xml:space="preserve">
+    <value>Générer</value>
+  </data>
+  <data name="RapportJournalierDu_lb" xml:space="preserve">
+    <value>Rapport journalier du</value>
+  </data>
+  <data name="DoublonSaisiePersonnel_warning" xml:space="preserve">
+    <value>La ou les personnes suivantes ont été saisies plusieurs fois : {0}</value>
+  </data>
+  <data name="Col_Intemperie_lb" xml:space="preserve">
+    <value>Intemperie</value>
+  </data>
+  <data name="Generation_Ligne_Traite_lb" xml:space="preserve">
+    <value>Nombre de lignes traitées : </value>
+  </data>
+  <data name="Generation_success" xml:space="preserve">
+    <value>Les pointages anticipés ont été générés avec succès</value>
+  </data>
+  <data name="Generation_Ligne_Error_lb" xml:space="preserve">
+    <value>Nombre de lignes ayant rencontré des erreurs : </value>
+  </data>
+  <data name="Generation_Ligne_NonTrait_lb" xml:space="preserve">
+    <value>Nombre de ligne non traitées : </value>
+  </data>
+  <data name="Choix_Pointage_Anticipe_lb" xml:space="preserve">
+    <value>Voir les pointages anticipés</value>
+  </data>
+  <data name="Choix_Pointage_Reel_lb" xml:space="preserve">
+    <value>Voir les pointages réels</value>
+  </data>
+  <data name="ButtonGenerateExcel_lb" xml:space="preserve">
+    <value>Télécharger le fichier Excel</value>
+    <comment>Move this Rsx to Module Paie</comment>
+  </data>
+  <data name="ButtonGenerateExcel_tip" xml:space="preserve">
+    <value>Cliquer pour télécharger le fichier PDF</value>
+    <comment>Move this Rsx to Module Paie</comment>
+  </data>
+  <data name="ButtonGeneratePDF_lb" xml:space="preserve">
+    <value>Télécharger le PDF</value>
+    <comment>Move this Rsx to Module Paie</comment>
+  </data>
+  <data name="ButtonGeneratePDF_tip" xml:space="preserve">
+    <value>Cliquer pour télécharger le fichier PDF</value>
+    <comment>Move this Rsx to Module Paie</comment>
+  </data>
+  <data name="ModalButtonClose_lb" xml:space="preserve">
+    <value>Fermer</value>
+    <comment>Move to Global Rsx</comment>
+  </data>
+  <data name="ModalButtonClose_title" xml:space="preserve">
+    <value>Cliquer pour fermer la fenêtre</value>
+    <comment>Move to Global Rsx</comment>
+  </data>
+  <data name="ModalTitleCloseHeader_lb" xml:space="preserve">
+    <value>Cliquer pour fermer la fenêtre</value>
+    <comment>Move to Global Rsx</comment>
+  </data>
+  <data name="PointageTitleExportPart1_lb" xml:space="preserve">
+    <value>Controle des pointages </value>
+    <comment>Move this Rsx to Module Paie</comment>
+  </data>
+  <data name="PointageTitleExportPart2_lb" xml:space="preserve">
+    <value>réels manquants </value>
+    <comment>Move this Rsx to Module Paie</comment>
+  </data>
+  <data name="FiltrerPar_lb" xml:space="preserve">
+    <value>Filtré par</value>
+    <comment>Move this Rsx to Module Paie</comment>
+  </data>
+  <data name="DuplicationPointages_lb" xml:space="preserve">
+    <value>Duplication des lignes de pointage</value>
+  </data>
+  <data name="DateDebutDuplication_lb" xml:space="preserve">
+    <value>Date de début de duplication</value>
+  </data>
+  <data name="DateFinDuplication_lb" xml:space="preserve">
+    <value>Date de fin de duplication</value>
+  </data>
+  <data name="Btn_RechercheStatutNonVerrouille_lb" xml:space="preserve">
+    <value>Non vérrouillé</value>
+  </data>
+  <data name="Btn_RechercheStatutValide_lb" xml:space="preserve">
+    <value>Validé</value>
+  </data>
+  <data name="Btn_RechercheStatutVerrouille_lb" xml:space="preserve">
+    <value>Vérrouillé</value>
+  </data>
+  <data name="Btn_RechercheToutStatut_lb" xml:space="preserve">
+    <value>Tous les statuts</value>
+  </data>
+  <data name="CritereRecherche_lb" xml:space="preserve">
+    <value>Critères de recherche</value>
+  </data>
+  <data name="RechercheDateMax_Lb" xml:space="preserve">
+    <value>jusqu'au : </value>
+  </data>
+  <data name="RechercheDateMin_Lb" xml:space="preserve">
+    <value>A partir du : </value>
+  </data>
+  <data name="RechercheStatut_Lb" xml:space="preserve">
+    <value>Statut des rapports : </value>
+  </data>
+  <data name="Button_ToutDeverrouiller_lb" xml:space="preserve">
+    <value>Déverrouiller</value>
+  </data>
+  <data name="Button_ToutVerrouiller_lb" xml:space="preserve">
+    <value>Vérrouiller</value>
+  </data>
+  <data name="Chk_ToutSelectionner_lb" xml:space="preserve">
+    <value>Tout sélectionner</value>
+  </data>
+  <data name="DuplicationPointages_success" xml:space="preserve">
+    <value>{0} ligne(s) de pointage on correctement été générée(s)</value>
+  </data>
+  <data name="TachesPointage_lb" xml:space="preserve">
+    <value>Taches de pointage</value>
+  </data>
+  <data name="SaisieRapportAuteur_lb" xml:space="preserve">
+    <value> par </value>
+  </data>
+  <data name="SaisieRapportDate_lb" xml:space="preserve">
+    <value> le </value>
+  </data>
+  <data name="ValidationChefChantierAbsente_lb" xml:space="preserve">
+    <value>Aucune validation de la part d'un chef de chantier</value>
+  </data>
+  <data name="ValidationChefChantierAuteur_lb" xml:space="preserve">
+    <value> par </value>
+  </data>
+  <data name="ValidationChefChantierDate_lb" xml:space="preserve">
+    <value> le </value>
+  </data>
+  <data name="ValidationChefChantier_lb" xml:space="preserve">
+    <value>Validation Chef de chantier</value>
+  </data>
+  <data name="deverrouillage_success" xml:space="preserve">
+    <value>Les rapports ont été dévérrouillés avec succès</value>
+  </data>
+  <data name="ValidationConducteurTravauxAbsente_lb" xml:space="preserve">
+    <value>Aucune validation de la part d'un conducteur de travaux</value>
+  </data>
+  <data name="ValidationConducteurTravauxAuteur_lb" xml:space="preserve">
+    <value> par </value>
+  </data>
+  <data name="ValidationConducteurTravauxDate_lb" xml:space="preserve">
+    <value> le </value>
+  </data>
+  <data name="ValidationConducteurTravaux_lb" xml:space="preserve">
+    <value>Validation Conducteur de travaux</value>
+  </data>
+  <data name="ValidationDirecteurChantierAbsente_lb" xml:space="preserve">
+    <value>Aucune validation de la part d'un directeur de travaux</value>
+  </data>
+  <data name="ValidationDirecteurChantierAuteur_lb" xml:space="preserve">
+    <value> par </value>
+  </data>
+  <data name="ValidationDirecteurChantierDate_lb" xml:space="preserve">
+    <value> le </value>
+  </data>
+  <data name="ValidationDirecteurChantier_lb" xml:space="preserve">
+    <value>Validation Directeur de chantier</value>
+  </data>
+  <data name="ValidationGestionnairePaieAbsente_lb" xml:space="preserve">
+    <value>Aucun vérrouillage de la part d'un gestionnaire de paie</value>
+  </data>
+  <data name="ValidationGestionnairePaieAuteur_lb" xml:space="preserve">
+    <value> par </value>
+  </data>
+  <data name="ValidationGestionnairePaieDate_lb" xml:space="preserve">
+    <value> le </value>
+  </data>
+  <data name="ValidationGestionnairePaie_lb" xml:space="preserve">
+    <value>Vérouillage Gestion de paie</value>
+  </data>
+  <data name="validation_success" xml:space="preserve">
+    <value>Les rapports ont été vérrouillés avec succès</value>
+  </data>
+  <data name="EditionControlePointage_lb" xml:space="preserve">
+    <value>Edition du contrôle des pointages</value>
+  </data>
+  <data name="ValidationAbsente_lb" xml:space="preserve">
+    <value>Aucune Validation</value>
+  </data>
+  <data name="AuteurModification_lb" xml:space="preserve">
+    <value>Auteur Modification</value>
+  </data>
+  <data name="InformationCreateurRapport_lb" xml:space="preserve">
+    <value>Créé par {0} le {1}</value>
+  </data>
+  <data name="InformationModificateurRapport_lb" xml:space="preserve">
+    <value>Modifié par {0} le {1}</value>
+  </data>
+  <data name="ValitationChefChantier_Title" xml:space="preserve">
+    <value>Chef de Chantier</value>
+  </data>
+  <data name="ValitationConducteurTravaux_Title" xml:space="preserve">
+    <value>Conducteur de travaux</value>
+  </data>
+  <data name="ValitationCorrespondantPaye_Title" xml:space="preserve">
+    <value>Correspondant paye</value>
+  </data>
+  <data name="ValitationDirecteurChantier_Title" xml:space="preserve">
+    <value>Directeur de chantier</value>
+  </data>
+  <data name="RecherchePersonnel" xml:space="preserve">
+    <value>Rechercher un personnel</value>
+  </data>
+  <data name="RechercheCI" xml:space="preserve">
+    <value>Rechercher un CI</value>
+  </data>
+  <data name="RechercheCodeMajoration" xml:space="preserve">
+    <value>Rechercher un code majoration</value>
+  </data>
+  <data name="Col_Personnel_lb" xml:space="preserve">
+    <value>Personnel</value>
+  </data>
+  <data name="RechercherRapports_lb" xml:space="preserve">
+    <value>Recherche des rapports</value>
+  </data>
+  <data name="Horaires_Tranches_error_lb" xml:space="preserve">
+    <value>Les tranches horaires sont incorrectes</value>
+  </data>
+  <data name="VerifTempsRapport_lb" xml:space="preserve">
+    <value> Vérification des temps</value>
+  </data>
+  <data name="ControlePointageRapport_lb" xml:space="preserve">
+    <value> Contrôle des pointages</value>
+  </data>
+  <data name="ListePrimeRapport_lb" xml:space="preserve">
+    <value> Liste des primes</value>
+  </data>
+  <data name="ListeIgdRapport_lb" xml:space="preserve">
+    <value> Liste des IGD</value>
+  </data>
+  <data name="ConfirmDeleteCi_lb" xml:space="preserve">
+    <value>Attention, tout changement de CI va ré-initialiser entièrement ce rapport, voulez-vous continuer ?</value>
+  </data>
+  <data name="Nouveau_lb" xml:space="preserve">
+    <value>Nouveau Rapport</value>
+  </data>
+</root>

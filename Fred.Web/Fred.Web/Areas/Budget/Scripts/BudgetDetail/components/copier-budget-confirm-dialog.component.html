@@ -1,0 +1,123 @@
+﻿<div class="copier-budget-confirm-dialog modal fade" id="{{$ctrl.Identifiers.Dialog}}" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <i class="flaticon flaticon-shuffle-1"></i>{{::$ctrl.resources.CopierBudgetConfirm_Titre}}
+                </h2>
+                <i class="flaticon flaticon-multiply close pull-right" ng-click="$ctrl.OnAnnulerButtonClick()" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+            </div>
+
+            <!-- Rappel des informations -->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2"></div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 column-header">{{::$ctrl.resources.CopierBudgetConfirm_Entete_Budget}}</div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 column-header">{{::$ctrl.resources.CopierBudgetConfirm_Entete_Bibliotheque}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2 row-header">{{::$ctrl.resources.CopierBudgetConfirm_Entete_Source}}</div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 source">{{$ctrl.BudgetSource.CI.Code}} - {{$ctrl.BudgetSource.CI.Libelle}} / {{$ctrl.BudgetSource.Revision.Revision}}</div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 source">{{$ctrl.Bibliotheque.CI.Code}} - {{$ctrl.Bibliotheque.CI.Libelle}}</div>
+                </div>
+            </div>
+
+            <!-- Aucune bibliothèque sélectionnée -->
+            <div class="modal-body modal-body-separator"
+                 ng-if="$ctrl.Bibliotheque.CI === null || !$ctrl.Bibliotheque.Exists">
+                <div class="row" ng-if="$ctrl.Bibliotheque.CI === null">
+                    <div class="col-lg-12 col-md-12 col-sm-12 question">{{::$ctrl.resources.CopierBudgetConfirm_AucuneBibliothequeSelectionnee}}</div>
+                </div>
+                <div class="row" ng-if="$ctrl.Bibliotheque.CI !== null && !$ctrl.Bibliotheque.Exists">
+                    <div class="col-lg-12 col-md-12 col-sm-12 question">{{::$ctrl.resources.CopierBudgetConfirm_BibliothequeInexistante}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <input type="radio"
+                               id="CONFIRM_COPIER_BUDGET_INITIALISER_COMPOSANTES_BUDGET_SOURCE_ID"
+                               ng-model="$ctrl.View.InitialiserComposantes"
+                               value="{{$ctrl.InitialiserComposantesEnum.BudgetSource}}"
+                               ng-disabled="$ctrl.Busy"
+                               ng-required="true">
+                        <label class="radio-label" for="CONFIRM_COPIER_BUDGET_INITIALISER_COMPOSANTES_BUDGET_SOURCE_ID"><span></span>{{::$ctrl.resources.CopierBudgetConfirm_AucuneBibliothequeSelectionnee_BudgetSource}}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <input type="radio"
+                               id="CONFIRM_COPIER_BUDGET_INITIALISER_COMPOSANTES_VIDES_ID"
+                               ng-model="$ctrl.View.InitialiserComposantes"
+                               value="{{$ctrl.InitialiserComposantesEnum.Vides}}"
+                               ng-disabled="$ctrl.Busy"
+                               ng-required="true">
+                        <label class="radio-label" for="CONFIRM_COPIER_BUDGET_INITIALISER_COMPOSANTES_VIDES_ID"><span></span>{{::$ctrl.resources.CopierBudgetConfirm_AucuneBibliothequeSelectionnee_Vides}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mode de copie -->
+            <div class="modal-body modal-body-separator">
+                <div class="row question-block-separator">
+                    <div class="col-lg-12 col-md-12 col-sm-12 question">{{::$ctrl.resources.CopierBudgetConfirm_ConfirmerCopie}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <input type="radio"
+                               id="CONFIRM_COPIER_BUDGET_COPIER_LIGNES_VIDES_ID"
+                               ng-model="$ctrl.View.CopierMode"
+                               value="{{$ctrl.CopierModeEnum.LignesVides}}"
+                               ng-disabled="$ctrl.Busy"
+                               ng-required="true">
+                        <label class="radio-label" for="CONFIRM_COPIER_BUDGET_COPIER_LIGNES_VIDES_ID"><span></span>{{::$ctrl.resources.CopierBudgetConfirm_ConfirmerCopie_SeulementLigneVide}}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <input type="radio"
+                               id="CONFIRM_COPIER_BUDGET_COPIER_INTEGRALEMENT_ID"
+                               ng-model="$ctrl.View.CopierMode"
+                               value="{{$ctrl.CopierModeEnum.Integrale}}"
+                               ng-disabled="$ctrl.Busy"
+                               ng-required="true">
+                        <label class="radio-label" for="CONFIRM_COPIER_BUDGET_COPIER_INTEGRALEMENT_ID"><span></span>{{::$ctrl.resources.CopierBudgetConfirm_ConfirmerCopie_Integralement}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copier également les ressources spécifiques -->
+            <!-- NPI : fonctionnalité désactivée pour le moment, une US va être faite sur ce sujet -->
+            <div class="modal-body modal-body-separator"
+                 ng-if="false && $ctrl.BudgetSource.CI.CiId !== $ctrl.BudgetCible.CI.CiId">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 groupe">
+                        <input type="checkbox"
+                               id="CONFIRM_COPIER_BUDGET_INCLURE_RESSOURCES_SPECIFIQUES_ID"
+                               ng-model="$ctrl.View.InclureRessourceSpecifiques"
+                               ng-disabled="$ctrl.Busy"
+                               ng-required="true">
+                        <label for="CONFIRM_COPIER_BUDGET_INCLURE_RESSOURCES_SPECIFIQUES_ID"><span></span>{{::$ctrl.resources.CopierBudgetConfirm_CopierRessourcesSpecifiques}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <!--Bouton d'action-->
+                <button class="btn btn-default pull-left"
+                        ng-click="$ctrl.OnValiderButtonClick()"
+                        title="{{::$ctrl.resources.Global_Bouton_Valider_Tooltip}}"
+                        ng-disabled="$ctrl.Busy || !$ctrl.IsValiderButtonEnable()">
+                    {{::$ctrl.resources.Global_Bouton_Valider}}
+                </button>
+
+                <!--Bouton annuler-->
+                <button class="btn btn-link pull-right"
+                        ng-click="$ctrl.OnAnnulerButtonClick()"
+                        title="{{::$ctrl.resources.Global_Bouton_Annuler_Tooltip}}"
+                        ng-disabled="$ctrl.Busy">
+                    {{::$ctrl.resources.Global_Bouton_Annuler}}
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

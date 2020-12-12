@@ -1,0 +1,35 @@
+﻿.excel-icon {
+    background-image: url("/medias/images/ico/excel-icon.png");
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.add-search .export-action-bloc {
+    display: flex;
+    position: relative;
+}
+
+.add-search .export-action-bloc fred-section-title {
+    position: absolute;
+    top: -17px;
+}
+
+.add-search .export-action-bloc .filter {
+    margin-right: auto;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .export-action-bloc .filter {
+        padding: 7px;
+    }
+    .export-action-bloc .filter .button-excel {
+        width: 25px;
+        height: 25px;
+        margin-right: 0;
+    }
+}

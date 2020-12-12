@@ -1,0 +1,202 @@
+﻿<div class="lot-pointage">
+  <!--BEGIN : Titre du module-->
+  
+  <!--END : Titre du module-->
+  <!--BEGIN : Entete des lignes-->
+  <div class="row headers">
+
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no_padding rowed">
+        <div class="mod-titles">
+            <fred-section id="title-corespondant" fred-Display-Handler="$ctrl.userOrganizationId" display="hidden">{{ $ctrl.resources.VPWeb_Correspondants }}</fred-section>
+            <fred-section id="title-gestionnaire" fred-Display-Handler="$ctrl.userOrganizationId" display="visible">{{$ctrl.resources.VPWeb_Gestionnaire}}</fred-section>
+        </div>
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 no_padding">
+        <div class="row">
+
+            <!-- Nombre de pointages -->
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 no_padding">
+                <div class="entete even">{{ $ctrl.resources.VPWeb_NombrePointages }}</div>
+            </div>
+
+            <!-- Contrôle  -->
+            <div id="controle"  fred-Display-Handler="$ctrl.userOrganizationId" display="visible" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no_padding">
+                <div class="entete odd">{{ $ctrl.resources.VPWeb_Controle }}</div>
+            </div>
+
+            <!-- Contrôle Chantier -->
+            <div id="controle-chantier"  fred-Display-Handler="$ctrl.userOrganizationId" display="hidden" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no_padding">
+                <div class="entete odd">{{ $ctrl.resources.VPWeb_ControleChantier }}</div>
+            </div>
+
+            <!-- Contrôle Vrac -->
+            <div id="controle-vrac"  fred-Display-Handler="$ctrl.userOrganizationId" display="hidden" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no_padding"  >
+                <div class="entete even">{{ $ctrl.resources.VPWeb_ControleVrac }}</div>
+            </div>
+
+            <!-- Visa Correspondant -->
+            <div id="controle-visaCorrespondant"  fred-Display-Handler="$ctrl.userOrganizationId" display="hidden" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no_padding" >
+                <div class="entete odd">{{ $ctrl.resources.VPWeb_VisaCorrespondant }}</div>
+            </div>
+
+        </div>
+    </div>
+
+
+  </div>
+  <!--END : Entete des lignes-->
+
+  <div class="corres-list fred-scroll">
+    <div ng-repeat="item in $ctrl.lotPointageList">
+        <div class="list-content">
+            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6 no_padding">
+    
+                <!--BEGIN : Détail des lignes-->
+                <div class="row ligne" ng-class="{'active': $ctrl.selectedLotPointageId === item.LotPointageId}">
+    
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no_padding manager"
+                        ng-click="$ctrl.handleSelectLotPointage(item.LotPointageId)">
+                        <fred-val>{{ item.AuteurCreation.PrenomNom }}</fred-val>
+                    </div>
+    
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 no_padding">
+                        <div class="row">
+    
+                            <!-- Nombre de pointages -->
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 no_padding nb-ptg"
+                                ng-click="$ctrl.handleSelectLotPointage(item.LotPointageId)">
+                                {{ item.NombrePointages }}
+                            </div>
+    
+                            <!-- Contrôle  -->
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no_padding" id="controle-detail"
+                                display="visible" fred-Display-Handler="$ctrl.userOrganizationId">
+                                <div
+                                    ng-if="$ctrl.rights.isVisible || ($ctrl.rights.isVisible === false && item.CurrentUser) || $ctrl.rights.isSuperAdmin">
+                                    <div class="material-icons icons todo" ng-show="item.ControleVrac === null"
+                                        aria-hidden="true"
+                                        ng-click="(($ctrl.rights.isVisible && !$ctrl.rights.isReadOnly ) || item.CurrentUser) && $ctrl.handleControleVrac(item.LotPointageId)"
+                                        title="{{ $ctrl.resources.VPWeb_ExecuterControleVrac }}">radio_button_unchecked
+                                    </div>
+                                    <div class="material-icons icons success"
+                                        ng-show="item.ControleVrac.Statut===$ctrl.status.Done"
+                                        ng-click="(($ctrl.rights.isVisible && !$ctrl.rights.isReadOnly ) || item.CurrentUser) && $ctrl.handleControleVrac(item.LotPointageId)"
+                                        title="{{ item.ControleVrac.ExecutionTooltip }}">radio_button_checked</div>
+                                    <div class="material-icons icons error"
+                                        ng-show="item.ControleVrac.Statut===$ctrl.status.Failed"
+                                        ng-click="(($ctrl.rights.isVisible && !$ctrl.rights.isReadOnly ) || item.CurrentUser) && $ctrl.handleControleVrac(item.LotPointageId)"
+                                        title="{{ item.ControleVrac.ExecutionTooltip }}">report</div>
+                                    <div class="material-icons icons rotation"
+                                        ng-show="item.ControleVrac.Statut===$ctrl.status.InProgress"
+                                        title="{{ item.ControleVrac.ExecutionTooltip }}">loop</div>
+                                </div>
+                            </div>
+    
+                            <!-- Contrôle Chantier -->
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no_padding" id="controle-chantier-detail"
+                                display="hidden" fred-Display-Handler="$ctrl.userOrganizationId">
+                                <div
+                                    ng-if="$ctrl.rights.isVisible || ($ctrl.rights.isVisible === false && item.CurrentUser) || $ctrl.rights.isSuperAdmin">
+                                    <div class="material-icons icons todo" ng-show="item.ControleChantier === null"
+                                        aria-hidden="true"
+                                        ng-click="(($ctrl.rights.isVisible && !$ctrl.rights.isReadOnly ) || item.CurrentUser) &&  $ctrl.handleControleChantier(item.LotPointageId)"
+                                        title="{{ $ctrl.resources.VPWeb_ExecuterControleChantier }}">radio_button_unchecked
+                                    </div>
+                                    <div class="material-icons icons success"
+                                        ng-show="item.ControleChantier.Statut === $ctrl.status.Done"
+                                        ng-click="(($ctrl.rights.isVisible && !$ctrl.rights.isReadOnly ) || item.CurrentUser) && $ctrl.handleControleChantier(item.LotPointageId)"
+                                        title="{{ item.ControleChantier.ExecutionTooltip }}">radio_button_checked</div>
+                                    <div class="material-icons icons error"
+                                        ng-show="item.ControleChantier.Statut === $ctrl.status.Failed"
+                                        ng-click="(($ctrl.rights.isVisible && !$ctrl.rights.isReadOnly ) || item.CurrentUser) && $ctrl.handleControleChantier(item.LotPointageId)"
+                                        title="{{ item.ControleChantier.ExecutionTooltip }}">report</div>
+                                    <div class="material-icons icons rotation"
+                                        ng-show="item.ControleChantier.Statut === $ctrl.status.InProgress"
+                                        title="{{ item.ControleChantier.ExecutionTooltip }}">loop</div>
+                                </div>
+                            </div>
+    
+                            <!-- Contrôle Vrac -->
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no_padding" id="controle-vrac-detail"
+                                display="hidden" fred-Display-Handler="$ctrl.userOrganizationId">
+                                <div
+                                    ng-if="$ctrl.rights.isVisible || ($ctrl.rights.isVisible === false && item.CurrentUser) || $ctrl.rights.isSuperAdmin">
+                                    <div class="material-icons icons todo" ng-show="item.ControleVrac === null"
+                                        aria-hidden="true"
+                                        ng-click="(($ctrl.rights.isVisible && !$ctrl.rights.isReadOnly ) || item.CurrentUser) && $ctrl.handleControleVrac(item.LotPointageId)"
+                                        title="{{ $ctrl.resources.VPWeb_ExecuterControleVrac }}">radio_button_unchecked
+                                    </div>
+                                    <div class="material-icons icons success"
+                                        ng-show="item.ControleVrac.Statut===$ctrl.status.Done"
+                                        ng-click="(($ctrl.rights.isVisible && !$ctrl.rights.isReadOnly ) || item.CurrentUser) && $ctrl.handleControleVrac(item.LotPointageId)"
+                                        title="{{ item.ControleVrac.ExecutionTooltip }}">radio_button_checked</div>
+                                    <div class="material-icons icons error"
+                                        ng-show="item.ControleVrac.Statut===$ctrl.status.Failed"
+                                        ng-click="(($ctrl.rights.isVisible && !$ctrl.rights.isReadOnly ) || item.CurrentUser) && $ctrl.handleControleVrac(item.LotPointageId)"
+                                        title="{{ item.ControleVrac.ExecutionTooltip }}">report</div>
+                                    <div class="material-icons icons rotation"
+                                        ng-show="item.ControleVrac.Statut===$ctrl.status.InProgress"
+                                        title="{{ item.ControleVrac.ExecutionTooltip }}">loop</div>
+                                </div>
+                            </div>
+    
+                            <!-- Visa Correspondant -->
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no_padding" id="controle-corerspondant-detail"
+                                display="hidden" fred-Display-Handler="$ctrl.userOrganizationId">
+                                <div
+                                    ng-if="$ctrl.rights.isVisible || ($ctrl.rights.isVisible === false && item.CurrentUser) || $ctrl.rights.isSuperAdmin">
+                                    <div class="material-icons icons todo" ng-show="item.AuteurVisaId===null"
+                                        aria-hidden="true"
+                                        ng-click="(($ctrl.rights.isVisible && !$ctrl.rights.isReadOnly ) || item.CurrentUser) && $ctrl.handleVisa(item.LotPointageId)"
+                                        title="{{ $ctrl.resources.VPWeb_ExecuterSignature }}">radio_button_unchecked</div>
+                                    <div class="material-icons icons success" ng-show="item.AuteurVisaId"
+                                        ng-click="(($ctrl.rights.isVisible && !$ctrl.rights.isReadOnly ) || item.CurrentUser) && $ctrl.handleVisa(item.LotPointageId)"
+                                        title="{{ item.ExecutionTooltip }}">radio_button_checked</div>
+                                </div>
+                            </div>
+    
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding" style="cursor:pointer"
+                                ng-click="$ctrl.handleSelectLotPointage(item.LotPointageId)">
+                                <i class="material-icons" title="Consulter les rapports d'erreurs">chevron_right</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--END : Détail des lignes-->
+    
+            </div>
+        </div>
+    </div>
+  </div>
+
+  
+
+  <div class="list-content">
+    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6 no_padding">
+
+      <!--BEGIN : Détail des lignes-->
+      <div class="row last-ligne">
+
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no_padding">
+          <fred-val class="no-verrou no-verrou-label">{{ $ctrl.resources.VPWeb_AucunVerrouillage }}</fred-val>
+        </div>
+
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 no_padding">
+
+          <div class="row">
+
+            <!--Nombre rapports non verrouillés-->
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 no_padding">
+              <div class="no-verrou nb-ptg">{{ $ctrl.aucunVerrouillageCount }}</div>
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9 no_padding">
+            </div>
+          </div>
+        </div>
+        <!--END : Détail des lignes-->
+
+      </div>
+    </div>
+  </div>
+
+</div>

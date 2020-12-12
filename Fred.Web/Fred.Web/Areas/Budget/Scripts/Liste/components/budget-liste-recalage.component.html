@@ -1,0 +1,35 @@
+﻿<div class="modal fade" id="BUDGET_LISTE_RECALAGE_ID" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1s"></i>{{$ctrl.resources.Budget_Recalage_Titre}}</h2>
+                <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <label>{{$ctrl.resources.Budget_Recalage_Selection_Periode}}</label>
+                    <select class="form-control col-lg-4 input-filter"
+                            ng-model="$ctrl.periodeFin"
+                            ng-options="periode for periode in $ctrl.listPeriodes"></select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!--Bouton pour valider le budget-->
+                <button class="btn btn-default pull-left"
+                        ng-disabled="!$ctrl.periodeFin"
+                        ng-click="$ctrl.RecalageBudgetaire()"
+                        ng-if="$ctrl.CurrentMode === $ctrl.Mode.Create"
+                        title="{{$ctrl.resources.Global_Bouton_Valider_Tooltip}}">
+                    {{$ctrl.resources.Global_Bouton_Valider}}
+                </button>
+
+                <!--Bouton annuler-->
+                <button class="btn btn-link pull-right"
+                        data-dismiss="modal"
+                        title="{{$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">
+                    {{$ctrl.resources.Global_Bouton_Annuler}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

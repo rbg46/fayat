@@ -1,0 +1,21 @@
+<div class="modal-content">
+    <div class="modal-header">    
+      <h2 class="modal-title"><i class="flaticon flaticon-star-1"></i>{{$ctrl.resources.Favoris_Modal_Titre_Supprimer}}</h2>    
+      <i class="flaticon flaticon-multiply close pull-right" ng-click="$ctrl.handleCancel()" title="{{$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <b>{{$ctrl.resources.Favoris_Modal_Confirmation_Suppression_part1}} "{{$ctrl.favori.Libelle}}" ?</b><br>
+                <b>{{$ctrl.resources.Favoris_Modal_Confirmation_Suppression_part2}}</b>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-default pull-left"
+                ng-click="$ctrl.handleDelete()" title="{{$ctrl.resources.Global_Bouton_Supprimer_Tooltip}}">{{$ctrl.resources.Global_Bouton_Supprimer}}</button>      
+        <button type="button" class="btn btn-link pull-right"
+                ng-click="$ctrl.handleCancel()" title="{{$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">{{$ctrl.resources.Global_Bouton_Annuler}}</button>
+    </div>
+</div>
+  

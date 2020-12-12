@@ -1,0 +1,151 @@
+﻿<!--START : Barre de recherche + Barre d'outils-->
+<fred-toolbar>
+    <!--Sélection de l'organisation ou du CI-->
+    <fred-section class="picklist-section">
+        <fred-section-title ng-if="$ctrl.type === $ctrl.typeBareme.Organisation">{{$ctrl.resources.BaremeExploitation_SelectionnerOrganisation}}</fred-section-title>
+        <fred-section-title ng-if="$ctrl.type === $ctrl.typeBareme.CI">{{$ctrl.resources.BaremeExploitation_SelectionnerCI}}</fred-section-title>
+        <fred-section-controls ng-if="$ctrl.type === $ctrl.typeBareme.Organisation">
+            <div class="inner-addon right-addon">
+                <lookup ng-model="$ctrl.organisation"
+                        search-placeholder="{{$ctrl.resources.Global_ReferentielOrganisation_Placeholder}}"
+                        search-title="{{$ctrl.resources.Global_ReferentielOrganisation}}"
+                        on-select="$ctrl.changeOrganisation()"
+                        url="/api/Organisation/SearchLightOrganisation/?typeOrganisation=GROUPE,SOCIETE,PUO,UO,ETABLISSEMENT&">
+                    <input type="text"
+                           class="form-control"
+                           ng-value="$ctrl.organisation.CodeLibelle"
+                           placeholder="{{$ctrl.resources.Global_ReferentielOrganisation_Placeholder}}"
+                           title="{{$ctrl.organisation.CodeLibelle}}" />
+                    <i class="chev material-icons">chevron_right</i>
+                </lookup>
+            </div>
+        </fred-section-controls>
+        <fred-section-controls ng-if="$ctrl.type === $ctrl.typeBareme.CI">
+            <div class="inner-addon right-addon">
+                <lookup ng-model="$ctrl.ci"
+                        search-placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                        search-title="{{$ctrl.resources.Global_ReferentielCI}}"
+                        on-select="$ctrl.changeCI()"
+                        url="/api/CI/SearchLight"
+                        custom-template-url="/Scripts/directive/lookup/custom-templates/ci.template.html">
+
+                    <input type="text"
+                           class="form-control"
+                           ng-value="$ctrl.ci.CodeLibelle"
+                           placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                           title="{{$ctrl.ci.Libelle}}" />
+                    <i class="chev material-icons">chevron_right</i>
+                </lookup>
+            </div>
+        </fred-section-controls>
+
+    </fred-section>
+
+    <!--Période comptable-->
+    <fred-section class="date-section">
+        <fred-section-title>{{$ctrl.resources.BaremeExploitation_PeriodeComptable}}</fred-section-title>
+        <fred-section-controls>
+            <div class="input-group date">
+                <app-date-picker id="periode" ng-model="$ctrl.periode" initial-date="{{$ctrl.periode}}" format="MM/YYYY" lang="fr" placeholder="Période"
+                                 ng-change="$ctrl.changePeriode()"></app-date-picker>
+            </div>
+        </fred-section-controls>
+    </fred-section>
+
+    <!--Rechercher-->
+    <fred-section class="text-search-section" ng-if="($ctrl.ci || $ctrl.organisation) && $ctrl.periode" ng-show="false">
+        <fred-section-title>Rechercher</fred-section-title>
+        <fred-section-controls>
+            <div class="input-group input-search">
+                <input type="text" placeholder="{{$ctrl.resources.BaremeExploitation_Rechercher_Placeholder}}" ng-model="$ctrl.search" class="form-control" ng-change="$ctrl.handleSearchChange()">
+                <span class="input-group-addon button-search">
+                    <i class="material-icons">search</i>
+                </span>
+            </div>
+        </fred-section-controls>
+    </fred-section>
+
+    <!--Devise-->
+    <fred-section class="devise-section" ng-if="($ctrl.ci || $ctrl.organisation) && $ctrl.periode">
+        <fred-section-title>{{$ctrl.resources.BaremeExploitation_Devise}}</fred-section-title>
+        <fred-section-controls>
+            <i class="btn devise devise-actif glyphicon glyphicon-euro"></i>
+            <i class="btn devise devise-inactif glyphicon glyphicon-gbp" ng-show="false"></i>
+            <i class="btn devise devise-inactif glyphicon glyphicon-usd" ng-show="false"></i>
+        </fred-section-controls>
+    </fred-section>
+
+    <!--Validation-->
+    <fred-section class="validation-section" ng-if="($ctrl.ci || $ctrl.organisation) && $ctrl.periode">
+        <fred-section-title>{{$ctrl.resources.BaremeExploitation_Validation}}</fred-section-title>
+        <fred-section-controls>
+            <button type="button" class="fred-button default text ng-binding" ng-click="$ctrl.handleClickCancel()" ng-disabled="$ctrl.readonly" ng-attr-title="{{$ctrl.readonly ? $ctrl.resources.BaremeExploitation_AnnulationImpossibleSurLaPeriode : ''}}">
+                {{$ctrl.resources.BaremeExploitation_Annuler}}
+            </button>
+            <button type="button" class="fred-button default text ng-binding" ng-click="$ctrl.handleClickSave()" ng-disabled="$ctrl.readonly" ng-attr-title="{{$ctrl.readonly ? $ctrl.readonlyMessage : ''}}">
+                {{$ctrl.resources.BaremeExploitation_Enregistrer}}
+            </button>
+        </fred-section-controls>
+    </fred-section>
+
+    <!--Actions-->
+    <fred-section class="action-section" ng-if="($ctrl.ci || $ctrl.organisation) && $ctrl.periode">
+        <fred-section-title>{{$ctrl.resources.BaremeExploitation_Actions}}</fred-section-title>
+        <fred-section-controls>
+            <fred-button class="default text" ng-click="$ctrl.handleExpandAll()">Tout déplier</fred-button>
+            <fred-button class="default text" ng-click="$ctrl.handleCollapseAll()">Tout replier</fred-button>
+            <button type="button" class="fred-button default text ng-binding" ng-click="$ctrl.popupConfirmSynchro()" ng-if="$ctrl.type === $ctrl.typeBareme.CI || ($ctrl.type === $ctrl.typeBareme.Organisation && $ctrl.organisation.TypeOrganisation != 'Groupe')" ng-disabled="$ctrl.readonly || $ctrl.parentEmpty" ng-attr-title="{{$ctrl.readonly || $ctrl.parentEmpty ? $ctrl.readonlyMessage : ''}}">
+                {{$ctrl.resources.BaremeExploitation_Synchroniser}}
+            </button>
+            <i class="btn material-icons btn-play" ng-show="false">access_time</i>
+            <i class="btn material-icons btn-setting" ng-show="false">settings</i>
+            <i class="btn material-icons btn-sync" ng-show="false">sync</i>
+            <i class="btn material-icons btn-cloud" ng-show="false">cloud_download</i>
+            <i class="btn material-icons btn-star" ng-show="flase">stars</i>
+            <button class="fred-button material-icons btn-star" type="button" ng-click="$ctrl.addFilter2Favoris(filter)" title="{{ $ctrl.resources.Button_Save_Favorite_Title }}">
+                <i class="material-icons">star</i>
+            </button>
+        </fred-section-controls>
+    </fred-section>
+
+    <!--Export-->
+    <fred-section class="export-section" ng-if="($ctrl.ci || $ctrl.organisation)">
+        <fred-section-title>Export</fred-section-title>
+        <fred-section-controls>
+            <!--!buttons Export Organisation-->
+            <fred-button type="button" ng-if="$ctrl.type === $ctrl.typeBareme.Organisation" class="export-section-button" ng-click="$ctrl.handleClickExportOrga(false)" title="">
+                <span class="excel-icon"></span>
+            </fred-button>
+            <fred-button type="button" ng-if="$ctrl.type === $ctrl.typeBareme.Organisation" class="export-section-button" ng-click="$ctrl.handleClickExportOrga(true)" title="" data-toggle="modal" data-target="#exportBaremeModal">
+                <span class="pdf-icon"></span>
+            </fred-button>
+            <!--Buttons Export CI-->
+            <fred-button type="button" ng-if="$ctrl.type === $ctrl.typeBareme.CI" ng-click="$ctrl.handleExportExcel(false)" class="export-section-button" title="">
+                <span class="excel-icon"></span>
+            </fred-button>
+            <fred-button type="button" ng-if="($ctrl.type === $ctrl.typeBareme.CI)" ng-click="$ctrl.handleExportExcel(true)" class="export-section-button" title="">
+                <span class="pdf-icon"></span>
+            </fred-button>
+        </fred-section-controls>
+    </fred-section>
+
+</fred-toolbar>
+
+<!--Modal de confirmation Synchro-->
+<div class="modal fade" id="confirmationSynchroModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="flaticon flaticon-repeat"></i>{{$ctrl.resources.Global_Modal_Confirmation}}</h2>
+                <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+            </div>
+            <div class="modal-body">
+                <b>{{$ctrl.resources.Bareme_ModalConfirmationSynchro_MessageConfirmation}}</b>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn  btn-default pull-left" data-dismiss="modal" ng-click="$ctrl.handleSynchro()">{{$ctrl.resources.Global_Bouton_Valider}}</button>
+                <button type="button" class="btn  btn-link pull-right" data-dismiss="modal" title="{{resources.Global_Bouton_Annuler_Tooltip}}">{{$ctrl.resources.Global_Bouton_Annuler}}</button>
+            </div>
+        </div>
+    </div>
+</div>

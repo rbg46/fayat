@@ -1,0 +1,253 @@
+﻿@*--------------------------------------------------------------------------------------------------------------*@
+@*                                          PARAMETRAGE PAIE                                                    *@
+@*--------------------------------------------------------------------------------------------------------------*@
+<div class="panel panel-default" ng-click="ctrl.handleOpenPaiePanel()">
+
+  <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse-paie" data-parent="#ci-accordion" id="panel-heading-paie"><i class="chevron fa fa-fw"></i>{{ctrl.resources.CI_Detail_Paie_Titre}}</div>
+  <div id="collapse-paie" class="panel-collapse collapse">
+
+    <div class="panel-body">
+      <!--BEGIN  > FORMULAIRE-->
+      <div class="row">
+        <label class="control-label">{{ctrl.resources.CI_Detail_Paie_ZoneModifiable}}</label>
+        <div>
+          <label class="switch">
+            <input type="checkbox" name="ZoneModifiable"
+                   ng-model="ctrl.panels.paie.data.address.ZoneModifiable" />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12 col-md-12 no_plpr">
+          <label class="control-label">{{ctrl.resources.CI_Detail_Paie_Adresse}}</label>
+          <input type="text"
+                 maxlength="300"
+                 class="form-control inputText"
+                 placeholder="{{ctrl.resources.CI_Detail_Paie_Adresse_Placeholder}}"
+                 ng-model="ctrl.panels.paie.data.address.Adresse" required />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 no_plpr">
+          <label class="control-label">{{ctrl.resources.CI_Detail_Paie_Adresse2}}</label>
+          <input type="text"
+                 class="form-control inputText"
+                 maxlength="300"
+                 placeholder="{{ctrl.resources.CI_Detail_Paie_Adresse_Placeholder2}}"
+                 ng-model="ctrl.panels.paie.data.address.Adresse2" />
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 no_plpr">
+          <label class="control-label">{{ctrl.resources.CI_Detail_Paie_Adresse3}}</label>
+          <input type="text"
+                 class="form-control inputText"
+                 maxlength="300"
+                 placeholder="{{ctrl.resources.CI_Detail_Paie_Adresse_Placeholder3}}"
+                 ng-model="ctrl.panels.paie.data.address.Adresse3" />
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-4 no_pl">
+          <label class="control-label">{{ctrl.resources.CI_Detail_Paie_CodePostal}} *</label>
+          <input type="text"
+                 maxlength="300"
+                 class="form-control inputText"
+                 placeholder="{{ctrl.resources.CI_Detail_Paie_CodePostal_Placeholder}}"
+                 ng-model="ctrl.panels.paie.data.address.CodePostal"
+                 required />
+        </div>
+        <div class="col-lg-4 col-md-4 no_plpr">
+          <label class="control-label">{{ctrl.resources.CI_Detail_Paie_Ville}} *</label>
+          <input type="text"
+                 maxlength="300"
+                 class="form-control inputText"
+                 placeholder="{{ctrl.resources.CI_Detail_Paie_Ville_Placeholder}}"
+                 ng-model="ctrl.panels.paie.data.address.Ville"
+                 required />
+        </div>
+        <div class="col-lg-4 col-md-4 no_pr">
+          <label class="control-label">{{ctrl.resources.CI_Detail_Paie_Pays}} *</label>          
+          <lookup-standalone name="Pays"
+                             ng-model="ctrl.panels.paie.data.address.Pays"
+                             text="ctrl.panels.paie.data.address.Pays.CodeLibelle"
+                             search-title="Référentiel des Pays"
+                             search-placeholder="Rechercher un Pays..."
+                             url="/api/Pays/SearchLight"
+                             on-select="ctrl.panels.paie.data.address.PaysId = item.IdRef"
+                             on-delete="ctrl.panels.paie.data.address.PaysId = null; ctrl.panels.paie.data.address.Pays = null;"
+                             class="formulaire long">
+          </lookup-standalone>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 no_pl search-add">
+          <button class="btn btn-default pull-left"
+                  ng-click="ctrl.handleCheckGps()">
+            {{ctrl.resources.Rechercher_lb}}
+
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 no_pl">
+          <label class="control-label">{{ctrl.resources.CI_Detail_Paie_Latitude}}</label>
+          <input type="text" id="txtLatitude" class="form-control inputText"
+                 placeholder="{{ctrl.resources.CI_Detail_Paie_Latitude_Placeholder}}"
+                 ng-model="ctrl.panels.paie.data.address.LatitudeLocalisation"
+                 readonly="readonly" />
+        </div>
+        <div class="col-lg-6 col-md-6 no_pr">
+          <label class="control-label">{{ctrl.resources.CI_Detail_Paie_Longitude}}</label>
+          <input type="text" id="txtLongitude" class="form-control inputText"
+                 placeholder="{{ctrl.resources.CI_Detail_Paie_Longitude_Placeholder}}"
+                 ng-model="ctrl.panels.paie.data.address.LongitudeLocalisation"
+                 readonly="readonly" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 no_pl no_pr">
+          <div class="autocomplete">
+            <label ng-show="ctrl.showAddressList" class="control-label">{{personnelEdit.resources.Global_GoogleMap_Proposition}}</label>
+            <ul ng-show="ctrl.showAddressList" role="menu" class="inputSelectItems" title="{{personnelEdit.resources.Global_GoogleMap_Selection}}">
+              <li ng-repeat="item in ctrl.addressList" class="inputSelectItem list-unstyled" ng-click="ctrl.handleChangeSelectAdress(item)">
+                <div class="address" title="{{ctrl.resources.Global_GoogleMap_Adresse}}">{{item.Adresse.Adresse1}}</div>
+                <div class="address" title="{{ctrl.resources.Global_GoogleMap_Adresse}}">{{item.Adresse.Adresse2}}</div>
+                <div class="address" title="{{ctrl.resources.Global_GoogleMap_Adresse}}">{{item.Adresse.Adresse3}}</div>
+                <div class="zip-code-city">
+                  <span class="zip-code" title="{{ctrl.resources.Global_GoogleMap_CodePostal}}">{{item.Adresse.CodePostal}}</span>
+                  <span class="city" title="{{ctrl.resources.Global_GoogleMap_Ville}}">{{item.Adresse.Ville}}</span>
+                </div>
+                <div class="country" title="{{ctrl.resources.Global_GoogleMap_Pays}}">{{item.Adresse.Pays}}</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      @* GOOGLE MAP*@
+      <div class="row">
+        <div class="col-lg-12 col-md-12 no_plpr">
+          <label class="control-label">{{ctrl.resources.CI_Detail_Paie_LocalisationAffaire}}</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 no_plpr">
+          <ng-map default-style="true"
+                  id="map"
+                  center="[{{ctrl.panels.paie.data.address.LatitudeLocalisation}}, {{ctrl.panels.paie.data.address.LongitudeLocalisation}}]"
+                  zoom="10">
+            <marker position="{{ctrl.panels.paie.data.address.LatitudeLocalisation}}, {{ctrl.panels.paie.data.address.LongitudeLocalisation}}"
+                    title="{{ctrl.resources.Global_GoogleMap_Position}}: {{ctrl.panels.paie.data.address.LatitudeLocalisation}}, {{ctrl.panels.paie.data.address.LongitudeLocalisation}}"
+                    id="ciMap"
+                    on-click="ctrl.map.showInfoWindow('mapDetail')">
+            </marker>
+            <marker position="{{ctrl.mapSelector.Latitude}}, {{ctrl.mapSelector.Longitude}}"
+                    icon="https://maps.google.com/mapfiles/ms/icons/green-dot.png"
+                    title="{{ctrl.resources.Global_GoogleMap_Position}}: {{ctrl.mapSelector.Latitude}}, {{ctrl.mapSelector.Longitude}}"
+                    id="mapSelectorMap"
+                    on-click="ctrl.map.showInfoWindow('selectorDetail')">
+            </marker>
+            <info-window id="mapDetail" visible-on-marker="ciMap">
+              <div ng-non-bindable>
+                <b>{{ctrl.resources.Global_GoogleMap_Adresse}}</b>: {{ctrl.panels.paie.data.address.Adresse}}<br />
+                <b>{{ctrl.resources.Global_GoogleMap_CodePostal}}</b>: {{ctrl.panels.paie.data.address.CodePostal}}<br />
+                <b>{{ctrl.resources.Global_GoogleMap_Ville}}</b>: {{ctrl.panels.paie.data.address.Ville}}<br />
+                <b>{{ctrl.resources.Global_GoogleMap_Pays}}</b>: {{ctrl.panels.paie.data.address.Pays}}<br />
+                <b>{{ctrl.resources.Global_GoogleMap_Latitude}}</b>: {{ctrl.panels.paie.data.address.LatitudeLocalisation}}<br />
+                <b>{{ctrl.resources.Global_GoogleMap_Longitude}}</b>: {{ctrl.panels.paie.data.address.LongitudeLocalisation}}<br />
+              </div>
+            </info-window>
+            <info-window id="selectorDetail" visible-on-marker="mapSelectorMap">
+              <div ng-non-bindable>
+                <b>{{ctrl.resources.Global_GoogleMap_Latitude}}</b>: {{ctrl.mapSelector.Latitude}}<br />
+                <b>{{ctrl.resources.Global_GoogleMap_Longitude}}</b>: {{ctrl.mapSelector.Longitude}}<br />
+              </div>
+            </info-window>
+          </ng-map>
+          <br />
+        </div>
+
+      </div>
+      @*FIN GOOGLE MAP*@
+
+
+      <div class="row">
+
+        @* CODE MAJORATION *@
+        <div class="col-lg-6 col-md-6 no_pl">
+          <h4>{{ctrl.resources.CI_Detail_Paie_SousTitre_Majoration}}</h4>
+          <table class="table table-hover majoration-table">
+            <thead style="background-color:#f5f5f5">
+                <tr>
+                    <th width="10%"></th>
+                    <th width="25%">{{ctrl.resources.CI_Detail_Paie_TableMajoration_Entete_Code}}</th>
+                    <th width="50%">{{ctrl.resources.CI_Detail_Paie_TableMajoration_Entete_Libelle}}</th>
+                    <th width="15%">{{ctrl.resources.CI_Detail_Paie_TableMajoration_Entete_Public}}</th>
+                </tr>
+            </thead>
+            <tbody class="fred-scroll">
+                <tr ng-repeat="item in ctrl.panels.paie.data.codeMajorationList track by $index">
+                    <td width="10%"><input type="checkbox" id="code-majoration-check-{{item.CodeMajorationId}}" ng-checked="item.IsLinkedToCI" ng-model="item.IsLinkedToCI" ng-disabled="item.EtatPublic" /><label for="code-majoration-check-{{item.CodeMajorationId}}" class="control-label"><span></span></label> </td>
+                    <td width="25%">{{item.Code}}</td>
+                    <td width="50%">{{item.Libelle}}</td>
+                    <td width="15%">
+                        <span ng-show="item.EtatPublic">{{ctrl.resources.Global_Oui}}</span>
+                        <span ng-show="!item.EtatPublic">{{ctrl.resources.Global_Non}}</span>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+          <p ng-show="ctrl.panels.paie.data.codeMajorationList.length === 0"> {{ctrl.resources.Global_Message_AucunElement}} </p>
+        </div>
+
+        @*</div>
+
+          <div class="row">*@
+
+        @*CODE PRIME*@
+        <div class="col-lg-6 col-md-6 no_pr">
+          <h4>{{ctrl.resources.CI_Detail_Paie_SousTitre_Prime}}</h4>
+          <table class="table table-hover prime-table">
+            <thead style="background-color:#f5f5f5">
+                <tr>
+                    <th width="10%"></th>
+                    <th width="15%">{{ctrl.resources.CI_Detail_Paie_TablePrime_Entete_Societe}}</th>
+                    <th width="15%">{{ctrl.resources.CI_Detail_Paie_TablePrime_Entete_Code}}</th>
+                    <th width="50%">{{ctrl.resources.CI_Detail_Paie_TablePrime_Entete_Libelle}}</th>
+                    <th width="10%">{{ctrl.resources.CI_Detail_Paie_TablePrime_Entete_Public}}</th>
+                </tr>
+            </thead>
+            <tbody class="fred-scroll">
+                <tr ng-repeat="item in ctrl.panels.paie.data.codePrimeList track by $index">
+                    <td width="10%"><input type="checkbox" id="code-prime-check-{{item.PrimeId}}" ng-checked="item.IsLinkedToCI" ng-model="item.IsLinkedToCI" ng-disabled="item.Publique" /><label for="code-prime-check-{{item.PrimeId}}" class="control-label"><span></span></label> </td>
+                    <td width="15%">{{item.Societe.Code}}</td>
+                    <td width="15%">{{item.Code}}</td>
+                    <td width="50%">{{item.Libelle}}</td>
+                    <td width="10%">
+                        <span ng-show="item.Publique">{{ctrl.resources.Global_Oui}}</span>
+                        <span ng-show="!item.Publique">{{ctrl.resources.Global_Non}}</span>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+          <p ng-show="ctrl.panels.paie.data.codeMajorationList.length === 0"> {{ctrl.resources.Global_Message_AucunElement}} </p>
+          <br />
+        </div>
+
+      </div>
+      <!--END > FORMULAIRE-->
+    </div>
+    <div class="panel-footer">
+      <!--BEGIN  > BOUTONS-->
+      <button type="submit" class="btn btn-link pull-right" ng-click="ctrl.handleCancel(ctrl.panels.paie)" title="{{resources.Global_Bouton_Annuler_Tooltip}}">{{ctrl.resources.Global_Bouton_Annuler}}</button>
+      <button type="submit" class="btn btn-default pull-left" ng-click="ctrl.handleSave(ctrl.panels.paie)" title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">{{ctrl.resources.Global_Bouton_Enregistrer}}</button>
+      <!--END  > BOUTONS-->
+    </div>
+  </div>
+</div>

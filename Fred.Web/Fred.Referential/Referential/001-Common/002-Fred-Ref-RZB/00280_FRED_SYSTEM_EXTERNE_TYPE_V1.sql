@@ -1,0 +1,6 @@
+﻿SET IDENTITY_INSERT [dbo].[FRED_SYSTEME_EXTERNE_TYPE] ON;
+
+INSERT INTO [dbo].[FRED_SYSTEME_EXTERNE_TYPE] ([SystemeExterneTypeId], [Libelle])
+VALUES(1, 'Facturation'),(2, 'Commandes')
+
+SET IDENTITY_INSERT [dbo].[FRED_SYSTEME_EXTERNE_TYPE] OFF;

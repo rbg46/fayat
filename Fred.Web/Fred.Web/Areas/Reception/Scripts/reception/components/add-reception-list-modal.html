@@ -1,0 +1,241 @@
+﻿<!-- START Modal Ajout de réceptions sur la sélection-->
+<div class="modal-header">
+    <h2 class="modal-title">
+        <i class="flaticon flaticons flaticon-checked"></i> Ajout de réceptions sur la sélection
+    </h2>
+    <i class="flaticon flaticons flaticon-multiply close pull-right" ng-click="$ctrl.handleCancel()" title="{{$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+</div>
+<form name="$ctrl.receptionForm" novalidate>
+    <div class="modal-body">
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label>{{$ctrl.resources.Global_CI}}</label>
+                    <input type="text"
+                           name="NumeroCi"
+                           placeholder="{{$ctrl.resources.Global_CI}}"
+                           class="form-control"
+                           value="{{$ctrl.reception.CI.CodeLibelle}}"
+                           ng-disabled="true" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" ng-class="{'has-error': $ctrl.receptionForm.$submitted && $ctrl.receptionForm.DateReception.$invalid }">
+                    <label>{{$ctrl.resources.Reception_Index_ModalAjout_Date}}</label>
+                    <span class="text-danger"
+                          ng-show="$ctrl.receptionForm.$submitted && $ctrl.receptionForm.DateReception.$invalid">
+                        {{$ctrl.resources.Global_Control_DataRequired_Erreur}}
+                    </span>
+                    <app-date-picker id="DateReception" format="DD/MM/YYYY"
+                                     lang="fr"
+                                     initial-date="{{$ctrl.reception.Date}}"
+                                     placeholder="{{$ctrl.resources.Reception_Index_ModalAjout_Date_Placeholder}}"
+                                     ng-model="$ctrl.reception.Date"
+                                     name="DateReception"
+                                     ng-change="$ctrl.handleChangeDate()"
+                                     required>
+                    </app-date-picker>
+                </div>
+                <div class="col-md-6" ng-class="{'has-error': $ctrl.receptionForm.$submitted && $ctrl.receptionForm.NumeroBL.$invalid }">
+                    <label>{{$ctrl.resources.Reception_Index_ModalAjout_BonCommande}}</label>
+                    <span class="text-danger"
+                          ng-show="$ctrl.receptionForm.$submitted && $ctrl.receptionForm.NumeroBL.$invalid">
+                        {{$ctrl.resources.Global_Control_DataRequired_Erreur}}
+                    </span>
+                    <input type="text"
+                           name="NumeroBL"
+                           class="form-control"
+                           placeholder="{{$ctrl.resources.Reception_Index_ModalAjout_BonCommande_Placeholder}}"
+                           ng-model="$ctrl.reception.NumeroBL"
+                           ng-required="true" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{{$ctrl.resources.Reception_Index_ModalAjout_Fournisseur}}</label>
+                    <input type="text"
+                           name=""
+                           class="form-control"
+                           ng-disabled="true"
+                           ng-model="$ctrl.reception.codeLibelleFournisseur" />
+                </div>
+                <div class="col-md-6">
+                    <label>{{$ctrl.resources.Reception_Index_ModalAjout_Numero_Bon_Commande}}</label>
+                    <input type="text"
+                           name=""
+                           class="form-control"
+                           ng-disabled="true"
+                           ng-model="$ctrl.reception.numeroCommande" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12" ng-class="{'has-error': $ctrl.receptionForm.$submitted && $ctrl.receptionForm.Libelle.$invalid }">
+                    <label>{{$ctrl.resources.Reception_Index_ModalAjout_Libelle}}</label>
+                    <span class="text-danger" ng-show="$ctrl.receptionForm.$submitted && $ctrl.receptionForm.Libelle.$invalid">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                    <input type="text" name="Libelle" class="form-control" placeholder="{{$ctrl.resources.Reception_Index_ModalAjout_Libelle_Placeholder}}"
+                           ng-model="$ctrl.reception.Libelle" ng-required="true" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6" ng-class="{'has-error': $ctrl.receptionForm.$submitted && $ctrl.receptionForm.Ressource.$invalid }">
+                    <label>{{$ctrl.resources.Reception_Index_ModalAjout_Ressource}}</label>
+                    <span class="text-danger" ng-show="$ctrl.receptionForm.$submitted && $ctrl.receptionForm.Ressource.$invalid">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                    <div class="pickListCallerRessourceContainer">
+                        <lookup-standalone ng-model="$ctrl.reception.Ressource" text="$ctrl.reception.Ressource.LibelleRef" search-title="{{$ctrl.resources.Global_ReferentielRessource}}"
+                                           search-placeholder="{{$ctrl.resources.Global_ReferentielRessource_Placeholder}}" url="/api/Ressource/SearchLight/?societeId={{$ctrl.reception.CI.SocieteId}}&ressourceId={{$ctrl.reception.RessourceId}}&"
+                                           on-select="$ctrl.handleLookupSelection('Ressource', item)" show-delete-button="false" class="formulaire long"
+                                           show-in-popup="true" ng-required="true" name="Ressource">
+                        </lookup-standalone>
+                    </div>
+                </div>
+                <div class="col-md-6" ng-class="{'has-error': $ctrl.receptionForm.$submitted && $ctrl.receptionForm.Tache.$invalid }">
+                    <label>{{$ctrl.resources.Reception_Index_ModalAjout_Tache}}</label>
+                    <span class="text-danger" ng-show="$ctrl.receptionForm.$submitted && $ctrl.receptionForm.Tache.$invalid">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                    <lookup-standalone ng-model="$ctrl.reception.Tache" text="$ctrl.reception.Tache.LibelleRef" search-title="{{$ctrl.resources.Global_ReferentielTache}}"
+                                       search-placeholder="{{$ctrl.resources.Global_ReferentielTache_Placeholder}}" on-click="$ctrl.handleShowLookup('Tache', $ctrl.reception)"
+                                       on-select="$ctrl.handleLookupSelection('Tache', item)" show-delete-button="false" class="formulaire long" show-in-popup="true"
+                                       ng-required="true" name="Tache" custom-template-url="/Scripts/directive/Lookup/custom-templates/tache.template.html">
+                    </lookup-standalone>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>{{$ctrl.resources.Reception_Index_ModalAjout_Commentaire}}</label>
+                    <input type="text" name="Commentaire" class="form-control" placeholder="{{$ctrl.resources.Reception_Index_ModalAjout_Commentaire_Placeholder}}"
+                           ng-model="$ctrl.reception.Commentaire" />
+                </div>
+            </div>
+
+            <!-- Ajouter une our plusieurs pièces jointes -->
+            <div class="row" ng-if="!$ctrl.reception.DateVisaReception">
+                <div class="col-lg-12 col-md-12">
+                    <label class="control-label">Pièce jointe</label>
+                    <label class="btn btn-default" style="display: table-cell">
+                        Choisir un fichier&hellip; <input type="file"
+                                                          class="ng-hide"
+                                                          id="attachment-upload"
+                                                          multiple
+                                                          onclick="angular.element(this).val(null)"
+                                                          onchange="angular.element(this).scope().$ctrl.handleSelectFile(event)"
+                                                          accept="{{$ctrl.attachmentAcceptedFormats}}">
+                    </label>
+                </div>
+            </div>
+
+            <!-- Liste des pièces jointes -->
+            <div ng-show="($ctrl.attachments!=null) && ($ctrl.attachments.length >0)" ng-repeat="pieceJointe in $ctrl.attachments">
+                <div ng-show="(pieceJointe.IsDeleted==false)" ng-class="{'no-padding': statusDisplay}" class="row pj-bloc">
+                    <i class="material-icons pj-icon">attach_file</i>
+                    <a id="attachment-label" title="{{pieceJointe.Libelle}}" ng-click="$ctrl.handleDownloadAttachment(pieceJointe.PieceJointeId,pieceJointe.Libelle)">{{pieceJointe.Libelle}}</a>
+                    <i id="delete-attachment"
+                       class="material-icons"
+                       title="{{resources.Commande_Title_Delete_Pcsjointe}}"
+                       ng-click="$ctrl.handleDeleteAttachment($index)"
+                       ng-show="!$ctrl.reception.DateVisaReception">close</i>
+                </div>
+            </div>
+
+            <div class="modal-quantity-block">
+                <span class="text-danger"
+                      ng-show="$ctrl.receptionForm.$submitted && $ctrl.receptionForm.Quantite.$invalid && $ctrl.receptionForm.Quantite.$error.required">
+                    {{$ctrl.resources.Global_Control_DataRequired_Erreur}}
+                </span>
+                <span class="text-danger"
+                      ng-show="$ctrl.receptionForm.Quantite.$invalid && $ctrl.receptionForm.Quantite.$error.Quantite">
+                    {{$ctrl.Quantite_Error}}
+                </span>
+                <div class="row modal-quantity"
+                     ng-class="{'modal-quantity-block-error': $ctrl.receptionForm.$submitted && $ctrl.receptionForm.Quantite.$invalid }">
+
+                    <div class="col-md-3">
+                        <label>{{$ctrl.resources.Reception_Index_ModalAjout_Unite}}</label>
+                        <input type="text"
+                               name="Unite"
+                               class="form-control"
+                               placeholder="{{$ctrl.resources.Reception_Index_ModalAjout_Unite_Placeholder}}"
+                               ng-model="$ctrl.reception.Unite.Code"
+                               ng-disabled="true" />
+                    </div>
+
+                    <div class="col-md-3"
+                         ng-class="{'has-error': $ctrl.receptionForm.$submitted && $ctrl.receptionForm.Quantite.$invalid }">
+                        <label>{{$ctrl.resources.Reception_Index_ModalAjout_Quantite}}</label>
+                        <input type="text"
+                               name="Quantite"
+                               fred-input-number="3"
+                               class="form-control"
+                               placeholder="{{$ctrl.resources.Reception_Index_ModalAjout_Quantite_Placeholder}}"
+                               ng-model="$ctrl.reception.Quantite"
+                               ng-change="$ctrl.handleQuantiteChange()"
+                               required />
+                    </div>
+
+                    <div class="col-md-3"
+                         ng-class="{'has-error': $ctrl.receptionForm.$submitted && $ctrl.receptionForm.PUHT.$invalid }">
+                        <label>{{$ctrl.resources.Reception_Index_ModalAjout_PU}}</label>
+                        <input type="text"
+                               name="PUHT"
+                               class="form-control"
+                               placeholder="{{$ctrl.resources.Reception_Index_ModalAjout_PU_Placeholder}}"
+                               value="{{$ctrl.reception.PUHT | number:2}}"
+                               ng-disabled="true">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>{{$ctrl.resources.Reception_Index_ModalAjout_Montant}}</label>
+                        <div class="montant"
+                             ng-if="$ctrl.reception.Quantite != null && $ctrl.reception.PUHT != null">
+                            {{$ctrl.reception.MontantHT | number : 2}} {{$ctrl.reception.Devise.Symbole}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit"
+                class="btn btn-default"
+                ng-click="$ctrl.handleSave(false)"
+                ng-disabled="$ctrl.saveAndNextButtonIsDisabled()"
+                title="{{$ctrl.resources.Global_Bouton_Valider_Tooltip}}">
+            Enregistrer et
+            <br>Ligne suivante >
+        </button>
+
+        <button type="submit"
+                class="btn btn-default"
+                ng-click="$ctrl.handleSave(true)"
+                ng-disabled="$ctrl.saveButtonIsDisabled()">
+            Enregistrer et<br> Terminer
+        </button>
+
+        <button type="button"
+                class="btn btn-primary"
+                ng-disabled="$ctrl.index === 0 || $ctrl.busy" ng-click="$ctrl.handleCancelAndPrevious()">
+            Annuler et<br> < Ligne précédente
+        </button>
+
+        <button type="button"
+                class="btn btn-primary"
+                ng-disabled="$ctrl.index === ($ctrl.selectedCommandeLignes.length-1) || $ctrl.busy"
+                ng-click="$ctrl.handleCancelAndNext()">
+            Annuler et<br> Ligne suivante >
+        </button>
+
+        <button type="button"
+                class="btn btn-link"
+                ng-click="$ctrl.handleCancel()"
+                title="{{$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">
+            Annuler et
+            <br> Terminer
+        </button>
+
+    </div>
+</form>
+
+<!-- END Modal Ajout de réceptions sur la sélection-->

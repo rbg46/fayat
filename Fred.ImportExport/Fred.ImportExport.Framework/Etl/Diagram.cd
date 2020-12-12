@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Moteur de l'ETL&#xD;&#xA;Appelle les séquences du workflow&#xD;&#xA;&#xD;&#xA;Doit être dérivé">
+    <Position X="1.031" Y="1.854" Height="1.052" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Permet de construire le workflow contenu dans IEtlConfig">
+    <Position X="1" Y="5.5" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Chaque interface est un élément du workflow&#xD;&#xA;&#xD;&#xA;Doivent être dérivées&#xD;&#xA;(sauf EtlConfig)">
+    <Position X="11.239" Y="0.5" Height="1.083" Width="1.637" />
+  </Comment>
+  <Class Name="Fred.ImportExport.Framework.Etl.Engine.Builder.EtlBuilder&lt;TI, TR&gt;" Collapsed="true">
+    <Position X="3.25" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Etl\Engine\Builder\EtlBuilder.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Config" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Fred.ImportExport.Framework.Etl.Engine.EtlProcessBase&lt;TI, TR&gt;">
+    <Position X="3.25" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAAAgKAIASICAAAgAQAAAAggAAACAAAAAAAAAA=</HashCode>
+      <FileName>Etl\Engine\EtlProcessBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Config" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Fred.ImportExport.Framework.Etl.Engine.Config.IEtlConfig&lt;TI, TR&gt;">
+    <Position X="6.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAQAEgAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Etl\Engine\Config\IEtlConfig.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Input" />
+      <Property Name="Result" />
+      <Property Name="OutPuts" />
+      <Property Name="Transforms" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Fred.ImportExport.Framework.Etl.Input.IEtlInput&lt;TI&gt;" Collapsed="true">
+    <Position X="11.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Etl\Input\IEtlInput.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Fred.ImportExport.Framework.Etl.Result.IEtlResult&lt;TR&gt;" Collapsed="true">
+    <Position X="11.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Etl\Result\IEtlResult.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Fred.ImportExport.Framework.Etl.Output.IEtlOutput&lt;TR&gt;" Collapsed="true">
+    <Position X="11.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Etl\Output\IEtlOutput.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Fred.ImportExport.Framework.Etl.Transform.IEtlTransform&lt;TI, TR&gt;" Collapsed="true">
+    <Position X="11.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Etl\Transform\IEtlTransform.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Fred.ImportExport.Framework.Etl.Engine.Config.IEtlOutputs&lt;TR&gt;" Collapsed="true">
+    <Position X="8.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Etl\Engine\Config\IEtlOutputs.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Items" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Interface Name="Fred.ImportExport.Framework.Etl.Engine.Config.IEtlTransforms&lt;TI, TR&gt;" Collapsed="true">
+    <Position X="8.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Etl\Engine\Config\IEtlTransforms.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Items" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

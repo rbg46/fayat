@@ -1,0 +1,39 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title">{{$ctrl.resources.Rapport_ModalProductionFlash_Titre}} {{$ctrl.dateChantier}}</h2>
+    </div>
+    <form autocomplete="off" name="$ctrl.formBilanFlashProduction" novalidate>
+        <div class="fred-scroll bilan-flash-modal-detail">
+            <div class="modal-body">
+
+                <div ng-repeat="objectifFlash in $ctrl.objectifFlashList">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12">
+                            {{$ctrl.resources.Rapport_ModalProductionFlash_Saisissez}} - {{objectifFlash.Libelle}}
+                        </div>
+                    </div>
+                    <div class="row" ng-repeat="tache in objectifFlash.Taches">
+                        <div class="col-md-6 col-lg-6">
+                            <label for="">{{$ctrl.resources.Rapport_ModalProductionFlash_Tache}}</label>
+                            <input type="text" ng-readonly="true" class="form-control" ng-model="tache.Libelle" />
+                        </div>
+                        <div class="col-md-3">
+                            <label for="">{{$ctrl.resources.Rapport_ModalProductionFlash_Unite}}</label>
+                            <input type="text" ng-readonly="true" class="form-control" ng-model="tache.Unite.Code" />
+                        </div>
+                        <div class="col-md-3">
+                            <label for="">{{$ctrl.resources.Rapport_ModalProductionFlash_Production}}*</label>
+                            <input fred-input-number="3" type="text" class="form-control inputText" ng-model="tache.TacheRealisations[0].QuantiteRealise" required />
+                            <span class="text-danger" ng-show="$ctrl.formBilanFlashProduction.$submitted && !tache.TacheRealisations[0].QuantiteRealise">* {{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                        </div>
+                    </div>
+                    <div>&nbsp;</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-default pull-left" ng-click="$ctrl.handleSave()" title="{{$ctrl.resources.Global_Bouton_Valider_Tooltip}}">{{$ctrl.resources.Global_Bouton_Valider}}</button>
+        </div>
+    </form>
+</div>

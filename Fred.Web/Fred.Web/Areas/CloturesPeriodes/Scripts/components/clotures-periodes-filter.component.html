@@ -1,0 +1,26 @@
+﻿<div class="filter-tiles">
+    <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="filterCtrl.childFilter.transfertFar && filterCtrl.getTransfertFar().value" ng-click="filterCtrl.reinitTransfertFar();">
+        {{filterCtrl.resources.Filtre_Transfert_Far_lb}} : {{filterCtrl.getTransfertFar().libelle}}
+        <span class="ico-filter flaticon-multiply"></span>
+    </span>
+    <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="filterCtrl.childFilter.clotureDepenses && filterCtrl.getClotureDepenses().value" ng-click="filterCtrl.reinitClotureDepenses();">
+        {{filterCtrl.resources.Filtre_Cloture_Depenses_lb}} : {{filterCtrl.getClotureDepenses().libelle}}
+        <span class="ico-filter flaticon-multiply"></span>
+    </span>
+    <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="filterCtrl.childFilter.validationAvancement && filterCtrl.getValidationAvancement().value" ng-click="filterCtrl.reinitValidationAvancement();">
+        {{filterCtrl.resources.Filtre_Validation_Avancement_lb}} : {{filterCtrl.getValidationAvancement().libelle}}
+        <span class="ico-filter flaticon-multiply"></span>
+    </span>
+    <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="filterCtrl.childFilter.validationControleBudgetaire && filterCtrl.getValidationControleBudgetaire().value" ng-click="filterCtrl.reinitValidationControleBudgetaire();">
+        {{filterCtrl.resources.Filtre_Validation_Controle_Budgetaire_lb}} : {{filterCtrl.getValidationControleBudgetaire().libelle}}
+        <span class="ico-filter flaticon-multiply"></span>
+    </span>
+    <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="filterCtrl.childFilter.clotureSurLaPeriode && filterCtrl.getClotureSurLaPeriode().value" ng-click="filterCtrl.reinitClotureSurLaPeriode();">
+        {{filterCtrl.resources.Filtre_Ci_Cloture_Sur_La_Periode_lb}} : {{filterCtrl.getClotureSurLaPeriode().libelle}}
+        <span class="ico-filter flaticon-multiply"></span>
+    </span>
+    <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="filterCtrl.childFilter.dejaTermine" ng-click="filterCtrl.childFilter.dejaTermine = false;">
+        {{filterCtrl.resources.Ci_Termines_Oui_lb}}
+        <span class="ico-filter flaticon-multiply"></span>
+    </span>
+</div>

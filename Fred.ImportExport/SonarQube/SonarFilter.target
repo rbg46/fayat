@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+***********************************************************************************************
+FAYAT FRED
+
+
+Custom target to filter Sonar project analysis when several projets are used accross multiple Solution.
+See :
+https://github.com/SonarSource/sonar-.net-documentation/blob/master/doc/appendix-3.md
+
+Excluding projects based on the file path
+==========================================
+
+Depending on the layout of the projects on disk, it might be possible to specify the projects to analyse based on the file paths.
+
+For example, suppose the projects above are laid out on disk as follows:
+
+c:\Web\ProjectA
+c:\Web\ProjectB
+c:\Framework\ProjectC
+c:\Framework\ProjectD
+c:\Framework\ProjectX
+The following custom targets file selects the projects to analyse based on the file path:
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+	<PropertyGroup Condition=" $(SonarQubeExclude) == '' AND $(SonarQubePathFilter) != '' ">
+		<MatchesSQPathFilter Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectFullPath), $(SonarQubePathFilter), System.Text.RegularExpressions.RegexOptions.IgnoreCase)) ">true</MatchesSQPathFilter>
+		<SonarQubeExclude Condition="$(MatchesSQPathFilter) != 'true' " >true</SonarQubeExclude>
+	</PropertyGroup>
+</Project>
+This targets file would allow the projects to be filtered as follows:
+
+REM Only analyse the web projects, regardless of which projects are included in the solution
+REM Note: the backslash in the supplied path is escaped
+msbuild Solution1.sln /p:SonarQubePathFilter=c:\\web
+
+REM Only analyse the framework projects
+msbuild Solution2.sln /p:SonarQubePathFilter=c:\\framework
+
+***********************************************************************************************
+-->
+
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+	<!-- This target customises the SonarQube Scanner for MSBuild targets to limit the projects that are analysed.
+	Projects whose full path and file name do not match the specified filter will be marked as "excluded".
+	The regular expression uses the normal .NET regular expression syntax.
+	-->
+
+	
+	<PropertyGroup Condition=" $(SonarQubeExclude) == '' AND $(SonarQubePathFilter) != '' ">
+		<MatchesSonarQubePathFilter Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectFullPath), $(SonarQubePathFilter), System.Text.RegularExpressions.RegexOptions.IgnoreCase)) ">true</MatchesSonarQubePathFilter>
+		<SonarQubeExclude Condition="$(MatchesSonarQubePathFilter) != 'true' " >true</SonarQubeExclude>
+	</PropertyGroup>
+
+	<Target Name="Exclusion Sonar" BeforeTargets="Build">
+        <Message Text="MSBuildProjectFullPath = $(MSBuildProjectFullPath)" />  
+		<Message Text="SonarQubePathFilter = $(SonarQubePathFilter)" />	
+		<Message Text="SonarQubeExclude = $(SonarQubeExclude)" />
+		<Message Importance="High" Text="Ce projet fait parti d'une autre solution, il est exclu de l'analyse Sonar." Condition="$(SonarQubeExclude) != '' "/>
+		<Message Importance="High" Text="Ce projet fait parti de la solution, il est inclu dans l'analyse Sonar." Condition="$(SonarQubeExclude) != 'true' "/>
+	</Target> 	
+	
+</Project>

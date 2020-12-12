@@ -1,0 +1,103 @@
+﻿<div class="flex-line node"
+     data-toggle="collapse"
+     aria-expanded="false"
+     data-target="#{{::$ctrl.NodeId}}"
+     ng-class="::{'has-children': $ctrl.HasChildren}">
+
+    <!--Axe-->
+    <div class="col-axe fixed-col-header"
+         style="padding-left:{{::$ctrl.GetAxePadding()}}px"
+         ng-class="::$ctrl.GetAxeClass()">
+        <div ng-if="::$ctrl.HasChildren" class="chevron"></div>
+        <span class="axe-icon"
+              title="{{::$ctrl.GetAxeTooltipHeader()}} : {{::$ctrl.node.Code}} - {{::$ctrl.node.Libelle}}"
+              ng-class="::$ctrl.GetAxeIconClass()"></span>
+        <span class="libelle">{{::$ctrl.node.Code}} {{::$ctrl.node.Libelle}}</span>
+    </div>
+
+    <!--Budget 1-->
+    <div class="col-group col-budget-1">
+        <div class="col-item col-item-quantite"
+             title="{{::$ctrl.node.Budget1.Quantite}}"
+             ng-class="::{'ecart': $ctrl.node.Ecart.Quantite}"
+             ng-show="::$ctrl.Colonnes.Budget1.HasQuantite">
+            <span>{{::$ctrl.node.Budget1.Quantite | number:2}}</span>
+        </div>
+        <div class="col-item col-item-unite"
+             title="{{::$ctrl.BudgetComparaisonService.GetUnitesTooltip($ctrl.node.Budget1.Unites)}}"
+             ng-class="::{'ecart': $ctrl.node.Ecart.Unites.length > 0}"
+             ng-show="::$ctrl.Colonnes.Budget1.HasUnite">
+            <span>{{::$ctrl.BudgetComparaisonService.GetUniteToDisplay($ctrl.node.Budget1.Unites)}}</span>
+        </div>
+        <div class="col-item col-item-prix-unitaire"
+             title="{{::$ctrl.node.Budget1.PrixUnitaire}}"
+             ng-class="::{'ecart': $ctrl.node.Ecart.PrixUnitaire}"
+             ng-show="::$ctrl.Colonnes.Budget1.HasPrixUnitaire">
+            <span>{{::$ctrl.node.Budget1.PrixUnitaire | number:2}}</span>
+        </div>
+        <div class="col-item col-item-montant"
+             title="{{::$ctrl.node.Budget1.Montant}}"
+             ng-class="::{'ecart': $ctrl.node.Ecart.Montant}">
+            <span>{{::$ctrl.node.Budget1.Montant | number:2}}</span>
+        </div>
+    </div>
+
+    <!--Budget 2-->
+    <div class="col-group col-budget-2">
+        <div class="col-item col-item-quantite"
+             title="{{::$ctrl.node.Budget2.Quantite}}"
+             ng-class="::{'ecart': $ctrl.node.Ecart.Quantite}"
+             ng-show="::$ctrl.Colonnes.Budget2.HasQuantite">
+            <span>{{::$ctrl.node.Budget2.Quantite | number:2}}</span>
+        </div>
+        <div class="col-item col-item-unite"
+             title="{{::$ctrl.BudgetComparaisonService.GetUnitesTooltip($ctrl.node.Budget2.Unites)}}"
+             ng-class="::{'ecart': $ctrl.node.Ecart.Unites.length > 0}"
+             ng-show="::$ctrl.Colonnes.Budget2.HasUnite">
+            <span>{{::$ctrl.BudgetComparaisonService.GetUniteToDisplay($ctrl.node.Budget2.Unites)}}</span>
+        </div>
+        <div class="col-item col-item-prix-unitaire"
+             title="{{::$ctrl.node.Budget2.PrixUnitaire}}"
+             ng-class="::{'ecart': $ctrl.node.Ecart.PrixUnitaire}"
+             ng-show="::$ctrl.Colonnes.Budget2.HasPrixUnitaire">
+            <span>{{::$ctrl.node.Budget2.PrixUnitaire | number:2}}</span>
+        </div>
+        <div class="col-item col-item-montant"
+             title="{{::$ctrl.node.Budget2.Montant}}"
+             ng-class="::{'ecart': $ctrl.node.Ecart.Montant}">
+            <span>{{::$ctrl.node.Budget2.Montant | number:2}}</span>
+        </div>
+    </div>
+
+    <!--Ecart-->
+    <div class="col-group col-ecart">
+        <div class="col-item col-item-quantite"
+             title="{{::$ctrl.node.Ecart.Quantite}}"
+             ng-show="::$ctrl.Colonnes.Ecart.HasQuantite">
+            <span>{{::$ctrl.node.Ecart.Quantite | number:2}}</span>
+        </div>
+        <div class="col-item col-item-unite"
+             title="{{::$ctrl.BudgetComparaisonService.GetUnitesTooltip($ctrl.node.Ecart.Unites)}}"
+             ng-show="::$ctrl.Colonnes.Ecart.HasUnite">
+            <span>{{::$ctrl.BudgetComparaisonService.GetUniteToDisplay($ctrl.node.Ecart.Unites)}}</span>
+        </div>
+        <div class="col-item col-item-prix-unitaire"
+             title="{{::$ctrl.node.Ecart.PrixUnitaire}}"
+             ng-show="::$ctrl.Colonnes.Ecart.HasPrixUnitaire">
+            <span>{{::$ctrl.node.Ecart.PrixUnitaire | number:2}}</span>
+        </div>
+        <div class="col-item col-item-montant"
+             title="{{::$ctrl.node.Ecart.Montant}}">
+            <span>{{::$ctrl.node.Ecart.Montant | number:2}}</span>
+        </div>
+    </div>
+</div>
+
+<!--Sous-noeuds-->
+<div ng-if="::$ctrl.HasChildren"
+     id="{{::$ctrl.NodeId}}"
+     class="collapse in">
+    <div ng-repeat="node in ::$ctrl.node.Nodes track by $index">
+        <budget-comparaison-node-component index="::$ctrl.index + 1" node="::node"></budget-comparaison-node-component>
+    </div>
+</div>

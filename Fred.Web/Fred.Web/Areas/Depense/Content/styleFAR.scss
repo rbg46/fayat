@@ -1,0 +1,179 @@
+﻿$color_1: white;
+$color_2: gray;
+$font_family_1: 'FontAwesome';
+$background_color_1: rgb(9, 173, 166);
+$background_color_2: gray;
+$background_color_3: #FEBB5F;
+$background_color_4: #ADCB60;
+$background_color_5: red;
+$background_color_6: brown;
+$background_color_7: #fcfcfc;
+
+
+.no-pl {
+    padding-left: 0;
+}
+
+.no-pr {
+    padding-right: 0;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.table {
+    tbody {
+        tr {
+            td {
+                height: 55px;
+            }
+        }
+    }
+}
+
+.search-container {
+    .btn {
+        font-size: 11px;
+    }
+}
+
+.inner-addon {
+    position: relative;
+
+    .glyphicon {
+        &:before {
+            content: '\f0f7';
+            font-family: $font_family_1;
+        }
+
+        background-color: $background_color_1;
+        color: $color_1;
+        font-size: 25px;
+        height: 45px;
+        line-height: 25px;
+        padding-top: 10px;
+        position: absolute;
+        text-align: center;
+        top: 0;
+        right: 0;
+        width: 45px;
+        font-weight: 400;
+    }
+}
+
+.lookupPane {
+    .inner-addon {
+        .glyphicon-search {
+            line-height: 16px;
+        }
+    }
+}
+
+#listFAR {
+    height: 450px;
+
+    .tr {
+        height: 55px;
+    }
+}
+
+.colCases {
+    text-align: right;
+    padding: 0;
+
+    input {
+        display: none;
+    }
+
+    label {
+        float: left;
+    }
+}
+
+.colCloture {
+    text-align: center;
+    font-size: 20px;
+}
+
+.statut-transfert {
+    color: $color_1;
+    font-weight: bold;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.status-0 {
+    background-color: $background_color_2;
+}
+
+.status-1 {
+    background-color: $background_color_3;
+}
+
+.status-2 {
+    background-color: $background_color_4;
+}
+
+.status-3 {
+    background-color: $background_color_5;
+}
+
+.status-4 {
+    background-color: $background_color_6;
+}
+
+.details-transfert {
+    color: $color_2;
+    font-size: 13px;
+}
+
+input[type="checkbox"] {
+    & + label {
+        span {
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 3px #2c77ba solid;
+            background-color: $background_color_7;
+            -moz-border-radius: 20%;
+            border-radius: 20%;
+            cursor: pointer;
+            display: inline-block;
+            height: 19px;
+            margin: -1px 4px 0 0;
+            vertical-align: middle;
+            width: 19px;
+        }
+    }
+
+    &:checked {
+        & + label {
+            span {
+                background-image: url(/medias/images/ico/checked.png);
+                background-position: center;
+                background-repeat: no-repeat;
+                border: 3px #2c77ba solid;
+            }
+        }
+    }
+}
+
+.information {
+    padding-top: 45px;
+
+    .icon {
+        text-align: right;
+
+        I {
+            font-size: 60px;
+            font-style: normal;
+            text-align: right;
+        }
+    }
+
+    .message {
+        font-size: 60px;
+        font-style: normal;
+        text-align: left;
+    }
+}

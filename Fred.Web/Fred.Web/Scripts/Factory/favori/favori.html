@@ -1,0 +1,44 @@
+﻿<div class="modal-content">
+  <div class="modal-header">    
+    <h2 class="modal-title"><i class="flaticon flaticon-star-1"></i>{{$ctrl.resources.Favoris_Modal_Titre_Ajouter}}</h2>    
+    <i class="flaticon flaticon-multiply close pull-right" ng-click="$ctrl.handleCancel()" title="{{$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+  </div>
+  <form name="$ctrl.favoriForm" role="form">
+    <div class="modal-body">
+      <div ng-class="{'has-error': $ctrl.favoriForm.$submitted && $ctrl.favoriForm.favoriLibelle.$invalid }">
+        <label for="favoriLibelle">{{$ctrl.resources.Favoris_Modal_Libelle}}</label>
+        <span class="text-danger" ng-show="$ctrl.favoriForm.$submitted && $ctrl.favoriForm.favoriLibelle.$invalid">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+        <input class="form-control" id="favoriLibelle" name="favoriLibelle"
+               ng-model="$ctrl.Libelle" ng-required="true"
+               placeholder="{{$ctrl.resources.Favoris_Modal_Libelle_Placeholder}}" />
+      </div>
+      <div style="padding-top: 10px">
+        <label>{{$ctrl.resources.Favoris_Modal_Couleur}}</label>
+        <select id="favoricolorselector" ng-model="$ctrl.Couleur">
+          <option value="#1F55A0" data-color="#1F55A0" selected="selected">{{$ctrl.resources.Favoris_Modal_Couleur_BleuFayat}}</option>
+          <option value="#5E94DF" data-color="#5E94DF">{{$ctrl.resources.Favoris_Modal_Couleur_Bleu}}</option>
+          <option value="#48D1CC" data-color="#48D1CC">{{$ctrl.resources.Favoris_Modal_Couleur_Turquoise}}</option>
+          <option value="#008B8B" data-color="#008B8B">{{$ctrl.resources.Favoris_Modal_Couleur_Cyan}}</option>
+          <option value="#32CD32" data-color="#32CD32">{{$ctrl.resources.Favoris_Modal_Couleur_Vert}}</option>
+          <option value="#A0522D" data-color="#A0522D">{{$ctrl.resources.Favoris_Modal_Couleur_Marron}}</option>
+          <option value="#D1282E" data-color="#D1282E">{{$ctrl.resources.Favoris_Modal_Couleur_Rouge}}</option>
+          <option value="#FF8C00" data-color="#FF8C00">{{$ctrl.resources.Favoris_Modal_Couleur_Orange}}</option>
+          <option value="#FFD800" data-color="#FFD800">{{$ctrl.resources.Favoris_Modal_Couleur_Jaune}}</option>
+          <option value="#EEA6A8" data-color="#EEA6A8">{{$ctrl.resources.Favoris_Modal_Couleur_Rose}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" 
+              class="btn btn-default pull-left"
+              ng-click="$ctrl.handleSave()" 
+              ng-disabled="$ctrl.favoriForm.$invalid"
+              title="{{$ctrl.resources.Global_Bouton_Enregistrer_Tooltip}}">{{$ctrl.resources.Global_Bouton_Enregistrer}}</button>      
+      <button type="button" 
+              class="btn btn-link pull-right"
+              ng-click="$ctrl.handleCancel()"
+              title="{{$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">{{$ctrl.resources.Global_Bouton_Annuler}}</button>
+    </div>
+  </form>
+</div>
+<script src="~/Scripts/module/Favoris/Service.js"></script>

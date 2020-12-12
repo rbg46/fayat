@@ -1,0 +1,9 @@
+﻿-- --------------------------------------------------
+-- FRED 2017 - R3 - JUILLET 2018 
+-- INJECTION DES DONNES POUR FRED - FAYAT FONDATIONS
+-- CREATION DES CODES MAJORATION POUR SEFI ET FRANKI
+-- --------------------------------------------------
+
+
+-- SUPPRESSION DES CODE MAJORATION SUITE MAIL NCA 05/07/2018 17:31
+-- DELETE FROM FRED_CODE_MAJORATION WHERE GroupeId = (SELECT GroupeId FROM FRED_GROUPE WHERE Code = 'FON')

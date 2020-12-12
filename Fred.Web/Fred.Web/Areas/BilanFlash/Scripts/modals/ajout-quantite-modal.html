@@ -1,0 +1,41 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title"><i class="flaticon flaticon-notebook-4"></i>{{::$ctrl.item.Libelle}}</h2>
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="row div-memo" ng-if="$ctrl.tache">
+                <div class="col-md-4">
+                    {{::$ctrl.resources.ObjectifFlash_Modal_Tache}}
+                </div>
+                <div class="col-md-8">
+                    {{::$ctrl.tache.Libelle}}
+                </div>
+            </div>
+            <div class="row div-memo">
+                <div class="col-md-4">
+                    {{::$ctrl.resources.ObjectifFlash_Modal_Periode}}
+                </div>
+                <div class="col-md-8">
+                    {{::$ctrl.dateDebut | date : 'dd/MM/yyyy'}} {{::$ctrl.resources.ObjectifFlash_Modal_Au}} {{::$ctrl.dateFin | date : 'dd/MM/yyyy'}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <b ng-if="!$ctrl.tache">{{::$ctrl.resources.ObjectifFlash_Modal_AjoutQuantiteTache_Message}}</b>
+                    <b ng-if="$ctrl.tache">{{::$ctrl.resources.ObjectifFlash_Modal_AjoutQuantiteRessource_Message}}</b>
+                </div>
+            </div>
+            <div class="row">
+                <div class="div-quantite-modal">
+                    <input name="quantite" type="text" fred-input-number="3" ng-model="$ctrl.Quantite" placeholder="{{::$ctrl.resources.ObjectifFlash_Quantite}}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-default pull-left" ng-click="$ctrl.handleValidate()" title="{{::$ctrl.resources.Global_Bouton_Valider_Tooltip}}">{{$ctrl.resources.Global_Bouton_Valider}}</button>
+    </div>
+</div>

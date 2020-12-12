@@ -1,0 +1,16 @@
+﻿<div class="bkg-item pk-{{ref.CodeRef}}-item"
+     ng-repeat="ref in $ctrl.referentiels track by $index "
+     ng-click="$ctrl.handleSelection(ref)"
+     ng-class="{selected : $index == $ctrl.selectedIndex}"
+     title="Cliquer pour sélectionner l'information {{ref.CodeRef}} / {{ref.LibelleRef}}">
+
+    <h3 fred-wrap-in-tag="{{ ref.Parent.Parent.CodeRef }} - {{ ref.Parent.Parent.LibelleRef }}" words="$ctrl.searchTexts">{{ ref.Parent.Parent.CodeRef }} - {{ ref.Parent.Parent.LibelleRef | truncateText:$ctrl.letterLimit }}</h3>
+  <div class="task-line">
+    <span class="material-icons">chevron_right</span>
+    <h3 fred-wrap-in-tag="{{ ref.Parent.CodeRef }} - {{ ref.Parent.LibelleRef }}" words="$ctrl.searchTexts">{{ ref.Parent.CodeRef }} - {{ ref.Parent.LibelleRef | truncateText:$ctrl.letterLimit }}</h3>
+  </div>
+  <div class="task-line t3">
+    <span class="material-icons">chevron_right</span>
+    <h3 fred-wrap-in-tag="{{ ref.CodeRef }} - {{ ref.LibelleRef }}" words="$ctrl.searchTexts">{{ ref.CodeRef }} - {{ ref.LibelleRef | truncateText:$ctrl.letterLimit}}</h3>
+  </div>
+</div>

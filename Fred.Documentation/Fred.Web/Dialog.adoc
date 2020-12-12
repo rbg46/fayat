@@ -1,0 +1,127 @@
+= Fred Dialog
+// define images directory relative to pwd if not defined in master.   
+ifndef::imagesdir[:imagesdir: ../]
+
+
+Cette nouvelle fenêtre à comme objectif de remplacer l’actuel confirmDialog.
+
+En effet, cela va permettre une meilleure lisibilité dans le code ainsi qu’une meilleure utilisation des modales au sein de Fred.
+
+Cette modale reprends le même principe que l’actuel confirmDialog (un service js, un composant et un template HTML), mais elle comprend les méthodes suivantes : generic / confirmation / information / question / message / erreur
+
+Toutes ces méthodes ont exactement les mêmes paramètres :
+
+* message : le message affiché dans la modale
+* title : le titre affiché dans la modale
+* tilteIcon : l’icone de la modale
+* leftTextButon : le texte du bouton de gauche
+* rightTextButon : le texte du bouton de droite
+* leftActionButon : la méthode (js) que l’on souhaite appeler lors du
+clic sur le bouton
+* rightActionButon : la méthode (js) que l’on souhaite appeler lors du
+clic sur le bouton
+* optionTextButon : le texte du bouton d’Option
+* optionActionButon : la méthode (js) que l’on souhaite appeler lors du
+clic sur le bouton
+* maxHeight : la hauteur max de la modale
+
+____
+Pourquoi faire plusieurs méthodes si elles ont toutes les mêmes paramètres ?
+____
+
+Car vous n’êtes pas obligé de tous les renseigner :)
+
+
+En effet les différentes méthodes ont des valeurs par défaut ; par exemple, la méthode question dispose par défaut d’un titre (Question), d’une icône et de texte déjà renseigné pour les boutons de gauche et de droite (je vous invite à regarder le code du fichier fredDialog.service.js afin de connaitre les valeurs par défaut), mais il est possible de surchargé chacune d’entrent-elles.
+
+Seule la méthode generic ne dispose d’aucunes de ces informations (il faudra alors implémenter celle d’on vous avez besoin, les valeurs non renseignées ne seront pas affichées).
+
+____
+Bon ok, mais comment je peux l’utiliser ?
+____
+
+Simplement avec de l’injection AngularJs, il suffit de ``choisir`` votre modale et de renseigner a minima le message (sinon vous aurez un popin vide :/ ).
+
+[source,javascript]
+----
+fredDialog.question('Trouvez-vous cette modale utile ?');
+----
+
+image:./Images/Dialog/modal1.png[image]
+
+Si, par exemple, vous souhaitez remplacer par le texte des boutons il vous suffit de renseigner le texte des boutons au moment de l’appel.
+
+TIP: si un paramètre de la méthode est laissée à vide, c’est la valeur par défaut qui sera prise.
+
+[source,javascript]
+----
+fredDialog.question('Trouvez-vous cette modale utile ?',``,``,'Oui','Bien-sûr');
+----
+
+image:./Images/Dialog/modal2.png[image]
+
+Si maintenant vous voulez effectuer une action particulière sur le clique du bouton gauche ou du bouton droit il vous faudra utiliser la syntaxe suivante :
+
+* Dans le cas d’une méthode sans paramètre
+
+[source,javascript]
+----
+fredDialog.question('Trouvez-vous cette modale utile ?',``,``,'Oui','Bien-sûr',methodOui, methodBiensur);
+
+function methodOui(){
+    alert('oui');
+}
+
+function methodBiensur(){
+    alert('Bien-sûr');
+}
+----
+
+* Dans le cas d’une méthode avec paramètres
+
+[source,javascript]
+----
+fredDialog.question('Trouvez-vous cette modale utile ?',``,``,'Oui','Bien-sûr',function() {return methodOui('Oui');}, function() {return methodBiensur('Biensur');});
+
+function methodOui(param){
+    alert(param);
+}
+
+function methodBiensur(param){
+    alert(param);
+}
+----
+
+En résumé :
+
+* Il existe 5 types de modale (generic, confirmation, information, question, message, erreur), elles diposent toutes de valeurs par défaut *sauf la modale generic*.
+* Si un paramètre de la modal est vide et qu’il n’est pas surchargé, ce dernier n’apparait pas (le bouton option existe sur toutes les modales, mais ne seront affichées que si le texte de ces dernières son renseignées)
+* Pour passer une méthode sans paramètre à la modale il faut utiliser la syntaxe suivante :
+
+[source,javascript]
+----
+fredDialog.question('Trouvez-vous cette modale utile ?',``,``,'Oui','Biensûr',methodOui, methodBiensur); 
+----
+
+* Pour passer une méthode avec paramètre à la modale il faut utiliser la syntaxe suivante
+
+[source,javascript]
+----
+fredDialog.question('Trouvez-vous cette modale utile ?',``,``,'Oui','Biensûr',function() {return methodOui('Oui');}, function() {return methodBiensur('Biensur');}); 
+----
+
+* Pour passer des méthodes chaîner sur un bouton il faudra passer par la méthode ``classique``
+
+[source,javascript]
+----
+fredDialog.question('Trouvez-vous cette modale utile ?').then(response){...}.then(response){...} 
+----
+
+* *Eviter le plus possible d’utiliser une modale incohérante* +
+ex:
+j’utilise une modale de type message pour poser une question :
+
+[source,javascript]
+----
+fredDialog.message('Trouvez-vous cette modale utile ?','Question','flaticon-question','Oui','Biensûr',methodOui, methodBiensur); 
+----

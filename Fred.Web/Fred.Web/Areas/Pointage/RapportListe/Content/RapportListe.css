@@ -1,0 +1,950 @@
+﻿.no-pad {
+    padding: 0;
+}
+
+.no-pl {
+    padding-left: 0;
+}
+
+.no-pr {
+    padding-right: 0;
+}
+
+.nav-tabs > li.active > a {
+    background-color: lightgrey;
+    border: 0;
+    border-radius: 0;
+}
+
+.nav-tabs > li.active > a:hover {
+    background-color: lightgrey;
+    border: 0;
+    border-radius: 0;
+}
+
+.nav-tabs > li.active > a:focus {
+    background-color: lightgrey;
+    border: 0;
+    border-radius: 0;
+}
+
+.finput {
+    border-radius: 0;
+    margin-bottom: 1em;
+}
+
+.fbtnFiltre {
+    background-color: #E0E0E0;
+    border: none;
+    border-radius: 0;
+    color: black;
+    display: inline-block;
+    padding: 0.25em 1em;
+    text-align: center;
+    text-decoration: none;
+}
+
+.fbtnFiltreSelected {
+    background-color: #0990b7;
+    border-radius: 0;
+    color: white;
+    display: inline-block;
+    padding: 0.25em 1em;
+    text-align: center;
+}
+
+.row-button-filter {
+    position: absolute;
+    right: 5px;
+    bottom: 15px;
+}
+
+.row-main-filter {
+    min-height: 170px;
+}
+
+.lookup-button-no-mrg-top span.btn {
+    margin-top: 0;
+}
+
+h1.expanded {
+    margin-bottom: 10px;
+}
+
+.headerSearch {
+    background-color: lightgrey;
+    margin-bottom: 30px;
+    padding: 28px;
+    width: 100%;
+}
+
+fred-tiles {
+    height: 110px;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+fred-tiles .separateur {
+    color: #E1E3E5;
+    font-size: 45px;
+}
+
+fred-tile {
+    height: 100px;
+    width: 100px;
+    border: 1px solid #E1E3E5;
+    display: block;
+    margin: 3px;
+    position: relative;
+    cursor: pointer;
+    background: #f4f5f7;
+}
+
+fred-tile:hover {
+    background: #0052A0;
+}
+
+fred-tile:hover > fred-tile-icon {
+    color: white;
+}
+
+fred-tile:hover > fred-tile-title {
+    color: white;
+}
+
+fred-tile-icon {
+    padding: 5px;
+}
+
+fred-tile-title {
+    position: absolute;
+    bottom: 0;
+    margin: 5px;
+    min-width: 90px;
+    right: 0px;
+    text-align: right;
+    color: black;
+}
+
+/*fred-button. {
+    background-color: $background_color_4;
+    color: $color_4;
+
+    &:hover {
+        background-color: $background_color_5;
+        color: $color_5;
+    }
+}*/
+.colorEC {
+    background-color: #696969;
+    color: white;
+}
+
+.colorVE {
+    background-color: #e51400;
+    color: white;
+}
+
+.colorVA {
+    background-color: #1e90ff;
+    color: white;
+}
+
+.no_pad {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.no_pad_l {
+    padding-left: 0;
+}
+
+.no_pad_r {
+    padding-right: 0;
+}
+
+.sm_pad_l {
+    padding-left: 4px;
+}
+
+.sm_pad_r {
+    padding-right: 4px;
+}
+
+.lbl_l {
+    display: table;
+    height: 100%;
+}
+
+.lbl_l .lbl_txt {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.lbl_r input {
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.lbl_r .glyphicon-search {
+    position: absolute;
+    top: 9px;
+    cursor: pointer;
+}
+
+.selection_filters .sm_pad_r .input-group.date input {
+    font-size: 13px;
+}
+
+.liste_rapports .edition {
+    display: none;
+}
+
+.liste_rapports fred-side {
+    width: 850px;
+    left: -850px;
+}
+
+.liste_rapports fred-side icon {
+    color: #0052a0;
+}
+
+.liste_rapports fred-side main {
+    padding: 5px;
+    height: calc(100vh - 200px);
+    max-height: 100%;
+}
+
+.liste_rapports fred-side .input-group.date {
+    width: 92% !important;
+}
+
+.liste_rapports fred-side .selection_filters {
+    height: 45px;
+}
+
+.liste_rapports fred-side .glyphicon-calendar {
+    float: left;
+}
+
+.liste_rapports fred-side .lbl_l {
+    display: table;
+    height: 100%;
+}
+
+.liste_rapports fred-side .lbl_l .lbl_txt {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+}
+
+.liste_rapports fred-side .sm_pad_r {
+    padding-right: 4px;
+}
+
+.liste_rapports.container-fluid {
+    margin-bottom: 20px;
+}
+
+.liste_rapports.container-fluid .filter-container {
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    position: relative;
+    min-height: 70px;
+    height: initial;
+    min-height: initial;
+    z-index: 1101;
+}
+
+.header-toolbar {
+    background-color: #E1E3E5;
+    padding: 8px;
+    padding-right: 25px;
+}
+
+.header-toolbar label {
+    font-size: 18px;
+    margin-top: 6px;
+}
+
+.header-toolbar .bt {
+    margin-bottom: 0;
+}
+
+.sub-header-toolbar {
+    background-color: #67757F;
+    padding: 8px 8px;
+    padding-right: 23px;
+}
+
+.sub-header-toolbar .check_it {
+    position: relative;
+}
+
+.sub-header-toolbar .check_it input[type="checkbox"] {
+    position: absolute;
+    top: 5px;
+}
+
+.sub-header-toolbar .btn {
+    margin-top: 0;
+}
+
+.sub-header-toolbar .r-buttons {
+    width: 65%;
+    padding-top: 4px;
+}
+
+.sub-header-toolbar .r-buttons .errors {
+    background-color: red;
+    color: #fff;
+    border: none;
+}
+
+.sub-header-toolbar .r-buttons .remont {
+    background-color: #de3f7e;
+    color: #fff;
+    border: none;
+}
+
+.sub-header-toolbar .lab-rapp-nbs {
+    margin-left: 10%;
+    float: left;
+}
+
+.sub-header-toolbar .rapp-nbs {
+    font-size: 14px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.sub-header-toolbar .action-list-block {
+    padding-bottom: 0;
+}
+
+.bloc-auth {
+    float: right;
+    overflow: initial;
+}
+
+.bloc-auth-overflow-hidden {
+    overflow: initial;
+}
+
+.bloc-auth-adjusted {
+    overflow: initial;
+}
+
+.bloc-auth-adjusted-no-margin {
+    overflow: initial;
+}
+
+.search-container .input-group-btn {
+    border: 1px solid #bbb;
+    border-left: none;
+}
+
+.search-container .input-group-btn .y_search {
+    height: 28px;
+    width: 30px;
+    padding: 0;
+    background-color: #ffde0e;
+    color: #555;
+    margin: 0;
+}
+
+.search-container .act-btns {
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.search-container .act-btns .new-rapp {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#rapport-list {
+    height: calc(100vh - 425px);
+}
+
+#rapport-list.not-role-paie {
+    height: calc(100vh - 320px);
+}
+
+#rapport-list.list-extend {
+    height: calc(100vh - 240px);
+}
+
+.rapport-ligne {
+    background-color: #fff;
+    display: flex;
+    border: 1px solid #E3E9FC;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+}
+
+.rapport-ligne:hover {
+    border-color: #0990B7;
+    cursor: pointer;
+}
+
+.rapport-ligne input[type='checkbox'] {
+    position: absolute;
+    top: 46%;
+}
+
+.rapport-block {
+    padding-right: 0;
+    border-right: 1px solid #E3E9FC;
+}
+
+.rapport-block:nth-child(1) {
+    padding-left: 0;
+    border-right: none;
+}
+
+.rapport-block:nth-child(2) {
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-top: 3px;
+}
+
+.rapport-block:nth-child(3) {
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-top: 3px;
+}
+
+.rapport-block:nth-child(4) {
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-top: 3px;
+}
+
+.rapport-block:nth-child(5) {
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+
+.rapport-block:nth-child(6) {
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+
+.rapport-block:nth-child(7) {
+    padding-bottom: 3px;
+    padding-top: 3px;
+    padding-left: 1px;
+}
+
+.rapport-block-content {
+    font-size: 13px;
+    height: fit-content;
+    padding-right: 10px;
+}
+
+.rapport-block-content.col1 {
+    display: inline-block;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    padding-left: 40px;
+    width: 100%;
+}
+
+.rapport-block-content-empty {
+    border-right: 1px solid #E3E9FC;
+    height: 100px;
+    text-align: center;
+}
+
+.rapport-block-content-end {
+    border-right: 0;
+    padding-top: 0;
+    padding-right: 0px;
+    margin: 0px 14px;
+}
+
+.color-left-block {
+    display: inline-block;
+    height: 100%;
+    margin-left: 25px;
+    position: absolute;
+    width: 10px;
+}
+
+.etiquette {
+    color: #fff;
+    display: block;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.etiquette.black {
+    background-color: #0052a0;
+}
+
+.etiquette.gray {
+    background-color: #696969;
+}
+
+.btn-rapport {
+    width: 100px;
+}
+
+.glyphicon-right {
+    float: right;
+}
+
+.title {
+    color: #90A4AE;
+    margin: 0;
+    padding: 0;
+}
+
+button.action-list-block-content {
+    color: #fff;
+    font-weight: normal;
+    margin-right: 5px;
+}
+
+label.action-list-block-content {
+    color: #fff;
+    padding-left: 0;
+}
+
+.selection-block {
+    display: inline-block;
+    height: 100%;
+    padding-left: 4px;
+    padding-top: 50px;
+    position: absolute;
+    width: 20px;
+}
+
+.selection-block label {
+    margin: 0 2px 0 4px;
+}
+
+.statut-validation-block {
+    margin-bottom: 1px;
+}
+
+.ico-filter {
+    padding-left: 15px;
+}
+
+.text-danger {
+    background-color: #ef3308;
+    color: white;
+    display: block;
+    font-size: 15px;
+    font-weight: 300;
+    padding-left: 3px;
+}
+
+.has-error .inputPL {
+    border-color: #ef3308;
+}
+
+.has-error #txtDateComptable {
+    border-color: #ef3308;
+}
+
+.modal-dialog .modal-import {
+    width: 900px;
+}
+
+.modal-dialog .modal-import .radios-bloc {
+    margin-bottom: 10px;
+}
+
+.modal-dialog .modal-import .date-week .input-group-addon {
+    border-left: 1px solid #ccc;
+}
+
+.modal-dialog .modal-import .modal-content .modal-import {
+    border-radius: 0;
+}
+
+.modal-title .modal-import {
+    background-position: left;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    font-weight: 100;
+    padding-left: 25px;
+}
+
+.modal-body .modal-import {
+    height: 200px;
+}
+
+.modal-body .row label {
+    margin-top: 0;
+}
+
+.modal-body .bloc-auth {
+    float: none;
+}
+
+.modal-footer .btn.btn-md {
+    background-color: #0050a0 !important;
+    height: 36px;
+    color: white;
+    margin: 5px;
+}
+
+.modal-footer .btn.btn-md span {
+    font-size: 20px;
+}
+
+.modal-footer .btn.btn-md.btn-link {
+    height: 36px;
+    margin: 5px;
+    float: right;
+}
+
+.export-ana-modal .modal-dialog {
+    width: 1000px;
+}
+
+.export-ana-modal .modal-header i::before {
+    font-size: 25px !important;
+}
+
+.export-ana-modal .modal-body .input-group.dates {
+    width: 100%;
+    top: 3px;
+    background-color: white;
+    border: none;
+    color: #555555;
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.export-ana-modal .modal-body .input-group.dates .input-group-addon {
+    width: 28px;
+    padding: 0;
+}
+
+.export-ana-modal .modal-body .radio-bloc {
+    display: flex;
+    height: 50px;
+    align-items: flex-end;
+}
+
+.export-ana-modal .modal-body .sim-check {
+    display: flex;
+    height: 50px;
+    align-items: flex-start;
+}
+
+.export-ana-modal .modal-body .sel-soc {
+    margin-top: 15px;
+}
+
+.export-ana-modal .modal-body .rd-eta {
+    border-right: 1px solid lightgrey;
+}
+
+.export-ana-modal .modal-body .eta-comp-bloc {
+    margin-top: 15px;
+    height: 60px;
+    background-color: #0052a0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.export-ana-modal .modal-body .eta-comp-bloc .txt {
+    color: #fff;
+}
+
+.export-ana-modal .modal-body .report {
+    margin-top: 15px;
+}
+
+.error-modal .modal-dialog {
+    top: 5%;
+}
+
+.error-modal .modal-dialog .modal-header i::before {
+    font-size: 25px !important;
+}
+
+.error-modal .modal-dialog .modal-body .error-list-bloc {
+    max-height: 500px;
+}
+
+.error-modal .modal-dialog .modal-body .error-list-bloc ul {
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.error-modal .modal-dialog .modal-body .error-list-bloc .ul-txt {
+    color: #0055a0;
+    font-size: 16px;
+}
+
+.error-modal .modal-dialog .modal-body .error-list-bloc .list .date {
+    color: grey;
+}
+
+.error-modal .modal-dialog .modal-body .error-list-bloc .list .error-type {
+    font-weight: 600;
+}
+
+.error-modal .modal-dialog .modal-body ul li {
+    margin-left: 20px;
+}
+
+.close {
+    color: #d3d3d3;
+    font-size: 35px;
+}
+
+.close:hover {
+    color: #ffd900;
+    font-size: 35px;
+    opacity: 0.9;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + label {
+    font-size: 14px;
+}
+
+input[type="checkbox"] + label span {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: 0 4px 0 0;
+    vertical-align: middle;
+    cursor: pointer;
+    -moz-border-radius: 20%;
+    border-radius: 20%;
+    background-color: #fcfcfc;
+    border: 3px #78C1DD solid;
+    -webkit-transition: background-color 0.4s linear;
+    -o-transition: background-color 0.4s linear;
+    -moz-transition: background-color 0.4s linear;
+    transition: background-color 0.4s linear;
+}
+
+input[type="checkbox"]:checked + label span {
+    border: 3px #2c77ba solid;
+    background-image: url("/medias/images/ico/checked.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-transition: background-color 0.4s linear;
+    -o-transition: background-color 0.4s linear;
+    -moz-transition: background-color 0.4s linear;
+    transition: background-color 0.4s linear;
+}
+
+.checkbox-inline {
+    margin-top: 10px;
+}
+
+.style {
+    background-color: #000;
+    bottom: 0;
+    left: 0;
+    opacity: 0.25;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transition: 0.2s opacity ease;
+    z-index: 1200;
+}
+
+.form-group {
+    height: 60px;
+}
+
+.form-group-organisation-modal {
+    height: auto;
+}
+
+.input-group-addon {
+    border-radius: 0;
+}
+
+.date-section .cl {
+    font-size: 35px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    color: #7f7f7f;
+    cursor: pointer;
+}
+
+.date-section .cr {
+    font-size: 35px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15px;
+    color: #7f7f7f;
+    cursor: pointer;
+}
+
+.label_date {
+    width: 77%;
+    background-color: white;
+    display: table;
+    align-items: center;
+}
+
+.label_date_text {
+    width: 86%;
+    font-size: 12px;
+    float: left;
+    height: 32px;
+    border: 1px solid #ccc;
+    border-right: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.labe_date_date_selector {
+    float: right;
+    width: 14%;
+}
+
+.etablissementPaie-margin-top {
+    margin-top: 15px;
+}
+
+.etablissementPaie-filter {
+    margin-top: 5px;
+}
+
+.etablissementPaie tbody tr .delete .flaticon-multiply {
+    position: relative;
+    height: 20px;
+    font-size: 15px;
+    margin-top: 0;
+    padding-top: 0;
+    top: 0;
+    right: 0;
+    background-color: transparent !important;
+    color: #337ab7;
+}
+
+#table-EtablissementPaie {
+    width: 100%;
+    table-layout: fixed;
+}
+
+#table-EtablissementPaie tbody {
+    width: 100%;
+    overflow-y: auto;
+    display: block;
+    max-height: 200px;
+}
+
+#table-EtablissementPaie tr {
+    display: block;
+}
+
+#table-EtablissementPaie th {
+    width: 100%;
+    height: 15px;
+}
+
+#table-EtablissementPaie td {
+    width: 100%;
+    height: 35px;
+}
+
+fred-side .text-fields {
+    width: 92% !important;
+}
+
+.btn-dark-gray .fa.fa-filter {
+    margin-top: -3px;
+}
+
+.error-message {
+    font-size: 16px;
+    display: flex !important;
+    justify-content: center;
+}
+
+#pointage_Mensuelle_Date_Comp_FES {
+    display: inline !important;
+}
+
+@media (min-width: 1024px) and (max-width: 1500px) {
+    .rapport-block-content-end {
+        margin-left: 5px;
+    }
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    #rapport-list {
+        height: calc(100vh - 355px);
+    }
+    #rapport-list.list-extend {
+        height: calc(100vh - 170px);
+    }
+    #rapport-list.not-role-paie {
+        height: calc(100vh - 225px);
+    }
+    .btn-dark-gray {
+        width: 25px !important;
+        height: 25px !important;
+    }
+    .search-container .act-btns .new-rapp {
+        font-size: 11px;
+    }
+    .header-toolbar label {
+        font-size: 14px;
+    }
+    .header-toolbar.clearfix .btn-default {
+        font-size: 11px;
+    }
+    .btn-rapport {
+        font-size: 10px;
+        padding: 5px;
+        width: 75px;
+    }
+    .liste_rapports fred-side main {
+        height: calc(100vh - 200px);
+    }
+}
+
+@media (max-height: 768px) and (max-width: 1366px) {
+    .modal-dialog .modal-import {
+        width: 600px;
+    }
+}

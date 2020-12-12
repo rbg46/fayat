@@ -1,0 +1,25 @@
+﻿<div class="$ctrl.fournisseur bkg-item pk-{{$ctrl.fournisseur.CodeRef}}-item"
+     title="Cliquer pour sélectionner l'information {{::$ctrl.fournisseur.CodeRef}} / {{::$ctrl.fournisseur.LibelleRef}}">
+    <h2 class="$ctrl.fournisseur-h2"
+        ng-click="$ctrl.selectFournisseur($ctrl.fournisseur)"
+        fred-wrap-in-tag="{{::$ctrl.fournisseur.Libelle}}"
+        words="$ctrl.textsToHighlight.searchTexts">
+        {{::$ctrl.fournisseur.Libelle}}
+    </h2>
+    <h3 class="$ctrl.fournisseur-h3"
+        ng-click="$ctrl.selectFournisseur($ctrl.fournisseur)"
+        fred-wrap-in-tag="{{::$ctrl.fournisseur.Code}} ({{::$ctrl.fournisseur.TypeSequence}}) - {{::$ctrl.fournisseur.SIREN}}"
+        words="$ctrl.textsToHighlight.searchTexts2">
+        {{::$ctrl.fournisseur.Code}} ({{::$ctrl.fournisseur.TypeSequence}}) - {{::$ctrl.fournisseur.SIREN}}
+    </h3>
+    <h4 class="$ctrl.fournisseur-h4"
+        ng-click="$ctrl.selectFournisseur($ctrl.fournisseur)"
+        fred-wrap-in-tag="{{::$ctrl.fournisseur.Adresse}} - {{::$ctrl.fournisseur.Ville}} ({{::$ctrl.fournisseur.CodePostal}})"
+        words="$ctrl.textsToHighlight.searchTexts3">
+        {{::$ctrl.fournisseur.Adresse}} - {{::$ctrl.fournisseur.Ville}} ({{::$ctrl.fournisseur.CodePostal}})
+    </h4>
+    <button ng-show="$ctrl.showButtonAgence"
+            ng-click="$ctrl.openAgence($ctrl.fournisseur)">
+        show Agence
+    </button>
+</div>

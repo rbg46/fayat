@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.fayatit.com/FRED-TIBCO/GetDetailContrat" xmlns:ns1="http://www.tibco.com/schemas/PaieRH.Pixid.IO.BW/BusinessProcesses/SubProcesses/Interimaire/RazelBec/GetDetailContrat/Schema.xsd2" xmlns:ns0="http://www.tibco.com/schemas/PaieRH.Pixid.IO.BW/BusinessProcesses/SubProcesses/Interimaire/RazelBec/GetDetailContrat/Schema.xsd" name="Untitled" targetNamespace="http://www.fayatit.com/FRED-TIBCO/GetDetailContrat" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema xmlns="http://www.tibco.com/schemas/PaieRH.Pixid.IO.BW/BusinessProcesses/SubProcesses/Interimaire/RazelBec/GetDetailContrat/Schema.xsd2" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.tibco.com/schemas/PaieRH.Pixid.IO.BW/BusinessProcesses/SubProcesses/Interimaire/RazelBec/GetDetailContrat/Schema.xsd2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="GetDetailContratOut">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="message" type="xs:string" />
+            <xs:element name="messageCode" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Record">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Timestamp" type="xs:string" />
+                  <xs:element name="PersonnelMatriculeExterne" type="xs:string" />
+                  <xs:element name="PersonnelNom" type="xs:string" />
+                  <xs:element name="PersonnelPrenom" type="xs:string" />
+                  <xs:element name="PersonnelAdresseCP" type="xs:string" />
+                  <xs:element name="PersonnelAdresseVille" type="xs:string" />
+                  <xs:element name="PersonnelAdressePaysISO" type="xs:string" />
+                  <xs:element name="PersonnelDateNaissance" type="xs:string" />
+                  <xs:element name="FournisseurSIREN" type="xs:string" />
+                  <xs:element name="FournisseurNIC" type="xs:string" />
+                  <xs:element name="FournisseurLibelleExterne" type="xs:string" />
+                  <xs:element name="SocieteContractanteSIREN" type="xs:string" />
+                  <xs:element name="SocieteContractanteNIC" type="xs:string" />
+                  <xs:element name="CIImputationContrat" type="xs:string" />
+                  <xs:element name="ContratDateDebut" type="xs:string" />
+                  <xs:element name="ContratDateFin" type="xs:string" />
+                  <xs:element name="ContratJoursSouplesse" type="xs:string" />
+                  <xs:element name="ContratNumeroExterne" type="xs:string" />
+                  <xs:element name="ContratCodeEmploiExterne" type="xs:string" />
+                  <xs:element name="ContratQualification" type="xs:string" />
+                  <xs:element name="ContratCodeStatutExterne" type="xs:string" />
+                  <xs:element name="ContratCodeStatutInterne" type="xs:string" />
+                  <xs:element name="ContratCodeMotifExterne" type="xs:string" />
+                  <xs:element name="ContratCodeMotifInterne" type="xs:string" />
+                  <xs:element name="ContratTarif" type="xs:string" />
+                  <xs:element name="ContratDevise" type="xs:string" />
+                  <xs:element name="ContratPeriode" type="xs:string" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns="http://www.tibco.com/schemas/PaieRH.Pixid.IO.BW/BusinessProcesses/SubProcesses/Interimaire/RazelBec/GetDetailContrat/Schema.xsd" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.tibco.com/schemas/PaieRH.Pixid.IO.BW/BusinessProcesses/SubProcesses/Interimaire/RazelBec/GetDetailContrat/Schema.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="GetDetailContratIn">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="transfert_contrat_id" type="xs:int" />
+            <xs:element name="application_cd" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="GetDetailContratIn">
+    <wsdl:part name="parameters" element="ns0:GetDetailContratIn" />
+  </wsdl:message>
+  <wsdl:message name="GetDetailContratOut">
+    <wsdl:part name="parameters" element="ns1:GetDetailContratOut" />
+  </wsdl:message>
+  <wsdl:portType name="portType">
+    <wsdl:operation name="GetDetailContratOp">
+      <wsdl:input message="tns:GetDetailContratIn" />
+      <wsdl:output message="tns:GetDetailContratOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="intfwsGetDetailContratEndpointBinding" type="tns:portType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetDetailContratOp">
+      <soap:operation soapAction="/BusinessProcesses/Interfaces/GetDetailContrat/intfGetDetailContrat-service.serviceagent/intfwsGetDetailContratEndpoint2/GetDetailContratOp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" parts="parameters" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="parameters" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="intfGetDetailContrat-service">
+    <wsdl:port name="intfwsGetDetailContratEndpoint" binding="tns:intfwsGetDetailContratEndpointBinding">
+      <soap:address location="http://frsacpvt01v.fr.rz.lan:1615/BusinessProcesses/Interfaces/GetDetailContrat/intfGetDetailContrat-service.serviceagent/intfwsGetDetailContratEndpoint" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

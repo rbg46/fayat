@@ -1,0 +1,2 @@
+﻿UPDATE FRED_FEATURE_FLIPPING SET CODE = 14
+WHERE NAME = 'MultiplePeriodeOperationDiverses'

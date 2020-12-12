@@ -1,0 +1,141 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+  ViewBag.Title = FeatureFacture.Facture_Index_TitreOnglet;
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+  @Styles.Render("~/FactureIndexBundle.css")
+}
+
+@section scripts {
+  @Scripts.Render("~/FactureIndexBundle.js")
+  @this.RenderResources("FeatureFavori", "FeatureFacture")
+}
+
+<div class="container facture" ng-controller="FactureController as factureCtrl" ng-init="factureCtrl.handleLoadPage('@ViewBag.favoriId')">
+
+
+    <fred-ui-titre title="{{factureCtrl.FactureList.length}} {{factureCtrl.resources.Facture_Index_NbrFacture}}"></fred-ui-titre>
+
+
+
+
+  <div id="container-dashed">
+
+    <div class="container main-content">
+
+      <!-- SEARCH BAR START -->
+      <div class="row" ng-show="displaySearch">
+        <search-filter filter-placeholder="{{factureCtrl.resources.Facture_Index_Rechercher_Placeholder}}"
+                       filter-api-controller="/api/Facture/Search"
+                       filter-template-url="/Facture/Facture/SearchFilterTemplate"
+                       callback-fn-search="factureCtrl.handleSearch(filter)"
+                       callback-fn-favoris="factureCtrl.handleFavori()"
+                       filter="factureCtrl.filters">
+        </search-filter>
+      </div>
+      <!-- SEARCH BAR END -->
+
+      @*<div class="header-toolbar clearfix">
+        <label for="">{{factureCtrl.FactureList.length}} {{factureCtrl.resources.Facture_Index_NbrFacture}}</label>
+        <div class="pull-right">
+          <div class="fold" ng-show="!displayCol" ng-click="displayCol = !displayCol">
+            <span class="glyphicon" ng-class="{'glyphicon-plus' : !displayCol, 'glyphicon-minus': displayCol}"></span>
+            <span class="fold-text">{{factureCtrl.resources.Facture_Index_Bouton_Deplier}}</span>
+          </div>
+          <div class="fold" ng-show="displayCol" ng-click="displayCol = !displayCol">
+            <span class="glyphicon" ng-class="{'glyphicon-plus' : !displayCol, 'glyphicon-minus': displayCol}"></span>
+            <span class="fold-text">{{factureCtrl.resources.Facture_Index_Bouton_Replier}}</span>
+          </div>
+        </div>
+      </div>*@
+
+
+
+
+        <!--BEGIN : Si Pas de résultats-->
+        <fred-ui-no-datas ng-show="factureCtrl.FactureList.length==0" message="Désolé, aucun résultat. Veuillez élargir votre recherche en supprimant des filtres"></fred-ui-no-datas>
+        <!--END : Si Pas de résultats-->
+        
+      <!-- LISTE START -->
+        <table  id="tableFixed" fred-ui-table-fixed ng-show="factureCtrl.FactureList.length!=0">
+          <thead>
+            <tr class="main">
+              <th class="cln1">{{factureCtrl.resources.Facture_Index_Table_Entete_NumFMFI}}</th>
+              <th class="cln2 lighted important last">{{factureCtrl.resources.Facture_Index_Table_Entete_NumFactureFournisseur}}</th>
+              <th class="cln3 lighted secondary last">{{factureCtrl.resources.Facture_Index_Table_Entete_DateFacture}}</th>
+              <th class="cln4">{{factureCtrl.resources.Facture_Index_Table_Entete_Journal}}</th>
+              <th class="cln5 lighted warning last">{{factureCtrl.resources.Facture_Index_Table_Entete_CompteGeneral}}</th>
+              <th class="cln6">{{factureCtrl.resources.Facture_Index_Table_Entete_Fournisseur}}</th>
+              <th class="cln7 lighted primary last">{{factureCtrl.resources.Facture_Index_Table_Entete_MontantTTC}}</th>
+              <th class="cln8">{{factureCtrl.resources.Facture_Index_Table_Entete_Devise}}</th>
+              <th class="cln9">{{factureCtrl.resources.Facture_Index_Table_Entete_CI}}</th>
+              <th class="cln10">{{factureCtrl.resources.Facture_Index_Table_Entete_DateComptable}}</th>
+              <th class="cln11">{{factureCtrl.resources.Facture_Index_Table_Entete_Folio}}</th>
+              <th class="cln12 lighted">{{factureCtrl.resources.Facture_Index_Table_Entete_MontantHT}}</th>
+              <th class="cln13 lighted">{{factureCtrl.resources.Facture_Index_Table_Entete_MontantTVA}}</th>
+              <th class="cln14 lighted">{{factureCtrl.resources.Facture_Index_Table_Entete_Societe}}</th>
+              <th class="cln15 lighted last">{{factureCtrl.resources.Facture_Index_Table_Entete_Etablissement}}</th>
+              <th class="cln16">{{factureCtrl.resources.Facture_Index_Table_Entete_Statut}}</th>
+              <th class="cln17"></th> <!-- Colonne Action -->
+            </tr>
+          </thead>
+          <tbody id="containerTableauFacture"  class="fred-scroll">
+            <tr ng-repeat="facture in factureCtrl.FactureList">
+              <td class="cln1  bkg-blue-light4">
+                  <!-- Bouton détail -->
+                  <fred-ui-detail ng-click="factureCtrl.handleSelectFacture(facture)" title="{{factureCtrl.resources.Facture_Index_Bouton_Detail_Tooltip}} {{facture.NoFMFI}}"></fred-ui-detail>
+                  <!-- Bouton Scan facture -->
+                  <fred-ui-icon icon="description" title="{{factureCtrl.resources.Facture_Index_Bouton_Scan_Tooltip}} {{facture.NoFMFI}}" ng-click="factureCtrl.handleScanFacture(facture)"></fred-ui-icon>
+                  <span>{{facture.NoFMFI}}</span>
+                  
+              </td>
+              <td class="cln2 lighted important last" >{{facture.NoFactureFournisseur}}</td>
+              <td class="cln3 lighted secondary last">{{facture.DateFacture | toLocaleDate | date : 'dd/MM/yyyy'}}</td>
+              <td class="cln4">{{facture.Journal.Code}}</td>
+              <td class="cln5 lighted warning">{{facture.CompteGeneral}}</td>
+              <td class="cln6">{{facture.Fournisseur.Code}} - {{facture.Fournisseur.Libelle}}</td>
+              <td class="cln7 money lighted primary last">{{facture.MontantTTC.toFixed(2) | thousandSeparator }}</td>
+              <td class="cln8">{{facture.Devise.IsoCode}}</td>
+              <td class="cln9" title="{{facture.CiCodeLibellesTooltip}}">{{facture.CICode}}</td>
+              <td class="cln10">{{facture.DateComptable | toLocaleDate | date : 'MM/yyyy'}}</td>
+              <td class="cln11">{{facture.Folio}}</td>
+              <td class="cln12  lighted">{{facture.MontantHT.toFixed(2) | thousandSeparator}}</td>
+              <td class="cln13  lighted" >{{facture.MontantTVA.toFixed(2) | thousandSeparator}}</td>
+              <td class="cln14  lighted" title="{{facture.Societe.CodeLibelle}}">{{facture.Societe.Code}}</td>
+              <td class="cln15  lighted last" title="{{facture.Etablissement.CodeLibelle}}">{{facture.Etablissement.Code}}</td>
+              <td class="cln16">
+                <span class="en_cours" ng-show="">Rappro. en cours</span>@*Temporaire*@
+                <span class="a_rapprocher" ng-show="facture.DateRapprochement === null">A rapprocher</span>@*Temporaire*@
+                <span class="rapprocher" ng-show="facture.DateRapprochement !== null">Rapprochée</span>@*Temporaire*@
+              </td>
+              <td class="cln17 action">
+                  <!-- Bouton Cacher/Dechacher -->
+                  <span class="flaticon flaticon-hide" title="{{factureCtrl.resources.Facture_Index_Bouton_Decacher_Tooltip}}" ng-show="facture.Cachee" ng-click="factureCtrl.handleDeCacheeFacture(facture)"></span>
+                  <!-- Bouton détail -->
+                  <fred-ui-detail ng-click="factureCtrl.handleSelectFacture(facture)" title="{{factureCtrl.resources.Facture_Index_Bouton_Detail_Tooltip}} {{facture.NoFMFI}}"></fred-ui-detail>  
+                  <!-- Bouton Scan facture -->
+                  <fred-ui-icon icon="description" title="{{factureCtrl.resources.Facture_Index_Bouton_Scan_Tooltip}} {{facture.NoFMFI}}" ng-click="factureCtrl.handleScanFacture(facture)"></fred-ui-icon>
+              </td>
+              
+            </tr>
+          </tbody>
+
+        </table>
+
+      <!-- LISTE END -->
+    </div>
+  </div>
+
+  @*<script type='text/javascript'>
+      (function () {
+        $('.movable').resizable({
+          handles: 'e',
+          minWidth: 18
+        });
+      })();
+    </script>*@
+
+</div>

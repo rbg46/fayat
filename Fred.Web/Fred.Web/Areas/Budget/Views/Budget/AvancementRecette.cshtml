@@ -1,0 +1,412 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureAvancementRecette.AvancementRecette_Index_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/Areas/Budget/Content/avancementRecette.css")
+}
+@section scripts {
+    @Scripts.Render("~/AvancementRecetteBundle.js")
+    @this.RenderResources("FeatureAvancementRecette")
+}
+
+<div class="container AvancementRecette" ng-controller="AvancementRecetteController as $ctrl">
+
+    <!-- START : Titre de la page -->
+    <h1>{{$ctrl.resources.AvancementRecette_Title}}</h1>
+
+    <!--START : Barre de recherche + Barre d'outils-->
+    <fred-toolbar>
+
+        <!--Sélection de l'organisation-->
+        <fred-section class="orga-section">
+
+            <fred-section-title>{{$ctrl.resources.Global_SelectionCI}}</fred-section-title>
+            <fred-section-controls>
+                <lookup ng-model="$ctrl.filters.ci"
+                        class="formulaire long"
+                        search-placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                        search-title="{{$ctrl.resources.Global_ReferentielCI}}"
+                        custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                        on-select="$ctrl.ChangePerimetre()"
+                        url="/api/CI/SearchLight"
+                        ng-disabled="$ctrl.busy">
+                    <input type="text"
+                           class="form-control"
+                           ng-value="$ctrl.filters.ci.CodeLibelle"
+                           placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                           title="{{$ctrl.filters.ci.Libelle}}" />
+                    <i class="chev material-icons">chevron_right</i>
+                </lookup>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Devise-->
+        <fred-section class="devise-section">
+            <fred-section-title>{{$ctrl.resources.Devise_lb}}</fred-section-title>
+            <fred-section-controls class="devise-section-controls">
+                <div class="currency active">€</div>
+                <div class="currency">£</div>
+                <div class="currency">$</div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Sélection de la période-->
+        <fred-section class="period-section">
+
+            <fred-section-title>{{$ctrl.resources.Global_SelectionnerPeriode}}</fred-section-title>
+            <fred-section-controls>
+                <div class="input-group date">
+                    <app-date-picker id="periode" ng-model="$ctrl.periode" initial-date="{{$ctrl.periode}}" format="MM/YYYY" lang="fr" placeholder="Période"
+                                     ng-disabled="$ctrl.busy" on-update="$ctrl.ChangePeriode()"></app-date-picker>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Actions-->
+        <fred-section class="action-section">
+            <fred-section-title>{{$ctrl.resources.Global_Action}}</fred-section-title>
+            <fred-section-controls class="action-controls">
+                <button class="btn btn-link" ng-click="$ctrl.Load()" ng-disabled="$ctrl.busy || !$ctrl.loaded">{{$ctrl.resources.Global_Bouton_Annuler}}</button>
+                <button class="btn btn-default" ng-click="$ctrl.Save()" ng-disabled="$ctrl.busy || !$ctrl.loaded">{{$ctrl.resources.Global_Bouton_Enregistrer}}</button>
+            </fred-section-controls>
+        </fred-section>
+
+    </fred-toolbar>
+    <!--END : Barre de recherche + Barre d'outils-->
+    <!-- START liste -->
+    <div class="AvancementRecette-list" ng-if="$ctrl.loaded && $ctrl.AvancementRecette.BudgetRecette">
+
+        <div class="bloc1">
+
+            <div class="bloc2">
+                <div class="colm-col">
+                    <legend>{{$ctrl.resources.AvancementRecette_RecetteBudgetEnApplication}}</legend>
+                    <div class="cell first">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_MontantMarche}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.BudgetRecette.MontantMarche | number: 2}} €</div>
+                    </div>
+                    <div class="cell first">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_MontantAvenants}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.BudgetRecette.MontantAvenants | number: 2}} €</div>
+                    </div>
+                    <div class="cell first">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_SommesAValoir}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.BudgetRecette.SommeAValoir | number: 2}} €</div>
+                    </div>
+                    <div class="cell first">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_TravauxSupplementaires}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.BudgetRecette.TravauxSupplementaires | number: 2}} €</div>
+                    </div>
+                    <div class="cell first">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_Revision}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.BudgetRecette.Revision | number: 2}} €</div>
+                    </div>
+                    <div class="cell first">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_AutresRecettes}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.BudgetRecette.AutresRecettes | number: 2}} €</div>
+                    </div>
+                    <div class="cell first">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_PenalitesEtRetenues}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.BudgetRecette.PenalitesEtRetenues | number: 2}} €</div>
+                    </div>
+                </div>
+                <div class="colm-col">
+                    <legend>{{$ctrl.resources.AvancementRecette_RecetteCumuleesMoisCourant}}</legend>
+                    <div class="cell second">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_MontantMarche}}</div>
+                        <span class="amount">
+                            <input type="text"
+                                   fred-input-number
+                                   ng-model="$ctrl.AvancementRecette.MontantMarche"
+                                   class="form-control" />
+                        </span>
+                    </div>
+                    <div class="cell second">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_MontantAvenants}}</div>
+                        <span class="amount">
+                            <input type="text"
+                                   fred-input-number
+                                   ng-model="$ctrl.AvancementRecette.MontantAvenants"
+                                   class="form-control" />
+                        </span>
+                    </div>
+                    <div class="cell second">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_SommesAValoir}}</div>
+                        <span class="amount">
+                            <input type="text"
+                                   fred-input-number
+                                   ng-model="$ctrl.AvancementRecette.SommeAValoir"
+                                   class="form-control" />
+                        </span>
+                    </div>
+                    <div class="cell second">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_TravauxSupplementaires}}</div>
+                        <span class="amount">
+                            <input type="text"
+                                   fred-input-number
+                                   ng-model="$ctrl.AvancementRecette.TravauxSupplementaires"
+                                   class="form-control" />
+                        </span>
+                    </div>
+                    <div class="cell second">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_Revision}}</div>
+                        <span class="amount">
+                            <input type="text"
+                                   fred-input-number
+                                   ng-model="$ctrl.AvancementRecette.Revision"
+                                   class="form-control" />
+                        </span>
+                    </div>
+                    <div class="cell second">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_AutresRecettes}}</div>
+                        <span class="amount">
+                            <input type="text"
+                                   fred-input-number
+                                   ng-model="$ctrl.AvancementRecette.AutresRecettes"
+                                   class="form-control" />
+                        </span>
+                    </div>
+                    <div class="cell second">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_PenalitesEtRetenues}}</div>
+                        <span class="amount">
+                            <input type="text"
+                                   fred-input-number
+                                   ng-model="$ctrl.AvancementRecette.PenalitesEtRetenues"
+                                   class="form-control" />
+                        </span>
+                    </div>
+                </div>
+                <div class="colm-col">
+                    <legend>{{$ctrl.resources.AvancementRecette_RecetteCumuleesMoisPrecedent}}</legend>
+                    <div class="cell third">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_MontantMarche}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.MontantMarchePrevious | number: 2}} €</div>
+                    </div>
+                    <div class="cell third">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_MontantAvenants}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.MontantAvenantsPrevious | number: 2}} €</div>
+                    </div>
+                    <div class="cell third">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_SommesAValoir}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.SommeAValoirPrevious | number: 2}} €</div>
+                    </div>
+                    <div class="cell third">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_TravauxSupplementaires}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.TravauxSupplementairesPrevious | number: 2}} €</div>
+                    </div>
+                    <div class="cell third">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_Revision}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.RevisionPrevious | number: 2}} €</div>
+                    </div>
+                    <div class="cell third">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_AutresRecettes}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.AutresRecettesPrevious | number: 2}} €</div>
+                    </div>
+                    <div class="cell third">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_PenalitesEtRetenues}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.PenalitesEtRetenuesPrevious | number: 2}} €</div>
+                    </div>
+                </div>
+                <div class="colm-col">
+                    <legend>{{$ctrl.resources.AvancementRecette_RecetteMoisCourant}}</legend>
+                    <div class="cell fourth">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_MontantMarche}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.MontantMarche - $ctrl.AvancementRecette.MontantMarchePrevious | number: 2}} €</div>
+                    </div>
+                    <div class="cell fourth">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_MontantAvenants}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.MontantAvenants - $ctrl.AvancementRecette.MontantAvenantsPrevious | number: 2}} €</div>
+                    </div>
+                    <div class="cell fourth">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_SommesAValoir}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.SommeAValoir - $ctrl.AvancementRecette.SommeAValoirPrevious | number: 2}} €</div>
+                    </div>
+                    <div class="cell fourth">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_TravauxSupplementaires}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.TravauxSupplementaires - $ctrl.AvancementRecette.TravauxSupplementairesPrevious | number: 2}} €</div>
+                    </div>
+                    <div class="cell fourth">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_Revision}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.Revision - $ctrl.AvancementRecette.RevisionPrevious | number: 2}} €</div>
+                    </div>
+                    <div class="cell fourth">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_AutresRecettes}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.AutresRecettes - $ctrl.AvancementRecette.AutresRecettesPrevious | number: 2}} €</div>
+                    </div>
+                    <div class="cell fourth">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_PenalitesEtRetenues}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.PenalitesEtRetenues - $ctrl.AvancementRecette.PenalitesEtRetenuesPrevious | number: 2}} €</div>
+                    </div>
+                </div>
+                <div class="colm-col">
+                    <div class="col-items">
+                        <span ng-if="$ctrl.PFAHasChanged()" class="material-icons warn" title="{{$ctrl.resources.AvancementRecette_WarningPFAaJour}}">live_help</span>
+                        <legend>{{$ctrl.resources.AvancementRecette_PFA}}</legend>
+                        <span class="material-icons edit" title="{{$ctrl.resources.AvancementRecette_BtnMajPFA}}" ng-click="$ctrl.PFAEdit = !$ctrl.PFAEdit">edit</span>
+                    </div>
+                    <div class="cell fifth">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_MontantMarche}}</div>
+                        <div class="val" ng-if="!$ctrl.PFAEdit">{{$ctrl.AvancementRecette.MontantMarchePFA | number: 2}} €</div>
+                        <input type="text" fred-input-number ng-if="$ctrl.PFAEdit" class="form-control" ng-model="$ctrl.AvancementRecette.MontantMarchePFA" />
+                    </div>
+                    <div class="cell fifth">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_MontantAvenants}}</div>
+                        <div class="val" ng-if="!$ctrl.PFAEdit">{{$ctrl.AvancementRecette.MontantAvenantsPFA | number: 2}} €</div>
+                        <input type="text" fred-input-number ng-if="$ctrl.PFAEdit" class="form-control" ng-model="$ctrl.AvancementRecette.MontantAvenantsPFA" />
+                    </div>
+                    <div class="cell fifth">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_SommesAValoir}}</div>
+                        <div class="val" ng-if="!$ctrl.PFAEdit">{{$ctrl.AvancementRecette.SommeAValoirPFA | number: 2}} €</div>
+                        <input type="text" fred-input-number ng-if="$ctrl.PFAEdit" class="form-control" ng-model="$ctrl.AvancementRecette.SommeAValoirPFA" />
+                    </div>
+                    <div class="cell fifth">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_TravauxSupplementaires}} </div>
+                        <div class="val" ng-if="!$ctrl.PFAEdit">{{$ctrl.AvancementRecette.TravauxSupplementairesPFA | number: 2}} €</div>
+                        <input type="text" fred-input-number ng-if="$ctrl.PFAEdit" class="form-control" ng-model="$ctrl.AvancementRecette.TravauxSupplementairesPFA" />
+                    </div>
+                    <div class="cell fifth">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_Revision}}</div>
+                        <div class="val" ng-if="!$ctrl.PFAEdit">{{$ctrl.AvancementRecette.RevisionPFA | number: 2}} €</div>
+                        <input type="text" fred-input-number ng-if="$ctrl.PFAEdit" class="form-control" ng-model="$ctrl.AvancementRecette.RevisionPFA" />
+                    </div>
+                    <div class="cell fifth">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_AutresRecettes}}</div>
+                        <div class="val" ng-if="!$ctrl.PFAEdit">{{$ctrl.AvancementRecette.AutresRecettesPFA | number: 2}} €</div>
+                        <input type="text" fred-input-number ng-if="$ctrl.PFAEdit" class="form-control" ng-model="$ctrl.AvancementRecette.AutresRecettesPFA" />
+                    </div>
+                    <div class="cell fifth">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_PenalitesEtRetenues}}</div>
+                        <div class="val" ng-if="!$ctrl.PFAEdit">{{$ctrl.AvancementRecette.PenalitesEtRetenuesPFA | number: 2}} €</div>
+                        <input type="text" fred-input-number ng-if="$ctrl.PFAEdit" class="form-control" ng-model="$ctrl.AvancementRecette.PenalitesEtRetenuesPFA" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="bloc3">
+                <div class="colm-col">
+                    <div class="cell first">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_Total}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.BudgetRecette.TotalRecette | number: 2}} €</div>
+                    </div>
+                </div>
+                <div class="colm-col">
+                    <div class="cell second">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_TotalFacture}}</div>
+                        <div class="val">{{$ctrl.TotalAvancement() | number: 2}} €</div>
+                    </div>
+                    <div class="cell second b">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_Correctif}}</div>
+                        <span class="amount"><input type="text" fred-input-number class="form-control" ng-model="$ctrl.AvancementRecette.Correctif"></span>
+                    </div>
+                    <div class="cell second c">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_Production}}</div>
+                        <div class="val">{{$ctrl.TotalFacture() | number: 2}} €</div>
+                    </div>
+                </div>
+                <div class="colm-col">
+                    <div class="cell third">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_TotalFacture}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.TotalAvancementPreviousRecette | number: 2}} €</div>
+                    </div>
+                    <div class="cell third b">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_Correctif}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.CorrectifPrevious | number : 2}} €</div>
+                    </div>
+                    <div class="cell third c">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_Production}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.TotalAvancementPreviousFacture | number: 2}} €</div>
+                    </div>
+                </div>
+                <div class="colm-col">
+                    <div class="cell fourth">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_TotalFacture}}</div>
+                        <div class="val">{{$ctrl.TotalAvancement() - $ctrl.AvancementRecette.TotalAvancementPreviousRecette | number: 2}} €</div>
+                    </div>
+                    <div class="cell fourth b">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_Correctif}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.Correctif - $ctrl.AvancementRecette.CorrectifPrevious | number: 2}} €</div>
+                    </div>
+                    <div class="cell fourth c">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_Production}}</div>
+                        <div class="val">{{$ctrl.TotalFacture() - $ctrl.AvancementRecette.TotalAvancementPreviousFacture | number: 2}} €</div>
+                    </div>
+                </div>
+                <div class="colm-col">
+                    <div class="cell fifth">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_TotalFacture}}</div>
+                        <div class="val">{{$ctrl.TotalPFA() | number: 2}} €</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bloc4">
+                <div class="colm-col">
+                    <div class="cell">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_DernierTauxFraisGeneraux}} </div>
+                        <span class="percent">
+                            <input type="text" class="form-control" fred-input-number ng-model="$ctrl.AvancementRecette.TauxFraisGeneraux" />
+                        </span>
+                    </div>
+                    <div class="cell">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_AjustementFraisGeneraux}}</div>
+                        <span class="amount">
+                            <input type="text" class="form-control" fred-input-number ng-model="$ctrl.AvancementRecette.AjustementFraisGeneraux" />
+                        </span>
+                    </div>
+                </div>
+                <div class="colm-col">
+                    <div class="cell">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_TauxFraisGeneraux}}</div>
+                        <span class="percent">
+                            <input type="text" class="form-control" fred-input-number ng-model="$ctrl.AvancementRecette.AvancementTauxFraisGeneraux" />
+                        </span>
+                    </div>
+                    <div class="cell">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_AjustementFraisGeneraux}}</div>
+                        <span class="amount">
+                            <input type="text" class="form-control" fred-input-number ng-model="$ctrl.AvancementRecette.AvancementAjustementFraisGeneraux" />
+                        </span>
+                    </div>
+                </div>
+                <div class="colm-col">
+                    <div class="cell">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_DernierTauxFraisGeneraux}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.AvancementTauxFraisGenerauxPrevious | number: 2 }} %</div>
+                    </div>
+                    <div class="cell">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_DernierAjustementFraisGeneraux}}</div>
+                        <div class="val">{{$ctrl.AvancementRecette.AvancementAjustementFraisGenerauxPrevious | number : 2 }} €</div>
+                    </div>
+                </div>
+                <div class="colm-col">
+                    <div class="cell">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_DifferenceTauxFraisGeneraux}}</div>
+                        <div class="val">{{$ctrl.TotalAvancementTauxFraisGeneraux()}} %</div>
+                    </div>
+                    <div class="cell">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_DifferenceAjustementFraisGeneraux}}</div>
+                        <div class="val">{{$ctrl.TotalAvancementAjustementFraisGeneraux()}} €</div>
+                    </div>
+                </div>
+                <div class="colm-col">
+                    <div class="cell">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_DernierTauxFraisGenerauxPFA}}</div>
+                        <span class="percent">
+                            <input type="text" class="form-control" fred-input-number ng-model="$ctrl.AvancementRecette.TauxFraisGenerauxPFA" />
+                        </span>
+                    </div>
+                    <div class="cell">
+                        <div class="lbl">{{$ctrl.resources.AvancementRecette_AjustementFraisGenerauxPFA}}</div>
+                        <span class="amount">
+                            <input type="text" class="form-control" fred-input-number ng-model="$ctrl.AvancementRecette.AjustementFraisGenerauxPFA" />
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

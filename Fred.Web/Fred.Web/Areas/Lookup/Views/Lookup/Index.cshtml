@@ -1,0 +1,619 @@
+﻿
+@{
+  ViewBag.Title = "Budget";
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+
+
+@section styles {
+  
+}
+
+@section scripts {
+
+  @Scripts.Render("~/LookupIndexBundle.js")
+  <style>
+    .title {
+      font-weight: 800;
+    }
+
+    .containerLookUp {
+      padding: 10px;
+    }
+
+    .detailLookUp {
+      padding: 15px;
+    }
+
+    h4 {
+      margin-top: 25px;
+    }
+
+    .bg-info {
+      margin-top: 25px;
+    }
+
+      .bg-info .a.title {
+        text-align: center;
+      }
+  </style>
+}
+
+<div class="containerLookUp" ng-controller="LookupController as $ctrl">
+
+  <h1>Documentation Lookup</h1>
+  <h2 class="title"> Il existe 2 versions de la lookup :</h2>
+  <h4 class="title"> lookup</h4>
+  <p>
+    Une version qui n'a pas de represention graphique, c'est la directive lookup.<br>
+    Ceci principalement pour une question de retro-compatibilite et cela permet aussi d'avoir une customisation maximale de la représentation du bouton d'ouverture.<br>
+    Sa representation graphique est definie dans son contenu. Le clique sur son contenu ouvrira la barre de recherche.<br>
+    Cette version est surtout utilisée pour afficher une image.
+  </p>
+
+  <div> </div>
+  <h4 class="title"> lookup-standalone</h4>
+  <p>
+    Une autre version, le lookup-standalone, est une version avec une representation avec 2 boutons.<br>
+    Un bouton qui ouvre la barre de recherche et un bouton qui supprime le contenu.
+  </p>
+
+  <div class="row bg-info">
+
+    <h3 class="col-md-12 a title"> DOCUMENTATION DES PARAMETRES</h3>
+
+    <xmp>
+      // [SEULEMENT SUR LOOKUP-STANDALONE]
+      //texte affiché
+      text: "<",
+
+      // [SEULEMENT SUR LOOKUP-STANDALONE]
+      //tooltip sur le bouton d'ouverture
+      tooltip: "<",
+
+      // [URL OU ON-CLICK OBLIGATOIRE (SOIT L UN SOIT L AUTRE)]
+      // Action executer au click sur l'element.
+      // Doit retourner l'url de l'api sur laquelle la recherche doit etre faite.
+      // Exemple :/api/CI/SearchLight/
+      // Attention, seule la valeur 'CI' dans l'exemple ci-dessus a de l'importance.
+      // L'url SearchLight sera automatiquement appelée.
+      // Si l'attribut n'est pas déclaré alors l'url appelé est defini par l'attribut 'url'.
+      onClick: '&',
+
+      // Action executée lors de la selection d'un element dans la barre de recherche
+      // Exemple de déclaration => onSelect: onSelectCi(item)
+      // ici 'item' contient l'élement selectionné.
+      onSelect: '&',
+
+      // [SEULEMENT SUR LOOKUP-STANDALONE]
+      // Action executé lors du click sur le bouton supprimé
+      onDelete: '&',
+
+      //Active ou desactive le lookup.
+      ngDisabled: '=ngDisabled',
+
+      // Ne pas renseigné MAIS il faut fournir un ngModel a la directive.
+      pickListModel: '=ngModel',
+
+      //texte affiché comme titre dans le panneaux de recherche.
+      searchTitle: "@@?",
+
+      //texte affiché comme Placeholder dans le panneaux de recherche.
+      searchPlaceholder: "@@?",
+
+      // [OPTIONNEL VALEUR PAR DEFAULT FALSE]
+      //Attribut qui est obligatoire a true si on affiche le lookup dans une popup
+      showInPopup: '<',
+
+      styleParent: "<",
+
+      // [OPTIONNEL VALEUR PAR DEFAULT FALSE]
+      //Permet de creer un item dans le lookup si aucune donnée n'est trouvéz sur le serveur
+      //L'item créer contiendra 2 champs :
+      // - CodeRef = sera egal au champ de recherche
+      // - LibelleRef = sera egal à : "Valeur inexistante. Voulez-vous saisir " + $ctrl.searchText + "?"
+      //valeur par defaut = false
+      enableDefaultSelection: '=?',
+
+      // [URL OU ON-CLICK OBLIGATOIRE (SOIT L UN SOIT L AUTRE)]
+      //url du serveur. cette valeur n'est pas pris en compte si l'attribut onClick est defini.
+      url: '@@'
+
+      // [SEULEMENT SUR LOOKUP-STANDALONE]
+      // [OPTIONNEL VALEUR PAR DEFAULT FALSE]
+      // Affiche le bouton de suppression seulement quand on survole le lookup qui a une valeur.
+      showDeleteButtonOnMouseOver: '<',
+
+      // [SEULEMENT SUR LOOKUP-STANDALONE]
+      // [OPTIONNEL VALEUR PAR DEFAULT 'glyphicon glyphicon-search']
+      // Permet de surcharger la classe du span qui affiche l'icone de recherche.
+      searchIconClass: '@@',
+
+      // [SEULEMENT SUR LOOKUP-STANDALONE]
+      // [OPTIONNEL VALEUR PAR DEFAULT FALSE]
+      // Afficher l'icone de recherche seulement quand aucun element n'a été selectionné.
+      showSearchIconOnlyWhenEmpty: '<',
+
+      // [SEULEMENT SUR LOOKUP-STANDALONE]
+      // [OPTIONNEL VALEUR PAR DEFAULT TRUE]
+      // Afficher le boutton de suppression.
+      showDeleteButton: '<',
+
+      //Met une longeur maximale pour le champ de recherche de la barre de recherche.
+      searchMaxLength: '@@?',
+
+      // Permet de specifier si il y a une action de confirmation
+      // valeur par defaut = false
+      hasConfirm: '=',
+
+      // Action de confirmation
+      // Cela peux etre une action qui retourne une promise ou une action qui retourne true ou false
+      onConfirm: '&'
+    </xmp>
+  </div>
+  @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+  @*////////////////////////////////////////////////////////////////////////////////  LOOKUP   ////////////////////////////////////////////////////////////////////////////////
+    @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+
+  <div class="row bg-success detailLookUp">
+    <div class="col-md-6 col-md-offset-6 title">LOOKUP</div>
+
+    <div></div>
+    <div class="title">Démonstration</div>
+    <lookup search-title="Référentiels CI"
+            search-placeholder="Rechercher des CI"
+            on-click="$ctrl.showPickList1('CI', null)"
+            on-select="$ctrl.loadData1(item)"
+            ng-disabled="$ctrl.lookupIsDisabled"
+            ng-model="$ctrl.pickListCI">
+      <a style="color:red" class="clicable linkRef">Texte du lien  !!!</a>
+    </lookup>
+    <br>
+    <div class="title">Démonstration dynamique</div>
+    <div>ng-model</div>
+    <div class="col-md-11 col-md-offset-1">{{$ctrl.pickListCI | json}}</div>
+    <div>Disabled </div>
+    <input type="checkbox" ng-model="$ctrl.lookupIsDisabled" />
+    <div class="col-md-11 col-md-offset-1">Le lookup est {{$ctrl.lookupIsDisabled ? 'disabled': 'enabled'}}</div>
+
+    <br>
+    <div class="title">Explication :</div>
+    <div>Le lookup est un directive transclude. Elle englobe donc un élement Html.</div>
+    <div>Ceci a été fait pour la retrocompatibilité avec la directive picklist.</div>
+    <div></div>
+    <div class="title">Configuration du lookup :</div>
+    <div>LookupDirective.js est déja referencé au niveau global dans le layout et layout new</div>
+    <div>LookupTemplateComponent.js est déja referencé au niveau global dans le layout et layout new</div>
+    <br>
+    <div class="title">Le code :</div>
+    <xmp>
+      <lookup search-title="Référentiels CI"
+              search-placeholder="Rechercher des CI"
+              on-click="$ctrl.showPickList1('CI', null)"
+              on-select="$ctrl.loadData1(item)"
+              ng-disabled="$ctrl.lookupIsDisabled"
+              ng-model="$ctrl.pickListCI">
+        <a style="color:red" class="clicable linkRef">Texte du lien  !!!</a>
+      </lookup>
+    </xmp>
+
+  </div>
+
+
+
+
+  @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+  @*////////////////////////////////////////////////////////////////////////////////  LOOK UP IMAGE   ////////////////////////////////////////////////////////////////////////////////
+    @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+  <div class="row bg-info detailLookUp">
+    <div class="col-md-6 col-md-offset-6 title">Lookup Image </div>
+    <div class="title">Démonstration</div>
+    <lookup ng-model="$ctrl.CILookup3"
+            text="$ctrl.CILookup3.Code"
+            search-title="{{$ctrl.searchTitle}}"
+            search-placeholder="{{$ctrl.Placeholder}}"
+            on-click="$ctrl.initLookup3()"
+            on-select="$ctrl.onSelectLookup3('lookup3', item)">
+      <span class="inputPLSearch inputPLSearchParent lookup-image-plus"></span>
+    </lookup>
+    <br>
+    <div class="title">Le code :</div>
+    <xmp>
+
+      <lookup ng-model="$ctrl.CILookup3"
+              text="$ctrl.CILookup3.Code"
+              search-title="{{$ctrl.searchTitle}}"
+              search-placeholder="{{$ctrl.Placeholder}}"
+              on-click="$ctrl.initLookup3()"
+              on-select="$ctrl.onSelectLookup3('lookup3', item)">
+        <span class="inputPLSearch inputPLSearchParent lookup-image-plus"></span>
+      </lookup>
+    </xmp>
+
+    <div class="title">Information </div>
+    <div>Jouer avec les classes sur le span pour modifier l'apparence du boutton"</div>
+  </div>
+
+
+
+
+  @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+  @*////////////////////////////////////////////////////////////////////////////////  STANDALONE   ////////////////////////////////////////////////////////////////////////////////
+    @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+
+
+
+
+  <div class="row bg-success detailLookUp">
+    <div class="col-md-6 col-md-offset-6 title">Lookup standalone</div>
+    <div class="title">Démonstration</div>
+    <lookup-standalone class="formulaire"
+                       ng-model="$ctrl.CILookup3"
+                       text="$ctrl.CILookup3.Code"
+                       search-title="{{$ctrl.searchTitle}}"
+                       search-placeholder="{{$ctrl.Placeholder}}"
+                       on-click="$ctrl.initLookup3()"
+                       on-select="$ctrl.onSelectLookup3('lookup3', item)"
+                       on-delete="$ctrl.onDeleteLookup3()"
+                       ng-disabled="$ctrl.lookupIsDisabled">
+    </lookup-standalone>
+    <br>
+    <div class="title">Démonstration dynamique</div>
+    <div>ng-model</div>
+    <div class="col-md-11 col-md-offset-1">{{$ctrl.CILookup3 | json}}</div>
+
+    <div>text (Texte Affiché)</div>
+    <div class="col-md-11 col-md-offset-1">{{$ctrl.CILookup3.Code | json}}</div>
+
+    <div>search-title (Texte Affiché comme titre dans la recherche)</div>
+    <div class="col-md-11 col-md-offset-1">{{$ctrl.searchTitle}}</div>
+
+    <div>search-placeholder (Texte Affiché dans le placeholder de la recherche)</div>
+    <div class="col-md-11 col-md-offset-1">{{$ctrl.Placeholder}}</div>
+
+    <div>Disabled </div>
+    <input type="checkbox" ng-model="$ctrl.lookupIsDisabled" />
+    <div class="col-md-11 col-md-offset-1">Le lookup est {{$ctrl.lookupIsDisabled ? 'disabled': 'enabled'}}</div>
+
+
+
+    <div class="title">Configuration:</div>
+    <div>LookupDirective.js est déja referencé au niveau global dans le layout et layout new</div>
+    <div>LookupStandaloneComponent.js est déja referencé au niveau global dans le layout et layout new</div>
+    <div>Rajouter la class="formulaire"</div>
+    <br>
+    <div class="title">Le code :</div>
+    <xmp>
+      <lookup-standalone class="formulaire"
+                         ng-model="{{$ctrl.CILookup3}}"
+                         text="{{$ctrl.CILookup3.Code}}"
+                         search-title="{{$ctrl.searchTitle}}"
+                         search-placeholder="{{$ctrl.Placeholder}}"
+                         on-click="$ctrl.initLookup3()"
+                         on-select="$ctrl.onSelectLookup3('lookup3', selectedRef)"
+                         on-delete="$ctrl.onDeleteLookup3()"
+                         ng-disabled="$ctrl.lookupIsDisabled">
+
+      </lookup-standalone>
+    </xmp>
+  </div>
+
+
+
+  @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+  @*////////////////////////////////////////////////////////////////////////////////  STANDALONE tableau  ////////////////////////////////////////////////////////////////////////////////
+    @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+
+
+
+
+  <div class="row bg-info detailLookUp">
+    <div class="col-md-6 col-md-offset-6 title">Lookup standalone pour un affichage dans un tableau</div>
+    <div class="title">Démonstration</div>
+    <lookup-standalone class="boutons"
+                       show-delete-button-on-mouse-over="true"
+                       show-search-icon-only-when-empty="true"
+                       search-icon-class="glyphicon glyphicon-plus"
+                       ng-model="$ctrl.CILookup3"
+                       text="$ctrl.CILookup3.Code"
+                       search-title="{{$ctrl.searchTitle}}"
+                       search-placeholder="{{$ctrl.Placeholder}}"
+                       on-click="$ctrl.initLookup3()"
+                       on-select="$ctrl.onSelectLookup3('lookup3', selectedRef)"
+                       on-delete="$ctrl.onDeleteLookup3()"
+                       ng-disabled="$ctrl.lookupIsDisabled">
+    </lookup-standalone>
+    <br>
+    <div class="title">Configuration :</div>
+    <div>En rajoutant show-delete-button-on-mouse-over="true" le bouton de suppression n'est visible que quand on survole l'element.</div>
+    <div>En rajoutant show-search-icon-only-when-empty="true" l'icone de recherche n'est visible que quand l'element est vide.</div>
+    <div>En rajoutant search-icon-class="glyphicon glyphicon-plus" on applique une classe sur le span representant la barre de recherche.</div>
+    <div>Rajouter la class="boutons" pour une representation graphique du lookup dans un tableau</div>
+    <br>
+    <div class="title">Le code :</div>
+    <xmp>
+
+      <lookup-standalone class="boutons"
+                         show-delete-button-on-mouse-over="true"
+                         show-search-icon-only-when-empty="true"
+                         search-icon-class="glyphicon glyphicon-plus"
+                         ng-model="$ctrl.CILookup3"
+                         text="$ctrl.CILookup3.Code"
+                         search-title="{{$ctrl.searchTitle}}"
+                         search-placeholder="{{$ctrl.Placeholder}}"
+                         on-click="$ctrl.initLookup3()"
+                         on-select="$ctrl.onSelectLookup3('lookup3', selectedRef)"
+                         on-delete="$ctrl.onDeleteLookup3()"
+                         ng-disabled="$ctrl.lookupIsDisabled">
+      </lookup-standalone>
+    </xmp>
+  </div>
+
+
+  @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+  @*////////////////////////////////////////////////////////////////////////////////  STANDALONE Barre de recherche  ////////////////////////////////////////////////////////////////////////////////
+    @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+
+
+
+
+  <div class="row bg-success detailLookUp">
+    <div class="col-md-6 col-md-offset-6 title">Lookup standalone pour une barre de recherche</div>
+    <div class="title">Démonstration</div>
+    <lookup-standalone class="searchBar"
+                       ng-model="$ctrl.CILookup3"
+                       text="$ctrl.CILookup3.Code"
+                       search-title="{{$ctrl.searchTitle}}"
+                       search-placeholder="{{$ctrl.Placeholder}}"
+                       on-click="$ctrl.initLookup3()"
+                       on-select="$ctrl.onSelectLookup3('lookup3', selectedRef)"
+                       on-delete="$ctrl.onDeleteLookup3()"
+                       ng-disabled="$ctrl.lookupIsDisabled">
+    </lookup-standalone>
+    <br>
+    <div class="title">Configuration :</div>
+    <div>Rajouter la class="searchBar" pour une representation graphique du lookup dans un tableau</div>
+  </div>
+
+
+
+  @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+  @*////////////////////////////////////////////////////////////////////////////////  STANDALONE Dans popup  ////////////////////////////////////////////////////////////////////////////////
+    @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+
+
+
+
+  <div class="row bg-info detailLookUp">
+    <div class="col-md-6 col-md-offset-6 title">Lookup standalone dans une popup.</div>
+    <div class="title">Démonstration</div>
+    <div><button ng-click="$ctrl.openModal()">Open modal</button></div>
+
+    <br>
+    <div class="title">Configuration :</div>
+    <div>Rajouter show-in-popup="true" pour reafficher correctement la barre de recherche.</div>
+    <br>
+    <br>
+
+    <div class="title">Info</div>
+
+    <div>Quand on veux ouvrir inclure un lookup dans une popup mettre  show-in-popup="true" </div>
+    <div>cela va replacer l'element de recheche sur le cote gauche</div>
+    <div>Il faudra peu etre aussi rajouter une classe pour que la barre de recherche passe par dessus de la popup</div>
+    <xmp>
+      <style>
+        .modal.uib-modal-window {
+          z-index: 1300 !important;
+        }
+      </style>
+    </xmp>
+  </div>
+
+
+
+
+  @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+  @*////////////////////////////////////////////////////////////////////////////////  STANDALONE AFFICHAGE DU BUTTON DE SUPPRESSION  ////////////////////////////////////////////////////////////////////////////////
+    @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+
+
+
+
+  <div class="row bg-success detailLookUp">
+    <div class="col-md-6 col-md-offset-6 title">Lookup standalone sans bouton de suppression</div>
+
+    <div class="title">Démonstration avec :</div>
+    <div class="title">ng-model +== null au chargement </div>
+    <div class="title">show-delete-button="false" </div>
+    <lookup-standalone class="noRemove"
+                       ng-model="$ctrl.CILookup4"
+                       show-delete-button="false"
+                       text="$ctrl.CILookup4.Code"
+                       search-title="{{$ctrl.searchTitle}}"
+                       search-placeholder="{{$ctrl.Placeholder}}"
+                       on-click="$ctrl.initLookup3()"
+                       on-select="$ctrl.onSelectLookup3('lookup3', selectedRef)"
+                       on-delete="$ctrl.onDeleteLookup3()"
+                       ng-disabled="$ctrl.lookupIsDisabled">
+    </lookup-standalone>
+    <br>
+    <br>
+    <br>
+
+    <div class="title">Démonstration avec :</div>
+    <div class="title">ng-model !== null au chargement </div>
+    <div class="title">show-delete-button="false" </div>
+    <lookup-standalone class="noRemove"
+                       ng-model="$ctrl.CILookup5"
+                       show-delete-button="false"
+                       text="$ctrl.CILookup5.Code"
+                       search-title="{{$ctrl.searchTitle}}"
+                       search-placeholder="{{$ctrl.Placeholder}}"
+                       on-click="$ctrl.initLookup3()"
+                       on-select="$ctrl.onSelectLookup3('lookup3', selectedRef)"
+                       on-delete="$ctrl.onDeleteLookup3()"
+                       ng-disabled="$ctrl.lookupIsDisabled">
+    </lookup-standalone>
+    <br>
+    <br>
+    <br>
+    <div>Disabled </div>
+    <input type="checkbox" ng-model="$ctrl.lookupIsDisabled" />
+    <div class="col-md-11 col-md-offset-1">Le lookup est {{$ctrl.lookupIsDisabled ? 'disabled': 'enabled'}}</div>
+    <br>
+    <br>
+    <br>
+    <div class="title">Configuration :</div>
+    <div>Rajouter show-delete-button="false" ou show-delete-button="true"</div>
+  </div>
+
+
+
+
+
+
+  @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+  @*////////////////////////////////////////////////////////////////////////////////  STANDALONE AFFICHAGE AVEC LONGUEUR DE TEXTE MAXIMAL  ////////////////////////////////////////////////////////////////////////////////
+    @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+
+
+
+
+  <div class="row bg-info detailLookUp">
+    <div class="col-md-6 col-md-offset-6 title">Lookup standalone avec une longueur de texte maximal</div>
+
+    <div class="title">Démonstration </div>
+
+    <lookup-standalone class="maxText"
+                       ng-model="$ctrl.CILookup4"
+                       show-delete-button="false"
+                       text="$ctrl.CILookup4.Code"
+                       search-title="{{$ctrl.searchTitle}}"
+                       search-placeholder="{{$ctrl.Placeholder}}"
+                       search-max-length="{{$ctrl.max}}"
+                       on-click="$ctrl.initLookup3()"
+                       on-select="$ctrl.onSelectLookup3('lookup3', selectedRef)"
+                       on-delete="$ctrl.onDeleteLookup3()"
+                       ng-disabled="$ctrl.lookupIsDisabled">
+    </lookup-standalone>
+    <br>
+    <br>
+    <br>
+
+
+    <br>
+    <br>
+    <br>
+    <div>Longeur maximale du champ de recherche  </div>
+    <input type="text" ng-model="$ctrl.max" />
+
+    <br>
+    <br>
+    <br>
+    <div class="title">Configuration :</div>
+
+    <div>Rajouter  search-max-length="{{$ctrl.max}}"</div>
+  </div>
+
+
+
+  @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+  @*////////////////////////////////////////////////////////////////////////////////  CONFIRMATION  ////////////////////////////////////////////////////////////////////////////////
+    @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+
+
+
+
+  <div class="row bg-info detailLookUp">
+    <div class="col-md-6 col-md-offset-6 title">Lookup standalone avec boite de dialogue de confirmation</div>
+
+    <div class="title">Démonstration </div>
+
+    <lookup-standalone class="maxText"
+                       ng-model="$ctrl.CILookup4"
+                       show-delete-button="false"
+                       text="$ctrl.CILookup4.Code"
+                       search-title="{{$ctrl.searchTitle}}"
+                       search-placeholder="{{$ctrl.Placeholder}}"
+                       search-max-length="{{$ctrl.max}}"
+                       on-click="$ctrl.initLookup3()"
+                       on-select="$ctrl.onSelectLookup3('lookup3', selectedRef)"
+                       on-delete="$ctrl.onDeleteLookup3()"
+                       has-confirm="true"
+                       on-confirm="$ctrl.confirmActionPromise()">
+    </lookup-standalone>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p>
+      Preciser 2 attributs en html :
+    </p>
+
+    <p> has-confirm="true" </p>
+    <p>on-confirm="$ctrl.confirmActionPromise()" </p>
+
+    <p> voici le code js : </p>
+
+    <p> $ctrl.confirmActionPromise = confirmActionPromise; </p>
+    <p>function confirmActionPromise() { </p>
+    <p>   return confirmDialog.confirm($ctrl.resources,"Confirmer vous l'ouverture du lookup ?") </p>
+    <p>                       .then(function () { </p>
+    <p>                            console.log("Vous avez cliquez sur oui !"); </p>
+    <p>                       }); </p>
+    <p> }; </p>
+    
+    <br>
+    <br>
+
+  </div>
+
+
+
+  <div class="row bg-info detailLookUp">
+    <div class="col-md-6 col-md-offset-6 title">Lookup standalone avec fonction de confirmation</div>
+
+    <div class="title">Démonstration </div>
+    <div class="title">Ici c'est un exemple ou la fonction de confirmation retourne toujours false, la boite ne s'ouvrira jamais </div>
+    <lookup-standalone class="maxText"
+                       ng-model="$ctrl.CILookup4"
+                       show-delete-button="false"
+                       text="$ctrl.CILookup4.Code"
+                       search-title="{{$ctrl.searchTitle}}"
+                       search-placeholder="{{$ctrl.Placeholder}}"
+                       search-max-length="{{$ctrl.max}}"
+                       on-click="$ctrl.initLookup3()"
+                       on-select="$ctrl.onSelectLookup3('lookup3', selectedRef)"
+                       on-delete="$ctrl.onDeleteLookup3()"
+                       has-confirm="true"
+                       on-confirm="$ctrl.confirmAction()">
+    </lookup-standalone>
+    <br>
+    <br>
+    <br>
+    <p>
+      Preciser 2 attributs en html :
+    </p>
+
+    <p> has-confirm="true" </p>
+    <p> on-confirm="$ctrl.confirmAction()" </p>
+
+    <p>voici le code js : </p>
+
+    <p> $ctrl.confirmAction = confirmAction; </p>
+    <p> function confirmAction() { </p>
+          return false; </p>
+    <p>  }; </p>
+   
+    <br>
+    <br>
+    <br>
+
+  </div>
+
+
+
+</div>
+
+

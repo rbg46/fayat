@@ -1,0 +1,75 @@
+﻿$color_1: #fff;
+$background_color_1: transparent;
+$background_color_2: #fff;
+
+
+.home-page {
+    height: auto;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+
+    .home-overlay {
+        background: linear-gradient(rgba(0, 0, 0, 0.1),rgba(255, 255, 255, 0.5));
+        position: fixed;
+        top: 0px;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        z-index: -1;
+    }
+
+    .title {
+        color: $color_1;
+        display: block;
+        font-size: 32px;
+        padding-left: 5%;
+        text-shadow: 1px 1px 0 rgb(0,85,160);
+    }
+
+    .pages {
+        width: 10%;
+        height: 5%;
+        margin: 20px auto 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        .indic {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border: 1px solid #fff;
+            cursor: pointer;
+        }
+
+        .indic.off {
+            background-color: $background_color_1;
+        }
+
+        .indic.on {
+            background-color: $background_color_2;
+        }
+    }
+
+    .background-img {
+        height: 100%;
+        position: fixed;
+        top: 0px;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        z-index: -1;
+    }
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+    .home-page {
+        .title {
+            font-size: 22px;
+        }
+    }
+}

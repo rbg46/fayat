@@ -1,0 +1,490 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Reception_Controller_ModalBuyer_AucuneCommandeAImporter" xml:space="preserve">
+    <value>Il n'y a aucune commande à importer</value>
+    <comment>reception.controller.js</comment>
+  </data>
+  <data name="Reception_Index_Button_ImporterCommandesBuyer" xml:space="preserve">
+    <value>Importer des commandes BUYER</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv1_CI" xml:space="preserve">
+    <value>CI</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_Titre" xml:space="preserve">
+    <value>Commande(s) à réceptionner</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv1_Commande" xml:space="preserve">
+    <value>Commande</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv1_Fournisseur" xml:space="preserve">
+    <value>Fournisseur</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Controller_ModalBuyer_ImportationDonnees_Error" xml:space="preserve">
+    <value>Une erreur s'est produite lors de l'importation des données</value>
+    <comment>reception.controller.js</comment>
+  </data>
+  <data name="Reception_Controller_ModalBuyer_ImportationDonnees_Success" xml:space="preserve">
+    <value>commandes ont été importées avec succès</value>
+    <comment>reception.controller.js</comment>
+  </data>
+  <data name="Reception_Index_TableNiv2_Ligne" xml:space="preserve">
+    <value>Ligne</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_Table_Montant" xml:space="preserve">
+    <value>Montant</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv2_PU" xml:space="preserve">
+    <value>PU</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv1_Receptionnee" xml:space="preserve">
+    <value>Réceptionnée</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_NbrCommande" xml:space="preserve">
+    <value>commande(s)</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Controller_ModalBuyer_Recherche_Error" xml:space="preserve">
+    <value>Une erreur s'est produite lors de la recherche</value>
+    <comment>reception.controller.js</comment>
+  </data>
+  <data name="Reception_Index_TableNiv2_Tache" xml:space="preserve">
+    <value>Tâche</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv2_Ressource" xml:space="preserve">
+    <value>Ressource</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv2_Unite" xml:space="preserve">
+    <value>Unité</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_Search_CommandesSoldees" xml:space="preserve">
+    <value>Voir aussi les commandes soldées</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv3_Rapprochee_Tooltip" xml:space="preserve">
+    <value>Impossible de modifier une réception rapprochée</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv3_Suppression_Tooltip" xml:space="preserve">
+    <value>Cliquer pour supprimer la réception</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv3_Modification_Tooltip" xml:space="preserve">
+    <value>Cliquer pour visualiser ou modifier la réception</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_Rechercher_Placeholder" xml:space="preserve">
+    <value>Rechercher une Commande ...</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_SousTitre" xml:space="preserve">
+    <value>Liste des réceptions</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Controller_ModalBuyer_ImportationEnCours" xml:space="preserve">
+    <value>Importation en cours...</value>
+    <comment>reception.controller.js</comment>
+  </data>
+  <data name="Reception_Controller_ModalBuyer_NbrCommandeTrouvee" xml:space="preserve">
+    <value>L'agent a trouvé {0} commandes</value>
+    <comment>reception.controller.js</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_BonCommande" xml:space="preserve">
+    <value>Numéro bon de livraison</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_BonCommande_Placeholder" xml:space="preserve">
+    <value>Bon de livraison</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_Commentaire" xml:space="preserve">
+    <value>Commentaire</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_Commentaire_Placeholder" xml:space="preserve">
+    <value>Commentaire</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_Date" xml:space="preserve">
+    <value>Date réception</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_Date_Placeholder" xml:space="preserve">
+    <value>Date</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_Libelle_Placeholder" xml:space="preserve">
+    <value>1ere ligne cde</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_Montant" xml:space="preserve">
+    <value>Montant</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_PU" xml:space="preserve">
+    <value>PU</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_PU_Placeholder" xml:space="preserve">
+    <value>PU</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_Quantite" xml:space="preserve">
+    <value>Quantité</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_Quantite_Placeholder" xml:space="preserve">
+    <value>Quantité</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_Ressource" xml:space="preserve">
+    <value>Ressource</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_Tache" xml:space="preserve">
+    <value>Tâche</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_TitreAjout" xml:space="preserve">
+    <value>Ajout d'une réception</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_Unite" xml:space="preserve">
+    <value>Unité</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_Unite_Placeholder" xml:space="preserve">
+    <value>Unité</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalBuyer_Annuler" xml:space="preserve">
+    <value>Annuler</value>
+    <comment>commande-buyer-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalBuyer_Annuler_Tooltip" xml:space="preserve">
+    <value>Annuler</value>
+    <comment>commande-buyer-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalBuyer_DateDebut" xml:space="preserve">
+    <value>Date de début</value>
+    <comment>commande-buyer-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalBuyer_DateFin" xml:space="preserve">
+    <value>Date de fin</value>
+    <comment>commande-buyer-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalBuyer_Etablissement" xml:space="preserve">
+    <value>Etablissement</value>
+    <comment>commande-buyer-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalBuyer_Importer" xml:space="preserve">
+    <value>Importer</value>
+    <comment>commande-buyer-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalBuyer_Importer_Tooltip" xml:space="preserve">
+    <value>Importer les commandes Buyer</value>
+    <comment>commande-buyer-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalBuyer_Quitter" xml:space="preserve">
+    <value>Quitter</value>
+    <comment>commande-buyer-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalBuyer_Quitter_Tooltip" xml:space="preserve">
+    <value>Quitter</value>
+    <comment>commande-buyer-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalBuyer_Rechercher" xml:space="preserve">
+    <value>Lancer recherche</value>
+    <comment>commande-buyer-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalBuyer_Rechercher_Tooltip" xml:space="preserve">
+    <value>Rechercher les commandes éligible à l'importation</value>
+    <comment>commande-buyer-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalBuyer_Titre" xml:space="preserve">
+    <value>Rechercher et importer des commandes BUYER</value>
+    <comment>commande-buyer-modal.html</comment>
+  </data>
+  <data name="Reception_Index_TableNiv2_Quantite" xml:space="preserve">
+    <value>Quantité</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv3_BonLivraison" xml:space="preserve">
+    <value>Bon de livraison</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv3_Date" xml:space="preserve">
+    <value>Date</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv3_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv3_PU" xml:space="preserve">
+    <value>PU</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv3_Quantite" xml:space="preserve">
+    <value>Quantité</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv3_Ressource" xml:space="preserve">
+    <value>Ressource</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv3_Tache" xml:space="preserve">
+    <value>Tâche</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TableNiv3_Unite" xml:space="preserve">
+    <value>Unité</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_Table_Devise" xml:space="preserve">
+    <value>Devise</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_TitreOnglet" xml:space="preserve">
+    <value>Réception</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_TitreModification" xml:space="preserve">
+    <value>Modification d'une réception</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalBuyer_VerificationDateDebut_Erreur" xml:space="preserve">
+    <value>La date de début doit être inférieure à la date de fin.</value>
+    <comment>commande-buyer-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalBuyer_VerificationDateFin_Erreur" xml:space="preserve">
+    <value>La date de fin doit être supérieure à la date de début.</value>
+    <comment>commande-buyer-modal.html</comment>
+  </data>
+  <data name="Reception_Index_Add_New_Reception" xml:space="preserve">
+    <value>Cliquer pour ajouter une nouvelle réception</value>
+  </data>
+  <data name="Reception_Index_Ligne_Commande" xml:space="preserve">
+    <value>Ligne de commande</value>
+  </data>
+  <data name="Reception_Index_TableNiv1_Open_Order" xml:space="preserve">
+    <value>Cliquer pour ouvrir dans un autre onglet la commande</value>
+  </data>
+  <data name="Reception_Index_SearchBar_Or" xml:space="preserve">
+    <value>ou</value>
+  </data>
+  <data name="Reception_Index_TableNiv3_Duplication_Tooltip" xml:space="preserve">
+    <value>Cliquer pour dupliquer la réception</value>
+  </data>
+  <data name="Reception_Index_Button_Reception_Lignes_Selection" xml:space="preserve">
+    <value>Réceptionner les lignes sélectionnées</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_Fournisseur" xml:space="preserve">
+    <value>Fournisseur</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_ModalAjout_Numero_Bon_Commande" xml:space="preserve">
+    <value>Numéro bon de commande</value>
+    <comment>reception-modal.html</comment>
+  </data>
+  <data name="Reception_Index_Ligne_Avenant" xml:space="preserve">
+    <value>Ligne d'avenant</value>
+  </data>
+  <data name="Reception_Index_TableNiv2_Date_Avenant" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Reception_Index_TableNiv2_Numero_Avenant" xml:space="preserve">
+    <value>Numéro d'avenant</value>
+  </data>
+  <data name="Reception_Index_Button_Favori" xml:space="preserve">
+    <value>Cliquer pour enregistrer les critères de recherche comme favori</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_Table_Action" xml:space="preserve">
+    <value>Actions</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_ModalConfirmation" xml:space="preserve">
+    <value>La réception est datée sur une période déjà transférée en FAR/clôturée, et va donc être comptabilisée sur une période plus récente. Voulez-vous continuer ?</value>
+    <comment>index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_Search_PiecesJointes" xml:space="preserve">
+    <value>Réceptions avec PJ</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Reception_Index_Autre_Information_Placeholder" xml:space="preserve">
+    <value>Autre information...(matricule, société, étab.)</value>
+  </data>
+  <data name="Reception_Index_Nom_Placeholder" xml:space="preserve">
+    <value>Nom du personnel...</value>
+  </data>
+  <data name="Reception_Index_Prenom_Placeholder" xml:space="preserve">
+    <value>Prénom du  personnel...</value>
+  </data>
+  <data name="Reception_Search_AuteurCreation" xml:space="preserve">
+    <value>Crée par</value>
+  </data>
+  <data name="Reception_SelectACi" xml:space="preserve">
+    <value>Veuillez sélectionner un CI</value>
+  </data>
+  <data name="Reception_Index_Confirmez_Vous_Le_Deverrouillage" xml:space="preserve">
+    <value>Confirmez vous le déverrouillage ?</value>
+  </data>
+  <data name="Reception_Index_Confirmez_Vous_Le_Verrouillage" xml:space="preserve">
+    <value>Confirmez vous le verrouillage ?</value>
+  </data>
+  <data name="Reception_Index_Deverrouiller" xml:space="preserve">
+    <value>Déverrouiller</value>
+  </data>
+  <data name="Reception_Index_Error_Already_Verrouiller" xml:space="preserve">
+    <value>La réception ne peut pas être ajoutée car la ligne de commande a été verrouillée</value>
+  </data>
+  <data name="Reception_Index_Verrouiller" xml:space="preserve">
+    <value>Verrouiller</value>
+  </data>
+  <data name="Reception_Index_OnlyReceptionsVerrouillees" xml:space="preserve">
+    <value>Seulement les réceptions verrouillées</value>
+  </data>
+  <data name="Reception_Quantity_Rules_Validator_GFTP_Error_Quantity_Negative" xml:space="preserve">
+    <value>La somme des réceptions sur la ligne de commande doit être négative.</value>
+  </data>
+  <data name="Reception_Quantity_Rules_Validator_GFTP_Error_Quantity_Positive" xml:space="preserve">
+    <value>La somme des réceptions sur la ligne de commande doit être positive.</value>
+  </data>
+  <data name="Reception_Index_Ligne_Avenant_Negative_Not_Modifiable_On_Closed_Peride" xml:space="preserve">
+    <value>La période est clôturée, il n’est plus possible de saisir une réception négative</value>
+  </data>
+</root>

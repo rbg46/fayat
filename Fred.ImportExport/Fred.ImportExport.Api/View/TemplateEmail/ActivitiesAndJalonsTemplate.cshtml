@@ -1,0 +1,164 @@
+﻿@using System.Globalization;
+@using Fred.Business.Email.ActivitySummary.Builders;
+@using Fred.ImportExport.Resources.Resources;
+@{
+    Layout = null;
+    var culture = CultureInfo.CreateSpecificCulture("fr-FR");
+}
+@model Fred.Entities.ActivitySummary.ActivitySummaryResult
+<p style="font-family: Arial, Helvetica, sans-serif;font-size: 13px;">
+    @Resource.ActivitiesAndJalonsTemplate_Bonjour,
+</p>
+<p style="font-family: Arial, Helvetica, sans-serif;font-size: 13px;">
+    @Resource.ActivitiesAndJalonsTemplate_Veuillez_trouver_etat_des_lieux
+</p>
+<table style="height: 20px; width: 330px;">
+    <tbody>
+        <tr>
+            <td style="width: 145px;">@Resource.ActivitiesAndJalonsTemplate_Rapport :</td>
+            <td style="width: 175px;">@Model.TotalRapportsAvalide1</td>
+        </tr>
+        <tr>
+            <td style="width: 145px;">@Resource.ActivitiesAndJalonsTemplate_Commande :</td>
+            <td style="width: 175px;">@Model.TotalCommandeAValider</td>
+        </tr>
+        <tr>
+            <td style="width: 145px;">@Resource.ActivitiesAndJalonsTemplate_Reception :</td>
+            <td style="width: 175px;">@Model.TotalReceptionsAviser</td>
+        </tr>
+    </tbody>
+    </tbody>
+</table>
+
+<br />
+@if (Model.HasActivitiesInProgress)
+{
+    <div style="width: 100%;">
+        <h3 style="font-family: Arial, Helvetica, sans-serif;font-size: 13px;font-weight: normal;width: calc(100% - 2px);padding: 5px 0;margin-top: 30px;text-transform:uppercase;">@Resource.ActivitiesAndJalonsTemplate_Tableau_bord_actions_a_mener</h3>
+        <table id="myTable" class="table" style="width: 800px;border-collapse: collapse;table-layout: fixed;font-family: Arial, Helvetica, sans-serif;font-size: 13px;" cellspacing="0">
+            <tbody>
+            <thead>
+                <tr style="height: 24px;vertical-align:top;">
+                    <td style="width: 320px; height: 24px;text-align: center"></td>
+                    <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: rgb(221,235,247);"> @Resource.ActivitiesAndJalonsTemplate_Rapports_a_valider</td>
+                    <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: rgb(221,235,247);">@Resource.ActivitiesAndJalonsTemplate_Commandes_a_valider</td>
+                    <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: rgb(221,235,247);">@Resource.ActivitiesAndJalonsTemplate_Receptions_a_viser</td>
+                    <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: rgb(221,235,247);">@Resource.ActivitiesAndJalonsTemplate_Budget_a_valider</td>
+                    <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: rgb(221,235,247);">@Resource.ActivitiesAndJalonsTemplate_Avancement_a_valider</td>
+                    <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: rgb(221,235,247);">  @Resource.ActivitiesAndJalonsTemplate_CB_a_valider</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var userActivitySummary in Model.UsersActivities)
+                {
+                    <tr style="height: 24px;vertical-align:top;">
+                        <td style="width: 320px; height: 24px;border: 2px solid black;"> @userActivitySummary.Labelle</td>
+                        <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: @userActivitySummary.ColorRapportsAvalide1.ToRgb();">@userActivitySummary.NombreRapportsAvalide1</td>
+                        <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: @userActivitySummary.ColorCommandeAValider.ToRgb();">@userActivitySummary.NombreCommandeAValider</td>
+                        <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: @userActivitySummary.ColorReceptionsAviser.ToRgb();">@userActivitySummary.NombreReceptionsAviser</td>
+                        <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: @userActivitySummary.ColorBudgetAvalider.ToRgb();"> @userActivitySummary.NombreBudgetAvalider</td>
+                        <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: @userActivitySummary.ColorAvancementAvalider.ToRgb();">@userActivitySummary.NombreAvancementAvalider</td>
+                        <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: @userActivitySummary.ColorControleBudgetaireAvalider.ToRgb();">@userActivitySummary.NombreControleBudgetaireAvalider</td>
+                    </tr>
+                }
+                @*METTRE EN GRAS CETTE LIGNE*@
+
+                <tr style="height: 24px;vertical-align:top;">
+                    <td style="width: 320px; height: 24px;border: 2px solid black;text-align: center"> @Resource.Total</td>
+                    <td style="width: 80px; height: 24px;border: 2px solid black;text-align: center">@Model.TotalRapportsAvalide1</td>
+                    <td style="width: 80px; height: 24px;border: 2px solid black;text-align: center">@Model.TotalCommandeAValider</td>
+                    <td style="width: 80px; height: 24px;border: 2px solid black;text-align: center">@Model.TotalReceptionsAviser</td>
+                    <td style="width: 80px; height: 24px;border: 2px solid black;text-align: center">@Model.TotalBudgetAvalider</td>
+                    <td style="width: 80px; height: 24px;border: 2px solid black;text-align: center">@Model.TotalAvancementAvalider</td>
+                    <td style="width: 80px; height: 24px;border: 2px solid black;text-align: center">@Model.TotalControleBudgetaireAvalider</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+}
+else
+{
+    <b>@Resource.ActivitiesAndJalonsTemplate_Aucune_action_en_attente</b>
+}
+<div style="width: 30%;">
+    <h3 style="font-family: Arial, Helvetica, sans-serif;font-size: 13px;font-weight: normal;width: 86%;padding: 5px 0;margin-top: 50px;text-transform:uppercase;">@Resource.ActivitiesAndJalonsTemplate_Tableau_bord_clotures</h3>
+
+    <table id="myTable" class="table" style="width: 800px;border-collapse: collapse;table-layout: fixed;font-family: Arial, Helvetica, sans-serif;font-size: 13px;" cellspacing="0">
+        <tbody>
+        <thead>
+            <tr style="height: 24px;vertical-align:top;">
+                <td style="width: 320px; height: 24px;text-align: center"></td>
+                <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: rgb(221,235,247);">
+                    @Resource.ActivitiesAndJalonsTemplate_Transfert_FAR
+                </td>
+                <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: rgb(221,235,247);">
+                    @Resource.ActivitiesAndJalonsTemplate_Cloture_Depenses
+                </td>
+                <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: rgb(221,235,247);">
+                    @Resource.ActivitiesAndJalonsTemplate_Validation_Avancement
+                </td>
+                <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: rgb(221,235,247);">
+                    @Resource.ActivitiesAndJalonsTemplate_Validation_CB
+                </td>
+                <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: rgb(221,235,247);">
+                    @Resource.ActivitiesAndJalonsTemplate_Avancement_a_valider
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var userActivitySummary in Model.UsersCiJalons)
+            {
+                <tr style="height: 24px;vertical-align:top;">
+                    <td style="width: 320px; height: 24px;border: 2px solid black;">
+                        @userActivitySummary.Labelle
+                    </td>
+                    <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: @userActivitySummary.ColorJalonTransfertFar.ToRgb();">
+                        @if (userActivitySummary.JalonTransfertFar.HasValue)
+                        {
+                            var JalonTransfertFar=string.Format("{0:MMM-yy}", @userActivitySummary.JalonTransfertFar.Value);
+                            @JalonTransfertFar
+
+                        }
+                    </td>
+                    <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: @userActivitySummary.ColorJalonClotureDepense.ToRgb();">
+                        @if (userActivitySummary.JalonClotureDepense.HasValue)
+                        {
+                            var JalonClotureDepense=string.Format("{0:MMM-yy}", @userActivitySummary.JalonClotureDepense.Value);
+                            @JalonClotureDepense
+
+                        }
+                    </td>
+                    <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: @userActivitySummary.ColorJalonAvancementvalider.ToRgb();">
+                        @if (userActivitySummary.JalonAvancementvalider.HasValue)
+                        {
+                            var JalonAvancementvalider=string.Format("{0:MMM-yy}", @userActivitySummary.JalonAvancementvalider.Value);
+                            @JalonAvancementvalider
+                        }
+                    </td>
+                    <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: @userActivitySummary.ColorJalonValidationControleBudgetaire.ToRgb();">
+                        @if (userActivitySummary.JalonValidationControleBudgetaire.HasValue)
+                        {
+                            var JalonValidationControleBudgetaire=string.Format("{0:MMM-yy}", @userActivitySummary.JalonValidationControleBudgetaire.Value);
+                            @JalonValidationControleBudgetaire
+                        }
+                    </td>
+                    <td style="width: 80px; height: 24px;text-align: center;border: 2px solid black;background-color: @userActivitySummary.ColorJalonCiCloturer.ToRgb();">
+                        @if (userActivitySummary.JalonCiCloturer.HasValue)
+                        {
+                            var JalonCiCloturer=string.Format("{0:MMM-yy}", @userActivitySummary.JalonCiCloturer.Value);
+                            @JalonCiCloturer
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<p style="font-family: Arial, Helvetica, sans-serif,bold ;font-size: 13px;font-weight: bold;">@Resource.ActivitiesAndJalonsTemplate_Pour_plus_de_renseignements : <a target="_blank" href="https://fred.fayat.com">fred.fayat.com</a></p>
+<br />
+<p style="font-family: Arial, Helvetica, sans-serif,bold ;font-size: 13px;font-weight: bold;">@Resource.ActivitiesAndJalonsTemplate_Cordialement</p>
+<p style="font-family: Arial, Helvetica, sans-serif,bold ;font-size: 13px;font-weight: bold;">@Resource.ActivitiesAndJalonsTemplate_Equipe_Fred</p>
+<br />
+<p style="font-family: Arial, Helvetica, sans-serif ;font-size: 11px;font-style: italic;font-weight: bold;">@Resource.ActivitiesAndJalonsTemplate_Ceci_est_un_email_automatique</p>

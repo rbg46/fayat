@@ -1,0 +1,294 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00-Libs", "00-Libs", "{032D6BC7-E475-4627-9203-A32B08AE08F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Analysis", "01-Analysis", "{60436168-B514-44DC-8982-EB4538E503A0}"
+	ProjectSection(SolutionItems) = preProject
+		Fred.ImportExport.ruleset = Fred.ImportExport.ruleset
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Presentation Layer", "03-Presentation Layer", "{CA8F01A5-ACF2-42E9-BA9B-7D8EAF1FC88E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-Business Layer", "04-Business Layer", "{B629E01C-D872-4A70-8797-57B91AFB4D3F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05-Data Access Layer", "05-Data Access Layer", "{FF165B36-D024-4834-B136-ADF4BA030ED6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "06-Persistence Layer", "06-Persistence Layer", "{8D1175F8-58C2-44F6-BA0E-FBBC71015980}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "07-Shared Layer", "07-Shared Layer", "{3AA8A684-9109-4754-AA77-92D13E8C0B06}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "08-Tests", "08-Tests", "{31441219-5B28-4284-82FA-68C79AB9F749}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "09-SyncFusion", "09-SyncFusion", "{E3EC13AE-72DA-4473-883A-89DDCB479E77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.Web", "Fred.ImportExport.Web\Fred.ImportExport.Web.csproj", "{9C7A2572-C9A2-4D87-B833-1BE00E2AC0E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.Api", "Fred.ImportExport.Api\Fred.ImportExport.Api.csproj", "{8904D5C1-9578-4F6C-A5AE-1316022762B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.DataAccess", "Fred.ImportExport.DataAccess\Fred.ImportExport.DataAccess.csproj", "{EB202E1C-5DD4-499C-BAF6-7AFD92CAEC95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.Business", "Fred.ImportExport.Business\Fred.ImportExport.Business.csproj", "{2BEE77D7-295D-48A4-924E-8574E3E22321}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.Entities", "Fred.ImportExport.Entities\Fred.ImportExport.Entities.csproj", "{3800678C-0906-458A-BC65-8CBBD1A3AA99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.Framework", "Fred.ImportExport.Framework\Fred.ImportExport.Framework.csproj", "{73B1B051-675C-44EE-A521-CBF9AE2B349C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.Database", "Fred.ImportExport.Database\Fred.ImportExport.Database.csproj", "{D3D12F17-3BA4-4B4C-BD9E-2E3FD0923049}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Framework", "..\Fred.Web\Fred.Framework\Fred.Framework.csproj", "{92478535-02C7-44E0-975E-E31D77E78CCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Entities", "..\Fred.Web\Fred.Entities\Fred.Entities.csproj", "{D84768F7-F096-4E6D-997E-AC1D9232B47A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Entities.ExternalService", "..\Fred.Web\Fred.Entities.ExternalService\Fred.Entities.ExternalService.csproj", "{E7951328-3F88-42C6-A68E-3AE41F35449A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Business", "..\Fred.Web\Fred.Business\Fred.Business.csproj", "{039E00B1-5F56-484C-82BA-5855684A1BBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.DataAccess", "..\Fred.Web\Fred.DataAccess\Fred.DataAccess.csproj", "{F86F9F7F-2269-4779-9064-515F94070CBD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A6EAE307-4F39-4430-B7CB-69B2635F86A2}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\.editorconfig = ..\..\.editorconfig
+		Fred.ImportExport.ruleset = Fred.ImportExport.ruleset
+		nuget.config = nuget.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.Bootstrapper", "Fred.ImportExport.Bootstrapper\Fred.ImportExport.Bootstrapper.csproj", "{02D4206E-9D2A-4612-B803-50E989F00A85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.EntityFramework", "..\Fred.Web\Fred.EntityFramework\Fred.EntityFramework.csproj", "{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Web.Shared", "..\Fred.Web\Fred.Web.Shared\Fred.Web.Shared.csproj", "{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube", "SonarQube", "{578C4051-98CA-470C-8084-9C2AFB0571CC}"
+	ProjectSection(SolutionItems) = preProject
+		SonarQube\Fayat.Fred.ImportExportCSharp.ruleset = SonarQube\Fayat.Fred.ImportExportCSharp.ruleset
+		SonarQube\SolutionBinding.sqconfig = SonarQube\SolutionBinding.sqconfig
+	EndProjectSection
+EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Fred.Analysis", "..\Fred.Web\Fred.Analysis\Fred.Analysis.modelproj", "{B925EA1C-00A2-4F29-83C0-09A63CE33776}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.Models", "Fred.ImportExport.Models\Fred.ImportExport.Models.csproj", "{F1E54D6F-EADB-4C6A-AE5C-7D2DFDD023C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.DataAccess.ExternalService", "Fred.ImportExport.DataAccess.ExternalService\Fred.ImportExport.DataAccess.ExternalService.csproj", "{ACB25339-9A18-4EC1-9F5C-7A3DF49D574E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		SpeedDebug|Any CPU = SpeedDebug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C7A2572-C9A2-4D87-B833-1BE00E2AC0E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C7A2572-C9A2-4D87-B833-1BE00E2AC0E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C7A2572-C9A2-4D87-B833-1BE00E2AC0E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C7A2572-C9A2-4D87-B833-1BE00E2AC0E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C7A2572-C9A2-4D87-B833-1BE00E2AC0E0}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{9C7A2572-C9A2-4D87-B833-1BE00E2AC0E0}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{8904D5C1-9578-4F6C-A5AE-1316022762B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8904D5C1-9578-4F6C-A5AE-1316022762B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8904D5C1-9578-4F6C-A5AE-1316022762B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8904D5C1-9578-4F6C-A5AE-1316022762B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8904D5C1-9578-4F6C-A5AE-1316022762B9}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{8904D5C1-9578-4F6C-A5AE-1316022762B9}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{EB202E1C-5DD4-499C-BAF6-7AFD92CAEC95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB202E1C-5DD4-499C-BAF6-7AFD92CAEC95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB202E1C-5DD4-499C-BAF6-7AFD92CAEC95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB202E1C-5DD4-499C-BAF6-7AFD92CAEC95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB202E1C-5DD4-499C-BAF6-7AFD92CAEC95}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{EB202E1C-5DD4-499C-BAF6-7AFD92CAEC95}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{2BEE77D7-295D-48A4-924E-8574E3E22321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BEE77D7-295D-48A4-924E-8574E3E22321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BEE77D7-295D-48A4-924E-8574E3E22321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BEE77D7-295D-48A4-924E-8574E3E22321}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BEE77D7-295D-48A4-924E-8574E3E22321}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{2BEE77D7-295D-48A4-924E-8574E3E22321}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{3800678C-0906-458A-BC65-8CBBD1A3AA99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3800678C-0906-458A-BC65-8CBBD1A3AA99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3800678C-0906-458A-BC65-8CBBD1A3AA99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3800678C-0906-458A-BC65-8CBBD1A3AA99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3800678C-0906-458A-BC65-8CBBD1A3AA99}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{3800678C-0906-458A-BC65-8CBBD1A3AA99}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{73B1B051-675C-44EE-A521-CBF9AE2B349C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73B1B051-675C-44EE-A521-CBF9AE2B349C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73B1B051-675C-44EE-A521-CBF9AE2B349C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73B1B051-675C-44EE-A521-CBF9AE2B349C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73B1B051-675C-44EE-A521-CBF9AE2B349C}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{73B1B051-675C-44EE-A521-CBF9AE2B349C}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{D3D12F17-3BA4-4B4C-BD9E-2E3FD0923049}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3D12F17-3BA4-4B4C-BD9E-2E3FD0923049}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3D12F17-3BA4-4B4C-BD9E-2E3FD0923049}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3D12F17-3BA4-4B4C-BD9E-2E3FD0923049}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3D12F17-3BA4-4B4C-BD9E-2E3FD0923049}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{D3D12F17-3BA4-4B4C-BD9E-2E3FD0923049}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{E7951328-3F88-42C6-A68E-3AE41F35449A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7951328-3F88-42C6-A68E-3AE41F35449A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7951328-3F88-42C6-A68E-3AE41F35449A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7951328-3F88-42C6-A68E-3AE41F35449A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7951328-3F88-42C6-A68E-3AE41F35449A}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{E7951328-3F88-42C6-A68E-3AE41F35449A}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{02D4206E-9D2A-4612-B803-50E989F00A85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02D4206E-9D2A-4612-B803-50E989F00A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02D4206E-9D2A-4612-B803-50E989F00A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02D4206E-9D2A-4612-B803-50E989F00A85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02D4206E-9D2A-4612-B803-50E989F00A85}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{02D4206E-9D2A-4612-B803-50E989F00A85}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{B925EA1C-00A2-4F29-83C0-09A63CE33776}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B925EA1C-00A2-4F29-83C0-09A63CE33776}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B925EA1C-00A2-4F29-83C0-09A63CE33776}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{F1E54D6F-EADB-4C6A-AE5C-7D2DFDD023C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1E54D6F-EADB-4C6A-AE5C-7D2DFDD023C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1E54D6F-EADB-4C6A-AE5C-7D2DFDD023C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1E54D6F-EADB-4C6A-AE5C-7D2DFDD023C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1E54D6F-EADB-4C6A-AE5C-7D2DFDD023C8}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1E54D6F-EADB-4C6A-AE5C-7D2DFDD023C8}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{ACB25339-9A18-4EC1-9F5C-7A3DF49D574E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACB25339-9A18-4EC1-9F5C-7A3DF49D574E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACB25339-9A18-4EC1-9F5C-7A3DF49D574E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACB25339-9A18-4EC1-9F5C-7A3DF49D574E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACB25339-9A18-4EC1-9F5C-7A3DF49D574E}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACB25339-9A18-4EC1-9F5C-7A3DF49D574E}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{60436168-B514-44DC-8982-EB4538E503A0} = {032D6BC7-E475-4627-9203-A32B08AE08F7}
+		{9C7A2572-C9A2-4D87-B833-1BE00E2AC0E0} = {CA8F01A5-ACF2-42E9-BA9B-7D8EAF1FC88E}
+		{8904D5C1-9578-4F6C-A5AE-1316022762B9} = {CA8F01A5-ACF2-42E9-BA9B-7D8EAF1FC88E}
+		{EB202E1C-5DD4-499C-BAF6-7AFD92CAEC95} = {FF165B36-D024-4834-B136-ADF4BA030ED6}
+		{2BEE77D7-295D-48A4-924E-8574E3E22321} = {B629E01C-D872-4A70-8797-57B91AFB4D3F}
+		{3800678C-0906-458A-BC65-8CBBD1A3AA99} = {3AA8A684-9109-4754-AA77-92D13E8C0B06}
+		{73B1B051-675C-44EE-A521-CBF9AE2B349C} = {3AA8A684-9109-4754-AA77-92D13E8C0B06}
+		{D3D12F17-3BA4-4B4C-BD9E-2E3FD0923049} = {8D1175F8-58C2-44F6-BA0E-FBBC71015980}
+		{92478535-02C7-44E0-975E-E31D77E78CCA} = {3AA8A684-9109-4754-AA77-92D13E8C0B06}
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A} = {3AA8A684-9109-4754-AA77-92D13E8C0B06}
+		{E7951328-3F88-42C6-A68E-3AE41F35449A} = {3AA8A684-9109-4754-AA77-92D13E8C0B06}
+		{039E00B1-5F56-484C-82BA-5855684A1BBC} = {B629E01C-D872-4A70-8797-57B91AFB4D3F}
+		{F86F9F7F-2269-4779-9064-515F94070CBD} = {FF165B36-D024-4834-B136-ADF4BA030ED6}
+		{02D4206E-9D2A-4612-B803-50E989F00A85} = {CA8F01A5-ACF2-42E9-BA9B-7D8EAF1FC88E}
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA} = {8D1175F8-58C2-44F6-BA0E-FBBC71015980}
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E} = {3AA8A684-9109-4754-AA77-92D13E8C0B06}
+		{B925EA1C-00A2-4F29-83C0-09A63CE33776} = {60436168-B514-44DC-8982-EB4538E503A0}
+		{F1E54D6F-EADB-4C6A-AE5C-7D2DFDD023C8} = {3AA8A684-9109-4754-AA77-92D13E8C0B06}
+		{ACB25339-9A18-4EC1-9F5C-7A3DF49D574E} = {FF165B36-D024-4834-B136-ADF4BA030ED6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BAD3319F-5844-430E-9D3E-E8DAE129C73B}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 19
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://fcistgweb-dev01v.fci.lan:8080/tfs/fred
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Fred.ImportExport.Web\\Fred.ImportExport.Web.csproj
+		SccProjectTopLevelParentUniqueName1 = Fred.ImportExport.Solution.sln
+		SccProjectName1 = Fred.ImportExport.Web
+		SccLocalPath1 = Fred.ImportExport.Web
+		SccProjectUniqueName2 = Fred.ImportExport.Api\\Fred.ImportExport.Api.csproj
+		SccProjectTopLevelParentUniqueName2 = Fred.ImportExport.Solution.sln
+		SccProjectName2 = Fred.ImportExport.Api
+		SccLocalPath2 = Fred.ImportExport.Api
+		SccProjectUniqueName3 = Fred.ImportExport.DataAccess\\Fred.ImportExport.DataAccess.csproj
+		SccProjectTopLevelParentUniqueName3 = Fred.ImportExport.Solution.sln
+		SccProjectName3 = Fred.ImportExport.DataAccess
+		SccLocalPath3 = Fred.ImportExport.DataAccess
+		SccProjectUniqueName4 = Fred.ImportExport.Business\\Fred.ImportExport.Business.csproj
+		SccProjectTopLevelParentUniqueName4 = Fred.ImportExport.Solution.sln
+		SccProjectName4 = Fred.ImportExport.Business
+		SccLocalPath4 = Fred.ImportExport.Business
+		SccProjectUniqueName5 = Fred.ImportExport.Entities\\Fred.ImportExport.Entities.csproj
+		SccProjectTopLevelParentUniqueName5 = Fred.ImportExport.Solution.sln
+		SccProjectName5 = Fred.ImportExport.Entities
+		SccLocalPath5 = Fred.ImportExport.Entities
+		SccProjectUniqueName6 = Fred.ImportExport.Framework\\Fred.ImportExport.Framework.csproj
+		SccProjectTopLevelParentUniqueName6 = Fred.ImportExport.Solution.sln
+		SccProjectName6 = Fred.ImportExport.Framework
+		SccLocalPath6 = Fred.ImportExport.Framework
+		SccProjectUniqueName7 = Fred.ImportExport.Database\\Fred.ImportExport.Database.csproj
+		SccProjectTopLevelParentUniqueName7 = Fred.ImportExport.Solution.sln
+		SccProjectName7 = Fred.ImportExport.Database
+		SccLocalPath7 = Fred.ImportExport.Database
+		SccProjectUniqueName8 = Fred.ImportExport.Bootstrapper\\Fred.ImportExport.Bootstrapper.csproj
+		SccProjectTopLevelParentUniqueName8 = Fred.ImportExport.Solution.sln
+		SccProjectName8 = Fred.ImportExport.Bootstrapper
+		SccLocalPath8 = Fred.ImportExport.Bootstrapper
+		SccProjectUniqueName9 = ..\\Fred.Web\\Fred.Entities\\Fred.Entities.csproj
+		SccProjectTopLevelParentUniqueName9 = Fred.ImportExport.Solution.sln
+		SccProjectName9 = ../Fred.Web/Fred.Entities
+		SccLocalPath9 = ..\\Fred.Web\\Fred.Entities
+		SccProjectUniqueName10 = ..\\Fred.Web\\Fred.Entities.ExternalService\\Fred.Entities.ExternalService.csproj
+		SccProjectTopLevelParentUniqueName10 = Fred.ImportExport.Solution.sln
+		SccProjectName10 = ../Fred.Web/Fred.Entities.ExternalService
+		SccLocalPath10 = ..\\Fred.Web\\Fred.Entities.ExternalService
+		SccProjectUniqueName11 = ..\\Fred.Web\\Fred.Framework\\Fred.Framework.csproj
+		SccProjectTopLevelParentUniqueName11 = Fred.ImportExport.Solution.sln
+		SccProjectName11 = ../Fred.Web/Fred.Framework
+		SccLocalPath11 = ..\\Fred.Web\\Fred.Framework
+		SccProjectUniqueName12 = ..\\Fred.Web\\Fred.EntityFramework\\Fred.EntityFramework.csproj
+		SccProjectTopLevelParentUniqueName12 = Fred.ImportExport.Solution.sln
+		SccProjectName12 = ../Fred.Web/Fred.EntityFramework
+		SccLocalPath12 = ..\\Fred.Web\\Fred.EntityFramework
+		SccProjectUniqueName13 = ..\\Fred.Web\\Fred.DataAccess\\Fred.DataAccess.csproj
+		SccProjectTopLevelParentUniqueName13 = Fred.ImportExport.Solution.sln
+		SccProjectName13 = ../Fred.Web/Fred.DataAccess
+		SccLocalPath13 = ..\\Fred.Web\\Fred.DataAccess
+		SccProjectUniqueName14 = ..\\Fred.Web\\Fred.Business\\Fred.Business.csproj
+		SccProjectTopLevelParentUniqueName14 = Fred.ImportExport.Solution.sln
+		SccProjectName14 = ../Fred.Web/Fred.Business
+		SccLocalPath14 = ..\\Fred.Web\\Fred.Business
+		SccProjectUniqueName15 = ..\\Fred.Web\\Fred.Web.Shared\\Fred.Web.Shared.csproj
+		SccProjectTopLevelParentUniqueName15 = Fred.ImportExport.Solution.sln
+		SccProjectName15 = ../Fred.Web/Fred.Web.Shared
+		SccLocalPath15 = ..\\Fred.Web\\Fred.Web.Shared
+		SccProjectUniqueName16 = ..\\Fred.Web\\Fred.Analysis\\Fred.Analysis.modelproj
+		SccProjectTopLevelParentUniqueName16 = Fred.ImportExport.Solution.sln
+		SccProjectName16 = ../Fred.Web/Fred.Analysis
+		SccLocalPath16 = ..\\Fred.Web\\Fred.Analysis
+		SccProjectUniqueName17 = Fred.ImportExport.Models\\Fred.ImportExport.Models.csproj
+		SccProjectTopLevelParentUniqueName17 = Fred.ImportExport.Solution.sln
+		SccProjectName17 = Fred.ImportExport.Models
+		SccLocalPath17 = Fred.ImportExport.Models
+		SccProjectUniqueName18 = Fred.ImportExport.DataAccess.ExternalService\\Fred.ImportExport.DataAccess.ExternalService.csproj
+		SccProjectTopLevelParentUniqueName18 = Fred.ImportExport.Solution.sln
+		SccProjectName18 = Fred.ImportExport.DataAccess.ExternalService
+		SccLocalPath18 = Fred.ImportExport.DataAccess.ExternalService
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Web", "Fred.Web\Fred.Web.csproj", "{A2C5D834-E219-4602-BA23-D47079371003}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Presentation Layer", "03-Presentation Layer", "{D4F3A58A-35DD-4E07-B4D2-6C8C848E0163}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "07-Shared Layer", "07-Shared Layer", "{452A1D7E-8ED3-4312-BF4A-0BA0BE540A3A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{66AD8169-F8E4-44C9-A153-BFC79C7D25E6}"
+	ProjectSection(SolutionItems) = preProject
+		FredWebSolution.Build.bat = FredWebSolution.Build.bat
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Web.Shared", "Fred.Web.Shared\Fred.Web.Shared.csproj", "{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		SpeedDebug|Any CPU = SpeedDebug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2C5D834-E219-4602-BA23-D47079371003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2C5D834-E219-4602-BA23-D47079371003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2C5D834-E219-4602-BA23-D47079371003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2C5D834-E219-4602-BA23-D47079371003}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2C5D834-E219-4602-BA23-D47079371003}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{A2C5D834-E219-4602-BA23-D47079371003}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A2C5D834-E219-4602-BA23-D47079371003} = {D4F3A58A-35DD-4E07-B4D2-6C8C848E0163}
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E} = {452A1D7E-8ED3-4312-BF4A-0BA0BE540A3A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {97BC53AC-3255-4421-9E89-52FB388593FA}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://fcistgweb-dev01v.fci.lan:8080/tfs/fred
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Fred.Web\\Fred.Web.csproj
+		SccProjectTopLevelParentUniqueName1 = FredWebFrontSolution.sln
+		SccProjectName1 = Fred.Web
+		SccLocalPath1 = Fred.Web
+		SccProjectUniqueName2 = Fred.Web.Shared\\Fred.Web.Shared.csproj
+		SccProjectTopLevelParentUniqueName2 = FredWebFrontSolution.sln
+		SccProjectName2 = Fred.Web.Shared
+		SccLocalPath2 = Fred.Web.Shared
+	EndGlobalSection
+EndGlobal

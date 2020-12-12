@@ -1,0 +1,74 @@
+﻿
+<div class="modal-header">
+  <h2 class="modal-title"><i class="flaticon flaticon-shuffle"></i>{{action}}</h2>
+  <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{resources.Global_Modal_Annuler_Tooltip}}" ng-click="close()"></i>
+</div>
+<form autocomplete="off" name="formSeuil" novalidate>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <label for="ddlRoles">{{resources.Role_Index_ModalSeuil_Role}}</label>
+        <select id="ddlRoles" class="form-control"
+                ng-options="item as item.Libelle for item in roleList track by item.RoleId"
+                ng-model="modalSelectedRole"
+                ng-change="getSelectedRole()"
+                ng-disabled="clone.RoleId > 0"></select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="container devise" id="divDevise" ng-show="true">
+          <label>{{resources.Role_Index_ModalSeuil_Devise}}</label><br />
+          <span class="text-danger" ng-show="formSeuil.$submitted && formSeuil.Devise.$error.required">{{resources.Global_Control_DataRequired_Erreur}}</span>
+          <div>
+            <lookup-standalone ng-model="deviseRef"
+                               text="deviseRef.Libelle"
+                               name="Devise"
+                               search-title="{{resources.Global_ReferentielDevise}}"
+                               search-placeholder="{{resources.Global_ReferentielDevise_Placeholder}}"
+                               on-click="showPickList()"
+                               on-select="loadDataRef(item)"
+                               show-in-popup="true"
+                               on-delete="handleDeletePickListItemDeviseRef()"
+                               class="formulaire long"
+                               required>
+            </lookup-standalone>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <label for="txtSeuilReferentiel">{{resources.Role_Index_ModalSeuil_Seuil}}</label>
+
+          <span class="text-danger" ng-show="formSeuil.$submitted && formSeuil.Montant.$error.max">Le seuil ne peut dépasser 9 999 999.</span>
+          <span class="text-danger" ng-show="formSeuil.$submitted && formSeuil.Montant.$error.number">Le seuil doit être numérique.</span>
+          <span class="text-danger" ng-show="formSeuil.$submitted && formSeuil.Montant.$error.required">{{resources.Global_Control_DataRequired_Erreur}}</span>
+          <div class="input-group col-md-12" ng-class="{'has-error': formSeuil.$submitted && formSeuil.Montant.$invalid}">
+            <input type="text"
+                   fred-input-number="0"
+                   name="Montant"
+                   id="txtSeuilReferentiel"
+                   class="form-control"
+                   ng-model="clone.Montant"
+                   min="0"
+                   max="9999999"                   
+                   required>
+            <div class="input-group-addon" ng-show="deviseRef.Symbole">{{deviseRef.Symbole}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn  btn-default pull-left"
+            ng-click="save(formSeuil)"
+            title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">
+      {{resources.Global_Bouton_Enregistrer}}
+    </button>
+    <button class="btn  btn-link pull-right"
+            ng-click="close()"
+            title="{{resources.Global_Bouton_Annuler_Tooltip}}">
+      {{resources.Global_Bouton_Annuler}}
+    </button>
+  </div>
+</form>

@@ -1,0 +1,59 @@
+﻿.tuile {
+    display: flex;
+}
+
+.tuile .bdg.storm {
+    margin-left: 10px;
+}
+
+.margg {
+    margin-bottom: 30px !important;
+}
+
+#PanelRight.options .margg .storm {
+    float: left;
+    margin-top: 0 !important;
+}
+
+.storm-cursor-default {
+    cursor: default;
+}
+
+.options .form {
+    height: calc(100vh - 280px);
+}
+
+.options .form .input-group.date {
+    width: 100%;
+}
+
+.options .form .input-group.date .input-group-addon {
+    padding: 0;
+    width: 32px;
+}
+
+.options .buttons {
+    margin-top: 0;
+}
+
+input[type="checkbox"]:disabled + label {
+    cursor: not-allowed !important;
+}
+
+input[type="checkbox"]:disabled + label.materiellocation-disabled {
+    color: lightgrey;
+}
+
+input[type="checkbox"]:disabled + label.materiellocation-disabled span {
+    border: 3px lightgrey solid;
+}
+
+input[type="checkbox"]:disabled + label span {
+    cursor: not-allowed !important;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .options .form {
+        height: 65%;
+    }
+}

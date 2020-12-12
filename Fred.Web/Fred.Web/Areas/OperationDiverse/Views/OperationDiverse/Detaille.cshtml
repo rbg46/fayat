@@ -1,0 +1,453 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureOperationDiverse.OperationDiverse_AutreFrais_Title;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section scripts {
+    @Scripts.Render("~/OperationDiverseIndexBundle.js")
+    @this.RenderResources("FeatureOperationDiverse")
+}
+
+@section styles {
+    @Styles.Render("~/OperationDiverseIndexBundle.css")
+}
+<div class="container autres-frais" ng-controller="DetailleController as ctrl" ng-init="init('@ViewBag.societeId', '@ViewBag.id', '@ViewBag.Year','@ViewBag.Month', '@ViewBag.famille', '@ViewBag.codeFamille')">
+
+    <div class="infobar">
+        <!-- Titre de la page -->
+        <h1>@FeatureOperationDiverse.OperationDiverse_AutreFrais_Title</h1>
+
+        <!-- Barre d'informations sur les montants -->
+        <div class="ecarts anael">
+            <span class="sapicon-E158"></span>
+            <div class="amount">
+                <span class="txt">{{ctrl.detailOdMontantComptaLibelle}}</span>
+                <span class="data">{{ctrl.TotalEcritureComptable | currency }}</span>
+            </div>
+        </div>
+
+        <div class="ecarts linked">
+            <span class="sapicon-E1A7"></span>
+            <div class="amount">
+                <span class="txt">Ecarts déjà rattachés</span>
+                <span class="data">{{ctrl.TotalRelatedAmount | currency }}</span>
+            </div>
+        </div>
+
+        <div class="ecarts unlinked">
+            <span class="sapicon-E02F"></span>
+            <div class="amount">
+                <span class="txt">Ecarts non rattachés</span>
+                <span class="data">{{ctrl.TotalNotRelatedAmount | currency }}</span>
+            </div>
+        </div>
+
+        <div class="ecarts to-affect">
+            <span class="sapicon-E1A7"></span>
+            <div class="amount">
+                <span class="txt">Ecarts restants à affecter</span>
+                <span class="data">
+                    {{ctrl.TotalEcritureComptable - ctrl.TotalRelatedAmount - ctrl.TotalNotRelatedAmount | currency}}
+                </span>
+            </div>
+        </div>
+        <div class="ci-infos">
+            <div>{{ctrl.CI.CodeLibelle}}</div>
+            <div>Période : {{month}}/{{year}}</div>
+        </div>
+    </div>
+
+    <span class="search-label">Recherche générale</span>
+    <div class="main-search input-group input-search">
+        <input type="text" class="form-control" ng-model="searchAll" placeholder="Rechercher une écriture comptable ou une OD">
+        <span class="input-group-addon button-search">
+            <span class="material-icons">search</span>
+        </span>
+    </div>
+
+    <!-- Listes  -->
+    <div class="autres-frais-lists">
+
+        <div class="ec-compt list">
+
+            <div class="list-search">
+                <div class="input-group input-search">
+                    <input type="text" class="form-control" ng-model="ecritureComptable" placeholder="Rechercher une écriture comptable">
+                    <span class="input-group-addon button-search">
+                        <span class="material-icons">search</span>
+                    </span>
+                </div>
+            </div>
+            <div class="list-header">
+                <span class="material-icons action" data-target="#ec-compt-filt">chevron_right</span>
+                <span class="sap sapicon-E0D8"></span>
+                <span class="txt">Ecritures comptables</span>
+            </div>
+            <div id="ec-compt-filt" class="list-filt collapse">
+            </div>
+
+            <div class="list-select-all">
+                <input type="checkbox" id="ec-comp-chb" ng-model="allAccountingEntriesChecked" ng-change="ctrl.handleCheckFullList(ctrl.ecritureComptableList, allAccountingEntriesChecked); ctrl.handleCheckAllAccountingEntries();" />
+                <label for="ec-comp-chb"><span></span>Tout sélectionner</label>
+            </div>
+
+            <div class="list-bloc">
+                <div class="ec-compt-list-content" ng-class="{'selected': ecritureComptable.Selected}" ng-repeat="ecritureComptable in ctrl.ecritureComptableList | orderBy:'-ecritureComptable.DateComptable' | filter:ecritureComptable:strict | filter:searchAll" ng-class="{'selected': $index==ctrl.selectedIndex} ">
+                    <div class="amounts">
+                        <div class="line-select">
+                            <input type="checkbox" id="line-ec-comp-chb-{{ecritureComptable.EcritureComptableId}}" ng-model="ecritureComptable.Selected" ng-change="ctrl.handleCheckAccountingEntry()" />
+                            <label for="line-ec-comp-chb-{{ecritureComptable.EcritureComptableId}}"><span></span></label>
+                        </div>
+                        <div class="date">{{ecritureComptable.DateComptable | date:'dd/MM/yyyy' }}</div>
+                        <span class="lbl">{{ecritureComptable.Libelle}}</span>
+                        <span class="amount">{{ecritureComptable.Montant | currency }}</span>
+                        <span class="indic">{{ecritureComptable.NombreOD}}</span>
+                    </div>
+                    <div class="datas">
+                        <span class="lbl-nat">{{ecritureComptable.Nature.CodeLibelleNature | limitTo : 26}}</span>
+                        <span class="material-icons warn" title="Ecarts constatés" ng-if="ecritureComptable.MontantTotalOD - ecritureComptable.Montant !== 0">warning</span>
+                        <span class="lbl"> </span>
+                        <span class="amount" ng-if="ecritureComptable.MontantTotalOD != ecritureComptable.Montant" ng-class="{'green' : ecritureComptable.MontantTotalOD > ecritureComptable.Montant, 'orange' : ecritureComptable.MontantTotalOD == ecritureComptable.Montant, 'pink' : ecritureComptable.MontantTotalOD < ecritureComptable.Montant}">{{ecritureComptable.MontantTotalOD - ecritureComptable.Montant | currency}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="od-linked list">
+
+            <div class="list-search">
+                <div class="input-group input-search">
+                    <input type="text" class="form-control" ng-model="searchRelatedOD" placeholder="{{ctrl.resources.OperationDiverse_Rechercher_OD_Rattachee}}">
+                    <span class="input-group-addon button-search">
+                        <span class="material-icons">search</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="list-header">
+                <span class="material-icons action" data-toggle="collapse" data-target="#od-linked-filt">chevron_right</span>
+                <span class="sap sapicon-02F"></span>
+                <span class="txt">OD rattachées</span>
+                <button type="button" ng-show="ctrl.TotalEcritureComptable >0 && ctrl.currentEcritureComptable" ng-click="ctrl.handleCreate(true);">
+                    Ajouter une OD rattachée
+                    <span class="material-icons">add</span>
+                </button>
+            </div>
+            <div id="od-linked-filt" class="list-filt collapse">
+                <div class="tiles">
+                    <div class="tiles-title">Afficher des informations complémentaires</div>
+                    <div class="tile">
+                        <button type="button" class="btn btn-default" ng-click="RelatedRessourcesChecked=!RelatedRessourcesChecked">Ressources</button>
+                        <button type="button" class="btn btn-default" ng-click="RelatedTaskChecked=!RelatedTaskChecked">Tâches</button>
+                        <button type="button" class="btn btn-default" ng-click="RelatedMontantChecked=!RelatedMontantChecked">Montant</button>
+                        <button type="button" class="btn btn-default" ng-click="RelatedAutreChecked=!RelatedAutreChecked">Autres</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-select-all">
+                <input type="checkbox" id="od-linked-chb" ng-model="checkAllLinkedOD" ng-change="ctrl.handleCheckFullList(ctrl.RelatedODList, checkAllLinkedOD)" />
+                <label for="od-linked-chb"><span></span>Tout sélectionner</label>
+            </div>
+
+            <div class="list-bloc">
+                <div class="od-list-content" ng-class="{'selected': RelatedOD.Selected}" ng-repeat="RelatedOD in ctrl.RelatedODList | filter:searchRelatedOD | filter:searchAll">
+                    <div class="labels">
+                        <div class="date">{{RelatedOD.DateComptable | date:'dd/MM/yyyy' }}</div>
+                        <span class="lbl">{{RelatedOD.Libelle}}</span>
+                        <span class="material-icons bkmk rat" title="{{ctrl.resources.OperationDiverseDetaillee_IconeAbonnement}}" ng-show="RelatedOD.EstUnAbonnement">bookmark</span>
+                    </div>
+                    <div class="data">
+                        <input type="checkbox" id="line-od-linked-chb-{{RelatedOD.OperationDiverseId}}" ng-model="RelatedOD.Selected" ng-change="ctrl.handleCheckLinkedOD()" />
+                        <label for="line-od-linked-chb-{{RelatedOD.OperationDiverseId}}"><span></span></label>
+                        <div class="archive" ng-hide="RelatedRessourcesChecked">
+                            {{RelatedOD.Ressource.Code}} - {{RelatedOD.Ressource.Libelle}}
+                        </div>
+                        <div class="task" ng-hide="RelatedTaskChecked">
+                            {{RelatedOD.Tache.Code}} - {{RelatedOD.Tache.Libelle}}
+                        </div>
+                    </div>
+                    <div class="amounts">
+                        <div class="col quant" ng-hide="RelatedAutreChecked">
+                            <span class="lbl">Quantité</span>
+                            <span class="val">{{RelatedOD.Quantite | number}}</span>
+                        </div>
+                        <div class="col unit" ng-hide="RelatedAutreChecked">
+                            <span class="lbl">Unité</span>
+                            <span class="val">{{RelatedOD.Unite.Libelle}}</span>
+                        </div>
+                        <div class="col pu" ng-hide="RelatedAutreChecked">
+                            <span class="lbl">PU</span>
+                            <span class="val">{{RelatedOD.PUHT | currency}}</span>
+                        </div>
+                        <div class="col mont" ng-hide="RelatedMontantChecked">
+                            <span class="lbl">Montant</span>
+                            <span class="val">{{RelatedOD.Montant | currency }}</span>
+                        </div>
+                        <div class="col edit">
+                            <span class="material-icons" ng-click="ctrl.handleEditOD(RelatedOD)">more_vert</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tie-untie">
+
+            <div class="tie-untie-btns">
+                <span class="material-icons untie" ng-click="ctrl.handleLinkSelectedUnlinkedOD()">reply_all</span>
+
+                <span class="material-icons tie" ng-click="ctrl.handleUnlinkSelectedLinkedOD()">reply_all</span>
+            </div>
+
+        </div>
+
+
+        <div class="od-unlinked list">
+
+            <div class="list-search">
+                <div class="input-group input-search">
+                    <input type="text" class="form-control" ng-model="searchNotRelatedOD" placeholder="{{ctrl.resources.OperationDiverse_Rechercher_OD_Non_Rattachee}}">
+                    <span class="input-group-addon button-search">
+                        <span class="material-icons">search</span>
+                    </span>
+                </div>
+            </div>
+            <div class="list-header">
+                <span class="material-icons action" data-toggle="collapse" data-target="#od-unlinked-filt">chevron_right</span>
+                <span class="sap sapicon-E02F"></span>
+                <span class="txt">OD non rattachées</span>
+                <button type="button" ng-click="ctrl.handleCreate(false);">
+                    Ajouter une OD
+                    <span class="material-icons">add</span>
+                </button>
+            </div>
+            <div id="od-unlinked-filt" class="list-filt collapse">
+                <div class="tiles">
+                    <div class="tiles-title">Afficher des informations complémentaires</div>
+                    <div class="tile">
+                        <button type="button" class="btn btn-default" ng-click="RessourcesChecked=!RessourcesChecked">Ressources</button>
+                        <button type="button" class="btn btn-default" ng-click="TaskChecked=!TaskChecked">Tâches</button>
+                        <button type="button" class="btn btn-default" ng-click="MontantChecked=!MontantChecked">Montant</button>
+                        <button type="button" class="btn btn-default" ng-click="AutreChecked=!AutreChecked">Autres</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-select-all">
+                <input type="checkbox" id="od-unlinked-chb" ng-model="checkAllUnlinkedOD" ng-change="ctrl.handleCheckFullList(ctrl.NotRelatedODList, checkAllUnlinkedOD)" />
+                <label for="od-unlinked-chb"><span></span>Tout sélectionner</label>
+            </div>
+
+            <div class="list-bloc">
+                <div class="od-list-content" ng-class="{'selected': NotRelatedOD.Selected}" ng-repeat="NotRelatedOD in ctrl.NotRelatedODList | filter: searchNotRelatedOD | filter:searchAll">
+                    <div class="labels">
+                        <div class="date">{{NotRelatedOD.DateComptable | date:'dd/MM/yyyy' }}</div>
+                        <span class="lbl">{{NotRelatedOD.Libelle}}</span>
+                        <span class="material-icons bkmk" title="{{ctrl.resources.OperationDiverseDetaillee_IconeAbonnement}}" ng-show="NotRelatedOD.EstUnAbonnement">bookmark</span>
+                    </div>
+                    <div class="data">
+                        <input type="checkbox" id="line-od-unlinked-chb-{{NotRelatedOD.OperationDiverseId}}" ng-model="NotRelatedOD.Selected" ng-change="ctrl.handleCheckUnlinkedOD()" />
+                        <label for="line-od-unlinked-chb-{{NotRelatedOD.OperationDiverseId}}"><span></span></label>
+                        <div class="archive" ng-hide="RessourcesChecked">
+                            {{NotRelatedOD.Ressource.Code}} - {{NotRelatedOD.Ressource.Libelle}}
+                        </div>
+                        <div class="task" ng-hide="TaskChecked">
+                            {{NotRelatedOD.Tache.Code}} - {{NotRelatedOD.Tache.Libelle}}
+                        </div>
+                    </div>
+                    <div class="amounts" ng-hide="AutreChecked">
+                        <div class="col quant">
+                            <span class="lbl">Quantité</span>
+                            <span class="val">{{NotRelatedOD.Quantite | number}}</span>
+                        </div>
+                        <div class="col unit" ng-hide="AutreChecked">
+                            <span class="lbl">Unité</span>
+                            <span class="val">{{NotRelatedOD.Unite.Libelle}}</span>
+                        </div>
+                        <div class="col pu" ng-hide="AutreChecked">
+                            <span class="lbl">PU</span>
+                            <span class="val">{{NotRelatedOD.PUHT | currency}}</span>
+                        </div>
+                        <div class="col mont" ng-hide="MontantChecked">
+                            <span class="lbl">Montant</span>
+                            <span class="val">{{NotRelatedOD.Montant | currency }}</span>
+                        </div>
+                        <div class="col edit">
+                            <span class="material-icons" ng-click="ctrl.handleEditOD(NotRelatedOD)">more_vert</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--DETAILS PANEL : START-->
+        <div ng-class="checkDisplayOptions" class="blockScreen" style="z-index:99"></div>
+        <div class="options" id="optionRightPanel" style="z-index:1101" ng-class="checkDisplayOptions">
+            <!--HEADER TOOLBAR : BEGIN-->
+            <div class="toolbar">
+                <div class="sapicon-E02F grandicone"></div>
+            </div>
+            <!--HEADER TOOLBAR : END-->
+            <!-- Titre : BEGIN -->
+            <div class="form-header">
+                <h2>
+                    <span ng-bind="ctrl.actionODName"></span>
+                </h2>
+                <label class="legend">Les champs marqués d'un astérisque (*) sont obligatoires</label>
+            </div>
+            <!-- Titre : END -->
+            <!--Formulaire: START-->
+            <div class="form fred-scroll">
+                <!--Formulaire: START-->
+                <form name="formOperationDiverse">
+                    <div class="form-group">
+                        <label>Libelle *</label>
+                        <input type="text" name="libelle" class="form-control" ng-model="operationDiverse.Libelle" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Ressource *</label>
+                        <lookup-standalone ng-model="operationDiverse.Ressource.CodeLibelle"
+                                           name="ressource"
+                                           ng-required="true"
+                                           text="operationDiverse.Ressource.CodeLibelle"
+                                           search-title="{{ctrl.resources.Global_ReferentielRessource}}"
+                                           search-placeholder="{{ctrl.resources.Global_ReferentielTache_Placeholder}}"
+                                           on-click="ctrl.showLookUpResource();"
+                                           on-select="ctrl.selectRessource(operationDiverse, item);"
+                                           show-delete-button="false"
+                                           tooltip="operationDiverse.Ressource.CodeLibelle"
+                                           class="formulaire middle"
+                                           show-in-popup="true"
+                                           placeholder="Sélectionner une Ressource" required>
+                        </lookup-standalone>
+                    </div>
+                    <div class="form-group">
+                        <label>Tâche *</label>
+                        <lookup-standalone ng-model="operationDiverse.Tache.CodeLibelle"
+                                           name="tache"
+                                           ng-required="true"
+                                           text="operationDiverse.Tache.CodeLibelle"
+                                           search-title="{{ctrl.resources.Global_ReferentielTache}}"
+                                           search-placeholder="{{ctrl.resources.Global_ReferentielTache_Placeholder}}"
+                                           url="/api/Tache/Search/?ciId={{id}}&"
+                                           on-select="ctrl.selectTask(operationDiverse, item);"
+                                           show-delete-button="false"
+                                           tooltip="operationDiverse.Tache.CodeLibelle"
+                                           class="formulaire middle"
+                                           show-in-popup="true"
+                                           custom-template-url="/Scripts/directive/Lookup/custom-templates/tache.template.html"
+                                           placeholder="Sélectionner une Tâche" required>
+                        </lookup-standalone>
+                    </div>
+                    <div class="bloc-abonnement">
+                        <input type="checkbox" id="cbCommandeAbo" ng-model="operationDiverse.EstUnAbonnement" ng-change="handleCollapse('#abonnement-panel')">
+                        <label class="abo-head" for="cbCommandeAbo"><span></span> {{ctrl.resources.AutreFrais_Libelle_Abonnement}}</label>
+                    </div>
+                    <div id="abonnement-panel" class="collapse" ng-class="{'in': operationDiverse.EstUnAbonnement}">
+                        <div class="row pad-abo">
+                            <div class="col-sm-6">
+                                <label class="control-label">{{ctrl.resources.AutreFrais_Periodicite_Abonnement}}</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <select id="ddlFrequenceAbo" class="form-control col-lg-4 input-filter" ng-model="operationDiverse.FrequenceAbonnementModel" ng-options="option as option.Libelle for option in frequenceAboList track by option.Value" ng-change="ctrl.handleChangeAboInputs()">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row pad-abo">
+                            <div class="col-sm-6">
+                                <label class="control-label">{{ctrl.resources.AutreFrais_Nombre_OD_Generer_Abonnement}}</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" ng-model="operationDiverse.DureeAbonnement" class="form-control" fred-input-number="0" fred-input-default-value="0" ng-change="ctrl.handleChangeAboInputs()" ng-model-options="{debounce: 500}" />
+                            </div>
+                        </div>
+                        <div class="row pad-abo">
+                            <div class="col-sm-6">
+                                <label class="control-label">{{ctrl.resources.AutreFrais_Date_Prochaine_Generation_OD_Abonnement}}</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <app-date-picker id="DateProchaineODAbonnement"
+                                                 format="DD/MM/YYYY"
+                                                 lang="fr"
+                                                 min-date="{{ctrl.DateMinAbonnement}}"
+                                                 max-date="{{ctrl.DateMaxAbonnement}}"
+                                                 placeholder="Date prochaine génération"
+                                                 ng-model="operationDiverse.DateProchaineODAbonnement"
+                                                 ng-change="ctrl.handleChangeAboInputs()">
+                                </app-date-picker>
+                            </div>
+                        </div>
+                        <div class="row pad-abo">
+                            <div class="col-sm-6">
+                                <label class="control-label">{{ctrl.resources.AutreFrais_Date_Premiere_Generation_OD_Abonnement}}</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" value="{{operationDiverse.DatePremiereODAbonnement | date:'dd/MM/yyyy'}}" class="form-control" ng-disabled="true" />
+                            </div>
+                        </div>
+                        <div class="row pad-abo">
+                            <div class="col-sm-6">
+                                <label class="control-label">{{ctrl.resources.AutreFrais_Date_Deniere_Generation_OD_Abonnement}}</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" value="{{operationDiverse.DateDerniereODAbonnement | date:'dd/MM/yyyy'}}" class="form-control" ng-disabled="true" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-4">
+                            <label>Unité</label>
+                            <lookup-standalone ng-model="operationDiverse.Unite"
+                                               name="unite"
+                                               text="operationDiverse.Unite.Libelle"
+                                               search-title="{{ctrl.resources.Global_ReferentielUnite}}"
+                                               search-placeholder="{{ctrl.resources.Global_ReferentielUnite_Placeholder}}"
+                                               on-click="ctrl.showLookUpUnite();"
+                                               on-select="ctrl.selectUnite(operationDiverse, item);"
+                                               show-delete-button="false"
+                                               tooltip="operationDiverse.Unite.Libelle"
+                                               class="formulaire middle">
+                            </lookup-standalone>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Quantité *</label>
+                            <input type="text" fred-input-number fred-input-default-value="0" name="quantite" class="form-control" ng-model="operationDiverse.Quantite" ng-change="ctrl.checkZeroValue();" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label>PU *</label>
+                            <input type="text" fred-input-number fred-input-default-value="0" name="pu" class="form-control" ng-model="operationDiverse.PUHT" ng-change="ctrl.checkZeroValue();" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Montant</label>
+                        <div class="montant" ng-model="operationDiverse.Montant">{{ operationDiverse.Quantite * operationDiverse.PUHT  | currency }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Commentaire</label>
+                        <textarea ng-model="operationDiverse.Commentaire"></textarea>
+                    </div>
+
+                    <!--FOOTER TOOLBAR : BEGIN-->
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="btn btn-default" type="submit" ng-click="ctrl.handleSave();" title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">Enregistrer</button>
+                            <button class="btn btn-link" type="submit" ng-click="ctrl.handleCancel();" title="{{resources.Global_Bouton_EnregistrerEtNouveau_Tooltip}}">Retour</button>
+                            <button class="btn btn-danger" type="submit" ng-click="ctrl.handleDelete();" title="{{resources.Global_Bouton_Supprimer_Tooltip}}">Supprimer</button>
+                        </div>
+                    </div>
+
+                    <!--FOOTER TOOLBAR : END-->
+                    <div class="close_panel" ng-click="ctrl.handleCancel();" title="{{ctrl.resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        <span>Refermer le panneau</span>
+                    </div>
+                </form>
+                <!-- Formulaire: END -->
+            </div>
+        </div>
+    </div>
+</div>

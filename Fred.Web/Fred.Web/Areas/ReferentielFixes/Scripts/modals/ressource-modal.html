@@ -1,0 +1,97 @@
+﻿<div class="modal-content">
+  <div class="modal-header">
+    <h2 class="modal-title"><i class="flaticon flaticon-notebook-4"></i>{{modalTitle}}</h2>
+    <span class="flaticon flaticon-multiply" ng-click="close()" data-dismiss="modal" title="{{resources.Global_Modal_Annuler_Tooltip}}"></span>
+  </div>
+
+  <div class="modal-body">
+      <div ng-show="ErrorMessage" class="alert alert-warning">
+          {{ErrorMessage}}
+      </div>
+
+      <div class="row">
+          <div class="col-md-12">
+              <label for="ddlRessourceTypes">{{resources.ReferentielFixe_ModalRessource_Type}}</label>
+              <select id="ddlRessourceTypes" class="form-control"
+                      ng-options="item as item.Libelle for item in typeRessources track by item.TypeRessourceId"
+                      ng-model="modalSelectedRessourceType"
+                      ng-change="getSelectedRessourceType()">
+                  <option value="">-</option>
+              </select>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-12">
+              <label for="ddlChapitres">{{resources.ReferentielFixe_ModalRessource_Chapitre}}</label>
+              <select id="ddlChapitres" class="form-control"
+                      ng-options="item as item.Libelle for item in chapterList track by item.ChapitreId"
+                      ng-model="modalSelectedChapitre" ng-change="getSelectedChapitre()"
+                      ng-disabled="clone.RessourceId > 0"></select>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-12">
+              <label for="ddlSousChapitres">{{resources.ReferentielFixe_ModalRessource_SousChapitre}}</label>
+              <select id="ddlSousChapitres" class="form-control"
+                      ng-options="item as item.Libelle for item in subChapterList track by item.SousChapitreId"
+                      ng-model="modalSelectedSousChapitre" ng-change="getSelectedSousChapitre()"
+                      ng-disabled="clone.RessourceId > 0"></select>
+          </div>
+      </div>
+
+      <div class="row">
+          <input type="hidden" ng-model="clone.RessourceId" />
+          <div class="col-md-4">
+              <label for="txtCodeReferentiel">{{resources.ReferentielFixe_ModalRessource_Code}}</label>
+              <input type="text" id="txtCodeReferentiel" class="form-control" placeholder="{{resources.ReferentielFixe_ModalRessource_Code_Placeholder}}" maxlength="20" ng-disabled="clone.RessourceId > 0" ng-model="clone.Code" autofocus>
+          </div>
+          <div class="col-md-8">
+              <label for="txtLabelReferentiel">{{resources.ReferentielFixe_ModalRessource_Libelle}}</label>
+              <input type="text" id="txtLabelReferentiel" class="form-control" placeholder="{{resources.ReferentielFixe_ModalRessource_Libelle_Placeholder}}" ng-model="clone.Libelle">
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-12">
+              <input id="rdbtnRF1" type="radio" name="optradio" ng-model="clone.Active" ng-value="true"><label for="rdbtnRF1"><span></span> {{resources.Global_Active}}</label>
+              <input id="rdbtnRF2" type="radio" name="optradio" ng-model="clone.Active" ng-value="false"><label for="rdbtnRF2"><span></span> {{resources.Global_Inactive}}</label>
+          </div>
+      </div>
+
+      <div class="row" ng-show="modalSelectedRessourceType.Code == 'MAT'">
+          <div class="col-md-6">
+              <label for="ddlCarburants">{{resources.ReferentielFixe_ModalRessource_Carburant}}</label>
+              <select id="ddlCarburants" class="form-control"
+                      ng-options="item as item.Libelle for item in listCarburants track by item.CarburantId"
+                      ng-model="modalSelectedCarburant"
+                      ng-change="getSelectedCarburant()">
+                  <option value="">-</option>
+              </select>
+          </div>
+          <div class="col-md-6">
+              <label for="txtConsommation">
+                  {{resources.ReferentielFixe_ModalRessource_Consommation}}
+                  <span ng-show="modalSelectedCarburant.Unite.Code">({{modalSelectedCarburant.Unite.Code}})</span>
+              </label>
+              <input type="text" fred-input-number max="9999.99" id="txtConsommation" class="form-control" ng-model="clone.Consommation">
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-12">
+              <label for="txtAreaKeywords">{{resources.ReferentielFixe_ModalRessource_MotCles}}</label>
+              <div class="flexH">
+                  <textarea id="txtAreaKeywords" placeholder={{resources.ReferentielFixe_ModalRessource_MotClesPlaceholder}} class="flex1" ng-model="clone.Keywords"></textarea>
+              </div>
+          </div>
+      </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn  btn-default pull-left" ng-click="save()" title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">{{resources.Global_Bouton_Enregistrer}}</button>
+    <button type="button" class="btn  btn-link pull-right" ng-click="close()" title="{{resources.Global_Bouton_Annuler_Tooltip}}">{{resources.Global_Bouton_Annuler}}</button>
+  </div>
+</div>

@@ -1,0 +1,401 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureBudgetBibliothequePrix.Budget_BibliothequePrix_TitrePage;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+    @Styles.Render("~/BudgetBibliothequePrixBundle.css")
+}
+@section scripts {
+    @Scripts.Render("~/BudgetBibliothequePrixBundle.js")
+    @this.RenderResources("FeatureBudgetBibliothequePrix", "FeatureFavori")
+}
+
+<div class="container"
+     ng-controller="BibliothequePrixController as $ctrl"
+     ng-init="$ctrl.OnInit('@ViewBag.organisationId', '@ViewBag.favoriId', '@ViewBag.deviseId')">
+
+    <h1>{{::$ctrl.resources.Budget_BibliothequePrix_Titre}}</h1>
+
+    <!--Toolbar-->
+    <fred-toolbar>
+
+        <!--Organisations-->
+        <fred-section class="organisation-section">
+            <fred-section-title>{{::$ctrl.resources.Budget_BibliothequePrix_SelectionnerOrganisation}}</fred-section-title>
+            <fred-section-controls>
+                <div class="inner-addon right-addon">
+                    <lookup ng-model="$ctrl.View.Organisation"
+                            search-placeholder="{{::$ctrl.resources.Global_ReferentielOrganisation_Placeholder}}"
+                            search-title="{{::$ctrl.resources.Global_ReferentielOrganisation}}"
+                            on-select="$ctrl.OnOrganisationChanged()"
+                            url="/api/Organisation/SearchLightOrganisation/?typeOrganisation=ETABLISSEMENT,CI&"
+                            ng-disabled="$ctrl.Loading">
+                        <input type="text"
+                               class="form-control"
+                               ng-value="$ctrl.View.Organisation.CodeLibelle"
+                               placeholder="{{::$ctrl.resources.Global_ReferentielOrganisation_Placeholder}}"
+                               title="{{$ctrl.View.Organisation.CodeLibelle}}"
+                               ng-disabled="$ctrl.Loading" />
+                        <i class="chev material-icons">chevron_right</i>
+                    </lookup>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Devises-->
+        <fred-section class="devise-section"
+                      ng-show="$ctrl.Loaded && !$ctrl.Loading"
+                      fred-one-time-binding-refresher="[$ctrl.Devises, $ctrl.Devise.DeviseId]">
+            <fred-section-title>{{::$ctrl.resources.Budget_BibliothequePrix_Devise}}</fred-section-title>
+            <fred-section-controls>
+                <div ng-repeat="devise in ::$ctrl.Devises"
+                     class="devise"
+                     ng-class="::devise.DeviseId === $ctrl.View.Devise.DeviseId ? 'devise-active' : 'devise-inactive'"
+                     ng-attr-title="{{::devise.Libelle}}"
+                     ng-click="$ctrl.View.Devise = devise; $ctrl.OnDeviseChanged()">
+                    {{::devise.Symbole}}
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Validation-->
+        <fred-section class="validation-section" ng-if="$ctrl.Loaded && !$ctrl.Loading">
+            <fred-section-title>{{::$ctrl.resources.Budget_BibliothequePrix_Validation}}</fred-section-title>
+            <fred-section-controls>
+                <button type="button"
+                        class="fred-button default text ng-binding"
+                        ng-click="$ctrl.OnCancelButtonClick()"
+                        ng-attr-title="{{::ctrl.resources.Global_Bouton_Annuler_Tooltip}}">
+                    {{::$ctrl.resources.Global_Bouton_Annuler}}
+                </button>
+                <button type="button"
+                        class="fred-button default text ng-binding"
+                        ng-click="$ctrl.OnSaveButtonClick()"
+                        ng-attr-title="{{::ctrl.resources.Global_Bouton_Enregistrer_Tooltip}}">
+                    {{::$ctrl.resources.Global_Bouton_Enregistrer}}
+                </button>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Actions-->
+        <fred-section class="actions-section" ng-if="$ctrl.Loaded && !$ctrl.Loading">
+            <fred-section-title>{{::$ctrl.resources.Budget_BibliothequePrix_Actions}}</fred-section-title>
+            <fred-section-controls>
+                <fred-button class="default text"
+                             ng-click="$ctrl.OnExpandAllButtonClick()">
+                    {{::$ctrl.resources.Budget_BibliothequePrix_ToutDeplier}}
+                </fred-button>
+                <fred-button class="default text"
+                             ng-click="$ctrl.OnCollapseAllButtonClick()">
+                    {{::$ctrl.resources.Budget_BibliothequePrix_ToutReplier}}
+                </fred-button>
+                <fred-button class="fred-button copy-values"
+                             type="button"
+                             title="{{::$ctrl.resources.Budget_BibliothequePrix_Copier_ButtonTootip}}"
+                             ng-click="$ctrl.OnCopyButtonClick()"
+                             ng-if="$ctrl.OrganisationCouranteEstCi()">
+                    <span class="material-icons">content_copy</span>
+                </fred-button>
+                <fred-button class="fred-button add-to-favorite"
+                             type="button"
+                             title="{{$ctrl.GetFavoriTooltip()}}"
+                             ng-click="$ctrl.OnAddToFavoriteButtonClick()">
+                    <i class="material-icons">star</i>
+                </fred-button>
+            </fred-section-controls>
+        </fred-section>
+    </fred-toolbar>
+
+    <!--Veuillez sélectionner une organisation pour afficher la bibliothèque des prix-->
+    <div class="row information" ng-show="!$ctrl.Loaded && !$ctrl.Loading">
+        <div class="col-md-4 icon">
+            <i class="flaticon flaticon-warning"></i>
+        </div>
+        <div class="col-md-4 msg">
+            <h3>{{::$ctrl.resources.Budget_BibliothequePrix_SelectionnerOrganisationPourAfficher}}</h3>
+        </div>
+    </div>
+
+    <!--Affiche la bibliothèque des prix que si elle a été chargée-->
+    <div id="{{::$ctrl.Identifiers.BibliothequePrixTable}}" fred-one-time-binding-refresher ng-show="$ctrl.Loaded && !$ctrl.Loading">
+        <fred-flex-table class="flex-table" id="FLEX_TABLE" anchor-bottom="25">
+            <!--Sub-en-tête-->
+            <div class="fixed-line-header subentete"
+                 fred-one-time-binding-refresher="$ctrl.Organisation.OrganisationId">
+                <div class="col-chapitre fixed-col-header"></div>
+                <div class="col-organisation-block"
+                     ng-repeat="organisation in ::$ctrl.Organisations track by $index">
+                    <div class="col-sep"></div>
+                    <div class="col-organisation"
+                         ng-class="::$ctrl.GetOrganisationClass($index)">
+                        {{::$ctrl.GetTypeOrganisationCodeToDisplay(organisation)}}
+                        <br />
+                        {{::organisation.Code}}
+                    </div>
+                </div>
+            </div>
+
+            <!--En-tête-->
+            <div class="fixed-line-header entete"
+                 fred-one-time-binding-refresher="$ctrl.Organisation.OrganisationId">
+                <div class="col-chapitre fixed-col-header">{{::$ctrl.resources.Budget_BibliothequePrix_Code}} / {{::$ctrl.resources.Budget_BibliothequePrix_Libelle}}</div>
+                <div class="col-organisation-block"
+                     ng-repeat="organisation in ::$ctrl.Organisations track by $index">
+                    <div class="col-sep"></div>
+                    <div class="col-organisation"
+                         ng-class="::$ctrl.GetOrganisationClass($index)">
+                        <div class="composante-first">{{::$ctrl.resources.Budget_BibliothequePrix_Prix}}</div>
+                        <div class="composante-next">{{::$ctrl.resources.Budget_BibliothequePrix_Unite}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Liste des chapitres-->
+            <div ng-repeat="chapitre in ::$ctrl.View.Chapitres track by $index" ng-if="::$ctrl.View.Chapitres">
+                <div class="flex-line level-1 collapsed"
+                     ng-click="$ctrl.OnChapitreClick(chapitre)"
+                     data-toggle="collapse"
+                     aria-expanded="false"
+                     data-target="#{{::chapitre.View.ViewId}}">
+                    <div class="col-chapitre fixed-col-header">
+                        <div class="chevron"></div>
+                        <span class="icon-R1" title="Chapitre"></span>
+                        {{::chapitre.Code}} {{::chapitre.Libelle}}
+                    </div>
+                    <div class="col-organisations"
+                         fred-one-time-binding-refresher="$ctrl.Organisation.OrganisationId">
+                        <div class="col-organisation-block"
+                             ng-repeat="organisation in ::$ctrl.Organisations track by $index"
+                             ng-init="organisationChapitreIndex = $index; organisationChapitreReadOnly = $ctrl.IsReadOnly($index)">
+                            <div class="col-sep"></div>
+                            <div class="col-organisation"
+                                 ng-class="::$ctrl.GetOrganisationClass(organisationChapitreIndex)">
+                                <div class="col-composantes"
+                                     ng-if="::!organisationChapitreReadOnly">
+
+                                    <!--Composante 'prix'-->
+                                    <div class="col-composante prix"
+                                         fred-one-time-binding-refresher="chapitre.View.Prix">
+                                        <input type="text"
+                                               fred-input-number="3"
+                                               min="-999999999999.999"
+                                               max="999999999999.999"
+                                               class="form-control"
+                                               ng-model="::chapitre.View.SnapshotPrix"
+                                               ng-click="$event.stopPropagation()"
+                                               ng-blur="chapitre.View.Prix = chapitre.View.SnapshotPrix" />
+                                    </div>
+
+                                    <!--Composante 'unité'-->
+                                    <div class="col-composante unite"
+                                         fred-one-time-binding-refresher="chapitre.View.Unite">
+                                        <input readonly
+                                               type="text"
+                                               class="form-control unite-editable"
+                                               ng-value="::chapitre.View.Unite.Code"
+                                               ng-attr-title="{{::$ctrl.GetUniteToolTip(chapitre)}}"
+                                               ng-click="$event.stopPropagation(); $ctrl.OnUniteClick(chapitre)" />
+                                        <i class="chev material-icons" ng-if="::!chapitre.View.Unite" ng-click="$event.stopPropagation(); $ctrl.OnUniteClick(chapitre)">chevron_right</i>
+                                        <i class="chev material-icons" ng-if="::chapitre.View.Unite" ng-click="$event.stopPropagation(); $ctrl.OnUniteReset(chapitre)">close</i>
+                                    </div>
+                                </div>
+                                <div class="col-actions" ng-if="::!organisationChapitreReadOnly">
+                                    <div class="col-icon"></div>
+                                    <div class="col-icon"></div>
+                                    <div class="col-icon">
+                                        <i ng-attr-title="{{::$ctrl.resources.Budget_BibliothequePrix_AppliquerAuxEnfants_ButtonTooltip}}"
+                                           class="clickable-icon material-icons"
+                                           aria-hidden="true"
+                                           ng-click="$event.stopPropagation(); $ctrl.OnChapitreToChildrenClick(chapitre)">vertical_align_bottom</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Liste des sous-chapitres-->
+                <div fred-one-time-binding-refresher="chapitre.SousChapitres !== null" class="collapse" id="{{::chapitre.View.ViewId}}">
+                    <div ng-repeat="sousChapitre in ::chapitre.SousChapitres track by $index" ng-if="::chapitre.SousChapitres">
+                        <div class="flex-line level-2 collapsed"
+                             ng-click="$ctrl.OnSousChapitreClick(sousChapitre)"
+                             data-toggle="collapse"
+                             aria-expanded="false"
+                             data-target="#{{::sousChapitre.View.ViewId}}">
+                            <div class="col-chapitre fixed-col-header">
+                                <div class="chevron"></div>
+                                <span class="icon-R2" title="Sous-chapitre"></span>
+                                {{::sousChapitre.Code}} {{::sousChapitre.Libelle}}
+                            </div>
+                            <div class="col-organisations"
+                                 fred-one-time-binding-refresher="$ctrl.Organisation.OrganisationId">
+                                <div class="col-organisation-block"
+                                     ng-repeat="organisation in ::$ctrl.Organisations track by $index"
+                                     ng-init="organisationSousChapitreIndex = $index; organisationSousChapitreReadOnly = $ctrl.IsReadOnly($index)">
+                                    <div class="col-sep"></div>
+                                    <div class="col-organisation"
+                                         ng-class="::$ctrl.GetOrganisationClass(organisationSousChapitreIndex)">
+                                        <div class="col-composantes"
+                                             ng-if="::!organisationSousChapitreReadOnly">
+
+                                            <!--Composante 'prix'-->
+                                            <div class="col-composante prix"
+                                                 fred-one-time-binding-refresher="sousChapitre.View.Prix">
+                                                <input type="text"
+                                                       fred-input-number="3"
+                                                       min="-999999999999.999"
+                                                       max="999999999999.999"
+                                                       class="form-control"
+                                                       ng-model="::sousChapitre.View.SnapshotPrix"
+                                                       ng-click="$event.stopPropagation()"
+                                                       ng-blur="sousChapitre.View.Prix = sousChapitre.View.SnapshotPrix" />
+                                            </div>
+
+                                            <!--Composante 'unité'-->
+                                            <div class="col-composante unite"
+                                                 fred-one-time-binding-refresher="sousChapitre.View.Unite">
+                                                <input readonly
+                                                       type="text"
+                                                       class="form-control unite-editable"
+                                                       ng-value="::sousChapitre.View.Unite.Code"
+                                                       ng-attr-title="{{::$ctrl.GetUniteToolTip(sousChapitre)}}"
+                                                       ng-click="$event.stopPropagation(); $ctrl.OnUniteClick(sousChapitre)" />
+                                                <i class="chev material-icons" ng-if="::!sousChapitre.View.Unite" ng-click="$event.stopPropagation(); $ctrl.OnUniteClick(sousChapitre)">chevron_right</i>
+                                                <i class="chev material-icons" ng-if="::sousChapitre.View.Unite" ng-click="$event.stopPropagation(); $ctrl.OnUniteReset(sousChapitre)">close</i>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-actions" ng-if="::!organisationSousChapitreReadOnly">
+                                            <div class="col-icon"></div>
+                                            <div class="col-icon"></div>
+                                            <div class="col-icon">
+                                                <i ng-attr-title="{{::$ctrl.resources.Budget_BibliothequePrix_AppliquerAuxEnfants_ButtonTooltip}}"
+                                                   class="clickable-icon material-icons"
+                                                   aria-hidden="true"
+                                                   ng-click="$event.stopPropagation(); $ctrl.OnSousChapitreToChildrenClick(sousChapitre)">vertical_align_bottom</i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Liste des ressources-->
+                        <div fred-one-time-binding-refresher="[sousChapitre.Ressources !== null, $ctrl.Organisation.OrganisationId, $ctrl.Devise.DeviseId]"
+                             class="collapse"
+                             id="{{::sousChapitre.View.ViewId}}">
+                            <div ng-repeat="ressource in ::sousChapitre.Ressources"
+                                 ng-if="::sousChapitre.Ressources">
+                                <div class="flex-line level-3">
+                                    <div class="col-chapitre fixed-col-header">
+                                        <span class="icon-R3" title="Ressource"></span>
+                                        {{::ressource.Code}} {{::ressource.Libelle}}
+                                    </div>
+                                    <div class="col-organisations">
+                                        <div class="col-organisation-block"
+                                             ng-repeat="item in ::ressource.Items track by $index"
+                                             ng-init="itemIndex = $index; itemReadOnly = $ctrl.IsReadOnly($index)">
+                                            <div class="col-sep"></div>
+                                            <div class="col-organisation {{itemReadOnly || $ctrl.IsItemViewValid(item.View) ? '' : 'erreur'}}"
+                                                 id="{{::item.View.ViewId}}"
+                                                 ng-class="::$ctrl.GetOrganisationClass(itemIndex)">
+                                                <div class="col-composantes"
+                                                     ng-class="::$ctrl.GetComposantesClass(item)">
+
+                                                    <!--Composante 'prix'-->
+                                                    <div class="col-composante prix"
+                                                         ng-if="::!itemReadOnly"
+                                                         fred-one-time-binding-refresher="[item.View.Prix, item.Original.Prix]">
+                                                        <input type="text"
+                                                               fred-input-number="3"
+                                                               min="-999999999999.999"
+                                                               max="999999999999.999"
+                                                               class="form-control"
+                                                               ng-model="::item.View.SnapshotPrix"
+                                                               ng-blur="item.View.Prix = item.View.SnapshotPrix" />
+                                                    </div>
+                                                    <div class="col-composante prix"
+                                                         ng-if="::itemReadOnly">
+                                                        <input type="text"
+                                                               fred-input-number="3"
+                                                               min="-999999999999.999"
+                                                               max="999999999999.999"
+                                                               class="form-control"
+                                                               ng-model="::item.View.Prix"
+                                                               ng-disabled="true" />
+                                                    </div>
+
+                                                    <!--Composante 'unité'-->
+                                                    <div class="col-composante unite"
+                                                         ng-if="::!itemReadOnly"
+                                                         fred-one-time-binding-refresher="[item.View.Unite, item.Original.Unite]">
+                                                        <input readonly
+                                                               type="text"
+                                                               class="form-control unite-editable"
+                                                               ng-value="::item.View.Unite.Code ? item.View.Unite.Code : ''"
+                                                               ng-attr-title="{{::$ctrl.GetUniteToolTip(item)}}"
+                                                               ng-click="$ctrl.OnUniteClick(item, item.View.ViewId)" />
+                                                        <i class="chev material-icons" ng-if="::!item.View.Unite" ng-click="$ctrl.OnUniteClick(item, item.View.ViewId)">chevron_right</i>
+                                                        <i class="chev material-icons" ng-if="::item.View.Unite" ng-click="$ctrl.OnUniteReset(item, item.View.ViewId)">close</i>
+                                                    </div>
+                                                    <div class="col-composante unite"
+                                                         ng-if="::itemReadOnly">
+                                                        <input readonly
+                                                               type="text"
+                                                               class="form-control unite-readonly"
+                                                               ng-value="::item.View.Unite.Code ? item.View.Unite.Code : ''"
+                                                               ng-attr-title="{{::$ctrl.GetUniteToolTip(item)}}"
+                                                               ng-disabled="true" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-actions" ng-if="::!itemReadOnly">
+                                                    <div class="col-icon">
+                                                        <i ng-show="!itemReadOnly && !$ctrl.IsItemViewValid(item.View)"
+                                                           title="{{::$ctrl.resources.Budget_BibliothequePrix_ErreurPrixEtUniteDoiventEtreCoherente}}"
+                                                           class="warning-icon material-icons" aria-hidden="true">warning</i>
+                                                    </div>
+                                                    <div class="col-icon"
+                                                         fred-one-time-binding-refresher="[item.View.Prix, item.View.Unite, item.Original.Prix, item.Original.Unite]">
+                                                        <i ng-show="::item.HasChanged()"
+                                                           title="{{::$ctrl.GetComposantesOriginaleMessage(item)}}"
+                                                           class="info-icon material-icons">check_circle</i>
+                                                    </div>
+                                                    <div class="col-icon">
+                                                        <i title="{{::$ctrl.resources.Budget_BibliothequePrix_Histo_Voir}}"
+                                                           ng-click="$ctrl.OnShowHistoriqueButtonClick(item)"
+                                                           class="clickable-icon material-icons">more_vert</i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fred-flex-table>
+
+        <bibliotheque-prix-item-historique-component devise="$ctrl.Devise">
+        </bibliotheque-prix-item-historique-component>
+
+        <bibliotheque-prix-enregistrement-sur-ci-component>
+        </bibliotheque-prix-enregistrement-sur-ci-component>
+
+        <bibliotheque-prix-copier-valeurs-component ng-if="$ctrl.OrganisationCouranteEstCi()">
+        </bibliotheque-prix-copier-valeurs-component>
+
+        <!--Lookup de sélection des unités-->
+        <lookup id="{{::$ctrl.Identifiers.LookupUnite}}"
+                ng-model="$ctrl.LookupUnite"
+                search-placeholder="{{::$ctrl.resources.Global_ReferentielUnite_Placeholder}}"
+                search-title="{{::$ctrl.resources.Global_ReferentielUnite}}"
+                placeholder="{{::$ctrl.resources.Budget_BibliothequePrix_Placeholder_SelectionnerUnite}}"
+                on-select="$ctrl.LookupUniteSelected()"
+                url="/api/Unite/SearchLightBySocieteId/?societeId={{$ctrl.SocieteId}}&">
+        </lookup>
+    </div>
+</div>

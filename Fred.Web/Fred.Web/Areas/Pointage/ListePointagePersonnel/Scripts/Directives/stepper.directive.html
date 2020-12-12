@@ -1,0 +1,16 @@
+﻿<div class="stepper">
+    <div class="step" ng-repeat="step in forms.steps">
+        <div class="step-heading" ng-class="{'active':!step.expanded}" ng-click="toggleListItems($index)">
+            <div class="circle">{{step.step}}</div>
+            <div class="title">{{step.name}}</div>
+        </div>
+        <div class="line" ng-hide="step.step >=forms.steps.length"></div>
+        <div uib-collapse="!step.expanded">
+            <div class="body">
+                <div>{{step.template}}</div>
+                <button ng-hide="step.step >=forms.steps.length" ng-click="toggleListItems($index + 1)" class="btn btn-sm btn-bg ripple" name="next" type="button"> Next </button>
+                <button ng-hide="step.step <=1" ng-class="{'btn-bg': step.step==forms.steps.length}" ng-click="toggleListItems($index - 1)" class="btn btn-sm ripple" name="previous" type="button"> Previous </button>
+            </div>
+        </div>
+    </div>
+</div>

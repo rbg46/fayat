@@ -1,0 +1,100 @@
+﻿<div class="modal-content" id="cont-vrac">
+  <div class="modal-header">
+    <h2 class="modal-title"><i class="flaticon flaticon-notebook-4"></i>{{ $ctrl.resources.VPWeb_ControleVrac }}</h2>
+    <i class="flaticon flaticon-multiply close pull-right" aria-label="Close" title="{{ $ctrl.resources.Global_Modal_Annuler_Tooltip }}" ng-click="$ctrl.handleCancel()"></i>
+  </div>
+  <form name="$ctrl.controleVracForm">
+    <div class="modal-body">
+      <div ng-show="$ctrl.errorMessage.length > 0" class="alert alert-warning">{{$ctrl.errorMessage}}</div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <label>{{ $ctrl.resources.Global_SelectionnerSociete }}</label>
+          <span class="text-danger" ng-show="$ctrl.controleVracForm.$submitted && $ctrl.controleVracForm.Societe.$invalid">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+          <lookup-standalone ng-model="$ctrl.filter.Societe"
+                             enable-default-selection="true"
+                             text="$ctrl.filter.Societe.CodeLibelle"
+                             search-max-length="100"
+                             search-title="{{$ctrl.resources.Global_ReferentielSociete}}"
+                             search-placeholder="{{$ctrl.resources.Global_ReferentielSociete_Placeholder}}"
+                             url="{{$ctrl.handleShowLookupSociete()}}"
+                             on-select="$ctrl.handleLookupSelection('Societe', item)"
+                             on-delete="$ctrl.handleLookupDeletion('Societe')"
+                             show-in-popup="true"
+                             class="formulaire long"
+                             name="Societe"
+                             ng-required="true" 
+                             placeholder="{{$ctrl.resources.Global_ReferentielSociete_Placeholder}}">
+          </lookup-standalone>
+        </div>
+      </div>
+
+      <hr>
+      
+      <div class="row" ng-if="$ctrl.isCurrentUserFes">
+        <div class="col-md-12 col-lg-12">
+            <label>{{ $ctrl.resources.ValidationPointage_Statut }}</label>
+        </div>
+        <div class="col-md-2 col-lg-2">
+          <input id="chbxStatutOuvrier" type="checkbox" ng-model="$ctrl.statutOuvrier" ng-click="$ctrl.handleChangePersonnelStatutList('StatutOuvrier')" />
+          <label for="chbxStatutOuvrier"><span></span>{{$ctrl.resources.ValidationPointage_StatutOuvrier}}</label>
+        </div>
+        <div class="col-md-2 col-lg-2">
+          <input id="chbxStatutEtam" type="checkbox"ng-model="$ctrl.statutEtam" ng-click="$ctrl.handleChangePersonnelStatutList('StatutEtam')" />
+          <label for="chbxStatutEtam"><span></span>{{$ctrl.resources.ValidationPointage_StatutEtam}}</label>
+        </div>
+        <div class="col-md-2 col-lg-2">
+          <input id="chbxStatutCadre" type="checkbox" ng-model="$ctrl.statutCadre" ng-click="$ctrl.handleChangePersonnelStatutList('StatutCadre')" />
+          <label for="chbxStatutCadre"><span></span>{{$ctrl.resources.ValidationPointage_StatutCadre}}</label>
+        </div>
+      </div>
+
+      <hr ng-if="$ctrl.isCurrentUserFes">
+      <div class="row">
+          <div class="col-md-6 col-lg-6">
+              <input type="radio" name="etablissementPaieRB" id="all-eta" ng-model="$ctrl.isAllEtablissement" ng-value="true" ng-change="$ctrl.handleEtablissementPaieOption()">
+              <label for="all-eta"><span></span>{{ $ctrl.resources.VPWeb_TousEtablissements }}</label>
+          </div>
+          <div class="col-md-6 col-lg-6">
+              <input type="radio" name="etablissementPaieRB" id="chose-eta" ng-model="$ctrl.isAllEtablissement" ng-value="false" ng-change="$ctrl.handleEtablissementPaieOption()">
+              <label for="chose-eta"><span></span>{{ $ctrl.resources.VPWeb_ChoixEtablissements }} :</label>
+          </div>
+      </div>
+      <div class="row" ng-show="!$ctrl.isAllEtablissement">
+        <div class="col-md-12 col-lg-12 cont-eta-picks etsPaie">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>{{ $ctrl.resources.VPWeb_EtablissementsPaie }}</th>
+                <th>
+                  <div class="add_currency pull-right">
+                    <lookup ng-model="$ctrl.selectedEtabPaie"
+                            search-placeholder="{{$ctrl.resources.Global_ReferentielEtablissementPaie_Placeholder}}"
+                            search-title="{{$ctrl.resources.Global_ReferentielEtablissementPaie}}"
+                            on-click="$ctrl.handleShowLookupEtabPaie($ctrl.filter.Societe.SocieteId)"
+                            on-select="$ctrl.handleLookupSelection('EtablissementPaie', item)"
+                            show-in-popup="true">
+                      <span class="btn btn-link" title="{{ $ctrl.resources.VPWeb_AjouterEtablissementTooltip }}">{{ $ctrl.resources.VPWeb_AjouterEtablissementButton }}</span>
+                    </lookup>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="ets in $ctrl.filter.EtablissementPaieList | orderBy:['+Code']">
+                <td>{{ets.CodeLibelle}}</td>
+                <td class="delete" align="right">
+                  <button class="btn btn-link flaticon flaticon-multiply" title="{{ $ctrl.resources.VPWeb_SupprimerEtablissementTooltip }}" ng-click="$ctrl.handleLookupDeletion('EtablissementPaie', ets)" aria-hidden="true"></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p ng-show="$ctrl.filter.EtablissementPaieIdList.length === 0">{{$ctrl.resources.Global_Message_AucunElement}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-default pull-left" title="{{ $ctrl.resources.Global_Bouton_Valider_Tooltip }}" ng-click="$ctrl.handleValidate()">{{ $ctrl.resources.Global_Bouton_Valider }}</button>
+      <button class="btn btn-link pull-right" title="{{ $ctrl.resources.Global_Modal_Annuler_Tooltip }}" ng-click="$ctrl.handleCancel()">{{ $ctrl.resources.Global_Bouton_Annuler }}</button>
+    </div>
+  </form>
+</div>

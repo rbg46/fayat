@@ -1,0 +1,1013 @@
+﻿
+@{
+    ViewBag.Title = "Explorateur de dépenses";
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/DepenseExplorateurBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/DepenseExplorateurBundle.js")
+    @this.RenderResources("FeatureDepense")
+}
+
+<div class="container explorateur-depense"
+     ng-controller="ExplorateurDepenseController as ctrl"
+     ng-init="ctrl.initWithCiId('@ViewBag.ciId'); ctrl.handleLoadFavori('@ViewBag.favoriId'); ctrl.initSearchFilterRedirect('@ViewBag.dateDebut','@ViewBag.dateFin','@ViewBag.codeFamille');">
+
+    <!-- START : Titre de la page -->
+    <h1>Explorateur de dépenses</h1>
+
+    <!--START : Barre de recherche + Barre d'outils-->
+    <fred-toolbar>
+
+        <!--Date début-->
+        <fred-section class="date-section">
+
+            <fred-section-title>Période comptable début</fred-section-title>
+
+            <fred-section-controls>
+                <div class="input-group date">
+                    <app-date-picker id="DateDebut"
+                                     format="MM/YYYY"
+                                     lang="fr"
+                                     initial-date="{{ctrl.filter.DefaultDateFrom}}"
+                                     placeholder="Période début"
+                                     ng-model="ctrl.filter.PeriodeDebut"
+                                     name="DateDebut"
+                                     max-date="{{ctrl.filter.PeriodeFin}}"
+                                     ng-disabled="ctrl.cumul"
+                                     on-update="ctrl.handleLoad();">
+                    </app-date-picker>
+                </div>
+                <button class="btn btn-primary cumul" ng-class="{'bkg-white': !ctrl.cumul}" ng-click="ctrl.handleCumul()">Cumul</button>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Date fin-->
+        <fred-section class="date-section end">
+
+            <fred-section-title>Période comptable fin</fred-section-title>
+
+            <fred-section-controls>
+                <div class="input-group date">
+                    <app-date-picker id="DateFin"
+                                     format="MM/YYYY"
+                                     lang="fr"
+                                     initial-date="{{ctrl.filter.DefaultDateTo}}"
+                                     placeholder="Période fin"
+                                     min-date="{{ctrl.filter.PeriodeDebut}}"
+                                     ng-model="ctrl.filter.PeriodeFin"
+                                     name="DateFin">
+                    </app-date-picker>
+                </div>
+                <button type="button" class="fred-button default text" ng-disabled="ctrl.cumul" ng-click="ctrl.filter.PeriodeFin = ctrl.filter.PeriodeDebut">= Début</button>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Sélection de l'organisation-->
+        <fred-section class="picklist-section">
+
+            <fred-section-title>Centre d'Imputation</fred-section-title>
+
+            <fred-section-controls>
+                <div class="inner-addon right-addon">
+                    <lookup-standalone ng-model="ctrl.filter.CI"
+                                       text="ctrl.filter.CI.CodeLibelle"
+                                       search-title="{{ctrl.resources.Global_ReferentielCI}}"
+                                       search-placeholder="{{ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                       custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                       on-click="ctrl.handleShowLookup('CI');"
+                                       on-select="ctrl.handleLookupSelection('CI', item);"
+                                       show-delete-button="false"
+                                       placeholder="{{ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                       tooltip="ctrl.filter.CI.CodeLibelle"
+                                       class="formulaire long">
+                    </lookup-standalone>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Recherche-->
+        <fred-section class="text-search-section">
+
+            <fred-section-title>Recherche avancée</fred-section-title>
+
+            <div class="container-fluid no-pad">
+                <div class="search-container">
+                    <div class="row">
+                        <!-- BEGIN : Barre de Recherche -->
+                        <div class="col-md-12 col-sm-12 no_padding flex no-pad">
+                            <input type="text" class="form-control" ng-model="ctrl.filter.ValueText" on-enter="ctrl.handleSearch();" placeholder="Rechercher une dépense...">
+                            <button class="input-group-addon button-search">
+                                <i class="material-icons">search</i>
+                            </button>
+                            <fred-button class="btn-dark-gray filter hidden-xs" ng-click="ctrl.handleResetFilter()" title="{{ctrl.resources.Global_Filtre_Bouton_ReinitialiserFiltre}}">
+                                <span class="fa fa-filter"></span>
+                                <span class="fa fa-times"></span>
+                            </fred-button>
+                            <fred-button class="white icon" ng-click="status ? status=false : status=true; ctrl.handleSaveFilter()">
+                                <span class="fa fa-circle filterActivated" ng-show="ctrl.isRedBubbleFiltered"></span>
+                                <span ng-class="{'fa fa-filter' :!buttonFilterClick  ,'material-icons closing' :buttonFilterClick}"
+                                      title="">
+                                    <span ng-show="buttonFilterClick">clear</span>
+                                </span>
+                            </fred-button>
+                        </div>
+                    </div>
+                    <!-- BEGIN : Bloc de Filtre -->
+                    <fred-overlay ng-click="status=false;" ng-class="{'open' :status  ,'close' :!status}"></fred-overlay>
+
+                    <fred-side ng-init="status=false;" ng-class="{'open' :status  ,'close' :!status}" esc-key="Test()">
+
+                        <!--En tete-->
+                        <header>
+                            <icon /><label>Affiner votre recherche : </label>
+                        </header>
+                        <main class="fred-scroll" style="padding: 5px;">
+
+                            <div class="filter-tiles" ng-show="ctrl.isFiltered">
+                                <span ng-repeat="i in ctrl.filters" type="button" class="btn btn-sm btn-primary btn-tile" ng-show="i.value.active">
+                                    {{i.value.label}}
+                                    <span class="ico-filter flaticon-multiply" ng-click="ctrl.handleFilterSelection(i.id, true)"></span>
+                                </span>
+                            </div>
+
+                            <div>
+                                <section-title data-toggle="collapse" data-target="#section1">Dates</section-title>
+
+                                <section-content class="collapse in" id="section1">
+                                    <div class="row">
+                                        <div class="selection_filters">
+                                            <div class="col-sm-4 lbl_l">
+                                                <label class="control-label lbl_txt">Date Dépense</label>
+                                            </div>
+                                            <div class="col-sm-4 no-pl sm_pad_r">
+                                                <app-date-picker id="DateDepenseDebut"
+                                                                 format="DD/MM/YYYY"
+                                                                 lang="fr"
+                                                                 initial-date="{{ctrl.filter.DefaultDateDepenseFrom}}"
+                                                                 placeholder="Date dépense début"
+                                                                 max-date="{{ctrl.filter.DateDepenseFin}}"
+                                                                 ng-model="ctrl.filter.DateDepenseDebut"
+                                                                 name="DateDepenseDebut"
+                                                                 ng-change="ctrl.handleFilterSelection('dateDepenseDebut')">
+                                                </app-date-picker>
+                                            </div>
+                                            <div class="col-sm-4 no-pad">
+                                                <app-date-picker id="DateDepenseFin"
+                                                                 format="DD/MM/YYYY"
+                                                                 lang="fr"
+                                                                 initial-date="{{ctrl.filter.DefaultDateDepenseTo}}"
+                                                                 placeholder="Date dépense fin"
+                                                                 min-date="{{ctrl.filter.DateDepenseDebut}}"
+                                                                 ng-model="ctrl.filter.DateDepenseFin"
+                                                                 name="DateDepenseFin"
+                                                                 ng-change="ctrl.handleFilterSelection('dateDepenseFin')">
+                                                </app-date-picker>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="selection_filters">
+                                            <div class="col-sm-4 lbl_l">
+                                                <label class="control-label lbl_txt">Date Facture</label>
+                                            </div>
+                                            <div class="col-sm-4 no-pl sm_pad_r">
+                                                <app-date-picker id="DateFactureDebut"
+                                                                 format="DD/MM/YYYY"
+                                                                 lang="fr"
+                                                                 initial-date="{{ctrl.filter.DefaultDateFactureFrom}}"
+                                                                 placeholder="Date facture début"
+                                                                 max-date="{{ctrl.filter.DateFactureFin}}"
+                                                                 ng-model="ctrl.filter.DateFactureDebut"
+                                                                 name="DateFactureDebut"
+                                                                 ng-change="ctrl.handleFilterSelection('dateFactureDebut')">
+                                                </app-date-picker>
+                                            </div>
+                                            <div class="col-sm-4 no-pad">
+                                                <app-date-picker id="DateFactureFin"
+                                                                 format="DD/MM/YYYY"
+                                                                 lang="fr"
+                                                                 initial-date="{{ctrl.filter.DefaultDateFactureTo}}"
+                                                                 placeholder="Date facture fin"
+                                                                 min-date="{{ctrl.filter.DateFactureDebut}}"
+                                                                 ng-model="ctrl.filter.DateFactureFin"
+                                                                 name="DateFactureFin"
+                                                                 ng-change="ctrl.handleFilterSelection('dateFactureFin')">
+                                                </app-date-picker>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="selection_filters">
+                                            <div class="col-sm-4 lbl_l">
+                                                <label class="control-label lbl_txt">Date Rapprochement</label>
+                                            </div>
+                                            <div class="col-sm-4 no-pl sm_pad_r">
+                                                <app-date-picker id="DateRapprochement"
+                                                                 format="MM/YYYY"
+                                                                 lang="fr"
+                                                                 initial-date="{{ctrl.filter.DateRapprochement}}"
+                                                                 placeholder="Date rapprochement"
+                                                                 ng-model="ctrl.filter.DateRapprochement"
+                                                                 name="DateRapprochement"
+                                                                 ng-change="ctrl.handleFilterSelection('dateRapprochement')">
+                                                </app-date-picker>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </section-content>
+
+                                <section-title data-toggle="collapse" data-target="#section2">Types de dépenses</section-title>
+
+                                <section-content class="collapse in" id="section2">
+                                    <div class="row">
+                                        <div class="selection_filters">
+                                            <div class="col-sm-4 lbl_l">
+                                                <label class="control-label lbl_txt">Types</label>
+                                            </div>
+                                            <div class="col-sm-8 no-pad">
+                                                <span class="filter-types" ng-class="{'active': ctrl.filter.TakeReception === true }" ng-click="ctrl.handleFilterSelection('reception')">Réception</span>
+                                                <span class="filter-types" ng-class="{'active': ctrl.filter.TakeFacturation === true }" ng-click="ctrl.handleFilterSelection('facturation')">Facture</span>
+                                                <span class="filter-types" ng-class="{'active': ctrl.filter.TakeFar === true }" ng-click="ctrl.handleFilterSelection('far')">Ajust. FAR</span>
+                                                <span class="filter-types" ng-class="{'active': ctrl.filter.TakeValorisation === true }" ng-click="ctrl.handleFilterSelection('valorisation')">Valorisation</span>
+                                                <feature-flag invert feature-key="ActivationUS13085_6000">
+                                                    <span class="filter-types" ng-class="{'active': ctrl.filter.TakeOd === true }" ng-click="ctrl.handleFilterSelection('od')">OD</span>
+                                                </feature-flag>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="selection_filters sub-types">
+                                            <div class="col-sm-4 lbl_l">
+                                                <label class="control-label lbl_txt">Sous-types</label>
+                                            </div>
+                                            <div class="col-sm-8 no-pad">
+                                                <span class="filter-types" ng-class="{'active': ctrl.filter.TakeEcart === true }" ng-click="ctrl.handleFilterSelection('ecart')">Ecart</span>
+                                                <span class="filter-types" ng-class="{'active': ctrl.filter.TakeNonCommandee === true }" ng-click="ctrl.handleFilterSelection('nonCommandee')">Non cmdée</span>
+                                                <span class="filter-types" ng-class="{'active': ctrl.filter.TakeAvoir === true }" ng-click="ctrl.handleFilterSelection('avoir')">Avoir</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <feature-flag feature-key="ExplorateurDepensesFiltresMOMateriels">
+                                        <div class="row">
+                                            <div class="selection_filters">
+                                                <div class="col-sm-4 lbl_l">
+                                                    <label class="control-label lbl_txt">Types Valorisation</label>
+                                                </div>
+                                                <div class="col-sm-8 no-pad">
+                                                    <span class="filter-types" ng-class="{'active': ctrl.filter.TakeMOInt === true }" ng-click="ctrl.handleFilterSelection('moInt')">MO Int.</span>
+                                                    <span class="filter-types" ng-class="{'active': ctrl.filter.TakeMOInterim === true }" ng-click="ctrl.handleFilterSelection('moInterim')">MO Intérim.</span>
+                                                    <span class="filter-types" ng-class="{'active': ctrl.filter.TakeMaterielInt === true }" ng-click="ctrl.handleFilterSelection('materielInt')">Matériel Int.</span>
+                                                    <span class="filter-types" ng-class="{'active': ctrl.filter.TakeMaterielExt === true }" ng-click="ctrl.handleFilterSelection('materielExt')">Matériel Ext.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </feature-flag>
+                                    <feature-flag feature-key="ActivationUS13085_6000">
+                                        <div class="row" ng-hide="ctrl.typeOdFilter.data[0].LibelleCourt == null">
+                                            <div class="selection_filters sub-types">
+                                                <div class="col-sm-4 lbl_l">
+                                                    <label class="control-label lbl_txt">Types OD</label>
+                                                </div>
+                                                <div class="col-sm-8 no-pad">
+                                                    <span class="filter-types" ng-class="{'active': ctrl.filter.TakeOdRct === true }" ng-show="ctrl.typeOdFilterRct" ng-click="ctrl.handleFilterSelection('typeOdRct')">{{ctrl.typeOdFilterRct}}</span>
+                                                    <span class="filter-types" ng-class="{'active': ctrl.filter.TakeOdMo === true }" ng-show="ctrl.typeOdFilterMo" ng-click="ctrl.handleFilterSelection('typeOdMo')">{{ctrl.typeOdFilterMo}}</span>
+                                                    <span class="filter-types" ng-class="{'active': ctrl.filter.TakeOdAch === true }" ng-show="ctrl.typeOdFilterAch" ng-click="ctrl.handleFilterSelection('typeOdAch')">{{ctrl.typeOdFilterAch}}</span>
+                                                    <span class="filter-types" ng-class="{'active': ctrl.filter.TakeOdMit === true }" ng-show="ctrl.typeOdFilterMit" ng-click="ctrl.handleFilterSelection('typeOdMit')">{{ctrl.typeOdFilterMit}}</span>
+                                                    <span class="filter-types" ng-class="{'active': ctrl.filter.TakeOdMi === true }" ng-show="ctrl.typeOdFilterMi" ng-click="ctrl.handleFilterSelection('typeOdMi')">{{ctrl.typeOdFilterMi}}</span>
+                                                    <span class="filter-types" ng-class="{'active': ctrl.filter.TakeOdOth === true }" ng-show="ctrl.typeOdFilterOth" ng-click="ctrl.handleFilterSelection('typeOdOth')">{{ctrl.typeOdFilterOth}}</span>
+                                                    <span class="filter-types" ng-class="{'active': ctrl.filter.TakeOdFg === true }" ng-show="ctrl.typeOdFilterFg" ng-click="ctrl.handleFilterSelection('typeOdFg')">{{ctrl.typeOdFilterFg}}</span>
+                                                    <span class="filter-types" ng-class="{'active': ctrl.filter.TakeOdOthd === true }" ng-show="ctrl.typeOdFilterOthd" ng-click="ctrl.handleFilterSelection('typeOdOthd')">{{ctrl.typeOdFilterOthd}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </feature-flag>
+                                    <div class="row" ng-show="ctrl.filter.CiId && ctrl.filter.Sep">
+                                        <div class="selection_filters">
+                                            <div class="col-sm-4 lbl_l">
+                                                <label class="control-label lbl_txt">Energie uniquement</label>
+                                            </div>
+                                            <div class="col-sm-8 no-pad">
+                                                <label class="switch">
+                                                    <input type="checkbox" ng-class="{'active': ctrl.filter.EnergieOnly === true }" ng-click="ctrl.handleFilterSelection('EnergieOnly')" />
+                                                    <span class="slider"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section-content>
+
+                                <section-title data-toggle="collapse" data-target="#section3">Autres critères</section-title>
+
+                                <section-content class="collapse in" id="section3">
+                                    <div class="row">
+                                        <div class="selection_filters">
+                                            <div class="col-sm-4 lb_l">
+                                                <label for="" class="control-label lbl_txt">Fournisseur</label>
+                                            </div>
+                                            <div class="col-sm-8 lbl_r no-pl">
+                                                <input-select is-selected="ctrl.filter.AgenceId || ctrl.filter.FournisseurId"
+                                                              is-editable="false"
+                                                              placeholder="ctrl.resources.Global_ReferentielFournisseur_Placeholder"
+                                                              on-select="ctrl.handleShowPickListFournisseurAgence()"
+                                                              on-delete="ctrl.handleClearAgenceAndFournisseur()"
+                                                              text="ctrl.filter.AgenceId ? ctrl.filter.Agence.CodeLibelle : ctrl.filter.Fournisseur.CodeLibelle">
+                                                </input-select>
+                                                <lookup-panel-fournisseur-agence on-item-selected="ctrl.handleSelectFournisseurAgence(fournisseur,agence)"
+                                                                                 current-fournisseur="ctrl.filter.Fournisseur"
+                                                                                 current-agence="ctrl.filter.Agence">
+                                                </lookup-panel-fournisseur-agence>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="selection_filters">
+                                            <div class="col-sm-4 lb_l">
+                                                <label for="" class="control-label lbl_txt">Ressource</label>
+                                            </div>
+                                            <div class="col-sm-8 lbl_r no-pl">
+                                                <lookup-standalone ng-model="ctrl.filter.Ressource"
+                                                                   text="ctrl.filter.Ressource.CodeLibelle"
+                                                                   search-title="{{ctrl.resources.Global_ReferentielRessource}}"
+                                                                   search-placeholder="{{ctrl.resources.Global_ReferentielRessource_Placeholder}}"
+                                                                   on-click="ctrl.handleShowLookup('Ressource');"
+                                                                   on-select="ctrl.handleLookupSelection('Ressource', item);"
+                                                                   on-delete="ctrl.handleLookupDeletion('Ressource');"
+                                                                   placeholder="{{ctrl.resources.Global_ReferentielRessource_Placeholder}}"
+                                                                   tooltip="ctrl.filter.Ressource.CodeLibelle"
+                                                                   class="formulaire long"
+                                                                   ng-disabled="!ctrl.filter.CI">
+                                                </lookup-standalone>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="selection_filters">
+                                            <div class="col-sm-4 lb_l">
+                                                <label for="" class="control-label lbl_txt">Tâche</label>
+                                            </div>
+                                            <div class="col-sm-8 lbl_r no-pl">
+                                                <lookup-standalone ng-model="ctrl.filter.Tache"
+                                                                   text="ctrl.filter.Tache.CodeLibelle"
+                                                                   search-title="{{ctrl.resources.Global_ReferentielTache}}"
+                                                                   search-placeholder="{{ctrl.resources.Global_ReferentielTache_Placeholder}}"
+                                                                   url="/api/Tache/SearchLight/?ciId={{ctrl.filter.CI.CiId}}&activeOnly=false&isTechnicalTask=true&"
+                                                                   on-select="ctrl.handleLookupSelection('Tache', item);"
+                                                                   on-delete="ctrl.handleLookupDeletion('Tache');"
+                                                                   placeholder="{{ctrl.resources.Global_ReferentielTache_Placeholder}}"
+                                                                   tooltip="ctrl.filter.Tache.CodeLibelle"
+                                                                   class="formulaire long"
+                                                                   ng-disabled="!ctrl.filter.CI"
+                                                                   custom-template-url="~/Scripts/directive/Lookup/custom-templates/tache.template.html">
+                                                </lookup-standalone>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <feature-flag feature-key="ActivationUS13085_6000">
+                                        <div class="row">
+                                            <div class="selection_filters">
+                                                <div class="col-sm-4 lb_l">
+                                                    <label for="" class="control-label lbl_txt">Type ressource</label>
+                                                </div>
+                                                <div class="col-sm-8 lbl_r no-pl">
+                                                    <lookup-standalone ng-model="ctrl.filter.TypeRessource"
+                                                                       text="ctrl.filter.TypeRessource.Libelle"
+                                                                       search-title="{{ctrl.resources.Global_ReferentielTypeRessource}}"
+                                                                       search-placeholder="{{ctrl.resources.Global_ReferentielTypeRessource_Placeholder}}"
+                                                                       url="/api/TypeRessource/SearchLight/"
+                                                                       on-select="ctrl.handleLookupSelection('TypeRessource', item);"
+                                                                       on-delete="ctrl.handleLookupDeletion('TypeRessource');"
+                                                                       placeholder="{{ctrl.resources.Global_ReferentielTypeRessource_Placeholder}}"
+                                                                       tooltip="ctrl.filter.TypeRessource.Libelle"
+                                                                       class="formulaire long">
+                                                    </lookup-standalone>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </feature-flag>
+
+                                    <div class="row">
+                                        <div class="selection_filters">
+                                            <div class="col-sm-4 lbl_l">
+                                                <label class="control-label lbl_txt">Montant HT</label>
+                                            </div>
+                                            <div class="col-sm-4 no-pad">
+                                                <input class="text-fields form-control" fred-input-number="0" type="text" placeholder="Min..." ng-change="ctrl.handleFilterSelection('montantHTDebut')" ng-model="ctrl.filter.MontantHTDebut">
+                                            </div>
+                                            <div class="col-sm-4 no-pad">
+                                                <input class="text-fields form-control" fred-input-number="0" type="text" placeholder="Max..." ng-change="ctrl.handleFilterSelection('montantHTFin')" ng-model="ctrl.filter.MontantHTFin">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="selection_filters">
+                                            <div class="col-sm-4 lbl_l">
+                                                <label class="control-label lbl_txt">Personnel</label>
+                                            </div>
+                                            <div class="col-sm-8 no-pad">
+                                                <span class="filter-types" ng-class="{'active': ctrl.filter.PersonnelInInsertion === true }" ng-click="ctrl.handleFilterSelection('personnelInInsertion')">En insertion</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section-content>
+                            </div>
+                        </main>
+
+                        <footer ng-click="status=false;">
+                            <!--BEGIN : Bouton Start-->
+                            <action>
+                                <button type="button" class="fred-button primary" data-toggle="collapse" data-target="#demo">{{ctrl.resources.Global_Filtre_Bouton_Appliquer}}</button>
+                                <button type="button" class="fred-button cancel" ng-click="ctrl.handleCancelFilter()"> {{ctrl.resources.Global_Bouton_Annuler}} </button>
+                            </action>
+                            <!--END : Bouton Start-->
+
+                            <close>
+                                <icon /><label>Refermer le panneau</label>
+                            </close>
+                        </footer>
+                    </fred-side>
+                </div>
+            </div>
+        </fred-section>
+
+        <!--Axe d'analyse-->
+        <fred-section class="aa-section">
+            <fred-section-title>Axe d'analyse</fred-section-title>
+            <fred-section-controls>
+                <fred-button type="button" class="task" ng-click="ctrl.handleSelectAxeAnalytiqueOrder(ctrl.axeAnalytique.tacheRessource)" title="Cliquer pour afficher l’explorateur sur l’axe Tâches > Ressources">
+                    <span ng-class="{'T-icon': ctrl.filter.AxeAnalytique == ctrl.axeAnalytique.tacheRessource, 'T-icon inactive': ctrl.filter.AxeAnalytique != ctrl.axeAnalytique.tacheRessource}"></span>
+                </fred-button>
+                <fred-button type="button" class="chap" ng-click="ctrl.handleSelectAxeAnalytiqueOrder(ctrl.axeAnalytique.ressourceTache)" title="Cliquer pour afficher l’explorateur sur l’axe Ressources > Tâches">
+                    <span ng-class="{'chap-icon': ctrl.filter.AxeAnalytique == ctrl.axeAnalytique.ressourceTache, 'chap-icon inactive': ctrl.filter.AxeAnalytique != ctrl.axeAnalytique.ressourceTache}"></span>
+                </fred-button>
+                <fred-button type="button" class="ax-param" ng-click="ctrl.handleOpenAxeAnalytiquePanel()" title="Cliquer pour afficher les options de personnalisation d’affichage">
+                    <span ng-class="{'sapicon-E056': ctrl.filterActiveOnAxe, 'sapicon-E056 inactive': !ctrl.filterActiveOnAxe}"></span>
+                </fred-button>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Actions-->
+        <fred-section class="action-section">
+
+            <fred-section-title>Actions</fred-section-title>
+
+            <fred-section-controls class="action-controls">
+                <fred-button class="default text" ng-click="ctrl.handleCollapse('#advanced-search-explorer', true); buttonFilterClick = false; ctrl.handleSearch();">Rechercher</fred-button>
+                <fred-button class="fred-button white-star col-sm-4" type="button" ng-click="ctrl.handleAddFilter2Favoris()" title="{{ctrl.resources.Button_Save_Favorite_Title}}">
+                    <i class="material-icons">star</i>
+                </fred-button>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Export-->
+        <fred-section class="export-section">
+
+            <fred-section-title>Export</fred-section-title>
+
+            <fred-section-controls>
+                <button type="button" class="btn button-excel" ng-class="{'disabled-img': ctrl.data.length === 0}" title="Exporter vers un fichier Excel" ng-click="ctrl.data.length > 0 && ctrl.handleOpenExportModal()"></button>
+            </fred-section-controls>
+        </fred-section>
+    </fred-toolbar>
+    <!--END : Barre de recherche + Barre d'outils-->
+    <!--START : Maquette explorateur-->
+
+    <div class="row information" ng-show="(!ctrl.filter.CiId || !ctrl.panelAxeOpened || (ctrl.filter.CiId && ctrl.panelAxeOpened)) && ctrl.data.length === 0">
+
+        <div class="col-md-4 icon">
+            <i class="flaticon flaticon-warning"></i>
+        </div>
+        <div class="col-md-8 message">
+            <h3 ng-show="!ctrl.filter.CiId">Veuillez sélectionner un CI, définir vos axes d'analyse et lancer la recherche.</h3>
+            <h3 ng-show="ctrl.filter.CiId && !ctrl.panelAxeOpened">Veuillez définir vos axes d'analyse et lancer la recherche.</h3>
+            <h3 ng-show="ctrl.filter.CiId && ctrl.panelAxeOpened">Veuillez lancer la recherche.</h3>
+        </div>
+
+    </div>
+
+    <div class="row" ng-show="ctrl.data.length > 0">
+
+        <div class="col-lg-3 col-md-3 no-pl">
+            <div class="explorator-container">
+                <div class="explorator-container-header one">
+                    <div class="explorator-analyse-header">
+                        <span class="unfold" ng-click="ctrl.handleCollapseOrUncollapseAll(false)">Tout déplier</span>
+                        <span class="fold" ng-click="ctrl.handleCollapseOrUncollapseAll(true)">Tout replier</span>
+                        <span class="uncheck-all" ng-click="ctrl.handleUncheckAll()">Tout désélectionner</span>
+                    </div>
+                    <div class="explorator-total-header">{{ ctrl.totalMontantHT | number:2 }} €</div>
+                </div>
+                <div class="explorator-container-header">
+                    <div class="explorator-checkbox-header">
+                        <input type="checkbox" id="chbx_all" ng-model="ctrl.allChecked" ng-change="ctrl.handleSelectAllAxeAnalytique()">
+                        <label for="chbx_all"><span></span></label>
+                    </div>
+                    <div class="explorator-analyse-header">
+                        Axes d'analyse
+                    </div>
+                    <div class="explorator-total-header">Montant HT</div>
+                </div>
+                <div class="explorator-list fred-scroll" fred-resize fred-resize-trigger="{{ctrl.data.length > 0}}">
+
+                    <!-- Begin Line Level 1 -->
+                    <div class="line" ng-repeat="(i1,level1) in ctrl.data ">
+
+                        <div class="{{level1.Type}}" ng-class="{'selected': level1.Checked, 'picked': level1.Picked, 'axis-disabled': level1.Checked && !level1.Picked }" ng-click="!ctrl.busy && ctrl.handleSelectAxeAnalytique($event, 1, level1, level1)">
+                            <div class="axe-analyse-data l1">
+                                <span ng-click="$event.stopPropagation();">
+                                    <input type="checkbox" id="chbx_{{level1.Id}}" ng-disabled="level1.Checked && !level1.Picked || ctrl.busy" ng-model="level1.Checked" ng-change="ctrl.handleSelectAxeAnalytique(null, 1, level1, level1)">
+                                    <label for="chbx_{{level1.Id}}"><span ng-class="{'disabled': level1.Checked && !level1.Picked }"></span></label>
+                                </span>
+                                <span class="chevron-box">
+                                    <span class="chevrons"
+                                          ng-show="level1.SousExplorateurAxe && level1.SousExplorateurAxe.length > 0"
+                                          data-toggle="collapse"
+                                          data-target="#R1_{{i1}}"
+                                          ng-click="$event.stopPropagation(); ctrl.handleCollapse('#R1_' + i1)">
+                                    </span>
+                                </span>
+                                <span class="line-icon-{{level1.Type}}"></span>
+                                <span class="line-entitled">{{level1.Code}} - {{level1.Libelle}}</span>
+                            </div>
+                            <div class="HTamount">
+                                <span class="data">{{level1.MontantHT | number:2 }} €</span>
+                            </div>
+                        </div>
+
+                        <!-- Begin Panel Level 2 -->
+                        <div class="collapse in" id="R1_{{i1}}" aria-expanded="true">
+                            <!-- Begin Line Level 2 -->
+                            <div class="line" ng-repeat="(i2,level2) in level1.SousExplorateurAxe ">
+                                <div class="{{level2.Type}}" ng-class="{'selected': level2.Checked, 'picked': level2.Picked, 'axis-disabled': level2.Checked && !level2.Picked }" ng-click="!ctrl.busy && ctrl.handleSelectAxeAnalytique($event, 2, level2, level1, level2)">
+                                    <div class="axe-analyse-data l2">
+                                        <span ng-click="$event.stopPropagation();">
+                                            <input type="checkbox" id="chbx_{{level2.Id}}" ng-disabled="level2.Checked && !level2.Picked || ctrl.busy" ng-model="level2.Checked" ng-change="ctrl.handleSelectAxeAnalytique(null, 2, level2, level1, level2)">
+                                            <label for="chbx_{{level2.Id}}"><span ng-class="{'disabled': level2.Checked && !level2.Picked }"></span></label>
+                                        </span>
+                                        <span class="chevron-box">
+                                            <span class="chevrons"
+                                                  ng-show="level2.SousExplorateurAxe && level2.SousExplorateurAxe.length > 0"
+                                                  data-toggle="collapse"
+                                                  data-target="#R2_{{i1}}{{i2}}"
+                                                  ng-click="$event.stopPropagation(); ctrl.handleCollapse('#R2_' + i1 + i2)">
+                                            </span>
+                                        </span>
+                                        <span class="line-icon-{{level2.Type}}"></span>
+                                        <span class="line-entitled">{{level2.Code}} - {{level2.Libelle}}</span>
+                                    </div>
+                                    <div class="HTamount">
+                                        <span class="data">{{level2.MontantHT | number:2 }} €</span>
+                                    </div>
+                                </div>
+
+                                <!-- Begin Panel Level 3 -->
+                                <div class="collapse in" id="R2_{{i1}}{{i2}}" aria-expanded="true">
+                                    <!-- Begin Line Level 3 -->
+                                    <div class="line" ng-repeat="(i3,level3) in level2.SousExplorateurAxe ">
+                                        <div class="{{level3.Type}}" ng-class="{'selected': level3.Checked, 'picked': level3.Picked, 'axis-disabled': level3.Checked && !level3.Picked }" ng-click="!ctrl.busy && ctrl.handleSelectAxeAnalytique($event, 3, level3, level1, level2, level3)">
+                                            <div class="axe-analyse-data l3">
+                                                <span ng-click="$event.stopPropagation();">
+                                                    <input type="checkbox" id="chbx_{{level3.Id}}" ng-disabled="level3.Checked && !level3.Picked || ctrl.busy" ng-model="level3.Checked" ng-change="ctrl.handleSelectAxeAnalytique(null, 3, level3, level1, level2, level3)">
+                                                    <label for="chbx_{{level3.Id}}"><span ng-class="{'disabled': level3.Checked && !level3.Picked }"></span></label>
+                                                </span>
+                                                <span class="chevron-box">
+                                                    <span class="chevrons"
+                                                          ng-show="level3.SousExplorateurAxe && level3.SousExplorateurAxe.length > 0"
+                                                          data-toggle="collapse"
+                                                          data-target="#R3_{{i1}}{{i2}}{{i3}}"
+                                                          ng-click="$event.stopPropagation(); ctrl.handleCollapse('#R3_' + i1 + i2 + i3)">
+                                                    </span>
+                                                </span>
+                                                <span class="line-icon-{{level3.Type}}"></span>
+                                                <span class="line-entitled">{{level3.Code}} - {{level3.Libelle}}</span>
+                                            </div>
+                                            <div class="HTamount">
+                                                <span class="data">{{level3.MontantHT | number:2 }} €</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Begin Panel Level 4-->
+                                        <div class="collapse in" id="R3_{{i1}}{{i2}}{{i3}}" aria-expanded="true">
+                                            <!-- Begin Line Level 4 -->
+                                            <div class="line" ng-repeat="(i4,level4) in level3.SousExplorateurAxe ">
+                                                <div class="{{level4.Type}}" ng-class="{'selected': level4.Checked, 'picked': level4.Picked, 'axis-disabled': level4.Checked && !level4.Picked }" ng-click="!ctrl.busy && ctrl.handleSelectAxeAnalytique($event, 4, level4, level1, level2, level3, level4)">
+                                                    <div class="axe-analyse-data l4">
+                                                        <span ng-click="$event.stopPropagation();">
+                                                            <input type="checkbox" id="chbx_{{level4.Id}}" ng-disabled="level4.Checked && !level4.Picked || ctrl.busy" ng-model="level4.Checked" ng-change="ctrl.handleSelectAxeAnalytique(null, 4, level4, level1, level2, level3, level4)">
+                                                            <label for="chbx_{{level4.Id}}"><span ng-class="{'disabled': level4.Checked && !level4.Picked }"></span></label>
+                                                        </span>
+                                                        <span class="chevron-box">
+                                                            <span class="chevrons"
+                                                                  ng-show="level4.SousExplorateurAxe && level4.SousExplorateurAxe.length > 0"
+                                                                  data-toggle="collapse"
+                                                                  data-target="#R4_{{i1}}{{i2}}{{i3}}{{i4}}"
+                                                                  ng-click="$event.stopPropagation(); ctrl.handleCollapse('#R4_' + i1 + i2 + i3 + i4)">
+                                                            </span>
+                                                        </span>
+                                                        <span class="line-icon-{{level4.Type}}"></span>
+                                                        <span class="line-entitled">{{level4.Code}} - {{level4.Libelle}}</span>
+                                                    </div>
+                                                    <div class="HTamount">
+                                                        <span class="data">{{level4.MontantHT | number:2 }} €</span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Begin Panel Level 5-->
+                                                <div class="collapse in" id="R4_{{i1}}{{i2}}{{i3}}{{i4}}" aria-expanded="true">
+                                                    <!-- Begin Line Level 5 -->
+                                                    <div class="line" ng-repeat="(i5,level5) in level4.SousExplorateurAxe ">
+                                                        <div class="{{level5.Type}}" ng-class="{'selected': level5.Checked, 'picked': level5.Picked, 'axis-disabled': level5.Checked && !level5.Picked }" ng-click="!ctrl.busy && ctrl.handleSelectAxeAnalytique($event, 5, level5, level2, level3, level5)">
+                                                            <div class="axe-analyse-data l5">
+                                                                <span ng-click="$event.stopPropagation();">
+                                                                    <input type="checkbox" id="chbx_{{level5.Id}}" ng-disabled="level5.Checked && !level5.Picked || ctrl.busy" ng-model="level5.Checked" ng-change="ctrl.handleSelectAxeAnalytique(null, 5, level5, level2, level3, level5)">
+                                                                    <label for="chbx_{{level5.Id}}"><span ng-class="{'disabled': level5.Checked && !level5.Picked }"></span></label>
+                                                                </span>
+                                                                <span class="chevron-box">
+                                                                    <span class="chevrons"
+                                                                          ng-show="level5.SousExplorateurAxe && level5.SousExplorateurAxe.length > 0"
+                                                                          data-toggle="collapse"
+                                                                          data-target="#R5_{{i1}}{{i2}}{{i3}}{{i4}}{{i5}}"
+                                                                          ng-click="$event.stopPropagation(); ctrl.handleCollapse('#R5_' + i1 + i2 + i3 + i4 + i5)">
+                                                                    </span>
+                                                                </span>
+                                                                <span class="line-icon-{{level5.Type}}"></span>
+                                                                <span class="line-entitled">{{level5.Code}} - {{level5.Libelle}}</span>
+                                                            </div>
+                                                            <div class="HTamount">
+                                                                <span class="data">{{level5.MontantHT | number:2 }} €</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Begin Panel Level 6-->
+                                                        <div class="collapse in" id="R5_{{i1}}{{i2}}{{i3}}{{i4}}{{i5}}" aria-expanded="true">
+                                                            <!-- Begin Line Level 6-->
+                                                            <div class="line" ng-repeat="(i6,level6) in level5.SousExplorateurAxe ">
+                                                                <div class="{{level6.Type}}" ng-class="{'selected': level6.Checked, 'picked': level6.Picked, 'axis-disabled': level6.Checked && !level6.Picked}" ng-click="!ctrl.busy && ctrl.handleSelectAxeAnalytique($event, 6, level6, level3, level6)">
+                                                                    <div class="axe-analyse-data l6">
+                                                                        <span ng-click="$event.stopPropagation();">
+                                                                            <input type="checkbox" id="chbx_{{level6.Id}}" ng-disabled="level6.Checked && !level6.Picked || ctrl.busy" ng-model="level6.Checked" ng-change="ctrl.handleSelectAxeAnalytique(null, 6, level6, level3, level6)">
+                                                                            <label for="chbx_{{level6.Id}}"><span ng-class="{'disabled': level6.Checked && !level6.Picked }"></span></label>
+                                                                        </span>
+                                                                        <span class="chevron-box"></span>
+                                                                        <span class="line-icon-{{level6.Type}}"></span>
+                                                                        <span class="line-entitled">{{level6.Code}} - {{level6.Libelle}}</span>
+                                                                    </div>
+                                                                    <div class="HTamount">
+                                                                        <span class="data">{{level6.MontantHT | number:2 }} €</span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- End Line Level 6-->
+                                                            </div>
+                                                            <!-- End Panel Level 6-->
+                                                        </div>
+                                                        <!-- End Line Level 5-->
+                                                    </div>
+                                                    <!-- End Panel Level 5-->
+                                                </div>
+                                                <!-- End Line Level 4-->
+                                            </div>
+                                            <!-- End Panel Level 4-->
+                                        </div>
+                                        <!-- End Line Level 3-->
+                                    </div>
+                                    <!-- End Panel Level 3-->
+                                </div>
+                                <!-- End Line Level 2-->
+                            </div>
+                            <!-- End Panel Level 2-->
+                        </div>
+                        <!-- End Line Level 1-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9 col-md-9 no-pad">
+            <div class="display-list" style="margin-top: 7px;">
+                <table id="fixedTable" fred-table fred-fixed-col="1" fred-table-resize-trigger="{{ctrl.depenses.length > 0}}" ng-show="ctrl.depenses.length > 0">
+                    <thead>
+                        <tr class="first-header">
+                            <th class="col2 bgk-lavender" ng-show="!ctrl.displayCol" colspan="3">
+                                <button type="submit" class="btn btn-primary replace" ng-disabled="ctrl.selectedDepenses==0" ng-click="ctrl.handleOpenReplaceTaskModal(ctrl.selectedDepenses)">Remplacer la tâche</button>
+                                <span class="select-all" ng-click="ctrl.handleSelecAlltDepenses(true, ctrl.depenses, ctrl.selectedDepenses)">Tout sélectionner</span>
+                                <span class="deselect-all" ng-click="ctrl.handleSelecAlltDepenses(false, ctrl.depenses, ctrl.selectedDepenses)">Tout déselect.</span>
+                            </th>
+                            <th class="col3 bgk-lavender" ng-show="false"></th>
+                            <th class="col4 bgk-lavender" ng-show="false"></th>
+                            <th class="col5 bgk-white"></th>
+                            <th class="col6 bgk-gray recap">{{ctrl.explorateurDepenseResult.CodeUnite}}</th>
+                            <th class="col7 bgk-light-grayish-blue recap">{{ctrl.explorateurDepenseResult.QuantiteTotal | number:2}}</th>
+                            <th class="col8 bgk-gray recap">{{ctrl.explorateurDepenseResult.PUHTTotal | number:2}} €</th>
+                            <th class="col9 bgk-light-grayish-blue recap">{{ctrl.explorateurDepenseResult.MontantHTTotal | number:2 }} €</th>
+                            <th class="col10 bgk-white"></th>
+                            <th class="col11 bgk-white"></th>
+                            <th class="col12 bgk-white"></th>
+                            <th class="col14 bgk-white"></th>
+                            <th class="col15 bgk-white"></th>
+                            <th class="col16 bgk-white"></th>
+                            <th class="col17 bgk-white"></th>
+                            <th class="col18 bgk-white"></th>
+                            <th class="col13 bgk-white"></th>
+                            <th class="col19 bgk-white"></th>
+                            <th class="col20 bgk-white"></th>
+                            <th class="col21 bgk-white"></th>
+                        </tr>
+                        <tr class="second-header">
+                            <th class="col2 bgk-blue" ng-show="!ctrl.displayCol">
+                                <feature-flag feature-key="triTableauExplorateurDepenses">
+                                    <fred-table-header ng-model="ctrl.filter.RessourceAsc" ng-change="ctrl.handleOnOrderChange('RessourceAsc')" header-style="blue">Ressource</fred-table-header>
+                                </feature-flag>
+                                <feature-flag invert feature-key="triTableauExplorateurDepenses">Ressource</feature-flag>
+                            </th>
+                            <th class="col3 bgk-blue" ng-show="!ctrl.displayCol">
+                                <feature-flag feature-key="triTableauExplorateurDepenses">
+                                    <fred-table-header ng-model="ctrl.filter.TacheAsc" ng-change="ctrl.handleOnOrderChange('TacheAsc')" header-style="blue">Tâche</fred-table-header>
+                                </feature-flag>
+                                <feature-flag invert feature-key="triTableauExplorateurDepenses">Tâche</feature-flag>
+                            </th>
+                            <th class="col4 bgk-blue" ng-show="!ctrl.displayCol"></th>
+                            <th class="col5 bgk-blue">
+                                <span class="material-icons fold-action" ng-show="!ctrl.displayCol" ng-click="ctrl.displayCol = !ctrl.displayCol" title="Afficher les colonnes supplémentaires">chevron_left</span>
+                                <span class="material-icons fold-action" ng-show="ctrl.displayCol" ng-click="ctrl.displayCol = !ctrl.displayCol" title="Replier les colonnes supplémentaires">chevron_right</span>
+                                <feature-flag feature-key="triTableauExplorateurDepenses">
+                                    <fred-table-header ng-model="ctrl.filter.Libelle1Asc" ng-change="ctrl.handleOnOrderChange('Libelle1Asc')" header-style="blue">Libellé 1</fred-table-header>
+                                </feature-flag>
+                                <feature-flag invert feature-key="triTableauExplorateurDepenses">Libellé 1</feature-flag>
+                            </th>
+                            <th class="col6 bgk-blue">
+                                <feature-flag feature-key="triTableauExplorateurDepenses">
+                                    <fred-table-header ng-model="ctrl.filter.UniteAsc" ng-change="ctrl.handleOnOrderChange('UniteAsc')" header-style="blue">Unité</fred-table-header>
+                                </feature-flag>
+                                <feature-flag invert feature-key="triTableauExplorateurDepenses">Unité</feature-flag>
+                            </th>
+                            <th class="col7 bgk-blue">
+                                <feature-flag feature-key="triTableauExplorateurDepenses">
+                                    <fred-table-header ng-model="ctrl.filter.QuantiteAsc" ng-change="ctrl.handleOnOrderChange('QuantiteAsc')" header-style="blue">Quantité</fred-table-header>
+                                </feature-flag>
+                                <feature-flag invert feature-key="triTableauExplorateurDepenses">Quantité</feature-flag>
+                            </th>
+                            <th class="col8 bgk-blue">
+                                <feature-flag feature-key="triTableauExplorateurDepenses">
+                                    <fred-table-header ng-model="ctrl.filter.PuHtAsc" ng-change="ctrl.handleOnOrderChange('PuHtAsc')" header-style="blue">PU</fred-table-header>
+                                </feature-flag>
+                                <feature-flag invert feature-key="triTableauExplorateurDepenses">PU</feature-flag>
+                            </th>
+                            <th class="col9 bgk-blue">
+                                <feature-flag feature-key="triTableauExplorateurDepenses">
+                                    <fred-table-header ng-model="ctrl.filter.MontantHtAsc" ng-change="ctrl.handleOnOrderChange('MontantHtAsc')" header-style="blue">Montant HT</fred-table-header>
+                                </feature-flag>
+                                <feature-flag invert feature-key="triTableauExplorateurDepenses">Montant HT</feature-flag>
+                            </th>
+                            <th class="col10 bgk-blue">
+                                <feature-flag feature-key="triTableauExplorateurDepenses">
+                                    <fred-table-header ng-model="ctrl.filter.CodeAsc" ng-change="ctrl.handleOnOrderChange('CodeAsc')" header-style="blue">Code</fred-table-header>
+                                </feature-flag>
+                                <feature-flag invert feature-key="triTableauExplorateurDepenses">Code</feature-flag>
+                            </th>
+                            <th class="col11 bgk-blue">
+                                <feature-flag feature-key="triTableauExplorateurDepenses">
+                                    <fred-table-header ng-model="ctrl.filter.Libelle2Asc" ng-change="ctrl.handleOnOrderChange('Libelle2Asc')" header-style="blue">Libellé 2</fred-table-header>
+                                </feature-flag>
+                                <feature-flag invert feature-key="triTableauExplorateurDepenses">Libellé 2</feature-flag>
+                            </th>
+                            <th class="col12 bgk-blue">
+                                <feature-flag feature-key="triTableauExplorateurDepenses">
+                                    <fred-table-header ng-model="ctrl.filter.CommentaireAsc" ng-change="ctrl.handleOnOrderChange('CommentaireAsc')" header-style="blue">Commentaire</fred-table-header>
+                                </feature-flag>
+                                <feature-flag invert feature-key="triTableauExplorateurDepenses">Commentaire</feature-flag>
+                            </th>
+                            <th class="col14 bgk-blue">
+                                <feature-flag feature-key="triTableauExplorateurDepenses">
+                                    <fred-table-header ng-model="ctrl.filter.DateDepenseAsc" ng-change="ctrl.handleOnOrderChange('DateDepenseAsc')" header-style="blue">Date Dépense</fred-table-header>
+                                </feature-flag>
+                                <feature-flag invert feature-key="triTableauExplorateurDepenses">Date Dépense</feature-flag>
+                            </th>
+                            <th class="col15 bgk-blue">
+                                <feature-flag feature-key="triTableauExplorateurDepenses">
+                                    <fred-table-header ng-model="ctrl.filter.PeriodeAsc" ng-change="ctrl.handleOnOrderChange('PeriodeAsc')" header-style="blue">Période</fred-table-header>
+                                </feature-flag>
+                                <feature-flag invert feature-key="triTableauExplorateurDepenses">Période</feature-flag>
+                            </th>
+                            <th class="col16 bgk-blue">
+                                <feature-flag feature-key="triTableauExplorateurDepenses">
+                                    <fred-table-header ng-model="ctrl.filter.NatureAsc" ng-change="ctrl.handleOnOrderChange('NatureAsc')" header-style="blue">Nature</fred-table-header>
+                                </feature-flag>
+                                <feature-flag invert feature-key="triTableauExplorateurDepenses">Nature</feature-flag>
+                            </th>
+                            <th class="col17 bgk-blue">
+                                <feature-flag feature-key="triTableauExplorateurDepenses">
+                                    <fred-table-header ng-model="ctrl.filter.TypeDepenseAsc" ng-change="ctrl.handleOnOrderChange('TypeDepenseAsc')" header-style="blue">Type Dépense</fred-table-header>
+                                </feature-flag>
+                                <feature-flag invert feature-key="triTableauExplorateurDepenses">Type Dépense</feature-flag>
+                            </th>
+                            <th class="col18 bgk-blue">
+                                <feature-flag feature-key="triTableauExplorateurDepenses">
+                                    <fred-table-header ng-model="ctrl.filter.SousTypeDepenseAsc" ng-change="ctrl.handleOnOrderChange('SousTypeDepenseAsc')" header-style="blue">Sous-Type</fred-table-header>
+                                </feature-flag>
+                                <feature-flag invert feature-key="triTableauExplorateurDepenses">Sous-Type</feature-flag>
+                            </th>
+                            <th class="col13 bgk-blue">
+                                <feature-flag feature-key="triTableauExplorateurDepenses">
+                                    <fred-table-header ng-model="ctrl.filter.PeriodeFacturationAsc" ng-change="ctrl.handleOnOrderChange('PeriodeFacturationAsc')" header-style="blue">Date Facture</fred-table-header>
+                                </feature-flag>
+                                <feature-flag invert feature-key="triTableauExplorateurDepenses">Date Facture</feature-flag>
+                            </th>
+                            <th class="col19 bgk-blue">Date Rapprochement</th>
+                            <th class="col20 bgk-blue">
+                                <feature-flag feature-key="triTableauExplorateurDepenses">
+                                    <fred-table-header ng-model="ctrl.filter.NumeroFactureAsc" ng-change="ctrl.handleOnOrderChange('NumeroFactureAsc')" header-style="blue">N° Facture</fred-table-header>
+                                </feature-flag>
+                                <feature-flag invert feature-key="triTableauExplorateurDepenses">N° Facture</feature-flag>
+                            </th>
+                            <th class="col21 bgk-blue">Total Facture</th>
+                        </tr>
+                    </thead>
+                    <tbody id="explorateur-depense-list" class="fred-scroll explorateur-list">
+                        <tr class="level7" ng-repeat="d in ctrl.depenses" ng-class="{'selected': d.Selected === true, 'odd' : $index %2 == 0}">
+
+                            <td class="col2" ng-show="!ctrl.displayCol">
+                                <span class="wrap-txt" title="{{d.Ressource.CodeLibelle}}">{{d.Ressource.CodeLibelle}}</span>
+                            </td>
+                            <td class="col3" ng-show="!ctrl.displayCol">
+                                <div class="nested">
+                                    <span class="wrap-txt" title="{{d.TacheTooltip}}" ng-class="{'replaced-task-color': d.TacheOrigineCodeLibelle}">{{d.Tache.CodeLibelle}}</span>
+                                    <span class="material-icons" id="btn_taskHistory_{{$index}}" ng-show="{{d.GroupeRemplacementTacheId != 0}}" title="Tâche remplacée" ng-click="ctrl.handleOpenReplaceTaskHistoryModal(d)">history</span>
+                                </div>
+                            </td>
+                            <td class="col4" title="Sélectionner la dépense" ng-show="!ctrl.displayCol">
+                                <div ng-show="d.TacheRemplacable">
+                                    <input type="checkbox" id="chbx_dep_{{$index}}" ng-disabled="!d.TacheRemplacable" ng-checked="ctrl.isChecked(ctrl.selectedDepenses,d)"  ng-model="d.Selected" ng-change="ctrl.handleSelectDepense(ctrl.depenses, d, null, ctrl.selectedDepenses, $index)">
+                                    <label for="chbx_dep_{{$index}}"><span></span></label>
+                                </div>
+                            </td>
+                            <td class="col5">
+                                <span class="wrap-txt" title="{{d.Libelle1}}">{{d.Libelle1}}</span>
+                            </td>
+                            <td class="col6" title="{{d.Unite.CodeLibelle}}">{{d.Unite.Code}}</td>
+                            <td class="col7" title="{{d.Quantite | number:2}}">{{d.Quantite | number:2}}</td>
+                            <td class="col8" title="{{d.PUHT | number:2}} €">{{d.PUHT | number:2 }} €</td>
+                            <td class="col9" title="{{d.MontantHT | number:2}} €">{{d.MontantHT | number:2 }} €</td>
+                            <td class="col10">
+                                <span class="wrap-txt code" title="{{d.Code}}">{{d.Code}} <a ng-show="d.CommandeId && d.Tache.Code != '999996' && !d.TacheOrigineCodeLibelle.includes('ECART INTERIM')" class="external-link" href="/Commande/Commande/Detail/{{d.CommandeId}}/false" target="_blank"><span class="material-icons open" title="Cliquer pour voir le détail de la commande">reply</span></a></span>
+                            </td>
+                            <td class="col11">
+                                <span class="wrap-txt" title="{{d.Libelle2}}">{{d.Libelle2}}</span>
+                            </td>
+                            <td class="col12">
+                                <span class="wrap-txt" title="{{d.Commentaire}}">{{d.Commentaire}}</span>
+                            </td>
+                            <td class="col14" title="{{d.DateDepense | date:'dd/MM/yyyy'}}">{{d.DateDepense | date:'dd/MM/yy'}}</td>
+                            <td class="col15" title="{{d.Periode | date:'MM/yyyy'}}">{{d.Periode | date:'MM/yy'}}</td>
+                            <td class="col16">
+                                <span class="wrap-txt" title="{{d.Nature.CodeLibelle}}">{{d.Nature.CodeLibelle}}</span>
+                            </td>
+                            <td class="col17" title="{{d.TypeDepense}}">{{d.TypeDepense}}</td>
+                            <td class="col18" title="{{d.SousTypeDepense}}">{{d.SousTypeDepense}}</td>
+                            <td class="col13" title="{{d.DateFacture | date:'dd/MM/yyyy'}}">{{d.DateFacture | date:'dd/MM/yy'}}</td>
+                            <td class="col19" title="{{d.DateRapprochement | date:'dd/MM/yyyy'}}">{{d.DateRapprochement | date:'dd/MM/yy'}}</td>
+                            <td class="col20">
+                                <span class="wrap-txt" title="{{d.NumeroFacture}}">{{d.NumeroFacture}}</span>
+                            </td>
+                            <td class="col21" title="{{d.MontantFacture}} €">{{d.MontantFacture | number:2 }} <span ng-show="d.MontantFacture">€</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="row information" ng-show="ctrl.depenses.length === 0 && !ctrl.busy">
+
+                    <div class="col-md-2 icon">
+                        <i class="flaticon flaticon-warning"></i>
+                    </div>
+                    <div class="col-md-10 message">
+                        <h3>Sélectionner une ligne dans le tableau de gauche pour afficher les dépenses correspondantes.</h3>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--END : Maquette explorateur-->
+    <!--START : Bandeau paramétrage Axes D'analyse-->
+    <div ng-show="ctrl.showPanelAxe">
+        <div class="blockScreen"
+             ng-click="ctrl.handleValidateAxeAnalytique()"
+             style="z-index:99">
+        </div>
+        <div class="options small"
+             id="PanelRight"
+             style="z-index:1102">
+
+
+            <!--HEADER TOOLBAR : BEGIN-->
+            <div class="toolbar">
+                <div class="material-icons grandicone">settings_input_svideo</div>
+            </div>
+            <!--HEADER TOOLBAR : END-->
+            <!-- Titre : BEGIN -->
+            <div class="form-header" id="Titre">
+                <h2>
+                    <span>Paramétrage Axes d'analyse</span>
+                </h2>
+            </div>
+            <!-- Titre : END -->
+            <!-- Body : BEGIN -->
+            <div class="form fred-scroll">
+
+                <div class="row bloc-info">
+                    <div class="col-md-12 bloc-info-title">
+                        <i class="fa fa-angle-right"
+                           aria-hidden="true"></i>
+                        <span>Axe analytique</span>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="axe-choice">
+                            <button type="button" class="btn-axe" ng-class="{'active': ctrl.filter.AxeAnalytique === ctrl.axeAnalytique.tacheRessource}" ng-click="ctrl.handleSelectAxeAnalytiqueOrder(ctrl.axeAnalytique.tacheRessource)">Axe Tâches > Ressources</button>
+                            <button type="button" class="btn-axe" ng-class="{'active': ctrl.filter.AxeAnalytique === ctrl.axeAnalytique.ressourceTache}" ng-click="ctrl.handleSelectAxeAnalytiqueOrder(ctrl.axeAnalytique.ressourceTache)">Axe Ressources > Tâches</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row bloc-info">
+                    <div class="col-md-12 bloc-info-title">
+                        <i class="fa fa-angle-right"
+                           aria-hidden="true"></i>
+                        <span>Détail de l'axe analytique</span>
+                    </div>
+
+                    <div class="bloc-info-erreur alert alert-warning" ng-show="ctrl.msgAxeAnalytique">{{ctrl.msgAxeAnalytique}}</div>
+
+                    <div class="col-md-12 bloc-axe-detail">
+                        <div class="axe-detail">
+                            <div class="detail-element" ng-class="{'selected' : ctrl.typeAxes.T1.selected}" ng-click="ctrl.handleSelectAxeAnalytiqueDetail(ctrl.typeAxes.T1)">
+                                <span class="detail-element-txt">T1</span>
+                                <div class="inner-triangle" ng-show="ctrl.typeAxes.T1.selected"></div>
+                            </div>
+                            <div class="detail-element" ng-class="{'selected' : ctrl.typeAxes.T2.selected}" ng-click="ctrl.handleSelectAxeAnalytiqueDetail(ctrl.typeAxes.T2)">
+                                <span class="detail-element-txt">T2</span>
+                                <div class="inner-triangle" ng-show="ctrl.typeAxes.T2.selected"></div>
+                            </div>
+                            <div class="detail-element" ng-class="{'selected' : ctrl.typeAxes.T3.selected}" ng-click="ctrl.handleSelectAxeAnalytiqueDetail(ctrl.typeAxes.T3)">
+                                <span class="detail-element-txt">T3</span>
+                                <div class="inner-triangle" ng-show="ctrl.typeAxes.T3.selected"></div>
+                            </div>
+                            <div class="detail-element" ng-class="{'selected' : ctrl.typeAxes.Chapitre.selected}" ng-click="ctrl.handleSelectAxeAnalytiqueDetail(ctrl.typeAxes.Chapitre)">
+                                <span class="detail-element-txt">Chapitre</span>
+                                <div class="inner-triangle" ng-show="ctrl.typeAxes.Chapitre.selected"></div>
+                            </div>
+                            <div class="detail-element" ng-class="{'selected' : ctrl.typeAxes.SousChapitre.selected}" ng-click="ctrl.handleSelectAxeAnalytiqueDetail(ctrl.typeAxes.SousChapitre)">
+                                <span class="detail-element-txt">Sous-Chapitre</span>
+                                <div class="inner-triangle" ng-show="ctrl.typeAxes.SousChapitre.selected"></div>
+                            </div>
+                            <div class="detail-element" ng-class="{'selected' : ctrl.typeAxes.Ressource.selected}" ng-click="ctrl.handleSelectAxeAnalytiqueDetail(ctrl.typeAxes.Ressource)">
+                                <span class="detail-element-txt">Ressources</span>
+                                <div class="inner-triangle" ng-show="ctrl.typeAxes.Ressource.selected"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Body : END -->
+                <!--FOOTER TOOLBAR : BEGIN-->
+                <div class="footer">
+                    <div class="buttons">
+                        <button class="btn btn-default"
+                                type="submit"
+                                ng-click="ctrl.handleValidateAxeAnalytique()"
+                                title="">
+                            Valider
+                        </button>
+                        <button class="btn btn-link"
+                                type="button"
+                                ng-click="ctrl.handleCancelAxeAnalytique()"
+                                title="">
+                            Annuler
+                        </button>
+                    </div>
+                </div>
+                <!--FOOTER TOOLBAR : END-->
+                <div class="close_panel" ng-click="ctrl.handleCancelAxeAnalytique()" title="">
+                    <i class="fa fa-angle-right"
+                       aria-hidden="true"></i>
+                    <span>Refermer le panneau</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--END : Bandeau paramétrage Axes D'analyse-->
+</div>
+

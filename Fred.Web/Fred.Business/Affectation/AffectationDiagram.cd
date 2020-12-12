@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Fred.Entities.Affectation.AffectationEnt">
+    <Position X="7.5" Y="3" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Fred.Entities.Affectation.AstreinteEnt">
+    <Position X="4.25" Y="3" Width="2" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Affectation" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Fred.Entities.Referential.CodeAstreinteEnt">
+    <Position X="4.25" Y="6.5" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Fred.Entities.Rapport.RapportLigneAstreinteEnt">
+    <Position X="0.75" Y="3" Width="2" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Astreinte" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Fred.Entities.Referential.RapportLigneCodeAstreinteEnt">
+    <Position X="0.5" Y="6.5" Width="2.5" />
+    <AssociationLine Name="CodeAstreinte" Type="Fred.Entities.Referential.CodeAstreinteEnt" FixedFromPoint="true">
+      <Path>
+        <Point X="3" Y="7.562" />
+        <Point X="4.25" Y="7.562" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="CodeAstreinte" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

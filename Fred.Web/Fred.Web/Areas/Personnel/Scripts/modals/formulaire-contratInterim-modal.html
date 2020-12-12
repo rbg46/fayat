@@ -1,0 +1,409 @@
+﻿<!--BEGIN :  Modal Ajout d'une -->
+<div class="modal-content zoneDeTravail">
+    <div class="modal-header">
+        <div class="bandeau-headline">
+            <ul>
+                <li class="tab-titles active">
+                    <a href="#tab1" data-toggle="tab" class="tab1">
+                        <h2 class="modal-title" ng-show="$ctrl.ContratInterimModal.ContratInterimaireId > 0"><i class="flaticon-users"></i> {{$ctrl.resources.Personnel_ModalContratInterim_Titre_Modification}}</h2>
+                        <h2 class="modal-title" ng-show="$ctrl.ContratInterimModal.ContratInterimaireId == 0"><i class="flaticon-users"></i> {{$ctrl.resources.Personnel_ModalContratInterim_Titre_Creation}}</h2>
+                    </a>
+                </li>
+                <li class="tab-titles no-mr" ng-show="$ctrl.ContratInterimModal.ContratInterimaireId > 0">
+                    <a href="#tab2" data-toggle="tab">
+                        <h2 class="modal-title"><i class="flaticon-placeholders"></i> {{$ctrl.resources.Personnel_ModalContratInterim_ZoneDeTravail_Titre}}</h2>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="warning" ng-show="$ctrl.errorZoneDeTravail">
+            <div class="col-md-1 icon">
+                <span class="material-icons">warning</span>
+            </div>
+            <div class="col-md-10 headerdivider">
+                Un établissement de comptable<br />
+                minimum dans la zone de travail
+            </div>
+        </div>
+        <i class="flaticon flaticon-multiply close pull-right" ng-click="$ctrl.handleCancel()" title="{{$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+    </div>
+    <form name="$ctrl.contratInterimForm">
+
+        <div class="modal-body">
+            <div class="tab-content">
+
+                <div class="tab-pane contratInterimaire active" id="tab1">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4><i class="flaticon flaticon-calendar-2"></i>{{$ctrl.resources.Personnel_ModalContratInterim_Titre_InformationsContrat}}</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <label>{{$ctrl.resources.Personnel_ModalContratInterim_Source}}</label>
+                                        <select class="form-control input-filter" disabled ng-model="$ctrl.ContratInterimModal.Source">
+                                            <option value="" disabled selected>{{$ctrl.resources.Personnel_ModalContratInterim_Source_Placeholder}}</option>
+                                            <option value="Manuel">{{$ctrl.resources.Personnel_ModalContratInterim_Source_Manuel}}</option>
+                                            <option value="Pixid">{{$ctrl.resources.Personnel_ModalContratInterim_Source_Pixid}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="row">
+                                        <label>
+                                            {{$ctrl.resources.Personnel_ModalContratInterim_SocieteContractante}}
+                                        </label><br />
+                                        <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.Societe.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                        <div>
+                                            <lookup-standalone ng-model="$ctrl.ContratInterimModal.Societe"
+                                                               text="$ctrl.ContratInterimModal.Societe.Libelle"
+                                                               search-title="{{$ctrl.resources.Global_ReferentielSociete}}"
+                                                               search-placeholder="{{$ctrl.resources.Global_ReferentielSociete_Placeholder}}"
+                                                               placeholder="{{$ctrl.resources.Personnel_ModalContratInterim_SocieteContractante_Placeholder}}"
+                                                               url="{{$ctrl.showPickList('Societe')}}"
+                                                               on-select="$ctrl.handleSelectedItem(item, 'Societe')"
+                                                               on-delete="$ctrl.handleDelete('Societe')"
+                                                               ng-required="true"
+                                                               ng-disabled="$ctrl.readOnly"
+                                                               name="Societe"
+                                                               show-in-popup="true"
+                                                               class="formulaire long no-padding"
+                                                               style-parent="true">
+                                            </lookup-standalone>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label>
+                                            {{$ctrl.resources.Personnel_ModalContratInterim_FournisseurETT}}
+                                        </label><br />
+                                        <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.Fournisseur.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                        <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.Fournisseur.$error.siren">{{$ctrl.resources.Personnel_ModalContratInterim_FournisseurSiren_Erreur}}</span>
+                                        <div>
+                                            <lookup-standalone ng-model="$ctrl.ContratInterimModal.Fournisseur"
+                                                               text="$ctrl.ContratInterimModal.Fournisseur.Libelle"
+                                                               search-title="{{$ctrl.resources.Global_ReferentielFournisseur}}"
+                                                               search-placeholder="{{$ctrl.resources.Global_ReferentielFournisseur_Placeholder}}"
+                                                               placeholder="{{$ctrl.resources.Personnel_ModalContratInterim_FournisseurETT_Placeholder}}"
+                                                               search-placeholder2="{{$ctrl.resources.Personnel_ModalContratInterim_FournisseurETT_Placeholder2}}"
+                                                               on-click="$ctrl.showPickListFournisseur()"
+                                                               on-select="$ctrl.handleSelectedItemFournisseur(item)"
+                                                               on-delete="$ctrl.handleDeleteFournisseur()"
+                                                               ng-required="true"
+                                                               ng-disabled="$ctrl.ContratInterimModal.Societe == null || $ctrl.readOnly"
+                                                               custom-template-url="/Scripts/directive/Lookup/custom-templates/fournisseur.template.html"
+                                                               name="Fournisseur"
+                                                               show-in-popup="true"
+                                                               class="formulaire long no-padding"
+                                                               style-parent="true"
+                                                               active-second-search-input="true">
+                                            </lookup-standalone>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label>{{$ctrl.resources.Personnel_ModalContratInterim_DateDeDebut}}</label>
+                                        <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.DateDebut.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                        <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.DateDebut.$error.RangeError">{{$ctrl.resources.Personnel_ModalContratInterim_VerificationDateDebut_Erreur}}</span>
+                                        <div>
+                                            <app-date-picker id="DateDebut"
+                                                             name="DateDebut"
+                                                             format="DD/MM/YYYY"
+                                                             lang="fr"
+                                                             placeholder="{{$ctrl.resources.Personnel_ModalContratInterim_DateDeDebut_Placeholder}}"
+                                                             initial-date="{{$ctrl.ContratInterimModal.DateDebut}}"
+                                                             ng-model="$ctrl.ContratInterimModal.DateDebut"
+                                                             ng-change="$ctrl.handleDateValidation()"
+                                                             ng-disabled="$ctrl.readOnly"
+                                                             ng-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label>{{$ctrl.resources.Personnel_ModalContratInterim_DateDeFin}}</label>
+                                        <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.DateFin.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                        <div>
+                                            <app-date-picker id="DateFin"
+                                                             name="DateFin"
+                                                             format="DD/MM/YYYY"
+                                                             lang="fr"
+                                                             placeholder="{{$ctrl.resources.Personnel_ModalContratInterim_DateDeFin_Placeholder}}"
+                                                             initial-date="{{$ctrl.ContratInterimModal.DateFin}}"
+                                                             ng-model="$ctrl.ContratInterimModal.DateFin"
+                                                             ng-change="$ctrl.handleDateValidation()"
+                                                             ng-disabled="$ctrl.readOnly"
+                                                             ng-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label>{{$ctrl.resources.Personnel_ModalContratInterim_NumeroContrat}}</label>
+                                        <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.NumContrat.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                        <input class="form-control inputText" type="text" maxlength="20" name="NumContrat" ng-change="$ctrl.GetContratInterimByNumeroContrat()" ng-disabled="$ctrl.readOnly" ng-model="$ctrl.ContratInterimModal.NumContrat" ng-required="true" placeholder="{{$ctrl.resources.Personnel_ModalContratInterim_NumeroContrat_Placeholder}}" />
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <label>{{$ctrl.resources.Personnel_ModalContratInterim_TarifUnitaire}}</label>
+                                        <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.TarifUnitaire.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                        <input class="form-control inputText number" type="number" step="0.01" min="0" lang="en" ng-disabled="$ctrl.readOnly" ng-model="$ctrl.ContratInterimModal.TarifUnitaire" ng-change="$ctrl.handleValorisationValidation()" ng-required="true" placeholder="{{$ctrl.resources.Personnel_ModalContratInterim_TarifUnitaire_Placeholder}}" />
+                                    </div>
+                                    <div class="row">
+                                        <label>
+                                            {{$ctrl.resources.Personnel_ModalContratInterim_ImputationContractuelle}}
+                                        </label><br />
+                                        <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.Ci.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                        <div>
+                                            <lookup-standalone ng-model="$ctrl.ContratInterimModal.Ci"
+                                                               text="$ctrl.libelleCiWithCode"
+                                                               search-title="{{$ctrl.resources.Global_ReferentielCI}}"
+                                                               search-placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                                               placeholder="{{$ctrl.resources.Personnel_ModalContratInterim_ImputationContractuelle_Placeholder}}"
+                                                               custom-template-url="../../../../Scripts/directive/lookup/custom-templates/ci.template.html"
+                                                               on-select="$ctrl.handleSelectedItem(item,'CI' )"
+                                                               on-delete="$ctrl.handleDelete('CI')"
+                                                               ng-required="true"
+                                                               url={{$ctrl.showPickList('CI')}}
+                                                               ng-disabled="$ctrl.ContratInterimModal.Societe == null || $ctrl.readOnly"
+                                                               ng-change="$ctrl.GetCiDevise()"
+                                                               name="Ci"
+                                                               show-in-popup="true"
+                                                               class="formulaire long no-padding"
+                                                               style-parent="true">
+                                            </lookup-standalone>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label>{{$ctrl.resources.Personnel_ModalContratInterim_Qualification}}</label>
+                                        <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.Qualification.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                        <input class="form-control inputText" type="text" ng-disabled="$ctrl.readOnly" ng-model="$ctrl.ContratInterimModal.Qualification" ng-required="true" placeholder="{{$ctrl.resources.Personnel_ModalContratInterim_Qualification_Placeholder}}" />
+                                    </div>
+                                    <div class="row">
+                                        <label>
+                                            {{$ctrl.resources.Personnel_ModalContratInterim_Statut}}
+                                        </label><br />
+                                        <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.Statut.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                        <div>
+                                            <select class="form-control input-filter" name="Statut" ng-disabled="$ctrl.readOnly" ng-model="$ctrl.ContratInterimModal.Statut" ng-required="true">
+                                                <option value="" disabled selected>{{$ctrl.resources.Personnel_ModalContratInterim_Statut_Placeholder}}</option>
+                                                <option value="1">{{$ctrl.resources.Personnel_ModalContratInterim_Statut_Ouvrier}}</option>
+                                                <option value="2">{{$ctrl.resources.Personnel_ModalContratInterim_Statut_ETAM_Chantier}}</option>
+                                                <option value="3">{{$ctrl.resources.Personnel_ModalContratInterim_Statut_Cadre}}</option>
+                                                <option value="4">{{$ctrl.resources.Personnel_ModalContratInterim_Statut_ETAM_Bureau}}</option>
+                                                <option value="5">{{$ctrl.resources.Personnel_ModalContratInterim_Statut_ETAM_Article_36}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label>{{$ctrl.resources.Personnel_ModalContratInterim_Souplesse}}</label>
+                                        <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.Souplesse.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                        <input class="form-control inputText number" type="number" min="0" ng-disabled="$ctrl.readOnly" ng-model="$ctrl.ContratInterimModal.Souplesse" placeholder="{{$ctrl.resources.Personnel_ModalContratInterim_Souplesse_Placeholder}}" />
+                                    </div>
+                                    <div class="row">
+                                        <label>{{$ctrl.resources.Personnel_ModalContratInterim_Energie}}</label>
+                                        <div>
+                                            <label class="switch">
+                                                <input type="checkbox" ng-model="$ctrl.ContratInterimModal.Energie" ng-disabled="$ctrl.readOnly || $ctrl.energieDisabled">
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <h4><i class="fa fa-usd"></i> {{$ctrl.resources.Personnel_ModalContratInterim_Titre_Valorisation}}</h4>
+                            <div class="row">
+                                <label>{{$ctrl.resources.Personnel_ModalContratInterim_Valorisation}}</label>
+                                <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.Valorisation.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.Valorisation.$error.RangeError">{{$ctrl.resources.Personnel_ModalContratInterim_VerificationValorisation_Erreur}}</span>
+                                <input class="form-control inputText number" type="number" min="0" step="0.01" ng-disabled="$ctrl.readOnly" lang="en" name="Valorisation" ng-model="$ctrl.ContratInterimModal.Valorisation" ng-change="$ctrl.handleValorisationValidation()" ng-required="true" placeholder="{{$ctrl.resources.Personnel_ModalContratInterim_Valorisation_Placeholder}}" />
+                            </div>
+                            <div class="row">
+                                <label>
+                                    {{$ctrl.resources.Personnel_ModalContratInterim_Ressource}}
+                                </label><br />
+                                <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.Ressource.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                <div>
+                                    <lookup-standalone ng-model="$ctrl.ContratInterimModal.Ressource"
+                                                       text="$ctrl.ContratInterimModal.Ressource.Libelle"
+                                                       search-title="{{$ctrl.resources.Global_ReferentielRessource}}"
+                                                       search-placeholder="{{$ctrl.resources.Global_ReferentielRessource_Placeholder}}"
+                                                       placeholder="{{$ctrl.resources.Personnel_ModalContratInterim_Ressource_Placeholder}}"
+                                                       on-click="$ctrl.showPickList('RessourcePersonnel')"
+                                                       on-select="$ctrl.handleSelectedItem(item, 'Ressource')"
+                                                       on-delete="$ctrl.handleDelete('Ressource')"
+                                                       ng-required="true"
+                                                       ng-disabled="$ctrl.ContratInterimModal.Societe == null || $ctrl.readOnly"
+                                                       name="Ressource"
+                                                       show-in-popup="true"
+                                                       class="formulaire long no-padding"
+                                                       style-parent="true">
+                                    </lookup-standalone>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label>
+                                    {{$ctrl.resources.Personnel_ModalContratInterim_Unite}}
+                                </label><br />
+                                <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.Unite.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                <div>
+                                    <lookup-standalone ng-model="$ctrl.ContratInterimModal.UniteId"
+                                                       text="$ctrl.ContratInterimModal.Unite.Libelle"
+                                                       search-title="{{$ctrl.resources.Global_ReferentielPersonnel}}"
+                                                       search-placeholder="{{$ctrl.resources.Global_ReferentielPersonnel_Placeholder}}"
+                                                       on-click="$ctrl.showPickList('Unite')"
+                                                       on-select="$ctrl.handleSelectedItem(item, 'Unite')"
+                                                       on-delete="$ctrl.handleDelete('Unite')"
+                                                       ng-required="true"
+                                                       ng-disabled="true"
+                                                       name="Unite"
+                                                       show-in-popup="true"
+                                                       class="formulaire long no-padding"
+                                                       style-parent="true">
+                                    </lookup-standalone>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2" ng-show="$ctrl.ContratInterimModal.ContratInterimaireId > 0 && $ctrl.CiLibelleList != null && $ctrl.CiLibelleList != ''">
+                            <h4><i class="flaticon flaticon-notepad-2"></i>{{$ctrl.resources.Personnel_ModalContratInterim_Titre_SuiviCommande}}</h4>
+                            <div class="row" ng-repeat="ciLibelle in $ctrl.CiLibelleList">
+                                <label>{{$ctrl.resources.Personnel_ModalContratInterim_CentreImputation}}</label>
+                                <input class="form-control inputText" type="text" value="{{ciLibelle}}" title="{{ciLibelle}}" disabled />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <h4><i class="flaticon flaticon-users"></i>{{$ctrl.resources.Personnel_ModalContratInterim_Titre_Remplacement}}</h4>
+                            <div class="row">
+                                <label>
+                                    {{$ctrl.resources.Personnel_ModalContratInterim_Motif}}
+                                </label>
+                                <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.MotifRemplacement.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                <select class="form-control input-filter" name="MotifRemplacement" ng-disabled="$ctrl.readOnly" ng-model="$ctrl.ContratInterimModal.MotifRemplacementId" ng-change="$ctrl.FillMotifRemplacement()" ng-required="true">
+                                    <option value="" disabled selected>{{$ctrl.resources.Personnel_ModalContratInterim_Motif_Placeholder}}</option>
+                                    <option value="{{motifRemplacement.MotifRemplacementId}}" ng-repeat="motifRemplacement in $ctrl.MotifRemplacementList">{{motifRemplacement.Libelle}}</option>
+                                </select>
+                            </div>
+                            <div class="row" ng-show="$ctrl.ContratInterimModal.MotifRemplacement.Code == 'RS'">
+                                <label>
+                                    {{$ctrl.resources.Personnel_ModalContratInterim_PersonnelRemplace}}
+                                </label><br />
+                                <span class="text-danger" ng-show="$ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.PersonnelRemplace.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                                <div>
+                                    <lookup-standalone ng-model="$ctrl.ContratInterimModal.PersonnelRemplace"
+                                                       text="$ctrl.ContratInterimModal.PersonnelRemplace.PrenomNom"
+                                                       search-title="{{$ctrl.resources.Global_ReferentielPersonnel}}"
+                                                       search-placeholder="{{$ctrl.resources.Global_ReferentielPersonnel_Placeholder}}"
+                                                       placeholder="{{$ctrl.resources.Personnel_ModalContratInterim_PersonnelRemplace_Placeholder}}"
+                                                       on-click="$ctrl.showPickList('Personnel')"
+                                                       on-select="$ctrl.handleSelectedItem(item, 'PersonnelRemplace')"
+                                                       on-delete="$ctrl.handleDelete('PersonnelRemplace')"
+                                                       ng-required="$ctrl.ContratInterimModal.MotifRemplacement.Code == 'RS'"
+                                                       ng-disabled="$ctrl.readOnly"
+                                                       name="PersonnelRemplace"
+                                                       show-in-popup="true"
+                                                       class="formulaire long no-padding"
+                                                       style-parent="true">
+                                    </lookup-standalone>
+                                </div>
+                            </div>
+                            <div class="row pull-bottom">
+                                <h4><i class="fa fa-comment-o"></i>{{$ctrl.resources.Personnel_ModalContratInterim_Titre_Commentaire}}</h4>
+                                <div class="row">
+                                    <textarea class="form-control"
+                                              id="Commentaire"
+                                              rows="5"
+                                              col="50"
+                                              ng-model="$ctrl.ContratInterimModal.Commentaire">
+                                        </textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label>{{$ctrl.resources.Personnel_ModalContratInterim_HeuresInsertion}}</label>
+                                <div>
+                                    <label class="switch">
+                                        <input type="checkbox" ng-model="$ctrl.ContratInterimModal.HeuresInsertion" ng-disabled="$ctrl.readOnly">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="tab-pane zoneDeTravail" id="tab2">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="col-md-1 tuile secondary" ng-click="$ctrl.DeleteZoneDeTravail(zoneDeTravail)" ng-repeat="zoneDeTravail in $ctrl.ContratInterimModal.ZonesDeTravail">
+                                <div class="row">
+                                    <span class="pull-right">&times</span>
+                                </div>
+                                <div class="row">
+                                    {{zoneDeTravail.EtablissementComptable.Code}}<br />
+                                    {{zoneDeTravail.EtablissementComptable.Libelle}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <lookup ng-model="selectedRef"
+                                    search-placeholder="{{$ctrl.resources.Global_ReferentielEtablissementComptable_Placeholder}}"
+                                    search-title="{{$ctrl.resources.Global_ReferentielEtablissementComptable}}"
+                                    show-in-popup="true"
+                                    on-click="$ctrl.showPickList('EtablissementComptable')"
+                                    on-select="$ctrl.AddZoneDeTravail(item)"
+                                    ng-disabled="$ctrl.readOnly">
+                                <div class="tuile primary pull-right">
+                                    <div class="row">
+                                        {{$ctrl.resources.Personnel_ModalContratInterim_ZoneDeTravail_Ajout}}
+                                    </div>
+                                    <div class="row">
+                                        <span class="pull-right">&#43</span>
+                                    </div>
+                                </div>
+                            </lookup>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" ng-show="$ctrl.errorNumeroExist">
+                <div class="col-md-12">
+                    <span class="text-danger">{{$ctrl.resources.Personnel_ModalContratInterim_Notify_Error_NumeroExist}}</span>
+                </div>
+            </div>
+
+            <div class="row" ng-show="$ctrl.errorContratExist">
+                <div class="col-md-12">
+                    <span class="text-danger">{{$ctrl.resources.Personnel_ModalContratInterim_Notify_Error_ContratExist}}</span>
+                </div>
+            </div>
+
+            <div class="row" ng-show="$ctrl.errorCiDevise">
+                <div class="col-md-12">
+                    <span class="text-danger">{{$ctrl.resources.Personnel_ModalContratInterim_Notify_Error_CiDevise}}</span>
+                </div>
+            </div>
+
+            <div class="row" ng-show="$ctrl.errorCompteInterneSepIdNull">
+                <div class="col-md-12">
+                    <span class="text-danger">{{$ctrl.resources.Personnel_ContratInterim_Error_CompteInterneSepId_IsNull}}</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!--FOOTER - BOUTONS VALIDER ET ANNULER-->
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-default pull-left"
+                    ng-click="$ctrl.handleSave()" ng-disabled="($ctrl.contratInterimForm.$submitted && $ctrl.contratInterimForm.$invalid) || $ctrl.error"
+                    title="{{$ctrl.resources.Global_Bouton_Valider_Tooltip}}">
+                {{$ctrl.resources.Global_Bouton_Valider}}
+            </button>
+            <button type="button" class="btn btn-link pull-right"
+                    ng-click="$ctrl.handleCancel()"
+                    title="{{$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">
+                {{$ctrl.resources.Global_Bouton_Annuler}}
+            </button>
+        </div>
+    </form>
+</div>
+<!--END :  Modal Ajout d'une ligne -->

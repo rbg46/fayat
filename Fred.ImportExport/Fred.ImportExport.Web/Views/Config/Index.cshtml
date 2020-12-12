@@ -1,0 +1,28 @@
+﻿@model Fred.ImportExport.Web.Models.ConfigViewModel
+@{
+    ViewBag.Title = "Config";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+
+    <ul>
+        <li>
+            <kbd>Storm</kbd>
+            <ul>
+                <li>Storm Api Url : <code>@Model.StormApiUrl</code></li>
+                <li>Storm Api Url Groupe Razel-Bec : <code>@Model.StormApiUrlGroupeRazelBec</code></li>
+                <li>Storm Api Url Groupe Fayat Tp : <code>@Model.StormApiUrlGroupeFayatTp</code></li>
+            </ul>
+        </li>
+        <li>
+            <kbd>Bridge</kbd>
+            <ul>
+                <li>Bridge Api Url : <code>@Model.BridgeApiUrl</code></li>
+            </ul>
+        </li>
+    </ul>
+
+</div>
+

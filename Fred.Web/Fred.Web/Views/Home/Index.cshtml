@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/ViewsHomeIndexBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/ViewsHomeIndexBundle.js")
+    @this.RenderResources("FeatureFavori", "FeatureHome")
+}
+
+    <div class="home-page" ng-controller="mainController as ctrl">
+        <img class="background-img" ng-src="{{ctrl.backgroundImgUrl}}" />
+        <span class="home-overlay"></span>
+        <span class="title">Vos fonctionnalités</span>
+        <fred-menu-home modules-autorized="ctrl.modulesAutorized" home="true"></fred-menu-home>
+    </div>
+

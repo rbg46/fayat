@@ -1,0 +1,802 @@
+﻿.no-p {
+    padding: 0;
+}
+
+.no-pr {
+    padding-right: 0;
+}
+
+.no-pl {
+    padding-left: 0;
+}
+
+.glyphicon-calendar::before {
+    float: left;
+}
+
+fred-toolbar .rapport-number fred-section-controls {
+    background-color: #FFD800;
+    height: 44px;
+    justify-content: center;
+}
+
+fred-toolbar .date-picker-section {
+    margin-left: 1%;
+}
+
+fred-toolbar .date-picker-section fred-section-controls .input-group.date {
+    width: 100%;
+}
+
+fred-toolbar .date-picker-section fred-section-controls .input-group.date .form-control {
+    width: 100%;
+    height: 31px;
+}
+
+fred-toolbar .date-picker-section fred-section-controls .input-group.date .input-group-addon {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+}
+
+fred-toolbar .datePickerRapport .input-group.date {
+    background-color: transparent;
+    width: 125px;
+    border: none;
+    color: #555555;
+    font-size: 36px;
+    font-weight: 600;
+    top: 1px;
+}
+
+fred-toolbar .datePickerRapport .input-group.date .input-group-addon {
+    padding: 0;
+}
+
+fred-toolbar .datePickerRapport .input-group.date .input-group-addon span {
+    top: -1px;
+    bottom: 0;
+    font-size: 24px;
+}
+
+fred-toolbar .datePickerRapport .form-control {
+    padding: 0;
+    width: 90%;
+    background-color: #0052a0;
+}
+
+fred-toolbar .datePickerRapport > div > input {
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    padding-right: 0;
+}
+
+fred-toolbar .datePickerRapport > div > span {
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    padding-right: 0;
+}
+
+fred-toolbar .text-search-section {
+    width: 40%;
+    margin-left: 1%;
+}
+
+fred-toolbar .text-search-section .input-group.input-search {
+    width: 100%;
+}
+
+fred-toolbar .boutons-actions {
+    margin-left: 1%;
+}
+
+fred-toolbar .boutons-actions .usr {
+    background-color: #F1F2F3;
+    color: #0052a0;
+}
+
+.datePickerRapport > div > span {
+    background-color: transparent;
+}
+
+.rapport-primes fred-side {
+    z-index: 1300;
+}
+
+.rapport-primes fred-side main {
+    height: calc(100vh - 200px);
+    max-height: 100%;
+    padding: 5px;
+}
+
+.display-list .rapport-table {
+    position: relative;
+    overflow: hidden;
+    border-collapse: collapse;
+}
+
+.rapport-table .border-left {
+    border-left: 1px white solid;
+}
+
+.rapport-table .border-right {
+    border-right: 1px white solid;
+}
+
+.rapport-table thead {
+    position: relative;
+    display: block;
+    overflow-x: visible;
+}
+
+.rapport-table thead th {
+    height: 40px;
+    color: #fff;
+}
+
+.rapport-table thead th:nth-child(1) {
+    position: relative;
+}
+
+.rapport-table thead th:nth-child(2) {
+    position: relative;
+}
+
+.rapport-table thead .col-personnel1 {
+    min-width: 90px;
+    width: 90px;
+    background-color: #0052a0;
+}
+
+.rapport-table thead .col-personnel2 {
+    min-width: 300px;
+    width: 300px;
+    background-color: #0052a0;
+}
+
+.rapport-table thead .header1 .col-prime {
+    min-width: 125px !important;
+    background-color: #437eb4;
+    color: white;
+}
+
+.rapport-table thead .header2 .col-prime {
+    min-width: 125px !important;
+    background-color: #739dc5;
+    color: white;
+    text-align: center;
+}
+
+.rapport-table thead .header2 .col-prime .prime-item {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.rapport-table thead .header2 .col-prime .prime-item .txt {
+    margin-right: 15px;
+}
+
+.rapport-table thead .header2 .col-prime .prime-item .material-icons {
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.rapport-table thead .header2 .col-prime .gly_bk {
+    cursor: pointer;
+}
+
+.rapport-table thead .col-astreinte {
+    min-width: 200px;
+    width: 200px;
+    background-color: #53a8c1;
+    color: white;
+    text-align: center;
+}
+
+.rapport-table thead .col-ci {
+    min-width: 260px;
+    width: 260px;
+    background-color: #a9d08e;
+    text-align: center;
+}
+
+.rapport-table thead .col-validate {
+    min-width: 115px;
+    width: 115px;
+    background-color: #acb9ca;
+    text-align: center;
+}
+
+.rapport-table thead .col-history {
+    min-width: 115px;
+    width: 115px;
+    background-color: #acb9ca;
+    text-align: center;
+}
+
+.rapport-table .td-lookup {
+    height: 25px;
+    width: 90%;
+}
+
+.rapport-table .td-lookup .inputPL {
+    height: 25px;
+}
+
+.rapport-table .td-lookup .inputPL .inputPLLabel.placeholder {
+    font-size: 11px;
+}
+
+.rapport-table .td-lookup .formulaire.middle .chev.material-icons {
+    font-size: 23px;
+}
+
+.rapport-table .td-lookup .formulaire.middle .material-icons.closing {
+    font-size: 23px;
+}
+
+.rapport-table .td-lookup .formulaire.long .chev.material-icons {
+    font-size: 23px;
+    padding: 0;
+}
+
+.rapport-table .td-lookup .formulaire.long .material-icons.closing {
+    font-size: 23px;
+    padding: 0;
+}
+
+.rapport-table tbody {
+    position: relative;
+    display: block;
+    overflow: auto;
+    overflow-x: visible;
+}
+
+.rapport-table tbody td {
+    height: 32px;
+    border-top: 1px solid #aeaeae;
+    border-bottom: 1px solid #aeaeae;
+}
+
+.rapport-table tbody td .form-control {
+    height: 25px;
+    font-size: 11px;
+}
+
+.rapport-table tbody tr td:nth-child(1) {
+    position: relative;
+    background-clip: padding-box;
+}
+
+.rapport-table tbody tr td:nth-child(2) {
+    position: relative;
+    background-clip: padding-box;
+}
+
+.rapport-table tbody .col-personnel1 {
+    min-width: 90px;
+    width: 90px;
+    background-color: #f2f2f2;
+}
+
+.rapport-table tbody .col-personnel1 .action-conteneur {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.rapport-table tbody .col-personnel1 .action-conteneur .material-icons {
+    font-size: 20px;
+    color: #2b2723;
+    cursor: pointer;
+}
+
+.rapport-table tbody .col-personnel1 .action-conteneur .material-icons.user {
+    color: #00539f;
+}
+
+.rapport-table tbody .col-personnel1 .action-conteneur .material-icons.error {
+    color: #de3f7e;
+}
+
+.rapport-table tbody .col-personnel1 .action-conteneur .material-icons.warning {
+    color: darkorange;
+}
+
+.rapport-table tbody .col-personnel2 {
+    min-width: 300px;
+    width: 300px;
+    background-color: #f2f2f2;
+}
+
+.rapport-table tbody .col-prime {
+    min-width: 125px !important;
+    width: 125px !important;
+    background-color: #739dc5;
+    color: white;
+}
+
+.rapport-table tbody .col-prime .prime-numbers {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.rapport-table tbody .col-prime .prime-numbers .input-light {
+    width: 75%;
+}
+
+.rapport-table tbody .col-prime .prime-numbers .unit {
+    width: 25%;
+    height: 25px;
+    font-size: 11px;
+    color: #2b2723;
+    text-align: right;
+    border: 1px solid #BBBBBB;
+}
+
+.rapport-table tbody .col-prime .prime-numbers .digits {
+    width: 60%;
+    height: 25px;
+    font-size: 11px;
+    color: #2b2723;
+    text-align: right;
+    border: 1px solid #BBBBBB;
+}
+
+.rapport-table tbody .col-astreinte {
+    min-width: 200px;
+    width: 200px;
+    background-color: #9dc8d6;
+}
+
+.rapport-table tbody .col-astreinte .astreinte-dates {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.rapport-table tbody .col-astreinte .astreinte-dates .days {
+    width: 15%;
+    height: 25px;
+    background-color: #9dc8d6;
+    color: #fff;
+    text-align: center;
+    border: 1px solid #BBBBBB;
+}
+
+.rapport-table tbody .col-astreinte .astreinte-dates .input-group.date {
+    width: 75%;
+}
+
+.rapport-table tbody .col-astreinte .astreinte-dates .input-group.date .input-group-addon {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+}
+
+.rapport-table tbody .col-ci {
+    width: 260px;
+    min-width: 260px;
+    background-color: #c6e0b4;
+}
+
+.rapport-table tbody .col-ci .td-lookup {
+    margin: 0 auto;
+}
+
+.rapport-table tbody .col-ci .td-lookup .inputPL .inputPLLabel {
+    width: 185px;
+    font-size: 11px;
+}
+
+.rapport-table tbody .col-validate {
+    min-width: 115px;
+    width: 115px;
+    background-color: #d6dce4;
+    text-align: center;
+}
+
+.rapport-table tbody .col-history {
+    min-width: 115px;
+    width: 115px;
+    background-color: #d9d9d9;
+    text-align: center;
+}
+
+.rapport-table tbody .col-history .shield-conteneur {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rapport-table tbody .col-history .shield-conteneur .display.shield {
+    background-color: #ffa90d;
+    min-width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.rapport-table tbody .col-history .shield-conteneur .display.shield .material-icons {
+    font-size: 17px;
+    color: #fff;
+}
+
+.rapport-table tbody .col-history .shield-conteneur fred-button.display.shield:hover {
+    background-color: #ffa90d !important;
+    color: #fff;
+}
+
+.rapport-table tbody .tr-validated {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
+.icons-materiel-conteneur {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.icons-materiel-conteneur.pick-add {
+    height: 40px;
+}
+
+.flaticon-add::before {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: "Material Icons";
+    content: 'add';
+}
+
+.lookup-image-plus::before {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: "Material Icons";
+    content: 'add';
+}
+
+.button-add-ligne-pointage {
+    cursor: pointer;
+}
+
+.icon-materiel-txt {
+    font-family: "Roboto", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    margin-left: 5px;
+}
+
+.popover {
+    z-index: 1200;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + label {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+input[type="checkbox"] + label span {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: 0;
+    vertical-align: middle;
+    cursor: pointer;
+    -moz-border-radius: 20%;
+    border-radius: 20%;
+    background-color: #fcfcfc;
+    border: 3px #78C1DD solid;
+    -webkit-transition: background-color 0.4s linear;
+    -o-transition: background-color 0.4s linear;
+    -moz-transition: background-color 0.4s linear;
+    transition: background-color 0.4s linear;
+}
+
+input[type="checkbox"]:checked + label span {
+    border: 3px #2c77ba solid;
+    background-image: url("/medias/images/ico/checked.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-transition: background-color 0.4s linear;
+    -o-transition: background-color 0.4s linear;
+    -moz-transition: background-color 0.4s linear;
+    transition: background-color 0.4s linear;
+}
+
+fred-overlay {
+    background: black;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1000;
+    opacity: 0.5;
+    display: none;
+    visibility: hidden;
+}
+
+fred-overlay.open {
+    display: block;
+    visibility: visible;
+    -webkit-animation-name: none;
+    -webkit-animation-duration: initial;
+}
+
+fred-overlay.close {
+    display: none;
+    visibility: hidden;
+}
+
+fred-side {
+    position: fixed;
+    width: 350px;
+    top: 0px;
+    left: -350px;
+    height: 100%;
+    z-index: 1101;
+    background: white;
+}
+
+fred-side header {
+    height: 75px;
+    background: #e1e3e5;
+    text-align: center;
+}
+
+fred-side header span.material-icons.icon {
+    font-size: 50px;
+    padding-top: 5px;
+}
+
+fred-side header label {
+    font-weight: 500;
+    font-size: 15px;
+}
+
+fred-side main {
+    max-height: 50%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+fred-side main .row {
+    padding-left: 15px;
+}
+
+fred-side main section-title {
+    cursor: pointer;
+    color: #2c77ba;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+fred-side main section-title::before {
+    font-family: "Material Icons";
+    font-style: normal;
+    font-weight: 400;
+    content: 'keyboard_arrow_down';
+    color: #67757f;
+}
+
+fred-side main section-title.collapsed::before {
+    font-family: "Material Icons";
+    font-style: normal;
+    font-weight: 400;
+    content: 'keyboard_arrow_up';
+    color: #67757f;
+}
+
+fred-side main h2 {
+    color: #2c77ba;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+fred-side section-block {
+    display: block;
+    width: 95%;
+    padding-left: 10px;
+    padding-bottom: 30px;
+}
+
+fred-side section-block section-titre-simple {
+    display: block;
+}
+
+fred-side .legend {
+    font-size: 12px;
+    border: none;
+    font-weight: 400;
+    color: #67757f;
+}
+
+fred-side footer {
+    height: 100px;
+    background-color: white;
+    color: grey;
+    font-weight: 400;
+    font-size: 12px;
+    text-align: center;
+    display: inline-block;
+}
+
+fred-side footer action {
+    padding-top: 5px;
+    height: 50px;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+}
+
+fred-side footer close {
+    height: 50px;
+    display: block;
+}
+
+fred-side footer close label {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+fred-side footer close icon:before {
+    content: '\f104';
+    font-size: 40px;
+    padding-right: 10px;
+    font-family: FontAwesome;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+fred-side.open {
+    -webkit-animation-name: transition_open;
+    -webkit-animation-duration: .5s;
+    animation-name: transition_open;
+    animation-duration: .5s;
+    top: 0px;
+    left: 0px;
+}
+
+@-webkit-keyframes transition_open {
+    from {
+        left: -350px;
+    }
+    to {
+        left: 0px;
+    }
+}
+
+/* Standard syntax */
+@keyframes transition_open {
+    from {
+        left: -350px;
+    }
+    to {
+        left: 0px;
+    }
+}
+
+cards {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+}
+
+cards card {
+    width: 310px;
+    padding: 10px;
+    border: 1px solid #097da0;
+    margin-bottom: 5px;
+}
+
+cards card titre {
+    font-weight: 500;
+}
+
+cards card infos {
+    display: flex;
+    flex-direction: column;
+}
+
+cards card infos info {
+    display: flex;
+    padding-bottom: 5px;
+}
+
+cards card infos info fred-label {
+    width: 30%;
+    font-size: 12px;
+    color: #aeaeae;
+}
+
+cards card infos info fred-val {
+    width: 70%;
+    font-size: 12px;
+}
+
+cards card infos info fred-val input {
+    width: 25%;
+    border: 1px solid #E1E3E5;
+}
+
+cards card action {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 3px;
+}
+
+cards card action fred-button {
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 20px;
+    font-size: 11px;
+}
+
+card.active {
+    border-color: #097da0;
+    border-left: 5px solid #097da0;
+}
+
+card.inactive {
+    border-color: #aeaeae;
+    background-color: rgba(225, 227, 229, 0.1);
+}
+
+card.next {
+    border-color: #DE3F7E;
+}
+
+card.archive {
+    border-color: #E1E3E5;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    fred-toolbar .rapport-number fred-section-controls {
+        height: 39px;
+    }
+    fred-toolbar .date-picker-section fred-section-controls .input-group.date .form-control {
+        height: 25px;
+    }
+    fred-toolbar .date-picker-section fred-section-controls .input-group.date .input-group-addon {
+        height: 25px;
+    }
+    .rapport-primes fred-side main {
+        height: calc(100vh - 180px);
+    }
+}

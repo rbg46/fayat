@@ -1,0 +1,125 @@
+= Procédures de rollback
+
+== Introduction
+Il y a trois types de rollback :
+
+. rollback d'un changeset
+. rollback de base de données
+. rollback d'un déploiement (binaire)
+
+Les différents types de rollback peuvent être cumulés, par exemple il est possible de faire un rollback de base de données combiné avec un rollback de binaire.
+
+IMPORTANT: Avant de faire un rollback, il est conseillé, mais pas obligatoire de faire un backup de(s) base de données. Pour cela, voir la section *Procédure de backup*.
+
+
+== Rollback de changeset
+
+La procédure est simple.
+
+* Ouvrir Visual Studio
+* Sélectionner la branche dans l'explorateur de code source
+* Choisir "Rollback..."
+* Choisir le changeset et cliquer sur Rollback
+* Le code est rollback sur le workspace local
+* Vérifier / Tester etc...
+* Commiter 
+* Le code est compilé sur la pic, il peut ensuite être déployé via Tfs.
+
+
+== Rollback d'une base de données
+
+WARNING: Un rollback de base de données *écrase* les données ! Donc si c'est un rollback sur la base de production, les données utilisateurs éventuellement saisies seront perdues.
+
+WARNING: Si vous faite uniquement une restauration de base de données sans mettre à jour les binaires de l'application, veuillez vous assurez que le schéma de la base de données est en accord avec les migrations EF.
+Si ce point n'est pas validé, vous devez soit aussi faire un rollback de binaire ou soit bien prendre en compte que lors du prochain lancement l'application jouera les migrations non présentes dans la base restaurée.
+
+NOTE: Les backups des bases de données sont sauvegardées sur le share réseau suivant : \\FILIBFREDSHAREV.fayat.lan\backup.   
+Vous devez utiliser le compte de service fayat\fred_admin_svc pour y accéder.
+
+NOTE: Vous devez déterminer quelle base de données restaurer : La base de Fred ? de Fred IE ? ou Hangfire ? etc etc
+
+
+=== Restaurer depuis un backup full
+
+La procédure la plus simple et de restaurer un backup complet de la base de données mais ceci ne permet pas de choisir l'heure à laquelle restaurer les données.
+
+==== Avec SSMS
+Avec le wizard SSMS :
+
+* Clique droit sur la base de données / Task / Restore
+* Dans General,
+** Décocher les fichiers de type Differential et Transaction Log pour ne garder que le dernier fichier Full
+* Dans Options, 
+** cocher "Overwrite the existing database"
+** cocher "Close existing connections..."
+
+==== En script
+
+Exemple : 
+
+[source,sql]
+----
+USE [master]
+ALTER DATABASE [FredWeb_Dev] SET SINGLE_USER WITH ROLLBACK IMMEDIATE
+BACKUP LOG [FredWeb_Dev] TO  DISK = N'\\FILIBFREDSHAREV\backup\Developpement\FredWeb_Dev_LogBackup_2019-12-18_21-14-32.bak' WITH NOFORMAT, NOINIT,  NAME = N'FredWeb_Dev_LogBackup_2019-12-18_21-14-32', NOSKIP, NOREWIND, NOUNLOAD,  NORECOVERY ,  STATS = 5
+RESTORE DATABASE [FredWeb_Dev] FROM  DISK = N'\\FILIBFREDSHAREV\backup\Developpement\FredWeb_Dev\FredWeb_Dev_backup_2019_12_18_033321_3570633.bak' WITH  FILE = 1,  NOUNLOAD,  REPLACE,  STATS = 5
+ALTER DATABASE [FredWeb_Dev] SET MULTI_USER
+GO
+----
+
+
+=== Restaurer à point précis dans le temp
+
+Vous pouvez restaurer une base de données à la seconde prêt. 
+Pour cela, il faut indiquer le dernier fichier de backup full et tous les fichiers de backup incrémentaux nécessaire pour aller jusqu'au point de sauvegarde désiré.
+
+==== Avec SSMS
+
+Avec le wizard SSMS :
+
+* Clique droit sur la base de données / Task / Restore
+* choisir "TimeLine" pour choisir le point de restauration dans le temps
+* Dans Options, 
+** cocher "Overwrite the existing database"
+** cocher "Close existing connections..."
+
+
+==== En script
+
+Exemple : 
+
+[source,sql]
+----
+USE [master]
+-- permet de clore les connexions
+ALTER DATABASE [FredWeb_Dev] SET SINGLE_USER WITH ROLLBACK IMMEDIATE
+
+-- effectue un tail log backup avant la restoration
+BACKUP LOG [FredWeb_Dev] TO  DISK = N'\\FILIBFREDSHAREV\backup\Developpement\FredWeb_Dev_LogBackup_2019-12-17_17-07-48.bak' WITH NOFORMAT, NOINIT,  NAME = N'FredWeb_Dev_LogBackup_2019-12-17_17-07-48', NOSKIP, NOREWIND, NOUNLOAD,  NORECOVERY ,  STATS = 5
+
+-- Restauration au 17 décembre 2019 à 16h23 et 41 secondes UTC
+RESTORE DATABASE [FredWeb_Dev] FROM  DISK = N'\\FILIBFREDSHAREV\backup\Developpement\FredWeb_Dev\FredWeb_Dev_backup_2019_12_17_033315_9718461.bak' WITH  FILE = 1,  NORECOVERY,  NOUNLOAD,  REPLACE,  STATS = 5
+RESTORE DATABASE [FredWeb_Dev] FROM  DISK = N'\\FILIBFREDSHAREV\backup\Developpement\FredWeb_Dev\FredWeb_Dev_backup_2019_12_17_150001_1287777.diff' WITH  FILE = 1,  NORECOVERY,  NOUNLOAD,  STATS = 5
+RESTORE LOG [FredWeb_Dev] FROM  DISK = N'\\FILIBFREDSHAREV\backup\Developpement\FredWeb_Dev\FredWeb_Dev_backup_2019_12_17_150002_4347864.trn' WITH  FILE = 1,  NORECOVERY,  NOUNLOAD,  STATS = 5
+RESTORE LOG [FredWeb_Dev] FROM  DISK = N'\\FILIBFREDSHAREV\backup\Developpement\FredWeb_Dev\FredWeb_Dev_backup_2019_12_17_170002_3435212.trn' WITH  FILE = 1,  NOUNLOAD,  STATS = 5,  STOPAT = N'2019-12-17T16:23:41'
+ALTER DATABASE [FredWeb_Dev] SET MULTI_USER
+
+GO
+----
+
+
+== Rollback d'un déploiement
+
+warning: Lors du déploiement d'une version précédente, s'il y a des migrations en moins, elles seront supprimées par Entity Framework, c-a-d que le code "Down" sera appelé. Vous devez vous assurer de ce point et si besoin tester sur une base locale.
+
+Vous pouvez déployer une version précédente facilement dans TFS.
+
+* Dans Tfs, Allez dans "Release"
+* Dans la liste des "Release Definitions" à gauche, choisir la le déploiement approprié :
+** "Fred - Dev"  : pour les déploiements sur M
+** "Fred - Prod" : pour les déploiements sur M
+* Cliquer sur "+ Release / Create Release"
+* Dans la combo box Artifact, choisir la version à déployer.
+* Dans la liste des déploiements automatique, laissez les activés ou désactivés selon vos besoins. Si vous avez un doute ou si vous ne savez pas que choisir, sélectionnez "Manual Deployment"
+* Puis cliquer sur Create.
+* Vous pouvez déclencher le déploiement sur un serveur en sélectionnant "Deploy" sur l'environnement.

@@ -1,0 +1,230 @@
+= Rajouter un menu avec permission
+
+Voici les actions a exécuter pour mettre les autorisations sur une page.
+
+[arabic]
+. Rajouter un menu avec la clé permissionKey 
+
+____
+Fred.Web\Scripts\Controllers\main\main.component.js
+____
+
+[source,js]
+----
+{
+  "ModuleId": 1,
+  "libelle": "Exploitation",
+  "ShortDescription": "Exploitation",
+  "position": "left",
+  "Features": [
+      {
+        "permissionKey": PERMISSION_KEYS.AffichageMenuOperationDiverse
+        Index,
+        "Type": "Feature",
+        "URI": "/OperationDiverse/OperationDiverse",
+        "icon": "flaticon flaticon-notebook-4",
+        "ShortDescription": "Gérer les opération diverses",
+        "LongDescription": "Gérer les opération diverses",
+        "KeyWords": "opération diverses OD écart"
+      },
+      {
+        "permissionKey": PERMISSION_KEYS.AffichageMenuBilanFlashIndex,
+        "Type": "Feature",
+        "URI": "/BilanFlash/BilanFlash",
+        "icon": "flaticon flaticon-network",
+        "ShortDescription": "Gérer les bilans flash",
+        "LongDescription": "Gérer les bilans flash",
+        "KeyWords": "bilans flash bilanFlash",
+        "ModificationRigthRequired": "false"
+      }
+  ]
+}, 
+----
+
+[arabic, start=2]
+. Rajouter une clé dans le fichier 
+
+____
+Fred.Web\Fred.Web\Scripts\module\authorization\permissionKeys.js
+____
+
+Ci-dessous _AffichageMenuOperationDiverseIndex_ et _AffichageMenuBilanFlashIndex_
+
+[source,js]
+----
+var PERMISSION_KEYS = {
+  AffichageMenuAuthentificationLogIndex: 'menu.show.authentificationlog.index',
+ 
+  AffichageMenuBudgetIndex: 'menu.show.budget.index',
+ 
+  AffichageMenuCIIndex: 'menu.show.ci.index',
+ 
+  AffichageMenuCodeAbsenceIndex: 'menu.show.codeabsence.index',
+  AffichageMenuCodeDeplacementIndex: 'menu.show.codedeplacement.index',
+  AffichageMenuCodeMajorationIndex: 'menu.show.codemajoration.index',
+  AffichageMenuCodeZoneDeplacementIndex: 'menu.show.codezonedeplacement.index',
+  AffichageMenuCommandeDetail: 'menu.show.commande.detail',
+  AffichageMenuCommandeIndex: 'menu.show.commande.index',
+  
+  AffichageMenuDatesClotureComptableIndex: 'menu.show.datescloturecomptable.index',
+  AffichageMenuDepenseExplorateur: 'menu.show.depense.explorateur',
+  AffichageMenuDepenseIndex: 'menu.show.depense.index',
+  AffichageMenuDepenseTransfertFAR: 'menu.show.depense.transfertfar',
+  AffichageMenuEtablissementComptableIndex: 'menu.show.etablissementcomptable.index',
+  AffichageMenuEtablissementPaieIndex: 'menu.show.etablissementpaie.index',
+  AffichageMenuFactureIndex: 'menu.show.facture.index',
+  AffichageMenuFournisseurIndex: 'menu.show.fournisseur.index',
+  
+  AffichageMenuMaterielIndex: 'menu.show.materiel.index',
+  AffichageMenuModuleIndex: 'menu.show.module.index',
+  AffichageMenuNatureIndex: 'menu.show.nature.index',
+  AffichageMenuOrganisationIndex: 'menu.show.organisation.index',
+  AffichageMenuParamTarifsReferentielsIndex: 'menu.show.paramtarifsreferentiels.index',
+  
+  AffichageMenuPersonnelIndex: 'menu.show.personnel.index',
+  AffichageMenuAreasPointageViewsRapportDetail: 'menu.show.areas.pointage.views.rapport.detail',
+  AffichageMenuAreasPointageViewsRapportIndex: 'menu.show.areas.pointage.views.rapport.index',
+  AffichageMenuPointagePersonnelIndex: 'menu.show.pointagepersonnel.index',
+  AffichageMenuPrimeIndex: 'menu.show.prime.index',
+ 
+  AffichageMenuReceptionIndex: 'menu.show.reception.index',
+  AffichageMenuAreasReferentialViewsDeviseIndex: 'menu.show.areas.referential.views.devise.index',
+  AffichageMenuReferentielEtenduIndex: 'menu.show.referentieletendu.index',
+  AffichageMenuReferentielFixesIndex: 'menu.show.referentielfixes.index',
+  AffichageMenuReferentielTachesIndex: 'menu.show.referentieltaches.index',
+  AffichageMenuRoleIndex: 'menu.show.role.index',
+  AffichageMenuSocieteIndex: 'menu.show.societe.index',
+  AffichageMenuValidationPointageIndex: 'menu.show.validationpointage.index',
+ 
+  AffichageMenuAreasPointageViewsRapportNew: 'menu.show.areas.pointage.views.rapport.new',
+  AffichageMenuOperationDiverseIndex: 'menu.show.opertiondiverse.index',
+  AffichageMenuBilanFlashIndex: 'menu.show.bilanflash.index',
+}
+----
+
+[arabic, start=3]
+. Faire de meme côté back : 
+
+____
+Fred.Web\Fred.Entities\Permission\PermissionKeys.cs
+____
+
+Attention la valeur de la clé doit être la même cote Back et front.
+
+[source,csharp]
+----
+namespace Fred.Entities.Permission
+{
+#pragma warning disable SA1600 // Elements must be documented
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+  /// <summary>
+  /// classe const de tous les codes possible pour une Permission
+  /// </summary>
+  public class PermissionKeys
+  {
+ 
+    public const string AffichageMenuAuthentificationLogIndex = "menu.show.authentificationlog.index";
+    public const string AffichageMenuBudgetIndex = "menu.show.budget.index";
+    public const string AffichageMenuCIIndex = "menu.show.ci.index";
+    public const string AffichageMenuCodeAbsenceIndex = "menu.show.codeabsence.index";
+    public const string AffichageMenuCodeDeplacementIndex = "menu.show.codedeplacement.index";
+    public const string AffichageMenuCodeMajorationIndex = "menu.show.codemajoration.index";
+    public const string AffichageMenuCodeZoneDeplacementIndex = "menu.show.codezonedeplacement.index";
+    public const string AffichageMenuCommandeDetail = "menu.show.commande.detail";
+    public const string AffichageMenuCommandeIndex = "menu.show.commande.index";
+    public const string AffichageMenuDatesCalendrierPaieIndex = "menu.show.datescalendrierpaie.index";
+    public const string AffichageMenuDatesClotureComptableIndex = "menu.show.datescloturecomptable.index";
+    public const string AffichageMenuDepenseExplorateur = "menu.show.depense.explorateur";
+    public const string AffichageMenuDepenseIndex = "menu.show.depense.index";
+    public const string AffichageMenuDepenseTransfertFAR = "menu.show.depense.transfertfar";
+    public const string AffichageMenuEtablissementComptableIndex = "menu.show.etablissementcomptable.index";
+    public const string AffichageMenuEtablissementPaieIndex = "menu.show.etablissementpaie.index";
+    public const string AffichageMenuFactureIndex = "menu.show.facture.index";
+    public const string AffichageMenuFournisseurIndex = "menu.show.fournisseur.index";
+    public const string AffichageMenuMaterielIndex = "menu.show.materiel.index";
+    public const string AffichageMenuModuleIndex = "menu.show.module.index";
+    public const string AffichageMenuNatureIndex = "menu.show.nature.index";
+    public const string AffichageMenuOrganisationIndex = "menu.show.organisation.index";
+    public const string AffichageMenuParamTarifsReferentielsIndex = "menu.show.paramtarifsreferentiels.index";
+    public const string AffichageMenuPersonnelIndex = "menu.show.personnel.index";
+    public const string AffichageMenuAreasPointageViewsRapportDetail = "menu.show.areas.pointage.views.rapport.detail";
+    public const string AffichageMenuAreasPointageViewsRapportIndex = "menu.show.areas.pointage.views.rapport.index";
+    public const string AffichageMenuPointagePersonnelIndex = "menu.show.pointagepersonnel.index";
+    public const string AffichageMenuPrimeIndex = "menu.show.prime.index";
+    public const string AffichageMenuReceptionIndex = "menu.show.reception.index";
+    public const string AffichageMenuAreasReferentialViewsDeviseIndex = "menu.show.areas.referential.views.devise.index";
+    public const string AffichageMenuReferentielEtenduIndex = "menu.show.referentieletendu.index";
+    public const string AffichageMenuReferentielFixesIndex = "menu.show.referentielfixes.index";
+    public const string AffichageMenuReferentielTachesIndex = "menu.show.referentieltaches.index";
+    public const string AffichageMenuRoleIndex = "menu.show.role.index";
+    public const string AffichageMenuSocieteIndex = "menu.show.societe.index";
+    public const string AffichageMenuValidationPointageIndex = "menu.show.validationpointage.index";
+    public const string AffichageMenuCIDetail = "menu.show.ci.detail";
+    public const string AffichageMenuBaremeIndex = "menu.show.bareme.index";
+    public const string AffichageMenuLookupIndex = "menu.show.lookup.index";
+    public const string AffichageMenuPersonnelEdit = "menu.show.personnel.edit";
+    public const string AffichageMenuRapprochementFactureIndex = "menu.show.rapprochementfacture.index";
+ 
+    public const string AffichageMenuAreasPointageViewsRapportNew = "menu.show.areas.pointage.views.rapport.new";
+ 
+    public const string AffichageMenuOperationDiverseIndex = "menu.show.opertiondiverse.index";
+    public const string AffichageMenuBilanFlashIndex = "menu.show.bilanflash.index";
+    /// <summary>
+    /// ctor
+    /// </summary>
+    protected PermissionKeys()
+    {
+      //empty
+    }
+  }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+#pragma warning restore SA1600 // Elements must be documented
+}
+----
+
+[arabic, start=4]
+. Rajouter l’attribut Authorize et FredAspAuthorize sur le contrôleur Asp.net
+
+____
+Fred.Web\Areas\OperationDiverse\Controllers\OperationDiverseController.cs
+____
+
+[source,csharp]
+----
+using Fred.Entities.Permission;
+using Fred.Web.Modules.Authorization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+ 
+namespace Fred.Web.Areas.OperationDiverse.Controllers
+{
+  [Authorize()]
+  public class OperationDiverseController : Controller
+  {
+    // GET: OperationDiverse/OperationDiverse
+    [FredAspAuthorize(globalPermissionKey: PermissionKeys.AffichageMenuRoleIndex)]
+    public ActionResult Index()
+    {
+      return View();
+    }
+  }
+}
+----
+
+[arabic, start=5]
+. Et enfin : Faire un script pour insérer 2 entrée dans la base ( car 2 menus). Il faut mettre ce nouveau script dans le dossier :
+____
+Fred.Web\Fred.Referential\Referential\001-Common\001-Fred-Ref
+____
+
+Attention la valeur de la  clé doit être la même que les autres.
+
+Fred.Web.Referential\001-Common\001-Fred-Ref\00230_FRED_PERMISSION_V3.sql
+[source,sql]
+----
+ INSERT INTO[dbo].[FRED_PERMISSION] ([PermissionKey], [PermissionType], [Code], [Libelle], [PermissionContextuelle]) VALUES('menu.show.opertiondiverse.index',1,'0041','Affichage du menu / Accès à la page ''Gérer les opérations diverses''.',0) 
+ INSERT INTO[dbo].[FRED_PERMISSION] ([PermissionKey], [PermissionType], [Code], [Libelle], [PermissionContextuelle]) VALUES('menu.show.bilanflash.index',1,'0042','Affichage du menu / Accès à la page ''Gérer les bilanss flash''.',0) 
+----

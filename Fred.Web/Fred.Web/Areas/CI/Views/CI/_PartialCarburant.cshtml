@@ -1,0 +1,283 @@
+﻿@*--------------------------------------------------------------------------------------------------------------*@
+@*                                          PARAMETRAGE CARBURANT                                               *@
+@*--------------------------------------------------------------------------------------------------------------*@
+<div class="panel panel-default carburant" id="Ci-Carburant" fred-display-handler="userOrganizationId" display="hidden">
+  <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse-carburant" data-parent="#ci-accordion" id="panel-heading-carburant">
+    <i class="chevron fa fa-fw"></i> {{ctrl.resources.CI_Detail_Carburant_Titre}}
+  </div>
+
+  <div id="collapse-carburant" class="panel-collapse collapse">
+    <ng-form name="formCarburant">
+      <div class="panel-body">
+
+        <!--BEGIN : LISTE DES CARBURANT-->
+
+        <div class="row">
+          <label class="control-label">{{ctrl.resources.CI_Detail_Carburant_ActiverCarburant}} :</label>
+          <label class="switch carb">
+            <input type="checkbox" ng-model="ctrl.panels.general.data.CarburantActif" id="CarburantActif" name="CarburantActif" />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <br />
+
+        @* ******************************************************************************************************************************************************************************************* *@
+        @*                                                                 PARAMETRAGE DES CARBURANTS (PRIX)                                                                                           *@
+        @* ******************************************************************************************************************************************************************************************* *@
+        <div class="row">
+          <h4>{{ctrl.resources.CI_Detail_Carburant_SousTitre_ParametragePrixCarburant}}</h4>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-md-3 no_pl">
+            <label class="dev"> {{ctrl.resources.CI_Detail_Carburant_SelectionDevise}}</label>
+            <select id="ddlDeviseCarburant"
+                    class="form-control input-filter"
+                    ng-model="ctrl.panels.carburant.data.selectedDevise"
+                    ng-options="item.Devise as item.Devise.CodeLibelle group by item.typeDevise for item in ctrl.panels.devise.data.ciDeviseList | orderBy:'+typeDevise'"
+                    ng-selected="ctrl.panels.carburant.data.selectedDevise.DeviseId === item.Devise.DeviseId"
+                    ng-change="ctrl.handleChangeDevise()"></select>
+          </div>
+        </div>
+        <br />
+        <div id="accordion" class="car_prix">
+
+          <div class="row">
+            <table class="table car_prix_header">
+              <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+              </colgroup>
+              <tbody>
+                <tr>
+                  <th class="col-md-4">{{ctrl.resources.CI_Detail_Carburant_TableCarburant_PeriodeApplication}}</th>
+                  <th class="col-md-3">{{ctrl.resources.CI_Detail_Carburant_TableCarburant_Cloture}}</th>
+                  <th class="col-md-4">{{ctrl.resources.CI_Detail_Carburant_TableCarburant_Prix}}</th>
+                  <th class="col-md-1">{{ctrl.resources.CI_Detail_Carburant_TableCarburant_Action}}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div id="parametrageCarburantDiv" class="table-responsive fred-scroll">
+            <div class="panel-group">
+              <div class="row panel panel-default" ng-repeat="carburant in ctrl.panels.carburant.data.parametrageCarburantList | orderBy: '+Code'">
+                <div class="panel-heading level1">
+                  <table class="t_first">
+                    <colgroup>
+                      <col>
+                      <col>
+                      <col>
+                      <col>
+                    </colgroup>
+                    <tbody>
+                      <tr class="main-row">
+                        <td class="col-md-11" data-toggle="collapse" data-target="#parametrage-{{carburant.CarburantId}}">
+                          <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#parametrage-{{carburant.CarburantId}}"></a>
+                          <span class="carburant-code-libelle">{{carburant.CodeLibelle}}</span>
+                        </td>
+                        <td class="col-md-1">
+                          <button class="btn btn-primary  btn-sm add_carburant" ng-click="ctrl.handleAddParamCarburant(carburant)" title="Cliquer pour ajouter un prix sur une nouvelle période d'application à ce carburant'">
+                            <span class="flation flaticon-add"></span>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div id="parametrage-{{carburant.CarburantId}}" class="panel-collapse collapse">
+                  <div class="panel-body level3">
+                    <table class="table t_third_param_carburant">
+                      <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                      </colgroup>
+                      <tbody>
+                        <tr ng-repeat="paramCarburant in carburant.ParametrageCarburants | orderBy: '-Periode'">
+                          <td class="col-md-4" ng-form="paramCarburant.formPeriodeCell">
+                            <span ng-show="paramCarburant.formPeriodeCell.periodeCarburant.$error.doublePeriode && paramCarburant.formPeriodeCell.$submitted" class="text-danger">{{ctrl.resources.CI_Detail_Carburant_TableCarburant_ErrorPeriodeUnique}}</span>
+                            <select class="form-control input-filter periode_carburant" name="periodeCarburant" id="periodeCarburant-{{paramCarburant.$$hashKey.split(':')[1]}}"
+                                    ng-model="paramCarburant.Periode"
+                                    ng-options="periode as (periode | date:'MM/yyyy') for periode in paramCarburant.Periodes | orderBy:'-'"
+                                    ng-change="ctrl.handleChangeParametrageCarburant(paramCarburant, carburant)"
+                                    ng-disabled="paramCarburant.Cloture"></select>
+                          </td>
+                          <td class="col-md-3">
+                            <i ng-show="paramCarburant.Cloture" class="glyphicon glyphicon-ok"></i>
+                          </td>
+                          <td class="col-md-4 prix_carburant" ng-form="paramCarburant.formPrixCell">
+                            <span ng-show="paramCarburant.formPrixCell.prixCarburant.$error.min" class="text-danger">{{ctrl.resources.CI_Detail_Carburant_TableCarburant_ErrorPrixPositif}}</span>
+                            @*<span ng-show="paramCarburant.formPrixCell.prixCarburant.$error.pattern" class="text-danger">{{ctrl.resources.CI_Detail_Carburant_TableCarburant_ErrorPrixDecimal}}</span>*@
+                            <span ng-show="paramCarburant.formPrixCell.prixCarburant.$error.prixObligatoire && paramCarburant.formPrixCell.$submitted" class="text-danger">{{ctrl.resources.CI_Detail_Carburant_TableCarburant_ErrorPrixObligatoire}}</span>
+                            <input name="prixCarburant" id="prixCarburant-{{paramCarburant.$$hashKey.split(':')[1]}}" class="text-right prix-carburant"
+                                   type="text" 
+                                   fred-input-number="5"
+                                   min="0"                                                                      
+                                   ng-change="ctrl.handleChangeParametrageCarburant(paramCarburant, carburant)"
+                                   ng-model="paramCarburant.Prix"
+                                   ng-disabled="paramCarburant.Cloture"
+                                   ng-required="true" />
+                            <span>{{paramCarburant.Devise.Symbole}}</span>
+                            /
+                            <span>{{carburant.Unite.Code}}</span>
+                          </td>
+                          <td class="col-md-1 prix_carburant">
+                            <button class="btn btn-link flaticon flaticon-multiply" ng-disabled="paramCarburant.Cloture" ng-show="!paramCarburant.Cloture" ng-click="ctrl.handleDeleteParamCarburant(carburant, paramCarburant)"></button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        @* ******************************************************************************************************************************************************************************************* *@
+        @*                                                                  CONSOMMATION DES RESSOURCES MATERIELLES                                                                                    *@
+        @* ******************************************************************************************************************************************************************************************* *@
+        <h4>{{ctrl.resources.CI_Detail_Carburant_SousTitre_ParametrageConsommationRessource }}</h4>
+
+        <div class="res_mat">
+          <input type="text" placeholder="{{ctrl.resources.Global_ReferentielRessource_Placeholder}}" class="form-control res_search_input" ng-model="ctrl.searchRessource" />
+        </div>
+
+        <div id="accordion" class="res_mat">
+
+          <div class="row">
+            <table class="table res_mat_header">
+              <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+              </colgroup>
+              <tbody>
+                <tr>
+                  <th class="col-md-2">{{ctrl.resources.CI_Detail_Carburant_TableRessource_Code}}</th>
+                  <th class="col-md-3">{{ctrl.resources.CI_Detail_Carburant_TableRessource_Libelle}}</th>
+                  <th class="col-md-2">{{ctrl.resources.CI_Detail_Carburant_TableRessource_Carburant}}</th>
+                  <th class="col-md-2 text-center">{{ctrl.resources.CI_Detail_Carburant_TableRessource_ConsommationDefaut}}</th>
+                  <th class="col-md-3 text-center">{{ctrl.resources.CI_Detail_Carburant_TableRessource_ConsommationCI}}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div id="ciRessourceDiv" class="table-responsive fred-scroll">
+            <div class="panel-group" id="accordion1">
+              <div class="row panel panel-default" ng-repeat="chapitre in ctrl.panels.carburant.data.ciRessourceList | orderBy:'+Code' | filter: ctrl.chapitresFilter(ctrl.searchRessource) as filteredList">
+                <div class="panel-heading level1">
+                  <table class="t_first">
+                    <colgroup>
+                      <col>
+                      <col>
+                      <col>
+                      <col>
+                      <col>
+                    </colgroup>
+                    <tbody>
+                      <tr data-toggle="collapse" data-target="#souschapitre-{{chapitre.ChapitreId}}">
+                        <td class="col-md-2">
+                          <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#souschapitre-{{chapitre.ChapitreId}}"></a>
+                          <span>{{chapitre.Code}}</span>
+                        </td>
+                        <td class="col-md-10 sm_pad" colspan="4">
+                          {{chapitre.Libelle}}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div id="souschapitre-{{chapitre.ChapitreId}}" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <div class="panel panel-default" ng-repeat="souschapitre in chapitre.SousChapitres | orderBy:'+Code' | filter: ctrl.sousChapitresFilter(ctrl.searchRessource) ">
+                      <div class="panel-heading level2">
+                        <table class="t_first">
+                          <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                          </colgroup>
+                          <tbody>
+                            <tr data-toggle="collapse" data-parent="#souschapitre-{{chapitre.ChapitreId}}" data-target="#ressource-{{souschapitre.SousChapitreId}}">
+                              <td class="col-md-2">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#souschapitre-{{chapitre.ChapitreId}}" data-target="#ressource-{{souschapitre.SousChapitreId}}"></a>
+                                <span>{{souschapitre.Code}}</span>
+                              </td>
+                              <td class="col-md-10 sm_pad">
+                                {{souschapitre.Libelle}}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <div id="ressource-{{souschapitre.SousChapitreId}}" class="panel-collapse collapse in">
+                        <div class="panel-body level3">
+                          <table class="table t_third">
+                            <tbody>
+                              <tr ng-repeat="ressource in souschapitre.Ressources | orderBy:'+Code' | filter : ctrl.ressourcesFilter(ctrl.searchRessource)">
+                                <td class="col-md-2">
+                                  <span>{{ressource.Code}}</span>
+                                </td>
+                                <td class="col-md-3">
+                                  <span>{{ressource.Libelle}}</span>
+                                </td>
+                                <td class="col-md-2">
+                                  <span>{{ressource.Carburant.Libelle}}</span>
+                                </td>
+                                <td class="text-center col-md-2">
+                                  <span ng-show="ressource.Consommation !== null">{{ressource.Consommation}} <span ng-show="true">{{ressource.Carburant.Unite.Code}}</span></span>
+                                  <span ng-show="ressource.Consommation === null">-</span>
+                                </td>
+                                <td class="text-center col-md-3 cons_ci" ng-form="formConsommationCell">
+                                  <span ng-show="formConsommationCell.surchargeConso.$error.min" class="text-danger">{{ctrl.resources.CI_Detail_Carburant_TableRessource_ErrorConsommationPositive}}</span>
+                                  @*<span ng-show="formConsommationCell.surchargeConso.$error.pattern" class="text-danger">{{ctrl.resources.CI_Detail_Carburant_TableRessource_ErrorConsommationDecimal}}</span>*@
+                                  <input name="surchargeConso" id="surchargeConso" class="text-right"
+                                         type="text"
+                                         fred-input-number 
+                                         min="0"
+                                         ng-change="ctrl.handleChangeOverloadedConso(ressource.CIRessources[0])"
+                                         ng-model="ressource.CIRessources[0].Consommation"                                         
+                                         @*ng-disabled="!ressource.CarburantId"*@ /> <!-- A voir si utile ou pas -->
+                                  <span ng-show="ressource.CarburantId !== null">{{ressource.Carburant.Unite.Code}}</span>
+                                  <button ng-show="ressource.CIRessources[0].Consommation !== null" ng-click="ctrl.handleDeleteOverloadedConso(ressource.CIRessources[0])" class="btn btn-link flaticon flaticon-multiply"></button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <p ng-show="filteredList.length === 0">{{ctrl.resources.Global_Message_AucunElement}}</p>
+          </div>
+        </div>
+        <!--END : LISTE DES MATERIELS-->
+      </div>
+      <div class="panel-footer">
+        <!--BEGIN  > BOUTONS-->
+        <button type="submit" class="btn btn-default pull-left" ng-click="ctrl.handleSave(ctrl.panels.carburant)" ng-disabled="formCarburant.$invalid && formCarburant.$submitted" title="{{resources.Global_Bouton_Enregistrer_Tooltip}}"> {{ctrl.resources.Global_Bouton_Enregistrer}}</button>
+        <button type="submit" class="btn btn-link pull-right" ng-click="ctrl.handleCancel(ctrl.panels.carburant)" title="{{resources.Global_Bouton_Annuler_Tooltip}}">  {{ctrl.resources.Global_Bouton_Annuler}} </button>
+        <!--END  > BOUTONS-->
+      </div>
+    </ng-form>
+  </div>
+
+</div>

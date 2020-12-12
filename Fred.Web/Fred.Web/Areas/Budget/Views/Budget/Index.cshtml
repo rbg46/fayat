@@ -1,0 +1,183 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+  ViewBag.Title = FeatureBudget.Budget_Index_TitreOnglet;
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+  @Styles.Render("~/BudgetIndexBundle.css")
+}
+@section scripts {
+  @Scripts.Render("~/BudgetIndexBundle.js")
+  @this.RenderResources("FeatureBudget", "FeatureCodeDeplacement", "FeatureReferentielTache") @*todo ajo a remplacer par les bonnes ressources*@
+
+  <style>
+    tr[title]:hover:after {
+      background-color: forestgreen;
+    }
+  </style>
+}
+
+<div class="container budget" ng-controller="BudgetController as budgetCtrl">
+
+  <h1>{{budgetCtrl.resources.Budget_Index_Titre}}</h1>
+
+  <div class="row bloc_search">
+    <div class="col-lg-12 col-md-12">
+      <fred-section class="decalage">
+        <label>{{budgetCtrl.resources.Budget_Index_SousTitre}}</label>
+      </fred-section>
+
+      <!--START : BARRE DE RECHERCHE-->
+      <div class="row search-container">
+        <div class="col-lg-6 col-md-6 no_pad_l">
+          <div class="inner-addon right-addon">
+            <span class="material-icons chevron-search">chevron_right</span>
+            <lookup ng-model="budgetCtrl.ciSelected"
+                    search-placeholder="{{budgetCtrl.resources.Global_ReferentielCI_Placeholder}}"
+                    search-title="{{budgetCtrl.resources.Global_ReferentielCI}}"
+                    custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                    on-select="budgetCtrl.handleClickChangedCI()"
+                    url="/api/CI/SearchLight">
+              <input type="text"
+                     class="form-control"
+                     ng-value="budgetCtrl.ciSelected.CodeLibelle"
+                     placeholder="{{budgetCtrl.resources.Global_ReferentielCI_Placeholder}}"
+                     title="{{budgetCtrl.ciSelected.CodeLibelle}}"
+                     readonly />
+            </lookup>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" ng-show="budgetCtrl.view === 'taskPlanView'">
+          <!--Bouton permettant de sélectionner les modes d'affichage : BEGIN  -->
+          @*<referentiel-tache-view-selector-component arbo-view-selected="true"
+                                                     splitted-view-selected="false">
+          </referentiel-tache-view-selector-component>*@
+
+        </div>
+      </div>
+
+      <!--END : BARRE DE RECHERCHE-->
+    </div>
+
+  </div>
+
+
+  <div class="row">
+
+    <div class="bloc_liste"
+         ng-show="budgetCtrl.showListing"
+         ng-class="{'col-lg-10 col-md-10 unshrink': budgetCtrl.view === 'listingView' ,'col-lg-4 col-md-4 shrink': budgetCtrl.view !== 'listingView' }">
+      <!--Rajouter la classe prevent_clic à l'overlay pour faire apparaitre le bloc grisé-->
+      <div class="overlay" ng-class="{'prevent_clic': budgetCtrl.selectedTaskIsModified }"></div>
+
+      <div class="row search-container">
+        <div class="col-md-8 input-group input-search">
+          <input type="text"
+                 class="form-control"
+                 ng-model="budgetCtrl.taskSearchText"
+                 ng-change="budgetCtrl.handleTaskSearchText()"
+                 placeholder="{{budgetCtrl.resources.Global_ReferentielTache_Placeholder}}">
+          <span class="input-group-addon button-search">
+            <i class="material-icons">search</i>
+          </span>
+        </div>
+        <div class="col-md-4 btn-group devises no_pad_r">
+          <button type="button"
+                  class="btn btn-default"
+                  aria-label="Left Align"
+                  ng-class="{'deviseSelected': budgetCtrl.deviseSelected === devise}"
+                  ng-click="budgetCtrl.handleDeviseSelectedChanged(devise)"
+                  ng-repeat="devise in budgetCtrl.devises track by $index">
+            {{devise.Symbole}}
+          </button>
+        </div>
+      </div>
+
+      <div class="budget_list">
+        <div>
+          <!--LISTE : START-->
+          <taches-budget-component resources="budgetCtrl.resources"
+                                   bugdet-info-changed="budgetCtrl.onBugdetInfoChanged(bugdetInfo)"
+                                   devise-selected="budgetCtrl.deviseSelected"
+                                   tasks-loaded="budgetCtrl.onTasksLoaded(tasksLoadedInfo)"
+                                   ci-selected="budgetCtrl.ciSelected"
+                                   view="budgetCtrl.view"
+                                   buget-revision-statut="budgetCtrl.bugetRevisionStatut">
+          </taches-budget-component>
+          <!--LISTE : END-->
+
+        </div>
+      </div>
+    </div>
+
+    <div class="bloc_detail col-lg-7 col-md-7 no_pad_l"
+         ng-show="budgetCtrl.showDetail">
+      <tache-detail-component devise-selected="budgetCtrl.deviseSelected"
+                              tasks="budgetCtrl.tasks"
+                              resources="budgetCtrl.resources"
+                              task-selected="$ctrl.taskSelected"
+                              ci-selected="budgetCtrl.ciSelected"
+                              buget-revision-statut="budgetCtrl.bugetRevisionStatut">
+      </tache-detail-component>
+    </div>
+
+    <div class="col-lg-2 col-md-2 bloc_infos"
+         ng-show="budgetCtrl.view === 'listingView'">
+      <budget-detail-component resources="budgetCtrl.resources"
+                               devises="budgetCtrl.devises">
+      </budget-detail-component>
+    </div>
+
+    <!--BEGIN : Bouton -->
+    <div class="col-lg-1 col-md-1" ng-show="budgetCtrl.showButtonBudgetRessources  && budgetCtrl.bugetRevisionStatut !== 'Valide'">
+      <span class="pull-right">
+        <label class="show_ressources">{{budgetCtrl.resources.Budget_Index_Bouton_AjouterRessource}}</label>
+        <i class="flaticon flaticon-add icoplus"
+           title=""
+           ng-show="!budgetCtrl.showBudgetRessources"
+           ng-click="budgetCtrl.handleClickOpenCloseBudgetRessources()"></i>
+        <i class="flaticon flaticon-substract icoplus"
+           title=""
+           ng-show="budgetCtrl.showBudgetRessources"
+           ng-click="budgetCtrl.handleClickOpenCloseBudgetRessources()"></i>
+      </span>
+    </div>
+    <!--END : Bouton -->
+
+  </div>
+
+  <div class="bloc_ressources"
+       ng-show="budgetCtrl.showBudgetRessources && budgetCtrl.bugetRevisionStatut !== 'Valide'"
+       ng-class="{'opened':budgetCtrl.showBudgetRessources, 'closed':!budgetCtrl.showBudgetRessources}">
+    <div class="row">
+      <div class="res_main">
+        <budget-ressources-component ci-selected="budgetCtrl.ciSelected"
+                                     devise-selected="budgetCtrl.deviseSelected"
+                                     resources="budgetCtrl.resources">
+        </budget-ressources-component>
+        <div class="close_panel" ng-click="budgetCtrl.handleClickOpenCloseBudgetRessources()" title="{{budgetCtrl.resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+          <i class="fa fa-angle-right" aria-hidden="true"></i> <span class="ng-binding">{{budgetCtrl.resources.Global_Bouton_RefermerPanneau}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-show="budgetCtrl.showTasksPlan">
+    <referentiel-taches-component resources="budgetCtrl.resources"
+                                  show-task-level-four="true"
+                                  tacks-changed="budgetCtrl.onTacksChanged(tasksChangedInfo)">
+
+    </referentiel-taches-component>
+  </div>
+
+
+  <footer ng-show="budgetCtrl.view === 'taskPlanView'">
+    <div class="action_buttons">
+      <button class="btn cancel pull-left"
+              ng-click="budgetCtrl.handleShowBudget()">
+        {{budgetCtrl.resources.Budget_Index_Bouton_RetourBudget}}
+      </button>
+    </div>
+  </footer>
+
+</div>

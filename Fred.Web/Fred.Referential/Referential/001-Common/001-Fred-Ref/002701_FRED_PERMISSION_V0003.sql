@@ -1,0 +1,1 @@
+﻿UPDATE [dbo].[FRED_PERMISSION] set [Libelle] = 'Affichage du menu / Accès à la page ''Gérer les clôtures''.' WHERE [PermissionKey] = 'menu.show.datescloturecomptable.index'

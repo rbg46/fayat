@@ -1,0 +1,26 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1s"></i>{{::$ctrl.resources.Global_Comment}}</h2>
+        <i class="flaticon flaticon-multiply close pull-right" ng-click="$ctrl.handleCancel()" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+    </div>
+    <div class="modal-body">
+        <div class="row commentaire">
+            <textarea id="txtCommentaire" rows="4" cols="75" ng-model="$ctrl.CommentaireDisplay" placeholder="{{::$ctrl.resources.RapportHebdo_Commentaire_Message}}"></textarea>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <!--Bouton pour valider le commentaire-->
+        <button class="btn btn-default pull-left"
+                ng-click="$ctrl.handleClickValidate()"
+                title="{{::$ctrl.resources.Global_Bouton_Valider_Tooltip}}">
+            {{::$ctrl.resources.Global_Bouton_Valider}}
+        </button>
+
+        <!--Bouton Supprimer-->
+        <button class="btn btn-link pull-right"
+                ng-click="$ctrl.handleDelete()"
+                title="{{::$ctrl.resources.Global_Bouton_Supprimer_Tooltip}}">
+            {{::$ctrl.resources.Global_Bouton_Supprimer}}
+        </button>
+    </div>
+</div>

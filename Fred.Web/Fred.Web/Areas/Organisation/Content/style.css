@@ -1,0 +1,192 @@
+﻿.no_padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.no-pl {
+    padding-left: 0;
+}
+
+.no-pr {
+    padding-right: 0;
+}
+
+.btn-circle {
+    font-size: 12px;
+    height: 30px;
+    margin: 0;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-excel {
+    margin-top: 15px;
+}
+
+.col_roles {
+    padding-left: 0;
+}
+
+.col_currency {
+    padding-right: 0;
+}
+
+.list-content {
+    overflow: auto;
+}
+
+.list-content .active {
+    background-color: #f5f5f5;
+}
+
+.list-content .ligne {
+    border-top: 1px solid #ddd;
+    cursor: pointer;
+    font-size: 15px;
+    min-height: 48px;
+    padding: 8px;
+}
+
+.list-content .ligne:hover {
+    background: #e8e8e8;
+}
+
+.list-content .selected .ligne:hover {
+    background-color: #428bca;
+}
+
+.list-content .data {
+    max-width: 100%;
+    padding-top: 5px;
+    word-wrap: break-word;
+}
+
+.list-content .badge-notify {
+    color: #ffa90d;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+.selected {
+    background-color: #428bca;
+    border-color: #357ebd;
+    color: #ffffff;
+}
+
+.selected .flaticon {
+    color: #fff;
+}
+
+.selected .material-icons {
+    color: #fff;
+}
+
+.selected .noDevise {
+    background-color: #fff;
+    color: #428bca;
+}
+
+.selected .hasDevise {
+    background-color: #fff;
+    color: #428bca;
+}
+
+.selected .arrow:after {
+    color: #fff;
+}
+
+.modal-body .row {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.toolbar {
+    display: block;
+    padding-top: 3px;
+}
+
+.toolbar label {
+    color: #67757f;
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.toolbar .controls {
+    background-color: #e1e3e5;
+    margin-bottom: 5px;
+    padding: 7px;
+    overflow: hidden;
+}
+
+.toolbar .controls .add {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.toolbar .controls .add .btn {
+    font-size: 18px;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+}
+
+.input-search {
+    font-weight: normal;
+    width: 100%;
+}
+
+.input-search.currency {
+    width: 93%;
+}
+
+.organisation .form-control {
+    background-color: #fafafa;
+}
+
+.input-group-addon {
+    border-color: #bbbbbb;
+    width: 30px;
+    position: relative;
+}
+
+.noDevise {
+    background-color: #FFA90D;
+    color: #fff;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.hasDevise {
+    background-color: #09ADA6;
+    color: #fff;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.arrow:after {
+    color: grey;
+    content: "\f105";
+    float: right;
+    font-family: "FontAwesome";
+    font-size: 25px;
+    line-height: 22px;
+    margin-left: 20px;
+}
+
+.form-control:read-only {
+    cursor: pointer;
+    background-color: #fff;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .input-group-addon {
+        width: 25px;
+    }
+    .btn-circle {
+        width: 25px;
+        height: 25px;
+    }
+}

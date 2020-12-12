@@ -1,0 +1,83 @@
+﻿<div class="modal-header">
+  <h2 class="modal-title"><i class="flaticon flaticon-shuffle"></i>{{action}}</h2>
+  <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{resources.Global_Modal_Annuler_Tooltip}}" ng-click="close()"></i>
+</div>
+<form name="featureForm" novalidate>
+  <div class="modal-body">
+    <div ng-show="ErrorMessage.length > 0" class="alert alert-warning">
+      {{ErrorMessage}}
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label for="ddlModules">{{resources.Module_Index_ModalFonctionnalite_Module}}</label>
+        <select id="ddlModules" class="form-control" ng-options="item as item.Libelle for item in moduleList track by item.ModuleId" ng-model="modalSelectedModule" ng-change="getSelectedModule()" ng-disabled="clone.FonctionnaliteId > 0"></select>
+      </div>
+    </div>
+    <div class="row">
+      <input type="hidden" ng-model="clone.FonctionnaliteId" />
+      <div class="col-md-4"
+           ng-class="{'has-error': featureForm.$submitted && featureForm.featureCode.$invalid }">
+        <label for="txtCodeReferentiel">{{resources.Module_Index_ModalFonctionnalite_Code}}</label>
+        <span class="text-danger"
+              ng-show="featureForm.$submitted && featureForm.featureCode.$error.required">{{resources.Global_Control_DataRequired_Erreur}}</span>
+        <span class="text-danger"
+              ng-show="featureForm.$submitted && featureForm.featureCode.$error.alreadyExist">{{resources.Module_Service_Control_CodeUnique_Erreur}}</span>
+        <input type="text" id="txtCodeReferentiel"
+               class="form-control"
+               name="featureCode"
+               ng-disabled="clone.FonctionnaliteId > 0"
+               ng-model="clone.Code"
+               title=">{{resources.Module_Index_ModalFonctionnalite_Code_Placeholder}}"
+               item-with-same-property-already-exist-validator list-to-check="featureList" property-name="Code"
+               maxlength="5"
+               ng-required="true"
+               autofocus>
+      </div>
+      <div class="col-md-8"
+           ng-class="{'has-error': featureForm.$submitted && featureForm.featureLibelle.$invalid }">
+        <label for="txtLabelReferentiel">{{resources.Module_Index_ModalFonctionnalite_Libelle}}</label>
+        <span class="text-danger"
+              ng-show="featureForm.$submitted && featureForm.featureLibelle.$error.required">{{resources.Global_Control_DataRequired_Erreur}}</span>
+        <input type="text"
+               id="txtLabelReferentiel"
+               class="form-control"
+               name="featureLibelle"
+               ng-model="clone.Libelle"
+               ng-required="true"
+               maxlength="125"
+               title="{{resources.Module_Index_ModalFonctionnalite_Libelle_Placeholder}}">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <label for="txtDescriptionModule">{{resources.Module_Index_ModalModule_Description}}</label>
+        <textarea class="form-control"
+                  id="txtDescriptionModule"
+                  maxlength="250"
+                  ng-model="clone.Description"></textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <input type="checkbox" id="cbxHorsOrganisation" ng-model="clone.HorsOrga">
+        <label for="cbxHorsOrganisation"><span></span>{{resources.Module_Index_ModalFonctionnalite_HorsOrganisation}}</label>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default pull-left"
+            ng-click="save()"
+            ng-disabled="featureForm.$submitted && featureForm.$invalid && isBusy"
+            title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">
+      {{resources.Global_Bouton_Enregistrer}}
+    </button>
+    <button class="btn btn-link pull-right"
+            ng-click="close()"
+            title="{{resources.Global_Bouton_Annuler_Tooltip}}">
+      {{resources.Global_Bouton_Annuler}}
+    </button>
+  </div>
+</form>

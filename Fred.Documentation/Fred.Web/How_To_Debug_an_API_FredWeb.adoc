@@ -1,0 +1,52 @@
+= Comment débugger une API de FRED Web ?
+
+Les API de FRED Web sont stockees dans le dossier Fred.Web > API et sont accessible via postman apres avoir recuperer un token d'authentification.
+
+Pour cela, utilisez la procedure suivante :
+
+== PostMan
+
+=== Installation
+
+allez sur https://www.getpostman.com/apps télécharger et installer postman.
+
+=== Créer votre requête
+
+Dans postman, ajouter la requête post ou get, par exemple : +
+http://localhost:6870/api/Achat/SearchRessources
+
+Dans l’onglet Body, choisir le type JSON et coller votre json, par exemple :
+
+[source,json]
+----
+{ 
+  "annee":2018,
+  "mois":7,
+  "auteursap":"CEDRIC LEJORT",
+  "societecode":"1000",
+  "cicodes":["435141"]
+}
+----
+
+ou configurer votre URL avec les parametres suivants :
+
+Par exemple :
+http://localhost:6870/api/Achat/SearchRessources?ciId=500&ressourcesRecommandeesOnly=1&achatsEnable=true&?&page=1&pageSize=20&recherche=&recherche2=&recherche3=&societeId=null&ciId=500&groupeId=null&agenceId=null&organisationId=null
+
+=== S’authentifier
+
+* Dans l’onglet _Authorization_, choisir _OAuth 2.0_ puis cliquer sur _Get new access token_
+* Dans la fenêtre qui s’ouvre mettre les informations suivantes : 
+** Grant Type : Password Credential
+** Access Token Url : http://localhost:6870/token
+** User : l'utilisateur de FredWeb à cette api. A trouver en base (par exemple ncalloix).
+** Password : le password de l'utilisateur. A trouver en base.
+** Client Authentication : Send as basic header
+* Cliquer sur _Request Tocken_. Si l’authent, ce passe bien, Fred IE Api renvoie un token qui s’affiche dans PostMan.
+* Cliquer sur _Use Token_
+
+=== Tester la requête
+
+* Cliquer sur _Send_.
+* le token est ajouté dans le header (Authorization : Bearer [token]) puis
+* la requête est envoyée.

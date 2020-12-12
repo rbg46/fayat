@@ -1,0 +1,32 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title" ng-if="$ctrl.type == 'Cancel'"><i class="flaticon flaticon-shuffle-1"></i> {{::$ctrl.resources.ObjectifFlash_Modal_Confirmation_Annulation_Titre}}</h2>
+        <h2 class="modal-title" ng-if="$ctrl.type == 'Activate'"><i class="flaticon flaticon-shuffle-1"></i> {{::$ctrl.resources.ObjectifFlash_Modal_Confirmation_Activation_Titre}}</h2>
+        <h2 class="modal-title" ng-if="$ctrl.type == 'Close'"><i class="flaticon flaticon-shuffle-1"></i> {{::$ctrl.resources.ObjectifFlash_Modal_Confirmation_Cloture_Titre}}</h2>
+        <h2 class="modal-title" ng-if="$ctrl.type == 'Save'"><i class="flaticon flaticon-shuffle-1"></i> {{::$ctrl.resources.ObjectifFlash_Modal_Confirmation_Sauvegarde_Titre}}</h2>
+        <i class="flaticon flaticon-multiply close pull-right" ng-click="$ctrl.handleCancel()" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <b ng-if="$ctrl.type == 'Cancel'">{{::$ctrl.resources.ObjectifFlash_Modal_Confirmation_Annulation_Message}}</b>
+                <b ng-if="$ctrl.type == 'Activate'">{{::$ctrl.resources.ObjectifFlash_Modal_Confirmation_Activation_Message}}</b>
+                <b ng-if="$ctrl.type == 'Close'">{{::$ctrl.resources.ObjectifFlash_Modal_Confirmation_Cloture_Message}}</b>
+                <b ng-if="$ctrl.type == 'Save'">{{::$ctrl.resources.ObjectifFlash_Modal_Confirmation_Sauvegarde_Message}}</b>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-default pull-left"
+                ng-click="$ctrl.handleValidate()"
+                title="{{::$ctrl.resources.Global_Bouton_Valider_Tooltip}}">
+            {{::$ctrl.resources.Global_Bouton_Valider}}
+        </button>
+        <button type="button" class="btn btn-link pull-right"
+                ng-click="$ctrl.handleCancel()"
+                title="{{::$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">
+            {{::$ctrl.resources.Global_Bouton_Annuler}}
+        </button>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title">
+            <i class="flaticon flaticons flaticon-checked"> {{$ctrl.resources.Commande_PostCommandeValidationModal_Titre}}</i>
+        </h2>
+        <i class="flaticon flaticons flaticon-multiply close pull-right" ng-click="$ctrl.handleCancel()" title="{{$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+    </div>
+    <div class="modal-body">
+        <p>{{$ctrl.headermessage}}</p>
+        <ul>
+            <li>- <a href="{{$ctrl.duplicateCommandeUrl}}">{{$ctrl.resources.Commande_PostCommandeValidationModal_Dupliquer}}</a>, <a ng-click="$ctrl.handlePrint()">{{$ctrl.resources.Commande_PostCommandeValidationModal_Imprimer}}</a> {{$ctrl.resources.Commande_PostCommandeValidationModal_Ou}} <a href="{{$ctrl.receptionUrl}}">{{$ctrl.resources.Commande_PostCommandeValidationModal_Receptionner}}</a> {{$ctrl.secondlabel}}</li>
+            <li>- <a href="{{$ctrl.newCommandeUrl}}">{{$ctrl.resources.Commande_PostCommandeValidationModal_NouvelleCommande}}</a></li>
+            <li>- <a href="{{$ctrl.commandeListUrl}}">{{$ctrl.resources.Commande_PostCommandeValidationModal_ListeCommande}}</a></li>
+            <li>- <a ng-click="$ctrl.handleCancel()">{{$ctrl.resources.Commande_PostCommandeValidationModal_ResterSurCommande}}</a></li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-right" ng-click="$ctrl.handleCancel()">{{$ctrl.resources.Global_Bouton_Fermer}}</button>
+    </div>
+</div> 

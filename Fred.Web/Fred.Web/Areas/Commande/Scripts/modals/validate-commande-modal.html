@@ -1,0 +1,124 @@
+﻿<div class="modal-content">
+    <form name="$ctrl.form" ng-submit="$ctrl.handleConfirm()">
+        <div class="modal-header">
+            <h2 class="modal-title">
+                <i>{{$ctrl.isAvenant ? $ctrl.resources.Commande_ValidateCommande_TitleAvenant : $ctrl.resources.Commande_ValidateCommande_TitleCommande}}</i>
+            </h2>
+            <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" aria-label="Close" title="{{$ctrl.resources.Commande_Tilte_Annuler}}" ng-click="$ctrl.handleCancel()" data-ng-show="!$ctrl.isLoading"></i>
+        </div>
+        <div ng-show="$ctrl.isLoading" class="text-center">
+
+            <img src="../../../../Content/images/loader.gif" />  <br />
+            <span class="control-label"> Chargement des données en cours…</span>
+        </div>
+        <div class="modal-body" style="font-size: 15px" disabled="true" data-ng-cloak data-ng-show="!$ctrl.isLoading">
+            <div class="modal-body-bloc1">
+                <label class="radio-label">
+                    <input ng-model="$ctrl.validationAction"
+                           name="validationAction"
+                           type="radio"
+                           value="{{$ctrl.validateActionValueValidate}}"
+                           ng-click="$ctrl.handleClickAction(1)"
+                           ng-disabled="!$ctrl.hasValidationRights" />
+                    {{$ctrl.isAvenant ? $ctrl.resources.Commande_ValidateCommande_ValidateAvenant : $ctrl.resources.Commande_ValidateCommande_ValidateCommande}}
+                </label>
+                <br />
+                <span ng-show="!$ctrl.hasValidationRights" class="legend">{{$ctrl.insufficientThresholdMessage}}</span>
+            </div>
+
+            <div class="modal-body-bloc2">
+                <label class="radio-label">
+                    <input ng-model="$ctrl.validationAction"
+                           name="validationAction"
+                           type="radio"
+                           ng-click="$ctrl.handleClickAction(2)"
+                           value="{{$ctrl.validateActionValueSend}}" />
+                    {{$ctrl.isAvenant ? $ctrl.resources.Commande_ValidateCommande_SendAvenant : $ctrl.resources.Commande_ValidateCommande_SendCommande}}
+                </label>
+
+                <div class="row">
+                    <div class="col-sm-12 no-padding" ng-class="{'has-error': $ctrl.form.recipient.$invalid }">
+                        <span class="text-danger"
+                              ng-show="$ctrl.form.recipient.$invalid">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                        <lookup-standalone ng-model="$ctrl.model.recipient"
+                                           ng-disabled="$ctrl.validationAction != $ctrl.validateActionValueSend" ng-class name="recipient"
+                                           text="$ctrl.model.recipient.LibelleRef" 
+                                           search-title="{{$ctrl.resources.Global_ReferentielUtilisateur}}"
+                                           search-placeholder="{{$ctrl.resources.Personnel_PartialGeneral_Nom_Placeholder}}"
+                                           placeholder="{{$ctrl.resources.Commande_ValidateCommande_SelectUser}}"
+                                           url="/api/Commande/PersonnelsForValidation/{{$ctrl.model.commande.MontantHT}}/{{$ctrl.model.commande.DeviseId}}?ciId={{$ctrl.model.commande.CiId}}{{$ctrl.customPicklistContext.authorizedOnlyUrl}}&"
+                                           custom-template-url="/Scripts/directive/lookup/custom-templates/personnel.with.seuil.validation.html"
+                                           custom-header-template-url="/Scripts/directive/lookup/custom-header-templates/personnel-with-seuil-validation-header-container.template.html"
+                                           custom-header-context="$ctrl.customPicklistContext"
+                                           on-select="$ctrl.handleSelectPersonnelForValidation({ item })"
+                                           on-delete="$ctrl.handleDeletePersonnelForValidation()" class="no-padding formulaire long" style-parent="true"
+                                           ng-required="$ctrl.isRecipientRequired()" show-in-popup="true">
+                        </lookup-standalone>
+                    </div>
+                </div>
+
+
+                <div>
+                    <span ng-show="$ctrl.model.recipient && !$ctrl.model.recipient.Email"
+                          class="red-text lbl ">
+                        {{$ctrl.resources.Commande_ValidateCommande_NoEmail}}
+                    </span>
+                    <span ng-show="$ctrl.model.recipient && $ctrl.model.recipient.Email">
+                        {{$ctrl.resources.Commande_ValidateCommande_Email}} <br /> {{$ctrl.model.recipient.Email}}
+                    </span>
+                </div>
+
+                <div class="row opinion">
+                    <div class="col-sm-12 no-padding">
+                        <span class="control-label">
+                            {{$ctrl.isAvenant ? $ctrl.resources.Commande_ValidateCommande_OpinionAvenant : $ctrl.resources.Commande_ValidateCommande_OpinionCommande}}
+                            :
+                        </span>
+                        <div class="col-sm-12">
+                            <label class="btn avisSelection" ng-class="$ctrl.model.typeAvis == $ctrl.typeAvisValueAgreement ? 'selected':''" ng-disabled="$ctrl.validationAction != $ctrl.validateActionValueSend">
+                                <input ng-model="$ctrl.model.typeAvis" ng-show="false" name="typeAvis" type="radio"
+                                       ng-disabled="$ctrl.validationAction != $ctrl.validateActionValueSend"
+                                       value="{{$ctrl.typeAvisValueAgreement}}" />
+                                {{$ctrl.resources.Commande_ValidateCommande_Agreement}}
+                            </label>
+                            <label class="btn avisSelection" ng-class="$ctrl.model.typeAvis == $ctrl.typeAvisValueRefusal ? 'selected':''" ng-disabled="$ctrl.validationAction != $ctrl.validateActionValueSend">
+                                <input ng-model="$ctrl.model.typeAvis" ng-show="false" name="typeAvis" type="radio"
+                                       ng-disabled="$ctrl.validationAction != $ctrl.validateActionValueSend"
+                                       value="{{$ctrl.typeAvisValueRefusal}}" />
+                                {{$ctrl.resources.Commande_ValidateCommande_Refusal}}
+                            </label>
+                            <label class="btn avisSelection" ng-class="$ctrl.model.typeAvis == $ctrl.typeAvisValueWithoutOpinion ? 'selected':''" ng-disabled="$ctrl.validationAction != $ctrl.validateActionValueSend">
+                                <input ng-model="$ctrl.model.typeAvis" ng-show="false" name="typeAvis" type="radio"
+                                       ng-disabled="$ctrl.validationAction != $ctrl.validateActionValueSend"
+                                       value="{{$ctrl.typeAvisValueWithoutOpinion}}" />
+                                {{$ctrl.resources.Commande_ValidateCommande_WithoutOpinion}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 no-padding" ng-class="{'has-error': $ctrl.form.comment.$invalid }">
+                        <label class="control-label">
+                            {{$ctrl.resources.Commande_ValidateCommande_Comment}} :
+                        </label>
+                        <span class="text-danger"
+                              ng-show="$ctrl.form.comment.$invalid">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                        <textarea ng-model="$ctrl.model.comment" ng-required="$ctrl.isCommentRequired()" name="comment" class="form-control"
+                                  ng-disabled="$ctrl.validationAction != $ctrl.validateActionValueSend"
+                                  placeholder="{{$ctrl.resources.Commande_ValidateCommande_Comment}}">
+                                        </textarea>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="$ctrl.isLoading" type="submit" class="btn btn-default pull-right" title="{{$ctrl.resources.Global_Bouton_Valider_Tooltip}}">{{$ctrl.validateButtonLibelle}}</button>
+            <button ng-disabled="$ctrl.isLoading" type="button" class="btn btn-link pull-right" ng-click="$ctrl.handleCancel()">{{$ctrl.resources.Commande_ValidateCommande_Cancel}}</button>
+        </div>
+    </form>
+</div> 

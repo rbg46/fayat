@@ -1,0 +1,508 @@
+﻿<div ng-repeat="item in $ctrl.data track by $index">
+    <div class="flex-line level-1 trav">
+        <div class="col-1">
+            <div class="chevron" ng-style="item.SubNodeList[0].Items.length ?{'visibility':'visible'}:{'visibility':'hidden'}" data-toggle="collapse" aria-expanded="false" data-target="#L1-{{$index}}"></div>
+            <span class="lbl">{{item.NodeText}}</span>
+            <span class="tot-txt">Total travail</span>
+            <span class="sapicon-E0A0 abs" title="{{::$ctrl.resources.RapportHebdo_Absence_Message}}"></span>
+        </div>
+        <div class="col-2">
+            <div ng-hide="::$ctrl.isIac">
+                <div class="contenor" ng-class="{'err': $ctrl.isAffichageParOuvrier ? $ctrl.checkSumFieldsForValidation(item.SubNodeList, 0, $index) : $ctrl.isBlockingHourNumberPerDays(0)}">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round($ctrl.calculateSumFields(item.SubNodeList, 0) * 100) / 100}}</span>
+                </div>
+            </div>
+            <div ng-show="::$ctrl.isIac">
+                <div class="contenor" ng-class="{'err': $ctrl.isAffichageParOuvrier && $ctrl.checkSumFieldsForValidationIac(item.SubNodeList, 0)}">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round(($ctrl.calculateSumFields(item.SubNodeList, 0)/7) * 100) / 100}}</span>
+                    <span class="material-icons warn" ng-show="$ctrl.isAffichageParOuvrier && $ctrl.checkSumFieldsForValidationIac(item.SubNodeList, 0)">warning</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div ng-hide="::$ctrl.isIac">
+                <div class="contenor" ng-class="{'err': $ctrl.isAffichageParOuvrier ? $ctrl.checkSumFieldsForValidation(item.SubNodeList, 1, $index) : $ctrl.isBlockingHourNumberPerDays(1)}">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round($ctrl.calculateSumFields(item.SubNodeList, 1) * 100) / 100}}</span>
+                </div>
+            </div>
+            <div ng-show="::$ctrl.isIac">
+                <div class="contenor" ng-class="{'err': $ctrl.isAffichageParOuvrier && $ctrl.checkSumFieldsForValidationIac(item.SubNodeList, 1)}">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round(($ctrl.calculateSumFields(item.SubNodeList, 1)/7) * 100) / 100}}</span>
+                    <span class="material-icons warn" ng-show="$ctrl.isAffichageParOuvrier && $ctrl.checkSumFieldsForValidationIac(item.SubNodeList, 1)">warning</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div ng-hide="::$ctrl.isIac">
+                <div class="contenor" ng-class="{'err': $ctrl.isAffichageParOuvrier ? $ctrl.checkSumFieldsForValidation(item.SubNodeList, 2, $index) : $ctrl.isBlockingHourNumberPerDays(2)}">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round($ctrl.calculateSumFields(item.SubNodeList, 2) * 100) / 100}}</span>
+                </div>
+            </div>
+            <div ng-show="::$ctrl.isIac">
+                <div class="contenor" ng-class="{'err': $ctrl.isAffichageParOuvrier && $ctrl.checkSumFieldsForValidationIac(item.SubNodeList, 2)}">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round(($ctrl.calculateSumFields(item.SubNodeList, 2)/7) * 100) / 100}}</span>
+                    <span class="material-icons warn" ng-show="$ctrl.isAffichageParOuvrier && $ctrl.checkSumFieldsForValidationIac(item.SubNodeList, 2)">warning</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div ng-hide="::$ctrl.isIac">
+                <div class="contenor" ng-class="{'err': $ctrl.isAffichageParOuvrier ? $ctrl.checkSumFieldsForValidation(item.SubNodeList, 3, $index) : $ctrl.isBlockingHourNumberPerDays(3)}">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round($ctrl.calculateSumFields(item.SubNodeList, 3) * 100) / 100}}</span>
+                </div>
+            </div>
+            <div ng-show="::$ctrl.isIac">
+                <div class="contenor" ng-class="{'err': $ctrl.isAffichageParOuvrier && $ctrl.checkSumFieldsForValidationIac(item.SubNodeList, 3)}">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round(($ctrl.calculateSumFields(item.SubNodeList, 3)/7) * 100) / 100}}</span>
+                    <span class="material-icons warn" ng-show="$ctrl.isAffichageParOuvrier && $ctrl.checkSumFieldsForValidationIac(item.SubNodeList, 3)">warning</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div ng-hide="::$ctrl.isIac">
+                <div class="contenor" ng-class="{'err': $ctrl.isAffichageParOuvrier ? $ctrl.checkSumFieldsForValidation(item.SubNodeList, 4, $index) : $ctrl.isBlockingHourNumberPerDays(4)}">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round($ctrl.calculateSumFields(item.SubNodeList, 4) * 100) / 100}}</span>
+                </div>
+            </div>
+            <div ng-show="::$ctrl.isIac">
+                <div class="contenor" ng-class="{'err': $ctrl.isAffichageParOuvrier && $ctrl.checkSumFieldsForValidationIac(item.SubNodeList, 4)}">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round(($ctrl.calculateSumFields(item.SubNodeList, 4)/7) * 100) / 100}}</span>
+                    <span class="material-icons warn" ng-show="$ctrl.isAffichageParOuvrier && $ctrl.checkSumFieldsForValidationIac(item.SubNodeList, 4)">warning</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-7">
+            <div ng-hide="::$ctrl.isIac">
+                <div class="contenor" ng-class="{'err': $ctrl.isAffichageParOuvrier ? $ctrl.checkSumFieldsForValidation(item.SubNodeList, 5, $index) : $ctrl.isBlockingHourNumberPerDays(5)}">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round($ctrl.calculateSumFields(item.SubNodeList, 5) * 100) / 100}}</span>
+                </div>
+            </div>
+            <div ng-show="::$ctrl.isIac">
+                <div class="contenor" ng-class="{'err': $ctrl.isAffichageParOuvrier && $ctrl.checkSumFieldsForValidationIac(item.SubNodeList, 5)}">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round(($ctrl.calculateSumFields(item.SubNodeList, 5)/7) * 100) / 100}}</span>
+                    <span class="material-icons warn" ng-show="$ctrl.isAffichageParOuvrier && $ctrl.checkSumFieldsForValidationIac(item.SubNodeList, 5)">warning</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div ng-hide="::$ctrl.isIac">
+                <div class="contenor" ng-class="{'err': $ctrl.isAffichageParOuvrier ? $ctrl.checkSumFieldsForValidation(item.SubNodeList, 6, $index) : $ctrl.isBlockingHourNumberPerDays(6)}">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round($ctrl.calculateSumFields(item.SubNodeList, 6) * 100) / 100}}</span>
+                </div>
+            </div>
+            <div ng-show="::$ctrl.isIac">
+                <div class="contenor" ng-class="{'err': $ctrl.isAffichageParOuvrier && $ctrl.checkSumFieldsForValidationIac(item.SubNodeList, 6)}">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round(($ctrl.calculateSumFields(item.SubNodeList, 6)/7) * 100) / 100}}</span>
+                    <span class="material-icons warn" ng-show="$ctrl.isAffichageParOuvrier && $ctrl.checkSumFieldsForValidationIac(item.SubNodeList, 6)">warning</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <span ng-hide="::$ctrl.isIac">
+                {{$ctrl.Math.round($ctrl.calculateSumFieldsTotal(item.SubNodeList) * 100) / 100}}
+            </span>
+            <span ng-show="::$ctrl.isIac">
+                {{$ctrl.Math.round(($ctrl.calculateSumFieldsTotal(item.SubNodeList)/7) * 100) / 100}}
+            </span>
+            <span ng-show="$ctrl.isIac && $ctrl.isAffichageParOuvrier && $ctrl.calculateSumFieldsTotal(item.SubNodeList) > $ctrl.limitHourPerWeekNotBlocking"
+                  class="error-center">{{::$ctrl.resources.RapportHebdo_Message_Non_Bloquant}}</span>
+            <span ng-show="$ctrl.isAffichageParOuvrier && !$ctrl.isBlockingTotalHoursNumberPerWeek(item)"
+                  class="error-center">{{::$ctrl.resources.RapportHebdo_Message_Bloquant}}</span>
+            <span ng-show="!$ctrl.isAffichageParOuvrier && !$ctrl.isBlockingTotalHoursNumberPerWeek(item) || $ctrl.showErrorMessageDepassement"
+                  class="error-center">{{::$ctrl.resources.RapportHebdo_Message_Bloquant}}</span>
+        </div>
+        <div>
+        </div>
+        <div ng-hide="::$ctrl.isAffichageParOuvrier || $ctrl.isIac || ($ctrl.isEtamIac && !$ctrl.isManagerPointing)">
+            <div class="col-10" ng-show="::$ctrl.isAffichageParOuvrier">{{$ctrl.calculateSumFieldsSupHour(item.SubNodeList)}}</div>
+            <div class="col-10" ng-show="::!$ctrl.isAffichageParOuvrier"></div>
+        </div>
+    </div>
+
+    <!--Liste niveau 2-->
+    <div class="collapse in" id="L1-{{$index}}">
+        <div>
+            <div class="flex-line level-2 abse">
+                <div class="col-1">
+                    <span class="sapicon-E0A0 abs"></span>
+                    <span class="lbl">{{::$ctrl.resources.RapportHebdo_Absence}}</span>
+                    <span class="tot-txt">{{::$ctrl.resources.RapportHebdo_Total_Absence}}</span>
+                </div>
+                <div class="col-2">
+                    <div ng-hide="::$ctrl.isIac">
+                        {{$ctrl.Math.round($ctrl.calculateSumFieldsAbsence(item.SubNodeList, 0) * 100) / 100}}
+                    </div>
+                    <div ng-show="::$ctrl.isIac">
+                        {{$ctrl.Math.round(($ctrl.calculateSumFieldsAbsence(item.SubNodeList, 0)/7) * 100) / 100}}
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div ng-hide="::$ctrl.isIac">
+                        {{$ctrl.Math.round($ctrl.calculateSumFieldsAbsence(item.SubNodeList, 1) * 100) / 100}}
+                    </div>
+                    <div ng-show="::$ctrl.isIac">
+                        {{$ctrl.Math.round(($ctrl.calculateSumFieldsAbsence(item.SubNodeList, 1)/7) * 100) / 100}}
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div ng-hide="::$ctrl.isIac">
+                        {{$ctrl.Math.round($ctrl.calculateSumFieldsAbsence(item.SubNodeList, 2) * 100) / 100}}
+                    </div>
+                    <div ng-show="::$ctrl.isIac">
+                        {{$ctrl.Math.round(($ctrl.calculateSumFieldsAbsence(item.SubNodeList, 2)/7) * 100) / 100}}
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div ng-hide="::$ctrl.isIac">
+                        {{$ctrl.Math.round($ctrl.calculateSumFieldsAbsence(item.SubNodeList, 3) * 100) / 100}}
+                    </div>
+                    <div ng-show="::$ctrl.isIac">
+                        {{$ctrl.Math.round(($ctrl.calculateSumFieldsAbsence(item.SubNodeList, 3)/7) * 100) / 100}}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div ng-hide="::$ctrl.isIac">
+                        {{$ctrl.Math.round($ctrl.calculateSumFieldsAbsence(item.SubNodeList, 4) * 100) / 100}}
+                    </div>
+                    <div ng-show="::$ctrl.isIac">
+                        {{$ctrl.Math.round(($ctrl.calculateSumFieldsAbsence(item.SubNodeList, 4)/7) * 100) / 100}}
+                    </div>
+                </div>
+                <div class="col-7">
+                    <div ng-hide="::$ctrl.isIac">
+                        {{$ctrl.Math.round($ctrl.calculateSumFieldsAbsence(item.SubNodeList, 5) * 100) / 100}}
+                    </div>
+                    <div ng-show="::$ctrl.isIac">
+                        {{$ctrl.Math.round(($ctrl.calculateSumFieldsAbsence(item.SubNodeList, 5)/7) * 100) / 100}}
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div ng-hide="::$ctrl.isIac">
+                        {{$ctrl.Math.round($ctrl.calculateSumFieldsAbsence(item.SubNodeList, 6) * 100) / 100}}
+                    </div>
+                    <div ng-show="::$ctrl.isIac">
+                        {{$ctrl.Math.round(($ctrl.calculateSumFieldsAbsence(item.SubNodeList, 6)/7) * 100) / 100}}
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div ng-hide="::$ctrl.isIac">
+                        {{$ctrl.Math.round($ctrl.calculateSumFieldsAbsenceTotal(item.SubNodeList) * 100) / 100}}
+                    </div>
+                    <div ng-show="::$ctrl.isIac">
+                        {{$ctrl.Math.round(($ctrl.calculateSumFieldsAbsenceTotal(item.SubNodeList)/7) * 100) / 100}}
+                    </div>
+                </div>
+                <div class="col-10" ng-hide="($ctrl.isAffichageParOuvrier || $ctrl.isIac || ($ctrl.isEtamIac && !$ctrl.isManagerPointing))"></div>
+            </div>
+        </div>
+
+        <div class="collapse in" id="L1-{{$index}}">
+            <div ng-repeat="subNode in item.SubNodeList | filter:{IsPersonnelCiDesaffected:false} track by $index">
+                <div class="flex-line sub-level1 biz">
+                    <div class="col-1">
+                        <div class="chevron collapsed" ng-style="subNode.SubNodeList[0].Items.length ?{'visibility':'visible'}:{'visibility':'hidden'}" data-toggle="collapse" aria-expanded="false" data-target="#L2-{{$parent.$index}}-{{$index}}"></div>
+                        <lookup ng-model="selectedRef"
+                                search-placeholder="{{::$ctrl.resources.Global_ReferentielTache_Placeholder}}"
+                                search-title="{{::$ctrl.resources.Global_ReferentielTache}}"
+                                on-click="$ctrl.handleLookupUrl('Tache', ($ctrl.isAffichageParOuvrier ? subNode.NodeId : item.NodeId))"
+                                on-select="$ctrl.handleLookupSelectionTask(item, subNode, ($ctrl.isAffichageParOuvrier ? subNode : $ctrl.data[$parent.$index]))"
+                                ng-disabled="subNode.PersonnelToReadOnly">
+                            <span class="material-icons">add_box</span>
+                        </lookup>
+                        <span class="sapicon-E165 biz"></span>
+                        <span class="biz-lbl">{{subNode.NodeText}}</span>
+                    </div>
+                    <div class="col-2">
+                        <i class="material-icons verrou" ng-if="subNode.SubNodeList[0].Items[0].RapportValide && !subNode.SubNodeList[1].Items[0].PersonnelVerrouille" title="{{::$ctrl.resources.Global_Bouton_Valider}}">lock</i>
+                        <i class="material-icons verrou locked" ng-if="subNode.SubNodeList[1].Items[0].PersonnelVerrouille" title="{{::$ctrl.resources.Global_Verrouiller}}">lock</i>
+                        <input type="number" ng-show="false" ng-readonly="true" ng-model="subNode.Items[0].TotalHours" class="form-control">
+                        <span ng-hide="::$ctrl.isIac">
+                            {{$ctrl.Math.round(subNode.Items[0].TotalHours * 100) / 100}}
+                        </span>
+                        <span ng-show="::$ctrl.isIac">
+                            {{$ctrl.Math.round((subNode.Items[0].TotalHours/7) * 100) / 100}}
+                        </span>
+                        <i class="material-icons commentaire" ng-class="{'empty' : $ctrl.commentaireNotNulleOrEmpty(subNode.SubNodeList[0].Items[0])}" ng-if="subNode.SubNodeList[0].Items[0].IsCommentaireVisible" ng-click="$ctrl.handleClickCommentaire(subNode.SubNodeList[0].Items[0])">chat</i>
+                    </div>
+                    <div class="col-3">
+                        <i class="material-icons verrou" ng-if="subNode.SubNodeList[0].Items[1].RapportValide && !subNode.SubNodeList[1].Items[1].PersonnelVerrouille" title="{{::$ctrl.resources.Global_Bouton_Valider}}">lock</i>
+                        <i class="material-icons verrou locked" ng-if="subNode.SubNodeList[1].Items[1].PersonnelVerrouille" title="{{::$ctrl.resources.Global_Verrouiller}}">lock</i>
+                        <input type="number" ng-show="false" ng-readonly="true" ng-model="subNode.Items[1].TotalHours" class="form-control">
+                        <span ng-hide="::$ctrl.isIac">
+                            {{$ctrl.Math.round(subNode.Items[1].TotalHours * 100) / 100}}
+                        </span>
+                        <span ng-show="::$ctrl.isIac">
+                            {{$ctrl.Math.round((subNode.Items[1].TotalHours/7) * 100) / 100}}
+                        </span>
+                        <i class="material-icons commentaire" ng-class="{'empty' : $ctrl.commentaireNotNulleOrEmpty(subNode.SubNodeList[0].Items[1])}" ng-if="subNode.SubNodeList[0].Items[1].IsCommentaireVisible" ng-click="$ctrl.handleClickCommentaire(subNode.SubNodeList[0].Items[1])">chat</i>
+                    </div>
+                    <div class="col-4">
+                        <i class="material-icons verrou" ng-if="subNode.SubNodeList[0].Items[2].RapportValide && !subNode.SubNodeList[1].Items[2].PersonnelVerrouille" title="{{::$ctrl.resources.Global_Bouton_Valider}}">lock</i>
+                        <i class="material-icons verrou locked" ng-if="subNode.SubNodeList[1].Items[2].PersonnelVerrouille" title="{{::$ctrl.resources.Global_Verrouiller}}">lock</i>
+                        <input type="number" ng-show="false" ng-readonly="true" ng-model="subNode.Items[2].TotalHours" class="form-control">
+                        <span ng-hide="::$ctrl.isIac">
+                            {{$ctrl.Math.round(subNode.Items[2].TotalHours * 100) / 100}}
+                        </span>
+                        <span ng-show="::$ctrl.isIac">
+                            {{$ctrl.Math.round((subNode.Items[2].TotalHours/7) * 100) / 100}}
+                        </span>
+                        <i class="material-icons commentaire" ng-class="{'empty' : $ctrl.commentaireNotNulleOrEmpty(subNode.SubNodeList[0].Items[2])}" ng-if="subNode.SubNodeList[0].Items[2].IsCommentaireVisible" ng-click="$ctrl.handleClickCommentaire(subNode.SubNodeList[0].Items[2])">chat</i>
+                    </div>
+                    <div class="col-5">
+                        <i class="material-icons verrou" ng-if="subNode.SubNodeList[0].Items[3].RapportValide && !subNode.SubNodeList[1].Items[3].PersonnelVerrouille" title="{{::$ctrl.resources.Global_Bouton_Valider}}">lock</i>
+                        <i class="material-icons verrou locked" ng-if="subNode.SubNodeList[1].Items[3].PersonnelVerrouille" title="{{::$ctrl.resources.Global_Verrouiller}}">lock</i>
+                        <input type="number" ng-show="false" ng-readonly="true" ng-model="subNode.Items[3].TotalHours" class="form-control">
+                        <span ng-hide="::$ctrl.isIac">
+                            {{$ctrl.Math.round(subNode.Items[3].TotalHours * 100) / 100}}
+                        </span>
+                        <span ng-show="::$ctrl.isIac">
+                            {{$ctrl.Math.round((subNode.Items[3].TotalHours/7) * 100) / 100}}
+                        </span>
+                        <i class="material-icons commentaire" ng-class="{'empty' : $ctrl.commentaireNotNulleOrEmpty(subNode.SubNodeList[0].Items[3])}" ng-if="subNode.SubNodeList[0].Items[3].IsCommentaireVisible" ng-click="$ctrl.handleClickCommentaire(subNode.SubNodeList[0].Items[3])">chat</i>
+                    </div>
+                    <div class="col-6">
+                        <i class="material-icons verrou" ng-if="subNode.SubNodeList[0].Items[4].RapportValide && !subNode.SubNodeList[1].Items[4].PersonnelVerrouille" title="{{::$ctrl.resources.Global_Bouton_Valider}}">lock</i>
+                        <i class="material-icons verrou locked" ng-if="subNode.SubNodeList[1].Items[4].PersonnelVerrouille" title="{{::$ctrl.resources.Global_Verrouiller}}">lock</i>
+                        <input type="number" ng-show="false" ng-readonly="true" ng-model="subNode.Items[4].TotalHours" class="form-control">
+                        <span ng-hide="::$ctrl.isIac">
+                            {{$ctrl.Math.round(subNode.Items[4].TotalHours * 100) / 100}}
+                        </span>
+                        <span ng-show="::$ctrl.isIac">
+                            {{$ctrl.Math.round((subNode.Items[4].TotalHours/7) * 100) / 100}}
+                        </span>
+                        <i class="material-icons commentaire" ng-class="{'empty' : $ctrl.commentaireNotNulleOrEmpty(subNode.SubNodeList[0].Items[4])}" ng-if="subNode.SubNodeList[0].Items[4].IsCommentaireVisible" ng-click="$ctrl.handleClickCommentaire(subNode.SubNodeList[0].Items[4])">chat</i>
+                    </div>
+                    <div class="col-7">
+                        <i class="material-icons verrou" ng-if="subNode.SubNodeList[0].Items[5].RapportValide && !subNode.SubNodeList[1].Items[5].PersonnelVerrouille" title="{{::$ctrl.resources.Global_Bouton_Valider}}">lock</i>
+                        <i class="material-icons verrou locked" ng-if="subNode.SubNodeList[1].Items[5].PersonnelVerrouille" title="{{::$ctrl.resources.Global_Verrouiller}}">lock</i>
+                        <input type="number" ng-show="false" ng-readonly="true" ng-model="subNode.Items[5].TotalHours" class="form-control">
+                        <span ng-hide="::$ctrl.isIac">
+                            {{$ctrl.Math.round(subNode.Items[5].TotalHours * 100) / 100}}
+                        </span>
+                        <span ng-show="::$ctrl.isIac">
+                            {{$ctrl.Math.round((subNode.Items[5].TotalHours/7) * 100) / 100}}
+                        </span>
+                        <i class="material-icons commentaire" ng-class="{'empty' : $ctrl.commentaireNotNulleOrEmpty(subNode.SubNodeList[0].Items[5])}" ng-if="subNode.SubNodeList[0].Items[5].IsCommentaireVisible" ng-click="$ctrl.handleClickCommentaire(subNode.SubNodeList[0].Items[5])">chat</i>
+                    </div>
+                    <div class="col-8">
+                        <i class="material-icons verrou" ng-if="subNode.SubNodeList[0].Items[6].RapportValide && !subNode.SubNodeList[1].Items[6].PersonnelVerrouille" title="{{::$ctrl.resources.Global_Bouton_Valider}}">lock</i>
+                        <i class="material-icons verrou locked" ng-if="subNode.SubNodeList[1].Items[6].PersonnelVerrouille" title="{{::$ctrl.resources.Global_Verrouiller}}">lock</i>
+                        <input type="number" ng-show="false" ng-readonly="true" ng-model="subNode.Items[6].TotalHours" class="form-control">
+                        <span ng-hide="::$ctrl.isIac">
+                            {{$ctrl.Math.round(subNode.Items[6].TotalHours * 100) / 100}}
+                        </span>
+                        <span ng-show="::$ctrl.isIac">
+                            {{$ctrl.Math.round((subNode.Items[6].TotalHours/7) * 100) / 100}}
+                        </span>
+                        <i class="material-icons commentaire" ng-class="{'empty' : $ctrl.commentaireNotNulleOrEmpty(subNode.SubNodeList[0].Items[6])}" ng-if="subNode.SubNodeList[0].Items[6].IsCommentaireVisible" ng-click="$ctrl.handleClickCommentaire(subNode.SubNodeList[0].Items[6])">chat</i>
+                    </div>
+                    <div class="col-9">
+                        <span ng-hide="::$ctrl.isIac">
+                            {{$ctrl.Math.round($ctrl.calculateSumFieldsTotalByLevel(subNode) * 100) / 100}}
+                        </span>
+                        <span ng-show="::$ctrl.isIac">
+                            {{$ctrl.Math.round(($ctrl.calculateSumFieldsTotalByLevel(subNode)/7) * 100) / 100}}
+                        </span>
+                        <!-- Show Errors-->
+                        <div class="error-center" ng-show="((!$ctrl.isEtamIac && !$ctrl.isIac) || $ctrl.isManagerPointing) && ( $ctrl.calculateSumFieldsTotalByLevelError(subNode) )||($ctrl.checkMaxHoursPerDay(item,$index))||($ctrl.isBlockingHoursNumberPerWeek(item)) || (isBlockingTotalHoursNumberPerWeek(item) || $ctrl.isBlockingHourNumberPerDays($index)) ">
+                            <span ng-show="$ctrl.calculateSumFieldsTotalByLevelError(subNode)">{{::$ctrl.resources.RapportHebdo_Message_Non_Bloquant}}</span>
+                            <span ng-show="($ctrl.isAffichageParOuvrier) && ($ctrl.checkMaxHoursPerDay(item,$index))||($ctrl.isBlockingHoursNumberPerWeek(item))">{{::$ctrl.resources.RapportHebdo_Message_Bloquant}}</span>
+                            <span ng-show="(!$ctrl.isAffichageParOuvrier) && (isBlockingTotalHoursNumberPerWeek(item) || $ctrl.isBlockingHourNumberPerDays($index)) ||  $ctrl.showErrorMessageDepassement">{{::$ctrl.resources.RapportHebdo_Message_Bloquant}}</span>
+                        </div>
+                    </div>
+                    <div class="col-10" ng-hide="($ctrl.isAffichageParOuvrier || $ctrl.isIac || ($ctrl.isEtamIac && !$ctrl.isManagerPointing))">{{$ctrl.calculateSupHoursByLevel(subNode)}}</div>
+                </div>
+
+                <!--Liste de sous-niveau 2-->
+                <div class="collapse" id="L2-{{$parent.$index}}-{{$index}}">
+                    <div>
+                        <div ng-repeat="task in subNode.SubNodeList track by $index" class="flex-line sub-level2 abse">
+                            <div class="col-1">
+                                <span class="sapicon-E0A0 abs"></span>
+                                <span class="lbl" title="{{$ctrl.getLibelleTask(task)}}">{{$ctrl.getLibelleTask(task) | truncateText:$ctrl.letterLimit}}</span>
+                            </div>
+                            <div class="col-2">
+                                <lookup ng-hide="subNode.PersonnelToReadOnly || subNode.IsAbsence || !task.isAbsenceNode || ( task.Items[0].PersonnelVerrouille) || (task.Items[0].RapportValide && !$ctrl.isManagerPointing)"
+                                        ng-model="selectedRef"
+                                        search-placeholder="{{::$ctrl.resources.Global_ReferentielCodeAbsence_Placeholder}}"
+                                        search-title="{{::$ctrl.resources.Global_ReferentielCodeAbsence}}"
+                                        url="/api/CodeAbsence/SearchLight/?societeId={{task.SocieteId}}&{{$ctrl.getReferentielRhUrl(item.Statut,subNode.Statut)}}"
+                                        on-select="$ctrl.handleLookupSelection(item, task.Items[0], 0, subNode)">
+                                    <span class="material-icons add">add</span>
+                                </lookup>
+                                <span class="absence" ng-show="task.isAbsenceNode">{{task.Items[0].CodeAbsence ? task.Items[0].CodeAbsence : 'Motif'}}</span>
+                                <input type="number" lang="en-US" step="0.25" min="0" max ="10" class="form-control"
+                                       ng-hide="::$ctrl.isIac" ng-readonly="subNode.PersonnelToReadOnly || subNode.IsAbsence || (task.isAbsenceNode && !task.Items[0].CodeAbsence) || item.ApprovedBySuperior ||( task.Items[0].PersonnelVerrouille) ||(task.Items[0].RapportValide && !$ctrl.isManagerPointing)"
+                                       ng-model="task.Items[0].TotalHours"
+                                       ng-checked="$ctrl.isBlockingHourNumberPerDay(item,0,$parent.$index, $index)"
+                                       ng-change="$ctrl.updateHeureTacheForEtamOuvrier(subNode, 0, task)"
+                                       ng-blur="$ctrl.updateTotalsForEtamOuvrier(subNode, 0, task)" />
+                                <input type="number" lang="en-US" min="0" max="1" step="{{task.isAbsenceNode?'0.5':'0.25'}}" class="form-control"
+                                       ng-show="::$ctrl.isIac" ng-readonly="subNode.PersonnelToReadOnly || subNode.IsAbsence || (task.isAbsenceNode && !task.Items[0].CodeAbsence) || item.ApprovedBySuperior ||( task.Items[0].PersonnelVerrouille)||(task.Items[0].RapportValide && !$ctrl.isManagerPointing)"
+                                       ng-model="task.Items[0].TotalHoursForIac"
+                                       ng-blur="$ctrl.updateTotalsForIac(subNode, 0, task)"
+                                       ng-change="$ctrl.updateHeureTacheForIac(subNode, 0, task)" />
+                                <span class="glyphicon glyphicon-warning-sign" ng-mouseover="$ctrl.handleShowErrorIAC(task.isAbsenceNode)" uib-popover-template="'popoverTemplate'" popover-trigger="'mouseenter'" popover-placement="right" ng-if="$ctrl.isIac && $ctrl.checkPointageError(task.isAbsenceNode, task.Items[0].TotalHoursForIac)"></span>
+                            </div>
+                            <div class="col-3">
+                                <lookup ng-hide="subNode.PersonnelToReadOnly || subNode.IsAbsence || !task.isAbsenceNode || ( task.Items[1].PersonnelVerrouille) || (task.Items[1].RapportValide && !$ctrl.isManagerPointing)"
+                                        ng-model="selectedRef"
+                                        search-placeholder="{{::$ctrl.resources.Global_ReferentielCodeAbsence_Placeholder}}"
+                                        search-title="{{::$ctrl.resources.Global_ReferentielCodeAbsence}}"
+                                        url="/api/CodeAbsence/SearchLight/?societeId={{task.SocieteId}}&{{$ctrl.getReferentielRhUrl(item.Statut,subNode.Statut)}}"
+                                        on-select="$ctrl.handleLookupSelection(item, task.Items[1], 1, subNode)">
+                                    <span class="material-icons add">add</span>
+                                </lookup>
+                                <span class="absence" ng-show="task.isAbsenceNode && task.Items[1].CodeAbsence">{{task.Items[1].CodeAbsence}}</span>
+                                <input type="number" lang="en-US" step="0.25" min="0" max="10" ng-hide="::$ctrl.isIac" class="form-control"
+                                       ng-readonly="subNode.PersonnelToReadOnly || subNode.IsAbsence || (task.isAbsenceNode && !task.Items[1].CodeAbsence) || item.ApprovedBySuperior ||( task.Items[1].PersonnelVerrouille)||(task.Items[1].RapportValide && !$ctrl.isManagerPointing) "
+                                       ng-model="task.Items[1].TotalHours"
+                                       ng-checked="$ctrl.isBlockingHourNumberPerDay(item,1,$parent.$index, $index)"
+                                       ng-change="$ctrl.updateHeureTacheForEtamOuvrier(subNode, 1, task)"
+                                       ng-blur="$ctrl.updateTotalsForEtamOuvrier(subNode, 1, task)" />
+                                <input type="number" lang="en-US" ng-show="::$ctrl.isIac" min="0" max="1" step="{{task.isAbsenceNode?'0.5':'0.25'}}" class="form-control"
+                                       ng-readonly="subNode.PersonnelToReadOnly || subNode.IsAbsence || (task.isAbsenceNode && !task.Items[1].CodeAbsence) || item.ApprovedBySuperior ||( task.Items[1].PersonnelVerrouille) ||(task.Items[1].RapportValide && !$ctrl.isManagerPointing)"
+                                       ng-model="task.Items[1].TotalHoursForIac"
+                                       ng-blur="$ctrl.updateTotalsForIac(subNode, 1, task)"
+                                       ng-change="$ctrl.updateHeureTacheForIac(subNode, 1, task)" />
+                                <span class="glyphicon glyphicon-warning-sign" ng-mouseover="$ctrl.handleShowErrorIAC(task.isAbsenceNode)" uib-popover-template="'popoverTemplate'" popover-trigger="'mouseenter'" popover-placement="right" ng-if="$ctrl.isIac && $ctrl.checkPointageError(task.isAbsenceNode, task.Items[1].TotalHoursForIac)"></span>
+                            </div>
+                            <div class="col-4">
+                                <lookup ng-hide="subNode.PersonnelToReadOnly || subNode.IsAbsence || !task.isAbsenceNode || ( task.Items[2].PersonnelVerrouille) || (task.Items[2].RapportValide && !$ctrl.isManagerPointing)"
+                                        ng-model="selectedRef"
+                                        search-placeholder="{{::$ctrl.resources.Global_ReferentielCodeAbsence_Placeholder}}"
+                                        search-title="{{::$ctrl.resources.Global_ReferentielCodeAbsence}}"
+                                        url="/api/CodeAbsence/SearchLight/?societeId={{task.SocieteId}}&{{$ctrl.getReferentielRhUrl(item.Statut,subNode.Statut)}}"
+                                        on-select="$ctrl.handleLookupSelection(item, task.Items[2], 2, subNode)">
+                                    <span class="material-icons add">add</span>
+                                </lookup>
+                                <span class="absence" ng-show="task.isAbsenceNode && task.Items[2].CodeAbsence">{{task.Items[2].CodeAbsence}}</span>
+                                <input type="number" lang="en-US" step="0.25" min="0" max="10" class="form-control"
+                                       ng-hide="::$ctrl.isIac"
+                                       ng-readonly="subNode.PersonnelToReadOnly || subNode.IsAbsence || (task.isAbsenceNode && !task.Items[2].CodeAbsence) || item.ApprovedBySuperior ||( task.Items[2].PersonnelVerrouille) ||(task.Items[2].RapportValide && !$ctrl.isManagerPointing)"
+                                       ng-model="task.Items[2].TotalHours"
+                                       ng-checked="$ctrl.isBlockingHourNumberPerDay(item,2,$parent.$index, $index)"
+                                       ng-change="$ctrl.updateHeureTacheForEtamOuvrier(subNode, 2, task)"
+                                       ng-blur="$ctrl.updateTotalsForEtamOuvrier(subNode, 2, task)">
+                                <input type="number" lang="en-US" ng-show="::$ctrl.isIac" min="0" max="1" step="{{task.isAbsenceNode?'0.5':'0.25'}}" class="form-control"
+                                       ng-readonly="subNode.PersonnelToReadOnly || subNode.IsAbsence || (task.isAbsenceNode && !task.Items[2].CodeAbsence) || item.ApprovedBySuperior ||( task.Items[2].PersonnelVerrouille) ||(task.Items[2].RapportValide && !$ctrl.isManagerPointing)"
+                                       ng-model="task.Items[2].TotalHoursForIac"
+                                       ng-blur="$ctrl.updateTotalsForIac(subNode, 2, task)"
+                                       ng-change="$ctrl.updateHeureTacheForIac(subNode, 2, task)" />
+                                <span class="glyphicon glyphicon-warning-sign" ng-mouseover="$ctrl.handleShowErrorIAC(task.isAbsenceNode)" uib-popover-template="'popoverTemplate'" popover-trigger="'mouseenter'" popover-placement="right" ng-if="$ctrl.isIac && $ctrl.checkPointageError(task.isAbsenceNode, task.Items[2].TotalHoursForIac)"></span>
+                            </div>
+                            <div class="col-5">
+                                <lookup ng-hide="subNode.PersonnelToReadOnly || subNode.IsAbsence || !task.isAbsenceNode || ( task.Items[3].PersonnelVerrouille) || (task.Items[3].RapportValide && !$ctrl.isManagerPointing)"
+                                        ng-model="selectedRef"
+                                        search-placeholder="{{::$ctrl.resources.Global_ReferentielCodeAbsence_Placeholder}}"
+                                        search-title="{{::$ctrl.resources.Global_ReferentielCodeAbsence}}"
+                                        url="/api/CodeAbsence/SearchLight/?societeId={{task.SocieteId}}&{{$ctrl.getReferentielRhUrl(item.Statut,subNode.Statut)}}"
+                                        on-select="$ctrl.handleLookupSelection(item, task.Items[3], 3, subNode)">
+                                    <span class="material-icons add">add</span>
+                                </lookup>
+                                <span class="absence" ng-show="task.isAbsenceNode && task.Items[3].CodeAbsence">{{task.Items[3].CodeAbsence}}</span>
+                                <input type="number" lang="en-US" step="0.25" ng-hide="::$ctrl.isIac" min="0" max="10" class="form-control"
+                                       ng-readonly="subNode.PersonnelToReadOnly || subNode.IsAbsence || (task.isAbsenceNode && !task.Items[3].CodeAbsence) || item.ApprovedBySuperior ||( task.Items[3].PersonnelVerrouille) ||(task.Items[3].RapportValide && !$ctrl.isManagerPointing)"
+                                       ng-model="task.Items[3].TotalHours"
+                                       ng-checked="$ctrl.isBlockingHourNumberPerDay(item,3,$parent.$index, $index)"
+                                       ng-change="$ctrl.updateHeureTacheForEtamOuvrier(subNode, 3, task)"
+                                       ng-blur="$ctrl.updateTotalsForEtamOuvrier(subNode, 3, task)">
+                                <input type="number" lang="en-US" ng-show="::$ctrl.isIac" min="0" max="1" step="{{task.isAbsenceNode?'0.5':'0.25'}}" class="form-control"
+                                       ng-readonly="subNode.PersonnelToReadOnly || subNode.IsAbsence || (task.isAbsenceNode && !task.Items[3].CodeAbsence) || item.ApprovedBySuperior ||( task.Items[3].PersonnelVerrouille) ||(task.Items[3].RapportValide && !$ctrl.isManagerPointing)"
+                                       ng-model="task.Items[3].TotalHoursForIac"
+                                       ng-blur="$ctrl.updateTotalsForIac(subNode, 3, task)"
+                                       ng-change="$ctrl.updateHeureTacheForIac(subNode, 3, task)" />
+                                <span class="glyphicon glyphicon-warning-sign" ng-mouseover="$ctrl.handleShowErrorIAC(task.isAbsenceNode)" uib-popover-template="'popoverTemplate'" popover-trigger="'mouseenter'" popover-placement="right" ng-if="$ctrl.isIac && $ctrl.checkPointageError(task.isAbsenceNode, task.Items[3].TotalHoursForIac)"></span>
+                            </div>
+                            <div class="col-6">
+                                <lookup ng-hide="subNode.PersonnelToReadOnly || subNode.IsAbsence || !task.isAbsenceNode || ( task.Items[4].PersonnelVerrouille) || (task.Items[4].RapportValide && !$ctrl.isManagerPointing)"
+                                        ng-model="selectedRef"
+                                        search-placeholder="{{::$ctrl.resources.Global_ReferentielCodeAbsence_Placeholder}}"
+                                        search-title="{{::$ctrl.resources.Global_ReferentielCodeAbsence}}"
+                                        url="/api/CodeAbsence/SearchLight/?societeId={{task.SocieteId}}&{{$ctrl.getReferentielRhUrl(item.Statut,subNode.Statut)}}"
+                                        on-select="$ctrl.handleLookupSelection(item, task.Items[4], 4, subNode)">
+                                    <span class="material-icons add">add</span>
+                                </lookup>
+                                <span class="absence" ng-show="task.isAbsenceNode && task.Items[4].CodeAbsence">{{task.Items[4].CodeAbsence}}</span>
+                                <input type="number" lang="en-US" step="0.25" ng-hide="::$ctrl.isIac" min="0" max="10" class="form-control"
+                                       ng-readonly="subNode.PersonnelToReadOnly || subNode.IsAbsence || (task.isAbsenceNode && !task.Items[4].CodeAbsence) || item.ApprovedBySuperior ||( task.Items[4].PersonnelVerrouille) ||(task.Items[4].RapportValide && !$ctrl.isManagerPointing)"
+                                       ng-model="task.Items[4].TotalHours"
+                                       ng-checked="$ctrl.isBlockingHourNumberPerDay(item,4,$parent.$index, $index)"
+                                       ng-change="$ctrl.updateHeureTacheForEtamOuvrier(subNode, 4, task)"
+                                       ng-blur="$ctrl.updateTotalsForEtamOuvrier(subNode, 4, task)">
+                                <input type="number" lang="en-US" ng-show="::$ctrl.isIac" min="0" max="1" step="{{task.isAbsenceNode?'0.5':'0.25'}}" class="form-control"
+                                       ng-readonly="subNode.PersonnelToReadOnly || subNode.IsAbsence || (task.isAbsenceNode && !task.Items[4].CodeAbsence) || item.ApprovedBySuperior ||( task.Items[4].PersonnelVerrouille) ||(task.Items[4].RapportValide && !$ctrl.isManagerPointing)"
+                                       ng-model="task.Items[4].TotalHoursForIac"
+                                       ng-blur="$ctrl.updateTotalsForIac(subNode, 4, task)"
+                                       ng-change="$ctrl.updateHeureTacheForIac(subNode, 4, task)" />
+                                <span class="glyphicon glyphicon-warning-sign" ng-mouseover="$ctrl.handleShowErrorIAC(task.isAbsenceNode)" uib-popover-template="'popoverTemplate'" popover-trigger="'mouseenter'" popover-placement="right" ng-if="$ctrl.isIac && $ctrl.checkPointageError(task.isAbsenceNode, task.Items[4].TotalHoursForIac)"></span>
+                            </div>
+                            <div class="col-7">
+                                <lookup ng-hide="subNode.PersonnelToReadOnly || subNode.IsAbsence || !task.isAbsenceNode || ( task.Items[5].PersonnelVerrouille) || (task.Items[5].RapportValide && !$ctrl.isManagerPointing)"
+                                        ng-model="selectedRef"
+                                        search-placeholder="{{::$ctrl.resources.Global_ReferentielCodeAbsence_Placeholder}}"
+                                        search-title="{{::$ctrl.resources.Global_ReferentielCodeAbsence}}"
+                                        url="/api/CodeAbsence/SearchLight/?societeId={{task.SocieteId}}&{{$ctrl.getReferentielRhUrl(item.Statut,subNode.Statut)}}"
+                                        on-select="$ctrl.handleLookupSelection(item, task.Items[5], 5, subNode)">
+                                    <span class="material-icons add">add</span>
+                                </lookup>
+                                <span class="absence" ng-show="task.isAbsenceNode && task.Items[5].CodeAbsence">{{task.Items[5].CodeAbsence}}</span>
+                                <input type="number" lang="en-US" step="0.25" ng-hide="::$ctrl.isIac" min="0" max="10" class="form-control"
+                                       ng-readonly="subNode.PersonnelToReadOnly || subNode.IsAbsence || (task.isAbsenceNode && !task.Items[5].CodeAbsence) ||item.ApprovedBySuperior ||( task.Items[5].PersonnelVerrouille) ||(task.Items[5].RapportValide && !$ctrl.isManagerPointing)"
+                                       ng-model="task.Items[5].TotalHours"
+                                       ng-checked="$ctrl.isBlockingHourNumberPerDay(item,5,$parent.$index, $index)"
+                                       ng-change="$ctrl.updateHeureTacheForEtamOuvrier(subNode, 5, task)"
+                                       ng-blur="$ctrl.updateTotalsForEtamOuvrier(subNode, 5, task)">
+                                <input type="number" lang="en-US" ng-show="::$ctrl.isIac" min="0" max="1" step="{{task.isAbsenceNode?'0.5':'0.25'}}" class="form-control"
+                                       ng-readonly="subNode.PersonnelToReadOnly || subNode.IsAbsence || (task.isAbsenceNode && !task.Items[5].CodeAbsence) || item.ApprovedBySuperior ||( task.Items[5].PersonnelVerrouille) ||(task.Items[5].RapportValide && !$ctrl.isManagerPointing)"
+                                       ng-model="task.Items[5].TotalHoursForIac"
+                                       ng-blur="$ctrl.updateTotalsForIac(subNode, 5, task)"
+                                       ng-change="$ctrl.updateHeureTacheForIac(subNode, 5, task)" />
+                                <span class="glyphicon glyphicon-warning-sign" ng-mouseover="$ctrl.handleShowErrorIAC(task.isAbsenceNode)" uib-popover-template="'popoverTemplate'" popover-trigger="'mouseenter'" popover-placement="right" ng-if="$ctrl.isIac && $ctrl.checkPointageError(task.isAbsenceNode, task.Items[5].TotalHoursForIac)"></span>
+                            </div>
+                            <div class="col-8">
+                                <lookup ng-hide="subNode.PersonnelToReadOnly || subNode.IsAbsence || !task.isAbsenceNode || ( task.Items[6].PersonnelVerrouille) || (task.Items[6].RapportValide && !$ctrl.isManagerPointing)"
+                                        ng-model="selectedRef"
+                                        search-placeholder="{{::$ctrl.resources.Global_ReferentielCodeAbsence_Placeholder}}"
+                                        search-title="{{::$ctrl.resources.Global_ReferentielCodeAbsence}}"
+                                        url="/api/CodeAbsence/SearchLight/?societeId={{task.SocieteId}}&{{$ctrl.getReferentielRhUrl(item.Statut,subNode.Statut)}}"
+                                        on-select="$ctrl.handleLookupSelection(item, task.Items[6], 6, subNode)">
+                                    <span class="material-icons add">add</span>
+                                </lookup>
+                                <span class="absence" ng-show="task.isAbsenceNode && task.Items[6].CodeAbsence">{{task.Items[6].CodeAbsence}}</span>
+                                <input type="number" lang="en-US" step="0.25" ng-hide="::$ctrl.isIac" min="0" max="10" class="form-control"
+                                       ng-readonly="subNode.PersonnelToReadOnly || subNode.IsAbsence || (task.isAbsenceNode && !task.Items[6].CodeAbsence) ||item.ApprovedBySuperior ||( task.Items[6].PersonnelVerrouille )||(task.Items[6].RapportValide && !$ctrl.isManagerPointing)"
+                                       ng-model="task.Items[6].TotalHours"
+                                       ng-checked="$ctrl.isBlockingHourNumberPerDay(item,6,$parent.$index, $index)"
+                                       ng-change="$ctrl.updateHeureTacheForEtamOuvrier(subNode, 6, task)"   
+                                       ng-blur="$ctrl.updateTotalsForEtamOuvrier(subNode, 6, task)">
+                                <input type="number" lang="en-US" ng-show="::$ctrl.isIac" min="0" max="1" step="{{task.isAbsenceNode?'0.5':'0.25'}}" class="form-control"
+                                       ng-readonly="subNode.PersonnelToReadOnly || subNode.IsAbsence || (task.isAbsenceNode && !task.Items[6].CodeAbsence) || item.ApprovedBySuperior ||( task.Items[6].PersonnelVerrouille) ||(task.Items[6].RapportValide && !$ctrl.isManagerPointing)"
+                                       ng-model="task.Items[6].TotalHoursForIac"
+                                       ng-blur="$ctrl.updateTotalsForIac(subNode, 6, task)"
+                                       ng-change="$ctrl.updateHeureTacheForIac(subNode, 6, task)" />
+                                <span class="glyphicon glyphicon-warning-sign" ng-mouseover="$ctrl.handleShowErrorIAC(task.isAbsenceNode)" uib-popover-template="'popoverTemplate'" popover-trigger="'mouseenter'" popover-placement="right" ng-if="$ctrl.isIac && $ctrl.checkPointageError(task.isAbsenceNode, task.Items[6].TotalHoursForIac)"></span>
+                            </div>
+                            <div class="col-9">
+                                <span ng-hide="$ctrl.isIac">
+                                    {{$ctrl.Math.round($ctrl.calculateSumFieldsTotalByLevel(task)* 100) / 100}}
+                                </span>
+                                <span ng-show="$ctrl.isIac">
+                                    {{$ctrl.Math.round(($ctrl.calculateSumFieldsTotalByLevel(task)/7) * 100) / 100}}
+                                </span>
+                            </div>
+                            <div class="col-10" ng-hide="($ctrl.isAffichageParOuvrier || $ctrl.isIac || ($ctrl.isEtamIac && !$ctrl.isManagerPointing))"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="popoverTemplate">
+    <ul ng-show="$ctrl.IacPointageError.length > 0" class="popoverList">
+        <li ng-repeat="erreur in  $ctrl.IacPointageError">
+            {{erreur}}
+        </li>
+    </ul>
+</script>

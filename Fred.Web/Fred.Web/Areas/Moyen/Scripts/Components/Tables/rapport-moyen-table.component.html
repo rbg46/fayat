@@ -1,0 +1,38 @@
+﻿<table class="moyens-table">
+    <thead class="header2">
+        <tr>
+            <th>{{$ctrl.resources.Moyen_Period}}</th>
+            <th>{{$ctrl.resources.Moyen_Societe}}</th>
+            <th>{{$ctrl.resources.Moyen_Etablissement}}</th>
+            <th>{{$ctrl.resources.Moyen_Num_Parc}}</th>
+            <th>{{$ctrl.resources.Moyen_Type}}</th>
+            <th>{{$ctrl.resources.Moyen_Modele}}</th>
+            <th>{{$ctrl.resources.Moyen_Libelle}}</th>
+            <th>{{$ctrl.resources.Moyen_Num_Immat}}</th>
+            <th>{{$ctrl.resources.Moyen_Site_prop}}</th>
+            <th>{{$ctrl.resources.Moyen_Site_actuel}}</th>
+            <th>{{$ctrl.resources.Moyen_Affected_To}}</th>
+            <th>{{$ctrl.resources.Moyen_Ci}}</th>
+            <th>{{$ctrl.resources.Moyen_Nombre_heures}}</th>
+            <th>{{$ctrl.resources.Moyen_Location}}</th>
+        </tr>
+    </thead>
+    <tbody id="containerTableauRapport" class="fred-scroll">
+        <tr ng-repeat="rapportMoyen in $ctrl.rapportMoyenList track by $index">
+            <td>{{rapportMoyen.DatePointage  | date : 'dd/MM/yyyy'}}</td>
+            <td>{{rapportMoyen.AffectationMoyen.Moyen.Societe.Libelle}}</td>
+            <td>{{rapportMoyen.AffectationMoyen.Moyen.EtablissementComptable.Libelle}}</td>
+            <td>{{rapportMoyen.AffectationMoyen.Moyen.Code}}</td>
+            <td>{{rapportMoyen.AffectationMoyen.Moyen.Ressource.SousChapitre.Chapitre.Libelle}}</td>
+            <td>{{rapportMoyen.AffectationMoyen.Moyen.Ressource.Libelle}}</td>
+            <td>{{rapportMoyen.AffectationMoyen.Libelle}}</td>
+            <td>{{rapportMoyen.AffectationMoyen.Immatriculation }}</td>
+            <td>{{rapportMoyen.AffectationMoyen.Moyen.SiteAppartenance.Libelle}}</td>
+            <td>{{rapportMoyen.AffectationMoyen.Site.Libelle}}</td>
+            <td>{{rapportMoyen.AffectationMoyen.AffectedTo}}</td>
+            <td>{{rapportMoyen.Ci.Libelle}}</td>
+            <td>{{rapportMoyen.HeuresMachine}}</td>
+            <td>{{rapportMoyen.AffectationMoyen.Moyen.IsLocation ? "OUI" : "NON"}}</td>
+        </tr>
+    </tbody>
+</table>

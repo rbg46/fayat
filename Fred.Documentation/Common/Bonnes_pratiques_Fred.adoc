@@ -1,0 +1,317 @@
+= Guide des bonnes pratiques
+
+== Les règles de bases
+
+=== Règle 1 : Le code métier est dans le projet Fred.Bussiness
+
+IMPORTANT: Il ne doit pas y avoir de code métier - dans les controlleurs - ni dans les repository - ni ailleurs
+
+____
+Le code métier est l’implémentation du fonctionnel et donc des règles de gestions.
+____
+
+=== Règle 2 : Une nouvelle fonctionnalité = une classe
+
+* Lorsqu’il y a une nouvelle fonctionnalité, j’évite si possible de mettre mon code un peu n’importe où. Je le mets dans une nouvelle classe
+qui portera un nom explicite avec des noms de méthode explicites. +
+Si c’est un service, alors j’implémente IService. +
+Si c’est un manager, alors j’implémente IManager. +
+Evitez les classes d’extensions sur les entity ou les managers, c’est static et donc pas thread safe.
+* Les classes doivent rester simple. Elles ne doivent pas exposer publiquement des méthodes internes : pour cela il y a les mots clefs
+protected/private. Les fonctions doivent être courtes : maxi 30 lignes, elle doit rentrer à l’écran d’un seul tenant.
+* Quand une classe commence à atteindre *500* lignes, je me dis, oups attention, est ce que ma classe n’en fait pas trop. +
+Et si je vois un fichier de plus de 500 lignes, au lieu de rajouter 100 lignes de plus, j’essais de voir si je ne peux pas déjà le refactoriser.
+Rien n’empèche de refactoriser le code d’un copain.
+
+____
+Sur la pic, le nombre maximal d’un fichier est limité à 1000 lignes. Et
+non, le mot clef *partial* ne sert pas pour palier à cette limitation…
+____
+
+=== Règle 3 : Utilisez des Design Pattern
+
+Beaucoup de design pattern sont décrits sur wikipedia. +
+Ne pas utiliser le singleton.
+
+Exemple de design pattern très efficace : - Factory - Bridge - Decorator
+- Template Method - State - Strategy - Visitor
+
+=== Règle 4 : Utilisez les principes SOLID
+
+Vous pouvez voir ou revoir les principes
+https://fr.wikipedia.org/wiki/SOLID_%28informatique%29[SOLID] sur
+wikipedia
+
+Les articles sur cette page sont très intéressants, vous ne regretterez
+pas leurs lectures.
+
+=== Règle 5 : Vérification avant commit
+
+Avant de commiter le code, une bonne pratique est de vérifier chacun de ces fichiers modifiés, un par un. Cela prend une ou deux minutes et ça
+évite beaucoup d’erreur.
+
+Vous pouvez vous aider avec l’outil suivant Diff akk Files
+
+=== Règle 6 : Console Web
+
+Merci d’avoir tout le temps la console JS ouverte (F12 dans tous les navigateurs). Ceci permet de détecter les erreurs JS.
+
+IMPORTANT: Si vous voyez une erreur js, merci de la *corriger*. De même lorsque vous trouvez un console.log dans le code, pensez à le supprimer.
+
+
+=== Règles 7 : Respectez le pattern then,catch,finally en Angular
+
+* Ne pas mettre du code `inline' dans les then,catch et finally
+* Toujours notifier l’utilisateur quand il y a une erreur ou un success.
+* Si vous trouvez un endroit ou le pattern n’est pas respecté, merci de
+le corriger.
+
+Exemple :
+
+[source,javascript]
+----
+function ()
+     ProgressBar.start(true);
+     PointagePersonnelService.duplicate(duplicateModel)
+            .then(onDuplicateSuccess)
+            .catch(onDuplicateError)
+            .finally(onDuplicateEnd);
+    });
+}
+
+function onDuplicateSuccess() {
+    Notify.message($ctrl.resources.Global_Notification_Enregistrement_Success);
+}
+function onDuplicateError() {
+    Notify.error($ctrl.resources.Global_Notification_Error);
+}
+function onDuplicateEnd() {
+    ProgressBar.complete();
+}
+----
+
+=== Règles 8 : Respecter le pattern $q.when()
+
+* Ne pas mettre du code `inline' dans les then,catch et finally
+* Toujours notifier l’utilisateur quand il y a une erreur ou un success.
+* Si vous trouvez un endroit ou le pattern n’est pas respecté, merci de le corriger.
+
+Exemple :
+
+[source,javascript]
+----
+function main() {
+
+     $q.when()
+     .then(ProgressBar.start)
+     .then(autrePromesse1)
+     .then(duplicatePromise)
+     .then(autrePromesse2)
+     .finally(ProgressBar.complete);
+}
+
+function duplicatePromise(){
+  return PointagePersonnelService.duplicate(duplicateModel)
+  .then(onDuplicateSuccess)
+  .catch(onDuplicateError);
+}
+function onDuplicateSuccess() {
+  Notify.message($ctrl.resources.Global_Notification_Enregistrement_Success);
+}
+
+function onDuplicateError() { 
+Notify.error($ctrl.resources.Global_Notification_Error);
+}
+----
+
+
+=== Règles 9 : Penser *Perf* ;)
+
+Lorsque vous tester votre code, vous devez aussi vérifier les performances.
+Pour cela, vous pouvez copier la base de prod en local.
+
+____
+Engagement : Temps de chargement maximum d’une page : 2s
+____
+
+==== Astuces pour les performances :
+
+* Ne jamais faire d’appel à la base dans une boucle for, foreach,
+while… +
+* autres astuces à partager ici …
+
+=== Règle 10 : Gestion des commentaires
+
+* Merci de commenter les algorithmes
+* Eviter inherit doc +
+le mot clef, n’est pas interdit, vous pouvez l’utiliser. Cependant, il n’est pris en compte que par Resharper, et tout le monde n’a pas Resharper. De plus, avec inherit doc, quand tu es dans le fichier, ça veut pas dire grand chose.
+
+=== Règle 11 : Ne pas utiliser jQuery
+
+jQuery, c’est so 2000 … c’était très bien à l’époque, mais aujourd’hui ça ne se justifie plus car tout est dans javascript et angular. Donc je fais l’effort de me documenter pour programmer sans jQuery, ça allègera les scripts envoyés au client et donc le poids des pages.
+
+=== Règle 12 : Objet en paramètres des fonctions
+
+Eviter de passer des objets dans les paramètres des méthodes si on n’utilise qu’une propriété de cet objet dans la méthode. +
+Cela rend le code plus facile à lire et il n’est donc pas nécessaire de parcourir le code pour savoir comment est chargé l’objet. De plus cela limite le couplage. Avec EF on charge ou non les objects liés, donc dans l’exemple suivant il faut que je regarde le contenu de la méthode pour
+savoir s’il faut que je charge une de ces propriétés.
+
+exemple :
+
+[source,csharp]
+----
+public CommandeContratInterimaireEnt AddCommandeContratInterimaire(RapportLigneEnt rapportLigneEnt, CommandeEnt commandeEnt, ContratInterimaireEnt contratInterimaireEnt)
+{
+    CommandeContratInterimaireEnt commandeContratInterimaireEnt = new CommandeContratInterimaireEnt()
+    {
+      CommandeId = commandeEnt.CommandeId,
+      ContratId = contratInterimaireEnt.ContratInterimaireId,
+      RapportLigneId = rapportLigneEnt.RapportLigneId
+    };
+
+    return Repository.AddCommandeContratInterimaire(commandeContratInterimaireEnt);
+}
+----
+
+Devrait être :
+
+[source,csharp]
+----
+public CommandeContratInterimaireEnt AddCommandeContratInterimaire(int rapportLigneId, int commandeId, int contratInterimaireId)// <==== ici modif
+{
+    CommandeContratInterimaireEnt commandeContratInterimaireEnt = new CommandeContratInterimaireEnt()
+    {
+      CommandeId = commandeId,
+      ContratId = contratInterimaireId,
+      RapportLigneId = rapportLigneId // <==== ici modif
+    };
+
+    return Repository.AddCommandeContratInterimaire(commandeContratInterimaireEnt);
+}
+----
+
+=== Règle 13 : Ne pas renvoyer de IQueryable
+
+Renvoyer un IQueryable dans les Managers depuis les repo casse la séparation des couches. Malheureusement, çela a été permis il y a longtemps dans le projet, et il est difficile de revenir en arrière. Cependant, ce n’est pas une raison pour le faire. +
+On devrait d’ailleurs décorer la fonction de base des repos qui renvoie le IQueryable avec [Obsolete]. (un volontaire ?)
+
+Merci de lire cet article
+https://programmingwithmosh.com/entity-framework/common-mistakes-with-the-repository-pattern[article].
+
+=== Règle 14 : Evitez `+GetDefaultQuery+`
+
+Voici comment faire plutôt que d’utiliser `+GetDefaultQuery+`
+
+Utilisation :
+
+[source,csharp]
+----
+var includes = new List<Expression<Func<LotPointageEnt, object>>>();
+includes.Include(x => x.RapportLignes.Select(oo => oo.Rapport))
+        .Include(x => x.RapportLignes.Select(oo => oo.Personnel))
+        .Include(x => x.RapportLignes.Select(oo => oo.Ci.CIType))
+        .Include(x => x.RapportLignes.Select(oo => oo.CodeAbsence))
+        .Include(x => x.RapportLignes.Select(oo => oo.CodeMajoration))
+        .Include(x => x.RapportLignes.Select(oo => oo.CodeDeplacement))
+        .Include(x => x.RapportLignes.Select(oo => oo.CodeZoneDeplacement))
+        .Include(x => x.RapportLignes.Select(oo => oo.ListCodePrimeAstreintes.Select(xoo => xoo.CodeAstreinte)))
+        .Include(x => x.RapportLignes.Select(oo => oo.ListRapportLigneAstreintes.Select(xoo => xoo.Astreinte)))
+        .Include(x => x.RapportLignes.Select(oo => oo.ListRapportLigneTaches.Select(xoo => xoo.Tache)))
+        .Include(x => x.RapportLignes.Select(oo => oo.ListRapportLignePrimes.Select(xoo => xoo.Prime)))
+        .Include(x => x.RapportLignes.Select(oo => oo.ListRapportLigneMajorations.Select(xoo => xoo.CodeMajoration)));
+
+LotPointageEnt lotPointage = this.LotPointageManager.Get(lotPointageId, includes);
+----
+
+Manager :
+
+[source,csharp]
+----
+public LotPointageEnt Get(int lotPointageId, List<Expression<Func<LotPointageEnt, object>>> includes)
+{
+    return Repository.Get(lotPointageId, includes);
+}
+----
+
+Repository :
+
+[source,csharp]
+----
+ public LotPointageEnt Get(int lotPointageId, List<Expression<Func<LotPointageEnt, object>>> includes)
+    {
+
+        var rapport = this.Get(null, null, includes, null, null).FirstOrDefault(x => x.LotPointageId == lotPointageId);
+        if (rapport != null)
+        {
+            rapport.RapportLignes = rapport.RapportLignes.Where(rl => !rl.DateSuppression.HasValue).ToList();
+        }
+        return rapport;
+    }
+----
+
+=== Règle 15 : Merge avec migration
+
+Comment merger un patch qui contient une migration d’une branche de prod vers la branche de dev ? Ceci est très important : en effet, lorsque vous faite une migration sur une branche de prod (à éviter si possible), alors le schéma de la base de données de production a évolué. Si le merge est fait vers la branche de dev sans suivre la procédure ci-dessous, alors EF voudra rejouer cette migration lorsque le code de dev ira en prod un jour. Hors la migration est déjà passée. => Plantage.
+
+Procédure : 
+
+Si le patch concerne une modification de la BD (donc Migration), il faut 
+bien évidemment fusionner le .csproj Fred.EntityFramework.   
+
+- Garder toutes les migrations (dev + prod) dans le .csproj fusionné. -
+Garder toutes les modifications des entités.   
+- Exécuter Update-Database via la console 
+- Ajouter la migration ``blanche``
+Add-Migration Merge[BrancheSource] -IgnoreChanges 
+- Re-exécuter Update-Database ou lancer tout simplement l’application pour tester 
+- Et vous pouvez commiter votre code en Dev :)+
+Lorsque le Dev deviendra une nouvelle Release, l’éxécution des migrations sur la base prod s’exécutera normalement.
+
+== La checklist du developpeur
+
+=== En règle général
+
+* Pas de code à rallonge, 500 lignes max, la limite est à 1000.
+* Pas de classe partielle pour outrepasser la limite
+* Vérifiez que le I18n (internationalisation) est fait (fichier resx,
+traduction, Fichier Html avec ``ressources.GLOBALXXXX'') .
+* Supprimez le code commenté, personne ne le lit…
+* Utilisez des noms de variables explicites, pas de `+temp+` par exemple
+* Utilisez l’*anglais pour le code*, le français pour les commentaires, pas de franglais. Les noms de fonctions/classes doivent être en anglais.
+
+=== En Angular
+
+* L’utilisation de `+document.getElementsByClassName+` est interdit. +
+Il n’est en effet pas autorisé de faire du jquery ou du javascript qui
+manipule le DOM.
+* Utilisez `+fredSubscribeService.raiseEvent+` plutôt que `+$scope.$emit+` +
+Cela évite les bugs lors d’un changement de structure html.
+* N’utilisez pas `+==+` en JS, mais plutôt `+===+` +
+Si vous en voyez, merci de corriger.
+* Supprimez les baseUrl dans les services angularJS http. +
+Cela rend impossible de savoir si notre API (controller asp.net web api)
+est utilisée ou non et donc rend très difficile la détection du code
+mort.
+* Supprimez les showPickList
+* Faire une methode JS par appel http, cela rend le code plus lisible
+* Utilisez `+fredDialog+` à la place de la `+confirmDialog+`, et remplacez cette dernière lorsque vous la rencontrez.
+
+=== En CSharp
+
+* Evitez l’utilisation de `+GetDefaultQuery+`
+* Corriger les includes en chaîne de caractères : +
+Remplacer `+.Include("ListRapportLignePrimes")+` par :
+`+.Include(x=>x.ListRapportLignePrimes)+`
+* En paramètre d’une fonction, passer des variables plutôt que des
+objets lorsque ce n’est pas nécessaire.
+* Evitez d’appeler unity.Register en dehors de UnityConfig.cs
+* Evitez l’utilisation des regions Parfoit cela peut-être utile, mais bien souvent cela masque un code complexe et/ou trop long.
+* Une fonction = une action. Par exemple : FaireUnCafe, ça ne veut pas dire PlanterDuCafe, ArroserLeCafe, RecolterLeCafe, TorrefierLeCafe,MoudreLeCafe…
+* Placer les méthodes privés au plus près de leur utilisation publique.
+
+=== HTML
+
+* Utilisez seulement un attribut par ligne sur la ligne et pas plusieurs. Cela simplifie les merges.
+* Ne pas mettre de code dans le html +
+Exemple : `+ng-disabled="$ctrl.pointageDuplication.HeureNormale > 0"+` +
+Doit être dans le Js. Cela rend le comportement de la page plus compréhensible et refactorable.

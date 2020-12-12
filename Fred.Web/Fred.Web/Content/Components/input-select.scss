@@ -1,0 +1,83 @@
+﻿$color_1: rgb(103, 117, 127);
+$color_2: darkGray;
+$color_3: white;
+$font_family_1: Roboto, sans-serif;
+$font_family_2: "Material Icons";
+$background_color_1: #09ada6;
+$background_color_2: rgb(250, 250, 250);
+
+.input-select {
+    background-color: $background_color_1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+
+    input {
+        background-color: $background_color_2;
+        border: 1px solid #BBBBBB;
+        border-right: none;
+        color: $color_1;
+        height: 30px;
+        padding: 0 10px;
+        flex: 1;
+        cursor: pointer;
+        font-family: $font_family_1;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        font-weight: 400;
+
+        &::placeholder {
+            font-size: 14px;
+            font-style: italic;
+            color: $color_2;
+            font-weight: 400;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+    }
+
+    .input-select-icon {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 22px;
+        font-weight: normal;
+        max-height: 28px;
+        max-width: 28px;
+        min-height: 28px;
+        min-width: 28px;
+        color: $color_3;
+        font-family: $font_family_2;
+        line-height: inherit;
+    }
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+    .input-select {
+        height: 25px;
+
+        input {
+            height: 25px;
+        }
+
+        .input-select-icon {
+            font-size: 17px;
+            max-height: 25px;
+            max-width: 24px;
+            min-height: 25px;
+            min-width: 24px;
+        }
+    }
+}

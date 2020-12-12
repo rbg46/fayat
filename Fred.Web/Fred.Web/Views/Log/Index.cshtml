@@ -1,0 +1,67 @@
+﻿@model List<Fred.Entities.Log.NLogEnt>
+@using Fred.Web.Shared.Extentions;
+
+@{
+  Layout = "~/Views/Shared/_NoLayout.new.cshtml";
+  ViewBag.Title = "Logs";
+  var grid = new WebGrid(canPage: true, rowsPerPage: 10);
+  grid.Bind(source: Model, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
+}
+
+@section scripts
+{
+  @Scripts.Render("~/Scripts/Log/order.js")
+  @Styles.Render("~/Content/View/log.css")
+}
+
+<h2>Logs</h2>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a href="#" class="navbar-brand">Search</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      @using (Html.BeginForm("index", "Log", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+      {
+        <div class="form-group search-box">
+          <input type="text" name="search" value="@ViewBag.search" class="form-control" placeholder="search" />
+        </div>
+        <div class="form-group">
+          @Html.DropDownList("level", ViewBag.Levels as IEnumerable<SelectListItem>, new { @class = "form-control" })
+        </div>
+        <button type="submit" value="Search" class="btn btn-success pull-right">Search</button>
+      }
+    </div>
+  </div>
+</nav>
+<div>
+  @grid.Table(
+      tableStyle: "table table-responsive table-bordered",
+      columns: grid.Columns(
+        //grid.Column("Application", "Application"),
+        grid.Column("Logged", "Logged"),
+        grid.Column("Level", "Level"),
+        grid.Column("Message", "Message"),
+        grid.Column("UserName", "UserName"),
+        //grid.Column("ServerName", "ServerName"),
+        //grid.Column("Port", "Port"),
+        grid.Column("Url", "Url"),
+        //grid.Column("Https", "Https"),
+        //grid.Column("ServerAddress", "ServerAddress"),
+        //grid.Column("RemoteAddress", "RemoteAddress"),
+        grid.Column("Logger", "Logger"),
+        grid.Column("Callsite", "Callsite"),
+        grid.Column("Exception", "Exception")
+      )
+    )
+
+  <div class="row">
+    <div>
+      @grid.PagerList(mode: WebGridPagerModes.All, paginationStyle: "pagination pagination-sm")
+    </div>
+  </div>
+
+  @Html.Hidden("dir", grid.SortDirection)
+  @Html.Hidden("col", grid.SortColumn)
+
+</div>

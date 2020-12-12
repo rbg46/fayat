@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Reprise de données";
+}
+<h2>Sélectionner un type d'import</h2>
+<strong>Mise à jour des centres d'imputation</strong>
+<li>@Html.ActionLink("Reprise Données - Mise à jour des CIs", "UpdateCis", "RepriseDonnees")</li>
+<br />
+<br />
+<strong>Création des commandes et réceptions</strong>
+<li>@Html.ActionLink("Reprise Données - Création des commandes et réceptions", "CreateCommandesAndReceptions", "RepriseDonnees")</li>
+<br />
+<br />
+<strong>Validation commandes outil 2</strong>
+<li>@Html.ActionLink("Reprise Données - Validation commandes ", "ValidationCommandes", "RepriseDonnees")</li>
+<br />
+<br />
+<strong>Création des rapports et rapports lignes</strong>
+<li>@Html.ActionLink("Import rapports journaliers simplifiés Données", "CreateRapports", "RepriseDonnees")</li>
+<br />
+<br />
+<strong>Import de plans de tâches</strong>
+<li>@Html.ActionLink("Reprise Données des plans de tâches", "CreatePlanTaches", "RepriseDonnees")</li>
+<br />
+<br />
+<strong>Import de Personnels</strong>
+<li>@Html.ActionLink("Reprise Données des Personnels", "CreatePersonnel", "RepriseDonnees")</li>
+<br />
+<br />
+<strong>Import de Matériels</strong>
+<li>@Html.ActionLink("Reprise Données des Matériels", "CreateMateriel", "RepriseDonnees")</li>
+<br />
+<br />
+<strong>Import d'Indemnités de Déplacement</strong>
+<li>@Html.ActionLink("Reprise Données des Indémnités de Déplacement", "CreateIndemniteDeplacement", "RepriseDonnees")</li>
+<br />
+<br />
+<strong>Importation des CIs</strong>
+<li>@Html.ActionLink("Importation des CIs", "ImportCiFromAnaelAndSendToSap", "RepriseDonnees")</li>
+<br />
+<br />
+<strong>Importation des Fournisseurs</strong>
+<li>@Html.ActionLink("Importation des Fournisseurs", "ImportFournisseursFromAnaelAndSendToSap", "RepriseDonnees")</li>

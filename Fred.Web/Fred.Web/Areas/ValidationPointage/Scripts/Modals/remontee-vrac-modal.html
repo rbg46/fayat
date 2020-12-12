@@ -1,0 +1,183 @@
+﻿<div class="modal-content" id="up-vrac">
+  <div class="modal-header">
+    <h2 class="modal-title"><i class="flaticon flaticon-notebook-4"></i>{{ $ctrl.resources.VPWeb_RemonteeVrac }}</h2>
+    <i class="flaticon flaticon-multiply close pull-right" aria-label="Close" title="{{ $ctrl.resources.Global_Modal_Annuler_Tooltip }}" ng-click="$ctrl.handleCancel()"></i>
+  </div>
+  <form name="$ctrl.remonteeVracForm">
+    <div class="modal-body">
+      <div ng-show="$ctrl.errorMessage.length > 0" class="alert alert-warning">{{$ctrl.errorMessage}}</div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <label for="">{{ $ctrl.resources.Global_SelectionnerSociete }}</label>
+          <span class="text-danger" ng-show="$ctrl.remonteeVracForm.$submitted && $ctrl.remonteeVracForm.Societe.$invalid">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+          <lookup-standalone ng-model="$ctrl.filter.Societe"
+                             enable-default-selection="true"
+                             text="$ctrl.filter.Societe.CodeLibelle"
+                             search-max-length="100"
+                             search-title="{{$ctrl.resources.Global_ReferentielSociete}}"
+                             search-placeholder="{{$ctrl.resources.Global_ReferentielSociete_Placeholder}}"
+                             url="{{$ctrl.handleShowLookupSociete()}}"
+                             on-select="$ctrl.handleLookupSelection('Societe', item)"
+                             on-delete="$ctrl.handleLookupDeletion('Societe')"
+                             show-in-popup="true"
+                             class="formulaire long"
+                             name="Societe"
+                             ng-required="true" 
+                             placeholder="{{$ctrl.resources.Global_ReferentielSociete_Placeholder}}">
+          </lookup-standalone>
+        </div>
+      </div>
+      <br />
+      <hr>
+
+      <div class="row" ng-if="$ctrl.isCurrentUserFes">
+          <div class="col-md-12 col-lg-12">
+              <label>{{ $ctrl.resources.ValidationPointage_Statut }}</label>
+          </div>
+          <div class="col-md-2 col-lg-2">
+            <input id="chbxStatutOuvrier" type="checkbox" ng-model="$ctrl.statutOuvrier" ng-click="$ctrl.handleChangePersonnelStatutList('StatutOuvrier')" />
+            <label for="chbxStatutOuvrier"><span></span>{{$ctrl.resources.ValidationPointage_StatutOuvrier}}</label>
+          </div>
+          <div class="col-md-2 col-lg-2">
+            <input id="chbxStatutEtam" type="checkbox"ng-model="$ctrl.statutEtam" ng-click="$ctrl.handleChangePersonnelStatutList('StatutEtam')" />
+            <label for="chbxStatutEtam"><span></span>{{$ctrl.resources.ValidationPointage_StatutEtam}}</label>
+          </div>
+          <div class="col-md-2 col-lg-2">
+            <input id="chbxStatutCadre" type="checkbox" ng-model="$ctrl.statutCadre" ng-click="$ctrl.handleChangePersonnelStatutList('StatutCadre')" />
+            <label for="chbxStatutCadre"><span></span>{{$ctrl.resources.ValidationPointage_StatutCadre}}</label>
+          </div>
+        </div>
+
+      <hr ng-if="$ctrl.isCurrentUserFes">
+
+
+      <br />
+      <div class="row grid--borderBetween">
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6 col-lg-6 no_pad_l no_pad_r">
+              <input type="radio" name="etablissementPaieRB" id="all-eta" ng-model="$ctrl.isAllEtablissement" ng-value="true" ng-change="$ctrl.handleEtablissementPaieOption()">
+              <label for="all-eta"><span></span>{{ $ctrl.resources.VPWeb_TousEtablissements }}</label>
+            </div>
+            <div class="col-md-6 col-lg-6 no_pad_l no_pad_r">
+              <input type="radio" name="etablissementPaieRB" id="chose-eta" ng-model="$ctrl.isAllEtablissement" ng-value="false" ng-change="$ctrl.handleEtablissementPaieOption()">
+              <label for="chose-eta"><span></span>{{ $ctrl.resources.VPWeb_ChoixEtablissements }} :</label>
+            </div>
+          </div>
+          <div class="row" ng-show="!$ctrl.isAllEtablissement">
+            <div class="col-md-12 col-lg-12 cont-eta-picks etsPaie no_pad_l no_pad_r">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>{{ $ctrl.resources.VPWeb_EtablissementsPaie }}</th>
+                    <th>
+                      <div class="pull-right">
+                        <lookup ng-model="$ctrl.selectedEtabPaie"
+                                search-placeholder="{{$ctrl.resources.Global_ReferentielEtablissementPaie_Placeholder}}"
+                                search-title="{{$ctrl.resources.Global_ReferentielEtablissementPaie}}"
+                                on-click="$ctrl.handleShowLookupEtabPaie($ctrl.filter.Societe.SocieteId)"
+                                on-select="$ctrl.handleLookupSelection('EtablissementPaie', item)"
+                                show-in-popup="true">
+                          <span class="btn btn-link" title="{{ $ctrl.resources.VPWeb_AjouterEtablissementTooltip }}">{{ $ctrl.resources.VPWeb_AjouterEtablissementButton }}</span>
+                        </lookup>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="ets in $ctrl.filter.EtablissementPaieList | orderBy:['+Code']">
+                    <td>{{ets.CodeLibelle}}</td>
+                    <td class="delete" align="right">
+                      <button class="btn btn-link flaticon flaticon-multiply" title="{{ $ctrl.resources.VPWeb_SupprimerEtablissementTooltip }}" ng-click="$ctrl.handleLookupDeletion('EtablissementPaie', ets)" aria-hidden="true"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <p ng-show="$ctrl.filter.EtablissementPaieIdList.length === 0">{{$ctrl.resources.Global_Message_AucunElement}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+
+          <div class="row">
+            <div class="col-md-6 col-lg-6 no_pad_l no_pad_r">
+              <input type="radio" name="matricule" id="all-mat" ng-model="$ctrl.isAllMatricule" ng-value="true" ng-change="$ctrl.handleMatriculeOption()">
+              <label for="all-mat"><span></span>{{ $ctrl.resources.VPWeb_TousMatricules }}</label>
+            </div>
+            <div class="col-md-6 col-lg-6 no_pad_l no_pad_r">
+              <input type="radio" name="matricule" id="chose-mat" ng-model="$ctrl.isAllMatricule" ng-value="false" ng-change="$ctrl.handleMatriculeOption()">
+              <label for="chose-mat"><span></span>{{ $ctrl.resources.VPWeb_ChoixMatricule }} :</label>
+            </div>
+          </div>
+
+          <div class="row" ng-show="!$ctrl.isAllMatricule">
+            <div class="col-md-12 col-lg-12 cont-eta-picks no_pad_l no_pad_r">
+              <feature-flag invert feature-key="PersonnelsNouveauxFiltres">
+                <lookup-standalone ng-model="$ctrl.filter.Personnel"
+                                  enable-default-selection="true"
+                                  text="$ctrl.filter.Personnel.CodeSocieteMatriculePrenomNom"
+                                  search-max-length="100"
+                                  search-title="{{$ctrl.resources.Global_ReferentielPersonnel}}"
+                                  search-placeholder="{{$ctrl.resources.Global_ReferentielPersonnel_Placeholder}}"
+                                  on-click="$ctrl.handleShowLookup('Personnel')"
+                                  on-select="$ctrl.handleLookupSelection('Personnel', item)"
+                                  on-delete="$ctrl.handleLookupDeletion('Personnel')"
+                                  show-in-popup="true"
+                                  class="formulaire long">
+                </lookup-standalone>
+              </feature-flag>
+              <feature-flag feature-key="PersonnelsNouveauxFiltres">
+                  <lookup-standalone ng-model="$ctrl.filter.Personnel"
+                                      enable-default-selection="true"
+                                      text="$ctrl.filter.Personnel.CodeSocieteMatriculePrenomNom"
+                                      search-max-length="100"
+                                      search-title="{{$ctrl.resources.Global_ReferentielPersonnel}}"
+                                      search-placeholder="{{$ctrl.resources.Global_ReferentielPersonnel_Placeholder}}"
+                                      url="{{$ctrl.handleShowLookupPersonnelFes($ctrl.filter.Societe.SocieteId)}}"
+                                      on-select="$ctrl.handleLookupSelection('Personnel', item)"
+                                      on-delete="$ctrl.handleLookupDeletion('Personnel')"
+                                      show-in-popup="true"
+                                      class="formulaire long"
+                                      ng-if="$ctrl.isCurrentUserFes">
+                </lookup-standalone>
+                  <lookup-standalone ng-model="$ctrl.filter.Personnel"
+                                     enable-default-selection="true"
+                                     text="$ctrl.filter.Personnel.CodeSocieteMatriculePrenomNom"
+                                     search-max-length="100"
+                                     search-title="{{$ctrl.resources.Global_ReferentielPersonnel}}"
+                                     search-placeholder="{{$ctrl.resources.Personnel_PartialGeneral_Nom_Placeholder}}"
+                                     search-placeholder2="{{$ctrl.resources.Personnel_PartialGeneral_Prenom_Placeholder}}"
+                                     search-placeholder3="{{$ctrl.resources.Personnel_Filter_Autre_Information_Placeholder}}"
+                                     active-second-search-input="true"
+                                     active-third-search-input="true"
+                                     url="/api/Personnel/SearchLight2"
+                                     on-select="$ctrl.handleLookupSelection('Personnel', item)"
+                                     on-delete="$ctrl.handleLookupDeletion('Personnel')"
+                                     show-in-popup="true"
+                                     class="formulaire long"
+                                     ng-if="!$ctrl.isCurrentUserFes" 
+                                     placeholder="{{$ctrl.resources.Global_ReferentielPersonnel_Placeholder}}">
+                  </lookup-standalone>
+              </feature-flag>
+            </div>
+          </div>
+
+          <br />
+
+          <div class="row">
+            <div class="col-md-12 col-lg-12  no_pad_l no_pad_r">
+              <input type="checkbox" id="up-miss" ng-model="$ctrl.filter.UpdateAbsence" ng-value="true">
+              <label for="up-miss"><span></span>{{ $ctrl.resources.VPWeb_MaJAbsences }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-default pull-left" title="{{ $ctrl.resources.Global_Bouton_Valider_Tooltip }}" ng-click="$ctrl.handleValidate()">{{ $ctrl.resources.Global_Bouton_Valider }}</button>
+      <button class="btn btn-link pull-right" title="{{ $ctrl.resources.Global_Modal_Annuler_Tooltip }}" ng-click="$ctrl.handleCancel()">{{ $ctrl.resources.Global_Bouton_Annuler }}</button>
+    </div>
+  </form>
+</div>

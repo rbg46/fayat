@@ -1,0 +1,31 @@
+﻿<div class="modal fade controle-budgetaire-validation-erreur-dialog" id="CONTROLE_BUDGETAIRE_VALIDATION_ERREUR_DIALOG_ID" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="flaticon flaticon-warning"></i>{{::$ctrl.resources.Global_Information}}</h2>
+                <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{::$ctrl.resources.Global_Bouton_Fermer_Tooltip}}"></i>
+            </div>
+            <div class="modal-body">
+                <b>{{::$ctrl.Message}}</b>
+            </div>
+            <hr>
+            <table>
+                <tr>
+                    <td class="controle-budgetaire-validation-erreur-dialog-table-header"><b>Avancement</b></td>
+                    <td class="controle-budgetaire-validation-erreur-dialog-table-data"><b>{{$ctrl.AvancementValide ? $ctrl.resources.Budget_ControleBudgetaire_Validation_Erreur_Avancement_Valide : $ctrl.resources.Budget_ControleBudgetaire_Validation_Erreur_Avancement_NonValide}}</b></td>
+                </tr>
+                <tr>
+                    <td class="controle-budgetaire-validation-erreur-dialog-table-header"><b>Période comptable</b></td>
+                    <td class="controle-budgetaire-validation-erreur-dialog-table-data"><b>{{$ctrl.PeriodeComptableCloturee ? $ctrl.resources.Budget_ControleBudgetaire_Validation_Erreur_PeriodeComptable_Cloturee : $ctrl.resources.Budget_ControleBudgetaire_Validation_Erreur_PeriodeComptable_Ouverte}}</b></td>
+                </tr>
+            </table>
+            <div class="modal-footer">
+                <!--Bouton OK-->
+                <button class="btn btn-default"
+                        ng-click="$ctrl.Hide()">
+                    {{::$ctrl.resources.Global_Bouton_Ok}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

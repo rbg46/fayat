@@ -1,0 +1,144 @@
+﻿<div class="modal-header">
+    <h2 class="modal-title">{{::$ctrl.resources.Modal_AssocieSep_Title}}</h2>
+    <i class="flaticon flaticons flaticon-multiply close pull-right" ng-click="$ctrl.handleCancel()" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+</div>
+<form name="$ctrl.form" autocomplete="off" ng-submit="$ctrl.handleSave()">
+    <div class="modal-body">
+        <table class="table table-hover sep-table">
+            <thead>
+                <tr>
+                    <th class="toggle-col"></th>
+                    <th class="societe-associee-col">{{::$ctrl.resources.Modal_AssocieSep_Table_Associe}}</th>
+                    <th class="type-participation-col">{{::$ctrl.resources.Modal_AssocieSep_Table_TypeParticipation}}</th>
+                    <th class="quote-part-col">{{::$ctrl.resources.Modal_AssocieSep_Table_QuotePart}}</th>
+                    <th class="fournisseur-col">{{::$ctrl.resources.Modal_AssocieSep_Table_Fournisseur}} <input class="btn btn-link btn-add-associe-sep" type="button" value="{{::$ctrl.resources.Modal_AssocieSep_Table_AjouterAssocie}}" title="{{::$ctrl.resources.Modal_AssocieSep_Table_AjouterAssocie_Title}}" ng-click="$ctrl.handleAddAssocieSep()" /></th>
+                    <th class="actions-col"></th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="(i1, associeSep) in $ctrl.associeSeps">
+                <tr>
+                    <td class="toggle-col">
+                        <a class="sep-toggle" href="#subrow-{{i1}}" aria-expanded="true" data-toggle="collapse" data-target="#subrow-{{i1}}, #subrow-{{i1}}" ng-show="associeSep.AssocieSepChildren && associeSep.AssocieSepChildren.length > 0"></a>
+                    </td>
+                    <td class="societe-associee-col">
+                        <span ng-show="associeSep.SocieteAssocieeValid === false" class="text-danger">{{::$ctrl.resources.Modal_AssocieSep_Table_Doublons_Error}}</span>
+                        <span ng-show="$ctrl.form.$submitted && $ctrl.form['societeAssociee1-{{i1}}'].$error && $ctrl.form['societeAssociee1-{{i1}}'].$error.required" class="text-danger">{{::$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                        <lookup-standalone ng-required="true"
+                                           name="societeAssociee1-{{i1}}"
+                                           ng-model="associeSep.SocieteAssociee"
+                                           text="associeSep.SocieteAssociee.CodeLibelle"
+                                           search-title="{{::$ctrl.resources.Global_ReferentielSociete}}"
+                                           search-placeholder="{{::$ctrl.resources.Global_ReferentielSociete_Placeholder}}"
+                                           url="/api/Societe/SearchLight?{{$ctrl.typeSocieteCodesParams}}"
+                                           on-select="$ctrl.handleLookupSelection('SocieteAssociee', item, associeSep)"
+                                           on-delete="$ctrl.handleLookupDeletion('SocieteAssociee', associeSep)"
+                                           class="formulaire long"
+                                           style-parent="true"
+                                           placeholder="{{::$ctrl.resources.Global_ReferentielSociete_Placeholder}}"
+                                           show-in-popup="true">
+                        </lookup-standalone>
+                    </td>
+                    <td class="type-participation-col">
+                        <span ng-show="associeSep.TypeParticipationSepValid === false" class="text-danger">{{::$ctrl.resources.Modal_AssocieSep_Table_Doublons_Error}}</span>
+                        <span ng-show="$ctrl.form.$submitted && $ctrl.form['ddlTypeParticipation-{{i1}}'].$error && $ctrl.form['ddlTypeParticipation-{{i1}}'].$error.required" class="text-danger">{{::$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                        <div class="form-group">
+                            <select name="ddlTypeParticipation-{{i1}}"
+                                    class="form-control input-filter"
+                                    ng-model="associeSep.TypeParticipationSepId"
+                                    ng-change="$ctrl.handleOnTypeParticipationSepChange(associeSep)"
+                                    ng-required="true"
+                                    ng-selected="associeSep.TypeParticipationSepId === item.TypeParticipationSepId"
+                                    ng-options="item.TypeParticipationSepId as item.Libelle for item in $ctrl.typeParticipationSeps"></select>
+                        </div>
+                    </td>
+                    <td class="quote-part-col">
+                        <span ng-show="associeSep.QuotePartValid === false" class="text-danger">{{::$ctrl.resources.Modal_AssocieSep_Table_TotalQuotePart_Error}}</span>
+                        <span ng-show="$ctrl.form.$submitted && $ctrl.form['quotePart-{{i1}}'].$error && $ctrl.form['quotePart-{{i1}}'].$error.required" class="text-danger">{{::$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                        <div class="form-group" ng-class="{ 'has-error' : ($ctrl.form.$submitted && !$ctrl.form['quotePart-{{i1}}'].$valid) || !associeSep.QuotePartValid }">
+                            <div class="input-group">
+                                <input type="text"
+                                       fred-input-number
+                                       class="form-control"
+                                       placeholder="Quote-part"
+                                       min="0"
+                                       max="100"
+                                       ng-change="$ctrl.handleOnQuotePartChange(associeSep)"
+                                       ng-model="associeSep.QuotePart"
+                                       ng-required="true"
+                                       name="quotePart-{{i1}}">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="fournisseur-col">
+                        <span ng-show="associeSep.FournisseursValid === false" class="text-danger">{{::$ctrl.resources.Modal_AssocieSep_Table_Doublons_Error}}</span>
+                        <span ng-show="$ctrl.form.$submitted && $ctrl.form['fournisseur-{{i1}}'].$error && $ctrl.form['fournisseur-{{i1}}'].$error.required" class="text-danger">{{::$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                        <lookup-standalone ng-required="true"
+                                           ng-model="associeSep.Fournisseur"
+                                           text="associeSep.Fournisseur.CodeLibelle"
+                                           search-title="{{::$ctrl.resources.Global_ReferentielFournisseur}}"
+                                           search-placeholder="{{::$ctrl.resources.Global_ReferentielFournisseur_Placeholder}}"
+                                           url="/api/Fournisseur/SearchLight?groupeId={{$ctrl.societe.GroupeId}}&"
+                                           on-select="$ctrl.handleLookupSelection('Fournisseur', item, associeSep)"
+                                           on-delete="$ctrl.handleLookupDeletion('Fournisseur', associeSep)"
+                                           class="formulaire long"
+                                           style-parent="true"
+                                           show-in-popup="true"
+                                           placeholder="{{::$ctrl.resources.Global_ReferentielFournisseur_Placeholder}}"
+                                           name="fournisseur-{{i1}}"
+                                           custom-template-url="/Scripts/directive/Lookup/custom-templates/fournisseur.template.html"
+                                           active-second-search-input="true"
+                                           search-placeholder2="Autres informations...(Adresse, Code, SIREN)"
+                                           search-tooltip='Commencez votre saisie par * si vous ne connaissez pas le début du nom (exemple : "*location").'>
+                        </lookup-standalone>
+                    </td>
+                    <td class="actions-col">
+                        <i class="flaticon flaticons flaticon-add-2" ng-click="$ctrl.handleAddAssocieSepChild(associeSep)" ng-show="associeSep.AssocieSepId > 0" title="{{::$ctrl.resources.Modal_AssocieSep_Table_AjouterAssocie_Niveau2_Title}}"></i>
+                        <i class="flaticon flaticons flaticon-multiply" ng-click="$ctrl.handleDeleteAssocieSep(associeSep)" title="{{::$ctrl.resources.Modal_AssocieSep_Table_SupprimerAssocie_Title}}"></i>
+                    </td>
+                </tr>
+                <tr ng-repeat="(i2, associeSepChild) in associeSep.AssocieSepChildren" class="collapse in" id="subrow-{{i1}}">
+                    <td class="toggle-col"></td>
+                    <td class="societe-associee-col child" colspan="2">
+                        <span ng-show="associeSepChild.SocieteAssocieeValid === false" class="text-danger">{{::$ctrl.resources.Modal_AssocieSep_Table_Doublons_Error}}</span>
+                        <span ng-show="$ctrl.form.$submitted && $ctrl.form['societeAssociee2-{{i2}}'].$error && $ctrl.form['societeAssociee2-{{i2}}'].$error.required" class="text-danger">{{::$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                        <lookup-standalone ng-required="true"
+                                           ng-model="associeSepChild.SocieteAssociee"
+                                           text="associeSepChild.SocieteAssociee.CodeLibelle"
+                                           search-title="{{::$ctrl.resources.Global_ReferentielSociete}}"
+                                           search-placeholder="{{::$ctrl.resources.Global_ReferentielSociete_Placeholder}}"
+                                           url="/api/Societe/SearchLight?{{$ctrl.typeSocieteCodesParams}}"
+                                           on-select="$ctrl.handleLookupSelection('SocieteAssocieeChild', item, associeSepChild, associeSep)"
+                                           on-delete="$ctrl.handleLookupDeletion('SocieteAssocieeChild', associeSepChild, associeSep)"
+                                           class="formulaire long"
+                                           style-parent="true"
+                                           show-in-popup="true"
+                                           placeholder="Société niveau 2"
+                                           name="societeAssociee2-{{i2}}">
+                        </lookup-standalone>
+                    </td>
+                   
+                    <td class="quote-part-col"></td>
+                    <td class="fournisseur-col"></td>
+                    <td class="actions-col">
+                        <i class="flaticon flaticons flaticon-multiply" ng-click="$ctrl.handleDeleteAssocieSepChildren(associeSep, associeSepChild)" title="{{::$ctrl.resources.Modal_AssocieSep_Table_SupprimerAssocie_Niveau2_Title}}"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p ng-show="!$ctrl.associeSeps || $ctrl.associeSeps.lenght === 0"> {{::$ctrl.resources.Global_Message_AucunElement}} </p>
+    </div>
+    <div class="modal-footer">
+        <button type="submit"
+                class="btn btn-default pull-left"
+                title="{{::$ctrl.resources.Global_Bouton_Valider_Tooltip}}">
+            {{::$ctrl.resources.Global_Bouton_Enregistrer}}
+        </button>
+        <button type="button"
+                class="btn btn-link pull-right"
+                ng-click="$ctrl.handleCancel()"
+                title="{{::$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">
+            {{::$ctrl.resources.Global_Bouton_Annuler}}
+        </button>
+    </div>
+</form>

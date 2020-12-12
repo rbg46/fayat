@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Contient les clefs du web.config qui doivent être modifiees en fonction des environnements Dev / Int / PreProd / Prod -->
+
+<parameters>
+
+
+  <!--Parametrage Compte Active Directory-->
+  <parameter
+      name="SecurityActiveDirectoryDomaine"
+      description="Adresse LDAP"
+      defaultvalue="__SecurityActiveDirectoryDomaine__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='Security:ActiveDirectory:Domaine']/@value">
+    </parameterentry>
+  </parameter>
+
+
+  <parameter
+      name="SecurityActiveDirectorySystemLogin"
+      description="Compte de service LDAP"
+      defaultvalue="__SecurityActiveDirectorySystemLogin__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='Security:ActiveDirectory:System:Login']/@value">
+    </parameterentry>
+  </parameter>
+
+
+  <parameter
+      name="SecurityActiveDirectorySystemPassword"
+      description="Mot de passe du compte de service LDAP"
+      defaultvalue="__SecurityActiveDirectorySystemPassword__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='Security:ActiveDirectory:System:Password']/@value">
+    </parameterentry>
+  </parameter>
+
+
+
+
+
+  <!-- Parametrage du serveur de mail-->
+  <parameter
+      name="EmailServerAddress"
+      description="Adresse du server SMTP"
+      defaultvalue="__EmailServerAddress__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='eMail:Server:Adress']/@value">
+    </parameterentry>
+  </parameter>
+
+
+  <parameter
+      name="EmailServerPort"
+      description="Port du server SMTP"
+      defaultvalue="__EmailServerPort__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='eMail:Server:Port']/@value">
+    </parameterentry>
+  </parameter>
+
+
+
+  <!-- Fred Import/Export API Endpoints -->
+  <parameter
+    name="FredIEWebApiUrl"
+    description="Adresse du service FredIE Api"
+    defaultvalue="__FredIEWebApiUrl__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/@url">
+    </parameterentry>
+  </parameter>
+
+  <!-- Fred Import/Export Service Accounts -->
+
+  <parameter
+    name="FredIEServiceAccountLogin"
+    description="Nom du compte de service FredIE Api"
+    defaultvalue="__FredIEServiceAccountLogin__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/serviceAccounts/add[@groupCode='Default']/@username">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="FredIEServiceAccountPassword"
+    description="Mot de passe du compte de service FredIE Api"
+    defaultvalue="__FredIEServiceAccountPassword__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/serviceAccounts/add[@groupCode='Default']/@password">
+    </parameterentry>
+  </parameter>
+
+  <!--
+  <parameter
+    name="FredIEServiceAccountLoginFES"
+    description="Nom du compte de service FredIE Api FES"
+    defaultvalue="__FredIEServiceAccountLoginFES__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/serviceAccounts/add[@groupCode='GFES']/@username">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="FredIEServiceAccountPasswordFES"
+    description="Mot de passe du compte de service FredIE Api FES"
+    defaultvalue="__FredIEServiceAccountPasswordFES__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/serviceAccounts/add[@groupCode='GFES']/@password">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="FredIEServiceAccountLoginFTP"
+    description="Nom du compte de service FredIE Api FTP"
+    defaultvalue="__FredIEServiceAccountLoginFTP__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/serviceAccounts/add[@groupCode='GFTP']/@username">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="FredIEServiceAccountPasswordFTP"
+    description="Mot de passe du compte de service FredIE Api FTP"
+    defaultvalue="__FredIEServiceAccountPasswordFTP__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/serviceAccounts/add[@groupCode='GFTP']/@password">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="FredIEServiceAccountLoginRZB"
+    description="Nom du compte de service FredIE Api RZB"
+    defaultvalue="__FredIEServiceAccountLoginRZB__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/serviceAccounts/add[@groupCode='GRZB']/@username">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="FredIEServiceAccountPasswordRZB"
+    description="Mot de passe du compte de service FredIE Api RZB"
+    defaultvalue="__FredIEServiceAccountPasswordRZB__" tags="">
+    <parameterentry
+      kind="XmlFile"
+      scope="\\web.config$"
+      match="/configuration/externalServices/importExport/serviceAccounts/add[@groupCode='GRZB']/@password">
+    </parameterentry>
+  </parameter>-->
+
+  <!-- Parametrage d'AppInsight -->
+  <parameter
+      name="FredAppInsightKey"
+      description="Clé API pour l'environnement"
+      defaultvalue="__FredAppInsightKey__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+          match="/configuration/appSettings/add[@key='Microsoft:ApplicationInsight:Key']/@value">
+    </parameterentry>
+  </parameter>
+
+
+  <!-- Parametrage des logs -->
+  <parameter
+      name="LogFilePath"
+      description="Chemin du fichier de log"
+      defaultvalue="__LogFilePath__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/nlog/targets/target[@name='logfile']/@fileName">
+    </parameterentry>
+  </parameter>
+
+
+  <!-- Parametrage du DbLink Buyer-->
+  <parameter
+      name="BuyerServerAddress"
+      description="Adresse du server sql de Buyer"
+      defaultvalue="__BuyerServerAddress__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='Buyer:Server:Address']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+    name="BuyerServerInstance"
+    description="Instance sur le server sql de Buyer"
+    defaultvalue="__BuyerServerInstance__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='Buyer:Server:Instance']/@value">
+    </parameterentry>
+  </parameter>
+
+  <parameter
+  name="BuyerServerDatabase"
+  description="Nom de la base Buyer"
+  defaultvalue="__BuyerServerDatabase__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='Buyer:Server:Database']/@value">
+    </parameterentry>
+  </parameter>
+
+  <!-- Parametrage du dossier de pièces jointes -->
+  <parameter
+  name="AttachmentFolder"
+  description="Dossier où sont enregistrés les Pièces Jointes"
+  defaultvalue="__AttachmentFolder__" tags="">
+    <parameterentry
+        kind="XmlFile"
+        scope="\\web.config$"
+        match="/configuration/appSettings/add[@key='attachment:folder']/@value">
+    </parameterentry>
+  </parameter>
+
+</parameters>

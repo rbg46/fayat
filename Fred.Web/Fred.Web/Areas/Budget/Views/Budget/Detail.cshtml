@@ -1,0 +1,325 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    /**/
+
+    /**/
+
+    ViewBag.Title = FeatureBudgetDetail.Budget_Detail_TitrePage;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+    @Styles.Render("~/BudgetDetailBundle.css")
+}
+@section scripts {
+    @Scripts.Render("~/BudgetDetailBundle.js")
+    @this.RenderResources("FredResource", "FeatureBudget", "FeatureBudgetDetail", "FeatureBudgetSousDetail", "FeatureBudgetCommentairePanel")
+}
+
+<div class="container detail-budget"
+     ng-controller="BudgetDetailController as $ctrl"
+     ng-init="$ctrl.getFilterOrFavoris('@ViewBag.id', '@ViewBag.favoriId')">
+
+    <h1>{{$ctrl.Titre}}</h1>
+    <span class="glyphicon glyphicon-warning-sign" title="{{$ctrl.Erreurs}}" ng-show="$ctrl.Erreurs.length > 0"></span>
+    <div ng-if="$ctrl.BudgetDetailService.ViewMode !== $ctrl.BudgetDetailService.ViewModeType.None && $ctrl.Budget && !$ctrl.Budget.Erreur">
+
+        <!--Barre d'outils detail-->
+        <fred-toolbar ng-if="$ctrl.BudgetDetailService.ViewMode === $ctrl.BudgetDetailService.ViewModeType.Detail" class="detail">
+
+            <!--CI-->
+            <fred-section class="ci-section">
+                <fred-section-title>{{::$ctrl.resources.Budget_Detail_ToolBar_Titre_CI}}</fred-section-title>
+                <fred-section-controls>
+                    <input type="text" class="form-control" value="{{$ctrl.Budget.CI.Code}} {{$ctrl.Budget.CI.Libelle}}" readonly>
+                </fred-section-controls>
+            </fred-section>
+
+            <!--Version-->
+            <fred-section class="version-section">
+                <fred-section-title>{{::$ctrl.resources.Budget_Detail_ToolBar_Titre_Version}}</fred-section-title>
+                <fred-section-controls>
+                    <input type="text" class="form-control" value="{{$ctrl.Budget.Version}}" readonly>
+                </fred-section-controls>
+            </fred-section>
+
+            <!--Recherche-->
+            <fred-section class="text-search-section" ng-if="false">
+                <fred-section-title>{{::$ctrl.resources.Budget_Detail_ToolBar_Titre_Rechercher}}</fred-section-title>
+                <div class="search-container">
+                    <div class="input-group input-search">
+                        <input type="text" class="form-control" placeholder="{{::$ctrl.resources.Budget_Detail_ToolBar_PlaceHolder_Rechercher}}">
+                        <span class="input-group-addon button-search">
+                            <i class="material-icons">search</i>
+                        </span>
+                    </div>
+                </div>
+            </fred-section>
+
+            <!--Devise-->
+            <fred-section class="devise-section" ng-if="$ctrl.Budget">
+                <fred-section-title>{{::$ctrl.resources.Budget_Detail_ToolBar_Titre_Devise}}</fred-section-title>
+                <fred-section-controls class="devise-section-controls">
+                    <div ng-repeat="devise in $ctrl.Budget.CI.Devises">
+                        <div ng-if="devise.Symbole" class="symbole">
+                            <div ng-if="devise.Active" class="currency active" title="{{devise.Libelle}}">{{devise.Symbole}}</div>
+                            <div ng-if="!devise.Active" class="currency" title="{{devise.Libelle}}">{{devise.Symbole}}</div>
+                        </div>
+                        <div ng-if="!devise.Symbole" class="iso-code">
+                            <div ng-if="devise.Active" class="currency a active" title="{{devise.Libelle}}">{{devise.IsoCode}}</div>
+                            <div ng-if="!devise.Active" class="currency a" title="{{devise.Libelle}}">{{devise.IsoCode}}</div>
+                        </div>
+                    </div>
+                </fred-section-controls>
+            </fred-section>
+
+            <!--Axe d'analyse-->
+            <fred-section class="aa-section" ng-if="$ctrl.Budget">
+                <fred-section-title>Axe d'analyse</fred-section-title>
+                <fred-section-controls>
+                    <fred-button type="button" class="ax-param" ng-click="::$ctrl.ShowPanelDisplayCustomization()" title="Cliquer pour afficher les options de personnalisation d’affichage">
+                        <span ng-class="{'sapicon-E056': $ctrl.filters.IsDisplayCustomized, 'sapicon-E056 inactive': !$ctrl.filters.IsDisplayCustomized}"></span>
+                    </fred-button>
+                </fred-section-controls>
+            </fred-section>
+
+            <!--Validation-->
+            <fred-section class="action-section" ng-if="$ctrl.Budget && $ctrl.Budget.Etat.Code !== $ctrl.CodeBudgetEtat.EnApplication && $ctrl.Budget.Etat.Code !== $ctrl.CodeBudgetEtat.Archive">
+                <fred-section-title>{{::$ctrl.resources.Global_Validation}}</fred-section-title>
+                <fred-section-controls class="action-controls">
+                    <button type="button" class="fred-button default text btn-grey" ng-click="$ctrl.CancelDetail()" ng-if="!$ctrl.Budget.Readonly">{{::$ctrl.resources.Budget_Detail_ToolBar_Action_Annuler}}</button>
+                    <button type="button" class="fred-button default text btn-enregistrer" ng-class="$ctrl.DEBUG && $ctrl.Budget.DetailHasChanged() ? 'debug-save-available' : ''" ng-click="$ctrl.SaveDetail()" ng-if="!$ctrl.Budget.Readonly">{{::$ctrl.resources.Budget_Detail_ToolBar_Action_Enregistrer}}</button>
+                    <button type="button" class="fred-button default text btn-validate" ng-click="$ctrl.DisplayValidationDialog()" ng-if="($ctrl.Budget.Etat.Code == $ctrl.CodeBudgetEtat.Brouillon || $ctrl.Budget.Etat.Code == $ctrl.CodeBudgetEtat.AValider)">{{$ctrl.libelleBoutonValider}}</button>
+                    <button type="button" class="fred-button default text btn-grey" ng-click="$ctrl.DisplayReturnDraftDialog()" ng-if="$ctrl.Budget.Etat.Code == $ctrl.CodeBudgetEtat.AValider">{{::$ctrl.resources.Budget_Detail_ToolBar_Action_RetourBrouillon}}</button>
+                </fred-section-controls>
+            </fred-section>
+
+            <!--Actions-->
+            <fred-section class="action-section" ng-if="$ctrl.Budget">
+                <fred-section-title>{{::$ctrl.resources.Budget_Detail_ToolBar_Titre_Actions}}</fred-section-title>
+                <fred-section-controls class="action-controls">
+                    <button type="button" class="fred-button default text btn-disabledTasks" ng-click="$ctrl.onDisabledTasksButtonClicked()">
+                        <i class="flaticon disabled-tasks-icon" ng-class="$ctrl.filters.DisabledTasksDisplayed ? 'flaticon-zoom-out' : 'flaticon-zoom-in'"></i>
+                        <span class="disabled-tasks-message">{{::$ctrl.resources.Budget_Detail_DisabledTasksButtonCaption}}</span>
+                    </button>
+                    <button class="btn-open-bibliotheque-prix btn material-icons"
+                            ng-click="$ctrl.OpenBibliothequePrix()"
+                            title="{{::$ctrl.resources.Budget_Ouvrir_BibliothequePrix_Button}}">
+                        local_library
+                    </button>
+                    <fred-authorization key="{{::$ctrl.PermissionKeys.AffichageBoutonCopierRessourcesBudget}}">
+                        <button class="btn btn-copy-budget material-icons"
+                                ng-if="$ctrl.CanCopyBudget()"
+                                ng-click="$ctrl.OnCopyBudgetButtonClick()"
+                                title="{{::$ctrl.resources.Budget_Detail_ToolBar_Action_CopierBudget}}">
+                            content_copy
+                        </button>
+                    </fred-authorization>
+                    <fred-button class="fred-button white-star" type="button" ng-click="$ctrl.addFilter2Favoris()">
+                        <i class="material-icons">star</i>
+                    </fred-button>
+                </fred-section-controls>
+            </fred-section>
+
+            <!--Indicateur-->
+            <fred-section class="indicator-section" ng-if="$ctrl.Budget">
+                <fred-section-title>{{::$ctrl.resources.Budget_Detail_ToolBar_Titre_Indicateur}}</fred-section-title>
+                <div class="indicator" ng-class="{'draft': $ctrl.Budget.Etat.Code == $ctrl.CodeBudgetEtat.Brouillon,
+                                'applicated': $ctrl.Budget.Etat.Code == $ctrl.CodeBudgetEtat.EnApplication,
+                                'archived': $ctrl.Budget.Etat.Code == $ctrl.CodeBudgetEtat.Archive,
+                                'tovalidate' : $ctrl.Budget.Etat.Code == $ctrl.CodeBudgetEtat.AValider}">
+                    <div class="amount">
+                        <span class="txt">{{::$ctrl.resources.Budget_Detail_ToolBar_Titre_Indicateur_Montant}}</span>
+                        <span class="taxless" ng-attr-title="{{$ctrl.BudgetDetailService.GetTooltip($ctrl.Budget.Montant)}}">{{$ctrl.Budget.Montant | number:2}}</span>
+                    </div>
+                </div>
+            </fred-section>
+
+            <!--Export-->
+            <fred-section class="export-section" ng-if="$ctrl.Budget">
+                <fred-section-title>{{::$ctrl.resources.Budget_Detail_ToolBar_Titre_Export}}</fred-section-title>
+                <fred-section-controls class="action-controls">
+                    <fred-button type="button" ng-click="$ctrl.DisplayExportDialog()" class="icon-button" title="{{::$ctrl.resources.Global_Bouton_ExportExcel_Tooltip}}">
+                        <span class="excel-icon" ng-class="{'.deactivate-button': $ctrl.Budget === null}"></span>
+                    </fred-button>
+                    <fred-button type="button" ng-click="$ctrl.onExportExcel('Editable', true)" class="icon-button" title="{{::$ctrl.resources.Global_Bouton_ExportPDF_Tooltip}}">
+                        <span class="pdf-icon deactivate-button" ng-class="{'.deactivate-button': $ctrl.Budget === null}"></span>
+                    </fred-button>                   
+                </fred-section-controls>
+            </fred-section>
+
+            <!--Notification New task-->
+            <fred-section class="notification-newtask-section" ng-if="$ctrl.Budget && $ctrl.Budget.IsNewTaskNotification">
+                <fred-section-title></fred-section-title>
+                <fred-section-controls>
+                    <div class="notification-newtask">
+                        <div class="notification-newtask-warning">
+                            <span class="material-icons" style="font-size: 30px">warning</span>
+                        </div>
+                        <div class="notification-newtask-lib">
+                            <b>Attention</b><br />
+                            <span>{{$ctrl.resources.BudgetDetail_NewTaskNotification}}</span>
+                        </div>
+                        <div class="notification-newtask-btn">
+                            <span class="material-icons" ng-click="$ctrl.DeleteNotificationNewTask();" ng-attr-title="{{::$ctrl.resources.BudgetDetail_NewTaskCloseNotificationTitle}}">clear</span>
+                        </div>
+                    </div>
+                </fred-section-controls>
+            </fred-section>
+        </fred-toolbar>
+
+        <!--Barre d'outils sous-detail-->
+        <fred-toolbar ng-if="$ctrl.BudgetDetailService.ViewMode === $ctrl.BudgetDetailService.ViewModeType.SousDetail" class="sous-detail">
+
+            <!--CI-->
+            <fred-section class="ci-section">
+                <fred-section-title>{{::$ctrl.resources.Budget_Detail_ToolBar_Titre_CI}}</fred-section-title>
+                <fred-section-controls>
+                    <input type="text" class="form-control" value="{{$ctrl.Budget.CI.Code}} {{$ctrl.Budget.CI.Libelle}}" readonly>
+                </fred-section-controls>
+            </fred-section>
+
+            <!--Version-->
+            <fred-section class="version-section">
+                <fred-section-title>{{::$ctrl.resources.Budget_Detail_ToolBar_Titre_Version}}</fred-section-title>
+                <fred-section-controls>
+                    <input type="text" class="form-control" value="{{$ctrl.Budget.Version}}" readonly>
+                </fred-section-controls>
+            </fred-section>
+
+            <!--Recherche-->
+            <fred-section class="text-search-section" ng-if="false">
+                <fred-section-title>{{::$ctrl.resources.Budget_Detail_ToolBar_Titre_Rechercher}}</fred-section-title>
+                <div class="search-container">
+                    <div class="input-group input-search">
+                        <input type="text" class="form-control" placeholder="{{::$ctrl.resources.Budget_Detail_ToolBar_PlaceHolder_Rechercher}}">
+                        <span class="input-group-addon button-search">
+                            <i class="material-icons">search</i>
+                        </span>
+                    </div>
+                </div>
+            </fred-section>
+
+            <!--Actions-->
+            <fred-section class="action-section" ng-if="!$ctrl.Budget.Readonly && !($ctrl.SousDetail.BudgetT4.Tache.Code.indexOf('T4REV') > -1)">
+                <fred-section-title>{{::$ctrl.resources.Budget_Detail_ToolBar_Titre_Actions}}</fred-section-title>
+                <fred-section-controls class="action-controls">
+                    <button type="button" class="fred-button default text btn-grey" ng-click="$ctrl.CancelSousDetail()">{{::$ctrl.resources.Budget_Detail_ToolBar_Action_Annuler}}</button>
+                    <button type="button" class="fred-button default text btn-enregistrer" ng-class="$ctrl.DEBUG && $ctrl.SousDetail.HasChanged() ? 'debug-save-available' : ''" ng-click="$ctrl.SaveSousDetail()">{{::$ctrl.resources.Budget_Detail_ToolBar_Action_Enregistrer}}</button>
+                    <button class="btn btn-open-bibliotheque-prix material-icons"
+                            ng-click="$ctrl.OpenBibliothequePrix()"
+                            title="{{::$ctrl.resources.Budget_Ouvrir_BibliothequePrix_Button}}">
+                        local_library
+                    </button>
+                </fred-section-controls>
+            </fred-section>
+
+            <!--Affichage-->
+            <fred-section class="display-section">
+                <fred-section-title>{{::$ctrl.resources.Budget_Detail_ToolBar_Titre_Affichage}}</fred-section-title>
+                <fred-section-controls class="display-section-controls" ng-disabled="$ctrl.Budget && $ctrl.Budget.Readonly">
+                    <div class="display sd"
+                         ng-class="$ctrl.GetDisplayButtonClass($ctrl.BudgetDetailService.SousDetailViewModeType.SD)"
+                         title="{{::$ctrl.resources.Budget_Detail_ToolBar_Tooltip_Affichage_SD}}"
+                         ng-click="$ctrl.ShowSousDetailVueSD()">
+                        {{::$ctrl.resources.Budget_Detail_ToolBar_Affichage_SD}}
+                    </div>
+                    <div class="display t4"
+                         ng-class="$ctrl.GetDisplayButtonClass($ctrl.BudgetDetailService.SousDetailViewModeType.T4)"
+                         title="{{::$ctrl.resources.Budget_Detail_ToolBar_Tooltip_Affichage_T4}}"
+                         ng-click="$ctrl.ShowSousDetailVueT4()">
+                        {{::$ctrl.resources.Budget_Detail_ToolBar_Affichage_T4}}
+                    </div>
+                    <div ng-if="false"
+                         class="display pu"
+                         ng-class="$ctrl.GetDisplayButtonClass($ctrl.BudgetDetailService.SousDetailViewModeType.PU)"
+                         title="{{::$ctrl.resources.Budget_Detail_ToolBar_Tooltip_Affichage_PU}}">
+                        {{::$ctrl.resources.Budget_Detail_ToolBar_Affichage_PU}}
+                    </div>
+                </fred-section-controls>
+            </fred-section>
+
+            <!--Indicateur-->
+            <fred-section class="indicator-section">
+                <fred-section-title>{{::$ctrl.resources.Budget_Detail_ToolBar_Titre_Indicateur}}</fred-section-title>
+                <div class="indicator" ng-class="{'draft': $ctrl.Budget.Etat.Code == $ctrl.CodeBudgetEtat.Brouillon || $ctrl.Budget.Etat.Code == $ctrl.CodeBudgetEtat.AValider,
+                                          'applicated': $ctrl.Budget.Etat.Code == $ctrl.CodeBudgetEtat.EnApplication,
+                                          'archived': $ctrl.Budget.Etat.Code == $ctrl.CodeBudgetEtat.Archive}">
+                    <div class="amount">
+                        <span class="txt">{{::$ctrl.resources.Budget_Detail_ToolBar_Titre_Indicateur_Montant}}</span>
+                        <span class="taxless" ng-attr-title="{{$ctrl.BudgetDetailService.GetTooltip($ctrl.Budget.Montant)}}">{{$ctrl.Budget.Montant | number:2}}</span>
+                    </div>
+                </div>
+            </fred-section>
+
+            <budget-sous-detail-navigate-t4-component resources="$ctrl.resources"
+                                                      budget="$ctrl.Budget"
+                                                      sous-detail="$ctrl.SousDetail">
+            </budget-sous-detail-navigate-t4-component>
+
+            <!--Export-->
+            <fred-section class="export-section" ng-if="false">
+                <fred-section-title>{{::$ctrl.resources.Budget_Detail_ToolBar_Titre_Export}}</fred-section-title>
+                <fred-section-controls>
+                    <fred-button type="button" class="cloud gr">
+                        <i class="material-icons">cloud_download</i>
+                    </fred-button>
+                    <fred-button type="button" class="cloud red">
+                        <i class="material-icons">cloud_download</i>
+                    </fred-button>
+                </fred-section-controls>
+            </fred-section>
+        </fred-toolbar>
+    </div>
+
+    <div class="row information" ng-show="$ctrl.BudgetDetailService.ViewMode === $ctrl.BudgetDetailService.ViewModeType.Detail">
+        <div class="col-md-1 icon">
+            <i class="flaticon flaticon-warning"></i>
+        </div>
+        <div class="col-md-11 message">
+            <span>{{$ctrl.filters.DisabledTasksDisplayed ? $ctrl.resources.Budget_Detail_DisabledTasksShown : $ctrl.resources.Budget_Detail_DisabledTasksHidden }}</span>
+        </div>
+    </div>
+
+    <!--budget detail - tableau des tâches-->
+    <budget-detail-liste-component ng-show="$ctrl.BudgetDetailService.ViewMode === $ctrl.BudgetDetailService.ViewModeType.Detail"
+                                   ng-if="$ctrl.Budget && !$ctrl.Budget.Erreur"
+                                   budget="$ctrl.Budget"
+                                   resources="$ctrl.resources"
+                                   disabled-tasks-displayed="$ctrl.filters.DisabledTasksDisplayed">
+    </budget-detail-liste-component>
+
+    <!--Sous-détail-->
+    <budget-sous-detail-liste-component ng-if="$ctrl.BudgetDetailService.ViewMode === $ctrl.BudgetDetailService.ViewModeType.SousDetail && $ctrl.Budget && !$ctrl.Budget.Erreur"
+                                        budget="$ctrl.Budget"
+                                        sous-detail="$ctrl.SousDetail"
+                                        resources="$ctrl.resources">
+    </budget-sous-detail-liste-component>
+
+    <!--Validation du budget-->
+    <budget-validation-dialog-component ng-if="$ctrl.Budget"
+                                        ci-id="$ctrl.Budget.CI.CiId"
+                                        budget="$ctrl.Budget"
+                                        on-validate="$ctrl.OnValidate(validationErreurs)"
+                                        resources="$ctrl.resources">
+    </budget-validation-dialog-component>
+
+    <plan-tache-lateral-component taches="$ctrl.Budget.Taches1"
+                                  resources="$ctrl.resources">
+    </plan-tache-lateral-component>
+
+    <!--Panneau de gestion des customisations d'affichage-->
+    <budget-detail-customize-display-panel-component ng-if="$ctrl.Budget"
+                                                     resources="$ctrl.resources">
+    </budget-detail-customize-display-panel-component>
+
+    <!--Fenêtre de copie de budget-->
+    <copier-budget-dialog-component ng-if="$ctrl.CanCopyBudget()"
+                                    resources="$ctrl.resources">
+    </copier-budget-dialog-component>
+
+    <!--Fenêtre de confirmation de copie de budget-->
+    <copier-budget-confirm-dialog-component ng-if="$ctrl.CanCopyBudget()"
+                                            resources="$ctrl.resources">
+    </copier-budget-confirm-dialog-component>
+</div>

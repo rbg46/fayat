@@ -1,0 +1,114 @@
+= Comment utiliser l’ETL
+
+== Principe
+
+ETL = Extract / Transform / Load Dans Fred.IE, pour plus de clarté, on appelle ça : 
+____
+ Input / Transform / Output
+____
+
+Donc :
+
+* De la data arrive en Input 
+* Elle est transformée 
+* Puis elle part vers une sortie
+
+Par exemple : 
+
+* Appel d’une Api => envoie dans une classe Input
+* Puis appel du métier
+* Puis sortie vers Excel, mail, ou une autre Api…
+
+Typage : Les classes sont typées avec deux templates : 
+
+* vos données d’entrée que l’on appelle Input
+* vos données transformées que l’on appelle Resultat
+
+== Le moteur : EtlProcessBase<TI, TR>
+
+* Cette classe doit être dérivée
+* Cette classe a accès à la Config
+* Implémeter la méthode Build pour décrire le workflow
+* Autres méthodes virtuelles si besoin:
+** OnBegin
+** OnSuccess (abstract)
+** OnError (abstract)
+** OnFinally (appelé même en cas d’exception)
+
+== Les processus :
+
+[width="100%",cols="14%,9%,27%,26%,24%",options="header",]
+|===
+|Description |Type |Commentaire |But |Appel
+
+|Entrée 
+|IEtlInput 
+|Une seule entrée possible. Contient les données d’entrées. Peut contenir autant de classes de données souhaitées. L’objet est passé en paramètre à tous les processus. |Peut correspondre à un MODEL ou autre 
+|IEtlInput.Execute
+
+|Result 
+|IEtlResult 
+|Une seule classe possible. Contient les données issues des transformations. Peut contenir autant de classes de données souhaitées. 
+|Peut correspondre à un MODEL ou autre 
+|N/A
+
+|Transformations 
+|IEtlTransform 
+|Plusieurs transformations possibles 
+|Code METIER de traitement 
+|IEtlTransform.Execute(input, result)
+
+|Ouput 
+|IEtlOuput 
+|Plusieurs sorties possibles 
+|Code METIER d’envoie
+|IEtlOutput.Execute(result)
+|===
+
+== Input
+
+Soit, j’ai déjà les données d’entrées. Dans ce cas, je peux les passer directement à l’Etl 
+----
+var myEtl = new MyEtl(); > myEtl.Build();
+myEtl.Execute(mes données);
+----
+
+Soit, je dois aller chercher les données, par exemple dans une base, une api… Dans ce cas je vais les chercher dans IEtlInput.Excute
+----
+var myEtl = new MyEtl();
+myEtl.Build();
+myEtl.Execute(); 
+...
+appel de MyInput.Execute
+----
+
+== Sample
+
+Il y a deux samples complets dans le projet ``ElephantToChatEtlProcess.cs`` et ``SampleCallEtl.cs``
+
+
+== Builder :
+
+Il y a un builder fluent pour aider à construire le process. 
+
+----
+new EtlBuilder<TI,TR>(Config).Input().Transform().Output().OnError().OnSuccess()
+----
+
+== Arrêt de l’Etl :
+
+Le workflow peut-être arrêté en lancant à tout moment ``EtlStopException``.
+Dans ce cas ``OnError`` est appelé.
+
+== Exceptions :
+
+Toute exception est capturée par le moteur. Il n’est pas nécessaire de  la logguer ni de la convertir, c’est déjà fait, Juste de traiter l’erreur s’il y a lieu. +
+Si une exception survient, la méthode suivante est appelée, vous pouvez la surcharger si besoin :
+
+____
+abstract void EtlProcessBase.OnError(exception)
+____
+
+== Ref:
+
+Il n’est pas obligatoire de définir IEtlResult dans le builder. Dans ce cas, l’objet sera null lorsqu’il sera passé en paramètre des fonctions Execute. C’est pourquoi, il est passé en ``ref`` (pointeur) pour qu’il puisse être instancié.

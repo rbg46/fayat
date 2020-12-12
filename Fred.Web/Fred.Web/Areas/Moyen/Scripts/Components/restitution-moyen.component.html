@@ -1,0 +1,86 @@
+﻿<div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i>{{$ctrl.title}}</h2>
+            <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" aria-label="Close" title="Cliquer pour annuler et fermer"></i>
+        </div>
+        <div class="modal-body">
+            <span class="text-danger" ng-show="$ctrl.isCheckErrorExistingStartDates && $ctrl.isErrorExistingStartDate">
+                {{$ctrl.messageErroExistingStartDate}}
+            </span>
+            <div ng-repeat="item in $ctrl.AffecationTypeList" class="row">
+                <div class="col-md-12">
+                    <input id="chbx_{{item.AffectationMoyenTypeId}}" type="checkbox" ng-model="item.Selected" ng-checked="item.Selected"
+                           ng-change="$ctrl.handleChangeSelection(item.AffectationMoyenTypeId)">
+                    <label for="chbx_{{item.AffectationMoyenTypeId}}" class="ng-binding"><span></span>{{item.Libelle}}</label>
+                </div>
+            </div>
+            <div class="row dp">
+                <div class="col-md-12">
+                    <label class="control-label">{{$ctrl.dateDebutName}}</label>
+                    <span class="text-danger" ng-show="$ctrl.isCheckDateDebutActif && $ctrl.dateDebuInvalid">
+                        {{$ctrl.messageErroExistingStartDate}}
+                    </span>
+                    <span class="text-danger" ng-show="$ctrl.dateDebutNull">
+                        {{$ctrl.resources.Moyen_Warning_DateRestitution}}
+                    </span>
+                    <span class="text-danger" ng-show="$ctrl.isDateDebutWeekend">Merci de saisir la date d'un jour ouvré.</span>
+                    <div class="input-group date">
+                        <app-date-picker id="dtDateRestitution"
+                                         name="DateOuverture"
+                                         format="DD/MM/YYYY"
+                                         lang="fr"
+                                         placeholder="{{$ctrl.dateDebutName}}"
+                                         initial-date="{{$ctrl.affectationModel.DateDebut}}"
+                                         ng-change="$ctrl.handleDateValidation()"
+                                         ng-model="$ctrl.affectationModel.DateDebut" />
+                    </div>
+                </div>
+                <div class="col-md-12" ng-hide="$ctrl.isMaintenance">
+                    <label><span></span>Site de restitution</label>
+                    <span class="text-danger" ng-show="$ctrl.isSiteSelectionError">
+                        Le site de restitution est obligatoire sauf dans le cas d’un retour au loueur .
+                    </span>
+                    <lookup-standalone ng-model="$ctrl.affectationModel.Site"
+                                       text="$ctrl.affectationModel.Site.Libelle"
+                                       search-title="Site de restitution"
+                                       search-placeholder="Site de restitution"
+                                       url="{{$ctrl.handleGetLookupUrl('Site')}}"
+                                       on-select="$ctrl.handleLookupSelection('Site', item)"
+                                       on-delete="$ctrl.handleRemoveSiteFilter()"
+                                       placeholder="Site de restitution"
+                                       show-in-popup="true"
+                                       tooltip="$ctrl.affectationModel.Site.Libelle"
+                                       ng-disabled="$ctrl.isSiteSelectionDisabled"
+                                       class="formulaire long">
+                    </lookup-standalone>
+                </div>
+                <div class="col-md-12" ng-show="$ctrl.isMaintenance">
+                    <label class="control-label">Date de fin prévue</label>
+                    <span class="text-danger" ng-show="$ctrl.dateFinInvalid">{{$ctrl.resources.Moyen_Maintenance_Warning_DateFin}}</span>
+                    <span class="text-danger" ng-show="$ctrl.isDateFinWeekend">Merci de saisir la date d'un jour ouvré.</span>
+                    <div class="input-group date">
+                        <app-date-picker id="dtPkEndAffectation"
+                                         name="DateFin"
+                                         format="DD/MM/YYYY"
+                                         lang="fr"
+                                         placeholder="Date de fin"
+                                         initial-date="{{$ctrl.affectationModel.DateFin}}"
+                                         ng-model="$ctrl.affectationModel.DateFin"
+                                         ng-change="$ctrl.handleDateValidation()" />
+                    </div>
+                </div>
+            </div>
+            <div class="row dp">
+                <div class="col-md-12">
+                    <textarea class="form-control" ng-model="$ctrl.affectationModel.Commentaire" placeholder="Commentaire"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default pull-left" data-dismiss="modal" ng-disabled="$ctrl.isFormDataInValid" ng-click="$ctrl.ValidateForm()">{{$ctrl.resources.Moyen_Enregistrer}}</button>
+            <button class="btn btn-link pull-right" data-dismiss="modal">Retour</button>
+        </div>
+    </div>
+</div>

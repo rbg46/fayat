@@ -1,0 +1,29 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = "Validation de mes affaires";
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/ValidationAffairesOuvriersBundle.css")
+    @Styles.Render("~/RapportHebdoBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/ValidationAffairesOuvriersBundle.js")
+    @this.RenderResources("FeatureRapport", "FeatureRapportHebdo", "FeatureFavori")
+}
+
+<div class="container pointage-hebdo" ng-controller="ValidationAffairesOuvriersController as $ctrl">
+    <div class="row" ng-show="!$ctrl.isShowRapport">
+        <validation-affaires-ouvriers-synthese-component resources="$ctrl.resources">
+        </validation-affaires-ouvriers-synthese-component>
+    </div>
+    <div class="row" ng-show="$ctrl.isShowRapport">
+        <pointage-hebdo-rapport-component resources="$ctrl.resources"
+                                          is-etam-iac="false"
+                                          is-manager-pointing="true">
+        </pointage-hebdo-rapport-component>
+    </div>
+</div>

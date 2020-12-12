@@ -1,0 +1,790 @@
+﻿$color_1: black;
+$color_2: white;
+$color_3: #fff;
+$color_4: rgb(255,0,102);
+$color_5: rgb(0, 82, 160);
+$color_6: rgb(103,117,127);
+$color_7: rgb(49,133,155);
+$color_8: rgb(234,112,13);
+$color_9: rgb(127,127,127);
+$color_10: #67757F;
+$color_11: rgb(9,173,166);
+$color_12: rgb(222,63,126);
+$background_color_1: white;
+$background_color_2: rgb(234,112,13);
+$background_color_3: rgb(157,187,97);
+$background_color_4: rgb(0, 82, 160);
+$background_color_5: rgb(255,0,102);
+$background_color_6: #fff;
+$background_color_7: #F1F2F3;
+$background_color_8: rgb(9,173,166);
+$background_color_9: #0052A0;
+$background_color_10: rgb(0,103,189);
+$background_color_11: rgb(222,63,126);
+$background_color_12: rgb(242,248,253);
+$background_color_13: rgb(245,248,239);
+$background_color_14: rgb(252,235,242);
+$background_color_15: rgb(128,190,237);
+$background_color_16: rgb(64,128,184);
+$background_color_17: rgb(0,82,160);
+$background_color_18: rgb(255, 169, 13);
+$background_color_19: rgb(242,242,242);
+
+/* Barre de recherche */
+/* Tableau */
+/* Modal */
+/* Custom Modal */
+/* Ventilation modal */
+fred-toolbar {
+    flex-flow: row wrap;
+
+    fred-section.ci {
+        width: 25%;
+    }
+
+    .select-date {
+        .input-group.date {
+            .input-group.date {
+                width: 87%;
+            }
+        }
+    }
+
+    .btn.btn-primary.bkg-white {
+        background-color: $background_color_1 !important;
+        color: $color_1 !important;
+    }
+
+    .inner-addon.right-addon {
+        width: 100%;
+
+        input {
+            cursor: pointer;
+        }
+    }
+
+    .chev.material-icons {
+        position: absolute;
+        display: inline-block;
+        line-height: 0.7;
+        pointer-events: none;
+        background-color: $background_color_8;
+        height: 29px;
+        width: 30px;
+        text-align: center;
+        color: $color_2;
+        font-size: 25px;
+        right: 0;
+        top: 0;
+        padding-top: 6px;
+    }
+}
+
+.feature-select-date {
+    display: flex;
+
+    .select-date {
+        margin-left: 2%;
+
+        .fred-button {
+            margin-left: 15px;
+            padding: 3px 0;
+            width: 50px;
+        }
+
+        .form-control {
+            height: 31px;
+        }
+
+        .fred-button.orange {
+            background-color: $background_color_2;
+        }
+
+        .fred-button.green {
+            background-color: $background_color_3;
+        }
+    }
+}
+
+.feature-select-date.month {
+    margin-left: 2%;
+}
+
+.btn.cumul {
+    font-size: 11px;
+    margin-top: 0;
+    margin-right: 0;
+    font-weight: 600;
+}
+
+.status {
+    .status-display {
+        background-color: $background_color_4;
+        padding: 3px;
+        color: $color_2;
+        font-size: 11px;
+        width: 50px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .status-display.orange {
+        background-color: $background_color_2;
+    }
+
+    .status-display.green {
+        background-color: $background_color_3;
+    }
+
+    margin-left: 1%;
+}
+
+.boutons-actions {
+    margin-left: 2%;
+
+    .fred-button {
+        margin-left: 0;
+        background-color: $background_color_3;
+        color: $color_3;
+    }
+}
+
+.fred-button.white-star {
+    background-color: $background_color_5;
+    color: $color_3;
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+
+    &:hover {
+        background-color: $background_color_6;
+        color: $color_4;
+    }
+}
+
+.fred-button.search {
+    background-color: $background_color_4;
+    color: $color_3;
+    width: 90px;
+    height: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+
+    &:hover {
+        color: $color_5;
+        background-color: $background_color_7 !important;
+    }
+}
+
+.input-group.date {
+    .input-group-addon {
+        padding-bottom: 5px;
+    }
+}
+
+.OD-list {
+    margin-top: 20px;
+}
+
+.OD-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+
+    th {
+        background-color: $background_color_9;
+        color: $color_3;
+        font-size: 11px;
+        font-weight: normal;
+        height: 30px;
+        padding-left: 5px;
+        text-align: right;
+
+        .tot-fred {
+            background-color: $background_color_10;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tot-anael {
+            background-color: $background_color_3;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tot-ecart {
+            background-color: $background_color_11;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    tbody {
+        overflow-y: auto;
+        width: 100%;
+    }
+
+    td {
+        padding-left: 5px;
+        height: 30px;
+        font-size: 12px;
+        text-align: right;
+        border-bottom: 1px solid rgb(221, 221, 221);
+
+        .tot-fred {
+            background-color: $background_color_12;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tot-anael {
+            background-color: $background_color_13;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .firstCol {
+        text-align: right;
+
+        div {
+            width: 100%;
+            height: 30px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .fred-icon {
+            background-image: url('/medias/images/ico/command-icon.png');
+            width: 30px;
+            height: 15px;
+            display: block;
+            background-position: 100% 50%;
+            background-size: 80%;
+            background-repeat: no-repeat;
+        }
+    }
+
+    .pr-ecart {
+        padding-right: 55px;
+    }
+
+    .ecart {
+        background-color: $background_color_14;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ecart.link {
+        background-color: $background_color_6;
+        height: 30px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        .material-icons {
+            color: $color_6;
+            cursor: pointer;
+        }
+    }
+
+    .col-1 {
+        text-align: left;
+        padding-left: 5%;
+    }
+
+    .sapicon-E060 {
+        color: $color_7;
+        margin-left: 20px;
+        font-size: 18px;
+    }
+
+    .sapicon-E0A5 {
+        color: $color_8;
+        margin-left: 20px;
+        font-size: 18px;
+    }
+}
+
+.OD-table.foot {
+    td {
+        border-top: none;
+        border-bottom: none;
+
+        .tot-fred {
+            background-color: $background_color_15;
+            color: $color_3;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tot-anael {
+            background-color: $background_color_3;
+            color: $color_3;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tot-ecart {
+            background-color: $background_color_11;
+            color: $color_3;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+.modal-dialog {
+    width: 600px;
+    top: 10%;
+
+    ul {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+}
+
+.sapicon-E02C {
+    margin-right: 10px;
+}
+
+.modal-body {
+    .infobar {
+        .period {
+            width: 150px;
+            height: 44px;
+            background-color: $background_color_3;
+            color: $color_3;
+            padding-right: 5px;
+            padding-left: 5px;
+
+            .lbl {
+                font-size: 11px;
+            }
+
+            .val {
+                font-size: 18px;
+                text-align: right;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        display: flex;
+        justify-content: space-evenly;
+
+        .anael {
+            margin-left: 1%;
+            width: 200px;
+            height: 44px;
+            background-color: $background_color_3;
+            color: $color_3;
+            padding-right: 5px;
+            padding-left: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .ecarts {
+            .sapicon-E158 {
+                margin-right: 20px;
+
+                &::before {
+                    font-size: 25px;
+                }
+            }
+
+            .sapicon-E1A7 {
+                margin-right: 20px;
+
+                &::before {
+                    font-size: 25px;
+                }
+            }
+
+            .sapicon-E02F {
+                margin-right: 20px;
+
+                &::before {
+                    font-size: 25px;
+                }
+            }
+
+            .material-icons {
+                margin-right: 20px;
+
+                &::before {
+                    font-size: 25px;
+                }
+            }
+
+            .amount {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+
+                .txt {
+                    text-align: left;
+                    font-size: 11px;
+                }
+
+                .data {
+                    text-align: right;
+                    font-size: 18px;
+                }
+            }
+        }
+
+        .vent {
+            margin-left: 1%;
+            width: 180px;
+            height: 44px;
+            background-color: $background_color_16;
+            color: $color_3;
+            padding-right: 5px;
+            padding-left: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .dispatch {
+            margin-left: 1%;
+            width: 230px;
+            height: 44px;
+            background-color: $background_color_11;
+            color: $color_3;
+            padding-right: 5px;
+            padding-left: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .add-rep {
+            margin-left: 1%;
+            width: 160px;
+            height: 44px;
+            background-color: $background_color_3;
+            border: none;
+            color: $color_3;
+            padding-right: 5px;
+            padding-left: 5px;
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .ecart-list {
+        margin-top: 30px;
+
+        table {
+            position: relative;
+            overflow: hidden;
+            border-collapse: collapse;
+            width: 100%;
+            table-layout: fixed;
+            display: table;
+        }
+    }
+}
+
+.ecart-list {
+    table {
+        thead {
+            position: relative;
+            display: block;
+            overflow-x: visible;
+
+            tr {
+                th {
+                    height: 30px;
+                    background-color: $background_color_17;
+                    color: $color_3;
+                    font-size: 11px;
+                    font-weight: 700;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+
+        tbody {
+            position: relative;
+            display: block;
+            overflow: auto;
+            overflow-x: visible;
+            height: 200px !important;
+
+            tr {
+                td {
+                    padding: 0;
+                    height: 30px;
+                    text-align: center;
+                    font-size: 11px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-top: 1px solid #ddd;
+
+                    .edit-icons {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        justify-content: space-evenly;
+
+                        .sapicon-E038 {
+                            &::before {
+                                cursor: pointer;
+                                font-size: 17px;
+                                color: $color_9;
+                            }
+                        }
+
+                        .material-icons {
+                            cursor: pointer;
+                            color: $color_9;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.fred-button.yellow {
+    background-color: $background_color_18 !important;
+    margin-left: 5px;
+}
+
+.custom-modal {
+    top: 25%;
+    left: 35%;
+}
+
+.custom-modal-content {
+    width: 100%;
+}
+
+.excel-choice-container {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.importButton {
+    width: 130px;
+    height: 100px;
+    border: 1px solid #BBBBBB;
+    font-size: 11px;
+    color: $color_10;
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    margin-right: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.importButton.selected {
+    border: 1px solid rgb(9,173,166);
+    color: $color_11;
+}
+
+.importButton.disabled {
+    cursor: not-allowed;
+    background-color: $background_color_19;
+}
+
+.importButton-txt {
+    cursor: pointer;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 30%;
+    font-weight: normal;
+}
+
+.col-md-1.small {
+    width: 80px !important;
+}
+
+.col-md-1.medium {
+    width: 100px !important;
+}
+
+.col-md-2.large {
+    width: 150px !important;
+    height: initial !important;
+}
+
+.col-md-2.super-large {
+    width: 200px !important;
+}
+
+.col-md-5.extra-large {
+    width: 250px !important;
+}
+
+.form-control.inputText {
+    width: 90%;
+}
+
+.amount-txt {
+    font-size: large;
+    align-self: baseline;
+    font-weight: 500;
+}
+
+.text-danger.error {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.formulaire.middle.lookup {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    display: block;
+}
+
+.col-md-2.has-error {
+    display: table;
+}
+
+.table-fixed {
+    tr {
+        display: flex;
+    }
+}
+
+.inner-triangle {
+    border-left: 15px solid transparent;
+    border-right: 15px solid rgb(9,173,166);
+    border-bottom: 15px solid transparent;
+    height: 0;
+    width: 0;
+    position: absolute;
+    right: 0px;
+    z-index: 2;
+}
+
+.mess-clot {
+    color: $color_12;
+}
+
+.ventilation-modal {
+    .modal-dialog {
+        width: 1500px;
+    }
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+    .feature-select-date {
+        .select-date {
+            .form-control {
+                height: 25px;
+            }
+        }
+    }
+
+    fred-toolbar {
+        .chev.material-icons {
+            height: 25px;
+            font-size: 20px;
+        }
+
+        .btn.btn-primary.bkg-white {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        .status {
+            .status-display.green {
+                height: 25px;
+            }
+
+            .status-display.orange {
+                height: 25px;
+            }
+        }
+
+        .fred-button.search {
+            height: 25px;
+        }
+
+        .feature-select-date.beg-end {
+            width: 35%;
+        }
+
+        .feature-select-date.month.state {
+            margin-left: 1%;
+        }
+    }
+
+    .input-group.date {
+        .input-group-addon {
+            padding: 2px 6px;
+        }
+    }
+
+    .fred-button.white-star {
+        width: 25px;
+        height: 25px;
+        font-size: 16px;
+    }
+
+    .boutons-actions {
+        margin-left: 0;
+    }
+
+    .modal-dialog {
+        width: 400px;
+    }
+
+    .ventilation-modal {
+        .modal-dialog {
+            width: 1200px;
+
+            .ecart-list {
+                table {
+                    thead {
+                        tr {
+                            th {
+                                font-size: 9px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

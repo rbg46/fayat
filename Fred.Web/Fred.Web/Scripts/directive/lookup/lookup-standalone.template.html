@@ -1,0 +1,58 @@
+﻿<div class="preLook">
+    <lookup enable-default-selection="$ctrl.enableDefaultSelection"
+            search-title="{{$ctrl.searchTitle}}"
+            search-placeholder="{{$ctrl.searchPlaceholder}}"
+            search-placeholder2="{{$ctrl.searchPlaceholder2}}"
+            search-placeholder3="{{$ctrl.searchPlaceholder3}}"
+            search-tooltip="{{$ctrl.searchTooltip}}"
+            search-max-length="{{$ctrl.searchMaxLength}}"
+            url="{{$ctrl.url}}"
+            on-click="$ctrl.onClick()"
+            on-select="$ctrl.onSelect({ item })"
+            ng-disabled="$ctrl.ngDisabled"
+            has-confirm="$ctrl.hasConfirm"
+            on-confirm="$ctrl.onConfirm()"
+            show-in-popup="$ctrl.showInPopup"
+            ng-model="$ctrl.pickListModel"
+            custom-template-url="{{$ctrl.customTemplateUrl}}"
+            custom-header-template-url="{{$ctrl.customHeaderTemplateUrl}}"
+            custom-header-context="$ctrl.customHeaderContext"
+            filters="$ctrl.filters"
+            active-second-search-input="$ctrl.activeSecondSearchInput"
+            active-third-search-input="$ctrl.activeThirdSearchInput"
+            add-Personel-Icon="$ctrl.addPersonelIcon"
+            active-checkbox-ressources-recomandee="$ctrl.activeCheckboxRessourcesRecomandee"
+            no-refresh-model-in-lookup="$ctrl.noRefreshModelInLookup"
+            id="{{$ctrl.id}}">
+        <div ng-transclude ng-hide="!$ctrl.addPersonelIcon"></div>
+        <div class="inputPL" ng-hide="$ctrl.addPersonelIcon"
+             ng-mouseover="$ctrl.onMouseOver()"
+             ng-mouseleave="$ctrl.onMouseLeave()">
+            <button class="inputPLSearch"
+                    ng-focus="$ctrl.focused = true;"
+                    ng-blur="$ctrl.focused = false;"
+                    ng-class="{'inputPLSearchParent' : $ctrl.styleParent, 'focused' : $ctrl.focused, 'disabled': $ctrl.ngDisabled }"
+                    ng-disabled="$ctrl.ngDisabled"
+                    title="{{$ctrl.getTooltipText()}}"
+                    type="button">
+                <span class="inputPLLabel placeholder" ng-if="!$ctrl.text && $ctrl.placeholder">{{$ctrl.placeholder}}</span>
+                <span class="inputPLLabel" ng-if="$ctrl.text">{{$ctrl.text}}</span>
+                <i ng-show="$ctrl.showSearchIcon() && !$ctrl.pickListModel || $ctrl.handleIsModelEmpty() || $ctrl.buttonOnly" class="chev" ng-class="$ctrl.searchIconClass">{{$ctrl.icon}}</i>
+            </button>
+            <div class="cross-bloc" ng-show="$ctrl.showDeleteButton === true || $ctrl.showDeleteButton === undefined" ng-if="$ctrl.buttonOnly != true">
+                <div class="rm-but" ng-show="$ctrl.deleteButtonIsVisible">
+                    <button class="inputPLRemove"
+                            ng-click="$ctrl.handleDelete($event)"
+                            ng-disabled="$ctrl.ngDisabled"
+                            ng-if="$ctrl.pickListModel != null || $ctrl.pickListModel != undefined"
+                            ng-class="{'inputPLSearchParent' : $ctrl.styleParent}"
+                            type="button">
+                        <i class="material-icons closing">close</i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </lookup>
+</div>
+

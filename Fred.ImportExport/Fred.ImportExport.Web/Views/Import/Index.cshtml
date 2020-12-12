@@ -1,0 +1,1138 @@
+﻿@model Fred.ImportExport.Web.Models.ImportViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Imports";
+}
+@section scripts {
+    <script type="text/javascript">
+        $("time.timeago").timeago();
+        var isStatValid = true;
+        function ImportEcrituresComptables() {
+            if (isStatValid) {
+                var dateDebutComptable = new Date(document.getElementById("dateDebutComptableRzb").value);
+                var dateFinComptable = new Date(document.getElementById("dateFinComptableRzb").value);
+                var codeEtablissement = document.getElementById("codeEtablissementRzb").value;
+                var queryString = "dateDebutComptable=" + dateDebutComptable.toJSON();
+                queryString += "&dateFinComptable=" + dateFinComptable.toJSON();
+                queryString += "&codeEtablissement=" + codeEtablissement;
+
+                ComputeActionUrl("/Import/ImportEcrituresComptablesRange", "anaelEcrituresRzb", null, queryString)
+            }
+
+        };
+
+        function ImportPartialEcrituresComptables() {
+            if (isStatValid) {
+                var dateDebutComptable = new Date(document.getElementById("dateDebutComptableRzb").value);
+                var dateFinComptable = new Date(document.getElementById("dateFinComptableRzb").value);
+                var codeEtablissement = document.getElementById("codeEtablissementRzb").value;
+                var queryString = "dateDebutComptable=" + dateDebutComptable.toJSON();
+                queryString += "&dateFinComptable=" + dateFinComptable.toJSON();
+                queryString += "&codeEtablissement=" + codeEtablissement;
+
+                ComputeActionUrl("/Import/ImportPartialEcrituresComptablesRange", "anaelEcrituresRzb", null, queryString)
+            }
+
+        };
+
+        function ImportEcrituresComptablesMoulins() {
+
+            var dateDebutComptable = new Date(document.getElementById("dateDebutComptableMoulins").value);
+            var dateFinComptable = new Date(document.getElementById("dateFinComptableMoulins").value);
+            var codeEtablissement = document.getElementById("codeEtablissementMoulins").value;
+            var queryString = "dateDebutComptable=" + dateDebutComptable.toJSON();
+            queryString += "&dateFinComptable=" + dateFinComptable.toJSON();
+            queryString += "&codeEtablissement=" + codeEtablissement;
+
+            ComputeActionUrl("/Import/ImportEcrituresComptablesRangeMoulins", "anaelEcrituresMoulins", null, queryString)
+
+        }
+
+         function ImportPartialEcrituresComptablesMoulins() {
+
+            var dateDebutComptable = new Date(document.getElementById("dateDebutComptableMoulins").value);
+            var dateFinComptable = new Date(document.getElementById("dateFinComptableMoulins").value);
+            var codeEtablissement = document.getElementById("codeEtablissementMoulins").value;
+            var queryString = "dateDebutComptable=" + dateDebutComptable.toJSON();
+            queryString += "&dateFinComptable=" + dateFinComptable.toJSON();
+            queryString += "&codeEtablissement=" + codeEtablissement;
+
+            ComputeActionUrl("/Import/ImportPartialEcrituresComptablesRangeMoulins", "anaelEcrituresMoulins", null, queryString)
+
+        }
+
+        function ComputeActionUrl(baseUrl, codeAnaelControlId, isBypassDateControlId, otherParameters = '') {
+            var actionUrl = baseUrl + '?';
+
+            if (codeAnaelControlId) {
+                var codeAnael = document.getElementById(codeAnaelControlId).innerText;
+                actionUrl += 'societeCodeAnael=' + codeAnael;
+            }
+            if (isBypassDateControlId) {
+                var isBypassDate = document.getElementById(isBypassDateControlId).checked;
+                actionUrl += '&byPassDate=' + isBypassDate;
+            }
+            if (otherParameters !== '') { actionUrl += '&' + otherParameters; }
+
+            location.href = actionUrl;
+        };
+
+        function OnCheckBypassDate(e, importNowControlId) {
+            var btn = document.getElementById(importNowControlId);
+
+            if (e.checked) {
+                btn.innerHTML = 'Import <b>Complet</b> Maintenant <span class="glyphicon glyphicon-warning-sign" style="color:red;"></span>';
+            }
+            else {
+                btn.innerHTML = "Importer Maintenant";
+            }
+        }
+
+        function GetCheckboxValue(cbId) {
+            return document.getElementById(cbId).checked;
+        }
+        function isDateDbFn() {
+            var dateFin = new Date(document.getElementById('dateFinComptable').value);
+            var dateDebut = new Date(document.getElementById('dateDebutComptable').value);
+            var dateLimit = new Date("01/10/2018").setHours(0, 0, 0, 0);
+            if (dateDebut < dateLimit || dateFin < dateLimit) {
+                isStatValid = false;
+                document.getElementById("ImportEcritureComptableMnt").disabled = true;
+                alert('la date que vous avez indique n\'est pas valide ');
+            }
+            else if (dateFin < dateDebut) {
+                isStatValid = false;
+                document.getElementById("ImportEcritureComptableMnt").disabled = true;
+                alert('Verifier Votre Date de Fin ');
+
+            }
+            else {
+                document.getElementById("ImportEcritureComptableMnt").disabled = false;
+                isStatValid = true;
+            }
+        }
+
+
+        /**/</script>
+}
+<div class="container-fluid import import-block">
+    <h2 class="align-center">@ViewBag.Title</h2>
+    <div class="row display-flex">
+        <div class="col-md-6">
+            @******************************************************IMPORT DES CI******************************************************@
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-home padding-right"></span><strong>@Html.Raw(Model.CiFlux?.Libelle)</strong>
+                        <span class="pull-right">
+                            @if (Model.CiFlux?.DateDerniereExecution.HasValue == true)
+                            {
+                                <span class="glyphicon glyphicon-time"></span>
+                                <time class="timeago" datetime="@Model.CiFlux.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.CiFlux.DateDerniereExecution.Value.ToLocalTime()"></time>
+                            }
+                        </span>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div>
+                        <ul>
+                            @if (Model.CiRecurringJob != null)
+                            {
+                                <li>Type d'import : <b>Récurrent</b></li>
+                                <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.CiRecurringJob)</b></li>
+                                <li>Cron : <code>@Model.CiRecurringJob.Cron</code></li>
+                            }
+                            else
+                            {
+                                <li>Type d'import : <b>Manuel</b></li>
+                            }
+                            <li>
+                                Code société ANAEL: <code id="anaelCIRzb">@Html.Raw(Model.CiFlux?.SocieteCode)</code>
+                            </li>
+                            <li><input type="checkbox" onclick="OnCheckBypassDate(this, 'importNowCi')" id="isBypassDateCi" /><label for="isBypassDateCi">&nbsp; Import complet</label></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button class="btn btn-primary" id="importNowCi" onclick="ComputeActionUrl('/Import/ImportCI', 'anaelCIRzb', 'isBypassDateCi')">Importer maintenant</button>
+                    <button class="btn btn-warning pull-right" onclick="ComputeActionUrl('/Import/ToggleScheduleImportCI', 'anaelCIRzb', null, 'activate=@Html.Raw(Model.CiRecurringJob == null ? "true": "false")')">
+                        @Html.Raw(Model.CiRecurringJob == null ? "Planifier" : "Déplanifier")
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            @******************************************************IMPORT DES CI GROUPE RZB (hors société RZB) ******************************************************@
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-home padding-right"></span><strong>@Html.Raw(Model.CIFluxGRZB?.Libelle)</strong>
+                        <span class="pull-right">
+                            @if (Model.CIFluxGRZB?.DateDerniereExecution.HasValue == true)
+                            {
+                                <span class="glyphicon glyphicon-time"></span>
+                                <time class="timeago" datetime="@Model.CIFluxGRZB.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.CIFluxGRZB.DateDerniereExecution.Value.ToLocalTime()"></time>
+                            }
+                        </span>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div>
+                        <ul>
+                            @if (Model.CIRecurringJobGRZB != null)
+                            {
+                                <li>Type d'import : <b>Récurrent</b></li>
+                                <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.CIRecurringJobGRZB)</b></li>
+                                <li>Cron : <code>@Model.CIRecurringJobGRZB.Cron</code></li>
+                            }
+                            else
+                            {
+                                <li>Type d'import : <b>Manuel</b></li>
+                            }
+                            <li>
+                                Code société ANAEL: <code id="anaelCIRzb">@Html.Raw(Model.CIFluxGRZB?.SocieteCode)</code>
+                            </li>
+                            <li><input type="checkbox" onclick="OnCheckBypassDate(this, 'importNowCiGZRB')" id="isBypassDateCIGRZB" /><label for="isBypassDateCIGRZB">&nbsp; Import complet</label></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button class="btn btn-primary" id="importNowCiGZRB" onclick="ComputeActionUrl('/Import/ImportCIGenerique', null, 'isBypassDateCIGRZB', 'codeFlux=CI_GRZB')">Importer maintenant</button>
+                    @if (Model.CIRecurringJobGRZB == null)
+                    {
+                        <button class="btn btn-warning pull-right"
+                                onclick="location.href='@Url.Action("ToggleScheduleImportCIGRZB", "Import", new { activate = true, codeFlux="CI_GRZB" })'">
+                            Planifier
+                        </button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-danger pull-right"
+                                onclick="location.href='@Url.Action("ToggleScheduleImportCIGRZB", "Import", new { activate = false , codeFlux="CI_GRZB"})'">
+                            Déplanifier
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row display-flex">
+    <div class="col-md-3">
+        @******************************************************IMPORT DES PERSONNELS RZB******************************************************@
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-user padding-right"></span><strong>@Html.Raw(Model?.PersonnelFlux?.Libelle)</strong>
+                    <span class="pull-right">
+                        @if (Model?.PersonnelFlux?.DateDerniereExecution.HasValue == true)
+                        {
+                            <span class="glyphicon glyphicon-time"></span>
+                            <time class="timeago" datetime="@Model.PersonnelFlux.DateDerniereExecution.Value.ToLocalTime().ToString("o")"
+                                  title="@Model.PersonnelFlux.DateDerniereExecution.Value.ToLocalTime()"></time>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        @if (Model.PersonnelRecurringJob != null)
+                        {
+                            <li>Type d'import : <b>Récurrent</b></li>
+                            <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.PersonnelRecurringJob)</b></li>
+                            <li>Cron : <code>@Model.PersonnelRecurringJob.Cron</code></li>
+                            <li>Code société paie: <code>RZB</code></li>
+                        }
+                        else
+                        {
+                            <li>Type d'import : <b>Manuel</b></li>
+                            <li>Code société paie: <code>RZB</code></li>
+                        }
+                        <li><input type="checkbox" onclick="OnCheckBypassDate(this, 'importNowPersonnel')" id="isBypassDatePersonnel" /><label for="isBypassDatePersonnel">&nbsp; Import complet</label></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-primary" id="importNowPersonnel" onclick="ComputeActionUrl('/Import/ImportPersonnelGenerique', null, 'isBypassDatePersonnel', 'codeFlux=PERSONNEL_RZB')">
+                    Importer maintenant
+                </button>
+                @if (Model.PersonnelRecurringJob == null)
+                {
+                    <button class="btn btn-warning pull-right"
+                            onclick="location.href='@Url.Action("ToggleScheduleImportPersonnelGenerique", "Import", new { activate = true, codeFlux="PERSONNEL_RZB" })'">
+                        Planifier
+                    </button>
+                }
+                else
+                {
+                    <button class="btn btn-danger pull-right"
+                            onclick="location.href='@Url.Action("ToggleScheduleImportPersonnelGenerique", "Import", new { activate = false , codeFlux="PERSONNEL_RZB"})'">
+                        Déplanifier
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        @******************************************************IMPORT DES PERSONNELS GRZB (hors société RZB) *****************************************************@
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-user padding-right"></span>
+                    <strong>@Html.Raw(Model?.PersonnelFluxGRZB?.Libelle)</strong>
+                    <span class="pull-right">
+                        @if (Model?.PersonnelFluxGRZB?.DateDerniereExecution.HasValue == true)
+                        {
+                            <span class="glyphicon glyphicon-time"></span>
+                            <time class="timeago" datetime="@Model.PersonnelFluxGRZB.DateDerniereExecution.Value.ToLocalTime().ToString("o")"
+                                  title="@Model.PersonnelFluxGRZB.DateDerniereExecution.Value.ToLocalTime()"></time>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        @if (Model.PersonnelRecurringJobGRZB != null)
+                        {
+                            <li>Type d'import : <b>Récurrent</b></li>
+                            <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.PersonnelRecurringJobGRZB)</b></li>
+                            <li>Cron : <code>@Model.PersonnelRecurringJobGRZB.Cron</code></li>
+                            <li>Code société paie: <code>@Html.Raw(Model.PersonnelFluxGRZB?.SocieteCode)</code></li>
+                        }
+                        else
+                        {
+                            <li>Type d'import : <b>Manuel</b></li>
+                            <li>Code société paie: <code>@Html.Raw(Model.PersonnelFluxGRZB?.SocieteCode)</code></li>
+                        }
+                        <li>
+                            <input type="checkbox"
+                                   onclick="OnCheckBypassDate(this, 'importNowPersonnelGRZB')"
+                                   id="isBypassDatePersonnelGRZB" />
+                            <label for="isBypassDatePersonnelGRZB">&nbsp; Import complet</label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-primary" id="importNowPersonnelGRZB"
+                        onclick="ComputeActionUrl('/Import/ImportPersonnelGenerique', null, 'isBypassDatePersonnelGRZB', 'codeFlux=PERSONNEL_GRZB')">
+                    Importer maintenant
+                </button>
+                @if (Model.PersonnelRecurringJobGRZB == null)
+                {
+                    <button class="btn btn-warning pull-right"
+                            onclick="location.href='@Url.Action("ToggleScheduleImportPersonnelGenerique", "Import" , new { activate=true, codeFlux="PERSONNEL_GRZB" })'">
+                        Planifier
+                    </button>
+                }
+                else
+                {
+                    <button class="btn btn-danger pull-right"
+                            onclick="location.href='@Url.Action("ToggleScheduleImportPersonnelGenerique", "Import" , new { activate=false , codeFlux="PERSONNEL_GRZB" })'">
+                        Déplanifier
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        @******************************************************IMPORT DES PERSONNELS GFTP******************************************************@
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-user padding-right"></span>
+                    <strong>@Html.Raw(Model?.PersonnelFluxGFTP?.Libelle)</strong>
+                    <span class="pull-right">
+                        @if (Model?.PersonnelFluxGFTP?.DateDerniereExecution.HasValue == true)
+                        {
+                            <span class="glyphicon glyphicon-time"></span>
+                            <time class="timeago" datetime="@Model.PersonnelFluxGFTP.DateDerniereExecution.Value.ToLocalTime().ToString("o")"
+                                  title="@Model.PersonnelFluxGFTP.DateDerniereExecution.Value.ToLocalTime()"></time>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        @if (Model.PersonnelRecurringJobGFTP != null)
+                        {
+                            <li>Type d'import : <b>Récurrent</b></li>
+                            <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.PersonnelRecurringJobGFTP)</b></li>
+                            <li>Cron : <code>@Model.PersonnelRecurringJobGFTP.Cron</code></li>
+                            <li>Code société paie: <code>@Html.Raw(Model.PersonnelFluxGFTP?.SocieteCode)</code></li>
+                        }
+                        else
+                        {
+                            <li>Type d'import : <b>Manuel</b></li>
+                            <li>Code société paie: <code>@Html.Raw(Model.PersonnelFluxGFTP?.SocieteCode)</code></li>
+                        }
+                        <li>
+                            <input type="checkbox"
+                                   onclick="OnCheckBypassDate(this, 'importNowPersonnelFTP')"
+                                   id="isBypassDatePersonnelFTP" />
+                            <label for="isBypassDatePersonnelFTP">&nbsp; Import complet</label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-primary" id="importNowPersonnelFTP"
+                        onclick="ComputeActionUrl('/Import/ImportPersonnelGenerique', null, 'isBypassDatePersonnelFTP', 'codeFlux=PERSONNEL_FTP')">
+                    Importer maintenant
+                </button>
+                @if (Model.PersonnelRecurringJobGFTP == null)
+                {
+                    <button class="btn btn-warning pull-right"
+                            onclick="location.href='@Url.Action("ToggleScheduleImportPersonnelGenerique", "Import" , new { activate=true, codeFlux="PERSONNEL_FTP" })'">
+                        Planifier
+                    </button>
+                }
+                else
+                {
+                    <button class="btn btn-danger pull-right"
+                            onclick="location.href='@Url.Action("ToggleScheduleImportPersonnelGenerique", "Import" , new { activate=false , codeFlux="PERSONNEL_FTP" })'">
+                        Déplanifier
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        @******************************************************IMPORT DES PERSONNELS FES******************************************************@
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-user padding-right"></span>
+                    <strong>@Html.Raw(Model?.PersonnelFluxFES?.Libelle)</strong>
+                    <span class="pull-right">
+                        @if (Model?.PersonnelFluxFES?.DateDerniereExecution.HasValue == true)
+                        {
+                            <span class="glyphicon glyphicon-time"></span>
+                            <time class="timeago" datetime="@Model.PersonnelFluxFES.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.PersonnelFluxFES.DateDerniereExecution.Value.ToLocalTime()"></time>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        @if (Model.PersonnelRecurringJobFES != null)
+                        {
+                            <li>Type d'import : <b>Récurrent</b></li>
+                            <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.PersonnelRecurringJobFES)</b></li>
+                            <li>Cron : <code>@Model.PersonnelRecurringJobFES.Cron</code></li>
+                            <li>Code société paie: <code>Groupe FES</code></li>
+                        }
+                        else
+                        {
+                            <li>Type d'import : <b>Manuel</b></li>
+                            <li>Code société paie: <code>Groupe FES</code></li>
+                        }
+                        <li>
+                            <input type="checkbox"
+                                   onclick="OnCheckBypassDate(this, 'importNowPersonnelFES')"
+                                   id="isBypassDatePersonnelFES" />
+                            <label for="isBypassDatePersonnelFES">&nbsp; Import complet</label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-primary"
+                        id="importNowPersonnelFES"
+                        onclick="ComputeActionUrl('/Import/ImportPersonnelMultipleSocieteInSameTime', null, 'isBypassDatePersonnelFES', 'codeFlux=PERSONNEL_FES')">
+                    Importer maintenant
+                </button>
+                @if (Model.PersonnelRecurringJobFES == null)
+                {
+                    <button class="btn btn-warning pull-right"
+                            onclick="location.href='@Url.Action("ToggleScheduleImportPersonnelMultipleSocieteInSameTime", "Import" , new { activate=true, codeFlux="PERSONNEL_FES" })'">
+                        Planifier
+                    </button>
+                }
+                else
+                {
+                    <button class="btn btn-danger pull-right"
+                            onclick="location.href='@Url.Action("ToggleScheduleImportPersonnelMultipleSocieteInSameTime", "Import" , new { activate=false , codeFlux="PERSONNEL_FES" })'">
+                        Déplanifier
+                    </button>
+                }
+            </div>
+        </div>
+        @******************************************************IMPORT DES PERSONNELS FON******************************************************@
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-user padding-right"></span>
+                    <strong>@Html.Raw(Model?.PersonnelFluxFON?.Libelle)</strong>
+                    <span class="pull-right">
+                        @if (Model?.PersonnelFluxFON?.DateDerniereExecution.HasValue == true)
+                        {
+                            <span class="glyphicon glyphicon-time"></span>
+                            <time class="timeago" datetime="@Model.PersonnelFluxFON.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.PersonnelFluxFON.DateDerniereExecution.Value.ToLocalTime()"></time>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        @if (Model.PersonnelRecurringJobFON != null)
+                        {
+                            <li>Type d'import : <b>Récurrent</b></li>
+                            <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.PersonnelRecurringJobFON)</b></li>
+                            <li>Cron : <code>@Model.PersonnelRecurringJobFON.Cron</code></li>
+                            <li>Code société paie: <code>Groupe FON</code></li>
+                        }
+                        else
+                        {
+                            <li>Type d'import : <b>Manuel</b></li>
+                            <li>Code société paie: <code>Groupe FON</code></li>
+                        }
+                        <li>
+                            <input type="checkbox"
+                                   onclick="OnCheckBypassDate(this, 'importNowPersonnelFON')"
+                                   id="isBypassDatePersonnelFON" />
+                            <label for="isBypassDatePersonnelFON">&nbsp; Import complet</label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-primary"
+                        id="importNowPersonnelFON"
+                        onclick="ComputeActionUrl('/Import/ImportPersonnelMultipleSocieteInSameTime', null, 'isBypassDatePersonnelFON', 'codeFlux=PERSONNEL_FON')">
+                    Importer maintenant
+                </button>
+                @if (Model.PersonnelRecurringJobFON == null)
+                {
+                    <button class="btn btn-warning pull-right"
+                            onclick="location.href='@Url.Action("ToggleScheduleImportPersonnelMultipleSocieteInSameTime", "Import" , new { activate=true, codeFlux="PERSONNEL_FON", cron="0 5 * * *" })'">
+                        Planifier
+                    </button>
+                }
+                else
+                {
+                    <button class="btn btn-danger pull-right"
+                            onclick="location.href='@Url.Action("ToggleScheduleImportPersonnelMultipleSocieteInSameTime", "Import" , new { activate=false , codeFlux="PERSONNEL_FON", cron="0 5 * * *" })'">
+                        Déplanifier
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row display-flex">
+    <div class="col-md-6">
+        @******************************************************IMPORT DES FOURNISSEURS******************************************************@
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-shopping-cart padding-right"></span><strong>@Html.Raw(Model?.FournisseurFlux?.Libelle)</strong>
+                    <span class="pull-right">
+                        @if (Model?.FournisseurFlux?.DateDerniereExecution.HasValue == true)
+                        {
+                            <span class="glyphicon glyphicon-time"></span>
+                            <time class="timeago" datetime="@Model.FournisseurFlux.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.FournisseurFlux.DateDerniereExecution.Value.ToLocalTime()"></time>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        @if (Model.FournisseurRecurringJob != null)
+                        {
+                            <li>Type d'import : <b>Récurrent</b></li>
+                            <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.FournisseurRecurringJob)</b></li>
+                            <li>Cron : <code>@Model.FournisseurRecurringJob.Cron</code></li>
+                            <li>Code société ANAEL: <code>1000</code></li>
+                            <li>Types séquence: <code>TIERS, TIERS2, GROUPE</code></li>
+                            <li>Règles de gestion: <code>F</code></li>
+                        }
+                        else
+                        {
+                            <li>Type d'import : <b>Manuel</b></li>
+                            <li>Code société ANAEL: <code>1000</code></li>
+                            <li>Types séquence: <code>TIERS, TIERS2, GROUPE</code></li>
+                            <li>Règles de gestion: <code>F</code></li>
+                        }
+                        <li><input type="checkbox" onclick="OnCheckBypassDate(this, 'importNowFournisseur')" id="isBypassDateFournisseur" /><label for="isBypassDateFournisseur">&nbsp; Import complet</label></li>
+                        <li><input type="checkbox" id="isFournisseurStormOutputActive" /><label for="isFournisseurStormOutputActive">&nbsp; Ne pas envoyer à SAP</label></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-primary" id="importNowFournisseur" onclick="ComputeActionUrl('/Import/ImportFournisseur', null, 'isBypassDateFournisseur', 'isStormOutputDesactivated=' + GetCheckboxValue('isFournisseurStormOutputActive'))">Importer maintenant</button>
+                @if (Model.FournisseurRecurringJob == null)
+                {
+                    <button class="btn btn-warning pull-right" onclick="location.href='@Url.Action("ToggleScheduleImportFournisseur", "Import", new { activate = true })&isStormOutputDesactivated=' + GetCheckboxValue('isFournisseurStormOutputActive')">Planifier</button>
+                }
+                else
+                {
+                    <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("ToggleScheduleImportFournisseur", "Import", new { activate = false })&isStormOutputDesactivated=' + GetCheckboxValue('isFournisseurStormOutputActive')">Déplanifier</button>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        @******************************************************IMPORT DES ETABLISSEMENTS COMPTABLES ******************************************************@
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-euro padding-right"></span><strong>@Html.Raw(Model?.EtablissementComptableFlux?.Libelle)</strong>
+                    <span class="pull-right">
+                        @if (Model?.EtablissementComptableFlux?.DateDerniereExecution.HasValue == true)
+                        {
+                            <span class="glyphicon glyphicon-time"></span>
+                            <time class="timeago" datetime="@Model.EtablissementComptableFlux.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.EtablissementComptableFlux.DateDerniereExecution.Value.ToLocalTime()"></time>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        @if (Model.EtablissementComptableRecurringJob != null)
+                        {
+                            <li>Type d'import : <b>Récurrent</b></li>
+                            <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.EtablissementComptableRecurringJob)</b></li>
+                            <li>Cron : <code>@Model.EtablissementComptableRecurringJob.Cron</code></li>
+
+                        }
+                        else
+                        {
+                            <li>Type d'import : <b>Manuel</b></li>
+                        }
+                    </ul>
+                </div>
+                <p style="color:red;font-weight:bold">A importer en premier lors d'une nouvelle initialisation de base de données</p>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("ImportEtablissementComptable", "Import", new { codeFlux = Model?.EtablissementComptableFlux?.Code })'">Importer maintenant</button>
+                @if (Model.EtablissementComptableRecurringJob == null)
+                {
+                    <button class="btn btn-warning pull-right" onclick="location.href='@Url.Action("ToggleScheduleImportEtablissementComptable", "Import", new { activate = true, codeFlux = Model?.EtablissementComptableFlux?.Code })'">Planifier</button>
+                }
+                else
+                {
+                    <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("ToggleScheduleImportEtablissementComptable", "Import", new { activate = false, codeFlux = Model?.EtablissementComptableFlux?.Code })'">Déplanifier</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row display-flex">
+    @******************************************************IMPORT DES ECRITURE COMPTABLES******************************************************@
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-home padding-right"></span>
+                    <strong>@Html.Raw(Model.EcritureComptableFluxRzb?.Libelle)</strong>
+                    <span class="pull-right">
+                        @if (Model.EcritureComptableFluxRzb?.DateDerniereExecution.HasValue == true)
+                        {
+                            <span class="glyphicon glyphicon-time"></span>
+                            <time class="timeago" datetime="@Model.EcritureComptableFluxRzb.DateDerniereExecution.Value.ToLocalTime().ToString("o")"
+                                  title="@Model.EcritureComptableFluxRzb.DateDerniereExecution.Value.ToLocalTime()"></time>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        @if (Model.EcritureComptableRecurringJobRzb != null)
+                        {
+                            <li>Type d'import : <b>Récurrent</b></li>
+                            <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.EcritureComptableRecurringJobRzb)</b></li>
+                            <li>Cron : <code>@Model.EcritureComptableRecurringJobRzb.Cron</code></li>
+                        }
+                        else
+                        {
+                            <li>Type d'import : <b>Manuel</b></li>
+                        }
+                        <li>
+                            <label>Code société ANAEL :<code id="anaelEcrituresRzb">1000</code></label>
+                        </li>
+                        <li>
+                            <label>
+                                Date Debut comptable :
+                                <input type="date" name="dateDebut" id="dateDebutComptableRzb" class="hasDatepicker" value="@Model.EcritureComptableDateDebutComptableRzb.ToString("yyyy-MM-dd")" onchange="isDateDbFn()" />
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                Date Fin comptable :
+                                <input type="date" name="dateFin" id="dateFinComptableRzb" class="hasDatepicker" value="@Model.EcritureComptableDateFinComptableRzb.ToString("yyyy-MM-dd")" onchange="isDateDbFn()" style="margin-left: 15px;" />
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                Code Etablissement :
+                                <input type="text" name="codeEtablissementRzb" id="codeEtablissementRzb" value="@Model.CodeEtablissementRzb" style="margin-left: 15px;" />
+                            </label>
+                        </li>
+                        <li>
+                            <span style="color:orange;font-weight:bold">Uniquement prise en compte pour "Importer maintenant".</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button id="ImportEcritureComptableMnt" onclick="ImportEcrituresComptables()" class="btn btn-primary">Importer maintenant</button>
+                <button id="ImportEcritureComptableMnt" onclick="ImportPartialEcrituresComptables()" class="btn btn-primary">Importer table secondaire</button>
+                <button class="btn btn-warning pull-right" onclick="ComputeActionUrl('/Import/ToggleScheduleImportEcrituresComptables', 'anaelEcrituresRzb', null, 'activate=@Html.Raw(Model.EcritureComptableRecurringJobRzb == null ? "true" : "false")')">
+                    @Html.Raw(Model.EcritureComptableRecurringJobRzb == null ? "Planifier" : "Déplanifier")
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-home padding-right"></span>
+                    <strong>@Html.Raw(Model.EcritureComptableFluxMoulins?.Libelle)</strong>
+                    <span class="pull-right">
+                        @if (Model.EcritureComptableFluxMoulins?.DateDerniereExecution.HasValue == true)
+                        {
+                            <span class="glyphicon glyphicon-time"></span>
+                            <time class="timeago" datetime="@Model.EcritureComptableFluxMoulins.DateDerniereExecution.Value.ToLocalTime().ToString("o")"
+                                  title="@Model.EcritureComptableFluxMoulins.DateDerniereExecution.Value.ToLocalTime()"></time>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        @if (Model.EcritureComptableRecurringJobMoulins != null)
+                        {
+                            <li>Type d'import : <b>Récurrent</b></li>
+                            <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.EcritureComptableRecurringJobMoulins)</b></li>
+                            <li>Cron : <code>@Model.EcritureComptableRecurringJobMoulins.Cron</code></li>
+                        }
+                        else
+                        {
+                            <li>Type d'import : <b>Manuel</b></li>
+                        }
+                        <li>
+                            <label>Code société ANAEL :<code id="anaelEcrituresMoulins">550</code></label>
+                        </li>
+                        <li>
+                            <label>
+                                Date Debut comptable :
+                                <input type="date" name="dateDebut" id="dateDebutComptableMoulins" class="hasDatepicker" value="@Model.EcritureComptableDateDebutComptableMoulins.ToString("yyyy-MM-dd")" onchange="isDateDbFn()" />
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                Date Fin comptable :
+                                <input type="date" name="dateFin" id="dateFinComptableMoulins" class="hasDatepicker" value="@Model.EcritureComptableDateFinComptableMoulins.ToString("yyyy-MM-dd")" onchange="isDateDbFn()" style="margin-left: 15px;" />
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                Code Etablissement :
+                                <input type="text" name="codeEtablissementMoulins" id="codeEtablissementMoulins" value="@Model.CodeEtablissementMoulins" style="margin-left: 15px;" />
+                            </label>
+                        </li>
+                        <li>
+                            <span style="color:orange;font-weight:bold">Uniquement prise en compte pour "Importer maintenant".</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button id="ImportEcritureComptableMnt" onclick="ImportEcrituresComptablesMoulins()" class="btn btn-primary">Importer maintenant</button>
+                <button id="ImportEcritureComptableMnt" onclick="ImportPartialEcrituresComptablesMoulins()" class="btn btn-primary">Importer table secondaire</button>
+                <button class="btn btn-warning pull-right" onclick="ComputeActionUrl('/Import/ToggleScheduleImportEcrituresComptablesMoulins', 'anaelEcrituresMoulins', null, 'activate=@Html.Raw(Model.EcritureComptableRecurringJobMoulins == null ? "true" : "false")')">
+                    @Html.Raw(Model.EcritureComptableRecurringJobMoulins == null ? "Planifier" : "Déplanifier")
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        @******************************************************IMPORT DES BAREMES******************************************************@
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-list-alt padding-right"></span><strong>Barèmes STORM</strong>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        <li>Type d'import : <b>One Shot</b></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("ImportBaremes", "Import")'">Importer maintenant</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row display-flex">
+    <div class="col-md-6">
+        @******************************************************IMPORT MATERIELS******************************************************@
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-user padding-right"></span><strong>@Html.Raw(Model?.MaterielFlux?.Libelle)</strong>
+                    <span class="pull-right">
+                        @if (Model?.MaterielFlux?.DateDerniereExecution.HasValue == true)
+                        {
+                            <span class="glyphicon glyphicon-time"></span>
+                            <time class="timeago" datetime="@Model.MaterielFlux.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.MaterielFlux.DateDerniereExecution.Value.ToLocalTime()"></time>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        @if (Model.MaterielRecurringJob != null)
+                        {
+                            <li>Type d'import : <b>Récurrent</b></li>
+                            <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.MaterielRecurringJob)</b></li>
+                            <li>Cron : <code>@Model.MaterielRecurringJob.Cron</code></li>
+                        }
+                        else
+                        {
+                            <li>Type d'import : <b>Manuel</b></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-danger" onclick="location.href='@Url.Action("ImportMateriel", "Import", new { isFull = true })'">Importer Full</button>
+                <button class="btn btn-default" onclick="location.href='@Url.Action("ImportMateriel", "Import", new { isFull = false })'">Importer Delta</button>
+                @if (Model.MaterielRecurringJob == null)
+                {
+                    <button class="btn btn-warning pull-right" onclick="location.href='@Url.Action("ToggleScheduleImportMateriel", "Import", new { activate = true })'">Planifier</button>
+                }
+                else
+                {
+                    <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("ToggleScheduleImportMateriel", "Import", new { activate = false })'">Déplanifier</button>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        @******************************************************IMPORT MATERIELS Fayat TPS******************************************************@
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-user padding-right"></span><strong>Import du mayériel Fayat TP</strong>
+                    <span class="pull-right">
+                        @if (Model?.MaterielFayatTpFlux?.DateDerniereExecution.HasValue == true)
+                        {
+                            <span class="glyphicon glyphicon-time"></span>
+                            <time class="timeago" datetime="@Model.MaterielFayatTpFlux.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.MaterielFayatTpFlux.DateDerniereExecution.Value.ToLocalTime()"></time>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        @if (Model.MaterielFayatTpRecurringJob != null)
+                        {
+                            <li>Type d'import : <b>Récurrent</b></li>
+                            <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.MaterielFayatTpRecurringJob)</b></li>
+                            <li>Cron : <code>@Model.MaterielFayatTpRecurringJob.Cron</code></li>
+                        }
+                        else
+                        {
+                            <li>Type d'import : <b>Manuel</b></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-danger" onclick="location.href='@Url.Action("ImportMaterielFayatTp", "Import", new { isFull = true })'">Importer Full</button>
+                <button class="btn btn-default" onclick="location.href='@Url.Action("ImportMaterielFayatTp", "Import", new { isFull = false })'">Importer Delta</button>
+                @if (Model.MaterielFayatTpRecurringJob == null)
+                {
+                    <button class="btn btn-warning pull-right" onclick="location.href='@Url.Action("ToggleScheduleImportMaterielFayatTp", "Import", new { activate = true })'">Planifier</button>
+                }
+                else
+                {
+                    <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("ToggleScheduleImportMaterielFayatTp", "Import", new { activate = false })'">Déplanifier</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row display-flex">
+    <div class="col-md-6">
+        @******************************************************IMPORT INDICATEURS STAIR******************************************************@
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-list-alt padding-right"></span><strong>STAIR</strong>
+                    <span class="pull-right">
+                        @if (Model?.StairFlux?.DateDerniereExecution.HasValue == true)
+                        {
+                            <span class="glyphicon glyphicon-time"></span>
+                            <time class="timeago" datetime="@Model.StairFlux.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.StairFlux.DateDerniereExecution.Value.ToLocalTime()"></time>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        @if (Model.StairRecurringJob != null)
+                        {
+                            <li>Type d'import : <b>Récurrent</b></li>
+                            <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.StairRecurringJob)</b></li>
+                            <li>Cron : <code>@Model.StairRecurringJob.Cron</code></li>
+                        }
+                        else
+                        {
+                            <li>Type d'import : <b>Manuel</b></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("ImportIndicateursSafeStair", "Import")'">Importer maintenant</button>
+                @if (Model.StairRecurringJob == null)
+                {
+                    <button class="btn btn-warning pull-right" onclick="location.href='@Url.Action("ToggleScheduleImportIndicateursSafeStair", "Import", new { activate = true })'">Planifier</button>
+                }
+                else
+                {
+                    <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("ToggleScheduleImportIndicateursSafeStair", "Import", new { activate = false })'">Déplanifier</button>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        @******************************************************IMPORT FORMULAIRE SPHINX******************************************************@
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-list-alt padding-right"></span><strong>STAIR SPHINX</strong>
+                    <span class="pull-right">
+                        @if (Model?.SphinxFlux?.DateDerniereExecution.HasValue == true)
+                        {
+                            <span class="glyphicon glyphicon-time"></span>
+                            <time class="timeago" datetime="@Model.SphinxFlux.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.SphinxFlux.DateDerniereExecution.Value.ToLocalTime()"></time>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        @if (Model.SphinxRecurringJob != null)
+                        {
+                            <li>Type d'import : <b>Récurrent</b></li>
+                            <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.SphinxRecurringJob)</b></li>
+                            <li>Cron : <code>@Model.SphinxRecurringJob.Cron</code></li>
+                        }
+                        else
+                        {
+                            <li>Type d'import : <b>Manuel</b></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("ImportFormulaireSphinxStair", "Import")'">Importer maintenant</button>
+                @if (Model.SphinxRecurringJob == null)
+                {
+                    <button class="btn btn-warning pull-right" onclick="location.href='@Url.Action("ToggleScheduleImportFormulaireSphinxStair", "Import", new { activate = true })'">Planifier</button>
+                }
+                else
+                {
+                    <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("ToggleScheduleImportFormulaireSphinxStair", "Import", new { activate = false })'">Déplanifier</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row display-flex">
+    <div class="col-md-6">
+        @******************************************************IMPORT JOURNAUX COMPTABLES******************************************************@
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-home padding-right"></span>
+                    <strong>@Html.Raw(Model.JournauxComptableFluxRzb?.Libelle)</strong>
+                    <span class="pull-right">
+                        @if (Model.JournauxComptableFluxRzb?.DateDerniereExecution.HasValue == true)
+                        {
+                            <span class="glyphicon glyphicon-time"></span>
+                            <time class="timeago" datetime="@Model.JournauxComptableFluxRzb.DateDerniereExecution.Value.ToLocalTime().ToString("o")"
+                                  title="@Model.JournauxComptableFluxRzb.DateDerniereExecution.Value.ToLocalTime()"></time>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        @if (Model.JournauxComptableRecurringJobRzb != null)
+                        {
+                            <li>Type d'import : <b>Récurrent</b></li>
+                            <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.JournauxComptableRecurringJobRzb)</b></li>
+                            <li>Cron : <code>@Model.JournauxComptableRecurringJobRzb.Cron</code></li>
+                        }
+                        else
+                        {
+                            <li>Type d'import : <b>Manuel</b></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("ImportJournauxComptableRzb", "Import")'">Importer maintenant</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row display-flex">
+    <div class="col-md-6">
+        @******************************************************IMPORT JOURNAUX COMPTABLES******************************************************@
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-home padding-right"></span>
+                    <strong>@Html.Raw(Model.JournauxComptableFluxMoulins?.Libelle)</strong>
+                    <span class="pull-right">
+                        @if (Model.JournauxComptableFluxMoulins?.DateDerniereExecution.HasValue == true)
+                        {
+                            <span class="glyphicon glyphicon-time"></span>
+                            <time class="timeago" datetime="@Model.JournauxComptableFluxMoulins.DateDerniereExecution.Value.ToLocalTime().ToString("o")"
+                                  title="@Model.JournauxComptableFluxMoulins.DateDerniereExecution.Value.ToLocalTime()"></time>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        @if (Model.JournauxComptableRecurringJobMoulins != null)
+                        {
+                            <li>Type d'import : <b>Récurrent</b></li>
+                            <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.JournauxComptableRecurringJobMoulins)</b></li>
+                            <li>Cron : <code>@Model.JournauxComptableRecurringJobMoulins.Cron</code></li>
+                        }
+                        else
+                        {
+                            <li>Type d'import : <b>Manuel</b></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("ImportJournauxComptableMoulins", "Import")'">Importer maintenant</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row display-flex">
+    <div class="col-md-6">
+        @******************************************************IMPORT DES CONTRAT INTERIMAIRE PIXID******************************************************@
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-user padding-right"></span><strong>@Html.Raw(Model?.ContratInteriamireFlux?.Libelle)</strong>
+                    <span class="pull-right">
+                        @if (Model?.ContratInteriamireFlux?.DateDerniereExecution.HasValue == true)
+                        {
+                            <span class="glyphicon glyphicon-time"></span>
+                            <time class="timeago" datetime="@Model.ContratInteriamireFlux.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.ContratInteriamireFlux.DateDerniereExecution.Value.ToLocalTime()"></time>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        @if (Model.ContratInteriamireRecurringJob != null)
+                        {
+                            <li>Type d'import : <b>Récurrent</b></li>
+                            <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.ContratInteriamireRecurringJob)</b></li>
+                            <li>Cron : <code>@Model.ContratInteriamireRecurringJob.Cron</code></li>
+                        }
+                        else
+                        {
+                            <li>Type d'import : <b>Manuel</b></li>
+                        }
+                        <li>Code Groupe Razel-Bec: <code>GRZB</code></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("ImportContratInterimaire", "Import")'">Importer maintenant</button>
+                @if (Model.ContratInteriamireRecurringJob == null)
+                {
+                    <button class="btn btn-warning pull-right" onclick="location.href='@Url.Action("ToggleScheduleImportContratInterimaire", "Import", new { activate = true })'">Planifier</button>
+                }
+                else
+                {
+                    <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("ToggleScheduleImportContratInterimaire", "Import", new { activate = false })'">Déplanifier</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row display-flex">
+    <div class="col-md-6">
+        @******************************************************Nettoyage des utlisateurs sortis******************************************************@
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-user padding-right"></span><strong>@Html.Raw(Model?.CleaningOutgoingUsers?.Libelle)</strong>
+                    <span class="pull-right">
+                        @if (Model?.CleaningOutgoingUsers?.DateDerniereExecution.HasValue == true)
+                        {
+                            <span class="glyphicon glyphicon-time"></span>
+                            <time class="timeago" datetime="@Model.CleaningOutgoingUsers.DateDerniereExecution.Value.ToLocalTime().ToString("o")" title="@Model.CleaningOutgoingUsers.DateDerniereExecution.Value.ToLocalTime()"></time>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <ul>
+                        @if (Model.CleaningOutgoingUsersJob != null)
+                        {
+                            <li>Type d'import : <b>Récurrent</b></li>
+                            <li>Prochaine exécution : <b>@Model.GetNextExecutionToString(Model.CleaningOutgoingUsersJob)</b></li>
+                            <li>Cron : <code>@Model.CleaningOutgoingUsersJob.Cron</code></li>
+                        }
+                        else
+                        {
+                            <li>Type d'import : <b>Manuel</b></li>
+                        }
+                        <li>Code Société paie: <code>tous</code></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("CleaningOutgoingUsers", "Import")'">Lancer maintenant</button>
+                @if (Model.CleaningOutgoingUsersJob == null)
+                {
+                    <button class="btn btn-warning pull-right" onclick="location.href='@Url.Action("ToggleScheduleCleaningOutgoingUsers", "Import", new { activate = true })'">Planifier</button>
+                }
+                else
+                {
+                    <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("ToggleScheduleCleaningOutgoingUsers", "Import", new { activate = false })'">Déplanifier</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

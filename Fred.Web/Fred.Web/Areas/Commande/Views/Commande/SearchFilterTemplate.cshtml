@@ -1,0 +1,228 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+@Scripts.Render("~/Scripts/module/BarreRecherche/barre-recherche.js")
+@{
+    ViewBag.Title = FeatureCommande.Commande_Search_TitreOnglet;
+}
+
+<div class="overlay"></div>
+<div class="container-fluid no-pl">
+  <div class="search-container filter-container">
+    <div class="row">
+      <!-- BEGIN : Barre de Recherche -->
+      <div class="col-md-5 col-sm-4 no_padding flex">
+        <input type="text" class="form-control" ng-model="filter.ValueText" on-enter="applyFilter(filter)" placeholder="{{filterPlaceholder}}" />
+        <button class="input-group-addon button-search" type="button" ng-click="applyFilter(filter)" ng-disabled="busy"><i class="material-icons">search</i></button>
+        <fred-button class="btn-dark-gray" ng-click="resetFilter()" title="{{resources.Global_Filtre_Bouton_ReinitialiserFiltre}}">
+          <span class="fa fa-filter"></span>
+          <span class="fa fa-times"></span>
+        </fred-button>
+      </div>
+      <!-- END : Barre de Recherche -->
+      <!-- BEGIN : Gestion des Tuiles -->
+      <div class="col-md-6 col-sm-7 flex">
+        <button type="button" class="fred-button criteria" ng-show="filter.FournisseurId" ng-click="filter.FournisseurId=null; filter.Fournisseur= null; applyFilter(filter)">{{filter.Fournisseur.CodeLibelle}}</button>
+        <button type="button" class="fred-button criteria" ng-show="filter.CiId" ng-click="filter.CiId=null; filter.CI= null; applyFilter(filter)">{{filter.CI.CodeLibelle}}</button>
+        <button type="button" class="fred-button criteria" ng-show="filter.StatutId" ng-click="filter.StatutId=null; filter.StatutModel = null; filter.StatutLibelle = null; applyFilter(filter)">{{resources.Commande_Search_Tuile_Statut}} &nbsp;<span id="ddlStatusText">{{filter.StatutLibelle}}</span></button>
+        <button type="button" class="fred-button criteria" ng-show="filter.TypeId" ng-click="filter.TypeId=null; filter.TypeModel = null; filter.TypeLibelle = null; applyFilter(filter)">{{resources.Commande_Search_Tuile_Type}} &nbsp;<span id="ddlTypesText">{{filter.TypeLibelle}}</span></button>
+        <button type="button" class="fred-button criteria" ng-show="filter.SystemeExterneId" ng-click="filter.SystemeExterneId=null; filter.SystemeExterneModel = null; filter.SystemeExterneLibelle = null; applyFilter(filter)">{{resources.Commande_Search_Tuile_SystemeOrigine}} &nbsp;<span id="ddlSystemeExternesText">{{filter.SystemeExterneLibelle}}</span></button>
+        <button type="button" class="fred-button criteria" ng-show="filter.MesCommandes" ng-click="filter.MesCommandes=false; applyFilter(filter)">{{resources.Commande_Search_Tuile_MesCommandes}}</button>
+        <button type="button" class="fred-button criteria" ng-show="filter.DateFrom" ng-click="filter.DateFrom=null; applyFilter(filter)">{{resources.Commande_Search_Tuile_DateDebut}}</button>
+        <button type="button" class="fred-button criteria" ng-show="filter.DateTo" ng-click="filter.DateTo=null; applyFilter(filter)">{{resources.Commande_Search_Tuile_DateFin}}</button>
+        <button type="button" class="fred-button criteria" ng-show="filter.MontantHTFrom" ng-click="filter.MontantHTFrom=null; applyFilter(filter)">{{resources.Commande_Search_Tuile_MontantMin}}{{filter.MontantHTFrom}}</button>
+        <button type="button" class="fred-button criteria" ng-show="filter.MontantHTTo" ng-click="filter.MontantHTTo=null; applyFilter(filter)">{{resources.Commande_Search_Tuile_MontantMax}}{{filter.MontantHTTo}} </button>
+        <button type="button" class="fred-button criteria" ng-show="filter.IsAbonnement" ng-click="filter.IsAbonnement=false; applyFilter(filter)">{{resources.Commande_Search_Tuile_Abonnement}}</button>
+        <button type="button" class="fred-button criteria" ng-show="filter.IsMaterielAPointer" ng-click="filter.IsMaterielAPointer=false; applyFilter(filter)">{{resources.Commande_Search_Tuile_MaterielAPointer}}</button>
+        <button type="button" class="fred-button criteria" ng-show="filter.IsEnergie" ng-click="filter.IsEnergie=false; applyFilter(filter)">{{resources.Commande_Search_Tuile_Energies}}</button>
+      </div>
+      <!-- END : Gestion des Tuiles -->
+      <div class="col-md-1 col-sm-1">
+        <button class="btn btn-sm btn-white filter hidden-xs pull-right" data-toggle="collapse" data-target="#demo">
+          <span class="fa fa-filter"></span>
+        </button>
+      </div>
+    </div>
+    <!-- BEGIN : Bloc de Filtre -->
+    <div id="demo" class="collapse filters_bloc folding">
+      <h3><span class="fa fa-filter"></span> {{resources.Global_Filtre_Titre}}</h3>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="legend">{{resources.Global_Filtre_SousTitre_Selection}} :</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Fournisseur lookup -->
+          <div class="col-lg-3 col-md-3 no-padding">
+            <label class="control-label">Fournisseur</label>
+          </div>
+          <div class="col-lg-9 col-md-9 no-padding" style="margin-bottom: 8px;">
+            <lookup-standalone ng-model="filter.Fournisseur"
+                               enable-default-selection="true"
+                               text="filter.Fournisseur.CodeLibelle"
+                               search-title="{{resources.Global_ReferentielFournisseur}}"
+                               search-placeholder="{{resources.Global_ReferentielFournisseur_Placeholder}}"
+                               url="/api/Fournisseur/SearchLight/"
+                               on-select="filter.FournisseurId = item.FournisseurId"
+                               on-delete="filter.Fournisseur = null; filter.FournisseurId = null;"
+                               class="no-padding formulaire long"
+                               show-in-popup="true"
+                               style-parent="true"
+                               custom-template-url="/Scripts/directive/Lookup/custom-templates/fournisseur.template.html"
+                               active-second-search-input="true"
+                               search-placeholder2="Autres informations...(Adresse, Code, SIREN)"
+                               search-tooltip='Commencez votre saisie par * si vous ne connaissez pas le début du nom (exemple : "*location").'>
+            </lookup-standalone>
+          </div>
+
+                    <!-- CI lookup -->
+                    <div class="col-lg-3 col-md-3 no-padding">
+                        <label class="control-label">{{resources.Global_CI}}</label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 no-padding" style="margin-bottom: 8px;">
+                        <lookup-standalone ng-model="filter.CI"
+                                           enable-default-selection="true"
+                                           text="filter.CI.CodeLibelle"
+                                           search-title="{{resources.Global_ReferentielCI}}"
+                                           search-placeholder="{{resources.Global_ReferentielCI_Placeholder}}"
+                                           custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                           url="/api/CI/SearchLight/"
+                                           on-select="filter.CiId = item.CiId"
+                                           on-delete="filter.CI = null; filter.CiId = null;"
+                                           class="no-padding formulaire long"
+                                           show-in-popup="true"
+                                           style-parent="true">
+                        </lookup-standalone>
+                    </div>
+
+                    <!-- Statut de la commande -->
+                    <div class="col-lg-3 col-md-3 no-padding">
+                        <label class="control-label">Statut</label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 no-padding">
+                        <select id="ddlStatus" class="form-control input-filter" ng-model="filter.StatutModel" style="height: 32px;" ng-change="handleSelect('StatutCommande', filter.StatutModel)">
+                            <option value="">{{resources.Commande_Search_ChoixStatut}}</option>
+                            <option ng-repeat="option in filter.Statuts" value="{{option}}">{{option.Libelle}}</option>
+                        </select>
+                    </div>
+
+                    <!-- Type de la commande -->
+                    <div class="col-lg-3 col-md-3 no-padding">
+                        <label class="control-label">Type</label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 no-padding">
+                        <select id="ddlTypes" class="form-control input-filter" ng-model="filter.TypeModel" style="height: 32px;" ng-change="handleSelect('CommandeType', filter.TypeModel)">
+                            <option value="">{{resources.Commande_Search_ChoixType}}</option>
+                            <option ng-repeat="option in filter.Types" value="{{option}}">{{option.Libelle}}</option>
+                        </select>
+                    </div>
+
+                    <!-- Système d'origine -->
+                    <div class="col-lg-3 col-md-3 no-padding">
+                        <label class="control-label">Système d'origine</label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 no-padding">
+                        <select id="ddlSystemeExternes" class="form-control input-filter" ng-model="filter.SystemeExterneModel" style="height: 32px;" ng-change="handleSelect('SystemeExterne', filter.SystemeExterneModel)">
+                            <option value="">{{resources.Commande_Search_ChoixSystemeOrigine}}</option>
+                            <option ng-repeat="option in filter.SystemeExternes" value="{{option}}">{{option.LibelleAffiche}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 no-padding">
+                            <label class="control-label">Date commande</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 no-pl">
+                            <app-date-picker format="DD/MM/YYYY" lang="fr" ng-model="filter.DateFrom" initial-date="{{filter.DateFrom}}" placeholder="{{resources.Commande_Search_DateDebut_Placeholder}}"></app-date-picker>
+                        </div>
+                        <div class="col-lg-4 col-md-4 no-pr">
+                            <app-date-picker format="DD/MM/YYYY" lang="fr" ng-model="filter.DateTo" initial-date="{{filter.DateTo}}" placeholder="{{resources.Commande_Search_DateFin_Placeholder}}"></app-date-picker>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 no-padding">
+                            <label class="control-label">Montant commandé</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 no_padding_left">
+                            <input type="text" fred-input-number class="col-md-6 form-control input-filter" ng-model="filter.MontantHTFrom" placeholder="{{resources.Commande_Search_MontantMin_Placeholder}}" style="height: 32px;" />
+                        </div>
+                        <div class="col-lg-4 col-md-4 no_padding_right">
+                            <input type="text" fred-input-number class="col-md-6 form-control input-filter" ng-model="filter.MontantHTTo" placeholder="{{resources.Commande_Search_MontantMax_Placeholder}}" style="height: 32px;" />
+                        </div>
+                    </div>
+
+          <div class="row">
+            <!-- Afficher mes commandes -->
+            <div class="selection_filters">
+              <label class="pull-left">
+                {{resources.Commande_Search_MesCommandes}}
+              </label>
+              <div class="pull-right">
+                <label class="switch">
+                  <input type="checkbox" id="chbxMesCommandes" name="chbxMesCommandes" ng-model="filter.MesCommandes" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- Afficher les commandes abonnement -->
+            <div class="selection_filters">
+              <label class="pull-left">
+                {{resources.Commande_Search_Abonnement}}
+              </label>
+              <div class="pull-right">
+                <label class="switch">
+                  <input type="checkbox" id="chbxCommandeAbo" name="chbxCommandeAbo" ng-model="filter.IsAbonnement" ng-change="filter.IsMaterielAPointer = false"/>
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+           <div class="row">
+            <!-- Afficher les commandes avec un matériel externe à pointer -->
+            <div class="selection_filters">
+              <label class="pull-left">
+                {{resources.Commande_Search_MaterielAPointer}}
+              </label>
+              <div class="pull-right">
+                <label class="switch">
+                  <input type="checkbox" id="chbxCommandeMaterielExterne" name="chbxCommandeMaterielExterne" ng-model="filter.IsMaterielAPointer" ng-change="filter.IsAbonnement = false" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- Afficher les commandes Energies -->
+            <div class="selection_filters">
+              <label class="pull-left">
+                {{resources.Commande_Search_Energies}}
+              </label>
+              <div class="pull-right">
+                <label class="switch">
+                  <input type="checkbox" id="chbxCommandeEnergie" name="chbxCommandeEnergie" ng-model="filter.IsEnergie" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+            </div>
+            <div class="row buttons_row">
+
+        <button type="button" class="btn btn-primary btn-grand pull-right" data-toggle="collapse" data-target="#demo" ng-click="applyFilter(filter)">{{resources.Global_Filtre_Bouton_Appliquer}} </button>
+        <button type="button" class="btn btn-gray btn-grand pull-right" ng-click="cancelFilters()">{{resources.Global_Bouton_Annuler}} </button>
+
+            </div>
+        </div>
+        <!-- END : Bloc de Filtre -->
+    </div>
+</div>

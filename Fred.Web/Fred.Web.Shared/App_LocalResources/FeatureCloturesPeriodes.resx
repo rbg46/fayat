@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Affiner_Recherche_lb" xml:space="preserve">
+    <value>Affiner votre recherche :</value>
+  </data>
+  <data name="Btn_CloturerDepenses_lb" xml:space="preserve">
+    <value>Clôturer les dépenses</value>
+  </data>
+  <data name="Chk_BlocDepensesToutDeselectionner_lb" xml:space="preserve">
+    <value>Tout déselectionner</value>
+  </data>
+  <data name="Chk_BlocDepensesToutSelectionner_lb" xml:space="preserve">
+    <value>Tout sélectionner</value>
+  </data>
+  <data name="Chk_BlocEnergiesToutDeselectionner_lb" xml:space="preserve">
+    <value>Tout déselectionner</value>
+  </data>
+  <data name="Chk_BlocEnergiesToutSelectionner_lb" xml:space="preserve">
+    <value>Tout sélectionner</value>
+  </data>
+  <data name="Ci_Cloture_lb" xml:space="preserve">
+    <value>CI clôturé</value>
+  </data>
+  <data name="Ci_Ouvert_lb" xml:space="preserve">
+    <value>CI ouvert</value>
+  </data>
+  <data name="Ci_Termines_Oui_lb" xml:space="preserve">
+    <value>CI terminés : Oui</value>
+  </data>
+  <data name="Cloture_Depenses_lb" xml:space="preserve">
+    <value>Clôture Dépenses</value>
+  </data>
+  <data name="Filtre_Ci_Cloture_Sur_La_Periode_lb" xml:space="preserve">
+    <value>CI clôturé sur la période</value>
+  </data>
+  <data name="Filtre_Cloture_Depenses_lb" xml:space="preserve">
+    <value>Clôture dépenses</value>
+  </data>
+  <data name="Filtre_Fait_cb" xml:space="preserve">
+    <value>Fait</value>
+  </data>
+  <data name="Filtre_Non_Fait_cb" xml:space="preserve">
+    <value>Non fait</value>
+  </data>
+  <data name="Filtre_Tiret_Tous_cb" xml:space="preserve">
+    <value>- Tous</value>
+  </data>
+  <data name="Filtre_Transfert_Far_lb" xml:space="preserve">
+    <value>Transfert FAR</value>
+  </data>
+  <data name="Filtre_Validation_Avancement_lb" xml:space="preserve">
+    <value>Validation Avancement</value>
+  </data>
+  <data name="Filtre_Validation_Controle_Budgetaire_lb" xml:space="preserve">
+    <value>Validation Contrôle budgétaire</value>
+  </data>
+  <data name="Filtre_Voir_Aussi_Ci_Termines_lb" xml:space="preserve">
+    <value>Voir aussi les CI terminés</value>
+  </data>
+  <data name="Generation_Energies_lb" xml:space="preserve">
+    <value>Génération des énergies</value>
+  </data>
+  <data name="Generer_Energies_lb" xml:space="preserve">
+    <value>Générer les énergies</value>
+  </data>
+  <data name="Non_Fait_lb" xml:space="preserve">
+    <value>Non fait</value>
+  </data>
+  <data name="permisssionKeyCloseDateButton" xml:space="preserve">
+    <value>button.enabled.close.period.index</value>
+  </data>
+  <data name="Recherche_Avancee_lb" xml:space="preserve">
+    <value>Recherche avancée</value>
+  </data>
+  <data name="Selection_Organisation_lb" xml:space="preserve">
+    <value>Sélectionner votre organisation</value>
+  </data>
+  <data name="Titre" xml:space="preserve">
+    <value>Gestion des clôtures de périodes</value>
+  </data>
+  <data name="Transfert_FAR_lb" xml:space="preserve">
+    <value>Transfert FAR</value>
+  </data>
+  <data name="Validation_Avancement_lb" xml:space="preserve">
+    <value>Validation Avancement</value>
+  </data>
+  <data name="Validation_Controle_Budgetaire" xml:space="preserve">
+    <value>Validation Contrôle Budgetaire</value>
+  </data>
+  <data name="CloturePeriodes_TitreOnglet" xml:space="preserve">
+    <value>Clôture de périodes en masse</value>
+  </data>
+  <data name="Btn_DecloturerDepenses_lb" xml:space="preserve">
+    <value>Déclôturer les dépenses</value>
+  </data>
+  <data name="Notif_ClotureDepenses_Succes" xml:space="preserve">
+    <value>Clôture des dépenses effectuée avec succès !</value>
+  </data>
+  <data name="Notif_ClotureDepense_Succes" xml:space="preserve">
+    <value>Clôture de la dépense effectuée avec succès !</value>
+  </data>
+  <data name="Notif_DeclotureDepenses_Succes" xml:space="preserve">
+    <value>Déclôture des dépenses effectuée avec succès !</value>
+  </data>
+  <data name="Notif_DeclotureDepense_Succes" xml:space="preserve">
+    <value>Déclôture de la dépense effectuée avec succès !</value>
+  </data>
+</root>

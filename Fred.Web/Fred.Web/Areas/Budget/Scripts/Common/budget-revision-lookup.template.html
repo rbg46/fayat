@@ -1,0 +1,10 @@
+﻿<div class="bkg-item pk-{{ref.CodeRef}}-item"
+     ng-repeat="ref in $ctrl.referentiels track by $index "
+     ng-click="$ctrl.handleSelection(ref)"
+     ng-class="{selected : $index == $ctrl.selectedIndex}"
+     title="Cliquer pour sélectionner la version {{ref.Revision}}">
+    <h2 fred-wrap-in-tag="{{ref.Revision}}" words="$ctrl.searchTexts">Version {{ref.Revision}}</h2>
+    <h3 fred-wrap-in-tag="{{ref.Etat}}" words="$ctrl.searchTexts">{{ref.Etat}}</h3>
+    <h3 ng-if="ref.PeriodeDebut !== null && ref.PeriodeFin === null" fred-wrap-in-tag="{{ref.PeriodeDebut}}" words="$ctrl.searchTexts">{{ref.PeriodeDebut}}</h3>
+    <h3 ng-if="ref.PeriodeDebut !== null && ref.PeriodeFin !== null" fred-wrap-in-tag="{{ref.PeriodeDebut}} - {{ref.PeriodeFin}}" words="$ctrl.searchTexts">{{ref.PeriodeDebut}} - {{ref.PeriodeFin}}</h3>
+</div>

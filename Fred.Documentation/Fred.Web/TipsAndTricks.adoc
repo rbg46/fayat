@@ -1,0 +1,43 @@
+= Trucs et astuces
+
+// define images directory relative to pwd if not defined in master.   
+ifndef::imagesdir[:imagesdir: ../]
+
+== Requêtes Sql utiles
+
+=== Liste des utilisateurs avec la société
+
+[source,sql]
+----
+SELECT usr.Login, ad.MotDePasse, per.SocieteId, soc.Libelle
+FROM FRED_UTILISATEUR usr
+JOIN FRED_EXTERNALDIRECTORY ad on (ad.FayatAccessDirectoryId = usr.FayatAccessDirectoryId)
+JOIN FRED_PERSONNEL per on (per.PersonnelId = usr.UtilisateurId)
+JOIN FRED_SOCIETE soc on (soc.SocieteId = per.SocieteId);
+----
+
+
+=== Liste des utilisateurs avec plein d'info...
+
+[source,sql]
+----
+select
+ut.UtilisateurId,
+--urod.UtilisateurId,
+ut.Login,exd.MotDePasse,
+ut.SuperAdmin,
+exd.isActived,
+p.Nom,
+p.Prenom,
+p.SocieteId,
+s.Libelle as Societe,
+urod.UtilisateurRoleOrganisationDeviseId as UtilisateurRoleOrganisationDeviseId,
+urod.OrganisationId as RoleSurOrga,
+r.Libelle as Role
+from FRED_UTILISATEUR  ut
+LEFT OUTER JOIN FRED_EXTERNALDIRECTORY exd on (ut.FayatAccessDirectoryId=exd.FayatAccessDirectoryId)
+LEFT OUTER JOIN FRED_PERSONNEL p on(ut.UtilisateurId = p.PersonnelId)
+LEFT OUTER JOIN FRED_SOCIETE s on(s.SocieteId = p.SocieteId)
+LEFT OUTER JOIN FRED_UTILISATEUR_ROLE_ORGANISATION_DEVISE urod ON urod.UtilisateurId = ut.UtilisateurId
+LEFT OUTER JOIN FRED_ROLE r ON urod.RoleId = r.RoleId
+----

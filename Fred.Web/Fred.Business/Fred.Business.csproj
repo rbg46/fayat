@@ -1,0 +1,87 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="4.2.1" />
+    <PackageReference Include="FluentValidation" Version="8.5.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="morelinq" Version="3.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="NLog" Version="4.6.7" />
+    <PackageReference Include="RazorEngine" Version="3.10.0" />
+    <PackageReference Include="Syncfusion.DocIO.AspNet.Mvc5" Version="17.1.0.32-beta" />
+    <PackageReference Include="Syncfusion.Pdf.AspNet.Mvc5" Version="17.1.0.32-beta" />
+    <PackageReference Include="Syncfusion.XlsIO.AspNet.Mvc5" Version="17.1.0.32-beta" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.18" />
+    <PackageReference Include="System.Runtime.Caching" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\GroupSpecific\Fred.GroupSpecific.Infrastructure\Fred.GroupSpecific.Infrastructure.csproj" />
+    <ProjectReference Include="..\Fred.DataAccess.Interfaces\Fred.DataAccess.Interfaces.csproj" />
+    <ProjectReference Include="..\Fred.DataAccess\Fred.DataAccess.csproj" />
+    <ProjectReference Include="..\Fred.Entities\Fred.Entities.csproj" />
+    <ProjectReference Include="..\Fred.Framework\Fred.Framework.csproj" />
+    <ProjectReference Include="..\Fred.Notifications.Interfaces\Fred.Notifications.Interfaces.csproj" />
+    <ProjectReference Include="..\Fred.Web.Shared\Fred.Web.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Commande\CommandeResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CommandeResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Depense\DepenseResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DepenseResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Commande\CommandeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommandeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Depense\DepenseResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DepenseResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="BusinessResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BusinessResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="BusinessResources.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BusinessResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+
+</Project>

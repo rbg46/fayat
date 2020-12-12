@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Budget_ControleBudgetaire_Bouton_Annuler" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Bouton_AValider" xml:space="preserve">
+    <value>A Valider</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Bouton_Cumul" xml:space="preserve">
+    <value>Cumul</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Bouton_Deverrouiller" xml:space="preserve">
+    <value>Déverrouiller</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Bouton_Enregistrer" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Bouton_Modifier" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Bouton_RefermerLePanneau" xml:space="preserve">
+    <value>Refermer le panneau</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Bouton_ToutDeplier" xml:space="preserve">
+    <value>Tout déplier</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Bouton_ToutPlier" xml:space="preserve">
+    <value>Tout plier</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Bouton_Valider" xml:space="preserve">
+    <value>Valider</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_Ajustement" xml:space="preserve">
+    <value>Ajustement</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_Budget" xml:space="preserve">
+    <value>Budget</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_Commentaire" xml:space="preserve">
+    <value>Commentaire</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_DAD" xml:space="preserve">
+    <value>Droit à dépense (DAD)</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_Depense" xml:space="preserve">
+    <value>Dépense</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_Ecart" xml:space="preserve">
+    <value>Écart</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_Montant" xml:space="preserve">
+    <value>Montant</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_PFA" xml:space="preserve">
+    <value>Prévision Fin d'Affaire</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_PFA_Precedent" xml:space="preserve">
+    <value>PFA du mois précédent</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_ProjectionLineaire" xml:space="preserve">
+    <value>Projection linéaire des dépenses</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_Pu" xml:space="preserve">
+    <value>PU</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_Quantite" xml:space="preserve">
+    <value>Quantité</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_RAD" xml:space="preserve">
+    <value>Reste à dépenser théorique</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_RAD_Abrege" xml:space="preserve">
+    <value>RAD</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_SommeMontant" xml:space="preserve">
+    <value>Somme des montants</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_TotalAjustement" xml:space="preserve">
+    <value>Total Ajustement</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_TotalBudget" xml:space="preserve">
+    <value>Total Budget</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_TotalDAD" xml:space="preserve">
+    <value>Total DAD</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_TotalDepenses" xml:space="preserve">
+    <value>Total Dépenses</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_TotalEcart" xml:space="preserve">
+    <value>Total Écart</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_TotalPFA" xml:space="preserve">
+    <value>Total PFA</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_TotalPFA_Precedent" xml:space="preserve">
+    <value>Total PFA Mois Précédent</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_TotalPLD" xml:space="preserve">
+    <value>Total PLD</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Colonne_TotalRAD" xml:space="preserve">
+    <value>Total RAD</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Message_Information" xml:space="preserve">
+    <value>Veuillez sélectionner un CI et une période pour gérer le contrôle budgétaire</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Panneau_Section_AxeAnalytique" xml:space="preserve">
+    <value>Axe analytique</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Panneau_Section_ColonnesAffichees" xml:space="preserve">
+    <value>Colonnes affichées</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Panneau_Section_DetailAxeAnalytique" xml:space="preserve">
+    <value>Détail de l'axe analytique</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Panneau_Titre" xml:space="preserve">
+    <value>Paramétrage de l'explorateur Contrôle Budgétaire</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Section_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Section_AvancementDepense" xml:space="preserve">
+    <value>Avancement/dépense</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Section_AxeAnalyse" xml:space="preserve">
+    <value>Axe d'analyse</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Section_Devise" xml:space="preserve">
+    <value>Devise</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Section_Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Section_SelectionOrganisation" xml:space="preserve">
+    <value>Sélectionner une organisation</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Section_SelectionPeriode" xml:space="preserve">
+    <value>Sélectionner une période</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Span_Avancement" xml:space="preserve">
+    <value>Avancement</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Span_Depense" xml:space="preserve">
+    <value>Dépense</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Titre" xml:space="preserve">
+    <value>Contrôle budgétaire</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Titre_AxeInconnu" xml:space="preserve">
+    <value>Axe principal inconnu </value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Titre_AxePrincipalRessource" xml:space="preserve">
+    <value>Ressources/Taches</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Titre_AxePrincipalTaches" xml:space="preserve">
+    <value>Taches/Ressources</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Tooltip_BandeauParametres" xml:space="preserve">
+    <value>Cliquer pour afficher les options de personnalisation d’affichage</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Tooltip_ChoiceAxeRessources" xml:space="preserve">
+    <value>Cliquer pour afficher l’explorateur sur l’axe Ressources &gt; Tâches</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Tooltip_ChoiceAxeTaches" xml:space="preserve">
+    <value>Cliquer pour afficher l’explorateur sur l’axe Tâches &gt; Ressources</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Validation_Erreur_Avancement_NonValide" xml:space="preserve">
+    <value>Non validé</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Validation_Erreur_Avancement_Valide" xml:space="preserve">
+    <value>Validé</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Validation_Erreur_Message" xml:space="preserve">
+    <value>Pour valider ce contrôle budgétaire sur la période {0} vous devez d'abord valider l'avancement et clôturer la période comptable correspondante.</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Validation_Erreur_PeriodeComptable_Cloturee" xml:space="preserve">
+    <value>Clôturée</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Validation_Erreur_PeriodeComptable_Ouverte" xml:space="preserve">
+    <value>Ouverte</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Validation_Verrouillage_Precedents_Message" xml:space="preserve">
+    <value>Le validation de ce contrôle budgétaire va entrainer le verrouillage des contrôles budgétaires précédents non validés :</value>
+  </data>
+  <data name="Budget_ControleBudgetaire_Validation_Verrouillage_Precedents_Periode" xml:space="preserve">
+    <value>CB période {0} non validé</value>
+  </data>
+  <data name="ControleBudgetaire_Favoris" xml:space="preserve">
+    <value>Favoris</value>
+  </data>
+  <data name="ControleBudgetaire_Tooltip_Favoris_Part1" xml:space="preserve">
+    <value>Mettre en favoris le contrôle bugétaire pour le CI </value>
+  </data>
+  <data name="ControleBudgetaire_Tooltip_Favoris_Part2" xml:space="preserve">
+    <value> pour la période </value>
+  </data>
+  <data name="DemandeValidationControleBudgetaireError" xml:space="preserve">
+    <value>Echec de la demande de validation</value>
+  </data>
+  <data name="DemandeValidationControleBudgetaireSuccess" xml:space="preserve">
+    <value>Réussite de la demande de validation</value>
+  </data>
+  <data name="EnregistrementControleBudgetaireError" xml:space="preserve">
+    <value>Erreur lors de l'enregistrement</value>
+  </data>
+  <data name="EnregistrementControleBudgetaireSuccess" xml:space="preserve">
+    <value>Enregistrement réussi !</value>
+  </data>
+  <data name="ExportExcelError" xml:space="preserve">
+    <value>Erreur lors de l'export excel</value>
+  </data>
+  <data name="GetControleBudgetaireAucuneDonnee" xml:space="preserve">
+    <value>Aucune donnée n'existe pour ce controle budgétaire</value>
+  </data>
+  <data name="GetControleBudgetaireError" xml:space="preserve">
+    <value>Impossible de récupérer le controle budgétaire</value>
+  </data>
+  <data name="PageTitre" xml:space="preserve">
+    <value>Controle Budgétaire</value>
+  </data>
+  <data name="PassageControleBudgetaireEtatBrouillonError" xml:space="preserve">
+    <value>Echec lors du passage à l'état brouillon</value>
+  </data>
+  <data name="PassageControleBudgetaireEtatBrouillonSuccess" xml:space="preserve">
+    <value>Réussite du passage à l'état brouillon</value>
+  </data>
+  <data name="RecuperationDesTypesAxeImpossible" xml:space="preserve">
+    <value>Impossible de récupérer les différents types d'axe analytique</value>
+  </data>
+  <data name="TelechargementExportExcelImpossible" xml:space="preserve">
+    <value>Impossible de télécharger l'excel du controle budgétaire. </value>
+  </data>
+  <data name="TotalDepenseExcel" xml:space="preserve">
+    <value>Total Dépenses</value>
+  </data>
+  <data name="ValidationControleBudgetaireError" xml:space="preserve">
+    <value>Erreur lors de la validation du controle budgétaire</value>
+  </data>
+  <data name="ValidationControleBudgetaireSuccess" xml:space="preserve">
+    <value>Validation du controle budgétaire réussie</value>
+  </data>
+</root>

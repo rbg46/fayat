@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewBag.Title = "Liste des commandes énergies";
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/CommandeEnergieIndexBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/CommandeEnergieIndexBundle.js")
+    @this.RenderResources("FeatureCommandeEnergie")
+}
+
+<div class="commande-energie-list" ng-controller="CommandeEnergieListController as $ctrl">
+
+    <!--START : Titre de la page-->
+    <h1>{{$ctrl.resources.Titre_Preparation_Commande_Energie}}</h1>
+
+    <!-- Barre de recherche + Barre d'outils-->
+    <fred-toolbar>
+
+        <!--Période comptable-->
+        <fred-section class="date-picker-section">
+
+            <fred-section-title>{{$ctrl.resources.Global_Periode_Comptable}}</fred-section-title>
+
+            <fred-section-controls>
+                <app-date-picker id="Periode"
+                                 format="MM/YYYY"
+                                 lang="fr"
+                                 initial-date="{{$ctrl.today}}"
+                                 placeholder="{{$ctrl.resources.Global_Periode_Comptable}}"
+                                 ng-model="$ctrl.filter.Periode"
+                                 name="Periode"
+                                 on-update="$ctrl.handleSearch()">
+                </app-date-picker>
+
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Sélection du CI-->
+        <fred-section class="picklist-section">
+
+            <fred-section-title>{{$ctrl.resources.Libelle_Chantier_SEP}}</fred-section-title>
+
+            <fred-section-controls>
+                <div class="lookup-bloc">
+                    <lookup-standalone ng-model="$ctrl.filter.Ci"
+                                       text="$ctrl.filter.Ci.CodeLibelle"
+                                       search-title="{{$ctrl.resources.Global_ReferentielCI}}"
+                                       search-placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                       custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                       url="/api/CommandeEnergie/Search/Ci"
+                                       placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                       on-select="$ctrl.handleLookupSelection('CI', item);"
+                                       on-delete="$ctrl.handleLookupDeletion('CI');"
+                                       tooltip="$ctrl.filter.ci.CodeLibelle"
+                                       class="formulaire long">
+                    </lookup-standalone>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Fournisseur Partenaire-->
+        <fred-section class="picklist-section">
+
+            <fred-section-title>{{$ctrl.resources.Libelle_Fournisseur_Partenaire}}</fred-section-title>
+
+            <fred-section-controls>
+                <div class="lookup-bloc">
+                    <lookup-standalone ng-model="$ctrl.filter.Fournisseur"
+                                       text="$ctrl.filter.Fournisseur.CodeLibelle"
+                                       search-title="{{$ctrl.resources.Global_ReferentielFournisseur}}"
+                                       search-placeholder="{{$ctrl.resources.Global_ReferentielFournisseur_Placeholder}}"
+                                       on-select="$ctrl.handleLookupSelection('Fournisseur', item);"
+                                       on-delete="$ctrl.handleLookupDeletion('Fournisseur');"
+                                       placeholder="{{$ctrl.resources.Global_ReferentielFournisseur_Placeholder}}"
+                                       tooltip="$ctrl.filter.Fournisseur.CodeLibelle"
+                                       class="formulaire long"
+                                       url="/api/CommandeEnergie/Search/Fournisseur"
+                                       custom-template-url="/Scripts/directive/Lookup/custom-templates/fournisseur.template.html"
+                                       active-second-search-input="true"
+                                       search-placeholder2="Autres informations...(Adresse, Code, SIREN)"
+                                       search-tooltip='Commencez votre saisie par * si vous ne connaissez pas le début du nom (exemple : "*location").'>
+                    </lookup-standalone>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Actions-->
+        <fred-section class="action-section">
+
+            <fred-section-title>{{$ctrl.resources.Global_Actions}}</fred-section-title>
+
+            <fred-section-controls class="action-controls">
+                <button type="button" class="fred-button default text" ng-click="$ctrl.handleNewCommande()">
+                    <span class="material-icons">add</span>
+                    {{$ctrl.resources.Bouton_Nouvelle_Commande_Energie}}
+                </button>
+            </fred-section-controls>
+        </fred-section>
+    </fred-toolbar>
+
+    <!--START Liste -->
+    <table class="prep-com-nrj">
+        <thead>
+            <tr>
+                <th class="col1">{{$ctrl.resources.Global_Statut}}</th>
+                <th class="col2">{{$ctrl.resources.Global_Fournisseur}}</th>
+                <th class="col3">{{$ctrl.resources.Type_Energie_Commande_Energie}}</th>
+                <th class="col4">{{$ctrl.resources.Global_Period}}</th>
+                <th class="col5">{{$ctrl.resources.Libelle_Numero_Commande}}</th>
+                <th class="col6">{{$ctrl.resources.Global_AmountHTEuros}}</th>
+                <th class="col7">{{$ctrl.resources.Libelle_Date_Emission}}</th>
+                <th class="col8">{{$ctrl.resources.Global_Centre_Imputation}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="cmd in $ctrl.commandeEnergies" ng-click="$ctrl.handleRedirectToDetail(cmd.CommandeId)">
+                <td class="col1 blue1">
+                    <div>
+                        <span class="material-icons edit">more_vert</span>
+                        <span class="tile {{$ctrl.statutCommandes[cmd.StatutCommande.Code].class}}">{{cmd.StatutCommande.Libelle}}</span>
+                    </div>
+                </td>
+                <td class="col2 blue1"><p>{{cmd.Fournisseur.Code}}<br />{{cmd.Fournisseur.Libelle}}</p></td>
+                <td class="col3">
+                    <span class="tile {{$ctrl.typeEnergies[cmd.TypeEnergie.Code].class}}">{{cmd.TypeEnergie.Libelle}}</span>
+                </td>
+                <td class="col4">{{cmd.Date | date:'MM/yyyy'}}</td>
+                <td class="col5">{{cmd.NumeroCommandeExterne}}</td>
+                <td class="col6 blue2">{{cmd.MontantHT | number:2}} €</td>
+                <td class="col7">{{cmd.DateCreation | date:'dd/MM/yyyy'}}</td>
+                <td class="col8"><p>{{cmd.CI.Societe.Code}} - {{cmd.CI.Code}}<br />{{cmd.CI.Libelle}}</p></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

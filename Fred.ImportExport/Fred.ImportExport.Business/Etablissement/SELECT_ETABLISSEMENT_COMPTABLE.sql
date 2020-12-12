@@ -1,0 +1,8 @@
+﻿SELECT DISTINCT 
+  TRIM(E.RSTE)	As CodeSociete, 
+  TRIM(E.RARG)	As CodeEtablissement, 
+  E.TLIB1	As Libelle
+FROM AXFILE.FAN100P1 E 
+INNER JOIN AXFILE.FCA180P1 L ON E.RSTE = L.RSTE AND E.RARG = L.RETAB 
+WHERE E.RCT = 'EB' AND L.REX >= '{0}' AND E.RSTE = '{1}'
+ORDER BY CodeSociete, CodeEtablissement

@@ -1,0 +1,460 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Societe_Index_PanelRight_CodeSocieteComptable" xml:space="preserve">
+    <value>Code société comptable</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_CodeSocieteComptable_Placeholder" xml:space="preserve">
+    <value>Code société comptable</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_CodeSocietePaye" xml:space="preserve">
+    <value>Code société paie</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_CodeSocietePaye_Placeholder" xml:space="preserve">
+    <value>Code société paie</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_Code" xml:space="preserve">
+    <value>Code</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_Code_Placeholder" xml:space="preserve">
+    <value>20 caractères max</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_SousTitre_ExercicePaie" xml:space="preserve">
+    <value>Période Exercice paie</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_GenerationAutoSamediCP" xml:space="preserve">
+    <value>Génération automatique des samedis en CP</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_ExercicePaie_MoisDebut" xml:space="preserve">
+    <value>Mois début année courante</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_ExercicePaie_MoisFin" xml:space="preserve">
+    <value>Mois fin année suivante</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelMain_Rechercher_Placeholder" xml:space="preserve">
+    <value>Rechercher une Société ...</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_Siren" xml:space="preserve">
+    <value>SIREN</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_Siren_Placeholder" xml:space="preserve">
+    <value>SIREN</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_Titre" xml:space="preserve">
+    <value>Gestion des sociétés</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_Titre_Ajouter" xml:space="preserve">
+    <value>Ajouter une Société</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_Titre_Modifier" xml:space="preserve">
+    <value>Modifier une Société</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Controller_DeviseDejaReference_Erreur" xml:space="preserve">
+    <value>La devise sélectionnée est déjà la devise de référence</value>
+    <comment>societe.controller.js</comment>
+  </data>
+  <data name="Societe_Controller_DeviseReferenceRequired_Erreur" xml:space="preserve">
+    <value>Devise de référence requise</value>
+    <comment>societe.controller.js</comment>
+  </data>
+  <data name="Societe_Controller_DoubleSelectionDevise_Erreur" xml:space="preserve">
+    <value>Vous ne pouvez pas sélectionner deux fois la même devise</value>
+    <comment>societe.controller.js</comment>
+  </data>
+  <data name="Societe_Controller_NombreMaxDeviseAtteint_Erreur" xml:space="preserve">
+    <value>Nombre maximum de devises atteint</value>
+    <comment>societe.controller.js</comment>
+  </data>
+  <data name="Societe_Controller_Notification_DeviseRefDejaSecondaire" xml:space="preserve">
+    <value>La devise sélectionnée est déjà une devise secondaire.</value>
+    <comment>societe.controller.js</comment>
+  </data>
+  <data name="Societe_Controller_TypeDevise_Reference" xml:space="preserve">
+    <value>Référence</value>
+    <comment>societe.controller.js</comment>
+  </data>
+  <data name="Societe_Controller_TypeDevise_Secondaire" xml:space="preserve">
+    <value>Secondaires</value>
+    <comment>societe.controller.js</comment>
+  </data>
+  <data name="Societe_Index_PanelMain_Table_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_AutreDevise" xml:space="preserve">
+    <value>Autres Devises</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_DeviseReference" xml:space="preserve">
+    <value>Devise de référence</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_JournalAchat" xml:space="preserve">
+    <value>Journaux d'Achat</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_JournalAchat_Placeholder" xml:space="preserve">
+    <value>Nouveau journal d'achat</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_JournalFAR" xml:space="preserve">
+    <value>Journal des FARs</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_JournalFAR_Placeholder" xml:space="preserve">
+    <value>Journal des FARs</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_Libelle_Placeholder" xml:space="preserve">
+    <value>Libellé de la Société</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_SousTitre_Devise" xml:space="preserve">
+    <value>Devises</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_SousTitre_Journaux" xml:space="preserve">
+    <value>Journaux</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_TableDevise_Bouton_Ajouter" xml:space="preserve">
+    <value>Ajouter une Devise</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_TableDevise_Bouton_Ajouter_Tooltip" xml:space="preserve">
+    <value>Ajouter une Devise Secondaire</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_TableDevise_Bouton_Supprimer_Tooltip" xml:space="preserve">
+    <value>Supprimer la Devise Secondaire</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_TableDevise_Entete_Devise" xml:space="preserve">
+    <value>Devise</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_TableJournal_Bouton_Ajouter" xml:space="preserve">
+    <value>Ajouter un Journal d'Achat</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_TableJournal_Bouton_Supprimer_Tooltip" xml:space="preserve">
+    <value>Supprimer le journal</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_TableJournal_Entete_Code" xml:space="preserve">
+    <value>Code</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_TitreOnglet" xml:space="preserve">
+    <value>Gestion des Sociétés</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_Interimaire" xml:space="preserve">
+    <value>Intérimaire</value>
+  </data>
+  <data name="Societe_Index_PanelRight_CodeSocieteStorm" xml:space="preserve">
+    <value>Code société STORM</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_CodeSocieteStorm_Placeholder" xml:space="preserve">
+    <value>Code société STORM</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_SousTitre_Unite" xml:space="preserve">
+    <value>Unités</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_TableUnite_Bouton_Ajouter_Tooltip" xml:space="preserve">
+    <value>Ajouter une unité</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_TableUnite_Bouton_Supprimer_Tooltip" xml:space="preserve">
+    <value>Supprimer l'unité</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_TableUnite_Entete" xml:space="preserve">
+    <value>Unité</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Controller_DoubleSelectionUnite_Erreur" xml:space="preserve">
+    <value>Vous ne pouvez pas sélectionner deux fois la même unité</value>
+    <comment>societe.controller.js</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_TableUnite_Bouton_Ajouter" xml:space="preserve">
+    <value>Ajouter une unité</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_ErreurSocieteInterim" xml:space="preserve">
+    <value>Une société intérimaire existe déjà pour ce groupe, impossible de créer une société intérimaire.</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_SousTitre_IndemniteDeplacement" xml:space="preserve">
+    <value>Indemnité de déplacement</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_SousTitre_IndemniteDeplacement_CalculType" xml:space="preserve">
+    <value>Le calcul des kilomètres se fait en :</value>
+  </data>
+  <data name="Societe_Index_PanelRight_SousTitre_Budget" xml:space="preserve">
+    <value>Budget</value>
+  </data>
+  <data name="Modal_AssocieSep_Table_AjouterAssocie" xml:space="preserve">
+    <value>Ajouter un associé</value>
+  </data>
+  <data name="Modal_AssocieSep_Table_AjouterAssocie_Niveau2_Title" xml:space="preserve">
+    <value>Cliquer pour ajouter une société de niveau 2</value>
+  </data>
+  <data name="Modal_AssocieSep_Table_AjouterAssocie_Title" xml:space="preserve">
+    <value>Cliquer pour ajouter une société de niveau 1</value>
+  </data>
+  <data name="Modal_AssocieSep_Table_Associe" xml:space="preserve">
+    <value>Associé</value>
+  </data>
+  <data name="Modal_AssocieSep_Table_CorrigerErreur" xml:space="preserve">
+    <value>Veuillez corriger les erreurs</value>
+  </data>
+  <data name="Modal_AssocieSep_Table_Doublons_Error" xml:space="preserve">
+    <value>Doublons</value>
+  </data>
+  <data name="Modal_AssocieSep_Table_Fournisseur" xml:space="preserve">
+    <value>Fournisseur</value>
+  </data>
+  <data name="Modal_AssocieSep_Table_QuotePart" xml:space="preserve">
+    <value>Quote-Part</value>
+  </data>
+  <data name="Modal_AssocieSep_Table_SupprimerAssocie_Niveau2_Title" xml:space="preserve">
+    <value>Cliquer pour supprimer la société de niveau 2</value>
+  </data>
+  <data name="Modal_AssocieSep_Table_SupprimerAssocie_Title" xml:space="preserve">
+    <value>Cliquer pour supprimer la société de niveau 1 et ses sociétés de niveau 2</value>
+  </data>
+  <data name="Modal_AssocieSep_Table_TotalQuotePart_Error" xml:space="preserve">
+    <value>Total incorrect</value>
+  </data>
+  <data name="Modal_AssocieSep_Table_TypeParticipation" xml:space="preserve">
+    <value>Type Participation</value>
+  </data>
+  <data name="Modal_AssocieSep_Title" xml:space="preserve">
+    <value>Associés de la SEP</value>
+  </data>
+  <data name="Societe_Index_PanelRight_AssocieSep" xml:space="preserve">
+    <value>Associés de la SEP</value>
+  </data>
+  <data name="Societe_Index_PanelRight_AssocieSep_Title_1" xml:space="preserve">
+    <value>Veuillez d'abord enregistrer la société</value>
+  </data>
+  <data name="Societe_Index_PanelRight_AssocieSep_Title_2" xml:space="preserve">
+    <value>Cliquer pour ajouter ou modifier les associés de la SEP</value>
+  </data>
+  <data name="Societe_Index_PanelRight_Fournisseur" xml:space="preserve">
+    <value>Fournisseur</value>
+  </data>
+  <data name="Societe_Index_PanelRight_Fournisseur_Placeholder" xml:space="preserve">
+    <value>Fournisseur</value>
+  </data>
+  <data name="AssocieSep_Fournisseur_Required" xml:space="preserve">
+    <value>Le fournisseur est obligatoire</value>
+  </data>
+  <data name="AssocieSep_QuotePart_Error" xml:space="preserve">
+    <value>Le total des quotes-parts doit être égal à 100%</value>
+  </data>
+  <data name="AssocieSep_QuotePart_Required" xml:space="preserve">
+    <value>La quote-part est obligatoire</value>
+  </data>
+  <data name="AssocieSep_SocieteAssociee_Required" xml:space="preserve">
+    <value>La société associée est obligatoire</value>
+  </data>
+  <data name="AssocieSep_SocieteSep_Required" xml:space="preserve">
+    <value>La société SEP est obligatoire</value>
+  </data>
+  <data name="AssocieSep_TypeParticipation_Required" xml:space="preserve">
+    <value>Le type de participation Sep est obligatoire</value>
+  </data>
+  <data name="AssocieSep_TypeParticipation_Unique" xml:space="preserve">
+    <value>Le type de participation doit être unique</value>
+  </data>
+  <data name="Modal_AssocieSep_Societe_Doublon_Error" xml:space="preserve">
+    <value>La société est déjà présente dans la liste des associés</value>
+  </data>
+  <data name="SocieteClassification_Code_Required" xml:space="preserve">
+    <value>Le code de classification est obligatoire</value>
+  </data>
+  <data name="SocieteClassification_Id_Required" xml:space="preserve">
+    <value>L'identifiant de classification est obligatoire</value>
+  </data>
+  <data name="SocieteClassification_Libelle_Required" xml:space="preserve">
+    <value>Le Libelle de classification est obligatoire</value>
+  </data>
+  <data name="SocieteClassification_Societes_Delete_NotEmpty" xml:space="preserve">
+    <value>Suppression de la classification société impossible : celle-ci est rattachée à au moins une société</value>
+  </data>
+  <data name="SocieteClassification_Societes_Disable_NotEmpty" xml:space="preserve">
+    <value>Désactivation de la classification société impossible : celle-ci est rattachée à au moins une société</value>
+  </data>
+  <data name="ClassificationLibelle" xml:space="preserve">
+    <value>Classification</value>
+  </data>
+  <data name="SocieteClassification_PlaceHolder_Input" xml:space="preserve">
+    <value>Rechercher une classification société</value>
+  </data>
+  <data name="SocieteClassification_Title" xml:space="preserve">
+    <value>Classifications Sociétés</value>
+  </data>
+  <data name="Societe_Index_PanelRight_TableBudget_Avancement_Ecart" xml:space="preserve">
+    <value>Saisie écart d'avancement</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_TableBudget_Avancement_TypeDynamique" xml:space="preserve">
+    <value>Type d'avancement dynamique</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Societe_Index_PanelRight_TableBudget_SaisieRecette" xml:space="preserve">
+    <value>Saisie de la recette</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="SocieteClassification_Code_AlreadyUsed" xml:space="preserve">
+    <value>Le code de classification est déjà utilisé</value>
+  </data>
+  <data name="Modal_AssocieSep_Fournisseur_Doublon_Error" xml:space="preserve">
+    <value>Le fournisseur est déjà présent dans la liste</value>
+  </data>
+  <data name="OnlyOneSocieteInterimaireParGroupe" xml:space="preserve">
+    <value>Il ne peut y avoir qu'une seule société intérimaire par groupe.</value>
+  </data>
+</root>

@@ -1,0 +1,780 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureRapport.Rapport_Index_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/RapportListeBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/RapportListeBundle.js")
+
+    @this.RenderResources("FeatureRapport", "FeatureFavori")
+}
+
+<div class="container liste_rapports"
+     id="main"
+     ng-controller="RapportListeController"
+     ng-init="getFilterOrFavoris('@ViewBag.favoriId')">
+
+    <h1 ng-class="{'expanded': displayReduce,  'reduice': !displayReduce}" ng-click="displayReduce = !displayReduce" ng-init="displayReduce=true;">{{::resources.Rapport_Index_Titre}}</h1>
+    <div id="container-dashed" ng-show="displayReduce">
+        <div class="container">
+            <fred-tiles ng-show="isUserHasMenuEditionPermission">
+                <fred-tile ng-click="handleSelectExport(exportation.verificationTemps)">
+                    <fred-tile-icon class="flaticon flaticon-stopwatch-4"></fred-tile-icon>
+                    <fred-tile-title>{{::resources.Rapport_Index_Bouton_VerificationTemps}}</fred-tile-title>
+                </fred-tile>
+                <i class="material-icons separateur">keyboard_arrow_right</i>
+                <fred-tile ng-show="isUserFes" ng-click="handleSelectExport(exportation.controlePointagesFes)">
+                    <fred-tile-icon class="flaticon flaticon-calendar-2"></fred-tile-icon>
+                    <fred-tile-title>{{::resources.Rapport_Index_Bouton_ControlePointage}}</fred-tile-title>
+                </fred-tile>
+                <fred-tile ng-hide="isUserFes" ng-click="handleSelectExport(exportation.controlePointages)">
+                    <fred-tile-icon class="flaticon flaticon-calendar-2"></fred-tile-icon>
+                    <fred-tile-title>{{::resources.Rapport_Index_Bouton_ControlePointage}}</fred-tile-title>
+                </fred-tile>
+                <i class="material-icons separateur">keyboard_arrow_right</i>
+                <fred-tile  ng-click="handleSelectExport(exportation.primes)">
+                    <fred-tile-icon class="flaticon flaticon-gift"></fred-tile-icon>
+                    <fred-tile-title>{{::resources.Rapport_Index_Bouton_ListePrime}}</fred-tile-title>
+                </fred-tile>
+                <i ng-hide="isUserFes" class="material-icons separateur">keyboard_arrow_right</i>
+                <fred-tile ng-hide="isUserFes" ng-click="handleSelectExport(exportation.IGD)">
+                    <fred-tile-icon class="flaticon flaticon-map-1"></fred-tile-icon>
+                    <fred-tile-title>{{::resources.Rapport_Index_Bouton_ListeIGD}}</fred-tile-title>
+                </fred-tile>
+                <i ng-hide="isUserFes" class="material-icons separateur">keyboard_arrow_right</i>
+                <fred-tile ng-hide="isUserFes" ng-click="handleSelectExport(exportation.heuresSpecifiques)">
+                    <fred-tile-icon class="flaticon flaticon-map-1"></fred-tile-icon>
+                    <fred-tile-title>{{::resources.Rapport_Index_Bouton_RecapHeuresSpecifiques}}</fred-tile-title>
+                </fred-tile>
+                <i id="I-SalarieAcompte" class="material-icons separateur" fred-display-handler="userOrganizationId" display="visible">keyboard_arrow_right</i>
+                <fred-tile id="FT-SalarieAcompte" fred-display-handler="userOrganizationId" display="visible" ng-click="handleSelectExport(exportation.salarieAcompte)">
+                    <fred-tile-icon class="flaticon flaticon-map-1"></fred-tile-icon>
+                    <fred-tile-title>{{::resources.Rapport_Index_Bouton_SalarieAcompte}}</fred-tile-title>
+                </fred-tile>
+                <i id="I-Absence" class="material-icons separateur" fred-display-handler="userOrganizationId" display="visible">keyboard_arrow_right</i>
+                <fred-tile id="FT-Absence" fred-display-handler="userOrganizationId" display="visible" ng-click="handleSelectExport(exportation.AbsencesMensuelsList)" @*id="fred_tiles_ListeAbsence" fred-Display-Handler="currentUser.Societe.Organisation.PereId" display="visible"*@>
+                    <fred-tile-icon class="flaticon flaticon-map-1"></fred-tile-icon>
+                    <fred-tile-title>{{::resources.Rapport_Index_Bouton_ListeAbsence}}</fred-tile-title>
+                </fred-tile>
+            </fred-tiles>
+
+            <div class="row">
+                <div class="container-fluid liste_rapports">
+                    <div class="search-container">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3 no_padding flex">
+                                <input type="text" class="form-control" ng-model="filters.ValueText" on-enter="handleLoadData()" placeholder="{{filterPlaceholder}}" />
+                                <button class="input-group-addon button-search" type="button" ng-click="handleLoadData()" title="{{::resources.Global_RechercheAffiner_Tooltip}}" ng-disabled="busy">
+                                    <i class="material-icons">search</i>
+                                </button>
+                                <fred-button class="btn-dark-gray" ng-click="handleResetFilter()" title="{{::resources.Global_Filtre_Bouton_ReinitialiserFiltre}}">
+                                    <span class="fa fa-filter"></span>
+                                    <span class="fa fa-times"></span>
+                                </fred-button>
+                            </div>
+                            <!-- BEGIN : Tuiles de l'écran principal -->
+                            <div class="col-md-7 col-sm-7 flex">
+                                <button type="button" class="fred-button criteria" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.Organisation" ng-click="filters.Organisation=null; filters.OrganisationId=null; handleLoadData()">{{filters.Organisation.CodeLibelle}}</button>
+                                <button type="button" class="fred-button criteria" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.StatutEnCours" ng-click="filters.StatutEnCours = false; handleLoadData()">{{::resources.Rapport_Search_Tuile_StatutEnCours}}</button>
+                                <button type="button" class="fred-button criteria" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.StatutValide1" ng-click="filters.StatutValide1 = false; handleLoadData()">{{::resources.Rapport_Search_Tuile_StatutValide1}}</button>
+                                <button type="button" class="fred-button criteria" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.StatutValide2" ng-click="filters.StatutValide2 = false; handleLoadData()">{{::resources.Rapport_Search_Tuile_StatutValide2}}</button>
+                                <button type="button" class="fred-button criteria" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.StatutValide3" ng-click="filters.StatutValide3 = false; handleLoadData()">{{::resources.Rapport_Search_Tuile_StatutValide3}}</button>
+                                <button type="button" class="fred-button criteria" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.StatutVerrouille" ng-click="filters.StatutVerrouille = false; handleLoadData()">{{::resources.Rapport_Search_Tuile_StatutVerrouille}}</button>
+                                <button type="button" class="fred-button criteria" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.StatutOuvrier" ng-click="filters.StatutOuvrier = false; handleLoadData()">{{::resources.Rapport_Search_Tuile_StatutOuvrier}}</button>
+                                <button type="button" class="fred-button criteria" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.StatutEtam" ng-click="filters.StatutEtam = false; handleLoadData()">{{::resources.Rapport_Search_Tuile_StatutEtam}}</button>
+                                <button type="button" class="fred-button criteria" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.StatutCadre" ng-click="filters.StatutCadre = false; handleLoadData()">{{::resources.Rapport_Search_Tuile_StatutCadre}}</button>
+                                <button type="button" class="fred-button criteria" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.DateComptable != null" ng-click="filters.DateComptable = null; handleLoadData()">{{::resources.Rapport_Search_Tuile_Periode}} {{filters.DateComptable | date : 'MM/yy'}}</button>
+                                <button type="button" class="fred-button criteria" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.DateChantierMin != null" ng-click="filters.DateChantierMin = null; handleLoadData()">{{::resources.Rapport_Search_Tuile_DateRapport}} >= {{filters.DateChantierMin | date : 'dd/MM/yyyy'}}</button>
+                                <button type="button" class="fred-button criteria" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.DateChantierMax != null" ng-click="filters.DateChantierMax = null; handleLoadData()">{{::resources.Rapport_Search_Tuile_DateRapport}} <= {{filters.DateChantierMax | date : 'dd/MM/yyyy'}}</button>
+                                <button type="button" class="fred-button criteria" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.AuteurCreation != null" ng-click="filters.AuteurCreation = null; handleLoadData()">{{::resources.Rapport_Search_Tuile_AuteurCreation}} {{filters.AuteurCreation.Nom}}</button>
+                                <button type="button" class="fred-button criteria" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.Valideur1 != null" ng-click="filters.Valideur1 = null; handleLoadData()">{{::resources.Rapport_Search_Tuile_Valideur1}} {{filters.Valideur1.Nom}}</button>
+                                <button type="button" class="fred-button criteria" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.Valideur2 != null" ng-click="filters.Valideur2 = null; handleLoadData()">{{::resources.Rapport_Search_Tuile_Valideur2}} {{filters.Valideur2.Nom}}</button>
+                                <button type="button" class="fred-button criteria" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.Valideur3 != null" ng-click="filters.Valideur3 = null; handleLoadData()">{{::resources.Rapport_Search_Tuile_Valideur3}} {{filters.Valideur3.Nom}}</button>
+                                <button type="button" class="fred-button criteria" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.Verrouilleur != null" ng-click="filters.Verrouilleur = null; handleLoadData()">{{::resources.Rapport_Search_Tuile_Verrouilleur}} {{filters.Verrouilleur.Nom}}</button>
+                            </div>
+                            <!-- END : Tuiles de l'écran principal -->
+
+                            <div class="col-md-2 col-sm-2 flex act-btns">
+                                <fred-button ng-class="{'white icon chip' :displayFilterState(),  'white icon' :!displayFilterState()}" ng-click="handleSaveFilters(); status ? status=false : status=true">
+                                    <span ng-hide="!displayFilterState()" class="chip"></span>
+                                    <span ng-class="{'fa fa-filter' :!buttonFilterClick  ,'material-icons closing' :buttonFilterClick}"
+                                          title="{{!ctrl.buttonFilterClicked ? ctrl.resources.Global_Filtre_Titre : ctrl.resources.Global_Bouton_Fermer}}">
+                                        <span ng-show="buttonFilterClick">clear</span>
+                                    </span>
+                                </fred-button>
+                                <fred-button class="fred-button white-star" type="button" ng-click="addFilter2Favoris()" title="{{::resources.Button_Save_Favorite_Title}}">
+                                    <i class="material-icons">star</i>
+                                </fred-button>
+                                <fred-authorization key="menu.show.areas.pointage.views.rapport.new">
+                                    <button type="button" class="btn btn-default ng-binding new-rapp" ng-click="handleClickNew()" title="{{::resources.Rapport_Index_Bouton_AjouterRapport_Tooltip}}">
+                                        <span class="glyphicon glyphicon-plus">&nbsp;</span>
+                                        {{::resources.Rapport_Index_Bouton_AjouterRapport}}
+                                    </button>
+                                </fred-authorization>
+                            </div>
+                        </div>
+
+                        <!-- BEGIN : Bloc de Filtre -->
+                        <fred-overlay ng-click="status=false;" ng-class="{'open' :status  ,'close' :!status}"></fred-overlay>
+
+                        <fred-side ng-init="status=false;" ng-class="{'open' :status  ,'close' :!status }" esc-key="Test()">
+
+                            <!--En tete-->
+                            <header>
+                                <icon><label>Affiner votre recherche : </label></icon>
+                            </header>
+
+                            <main class="fred-scroll" style="padding: 5px;">
+
+                                <div class="filter-tiles">
+                                    <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="filters.Organisation" ng-click="filters.Organisation=null; filters.OrganisationId=null;">
+                                        {{filters.Organisation.CodeLibelle}}
+                                        <span class="ico-filter flaticon-multiply"></span>
+                                    </span>
+                                    <span type="button" class="btn btn-sm btn-primary btn-tile" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.StatutEnCours" ng-click="filters.StatutEnCours = false;">
+                                        {{::resources.Rapport_Search_Tuile_StatutEnCours}}
+                                        <span class="ico-filter flaticon-multiply"></span>
+                                    </span>
+                                    <span type="button" class="btn btn-sm btn-primary btn-tile" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.StatutValide1" ng-click="filters.StatutValide1 = false;">
+                                        {{::resources.Rapport_Search_Tuile_StatutValide1}}
+                                        <span class="ico-filter flaticon-multiply"></span>
+                                    </span>
+                                    <span type="button" class="btn btn-sm btn-primary btn-tile" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.StatutValide2" ng-click="filters.StatutValide2 = false;">
+                                        {{::resources.Rapport_Search_Tuile_StatutValide2}}
+                                        <span class="ico-filter flaticon-multiply"></span>
+                                    </span>
+                                    <span type="button" class="btn btn-sm btn-primary btn-tile" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.StatutValide3" ng-click="filters.StatutValide3 = false;">
+                                        {{::resources.Rapport_Search_Tuile_StatutValide3}}
+                                        <span class="ico-filter flaticon-multiply"></span>
+                                    </span>
+                                    <span type="button" class="btn btn-sm btn-primary btn-tile" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.StatutVerrouille" ng-click="filters.StatutVerrouille = false;">
+                                        {{::resources.Rapport_Search_Tuile_StatutVerrouille}}
+                                        <span class="ico-filter flaticon-multiply"></span>
+                                    </span>
+                                    <span type="button" class="btn btn-sm btn-primary btn-tile" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.StatutOuvrier" ng-click="filters.StatutOuvrier = false;">
+                                        {{::resources.Rapport_Search_Tuile_StatutOuvrier}}
+                                        <span class="ico-filter flaticon-multiply"></span>
+                                    </span>
+                                    <span type="button" class="btn btn-sm btn-primary btn-tile" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.StatutEtam" ng-click="filters.StatutEtam = false;">
+                                        {{::resources.Rapport_Search_Tuile_StatutEtam}}
+                                        <span class="ico-filter flaticon-multiply"></span>
+                                    </span>
+                                    <span type="button" class="btn btn-sm btn-primary btn-tile" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.StatutCadre" ng-click="filters.StatutCadre = false;">
+                                        {{::resources.Rapport_Search_Tuile_StatutCadre}}
+                                        <span class="ico-filter flaticon-multiply"></span>
+                                    </span>
+                                    <span type="button" class="btn btn-sm btn-primary btn-tile" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.DateComptable != null" ng-click="filters.DateComptable = null;">
+                                        {{::resources.Rapport_Search_Tuile_Periode}} {{filters.DateComptable |date : 'MM/yy'}}
+                                        <span class="ico-filter flaticon-multiply"></span>
+                                    </span>
+                                    <span type="button" class="btn btn-sm btn-primary btn-tile" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.DateChantierMin != null" ng-click="filters.DateChantierMin = null;">
+                                        {{::resources.Rapport_Search_Tuile_DateRapport}} >= {{filters.DateChantierMin | date : 'dd/MM/yyyy'}}
+                                        <span class="ico-filter flaticon-multiply"></span>
+                                    </span>
+                                    <span type="button" class="btn btn-sm btn-primary btn-tile" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.DateChantierMax != null" ng-click="filters.DateChantierMax = null;">
+                                        {{::resources.Rapport_Search_Tuile_DateRapport}} <= {{filters.DateChantierMax | date : 'dd/MM/yyyy'}}
+                                        <span class="ico-filter flaticon-multiply"></span>
+                                    </span>
+                                    <span type="button" class="btn btn-sm btn-primary btn-tile" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.AuteurCreation != null" ng-click="filters.AuteurCreation = null;">
+                                        {{::resources.Rapport_Search_Tuile_AuteurCreation}}: {{filters.AuteurCreation.Nom}}
+                                        <span class="ico-filter flaticon-multiply"></span>
+                                    </span>
+                                    <span type="button" class="btn btn-sm btn-primary btn-tile" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.Valideur1 != null" ng-click="filters.Valideur1 = null;">
+                                        {{::resources.Rapport_Search_Tuile_Valideur1}}: {{filters.Valideur1.Nom}}
+                                        <span class="ico-filter flaticon-multiply"></span>
+                                    </span>
+                                    <span type="button" class="btn btn-sm btn-primary btn-tile" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.Valideur2 != null" ng-click="filters.Valideur2 = null;">
+                                        {{::resources.Rapport_Search_Tuile_Valideur2}}: {{filters.Valideur2.Nom}}
+                                        <span class="ico-filter flaticon-multiply"></span>
+                                    </span>
+                                    <span type="button" class="btn btn-sm btn-primary btn-tile" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.Valideur3 != null" ng-click="filters.Valideur3 = null;">
+                                        {{::resources.Rapport_Search_Tuile_Valideur3}}: {{filters.Valideur3.Nom}}
+                                        <span class="ico-filter flaticon-multiply"></span>
+                                    </span>
+                                    <span type="button" class="btn btn-sm btn-primary btn-tile" title="{{::resources.Global_Filtre_Tuile_Tooltip}}" ng-show="filters.Verrouilleur != null" ng-click="filters.Verrouilleur = null;">
+                                        {{::resources.Rapport_Search_Tuile_Verrouilleur}}: {{filters.Verrouilleur.Nom}}
+                                        <span class="ico-filter flaticon-multiply"></span>
+                                    </span>
+                                </div>
+
+                                <div class="main-body">
+                                    <section-title data-toggle="collapse" data-target="#section1">{{::resources.Global_Filtre_SousTitre_Date}} :</section-title>
+
+                                    <section-content class="collapse in" id="section1">
+                                        <div class="row">
+                                            <div class="selection_filters">
+                                                <div class="col-sm-4 lbl_l">
+                                                    <label class="control-label lbl_txt">{{::resources.Rapport_Search_DateComptable}}</label>
+                                                </div>
+                                                <div class="col-sm-4 no-pl sm_pad_r">
+                                                    <app-date-picker format="MM/YYYY"
+                                                                     lang="fr"
+                                                                     ng-model="filters.DateComptable"
+                                                                     initial-date="{{filters.DateComptable}}"
+                                                                     placeholder="{{::resources.Rapport_Search_DateComptable_Placeholder}}">
+                                                    </app-date-picker>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="selection_filters">
+                                                <div class="col-sm-4 lbl_l">
+                                                    <label class="control-label lbl_txt">{{::resources.Rapport_Search_DateGestion}}</label>
+                                                </div>
+                                                <div class="col-sm-4 no-pl sm_pad_r">
+                                                    <app-date-picker format="DD/MM/YYYY"
+                                                                     lang="fr"
+                                                                     ng-model="filters.DateChantierMin"
+                                                                     initial-date="{{filters.DateChantierMin}}"
+                                                                     placeholder="{{::resources.Rapport_Search_DateDebut_Placeholder}}">
+                                                    </app-date-picker>
+                                                </div>
+                                                <div class="col-sm-4 no-pad">
+                                                    <app-date-picker format="DD/MM/YYYY"
+                                                                     lang="fr"
+                                                                     ng-model="filters.DateChantierMax"
+                                                                     initial-date="{{filters.DateChantierMax}}"
+                                                                     placeholder="{{::resources.Rapport_Search_DateFin_Placeholder}}">
+                                                    </app-date-picker>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section-content>
+
+                                    <section-title data-toggle="collapse" data-target="#section2">{{::resources.Global_Filtre_SousTitre_Selection}} :</section-title>
+
+                                    <section-content class="collapse in" id="section2">
+                                        <div class="row">
+                                            <div class="selection_filters">
+                                                <div class="col-sm-4 lbl_l">
+                                                    <label class="control-label lbl_txt">Types</label>
+                                                </div>
+                                                <div class="col-sm-8 no-pad">
+                                                    <span class="filter-types" ng-class="{'active' : filters.StatutEnCours, fbtnFiltreSelected : filters.StatutEnCours}" ng-click="filters.StatutEnCours = !filters.StatutEnCours">{{::resources.Rapport_Search_StatutEnCours}}</span>
+                                                    <span class="filter-types" ng-class="{'active' : filters.StatutValide1, fbtnFiltreSelected : filters.StatutValide1}" ng-click="filters.StatutValide1 = !filters.StatutValide1" ng-if="!isUserFes">{{::resources.Rapport_Search_StatutValide1}}</span>
+                                                    <span class="filter-types" ng-class="{'active' : filters.StatutValide2, fbtnFiltreSelected : filters.StatutValide2}" ng-click="filters.StatutValide2 = !filters.StatutValide2">{{::resources.Rapport_Search_StatutValide2}}</span>
+                                                    <span class="filter-types" ng-class="{'active' : filters.StatutValide3, fbtnFiltreSelected : filters.StatutValide3}" ng-click="filters.StatutValide3 = !filters.StatutValide3" ng-if="!isUserFes">{{::resources.Rapport_Search_StatutValide3}}</span>
+                                                    <span class="filter-types" ng-class="{'active' : filters.StatutVerrouille, fbtnFiltreSelected : filters.StatutVerrouille}" ng-click="filters.StatutVerrouille = !filters.StatutVerrouille">{{::resources.Rapport_Search_StatutVerrouille}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-if="isUserFes">
+                                            <div class="selection_filters">
+                                                <div class="col-sm-4 lbl_l">
+                                                    <label class="control-label lbl_txt">Statuts</label>
+                                                </div>
+                                                <div class="col-sm-8 no-pad">
+                                                    <span class="filter-types" ng-class="{'active' : filters.StatutOuvrier, fbtnFiltreSelected : filters.StatutOuvrier}" ng-click="filters.StatutOuvrier = !filters.StatutOuvrier">{{::resources.Rapport_Search_StatutOuvrier}}</span>
+                                                    <span class="filter-types" ng-class="{'active' : filters.StatutEtam, fbtnFiltreSelected : filters.StatutEtam}" ng-click="filters.StatutEtam = !filters.StatutEtam">{{::resources.Rapport_Search_StatutEtam}}</span>
+                                                    <span class="filter-types" ng-class="{'active' : filters.StatutCadre, fbtnFiltreSelected : filters.StatutCadre}" ng-click="filters.StatutCadre = !filters.StatutCadre">{{::resources.Rapport_Search_Tuile_StatutCadre}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div ng-if="!isUserFes">
+                                            <div class="row">
+                                                <div class="selection_filters">
+                                                    <div class="col-sm-4 lbl_l">
+                                                        <label for="" class="control-label lbl_txt">{{::resources.Global_CreatedBy}}</label>
+                                                    </div>
+                                                    <div class="col-sm-8 lbl_r no-pl">
+                                                        <lookup-standalone ng-model="filters.AuteurCreation"
+                                                                           enable-default-selection="true"
+                                                                           text="filters.AuteurCreation.CodeLibelleRef"
+                                                                           search-max-length="100"
+                                                                           search-title="{{::resources.Global_ReferentielPersonnel}}"
+                                                                           search-placeholder="{{::resources.Personnel_PartialGeneral_Nom_Placeholder}}"
+                                                                           search-placeholder2="{{::resources.Personnel_PartialGeneral_Prenom_Placeholder}}"
+                                                                           search-placeholder3="{{::resources.Personnel_Filter_Autre_Information_Placeholder}}"
+                                                                           active-second-search-input="true"
+                                                                           active-third-search-input="true"
+                                                                           url="/api/Rapport/SearchAuthor/?authorType={{AuthorType.AuteurCreation}}&"
+                                                                           on-select="filters.AuteurCreation = item"
+                                                                           on-delete="filters.AuteurCreation = null"
+                                                                           ng-disabled="rapportIsLocked() || rapportLigne.AvecChauffeur || IsFes"
+                                                                           class="formulaire middle">
+                                                        </lookup-standalone>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="selection_filters">
+                                                    <div class="col-sm-4 lbl_l">
+                                                        <label for="" class="control-label lbl_txt">{{::resources.Rapport_Index_Valideur1}}</label>
+                                                    </div>
+                                                    <div class="col-sm-8 lbl_r no-pl">
+                                                        <lookup-standalone ng-model="filters.Valideur1"
+                                                                           enable-default-selection="true"
+                                                                           text="filters.Valideur1.CodeLibelleRef"
+                                                                           search-max-length="100"
+                                                                           search-title="{{::resources.Global_ReferentielPersonnel}}"
+                                                                           search-placeholder="{{::resources.Personnel_PartialGeneral_Nom_Placeholder}}"
+                                                                           search-placeholder2="{{::resources.Personnel_PartialGeneral_Prenom_Placeholder}}"
+                                                                           search-placeholder3="{{::resources.Personnel_Filter_Autre_Information_Placeholder}}"
+                                                                           active-second-search-input="true"
+                                                                           active-third-search-input="true"
+                                                                           url="/api/Rapport/SearchAuthor/?authorType={{AuthorType.Valideur1}}&"
+                                                                           on-select="filters.Valideur1 = item"
+                                                                           on-delete="filters.Valideur1 = null"
+                                                                           class="formulaire middle">
+                                                        </lookup-standalone>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="selection_filters">
+                                                    <div class="col-sm-4 lbl_l">
+                                                        <label for="" class="control-label lbl_txt">{{::resources.Rapport_Index_Valideur2}}</label>
+                                                    </div>
+                                                    <div class="col-sm-8 lbl_r no-pl">
+                                                        <lookup-standalone ng-model="filters.Valideur2"
+                                                                           enable-default-selection="true"
+                                                                           text="filters.Valideur2.CodeLibelleRef"
+                                                                           search-max-length="100"
+                                                                           search-title="{{::resources.Global_ReferentielPersonnel}}"
+                                                                           search-placeholder="{{::resources.Personnel_PartialGeneral_Nom_Placeholder}}"
+                                                                           search-placeholder2="{{::resources.Personnel_PartialGeneral_Prenom_Placeholder}}"
+                                                                           search-placeholder3="{{::resources.Personnel_Filter_Autre_Information_Placeholder}}"
+                                                                           active-second-search-input="true"
+                                                                           active-third-search-input="true"
+                                                                           url="/api/Rapport/SearchAuthor/?authorType={{AuthorType.Valideur2}}&"
+                                                                           on-select="filters.Valideur2 = item"
+                                                                           on-delete="filters.Valideur2 = null"
+                                                                           class="formulaire middle">
+                                                        </lookup-standalone>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="selection_filters">
+                                                    <div class="col-sm-4 lbl_l">
+                                                        <label for="" class="control-label lbl_txt">{{::resources.Rapport_Index_Valideur3}}</label>
+                                                    </div>
+                                                    <div class="col-sm-8 lbl_r no-pl">
+                                                        <lookup-standalone ng-model="filters.Valideur3"
+                                                                           enable-default-selection="true"
+                                                                           text="filters.Valideur3.CodeLibelleRef"
+                                                                           search-max-length="100"
+                                                                           search-title="{{::resources.Global_ReferentielPersonnel}}"
+                                                                           search-placeholder="{{::resources.Personnel_PartialGeneral_Nom_Placeholder}}"
+                                                                           search-placeholder2="{{::resources.Personnel_PartialGeneral_Prenom_Placeholder}}"
+                                                                           search-placeholder3="{{::resources.Personnel_Filter_Autre_Information_Placeholder}}"
+                                                                           active-second-search-input="true"
+                                                                           active-third-search-input="true"
+                                                                           url="/api/Rapport/SearchAuthor/?authorType={{AuthorType.Valideur3}}&"
+                                                                           on-select="filters.Valideur3 = item"
+                                                                           on-delete="filters.Valideur3 = null"
+                                                                           class="formulaire middle">
+                                                        </lookup-standalone>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="selection_filters">
+                                                    <div class="col-sm-4 lbl_l">
+                                                        <label for="" class="control-label lbl_txt">{{::resources.Rapport_Index_Verrouilleur}}</label>
+                                                    </div>
+                                                    <div class="col-sm-8 lbl_r no-pl">
+                                                        <lookup-standalone ng-model="filters.Verrouilleur"
+                                                                           enable-default-selection="true"
+                                                                           text="filters.Verrouilleur.CodeLibelleRef"
+                                                                           search-max-length="100"
+                                                                           search-title="{{::resources.Global_ReferentielPersonnel}}"
+                                                                           search-placeholder="{{::resources.Personnel_PartialGeneral_Nom_Placeholder}}"
+                                                                           search-placeholder2="{{::resources.Personnel_PartialGeneral_Prenom_Placeholder}}"
+                                                                           search-placeholder3="{{::resources.Personnel_Filter_Autre_Information_Placeholder}}"
+                                                                           active-second-search-input="true"
+                                                                           active-third-search-input="true"
+                                                                           url="/api/Rapport/SearchAuthor/?authorType={{AuthorType.Verrouilleur}}&"
+                                                                           on-select="filters.Verrouilleur = item"
+                                                                           on-delete="filters.Verrouilleur = null"
+                                                                           class="formulaire middle">
+                                                        </lookup-standalone>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section-content>
+
+                                    <section-title data-toggle="collapse" data-target="#section3">{{::resources.Rapport_Search_Perimetre}} :</section-title>
+
+                                    <section-content class="collapse in" id="section3">
+                                        <div class="row">
+                                            <div class="selection_filters">
+                                                <div class="col-sm-4 lbl_l">
+                                                    <label for="" class="control-label lbl_txt">{{::resources.Rapport_Search_Perimetre}}</label>
+                                                </div>
+                                                <div class="col-sm-8 lbl_r no-pl">
+                                                    <lookup-standalone ng-model="filters.Organisation"
+                                                                       enable-default-selection="true"
+                                                                       text="filters.Organisation.CodeLibelle"
+                                                                       search-title="{{::resources.Global_ReferentielOrganisation}}"
+                                                                       search-placeholder="{{::resources.Global_ReferentielOrganisation_Placeholder}}"
+                                                                       url="/api/Organisation/SearchLightOrganisation/?typeOrganisation=CI,SOCIETE&"
+                                                                       on-select="handleLookupSelection('OrganisationFilter', item)"
+                                                                       on-delete="handleLookupDeletion('OrganisationFilter')"
+                                                                       class="no-padding formulaire long"
+                                                                       style-parent="true">
+                                                    </lookup-standalone>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row etablissementPaie-margin-top" ng-show="filters.Organisation.TypeOrganisationLibelle  == 'Société'">
+                                            <div class="col-md-6 col-lg-6">
+                                                <input type="radio" name="etablissementPaieRB" id="all-eta-filter" ng-model="isAllEtablissementFilter" ng-value="true" ng-click="handleSelectAllEtablissementForFilter()">
+                                                <label for="all-eta-filter"><span></span>{{::resources.Rapport_ModalImport_Radio_TousEtablissementPaie}}</label>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                <input type="radio" name="etablissementPaieRB" id="chose-eta-filter" ng-model="isAllEtablissementFilter" ng-value="false" ng-click="handleSelectChoseEtablissementForFilter()">
+                                                <label for="chose-eta-filter"><span></span>{{::resources.Rapport_ModalImport_Radio_ChoixEtablissementPaie}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-show="!isAllEtablissementFilter && filters.Organisation.TypeOrganisationLibelle == 'Société'">
+                                            <div class="col-md-12 col-lg-12 etablissementPaie-margin-top etablissementPaie">
+                                                <table class="table table-hover" id="table-EtablissementPaie">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>{{::resources.Rapport_ModalImport_EtablissementPaie}}</th>
+                                                            <th>
+                                                                <div class="col-sm-8 lbl_r no-pl">
+                                                                    <lookup ng-model="selectedEtabPaie"
+                                                                            enable-default-selection="true"
+                                                                            url="/api/EtablissementPaie/SearchLight/?societeId={{Societe.SocieteId}}&"
+                                                                            search-placeholder="{{::resources.Global_ReferentielEtablissementPaie_Placeholder}}"
+                                                                            search-title="{{::resources.Global_ReferentielEtablissementPaie}}"
+                                                                            on-select="handleLookupSelection('EtablissementPaieFilter', item)"
+                                                                            on-click="handleShowLookup('EtablissementPaieFilter')"
+                                                                            class="no-padding formulaire long">
+                                                                        <span class="btn btn-link" title="{{::resources.Rapport_ModalImport_AjouterEtablissementPaie_Tooltip }}">{{::resources.Rapport_ModalImport_AjouterEtablissementPaie}}</span>
+                                                                    </lookup>
+                                                                </div>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="fred-scroll">
+                                                        <tr ng-repeat="etablissement in filters.EtablissementPaieList | orderBy:['+Code']">
+                                                            <td>{{etablissement.CodeLibelle}}</td>
+                                                            <td class="delete" align="right">
+                                                                <button class="btn btn-link flaticon flaticon-multiply" title="{{::resources.Rapport_ModalImport_SupprimerEtablissementPaie_Tooltip}}" ng-click="handleLookupDeletion('EtablissementPaieFilter', etablissement)" aria-hidden="true"></button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </section-content>
+                                </div>
+                            </main>
+
+                            <footer ng-click="status=false;">
+                                <!--BEGIN : Bouton Start-->
+                                <action>
+                                    <button type="button" class="fred-button primary" ng-click="handleLoadData()">{{::resources.Global_Filtre_Bouton_Appliquer}}</button>
+                                    <button type="button" class="fred-button cancel" ng-click="handleCancelFilters()">{{::resources.Global_Bouton_Annuler}}</button>
+                                </action>
+                                <!--END : Bouton Start-->
+
+                                <close>
+                                    <icon /><label>{{::resources.Global_Bouton_RefermerPanneau}}</label>
+                                </close>
+                            </footer>
+                        </fred-side>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="header-toolbar clearfix">
+                <label>{{listRapport.length}} sur {{totalCount}} {{::resources.Rapport_Index_NbrRapport}} </label>
+                <fred-authorization key="menu.show.areas.pointage.views.rapport.new">
+                    <button type="button" class="btn btn-default ng-binding pull-right" ng-click="handleClickNew()" title="{{::resources.Rapport_Index_Bouton_AjouterRapport_Tooltip}}">
+                        <span class="glyphicon glyphicon-plus">&nbsp;</span>
+                        {{::resources.Rapport_Index_Bouton_AjouterRapport}}
+                    </button>
+                </fred-authorization>
+            </div>*@
+
+
+    </div>
+
+    <div class="sub-header-toolbar clearfix">
+        <div class="pull-left" ng-show="IsRolePaie">
+            <div style="display: flex; align-items:center">
+                <div class="checkbox">
+                    <input type="checkbox" id="chkSelectAll" ng-change="handleSelectAll()" ng-model="allSelected"><label for="chkSelectAll" class="action-list-block-content"><span></span>{{::resources.Rapport_Index_CheckBox_ToutSelectionner}}</label>
+                </div>
+                <div>
+                    <span class="material-icons warning-icon" style="color: red;" ng-show="allSelected && listRapport && listRapport.length > 0" title="{{totalCountViewModel}}{{::ressources.Rapport_Index_Rapport_Selectionnes}}">warning</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="lab-rapp-nbs" ng-show="IsRolePaie">
+            <div class="rapp-nbs">{{listRapport.length}} sur {{totalCount}} {{::resources.Rapport_Index_NbrRapport}} </div>
+        </div>
+
+        <div class="pull-right r-buttons">
+            <fred-authorization key="{{permissionKeys.AffichageBoutonExportAnalytique}}">
+                <button class="btn errors" ng-show="isErrorsDispo" data-toggle="modal" data-target="#incomplete-modal">
+                    {{::resources.Rapport_ModalExport_ErreursTitle}}
+                </button>
+                <button class="btn remont" data-toggle="modal" data-target="#export-ana" ng-click="handleModeControle()">
+                    {{::resources.Rapport_ModalExport_ControleSaisieTitle}}
+                </button>
+                <button class="btn remont" data-toggle="modal" data-target="#export-ana" ng-click="handleModeAnalytique()">
+                    {{::resources.Rapport_ModalExport_ExportAnaTitle}}
+                </button>
+            </fred-authorization>
+            <div ng-show="IsRolePaie" class="pull-right">
+                <button class="btn btn-warning action-list-block-content btnVerrouiller"
+                        id="btnVerrouiller"
+                        ng-show="IsRolePaie" ng-click="handleVerrouillerRapport()"
+                        title="{{::resources.Rapport_Index_Bouton_Verrouiller_Placeholder}}"
+                        ng-disabled="!allSelected && selectedRapports.length === 0">
+                    {{::resources.Rapport_Index_Bouton_Verrouiller}}
+                </button>
+                <button class="btn btn-warning action-list-block-content btnDeverrouiller"
+                        id="btnDeverrouiller"
+                        ng-show="IsRolePaie" ng-click="handleDeverrouillerRapport()"
+                        title="{{::resources.Rapport_Index_Bouton_Deverrouiller_Placeholder}}"
+                        ng-disabled="!allSelected && selectedRapports.length === 0">
+                    {{::resources.Rapport_Index_Bouton_Deverrouiller}}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="fred-scroll" id="rapport-list" ng-class="{ 'not-role-paie' : !IsRolePaie, 'list-extend' : !displayReduce }">
+        <div id="rapport_{{rapport.RapportId}}" class="row  rapport-ligne" ng-repeat="rapport in listRapport track by $index" ng-dblclick="handleClickDetail(rapport.RapportId)">
+            <div class="col-md-2 col-sm-2 col-xs-2 rapport-block">
+                <div class="rapport-block selection-block" ng-show="IsRolePaie">
+                    <input type="checkbox" id="chkList_{{rapport.RapportId}}" ng-model="rapport.IsSelected" class="selectableChk" ng-change="handleSelectRapport(rapport)" />
+                    <label for="chkList_{{rapport.RapportId}}"><span></span></label>
+                </div>
+                <div class="color-left-block" ng-class="{colorVE: rapport.IsStatutVerrouille, colorVA: (rapport.IsStatutValide && !rapport.IsStatutVerrouille), colorEC: rapport.IsStatutEnCours}"></div>
+                <div class="rapport-block-content col1">
+                    <b>{{rapport.CI.Code}}</b>
+                    <br />
+                    {{rapport.CI.Libelle}}
+                    <br />
+                    <p class="title">{{::resources.Rapport_Index_ListeRapport_Statut}}</p>
+                    <p><span class="etiquette" ng-class="{colorVE: rapport.IsStatutVerrouille, colorVA: (rapport.IsStatutValide && !rapport.IsStatutVerrouille), colorEC: rapport.IsStatutEnCours}">{{rapport.RapportStatut.Libelle}}</span></p>
+                </div>
+            </div>
+
+            <div class="col-md-1 col-sm-1 col-xs-1 rapport-block">
+                <div class="rapport-block-content">
+                    <span style="background-color: #FEBB5F">{{::resources.Rapport_Index_ListeRapport_Journee}}</span>
+                    <b>{{rapport.DateChantier | date: "dd/MM/yyyy"}}</b>
+                    <p class="title">{{::resources.Rapport_Index_ListeRapport_Numero}}</p>
+                    <p><span class="etiquette black"><b>{{rapport.RapportId}}</b></span></p>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-sm-2 col-xs-2 rapport-block">
+                <div class="rapport-block-content">
+                    <p class="title">Saisi par</p>
+                    <p><span class="etiquette gray">{{rapport.AuteurCreation.NomPrenom}}</span></p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-3 col-xs-3 rapport-block">
+                <div class="rapport-block-content" ng-show="rapport.ValideurCDT != null || rapport.ValideurCDC != null || rapport.ValideurDRC != null || rapport.ValideurGSP != null">
+                    <div ng-show="rapport.ValideurCDC != undefined || rapport.ValideurCDC != null">
+                        <p class="statut-validation-block"><span class="title">{{::resources.Rapport_Index_ListeRapport_ValidationChefChantier}}</span></p>
+                        <p ng-show="rapport.ValideurCDC != null" class="statut-validation-block"><span class="title">{{::resources.Rapport_Index_ListeRapport_ValidationChefChantierAuteur}} </span><span>{{rapport.ValideurCDC.NomPrenom}}</span><span class="title"> {{::resources.Rapport_Index_ListeRapport_ValidationChefChantierDate}} </span><span>{{rapport.DateValidationCDC | date: "dd/MM/yyyy"}}</span></p>
+                    </div>
+                    <div ng-show="rapport.ValideurCDT != null">
+                        <p class="statut-validation-block"><span class="title">{{::resources.Rapport_Index_ListeRapport_ValidationConducteurTravaux}}</span></p>
+                        <p class="statut-validation-block"><span class="title">{{::resources.Rapport_Index_ListeRapport_ValidationConducteurTravauxAuteur}} </span><span>{{rapport.ValideurCDT.NomPrenom}}</span><span class="title"> {{::resources.Rapport_Index_ListeRapport_ValidationConducteurTravauxDate}} </span><span>{{rapport.DateValidationCDT | date: "dd/MM/yyyy"}}</span></p>
+                    </div>
+                    <div ng-show="rapport.ValideurDRC != null">
+                        <p class="statut-validation-block"><span class="title">{{::resources.Rapport_Index_ListeRapport_ValidationDirecteurChantier}}</span></p>
+                        <p class="statut-validation-block"><span class="title">{{::resources.Rapport_Index_ListeRapport_ValidationDirecteurChantierAuteur}} </span><span>{{rapport.ValideurDRC.NomPrenom}}</span><span class="title"> {{::resources.Rapport_Index_ListeRapport_ValidationDirecteurChantierDate}} </span><span>{{rapport.DateValidationDRC | date: "dd/MM/yyyy"}}</span></p>
+                    </div>
+                    <div ng-show="rapport.ValideurGSP != null">
+                        <p class="statut-validation-block"><span class="title">{{::resources.Rapport_Index_ListeRapport_ValidationGestionnairePaie}}</span></p>
+                        <p class="statut-validation-block"><span class="title">{{::resources.Rapport_Index_ListeRapport_ValidationGestionnairePaieAuteur}} </span><span>{{rapport.ValideurGSP.NomPrenom}}</span><span class="title"> {{::resources.Rapport_Index_ListeRapport_ValidationGestionnairePaieDate}} </span><span>{{rapport.DateValidationGSP | date: "dd/MM/yyyy"}}</span></p>
+                    </div>
+                </div>
+                <div ng-show="rapport.ValideurCDT == null && rapport.ValideurCDC == null && rapport.ValideurDRC == null && rapport.ValideurGSP == null" class="rapport-block-content">
+                    {{::resources.Rapport_Index_ListeRapport_ValidationAbsente}}
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-3 rapport-block">
+                <div class="rapport-block-content">
+                    <p class="title">{{::resources.Rapport_Index_ListeRapport_VerrouillageGestionnairePaie}}</p>
+                    <p ng-show="rapport.AuteurVerrou != null" class="statut-validation-block"><span class="title">{{::resources.Rapport_Index_ListeRapport_VerrouillageGestionnairePaieAuteur}} </span><span>{{rapport.AuteurVerrou.NomPrenom}}</span><span class="title"> {{::resources.Rapport_Index_ListeRapport_VerrouillageGestionnairePaieDate}} </span><span>{{rapport.DateVerrou | date: "dd/MM/yyyy"}}</span></p>
+                    <p ng-show="rapport.AuteurVerrou == null" class="statut-validation-block"><span>{{::resources.Rapport_Index_ListeRapport_VerrouillageGestionnairePaieAbsente}}</span></p>
+                </div>
+            </div>
+
+            <div class="col-md-1 col-sm-1 col-xs-1 rapport-block">
+                <div class="rapport-block-content-end">
+                    <button class="btn btn-sm btn-rapport btn-primary" ng-click="handleClickDetail(rapport.RapportId)" title="{{::resources.Rapport_Index_ListeRapport_Bouton_Detail_Tooltip}}">{{::resources.Rapport_Index_ListeRapport_Bouton_Detail}}</button>
+                    <fred-authorization key="menu.show.areas.pointage.views.rapport.new" style="float:none">
+                        <button class="btn btn-sm btn-rapport btn-default" ng-click="handleDuplicate(rapport.RapportId)" title="{{::resources.Global_Bouton_Dupliquer_Tooltip}}">{{::resources.Global_Bouton_Dupliquer}}</button>
+                        <button class="btn btn-sm btn-rapport btn-warning" ng-click="handleDeleteRapport(rapport)" title="{{::resources.Global_Bouton_Supprimer_Tooltip}}">{{::resources.Global_Bouton_Supprimer}}</button>
+                    </fred-authorization>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pop in de rapprochement -->
+    <div class="export-ana-modal modal fade" id="export-ana" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" ng-show="!ModeControleSaisie"><i class="flaticon flaticon-notebook-4"></i>{{::resources.Rapport_ModalExport_ExportAnaTitle}}</h2>
+                    <h2 class="modal-title" ng-show="ModeControleSaisie"><i class="flaticon flaticon-notebook-4"></i>{{::resources.Rapport_ModalExport_ControleSaisieTitle}}</h2>
+                    <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" aria-label="{{::resources.Global_Bouton_Annuler}}" title="{{::resources.Global_Bouton_Annuler}}"></i>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <label class="control-label">{{::resources.Rapport_ModalExport_Selection_Periode}}</label>
+                            <fred-section-controls ng-show="ExportAnaModel.Hebdo">
+                                <span class="material-icons cl" ng-click="handleChangeWeek(false)">chevron_left</span>
+                                <div class="label_date_text" >{{ExportAnaModel.SelectedWeek}}</div>
+                                <div class="labe_date_date_selector">
+                                    <app-date-picker id="DateChantierHebdo" name="DateChantierHebdo"
+                                                     format="DD/MM/YYYY" lang="fr"
+                                                     initial-date="{{ExportAnaModel.DateDebut}}"
+                                                     ng-model="ExportAnaModel.DateDebut"
+                                                     calendar-weeks="true"
+                                                     input-hiden="true"
+                                                     is-week-calendar="true"
+                                                     on-change="displayWeek({ date })" />
+
+                                </div>
+                                <span class="material-icons cr" ng-click="handleChangeWeek(true)">chevron_right</span>
+                            </fred-section-controls>
+                            <div class="input-group dates" ng-show="!ExportAnaModel.Hebdo">
+                                <app-date-picker class="datePickerRapport"
+                                                    id="DateChantier"
+                                                    name="DateChantier"
+                                                    format="MM/YYYY"
+                                                    lang="fr"
+                                                    initial-date="{{ExportAnaModel.DateDebut}}"
+                                                    ng-model="ExportAnaModel.DateDebut" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="radio-bloc">
+                                <label class="radio-inline">
+                                    <input type="radio" name="mois" id="txtmois" ng-value="false" ng-model="ExportAnaModel.Hebdo" ng-change="onHebdoChanged()">
+                                    <label for="txtmois"><span></span>{{::resources.Rapport_ModalExport_Mois}}</label>
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="semaine" id="txtsemaine" ng-value="true" ng-model="ExportAnaModel.Hebdo" ng-change="onHebdoChanged()">
+                                    <label for="txtsemaine"><span></span>{{::resources.Rapport_Index_ListeRapport_Semaine}}</label>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row sel-soc">
+                        <div class="col-lg-12 col-md-12">
+                            <label class="control-label">{{::resources.Global_SelectionnerSociete}}</label>
+                            <lookup-standalone ng-model="ExportAnaModel.Societe"
+                                               name="Societe"
+                                               text="ExportAnaModel.Societe.CodeLibelle"
+                                               search-title="{{resources.Global_ReferentielSociete}}"
+                                               search-placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+                                               url="/api/Organisation/SearchLightSocieteOrganisationForEtabComptable"
+                                               on-select="onSelectSocieteLookup(item)"
+                                               show-delete-button="false"
+                                               show-in-popup="true"
+                                               class="formulaire long no-padding">
+                            </lookup-standalone>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 rd-eta">
+                            <div class="radio-bloc-etab">
+                                <label class="radio-inline">
+                                    <input type="radio" name="alleta" id="txtalleta" ng-value="true" ng-model="ExportAnaModel.AllEtab">
+                                    <label for="txtalleta"><span></span>{{::resources.Rapport_ModalImport_Radio_TousEtablissementPaie}}</label>
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="cheta" id="txtcheta" ng-value="false" ng-model="ExportAnaModel.AllEtab">
+                                    <label for="txtcheta"><span></span>{{::resources.Rapport_ModalImport_Radio_ChoixEtablissementPaie}}</label>
+                                </label>
+                            </div>
+                            <div class="eta-comp-bloc" ng-show="!ExportAnaModel.AllEtab">
+                                <span class="txt">{{::resources.Rapport_ModalExport_Etablissement}}</span>
+                                <div class="btn btn-link">
+                                    <lookup ng-model="ExportAnaModel.Etablissement"
+                                            search-placeholder="{{::resources.Global_ReferentielEtablissementComptable_Placeholder}}"
+                                            search-title="{{::resources.Global_ReferentielEtablissementComptable}}"
+                                            url="{{handleGetEtablissementComptable(ExportAnaModel.Societe.OrganisationId)}}"
+                                            on-select="onSelectEtablissentLookup(item)"
+                                            show-in-popup="true"
+                                            class="lookup-button-no-mrg-top span.btn">
+                                        <span title="{{::resources.Rapport_ModalImport_AjouterEtablissementPaie_Tooltip}}">{{::resources.Rapport_ModalImport_AjouterEtablissementPaie}}</span>
+                                    </lookup>
+                                </div>
+                            </div>
+                            <div class="report" ng-show="!ExportAnaModel.AllEtab">
+                                <div ng-show="ExportAnaModel.EtablissementComptaList.length === 0">{{::resources.Rapport_ModalExport_AucunElement}}</div>
+                                <table class="table table-hover" id="table-Etablissement">
+                                    <tbody class="fred-scroll">
+                                        <tr ng-repeat="etablissement in ExportAnaModel.EtablissementComptaList | orderBy:['+Code']">
+                                            <td>{{etablissement.CodeLibelle}}</td>
+                                            <td class="delete">
+                                                <button class="btn btn-link flaticon flaticon-multiply" title="{{::resources.Rapport_ModalImport_SupprimerEtablissementPaie_Tooltip}}" ng-click="handleLookupDeletion('EtablissementComptable', etablissement)" aria-hidden="true"></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="sim-check" ng-show="!ModeControleSaisie">
+                                <input type="checkbox" id="sim" ng-disabled="ExportAnaModel.Hebdo" ng-model="ExportAnaModel.Simulation" ng-checked="ExportAnaModel.Simulation"><label for="sim"><span></span>{{::resources.Rapport_ExportModal_Simulation}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button ng-show="ExportAnaModel.Societe" class="btn btn-default pull-left" data-dismiss="modal" type="submit" ng-click="validerExportAnalytique()">{{::resources.Global_Bouton_Valider}}</button>
+                    <button class="btn btn-link pull-right" data-dismiss="modal">{{::resources.Global_Bouton_Annuler}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal de liste d'erreurs-->
+    <div id="incomplete-modal" class="error-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i></h2>
+                    <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" aria-label="{{::resources.Global_Bouton_Annuler}}" title="{{::resources.Global_Bouton_Annuler}}"></i>
+                </div>
+                <div class="modal-body">
+                    <div class="error-list-bloc fred-scroll">
+                        <ul data-toggle="collapse" ng-repeat="personnel in errorsTibco track by $index" href="#collapseExample{{$index}}" aria-expanded="false" aria-controls="collapseExample{{$index}}">
+                            <span class="ul-txt">{{personnel.LibelleNoeud}}</span>
+                            <span class="list collapse" id="collapseExample{{$index}}">
+                                <li ng-repeat="erreur in personnel.Erreurs | orderBy:'+DateRapport'">
+                                    <span ng-show="erreur.DateRapport" class="date">{{erreur.DateRapport | date:'dd/MM/yyyy'}}</span> <span class="error-type">{{erreur.Message}}</span>
+                                </li>
+                            </span>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-link pull-right" data-dismiss="modal">{{::resources.Global_Bouton_Annuler}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

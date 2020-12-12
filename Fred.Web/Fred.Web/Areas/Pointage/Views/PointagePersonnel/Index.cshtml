@@ -1,0 +1,205 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = "Liste des pointages personnels";
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/ListePointagePersonnelBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/ListePointagePersonnelBundle.js")
+    @this.RenderResources("FeatureRapport")
+}
+
+<div class="container-fluid pointages-personnels" id="main" ng-controller="PointagePersonnelController as mainCtrl" ng-init="mainCtrl.init('@ViewBag.favoriId', '@ViewBag.PersonnelId', '@ViewBag.Period')">
+
+    <h1>{{::mainCtrl.resources.Pointage_Index_Titre}}</h1>
+
+    <fred-toolbar>
+
+        <fred-section class="date-section">
+            <fred-section-title>{{::mainCtrl.resources.Pointage_Index_Filtre_Date}}</fred-section-title>
+            <span class="radio-btns" id="rd-choix-periode" fred-display-handler="mainCtrl.userOrganisationId" display="visible" ng-class="{ 'div-datePicker-disabled': mainCtrl.disableChangeCalendar}">
+                <input type="radio"
+                            ng-model="mainCtrl.isWeek" ng-value="false"
+                            name="periode"
+                            ng-change="mainCtrl.handleChangeCalendarMonth()" />
+                <label class="lbl-month" for="mois">{{::mainCtrl.resources.Global_Month}}</label>
+                <input type="radio"
+                            ng-model="mainCtrl.isWeek" ng-value="true"
+                            name="periode"
+                            ng-change="mainCtrl.setIsWeekPeriode(true)" />
+                <label for="semaine">{{::mainCtrl.resources.Global_Week}}</label>
+                
+            </span>
+            <fred-section-controls>
+                <div class="input-group date" ng-class="{ 'div-datePicker-disabled': mainCtrl.disableChangeCalendar}" ng-if="mainCtrl.isWeek">
+                    <app-date-picker format="DD/MM/YYYY"
+                                    lang="fr"
+                                    placeholder="{{::mainCtrl.resources.Global_Period}}"
+                                    ng-model="mainCtrl.week"
+                                    initial-date="{{mainCtrl.week}}"
+                                    ng-change="mainCtrl.handleChangeWeek(mainCtrl.week)"
+                                    calendar-weeks="true"
+                                    is-week-calendar="true"></app-date-picker>
+                </div>
+                <div class="input-group date" ng-class="{ 'div-datePicker-disabled': mainCtrl.disableChangeCalendar}" ng-if="!mainCtrl.isWeek">
+                    <app-date-picker format="MM/YYYY"
+                                    lang="fr"
+                                    placeholder="{{::mainCtrl.resources.Global_Period}}"
+                                    ng-model="mainCtrl.periode"
+                                    initial-date="{{mainCtrl.periode}}"
+                                    ng-change="mainCtrl.handleChangeMonth(mainCtrl.periode, mainCtrl.currentMonth)"
+                                    calendar-weeks="false"
+                                    is-week-calendar="false"></app-date-picker>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <personnel-picker-component resources="mainCtrl.resources"
+                                    personnel="mainCtrl.personnel"
+                                    periode="mainCtrl.periode"
+                                    pointages-list="mainCtrl.pointagesList"
+                                    show-label="true"
+                                    id="picklist-section">
+        </personnel-picker-component>
+
+        <fred-section class="export-section">
+            <fred-section-title>
+                {{::mainCtrl.resources.PointagePersonnel_Index_ExportSection}}
+            </fred-section-title>
+            <fred-section-controls>
+                <button class="btn button-excel" ng-click="mainCtrl.handleExport(mainCtrl.typeExport.excel)" ng-disabled="ReadOnly || !mainCtrl.personnel" title="{{::mainCtrl.resources.Global_Bouton_ExportExcel_Tooltip}}">
+                </button>
+                <button class="btn button-pdf" ng-click="mainCtrl.handleExport(mainCtrl.typeExport.pdf)" ng-disabled="ReadOnly || !mainCtrl.personnel" title="{{::mainCtrl.resources.Global_Bouton_ExportPDF_Tooltip}}">
+                </button>
+                <fred-button class="fred-button white-star" type="button" ng-show="mainCtrl.personnel && mainCtrl.periode" ng-click="mainCtrl.addFilter2Favoris()" title="{{::mainCtrl.resources.Button_Save_Favorite_Title}}">
+                    <i class="material-icons">star</i>
+                </fred-button>
+            </fred-section-controls>
+        </fred-section>
+
+        <fred-section class="lockin-section">
+            <fred-section-title>{{::mainCtrl.resources.PointagePersonnel_Index_Lock}}</fred-section-title>
+            <fred-section-controls>
+                <button class="btn btn-link" ng-disabled="mainCtrl.globalReadOnly || !mainCtrl.saveEnable" ng-click="mainCtrl.handleClickCancel()" title="{{::mainCtrl.resources.Global_Bouton_Annuler}}">
+                    {{::mainCtrl.resources.Global_Bouton_Annuler}}
+                </button>
+                <button class="btn btn-default" ng-click="mainCtrl.handleClickSave()" ng-disabled="mainCtrl.globalReadOnly || !mainCtrl.saveEnable || !mainCtrl.saveAstreintesEnable" title="{{::mainCtrl.resources.Global_Bouton_Enregistrer_Tooltip}}">
+                    {{::mainCtrl.resources.Global_Bouton_Enregistrer}}
+                </button>
+                <span>
+                    <fred-authorization key="{{mainCtrl.permissionKeys.AffichageBoutonPointageParDefaut}}" style="margin-left: auto;">
+                        <button class="btn btn-link" id="btn-pointage-default" ng-click="mainCtrl.globalReadOnly || mainCtrl.handleDefaultPointage()" title="{{::mainCtrl.resources.Pointage_Default_Tooltip}}">
+                            {{'Pointer par defaut'}}
+                        </button>
+                    </fred-authorization>
+                </span>
+            </fred-section-controls>
+        </fred-section>
+
+    </fred-toolbar>
+
+    <pointage-list-component resources="mainCtrl.resources"
+                             read-only="mainCtrl.globalReadOnly"
+                             personnel="mainCtrl.personnel"
+                             periode="mainCtrl.periode"
+                             display-banner="mainCtrl.displayBanner"
+                             pointages-list="mainCtrl.pointagesList"
+                             is-gsp="mainCtrl.IsGSP"
+                             is-somopa="mainCtrl.isSomopa">
+    </pointage-list-component>
+
+    <sidebar-detail-component resources="mainCtrl.resources"
+                              read-only="mainCtrl.globalReadOnly"
+                              display-banner="mainCtrl.displayBanner"
+                              is-gsp="mainCtrl.IsGSP"
+                              is-somopa="mainCtrl.isSomopa">
+    </sidebar-detail-component>
+
+    <div ng-class="{ 'hide-overlay': !mainCtrl.displayBanner, 'show-overlay' : mainCtrl.displayBanner}" class="side-bar-overlay" ng-click="mainCtrl.displayBanner= !mainCtrl.displayBanner; mainCtrl.actionToggleSidebar(false)"></div>
+
+    @*Modal d'export du pointage personnel'*@
+    <div class="modal fade" id="exp-exc" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title"><i class="flaticon flaticon-send"></i>{{::mainCtrl.resources.RapportHebdo_Export}}</h2>
+                    <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{::mainCtrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="">choix de l'export</label>
+                            <select class="form-control" name="" id="">
+                                <option value="">{{::mainCtrl.resources.RapportHebdo_Export_Hebdo}}</option>
+                                <option value="">{{::mainCtrl.resources.Global_Etc}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>{{::mainCtrl.resources.Global_Date_Comptable}}</label>
+                            <app-date-picker id="DateComptable"
+                                             format="DD/MM/YYYY"
+                                             lang="fr"
+                                             initial-date=""
+                                             placeholder=""
+                                             name="DateComptable"
+                                             ng-model="mainCtrl.dateComptable"
+                                             required>
+                            </app-date-picker>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>{{::mainCtrl.resources.Global_Choix_Perimetre}}</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>{{::mainCtrl.resources.Global_Choix_Personnel}}</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>{{::mainCtrl.resources.Global_From}}</label>
+                            <app-date-picker id="DateMin"
+                                             format="DD/MM/YYYY"
+                                             lang="fr"
+                                             initial-date=""
+                                             placeholder=""
+                                             name="DateMin"
+                                             ng-model="mainCtrl.dateDuplicateMin">
+                            </app-date-picker>
+                        </div>
+                        <div class="col-md-6">
+                            <label>{{::mainCtrl.resources.Global_To}}</label>
+                            <app-date-picker id="DateMax"
+                                             format="DD/MM/YYYY"
+                                             lang="fr"
+                                             initial-date=""
+                                             placeholder=""
+                                             name="DateMax"
+                                             ng-model="mainCtrl.dateDuplicateMax">
+                            </app-date-picker>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default pull-left" data-dismiss="modal" title="{{::mainCtrl.resources.RapportHebdo_Export_Excel}}"><span class="glyphicon glyphicon-export">&nbsp;</span>{{::mainCtrl.resources.RapportHebdo_Export_Excel}}</button>
+                    <button type="button" class="btn  btn-link pull-right" data-dismiss="modal" title="{{::mainCtrl.resources.Global_Bouton_Fermer}}">{{::mainCtrl.resources.Global_Bouton_Fermer}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

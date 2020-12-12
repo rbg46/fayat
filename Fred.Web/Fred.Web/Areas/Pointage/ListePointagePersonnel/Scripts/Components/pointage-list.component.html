@@ -1,0 +1,319 @@
+﻿<div class="bloc-liste" ng-click="$ctrl.whatIsFocused()">
+    <div class="pointages-personnels-tab">
+        <div class="table-conteneur">
+            <table class="pointages">
+                <thead>
+                    <tr>
+                        <th class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></th>
+                        <th class="bd-r type2" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">{{::$ctrl.resources.Rapport_Detail_CentreImputation}}</th>
+                        <th class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">{{::$ctrl.resources.Rapport_Detail_EnteteNiv1_HeuresNormales}}</th>
+                        <th class="type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></th>
+                        <th class="type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">{{::$ctrl.resources.Rapport_Detail_EnteteNiv1_Absence}}</th>
+                        <th class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></th>
+                        <th class="type1" ng-if="$ctrl.PointagePersonnelService.ShowDeplacement"></th>
+                        <th class="type1" ng-if="$ctrl.PointagePersonnelService.ShowDeplacement">{{::$ctrl.resources.Rapport_Detail_EnteteNiv1_Deplacement}}</th>
+                        <th class="type1" ng-if="$ctrl.PointagePersonnelService.ShowDeplacement"></th>
+                        <th class="bd-r type1" ng-if="$ctrl.PointagePersonnelService.ShowDeplacement"></th>
+                        <th class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">{{::$ctrl.resources.Pointage_Index_Entete_HeureMajoration}}</th>
+                        <th class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">{{::$ctrl.resources.Pointage_Index_Entete_Prime}}</th>
+                        <th class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">
+                            <span id="materiel-entete" fred-display-handler="$ctrl.userOrganizationId" display="hidden">{{::$ctrl.resources.Rapport_Detail_EnteteNiv1_Materiel}}</span>
+                            <span id="astreinte-entete" fred-display-handler="$ctrl.userOrganizationId" display="visible">{{::$ctrl.resources.Rapport_Detail_EnteteNiv1_Astreinte}}</span>
+                        </th>
+                        <th class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="niv2-headers">
+                        <td class="type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td class="bd-r type2" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td class="type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">{{::$ctrl.resources.Rapport_Detail_EnteteNiv2_Absence_Code}}</td>
+                        <td ng-hide="$ctrl.isUserFes && $ctrl.isIac" class="type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">{{::$ctrl.resources.Rapport_Detail_EnteteNiv2_Absence_Heure}}</td>
+                        <td ng-show="$ctrl.isIac && $ctrl.isUserFes" class="type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">{{::$ctrl.resources.Rapport_Detail_EnteteNiv2_Absence_Jours}}</td>
+                        <td class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">{{::$ctrl.resources.Rapport_Detail_EnteteNiv2_Absence_NumSemaineIntemperie}}</td>
+                        <td class="type1" ng-if="$ctrl.PointagePersonnelService.ShowDeplacement"></td>
+                        <td class="type1" ng-if="$ctrl.PointagePersonnelService.ShowDeplacement">{{::$ctrl.resources.Rapport_Detail_EnteteNiv2_Deplacement_Code}}</td>
+                        <td class="type1" ng-if="$ctrl.PointagePersonnelService.ShowDeplacement">{{::$ctrl.resources.Rapport_Detail_EnteteNiv2_Deplacement_Zone}}</td>
+                        <td class="bd-r type1" ng-if="$ctrl.PointagePersonnelService.ShowDeplacement"><span id="ivd-entete" fred-display-handler="$ctrl.userOrganizationId" display="hidden">{{::$ctrl.resources.Rapport_Detail_EnteteNiv2_Deplacement_IVD}}</span></td>
+                        <td class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"><div id="date-astriente" fred-display-handler="$ctrl.userOrganizationId" display="visible"><span style="margin-right:10px">Debut</span><span style="margin-left:10px">Fin</span></div></td>
+                        <td class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                    </tr>
+                    <tr class="niv3-headers">
+                        <td class="bd-r bd-l type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">
+                            <span class="material-icons alerte" uib-popover-template="'anyErrorWarningTemplate'" popover-trigger="'mouseenter'" popover-placement="right" ng-if="$ctrl.anyErreur()">warning</span>
+                        </td>
+                        <td class="bd-r type2" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td ng-hide="$ctrl.isUserFes && $ctrl.isIac" class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"><span class="total-time">{{$ctrl.TotalHeureNormale}} {{::$ctrl.resources.Heure_Short_lb}}</span></td>
+                        <td ng-show="$ctrl.isIac && $ctrl.isUserFes" class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"><span class="total-time">{{$ctrl.TotalHeureNormale}} {{::$ctrl.resources.Jour_Short_lb}}</span></td>
+                        <td class="type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td class="type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"><span class="total-time">{{$ctrl.TotalHeureAbsence}}</span></td>
+                        <td class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td class="type1" ng-if="$ctrl.PointagePersonnelService.ShowDeplacement"></td>
+                        <td class="type1" ng-if="$ctrl.PointagePersonnelService.ShowDeplacement"></td>
+                        <td class="type1" ng-if="$ctrl.PointagePersonnelService.ShowDeplacement"></td>
+                        <td class="bd-r type1" ng-if="$ctrl.PointagePersonnelService.ShowDeplacement"></td>
+                        <td class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"><span class="total-time">{{$ctrl.TotalHeureMajoration}} {{::$ctrl.resources.Heure_Short_lb}}</span></td>
+                        <td class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td class="bd-r type1" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                    </tr>
+                </tbody>
+                <tbody id="bodyPointagePersonnel" ng-class="$ctrl.hasVericalScrollbarVisible() ? 'body-list fred-scroll' : 'body-list fred-scroll withoutScroll'">
+                    <tr class="line" ng-repeat="pointage in $ctrl.pointagesList track by $index"
+                        ng-if="!pointage.IsDeleted"
+                        ng-class="{'bd-t': pointage.Day.Display, bank: !pointage.Day.IsHoliday && !pointage.Day.IsWeekend && pointage.PointageId == undefined, weekend: pointage.Day.IsHoliday || pointage.Day.IsWeekend, even: !pointage.Day.IsHoliday && !pointage.Day.IsWeekend && pointage.PointageId != undefined, lockDay: pointage.NewPointageLocked, lockPointage: pointage.IsLocked && !pointage.NewPointageLocked}">
+                        <td class="single-row type1" ng-class="{'dateOdd': !pointage.Day.IsEven, 'dateEven': pointage.Day.IsEven, 'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">
+                            <div class="conteneur1">
+                                <span class="data col1" ng-if="pointage.Day.Display">{{pointage.Day.Date | date:'dd/MM'}}</span>
+                                <lookup-standalone ng-model="$ctrl.CiTemp"
+                                                    tooltip="$ctrl.resources.Pointage_List_Add"
+                                                    button-only="true"
+                                                    search-icon-class="material-icons"
+                                                    search-title="{{::$ctrl.resources.Global_ReferentielCI}}"
+                                                    search-placeholder="{{::$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                                    url={{$ctrl.GetURLForCISearch(pointage.Day.Date)}}
+                                                    custom-template-url="../Scripts/directive/lookup/custom-templates/ci.template.html"
+                                                    on-select="$ctrl.handleSelectCI(item, pointage, $index,$ctrl.pointagesList)"
+                                                    class="pull-right"
+                                                    ng-if="pointage.Day.Display"
+                                                    ng-disabled="$ctrl.readOnly || $ctrl.readOnly || pointage.NewPointageLocked">
+                                </lookup-standalone>
+                            </div>
+                        </td>
+                        <td class="bd-r type2" ng-if="pointage.PointageId != undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">
+                            <span class="sapicon-E1BA verrou consult" ng-if="pointage.IsLocked"></span>
+                            <i class="material-icons verrou locked" ng-if="pointage.IsRapportLocked" title="Pointage verrouillé le {{pointage.Rapport.DateVerrou | date:'dd/MM/yyyy'}} par {{pointage.Rapport.AuteurVerrou.NomPrenom}}">lock</i>
+                            <span class="material-icons alerte" ng-mouseover="$ctrl.loadErreurs(pointage)" uib-popover-template="'popoverTemplate'" popover-trigger="'mouseenter'" popover-placement="right" ng-if="pointage.ListErreurs.length > 0">warning</span>
+                            <span class="data CI">{{pointage.Ci.CodeLibelle}}</span>
+                        </td>
+                        <td class="bd-r type1" ng-if="pointage.PointageId != undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">
+                            <input ng-show="!$ctrl.isUserFes" type="text" fred-input-number="2" class="input-number"
+                                   select-on-click min="0" max="12" ng-class="{focused : hnFocused}"
+                                   ng-init="hnFocused = false" ng-focus="hnFocused = true"
+                                   ng-blur="hnFocused = false"
+                                   title="{{pointage.ListRapportLigneTaches.length > 1 ? 'Modifiable uniquement lorsque le pointage est mono-tache' : 'Heures normales'}}"
+                                   ng-model="pointage.HeureNormale"
+                                   ng-change="$ctrl.handleChangeHeureNormale(pointage)"
+                                   ng-disabled="$ctrl.readOnly || pointage.IsLocked || $ctrl.checkTotalTacheMoreThanOne(pointage)">
+                            <input ng-show="!$ctrl.isIac && $ctrl.isUserFes" type="text" fred-input-number="2"
+                                   ng-model="pointage.HeureNormale"
+                                   ng-change="$ctrl.handleChangeHeureNormale(pointage)"
+                                   ng-disabled="$ctrl.readOnly || $ctrl.isUserFes" />
+                            <input ng-show="$ctrl.isIac && $ctrl.isUserFes" type="text" fred-input-number="2" min="0" max="1" class="input-number"
+                                   oninput="validity.valid||(value='1');"
+                                   ng-model="pointage.HeureNormaleIac" ng-change="$ctrl.handleChangeHeureNormale(pointage)"
+                                   ng-disabled="$ctrl.readOnly || $ctrl.isUserFes" />
+                        </td>
+                        <td class="type1" ng-if="pointage.PointageId != undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">
+                           
+                            <lookup-standalone ng-model="pointage.CodeAbsence"
+                                               text="pointage.CodeAbsence.Code"
+                                               show-delete-button-on-mouse-over="true"
+                                               show-search-icon-only-when-empty="true"
+                                               search-icon-class="material-icons"
+                                               tooltip="pointage.CodeAbsence.Code + ' - ' + pointage.CodeAbsence.Libelle"
+                                               search-title="{{::$ctrl.resources.Global_ReferentielCodeAbsence}}"
+                                               search-placeholder="{{::$ctrl.resources.Global_ReferentielCodeAbsence_Placeholder}}"
+                                               on-select="$ctrl.handleSelectCodeAbsence(item, pointage)"
+                                               on-delete="$ctrl.handleClickDeleteAbsence(pointage)"
+                                               on-click="$ctrl.showPickList('CodeAbsence', pointage)"
+                                               class="formulaire middle"
+                                               ng-disabled="$ctrl.readOnly || pointage.IsLocked">
+                            </lookup-standalone>
+                        </td>
+                        <td class="type1" ng-if="pointage.PointageId != undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">
+                            <input ng-hide="$ctrl.isIac && $ctrl.isUserFes" type="text" fred-input-number="2" class="input-number" select-on-click min="{{$ctrl.heuresAbsenceMin(pointage)}}" max="{{$ctrl.heuresAbsenceMax(pointage)}}" ng-init="haFocused = false"
+                                   ng-focus="haFocused = true" ng-blur="haFocused = false" ng-model="pointage.HeureAbsence" ng-class="{inputNotEmpty: pointage.HeureAbsence, focused : haFocused}" ng-change="$ctrl.handleChangeHeureAbsence(pointage)" ng-disabled="$ctrl.readOnly || pointage.IsLocked || !pointage.CodeAbsence" />
+                            <input ng-show="$ctrl.isIac && $ctrl.isUserFes" type="text" fred-input-number="2" class="input-number" select-on-click min="{{$ctrl.heuresAbsenceMin(pointage)}}" max="{{$ctrl.heuresAbsenceMax(pointage)}}" ng-init="haFocused = false"
+                                   ng-focus="haFocused = true" ng-blur="haFocused = false" ng-model="pointage.HeureAbsenceIac" ng-class="{inputNotEmpty: pointage.HeureAbsence, focused : haFocused}" ng-change="$ctrl.handleChangeHeureAbsenceIac(pointage)" ng-disabled="$ctrl.readOnly || pointage.IsLocked || !pointage.CodeAbsence" />
+                        </td>
+                        <td class="bd-r type1" ng-if="pointage.PointageId != undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">
+                            <input type="text" fred-input-number="0" class="input-number" select-on-click min="1" max="52" ng-class="{focused : sFocused}" ng-init="sFocused = false" ng-focus="sFocused = true" ng-blur="sFocused = false" ng-model="pointage.NumSemaineIntemperieAbsence" ng-disabled="$ctrl.readOnly || pointage.IsLocked || pointage.CodeAbsence == null || !pointage.CodeAbsence.Intemperie">
+                        </td>
+                        <td class="type1" ng-if="pointage.PointageId != undefined && $ctrl.PointagePersonnelService.ShowDeplacement">
+                            <span class="fa fa-refresh" title="{{::$ctrl.resources.PointagePersonnel_Rafraichir_Indemnites}}" ng-click="$ctrl.handleClickIndemnites(pointage)"></span>
+                            <div ng-if="pointage.View.CodeDeplacementPlusFavorable" class="code-deplacement-favorable" ng-attr-title="{{::$ctrl.resources.Rapport_Deplacement_CodePlusFavorable}}"></div>
+                            <div ng-if="!pointage.View.CodeDeplacementPlusFavorable" class="code-deplacement-defavorable"></div>
+                            <div ng-if="$ctrl.PointagePersonnelService.ShowSaisieManuelle && pointage.View.CodeZoneDeplacementSaisiManuellement" class="code-zone-deplacement-saisi-manuellement" ng-attr-title="{{::$ctrl.resources.Rapport_Deplacement_ZoneSaisiManuellement}}"></div>
+                            <div ng-if="!$ctrl.PointagePersonnelService.ShowSaisieManuelle || !pointage.View.CodeZoneDeplacementSaisiManuellement" class="code-zone-deplacement-calcule"></div>
+                        </td>
+                        <td class="type1" ng-if="pointage.PointageId != undefined && $ctrl.PointagePersonnelService.ShowDeplacement">
+                            <lookup-standalone ng-model="pointage.CodeDeplacement"
+                                               show-delete-button-on-mouse-over="true"
+                                               show-search-icon-only-when-empty="true"
+                                               search-icon-class="material-icons"
+                                               text="pointage.CodeDeplacement.Code"
+                                               tooltip="pointage.CodeDeplacement.Code + ' - ' + pointage.CodeDeplacement.Libelle"
+                                               search-title="{{::$ctrl.resources.Global_ReferentielCodeDeplacement}}"
+                                               search-placeholder="{{::$ctrl.resources.Global_ReferentielCodeDeplacement_Placeholder}}"
+                                               on-click="$ctrl.showPickList('CodeDeplacement', pointage)"
+                                               on-select="$ctrl.handleSelectCodeDeplacement(item, pointage)"
+                                               on-delete="$ctrl.handleClickDeleteDeplacement(pointage)"
+                                               class="formulaire middle"
+                                               ng-class="{focused : cdFocused}" ng-init="cdFocused = false" ng-focus="cdFocused = true" ng-blur="cdFocused = false"
+                                               ng-disabled="$ctrl.readOnly || pointage.IsLocked || $ctrl.PointagePersonnelService.CodeDeplacementReadonly">
+                            </lookup-standalone>
+                        </td>
+                        <td class="type1" ng-if="pointage.PointageId != undefined && $ctrl.PointagePersonnelService.ShowDeplacement">
+                            <lookup-standalone ng-model="pointage.CodeZoneDeplacement"
+                                               show-delete-button-on-mouse-over="true"
+                                               show-search-icon-only-when-empty="true"
+                                               search-icon-class="material-icons"
+                                               text="pointage.CodeZoneDeplacement.Code"
+                                               tooltip="pointage.CodeZoneDeplacement.Code + ' - ' + pointage.CodeZoneDeplacement.Libelle"
+                                               search-title="{{::$ctrl.resources.Global_ReferentielCodeZoneDeplacement}}"
+                                               search-placeholder="{{::$ctrl.resources.Global_ReferentielCodeZoneDeplacement_Placeholder}}"
+                                               on-click="$ctrl.showPickList('CodeZoneDeplacement', pointage)"
+                                               on-select="$ctrl.handleSelectCodeZoneDeplacement(item, pointage)"
+                                               on-delete="$ctrl.handleClickDeleteZoneDeplacement(pointage)"
+                                               class="formulaire middle"
+                                               ng-class="{focused : czdFocused}" ng-init="czdFocused = false" ng-focus="czdFocused = true" ng-blur="czdFocused = false"
+                                               ng-disabled="$ctrl.readOnly || pointage.IsLocked || (!pointage.Ci.ZoneModifiable && !$ctrl.isGsp && pointage.Personnel.EtablissementPaie.GestionIndemnites)">
+                            </lookup-standalone>
+                        </td>
+                        <td class="bd-r type1" ng-if="pointage.PointageId != undefined && $ctrl.PointagePersonnelService.ShowDeplacement">
+                            <div id="ivd-detail" fred-display-handler="$ctrl.userOrganizationId" display="hidden">
+                                <input id="ivd_{{$index}}" type="checkbox" ng-model="pointage.DeplacementIV" ng-class="{inputNotEmpty: pointage.DeplacementIV}" ng-disabled="$ctrl.readOnly || pointage.IsLocked" ng-change="$ctrl.handleChangeIVD(pointage)" />
+                                <label for="ivd_{{$index}}"><span></span></label>
+                            </div>
+                        </td>
+                        <td class="bd-r hmaj-data type1" ng-if="pointage.PointageId != undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">
+                            <div>
+                                <span ng-show="$ctrl.isUserFes" ng-if="$ctrl.handleDisplayTotalHeureMajoration(pointage.ListRapportLigneMajorations)" style="border: 0.5px solid rgb(0, 82, 160);padding: 1px 6px;">
+                                    {{$ctrl.totalMajorationCi(pointage.ListRapportLigneMajorations)}} {{::$ctrl.resources.Heure_Short_lb}}
+                                </span>
+                            </div>
+                            <span ng-show="$ctrl.isUserFes" ng-if="pointage.ListRapportLigneMajorations.length != 0 " ng-repeat="rapportligneMajoration in pointage.ListRapportLigneMajorations | filter:{IsDeleted:false} track by $index" style="display: inline-block;">
+                                {{rapportligneMajoration.CodeMajoration.Code}} ({{rapportligneMajoration.HeureMajoration}}{{::$ctrl.resources.Heure_Short_lb}})
+                            </span>
+                            <span ng-show="!$ctrl.isUserFes" ng-if="pointage.HeureMajoration != 0 && pointage.CodeMajoration != null">
+                                {{pointage.CodeMajoration.Code}}({{pointage.HeureMajoration}}{{::$ctrl.resources.Heure_Short_lb}} )
+                            </span>
+                        </td>
+                        <td class="bd-r type1" ng-if="pointage.PointageId != undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">
+                            <div ng-if="pointage.ListRapportLignePrimes.length != 0">
+                                <label class="primes">
+                                    {{pointage.LibPrimeAbrege}}
+                                </label>
+                            </div>
+                        </td>
+                        <td class="bd-r type1" ng-if="pointage.PointageId != undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">
+                            <i class="material-icons" id="materiel-detail" fred-display-handler="$ctrl.userOrganizationId" display="hidden" ng-if="pointage.Materiel != null">check</i>
+                            <div id="astreinte-detail" fred-display-handler="$ctrl.userOrganizationId" display="visible" ng-class="$ctrl.astreinteDetailIsVisible() ? 'sortieAstreinteInline' : ''">
+                                <i class="fa fa-plus fa-lg action-icone" ng-show="pointage.HasAstreinte" style="cursor:pointer;" ng-if="pointage.HasAstreinte" ng-click="$ctrl.handleAddAstreinte(pointage)" title="{{::$ctrl.resources.Rapport_Ajout_Sortie_Astreinte}}"></i>
+                                <i class="sapicon-E249 abs-as" ng-hide="pointage.HasAstreinte"></i>
+                                <div style="padding:0px;border:1px solid  {{$ctrl.handleCheckAstreinte(raportligneAstreinte.DateDebutAstreinte,raportligneAstreinte.DateFinAstreinte) ? '#ccc' : '#f00'}}" ng-repeat="raportligneAstreinte in pointage.ListRapportLigneAstreintes | filter:{IsDeleted:false} track by $index ">
+                                    <input class="input-number" style="padding:0px;margin:0px;width: 36px;" readonly type="text" value="{{$ctrl.getDateTime(raportligneAstreinte.DateDebutAstreinte)}}" />
+                                    <span class="glyphicon glyphicon-play"></span>
+                                    <input class="input-number" style="padding:0px;margin:0px;width: 36px;" readonly type="text" value="{{$ctrl.getDateTime(raportligneAstreinte.DateFinAstreinte)}}" />
+                                    <br />
+                                    <div class="text-center">
+                                        <span class="fa fa-pencil fa-lg action-icone" style="cursor:pointer;" ng-click="$ctrl.handleChangeAstreinteDates(raportligneAstreinte,pointage.DatePointage,pointage)" title="{{::$ctrl.resources.PointagePersonnel_Modifier_Astreinte}}"></span>
+                                        <span class="fa fa-trash fa-lg action-icone" style="cursor:pointer;" ng-click="$ctrl.handleDeleteSortieAstreinte($index,pointage)" title="{{::$ctrl.resources.Rapport_Suppression_Sortie_Astreinte}}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="bd-r icons-actions type1" ng-if="pointage.PointageId != undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}">
+                            <div class="conteneur2">
+                                <fred-authorization key="{{$ctrl.permissionKeys.AffichageDuplicationPointagePersonnelIndex}}">
+                                    <i class="fa fa-copy" title="{{::$ctrl.resources.Pointage_List_Duplicate}}" ng-click="$ctrl.handleShowDuplicatePopIn(pointage, $index)"></i>
+                                </fred-authorization>
+                                <i class="material-icons" title="{{::$ctrl.resources.Pointage_List_Delete}}" ng-click="$ctrl.handleShowDeletePopIn(pointage, $index)">clear</i>
+                                <i class="material-icons" title="{{::$ctrl.resources.Pointage_List_Show}}" ng-click="$ctrl.handleShowDetail(pointage, $index)">chevron_right</i>
+                            </div>
+                        </td>
+                        <td class="bd-r type2" ng-if="pointage.PointageId == undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td class="bd-r type1" ng-if="pointage.PointageId == undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td class="type1" ng-if="pointage.PointageId == undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td class="type1" ng-if="pointage.PointageId == undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td class="bd-r type1" ng-if="pointage.PointageId == undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td class="type1" ng-if="pointage.PointageId == undefined && $ctrl.PointagePersonnelService.ShowDeplacement"></td>
+                        <td class="type1" ng-if="pointage.PointageId == undefined && $ctrl.PointagePersonnelService.ShowDeplacement"></td>
+                        <td class="type1" ng-if="pointage.PointageId == undefined && $ctrl.PointagePersonnelService.ShowDeplacement"></td>
+                        <td class="bd-r type1" ng-if="pointage.PointageId == undefined && $ctrl.PointagePersonnelService.ShowDeplacement"></td>
+                        <td class="bd-r type1" ng-if="pointage.PointageId == undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td class="bd-r type1" ng-if="pointage.PointageId == undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td class="bd-r type1" ng-if="pointage.PointageId == undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                        <td class="bd-r type1" ng-if="pointage.PointageId == undefined" ng-class="{'no-dep': !$ctrl.PointagePersonnelService.ShowDeplacement}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--Popover template-->
+<script type="text/ng-template" id="popoverTemplate">
+    <ul ng-if="$ctrl.lstErreurs.length > 0" class="popoverList">
+        <li ng-repeat="erreur in $ctrl.lstErreurs">
+            {{erreur}}
+        </li>
+    </ul>
+</script>
+<script type="text/ng-template" id="anyErrorWarningTemplate">
+    <ul class="anyErrorPopOverList">
+        <li>
+            {{::$ctrl.resources.Pointage_AnyErreur}}
+        </li>
+    </ul>
+</script>
+<!-- Modal pop-in suppression -->
+<div class="modal fade" id="confirmationDelete" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="flaticon flaticon-garbage-2"></i>{{::$ctrl.resources.Global_Modal_Confirmation}}</h2>
+                <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+            </div>
+            <div class="modal-body">
+                <b>{{::$ctrl.resources.PointagePersonnel_ModalDeleteConfirmation}}</b>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn  btn-default pull-left" data-dismiss="modal" ng-click="$ctrl.handleClickDelete(pointage, $index)" title="{{::$ctrl.resources.Global_Bouton_Valider_Tooltip}}">{{::$ctrl.resources.Global_Bouton_Valider}}</button>
+                <button type="button" class="btn  btn-link pull-right" data-dismiss="modal" title="{{::$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">{{::$ctrl.resources.Global_Bouton_Annuler}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal de changement des dates d'astreinte*@ -->
+<div class="modal fade" ng-repeat="pointage in $ctrl.pointagesList track by $index" id="changeAstreinteDateModal{{$index}}" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fa fa-pencil"></i>{{::$ctrl.resources.PointagePersonnel_Changer_Date_Astreinte}}</h2>
+                <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{resources.Global_Modal_Annuler_Tooltip}}"></i>
+            </div>
+            <div class="modal-body">
+                <span class="text-danger" ng-show="!$ctrl.handleShevalCondition($ctrl.pointagesList[$index].ListRapportLigneAstreintes[$ctrl.selectedRaportLigneAstreinteIndex].DateDebutAstreinte,$ctrl.pointagesList[$index].ListRapportLigneAstreintes[$ctrl.selectedRaportLigneAstreinteIndex].DateFinAstreinte)">&#8226 {{::$ctrl.resources.RapportHebdo_Warning_Heures_Astreintes}}</span>
+                <span class="text-danger" ng-show="!$ctrl.handleSuperieureCondition($ctrl.pointagesList[$index].ListRapportLigneAstreintes[$ctrl.selectedRaportLigneAstreinteIndex].DateDebutAstreinte,$ctrl.pointagesList[$index].ListRapportLigneAstreintes[$ctrl.selectedRaportLigneAstreinteIndex].DateFinAstreinte)">&#8226 {{::$ctrl.resources.Rapport_Warning_Astrieintes_Change}}</span>
+                <div class="row">
+                    <div class="col-md-5">
+                        <fred-date-picker name="DateDebutAstreinte"
+                                          locale="fr"
+                                          format="DD/MM/YYYY HH:mm"
+                                          ng-model="$ctrl.pointagesList[$index].ListRapportLigneAstreintes[$ctrl.selectedRaportLigneAstreinteIndex].DateDebutAstreinte"
+                                          min="{{$ctrl.handleMinDateDebutAstreinte()}}"
+                                          max="{{$ctrl.handleMaxDateDebutAstreinte()}}"
+                                          stepping="15"
+                                          ng-change="$ctrl.handleChangeDateDebutAstreinte($index)"
+                                          placeholder="{{::$ctrl.resources.Rapport_Debut_Astreinte}}"></fred-date-picker>
+                    </div>
+                    <div class="col-md-5">
+                        <fred-date-picker name="DateFinAstreinte"
+                                          locale="fr"
+                                          format="DD/MM/YYYY HH:mm"
+                                          ng-model="$ctrl.pointagesList[$index].ListRapportLigneAstreintes[$ctrl.selectedRaportLigneAstreinteIndex].DateFinAstreinte"
+                                          max="{{$ctrl.handleMaxDateFinAstreinte()}}"
+                                          min="{{$ctrl.handleMinDateFinAstreinte()}}"
+                                          stepping="15"
+                                          ng-change="$ctrl.handleChangeDateFinAstreinte($index)"
+                                          placeholder="{{::$ctrl.resources.Rapport_Fin_Astreinte}}"></fred-date-picker>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

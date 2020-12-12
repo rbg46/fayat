@@ -1,0 +1,268 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.452
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Analysis", "01-Analysis", "{41985A49-2EC2-4985-9FDE-D1A86EA8B13D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Documentation", "02-Documentation", "{6D88B73A-61C8-416C-B669-5E16098949B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Presentation Layer", "03-Presentation Layer", "{D4F3A58A-35DD-4E07-B4D2-6C8C848E0163}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-Business Layer", "04-Business Layer", "{C1D1581D-40AD-4B59-9B6D-1A295319FB9E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05-Data Access Layer", "05-Data Access Layer", "{57F0E57F-3F37-4A35-A603-5254BD045928}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "06-Persistence Layer", "06-Persistence Layer", "{7AF81D3C-5288-4A17-BBCF-372BC713E892}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "07-Shared Layer", "07-Shared Layer", "{5B8A114E-AFC0-4FF1-9815-19982717CB28}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "08-Tests", "08-Tests", "{0226AD89-7AB5-42EB-924C-15E7069BD349}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{06D6E709-6CDC-411D-8F8B-0E1BD96D86A4}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\.editorconfig = ..\..\.editorconfig
+		Fred.ruleset = Fred.ruleset
+		FredWebSolution.sln.DotSettings = FredWebSolution.sln.DotSettings
+		nuget.config = nuget.config
+		WE-Palette.css = WE-Palette.css
+		WebEssentials2015-Settings.json = WebEssentials2015-Settings.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube", "SonarQube", "{21216290-D52F-40C8-B281-B8DB39A5AB42}"
+	ProjectSection(SolutionItems) = preProject
+		SonarQube\Fayat.FredWebCSharp.ruleset = SonarQube\Fayat.FredWebCSharp.ruleset
+		SonarQube\SolutionBinding.sqconfig = SonarQube\SolutionBinding.sqconfig
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.Business", "Fred.Business\Fred.Business.csproj", "{039E00B1-5F56-484C-82BA-5855684A1BBC}"
+EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Fred.Analysis", "Fred.Analysis\Fred.Analysis.modelproj", "{B925EA1C-00A2-4F29-83C0-09A63CE33776}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Web", "Fred.Web\Fred.Web.csproj", "{A2C5D834-E219-4602-BA23-D47079371003}"
+	ProjectSection(ProjectDependencies) = postProject
+		{34D7B42A-0D2F-46C4-A4F3-3842136FB86E} = {34D7B42A-0D2F-46C4-A4F3-3842136FB86E}
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E} = {8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.DataAccess", "Fred.DataAccess\Fred.DataAccess.csproj", "{F86F9F7F-2269-4779-9064-515F94070CBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Entities", "Fred.Entities\Fred.Entities.csproj", "{D84768F7-F096-4E6D-997E-AC1D9232B47A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Framework", "Fred.Framework\Fred.Framework.csproj", "{92478535-02C7-44E0-975E-E31D77E78CCA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.Business.Tests", "Fred.Business.Tests\Fred.Business.Tests.csproj", "{5CF77ED1-5AF1-4AD6-AF4A-9E792A396E64}"
+EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Fred.Documentation", "Fred.Documentation\Fred.Documentation.shfbproj", "{78459D85-4045-4DBE-BB29-6C4A1D8F12B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Framework.Tests", "Fred.Framework.Tests\Fred.Framework.Tests.csproj", "{A87F469A-73DC-471A-AD20-A8084B02C1A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.DataAccess.ExternalService", "Fred.DataAccess.ExternalService\Fred.DataAccess.ExternalService.csproj", "{17451402-6778-4A17-8DB1-542D50DB8C94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Entities.ExternalService", "Fred.Entities.ExternalService\Fred.Entities.ExternalService.csproj", "{E7951328-3F88-42C6-A68E-3AE41F35449A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Business.ExternalService", "Fred.Business.ExternalService\Fred.Business.ExternalService.csproj", "{A0ACFD5F-F48B-4836-9250-D46973C22F0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Web.Bootstrapper", "Bootstrapper\Fred.Web.Bootstrapper.csproj", "{34D7B42A-0D2F-46C4-A4F3-3842136FB86E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Web.Shared", "Fred.Web.Shared\Fred.Web.Shared.csproj", "{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.EntityFramework", "Fred.EntityFramework\Fred.EntityFramework.csproj", "{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Referential", "Fred.Referential\Fred.Referential.csproj", "{D4DCFE97-9577-487A-BF16-70216B74C445}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		SpeedDebug|Any CPU = SpeedDebug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{B925EA1C-00A2-4F29-83C0-09A63CE33776}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B925EA1C-00A2-4F29-83C0-09A63CE33776}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B925EA1C-00A2-4F29-83C0-09A63CE33776}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B925EA1C-00A2-4F29-83C0-09A63CE33776}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B925EA1C-00A2-4F29-83C0-09A63CE33776}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{A2C5D834-E219-4602-BA23-D47079371003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2C5D834-E219-4602-BA23-D47079371003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2C5D834-E219-4602-BA23-D47079371003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2C5D834-E219-4602-BA23-D47079371003}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2C5D834-E219-4602-BA23-D47079371003}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{A2C5D834-E219-4602-BA23-D47079371003}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{5CF77ED1-5AF1-4AD6-AF4A-9E792A396E64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CF77ED1-5AF1-4AD6-AF4A-9E792A396E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CF77ED1-5AF1-4AD6-AF4A-9E792A396E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CF77ED1-5AF1-4AD6-AF4A-9E792A396E64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CF77ED1-5AF1-4AD6-AF4A-9E792A396E64}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CF77ED1-5AF1-4AD6-AF4A-9E792A396E64}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{78459D85-4045-4DBE-BB29-6C4A1D8F12B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78459D85-4045-4DBE-BB29-6C4A1D8F12B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78459D85-4045-4DBE-BB29-6C4A1D8F12B0}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A87F469A-73DC-471A-AD20-A8084B02C1A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A87F469A-73DC-471A-AD20-A8084B02C1A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A87F469A-73DC-471A-AD20-A8084B02C1A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A87F469A-73DC-471A-AD20-A8084B02C1A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A87F469A-73DC-471A-AD20-A8084B02C1A0}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{A87F469A-73DC-471A-AD20-A8084B02C1A0}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{17451402-6778-4A17-8DB1-542D50DB8C94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17451402-6778-4A17-8DB1-542D50DB8C94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17451402-6778-4A17-8DB1-542D50DB8C94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17451402-6778-4A17-8DB1-542D50DB8C94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17451402-6778-4A17-8DB1-542D50DB8C94}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{17451402-6778-4A17-8DB1-542D50DB8C94}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{E7951328-3F88-42C6-A68E-3AE41F35449A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7951328-3F88-42C6-A68E-3AE41F35449A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7951328-3F88-42C6-A68E-3AE41F35449A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7951328-3F88-42C6-A68E-3AE41F35449A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7951328-3F88-42C6-A68E-3AE41F35449A}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{E7951328-3F88-42C6-A68E-3AE41F35449A}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{A0ACFD5F-F48B-4836-9250-D46973C22F0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0ACFD5F-F48B-4836-9250-D46973C22F0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0ACFD5F-F48B-4836-9250-D46973C22F0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0ACFD5F-F48B-4836-9250-D46973C22F0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0ACFD5F-F48B-4836-9250-D46973C22F0F}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{A0ACFD5F-F48B-4836-9250-D46973C22F0F}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{34D7B42A-0D2F-46C4-A4F3-3842136FB86E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34D7B42A-0D2F-46C4-A4F3-3842136FB86E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34D7B42A-0D2F-46C4-A4F3-3842136FB86E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34D7B42A-0D2F-46C4-A4F3-3842136FB86E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34D7B42A-0D2F-46C4-A4F3-3842136FB86E}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{34D7B42A-0D2F-46C4-A4F3-3842136FB86E}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{D4DCFE97-9577-487A-BF16-70216B74C445}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4DCFE97-9577-487A-BF16-70216B74C445}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4DCFE97-9577-487A-BF16-70216B74C445}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4DCFE97-9577-487A-BF16-70216B74C445}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4DCFE97-9577-487A-BF16-70216B74C445}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{D4DCFE97-9577-487A-BF16-70216B74C445}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{039E00B1-5F56-484C-82BA-5855684A1BBC} = {C1D1581D-40AD-4B59-9B6D-1A295319FB9E}
+		{B925EA1C-00A2-4F29-83C0-09A63CE33776} = {41985A49-2EC2-4985-9FDE-D1A86EA8B13D}
+		{A2C5D834-E219-4602-BA23-D47079371003} = {D4F3A58A-35DD-4E07-B4D2-6C8C848E0163}
+		{F86F9F7F-2269-4779-9064-515F94070CBD} = {57F0E57F-3F37-4A35-A603-5254BD045928}
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A} = {5B8A114E-AFC0-4FF1-9815-19982717CB28}
+		{92478535-02C7-44E0-975E-E31D77E78CCA} = {5B8A114E-AFC0-4FF1-9815-19982717CB28}
+		{5CF77ED1-5AF1-4AD6-AF4A-9E792A396E64} = {0226AD89-7AB5-42EB-924C-15E7069BD349}
+		{78459D85-4045-4DBE-BB29-6C4A1D8F12B0} = {6D88B73A-61C8-416C-B669-5E16098949B7}
+		{A87F469A-73DC-471A-AD20-A8084B02C1A0} = {0226AD89-7AB5-42EB-924C-15E7069BD349}
+		{17451402-6778-4A17-8DB1-542D50DB8C94} = {57F0E57F-3F37-4A35-A603-5254BD045928}
+		{E7951328-3F88-42C6-A68E-3AE41F35449A} = {5B8A114E-AFC0-4FF1-9815-19982717CB28}
+		{A0ACFD5F-F48B-4836-9250-D46973C22F0F} = {C1D1581D-40AD-4B59-9B6D-1A295319FB9E}
+		{34D7B42A-0D2F-46C4-A4F3-3842136FB86E} = {D4F3A58A-35DD-4E07-B4D2-6C8C848E0163}
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E} = {5B8A114E-AFC0-4FF1-9815-19982717CB28}
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA} = {7AF81D3C-5288-4A17-BBCF-372BC713E892}
+		{D4DCFE97-9577-487A-BF16-70216B74C445} = {5B8A114E-AFC0-4FF1-9815-19982717CB28}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {97BC53AC-3255-4421-9E89-52FB388593FA}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 17
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://fcistgweb-dev01v.fci.lan:8080/tfs/fred
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Fred.Business\\Fred.Business.csproj
+		SccProjectTopLevelParentUniqueName1 = FredWebSolution.sln
+		SccProjectName1 = Fred.Business
+		SccLocalPath1 = Fred.Business
+		SccProjectUniqueName2 = Fred.Analysis\\Fred.Analysis.modelproj
+		SccProjectTopLevelParentUniqueName2 = FredWebSolution.sln
+		SccProjectName2 = Fred.Analysis
+		SccLocalPath2 = Fred.Analysis
+		SccProjectUniqueName3 = Fred.Web\\Fred.Web.csproj
+		SccProjectTopLevelParentUniqueName3 = FredWebSolution.sln
+		SccProjectName3 = Fred.Web
+		SccLocalPath3 = Fred.Web
+		SccProjectUniqueName4 = Fred.DataAccess\\Fred.DataAccess.csproj
+		SccProjectTopLevelParentUniqueName4 = FredWebSolution.sln
+		SccProjectName4 = Fred.DataAccess
+		SccLocalPath4 = Fred.DataAccess
+		SccProjectUniqueName5 = Fred.Entities\\Fred.Entities.csproj
+		SccProjectTopLevelParentUniqueName5 = FredWebSolution.sln
+		SccProjectName5 = Fred.Entities
+		SccLocalPath5 = Fred.Entities
+		SccProjectUniqueName6 = Fred.Framework\\Fred.Framework.csproj
+		SccProjectTopLevelParentUniqueName6 = FredWebSolution.sln
+		SccProjectName6 = Fred.Framework
+		SccLocalPath6 = Fred.Framework
+		SccProjectUniqueName7 = Fred.Business.Tests\\Fred.Business.Tests.csproj
+		SccProjectTopLevelParentUniqueName7 = FredWebSolution.sln
+		SccProjectName7 = Fred.Business.Tests
+		SccLocalPath7 = Fred.Business.Tests
+		SccProjectUniqueName8 = Fred.Documentation\\Fred.Documentation.shfbproj
+		SccProjectTopLevelParentUniqueName8 = FredWebSolution.sln
+		SccProjectName8 = Fred.Documentation
+		SccLocalPath8 = Fred.Documentation
+		SccProjectUniqueName9 = Fred.Framework.Tests\\Fred.Framework.Tests.csproj
+		SccProjectTopLevelParentUniqueName9 = FredWebSolution.sln
+		SccProjectName9 = Fred.Framework.Tests
+		SccLocalPath9 = Fred.Framework.Tests
+		SccProjectUniqueName10 = Fred.Entities.ExternalService\\Fred.Entities.ExternalService.csproj
+		SccProjectTopLevelParentUniqueName10 = FredWebSolution.sln
+		SccProjectName10 = Fred.Entities.ExternalService
+		SccLocalPath10 = Fred.Entities.ExternalService
+		SccProjectUniqueName11 = Fred.DataAccess.ExternalService\\Fred.DataAccess.ExternalService.csproj
+		SccProjectTopLevelParentUniqueName11 = FredWebSolution.sln
+		SccProjectName11 = Fred.DataAccess.ExternalService
+		SccLocalPath11 = Fred.DataAccess.ExternalService
+		SccProjectUniqueName12 = Fred.Business.ExternalService\\Fred.Business.ExternalService.csproj
+		SccProjectTopLevelParentUniqueName12 = FredWebSolution.sln
+		SccProjectName12 = Fred.Business.ExternalService
+		SccLocalPath12 = Fred.Business.ExternalService
+		SccProjectUniqueName13 = Bootstrapper\\Fred.Web.Bootstrapper.csproj
+		SccProjectTopLevelParentUniqueName13 = FredWebSolution.sln
+		SccProjectName13 = Bootstrapper
+		SccLocalPath13 = Bootstrapper
+		SccProjectUniqueName14 = Fred.Web.Shared\\Fred.Web.Shared.csproj
+		SccProjectTopLevelParentUniqueName14 = FredWebSolution.sln
+		SccProjectName14 = Fred.Web.Shared
+		SccLocalPath14 = Fred.Web.Shared
+		SccProjectUniqueName15 = Fred.EntityFramework\\Fred.EntityFramework.csproj
+		SccProjectTopLevelParentUniqueName15 = FredWebSolution.sln
+		SccProjectName15 = Fred.EntityFramework
+		SccLocalPath15 = Fred.EntityFramework
+		SccProjectUniqueName16 = Fred.Referential\\Fred.Referential.csproj
+		SccProjectTopLevelParentUniqueName16 = FredWebSolution.sln
+		SccProjectName16 = Fred.Referential
+		SccLocalPath16 = Fred.Referential
+	EndGlobalSection
+EndGlobal

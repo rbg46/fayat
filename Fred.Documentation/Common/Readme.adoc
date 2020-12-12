@@ -1,0 +1,223 @@
+= Bienvenue sur FRED !
+
+En tant que développeur vous aurez besoin des éléments suivants sur
+votre machine.
+
+== Machine de développement
+
+=== En setup classique
+
+* Chrome
+* Version 67.0
+* Firefox
+** Version 60.0 :
+https://ftp.mozilla.org/pub/firefox/releases/60.0/win64/fr/[download]
+** Durant l’installation, choisir personnalisé, et désactiver les mises à jours
+** Dans Firefox, aller dans les préférences et désactiver aussi les mises à jours
+* Forti Client
+** https://www.forticlient.com/downloads[Download]
+** Prendre la version pour Windows pas pour Windows Apps
+** Avec la nouvelle version on peut maintenant :
+*** Sauvegarder le mdp
+*** Faire une reconnection automatique : option _Toujours actif_
+*** Configuration :
+**** Passerelle distance = 83.206.41.129
+**** Authentification : sauvegarder les identifiants
+**** nom d’utilisateur : vpn-sqli
+**** mdp : F@yat2017
+**** Option : _Ne pas alerter en cas de certificat serveur invalide_ : cochée
+* Visual Studio 2019 dernière version
+** Dans l'installateur, aller dans Composants Individuels et Cocher  _Pack de Ciblage .Net Framework 4.6.2_
+* .Net Core :
+** Installer .Net Core 2.2.402 : https://dotnet.microsoft.com/download/thank-you/dotnet-sdk-2.2.402-windows-x64-installer[Download] 
+* SandCastle Help File Builder (optionnel), https://github.com/EWSoftware/SHFB[site officiel]
+* Siren of Shame (Build monitoring, optionnel) https://www.sirenofshame.com/[Download]
+** Config
+*** Serveur : http://fcistgweb-dev01v.fci.lan:8080/tfs/
+*** Collection : FRED
+
+=== Via les _Extensions and Updates'' de Visual Studio (menu Tools)
+
+* Web Essentials
+* Web Compiler
+* Productivity Power Tools (recommandé)
+** Options :
+*** Solution Errors Visualizer : 
+**** désactiver _Underline items containing messages_
+*** PowerCommands/General : 
+**** Activer _Format document on save_
+**** Activer _Remove and sort Usings on save_
+* Code Review Checkin Policy
+** Pour Visual Studio 2017 :
+https://fayatsas.sharepoint.com/sites/Dev-Team/Documents%20partages/General/bin/ColinsALMCheckinPoliciesInstaller_VS2017.vsix[Lien]
+
+** Pour Visual Studio 2019 :
+https://fayatsas.sharepoint.com/sites/Dev-Team/Documents%20partages/General/bin/ColinsALMCheckinPoliciesInstaller_VS2019.vsix[Lien]
+
+=== Configuration oligatoire de VS
+
+* Tools > options > recherche « Source » : Décocher « Tenter de résoudre les conflits automatiquement »
+* Tools > Options > Text Editor > Javascript/Typescript >Linting, et cochez la case _Enable ESLint''. Les erreurs JS apparaîtront ainsi dans la fenêtre Error List, au même titre que les erreurs et warnings C#.
+* Tools > Options > Text Editor > All Languages > Tab > Cocher _Insert Space_
+
+=== Installation de Sql Server Developer
+
+Télécharger Sql Server Developer 2017 web installer ici : +
+https://www.microsoft.com/fr-fr/sql-server/sql-server-downloads  +
+C’est un web installer. 
+
+. Choisir _Download Media_
+.. Language : Anglais
+.. type : ISO
+. Monter le fichier iso puis lancer setup.exe
+. Cliquer sur Installation / New Sql Server Stand-Alone installation
+.. Cocher _Database Engine Services_ et rien d’autres
+.. Laisser le répertoire par défaut
+.. Cliquer sur Next
+. Dans Instance Configuration, choisir :
+.. Name Instance = FredInstanceDev
+.. Instance ID = *FREDINSTANCEDEV*
+.. Cliquer sur Next 
+. Dans Server Configuration / Service Account, choisir :
+.. Sql Server Agent => Startup Type = Automatic
+.. Sql Server Database Engine => Startup Type = Automatic
+.. Sql Server Brower => Startup Type = Automatic
+. Dans Server Configuration / Collation, choisir :
+.. Cliquer sur Customize, et choisir Latin1_General, et décocher toutes les cases
+.. vous devez obtenir OBLIGATOIREMENT : *_Latin1_General_CI_AI_*
+.. Cliquer sur Next
+. Dans Database Engine Configuration / Server Configuration, choisir :
+.. Mixed Mode 
+.. Mettre le mot de passe suivant (pour l’utilisateur sa) : fredFRED
+.. Cliquer sur _Add Current User_, pour ajouter votre login windows en tant qu’admin
+.. Cliquer sur l’onglet Data Directories
+. Dans Database Engine Configuration / Data Directories, choisir :
+.. Vous pouvez laisser la valeur par défaut de Data root directory
+.. Ou modifier Data root directoy et mettre par exemple D:\SqlServer
+.. Cliquer sur Next
+. Cliquer sur Install
+
+
+WARNING: une erreur d’installation du Database Engine peut survenir avec le message 
+_VS SHELL installation has failed_ .
+Celà peut produire lorsque VS2017 a été installé avant SQL Server Dev. +  
+Pour la résoudre, reportez vous à la réponse dans cette page : https://dba.stackexchange.com/questions/190090/help-installing-sql-server-2017-vs-shell-installation-has-failed-with-exit-cod
+
+
+== Code source
+
+* Connecter VS au tfs suivant http://fcistgweb-dev01v.fci.lan:8080/tfs/
+* Prendre la Collection Fred
+* Synchroniser les sources : 
+** vous pouvez ne prendre que la branche Dev et la derniere branche de prod ** vous pouvez _cloak/masquer_ les autres branches
+* vous *devez* prendre les fichiers suivants à la racine:
+** .editorconfig
+** .tfignore
+
+Il y 4 solutions :
+
+[cols=",",options="header",]
+|===
+|Projet |Solution
+|Fred Web |FredWebSolution.sln
+|Fred IE |Fred.ImportExport.sln
+|Fred Web + IE |*Fred.sln (préférée)*
+|Fred Mobile |Fred.Mobile.sln
+|===
+
+== Fred Web : Init de la base de données
+
+* Pour créer la base :
+** Vérifier les chaines de connexion dans
+*** .Web.Web.config
+*** .ImportExport.ImportExport.Web.config
+*** .ImportExport.ImportExport.Api.config
+** puis soit lancer le projet Fred.Web,
+** ou soit exécuter le tua CreateOrUpdateDatabase
+* Pour créer les données de références, exécuter le script
+** (vérifier la chaine de connexion avant)
+** Fred.Web.Referential_Local.ps1
+
+== Fred IE : Init des bases de données
+
+* Créer une base Fred.Hangfire sur votre instance FredInstanceDev
+* Vérifier les chaines de connexion dans
+** .ImportExport.ImportExport.Web.config
+** .ImportExport.ImportExport.Api.config
+* Lancer Fred IE, il va créer sa propre base Fred.ImportExport
+* Pour créer les données de références, exécuter le script
+Fred.ImportExport.ImportExport.Database_Local.ps1
+
+== Copie des bases des serveurs en local
+
+Les backups des bases de données sont disponibles dans Teams
+https://teams.microsoft.com/_#/files/DBBackups?threadId=19%3A13625f80efba4f35a623bb30197786bb%40thread.skype&ctx=channel[ici.] +
+
+* Télécharger une base 
+* Faire une restauration à l’aide de SSMS 
+* En fonction de la base, jouer les migrations et jouer le référentiel.
+
+== Ajouter ou modifier les éléments de travail TFS en bloc avec Excel
+
+Cet outil n’est à installer que si vous n’avez pas Visual Studio sur
+votre poste.
+
+* Télécharger l’extension excel
+https://www.visualstudio.com/downloads/download-visual-studio-vs[Intégration
+Office® pour Team Foundation Server 2015 Update 2]
+* Naviguer vers le menu Team Foundation Server 2015 >> Intégration
+Office® pour Team Foundation Server 2015
+* Aide d’utilisation sur
+https://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&rd=true&l=FR-FR&k=k(vs.tfc.office.excelworkitems)[msdn]
+
+== Dev AS400/Anael
+
+* Installer le driver qui est sur le sharepoint du projet
+* https://fayatsas.sharepoint.com/sites/FRED860/Documents%20partages/Forms/AllItems.aspx?id=%2Fsites%2FFRED860%2FDocuments%20partages%2F70%2DBascule%2FDocumentations[Lien]
+* Il y a les binaires du drivers et la doc d’installation
+
+== Liste des environnements
+
+La liste complete ainsi que la configuration de tous les environnements
+se trouve ici
+
+____
+http://filibfreddevwbv.fayat.lan:8090/ConfigurationReport.html
+____
+
+== Fichier host si vous utilisez le vpn
+
+[cols=",",options="header",]
+|===
+|Ip |Hostname
+|10.99.12.91 |FILIBFREDDEVWBV
+|10.99.12.92 |FILIBFREDDEVBDV
+|10.99.12.93 |FILIBFREDINTWBV
+|10.99.12.94 |FILIBFREDINTBDV
+|10.99.12.95 |FILIBFREDFORWBV
+|10.99.12.96 |FILIBFREDFORBDV
+|10.99.12.97 |FILIBFREDPREWBV
+|10.99.12.98 |FILIBFREDPREIEV
+|10.99.12.99 |FILIBFREDPREBDV
+|10.122.254.36 |FSIBOPSLDRB.si-boppard.zone
+|10.122.254.38 |FSIBOPSLQRB.si-boppard.zone
+|10.122.254.22 |FSIBOPSLDEV.si-boppard.zone
+|10.122.254.39 |FSIBOPSLPPA.si-boppard.zone
+|===
+
+
+== Faire un commit
+
+Pour faire un commit, vous devez mettre un commentaire explicite ainsi qu’associer un Work Item.
+
+Les commits sont en _gated checkin_ : +
+ce qui veut dire que le code est d’abord compilé sur le serveur TFS. S’il est validé, alors le commit est commité, sinon le commit est rejeté. +
+Une fois le commit passé, vous devez cliquer sur _reconcile_ dans VS
+
+
+== Tips
+
+Mettre les liens suivants en favoris :
+
+* http://filibfreddevwbv.fayat.lan:8090/ConfigurationReport.html
+* http://filibfreddevwbv.fayat.lan:8090/Documentation.html

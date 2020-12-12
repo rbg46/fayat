@@ -1,0 +1,123 @@
+﻿
+<div class="contextUtilisateur contextUtilisateurOpen">
+    <div class="monCompte content">
+        <div class="line headerInfoCompte">
+            <div>
+                <div ng-click="OpenUser = !OpenUser" title="Cliquer pour se déconnecter">
+                    <span class="flaticon flaticon-more-1"></span>
+                </div>
+                <div class="text">
+                    {{::$ctrl.resources.txt_myaccount}}
+                </div>
+            </div>
+        </div>
+
+        <div class="bloc">
+
+            <div class="title1">
+                <span>{{::$ctrl.resources.txt_myaccount}}</span>
+            </div>
+
+            <div class="blocInfoUtilisateur">
+                <div class="divFlex line">
+                    <div class="alignRight logoUtilisateur centrage">
+
+                        <img class="profil-image" ng-src="{{$ctrl.photoProfil}}" />
+                    </div>
+                    <div class="infoUtilisateur centrage">
+                        <div>
+                            <span>
+                                {{::$ctrl.user.Personnel.Nom}}
+                            </span>
+                            <span>{{::$ctrl.user.Personnel.Prenom}}</span>
+                        </div>
+                        <div class="societe">
+                            <span>{{::$ctrl.user.Personnel.Societe.Libelle}}</span>
+                        </div>
+                    </div>
+                    <div class="blocDeconnexion"
+                         ng-click="$ctrl.redirect()"
+                         title="{{::$ctrl.resources.txtdeconnect}}">
+                        <span class="centrage flaticon flaticon-exit"
+                              id="deconnexion-icon"></span>
+                        <span class="deconnexion-label">{{::$ctrl.resources.deconnectword}}</span>
+                    </div>
+                </div>
+
+                <div class="title2 separateur">Mon Profil</div>
+                <div class="row summary">
+
+                    <div class="col-sm-6">
+                        <label class="t2a">Login</label>
+                        <label class="t2b">{{::$ctrl.user.Login}}</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="t2a"> DateDerniereConnexion</label>
+                        <label class="t2b">{{::$ctrl.user.DateDerniereConnexion  | date:'dd/MM/yyyy hh:mm'}}</label>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="t2a">Entité de rattachement</label>
+                        <label class="t2b">{{::$ctrl.user.Personnel.Societe.Libelle}}</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="t2a">Matricule</label>
+                        <label class="t2b">{{::$ctrl.user.Personnel.Matricule}}</label>
+                    </div>
+                    <div class="row summary">
+                        <div class="col-sm-6">
+                            <label class="t2a">Ma ligne directe</label>
+                            <label class="t2b">{{::$ctrl.user.Personnel.Telephone1}}</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="t2a">Mon portable</label>
+                            <label class="t2b">{{::$ctrl.user.Personnel.Telephone2}}</label>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="team-entete" fred-display-handler="$ctrl.userOrganizationId" display="visible" class="title2 separateur">Mes outils</div>
+                <div id="team-entete" fred-display-handler="$ctrl.userOrganizationId" display="visible" class="row summary myTools">
+                    <a href="/Personnel/Personnel/Equipe" title="Cliquer ici pour gérer son équipe favorite">
+                        {{::$ctrl.resources.Title_Gerer_Equipe}}
+                        <span class="saps sapicon-E064"></span>
+                    </a>
+                </div>
+                <div class="row summary myTools" ng-show="$ctrl.utilisateurRole.Role.Code != 'RCI' && $ctrl.utilisateurRole.Role.Code != 'DCI' && $ctrl.utilisateur.Personnel.Societe.SocieteId == 1">
+                    <a href="" ng-click="$ctrl.GetRightPersonnelManagement()" title="Cliquer ici pour gérer ses délégations pendant ses absences">
+                        Gestion des délégations
+                        <span class="saps sapicon-E149"></span>
+                    </a>
+                </div>
+                <div class="title2 separateur" id="user-panel-support" fred-display-handler="$ctrl.userOrganizationId" display="hidden" >Support</div>
+                <div class="row summary" id="user-panel-support" fred-display-handler="$ctrl.userOrganizationId" display="hidden">
+                    <span class="t2b">Pour contacter le support Fayat It, envoyer un mail à l'adresse <a href="mailto:support.FRED@fayatit.fayat.com" target="_top">support.FRED@fayatit.fayat.com</a></span>
+                    <span class="t2b">Indiquer le numéro de version suivant : &#60; {{$ctrl.version}} &#62;</span>
+                </div>
+                <div class="row summary">
+
+                    <div class="col-sm-6">
+                        <label class="t2a">Barre de navigation</label>
+                    </div>
+                    <div class="col-sm-6">
+
+                        <label class="t2b">
+
+                            <fred-button class="primary" ng-click="$ctrl.handleChangeModeMenu()">
+                                <span ng-show="$ctrl.ModeMenu=='modern'">Afficher</span>
+                                <span ng-show="$ctrl.ModeMenu=='classic'">Masquer</span>
+                            </fred-button>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="line bloc-bas" ng-click="$ctrl.closePanel()">
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    <span class="close_it">{{::$ctrl.resources.Close_Panel}}</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

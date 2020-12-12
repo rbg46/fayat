@@ -1,0 +1,34 @@
+﻿<div class="panel-body">
+  <div class="panel panel-default">
+    <div class="panel-heading level3">
+      <table class="t_third">
+        <tr>
+          <td>
+            <a ng-show="$ctrl.societe.children"
+               class="accordion-toggle"
+               data-toggle="collapse"
+               data-target="#sub{{$ctrl.societe.OrganisationId}}">
+              <span class="material-icons">chevron_right</span>
+            </a>
+           <span class="amalgam" ng-show="!$ctrl.societe.children"></span>
+            <input id="chkActif_{{$ctrl.societe.OrganisationId}}"
+                   ng-model="$ctrl.societe.IsEnable"                   
+                   type="checkbox" />
+            <label for="chkActif_{{$ctrl.societe.OrganisationId}}"><span></span>{{$ctrl.societe.Libelle}}</label>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="sub{{$ctrl.societe.OrganisationId}}"
+          class="panel-collapse collapse in">
+
+      <child-societe-component ng-repeat="child in $ctrl.societe.children | orderBy:'Libelle'"
+                               libelle="child.Libelle"
+                               Type-organisation-id="child.TypeOrganisationId">
+
+      </child-societe-component>
+
+    </div>
+  </div>
+</div>

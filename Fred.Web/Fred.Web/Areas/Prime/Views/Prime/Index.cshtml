@@ -1,0 +1,280 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeaturePrime.Prime_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/PrimeIndexBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/PrimeIndexBundle.js")
+    @this.RenderResources("FeaturePrime")
+}
+
+<div class="container" ng-controller="PrimeController" ng-init="init()">
+
+    <div class="toleft" id="PanelMain">
+
+        <!--Titre de la page : START-->
+        <h1>{{resources.Prime_PanelMain_Titre}}</h1>
+        <!--Titre de la page : START-->
+
+        <div class="row">
+            <!--BEGIN : Picklist Societe -->
+            <div class="col-md-5">
+                <label class="infoFilter">{{resources.Global_SelectionnerSociete}}</label>
+                <div class="filter">
+                    <div class="inner-addon right-addon">
+                        <i class="chev material-icons">chevron_right</i>
+                        <lookup ng-model="societe"
+                                search-placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+                                search-title="{{resources.Global_ReferentielSociete}}"
+                                on-select="loadData()"
+                                url="/api/Societe/SearchLightForRoles?{{typeSocieteCodesParams}}">
+                            <input type="text"
+                                   class="form-control"
+                                   ng-value="societe.CodeLibelle"
+                                   placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+                                   title="{{societe.CodeLibelle}}" />
+                        </lookup>
+                    </div>
+                </div>
+            </div>
+            <!--END : Picklist Societe -->
+            <!--BEGIN : Recherche -->
+            <div class="col-md-5" ng-if="societeId != undefined">
+                <label class="infoFilter">{{resources.Global_RechercheAffiner}}</label>
+                <div class="filter">
+                    <div class="input-group">
+                        <input class="form-control txt" type="text" id="txtRecherche"
+                               name="Recherche"
+                               placeholder="{{resources.Prime_PanelMain_Recherche_Placeholder}}"
+                               ng-model="recherche"
+                               ng-model-options="{ debounce: 500 }"
+                               ng-change="handleSearch(recherche)" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary y_search"
+                                    title="{{resources.Global_RechercheAffiner_Tooltip}}"
+                                    type="button"
+                                    ng-click="handleSearch(recherche)">
+                                <i class="material-icons">search</i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--END : Recherche -->
+            <!--BEGIN : Bouton pour ajouter Items -->
+            <div class="col-md-2 add-search" ng-if="societeId != undefined">
+                <span class="pull-right">
+                    <label class="infoFilter">{{resources.Global_Ajouter}}</label>
+                    <i class="flaticon flaticon-add  icoplus " title="{{resources.Global_Bouton_AjouterReference_Tooltip}}" ng-click="handleClickCreateNew()"></i>
+                </span>
+            </div>
+            <!--END : Bouton pour ajouter Items -->
+        </div>
+
+        <!--LISTE : START-->
+        <div class="row results" id="Table" ng-if="societe != undefined">
+            <div class="col-md-12 refs-list">
+                <div ng-repeat="item in items">
+                    <div class="row line" ng-click="handleSelect(item)">
+                        <div class="col-md-2">
+                            <span class="t1">{{item.Code}}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="lb">{{resources.Prime_PanelMain_Table_Libelle}}</div>
+                            <span class="t2">{{item.Libelle}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="lb">{{resources.Prime_PanelMain_Table_Type}}</div>
+                            <div class="val ng-binding">
+                                <span ng-if="IsPrimeHoraire(item)">{{resources.Prime_PanelMain_Table_Horaire}}</span>
+                                <span ng-if="IsPrimeJournaliere(item)">{{resources.Prime_PanelMain_Table_Journalier}}</span>
+                                <span ng-if="IsPrimeMensuelle(item)">{{resources.Prime_PrimeModel_Mensuelle}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="bdg actif" ng-if="item.Publique">{{resources.Global_Public}}</span>
+                            <span class="bdg inactif" ng-if="!item.Publique">{{resources.Global_Prive}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="bdg actif" ng-if="item.Actif">{{resources.Global_Actif}}</span>
+                            <span class="bdg inactif" ng-if="!item.Actif">{{resources.Global_Inactif}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--LISTE : END-->
+
+    </div>
+
+
+    <div ng-class="checkDisplayOptions"
+         class="blockScreen"
+         style="z-index:99"></div>
+    <div class="options"
+         id="PanelRight"
+         ng-class="checkDisplayOptions + ' ' + checkFormatOptions">
+
+        <!-- HEADER TOOLBAR : BEGIN -->
+        <div class="toolbar"
+             ng-class="{'is-already-used':isAlreadyUsed}">
+            <span class="material-icons grandicone">done_all</span>
+        </div>
+        <span ng-show="isAlreadyUsed" class="is-already-used-text">{{resources.Global_Item_Already_Used}}</span>
+        <!-- HEADER TOOLBAR : END -->
+        <!-- Titre : BEGIN -->
+        <div class="form-header" id="Titre">
+            <h2>
+                <span ng-if="prime.PrimeId == 0">{{resources.Prime_PanelMain_Titre_Ajouter}}</span>
+                <span ng-if="prime.PrimeId != 0">{{resources.Prime_PanelMain_Titre_Modifier}}</span>
+            </h2>
+            <label class="legend">{{resources.Global_LegendeAsterisque}}</label>
+        </div>
+        <!-- Titre : END -->
+
+        <div class="form  fred-scroll">
+            <!--Formulaire: START-->
+            <form name="formPrime" autocomplete="off" novalidate>
+                <!--FIELD Active: START-->
+                <div class="col-md-offset-8 chb_r">
+                    <input id="chkActif" type="checkbox" ng-model="prime.Actif" />
+                    <label for="chkActif"><span></span>{{resources.Global_Actif}}</label>
+                </div>
+                <!--FIELD Active: END-->
+                <!--FIELD Code: START-->
+                <div class="form-group" ng-class="{ 'has-error' : ( formPrime.Code.$invalid && formPrime.$submitted) || formPrime.Code.$error.exist || formPrime.Code.$error.pattern}">
+                    <label for="txtCode">{{resources.Prime_PanelRight_Code}} *</label>
+                    <span class="text-danger" ng-show="formPrime.Code.$error.required && formPrime.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <span class="text-danger" ng-show="formPrime.Code.$error.exist">{{resources.Global_Control_Code_ExistInSociete_Erreur}}</span>
+                    <span class="text-danger" ng-show="formPrime.Code.$error.pattern">{{resources.Global_Control_Code_FormatAlphanumeric_Erreur}}</span>
+                    <input class="form-control" ng-pattern='/^[a-zA-Z0-9]+$/' type="text" maxlength="10" id="txtCode" name="Code" ng-change="handleChangeCode(formPrime)" required placeholder="{{resources.Prime_PanelRight_Code_Placeholder}}" ng-model="prime.Code" />
+                </div>
+                <!--FIELD Code: END-->
+                <!--FIELD Libelle: START-->
+                <div class="form-group" ng-class="{ 'has-error' :  formPrime.Libelle.$invalid && formPrime.$submitted}">
+                    <label for="txtLibelle">{{resources.Prime_PanelRight_Libelle}} *</label>
+                    <span class="text-danger" ng-show="formPrime.Libelle.$invalid && formPrime.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <input class="form-control" type="text" id="txtLibelle" name="Libelle" required placeholder="{{resources.Prime_PanelRight_Libelle_Placeholder}}" ng-model="prime.Libelle" maxlength="500" />
+                </div>
+                <!--FIELD Libelle: END-->
+                <!--FIELD Publique: START-->
+                <div>
+                    <input id="chkPubliqueFor" type="checkbox" ng-model="prime.Publique" ng-disabled="IsPrimeMensuelle(prime)" />
+                    <label for="chkPubliqueFor"><span></span>{{resources.Global_Public}}</label>
+                    <br />
+                    <br />
+                </div>
+                <!--FIELD Publique: END-->
+                <!--FIELD Type Horaire: START-->
+                <div class="form-group">
+                    <div class="col-md-12 no_padding_left">
+                        <div class="col-md-5 no_padding_left rd_l" id="Prime-Select-Type" fred-display-handler="userOrganizationId" display="hidden">
+                            <input type="radio" name="rbtnTypeJournalier" ng-model="prime.PrimeType" id="rbtnTypeJournalier" ng-checked="IsPrimeJournaliere(prime)" ng-click="prime.NombreHeuresMax = null" ng-value="0"><label for="rbtnTypeJournalier"><span></span>{{resources.Prime_PanelRight_Journalier}}</label>
+                            <input type="radio" name="rbtnTypeHoraire" ng-model="prime.PrimeType" id="rbtnTypeHoraire" ng-checked="IsPrimeHoraire(prime)" ng-value="1"><label for="rbtnTypeHoraire"><span></span>{{resources.Prime_PanelRight_Horaire}}</label>
+                            <input type="radio" name="rbtnTypeMensuelle" ng-model="prime.PrimeType" id="rbtnTypeMensuelle" ng-checked="IsPrimeMensuelle(prime)" ng-click="prime.NombreHeuresMax = null; prime.SeuilMensuel = 200" ng-value="2"><label for="rbtnTypeMensuelle"><span></span>{{resources.Prime_PrimeModel_Mensuelle}}</label>
+                        </div>
+                        <!--FIELD IsOuvrier IsETAM IsCadre: START-->
+                        <div ng-if="isUserFes">
+                            <input id="chkIsOuvrier"
+                                   type="checkbox"
+                                   ng-model="prime.IsOuvrier" />
+                            <label for="chkIsOuvrier"><span></span>{{resources.IsOuvrier_lb}}</label>
+                            <input id="chkIsETAM"
+                                   type="checkbox"
+                                   ng-model="prime.IsETAM" />
+                            <label for="chkIsETAM"><span></span>{{resources.IsETAM_lb}}</label>
+                            <input id="chkIsCadre"
+                                   type="checkbox"
+                                   ng-model="prime.IsCadre" />
+                            <label for="chkIsCadre"><span></span>{{resources.IsCadre_lb}}</label>
+                        </div>
+                        <!--FIELD IsOuvrier IsETAM IsCadre: END-->
+                        <!--FIELD NombreHeuresMax: START-->
+                        <div class="col-md-7 rd_l" ng-class="{ 'has-error' : (formPrime.NombreHeuresMax.$invalid && formPrime.$submitted) || formPrime.Code.$error.pattern}" ng-show="IsPrimeHoraire(prime)">
+                            <label for="txtNombreHeuresMax">{{resources.Prime_PanelRight_NbrHeuresMax}} *</label>
+                            <span class="text-danger" ng-show="formPrime.NombreHeuresMax.$error.required && formPrime.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                            <span class="text-danger" ng-show="(formPrime.NombreHeuresMax.$error.min || formPrime.NombreHeuresMax.$error.max) && formPrime.$submitted">{{resources.Prime_PanelRight_NbrHeuresMax_Plage_Erreur}}</span>
+                            <span class="text-danger" ng-show="formPrime.NombreHeuresMax.$error.number && formPrime.$submitted">{{resources.Prime_PanelRight_NbrHeuresMax_FormatNumeric_Erreur}}</span>
+                            <input class="form-control"
+                                   type="text"
+                                   fred-input-number="1"
+                                   id="txtNombreHeuresMax"
+                                   name="NombreHeuresMax"
+                                   ng-required="IsPrimeHoraire(prime)"
+                                   placeholder="{{resources.Prime_PanelRight_NbrHeuresMax_Placeholder}}"
+                                   ng-model="prime.NombreHeuresMax"
+                                   min="0"
+                                   max="12" />
+                        </div>
+                        <!--FIELD NombreHeuresMax: END-->
+                        <!--FIELD SeuilMensuel: START-->
+                        <div class="col-md-7 rd_l" ng-class="{ 'has-error' : (formPrime.SeuilMensuel.$invalid && formPrime.$submitted) || formPrime.Code.$error.pattern}" ng-show="IsPrimeMensuelle(prime)">
+                            <label for="txtSeuilMensuel">{{resources.Prime_PanelRight_SeuilMensuel}} *</label>
+                            <span class="text-danger" ng-show="formPrime.SeuilMensuel.$error.required && formPrime.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                            <span class="text-danger" ng-show="formPrime.SeuilMensuel.$error.min && formPrime.$submitted">{{resources.Prime_PanelRight_SeuilMensuel_Min_Erreur}}</span>
+                            <span class="text-danger" ng-show="formPrime.SeuilMensuel.$error.number && formPrime.$submitted">{{resources.Prime_PanelRight_SeuilMensuel_FormatNumeric_Erreur}}</span>
+                            <input class="form-control"
+                                   type="text"
+                                   fred-input-number="2"
+                                   id="txtSeuilMensuel"
+                                   name="SeuilMensuel"
+                                   ng-required="IsPrimeMensuelle(prime)"
+                                   placeholder="200"
+                                   ng-model="prime.SeuilMensuel"
+                                   min="0" />
+                        </div>
+                        <!--FIELD SeuilMensuel: END-->
+                    </div>
+                </div>
+                <!--FIELD Type Horaire: END-->
+                <!--FOOTER TOOLBAR : BEGIN -->
+                <div class="footer">
+                    <div class="buttons">
+                        <button class="btn btn-default"
+                                type="submit"
+                                ng-disabled="isBusy"
+                                ng-click="handleClickAddOrUpdate();"
+                                title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">
+                            {{resources.Global_Bouton_Enregistrer}}
+                        </button>
+                        <button class="btn btn-primary"
+                                type="submit"
+                                ng-disabled="isBusy"
+                                ng-click="handleClickAddOrUpdateAndNew();"
+                                title="{{resources.Global_Bouton_EnregistrerEtNouveau_Tooltip}}">
+                            {{resources.Global_Bouton_EnregistrerEtNouveau}}
+                        </button>
+                        <button ng-hide="prime.PrimeId==0"
+                                class="btn"
+                                type="submit"
+                                ng-click="handleClickDelete(prime);"
+                                title="{{resources.Global_Bouton_Supprimer_Tooltip}}">
+                            {{resources.Global_Bouton_Supprimer}}
+                        </button>
+                        <button class="btn btn-link"
+                                type="submit"
+                                ng-click="handleClickCancel();"
+                                title="{{resources.Global_Bouton_Annuler_Tooltip}}">
+                            {{resources.Global_Bouton_Annuler}}
+                        </button>
+                    </div>
+                    <div class="close_panel" ng-click="handleClickCancel();"
+                         title="{{resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        <span>{{resources.Global_Bouton_RefermerPanneau}}</span>
+                    </div>
+                </div>
+                <!--FOOTER TOOLBAR : END-->
+
+            </form>
+            <!--Formulaire: END-->
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,289 @@
+﻿$white: #fff;
+$pink: rgb(255,0,102);
+$grey1: rgb(127,127,127);
+$grey2: #ddd;
+$grey3: #fcfcfc;
+$blue1: rgb(0, 82, 160);
+$blue2: #bdd7ee;
+$blue3: #097da0;
+$blue4: #78C1DD;
+$blue5: #2c77ba;
+
+.ValidationAffairesOuvriers {
+
+    fred-toolbar {
+
+        .btn {
+            font-size: 11px;
+            margin-top: 0;
+            height: 30px;
+        }
+
+        .date-section {
+            width: 20%;
+
+            .cl {
+                font-size: 35px;
+                width: 25px;
+                height: 25px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-right: 15px;
+                color: $grey1;
+                cursor: pointer;
+            }
+
+            .cr {
+                font-size: 35px;
+                width: 25px;
+                height: 25px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: 15px;
+                color: $grey1;
+                cursor: pointer;
+            }
+
+            .label_date_text {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 90%;
+                font-size: 12px;
+                height: 25px !important;
+                margin: 0;
+                float: none;
+            }
+        }
+
+        .action-section {
+            margin-left: auto;
+
+            .btn-validate {
+                background-color: $pink;
+                color: $white;
+            }
+        }
+    }
+
+    .my-biz-bloc {
+        width: 100%;
+
+        .my-biz-table {
+            width: 100%;
+
+            thead {
+                display: table;
+                table-layout: fixed;
+                width: 100%;
+
+                &.header1 {
+                    background-color: $blue2;
+                    color: $blue1;
+                    font-size: 11px;
+                    height: 40px;
+
+                    .col1 {
+                        width: 3%;
+                        background-color: $blue2;
+
+                        &.sel-all {
+                            text-align: center;
+                        }
+                    }
+
+                    .col2 {
+                        width: 10%;
+                    }
+
+                    .col3 {
+                        width: 87%;
+                        background-color: $white;
+                    }
+                }
+
+                &.header2 {
+                    background-color: $blue1;
+                    color: $white;
+                    font-size: 11px;
+                    height: 40px;
+
+                    th {
+                        height: 40px;
+                        text-align: center;
+                    }
+
+                    .col1 {
+                        width: 3%;
+                    }
+
+                    .col2 {
+                        width: 7%;
+                    }
+
+                    .col3 {
+                        width: 10%;
+                    }
+
+                    .col4 {
+                        width: 30%;
+                    }
+
+                    .col5 {
+                        width: 10%;
+                    }
+
+                    .col6 {
+                        width: 5%;
+                    }
+
+                    .col7 {
+                        width: 5%;
+                    }
+
+                    .col8 {
+                        width: 5%;
+                    }
+
+                    .col9 {
+                        width: 5%;
+                    }
+
+                    .col10 {
+                        width: 5%;
+                    }
+
+                    .col11 {
+                        width: 15%;
+                    }
+                }
+            }
+
+            tbody {
+                display: block;
+                height: calc(100vh - 355px);
+
+                tr {
+                    display: table;
+                    width: 100%;
+                    table-layout: fixed;
+                    border-top: 1px solid $grey2;
+
+                    td {
+                        font-size: 11px;
+                        height: 30px;
+                        text-align: center;
+                    }
+
+                    .col1 {
+                        width: 3%;
+                    }
+
+                    .col2 {
+                        width: 7%;
+
+                        .sap-biz {
+                            color: $blue1;
+                            font-size: 14px;
+                            margin-right: 5px;
+
+                            &.eye {
+                                color: $blue4;
+                            }
+                        }
+                    }
+
+                    .col3 {
+                        width: 10%;
+                    }
+
+                    .col4 {
+                        width: 30%;
+                    }
+
+                    .col5 {
+                        width: 10%;
+                        font-weight: 700;
+                    }
+
+                    .col6 {
+                        width: 5%;
+                    }
+
+                    .col7 {
+                        width: 5%;
+                    }
+
+                    .col8 {
+                        width: 5%;
+                    }
+
+                    .col9 {
+                        width: 5%;
+                    }
+
+                    .col10 {
+                        width: 5%;
+                    }
+
+                    .col11 {
+                        width: 15%;
+
+                        .btn-tile {
+                            background-color: $blue3;
+                            color: #fff;
+                            margin: 5px;
+                            font-size: 11px;
+                            height: 24px;
+                            width: 90px;
+                            border: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    input[type="checkbox"] {
+        display: none;
+
+        & + label {
+            font-size: 14px;
+            margin-bottom: 0;
+
+            span {
+                display: inline-block;
+                width: 19px;
+                height: 19px;
+                margin: -1px 4px 0 0;
+                vertical-align: middle;
+                cursor: pointer;
+                -moz-border-radius: 20%;
+                border-radius: 20%;
+                background-color: $grey3;
+                border: 3px $blue4 solid;
+                -webkit-transition: background-color 0.4s linear;
+                -o-transition: background-color 0.4s linear;
+                -moz-transition: background-color 0.4s linear;
+                transition: background-color 0.4s linear;
+            }
+        }
+
+        &:checked {
+            & + label {
+                span {
+                    border: 3px $blue5 solid;
+                    background-image: url('/medias/images/ico/checked.png');
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    -webkit-transition: background-color 0.4s linear;
+                    -o-transition: background-color 0.4s linear;
+                    -moz-transition: background-color 0.4s linear;
+                    transition: background-color 0.4s linear;
+                }
+            }
+        }
+    }
+}

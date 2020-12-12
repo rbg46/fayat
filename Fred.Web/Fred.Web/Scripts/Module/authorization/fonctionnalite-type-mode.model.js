@@ -1,0 +1,7 @@
+﻿
+var FONCTIONNALITE_TYPE_MODE = {
+  UNAFFECTED: 0,
+  READ: 1,
+  WRITE:2
+};
+

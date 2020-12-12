@@ -1,0 +1,91 @@
+﻿/************************** Common style **************************/
+.fred-table-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+    .fred-table-header .fred-table-header-icon .arrow-up,
+    .fred-table-header .fred-table-header-icon .arrow-down {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+    }
+
+    .fred-table-header .fred-table-header-icon .arrow-up {
+        margin-bottom: 1px;
+    }
+
+    .fred-table-header .fred-table-header-icon .arrow-down {
+        margin-top: 1px;
+    }
+
+    .fred-table-header .fred-table-header-label {
+        margin-left: 5px;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    /************************** BLUE background color **************************/
+    .fred-table-header.blue .fred-table-header-icon .arrow-up {
+        border-bottom: 9px solid rgba(255,255,255, 0.5);
+    }
+
+    .fred-table-header.blue .fred-table-header-icon .arrow-down {
+        border-top: 9px solid rgba(255,255,255, 0.5);
+    }
+
+    .fred-table-header.blue .fred-table-header-label {
+        color: #fff;
+    }
+
+    .fred-table-header.blue .fred-table-header-icon .arrow-down.active {
+        border-top: 9px solid #fff;
+    }
+
+    .fred-table-header.blue .fred-table-header-icon .arrow-up.active {
+        border-bottom: 9px solid #fff;
+    }
+
+    /************************** WHITE background color **************************/
+    .fred-table-header.white .fred-table-header-icon .arrow-up {
+        border-bottom: 9px solid rgba(0, 82, 160, 0.25);
+    }
+
+    .fred-table-header.white .fred-table-header-icon .arrow-down {
+        border-top: 9px solid rgba(0, 82, 160, 0.25);
+    }
+
+    .fred-table-header.white .fred-table-header-label {
+        color: rgb(0, 82, 160);
+    }
+
+    .fred-table-header.white .fred-table-header-icon .arrow-down.active {
+        border-top: 9px solid rgb(0, 82, 160);
+    }
+
+    .fred-table-header.white .fred-table-header-icon .arrow-up.active {
+        border-bottom: 9px solid rgb(0, 82, 160);
+    }
+
+    /************************** Other background color (Default) **************************/
+    .fred-table-header .fred-table-header-icon .arrow-up {
+        border-bottom: 9px solid rgba(255,255,255, 0.5);
+    }
+
+    .fred-table-header .fred-table-header-icon .arrow-down {
+        border-top: 9px solid rgba(255,255,255, 0.5);
+    }
+
+    .fred-table-header .fred-table-header-label {
+        color: #000;
+    }
+
+    .fred-table-header .fred-table-header-icon .arrow-down.active {
+        border-top: 9px solid rgb(0, 82, 160);
+    }
+
+    .fred-table-header .fred-table-header-icon .arrow-up.active {
+        border-bottom: 9px solid rgb(0, 82, 160);
+    }

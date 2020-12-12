@@ -1,0 +1,226 @@
+﻿$color_1: #fff;
+$color_2: rgb(0,85,160);
+$background_color_1: rgb(0,85,160);
+$background_color_2: #fff;
+
+
+.home-page-content {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
+
+    .col {
+        height: 90%;
+
+        .bloc {
+            width: 95px;
+            height: 95px;
+            margin-bottom: 10px;
+
+            &:hover {
+                box-shadow: 3px 3px 5px grey;
+            }
+
+            a {
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+
+            .bloc-icon {
+                text-align: center;
+                height: 30px;
+
+                .icon {
+                    font-size: 30px;
+                }
+
+                .icon.star {
+                    font-size: 45px;
+                }
+            }
+
+            .bloc-lbl {
+                text-align: center;
+                font-size: 13px;
+                height: 65%;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+            }
+        }
+
+        .bloc.mod {
+            a {
+                color: $color_1;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-flow: column;
+                align-items: center;
+            }
+
+            background-color: $background_color_1;
+            color: $color_1;
+            border: 1px solid #fff;
+        }
+
+        .bloc.entFonc {
+            background-color: $background_color_2;
+            color: $color_2;
+            border: 1px solid #fff;
+
+            a {
+                &:hover {
+                    color: $color_2;
+                }
+            }
+        }
+
+        .bloc.entFonc.lg {
+            word-break: break-all;
+
+            .bloc-lbl {
+                text-align: left;
+            }
+        }
+    }
+
+    .col.fav {
+        .bloc.mod {
+            background-color: $background_color_1;
+            color: $color_1;
+            border: 1px solid #fff;
+
+            .lbl {
+                color: $color_1;
+            }
+
+            .bloc-lbl {
+                color: $color_1;
+            }
+        }
+
+        .bloc {
+            background-color: $background_color_2;
+
+            .bloc-lbl {
+                color: $color_2;
+            }
+        }
+
+        .bloc.favoris-delete {
+            .delete {
+                margin: 3px;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.home-page-content.h {
+    padding-top: 0;
+}
+
+fred-menu-home.padd-top {
+    .home-page-content {
+        padding-top: 100px;
+        height: 100vh;
+        overflow-y: auto;
+
+        .col {
+            .bloc {
+                width: 88px;
+                height: 88px;
+            }
+
+            .bloc.mod {
+                &:hover {
+                    box-shadow: none;
+                }
+            }
+        }
+    }
+}
+
+.indexWindow {
+    z-index: 1201 !important;
+}
+
+.indexBackdrop {
+    z-index: 1200 !important;
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+    .home-page-content {
+        .col {
+            .bloc {
+                width: 73px;
+                height: 73px;
+
+                .bloc-icon {
+                    height: 22px;
+
+                    .icon {
+                        font-size: 15px;
+                    }
+
+                    .icon.star {
+                        font-size: 30px;
+                    }
+                }
+
+                .bloc-lbl {
+                    margin-top: 2px;
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+
+    fred-menu-home.padd-top {
+        .home-page-content {
+            padding-top: 55px;
+
+            .col {
+                .bloc {
+                    width: 55px;
+                    height: 55px;
+
+                    .bloc-lbl {
+                        margin-top: -3px;
+                        font-size: 8px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:1600px) and (max-height:900px) {
+    .home-page-content {
+        .col {
+            .bloc {
+                width: 73px;
+                height: 73px;
+
+                .bloc-icon {
+                    height: 22px;
+
+                    .icon {
+                        font-size: 15px;
+                    }
+
+                    .icon.star {
+                        font-size: 30px;
+                    }
+                }
+
+                .bloc-lbl {
+                    margin-top: 2px;
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+}

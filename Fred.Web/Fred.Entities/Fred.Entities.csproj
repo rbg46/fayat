@@ -1,0 +1,535 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D84768F7-F096-4E6D-997E-AC1D9232B47A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fred.Entities</RootNamespace>
+    <AssemblyName>Fred.Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Fred.Entities.XML</DocumentationFile>
+    <CodeAnalysisRuleSet>Fred.Entities.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Fred.Entities.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'SpeedDebug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\SpeedDebug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin\Debug\Fred.Entities.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>Fred.Entities.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="LinqKit.Core, Version=1.1.16.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LinqKit.Core.1.1.16\lib\net45\LinqKit.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NLog.4.6.7\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Collections.Immutable.1.5.0\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Achat\Calculation\Reception\DepenseAchatMontantHtModel.cs" />
+    <Compile Include="Achat\Calculation\Reception\ReceptionMontantFactureHorsEcartAndAvoirModel.cs" />
+    <Compile Include="Action\ActionStatusEnt.cs" />
+    <Compile Include="Action\ActionTypeEnt.cs" />
+    <Compile Include="Action\ActionJobEnt.cs" />
+    <Compile Include="Action\ActionEnt.cs" />
+    <Compile Include="Achat\Calculation\Commande\CommandeMontantHtModel.cs" />
+    <Compile Include="Achat\Calculation\Reception\ReceptionSoldeFarModel.cs" />
+    <Compile Include="ActivitySummary\ActivityRequestWithCountResult.cs" />
+    <Compile Include="ActivitySummary\ActivityRequestWithDateResult.cs" />
+    <Compile Include="ActivitySummary\ActivitySummaryResult.cs" />
+    <Compile Include="ActivitySummary\ColorActivity.cs" />
+    <Compile Include="ActivitySummary\ColorJalon.cs" />
+    <Compile Include="ActivitySummary\EmailGenerationResult.cs" />
+    <Compile Include="ActivitySummary\PersonnelInfoForSendEmailResult.cs" />
+    <Compile Include="ActivitySummary\TypeActivity.cs" />
+    <Compile Include="ActivitySummary\TypeJalon.cs" />
+    <Compile Include="ActivitySummary\UserActivitySummary.cs" />
+    <Compile Include="ActivitySummary\UserJalonSummary.cs" />
+    <Compile Include="Adresse\AdresseEnt.cs" />
+    <Compile Include="Avis\AvisCommandeAvenantEnt.cs" />
+    <Compile Include="Avis\AvisCommandeEnt.cs" />
+    <Compile Include="Avis\AvisEnt.cs" />
+    <Compile Include="Bareme\Models\ExportBaremeCiExcelModel.cs" />
+    <Compile Include="Bareme\Models\ExportBaremeOrganisationExcelModel.cs" />
+    <Compile Include="Bareme\Search\SearchBaremeExploitationCIEnt.cs" />
+    <Compile Include="Bareme\Search\SearchBaremeExploitationOrganisationEnt.cs" />
+    <Compile Include="Budget\Avancement\AvancementTacheEnt.cs" />
+    <Compile Include="Budget\BudgetBibliothequePrixEnt.cs" />
+    <Compile Include="Budget\BudgetBibliothequePrixItemEnt.cs" />
+    <Compile Include="Budget\BudgetBibliothequePrixItemValuesHistoEnt.cs" />
+    <Compile Include="Budget\BudgetCopyHistoEnt.cs" />
+    <Compile Include="Budget\Dao\BudgetComparaison\Comparaison\AxeInfoDao.cs" />
+    <Compile Include="Budget\Dao\BudgetComparaison\Comparaison\BudgetRevisionDao.cs" />
+    <Compile Include="Budget\Dao\BudgetComparaison\Comparaison\DeviseDao.cs" />
+    <Compile Include="Budget\Dao\BudgetComparaison\Comparaison\SousDetailDao.cs" />
+    <Compile Include="Budget\Dao\BudgetComparaison\Comparaison\UniteDao.cs" />
+    <Compile Include="Budget\Dao\BudgetComparaison\ExcelExport\BudgetRevisionDao.cs" />
+    <Compile Include="Budget\Dao\BudgetComparaison\ExcelExport\BudgetsRevisionsDao.cs" />
+    <Compile Include="Budget\Dao\Budget\ExcelExport\PersonnelDao.cs" />
+    <Compile Include="Budget\Dao\CodeLibelleDao.cs" />
+    <Compile Include="Budget\Search\SearchAvancementEnt.cs" />
+    <Compile Include="Budget\Recette\AvancementRecetteEnt.cs" />
+    <Compile Include="Budget\Recette\BudgetRecetteEnt.cs" />
+    <Compile Include="Budget\Recette\TacheRecetteEnt.cs" />
+    <Compile Include="Budget\Search\SearchBibliothequePrixEnt.cs" />
+    <Compile Include="Budget\Search\SearchControleBudgetaireEnt.cs" />
+    <Compile Include="Budget\Search\SearchControleBudgetaireFilterEnt.cs" />
+    <Compile Include="Budget\Search\SearchDetailBudgetEnt.cs" />
+    <Compile Include="Budget\Search\SearchListeBudgetEnt.cs" />
+    <Compile Include="Budget\TacheRecalageParameter.cs" />
+    <Compile Include="CI\CiForMoyenAffectationsRolesFiltersEnt.cs" />
+    <Compile Include="CI\CILightEnt.cs" />
+    <Compile Include="CloturesPeriodes\CiDateClotureComptableDto.cs" />
+    <Compile Include="CloturesPeriodes\CiDateClotureComptableNavigableEnt.cs" />
+    <Compile Include="CloturesPeriodes\PlageCisDatesClotureComptableDto.cs" />
+    <Compile Include="CloturesPeriodes\SearchCloturesPeriodesForCiEnt.cs" />
+    <Compile Include="CloturesPeriodes\SocieteDto.cs" />
+    <Compile Include="Commande\ActionCommandeLigneEnt.cs" />
+    <Compile Include="Commande\CommandeAvenantEnt.cs" />
+    <Compile Include="Commande\CommandeContratInterimaireEnt.cs" />
+    <Compile Include="Commande\CommandeLigneAvenantEnt.cs" />
+    <Compile Include="Achat\Calculation\Commande\CommandeMontantHTReceptionneModel.cs" />
+    <Compile Include="Commande\CommandeLigneWithReceptionQuantiteModel.cs" />
+    <Compile Include="Commande\ReceptionQuantiteModel.cs" />
+    <Compile Include="Commande\SearchCommandeReceptionEnt.cs" />
+    <Compile Include="Commande\SearchReceivableOrdersFilter.cs" />
+    <Compile Include="Common\CommonSearchExpression\SearchExpression.cs" />
+    <Compile Include="CompteExploitation\SearchCompteExploitationEditionEnt.cs" />
+    <Compile Include="CommandeLigne\QuantiteNegative\CommandeLigneQuantiteNegativeModel.cs" />
+    <Compile Include="DatesClotureComptable\CiDateOuvertureDateFermeture.cs" />
+    <Compile Include="DatesClotureComptable\CiDernierePeriodeComptableNonCloturee.cs" />
+    <Compile Include="Depense\RemplacementTacheOriginInformationModel.cs" />
+    <Compile Include="FonctionnaliteConstantes.cs" />
+    <Compile Include="Depense\GroupeRemplacementTacheEnt.cs" />
+    <Compile Include="Depense\HasAnyReceptionAlreadyViseeResultModel.cs" />
+    <Compile Include="OperationDiverse\ParametrageFamilleOperationDiverseModel.cs" />
+    <Compile Include="Personnel\Import\PersonnelModel.cs" />
+    <Compile Include="Rapport\LockRapportResponse.cs" />
+    <Compile Include="Reception\QuantiteNegative\ReceptionQuantiteModel.cs" />
+    <Compile Include="Depense\RemplacementTacheEnt.cs" />
+    <Compile Include="EcritureComptable\EcritureComptableRetreiveResult.cs" />
+    <Compile Include="EcritureComptable\EcritureComptableFtpDto.cs" />
+    <Compile Include="EcritureComptable\EcritureComptableRejetEnt.cs" />
+    <Compile Include="Email\Souscription\EmailSouscriptionEnt.cs" />
+    <Compile Include="Email\Souscription\EmailSouscriptionKey.cs" />
+    <Compile Include="Email\Souscription\HasSubscribeToMaillingListResult.cs" />
+    <Compile Include="EnumerationExtensions.cs" />
+    <Compile Include="Fonctionnalite\FonctionnaliteForPermissionResponse.cs" />
+    <Compile Include="Fonctionnalite\FonctionnaliteInactiveResponse.cs" />
+    <Compile Include="ObjectifFlash\ObjectifFlashJournalisation.cs" />
+    <Compile Include="ObjectifFlash\ObjectifFlashTacheJournalisationEnt.cs" />
+    <Compile Include="ObjectifFlash\ObjectifFlashTacheRapportRealiseEnt.cs" />
+    <Compile Include="ObjectifFlash\ObjectifFlashTacheRessourceEnt.cs" />
+    <Compile Include="ObjectifFlash\ObjectifFlashTacheRessourceJournalisationEnt.cs" />
+    <Compile Include="ObjectifFlash\Panel\ChapitrePanelEnt.cs" />
+    <Compile Include="ObjectifFlash\Panel\RessourcePanelEnt.cs" />
+    <Compile Include="ObjectifFlash\Panel\SousChapitrePanelEnt.cs" />
+    <Compile Include="ObjectifFlash\Search\SearchObjectifFlashEnt.cs" />
+    <Compile Include="ObjectifFlash\Search\SearchObjectifFlashListWithFilterResult.cs" />
+    <Compile Include="OperationDiverse\Excel\ErreurImportODExcelModel.cs" />
+    <Compile Include="OperationDiverse\Excel\ExcelOdModel.cs" />
+    <Compile Include="OperationDiverse\ImportODResult.cs" />
+    <Compile Include="Organisation\Tree\OrganisationTreeCacheKey.cs" />
+    <Compile Include="Personnel\Interimaire\ContratInterimaireImportEnt.cs" />
+    <Compile Include="Personnel\Interimaire\EtatContratInterimaireEnt.cs" />
+    <Compile Include="Personnel\PersonnelLightForPickListEnt.cs" />
+    <Compile Include="Personnel\PersonnelListResultViewModel.cs" />
+    <Compile Include="PieceJointe\PieceJointeReceptionEnt.cs" />
+    <Compile Include="PieceJointe\PieceJointeCommandeEnt.cs" />
+    <Compile Include="Rapport\CiHeuresSupSummaryEnt.cs" />
+    <Compile Include="Rapport\CiPointageSummaryEnt.cs" />
+    <Compile Include="Rapport\Constante\FiggoConstante.cs" />
+    <Compile Include="Rapport\ExportTibcoRapportLigneModel.cs" />
+    <Compile Include="Rapport\PersonnelRapportSummaryEnt.cs" />
+    <Compile Include="Rapport\PointageUnit.cs" />
+    <Compile Include="Rapport\RapportHebdoNewPointageStatutEnt.cs" />
+    <Compile Include="Referential\AffectationAbsenceEnt.cs" />
+    <Compile Include="Rapport\RapportHebdoSummaryBase.cs" />
+    <Compile Include="Referential\AgenceEnt.cs" />
+    <Compile Include="Referential\AgenceLightEnt.cs" />
+    <Compile Include="Referential\EtablissementPaieLightEnt.cs" />
+    <Compile Include="Import\SystemeExterneEnt.cs" />
+    <Compile Include="Import\SystemeExterneLightEnt.cs" />
+    <Compile Include="Import\SystemeExterneTypeEnt.cs" />
+    <Compile Include="IndemniteDeplacement\IndemniteDeplacementCalculTypeEnt.cs" />
+    <Compile Include="Models\Flux\Depense\DepenseFluxResponseModel.cs" />
+    <Compile Include="Models\ResultModel.cs" />
+    <Compile Include="Moyen\AffectationMoyenEnt.cs" />
+    <Compile Include="Moyen\AffectationMoyenFamilleEnt.cs" />
+    <Compile Include="Moyen\AffectationMoyenRolesFiltersEnt.cs" />
+    <Compile Include="Moyen\AffectationMoyenTypeEnt.cs" />
+    <Compile Include="Moyen\MaterielLocationEnt.cs" />
+    <Compile Include="Moyen\SearchBaseMoyenEnt.cs" />
+    <Compile Include="Moyen\SearchRapportLigneMoyenEnt.cs" />
+    <Compile Include="Moyen\SearchAffectationMoyenEnt.cs" />
+    <Compile Include="Moyen\SearchEtablissementMoyenEnt.cs" />
+    <Compile Include="Moyen\SearchImmatriculationMoyenEnt.cs" />
+    <Compile Include="Moyen\SearchMoyenEnt.cs" />
+    <Compile Include="Moyen\SearchSocieteMoyenEnt.cs" />
+    <Compile Include="Moyen\SiteEnt.cs" />
+    <Compile Include="OperationDiverse\SearchOperationDiverseEnt.cs" />
+    <Compile Include="Organisation\Tree\AffectationBase.cs" />
+    <Compile Include="Organisation\Tree\Node.cs" />
+    <Compile Include="Organisation\Tree\OrganisationBase.cs" />
+    <Compile Include="Organisation\Tree\OrganisationTree.cs" />
+    <Compile Include="Params\ParamKeyEnt.cs" />
+    <Compile Include="Params\ParamValueEnt.cs" />
+    <Compile Include="Personnel\Import\Fes\PersonnelAffectationResult.cs" />
+    <Compile Include="Personnel\Interimaire\ContratInterimaireEnt.cs" />
+    <Compile Include="Affectation\AffectationViewEnt.cs" />
+    <Compile Include="Affectation\AstreinteViewEnt.cs" />
+    <Compile Include="Affectation\CalendarAffectationViewEnt.cs" />
+    <Compile Include="Authentification\AuthenticationStatus.cs" />
+    <Compile Include="AuthentificationLog\AuthentificationLogEnt.cs" />
+    <Compile Include="Bareme\BaremeExploitationCIEnt.cs" />
+    <Compile Include="Bareme\BaremeExploitationOrganisationEnt.cs" />
+    <Compile Include="Bareme\SurchargeBaremeExploitationCIEnt.cs" />
+    <Compile Include="Budget\Avancement\AvancementWorkflowEnt.cs" />
+    <Compile Include="Budget\Avancement\AvancementEtatEnt.cs" />
+    <Compile Include="Budget\Avancement\AvancementEnt.cs" />
+    <Compile Include="Budget\BudgetEtatEnt.cs" />
+    <Compile Include="Budget\BudgetSousDetailEnt.cs" />
+    <Compile Include="Budget\BudgetT4Ent.cs" />
+    <Compile Include="Budget\BudgetTacheEnt.cs" />
+    <Compile Include="Budget\BudgetWorkflowEnt.cs" />
+    <Compile Include="Budget\ControleBudgetaireEnt.cs" />
+    <Compile Include="Budget\ControleBudgetaireValeursEnt.cs" />
+    <Compile Include="CI\CITypeEnt.cs" />
+    <Compile Include="CI\CITypeSearchEnt.cs" />
+    <Compile Include="Affectation\AffectationEnt.cs" />
+    <Compile Include="Affectation\AstreinteEnt.cs" />
+    <Compile Include="Affectation\EquipeEnt.cs" />
+    <Compile Include="Affectation\EquipePersonnelEnt.cs" />
+    <Compile Include="Delegation\DelegationEnt.cs" />
+    <Compile Include="EcritureComptable\EcritureComptableCumulEnt.cs" />
+    <Compile Include="EntityBase\Deletable.cs" />
+    <Compile Include="EntityBase\IDeletable.cs" />
+    <Compile Include="FeatureFlipping\FeatureFlippingEnt.cs" />
+    <Compile Include="Import\SystemeImportEnt.cs" />
+    <Compile Include="Import\TranscoImportEnt.cs" />
+    <Compile Include="Notification\TypeNotification.cs" />
+    <Compile Include="ObjectifFlash\ObjectifFlashEnt.cs" />
+    <Compile Include="ObjectifFlash\ObjectifFlashTacheEnt.cs" />
+    <Compile Include="Budget\BudgetEnt.cs" />
+    <Compile Include="Budget\BudgetRevisionEnt.cs" />
+    <Compile Include="Budget\RessourceTacheComparer.cs" />
+    <Compile Include="Budget\RessourceTacheDeviseEnt.cs" />
+    <Compile Include="Budget\RessourceTacheEnt.cs" />
+    <Compile Include="Carburant\CarburantOrganisationDeviseEnt.cs" />
+    <Compile Include="CI\CICodeMajorationEnt.cs" />
+    <Compile Include="CI\CIRessourceEnt.cs" />
+    <Compile Include="CI\CIDeviseEnt.cs" />
+    <Compile Include="CI\CIPrimeEnt.cs" />
+    <Compile Include="CI\SearchCIEnt.cs" />
+    <Compile Include="Commande\SearchCommandeEnt.cs" />
+    <Compile Include="Common\IFacturable.cs" />
+    <Compile Include="DatesClotureComptable\PeriodeClotureEnt.cs" />
+    <Compile Include="Depense\DepenseTemporaireEnt.cs" />
+    <Compile Include="Depense\DepenseAchatEnt.cs" />
+    <Compile Include="Constantes.cs" />
+    <Compile Include="DatesCalendrierPaie\DatesCalendrierPaieEnt.cs" />
+    <Compile Include="DatesClotureComptable\DatesClotureComptableEnt.cs" />
+    <Compile Include="Depense\DepenseTypeEnt.cs" />
+    <Compile Include="Depense\LotFarEnt.cs" />
+    <Compile Include="Depense\SearchDepenseTemporaireEnt.cs" />
+    <Compile Include="Depense\SearchDepenseEnt.cs" />
+    <Compile Include="EcritureComptable\EcritureComptableDto.cs" />
+    <Compile Include="EcritureComptable\EcritureComptableEnt.cs" />
+    <Compile Include="EntityBase\AuditableEntity.cs" />
+    <Compile Include="EntityBase\Creatable.cs" />
+    <Compile Include="EntityBase\IAuditableEntity.cs" />
+    <Compile Include="EntityBase\ICreatable.cs" />
+    <Compile Include="Enumeration.cs" />
+    <Compile Include="Facturation\FacturationEnt.cs" />
+    <Compile Include="Facturation\FacturationTypeEnt.cs" />
+    <Compile Include="Facture\FactureEnt.cs" />
+    <Compile Include="Facture\FactureLigneEnt.cs" />
+    <Compile Include="Facture\SearchFactureEnt.cs" />
+    <Compile Include="FonctionnaliteDesactive\FonctionnaliteDesactiveEnt.cs" />
+    <Compile Include="Fonctionnalite\FonctionnaliteComparer.cs" />
+    <Compile Include="Habilitation\HabilitationEnt.cs" />
+    <Compile Include="Image\ImageEnt.cs" />
+    <Compile Include="IndemniteDeplacement\IndemniteDeplacementEnt.cs" />
+    <Compile Include="Groupe\GroupeEnt.cs" />
+    <Compile Include="Holding\HoldingEnt.cs" />
+    <Compile Include="IndemniteDeplacement\SearchIndemniteDeplacementEnt.cs" />
+    <Compile Include="JobStatut\JobStatutModel.cs" />
+    <Compile Include="Journal\JournalEnt.cs" />
+    <Compile Include="LogImport\LogImportEnt.cs" />
+    <Compile Include="Log\NLogEnt.cs" />
+    <Compile Include="Fonctionnalite\FonctionnaliteEnt.cs" />
+    <Compile Include="ModuleDesactive\ModuleDesactiveEnt.cs" />
+    <Compile Include="Module\ModuleEnt.cs" />
+    <Compile Include="OperationDiverse\FamilleOperationDiverseEnt.cs" />
+    <Compile Include="OperationDiverse\OperationDiverseEnt.cs" />
+    <Compile Include="OrganisationGenerique\OrganisationGeneriqueEnt.cs" />
+    <Compile Include="Organisation\AffectationSeuilOrgaEnt.cs" />
+    <Compile Include="Organisation\OrganisationLightEnt.cs" />
+    <Compile Include="Organisation\TypeOrganisationEnt.cs" />
+    <Compile Include="Organisation\OrganisationLienEnt.cs" />
+    <Compile Include="Parametre\GoogleApiParam.cs" />
+    <Compile Include="Parametre\ParametreEnt.cs" />
+    <Compile Include="PermissionFonctionnalite\PermissionFonctionnaliteEnt.cs" />
+    <Compile Include="Permission\PermissionKeys.cs" />
+    <Compile Include="Permission\PermissionEnt.cs" />
+    <Compile Include="Permission\PermissionType.cs" />
+    <Compile Include="Personnel\Interimaire\MatriculeExterneEnt.cs" />
+    <Compile Include="Personnel\Interimaire\ZoneDeTravailEnt.cs" />
+    <Compile Include="Personnel\PersonnelForMoyenAffectationsRolesFiltersEnt.cs" />
+    <Compile Include="Personnel\PersonnelImageEnt.cs" />
+    <Compile Include="Personnel\PersonnelLightEnt.cs" />
+    <Compile Include="Personnel\SearchPersonnelEnt.cs" />
+    <Compile Include="Personnel\PersonnelEnt.cs" />
+    <Compile Include="PieceJointe\PieceJointeEnt.cs" />
+    <Compile Include="PointagePersonnel\Search\SearchListePointagePersonnelEnt.cs" />
+    <Compile Include="Pole\PoleEnt.cs" />
+    <Compile Include="RapportPrime\RapportPrimeLigneAstreinteComparer.cs" />
+    <Compile Include="RapportPrime\RapportPrimeLigneAstreinteEnt.cs" />
+    <Compile Include="RapportPrime\RapportPrimeLignePrimeEnt.cs" />
+    <Compile Include="Rapport\DuplicatePointageResult.cs" />
+    <Compile Include="Rapport\DuplicateRapportResult.cs" />
+    <Compile Include="Rapport\FilterRapportFesExport.cs" />
+    <Compile Include="RapportPrime\RapportPrimeEnt.cs" />
+    <Compile Include="RapportPrime\RapportPrimeLigneEnt.cs" />
+    <Compile Include="Rapport\InterimaireDuplicationState.cs" />
+    <Compile Include="Rapport\MajorationPersonnelCiEnt.cs" />
+    <Compile Include="Rapport\PersonnelTotalHourByDayAndByCiEnt.cs" />
+    <Compile Include="Rapport\PersonnelTotalHourByDayEnt.cs" />
+    <Compile Include="Rapport\PointageAnticipeEnt.cs" />
+    <Compile Include="Rapport\PointageAnticipePrimeEnt.cs" />
+    <Compile Include="Rapport\PointageBase.cs" />
+    <Compile Include="Rapport\PointageMajorationBase.cs" />
+    <Compile Include="Rapport\PointageMensuelEnt.cs" />
+    <Compile Include="Rapport\PointageMensuelPersonEnt.cs" />
+    <Compile Include="Rapport\PointagePrimeBase.cs" />
+    <Compile Include="Rapport\PrimeRapportHebdoEnt.cs" />
+    <Compile Include="Rapport\RapportEnt.cs" />
+    <Compile Include="Rapport\RapportHebdoPersonnelWithAllCiEnt.cs" />
+    <Compile Include="Rapport\RapportHebdoPersonnelWithTotalHourEnt.cs" />
+    <Compile Include="Rapport\RapportHebdoSyntheseMensuelleEnt.cs" />
+    <Compile Include="Rapport\RapportLigneAstreinteEnt.cs" />
+    <Compile Include="Rapport\RapportLigneEnt.cs" />
+    <Compile Include="Rapport\RapportLigneMajorationEnt.cs" />
+    <Compile Include="Rapport\RapportLignePrimeEnt.cs" />
+    <Compile Include="Rapport\RapportLigneTacheEnt.cs" />
+    <Compile Include="Rapport\RapportStatutEnt.cs" />
+    <Compile Include="Rapport\RapportTacheEnt.cs" />
+    <Compile Include="Rapport\Search\SearchRapportEnt.cs" />
+    <Compile Include="Rapport\SearchRapportLigneEnt.cs" />
+    <Compile Include="Rapport\TypeFiltreEtatPaie.cs" />
+    <Compile Include="Rapport\TypeRapport.cs" />
+    <Compile Include="Personnel\Interimaire\MotifRemplacementEnt.cs" />
+    <Compile Include="Referential\CodeAstreinteEnt.cs" />
+    <Compile Include="Referential\FournisseurLightEnt.cs" />
+    <Compile Include="Referential\MajorationAffectationEnt.cs" />
+    <Compile Include="Referential\MajorationPersonnelAffectationEnt.cs" />
+    <Compile Include="Referential\MajorationPersonnelsGetEnt.cs" />
+    <Compile Include="Referential\PrimesPersonnelsGetEnt.cs" />
+    <Compile Include="Referential\PrimeAffectationEnt.cs" />
+    <Compile Include="Referential\PrimePersonnelAffectationEnt.cs" />
+    <Compile Include="Referential\RapportLigneCodeAstreinteEnt.cs" />
+    <Compile Include="Referential\SearchRessourcesRequestModel.cs" />
+    <Compile Include="Referential\SearchTacheEnt.cs" />
+    <Compile Include="Referential\StatutAbsenceEnt.cs" />
+    <Compile Include="Referential\TacheLightEnt.cs" />
+    <Compile Include="Referential\TypeEnergieEnt.cs" />
+    <Compile Include="Referential\TypeJourneeEnt.cs" />
+    <Compile Include="Referential\UniteEnt.cs" />
+    <Compile Include="Referential\NatureEnt.cs" />
+    <Compile Include="Referential\MaterielEnt.cs" />
+    <Compile Include="Referential\CodeAbsenceEnt.cs" />
+    <Compile Include="Referential\CodeDeplacementEnt.cs" />
+    <Compile Include="Referential\CodeZoneDeplacementEnt.cs" />
+    <Compile Include="Referential\CodeMajorationEnt.cs" />
+    <Compile Include="Referential\DeviseEnt.cs" />
+    <Compile Include="Referential\EtablissementComptableEnt.cs" />
+    <Compile Include="Referential\EtablissementPaieEnt.cs" />
+    <Compile Include="Referential\FournisseurEnt.cs" />
+    <Compile Include="Commande\CommandeEnt.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Commande\StatutCommandeEnt.cs" />
+    <Compile Include="CI\CIEnt.cs" />
+    <Compile Include="Commande\CommandeLigneEnt.cs" />
+    <Compile Include="Organisation\OrganisationEnt.cs" />
+    <Compile Include="Referential\PrimeEnt.cs" />
+    <Compile Include="Referential\SearchEtablissementPaieEnt.cs" />
+    <Compile Include="Referential\SearchCriteriaEnt.cs" />
+    <Compile Include="Referential\SearchCodeZoneDeplacementEnt.cs" />
+    <Compile Include="Referential\SearchCodeAbsenceEnt.cs" />
+    <Compile Include="Referential\SearchCodeDeplacementEnt.cs" />
+    <Compile Include="Referential\SearchMaterielEnt.cs" />
+    <Compile Include="Referential\SearchEtablissementComptableEnt.cs" />
+    <Compile Include="Referential\SearchDeviseEnt.cs" />
+    <Compile Include="Referential\SearchFournisseurEnt.cs" />
+    <Compile Include="Referential\SearchPrimeEnt.cs" />
+    <Compile Include="Referential\SeuilValidationEnt.cs" />
+    <Compile Include="Referential\TypeDepenseEnt.cs" />
+    <Compile Include="Referential\TacheEnt.cs" />
+    <Compile Include="Commande\CommandeTypeEnt.cs" />
+    <Compile Include="Referential\PaysEnt.cs" />
+    <Compile Include="Carburant\CarburantEnt.cs" />
+    <Compile Include="ReferentielEtendu\ParametrageReferentielEtenduEnt.cs" />
+    <Compile Include="ReferentielEtendu\ParametrageReferentielEtenduExportEnt.cs" />
+    <Compile Include="ReferentielEtendu\ReferentielEtenduEnt.cs" />
+    <Compile Include="ReferentielEtendu\UniteReferentielEtenduEnt.cs" />
+    <Compile Include="ReferentielFixe\ChapitreEnt.cs" />
+    <Compile Include="ReferentielFixe\RessourceEnt.cs" />
+    <Compile Include="ReferentielFixe\RessourceLightEnt.cs" />
+    <Compile Include="ReferentielFixe\SousChapitreEnt.cs" />
+    <Compile Include="ReferentielFixe\TypeRessourceEnt.cs" />
+    <Compile Include="RepartitionEcart\RepartitionEcartEnt.cs" />
+    <Compile Include="RepriseDonnees\Commade\GetT3ByCodesOrDefaultRequest.cs" />
+    <Compile Include="RepriseDonnees\Commade\GetT3ByCodesOrDefaultResponse.cs" />
+    <Compile Include="RepriseDonnees\Excel\RepriseExcelIndemniteDeplacement.cs" />
+    <Compile Include="RepriseDonnees\Excel\RepriseExcelMateriel.cs" />
+    <Compile Include="RepriseDonnees\Excel\RepriseExcelPersonnel.cs" />
+    <Compile Include="RepriseDonnees\ImportIndemniteDeplacementResult.cs" />
+    <Compile Include="RepriseDonnees\ImportMaterielResult.cs" />
+    <Compile Include="RepriseDonnees\ImportPersonnelResult.cs" />
+    <Compile Include="RepriseDonnees\RepriseResult.cs" />
+    <Compile Include="RepriseDonnees\Rule\RuleResult.cs" />
+    <Compile Include="RessourcesRecommandees\RessourceRecommandeeEnt.cs" />
+    <Compile Include="RepriseDonnees\Excel\RepriseExcelCommande.cs" />
+    <Compile Include="RepriseDonnees\Excel\RepriseExcelRapport.cs" />
+    <Compile Include="RepriseDonnees\Excel\RepriseExcelValidationCommande.cs" />
+    <Compile Include="RepriseDonnees\Excel\RepriseExcelPlanTaches.cs" />
+    <Compile Include="RepriseDonnees\ImportCiResult.cs" />
+    <Compile Include="RepriseDonnees\Excel\RepriseExcelCi.cs" />
+    <Compile Include="RepriseDonnees\ImportCommandeResult.cs" />
+    <Compile Include="RepriseDonnees\ImportRapportResult.cs" />
+    <Compile Include="RepriseDonnees\ImportValidationCommandeResult.cs" />
+    <Compile Include="RepriseDonnees\ImportPlanTachesResult.cs" />
+    <Compile Include="RoleFonctionnalite\RoleFonctionnaliteEnt.cs" />
+    <Compile Include="Role\ApplicationRole.cs" />
+    <Compile Include="Search\ISearchableEnt.cs" />
+    <Compile Include="Societe\Classification\SocieteClassificationEnt.cs" />
+    <Compile Include="Societe\SocieteLightEnt.cs" />
+    <Compile Include="Societe\AssocieSepEnt.cs" />
+    <Compile Include="Societe\TypeSocieteEnt.cs" />
+    <Compile Include="Societe\TypeParticipationSepEnt.cs" />
+    <Compile Include="Societe\UniteSocieteEnt.cs" />
+    <Compile Include="Utilisateur\ApplicationUser.cs" />
+    <Compile Include="ValidationPointage\PersonnelErreur.cs" />
+    <Compile Include="ValidationPointage\RemonteeVracEnt.cs" />
+    <Compile Include="ValidationPointage\RemonteeVracErreurEnt.cs" />
+    <Compile Include="Role\RoleEnt.cs" />
+    <Compile Include="Search\AbstractSearch.cs" />
+    <Compile Include="Search\AbstractSearchEnt.cs" />
+    <Compile Include="Search\IOrderer.cs" />
+    <Compile Include="Search\Orderer.cs" />
+    <Compile Include="Societe\SocieteDeviseEnt.cs" />
+    <Compile Include="Societe\SearchSocieteEnt.cs" />
+    <Compile Include="Societe\SocieteEnt.cs" />
+    <Compile Include="Directory\ExternalDirectoryEnt.cs" />
+    <Compile Include="Favori\FavoriEnt.cs" />
+    <Compile Include="Notification\NotificationEnt.cs" />
+    <Compile Include="Utilisateur\AffectationGroupByOrganisationEnt.cs" />
+    <Compile Include="Utilisateur\AffectationSeuilUtilisateurEnt.cs" />
+    <Compile Include="Utilisateur\UtilisateurEnt.cs" />
+    <Compile Include="ValidationPointage\ControlePointageEnt.cs" />
+    <Compile Include="ValidationPointage\ControlePointageErreurEnt.cs" />
+    <Compile Include="ValidationPointage\LotPointageEnt.cs" />
+    <Compile Include="ValidationPointage\PointageFiltre.cs" />
+    <Compile Include="ValidationPointage\SearchValidationResult.cs" />
+    <Compile Include="Rapport\RapportLigneDatePointageInfo.cs" />
+    <Compile Include="Valorisation\RapportRapportLigneVerrouPeriode.cs" />
+    <Compile Include="Valorisation\ValorisationEnt.cs" />
+    <Compile Include="VerificationPointage\ChekingPointing.cs" />
+    <Compile Include="VerificationPointage\ChekingPointingMonth.cs" />
+    <Compile Include="VerificationPointage\DisplayTypePointing.cs" />
+    <Compile Include="VerificationPointage\FilterChekingPointing.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\Fred.Analysis\LogicalWebArchitecture.layerdiagram">
+      <Link>LogicalWebArchitecture.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
+    <AdditionalFiles Include="..\Fred.Analysis\LogicalFredIEArchitecture.layerdiagram">
+      <Link>LogicalFredIEArchitecture.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
+    <None Include="Budget\Budget.cd" />
+    <None Include="Fred.Entities.ruleset" />
+    <None Include="packages.config" />
+    <None Include="Referential\DiagramOd.cd" />
+    <None Include="ValidationPointage\ValidationPointage.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.10.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
+    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.10.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\Google.Protobuf.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\SonarAnalyzer.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Achat\Calculation\CommandeLigne\" />
+    <Folder Include="AffectationInterimaire\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

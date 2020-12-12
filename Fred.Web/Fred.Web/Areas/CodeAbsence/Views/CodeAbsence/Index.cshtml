@@ -1,0 +1,312 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureCodeAbsence.CodeAbsence_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/CodeAbsenceIndexBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/CodeAbsenceIndexBundle.js")
+    @this.RenderResources("FeatureCodeAbsence")
+}
+
+<div class="container" ng-controller="CodeAbsenceController">
+
+    <div class="toleft" id="PanelMain">
+
+        <!-- START : Titre de la page -->
+        <h1>{{resources.CodeAbsence_PanelMain_Titre}}</h1>
+        <!--END : Titre de la page -->
+
+        <div class="row">
+            <!--BEGIN : Picklist Societe -->
+            <div class="col-md-5">
+                <label class="infoFilter">{{resources.Global_SelectionnerSociete}}</label>
+                <div class="filter">
+                    <div class="inner-addon right-addon">
+                        <i class="chev material-icons">chevron_right</i>
+                        <lookup ng-model="societe"
+                                search-placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+                                search-title="{{resources.Global_ReferentielSociete}}"
+                                on-select="loadData()"
+                                url="/api/Societe/SearchLightForRoles?{{typeSocieteCodesParams}}">
+                            <input type="text" class="form-control"
+                                   ng-value="societe.CodeLibelle"
+                                   placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+                                   title="{{societe.CodeLibelle}}" />
+                        </lookup>
+                    </div>
+                </div>
+            </div>
+            <!--END : Picklist Societe -->
+            <!--BEGIN : Recherche -->
+            <div class="col-md-5" ng-if="societeId != undefined">
+                <label class="infoFilter">{{resources.Global_RechercheAffiner}}</label>
+                <div class="filter">
+                    <div class="input-group">
+                        <input class="form-control txt"
+                               type="text"
+                               id="txtRecherche"
+                               name="Recherche"
+                               placeholder="{{resources.CodeAbsence_PanelMain_Recherche_Placeholder}}"
+                               ng-model="recherche"
+                               ng-model-options="{ debounce: 500 }"
+                               ng-change="handleSearch(recherche)" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary y_search"
+                                    title="{{resources.Global_RechercheAffiner_Tooltip}}"
+                                    type="button"
+                                    ng-click="handleSearch(recherche)">
+                                <i class="material-icons">search</i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--END : Recherche -->
+            <!--BEGIN : Bouton pour ajouter Items -->
+            <div class="col-md-2 add-search" ng-if="societeId != undefined">
+                <span class="pull-right">
+                    <label class="infoFilter">{{resources.Global_Ajouter}}</label>
+                    <i class="flaticon flaticon-add  icoplus " title="{{resources.Global_Bouton_AjouterReference_Tooltip}}" ng-click="handleClickCreateNew()"></i>
+                </span>
+            </div>
+            <!--END : Bouton pour ajouter Items -->
+        </div>
+
+        <!--LISTE : START-->
+        <div class="row results" id="Table" ng-if="societeId != undefined">
+            <div class="col-md-12 refs-list">
+                <div ng-repeat="item in items">
+                    <div class="row line" ng-click="handleSelect(item)">
+                        <div class="col-md-2">
+                            <span class="t1">{{item.Code}}</span>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="lb">{{resources.CodeAbsence_PanelMain_Table_Libelle}}</div>
+                            <span class="t2">{{item.Libelle}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="lb">{{resources.CodeAbsence_PanelMain_Table_Intemperie}}</div>
+                            <div class="val ng-binding">
+                                <span ng-if="item.Intemperie">{{resources.Global_Oui}}</span>
+                                <span ng-if="!item.Intemperie">{{resources.Global_Non}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="bdg actif" ng-if="item.Actif">{{resources.Global_Actif}}</div>
+                            <div class="bdg inactif" ng-if="!item.Actif">{{resources.Global_Inactif}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--LISTE : END-->
+
+    </div>
+
+
+    <!--DETAILS PANEL : START-->
+
+    <div ng-class="checkDisplayOptions"
+         class="blockScreen"
+         style="z-index:99"></div>
+    <div class="options"
+         id="PanelRight"
+         ng-class="checkDisplayOptions + ' ' + checkFormatOptions">
+
+
+        <!--HEADER TOOLBAR : BEGIN-->
+        <div class="toolbar"
+             ng-class="{'is-already-used':isAlreadyUsed}">
+            <div class="flaticon flaticon-plus grandicone"></div>
+        </div>
+        <span ng-show="isAlreadyUsed" class="is-already-used-text">{{resources.Global_Item_Already_Used}}</span>
+        <!--HEADER TOOLBAR : END-->
+        <!-- Titre : BEGIN -->
+        <div class="form-header" id="Titre">
+            <h2>
+                <span ng-if="codeAbsence.CodeAbsenceId == 0">{{resources.CodeAbsence_PanelRight_Titre_Ajouter}}</span>
+                <span ng-if="codeAbsence.CodeAbsenceId != 0">{{resources.CodeAbsence_PanelRight_Titre_Modifier}}</span>
+            </h2>
+            <label class="legend">{{resources.Global_LegendeAsterisque}}</label>
+        </div>
+        <!-- Titre : END -->
+
+        <div class="form fred-scroll">
+            <!--Formulaire: START-->
+            <form name="formCodeAbsence" autocomplete="off" novalidate>
+                <!--FIELD Active: START-->
+                <div class="col-md-offset-8 chb_r">
+                    <input id="chkActif" type="checkbox" ng-model="codeAbsence.Actif" />
+                    <label for="chkActif"><span></span>{{resources.Global_Actif}}</label>
+                </div>
+                <!--FIELD Active: END-->
+                <!--FIELD Code: START-->
+                <div class="form-group" ng-class="{ 'has-error' : (formCodeAbsence.Code.$invalid && formCodeAbsence.$submitted) || formCodeAbsence.Code.$error.exist || formCodeAbsence.Code.$error.pattern}">
+                    <label for="txtCode">{{resources.CodeAbsence_PanelRight_Code}} *</label>
+                    <span class="text-danger" ng-show="formCodeAbsence.Code.$error.required && formCodeAbsence.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <span class="text-danger" ng-show="formCodeAbsence.Code.$error.exist">{{resources.Global_Control_Code_ExistInSociete_Erreur}}</span>
+                    <span class="text-danger" ng-show="formCodeAbsence.Code.$error.pattern">{{resources.Global_Control_Code_FormatAlphanumeric_Erreur}}</span>
+                    <input class="form-control" type="text" id="txtCode" name="Code" ng-pattern="/^[a-zA-Z0-9]*$/" ng-change="handleChangeCode(formCodeAbsence)" required placeholder="{{resources.CodeAbsence_PanelRight_Code_Placeholder}}" ng-model="codeAbsence.Code" maxlength="20" />
+                </div>
+                <!--FIELD Code: END-->
+                <!--FIELD Libelle: START-->
+                <div class="form-group" ng-class="{ 'has-error' : formCodeAbsence.Libelle.$invalid && formCodeAbsence.$submitted}">
+                    <label for="txtLibelle">{{resources.CodeAbsence_PanelRight_Libelle}} *</label>
+                    <span class="text-danger" ng-show="formCodeAbsence.Libelle.$invalid && formCodeAbsence.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <input class="form-control" type="text" id="txtLibelle" name="Libelle" required placeholder="{{resources.CodeAbsence_PanelRight_Libelle_Placeholder}}" ng-model="codeAbsence.Libelle" maxlength="500" />
+                </div>
+                <!--FIELD Libelle: END-->
+                <!--FIELD Nombre d'heures ETAM: START-->
+                <div class="row form-group">
+                    <label for="NbHeuresETAM">{{resources.CodeAbsence_PanelRight_NbrHeureDefautEtam}} *</label>
+                    <span class="text-danger" ng-show="(formCodeAbsence.NBHeuresDefautETAM.$error.required || formCodeAbsence.NBHeuresMinETAM.$error.required || formCodeAbsence.NBHeuresMaxETAM.$error.required) && formCodeAbsence.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <span class="text-danger" ng-show="(formCodeAbsence.NBHeuresDefautETAM.$error.numeric || formCodeAbsence.NBHeuresMinETAM.$error.numeric || formCodeAbsence.NBHeuresMaxETAM.$error.numeric) && formCodeAbsence.$submitted">{{resources.CodeAbsence_PanelRight_ErrorHeureFormat}}</span>
+                    <span class="text-danger" ng-show="(formCodeAbsence.NBHeuresDefautETAM.$error.min || formCodeAbsence.NBHeuresDefautETAM.$error.max || formCodeAbsence.NBHeuresMinETAM.$error.min || formCodeAbsence.NBHeuresMinETAM.$error.max  || formCodeAbsence.NBHeuresMaxETAM.$error.min || formCodeAbsence.NBHeuresMaxETAM.$error.max) && formCodeAbsence.$submitted">{{resources.CodeAbsence_PanelRight_ErrorNbrHeuresMin}}</span>
+                    <span class="text-danger" ng-show="(parseFloat(codeAbsence.NBHeuresDefautETAM) < parseFloat(codeAbsence.NBHeuresMinETAM) || parseFloat(codeAbsence.NBHeuresDefautETAM) > parseFloat(codeAbsence.NBHeuresMaxETAM)) && formCodeAbsence.$submitted">{{resources.CodeAbsence_PanelRight_ErrorNbrHeuresHorsLimites}}</span>
+                    <span class="text-danger" ng-show="(parseFloat(codeAbsence.NBHeuresMinETAM) > parseFloat(codeAbsence.NBHeuresMaxETAM)) && formCodeAbsence.$submitted">{{resources.CodeAbsence_PanelRight_ErrorNbrHeureMiniETAM}}</span>
+                    <div id="NbHeuresETAM">
+                        <div class="col-md-4 col-lg-4">
+                            <!--FIELD NBHeuresDefautETAM: START-->
+                            <div ng-class="{ 'has-error' : formCodeAbsence.NBHeuresDefautETAM.$invalid && formCodeAbsence.$submitted}">
+                                <label for="txtNBHeuresDefautETAM"><b>{{resources.CodeAbsence_PanelRight_HeureParDefaut}} *</b></label>
+                                <input class="form-control" type="text" fred-input-number min="0" max="12" id="txtNBHeuresDefautETAM" name="NBHeuresDefautETAM" required ng-model="codeAbsence.NBHeuresDefautETAM" ng-change="handleCheckNumeric(formCodeAbsence.NBHeuresDefautETAM)" />
+                            </div>
+                            <!--FIELD NBHeuresDefautETAM: END-->
+                        </div>
+                        <div class="col-md-4 col-lg-4">
+                            <!--FIELD NBHeuresMinETAM START-->
+                            <div ng-class="{ 'has-error' : formCodeAbsence.NBHeuresMinETAM.$invalid && formCodeAbsence.$submitted}">
+                                <label for="txtNBHeuresMinETAM"><b>{{resources.CodeAbsence_PanelRight_HeureMin}} *</b></label>
+                                <input class="form-control" type="text" fred-input-number min="0" max="12" id="txtNBHeuresMinETAM" name="NBHeuresMinETAM" required ng-model="codeAbsence.NBHeuresMinETAM" ng-change="handleCheckNumeric(formCodeAbsence.NBHeuresMinETAM)" />
+                            </div>
+                            <!--FIELD NBHeuresMinETAM: END-->
+                        </div>
+                        <div class="col-md-4 col-lg-4">
+                            <!--FIELD NBHeuresMaxETAM: START-->
+                            <div ng-class="{ 'has-error' : formCodeAbsence.NBHeuresMaxETAM.$invalid && formCodeAbsence.$submitted}">
+                                <label for="txtNBHeuresMaxETAM"><b>{{resources.CodeAbsence_PanelRight_HeureMax}} *</b></label>
+                                <input class="form-control" type="text" fred-input-number min="0" max="12" id="txtNBHeuresMaxETAM" name="NBHeuresMaxETAM" required ng-model="codeAbsence.NBHeuresMaxETAM" ng-change="handleCheckNumeric(formCodeAbsence.NBHeuresMaxETAM)" />
+                            </div>
+                            <!--FIELD NBHeuresMaxETAM: END-->
+                        </div>
+                    </div>
+                </div>
+                <!--FIELD Nombre d'heures ETAM: END-->
+                <!--FIELD Nombre d'heures CO: START-->
+                <div class="row form-group">
+                    <label for="NbHeuresCO">{{resources.CodeAbsence_PanelRight_NbrHeureDefautCO}} *</label>
+                    <span class="text-danger" ng-show="(formCodeAbsence.NBHeuresDefautCO.$error.required || formCodeAbsence.NBHeuresMinCO.$error.required || formCodeAbsence.NBHeuresMaxCO.$error.required) && formCodeAbsence.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <span class="text-danger" ng-show="(formCodeAbsence.NBHeuresDefautCO.$error.numeric || formCodeAbsence.NBHeuresMinCO.$error.numeric || formCodeAbsence.NBHeuresMaxCO.$error.numeric) && formCodeAbsence.$submitted">{{resources.CodeAbsence_PanelRight_ErrorHeureFormat}}</span>
+                    <span class="text-danger" ng-show="(formCodeAbsence.NBHeuresDefautCO.$error.min ||formCodeAbsence.NBHeuresMaxCO.$error.min || formCodeAbsence.NBHeuresMinC0.$error.min || formCodeAbsence.NBHeuresDefautCO.$error.max ||formCodeAbsence.NBHeuresMaxCO.$error.max || formCodeAbsence.NBHeuresMinC0.$error.max)  && formCodeAbsence.$submitted">{{resources.CodeAbsence_PanelRight_ErrorNbrHeuresMin}}</span>
+                    <span class="text-danger" ng-show="(parseFloat(codeAbsence.NBHeuresDefautCO) < parseFloat(codeAbsence.NBHeuresMinCO) || parseFloat(codeAbsence.NBHeuresDefautCO) > parseFloat(codeAbsence.NBHeuresMaxCO)) && formCodeAbsence.$submitted">{{resources.CodeAbsence_PanelRight_ErrorNbrHeuresHorsLimites}}</span>
+                    <span class="text-danger" ng-show="(parseFloat(codeAbsence.NBHeuresMinCO) > parseFloat(codeAbsence.NBHeuresMaxCO)) && formCodeAbsence.$submitted">{{resources.CodeAbsence_PanelRight_ErrorNbrHeureMiniCO}}</span>
+                    <div id="NbHeuresCO">
+                        <div class="col-md-4 col-lg-4">
+                            <!--FIELD NBHeuresDefautCO: START-->
+                            <div ng-class="{ 'has-error' : formCodeAbsence.NBHeuresDefautCO.$invalid && formCodeAbsence.$submitted}">
+                                <label for="txtNBHeuresDefautCO"><b>{{resources.CodeAbsence_PanelRight_HeureParDefaut}} *</b></label>
+                                <input class="form-control" type="text" fred-input-number min="0" max="12" id="txtNBHeuresDefautCO" name="NBHeuresDefautCO" required ng-model="codeAbsence.NBHeuresDefautCO" ng-change="handleCheckNumeric(formCodeAbsence.NBHeuresDefautCO)" />
+                            </div>
+                            <!--FIELD NBHeuresDefautCO: END-->
+                        </div>
+                        <div class="col-md-4 col-lg-4">
+                            <!--FIELD NBHeuresMinCO: START-->
+                            <div ng-class="{ 'has-error' : formCodeAbsence.NBHeuresMinCO.$invalid && formCodeAbsence.$submitted}">
+                                <label for="txtNBHeuresMinCO"><b>{{resources.CodeAbsence_PanelRight_HeureMin}} *</b></label>
+                                <input class="form-control" type="text" fred-input-number min="0" max="12" id="txtNBHeuresMinCO" name="NBHeuresMinCO" required ng-model="codeAbsence.NBHeuresMinCO" ng-change="handleCheckNumeric(formCodeAbsence.NBHeuresMinCO)" />
+                            </div>
+                            <!--FIELD NBHeuresMinCO: END-->
+                        </div>
+                        <div class="col-md-4 col-lg-4">
+                            <!--FIELD NBHeuresMaxCO: START-->
+                            <div ng-class="{ 'has-error' : formCodeAbsence.NBHeuresMaxCO.$invalid && formCodeAbsence.$submitted}">
+                                <label for="txtNBHeuresMaxCO"><b>{{resources.CodeAbsence_PanelRight_HeureMax}} *</b></label>
+                                <input class="form-control" type="text" fred-input-number min="0" max="12" id="txtNBHeuresMaxCO" name="NBHeuresMaxCO" required ng-model="codeAbsence.NBHeuresMaxCO" ng-change="handleCheckNumeric(formCodeAbsence.NBHeuresMaxCO)" />
+                            </div>
+                            <!--FIELD NBHeuresMaxCO: END-->
+                        </div>
+                    </div>
+                </div>
+                <!--FIELD Nombre d'heures CO: END-->
+                <!--FIELD Intemperie: START-->
+                <div class="form-group">
+                    <input id="chkIntemperie" type="checkbox" ng-model="codeAbsence.Intemperie" />
+                    <label for="chkIntemperie"><span></span>{{resources.CodeAbsence_PanelRight_Intemperie}}</label>
+                </div>
+                <!--FIELD Intemperie: END-->
+                <!--FIELD IsOuvrier IsETAM IsCadre: START-->
+                <div ng-if="isUserFes">
+                    <input id="chkIsOuvrier"
+                           type="checkbox"
+                           ng-model="codeAbsence.IsOuvrier" />
+                    <label for="chkIsOuvrier"><span></span>{{resources.IsOuvrier_lb}}</label>
+                    <input id="chkIsETAM"
+                           type="checkbox"
+                           ng-model="codeAbsence.IsETAM" />
+                    <label for="chkIsETAM"><span></span>{{resources.IsETAM_lb}}</label>
+                    <input id="chkIsCadre"
+                           type="checkbox"
+                           ng-model="codeAbsence.IsCadre" />
+                    <label for="chkIsCadre"><span></span>{{resources.IsCadre_lb}}</label>
+                </div>
+                <!--FIELD IsOuvrier IsETAM IsCadre: END-->
+                <!--FIELD TauxDecote: START-->
+                <div ng-class="{ 'has-error' : formCodeAbsence.TauxDecote.$invalid && formCodeAbsence.$submitted}" ng-show="codeAbsence.Intemperie">
+                    <label for="txtTauxDecote">{{resources.CodeAbsence_PanelRight_TauxDecote}} *</label>
+                    <span class="text-danger" ng-show="formCodeAbsence.TauxDecote.$error.required && formCodeAbsence.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <span class="text-danger" ng-show="(formCodeAbsence.TauxDecote.$error.min || formCodeAbsence.TauxDecote.$error.max) && formCodeAbsence.$submitted">{{resources.CodeAbsence_PanelRight_ErrorTauxDecoteHorsLimite}}</span>
+                    <span class="text-danger" ng-show="formCodeAbsence.TauxDecote.$error.numeric && formCodeAbsence.$submitted">{{resources.CodeAbsence_PanelRight_ErrorNombreFormat}}</span>
+                    <input class="form-control" min="0" max="100" name="TauxDecote" type="text" fred-input-number id="txtTauxDecote" ng-required="codeAbsence.Intemperie" placeholder="{{resources.CodeAbsence_PanelRight_TauxDecote_Placeholder}}" ng-model="codeAbsence.TauxDecote" ng-change="handleCheckNumeric(formCodeAbsence.TauxDecote)" />
+                </div>
+                <!--FIELD TauxDecote: END-->
+                <!--FOOTER TOOLBAR : BEGIN-->
+                <div class="footer">
+                    <div class="buttons">
+                        <button class="btn btn-default"
+                                type="submit"
+                                ng-disabled="isBusy"
+                                ng-click="handleClickAddOrUpdate();"
+                                title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">
+                            {{resources.Global_Bouton_Enregistrer}}
+                        </button>
+                        <button class="btn btn-primary"
+                                type="submit"
+                                ng-disabled="isBusy"
+                                ng-click="handleClickAddOrUpdateAndNew();"
+                                title="{{resources.Global_Bouton_EnregistrerEtNouveau_Tooltip}}">
+                            {{resources.Global_Bouton_EnregistrerEtNouveau}}
+                        </button>
+                        <button ng-hide="codeAbsence.CodeAbsenceId==0"
+                                class="btn" type="submit"
+                                ng-click="handleClickDelete(codeAbsence);"
+                                title="{{resources.Global_Bouton_Supprimer_Tooltip}}">
+                            {{resources.Global_Bouton_Supprimer}}
+                        </button>
+                        <button class="btn btn-link"
+                                type="button"
+                                ng-click="handleClickCancel();"
+                                title="{{resources.Global_Bouton_Annuler_Tooltip}}">
+                            {{resources.Global_Bouton_Annuler}}
+                        </button>
+                    </div>
+                </div>
+                <!--FOOTER TOOLBAR : END-->
+                <div class="close_panel"
+                     ng-click="handleClickCancel();"
+                     title="{{resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+                    <i class="fa fa-angle-right"
+                       aria-hidden="true"></i>
+                    <span>{{resources.Global_Bouton_RefermerPanneau}}</span>
+                </div>
+            </form>
+            <!--Formulaire: END-->
+
+        </div>
+    </div>
+</div>

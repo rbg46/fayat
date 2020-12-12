@@ -1,0 +1,159 @@
+﻿
+<div ng-repeat="axe in $ctrl.tree">
+    <div class="flex-line"
+         ng-class="$ctrl.getAxeLevel(axe)">
+
+        <!--Colonne de définition de l'axe T1 ou T2...-->
+        <div ng-click="$ctrl.setHiddenChildren(axe)" class="col-1 fixed-col-header" data-toggle="collapse" aria-expanded="false" ng-attr-data-target="{{ '#axe-' + $id }}">
+            <span class="chevron"></span>
+            <span ng-class="$ctrl.getLevelIcon(axe)"></span>
+            <span class="col-md-10 ax-lib" title="{{axe.Code}} - {{axe.Libelle}}">{{axe.Code}} - {{axe.Libelle}}</span>
+            <span class="col-md-1"></span>
+            <span class="col-md-1 glyphicon glyphicon-warning-sign warning-size" ng-if="axe.Valeurs.IsNewTache" title="{{$ctrl.resources.TachesBudgetCreeApresMiseEnApplicationWarning}}"></span>
+        </div>
+
+        <!--Colonne Budget-->
+
+
+        <div class="col-3" ng-show="$ctrl.colonnesAffichees.includes('BudgetQte')">
+            <span ng-if="axe.Valeurs.DisplayQtePu === 1">
+                {{axe.Valeurs.QuantiteBudget.Quantite | number:2 }} {{axe.Valeurs.QuantiteBudget.Unite}}
+            </span>
+        </div>
+        <div class="col-4" ng-show="$ctrl.colonnesAffichees.includes('BudgetPu')">
+            <span ng-if="axe.Valeurs.DisplayQtePu === 1" title="{{axe.Valeurs.PuBudget}} {{$ctrl.symboleDevise}}" ng-show="axe.Valeurs.PuBudget !== null">
+                {{axe.Valeurs.PuBudget | number:2}} {{$ctrl.symboleDevise}}
+            </span>
+        </div>
+        <div class="col-2">
+            <span title="{{axe.Valeurs.MontantBudget}} {{$ctrl.symboleDevise}}" ng-show="axe.Valeurs.MontantBudget !== null">
+                {{axe.Valeurs.MontantBudget | number:2}} {{$ctrl.symboleDevise}}
+            </span>
+        </div>
+
+
+        <div class="col-sep"></div>
+        <div class="col-8" title="{{axe.Valeurs.PourcentageDad}} %">{{axe.Valeurs.PourcentageDad | number:2}} %</div>
+
+        <!--Colonne Droit à la dépense-->
+        <div class="col-6" ng-show="$ctrl.colonnesAffichees.includes('DadQte')">
+            <span ng-if="axe.Valeurs.DisplayQtePu === 1" ng-show="axe.Valeurs.QuantiteBudget !== null">
+                {{axe.Valeurs.QuantiteDad | number:2}} {{axe.Valeurs.QuantiteBudget.Unite}}
+            </span>
+        </div>
+        <div class="col-7" ng-show="$ctrl.colonnesAffichees.includes('DadPu')">
+            <span ng-if="axe.Valeurs.DisplayQtePu === 1" title="{{axe.Valeurs.PuDad}}  {{$ctrl.symboleDevise}}" ng-show="axe.Valeurs.PuBudget !== null">
+                {{axe.Valeurs.PuDad | number:2}}  {{$ctrl.symboleDevise}}
+            </span>
+        </div>
+        <div class="col-9">
+            <span title="{{axe.Valeurs.MontantDad}} {{$ctrl.symboleDevise}}" ng-show="axe.Valeurs.MontantDad !== null">
+                {{axe.Valeurs.MontantDad | number:2}} {{$ctrl.symboleDevise}}
+            </span>
+        </div>
+
+
+        <div class="col-sep"></div>
+
+        <!--Colonne Dépense-->
+        <div class="col-8">
+            <span title="{{axe.Valeurs.PourcentageDepense}} %" ng-show="axe.Valeurs.PourcentageDepense !== null">
+                {{ axe.Valeurs.PourcentageDepense | number:2}} %
+            </span>
+        </div>
+
+        <div class="col-10" ng-show="$ctrl.colonnesAffichees.includes('DepQte')">
+            <span class="material-icons to-expl" ng-click="$ctrl.ouvreOngletDepense(axe)" title="Cliquer pour ouvrir dans un nouvel onglet l'explorateur de dépense">reply</span>
+            <span ng-if="axe.Valeurs.DisplayQtePu === 1">
+                {{axe.Valeurs.QuantiteDepense.Quantite | number:2 }} {{$ctrl.getUniteQuantiteEcart(axe)}}
+            </span>
+        </div>
+        <div class="col-11" ng-show="$ctrl.colonnesAffichees.includes('DepPu')">
+            <span ng-if="axe.Valeurs.DisplayQtePu === 1" title="{{ axe.Valeurs.PuDepense }}{{axe.Valeurs.PuDepense != null ? (' ' + $ctrl.symboleDevise) : ''}}">
+                {{ axe.Valeurs.PuDepense | number:2 }}
+                <!--Cette valeur et uniquement cette valeur parmis toutes les autres
+                est calculée
+                est affichée sur des lignes spécifiques
+                Ces paramètres font que pour garder un écran utilisable on vérifie la présence d'un Pu pour la ligne en cours
+                -->
+                <span ng-show="axe.Valeurs.PuDepense !== null">
+                    {{$ctrl.symboleDevise}}
+                </span>
+            </span>
+        </div>
+        <div class="col-9">
+            <span title="{{axe.Valeurs.MontantDepense}} {{$ctrl.symboleDevise}}" ng-show="axe.Valeurs.MontantDepense !== null">
+                {{axe.Valeurs.MontantDepense | number:2}} {{$ctrl.symboleDevise}}
+            </span>
+        </div>
+
+        <div class="col-sep"></div>
+
+        <!--Colonne Ecart-->
+
+        <div class="col-13" ng-show="$ctrl.colonnesAffichees.includes('EcartQte')">
+            <span ng-if="axe.Valeurs.DisplayQtePu === 1">
+                {{axe.Valeurs.QuantiteEcart | number:2 }} {{$ctrl.getUniteQuantiteEcart(axe)}}
+            </span>
+        </div>
+        <div class="col-14" ng-show="$ctrl.colonnesAffichees.includes('EcartPu')">
+            <span ng-if="axe.Valeurs.DisplayQtePu === 1" ng-show="axe.Valeurs.PuEcart !== null">
+                {{axe.Valeurs.PuEcart | number:2}} {{$ctrl.symboleDevise}}
+            </span>
+        </div>
+        <div class="col-12" title="{{axe.Valeurs.MontantEcart}} {{$ctrl.symboleDevise}}">{{axe.Valeurs.MontantEcart | number:2}} {{$ctrl.symboleDevise}}</div>
+
+        <div class="col-sep"></div>
+
+        <!--Colonne Rad-->
+
+        <div class="col-16" ng-show="$ctrl.colonnesAffichees.includes('RadQte')">
+            <span ng-if="axe.Valeurs.DisplayQtePu === 1">
+                {{ axe.Valeurs.QuantiteRad | number:2 }} {{$ctrl.getUniteQuantiteRad(axe)}}
+            </span>
+        </div>
+        <div class="col-17" ng-show="$ctrl.colonnesAffichees.includes('RadPu')">
+            <span ng-if="axe.Valeurs.DisplayQtePu === 1" title="{{axe.Valeurs.PuBudget}} {{$ctrl.symboleDevise}}" ng-show="axe.Valeurs.PuBudget !== null">
+                {{axe.Valeurs.PuBudget | number:2}} {{$ctrl.symboleDevise}}
+            </span>
+        </div>
+        <div class="col-15" title="{{ axe.Valeurs.MontantRadTheorique}} {{$ctrl.symboleDevise}}">{{ axe.Valeurs.MontantRadTheorique | number:2}} {{$ctrl.symboleDevise}}</div>
+
+        <div class="col-sep" ng-show="$ctrl.cumul"></div>
+
+        <!--Colonne Ajustement-->
+        <div class="col-18" ng-show="$ctrl.cumul">
+            <span ng-if="!$ctrl.isAjustementEditable(axe)">{{axe.Valeurs.MontantAjustement}}</span>
+            <input select-on-click fred-input-number="3" fred-input-default-value="0" type="text" ng-if="$ctrl.isAjustementEditable(axe)" ng-change="$ctrl.montantAjustementChanged(axe)" step=".01" ng-model="axe.Valeurs.MontantAjustement" class="form-control nb">
+            <span>{{$ctrl.symboleDevise}}</span>
+        </div>
+        <div class="col-19" ng-show="$ctrl.colonnesAffichees.includes('AjustementCommentaire') && $ctrl.cumul">
+            <input select-on-click type="text" ng-disabled="!$ctrl.isAjustementEditable(axe)" ng-model="axe.Valeurs.CommentaireAjustement" class="form-control">
+        </div>
+        <div class="col-sep" ng-show="$ctrl.cumul"></div>
+        <div title="{{ $ctrl.getPfa(axe)}} {{$ctrl.symboleDevise}}" class="col-20" ng-show="$ctrl.colonnesAffichees.includes('PrevisionnelFinAffaire') && $ctrl.cumul">
+            {{ $ctrl.getPfa(axe) | number:2 }} {{$ctrl.symboleDevise}}
+        </div>
+        <div title="{{axe.Valeurs.PfaMoisPrecedent}} {{$ctrl.symboleDevise}}" class="col-21" ng-show="$ctrl.colonnesAffichees.includes('PfaMoisPrecedent') && $ctrl.cumul">
+            {{axe.Valeurs.PfaMoisPrecedent | number:2}} {{$ctrl.symboleDevise}}
+        </div>
+        <div title="{{axe.Valeurs.ProjectionLineaireDepenses}} {{$ctrl.symboleDevise}}" class="col-22" ng-show="$ctrl.colonnesAffichees.includes('ProjectionLineaireDepense')  && $ctrl.cumul">
+            {{axe.Valeurs.ProjectionLineaireDepenses | number:2}} {{$ctrl.symboleDevise}}
+        </div>
+        <div class="col-23">
+            <span class="material-icons">cloud_download</span>
+        </div>
+    </div>
+    <div class="collapse in" ng-attr-id="{{ 'axe-' + $id }}">
+        <budget-controle-budgetaire-arbre-axes-component ng-if="axe.SousAxe"
+                                                         tree="axe.SousAxe"
+                                                         axe-principal="$ctrl.axePrincipal"
+                                                         locked="$ctrl.locked"
+                                                         readonly="$ctrl.readonly"
+                                                         colonnes-affichees="$ctrl.colonnesAffichees"
+                                                         symbole-devise="$ctrl.symboleDevise"
+                                                         cumul="$ctrl.cumul"
+                                                         axe-affichees="$ctrl.axeAffichees">
+        </budget-controle-budgetaire-arbre-axes-component>
+    </div>
+</div>

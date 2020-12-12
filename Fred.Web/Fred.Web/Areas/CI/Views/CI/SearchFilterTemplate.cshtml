@@ -1,0 +1,97 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+  ViewBag.Title = FeatureCI.CI_Search_TitreOnglet;
+}
+
+@Styles.Render("~/Content/BarreRecherche/barre-recherche.css")
+@Scripts.Render("~/Scripts/module/BarreRecherche/barre-recherche.js")
+
+<div class="overlay"></div>
+<div class="container-fluid CI">
+  <div class="filter-container">
+    <div class="row">
+      <div class="col-md-4 col-sm-5 no_padding">
+        <div class="input-group">
+          <input type="text" class="form-control" ng-model="filter.ValueText" on-enter="applyFilter(filter)" placeholder="{{filterPlaceholder}}" />
+          <span class="input-group-btn">
+            <button class="btn btn-secondary y_search" type="button" ng-click="applyFilter(filter)" ng-disabled="busy"><i class="material-icons">search</i></button>
+          </span>
+        </div>
+        <button class="btn btn-sm btn-white filter visible-xs pull-right" data-toggle="collapse" data-target="#demo" >
+          <span class="fa fa-filter"></span>
+        </button>
+      </div>
+      <div class="col-md-6 col-sm-7 flex">
+          <button type="button" class="fred-button criteria" ng-show="filter.IsSEP" ng-click="filter.IsSEP=false; applyFilter(filter)">{{resources.CI_Search_Tuile_SEP}}</button>
+          <button type="button" class="fred-button criteria" ng-show="filter.ClotureOk" ng-click="filter.ClotureOk=false; applyFilter(filter)">{{resources.CI_Search_Tuile_ClotureOk}}</button>
+          <button type="button" ng-repeat="type in filter.CITypeList" class="fred-button criteria" ng-show="type.Selected" ng-click="type.Selected=false;  applyFilter(filter)">{{type.Designation}}</span></button>
+          <button type="button" class="fred-button criteria" ng-show="filter.DateOuvertureFrom" ng-click="filter.DateOuvertureFrom=null; applyFilter(filter)">{{resources.CI_Search_Tuile_DateOuverture}} {{filter.DateOuvertureFrom | toLocaleDate | date : 'dd/MM/yy'}}</button>
+          <button type="button" class="fred-button criteria" ng-show="filter.DateFermetureTo" ng-click="filter.DateFermetureTo=null; applyFilter(filter)">{{resources.CI_Search_Tuile_DateFermeture}} {{filter.DateFermetureTo | toLocaleDate | date : 'dd/MM/yy'}}</button>
+      </div>
+      <div class="col-md-1 col-sm-1 no-pr">
+        <button class="fred-button white-star pull-right" type="button" ng-click="addFilter2Favoris(filter)" title="{{ resources.CI_Search_Favori_Tooltip }}">
+          <i class="material-icons">star</i>
+        </button>
+
+        <button class="btn btn-sm btn-white filter hidden-xs pull-right"  ng-click="savePreviousFilter(filter)" data-toggle="collapse" data-target="#demo">
+          <span class="fa fa-filter"></span>
+        </button>
+      </div>
+    </div>
+    <div id="demo" class="collapse filters_bloc folding">
+      <h3><i class="glyphicon glyphicon-filter"></i> {{resources.Global_Filtre_Titre}}</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="legend">{{resources.Global_Filtre_SousTitre_Selection}} :</div>
+          <div class="selection_filters">
+            <label class="pull-left">
+              {{resources.CI_Search_SeulementSEP}}
+            </label>
+            <div class="pull-right">
+              <label class="switch">
+                <input type="checkbox" name="IsSEP" ng-model="filter.IsSEP" />
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+          <div class="selection_filters">
+            <label class="pull-left">
+              {{resources.CI_Search_InclureClotures}}
+            </label>
+            <div class="pull-right">
+              <label class="switch">
+                <input type="checkbox" name="ClotureOk" ng-model="filter.ClotureOk" />
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+          <div ng-repeat="type in filter.CITypeList" class="selection_filters fes">
+            <label class="pull-left">
+              {{resources[type.RessourceKey]}}
+            </label>
+            <div class="pull-right">
+              <label class="switch">
+                <input type="checkbox"
+                       name="ClotureOk"
+                       value="{{type.Id}}"
+                       ng-model="type.Selected" />
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="legend">{{resources.Global_Filtre_SousTitre_Date}} :</div>
+          <app-date-picker format="DD/MM/YYYY" lang="fr" ng-model="filter.DateOuvertureFrom" placeholder={{resources.CI_Search_DateOuverture_Placeholder}}></app-date-picker>
+          <app-date-picker format="DD/MM/YYYY" lang="fr" ng-model="filter.DateFermetureTo" placeholder="{{resources.CI_Search_DateFermeture_Placeholder}}"></app-date-picker>
+        </div>
+      </div>
+      <div class="row buttons_row">
+        <button type="button" class="btn btn-primary btn-grand pull-right" ng-click="applyFilter(filter)">{{resources.Global_Filtre_Bouton_Appliquer}} </button>
+        <button type="button" class="btn btn-gray btn-grand pull-right" ng-click="cancelFilter(filter)">{{resources.Global_Bouton_Annuler}} </button>
+      </div>
+    </div>
+  </div>
+</div>
+

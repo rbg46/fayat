@@ -1,0 +1,40 @@
+﻿
+
+<div class="component-lookup-panel" ng-keydown="$ctrl.handleKeyDown($event)">
+
+
+    <div class="component-lookup-panel-header">
+
+        <!--########  Titre  ########-->
+        <div class="component-lookup-panel-title">
+            <div class="color-white flex1 bold txt-size-140">{{$ctrl.title}}</div>
+            <i class="color-white material-icons txt-link" title="Cliquer pour fermer" ng-click="$ctrl.handleCancel()">close</i>
+        </div>
+
+        <!--########  champ de recherche (champ par défaut)  ########-->
+        <input type="text"
+               style="margin-bottom:10px !important"
+               ng-change="$ctrl.handleChangeSearchText()"
+               ng-model="$ctrl.searchText"
+               class="form-control"
+               placeholder="{{$ctrl.placeholder}}"
+               title="{{$ctrl.searchTooltip}}" />
+
+    </div>
+    <div class="component-lookup-panel-scroll">
+
+        <div ng-show="$ctrl.items.length<1" class="alignCenter txt-size-200 bold flex1 color-grey2">
+            Aucun élément trouvé
+        </div>
+
+        <!--########  Liste des items  ########-->
+        <div ng-hide="$ctrl.busy" ng-repeat="item in $ctrl.items track by $index">
+            <div ng-click="$ctrl.handleSelectItem(item)" ng-if="$ctrl.itemTemplate" ng-include="$ctrl.itemTemplate"></div>
+        </div>
+
+        <!--########  Loader  ########-->
+        <div ng-show="$ctrl.busy && ($ctrl.currentPage === 1)" class="component-lookup-panel-scroll-busy">
+            <img src="../../../../Content/images/loader.gif" />
+        </div>
+    </div>
+</div>

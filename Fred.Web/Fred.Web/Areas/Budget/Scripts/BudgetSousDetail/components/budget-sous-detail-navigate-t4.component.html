@@ -1,0 +1,14 @@
+﻿<fred-section class="nav-section">
+    <fred-section-title>{{::$ctrl.resources.Budget_Detail_ToolBar_Titre_Navigation}}</fred-section-title>
+    <fred-section-controls>
+        <fred-button type="button" class="default fred-button" title="{{$ctrl.previousT4ButtonMessage()}}" ng-disabled="$ctrl.isT4DisplayedFirstInList()" ng-click="$ctrl.onNavigateT4($ctrl.NavigateT4Enum.PreviousT4)">
+            <i class="material-icons">chevron_left</i>
+        </fred-button>
+        <fred-button class="default">
+            <i class="material-icons" ng-click="$ctrl.showBandeauLateral();">search</i>
+        </fred-button>
+        <fred-button type="button" class="default fred-button" title="{{$ctrl.nextT4ButtonMessage()}}" ng-disabled="$ctrl.isT4DisplayedLastInList()">
+            <i class="material-icons" ng-click="$ctrl.onNavigateT4($ctrl.NavigateT4Enum.NextT4)">chevron_right</i>
+        </fred-button>
+    </fred-section-controls>
+</fred-section>

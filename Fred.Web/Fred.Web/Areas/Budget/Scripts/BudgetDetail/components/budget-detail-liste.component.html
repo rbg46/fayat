@@ -1,0 +1,207 @@
+﻿<fred-flex-table class="budget-detail flex-table fred-scroll" id="FLEX_TABLE" anchor-bottom="25">
+    <!--Premier en-tête-->
+    <div class="fixed-line-header top-header">
+        <div class="col-1 fixed-col-header selector">
+            <span class="foldUnfold" ng-click="$ctrl.onToutPlier()">Tout plier</span>
+            <span class="foldUnfold" ng-click="$ctrl.onToutDeplier()">Tout deplier</span>
+        </div>
+        <div class="col-2 fixed-col-header" ng-class="$ctrl.Col2SizeClass"></div>
+        <div class="col-3">{{::$ctrl.resources.Budget_Detail_Liste_Entete_Budget}}</div>
+        <div class="col-unite" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.Unite)">{{::$ctrl.resources.Budget_Detail_Liste_Entete_T4}}</div>
+        <div class="col-4" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.Quantite)"></div>
+        <div class="col-5" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.PU)"></div>
+        <div class="col-6"></div>
+        <div class="col-8" ng-if="!$ctrl.budget.IsTypeAvancementBudgetDynamique"></div>
+        <div class="col-11"></div>
+    </div>
+
+    <!--Second en-tête-->
+    <div class="fixed-line-header mid-header">
+        <div class="col-1 fixed-col-header selector">{{::$ctrl.resources.Budget_Detail_Liste_Entete_Code}}</div>
+        <div class="col-2 fixed-col-header" ng-class="$ctrl.Col2SizeClass">{{::$ctrl.resources.Budget_Detail_Liste_Entete_Libelle}}</div>
+        <div class="col-3">{{::$ctrl.resources.Budget_Detail_Liste_Entete_Montant}}</div>
+        <div class="col-unite" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.Unite)">{{::$ctrl.resources.Budget_Detail_Liste_Entete_Unite}}</div>
+        <div class="col-4" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.Quantite)">{{::$ctrl.resources.Budget_Detail_Liste_Entete_Quantie}}</div>
+        <div class="col-5" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.PU)">{{::$ctrl.resources.Budget_Detail_Liste_Entete_PU}}</div>
+        <div class="col-6">{{::$ctrl.resources.Budget_Detail_Liste_Entete_Commentaire}}</div>
+        <div class="col-8" ng-if="!$ctrl.budget.IsTypeAvancementBudgetDynamique">{{::$ctrl.resources.Budget_Detail_Liste_Entete_Type}}</div>
+        <div class="col-11">{{::$ctrl.resources.Budget_Detail_Liste_Entete_Actions}}</div>
+    </div>
+
+    <!--Liste des tâches de niveau 1-->
+    <div ng-repeat="tache1 in $ctrl.budget.Taches1 | orderBy: '+Code'">
+        <div class="flex-line level-1" ng-class="{ 'task-disabled': !tache1.IsActive }" ng-show="$ctrl.ShouldDisplayTaskLine(tache1)" data-toggle="collapse" aria-expanded="false" data-target="#T1_{{tache1.TacheId}}">
+            <div class="col-1 fixed-col-header selector" ng-class="{'is-new-task': tache1.Warnings}">
+                <div class="div-task">
+                    <div class="chevron" ng-class="tache1.Taches2.length != 0 ? '' : 'not-visible'"></div>
+                    <span class="icon-T1" ng-attr-title="{{::$ctrl.resources.Budget_Detail_Tooltip_Tache1}}"></span>
+                    {{tache1.Code}}
+                </div>
+                <span class="glyphicon glyphicon-warning-sign warning-size" ng-if="tache1.Warnings" title="{{tache1.Warnings}}"></span>
+            </div>
+            <div class="col-2 fixed-col-header" ng-class="$ctrl.Col2SizeClass">{{tache1.Libelle}}</div>
+            <div class="col-3" ng-attr-title="{{$ctrl.BudgetDetailService.GetTooltip(tache1.Montant)}}">{{tache1.Montant | number:2}}</div>
+            <div class="col-unite" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.Unite)"></div>
+            <div class="col-4" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.Quantite)"></div>
+            <div class="col-5" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.PU)"></div>
+            <div class="col-6" ng-click="$event.stopPropagation()">
+                <input type="text" class="form-control" ng-model="tache1.Info.View.Commentaire" maxlength="150" ng-attr-title="{{tache1.Info.View.Commentaire}}" ng-readonly="$ctrl.budget.Readonly" ng-focus="$ctrl.budget.EditTache(tache1)">
+                <span class="material-icons" ng-click="$ctrl.ShowComment(tache1)" ng-attr-title="{{$ctrl.GetShowCommentButtonTooltip()}}">more_vert</span>
+            </div>
+            <div class="col-8" ng-if="!$ctrl.budget.IsTypeAvancementBudgetDynamique"></div>
+            <div class="col-11"></div>
+        </div>
+
+        <!--Liste des tâches de niveau 2-->
+        <div class="collapse in" id="T1_{{tache1.TacheId}}">
+            <div ng-repeat="tache2 in tache1.Taches2 | orderBy: '+Code'">
+                <div class="flex-line level-2" ng-class="{ 'task-disabled ': !tache2.IsActive }" ng-show="$ctrl.ShouldDisplayTaskLine(tache2)" data-toggle="collapse" aria-expanded="false" data-target="#T2_{{tache2.TacheId}}">
+                    <div class="col-1 fixed-col-header selector" ng-class="{'is-new-task': tache2.Warnings}">
+                        <div class="div-task">
+                            <div class="chevron" ng-class="tache2.Taches3.length != 0 ? '' : 'not-visible'"></div>
+                            <span class="icon-T2" ng-attr-title="{{::$ctrl.resources.Budget_Detail_Tooltip_Tache2}}"></span>
+                            {{tache2.Code}}
+                        </div>
+                        <span class="glyphicon glyphicon-warning-sign warning-size" ng-if="tache2.Warnings" title="{{tache2.Warnings}}"></span>
+                    </div>
+                    <div class="col-2 fixed-col-header" ng-class="$ctrl.Col2SizeClass">{{tache2.Libelle}}</div>
+                    <div class="col-3" ng-attr-title="{{$ctrl.BudgetDetailService.GetTooltip(tache2.Montant)}}">{{tache2.Montant | number:2}}</div>
+                    <div class="col-unite" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.Unite)"></div>
+                    <div class="col-4" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.Quantite)"></div>
+                    <div class="col-5" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.PU)"></div>
+                    <div class="col-6" ng-click="$event.stopPropagation()">
+                        <input type="text" class="form-control" ng-model="tache2.Info.View.Commentaire" maxlength="150" ng-attr-title="{{tache2.Info.View.Commentaire}}" ng-readonly="$ctrl.budget.Readonly" ng-focus="$ctrl.budget.EditTache(tache2)">
+                        <span class="material-icons" ng-click="$ctrl.ShowComment(tache2)" title="{{::$ctrl.resources.Budget_Detail_Tooltip_ModifierCommentaire}}">more_vert</span>
+                    </div>
+                    <div class="col-8" ng-if="!$ctrl.budget.IsTypeAvancementBudgetDynamique"></div>
+                    <div class="col-11"></div>
+                </div>
+
+                <!--Liste des tâches de niveau 3-->
+                <div class="collapse in" id="T2_{{tache2.TacheId}}">
+                    <div ng-repeat="tache3 in tache2.Taches3 | orderBy: '+Code'">
+                        <div class="flex-line level-3" ng-class="{ 'task-disabled': !tache3.IsActive }" ng-show="$ctrl.ShouldDisplayTaskLine(tache3)" data-toggle="collapse" aria-expanded="false" data-target="#T3_{{tache3.TacheId}}">
+                            <div class="col-1 fixed-col-header selector" ng-class="{'is-new-task': tache3.Warnings}">
+                                <div class="div-task">
+                                    <div class="chevron" ng-class="tache3.Taches4.length != 0 ? '' : 'not-visible' "></div>
+                                    <span class="icon-T3" ng-attr-title="{{::$ctrl.resources.Budget_Detail_Tooltip_Tache3}}"></span>
+                                    {{tache3.Code}}
+                                </div>
+                                <span class="glyphicon glyphicon-warning-sign warning-size" ng-if="tache3.Warnings" title="{{tache3.Warnings}}"></span>
+                            </div>
+                            <div class="col-2 fixed-col-header" ng-class="$ctrl.Col2SizeClass">{{tache3.Libelle}}</div>
+                            <div class="col-3" ng-attr-title="{{$ctrl.BudgetDetailService.GetTooltip(tache3.Montant)}}">{{tache3.Montant | number:2}}</div>
+                            <div class="col-unite" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.Unite)"></div>
+                            <div class="col-4" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.Quantite)"></div>
+                            <div class="col-5" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.PU)"></div>
+                            <div class="col-6" ng-click="$event.stopPropagation()">
+                                <input type="text" class="form-control" ng-model="tache3.Info.View.Commentaire" maxlength="150" ng-attr-title="{{tache3.Info.View.Commentaire}}" ng-readonly="$ctrl.budget.Readonly" ng-focus="$ctrl.budget.EditTache(tache3)">
+                                <span class="material-icons" ng-click="$ctrl.ShowComment(tache3)" title="{{::$ctrl.resources.Budget_Detail_Tooltip_ModifierCommentaire}}">more_vert</span>
+                            </div>
+                            <div class="col-8" ng-if="!$ctrl.budget.IsTypeAvancementBudgetDynamique"></div>
+                            <div class="col-11">
+                                <div class="action-t3" ng-if="!$ctrl.budget.Readonly && !$ctrl.isTacheEcart(tache3)">
+                                    <feature-flag feature-key="budgetDetailCopierDeplacerT4">
+                                        <div class="action-icons" ng-click="$event.stopPropagation(); $ctrl.ShowCopyMoveDialog(tache3)" ng-attr-title="{{::$ctrl.resources.CopierDeplacerT4_Tooltip_T3}}">
+                                            <span class="material-icons">cloud_download</span>
+                                        </div>
+                                    </feature-flag>
+                                    <div ng-click="$event.stopPropagation(); $ctrl.AddT4(tache3)" ng-attr-title="{{::$ctrl.resources.Budget_Detail_Tooltip_CreerT4}}" style="display: inline-block">
+                                        <span class="add-t4">T4 <span class="material-icons">add</span></span>
+                                    </div>
+                                </div>
+                                <div ng-if="$ctrl.budget.Readonly">
+                                    <span class="glyphicon glyphicon-warning-sign" ng-if="tache4.Warnings" title="{{tache4.Warnings}}"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Liste des tâches de niveau 4-->
+                        <div class="collapse in" id="T3_{{tache3.TacheId}}">
+                            <div ng-repeat="tache4 in tache3.Taches4 | orderBy: '+Code' | filter:{Deleted:false}">
+                                <div class="flex-line level-4" ng-show="$ctrl.ShouldDisplayTaskLine(tache4)" ng-class="{'item-edited': tache4.IsEdited, 'task-disabled': !tache4.IsActive}">
+                                    <div class="col-1 fixed-col-header selector" ng-class="{'is-tache4-copied': tache4.Copied, 'is-new-task': tache4.Warnings}">
+                                        <div class="div-task">
+                                            <div class="chevron not-visible"></div>
+                                            <span class="fa fa-exclamation-triangle warning-tache-ecart" ng-attr-title="{{ ::$ctrl.resources.BudgetTacheWarningT4Rev }}" ng-if="$ctrl.isTacheEcart(tache3)"></span>
+                                            <span class="icon-T4" ng-attr-title="{{::$ctrl.resources.Budget_Detail_Tooltip_Tache4}}"></span>
+                                            {{tache4.Code}}
+                                        </div>
+                                        <span class="glyphicon glyphicon-warning-sign warning-size" ng-if="tache4.Warnings" title="{{tache4.Warnings}}"></span>
+                                        </div>
+                                        <div class="col-2 fixed-col-header" ng-class="$ctrl.Col2SizeClass">{{tache4.Libelle}}</div>
+                                        <div class="col-3" ng-attr-title="{{$ctrl.BudgetDetailService.GetTooltip(tache4.BudgetT4.MontantT4)}}">{{tache4.BudgetT4.MontantT4 | number:2}}</div>
+                                        <div class="col-unite" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.Unite)" ng-attr-title="{{tache4.BudgetT4.Unite.Libelle}}">{{tache4.BudgetT4.Unite.Code}}</div>
+                                        <div class="col-4" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.Quantite)" ng-attr-title="{{$ctrl.BudgetDetailService.GetTooltip(tache4.BudgetT4.QuantiteARealiser)}}">{{tache4.BudgetT4.QuantiteARealiser | number:2}}</div>
+                                        <div class="col-5" ng-show="$ctrl.IsColumnVisible($ctrl.BudgetService.DetailColumnEnum.PU)" ng-attr-title="{{$ctrl.BudgetDetailService.GetTooltip(tache4.BudgetT4.PU)}}">{{tache4.BudgetT4.PU | number:2}}</div>
+                                        <div class="col-6" ng-click="$event.stopPropagation()">
+                                            <input type="text" class="form-control" ng-model="tache4.BudgetT4.View.Commentaire" maxlength="500" ng-attr-title="{{tache4.BudgetT4.View.Commentaire}}" ng-readonly="$ctrl.budget.Readonly || tache4.Code.indexOf('T4REV') > -1" ng-focus="$ctrl.budget.EditTache(tache4)">
+                                            <span class="material-icons" ng-click="$ctrl.ShowComment(tache4)" title="{{::$ctrl.resources.Budget_Detail_Tooltip_ModifierCommentaire}}">more_vert</span>
+                                        </div>
+                                        <div class="col-8" ng-if="!$ctrl.budget.Readonly && !(tache4.Code.indexOf('T4REV') > -1) && !$ctrl.budget.IsTypeAvancementBudgetDynamique">
+                                            <span ng-if="!tache4.BudgetT4.View.TypeAvancement"
+                                                  class="type-avancement indefini"
+                                                  ng-click="$ctrl.ToggleTypeAvancement(tache4)"
+                                                  title="{{::$ctrl.resources.Budget_Detail_Tooltip_ChangerTypeAvancement}}">{{::$ctrl.resources.Budget_Detail_Avancement_Indefini}}</span>
+                                            <span ng-if="tache4.BudgetT4.View.TypeAvancement === $ctrl.BudgetService.TypeAvancementEnum.Pourcentage"
+                                                  class="type-avancement pourcent"
+                                                  ng-click="$ctrl.ToggleTypeAvancement(tache4)"
+                                                  title="{{::$ctrl.resources.Budget_Detail_Tooltip_ChangerTypeAvancement}}">{{::$ctrl.resources.Budget_Detail_Avancement_Pourcentage}}</span>
+                                            <span ng-if="tache4.BudgetT4.View.TypeAvancement === $ctrl.BudgetService.TypeAvancementEnum.Quantite"
+                                                  class="type-avancement quantite"
+                                                  ng-click="$ctrl.ToggleTypeAvancement(tache4)"
+                                                  title="{{::$ctrl.resources.Budget_Detail_Tooltip_ChangerTypeAvancement}}">{{::$ctrl.resources.Budget_Detail_Avancement_Quantite}}</span>
+                                        </div>
+                                        <div class="col-8" ng-if="($ctrl.budget.Readonly || (tache4.Code.indexOf('T4REV') > -1)) && !$ctrl.budget.IsTypeAvancementBudgetDynamique">
+                                            <span ng-if="!tache4.BudgetT4.View.TypeAvancement"
+                                                  class="type-avancement indefini">{{::$ctrl.resources.Budget_Detail_Avancement_Indefini}}</span>
+                                            <span ng-if="tache4.BudgetT4.View.TypeAvancement === $ctrl.BudgetService.TypeAvancementEnum.Pourcentage"
+                                                  class="type-avancement pourcent">{{::$ctrl.resources.Budget_Detail_Avancement_Pourcentage}}</span>
+                                            <span ng-if="tache4.BudgetT4.View.TypeAvancement === $ctrl.BudgetService.TypeAvancementEnum.Quantite"
+                                                  class="type-avancement quantite">{{::$ctrl.resources.Budget_Detail_Avancement_Quantite}}</span>
+                                        </div>
+                                        <div class="col-11">
+                                            <div class="action-icons">
+                                                <feature-flag feature-key="budgetDetailCopierDeplacerT4">
+                                                    <span class="material-icons"
+                                                          ng-if="!$ctrl.budget.Readonly && !$ctrl.isTacheEcart(tache3) && !(tache4.Code.indexOf('T4REV') > -1)"
+                                                          ng-click="$ctrl.ShowCopyMoveDialog(tache4)"
+                                                          ng-attr-title="{{::$ctrl.resources.CopierDeplacerT4_Tooltip_T4}}"
+                                                          ng-show="false">cloud_download</span>
+                                                </feature-flag>
+                                                <span class="material-icons" ng-if="!$ctrl.budget.Readonly && !$ctrl.isTacheEcart(tache3) && !(tache4.Code.indexOf('T4REV') > -1)" ng-click="$ctrl.ChangeT4(tache4)" ng-attr-title="{{::$ctrl.resources.Budget_Detail_ChangeTache4_Tooltip}}">more_vert</span>
+                                                <span class="material-icons" ng-if="!$ctrl.budget.Readonly && !$ctrl.isTacheEcart(tache3) && !(tache4.Code.indexOf('T4REV') > -1)" ng-click="$ctrl.DeleteBudgetT4(tache4)" ng-attr-title="{{::$ctrl.resources.Budget_Detail_Tooltip_SupprimerBudgetT4}}">clear</span>
+                                                <span class="material-icons" ng-click="$ctrl.LoadSousDetailRequested(tache4)" ng-attr-title="{{::$ctrl.resources.Budget_Detail_Tooltip_VoirSousDetail}}">chevron_right</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fred-flex-table>
+
+<!--Panneau de gestion des commentaires-->
+<budget-commentaire-panel-component ng-if="$ctrl.budget"
+                                    readonly="$ctrl.budget.Readonly"
+                                    resources="$ctrl.resources">
+</budget-commentaire-panel-component>
+
+<!--Modal d'ajout / modification d'une tâche de niveau 4-->
+<gestion-t4-dialog-component ng-if="$ctrl.budget && !$ctrl.budget.Readonly"
+                             resources="$ctrl.resources"
+                             budget="$ctrl.budget">
+</gestion-t4-dialog-component>
+
+<!--Modal de copie / déplacement de T4-->
+<copier-deplacer-t4-dialog-component ng-if="$ctrl.budget && !$ctrl.budget.Readonly"
+                                     resources="$ctrl.resources">
+</copier-deplacer-t4-dialog-component>
+
+<!--Modal de confirmation pour la copie / déplacement de T4-->
+<copier-deplacer-t4-confirmation-dialog-component ng-if="$ctrl.budget && !$ctrl.budget.Readonly"
+                                                  resources="$ctrl.resources">
+</copier-deplacer-t4-confirmation-dialog-component>

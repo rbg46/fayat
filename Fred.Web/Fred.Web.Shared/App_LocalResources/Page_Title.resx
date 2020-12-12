@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Title_Acceuil" xml:space="preserve">
+    <value>Acceuil</value>
+  </data>
+  <data name="Title_App" xml:space="preserve">
+    <value>FRED - </value>
+  </data>
+  <data name="Title_Athentification" xml:space="preserve">
+    <value>Authentification</value>
+  </data>
+  <data name="Title_Bareme" xml:space="preserve">
+    <value>Barème</value>
+  </data>
+  <data name="Title_budget" xml:space="preserve">
+    <value>Budgets</value>
+  </data>
+  <data name="Title_Ci" xml:space="preserve">
+    <value>Centre d'imputation</value>
+  </data>
+  <data name="Title_Cloture_Comptable" xml:space="preserve">
+    <value>Calendrier de clôture comptable</value>
+  </data>
+  <data name="Title_Code_Absence" xml:space="preserve">
+    <value>Codes absense</value>
+  </data>
+  <data name="Title_Code_Deplacement" xml:space="preserve">
+    <value>Codes deplacement</value>
+  </data>
+  <data name="Title_Code_Majoration" xml:space="preserve">
+    <value>Codes majoration</value>
+  </data>
+  <data name="Title_Code_Zone_Deplacement" xml:space="preserve">
+    <value>Codes zone déplacement</value>
+  </data>
+  <data name="Title_Commande" xml:space="preserve">
+    <value>Commandes</value>
+  </data>
+  <data name="Title_Date_Paie" xml:space="preserve">
+    <value>Calendrier de paie</value>
+  </data>
+  <data name="Title_Depense" xml:space="preserve">
+    <value>Dépense</value>
+  </data>
+  <data name="Title_Etablissement_Comptable" xml:space="preserve">
+    <value>Etablissement comptable</value>
+  </data>
+  <data name="Title_Etablissement_Paie" xml:space="preserve">
+    <value>Etablissement paie</value>
+  </data>
+  <data name="Title_Facture" xml:space="preserve">
+    <value>Liste des factures</value>
+  </data>
+  <data name="Title_Founisseur" xml:space="preserve">
+    <value>Gestion des fournisseur</value>
+  </data>
+  <data name="Title_Help" xml:space="preserve">
+    <value>Aide et support</value>
+  </data>
+  <data name="Title_Home" xml:space="preserve">
+    <value>Fayat://FRED</value>
+  </data>
+  <data name="Title_Indemnite_Deplacement" xml:space="preserve">
+    <value>Indemnité déplacement</value>
+  </data>
+  <data name="Title_Lookup" xml:space="preserve">
+    <value>Lookup</value>
+  </data>
+  <data name="Title_Materiel" xml:space="preserve">
+    <value>Matériel</value>
+  </data>
+  <data name="Title_Module" xml:space="preserve">
+    <value>Module</value>
+  </data>
+  <data name="Title_Monitoring" xml:space="preserve">
+    <value>Monitoring</value>
+  </data>
+  <data name="Title_Nature" xml:space="preserve">
+    <value>Nature</value>
+  </data>
+  <data name="Title_Notification" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="Title_Organisation" xml:space="preserve">
+    <value>Organisation</value>
+  </data>
+  <data name="Title_Param_Tarif" xml:space="preserve">
+    <value>Tarifs référentiel</value>
+  </data>
+  <data name="Title_Personnel" xml:space="preserve">
+    <value>Personnels</value>
+  </data>
+  <data name="Title_Pointage" xml:space="preserve">
+    <value>Rapports</value>
+  </data>
+  <data name="Title_Pointage_Personnel" xml:space="preserve">
+    <value>Pointages personnels</value>
+  </data>
+  <data name="Title_Prime" xml:space="preserve">
+    <value>Primes</value>
+  </data>
+  <data name="Title_Rapprochement" xml:space="preserve">
+    <value>Rapprochement de factures</value>
+  </data>
+  <data name="Title_Reception" xml:space="preserve">
+    <value>Reception</value>
+  </data>
+  <data name="Title_Referentiel" xml:space="preserve">
+    <value>Référentiels</value>
+  </data>
+  <data name="Title_Referentiel_Etendu" xml:space="preserve">
+    <value>Référentiels étentus</value>
+  </data>
+  <data name="Title_Referentiel_Fixe" xml:space="preserve">
+    <value>Référentiels fixe</value>
+  </data>
+  <data name="Title_Referentiel_Tache" xml:space="preserve">
+    <value>Référentiels taches</value>
+  </data>
+  <data name="Title_Role" xml:space="preserve">
+    <value>Rôles</value>
+  </data>
+  <data name="Title_Societe" xml:space="preserve">
+    <value>Sociétés</value>
+  </data>
+  <data name="Title_User" xml:space="preserve">
+    <value>Utilisateur</value>
+  </data>
+  <data name="Title_Validation_Pointage" xml:space="preserve">
+    <value>Pointages personnel</value>
+  </data>
+  <data name="Title_Journal_Comptable" xml:space="preserve">
+    <value>Journaux comptables</value>
+  </data>
+  <data name="Title_Valorisation" xml:space="preserve">
+    <value>Valorisation</value>
+  </data>
+  <data name="Title_FeatureFlipping" xml:space="preserve">
+    <value>Feature Flipping</value>
+  </data>
+  <data name="Title_Ressources_Specifiques_CI" xml:space="preserve">
+    <value>Ressources spécifiques CI</value>
+  </data>
+  <data name="Title_Ressources_Recommandees" xml:space="preserve">
+    <value>Ressources recommandées</value>
+  </data>
+</root>

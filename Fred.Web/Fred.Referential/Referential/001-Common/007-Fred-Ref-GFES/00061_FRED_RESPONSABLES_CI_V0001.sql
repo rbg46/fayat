@@ -1,0 +1,44 @@
+﻿-- PAS D'IMPORT DE DONNEES DE TESTS !!!
+
+
+
+-- Affectation du rôle Responsable CI aux utilisateurs responsables des CI
+
+/*
+
+
+
+
+
+CREATE PROCEDURE #SET_ROLE_RESPONSABLE_CI
+	@Matricule NVARCHAR(20),
+	@RoleId INT,
+	@SocieteId INT,
+	@CodeCI NVARCHAR(40)
+AS
+BEGIN
+	DECLARE @UserId INT;
+	SET @UserId = (SELECT PersonnelId FROM FRED_PERSONNEL WHERE Matricule = @Matricule and SocieteId=@SocieteId)
+
+	INSERT INTO FRED_UTILISATEUR_ROLE_ORGANISATION_DEVISE (UtilisateurId, RoleId, OrganisationId)
+	VALUES (@UserId, @RoleId, (SELECT OrganisationId FROM FRED_CI WHERE Code=@CodeCI and SocieteId=@SocieteId))
+END
+GO
+
+DECLARE @SocId INT;
+SET @SocId = (SELECT SocieteId FROM FRED_SOCIETE WHERE Code='E001')
+DECLARE @RoleRespId INT;
+SET @RoleRespId = (SELECT RoleId FROM FRED_ROLE WHERE Code='RCI' and SocieteId=@SocId)
+
+EXEC #SET_ROLE_RESPONSABLE_CI '1016', @RoleRespId, @SocId, 'A00000001'
+EXEC #SET_ROLE_RESPONSABLE_CI '1016', @RoleRespId, @SocId, 'A00000002'
+EXEC #SET_ROLE_RESPONSABLE_CI '1025', @RoleRespId, @SocId, 'A00000003'
+EXEC #SET_ROLE_RESPONSABLE_CI '1025', @RoleRespId, @SocId, 'A00000004'
+EXEC #SET_ROLE_RESPONSABLE_CI '1008', @RoleRespId, @SocId, 'S8925'
+EXEC #SET_ROLE_RESPONSABLE_CI '1015', @RoleRespId, @SocId, 'S5000'
+EXEC #SET_ROLE_RESPONSABLE_CI '1010', @RoleRespId, @SocId, 'E5555'
+EXEC #SET_ROLE_RESPONSABLE_CI '1012', @RoleRespId, @SocId, 'E3333'
+
+DROP PROCEDURE #SET_ROLE_RESPONSABLE_CI
+
+*/

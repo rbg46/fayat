@@ -1,0 +1,69 @@
+﻿<div ng-class="$ctrl.PanelClass" class="blockScreen"></div>
+<div class="budget-commentaire-panel options" ng-class="$ctrl.PanelClass">
+    <div class="form-header" id="Titre">
+        <h2>
+            <span>Paramétrage du détail de Budget</span>
+        </h2>
+    </div>
+    <div class="row bloc-info">
+        <div class="col-md-12 bloc-info-title">
+            <i class="fa fa-angle-right"
+               aria-hidden="true"></i>
+            <span>Détail de l'axe analytique</span>
+        </div>
+        <div class="col-md-12">
+            <div class="select-box">
+                <div ng-repeat="axe in $ctrl.Axes" class="detail-element box-sm"
+                     ng-class="{'selected' : axe.IsSelected}"
+                     ng-click="$ctrl.ChangeAxeSelection(axe)">
+                    <span class="detail-element-txt">{{axe.Label}}</span>
+                    <div class="inner-triangle" ng-show="axe.IsSelected"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row bloc-info">
+        <div class="col-md-12 bloc-info-title">
+            <i class="fa fa-angle-right"
+               aria-hidden="true"></i>
+            <span>Colonnes affichées</span>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2 select-box-label">
+                <div><span>T4</span></div> 
+            </div>
+            <div class="col-md-10 select-box">
+                <div ng-repeat="column in $ctrl.Columns" class="detail-element box-sm"
+                     ng-class="{'selected' : column.IsSelected}"
+                     ng-click="$ctrl.ChangeColumnSelection(column)">
+                    <span class="detail-element-txt">{{column.Label}}</span>
+                    <div class="inner-triangle" ng-show="column.IsSelected"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Body : END -->
+    <!--FOOTER TOOLBAR : BEGIN-->
+    <div class="footer">
+        <div class="buttons">
+            <button class="btn btn-default"
+                    type="submit"
+                    ng-click="$ctrl.Validate()">
+                Enregistrer
+            </button>
+            <button class="btn btn-link"
+                    type="button"
+                    ng-click="$ctrl.Cancel()"
+                    title="">
+                Annuler
+            </button>
+        </div>
+    </div>
+    <!--FOOTER TOOLBAR : END-->
+    <div class="close_panel" ng-click="$ctrl.Hide()" title="">
+        <i class="fa fa-angle-right"
+           aria-hidden="true"></i>
+        <span>Refermer le panneau</span>
+    </div>
+</div>

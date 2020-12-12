@@ -1,0 +1,43 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+@using Fred.Web.Helpers;
+@{
+  ViewBag.Title = "Search";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts {
+  @Scripts.Render("~/Areas/Referential/Scripts/Controllers/countrySearchController.js")
+  @Scripts.Render("/api/resource/FredResource")
+  @Scripts.Render("/api/resource/FeatureReferential")
+}
+
+<div class="container" ng-controller="countrySearchController">
+  <div class="row">
+    <h2>{{resources.Rechercher_lb}}</h2>
+
+    <form autocomplete="off" class="form-inline" name="searchCountryForm" ng-init="searchText=''"> 
+      <p>
+        <input type="text" class="form-control" size="50" placeholder="Search" ng-model="searchText">
+        <button type="submit" class="btn btn-danger" data-ng-click="searchCountry()">
+          <span class="glyphicon glyphicon-search"></span>
+        </button>
+      </p>
+    </form>
+  </div>
+
+  <div id="searchGrid" class="row" ng-show='countries.length > 0' style="display:none">
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <th>{{resources.NameFr_lb}}</th>
+          <th>{{resources.NameGb_lb}}</th>
+          <th>{{resources.CodeISO_lb}}</th>
+        </tr>
+        <tr ng-repeat="country in countries">
+          <td>{{ country.NameFr }}</td>
+          <td>{{ country.NameGb }}</td>
+          <td>{{ country.CodeIso }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

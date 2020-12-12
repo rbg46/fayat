@@ -1,0 +1,112 @@
+﻿@*--------------------------------------------------------------------------------------------------------------*@
+@*                                          PARAMETRAGE FACTURATION                                             *@
+@*--------------------------------------------------------------------------------------------------------------*@
+<div class="panel panel-default param_adresse" id="Ci-Commande" fred-display-handler="userOrganizationId" display="hidden">
+
+  <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse-facturation" data-parent="#ci-accordion" id="panel-heading-facturation"><i class="chevron fa fa-fw"></i>{{ctrl.resources.CI_Detail_Commande_Titre}}</div>
+  <div id="collapse-facturation" class="panel-collapse collapse">
+    <form name="ctrl.formModuleCommande" role="form" novalidate>
+      <div class="panel-body">
+        <!--BEGIN  > FORMULAIRE-->
+        @* ADRESSE FACTURATION COMMANDE *@
+
+        <div class="row">
+          <div>
+            <h4>{{ctrl.resources.CI_Detail_Commande_SousTitre_Facturation}}</h4>
+          </div>
+          <br />
+          <div>
+            <input type="radio" name="adresseFacturation" id="adliv" ng-model="ctrl.panels.facturation.data.FacturationEtablissement" ng-value="false" ng-change="ctrl.handleChangeDeliveryAddress()"><label for="adliv" class="control-label"><span></span>{{ctrl.resources.CI_Detail_Commande_Factutation_Choix1}}</label>
+            <input type="radio" name="adresseFacturation" id="adfact" ng-model="ctrl.panels.facturation.data.FacturationEtablissement" ng-value="true" ng-change="ctrl.handleChangeDeliveryAddress()" ng-disabled="!ctrl.panels.general.data.EtablissementComptableId || ctrl.panels.general.data.Sep"><label for="adfact" class="control-label"><span></span>{{ctrl.resources.CI_Detail_Commande_Factutation_Choix2}}</label>
+          </div>
+          <br />
+          <div class="col-lg-12 col-md-12 no_plpr" ng-class="{'has-error': ctrl.formModuleCommande.$submitted && ctrl.formModuleCommande.AdresseFacturation.$invalid}">
+            <label class="control-label">{{ctrl.resources.CI_Detail_Commande_Facturation_Adresse}} *</label>
+            <span class="text-danger" ng-show="ctrl.formModuleCommande.AdresseFacturation.$error.required && ctrl.formModuleCommande.$submitted">{{ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+            <input type="text" autocomplete="off" id="AdresseFacturation" name="AdresseFacturation" class="form-control" placeholder="{{ctrl.resources.CI_Detail_Commande_Facturation_Adresse_Placeholder}}" ng-model="ctrl.panels.facturation.data.AdresseFacturation" ng-disabled="ctrl.panels.facturation.data.FacturationEtablissement" ng-required="true" />
+          </div>
+          <div class="col-lg-4 col-md-4 no_pl" ng-class="{'has-error': ctrl.formModuleCommande.$submitted && ctrl.formModuleCommande.CPFacturation.$invalid}">
+            <label class="control-label">{{ctrl.resources.CI_Detail_Commande_Facturation_CodePostal}} *</label>
+            <span class="text-danger" ng-show="ctrl.formModuleCommande.CPFacturation.$error.required && ctrl.formModuleCommande.$submitted">{{ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+            <input type="text" autocomplete="off" id="CPFacturation" name="CPFacturation" class="form-control" placeholder="{{ctrl.resources.CI_Detail_Commande_Facturation_CodePostal_Placeholder}}" ng-model="ctrl.panels.facturation.data.CodePostalFacturation" ng-disabled="ctrl.panels.facturation.data.FacturationEtablissement" ng-required="true" />
+          </div>
+          <div class="col-lg-4 col-md-4 no_plpr" ng-class="{'has-error': ctrl.formModuleCommande.$submitted && ctrl.formModuleCommande.VilleFacturation.$invalid}">
+            <label class="control-label">{{ctrl.resources.CI_Detail_Commande_Facturation_Ville}} *</label>
+            <span class="text-danger" ng-show="ctrl.formModuleCommande.VilleFacturation.$error.required && ctrl.formModuleCommande.$submitted">{{ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+            <input type="text" autocomplete="off" id="VilleFacturation" name="VilleFacturation" class="form-control" placeholder="{{ctrl.resources.CI_Detail_Commande_Facturation_Ville_Placeholder}}" ng-model="ctrl.panels.facturation.data.VilleFacturation" ng-disabled="ctrl.panels.facturation.data.FacturationEtablissement" ng-required="true" />
+          </div>
+          <div class="col-lg-4 col-md-4 no_pr" ng-class="{'has-error': ctrl.formModuleCommande.$submitted && ctrl.formModuleCommande.PaysFacturation.$invalid}">
+            <label class="control-label">{{ctrl.resources.CI_Detail_Commande_Facturation_Pays}} *</label>
+            <span class="text-danger" ng-show="ctrl.formModuleCommande.PaysFacturation.$error.required && ctrl.formModuleCommande.$submitted">{{ctrl.resources.Global_Control_DataRequired_Erreur}}</span>            
+            <lookup-standalone id="PaysFacturation"
+                               name="PaysFacturation"
+                               ng-model="ctrl.panels.facturation.data.PaysFacturation"
+                               text="ctrl.panels.facturation.data.PaysFacturation.CodeLibelle"
+                               search-title="Référentiel des Pays"
+                               search-placeholder="Rechercher un Pays..."
+                               url="/api/Pays/SearchLight"
+                               on-select="ctrl.panels.facturation.data.PaysFacturationId = item.IdRef"
+                               on-delete="ctrl.panels.facturation.data.PaysFacturationId = null; ctrl.panels.facturation.data.PaysFacturation = null;"
+                               class="formulaire long"
+                               ng-required="true"
+                               ng-disabled="ctrl.panels.facturation.data.FacturationEtablissement">
+            </lookup-standalone>
+          </div>
+        </div>
+
+        <br />
+
+        @* ADRESSE LIVRAISON COMMANDE *@
+
+        <div class="row">
+          <div>
+            <h4>{{ctrl.resources.CI_Detail_Commande_SousTitre_Livraison}}</h4>
+          </div>
+          <div>
+            <button class="btn btn-primary" type="button" ng-click="ctrl.handleCopyBillingToDelivery()">{{ctrl.resources.CI_Detail_Commande_CopierFacturation}}</button>
+            <button class="btn btn-primary" type="button" ng-click="ctrl.handleCopyCIToDelivery()">Copier l'adresse du CI</button>
+          </div>
+          <br />
+          <div class="col-lg-12 col-md-12 no_plpr">
+            <label class="control-label">{{ctrl.resources.CI_Detail_Commande_Livraison_Entete}}</label>
+            <input type="text" autocomplete="off" id="EnteteLivraison" class="form-control" placeholder="{{ctrl.resources.CI_Detail_Commande_Livraison_Entete_Placeholder}}" ng-model="ctrl.panels.facturation.data.EnteteLivraison" />
+          </div>
+          <div>
+            <label class="control-label">{{ctrl.resources.CI_Detail_Commande_Livraison_Adresse}}</label>
+            <input type="text" autocomplete="off" id="AdresseLivraison" class="form-control" placeholder="{{ctrl.resources.CI_Detail_Commande_Livraison_Adresse_Placeholder}}" ng-model="ctrl.panels.facturation.data.AdresseLivraison" />
+          </div>
+          <div class="col-lg-4 col-md-4 no_pl">
+            <label class="control-label">{{ctrl.resources.CI_Detail_Commande_Livraison_CodePostal}}</label>
+            <input type="text" autocomplete="off" id="CPLivraison" class="form-control" placeholder="{{ctrl.resources.CI_Detail_Commande_Livraison_CodePostal_Placeholder}}" ng-model="ctrl.panels.facturation.data.CodePostalLivraison" />
+          </div>
+          <div class="col-lg-4 col-md-4  no_plpr">
+            <label class="control-label">{{ctrl.resources.CI_Detail_Commande_Livraison_Ville}}</label>
+            <input type="text" autocomplete="off" id="VilleLivraison" class="form-control" placeholder="{{ctrl.resources.CI_Detail_Commande_Livraison_Ville_Placeholder}}" ng-model="ctrl.panels.facturation.data.VilleLivraison" />
+          </div>
+          <div class="col-lg-4 col-md-4 no_pr">
+            <label class="control-label">{{ctrl.resources.CI_Detail_Commande_Livraison_Pays}}</label>            
+            <lookup-standalone id="PaysLivraison"
+                               name="PaysLivraison"
+                               ng-model="ctrl.panels.facturation.data.PaysLivraison"
+                               text="ctrl.panels.facturation.data.PaysLivraison.CodeLibelle"
+                               search-title="Référentiel des Pays"
+                               search-placeholder="Rechercher un Pays..."
+                               url="/api/Pays/SearchLight"
+                               on-select="ctrl.panels.facturation.data.PaysLivraisonId = item.IdRef"
+                               on-delete="ctrl.panels.facturation.data.PaysLivraisonId = null; ctrl.panels.facturation.data.PaysLivraison = null;"
+                               class="formulaire long">
+            </lookup-standalone>
+          </div>
+        </div>
+        <br />
+        <!--END > FORMULAIRE-->
+      </div>
+      <div class="panel-footer">
+        <!--BEGIN  > BOUTONS-->
+        <input type="button" class="btn btn-link pull-right" ng-click="ctrl.handleCancel(ctrl.panels.facturation)" title="{{resources.Global_Bouton_Annuler_Tooltip}}" value="{{ctrl.resources.Global_Bouton_Annuler}}" />
+        <button type="submit" ng-disabled="ctrl.formModuleCommande.$invalid && ctrl.formModuleCommande.$submitted" class="btn btn-default pull-left" ng-click="ctrl.handleSave(ctrl.panels.facturation)" title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">{{ctrl.resources.Global_Bouton_Enregistrer}}</button>
+        <!--END  > BOUTONS-->
+      </div>
+    </form>
+  </div>
+</div>

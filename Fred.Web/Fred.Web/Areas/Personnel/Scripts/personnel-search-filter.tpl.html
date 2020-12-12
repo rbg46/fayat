@@ -1,0 +1,250 @@
+﻿<!--Champ de recherche-->
+<div id="personnel-pickList-multi-search" fred-display-handler="$ctrl.userOrganizationId" display="hidden">
+    <fred-section-controls-left>
+        <input class="form-control"
+               ng-model="$ctrl.filter.ValueTextNom"
+               ng-change="$ctrl.applyFilter($ctrl.filter)"
+               ng-model-options="{ debounce: 500 }"
+               placeholder="{{$ctrl.resources.Personnel_PartialGeneral_Nom_Placeholder}}" />
+        <fred-button class="search-button icon" ng-click="$ctrl.applyFilter($ctrl.filter)">
+            <i class="material-icons">search</i>
+        </fred-button>
+        <input class="form-control"
+               ng-model="$ctrl.filter.ValueTextPrenom"
+               ng-change="$ctrl.applyFilter($ctrl.filter)"
+               ng-model-options="{ debounce: 500 }"
+               placeholder="{{$ctrl.resources.Personnel_PartialGeneral_Prenom_Placeholder}}" />
+        <fred-button class="search-button icon" ng-click="$ctrl.applyFilter($ctrl.filter)">
+            <i class="material-icons">search</i>
+        </fred-button>
+        <input class="form-control"
+               ng-model="$ctrl.filter.ValueText"
+               ng-change="$ctrl.applyFilter($ctrl.filter)"
+               ng-model-options="{ debounce: 500 }"
+               placeholder="{{$ctrl.resources.Personnel_Filter_Autre_Information_Placeholder}}" />
+        <fred-button class="search-button icon" ng-click="$ctrl.applyFilter($ctrl.filter)">
+            <i class="material-icons">search</i>
+        </fred-button>
+    </fred-section-controls-left>
+</div>
+<div id="personnel-pickList" fred-display-handler="$ctrl.userOrganizationId" display="visible">
+    <fred-section-controls-left>
+        <input class="form-control"
+               ng-model="$ctrl.filter.ValueText"
+               ng-change="$ctrl.applyFilter($ctrl.filter)"
+               ng-model-options="{ debounce: 500 }"
+               placeholder="{{$ctrl.resources.Personnel_Index_Rechercher_Placeholder}}" />
+        <fred-button class="search-button icon" ng-click="$ctrl.applyFilter($ctrl.filter)">
+            <i class="material-icons">search</i>
+        </fred-button>
+    </fred-section-controls-left>
+</div>
+
+<!--Bouton Recherche complémentaire-->
+<fred-section-controls-right>
+    <fred-button ng-class="{'white icon chip' :$ctrl.displayFilterState(),  'white icon' :!$ctrl.displayFilterState()}" data-toggle="collapse" data-target="#demo1" ng-click="status ? status=false : status=true;">
+        <span ng-hide="!$ctrl.displayFilterState()" class="chip"></span>
+        <span ng-class="{'fa fa-filter' :!buttonFilterClicked  ,'material-icons closing' :buttonFilterClicked}"
+              title="{{!buttonFilterClicked ? ctrl.resources.Global_Filtre_Titre : ctrl.resources.Global_Bouton_Fermer}}">
+            <span ng-show="buttonFilterClicked">clear</span>
+        </span>
+    </fred-button>
+</fred-section-controls-right>
+
+
+<!--Formulaire de recherche-->
+<fred-overlay ng-click="status=false;" ng-class="{'open' :status  ,'close' :!status}"></fred-overlay>
+<fred-side ng-init="status=false;" ng-class="{'open' :status  ,'close' :!status}" esc-key="Test()">
+
+    <!--En tete-->
+    <header>
+        <icon /><label>Affiner votre recherche : {{count}}</label>
+    </header>
+    <main class="fred-scroll">
+
+        <section-title data-toggle="collapse" data-target="#section1">Filtrer par Etat</section-title>
+        <!--BEGIN : Critère de sélection-->
+        <!--Div Actif-->
+        <section-content class="collapse in" id="section1">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="legend">
+                        {{$ctrl.resources.Personnel_Search_SousTitre_ActifSeulement}}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <input type="radio" ng-model="$ctrl.filter.IsActif"
+                           ng-value="true"
+                           ng-checked="$ctrl.filter.IsActif"
+                           id="rbtn1">
+                    <label for="rbtn1">
+                        <span>
+                        </span>{{$ctrl.resources.Global_Oui}}
+                    </label>
+                    &nbsp;&nbsp;
+                    <input type="radio"
+                           ng-model="$ctrl.filter.IsActif"
+                           ng-value="false"
+                           ng-checked="!$ctrl.filter.IsActif"
+                           id="rbtn2"><label for="rbtn2"><span></span>{{$ctrl.resources.Global_Non}}</label>
+                </div>
+            </div>
+
+
+
+            <!--Div Interne-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="legend">{{$ctrl.resources.Personnel_Search_SousTitre_InterneSeulement}}</div>
+                </div>
+                <div class="col-md-6">
+                    <input type="radio" ng-model="$ctrl.filter.IsInterne"
+                           ng-value="true"
+                           ng-checked="$ctrl.filter.IsInterne" id="rbtn3">
+                    <label for="rbtn3"><span></span>{{$ctrl.resources.Global_Oui}}</label>
+                    &nbsp;&nbsp;
+                    <input type="radio" ng-model="$ctrl.filter.IsInterne"
+                           ng-value="false"
+                           ng-checked="!$ctrl.filter.IsInterne" id="rbtn4">
+                    <label for="rbtn4"><span></span>{{$ctrl.resources.Global_Non}}</label>
+                </div>
+            </div>
+
+            <!--Div Actif-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="legend">
+                        {{$ctrl.resources.Personnel_Search_SousTitre_UtilisateurSeulement}}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <input type="radio"
+                           ng-model="$ctrl.filter.IsUtilisateur"
+                           ng-value="true"
+                           ng-checked="$ctrl.filter.IsUtilisateur"
+                           id="rbtn5">
+                    <label for="rbtn5"><span></span>{{$ctrl.resources.Global_Oui}}</label>
+                    &nbsp;&nbsp;
+                    <input type="radio"
+                           ng-model="$ctrl.filter.IsUtilisateur"
+                           ng-value="false"
+                           ng-checked="!$ctrl.filter.IsUtilisateur"
+                           id="rbtn6"><label for="rbtn6"><span></span>{{$ctrl.resources.Global_Non}}</label>
+                </div>
+            </div>
+
+            <!--Div Intérimaire-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="legend">{{$ctrl.resources.Personnel_Search_SousTitre_InterimaireSeulement}}</div>
+
+                </div>
+                <div class="col-md-6">
+                    <input type="radio" ng-model="$ctrl.filter.IsInterimaire"
+                           ng-value="true"
+                           ng-checked="$ctrl.filter.IsInterimaire" id="rbtn7">
+                    <label for="rbtn7"><span></span>{{$ctrl.resources.Global_Oui}}</label>
+                    &nbsp;&nbsp;
+                    <input type="radio" ng-model="$ctrl.filter.IsInterimaire" ng-value="false"
+                           ng-checked="!$ctrl.filter.IsInterimaire" id="rbtn8">
+                    <label for="rbtn8"><span></span>{{$ctrl.resources.Global_Non}}</label>
+                </div>
+            </div>
+            <!--Div Intérimaire-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="legend">{{$ctrl.resources.Personnel_Search_SousTitre_NonPointablesPersonnels}}</div>
+                </div>
+                <div class="col-md-6">
+                    <input type="radio" 
+                           ng-model="$ctrl.filter.IsPersonnelsNonPointables"
+                           ng-value="true"
+                           ng-checked="$ctrl.filter.IsPersonnelsNonPointables"
+                           id="rbtn9">
+                    <label for="rbtn9"><span></span>{{$ctrl.resources.Global_Oui}}</label>
+                    &nbsp;&nbsp;
+                    <input type="radio"
+                           ng-model="$ctrl.filter.IsPersonnelsNonPointables"
+                           ng-value="false"
+                           ng-checked="!$ctrl.filter.IsPersonnelsNonPointables"
+                           id="rbtn10">
+                    <label for="rbtn10"><span></span>{{$ctrl.resources.Global_Non}}</label>
+                </div>
+            </div>
+
+        </section-content>
+        <!--END : Critère de sélection-->
+        <div id="personnel-pickList-multi-search" fred-display-handler="$ctrl.userOrganizationId" display="hidden">
+            <section-title data-toggle="collapse" data-target="#section2">{{$ctrl.resources.Personnel_Filter_Autres_Criteres}}</section-title>
+            <!--BEGIN : Autres Critères-->
+            <!--Div Actif-->
+            <section-content class="collapse in" id="section2">
+                <div class="row">
+                    <div class="legend">
+                        {{$ctrl.resources.Personnel_Filter_Etablissement_Paie}}
+                    </div>
+                    <div class="col-md-11">
+                        <lookup-standalone ng-model="$ctrl.filter.SearchEtab"
+                                           name="EtablissementPaie"
+                                           text="$ctrl.filter.SearchEtab.CodeLibelle"
+                                           search-title="{{$ctrl.resources.Global_ReferentielEtablissementPaie}}"
+                                           search-placeholder="{{$ctrl.resources.Global_ReferentielEtablissementPaie_Placeholder}}"
+                                           url="/api/EtablissementPaie/SearchLight/?societeId={{$ctrl.filter.SearchSociete.SocieteId}}&isHorsRegion=null&isAgenceRattachement=true&"
+                                           on-select="$ctrl.handleSelectPickList('EtablissementPaie')"
+                                           on-delete="$ctrl.handleDeletePickList('EtablissementPaie')"
+                                           class="no-padding formulaire long"
+                                           style-parent="true">
+                        </lookup-standalone>
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="legend">
+                        {{$ctrl.resources.Personnel_PartialGeneral_Societe}}
+                    </div>
+                    <div class="col-md-11">
+                        <lookup-standalone ng-model="$ctrl.filter.SearchSociete"
+                                           name="Societe"
+                                           text="$ctrl.filter.SearchSociete.CodeLibelle"
+                                           search-title="{{$ctrl.resources.Global_ReferentielSociete}}"
+                                           search-placeholder="{{$ctrl.resources.Global_ReferentielSociete_Placeholder}}"
+                                           url="/api/Societe/SearchLightForRoles/"
+                                           on-select="$ctrl.handleSelectPickList('Societe')"
+                                           on-delete="$ctrl.handleDeletePickList('Societe')"
+                                           class="formulaire long no-padding"
+                                           style-parent="true">
+                        </lookup-standalone>
+                    </div>
+                </div>
+            </section-content>
+            <!--END : Autres Critères-->
+        </div>
+    </main>
+
+
+
+
+    <footer ng-click="status=false;">
+        <!--BEGIN : Bouton Start-->
+        <action>
+            <button type="button" class="fred-button primary"
+                    data-toggle="collapse"
+                    data-target="#demo"
+                    ng-click="$ctrl.applyFilter($ctrl.filter)">
+                {{$ctrl.resources.Global_Filtre_Bouton_Appliquer}}
+            </button>
+            <button type="button" class="fred-button warning"
+                    ng-click="$ctrl.addFilter2Favoris($ctrl.filter)">
+                {{$ctrl.resources.Global_Filtre_Bouton_AjouterFavoris}}
+            </button>
+            <button type="button" class="fred-button cancel"
+                    ng-click="$ctrl.resetFilter()">
+                {{$ctrl.resources.Global_Filtre_Bouton_Reinitialiser}}
+            </button>
+        </action>
+        <!--END : Bouton Start-->
+
+        <close>
+            <icon /><label>Refermer le panneau</label>
+        </close>
+    </footer>
+</fred-side>

@@ -1,0 +1,495 @@
+﻿fred-toolbar.detail .ci-section {
+    width: 30%;
+}
+
+fred-toolbar.sous-detail .t4-section {
+    width: 20%;
+}
+
+fred-toolbar.sous-detail .ci-section {
+    margin-left: 1%;
+    width: 20%;
+}
+
+fred-toolbar .version-section {
+    margin-left: 1%;
+}
+
+fred-toolbar .text-search-section {
+    margin-left: 1%;
+}
+
+fred-toolbar .devise-section {
+    margin-left: 1%;
+}
+
+fred-toolbar .devise-section-controls {
+    justify-content: space-between;
+}
+
+fred-toolbar .devise-section-controls .currency {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    color: #bfbfbf;
+    font-weight: normal;
+    border: 1px solid #ccc;
+    cursor: not-allowed;
+}
+
+fred-toolbar .devise-section-controls .currency.a {
+    margin-right: 5px;
+}
+
+fred-toolbar .devise-section-controls .symbole .currency {
+    font-size: 18px;
+}
+
+fred-toolbar .devise-section-controls .iso-code .currency {
+    font-size: 11px;
+}
+
+fred-toolbar .devise-section-controls .currency.active {
+    background-color: #09ada6;
+    border: 1px solid #09ada6;
+    color: #fff;
+}
+
+fred-toolbar .action-section {
+    margin-left: 1%;
+}
+
+fred-toolbar .action-section .btn {
+    font-size: 11px;
+    margin-top: 0;
+    height: 30px;
+}
+
+fred-toolbar .action-section .btn-link {
+    background-color: #fff !important;
+    color: #bfbfbf;
+    border: 1px solid #ccc !important;
+}
+
+fred-toolbar .action-section .btn-grey {
+    background-color: #fff !important;
+    color: #bfbfbf;
+    border: 1px solid #ccc !important;
+}
+
+fred-toolbar .action-section .btn-default {
+    background-color: #3366cc;
+}
+
+fred-toolbar .action-section .btn-open-bibliotheque-prix {
+    background-color: #febb5f;
+    color: white;
+    font-size: large;
+    width: 30px;
+    margin-left: 5px;
+    padding: 0;
+}
+
+fred-toolbar .action-section .btn-copy-budget {
+    background-color: #ffd800;
+    color: white;
+    font-size: large;
+    width: 30px;
+    margin-left: 5px;
+    padding: 0;
+}
+
+fred-toolbar .action-section .btn-disabledTasks {
+    background-color: #ff0066;
+    display: inline-flex;
+}
+
+fred-toolbar .action-section .btn-disabledTasks .disabled-tasks-message {
+    margin-top: 2px;
+}
+
+fred-toolbar .action-section .btn-disabledTasks .disabled-tasks-icon {
+    font-size: 15px;
+}
+
+fred-toolbar .action-section .btn-validate {
+    background-color: #09ada6;
+    color: #fff;
+}
+
+fred-toolbar .display-section {
+    margin-left: 1%;
+}
+
+fred-toolbar .display-section-controls {
+    width: 81px;
+    justify-content: space-between;
+}
+
+fred-toolbar .display-section-controls .display {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    color: #bfbfbf;
+    font-size: 14px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+fred-toolbar .display-section-controls .display.sd.selected {
+    color: #fff;
+    background-color: #0990b7;
+}
+
+fred-toolbar .display-section-controls .display.t4.selected {
+    color: #fff;
+    background-color: #3366cc;
+}
+
+fred-toolbar .display-section-controls .display.pu.selected {
+    color: #fff;
+    background-color: #09ada6;
+}
+
+fred-toolbar .indicator-section {
+    margin-left: 1%;
+}
+
+fred-toolbar .indicator {
+    width: 150px;
+    height: 44px;
+    background-color: #09ada6;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+}
+
+fred-toolbar .indicator .amount {
+    display: flex;
+    flex-direction: column;
+    width: 115px;
+}
+
+fred-toolbar .indicator .amount .txt {
+    font-size: 7px;
+}
+
+fred-toolbar .indicator .amount .taxless {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: normal;
+    padding-left: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+fred-toolbar .indicator .material-icons {
+    font-size: 35px;
+    cursor: pointer;
+}
+
+fred-toolbar .indicator.draft {
+    background-color: #FEBB5F;
+}
+
+fred-toolbar .indicator.applicated {
+    background-color: #ADCB60;
+}
+
+fred-toolbar .indicator.archived {
+    background-color: #666666;
+}
+
+fred-toolbar .indicator.tovalidate {
+    background-color: #DE3F7E;
+}
+
+fred-toolbar budget-sous-detail-navigate-t4-component {
+    margin-left: 1%;
+}
+
+fred-toolbar .export-section {
+    margin-left: 1%;
+}
+
+fred-toolbar .export-section fred-button:first-child {
+    margin-left: 0;
+}
+
+fred-toolbar .export-section .gr {
+    background-color: #09ada6;
+}
+
+fred-toolbar .export-section .red {
+    background-color: #ff0066;
+}
+
+fred-toolbar .notification-newtask-section {
+    width: 13.5%;
+    margin-left: 1%;
+    margin-top: 16px;
+}
+
+fred-toolbar .notification-newtask-section .notification-newtask {
+    background-color: #e12d37;
+    font-size: 11px;
+    font-weight: 400;
+    font-family: Arial;
+    color: white;
+    display: flex;
+    width: 100%;
+}
+
+fred-toolbar .notification-newtask-section .notification-newtask .notification-newtask-warning {
+    padding-top: 2px;
+    height: 30px;
+}
+
+fred-toolbar .notification-newtask-section .notification-newtask .notification-newtask-lib {
+    width: 85%;
+    padding: 2px 0 2px 5px;
+}
+
+fred-toolbar .notification-newtask-section .notification-newtask .notification-newtask-btn {
+    position: relative;
+    right: 5px;
+    cursor: pointer;
+    height: 20px;
+}
+
+fred-toolbar .aa-section {
+    margin-left: 1%;
+}
+
+fred-toolbar .aa-section > fred-section-title {
+    white-space: nowrap;
+}
+
+fred-toolbar .aa-section .ax-param span {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffa90d;
+    color: #fff;
+    font-size: 20px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+fred-toolbar .fred-button {
+    white-space: nowrap;
+}
+
+fred-toolbar .btn-enregistrer.debug-save-available {
+    border: 2px solid red;
+}
+
+fred-button.white-star {
+    background-color: #ff0066;
+    color: #fff;
+}
+
+fred-button.white-star:hover {
+    background-color: #fff;
+    color: #ff0066;
+}
+
+.flex-table {
+    font-size: 11px;
+    height: 200px;
+    min-height: 200px;
+    width: 100%;
+    overflow: auto;
+}
+
+.bandeau-lateral.flex-table {
+    font-size: 11px;
+    height: 100%;
+    min-height: 200px;
+    width: 100%;
+    overflow: auto;
+}
+
+.fixed-line-header {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    z-index: 2;
+}
+
+.fixed-col-header {
+    position: relative;
+    display: flex;
+    z-index: 1;
+}
+
+.flex-line {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.budget-detail:not(.bandeau-lateral) .flex-line:hover > * {
+    background-color: #ffd486 !important;
+}
+
+.budget-detail:not(.bandeau-lateral) .flex-line:hover .selector {
+    border-left-color: #ffb631;
+}
+
+.flex-line.task-disabled {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.selector {
+    border-left-color: transparent;
+    border-left-style: outset;
+    border-left-width: 5px;
+}
+
+.item-edited .selector {
+    border-left-color: red;
+}
+
+.item-edited:hover .selector {
+    border-left-color: red;
+}
+
+.is-new-task {
+    border-left-color: #de3f7e;
+}
+
+.is-tache4-copied {
+    border-left-color: #ffb631;
+}
+
+.task-disabled .selector {
+    border-left-color: #d57b9f;
+}
+
+.task-disabled:hover .selector {
+    border-left-color: #d57b9f;
+}
+
+.row.information {
+    display: inline-flex;
+    float: left;
+    color: #de3f7e;
+}
+
+.information .icon I {
+    font-size: 15px;
+    font-style: normal;
+}
+
+.information .message {
+    font-size: 15px;
+    font-style: normal;
+    text-align: left;
+}
+
+.options .bloc-info-title {
+    display: flex;
+    align-items: center;
+    color: #67757f;
+}
+
+.options .bloc-info-title .fa {
+    font-size: 35px;
+}
+
+.options .bloc-info-title span {
+    font-size: 1.1em;
+    margin-left: 10px;
+}
+
+.select-box {
+    margin: auto;
+    margin-top: 20px;
+    width: 80%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    flex-flow: wrap;
+}
+
+.select-box .detail-element {
+    border: 1px solid #67757f;
+    color: #67757f;
+    display: flex;
+    position: relative;
+    cursor: pointer;
+}
+
+.select-box .detail-element .inner-triangle {
+    border-left: 10px solid transparent;
+    border-right: 10px solid #09ada6;
+    border-bottom: 10px solid transparent;
+    height: 0;
+    width: 0;
+    position: absolute;
+    right: 0;
+    z-index: 2;
+    margin: -1px;
+}
+
+.select-box .detail-element .detail-element-txt {
+    margin: auto;
+}
+
+.select-box .detail-element.selected {
+    border: 1px solid #09ada6;
+}
+
+.select-box .detail-element.selected .detail-element-txt {
+    color: #09ada6;
+}
+
+.select-box-label {
+    height: 40px;
+    width: 40px;
+    margin-top: 15px;
+    padding-left: 20px;
+    display: flex;
+}
+
+.select-box-label div {
+    margin: auto;
+}
+
+.box-sm {
+    font-size: 11px;
+    width: 80px;
+    height: 40px;
+}
+
+.box-lg {
+    width: 100px;
+    height: 100px;
+    font-size: 14px;
+}
+
+.select-box-label-lg {
+    display: flex;
+    position: relative;
+}
+
+.select-box-label-lg span {
+    font-size: 14px;
+    margin: auto;
+}
+
+.aa-section .ax-param .inactive {
+    background-color: gray;
+}

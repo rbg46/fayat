@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Budget_BibliothequePrix_Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Annulation_Confirmation" xml:space="preserve">
+    <value>Etes-vous certain de vouloir annuler ?</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Annulation_Effectue" xml:space="preserve">
+    <value>Annulation effectuée</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Annulation_PasDeModification" xml:space="preserve">
+    <value>Pas de modification à annuler</value>
+  </data>
+  <data name="Budget_BibliothequePrix_AppliquerAuxEnfants_Applique" xml:space="preserve">
+    <value>Valeurs appliquées aux enfants</value>
+  </data>
+  <data name="Budget_BibliothequePrix_AppliquerAuxEnfants_ButtonTooltip" xml:space="preserve">
+    <value>Appliquer aux enfants</value>
+  </data>
+  <data name="Budget_BibliothequePrix_AppliquerAuxEnfants_NonVide_Confirmation_Message" xml:space="preserve">
+    <value>Il existe au moins une donnée renseignée sur un des enfants, confirmez-vous la propagation ?</value>
+  </data>
+  <data name="Budget_BibliothequePrix_AppliquerAuxEnfants_NonVide_Confirmation_Titre" xml:space="preserve">
+    <value>Confirmation de propagation</value>
+  </data>
+  <data name="Budget_BibliothequePrix_ButtonTooltip_AppliquerAuxEnfants" xml:space="preserve">
+    <value>Appliquer aux enfants</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Chargement_Erreur_CiAucuneDevise" xml:space="preserve">
+    <value>Le CI ne possède aucune devise</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Chargement_Erreur_DeviseNonDisponible" xml:space="preserve">
+    <value>La devise n'est pas disponible pour l'organisation</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Chargement_Erreur_Inexistante" xml:space="preserve">
+    <value>Il n'existe pas de bibliothèque des prix pour l'organisation et la devise demandées</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Chargement_Erreur_OrganisationEtablissementNexistePas" xml:space="preserve">
+    <value>L'organisation de l'établissement du CI n'existe pas</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Chargement_Erreur_OrganisationNexistePas" xml:space="preserve">
+    <value>L'organisation n'existe pas</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Chargement_Erreur_SocieteAucuneDevise" xml:space="preserve">
+    <value>La société de l'établissement ne possède aucune devise</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Chargement_Erreur_SocieteAucuneUnite" xml:space="preserve">
+    <value>La société parente ne possède aucune unité</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Chargement_Erreur_SocieteNexistePas" xml:space="preserve">
+    <value>La société parente n'existe pas</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Budget_BibliothequePrix_ComposanteOriginale_Tooltip" xml:space="preserve">
+    <value>Prix : {0}\r\nUnité : {1}</value>
+  </data>
+  <data name="Budget_BibliothequePrix_ComposanteOriginale_Tooltip_NonRenseigne" xml:space="preserve">
+    <value>non renseigné</value>
+  </data>
+  <data name="Budget_BibliothequePrix_ComposanteOriginale_Tooltip_NonRenseignee" xml:space="preserve">
+    <value>non renseignée</value>
+  </data>
+  <data name="Budget_BibliothequePrix_ConfirmerModificationsPerdues" xml:space="preserve">
+    <value>Les modifications en cours seront perdues, voulez-vous continuer ?</value>
+  </data>
+  <data name="Budget_BibliothequePrix_CopierDialog_CIRadio_Label" xml:space="preserve">
+    <value>Copier les valeurs de la bibliothèque CI d'un autre CI</value>
+  </data>
+  <data name="Budget_BibliothequePrix_CopierDialog_Erreur_CiIdentique" xml:space="preserve">
+    <value>Le CI sélectionné doit être différent du CI courant</value>
+  </data>
+  <data name="Budget_BibliothequePrix_CopierDialog_EtablissementRadio_Label" xml:space="preserve">
+    <value>Copier les valeurs de la bibliothèque établissement</value>
+  </data>
+  <data name="Budget_BibliothequePrix_CopierDialog_QueSouhaitezVousFaire" xml:space="preserve">
+    <value>Que souhaitez-vous faire ?</value>
+  </data>
+  <data name="Budget_BibliothequePrix_CopierDialog_Title" xml:space="preserve">
+    <value>Confirmation de la copie</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Copier_ButtonTootip" xml:space="preserve">
+    <value>Copier les valeurs</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Copier_DonneedIdentiques" xml:space="preserve">
+    <value>Les données de l'organisation choisie sont identiques aux données d'origine</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Copier_Effectuee" xml:space="preserve">
+    <value>Copie effectuée, enregistrez pour appliquer les changements</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Devise" xml:space="preserve">
+    <value>Devise</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Enregistrement_Effectue" xml:space="preserve">
+    <value>Enregistrement effectué</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Enregistrement_PasDeModification" xml:space="preserve">
+    <value>Pas de modification à enregistrer</value>
+  </data>
+  <data name="Budget_BibliothequePrix_ErreurEnregistrement" xml:space="preserve">
+    <value>La bibliothèque des prix comporte des erreurs, veuillez les corriger avant d'enregistrer </value>
+  </data>
+  <data name="Budget_BibliothequePrix_ErreurPrixEtUniteDoiventEtreCoherente" xml:space="preserve">
+    <value>Le prix et l'unité doivent être soit renseignés soit vides</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Favoris_CI_ButtonTooltip" xml:space="preserve">
+    <value>Mettre en favoris la bibliothèque des prix pour le CI {0} avec la devise {1} - {2}</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Favoris_Etablissement_ButtonTooltip" xml:space="preserve">
+    <value>Mettre en favoris la bibliothèque des prix pour l'établissement {0} avec la devise {1} - {2}</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Histo_Aucune_Donnees" xml:space="preserve">
+    <value>Il n'y a pas d'historique</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Histo_EnTete" xml:space="preserve">
+    <value>Historique de l'item de la bibliothèque des prix</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Histo_RappelInfos" xml:space="preserve">
+    <value>Rappel des informations</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Histo_Titre" xml:space="preserve">
+    <value>Historique de la bibliothèque des prix</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Histo_ValeursAppliquees" xml:space="preserve">
+    <value>Valeurs actuelles</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Histo_Voir" xml:space="preserve">
+    <value>Voir l'historique</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Placeholder_SelectionnerUnite" xml:space="preserve">
+    <value>Sélectionner une unité</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Prix" xml:space="preserve">
+    <value>Prix</value>
+  </data>
+  <data name="Budget_BibliothequePrix_PropagationBudgetBrouillonError" xml:space="preserve">
+    <value>Error lors de la mise à jour des budgets brouillons</value>
+  </data>
+  <data name="Budget_BibliothequePrix_PropagationBudgetBrouillonSuccess" xml:space="preserve">
+    <value>Les budgets brouillons ont été mis à jour</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Save_CopierValeursSurBudgetBrouillonSansLignesExceptions" xml:space="preserve">
+    <value>Copier les valeurs sur toutes les lignes SAUF les lignes en exception</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Save_CopierValeursSurBudgetBrouillonSurLignesExceptions" xml:space="preserve">
+    <value>Copier les valeurs sur toutes les lignes Y COMPRIS les lignes en exception</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Save_RecuperationBudgetBrouillonErreurEnregistrementCompromisWarning" xml:space="preserve">
+    <value>Impossible de récupérer la liste des budgets brouillons pour ce CI, la propagation des valeurs de la bibliothèque des prix est impossible</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Save_SelectionBudgetsBrouillonsConcernes" xml:space="preserve">
+    <value>Selection des budgets brouillons à impacter</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Save_SurCi_BudgetsBrouillonPasEncoreDispo" xml:space="preserve">
+    <value>La récupération des budgets brouillons disponibles est toujours en cours</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Save_UnitePropageQuelqueSoitLeChoix" xml:space="preserve">
+    <value>Attention : dans tous les cas, l'unité sera propagée</value>
+  </data>
+  <data name="Budget_BibliothequePrix_SelectionnerOrganisation" xml:space="preserve">
+    <value>Sélectionnez votre organisation</value>
+  </data>
+  <data name="Budget_BibliothequePrix_SelectionnerOrganisationPourAfficher" xml:space="preserve">
+    <value>Veuillez sélectionner une organisation pour afficher la bibliothèque des prix</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Titre" xml:space="preserve">
+    <value>Bibliothèque des prix</value>
+  </data>
+  <data name="Budget_BibliothequePrix_TitrePage" xml:space="preserve">
+    <value>Bibliothèque des prix</value>
+  </data>
+  <data name="Budget_BibliothequePrix_ToutDeplier" xml:space="preserve">
+    <value>Tout déplier</value>
+  </data>
+  <data name="Budget_BibliothequePrix_ToutReplier" xml:space="preserve">
+    <value>Tout replier</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Unite" xml:space="preserve">
+    <value>Unité</value>
+  </data>
+  <data name="Budget_BibliothequePrix_Validation" xml:space="preserve">
+    <value>Validation</value>
+  </data>
+</root>

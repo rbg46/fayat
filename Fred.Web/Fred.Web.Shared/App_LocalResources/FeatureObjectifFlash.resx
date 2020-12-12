@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ObjectifFlash_BaremeBudgetValide" xml:space="preserve">
+    <value>Barème du budget validé</value>
+    <comment>Areas\BilanFlash\Scripts\Ressources\ressources-template.html</comment>
+  </data>
+  <data name="ObjectifFlash_RessourcesTache" xml:space="preserve">
+    <value>Ressources de la tâche -</value>
+    <comment>Areas\BilanFlash\Scripts\Ressources\ressources-template.html</comment>
+  </data>
+  <data name="ObjectifFlash_Button_ChoixTaches" xml:space="preserve">
+    <value>Tâches</value>
+    <comment>Areas\BilanFlash\Views\BilanFlash\ObjectifFlash.cshtml</comment>
+  </data>
+  <data name="ObjectifFlash_Button_Impression" xml:space="preserve">
+    <value>Bilan Flash</value>
+    <comment>Areas\BilanFlash\Views\BilanFlash\ObjectifFlash.cshtml</comment>
+  </data>
+  <data name="ObjectifFlash_Button_Journalisation" xml:space="preserve">
+    <value>Journalisation</value>
+    <comment>Areas\BilanFlash\Views\BilanFlash\ObjectifFlash.cshtml</comment>
+  </data>
+  <data name="ObjectifFlash_Span_Cloture" xml:space="preserve">
+    <value>Clôturé</value>
+    <comment>Areas\BilanFlash\Views\BilanFlash\ObjectifFlash.cshtml</comment>
+  </data>
+  <data name="ObjectifFlash_AddRessourceToTache" xml:space="preserve">
+    <value>Cliquer pour ajouter cette ressource à la tâche</value>
+    <comment>Areas\BilanFlash\Scripts\objectif-flash.controller.js</comment>
+  </data>
+  <data name="ObjectifFlash_CI" xml:space="preserve">
+    <value>Centre d'imputation</value>
+    <comment>Areas\BilanFlash\Views\BilanFlash\ObjectifFlash.cshtml</comment>
+  </data>
+  <data name="ObjectifFlash_DateDebut" xml:space="preserve">
+    <value>Date de début</value>
+    <comment>Areas\BilanFlash\Views\BilanFlash\ObjectifFlash.cshtml</comment>
+  </data>
+  <data name="ObjectifFlash_DateFin" xml:space="preserve">
+    <value>Date de fin</value>
+    <comment>Areas\BilanFlash\Views\BilanFlash\ObjectifFlash.cshtml</comment>
+  </data>
+  <data name="ObjectifFlash_Libelle" xml:space="preserve">
+    <value>Libellé objectif Flash</value>
+    <comment>Areas\BilanFlash\Views\BilanFlash\ObjectifFlash.cshtml</comment>
+  </data>
+  <data name="ObjectifFlash_Button_Cloturer" xml:space="preserve">
+    <value>Clôturer</value>
+    <comment>Areas\BilanFlash\Views\BilanFlash\ObjectifFlash.cshtml</comment>
+  </data>
+  <data name="ObjectifFlash_Title" xml:space="preserve">
+    <value>Objectif Flash</value>
+    <comment>Areas\BilanFlash\Views\BilanFlash\ObjectifFlash.cshtml</comment>
+  </data>
+  <data name="ObjectifFlash_ChoiceBibliothequePrix" xml:space="preserve">
+    <value>Bibliothèque des Prix</value>
+    <comment>Areas\BilanFlash\Scripts\Ressources\ressources-template.html</comment>
+  </data>
+  <data name="ObjectifFlash_ChoiceBareme_Exploitation" xml:space="preserve">
+    <value>Barème Exploitation CI</value>
+    <comment>Areas\BilanFlash\Scripts\Ressources\ressources-template.html</comment>
+  </data>
+  <data name="ObjectifFlash_Button_Activer" xml:space="preserve">
+    <value>Activer</value>
+    <comment>Areas\BilanFlash\Views\BilanFlash\ObjectifFlash.cshtml</comment>
+  </data>
+  <data name="ObjectifFlash_Span_Actif" xml:space="preserve">
+    <value>Actif</value>
+    <comment>Areas\BilanFlash\Views\BilanFlash\ObjectifFlash.cshtml</comment>
+  </data>
+  <data name="ObjectifFlash_Span_Numero" xml:space="preserve">
+    <value>Numéro : </value>
+    <comment>Areas\BilanFlash\Views\BilanFlash\ObjectifFlash.cshtml</comment>
+  </data>
+  <data name="ObjectifFlash_Span_Brouillon" xml:space="preserve">
+    <value>Brouillon</value>
+    <comment>Areas\BilanFlash\Views\BilanFlash\ObjectifFlash.cshtml</comment>
+  </data>
+  <data name="ObjectifFlash_Modal_AjoutQuantiteTache_Message" xml:space="preserve">
+    <value>Saisissez une quantité de tâche afin de générer une journalisation automatique :</value>
+    <comment>ajout-quantite-modal.html</comment>
+  </data>
+  <data name="ObjectifFlash_Quantite" xml:space="preserve">
+    <value>Quantité</value>
+    <comment>Areas\BilanFlash\Views\BilanFlash\ObjectifFlash.cshtml</comment>
+  </data>
+  <data name="ObjectifFlash_Button_Reporter" xml:space="preserve">
+    <value>Reporter l'objectif</value>
+    <comment>Areas\BilanFlash\Scripts\objectif-flash.controller.js</comment>
+  </data>
+  <data name="ObjectifFlash_Modal_AjoutQuantiteRessource_Message" xml:space="preserve">
+    <value>Saisissez une quantité de ressource afin de générer une journalisation automatique :</value>
+    <comment>ajout-quantite-modal.html</comment>
+  </data>
+  <data name="ObjectifFlash_Modal_Au" xml:space="preserve">
+    <value>au</value>
+    <comment>ajout-quantite-modal.html</comment>
+  </data>
+  <data name="ObjectifFlash_Modal_Periode" xml:space="preserve">
+    <value>Période</value>
+    <comment>ajout-quantite-modal.html</comment>
+  </data>
+  <data name="ObjectifFlash_Modal_ReporterObjectif_Titre" xml:space="preserve">
+    <value>Reporter Objectif</value>
+  </data>
+  <data name="ObjectifFlash_Modal_Tache" xml:space="preserve">
+    <value>Tâche</value>
+    <comment>ajout-quantite-modal.html</comment>
+  </data>
+  <data name="ObjectifFlash_Error_ActivationImpossible" xml:space="preserve">
+    <value>Veuillez corriger les erreurs pour activer l'objectif flash.</value>
+  </data>
+  <data name="ObjectifFlash_Error_DateActivationInvalide" xml:space="preserve">
+    <value>La date de début de l'objectif flash doit être supérieure ou égale à la date du jour. Veuillez reporter vos dates avant de faire l'activation.</value>
+  </data>
+  <data name="ObjectifFlash_Error_RessourcePUManquant" xml:space="preserve">
+    <value>La ressource doit avoir un PU défini.</value>
+  </data>
+  <data name="ObjectifFlash_Error_RessourceQuantiteManquante" xml:space="preserve">
+    <value>La ressource doit avoir une quantité définie.</value>
+  </data>
+  <data name="ObjectifFlash_Error_RessourceSommeQuantiteJournalisees" xml:space="preserve">
+    <value>La somme des quantités journalisées ne correspond pas à la quantité de la ressource.</value>
+  </data>
+  <data name="ObjectifFlash_Error_RessourceUniteManquante" xml:space="preserve">
+    <value>La ressource doit avoir une unité définie.</value>
+  </data>
+  <data name="ObjectifFlash_Error_TacheManquante" xml:space="preserve">
+    <value>Un objectif flash doit au moins avoir une tâche.</value>
+  </data>
+  <data name="ObjectifFlash_Error_TacheQuantiteVide" xml:space="preserve">
+    <value>La tâche doit avoir une quantité définie.</value>
+  </data>
+  <data name="ObjectifFlash_Error_TacheRessourceClefManquante" xml:space="preserve">
+    <value>Une ressource clef de répartition doit etre définie pour la tâche.</value>
+  </data>
+  <data name="ObjectifFlash_Error_TacheRessourceErrors" xml:space="preserve">
+    <value>La tâche comporte des ressources en erreur.</value>
+  </data>
+  <data name="ObjectifFlash_Error_TacheRessourceManquante" xml:space="preserve">
+    <value>La tâche doit comporter au minimum une ressource.</value>
+  </data>
+  <data name="ObjectifFlash_Error_TacheSommeQuantitesJournalisees" xml:space="preserve">
+    <value>La somme des quantités journalisées ne correspond pas à la quantité de la tâche.</value>
+  </data>
+  <data name="ObjectifFlash_Error_TacheUniteVide" xml:space="preserve">
+    <value>La tâche doit avoir une unité définie.</value>
+  </data>
+  <data name="ObjectifFlash_Table_Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="ObjectifFlash_Table_Clef" xml:space="preserve">
+    <value>Clef</value>
+  </data>
+  <data name="ObjectifFlash_Table_LibelleTacheRessource" xml:space="preserve">
+    <value>Libellé Tâche/Ressource</value>
+  </data>
+  <data name="ObjectifFlash_Table_Montant" xml:space="preserve">
+    <value>Montant</value>
+  </data>
+  <data name="ObjectifFlash_Table_PUHT" xml:space="preserve">
+    <value>PUHT</value>
+  </data>
+  <data name="ObjectifFlash_Table_Quantite" xml:space="preserve">
+    <value>Quantité</value>
+  </data>
+  <data name="ObjectifFlash_Table_Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="ObjectifFlash_Table_TotalGeneral" xml:space="preserve">
+    <value>Total général</value>
+  </data>
+  <data name="ObjectifFlash_Table_Unite" xml:space="preserve">
+    <value>Unité</value>
+  </data>
+  <data name="ObjectifFlash_Modal_Confirmation_Activation_Message" xml:space="preserve">
+    <value>Confirmez vous l'activation de l'objectif flash ? Attention cette opération est irréversible.</value>
+  </data>
+  <data name="ObjectifFlash_Modal_Confirmation_Activation_Titre" xml:space="preserve">
+    <value>Activer l'objectif flash</value>
+  </data>
+  <data name="ObjectifFlash_Modal_Confirmation_Annulation_Message" xml:space="preserve">
+    <value>Êtes-vous certain de vouloir annuler ?</value>
+  </data>
+  <data name="ObjectifFlash_Modal_Confirmation_Annulation_Titre" xml:space="preserve">
+    <value>Annuler les modifications</value>
+  </data>
+  <data name="ObjectifFlash_Modal_Confirmation_Cloture_Message" xml:space="preserve">
+    <value>Confirmez vous la clôture de l'objectif flash ? Attention cette opération est irréversible.</value>
+  </data>
+  <data name="ObjectifFlash_Modal_Confirmation_Cloture_Titre" xml:space="preserve">
+    <value>Clôturer l'objectif flash</value>
+  </data>
+  <data name="ObjectifFlash_Modal_ReporterObjectif_NouvelleDate" xml:space="preserve">
+    <value>Nouvelle date de début de l'objectif flash :</value>
+  </data>
+  <data name="ObjectifFlash_Modal_ReporterObjectif_PeriodeInitiale" xml:space="preserve">
+    <value>Période initiale de l'objectif :</value>
+  </data>
+  <data name="ObjectifFlash_Error_DateFinAnterieure" xml:space="preserve">
+    <value>La date de fin doit être postérieure à la date de début.</value>
+  </data>
+  <data name="ObjectifFlash_Error_DateDebutPosterieureDateFin" xml:space="preserve">
+    <value>La date de début est postérieure à la date de fin.</value>
+  </data>
+  <data name="ObjectifFlash_Error_ObjectifFlashClosed" xml:space="preserve">
+    <value>Impression / Export impossible car Objectif Flash clôturé.</value>
+  </data>
+  <data name="ObjectifFlash_Error_ObjectifIdNotFound" xml:space="preserve">
+    <value>L'Objectif Flash {0} n'existe pas.</value>
+  </data>
+  <data name="ObjectifFlash_Error_StartDateTooOld" xml:space="preserve">
+    <value>La date de d'impression est antérieure à la date de début de l'Objectif Flash.</value>
+  </data>
+  <data name="ObjectifFlash_Error_CI_Libelle_Obligatoire" xml:space="preserve">
+    <value>Le CI et le libellé sont obligatoires pour la création d’un objectif flash</value>
+  </data>
+  <data name="ObjectifFlash_Error_DateDebutFinObligatoire" xml:space="preserve">
+    <value>Dates de début et de fin obligatoires</value>
+  </data>
+  <data name="ObjectifFlash_PanelRessource_AucunBaremeExploitation" xml:space="preserve">
+    <value>Aucun barème d'exploitation pour ce CI</value>
+  </data>
+  <data name="ObjectifFlash_PanelRessource_AucuneBaremeBudgetValide" xml:space="preserve">
+    <value>Aucun barème du budget validé pour ce CI et cette tâche</value>
+  </data>
+  <data name="ObjectifFlash_PanelRessource_AucuneBibiothequePrix" xml:space="preserve">
+    <value>Aucune bibliothèque des prix pour ce CI</value>
+  </data>
+  <data name="ObjectifFlash_PanelRessource_AucunPrix" xml:space="preserve">
+    <value>Pas de prix pour cette ressource</value>
+  </data>
+  <data name="ObjectifFlash_PanelRessource_Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="ObjectifFlash_PanelRessource_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+  </data>
+  <data name="ObjectifFlash_PanelRessource_Prix" xml:space="preserve">
+    <value>Prix</value>
+  </data>
+  <data name="ObjectifFlash_PanelRessource_Unite" xml:space="preserve">
+    <value>Unité</value>
+  </data>
+  <data name="ObjectifFlash_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="ObjectifFlash_TotalDebourse" xml:space="preserve">
+    <value>Total déboursé</value>
+  </data>
+  <data name="ObjectifFlash_TotalGeneral" xml:space="preserve">
+    <value>Total général</value>
+  </data>
+  <data name="ObjectifFlash_Error_TacheDejaPresente" xml:space="preserve">
+    <value>Cette tâche fait déjà partie de l'objectif flash</value>
+  </data>
+  <data name="ObjectifFlash_PanelRessource_RessourceRecommandee" xml:space="preserve">
+    <value>Cette ressource est une ressource recommandée</value>
+  </data>
+  <data name="ObjectifFlash_Modal_Confirmation_Sauvegarde_Message" xml:space="preserve">
+    <value>Êtes-vous certain de sauvegarder ces modifications ?</value>
+  </data>
+  <data name="ObjectifFlash_Modal_Confirmation_Sauvegarde_Titre" xml:space="preserve">
+    <value>Enregistrer les modifications</value>
+  </data>
+  <data name="ObjectifFlash_Error_InvalidExportParameters" xml:space="preserve">
+    <value>Un Objectif Flash, une date de début et une date de fin doivent être sélectionnés.</value>
+  </data>
+</root>

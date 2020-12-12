@@ -1,0 +1,69 @@
+﻿ <!--END Tableau liste-->
+<!-- START modal duplication d'un budget -->
+<div class="modal fade rec-dup-budg" id="{{$ctrl.Identifiers.Dialog}}" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i>{{::$ctrl.resources.Global_Modal_ConfirmationEnregistrement}}</h2>
+                <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title=""></i>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <input type="radio" name="updateValeursSurLignesEnExceptionRadio" id="updateValeursSurLignesEnExceptionTrue" ng-value="true" ng-model="$ctrl.UpdateValeursSurLignesEnException" value="true">
+                    <label for="updateValeursSurLignesEnExceptionTrue" class="bloc-txt">
+                        <span></span>{{::$ctrl.resources.Budget_BibliothequePrix_Save_CopierValeursSurBudgetBrouillonSurLignesExceptions}}
+                    </label>
+                </div>
+                <div>
+                    <input type="radio" name="updateValeursSurLignesEnExceptionRadio" id="updateValeursSurLignesEnExceptionFalse" ng-value="false" ng-model="$ctrl.UpdateValeursSurLignesEnException" value="false">
+                    <label for="updateValeursSurLignesEnExceptionFalse" class="bloc-txt">
+                        <span></span>{{::$ctrl.resources.Budget_BibliothequePrix_Save_CopierValeursSurBudgetBrouillonSansLignesExceptions}}
+                    </label>
+                </div>
+                <div class="separator"></div>
+
+                <div class="control-label bloc-txt bold-txt">{{::$ctrl.resources.Budget_BibliothequePrix_Save_UnitePropageQuelqueSoitLeChoix}}</div>
+                <div class="separator"></div>
+
+                <div class="control-label bloc-txt">{{::$ctrl.resources.Budget_BibliothequePrix_Save_SelectionBudgetsBrouillonsConcernes}}</div>
+                <div class="separator"></div>
+
+                <input type="checkbox" id="cbSelectionnerTout" ng-model="$ctrl.SelectAllValue" ng-change="$ctrl.SelectAllCbChange()">
+                <label for="cbSelectionnerTout" class="control-label bloc-txt">
+                    <span></span>{{::$ctrl.resources.Global_Select_All}}
+                </label>
+
+                <div class="prop-list">
+                    <div class="row">
+                        <label class="col-md-3 col-sm-3">Version</label>
+                        <label class="col-md-9 col-sm-3">Créé par</label>
+                    </div>
+                    <div ng-if="!$ctrl.BudgetsBrouillons">
+                        <span
+                            class="control-label bloc-txt bold-txt">{{::$ctrl.resources.Budget_BibliothequePrix_Save_SurCi_BudgetsBrouillonPasEncoreDispo}}</span>
+                    </div>
+                    
+                    <div ng-repeat="budget in $ctrl.BudgetsBrouillons">
+                        <div class="row budget-brouillon-row">
+                            <div class="col-md-3 col-sm-3">
+                                <input type="checkbox" ng-attr-id="{{'cbPropageSurBudget' + '-' + budget.Version}}"
+                                    ng-model="budget.PropageSurBudget">
+                                <label ng-attr-for="{{'cbPropageSurBudget' + '-' + budget.Version}}" class="bloc-txt">
+                                    <span></span>{{budget.Version}}
+                                </label>
+                            </div>
+                            <div class="col-md-9 col-sm-9">
+                                <label class="bloc-txt">{{budget.PrenomAuteur}} {{budget.NomAuteur}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-lg btn-default pull-left" data-dismiss="modal" ng-disabled="!$ctrl.IsSaveAllowed()" ng-click="$ctrl.EnregistrerSurCi()">{{::$ctrl.resources.Global_Bouton_Continuer}}</button>
+                <button class="btn btn-lg btn-link pull-right" data-dismiss="modal">{{::$ctrl.resources.Global_Bouton_Annuler}}</button>
+            </div>
+        </div>
+    </div>
+</div>

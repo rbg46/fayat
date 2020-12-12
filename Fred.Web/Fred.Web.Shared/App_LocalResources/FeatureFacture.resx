@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Facture_Index_Table_Entete_CI" xml:space="preserve">
+    <value>CI</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Table_Entete_DateComptable" xml:space="preserve">
+    <value>Date comptable</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Table_Entete_DateFacture" xml:space="preserve">
+    <value>Date facture</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Table_Entete_Devise" xml:space="preserve">
+    <value>Dev.</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Table_Entete_Journal" xml:space="preserve">
+    <value>Journ.</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Table_Entete_Fournisseur" xml:space="preserve">
+    <value>Fournisseur</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Table_Entete_MontantHT" xml:space="preserve">
+    <value>Montant HT</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Table_Entete_MontantTTC" xml:space="preserve">
+    <value>Montant TTC</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Table_Entete_MontantTVA" xml:space="preserve">
+    <value>Montant TVA</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Table_Entete_CompteGeneral" xml:space="preserve">
+    <value>Compte Général</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Table_Entete_Etablissement" xml:space="preserve">
+    <value>Etab.</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Table_Entete_NumFactureFournisseur" xml:space="preserve">
+    <value>N° Facture Fourn.</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Table_Entete_NumFMFI" xml:space="preserve">
+    <value>N° FMFI</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Table_Entete_Societe" xml:space="preserve">
+    <value>Soc.</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Table_Entete_Statut" xml:space="preserve">
+    <value>Statut</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Titre" xml:space="preserve">
+    <value>Recherche des factures</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Search_DateComptable" xml:space="preserve">
+    <value>Date comptable</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_DateEcheance" xml:space="preserve">
+    <value>Date d'échéance</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_DateFacture" xml:space="preserve">
+    <value>Date facture</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_DateGestion" xml:space="preserve">
+    <value>Date de gestion</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_MontantMax_Placeholder" xml:space="preserve">
+    <value>Max...</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_MontantMin_Placeholder" xml:space="preserve">
+    <value>Min...</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_MontantHT" xml:space="preserve">
+    <value>Montant HT</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_MontantTTC" xml:space="preserve">
+    <value>Montant TTC</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_MontantTVA" xml:space="preserve">
+    <value>Montant TVA</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_SeulementMesFactures" xml:space="preserve">
+    <value>Seulement mes factures</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_Organisation" xml:space="preserve">
+    <value>Organisation</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_SeulementNonRapprochees" xml:space="preserve">
+    <value>Seulement les factures non rapprochées</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_SeulementNonCachees" xml:space="preserve">
+    <value>Seulement les factures non cachées</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_DateComptable_Placeholder" xml:space="preserve">
+    <value>Choisir période</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_DateDebut_Placeholder" xml:space="preserve">
+    <value>Après le...</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_DateFin_Placeholder" xml:space="preserve">
+    <value>Avant le...</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_Tuile_MesFactures" xml:space="preserve">
+    <value>Mes factures</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Table_Entete_Folio" xml:space="preserve">
+    <value>Folio</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Search_Tuile_NonCachees" xml:space="preserve">
+    <value>Non cachées</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_Tuile_NonRapprochees" xml:space="preserve">
+    <value>Non rapprochées</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_TitreOnglet" xml:space="preserve">
+    <value>Recherche Facture</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_Tuile_DateComptable" xml:space="preserve">
+    <value>Date Comptable</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_Tuile_DateEcheance" xml:space="preserve">
+    <value>Date Echéance</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_Tuile_DateFacture" xml:space="preserve">
+    <value>Date Facture</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_Tuile_DateGestion" xml:space="preserve">
+    <value>Date Gestion</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_Tuile_MontantHT" xml:space="preserve">
+    <value>Montant HT</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_Tuile_MontantTTC" xml:space="preserve">
+    <value>Montant TTC</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Search_Tuile_MontantTVA" xml:space="preserve">
+    <value>Montant TVA</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Bouton_Decacher_Tooltip" xml:space="preserve">
+    <value>Dé-cacher la facture</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Bouton_Deplier" xml:space="preserve">
+    <value>Déplier la liste</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Bouton_Detail_Tooltip" xml:space="preserve">
+    <value>Cliquer pour accéder au détail de la facture</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Bouton_Recacher_Tooltip" xml:space="preserve">
+    <value>Re-cacher la facture</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Bouton_Replier" xml:space="preserve">
+    <value>Replier la liste</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Bouton_Scan_Tooltip" xml:space="preserve">
+    <value>Ouvrir le scan de la facture</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_NbrFacture" xml:space="preserve">
+    <value>facture(s)</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_Rechercher_Placeholder" xml:space="preserve">
+    <value>Rechercher une Facture ...</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Facture_Index_TitreOnglet" xml:space="preserve">
+    <value>Facture</value>
+    <comment>Index.cshtml</comment>
+  </data>
+</root>

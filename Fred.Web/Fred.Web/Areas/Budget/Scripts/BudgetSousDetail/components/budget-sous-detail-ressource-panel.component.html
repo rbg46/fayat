@@ -1,0 +1,105 @@
+﻿<div ng-class="$ctrl.PanelClass" ng-click="$ctrl.Hide()" class="blockScreen"></div>
+
+<div class="sous-detail-ressource-panel options" id="optionRightPanel" ng-class="$ctrl.PanelClass">
+
+    <!--Ancre pour la fenêtre d'ajout / modification de surcharges-->
+    <div id="SOUS_DETAIL_RESSOURCE_PANEL_MODAL"></div>
+
+    <!--Header-->
+    <div class="form-header rechercher row">
+        <div class="inner-addon right-addon pull-left">
+            <i class="material-icons">search</i>
+            <input type="text"
+                   id="searched_text"
+                   class="form-control"
+                   ng-change="$ctrl.handleChangeSearch()"
+                   ng-model="$ctrl.View.Search"
+                   ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }"
+                   placeholder="{{::$ctrl.resources.Global_ReferentielRessource_Placeholder}}">
+            <div class="recommandees-uniquement" ng-if="$ctrl.GereRessourcesRecommandees">
+                <input type="checkbox" ng-model="$ctrl.RecommandeesUniquement" id="RecommandeesUniquementCheckboxId" />
+                <label for="RecommandeesUniquementCheckboxId"><span></span>{{$ctrl.resources.BudgetSousDetail_RessourcePanel_RecommandeesUniquement}}</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form fred-scroll" id="containerRessources">
+        <div ng-repeat="chapitre in $ctrl.Chapitres | filter: $ctrl.chapitresFilter($ctrl.View.Search)">
+            <div class="level-1 panel-default"
+                 ng-class="{'isOpen': chapitre.isOpen }">
+
+                <!--CHAPITRE-->
+                <div class="Chapitre row panel-heading"
+                     ng-click="$ctrl.handleClickChapitre(chapitre)">
+
+                    <div class="col-md-2 pl5">
+                        <div class="arrow"></div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="lb">{{::$ctrl.resources.Budget_SousDetail_RessourcePanel_Code}}</div>
+                        <span>{{chapitre.ChapitreCode}}</span>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="lb">{{::$ctrl.resources.Budget_SousDetail_RessourcePanel_Libelle}}</div>
+                        <span class="field">{{chapitre.ChapitreLibelle}}</span>
+                    </div>
+                </div>
+
+                <!--SOUS CHAPITRE-->
+                <div class="sousChapitre"
+                     ng-if="chapitre.isOpen">
+                    <div ng-repeat="sousChapitre in chapitre.SousChapitres | filter: $ctrl.sousChapitresFilter($ctrl.View.Search)"
+                         class="row main_line">
+
+                        <div class="row level-2 panel-default pad_l"
+                             ng-class="{'isOpen': sousChapitre.isOpen }"
+                             ng-click="$ctrl.handleClickSousChapitre(sousChapitre)">
+
+                            <div class="col-md-2 pad_l">
+                                <div class="arrow"></div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="lb">{{::$ctrl.resources.Budget_SousDetail_RessourcePanel_Code}}</div>
+                                <span>{{sousChapitre.SousChapitreCode}}</span>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="lb">{{::$ctrl.resources.Budget_SousDetail_RessourcePanel_Libelle}}</div>
+                                <span class="field">{{sousChapitre.SousChapitreLibelle}}</span>
+                            </div>
+                        </div>
+
+                        <!--RESSOURCES-->
+                        <div class="row level-3"
+                             ng-if="sousChapitre.isOpen">
+                            <div ng-repeat="budgetRessource in sousChapitre.Ressources | filter: $ctrl.ressourcesFilter($ctrl.View.Search)">
+                                <budget-ressource-component chapitre="chapitre"
+                                                            sous-chapitre="sousChapitre"
+                                                            budget-ressource="budgetRessource"
+                                                            devise-selected="$ctrl.budget.Devise"
+                                                            resources="$ctrl.resources"
+                                                            budget="$ctrl.budget"
+                                                            searched="$ctrl.View.Search"
+                                                            bibliotheque-prix="$ctrl.bibliothequePrix">
+                                </budget-ressource-component>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Bouton fermer-->
+    <div class="form-footer action-controls">
+        <div class="btn-fermer">
+            <button type="button"
+                    class="btn btn-default"
+                    ng-click="$ctrl.Hide()"
+                    title="{{::$ctrl.resources.Global_Bouton_Fermer_Tooltip}}">
+                {{::$ctrl.resources.Global_Bouton_Fermer}}
+            </button>
+        </div>
+    </div>
+</div>

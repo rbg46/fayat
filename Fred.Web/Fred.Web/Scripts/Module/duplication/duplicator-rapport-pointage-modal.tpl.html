@@ -1,0 +1,76 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title">
+            <i class="flaticon flaticon-add-3">
+            </i>{{$ctrl.title}}
+        </h2>
+        <i class="flaticon flaticon-multiply close pull-right"
+           aria-label="Close"
+           ng-click="$ctrl.turnOff()"
+           title="{{$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">
+        </i>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body-content">
+            <b>{{$ctrl.resources.Duplicate_Pointage_Popup_Label}}</b>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <fred-section class="select-date">
+                    <label for="">{{$ctrl.resources.Global_Date_Debut}}</label>
+                    <fred-section-controls lang="fr">
+                        <div class="input-group date">
+                            <app-date-picker id="startDate"
+                                             ng-model="$ctrl.startDate"
+                                             initial-date="{{$ctrl.startDate}}"
+                                             format="DD/MM/YYYY"
+                                             lang="fr" />
+                        </div>
+                    </fred-section-controls>
+                </fred-section>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <fred-section class="select-date">
+                    <label>{{$ctrl.resources.Global_Date_Fin}}</label>
+                    <fred-section-controls lang="fr">
+                        <div class="input-group date">
+                            <app-date-picker id="endDate"
+                                             ng-model="$ctrl.endDate"
+                                             initial-date="{{$ctrl.endDate}}"
+                                             format="DD/MM/YYYY"
+                                             lang="fr" />
+                        </div>
+                    </fred-section-controls>
+                </fred-section>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <label for="">Centre d'imputation</label>
+                <lookup-standalone ng-model="$ctrl.ciDuplication"
+                                   text="$ctrl.ciDuplication.CodeLibelle"
+                                   search-max-length="100"
+                                   search-title="{{$ctrl.resources.Global_ReferentielCI}}"
+                                   search-placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                   show-in-popup="true"
+                                   url="/api/CI/SearchLight"
+                                   on-select="$ctrl.ciDuplication = item"
+                                   on-delete="$ctrl.ciDuplication = null"
+                                   class="formulaire middle"
+                                   ng-disabled="$ctrl.lookupCiIsDisabled()">
+                </lookup-standalone>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default pull-left"
+                ng-disabled="!$ctrl.canDuplicate()"
+                ng-click="$ctrl.duplicate()">
+            {{$ctrl.resources.Pointage_List_Duplicate_Button}}
+        </button>
+        <button class="btn btn-link pull-right"
+                ng-click="$ctrl.turnOff()">
+            {{$ctrl.resources.Global_Bouton_Annuler}}
+        </button>
+    </div>
+</div>

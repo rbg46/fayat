@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="20a35ef4-22f7-4004-a870-aa204740530f" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <comments>
+    <comment Id="9748f7fd-f1cc-48d5-9e5c-92bd4dea4344" name="Comment1">
+      <body>Fred.Database</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="0612698b-9f78-4a99-ad91-d87bd4666b2d" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+  </comments>
+  <layers>
+    <layer Id="fd98ab59-86e3-4121-89fc-f6bc0bac7860" name="Couche de persistance de la donnée">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="34444277-9706-4456-b732-dcd683a4fbbf" direction="Forward">
+          <layerMoniker Id="e54d70c9-47d6-44be-a6b5-17bdb4653e55" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="9d795272-55f6-4e4e-9e28-7fa6faa2b26e" name="Fred.ImportExport.Database" requiredNamespace="Fred.ImportExport.Database" forbiddenNamespaceDependencies="Fred.DataAccess">
+          <references>
+            <reference Id="de45483f-5aaf-4ad6-9256-6e3cc83e88fb" name="Fred.ImportExport.Database">
+              <ArtifactNode Label="Fred.ImportExport.Database" Category="CodeSchema_Project" Id="(Assembly=../Fred.ImportExport.Database/Fred.ImportExport.Database.csproj)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=Fred.ImportExport.Database)" Label="Fred.ImportExport.Database.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Produces" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="ed56fb3c-ddf0-4267-a159-e7b9ccc268d9" name="Couche d'accès à la donnée">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="3f584ee5-616c-4611-b7c2-d3a91b69c460" direction="Forward">
+          <layerMoniker Id="e54d70c9-47d6-44be-a6b5-17bdb4653e55" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="0612698b-9f78-4a99-ad91-d87bd4666b2d" name="Fred.DataAccess" forbiddenNamespaceDependencies="Fred.ImportExport">
+          <references>
+            <reference Id="41b3e5b5-c81f-4018-94e0-46d6fabb2906" name="Fred.DataAccess">
+              <ArtifactNode Label="Fred.DataAccess" Category="CodeSchema_Project" Id="(Assembly=../../../Fred-Web/Dev/Fred.DataAccess/Fred.DataAccess.csproj)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=Fred.DataAccess)" Label="Fred.DataAccess.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Produces" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="b1f9001f-e52d-4576-9814-06a7f565a7f4" name="Fred.ImportExport.DataAccess" requiredNamespace="Fred.ImportExport.DataAccess" forbiddenNamespaceDependencies="Fred.DataAccess">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="d76123b9-0a8a-467e-9766-050beabd5162" direction="Forward">
+              <layerMoniker Id="9d795272-55f6-4e4e-9e28-7fa6faa2b26e" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="93b4a841-40c2-484b-911f-ce4432ef31fd" name="Fred.ImportExport.DataAccess">
+              <ArtifactNode Label="Fred.ImportExport.DataAccess" Category="CodeSchema_Project" Id="(Assembly=../Fred.ImportExport.DataAccess/Fred.ImportExport.DataAccess.csproj)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=Fred.ImportExport.DataAccess)" Label="Fred.ImportExport.DataAccess.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Produces" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="856eba1b-0363-40b0-9184-986c8060f011" name="Couche de traitement métier">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="4288869b-5a09-463d-be7d-263c9a5a7543" direction="Forward">
+          <layerMoniker Id="e54d70c9-47d6-44be-a6b5-17bdb4653e55" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="8e74f3cf-232e-44c0-bcce-87860fa7edb1" name="Fred.Business" forbiddenNamespaceDependencies="Fred.ImportExport">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="8d54fbd1-b9d8-45c7-83f7-dcaace25d107" direction="Forward">
+              <layerMoniker Id="0612698b-9f78-4a99-ad91-d87bd4666b2d" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="ee5177d9-76e8-4b9c-b2ef-65e585ee8d3e" name="Fred.Business">
+              <ArtifactNode Label="Fred.Business" Category="CodeSchema_Project" Id="(Assembly=../../../Fred-Web/Dev/Fred.Business/Fred.Business.csproj)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=Fred.Business)" Label="Fred.Business.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Produces" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="0e03ccc8-4128-42cc-a27a-9e35f1daed0a" name="Fred.ImportExport.Business" requiredNamespace="Fred.ImportExport.Business">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="49d6a67d-1464-433c-ab82-e1191b515c46" direction="Forward">
+              <layerMoniker Id="8e74f3cf-232e-44c0-bcce-87860fa7edb1" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="2808ef68-4ef5-4137-94bd-e25d8e8d46d0" direction="Forward">
+              <layerMoniker Id="b1f9001f-e52d-4576-9814-06a7f565a7f4" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="ec33eb11-5a14-497e-a80e-76dcaf0d0ed6" direction="Forward">
+              <layerMoniker Id="9d795272-55f6-4e4e-9e28-7fa6faa2b26e" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="9d6a8e79-6e9e-463f-b52d-5ca06ce000bf" name="Fred.ImportExport.Business">
+              <ArtifactNode Label="Fred.ImportExport.Business" Category="CodeSchema_Project" Id="(Assembly=../Fred.ImportExport.Business/Fred.ImportExport.Business.csproj)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=Fred.ImportExport.Business)" Label="Fred.ImportExport.Business.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Produces" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="faa6c54e-2143-4bfc-a550-3695c9f092df" name="Couche d'exposition&#xD;&#xA;(Presentation Layer)" forbiddenNamespaceDependencies="Fred.Business">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="00e0f907-9903-4b84-9547-441d38c2e6dd" direction="Forward">
+          <layerMoniker Id="e54d70c9-47d6-44be-a6b5-17bdb4653e55" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="33acb2bb-c8ca-4d7e-9176-47accc0cd78a" direction="Forward">
+          <layerMoniker Id="e10f0a62-198d-4da5-83d9-6bda31a81efe" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="c79bf779-20fb-483f-b3a8-cf87f80c5edc" name="Fred.ImportExport.Web" requiredNamespace="Fred.ImportExport.Web" forbiddenNamespaceDependencies="Fred.ImportExport.Api">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="e55675da-d740-486e-92c1-f686d3f51c33" direction="Forward">
+              <layerMoniker Id="0e03ccc8-4128-42cc-a27a-9e35f1daed0a" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="ddf68576-f39b-44a3-bcde-7a73a16f3f96" name="Fred.ImportExport.Web">
+              <ArtifactNode Label="Fred.ImportExport.Web" Category="CodeSchema_Project" Id="(Assembly=../Fred.ImportExport.Web/Fred.ImportExport.Web.csproj)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=Fred.ImportExport.Web)" Label="Fred.ImportExport.Web.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Produces" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="dc1a8ec2-9b28-4639-a966-4978f028e734" name="Fred.ImportExport.Api" requiredNamespace="Fred.ImportExport.Api" forbiddenNamespaceDependencies="Fred.Business">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="d8b1ef16-101c-4568-9c56-470f35faeada" direction="Forward">
+              <layerMoniker Id="0e03ccc8-4128-42cc-a27a-9e35f1daed0a" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="a0739e2c-9f3b-4f54-a922-54199fa4471d" name="Fred.ImportExport.Api">
+              <ArtifactNode Label="Fred.ImportExport.Api" Category="CodeSchema_Project" Id="(Assembly=../Fred.ImportExport.Api/Fred.ImportExport.Api.csproj)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=Fred.ImportExport.Api)" Label="Fred.ImportExport.Api.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Produces" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="e54d70c9-47d6-44be-a6b5-17bdb4653e55" name="Couche partagée">
+      <childLayers>
+        <layer Id="e4e6cec5-26fa-4f80-9070-e34fcdf34cc5" name="Couche partagée&#xD;&#xA;Fred.Web" forbiddenNamespaceDependencies="Fred.ImportExport">
+          <childLayers>
+            <layer Id="b8543fde-438a-408a-b694-a3bb1e4fbeaa" name="Fred.Entities">
+              <references>
+                <reference Id="24112f17-b8f3-42f4-ba2c-519c5b2907be" name="Fred.Entities">
+                  <ArtifactNode Label="Fred.Entities" Category="CodeSchema_Project" Id="(Assembly=../../../Fred-Web/Dev/Fred.Entities/Fred.Entities.csproj)" />
+                  <ExpandedNode Id="(Assembly=Fred.Entities)" Label="Fred.Entities.dll" Category="CodeSchema_Assembly">
+                    <Category Ref="FileSystem.Category.FileOfType.dll" />
+                    <LinkCategory Ref="Produces" />
+                    <LinkCategory Ref="Represents" />
+                  </ExpandedNode>
+                </reference>
+              </references>
+            </layer>
+            <layer Id="32df8e44-4997-4008-a4ed-ba4da7b5d4c3" name="Fred.Framework">
+              <references>
+                <reference Id="756446cd-bff1-4ffc-a8ed-5e3bd3f19667" name="Fred.Framework">
+                  <ArtifactNode Label="Fred.Framework" Category="CodeSchema_Project" Id="(Assembly=../../../Fred-Web/Dev/Fred.Framework/Fred.Framework.csproj)" />
+                  <ExpandedNode Id="(Assembly=Fred.Framework)" Label="Fred.Framework.dll" Category="CodeSchema_Assembly">
+                    <Category Ref="FileSystem.Category.FileOfType.dll" />
+                    <LinkCategory Ref="Produces" />
+                    <LinkCategory Ref="Represents" />
+                  </ExpandedNode>
+                </reference>
+              </references>
+            </layer>
+          </childLayers>
+        </layer>
+        <layer Id="27dee638-e5f5-4488-a5c3-700ad1dc252d" name="Couche partagée&#xD;&#xA;Fred.ImportExport">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="16ae5606-7fe9-4892-8780-b054c2103a77" direction="Forward">
+              <layerMoniker Id="e4e6cec5-26fa-4f80-9070-e34fcdf34cc5" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <childLayers>
+            <layer Id="c7e5911a-296e-45b5-81f6-a93dcdcc18d3" name="Fred.ImportExport.Entities" requiredNamespace="Fred.ImportExport.Entities">
+              <references>
+                <reference Id="ecef1a0c-eb60-4cd9-88aa-a0d57ccb6585" name="Fred.ImportExport.Entities">
+                  <ArtifactNode Label="Fred.ImportExport.Entities" Category="CodeSchema_Project" Id="(Assembly=../Fred.ImportExport.Entities/Fred.ImportExport.Entities.csproj)" />
+                  <ExpandedNode Id="(Assembly=Fred.ImportExport.Entities)" Label="Fred.ImportExport.Entities.dll" Category="CodeSchema_Assembly">
+                    <Category Ref="FileSystem.Category.FileOfType.dll" />
+                    <LinkCategory Ref="Produces" />
+                    <LinkCategory Ref="Represents" />
+                  </ExpandedNode>
+                </reference>
+              </references>
+            </layer>
+            <layer Id="6a19db96-753d-4e0e-9008-befbba50535e" name="Fred.ImportExport.Framework" requiredNamespace="Fred.ImportExport.Framework">
+              <references>
+                <reference Id="7c5f2245-ea32-437d-a255-7ce0e73dc546" name="Fred.ImportExport.Framework">
+                  <ArtifactNode Label="Fred.ImportExport.Framework" Category="CodeSchema_Project" Id="(Assembly=../Fred.ImportExport.Framework/Fred.ImportExport.Framework.csproj)" />
+                  <ExpandedNode Id="(Assembly=Fred.ImportExport.Framework)" Label="Fred.ImportExport.Framework.dll" Category="CodeSchema_Assembly">
+                    <Category Ref="FileSystem.Category.FileOfType.dll" />
+                    <LinkCategory Ref="Produces" />
+                    <LinkCategory Ref="Represents" />
+                  </ExpandedNode>
+                </reference>
+              </references>
+            </layer>
+          </childLayers>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="e10f0a62-198d-4da5-83d9-6bda31a81efe" name="Infrastructure">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="347bd2c5-7ca0-4daf-973e-cc73e058b47c" direction="Forward">
+          <layerMoniker Id="fd98ab59-86e3-4121-89fc-f6bc0bac7860" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="d5152608-69f7-4014-9d3f-55bd12f0df62" direction="Forward">
+          <layerMoniker Id="e54d70c9-47d6-44be-a6b5-17bdb4653e55" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="7ee2b73b-dfc0-4ab8-853c-89566fecb015" direction="Forward">
+          <layerMoniker Id="856eba1b-0363-40b0-9184-986c8060f011" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="601a6395-63a6-4642-9084-36c4ee75f3c1" direction="Forward">
+          <layerMoniker Id="ed56fb3c-ddf0-4267-a159-e7b9ccc268d9" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="3bc687c2-9760-4bfb-bd49-6e83ce4d665f" name="Fred.ImportExport.Bootstrapper">
+          <references>
+            <reference Id="20789060-55e4-4c9c-91c6-2215a9fcbba3" name="Fred.ImportExport.Bootstrapper">
+              <ArtifactNode Label="Fred.ImportExport.Bootstrapper" Category="CodeSchema_Project" Id="(Assembly=../Fred.ImportExport.Bootstrapper/Fred.ImportExport.Bootstrapper.csproj)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=Fred.ImportExport.Bootstrapper)" Label="Fred.ImportExport.Bootstrapper.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Produces" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+    </layer>
+  </layers>
+</layerModel>

@@ -1,0 +1,41 @@
+= Lancer les tests unitaires en local
+
+== Prequel
+
+A lire :
+
+Section sur le guide des tests unitaires
+
+== Démarrer les tests unitaires
+
+=== Configurer la base de données
+
+*En partant sur une base vide*
+
+    * Détruisez l'ancienne base de test
+    * Recréez en une autre en faisant dans SQL Management Studio, clique droit sur l'instance SQL * New Database
+    * Mettez a jour le schema de la base en allant sur Visual Studio :
+        * Renseignez ce nom dans le App.config du projet de test dans Visual Studio
+        * Lancer le test Fred.Business.Tests > TestCodeFirst > CreateOrUpdateDatabase();
+        * Ou taper la commande Upgrade-Database [nom de la base] dans Visual Studio command prompt
+    * Deployez le référentiel en ouvrant dans un notepad le script suivant ~\Fred.Web\Fred.Referential\DeployReferential_Local.ps1
+        * Changez le driver en SQL Server Developer en commentant / decommentant en ajoutant un '#' sur la section concernée
+        * Changer le nom de la base de donnees avec celle que vous avez creer dans la connection string.
+
+[source, bat]
+$Connection="Data Source=localhost\FredInstanceDev;Initial Catalog=FredWeb_Tua;Integrated Security=True;"
+
+*Si vous partez d'une base non vide*
+
+    * il faut exécuter tous les scripts SQL contenu dans ~\Fred.Web\Fred.Referential\InCaseOfNotEmptyDatabase\ tous les scripts.
+
+== Dans Visual Studio
+
+* Ouvrir le test explorer dans le menu Test > Windows > Test Explorer ou taper Ctrl + E, T
+* Lancer tous les tests
+
+== Aller plus loin
+
+* Vous pouvez voir la couverture de code directement depuis les fichiers .cs ouverts en activant le Unit Test Live
+    * Aller dans Test > Live Unit Testing > Start : les parties du code en vert sont couverts et en jaune non couvertes. En rouge, couvertes mais en erreur.
+    * Vous pouvez aller dans les options du Live Unit Testing pour le lancer au demarrage de la solution et le mettre en pause pendant les phase de build / debug.

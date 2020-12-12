@@ -1,0 +1,264 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+@{
+    ViewBag.Title = FeatureRessourcesSpecifiquesCI.RessourcesSpecifiquesCI_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+    @Styles.Render("~/RessourcesSpecifiquesCIBundle.css")
+}
+@section scripts {
+    @Scripts.Render("~/RessourcesSpecifiquesCIBundle.js")
+    @this.RenderResources("FeatureRessourcesSpecifiquesCI")
+}
+
+<div ng-controller="RessourcesSpecifiquesCIController as ctrl">
+
+
+    <h1>{{::ctrl.resources.RessourcesSpecifiquesCI_Titre}}</h1>
+
+    <!--START : Barre de rechreche + Barre d'outils-->
+    <fred-toolbar>
+
+        <!--Sélectionner un CI-->
+        <fred-section class="picklist-ci-section">
+            <fred-section-title>{{::ctrl.resources.RessourcesSpecifiquesCI_CI_SousTitre}}</fred-section-title>
+
+            <fred-section-controls>
+                <div class="search-bloc">
+                    <lookup-standalone ng-model="ctrl.selectedCI"
+                                       text="ctrl.selectedCI.CodeLibelle"
+                                       search-title="{{::ctrl.resources.RessourcesSpecifiquesCI_ReferentielCI}}"
+                                       search-placeholder="{{::ctrl.resources.RessourcesSpecifiquesCI_ReferentielCI_Placeholder}}"
+                                       custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                       url="/api/CI/SearchLightForSpecificCi"
+                                       on-select="ctrl.onCiChanged()"
+                                       placeholder="{{::ctrl.resources.RessourcesSpecifiquesCI_ReferentielCI_Placeholder}}"
+                                       class="formulaire long"
+                                       showDeleteButton="false">
+                    </lookup-standalone>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <fred-section class="export-section">
+            <fred-section-title>Export</fred-section-title>
+            <fred-section-controls>
+                <!--Export Excel-->
+                <button type="button" class="btn button-excel" ng-disabled="!ctrl.selectedCI" ng-click="ctrl.handleExport()" title="{{ctrl.resources.Global_Bouton_ExportExcel_Tooltip}}">
+                </button>
+            </fred-section-controls>
+        </fred-section>
+    </fred-toolbar>
+
+    <!--Message Sélectionner un CI-->
+    <div class="row information" ng-show="!ctrl.selectedCI">
+        <div class="col-md-4 icon">
+            <span class="flaticon flaticon-warning"></span>
+        </div>
+        <div class="col-md-4 msg">
+            <h3>{{::ctrl.resources.RessourcesSpecifiquesCI_Index_Selectionner_CI_Warning}}</h3>
+        </div>
+    </div>
+
+    <div class="row" ng-show="ctrl.selectedCI">
+
+        <!--TABLEAU DES RESSOURCES -->
+        <fred-section>{{::ctrl.resources.RessourcesSpecifiquesCI_Ressource_SousTitre}}</fred-section>
+
+        <div class="search-container">
+            <div class="input-group input-search">
+                <input type="text" placeholder="{{::ctrl.resources.RessourcesSpecifiquesCI_ReferentielRessource_Placeholder}}" ng-model="ctrl.searchRessource" class="form-control">
+                <span class="input-group-addon button-search"><i class="material-icons">search</i></span>
+            </div>
+            <div class="fold">
+                <button type="button" class="btn btn-primary" ng-click="ctrl.handleOpenAll()">{{::ctrl.resources.RessourcesSpecifiquesCI_Bouton_ToutDeplier}}</button>
+                <button type="button" class="btn btn-primary" ng-click="ctrl.handleCloseAll()">{{::ctrl.resources.RessourcesSpecifiquesCI_Bouton_ToutReplier}}</button>
+            </div>
+        </div>
+
+        <div class="spec-res-body fred-scroll">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default" ng-repeat="chapitre in ctrl.referentielList | orderBy: '+Code' | filter: ctrl.chapitresCascadeFilter(ctrl.searchRessource)">
+                    <div class="panel-heading level1">
+                        <table class="t-first">
+                            <tbody>
+                                <tr class="chap collapsed" data-toggle="collapse" data-target="#ss-{{::chapitre.Code}}-{{::chapitre.ChapitreId}}" aria-expanded="true">
+                                    <td class="col1" >
+                                        <a class="accordion-toggle"></a>
+                                    </td>
+                                    <td class="col2">
+                                        <p class="inline-header">{{::ctrl.resources.RessourcesSpecifiquesCI_Code}}</p>
+                                        <p class="inline-description">{{::chapitre.Code}}</p>
+                                    </td>
+                                    <td class="col3">
+                                        <p class="inline-header">{{::ctrl.resources.RessourcesSpecifiquesCI_Libelle}}</p>
+                                        <p class="inline-description">{{::chapitre.Libelle}}</p>
+                                    </td>
+                                    <td class="col4"></td>
+                                    <td class="col5">
+                                        <div class="warn-mess" ng-if="chapitre.CountRessourceSpecifiquesCI > 0">
+                                            <span class="material-icons badge-notify">warning</span>
+                                            <span class="warn-txt">
+                                                {{chapitre.CountRessourceSpecifiquesCI}} {{::ctrl.resources.RessourcesSpecifiquesCI_NombreWarning}}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td class="col6"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="ss-{{::chapitre.Code}}-{{::chapitre.ChapitreId}}" class="panel-collapse collapse" aria-expanded="true">
+                        <div class="panel-body">
+                            <div class="panel panel-default" ng-repeat="souschapitre in chapitre.SousChapitres | orderBy: '+Code' | filter: ctrl.sousChapitresCascadeFilter(ctrl.searchRessource)">
+                                <div class="panel-heading level2">
+                                    <table class="t-first">
+                                        <tbody>
+                                            <tr class="sous-chap collapsed" data-toggle="collapse"
+                                                       data-parent="#ss-{{::chapitre.Code}}-{{::chapitre.ChapitreId}}"
+                                                       data-target="#ress-{{::souschapitre.Code}}-{{::souschapitre.SousChapitreId}}"
+                                                       aria-expanded="true">
+                                                <td class="col1">
+                                                    <a class="accordion-toggle"></a>
+                                                </td>
+                                                <td class="col2">
+                                                    <p class="inline-header">{{::ctrl.resources.RessourcesSpecifiquesCI_Code}}</p>
+                                                    <p class="inline-description">{{::souschapitre.Code}}</p>
+                                                </td>
+                                                <td class="col3">
+                                                    <p class="inline-header">{{::ctrl.resources.RessourcesSpecifiquesCI_Libelle}}</p>
+                                                    <p class="inline-description">{{::souschapitre.Libelle}}</p>
+                                                </td>
+                                                <td class="col4"></td>
+                                                <td class="col5">
+                                                    <div class="warn-mess" ng-if="souschapitre.CountRessourceSpecifiquesCI > 0">
+                                                        <span class="material-icons badge-notify">warning</span>
+                                                        <span class="warn-txt">
+                                                            {{souschapitre.CountRessourceSpecifiquesCI}} {{::ctrl.resources.RessourcesSpecifiquesCI_NombreWarning}}
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td class="col6"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div id="ress-{{::souschapitre.Code}}-{{::souschapitre.SousChapitreId}}" class="panel-collapse collapse">
+                                    <div class="panel-body level3">
+                                        <table class="table t-third">
+                                            <tbody>
+                                                <tr class="res1" ng-repeat="ressource in souschapitre.Ressources | orderBy: '+Code' | filter: ctrl.ressourcesFilter(ctrl.searchRessource)">
+                                                    <td class="col1"></td>
+                                                    <td class="col2">
+                                                        <p class="inline-header">{{::ctrl.resources.RessourcesSpecifiquesCI_Code}}</p>
+                                                        <p class="inline-description">{{::ressource.Code}}</p>
+                                                    </td>
+                                                    <td class="col3">
+                                                        <p class="inline-header">{{::ctrl.resources.RessourcesSpecifiquesCI_Libelle}}</p>
+                                                        <p class="inline-description">{{::ressource.Libelle}}</p>
+                                                    </td>
+                                                    <td class="col4">
+                                                        <div class="add-res-bloc" ng-if="::!ressource.IsRessourceSpecifiqueCi">
+                                                            <span class="material-icons add-res" ng-click="ctrl.handleInitCreation(ressource, ctrl.selectedCI.CiId)" data-toggle="modal" data-target="#create-res" title="{{::ctrl.resources.RessourcesSpecifiquesCI_Creation_Info}}">add</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="col4">
+                                                        <div class="tile-bloc" ng-if="::ressource.IsRessourceSpecifiqueCi">
+                                                            <span class="tile active" ng-if="::ressource.Active">{{::ctrl.resources.RessourcesSpecifiquesCI_EstSpecifiqueCI}}</span>
+                                                            <span class="tile inactive" ng-if="::!ressource.Active">{{::ctrl.resources.RessourcesSpecifiquesCI_EstSpecifiqueCI}}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="col5">
+                                                        <p class="inline-header" ng-if="::ressource.IsRessourceSpecifiqueCi">{{::ctrl.resources.RessourcesSpecifiquesCI_RessourceRattachement}}</p>
+                                                        <p class="inline-description" ng-if="::ressource.IsRessourceSpecifiqueCi">{{::ressource.RessourceRattachement.CodeLibelle}}</p>
+                                                    </td>
+                                                    <td class="col6">
+                                                        <div class="act-icons" ng-if="::ressource.IsRessourceSpecifiqueCi">
+                                                            <span class="material-icons" ng-click="ctrl.handleInitEdition(ressource)" data-toggle="modal" data-target="#create-res" title="{{::ctrl.resources.RessourcesSpecifiquesCI_Modification_Info}}">more_vert</span>
+                                                            <span class="material-icons" ng-click="ctrl.handleInitEdition(ressource)" data-toggle="modal" data-target="#del-res" title="{{::ctrl.resources.RessourcesSpecifiquesCI_Suppression_Info}}">clear</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Modal Création de resource spécifique-->
+        <div class="modal crea-res-modal fade" id="create-res" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" ng-show="ctrl.modeCreation"> <i class="flaticon flaticon-notebook-4"></i>{{::ctrl.resources.RessourcesSpecifiquesCI_CreationTitre}}</h2>
+                        <h2 class="modal-title" ng-show="!ctrl.modeCreation"> <i class="flaticon flaticon-notebook-4"></i>{{::ctrl.resources.RessourcesSpecifiquesCI_EditionTitre}}</h2>
+                        <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" aria-label="Close" title="{{::ctrl.resources.RessourcesSpecifiquesCI_AnnulerFermer_Info}}"></i>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>{{::ctrl.resources.RessourcesSpecifiquesCI_RessourceRattachement}}</label>
+                                <input type="text" readonly disabled name="" value="{{::ctrl.currentRessource.RessourceRattachement.CodeLibelle}}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>{{::ctrl.resources.RessourcesSpecifiquesCI_Code}}</label>
+                                <input type="text" readonly disabled name="" ng-model="ctrl.currentRessource.Code" class="form-control" />
+                            </div>
+                            <div class="col-md-8">
+                                <label>{{::ctrl.resources.RessourcesSpecifiquesCI_Libelle}} *</label>
+                                <input type="text" name="" ng-model="ctrl.currentRessource.Libelle" ng-change="ctrl.handleValidateLibelle()" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="radio" name="active" ng-model="ctrl.currentRessource.Active" id="active" ng-value="true"><label for="active"><span></span>{{::ctrl.resources.RessourcesSpecifiquesCI_Active}}</label>
+                                <input type="radio" name="inactive" ng-model="ctrl.currentRessource.Active" id="inactive" ng-value="false"><label for="inactive"><span></span>{{::ctrl.resources.RessourcesSpecifiquesCI_Inactive}}</label>
+                            </div>
+                        </div>
+
+                        
+                        <div class="row margin-top4" ng-if="ctrl.errorLibelle">
+                            <div class="col-md-12">
+                                <span class="text-danger">{{::ctrl.resources.RessourcesSpecifiquesCl_Modal_Erreur_Libelle_Vide}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-default pull-left" ng-disabled="ctrl.errorLibelle" data-dismiss="modal" ng-click="ctrl.handleSave()">{{::ctrl.resources.RessourcesSpecifiquesCI_Enregistrer}}</button>
+                        <button class="btn btn-link pull-right" data-dismiss="modal">{{::ctrl.resources.RessourcesSpecifiquesCI_Annuler}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Modal Confirmation suppression d'une resource spécifique-->
+        <div class="modal fade" id="del-res" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title"> <i class="flaticon flaticon-notebook-4"></i>{{::ctrl.resources.RessourcesSpecifiquesCI_SuppressionTitre}}</h2>
+                        <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" aria-label="Close" title="{{::ctrl.resources.RessourcesSpecifiquesCI_AnnulerFermer_Info}}"></i>
+                    </div>
+                    <div class="modal-body">
+                        <b>{{::ctrl.resources.RessourcesSpecifiquesCI_MessageSupprConfirmation}}</b>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default pull-left" data-dismiss="modal" ng-click="ctrl.handleDelete()">{{::ctrl.resources.RessourcesSpecifiquesCI_Valider}}</button>
+                        <button class="btn btn-link pull-right" data-dismiss="modal">{{::ctrl.resources.RessourcesSpecifiquesCI_Annuler}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

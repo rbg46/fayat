@@ -1,0 +1,334 @@
+﻿@import "https://fonts.googleapis.com/css?family=Roboto";
+.closeReferentialsx {
+    visibility: hidden;
+    display: none;
+}
+
+.referentials {
+    position: fixed;
+    height: 100%;
+    top: 0px;
+    right: 0px;
+    z-index: 3000;
+    overflow: auto;
+}
+
+.referentials .toolbar {
+    border-bottom: #b6b6b6 1px solid;
+    background-color: #005ba2;
+    margin: 0px;
+    padding: 0px;
+    height: 100px;
+    position: relative;
+}
+
+.referentials .toolbar .title {
+    font-family: "Roboto", sans-serif;
+    color: #ffffff;
+    font-weight: 100;
+    font-size: 35px;
+    padding-left: 5px;
+    height: 40px;
+    position: relative;
+}
+
+.referentials .toolbar .search {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.referentials .toolbar .input {
+    font-family: "Roboto", sans-serif;
+    color: white;
+    margin-left: 5%;
+    padding-left: 5px;
+    font-size: 15px;
+    width: 90%;
+    border-radius: 0px !important;
+    border: 0px;
+    border-bottom: 1px solid white;
+    background-color: transparent;
+    font-size: 18px;
+    display: block;
+    -webkit-box-shadow: none !important;
+}
+
+.referentials .toolbar .input::-webkit-input-placeholder {
+    color: white;
+    font-family: "Roboto", sans-serif;
+}
+
+.referentials .toolbar .input:-moz-placeholder {
+    color: white;
+    font-family: "Roboto", sans-serif;
+}
+
+.referentials .toolbar .input::-moz-placeholder {
+    color: white;
+    font-family: "Roboto", sans-serif;
+}
+
+.referentials .toolbar .input:-ms-input-placeholder {
+    color: white;
+    font-family: "Roboto", sans-serif;
+}
+
+.referentials .toolbar .input:focus {
+    border: none;
+    border-bottom: 1px solid white;
+}
+
+.referentials .toolbar .button {
+    border: none;
+    background: none;
+}
+
+.referentials .items {
+    padding-top: 10px;
+    width: 100%;
+    height: 90%;
+    overflow: auto;
+    direction: rtl;
+    position: relative;
+}
+
+.referentials .items::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+}
+
+.referentials .items::-webkit-scrollbar {
+    width: 3px;
+    background-color: #F5F5F5;
+}
+
+.referentials .items::-webkit-scrollbar-thumb {
+    background-color: #276AC5;
+}
+
+.referentials .item {
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+    background-color: #ffffff;
+    border: 1px solid #e4e4e4;
+    margin: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    direction: ltr;
+}
+
+.referentials .item:hover {
+    box-shadow: 0px 0px 2px 2px rgba(39, 106, 197, 0.5);
+    -moz-box-shadow: 0px 0px 2px 2px rgba(39, 106, 197, 0.5);
+    -webkit-box-shadow: 0px 0px 2px 2px rgba(39, 106, 197, 0.5);
+}
+
+.referentials .item h2 {
+    color: #535353;
+    font-size: 25px;
+    font-weight: 500;
+    margin: 0px;
+    padding: 0px;
+}
+
+.referentials .item h3 {
+    color: #868686;
+    font-size: 15px;
+    font-weight: 200;
+    margin: 0px;
+    padding: 0px;
+}
+
+.referentials .item h4 {
+    color: #868686;
+    font-size: 15px;
+    font-weight: 200;
+    margin: 0px;
+    padding: 0px;
+}
+
+.referentials .item h5 {
+    color: #868686;
+    font-size: 12px;
+    font-style: italic;
+    text-align: right;
+    margin: 0px;
+    margin-right: 5px;
+    padding: 0px;
+}
+
+.referentials .item .detail {
+    color: #868686;
+    font-size: 10px;
+    margin-left: 15px;
+}
+
+.referentials .c1 {
+    border-left: #D1282E 10px solid;
+}
+
+.referentials .c2 {
+    border-left: #1F55A0 10px solid;
+}
+
+.inner-addon {
+    position: relative;
+}
+
+.inner-addon .glyphicon {
+    position: absolute;
+    padding: 6px !important;
+    pointer-events: none;
+}
+
+.left-addon .glyphicon {
+    left: 0px;
+}
+
+.left-addon input {
+    padding-left: 30px;
+}
+
+.right-addon .glyphicon {
+    top: 1px;
+    right: 1px;
+}
+
+.right-addon input {
+    padding-right: 30px;
+}
+
+.load-container {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 100%;
+    height: 100%;
+    float: left;
+    position: relative;
+    overflow: hidden;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: transparent;
+}
+
+.loader {
+    background: #0052a0;
+    -webkit-animation: load1 1s infinite ease-in-out;
+    animation: load1 1s infinite ease-in-out;
+    width: 1em;
+    height: 4em;
+    color: #0052a0;
+    text-indent: -9999em;
+    margin: 88px auto;
+    position: relative;
+    font-size: 6px;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+
+.loader:before {
+    background: #0052a0;
+    -webkit-animation: load1 1s infinite ease-in-out;
+    animation: load1 1s infinite ease-in-out;
+    width: 1em;
+    height: 4em;
+    position: absolute;
+    top: 0;
+    content: '';
+    left: -1.5em;
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+
+.loader:after {
+    background: #0052a0;
+    -webkit-animation: load1 1s infinite ease-in-out;
+    animation: load1 1s infinite ease-in-out;
+    width: 1em;
+    height: 4em;
+    position: absolute;
+    top: 0;
+    content: '';
+    left: 1.5em;
+}
+
+@-webkit-keyframes load1 {
+    0%, 80%, 100% {
+        box-shadow: 0 0;
+        height: 4em;
+    }
+    40% {
+        box-shadow: 0 -2em;
+        height: 5em;
+    }
+}
+
+@keyframes load1 {
+    0%, 80%, 100% {
+        box-shadow: 0 0;
+        height: 4em;
+    }
+    40% {
+        box-shadow: 0 -2em;
+        height: 5em;
+    }
+}
+
+@media all and (min-width: 350px) {
+    .referentials {
+        background-color: #fbfbfb;
+        width: 350px;
+        height: 100%;
+        box-shadow: 0px 0px 10px 3px rgba(119, 119, 119, 0.75);
+        -moz-box-shadow: 0px 0px 10px 3px rgba(119, 119, 119, 0.75);
+        -webkit-box-shadow: 0px 0px 10px 3px rgba(119, 119, 119, 0.75);
+    }
+    .openReferentials {
+        -webkit-animation-name: transition_open;
+        -webkit-animation-duration: 2s;
+        animation-name: transition_open;
+        animation-duration: 0.40s;
+    }
+    .closeReferentials {
+        visibility: hidden;
+        display: none;
+    }
+}
+
+@media all and (max-width: 650px) {
+    .referentials {
+        background-color: #fbfbfb;
+        width: 100%;
+    }
+    .openReferentials {
+        visibility: visible;
+        display: block;
+    }
+    .closeReferentials {
+        visibility: hidden;
+        display: none;
+    }
+}
+
+@-webkit-keyframes transition_open {
+    from {
+        right: -350px;
+    }
+    to {
+        right: 0px;
+    }
+}
+
+/* Standard syntax */
+@keyframes transition_open {
+    from {
+        right: -350px;
+    }
+    to {
+        right: 0px;
+    }
+}

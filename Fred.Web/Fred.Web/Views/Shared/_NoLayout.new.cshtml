@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html lang="fr" ng-app="Fred">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
+
+    @Styles.Render("~/vendor/css")
+    @Styles.Render("~/app/css")
+
+    @Scripts.Render("~/vendor/js")
+    @Scripts.Render("~/app/js")
+</head>
+<body>
+    @RenderBody()
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+

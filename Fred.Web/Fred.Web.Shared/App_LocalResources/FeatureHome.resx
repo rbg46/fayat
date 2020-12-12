@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Authentification_Logs" xml:space="preserve">
+    <value>Gérer les logs d'authentification.</value>
+  </data>
+  <data name="Bareme_Helper" xml:space="preserve">
+    <value>Gestion des barèmes budget.</value>
+  </data>
+  <data name="BudgetTop_Helper" xml:space="preserve">
+    <value>Accéder à la gestion du budget.</value>
+  </data>
+  <data name="Budget_Helper" xml:space="preserve">
+    <value>Gestion du budget.</value>
+  </data>
+  <data name="CITop_Helper" xml:space="preserve">
+    <value>Accéder à la gestion des centre d'imputation et plan de tâche.</value>
+  </data>
+  <data name="CI_Helper" xml:space="preserve">
+    <value>Gestion des centres d'imputation.</value>
+  </data>
+  <data name="Close_Panel" xml:space="preserve">
+    <value>Refermer le panneau</value>
+  </data>
+  <data name="CodeAbsence_Helper" xml:space="preserve">
+    <value>Gestion des codes absence.</value>
+  </data>
+  <data name="CodeDeplacement_Helper" xml:space="preserve">
+    <value>Gestion des codes déplacement.</value>
+  </data>
+  <data name="CodeMajoration_Helper" xml:space="preserve">
+    <value>Gestion des codes de majoration.</value>
+  </data>
+  <data name="CodeZoneDeplacement_Helper" xml:space="preserve">
+    <value>Gestion des codes par zones de déplacement.</value>
+  </data>
+  <data name="CommandeTop_Helper" xml:space="preserve">
+    <value>Accéder à la gestion des commandes.</value>
+  </data>
+  <data name="Commande_Detail_Helper" xml:space="preserve">
+    <value>Création d'une nouvelle commande.</value>
+  </data>
+  <data name="Commande_Helper" xml:space="preserve">
+    <value>Accéder à la liste des commandes.</value>
+  </data>
+  <data name="DatesCalendrierPaie_Helper" xml:space="preserve">
+    <value>Parametrage de la clôture paie.</value>
+  </data>
+  <data name="DatesClotureComptable_Helper" xml:space="preserve">
+    <value>Gestion des Calendriers de clôture comptable.</value>
+  </data>
+  <data name="deconnectword" xml:space="preserve">
+    <value>Deconnexion</value>
+  </data>
+  <data name="DepenseTop_Helper" xml:space="preserve">
+    <value>Accéder à la gestion des dépenses.</value>
+  </data>
+  <data name="Depense_Explorateur_Helper" xml:space="preserve">
+    <value>Accéder à l'explorateur des dépenses.</value>
+  </data>
+  <data name="Depense_Helper" xml:space="preserve">
+    <value>Accéder à la liste des dépenses.</value>
+  </data>
+  <data name="Depense_TransfertFAR_Helper" xml:space="preserve">
+    <value>Gestion des transferts de FAR.</value>
+  </data>
+  <data name="Description_FRED" xml:space="preserve">
+    <value>FAYAT RAPPORT ELECTRONIQUE DIGITAL</value>
+  </data>
+  <data name="EtablissementComptable_Helper" xml:space="preserve">
+    <value>Gestion des établissements comptable.</value>
+  </data>
+  <data name="EtablissementPaie_Helper" xml:space="preserve">
+    <value>Gestion des établissement de paie.</value>
+  </data>
+  <data name="FactureTop_Helper" xml:space="preserve">
+    <value>Accéder à la gestion des factures.</value>
+  </data>
+  <data name="Facture_Helper" xml:space="preserve">
+    <value>Accéder à la gestion des factures.</value>
+  </data>
+  <data name="Fournisseur_Helper" xml:space="preserve">
+    <value>Gestion des fournisseurs.</value>
+  </data>
+  <data name="gestion_alerte" xml:space="preserve">
+    <value>Gestion de mes alertes</value>
+  </data>
+  <data name="gestion_mail" xml:space="preserve">
+    <value>Notifications par email :</value>
+  </data>
+  <data name="gestion_sms" xml:space="preserve">
+    <value>Notifications par SMS :</value>
+  </data>
+  <data name="lang_en" xml:space="preserve">
+    <value>Anglais</value>
+  </data>
+  <data name="lang_fr" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="Materiel_Helper" xml:space="preserve">
+    <value>Gestion des codes matériel.</value>
+  </data>
+  <data name="Module_Helper" xml:space="preserve">
+    <value>Administration du référentiel des modules et fonctionnalités.</value>
+  </data>
+  <data name="Nature_Helper" xml:space="preserve">
+    <value>Gestion des codes nature.</value>
+  </data>
+  <data name="Organisation_Helper" xml:space="preserve">
+    <value>Gérer les seuils de commande par organisation.</value>
+  </data>
+  <data name="ParamTarifsReferentiels_Helper" xml:space="preserve">
+    <value>Gestion des tarifs référentiel.</value>
+  </data>
+  <data name="Personnel_Helper" xml:space="preserve">
+    <value>Gestion du personnel.</value>
+  </data>
+  <data name="PointagePersonnel_Helper" xml:space="preserve">
+    <value>Accéder à la liste des pointages personels.</value>
+  </data>
+  <data name="Pointage_Detail_Helper" xml:space="preserve">
+    <value>Créer un nouveau pointage.</value>
+  </data>
+  <data name="Pointage_Edition_Helper" xml:space="preserve">
+    <value>Edition des pointages personels.</value>
+  </data>
+  <data name="Pointage_Helper" xml:space="preserve">
+    <value>Accéder à la liste des rapports, créer un nouveau pointage.</value>
+  </data>
+  <data name="Pointage_Rapport_Helper" xml:space="preserve">
+    <value>Accéder à la liste des rapports.</value>
+  </data>
+  <data name="Prime_Helper" xml:space="preserve">
+    <value>Gestion des codes de prime.</value>
+  </data>
+  <data name="Rapprochementfacture_HelpeRapprochementfacture_Helper" xml:space="preserve">
+    <value>Effectuer un rapprochement de facture.</value>
+  </data>
+  <data name="Reception_Helper" xml:space="preserve">
+    <value>Gérer la reception des commandes</value>
+  </data>
+  <data name="Referential_Helper" xml:space="preserve">
+    <value>Gérer Codes Devise.</value>
+  </data>
+  <data name="ReferentielEtendu_Helper" xml:space="preserve">
+    <value>Administration du référentiel étendu.</value>
+  </data>
+  <data name="ReferentielFixes_Helper" xml:space="preserve">
+    <value>Administration du référentiel fixe.</value>
+  </data>
+  <data name="ReferentielTaches_Helper" xml:space="preserve">
+    <value>Gestion des plans de tâche.</value>
+  </data>
+  <data name="Role_Helper" xml:space="preserve">
+    <value>Administration des rôles</value>
+  </data>
+  <data name="select_lang" xml:space="preserve">
+    <value>Sélection de la langue</value>
+  </data>
+  <data name="Societe_Helper" xml:space="preserve">
+    <value>Gestion des sociétés.</value>
+  </data>
+  <data name="Title_Affaire" xml:space="preserve">
+    <value>Affaires</value>
+  </data>
+  <data name="Title_Bar_Budget" xml:space="preserve">
+    <value>Barèmes Budget</value>
+  </data>
+  <data name="Title_Budget" xml:space="preserve">
+    <value>Budget</value>
+  </data>
+  <data name="Title_Cloture_Comptable" xml:space="preserve">
+    <value>Clôtures comptables</value>
+  </data>
+  <data name="Title_Code" xml:space="preserve">
+    <value>Codes</value>
+  </data>
+  <data name="Title_Code_Absence" xml:space="preserve">
+    <value>Codes absence</value>
+  </data>
+  <data name="Title_Code_Deplacement" xml:space="preserve">
+    <value>Codes déplacement</value>
+  </data>
+  <data name="Title_Code_Majoration" xml:space="preserve">
+    <value>Codes majoration</value>
+  </data>
+  <data name="Title_Code_Nature" xml:space="preserve">
+    <value>Codes nature</value>
+  </data>
+  <data name="Title_Code_Prime" xml:space="preserve">
+    <value>Codes primes</value>
+  </data>
+  <data name="Title_Commande" xml:space="preserve">
+    <value>Commandes</value>
+  </data>
+  <data name="Title_Depense" xml:space="preserve">
+    <value>Dépenses</value>
+  </data>
+  <data name="Title_Etat_Compta" xml:space="preserve">
+    <value>Etablissements comptables</value>
+  </data>
+  <data name="Title_Etat_Paie" xml:space="preserve">
+    <value>Etablissements de paie</value>
+  </data>
+  <data name="Title_Explo_Depense" xml:space="preserve">
+    <value>Explorateur de dépenses</value>
+  </data>
+  <data name="Title_Facture" xml:space="preserve">
+    <value>Factures</value>
+  </data>
+  <data name="Title_FRED" xml:space="preserve">
+    <value>FRED</value>
+  </data>
+  <data name="Title_Gerer_Budget" xml:space="preserve">
+    <value>Gérer les Budgets</value>
+  </data>
+  <data name="Title_Gerer_CI" xml:space="preserve">
+    <value>Gérer les centres d'imputation</value>
+  </data>
+  <data name="Title_Gerer_Commande" xml:space="preserve">
+    <value>Gérer les commandes</value>
+  </data>
+  <data name="Title_Gerer_Depense" xml:space="preserve">
+    <value>Gérer des dépenses</value>
+  </data>
+  <data name="Title_Gerer_Facture" xml:space="preserve">
+    <value>Gérer les factures</value>
+  </data>
+  <data name="Title_gerer_Materiel" xml:space="preserve">
+    <value>Gérer les matériels</value>
+  </data>
+  <data name="Title_Gerer_Module" xml:space="preserve">
+    <value>Gérer les modules</value>
+  </data>
+  <data name="Title_Gerer_Personnel" xml:space="preserve">
+    <value>Gérer le personnel</value>
+  </data>
+  <data name="Title_Gerer_Reception" xml:space="preserve">
+    <value>Gérer les réceptions</value>
+  </data>
+  <data name="Title_Gerer_Role" xml:space="preserve">
+    <value>Gérer les rôles</value>
+  </data>
+  <data name="Title_Gest_Devise" xml:space="preserve">
+    <value>Gérer les devises</value>
+  </data>
+  <data name="Title_Gest_Founisseur" xml:space="preserve">
+    <value>Gestion des fournisseurs</value>
+  </data>
+  <data name="Title_Habilitation" xml:space="preserve">
+    <value>Habilitations</value>
+  </data>
+  <data name="Title_Liste_Pointage" xml:space="preserve">
+    <value>Liste des pointages personnel</value>
+  </data>
+  <data name="Title_Liste_Rapport" xml:space="preserve">
+    <value>Liste des rapports</value>
+  </data>
+  <data name="Title_Lot_Pointage" xml:space="preserve">
+    <value>Validation Lot de Pointage</value>
+  </data>
+  <data name="Title_New_Commande" xml:space="preserve">
+    <value>Nouvelle commande</value>
+  </data>
+  <data name="Title_New_Rapport" xml:space="preserve">
+    <value>Nouveau rapport</value>
+  </data>
+  <data name="Title_Organisation" xml:space="preserve">
+    <value>Organisation</value>
+  </data>
+  <data name="Title_Param" xml:space="preserve">
+    <value>Paramétrage</value>
+  </data>
+  <data name="Title_Plan_Tache" xml:space="preserve">
+    <value>Plan de tâches</value>
+  </data>
+  <data name="Title_Pointage" xml:space="preserve">
+    <value>Pointages</value>
+  </data>
+  <data name="Title_Ref_Etendu" xml:space="preserve">
+    <value>Référentiels étendus</value>
+  </data>
+  <data name="Title_Ref_Fixe" xml:space="preserve">
+    <value>Référentiels fixes</value>
+  </data>
+  <data name="Title_Seuils" xml:space="preserve">
+    <value>Gestion des seuils</value>
+  </data>
+  <data name="Title_Societe" xml:space="preserve">
+    <value>Sociétés</value>
+  </data>
+  <data name="Title_Trans_FAR" xml:space="preserve">
+    <value>Transférer des FARs</value>
+  </data>
+  <data name="Title_Zone_Deplacement" xml:space="preserve">
+    <value>Codes zone déplacement</value>
+  </data>
+  <data name="txtdeconnect" xml:space="preserve">
+    <value>Cliquer pour se déconnecter</value>
+  </data>
+  <data name="txtNo" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="txtYes" xml:space="preserve">
+    <value>Oui</value>
+  </data>
+  <data name="txt_myaccount" xml:space="preserve">
+    <value>Mon compte</value>
+  </data>
+  <data name="ValidationPointage_Helper" xml:space="preserve">
+    <value>Validation des pointages personnels.</value>
+  </data>
+  <data name="txtNotificationClose" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="txtNotificationRead" xml:space="preserve">
+    <value>Lue</value>
+  </data>
+  <data name="Title_Gerer_Equipe" xml:space="preserve">
+    <value>Gérer son équipe favorite</value>
+  </data>
+</root>

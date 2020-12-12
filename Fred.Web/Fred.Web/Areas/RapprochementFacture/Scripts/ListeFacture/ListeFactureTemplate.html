@@ -1,0 +1,1369 @@
+﻿<div class="bloc_liste">
+
+    <div class="factureTabs v1">
+        <div class="tabLine table-responsive">
+                <table class="facture firstLevel" ng-class="{'extendTab' : displayCol}">
+                    <thead>
+                        <tr class="mainHead">
+                            <th colspan="1" class="hidden-th"></th>
+                            <th colspan="2" class="hidden-th"></th>
+                            <th colspan="2" class="hidden-th"></th>
+                            <th colspan="2" class="hidden-th"></th>
+                            <th colspan="2">Montant HT</th>
+                            <th colspan="1">Qté</th>
+                            <th colspan="2">PU</th>
+                            <th colspan="2">Ecart</th>
+                            <th colspan="2" ng-show="!displayCol" class="hInfos more">+ d'infos</th>
+                            <th colspan="2" ng-show="displayCol" class="hInfos less">- d'infos</th>
+                            <th colspan="2" ng-show="displayCol" class="xtras hInfos vide"></th>
+                            <th colspan="2" ng-show="displayCol" class="xtras hInfos vide"></th>
+                            <th colspan="2" ng-show="displayCol" class="xtras hInfos vide"></th>
+                            <th colspan="2" ng-show="displayCol" class="xtras hInfos vide"></th>
+                            <th colspan="2" ng-show="displayCol" class="xtras hInfos vide"></th>
+                            <th colspan="2" ng-show="displayCol" class="xtras hInfos vide"></th>
+                            <th colspan="2" ng-show="displayCol" class="xtras hInfos vide"></th>
+                            <th colspan="9" class="hidden-th"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr class="head1">
+                            <td colspan="1">
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData"># Ligne</span>
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData">CI</span>
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData">Nature</span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData"></span>
+                            </td>
+                            <td colspan="1" class="price">
+                                <span class="lineData"></span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData"></span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData"></span>
+                            </td>
+                            <td colspan="2"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="9">
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr class="level1">
+                            <td colspan="1">
+                                <div class="arrow">
+                                    <a href="" ng-show="!showLine1" class="accordion-toggle closed" title="Cliquer" ng-click="showLine1 = !showLine1" ng-class="{'closed' : !showLine1}"></a>
+                                    <a href="" ng-show="showLine1" class="accordion-toggle" title="Cliquer" ng-click="showLine1 = !showLine1" ng-class="{'closed' : !showLine1}"></a>
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                <input type="radio" name="facLine1" id="facLine1">
+                                <label for="facLine1"><span class="rdo"></span></label>
+                                <span class="lineData">1</span>
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData">53712</span>
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData">162101</span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData">946,00</span>
+                            </td>
+                            <td colspan="1" class="price">
+                                <span class="lineData">1</span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData">946,00</span>
+                            </td>
+                            <td class="green" colspan="2">
+                                <span class="lineData">0,00</span>
+                            </td>
+                            <td colspan="2"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="9">
+                                <button class="pull-right complete" data-toggle="modal" data-target="#compRap" title="Cliquer pour compléter">Compléter</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="{{displayCol ? 39 : 25}}" class="nestingTab">
+                                <table class="depenses subLevels" ng-show="showLine1">
+                                    <thead>
+                                        <th class="colorCol" colspan="1"></th>
+                                        <th colspan="2">Réception</th>
+                                        <th colspan="2">N°BC</th>
+                                        <th colspan="2">N°BL</th>
+                                        <th colspan="2" class="price"></th>
+                                        <th colspan="1" class="price"></th>
+                                        <th colspan="2" class="price"></th>
+                                        <th colspan="2" class="price"></th>
+                                        <th colspan="2"></th>
+                                        <th colspan="2" ng-show="displayCol" class="xtras">Fournisseur</th>
+                                        <th colspan="2" ng-show="displayCol" class="xtras">CI</th>
+                                        <th colspan="2" ng-show="displayCol" class="xtras">Tâche</th>
+                                        <th colspan="2" ng-show="displayCol" class="xtras">Nature</th>
+                                        <th colspan="2" ng-show="displayCol" class="xtras">N°BC manuel</th>
+                                        <th colspan="2" ng-show="displayCol" class="xtras">Ressource</th>
+                                        <th colspan="2" ng-show="displayCol" class="xtras">Gestion</th>
+                                        <th colspan="5">Statut</th>
+                                        <th colspan="1"></th>
+                                        <th colspan="1"></th>
+                                        <th colspan="1"></th>
+                                        <th colspan="1"></th>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="level2">
+                                            <td colspan="1" class="colorCol"></td>
+                                            <td colspan="2">
+                                                <span class="lineData">03/07/17</span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData">FDT35676</span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData">DRF3453</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">951,00</span>
+                                            </td>
+                                            <td colspan="1" class="price">
+                                                <span class="lineData">1</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">951,00</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                            </td>
+                                            <td colspan="2" class="lay">
+                                                <i class="material-icons" title="Afficher plus d'infos" ng-click="displayCol = !displayCol">layers</i>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">CWTD0001</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">437317</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">ECARTTS</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">162101</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">10103-03</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            
+                                            <td colspan="5">
+                                                <span class="status grey">Rapprochée</span>
+                                            </td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="reconduire">replay</i>
+                                            </td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="Déplacer">call_missed_outgoing</i>
+                                            </td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="modifier">more_vert</i>
+                                            </td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="Supprimer">clear</i>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="level2">
+                                            <td colspan="1" class="colorCol"></td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">-5,00</span>
+                                            </td>
+                                            <td colspan="1" class="price">
+                                                <span class="lineData">1</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">-5,00</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                            </td>
+                                            <td colspan="2" class="lay">
+                                                <i class="material-icons" title="Afficher plus d'infos" ng-click="displayCol = !displayCol">layers</i>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">CWTD0001</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">437317</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">ECARTTS</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">162101</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">10103-03</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="5">
+                                                <span class="status green">Ajustée</span>
+                                            </td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="Supprimer">clear</i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                    <tbody>
+                        <tr class="head1">
+                            <td colspan="1">
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData"># Ligne</span>
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData">CI</span>
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData">Nature</span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData"></span>
+                            </td>
+                            <td colspan="1" class="price">
+                                <span class="lineData"></span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData"></span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData"></span>
+                            </td>
+                            <td colspan="2"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="9">
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr class="level1">
+                            <td colspan="1">
+                                <div class="arrow">
+                                    <a href="" ng-show="!showLine2" class="accordion-toggle closed" title="Cliquer" ng-click="showLine2 = !showLine2" ng-class="{'closed' : !showLine2}"></a>
+                                    <a href="" ng-show="showLine2" class="accordion-toggle" title="Cliquer" ng-click="showLine2 = !showLine2" ng-class="{'closed' : !showLine2}"></a>
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                <input type="radio" name="facLine2" id="facLine2">
+                                <label for="facLine2"><span class="rdo"></span></label>
+                                <span class="lineData">2</span>
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData">437317</span>
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData">164307</span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData">1 045,00</span>
+                            </td>
+                            <td colspan="1" class="price">
+                                <span class="lineData">5</span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData">209,00</span>
+                            </td>
+                            <td class="green" colspan="2">
+                                <span class="lineData">0,00</span>
+                            </td>
+                            <td colspan="2"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="9">
+                                <button class="pull-right complete" data-toggle="modal" data-target="#compRap" title="Cliquer pour compléter">Compléter</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="{{displayCol ? 39 : 25}}" class="nestingTab">
+                                <table class="depenses subLevels" ng-show="showLine2">
+                                    <thead>
+                                        <tr>
+                                            <th class="colorCol" colspan="1"></th>
+                                            <th colspan="2">Réception</th>
+                                            <th colspan="2">N°BC</th>
+                                            <th colspan="2">N°BL</th>
+                                            <th colspan="2" class="price"></th>
+                                            <th colspan="1" class="price"></th>
+                                            <th colspan="2" class="price"></th>
+                                            <th colspan="2" class="price"></th>
+                                            <th colspan="2"></th>
+                                            <th colspan="2" ng-show="displayCol" class="xtras">Fournisseur</th>
+                                            <th colspan="2" ng-show="displayCol" class="xtras">CI</th>
+                                            <th colspan="2" ng-show="displayCol" class="xtras">Tâche</th>
+                                            <th colspan="2" ng-show="displayCol" class="xtras">Nature</th>
+                                            <th colspan="2" ng-show="displayCol" class="xtras">N°BC manuel</th>
+                                            <th colspan="2" ng-show="displayCol" class="xtras">Ressource</th>
+                                            <th colspan="2" ng-show="displayCol" class="xtras">Gestion</th>
+                                            <th colspan="5">Statut</th>
+                                            <th colspan="1"></th>
+                                            <th colspan="1"></th>
+                                            <th colspan="1"></th>
+                                            <th colspan="1"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="level2">
+                                            <td colspan="1" class="colorCol">
+                                                <div class="arrow">
+                                                    <a href="" ng-show="!showSub1" class="accordion-toggle closed" title="Cliquer" ng-click="showSub1 = !showSub1" ng-class="{'closed' : !showSub1}"></a>
+                                                    <a href="" ng-show="showSub1" class="accordion-toggle" title="Cliquer" ng-click="showSub1 = !showSub1" ng-class="{'closed' : !showSub1}"></a>
+                                                </div>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData">03/07/17</span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData">FDT35676</span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData">DRF3453</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">951,00</span>
+                                            </td>
+                                            <td colspan="1" class="price">
+                                                <span class="lineData">1</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">951,00</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                            </td>
+                                            <td colspan="2" class="lay">
+                                                <i class="material-icons" title="Afficher plus d'infos" ng-click="displayCol = !displayCol">layers</i>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">CWTD0001</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">437317</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">ECARTTS</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">162101</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">10103-03</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            
+                                            <td colspan="5">
+                                                <span class="status green">Ajustée</span>
+                                            </td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="reconduire">replay</i>
+                                            </td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="Déplacer">call_missed_outgoing</i>
+                                            </td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="modifier">more_vert</i>
+                                            </td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="Supprimer">clear</i>
+                                            </td>
+                                        </tr>
+                                            
+                                        <tr class="level3" ng-show="showSub1">
+                                            <td colspan="1"></td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">-5,00</span>
+                                            </td>
+                                            <td colspan="1" class="price">
+                                                <span class="lineData">1</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">-5,00</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                
+                                            </td>
+                                            <td colspan="2" class="lay">
+                                                <i class="material-icons" title="Afficher plus d'infos" ng-click="displayCol = !displayCol">layers</i>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">CWTD0001</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">437317</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">ECARTTS</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">162101</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">10103-03</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="5">
+                                                <span class="status orangeLight">Réception initiale</span>
+                                            </td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="Supprimer">clear</i>
+                                            </td>
+                                        </tr>
+                                            
+                                        <tr class="level3" ng-show="showSub1">
+                                            <td colspan="1"></td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">-5,00</span>
+                                            </td>
+                                            <td colspan="1" class="price">
+                                                <span class="lineData">1</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">-5,00</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                            </td>
+                                            <td colspan="2" class="lay">
+                                                <i class="material-icons" title="Afficher plus d'infos" ng-click="displayCol = !displayCol">layers</i>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">CWTD0001</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">437317</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">ECARTTS</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">162101</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">10103-03</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="5">
+                                                <span class="status orangeLight">Correction</span>
+                                            </td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="Supprimer">clear</i>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="level3" ng-show="showSub1">
+                                            <td colspan="1"></td>
+                                            <td colspan="2">
+                                            <i class="material-icons warning">announcement</i>
+                                                <span class="lineData">15/05/17</span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData">153-1569</span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData">1539-467</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">1 500,00</span>
+                                            </td>
+                                            <td colspan="1" class="price">
+                                                <span class="lineData">10</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">150,00</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                            </td>
+                                            <td colspan="2" class="lay">
+                                                <i class="material-icons" title="Afficher plus d'infos" ng-click="displayCol = !displayCol">layers</i>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">CWTD0001</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">437317</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">ECARTTS</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">162101</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">10103-03</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="5">
+                                                <span class="status green">Ajustée</span>
+                                            </td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="Supprimer">clear</i>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="level3" ng-show="showSub1">
+                                            <td colspan="1" class="bt-none"></td>
+                                            <td colspan="13" class="comments warning">
+                                                <span>Attention, réception annulée par Emmanuel Rouyer le 15 mars 2020 suite à un défaut de conception du produit initialement commandé</span>
+                                            </td>
+                                             <td colspan="14" class="bt-none" ng-show="displayCol">
+                                                
+                                            </td>
+                                            <td colspan="10" class="bt-none"></td>
+                                        </tr>
+                                            
+                                        <tr class="level3" ng-show="showSub1">
+                                            <td colspan="1"></td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">-5,00</span>
+                                            </td>
+                                            <td colspan="1" class="price">
+                                                <span class="lineData">1</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">-5,00</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                            </td>
+                                            <td colspan="2" class="lay">
+                                                <i class="material-icons" title="Afficher plus d'infos" ng-click="displayCol = !displayCol">layers</i>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">CWTD0001</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">437317</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">ECARTTS</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">162101</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">10103-03</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="5">
+                                                <span class="status red">Reconduction</span>
+                                            </td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="Supprimer">clear</i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                    <tbody>
+                        <tr class="head1">
+                            <td colspan="1">
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData"># Ligne</span>
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData">CI</span>
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData">Nature</span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData"></span>
+                            </td>
+                            <td colspan="1" class="price">
+                                <span class="lineData"></span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData"></span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData"></span>
+                            </td>
+                            <td colspan="2"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="9">
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr class="level1">
+                            <td colspan="1">
+                                
+                            </td>
+                            <td colspan="2">
+                                <input type="radio" name="facLine3" id="facLine3">
+                                <label for="facLine3"><span class="rdo"></span></label>
+                                <span class="lineData">3</span>
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData">437317</span>
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData">152708</span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData">756,00</span>
+                            </td>
+                            <td colspan="1" class="price">
+                                <span class="lineData">3</span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData">252,00</span>
+                            </td>
+                            <td class="red" colspan="2">
+                                <span class="lineData">756,00</span>
+                            </td>
+                            <td colspan="2"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="9">
+                                <button class="pull-right complete" data-toggle="modal" data-target="#compRap" title="Cliquer pour compléter">Compléter</button>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                    <tbody>
+                        <tr class="head1">
+                            <td colspan="1">
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData"># ligne</span>
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData">CI</span>
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData">Nature</span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData"></span>
+                            </td>
+                            <td colspan="1" class="price">
+                                <span class="lineData"></span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData"></span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData"></span>
+                            </td>
+                            <td colspan="2"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="9">
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr class="level1">
+                            <td colspan="1">
+                                <div class="arrow">
+                                    <a href="" ng-show="!showLine4" class="accordion-toggle closed" title="Cliquer" ng-click="showLine4 = !showLine4" ng-class="{'closed' : !showLine4}"></a>
+                                    <a href="" ng-show="showLine4" class="accordion-toggle" title="Cliquer" ng-click="showLine4 = !showLine4" ng-class="{'closed' : !showLine4}"></a>
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                <input type="radio" name="facLine4" id="facLine4">
+                                <label for="facLine4"><span class="rdo"></span></label>
+                                <span class="lineData">4</span>
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData">437317</span>
+                            </td>
+                            <td colspan="2">
+                                <span class="lineData">152708</span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData">709,00</span>
+                            </td>
+                            <td colspan="1" class="price">
+                                <span class="lineData">2</span>
+                            </td>
+                            <td colspan="2" class="price">
+                                <span class="lineData">354,50</span>
+                            </td>
+                            <td class="green" colspan="2">
+                                <span class="lineData">0,00</span>
+                            </td>
+                            <td colspan="2"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="2" ng-show="displayCol"></td>
+                            <td colspan="9">
+                                <button class="pull-right complete" data-toggle="modal" data-target="#compRap" title="Cliquer pour compléter">Compléter</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="{{displayCol ? 39 : 25}}" class="nestingTab">
+                                <table class="depenses subLevels" ng-show="showLine4">
+                                    <thead>
+                                        <th class="colorCol" colspan="1"></th>
+                                        <th colspan="2">Réception</th>
+                                        <th colspan="2">N°BC</th>
+                                        <th colspan="2">N°BL</th>
+                                        <th colspan="2" class="price"></th>
+                                        <th colspan="1" class="price"></th>
+                                        <th colspan="2" class="price"></th>
+                                        <th colspan="2" class="price"></th>
+                                        <th colspan="2"></th>
+                                        <th colspan="2" ng-show="displayCol" class="xtras">Fournisseur</th>
+                                        <th colspan="2" ng-show="displayCol" class="xtras">CI</th>
+                                        <th colspan="2" ng-show="displayCol" class="xtras">Tâche</th>
+                                        <th colspan="2" ng-show="displayCol" class="xtras">Nature</th>
+                                        <th colspan="2" ng-show="displayCol" class="xtras">N°BC manuel</th>
+                                        <th colspan="2" ng-show="displayCol" class="xtras">Ressource</th>
+                                        <th colspan="2" ng-show="displayCol" class="xtras">Gestion</th>
+                                        <th colspan="5">Statut</th>
+                                        <th colspan="1"></th>
+                                        <th colspan="1"></th>
+                                        <th colspan="1"></th>
+                                        <th colspan="1"></th>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="level2">
+                                            <td colspan="1" class="colorCol"></td>
+                                            <td colspan="2">
+                                                <span class="lineData">15/06/17</span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">350,00</span>
+                                            </td>
+                                            <td colspan="1" class="price">
+                                                <span class="lineData">1</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">350,00</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                            </td>
+                                            <td colspan="2" class="lay">
+                                                <i class="material-icons" title="Afficher plus d'infos" ng-click="displayCol = !displayCol">layers</i>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">CWTD0001</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">437317</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">TXINT12</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">152708</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">50802-1</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="5">
+                                                <span class="status grey">Rapprochée</span>
+                                            </td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="reconduire">replay</i>
+                                            </td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="Déplacer">call_missed_outgoing</i>
+                                            </td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="modifier">more_vert</i>
+                                            </td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="Supprimer">clear</i>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="level2">
+                                            <td colspan="1" class="colorCol">
+                                                <div class="arrow">
+                                                    <a href="" ng-show="!showSub2" class="accordion-toggle closed" title="Cliquer" ng-click="showSub2 = !showSub2" ng-class="{'closed' : !showSub2}"></a>
+                                                <a href="" ng-show="showSub2" class="accordion-toggle" title="Cliquer" ng-click="showSub2 = !showSub2" ng-class="{'closed' : !showSub2}"></a>
+                                                </div>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">350,00</span>
+                                            </td>
+                                            <td colspan="1" class="price">
+                                                <span class="lineData">1</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">350,00</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                            </td>
+                                            <td colspan="2" class="lay">
+                                                <i class="material-icons" title="Afficher plus d'infos" ng-click="displayCol = !displayCol">layers</i>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">CWTD0001</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">437317</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">TXINT12</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">152708</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">50802-01</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="5">
+                                                <span class="status green">Ajustée</span>
+                                            </td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="Supprimer">clear</i>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="level3" ng-show="showSub2">
+                                            <td colspan="1"></td>
+                                            <td colspan="2">
+                                                <span class="lineData">04/06/17</span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">350,00</span>
+                                            </td>
+                                            <td colspan="1" class="price">
+                                                <span class="lineData">1</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">350,00</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                
+                                            </td>
+                                            <td colspan="2" class="lay">
+                                                <i class="material-icons" title="Afficher plus d'infos" ng-click="displayCol = !displayCol">layers</i>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">CWTD0001</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">437317</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">TXINT12</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">152708</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">50802-02</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">10103-03</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="5">
+                                                <span class="status orangeLight">Réception initiale</span>
+                                            </td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1">
+                                                
+                                            </td>
+                                        </tr>
+
+                                        <tr class="level3" ng-show="showSub2">
+                                            <td colspan="1"></td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">-350,00</span>
+                                            </td>
+                                            <td colspan="1" class="price">
+                                                <span class="lineData">-1</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">350,00</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                
+                                            </td>
+                                            <td colspan="2" class="lay">
+                                                <i class="material-icons" title="Afficher plus d'infos" ng-click="displayCol = !displayCol">layers</i>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">CWTD0001</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">437317</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">TXINT12</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">152708</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">50802-02</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="5">
+                                                <span class="status orangeLight">Correction</span>
+                                            </td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1"></td>
+                                            <td colspan="1">
+                                                
+                                            </td>
+                                        </tr>
+
+                                        <tr class="level2">
+                                            <td colspan="1" class="colorCol"></td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">9,00</span>
+                                            </td>
+                                            <td colspan="1" class="price">
+                                                <span class="lineData">1</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                                <span class="lineData">9,00</span>
+                                            </td>
+                                            <td colspan="2" class="price">
+                                            </td>
+                                            <td colspan="2" class="lay">
+                                                <i class="material-icons" title="Afficher plus d'infos" ng-click="displayCol = !displayCol">layers</i>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">CWTD0001</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">437317</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">TXINT12</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">152708</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData">50802-1</span>
+                                            </td>
+                                            <td colspan="2" ng-show="displayCol">
+                                                <span class="lineData"></span>
+                                            </td>
+                                            <td colspan="5">
+                                                <span class="status green">Ajustée</span>
+                                            </td>
+                                            <td colspan="1">
+                                                
+                                            </td>
+                                            <td colspan="1">
+                                                
+                                            </td>
+                                            <td colspan="1">
+                                                
+                                            </td>
+                                            <td colspan="1">
+                                                <i class="material-icons" title="Supprimer">clear</i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                    
+ 
+
+    <div class="factureTabs v1 depensesTab table-responsive">
+    <h4>Dépenses restant à assigner aux lignes de facture</h4>
+        <table class="facture depenses" ng-class="{'extendTab' : displayCol}">
+
+            <tbody class="annex-tab">
+                <tr class="head1">
+                    <td colspan="1">
+                    </td>
+                    <td colspan="2">
+                        <span class="lineData">Réception</span>
+                    </td>
+                    <td colspan="2">
+                        <span class="lineData">N°BC</span>
+                    </td>
+                    <td colspan="2">
+                        <span class="lineData">N°BL</span>
+                    </td>
+                    <td colspan="2" class="price entete">
+                        <span class="lineData">Montant HT</span>
+                    </td>
+                    <td colspan="1" class="price entete">
+                        <span class="lineData">Qté</span>
+                    </td>
+                    <td colspan="2" class="price entete">
+                        <span class="lineData">PU</span>
+                    </td>
+                    <td colspan="2" class="price entete">
+                        <span class="lineData"></span>
+                    </td>
+                    <td colspan="2" ng-show="!displayCol" class="hInfos more">+ d'infos</td>
+                    <td colspan="2" ng-show="displayCol" class="hInfos less">- d'infos</td>
+                    <td colspan="2" ng-show="displayCol">Fournisseur</td>
+                    <td colspan="2" ng-show="displayCol">CI</td>
+                    <td colspan="2" ng-show="displayCol">Tâche</td>
+                    <td colspan="2" ng-show="displayCol">Nature</td>
+                    <td colspan="2" ng-show="displayCol">N°BC manuel</td>
+                    <td colspan="2" ng-show="displayCol">Ressource</td>
+                    <td colspan="2" ng-show="displayCol">Gestion</td>
+                    <td colspan="9">
+                    </td>
+                </tr>
+            </tbody>
+
+            <tbody>
+                <tr class="level2">
+                    <td colspan="1"></td>
+                    <td colspan="2">
+                        <span class="lineData">15/06/17</span>
+                    </td>
+                    <td colspan="2">
+                        <span class="lineData"></span>
+                    </td>
+                    <td colspan="2">
+                        <span class="lineData"></span>
+                    </td>
+                    <td colspan="2" class="price">
+                        <span class="lineData">350,00</span>
+                    </td>
+                    <td colspan="1" class="price">
+                        <span class="lineData">1</span>
+                    </td>
+                    <td colspan="2" class="price">
+                        <span class="lineData">350,00</span>
+                    </td>
+                    <td colspan="2" class="price">
+                    </td>
+                    <td colspan="2" class="lay">
+                        <i class="material-icons" title="Afficher plus d'infos" ng-click="displayCol = !displayCol">layers</i>
+                    </td>
+                    <td colspan="2" ng-show="displayCol">
+                        <span class="lineData">CWTD0001</span>
+                    </td>
+                    <td colspan="2" ng-show="displayCol">
+                        <span class="lineData red">437317</span>
+                    </td>
+                    <td colspan="2" ng-show="displayCol">
+                        <span class="lineData">ECARTTS</span>
+                    </td>
+                    <td colspan="2" ng-show="displayCol">
+                        <span class="lineData">162101</span>
+                    </td>
+                    <td colspan="2" ng-show="displayCol">
+                        <span class="lineData"></span>
+                    </td>
+                    <td colspan="2" ng-show="displayCol">
+                        <span class="lineData">10103-03</span>
+                    </td>
+                    <td colspan="2" ng-show="displayCol">
+                        <span class="lineData"></span>
+                    </td>
+                    
+                    <td colspan="5">
+                        
+                    </td>
+                    <td colspan="1">
+                        
+                    </td>
+                    <td colspan="1">
+                        
+                    </td>
+                    <td colspan="1">
+                        <i class="material-icons" title="modifier">more_vert</i>
+                    </td>
+                    <td colspan="1">
+                        <i class="material-icons" title="Supprimer">clear</i>
+                    </td>
+                </tr>
+
+                <tr class="level2">
+                    <td colspan="1"></td>
+                    <td colspan="2">
+                        <span class="lineData">15/06/17</span>
+                    </td>
+                    <td colspan="2">
+                        <span class="lineData"></span>
+                    </td>
+                    <td colspan="2">
+                        <span class="lineData"></span>
+                    </td>
+                    <td colspan="2" class="price">
+                        <span class="lineData">350,00</span>
+                    </td>
+                    <td colspan="1" class="price">
+                        <span class="lineData">1</span>
+                    </td>
+                    <td colspan="2" class="price">
+                        <span class="lineData">350,00</span>
+                    </td>
+                    <td colspan="2" class="price">
+                    </td>
+                    <td colspan="2" class="lay">
+                        <i class="material-icons" title="Afficher plus d'infos" ng-click="displayCol = !displayCol">layers</i>
+                    </td>
+                    <td colspan="2" ng-show="displayCol">
+                        <span class="lineData red">CWTD0001</span>
+                    </td>
+                    <td colspan="2" ng-show="displayCol">
+                        <span class="lineData">437317</span>
+                    </td>
+                    <td colspan="2" ng-show="displayCol">
+                        <span class="lineData">ECARTTS</span>
+                    </td>
+                    <td colspan="2" ng-show="displayCol">
+                        <span class="lineData">162101</span>
+                    </td>
+                    <td colspan="2" ng-show="displayCol">
+                        <span class="lineData"></span>
+                    </td>
+                    <td colspan="2" ng-show="displayCol">
+                        <span class="lineData">10103-03</span>
+                    </td>
+                    <td colspan="2" ng-show="displayCol">
+                        <span class="lineData"></span>
+                    </td>
+                    <td colspan="5">
+                        
+                    </td>
+                    <td colspan="1"></td>
+                    <td colspan="1"></td>
+                    <td colspan="1">
+                        <i class="material-icons" title="modifier">more_vert</i>
+                    </td>
+                    <td colspan="1">
+                        <i class="material-icons" title="Supprimer">clear</i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+$(document).ready(function() {
+
+    var div1 = $('.tabLine');
+    var div2 = $('.depensesTab');
+
+    div1.scroll(function() {
+        div2.scrollLeft($(this).scrollLeft());
+    });
+
+    div2.scroll(function() {
+        div1.scrollLeft($(this).scrollLeft());
+    });
+});
+</script>

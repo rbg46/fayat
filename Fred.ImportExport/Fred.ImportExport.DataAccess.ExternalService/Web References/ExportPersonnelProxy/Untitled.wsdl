@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://xmlns.example.com/1567776565226" xmlns:ns1="http://www.tibco.com/schemas/Compta.FRED.IO.BW/BusinessProcesses/SubProcesses/PersonnelManager/PersonnelManagerOut.xsd" xmlns:ns0="http://www.tibco.com/schemas/Compta.FRED.IO.BW/BusinessProcesses/SubProcesses/PersonnelManager/PersonnelManagerIn.xsd" name="Untitled" targetNamespace="http://xmlns.example.com/1567776565226" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema xmlns="http://www.tibco.com/schemas/Compta.FRED.IO.BW/BusinessProcesses/SubProcesses/PersonnelManager/PersonnelManagerOut.xsd" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.tibco.com/schemas/Compta.FRED.IO.BW/BusinessProcesses/SubProcesses/PersonnelManager/PersonnelManagerOut.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="PersonnelManagerOut">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Code" type="xs:string" />
+            <xs:element name="Message" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns="http://www.tibco.com/schemas/Compta.FRED.IO.BW/BusinessProcesses/SubProcesses/PersonnelManager/PersonnelManagerIn.xsd" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.tibco.com/schemas/Compta.FRED.IO.BW/BusinessProcesses/SubProcesses/PersonnelManager/PersonnelManagerIn.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="PersonnelManagerIn">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Record">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="CodeSocieteCompta" type="xs:string" />
+                  <xs:element minOccurs="0" name="CodeEtabCompta" type="xs:string" />
+                  <xs:element name="CodeSocietePaie" type="xs:string" />
+                  <xs:element minOccurs="0" name="CodeEtabPaie" type="xs:string" />
+                  <xs:element name="MatriculePersonnel" type="xs:string" />
+                  <xs:element name="NomPersonnel" type="xs:string" />
+                  <xs:element name="PrenomPersonnel" type="xs:string" />
+                  <xs:element minOccurs="0" name="EmailPersonnel" type="xs:string" />
+                  <xs:element name="IsUserFRED" type="xs:string" />
+                  <xs:element minOccurs="0" name="LoginPersonnel" type="xs:string" />
+                  <xs:element name="IsUserManager" type="xs:string" />
+                  <xs:element minOccurs="0" name="CodeSocieteComptaManager" type="xs:string" />
+                  <xs:element minOccurs="0" name="CodeEtabComptaManager" type="xs:string" />
+                  <xs:element minOccurs="0" name="CodeSocietePaieManager" type="xs:string" />
+                  <xs:element minOccurs="0" name="CodeEtabPaieManager" type="xs:string" />
+                  <xs:element minOccurs="0" name="MatriculeManager" type="xs:string" />
+                  <xs:element minOccurs="0" name="NomManager" type="xs:string" />
+                  <xs:element minOccurs="0" name="PrenomManager" type="xs:string" />
+                  <xs:element name="IsManagerUserFRED" type="xs:string" />
+                  <xs:element minOccurs="0" name="LoginManager" type="xs:string" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="PersonnelManagerIn">
+    <wsdl:part name="parameters" element="ns0:PersonnelManagerIn" />
+  </wsdl:message>
+  <wsdl:message name="PersonnelManagerOut">
+    <wsdl:part name="parameters" element="ns1:PersonnelManagerOut" />
+  </wsdl:message>
+  <wsdl:portType name="portType">
+    <wsdl:operation name="PersonnelManagerOp">
+      <wsdl:input message="tns:PersonnelManagerIn" />
+      <wsdl:output message="tns:PersonnelManagerOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="intfwsPersonnelManagerEndpoint0Binding" type="tns:portType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="PersonnelManagerOp">
+      <soap:operation soapAction="/BusinessProcesses/Interfaces/intfPersonnelManager-service.serviceagent/intfwsPersonnelManagerEndpoint0/PersonnelManagerOp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" parts="parameters" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="parameters" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="intfPersonnelManager-service">
+    <wsdl:port name="intfwsPersonnelManagerEndpoint0" binding="tns:intfwsPersonnelManagerEndpoint0Binding">
+      <soap:address location="http://frsacpvt05v.fr.rz.lan:1632/BusinessProcesses/Interfaces/intfPersonnelManager-service.serviceagent/intfwsPersonnelManagerEndpoint0" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

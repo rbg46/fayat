@@ -1,0 +1,129 @@
+﻿<div class="modal-dialog mgmt-loc" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i>Gestion des moyens en location</h2>
+            <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" aria-label="Close" title="Cliquer pour annuler et fermer"></i>
+        </div>
+        <div class="modal-body">
+            <label>Rechercher une location</label>
+            <!-- Barre de recherche -->
+            <div class="search-bloc">
+                <div class="input-group input-search">
+                    <input type="text" placeholder="Rechercher..." class="form-control" ng-model="$ctrl.FilterInput">
+                    <span class="input-group-addon button-search"><i class="material-icons">search</i></span>
+                </div>
+                <button class="btn btn-default" type="button" ng-click="$ctrl.ouvreCadre()">+</button>
+            </div>
+            <!--START Liste -->
+            <table class="loc-list">
+                <thead>
+                    <tr>
+                        <th class="col1">Société</th>
+                        <th class="col2">Etablissement</th>
+                        <th class="col3">N° de parc</th>
+                        <th class="col4">Libellé</th>
+                        <th class="col5">N° Immat</th>
+                        <th class="col6"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in $ctrl.locations  | filter: $ctrl.FilterInput :strict">
+                        <td class="col1">{{item.Societe}}</td>
+                        <td class="col2">{{item.Etablissement}}</td>
+                        <td class="col3">{{item.NumeroParc}}</td>
+                        <td class="col4"><span class="txt">{{item.Libelle}}</span></td>
+                        <td class="col5">{{item.Immatriculation}}</td>
+                        <td class="col6" ng-click="$ctrl.handleClickItem(item)"><span class="material-icons">more_vert</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!--END Liste -->
+        </div>
+        <div class="modal-footer">
+        </div>
+    </div>
+</div>
+
+<div class="options"
+     id="PanelRight"
+     ng-hide="!$ctrl.isCadre">
+
+    <span class="text-danger" ng-show="$ctrl.isInvalidForm">
+        Veuillez renseigner les champs obligatoires avant de créer la location
+    </span>
+    <div class="row dp">
+        <div class="col-md-12">
+            <label class="control-label">Num Immat</label>
+            <input type="text" ng-model="$ctrl.moyenModel.NumImmat" ng-change="$ctrl.handleValidateFormFields()" class="form-control" value="Num Immat">
+            <input type="hidden" ng-model="$ctrl.moyenModel.MaterielLocationId">
+        </div>
+    </div>
+    <div class="row dp">
+        <div class="col-md-12">
+            <label class="control-label">Libellé</label>
+            <div ng-class="{'required-location-field' : !$ctrl.moyenModel.Libelle}">
+                <input type="text" class="form-control" ng-change="$ctrl.handleValidateFormFields()" placeholder="Libellé" value="Libellé" ng-model="$ctrl.moyenModel.Libelle">
+            </div>
+        </div>
+
+    </div>
+    <div class="row dp">
+        <div class="col-md-12">
+            <label class="control-label">Modèle</label>
+            <div ng-class="{'required-location-field' : !$ctrl.moyenModel.FicheGeneriqueModel.LibelleRef}">
+                <lookup-standalone ng-model="$ctrl.moyenModel.FicheGeneriqueModel.LibelleRef"
+                                   text="$ctrl.moyenModel.FicheGeneriqueModel.LibelleRef"
+                                   search-title="Modèle"
+                                   search-placeholder="Modèle"
+                                   url="{{$ctrl.handleGetLookupUrl('FicheGenerique')}}"
+                                   on-select="$ctrl.handleLookupSelection('FicheGenerique', item)"
+                                   on-delete="$ctrl.handleLookupDeletion('FicheGenerique')"
+                                   placeholder="Modèle"
+                                   show-in-popup="true"
+                                   tooltip="$ctrl.moyenModel.FicheGeneriqueModel.LibelleRef"
+                                   class="formulaire long">
+                </lookup-standalone>
+            </div>
+        </div>
+    </div>
+    <div class="row dp">
+        <div class="col-md-12">
+            <label class="control-label">Fiche générique</label>
+            <div ng-class="{'required-location-field' : !$ctrl.moyenModel.ModeleLocation.Libelle}">
+                <lookup-standalone ng-model="$ctrl.moyenModel.ModeleLocation"
+                                   text="$ctrl.moyenModel.ModeleLocation.Libelle"
+                                   search-title="Fiche générique"
+                                   search-placeholder="Fiche générique"
+                                   url="{{$ctrl.handleGetLookupUrl('NumParc')}}"
+                                   on-select="$ctrl.handleLookupSelection('NumParc', item)"
+                                   on-delete="$ctrl.handleLookupDeletion('NumParc')"
+                                   placeholder="Fiche générique"
+                                   tooltip="$ctrl.moyenModel.ModeleLocation.Libelle"
+                                   show-in-popup="true"
+                                   class="formulaire long">
+                </lookup-standalone>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="buttons">
+            <button class="btn btn-default pull-left" ng-click="$ctrl.handleValidateForm()" ng-disabled="$ctrl.isInvalidForm"
+                ng-hide="$ctrl.isUpdate">{{$ctrl.resources.Moyen_Enregistrer}}
+            </button>
+            <button class="btn btn-default pull-left" ng-disabled="$ctrl.isInvalidForm" ng-click="$ctrl.handleUpdateMoyenLocation()"
+                ng-hide="!$ctrl.isUpdate">{{$ctrl.resources.Moyen_Enregistrer}}
+            </button>
+            <button class="btn btn-link pull-right" ng-click="$ctrl.handleDeleteLocation()"
+                ng-hide="!$ctrl.isUpdate">{{$ctrl.resources.btn_MoyenDelete}}
+            </button>
+            <button class="btn btn-link pull-right" ng-click="$ctrl.handleCancel()"
+                ng-hide="$ctrl.isUpdate">{{$ctrl.resources.Global_Bouton_Back}}
+            </button>
+        </div>
+        <div class="close_panel" ng-click="$ctrl.handleCancel()" title="Cliquer pour refermer le panneau">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <span class="ng-binding">Refermer le panneau</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,111 @@
+﻿<div class="row resHeader">
+  <div class="padding">
+      <label for="">{{::$ctrl.resources.ObjectifFlash_RessourcesTache}} {{$ctrl.tache.Libelle}}</label>
+  </div>
+
+  <div class="separator"></div>
+
+  <div class="padding">
+    <label for="">{{::$ctrl.resources.Global_ReferentielRessource}}</label>
+    <div class="right-addon searchBloc">
+      <i class="material-icons">search</i>
+      <input type="text"
+            class="form-control"
+            ng-model="$ctrl.search"
+            ng-change="$ctrl.handleChangeSearch()"
+            placeholder="{{::$ctrl.resources.Global_ReferentielRessource_Placeholder}}">
+    </div>
+
+    <div class="line-choice-btn">
+        <button class="btn btn-default btn-choice margin-l-1" ng-class="{'selected-0' : $ctrl.choiceBareme == 'BibliothequePrix'}" ng-click="$ctrl.actionUpdateRessourcesList('BibliothequePrix')">{{::$ctrl.resources.ObjectifFlash_ChoiceBibliothequePrix}}</button>
+        <button class="btn btn-default btn-choice" ng-class="{'selected-1' : $ctrl.choiceBareme == 'ExploitationCi'}" ng-click="$ctrl.actionUpdateRessourcesList('ExploitationCi')">{{::$ctrl.resources.ObjectifFlash_ChoiceBareme_Exploitation}}</button>
+        <button class="btn btn-default btn-choice" ng-class="{'selected-2' : $ctrl.choiceBareme == 'BudgetValide'}" ng-click="$ctrl.actionUpdateRessourcesList('BudgetValide')">{{::$ctrl.resources.ObjectifFlash_BaremeBudgetValide}}</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="row information" ng-if="!$ctrl.chapitres.length > 0">
+
+  <div class="col-md-2 icon">
+      <i class="flaticon flaticon-warning"></i>
+  </div>
+  <div class="col-md-10 message">
+      <h3 ng-if="$ctrl.choiceBareme == 'BibliothequePrix'">{{::$ctrl.resources.ObjectifFlash_PanelRessource_AucuneBibiothequePrix}}</h3>
+      <h3 ng-if="$ctrl.choiceBareme == 'ExploitationCi'">{{::$ctrl.resources.ObjectifFlash_PanelRessource_AucunBaremeExploitation}}</h3>
+      <h3 ng-if="$ctrl.choiceBareme == 'BudgetValide'">{{::$ctrl.resources.ObjectifFlash_PanelRessource_AucuneBaremeBudgetValide}}</h3>
+  </div>
+
+</div>
+
+<div id="containerRessources" class="fred-scroll" ng-if="$ctrl.chapitres.length > 0">
+  <div ng-repeat="chapitre in $ctrl.chapitres | filter: $ctrl.chapitresFilter($ctrl.search)">
+    <div class="res_lev1 panel-default" ng-class="{'isOpen': chapitre.isOpen }">
+
+      <!--CHAPITRE-->
+      <div class="Chapitre row panel-heading" ng-click="$ctrl.clickChapitre(chapitre)">
+
+        <div class="col-md-1 pad_l_5">
+          <div class="arrow"></div>
+        </div>
+
+        <div class="col-md-3">
+          <span>{{::chapitre.Code}}</span>
+        </div>
+        <div class="col-md-8">
+          <span class="field">{{::chapitre.Libelle}}</span>
+        </div>
+      </div>
+
+      <!--SOUS CHAPITRE-->
+      <div class="sousChapitre" ng-if="chapitre.isOpen">
+        <div ng-repeat="sousChapitre in chapitre.SousChapitres | filter: $ctrl.sousChapitresFilter($ctrl.search)" class="row main_line">
+
+          <div class="row res_lev2 panel-default" ng-class="{'isOpen': sousChapitre.isOpen }" ng-click="$ctrl.clickSousChapitre(sousChapitre)">
+            <div class="col-md-1 pad_l_15">
+              <div class="arrow"></div>
+            </div>
+            <div class="col-md-3">
+              <span>{{::sousChapitre.Code}}</span>
+            </div>
+            <div class="col-md-8">
+              <span class="field">{{::sousChapitre.Libelle}}</span>
+            </div>
+          </div>
+
+          <!--RESSOURCES-->
+          <div class="row res_lev3" ng-if="sousChapitre.isOpen">
+            <div ng-repeat="ressource in sousChapitre.Ressources | filter: $ctrl.ressourcesFilter($ctrl.search)">
+              <of-ressource-component current-ressource="ressource"
+                                      devise-selected="$ctrl.devise"
+                                      resources="$ctrl.resources">
+              </of-ressource-component>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <script type='text/javascript'>
+
+    var RessourcesContent = $(window).height();
+    var RessourcesWidth = $(window).width();
+
+    if (RessourcesWidth > 1300) {
+      var heightContainerRessources =  RessourcesContent - (RessourcesContent / 4);
+      $('#containerRessources').css('height', heightContainerRessources);
+
+    } else {
+      var heightContainerRessources =  RessourcesContent - (RessourcesContent / 3);
+      $('#containerRessources').css('height', heightContainerRessources);
+
+    }
+
+  </script>
+
+
+</div>

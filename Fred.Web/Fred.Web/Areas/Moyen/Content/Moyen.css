@@ -1,0 +1,553 @@
+﻿@charset "UTF-8";
+.no-p {
+    padding: 0;
+}
+
+.no-pr {
+    padding-right: 0;
+}
+
+.no-pl {
+    padding-left: 0;
+}
+
+.text_italic {
+    font-style: italic;
+}
+
+.required-location-field {
+    border: 2px solid #f00;
+}
+
+fred-toolbar {
+    margin-bottom: 0;
+    padding-bottom: 7px;
+}
+
+fred-toolbar .picklist-section {
+    width: 40%;
+}
+
+fred-toolbar .picklist-section .bloc-auth-overflow-hidden {
+    overflow: initial;
+    margin-right: 10px;
+    width: 30%;
+}
+
+fred-toolbar .picklist-section .bloc-auth {
+    overflow: initial;
+    margin-right: 10px;
+    width: 30%;
+}
+
+fred-toolbar .picklist-section .bloc-auth-adjusted {
+    overflow: initial;
+    margin-right: 10px;
+    width: 30%;
+}
+
+fred-toolbar .picklist-section .bloc-auth-adjusted-no-margin {
+    overflow: initial;
+    margin-right: 10px;
+    width: 30%;
+}
+
+fred-toolbar .picklist-section .ci-controls {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+fred-toolbar .picklist-section .ci-controls .inputPL .inputPLLabel.placeholder {
+    font-size: 11px;
+}
+
+fred-toolbar .picklist-section .ci-controls .inner-addon.right-addon {
+    width: 100%;
+    margin-left: 2%;
+}
+
+fred-toolbar .picklist-section .personnel-controls {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: 30px;
+}
+
+fred-toolbar .picklist-section .personnel-controls .inputPL .inputPLLabel.placeholder {
+    font-size: 11px;
+}
+
+fred-toolbar .picklist-section .personnel-controls .inner-addon.right-addon {
+    width: 100%;
+    margin-left: 2%;
+}
+
+fred-toolbar .picklist-section .resp-controls {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 5px;
+}
+
+fred-toolbar .picklist-section .resp-controls label {
+    font-size: 11px;
+    margin-bottom: 0;
+}
+
+fred-toolbar .picklist-section .resp-controls .form-control {
+    width: 100%;
+    margin-left: 2%;
+    font-size: 11px;
+}
+
+fred-toolbar .picklist-section .selectAll-controls {
+    width: 50px;
+}
+
+fred-toolbar .picklist-section fred-side main .bloc-auth {
+    overflow: initial;
+    margin-right: 10px;
+    width: 100%;
+}
+
+fred-toolbar .picklist-section fred-side main .bloc-auth-adjusted {
+    overflow: initial;
+    margin-right: 10px;
+    width: 100%;
+}
+
+fred-toolbar .picklist-section fred-side main .bloc-auth-adjusted-no-margin {
+    overflow: initial;
+    margin-right: 10px;
+    width: 100%;
+}
+
+fred-toolbar .filtres {
+    width: 40%;
+    margin-left: 1%;
+}
+
+fred-toolbar .moyens-section {
+    margin-left: 2%;
+}
+
+fred-toolbar .moyens-section .btn-default {
+    margin-top: 0;
+    font-size: 11px;
+    height: 30px;
+}
+
+fred-toolbar .moyens-section .btn-default:focus {
+    background-color: #0052a0;
+    color: #fff;
+}
+
+fred-toolbar .moyens-section .btn-link {
+    background-color: #fff !important;
+    margin-top: 0;
+    font-size: 11px;
+    height: 30px;
+    color: #0052a0;
+}
+
+fred-toolbar .moyens-section .btn-error {
+    margin-top: 0;
+    font-size: 11px;
+    height: 30px;
+    background-color: red;
+    color: #fff;
+}
+
+fred-toolbar .moyens-section.b {
+    margin-left: 1%;
+}
+
+fred-toolbar .action-section {
+    margin-left: auto;
+    margin-right: 17px;
+}
+
+fred-toolbar .action-section .btn {
+    font-size: 11px;
+    margin-top: 0;
+    height: 30px;
+}
+
+fred-toolbar .action-section .btn-validate {
+    background-color: #ff0066;
+    color: #fff;
+    margin-right: 0;
+}
+
+.btn-rechercher {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.selection_filters.first {
+    margin-top: 20px;
+}
+
+.selection_filters {
+    display: inline-block;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 200px;
+}
+
+.selection_filters select {
+    font-size: 11px;
+    height: 30px;
+    width: 90px;
+}
+
+.moyens-table {
+    width: 100%;
+}
+
+.moyens-table tbody {
+    display: block;
+    height: calc( 100vh - 290px);
+}
+
+.moyens-table tbody tr {
+    border-top: 1px solid #ddd;
+}
+
+.moyens-table tbody tr.odd {
+    background-color: #fffafa;
+}
+
+.moyens-table tbody td {
+    font-size: 11px;
+    height: 30px;
+    text-align: center;
+}
+
+.moyens-table tbody td .lim {
+    white-space: nowrap;
+    width: 85%;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+    cursor: default;
+}
+
+.moyens-table tbody td .more-detail {
+    height: 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.moyens-table tbody td .more-detail .material-icons {
+    font-size: 26px;
+    color: #67757f;
+    cursor: pointer;
+}
+
+.moyens-table thead {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    width: calc( 100% - 9px);
+}
+
+.moyens-table thead th {
+    text-align: center;
+    height: 30px;
+}
+
+.moyens-table .header1 {
+    background-color: #0052a0;
+    color: #fff;
+    font-size: 11px;
+    height: 30px;
+}
+
+.moyens-table .header1 th {
+    height: 30px;
+}
+
+.moyens-table .header1 th.select-all-s {
+    display: inline-block;
+    align-items: center;
+    margin-top: 6px;
+    margin-left: 8px;
+    margin-right: 5px;
+}
+
+.moyens-table .chb {
+    background-color: #6697c6;
+    width: 40px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+.moyens-table .chb_all {
+    background-color: #6697c6;
+    width: 40px;
+    height: 30px;
+    display: contents;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+.moyens-table .header2 {
+    background-color: #31859b;
+    color: #fff;
+    font-size: 11px;
+    height: 30px;
+}
+
+.moyens-table .firstCol {
+    width: 3%;
+}
+
+.moyens-table input[type="checkbox"] + label span {
+    margin-right: 0;
+}
+
+tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + label {
+    font-size: 11px;
+    margin-bottom: 0;
+}
+
+input[type="checkbox"] + label span {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: 0;
+    margin-right: 5px;
+    vertical-align: middle;
+    cursor: pointer;
+    -moz-border-radius: 20%;
+    border-radius: 20%;
+    background-color: #fcfcfc;
+    border: 3px #78C1DD solid;
+    -webkit-transition: background-color 0.4s linear;
+    -o-transition: background-color 0.4s linear;
+    -moz-transition: background-color 0.4s linear;
+    transition: background-color 0.4s linear;
+}
+
+input[type="checkbox"]:checked + label span {
+    border: 3px #2c77ba solid;
+    background-image: url("/medias/images/ico/checked.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-transition: background-color 0.4s linear;
+    -o-transition: background-color 0.4s linear;
+    -moz-transition: background-color 0.4s linear;
+    transition: background-color 0.4s linear;
+}
+
+.modal [class*=" flaticon-"]::before {
+    font-size: 25px;
+}
+
+.modal .modal-body .lk {
+    margin-top: 10px;
+}
+
+.modal .modal-body .dp {
+    margin-top: 30px;
+}
+
+.modal .modal-dialog textarea {
+    resize: none;
+}
+
+.modal .modal-dialog select {
+    width: 170px;
+    height: 30px;
+}
+
+.modal .modal-dialog .loc-list {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.modal .modal-dialog .loc-list th {
+    padding-left: 10px;
+}
+
+.modal .modal-dialog .loc-list td {
+    padding-left: 10px;
+}
+
+.modal .modal-dialog .loc-list .col1 {
+    width: 18%;
+}
+
+.modal .modal-dialog .loc-list .col2 {
+    width: 18%;
+}
+
+.modal .modal-dialog .loc-list .col3 {
+    width: 18%;
+}
+
+.modal .modal-dialog .loc-list .col4 {
+    width: 18%;
+}
+
+.modal .modal-dialog .loc-list .col5 {
+    width: 18%;
+}
+
+.modal .modal-dialog .loc-list .col {
+    width: 10%;
+}
+
+.modal .modal-dialog .loc-list thead {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    background-color: #0052a0;
+    color: #fff;
+    font-size: 11px;
+    height: 30px;
+}
+
+.modal .modal-dialog .loc-list tbody {
+    display: block;
+    height: calc(100vh - 500px);
+    overflow: auto;
+    font-size: 11px;
+}
+
+.modal .modal-dialog .loc-list tbody .txt {
+    margin-right: 0;
+    white-space: nowrap;
+    width: 80%;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+}
+
+.modal .modal-dialog .loc-list .col6 .material-icons {
+    cursor: pointer;
+}
+
+.modal .bootstrap-datetimepicker-widget table tbody tr {
+    display: table-row;
+}
+
+.modal .popoverList li h3 {
+    cursor: pointer;
+}
+
+.modal .modal-dialog.mgmt-loc {
+    width: 800px;
+}
+
+.modal .modal-dialog.mgmt-loc .search-bloc {
+    display: flex;
+    width: 100%;
+}
+
+.modal .modal-dialog.mgmt-loc .search-bloc .input-group.input-search {
+    width: 95%;
+}
+
+.modal .modal-dialog.mgmt-loc .search-bloc button {
+    margin-top: 0;
+    margin-left: 5px;
+    padding: 5px 12px;
+}
+
+.action-controls-moyen {
+    background-color: #e1e3e5;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.modal.loc-mod {
+    z-index: 1109;
+}
+
+fred-side main {
+    max-height: 74%;
+}
+
+fred-side main fred-toolbar .picklist-section fred-side main .bloc-auth-overflow-hidden {
+    overflow: initial;
+    margin-right: 10px;
+    width: 100%;
+}
+
+.bootstrap-datetimepicker-widget table tbody tr {
+    display: table-row;
+}
+
+.text-warning-moyen {
+    background-color: #fdb94d !important;
+    color: black !important;
+    display: block !important;
+    font-size: 15px;
+    font-weight: 500;
+    padding-left: 3px;
+}
+
+.options .dp {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.options .footer .buttons {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .moyens-table .header1 {
+        font-size: 9px;
+    }
+    .moyens-table .header2 {
+        font-size: 9px;
+    }
+    .moyens-table tbody {
+        height: calc( 100vh - 215px);
+    }
+    .moyens-table tbody td {
+        font-size: 9px;
+    }
+}
+
+/* spécifique à firefox */
+@-moz-document url-prefix() {
+    fred-toolbar .picklist-section .resp-controls label {
+        width: 30%;
+    }
+    fred-toolbar .picklist-section .resp-controls .form-control {
+        width: 70%;
+    }
+    .moyens-table thead {
+        width: calc( 100% - 17px);
+    }
+}

@@ -1,0 +1,34 @@
+﻿--Etape 0 : Récupération des données
+SELECT EC.CIID, DATECOMPTABLE, EC.FAMILLEOPERATIONDIVERSEID, EC.MONTANT, NATUREID, COUNT(*) NBOCCURENCE 
+INTO #SRC
+FROM FRED_ECRITURE_COMPTABLE EC
+INNER JOIN  FRED_FAMILLE_OPERATION_DIVERSE FOD ON FOD.FAMILLEOPERATIONDIVERSEID = EC.FAMILLEOPERATIONDIVERSEID
+WHERE 1=1
+AND FOD.ISACCRUED = 1
+AND SOCIETEID = 1
+GROUP BY EC.CIID, DATECOMPTABLE, EC.FAMILLEOPERATIONDIVERSEID, EC.MONTANT, NATUREID
+HAVING COUNT(*)>1
+
+--ETAPE 1 : Suppression des écritures comptable qui ont un mauvais libellée (ils sont mauvais car ils n'ont pas d'écriture cumulées)
+DELETE EC
+from FRED_ECRITURE_COMPTABLE ec 
+INNER JOIN  #SRC s on s.CiId = ec.CiId and s.DateComptable = ec.DateComptable and s.FamilleOperationDiverseId  = ec.FamilleOperationDiverseId and s.Montant = ec.Montant
+LEFT OUTER JOIN FRED_ECRITURE_COMPTABLE_CUMUL ecc on ecc.CiId = ec.CiId and ecc.EcritureComptableId = ec.EcritureComptableId
+WHERE 1=1
+AND ecc.EcritureComptableId is null 
+
+--Etape 2 : Renommer les anciens libellé de TOUTES Ecritures avec les nouveaux
+UPDATE EC 
+SET EC.Libelle = 
+CASE 
+	WHEN EC.Libelle LIKE 'MO POINTEE (Hors Intérim)%' THEN REPLACE(EC.Libelle, 'MO POINTEE (Hors Intérim)',FOD.Libelle)
+	WHEN EC.Libelle LIKE 'ACHAT AVEC COMMANDE (y compris Intérim)%' THEN REPLACE(EC.Libelle, 'ACHAT AVEC COMMANDE (y compris Intérim)',FOD.Libelle)
+	ELSE EC.Libelle
+END
+FROM FRED_ECRITURE_COMPTABLE EC
+INNER JOIN  FRED_FAMILLE_OPERATION_DIVERSE FOD ON FOD.FAMILLEOPERATIONDIVERSEID = EC.FAMILLEOPERATIONDIVERSEID
+WHERE 1=1
+AND FOD.ISACCRUED = 1
+AND SOCIETEID = 1
+
+DROP TABLE #SRC

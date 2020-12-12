@@ -1,0 +1,201 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureReferentielFixe.ReferentielFixe_Index_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/ReferentielFixesIndexBundle.css")
+}
+
+@section scripts {
+
+    @Scripts.Render("~/ReferentielFixesIndexBundle.js")
+    @this.RenderResources("FeatureReferentielFixe")
+}
+
+<div class="referentiel_fixe container-fluid" ng-controller="ReferentielsFixesCtrl" ng-init="init()">
+
+    <div class="row ">
+        <div class="col-md-10"><h1>{{resources.ReferentielFixe_Index_Titre}}</h1></div>
+        <div class="col-md-2"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-sm-12 col-xs-12 lists">
+            <div class="row">
+
+                @*---------------------------------------------------------- CHAPITRE ----------------------------------------------------------*@
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="toolbar">
+                            <fred-section>{{resources.ReferentielFixe_Index_Chapitre}}</fred-section>
+                            <div class="controls">
+                                <div class="input-group input-search">
+                                    <input type="text" placeholder="{{resources.ReferentielFixe_Index_Chapitre_Placeholder}}" ng-model="searchChapitre" class="form-control">
+                                    <span class="input-group-addon button-search"><span class="material-icons">search</span></span>
+                                </div>
+
+                                <div class="add">
+                                    <button class="btn btn-default btn-circle" ng-click="handleAddChapitre(chapterList, resources)" title="{{resources.ReferentielFixe_Index_Chapitre_Ajouter_Tooltip}}"><i class="flaticon flaticon-add"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="list-content">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no_padding" ng-repeat="chapitre in chapterList | codeLibelleFilter: searchChapitre" ng-class="{selected: chapitre.ChapitreId === idSelectedChapitre, active: chapitre.ChapitreId !== idSelectedChapitre && $index % 2 == 0}" title="{{resources.ReferentielFixe_Index_Chapitre_Ligne_Tooltip}}">
+                                <div class="row ligne" ng-click="handleSelectChapter(chapitre.ChapitreId)">
+
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs3 no_padding">
+                                        <div class="lb">{{resources.ReferentielFixe_Index_PanelDetail_Code}}</div>
+                                        <div class="val">{{chapitre.Code}}</div>
+
+                                    </div>
+                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs7 no_padding">
+                                        <div class="lb">{{resources.ReferentielFixe_Index_Chapitre}}</div>
+                                        <div class="val">{{chapitre.Libelle | truncateText:letterLimit }}</div>
+                                    </div>
+
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                                        <span class="button-action flaticon flaticon-multiply" data-toggle="modal" ng-click="handleDeleteChapter(chapitre)" title="{{resources.ReferentielFixe_Index_Chapitre_Supprimer_Tooltip}}"></span>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                                        <span class="button-action material-icons" ng-click="handleEditChapitre(chapitre, resources)" title="{{resources.ReferentielFixe_Index_Chapitre_Modifier_Tooltip}}">more_vert</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @*---------------------------------------------------------- SOUS-CHAPITRE ----------------------------------------------------------*@
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="toolbar">
+                            <fred-section>{{resources.ReferentielFixe_Index_SousChapitre}}</fred-section>
+                            <div class="controls">
+                                <div class="input-group input-search">
+                                    <input type="text" placeholder={{resources.ReferentielFixe_Index_SousChapitre_Placeholder}} ng-model="searchSouschapitre" class="form-control">
+                                    <span class="input-group-addon button-search"><span class="material-icons">search</span></span>
+                                </div>
+                                <div class="add">
+                                    <button ng-show="idSelectedChapitre" class="btn btn-default btn-circle" ng-click="handleAddSousChapitre(subChapterList, idSelectedChapitre, resources)" title="{{resources.ReferentielFixe_Index_SousChapitre_Ajouter_Tooltip}}"><i class="flaticon flaticon-add"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="list-content">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no_padding" ng-repeat="souschapitre in subChapterList | codeLibelleFilter: searchSouschapitre" ng-class="{selected: souschapitre.SousChapitreId === idSelectedSousChapitre, active: souschapitre.SousChapitreId !== idSelectedSousChapitre && $index % 2 == 0}" title="{{resources.ReferentielFixe_Index_SousChapitre_Ligne_Tooltip}}">
+                                <div class="row ligne" ng-click="handleSelectSubChapter(souschapitre.SousChapitreId)">
+
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs4 no_padding">
+                                        <div class="lb">{{resources.ReferentielFixe_Index_PanelDetail_Code}}</div>
+                                        <div class="val">{{souschapitre.Code}}</div>
+
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs6 no_padding">
+                                        <div class="lb">{{resources.ReferentielFixe_Index_SousChapitre}}</div>
+                                        <div class="val">{{souschapitre.Libelle | truncateText:letterLimit}}</div>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                                        <span class="button-action flaticon flaticon-multiply" ng-click="handleDeleteSubChapter(souschapitre)" title="{{resources.ReferentielFixe_Index_SousChapitre_Supprimer_Tooltip}}"></span>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                                        <span class="button-action material-icons" ng-click="handleEditSousChapitre(souschapitre, idSelectedSousChapitre, resources)" title="{{resources.ReferentielFixe_Index_SousChapitre_Modifier_Tooltip}}">more_vert </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @*---------------------------------------------------------- RESSOURCE ----------------------------------------------------------*@
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="toolbar">
+                            <fred-section>{{resources.ReferentielFixe_Index_Ressource}}</fred-section>
+                            <div class="controls">
+                                <div class="input-group input-search">
+                                    <input type="text" placeholder="{{resources.ReferentielFixe_Index_Ressource_Placeholder}}" ng-model="searchRessource" class="form-control">
+                                    <span class="input-group-addon button-search"><span class="material-icons">search</span></span>
+                                </div>
+                                <div class="add">
+                                    <button ng-show="subChapterList.length > 0 && idSelectedSousChapitre " class="btn btn-default btn-circle" ng-click="handleAddRessource(resourceList, idSelectedChapitre, idSelectedSousChapitre)" title="{{resources.ReferentielFixe_Index_Ressource_Ajouter_Tooltip}}"><i class="flaticon flaticon-add"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="list-content">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no_padding" ng-repeat="ressource in resourceList | codeLibelleFilter: searchRessource" ng-class="{selected: ressource.RessourceId === idSelectedRessource, active: ressource.RessourceId !== idSelectedRessource && $index % 2 == 0}" title="{{resources.ReferentielFixe_Index_Ressources_Ligne_Tooltip}}">
+                                <div class="row ligne" ng-click="handleSelectResource(ressource.RessourceId)">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs3 no_padding">
+                                        <div class="lb">{{resources.ReferentielFixe_Index_PanelDetail_Code}}</div>
+                                        <div class="val">{{ressource.Code}}</div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs6 no_padding">
+                                        <div class="lb">{{resources.ReferentielFixe_Index_Ressource}}</div>
+                                        <div class="val">{{ressource.Libelle | truncateText:letterLimit}}</div>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                                        <span class="material-icons badge-notify" title="{{resources.ReferentielFixe_Index_Ressource_Desactiver_Tooltip}}" ng-show="!ressource.Active">warning</span>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                                        <span class="button-action flaticon flaticon-multiply" ng-click="handleDeleteResource(ressource)" title="{{resources.ReferentielFixe_Index_Ressource_Supprimer_Tooltip}}"></span>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                                        <span class="button-action material-icons" ng-click="handleEditRessource(ressource, idSelectedChapitre, idSelectedSousChapitre, resources)" title="{{resources.ReferentielFixe_Index_Ressource_Modifier_Tooltip}}">more_vert </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        @*---------------------------------------------------------- DETAIL RESSOURCE ----------------------------------------------------------*@
+        <div class="col-md-2 col-sm-12 col-xs-12 summary">
+
+            <!--Export Excel-->
+            <button type="button" class="btn button-excel" ng-click="handleExtractExcel()" value="{{resources.Global_Bouton_ExportExcel}}" title="{{resources.Global_Bouton_ExportExcel_Tooltip}}">
+            </button>
+
+            <div ng-show="selectedRessource" class="summary-bloc">
+                <fred-section>
+                    {{resources.ReferentielFixe_Index_PanelDetail_Titre}}
+                </fred-section>
+                <p>
+                    <label class="t1">{{resources.ReferentielFixe_Index_PanelDetail_SousTitre_Description}}</label>
+                    <label class="t2a">{{resources.ReferentielFixe_Index_PanelDetail_Code}}</label>
+                    <label class="t2b">{{selectedRessource.Code}}</label>
+                    <label class="t2a mt">{{resources.ReferentielFixe_Index_PanelDetail_Libelle}}</label>
+                    <label class="t2b">{{selectedRessource.Libelle}}</label>
+                </p>
+
+                <p ng-if="selectedRessource.TypeCode != ''">
+                    <label class="t1">{{resources.ReferentielFixe_Index_PanelDetail_SousTitre_Detail}}</label>
+                    <label class="t2a">{{resources.ReferentielFixe_Index_PanelDetail_Type}}</label>
+                    <label class="t2b">{{selectedRessource.TypeRessource.Libelle}}</label>
+
+                    <span ng-if="selectedRessource.TypeCode == 'MAT'">
+                        <label class="t2a mt">{{resources.ReferentielFixe_Index_PanelDetail_Carburant}}</label>
+                        <label class="t2b">{{selectedRessource.Carburant.Libelle}}</label>
+                        <label class="t2a mt">{{resources.ReferentielFixe_Index_PanelDetail_Consommation}}</label>
+                        <label class="t2b">{{selectedRessource.ConsommationLibelle}} {{selectedRessource.Carburant.Unite.Code}}</label>
+                    </span>
+                </p>
+                <p>
+                    <label class="t1">{{resources.ReferentielFixe_ModalRessource_MotCles}}</label>
+                    <span>{{selectedRessource.Keywords}}</span>
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</div>

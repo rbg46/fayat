@@ -1,0 +1,76 @@
+﻿﻿.p-0 {
+    padding: 0!important;
+}
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.zones-libres-commande {
+    margin-top: 10px;
+    margin-bottom: 0!important;
+}
+
+.zones-libres-commande .title {
+    font-size: 17px;
+    color: #2c77ba;
+    width: 100%;
+    display: inline-flex;
+    cursor: pointer;
+}
+
+.zones-libres-commande .content > div.d-grid {
+    display: grid;
+    margin-bottom: 20px;
+}
+
+.zones-libres-commande .content div > label {
+    color: #67757F;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.zones-libres-commande .content div > textarea {
+    border-color: lightgray;
+    color: darkgray;
+    outline: none;
+    padding: 5px;
+}
+
+.zones-libres-commande .content div#CGA {
+    margin-top: 5px;
+    max-width: 330px;
+}
+
+.zones-libres-commande .content div#CGA > div.row {
+    margin-bottom: 10px;
+}
+
+.zones-libres-commande .content div#CGA > div label {
+    outline: none;
+    background-color: #1E90FF;
+    color: white;
+    height: 27px;
+    font-size: 11px;
+    width: 100%;
+}
+.zones-libres-commande .content div#CGA > div label:hover {
+    background-color: #0f75dc;
+}
+
+.zones-libres-commande .content div#CGA > div > div {
+    color: #1E90FF;
+    font-size: 17px;
+    display: flex;
+    padding: 0;
+}

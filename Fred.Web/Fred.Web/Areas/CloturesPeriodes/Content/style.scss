@@ -1,0 +1,448 @@
+﻿/* Couleurs */
+
+$bleuFayat: rgb(0,82,160);
+$lightBlue1: rgb(215,236,242);
+$lightBlue2: rgb(24,109,171);
+
+$yellow: rgb(255,192,0);
+
+$green: rgb(157,187,97);
+
+$red: rgb(192,80,70);
+
+$white: #fff;
+$white2: rgb(245,248,251);
+
+$grey: rgb(174, 174, 174);
+$grey2: rgb(138,140,140);
+
+.no-pad {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Toolbar*/
+
+fred-toolbar {
+
+    fred-section {
+
+        &.period-section {
+            width: 10%;
+
+            .glyphicon {
+                float: left;
+            }
+        }
+
+        &.orga-section {
+            margin-left: 1%;
+            width: 20%;
+
+            .row-lookup {
+                width: 100%;
+            }
+        }
+
+        &.text-search-section {
+            margin-left: 1%;
+            width: 68%;
+
+            .search-bloc {
+                display: flex;
+                background-color: rgb(225,227,229);
+
+                .search-field {
+                    width: 100%;
+                    display: flex;
+
+                    .input-group.input-search {
+                        width: 30%;
+
+                        .button-search {
+                            border-right: 1px solid #ccc;
+
+                            .material-icons { height: 100%; }
+                        }
+                    }
+
+                    .fil-ti {
+                        width: 63%;
+                        display: flex;
+                        align-items: center;
+
+                        .filter-tiles {
+                            padding: 0;
+                            margin-top: 0;
+                            min-height: initial;
+
+                            .btn {
+                                margin-top: 3px;
+                            }
+                        }
+                    }
+
+                    .act-btns {
+                        display: flex;
+                        align-items: center;
+
+                        .excel-icon {
+                            background-image: url('/medias/images/ico/excel-icon.png');
+                            display: inline-block;
+                            width: 30px;
+                            height: 30px;
+                            margin-right: 3px;
+                            background-size: cover;
+                            background-repeat: no-repeat;
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                .action-field {
+                    display: flex;
+                    margin-left: auto;
+
+
+                    .btn-rechercher {
+                        margin-left: 0;
+                    }
+                }
+            }
+
+            fred-side {
+                width: 600px;
+                left: -600px;
+
+                &.open {
+                    left: 0;
+                }
+
+                main {
+
+                    section-title {
+                        cursor: default;
+
+                        &::before {
+                            color: transparent;
+                        }
+                    }
+
+                    .selection_filters {
+                        height: 55px;
+
+                        .lbl_l {
+
+                            .lbl_txt {
+                                display: flex;
+                                justify-content: flex-start;
+                                align-items: center;
+                                height: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &.export-section {
+            margin-left: 1%;
+
+            button { margin-right: 0; }
+        }
+    }
+}
+
+/* liste */
+
+.display-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .head {
+        display: flex;
+        width: 100%;
+        height: 46px;
+
+        &.head1 {
+
+            .col-btns {
+                background-color: $lightBlue1;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                width: 25%;
+
+                button {
+                    //padding-left: 10px;
+                    //padding-right: 10px;
+                    font-size: 11px;
+                    border: none;
+                    height: 75%;
+                }
+
+                .sel-all {
+                    @extend button;
+                }
+
+                .unsel-all {
+                    @extend button;
+                }
+
+                .gen {
+                    @extend button;
+                    background-color: $yellow;
+                }
+
+                .dec {
+                    @extend button;
+                    background-color: rgb(157,187,97);
+                    color: white;
+                    border: 1px solid #9dbb61;
+                }
+            }
+
+            .fill1 {
+                width: 12.5%;
+            }
+
+            .fill2 {
+                width: 25%;
+            }
+        }
+
+        &.head2 {
+            height: 35px;
+
+            .blue {
+                background-color: $bleuFayat;
+                color: $white;
+                font-size: 11px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+
+    .col1 {
+        width: 40.5%;
+    }
+
+    .col2,
+    .col3 {
+        width: 12.5%;
+    }
+
+    .col4,
+    .col5,
+    .col6,
+    .col7 {
+        width: 11.25%;
+    }
+
+    .col-sep {
+        width: 2%;
+        background-color: $lightBlue1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .colScroll {
+        width: 10px;
+    }
+    /* spécifique à firefox */
+    @-moz-document url-prefix() {
+
+        .colScroll {
+            width: 17px;
+        }
+    }
+
+    .list-bloc {
+        height: calc(100vh - 370px);
+        overflow-y: scroll;
+
+        .list-line {
+            border-bottom: 1px solid $grey;
+            display: flex;
+            width: 100%;
+            height: 35px;
+
+            .org-data {
+                display: flex;
+                height: 100%;
+                width: 100%;
+                align-items: center;
+                padding-left: 10px;
+
+                .txt {
+                    font-size: 11px;
+                    text-transform: uppercase;
+                    white-space: nowrap;
+                    width: 90%;
+                    overflow: hidden;
+                    display: block;
+                    text-overflow: ellipsis;
+                }
+            }
+
+            .tiled {
+                display: flex;
+                height: 100%;
+                justify-content: center;
+                align-items: center;
+                background-color: $white2;
+
+                .tile {
+                    font-size: 11px;
+                    color: $white;
+                    width: 120px;
+                    height: 20px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    &.clickable {
+                        cursor: pointer;
+                    }
+
+                    &.done {
+                        background-color: $green;
+                    }
+
+                    &.undone {
+                        background-color: $red;
+                    }
+
+                    &.closed {
+                        background-color: $white;
+                        color: $grey2;
+                        border: 1px solid $grey2;
+                    }
+
+                    &.open {
+                        background-color: $white;
+                        color: $grey2;
+                        border: 1px solid $grey2;
+                    }
+
+                    .fa-lock {
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+    }
+
+    input[type="checkbox"] {
+        display: none;
+    }
+
+    input[type="checkbox"] + label {
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+
+    input[type="checkbox"] + label span {
+        display: inline-block;
+        width: 19px;
+        height: 19px;
+        margin: 0;
+        vertical-align: middle;
+        cursor: pointer;
+        -moz-border-radius: 20%;
+        border-radius: 20%;
+        background-color: #fcfcfc;
+        border: 3px #78C1DD solid;
+    }
+
+    input[type="checkbox"]:checked + label span {
+        border: 3px #2c77ba solid;
+        background-image: url('/medias/images/ico/checked.png');
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    input[type="checkbox"] + label span,
+    input[type="checkbox"]:checked + label span {
+        -webkit-transition: background-color 0.4s linear;
+        -o-transition: background-color 0.4s linear;
+        -moz-transition: background-color 0.4s linear;
+        transition: background-color 0.4s linear;
+    }
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+
+    fred-toolbar {
+
+        .period-section {
+
+            .input-group {
+
+                &.date {
+
+                    .form-control {
+                        
+                        font-size: 11px;
+                    }
+
+                    .input-group-addon {
+                        padding: 0;
+                        width: 25px;
+                        height: 25px;
+
+                        .glyphicon-calendar {
+                            float: none;
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .text-search-section {
+
+            .search-bloc {
+
+                margin-top: 3px;
+
+                .search-field {
+
+                    .input-group {
+
+                        &.input-search {
+
+                            .action-field {
+
+                                margin-top: 0;
+
+                                .btn-rechercher {
+                                    height: 25px;
+
+
+                                    .button-search {
+
+                                        width: 100%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    .display-list {
+
+        .list-bloc {
+
+            height: calc(100vh - 275px);
+        }
+    }
+}

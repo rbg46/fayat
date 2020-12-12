@@ -1,0 +1,625 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    /**/
+
+    ViewBag.Title = FeatureBudget.PageAvancementTitre;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+    @Styles.Render("~/AvancementBundle.css")
+    @Styles.Render("~/Content/FormPanel/style.css")
+}
+@section scripts {
+    @Scripts.Render("~/AvancementBundle.js")
+    @this.RenderResources("FredResource", "FeatureAvancement", "FeatureBudgetCommentairePanel", "FeatureFavori")
+}
+
+<div class="container avancement" ng-controller="AvancementController as $ctrl" ng-init="$ctrl.getFilterOrFavoris('@ViewBag.favoriId')">
+
+    <!-- START : Titre de la page -->
+    <h1>{{$ctrl.resources.Avancement_Titre}}</h1>
+
+    <!--START : Barre de recherche + Barre d'outils-->
+    <fred-toolbar>
+
+        <!--CI-->
+        <fred-section class="ci-section">
+            <fred-section-title>{{$ctrl.resources.Global_SelectionCI}}</fred-section-title>
+            <fred-section-controls>
+                <lookup ng-model="$ctrl.filters.ci"
+                        class="formulaire long"
+                        search-placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                        search-title="{{$ctrl.resources.Global_ReferentielCI}}"
+                        on-select="$ctrl.ChangePerimetre()"
+                        custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                        url="/api/CI/SearchLight"
+                        ng-disabled="$ctrl.busy">
+                    <input type="text"
+                           class="form-control"
+                           ng-value="$ctrl.filters.ci.CodeLibelle"
+                           placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                           title="{{$ctrl.filters.ci.Libelle}}" />
+                    <i class="chev material-icons">chevron_right</i>
+                </lookup>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Recherche-->
+        <fred-section class="text-search-section">
+            <fred-section-title>{{$ctrl.resources.Rechercher_lb}}</fred-section-title>
+            <fred-section-controls>
+                <div class="input-group input-search">
+                    <input type="text" class="form-control" placeholder="{{$ctrl.resources.Avancement_RechercheTache}}" ng-model="$ctrl.filters.searchTache" ng-change="$ctrl.updateFilters()">
+                    <span class="input-group-addon button-search">
+                        <i class="material-icons">search</i>
+                    </span>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Devise-->
+        <fred-section class="devise-section">
+            <fred-section-title>{{$ctrl.resources.Devise_lb}}</fred-section-title>
+            <fred-section-controls class="devise-section-controls">
+                <div class="currency active">€</div>
+                <div class="currency">£</div>
+                <div class="currency">$</div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Période-->
+        <fred-section class="date-section">
+            <fred-section-title>{{$ctrl.resources.Global_SelectionnerPeriode}}</fred-section-title>
+            <fred-section-controls>
+                <div class="input-group date">
+                    <app-date-picker id="periode" ng-model="$ctrl.filters.periode" initial-date="{{$ctrl.filters.periode}}" format="MM/YYYY" lang="fr" placeholder="Période"
+                                     ng-disabled="$ctrl.busy" on-update="$ctrl.ChangePeriode()"></app-date-picker>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Actions-->
+        <fred-section class="action-section" ng-if="$ctrl.filters.ci && $ctrl.Budget != null && $ctrl.Budget.TachesNiveau1 != null && $ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Valide">
+            <fred-section-title>Action</fred-section-title>
+            <fred-section-controls class="action-controls">
+                <button class="btn btn-default" ng-click="$ctrl.Save()" ng-if="$ctrl.Budget.CodeEtatAvancement == $ctrl.CodeEtatAvancement.Enregistre" ng-disabled="!$ctrl.filters.ci">Enregistrer</button>
+                <button class="btn btn-default validate" ng-click="$ctrl.Validate()" ng-if="$ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Valide" ng-disabled="!$ctrl.filters.ci">{{$ctrl.libelleBoutonValider}}</button>
+                <button class="btn btn-default" ng-click="$ctrl.RetourBrouillonAvancement()" ng-if="$ctrl.Budget.CodeEtatAvancement == $ctrl.CodeEtatAvancement.AValider" ng-disabled="!$ctrl.filters.ci">Retour Brouillon</button>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Export-->
+        <fred-section class="export-section" ng-if="$ctrl.filters.ci && $ctrl.Budget != null && $ctrl.Budget.TachesNiveau1 != null">
+            <fred-section-title>Export</fred-section-title>
+            <fred-section-controls>
+                <fred-button type="button" ng-click="$ctrl.onExportExcel(false)" class="export-section-button" title="{{::$ctrl.resources.Global_Bouton_ExportExcel_Tooltip}}">
+                    <span class="excel-icon"></span>
+                </fred-button>
+                <fred-button type="button" ng-click="$ctrl.onExportExcel(true)" class="export-section-button" title="{{::$ctrl.resources.Global_Bouton_ExportPDF_Tooltip}}">
+                    <span class="pdf-icon"></span>
+                </fred-button>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Favoris-->
+        <fred-section class="favoris-section" ng-show="$ctrl.filters.ci && $ctrl.filters.periode">
+            <fred-section-title>{{$ctrl.resources.Avancement_Favoris}}</fred-section-title>
+            <fred-section-controls>
+                <fred-button class="fred-button white-star" type="button" ng-click="$ctrl.addFilter2Favoris()"
+                             title="{{ $ctrl.getTooltipFavoris() }}">
+                    <i class="material-icons">star</i>
+                </fred-button>
+            </fred-section-controls>
+        </fred-section>
+
+        <!-- Axe d'analyse -->
+        <fred-section class="aa-section">
+            <fred-section-title>Axe d'analyse</fred-section-title>
+            <fred-section-controls>
+                <fred-button type="button" class="ax-param" ng-click="$ctrl.handleRightPanelShow()" title="Cliquer pour afficher les options de personnalisation d’affichage">
+                    <span ng-class="{'sapicon-E056': $ctrl.filterActiveOnAxe, 'sapicon-E056 inactive': !$ctrl.filterActiveOnAxe}"></span>
+                </fred-button>
+            </fred-section-controls>
+        </fred-section>
+    </fred-toolbar>
+
+    <feature-flag feature-key="ParametrageAvancementDroitADepense">
+        <!-- Bandeau Axe d'analyse : DEBUT -->
+        <div ng-show="$ctrl.displayBanner">
+            <div class="blockScreen" ng-click="" style="z-index: 99">
+            </div>
+            <div class="options medium" id="PanelRight" style="z-index:100">
+                <!--HEADER TOOLBAR : BEGIN-->
+                <div class="toolbar">
+                    <div class="material-icons grandicone">group_work</div>
+                </div>
+                <!--HEADER TOOLBAR : END-->
+                <!-- Titre : BEGIN -->
+                <div class="form-header" id="Titre">
+                    <h2>
+                        <span>Paramétrage de l'avancement <br> du droit à dépense</span>
+                    </h2>
+                </div>
+                <!-- Titre : END -->
+                <!-- Body : BEGIN -->
+                <div class="form">
+                    <div class="row bloc-info">
+                        <div class="col-md-12 bloc-info-title">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                            <span>Détail de l'axe analytique</span>
+                        </div>
+
+                        <div class="bloc-info-erreur alert alert-warning" ng-show="$ctrl.analyticalAxisMessage">{{$ctrl.analyticalAxisMessage}}</div>
+
+                        <div class="col-md-12 bloc-axe-detail">
+                            <div class="axe-detail">
+                                <div ng-repeat="axeType in $ctrl.showableAnalyticalAxis" class="detail-element" ng-class="{'selected' : $ctrl.isAnalyticalAxisSelected(axeType)}" ng-click="$ctrl.handleShowOrHideAxe(axeType)">
+                                    <span class="detail-element-txt">{{axeType.Name}}</span>
+                                    <div class="inner-triangle" ng-show="$ctrl.isAnalyticalAxisSelected(axeType)"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 bloc-info-title">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        <span>Colonnes affichées</span>
+                    </div>
+
+                    <div class="axe-detail cols">
+                        <div class="detail-element borderless">
+                            <span class="detail-element-txt">Budget</span>
+                        </div>
+                        <div class="detail-element" ng-class="{'selected' : $ctrl.isShowableColumn('BudgetQuantite')}" ng-click="$ctrl.handleShowOrHideColumn('BudgetQuantite')">
+                            <span class="detail-element-txt">Quantité</span>
+                            <div class="inner-triangle" ng-show="$ctrl.isShowableColumn('BudgetQuantite')"></div>
+                        </div>
+                        <div class="detail-element" ng-class="{'selected' : $ctrl.isShowableColumn('BudgetPU')}" ng-click="$ctrl.handleShowOrHideColumn('BudgetPU')">
+                            <span class="detail-element-txt">PU</span>
+                            <div class="inner-triangle" ng-show="$ctrl.isShowableColumn('BudgetPU')"></div>
+                        </div>
+                        <div class="detail-element" ng-class="{'selected' : $ctrl.isShowableColumn('BudgetMontant')}" ng-click="$ctrl.handleShowOrHideColumn('BudgetMontant')">
+                            <span class="detail-element-txt">Montant</span>
+                            <div class="inner-triangle" ng-show="$ctrl.isShowableColumn('BudgetMontant')"></div>
+                        </div>
+
+                        <div class="detail-element borderless">
+                            <span class="detail-element-txt">Avancement cumulé</span>
+                        </div>
+                        <div class="detail-element" ng-class="{'selected' : $ctrl.isShowableColumn('AcMoisDernier')}" ng-click="$ctrl.handleShowOrHideColumn('AcMoisDernier')">
+                            <span class="detail-element-txt">{{$ctrl.previousMonthFront}}</span>
+                            <div class="inner-triangle" ng-show="$ctrl.isShowableColumn('AcMoisDernier')"></div>
+                        </div>
+                        <div class="detail-element" ng-class="{'selected' : $ctrl.isShowableColumn('AcMoisActuel')}" ng-click="$ctrl.handleShowOrHideColumn('AcMoisActuel')">
+                            <span class="detail-element-txt">{{$ctrl.currentMonthFront}}</span>
+                            <div class="inner-triangle" ng-show="$ctrl.isShowableColumn('AcMoisActuel')"></div>
+                        </div>
+                        <div class="detail-element" ng-class="{'selected' : $ctrl.isShowableColumn('AcEcart')}" ng-click="$ctrl.handleShowOrHideColumn('AcEcart')">
+                            <span class="detail-element-txt">Ecart</span>
+                            <div class="inner-triangle" ng-show="$ctrl.isShowableColumn('AcEcart')"></div>
+                        </div>
+
+                        <div class="detail-element borderless">
+                            <span class="detail-element-txt">Droit à dépense (DAD) cumulé</span>
+                        </div>
+                        <div class="detail-element" ng-class="{'selected' : $ctrl.isShowableColumn('DadMoisDernier')}" ng-click="$ctrl.handleShowOrHideColumn('DadMoisDernier')">
+                            <span class="detail-element-txt">{{$ctrl.previousMonthFront}}</span>
+                            <div class="inner-triangle" ng-show="$ctrl.isShowableColumn('DadMoisDernier')"></div>
+                        </div>
+                        <div class="detail-element" ng-class="{'selected' : $ctrl.isShowableColumn('DadMoisActuel')}" ng-click="$ctrl.handleShowOrHideColumn('DadMoisActuel')">
+                            <span class="detail-element-txt">{{$ctrl.currentMonthFront}}</span>
+                            <div class="inner-triangle" ng-show="$ctrl.isShowableColumn('DadMoisActuel')"></div>
+                        </div>
+                        <div class="detail-element" ng-class="{'selected' : $ctrl.isShowableColumn('DadEcart')}" ng-click="$ctrl.handleShowOrHideColumn('DadEcart')">
+                            <span class="detail-element-txt">Ecart</span>
+                            <div class="inner-triangle" ng-show="$ctrl.isShowableColumn('DadEcart')"></div>
+                        </div>
+
+                        <div class="detail-element borderless">
+                            <span class="detail-element-txt">Reste à dépenser (RAD)</span>
+                        </div>
+                        <div class="detail-element" ng-class="{'selected' : $ctrl.isShowableColumn('RadMontant')}" ng-click="$ctrl.handleShowOrHideColumn('RadMontant')">
+                            <span class="detail-element-txt">Montant</span>
+                            <div class="inner-triangle" ng-show="$ctrl.isShowableColumn('RadMontant')"></div>
+                        </div>
+                        <div class="detail-element" ng-class="{'selected' : $ctrl.isShowableColumn('RadPourcent')}" ng-click="$ctrl.handleShowOrHideColumn('RadPourcent')">
+                            <span class="detail-element-txt">%</span>
+                            <div class="inner-triangle" ng-show="$ctrl.isShowableColumn('RadPourcent')"></div>
+                        </div>
+                        <div class="detail-element" ng-class="{'selected' : $ctrl.isShowableColumn('RadQuantite')}" ng-click="$ctrl.handleShowOrHideColumn('RadQuantite')">
+                            <span class="detail-element-txt">Quantité</span>
+                            <div class="inner-triangle" ng-show="$ctrl.isShowableColumn('RadQuantite')"></div>
+                        </div>
+                    </div>
+
+                    <!-- Body : END -->
+                    <!--FOOTER TOOLBAR : BEGIN-->
+                    <div class="footer">
+                        <div class="buttons">
+                            <p>{{$ctrl.analyticalAxisMessage}}</p>
+                            <button class="btn btn-default"
+                                    ng-class="$ctrl.analyticalAxisMessage.length === 0 ? 'btn-default' : 'btn-link'"
+                                    type="submit"
+                                    ng-click="$ctrl.handleSaveConfigurationAvancement()"
+                                    ng-disabled="$ctrl.analyticalAxisMessage.length !== 0"
+                                    title="">
+                                Enregistrer
+                            </button>
+                            <button class="btn btn-link"
+                                    type="button"
+                                    ng-click="$ctrl.handleCancelConfigurationChangesAvancement()"
+                                    title="">
+                                Annuler
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!--FOOTER TOOLBAR : END-->
+                <div class="close_panel" ng-class="{'disabled': !($ctrl.analyticalAxisMessage.length === 0)}" ng-click="$ctrl.displayBanner = !$ctrl.displayBanner" title="">
+                    <i class="fa fa-angle-right"
+                       aria-hidden="true"></i>
+                    <span>Refermer le panneau</span>
+                </div>
+            </div>
+        </div>
+        <!-- Bandeau Axe d'analyse : FIN -->
+    </feature-flag>
+
+    <!--Tableau de l'avancement-->
+    <fred-flex-table class="flex-table fred-scroll" id="FLEX_TABLE" anchor-bottom="25">
+
+        <!--Premier en-tête-->
+        <div class="fixed-line-header mid-header">
+            <div class="col-1 fixed-col-header">
+                <span class="foldUnfold" ng-click="$ctrl.onToutPlier()">{{$ctrl.resources.Avancement_Plier}}</span>
+                <span class="foldUnfold" ng-click="$ctrl.onToutDeplier()">{{$ctrl.resources.Avancement_Deplier}}</span>
+            </div>
+            <div class="col-2 fixed-col-header"></div>
+            <div class="col-commentaire"></div>
+            <div class="col-unite"></div>
+            <div class="col-3"  style="min-width: {{$ctrl.enteteBudgetWidth}}px; width: {{$ctrl.enteteBudgetWidth}}px" ng-show="$ctrl.enteteBudgetWidth > 0">{{$ctrl.resources.Avancement_Budget}}</div>
+            <div class="sep0" ng-show="$ctrl.enteteBudgetWidth > 0"></div>
+            <div class="col-4" style="min-width: {{$ctrl.enteteAvancementCumuleWidth}}px; width: {{$ctrl.enteteAvancementCumuleWidth}}px" ng-show="$ctrl.enteteAvancementCumuleWidth > 0">{{$ctrl.resources.Avancement_Cumule}}</div>
+            <div class="sep1" ng-show="$ctrl.enteteAvancementCumuleWidth > 0"></div>
+            <div class="col-20" style="min-width: {{$ctrl.enteteDadCumuleWidth}}px; width: {{$ctrl.enteteDadCumuleWidth}}px" ng-show="$ctrl.enteteDadCumuleWidth > 0">{{$ctrl.resources.Avancement_DAD}}</div>
+            <div class="sep3" ng-show="$ctrl.enteteDadCumuleWidth > 0"></div>
+            <div class="col-21" style="min-width: {{$ctrl.enteteRadCumuleWidth}}px; width: {{$ctrl.enteteRadCumuleWidth}}px" ng-show="$ctrl.enteteRadCumuleWidth > 0">{{$ctrl.resources.Avancement_RAD}}</div>
+            <div class="sep4" ng-show="$ctrl.enteteRadCumuleWidth > 0"></div>
+            <div class="col-commentaire-avancement"></div>
+        </div>
+
+        <!--Second en-tête-->
+        <div class="fixed-line-header bottom-header">
+            <div class="col-1 fixed-col-header">{{$ctrl.resources.Avancement_Code}}</div>
+            <div class="col-2 fixed-col-header">{{$ctrl.resources.Libelle_lb}}</div>
+            <div class="col-commentaire">{{$ctrl.resources.Avancement_CommentaireBudget}}</div>
+            <div class="col-unite">{{$ctrl.resources.Unite_lb}}</div>
+            <div class="col-4" ng-show="$ctrl.isShowableColumn('BudgetQuantite')">{{$ctrl.resources.Quantite_lb}}</div>
+            <div class="col-3" ng-class="{'no-left-border' : $ctrl.enteteBudgetWidth <= 100}" ng-show="$ctrl.isShowableColumn('BudgetPU')">{{$ctrl.resources.PU_lb}}</div>
+            <div class="col-5" ng-class="{'no-left-border' : $ctrl.enteteBudgetWidth <= 100}" ng-show="$ctrl.isShowableColumn('BudgetMontant')">{{$ctrl.resources.Montant_lb}}</div>
+            <div class="sep0" ng-show="$ctrl.enteteBudgetWidth > 0"></div>
+            <div class="col-6"  ng-show="$ctrl.isShowableColumn('AcMoisDernier')">{{$ctrl.periodePrecedente}}</div>
+            <div class="col-7" ng-class="{'no-left-border' : $ctrl.enteteAvancementCumuleWidth <= 100}" ng-show="$ctrl.isShowableColumn('AcMoisActuel')">{{$ctrl.periodeCourante}}</div>
+            <div class="col-8" ng-class="{'no-left-border' : $ctrl.enteteAvancementCumuleWidth <= 100}" ng-show="$ctrl.isShowableColumn('AcEcart')">Ecart</div>
+            <div class="sep1" ng-show="$ctrl.enteteAvancementCumuleWidth > 0"></div>
+            <div class="col-24" ng-show="$ctrl.isShowableColumn('DadMoisDernier')">{{$ctrl.periodePrecedente}}</div>
+            <div class="col-25" ng-class="{'no-left-border' : $ctrl.enteteDadCumuleWidth <= 100}" ng-show="$ctrl.isShowableColumn('DadMoisActuel')">{{$ctrl.periodeCourante}}</div>
+            <div class="col-26" ng-class="{'no-left-border' : $ctrl.enteteDadCumuleWidth <= 100}" ng-show="$ctrl.isShowableColumn('DadEcart')">{{$ctrl.resources.Ecart_lb}}</div>
+            <div class="sep3" ng-show="$ctrl.enteteDadCumuleWidth > 0"></div>
+            <div class="col-27" ng-show="$ctrl.isShowableColumn('RadMontant')">{{$ctrl.resources.Montant_lb}}</div>
+            <div class="col-28" ng-class="{'no-left-border' : $ctrl.enteteRadCumuleWidth <= 100}" ng-show="$ctrl.isShowableColumn('RadPourcent')">%</div>
+            <div class="col-29" ng-class="{'no-left-border' : $ctrl.enteteRadCumuleWidth <= 100}" ng-show="$ctrl.isShowableColumn('RadQuantite')">{{$ctrl.resources.Quantite_lb}}</div>
+            <div class="sep4" ng-show="$ctrl.enteteRadCumuleWidth > 0"></div>
+            <div class="col-commentaire-avancement">{{$ctrl.resources.Commentaire_lb}}</div>
+        </div>
+
+        <!--Total en-tête-->
+        <div class="fixed-line-header bottom-header" ng-show="$ctrl.Budget && !$ctrl.Budget.Erreur">
+            <div class="col-1 fixed-col-header"></div>
+            <div class="col-2 fixed-col-header"></div>
+            <div class="col-commentaire"></div>
+            <div class="col-unite"></div>
+            <div class="col-4" ng-show="$ctrl.isShowableColumn('BudgetQuantite')"></div>
+            <div class="col-3" ng-show="$ctrl.isShowableColumn('BudgetPU')"></div>
+            <div class="col-5" title="{{$ctrl.TotalMontant}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('BudgetMontant')">{{$ctrl.TotalMontant | number:2}} {{$ctrl.symboleDevise}}</div>
+            <div class="sep0" ng-show="$ctrl.enteteBudgetWidth > 0"></div>
+            <div class="col-6" title="{{$ctrl.TotalAvancementPourcentPrevious}} %" ng-show="$ctrl.isShowableColumn('AcMoisDernier')">{{$ctrl.TotalAvancementPourcentPrevious | number:2}} %</div>
+            <div class="col-7" title="{{$ctrl.TotalAvancementPourcent}} %" ng-show="$ctrl.isShowableColumn('AcMoisActuel')">{{$ctrl.TotalAvancementPourcent | number:2}} %</div>
+            <div class="col-8" title="{{$ctrl.TotalEcartAvancement}} %" ng-show="$ctrl.isShowableColumn('AcEcart')">{{$ctrl.TotalEcartAvancement | number:2}} %</div>
+            <div class="sep1" ng-show="$ctrl.enteteAvancementCumuleWidth > 0"></div>
+            <div class="col-24" title="{{$ctrl.TotalDADPrevious}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('DadMoisDernier')">{{$ctrl.TotalDADPrevious | number:2}} {{$ctrl.symboleDevise}}</div>
+            <div class="col-25" title="{{$ctrl.TotalDAD}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('DadMoisActuel')">{{$ctrl.TotalDAD | number:2}} {{$ctrl.symboleDevise}}</div>
+            <div class="col-26" title="{{$ctrl.TotalEcartDAD}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('DadEcart')">{{$ctrl.TotalEcartDAD | number:2}} {{$ctrl.symboleDevise}}</div>
+            <div class="sep3" ng-show="$ctrl.enteteDadCumuleWidth > 0"></div>
+            <div class="col-27" title="{{$ctrl.TotalRAD}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('RadMontant')">{{$ctrl.TotalRAD | number:2}} {{$ctrl.symboleDevise}}</div>
+            <div class="col-28" title="{{$ctrl.TotalPourcentageRAD}} %" ng-show="$ctrl.isShowableColumn('RadPourcent')">{{$ctrl.TotalPourcentageRAD | number:2}} %</div>
+            <div class="col-29" title="{{$ctrl.TotalQuantiteRAD}}" ng-show="$ctrl.isShowableColumn('RadQuantite')">{{$ctrl.TotalQuantiteRAD | number:2}}</div>
+            <div class="sep4" ng-show="$ctrl.enteteRadCumuleWidth > 0"></div>
+            <div class="col-commentaire-avancement"></div>
+        </div>
+
+        <!--Liste niveau 1-->
+        <div ng-repeat="tache1 in $ctrl.Budget.TachesNiveau1 | filterTaches : $ctrl.filters.searchTache : 1 | orderBy: '+Code'">
+            <div class="flex-line level-1" ng-class="{'hidden' : $ctrl.showAnalyticalAxis('T1')}">
+                <div ng-click="$ctrl.onClickHideOrShowChildren(tache1)" class="col-1 fixed-col-header" data-toggle="collapse" aria-expanded="false" data-target="#T1_{{tache1.TacheId}}">
+                    <div class="chevron"></div>
+                    <span class="icon-T1"></span>
+                    {{tache1.Code}}
+                </div>
+                <div class="col-2 fixed-col-header">{{tache1.Libelle}}</div>
+                <div class="col-commentaire"></div>
+                <div class="col-unite"></div>
+                <div class="col-3" ng-show="$ctrl.isShowableColumn('BudgetQuantite')"></div>
+                <div class="col-4" ng-show="$ctrl.isShowableColumn('BudgetPU')"></div>
+                <div class="col-5" title="{{tache1.Montant}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('BudgetMontant')">{{tache1.Montant | number:2}} {{$ctrl.symboleDevise}}</div>
+                <div class="sep0" ng-show="$ctrl.enteteBudgetWidth > 0"></div>
+                <div class="col-6" title="{{tache1.AvancementPourcentPrevious}} %" ng-show="$ctrl.isShowableColumn('AcMoisDernier')">{{tache1.AvancementPourcentPrevious | number:2}} %</div>
+                <div class="col-7" ng-show="$ctrl.isShowableColumn('AcMoisActuel')">
+                    <input class="form-control"
+                           type="text"
+                           fred-input-number="2"
+                           min="0"
+                           max="100"
+                           ng-model="tache1.AvancementPourcent"
+                           ng-model-options="{updateOn: 'blur'}"
+                           ng-class="{'value-modified' : tache1.IsTacheModified, 'cell-edited' : tache1.EditedColumn === $ctrl.EditedColumnEnum.Avancement}"
+                           ng-change="$ctrl.ChangeAvancementTache(tache1)"
+                           ng-disabled="$ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache1.Disabled"> %
+                </div>
+                <div class="col-8" ng-show="$ctrl.isShowableColumn('AcEcart')">
+                    <input class="form-control"
+                           type="text"
+                           fred-input-number="2"
+                           ng-model="tache1.EcartAvancement"
+                           ng-model-options="{updateOn: 'blur'}"
+                           ng-class="{'value-modified' : tache1.IsTacheModified, 'cell-edited' : tache1.EditedColumn === $ctrl.EditedColumnEnum.Ecart}"
+                           ng-change="$ctrl.ChangeEcartTache(tache1)"
+                           ng-disabled="$ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache1.Disabled || !$ctrl.Budget.IsBudgetAvancementEcart"> %
+                </div>
+                <div class="sep1" ng-show="$ctrl.enteteAvancementCumuleWidth > 0"></div>
+                <div class="col-24" title="{{tache1.DADPrevious}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('DadMoisDernier')">{{tache1.DADPrevious | number:2}} {{$ctrl.symboleDevise}}</div>
+                <div class="col-25" title="{{tache1.DAD}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('DadMoisActuel')">{{tache1.DAD | number:2}} {{$ctrl.symboleDevise}}</div>
+                <div class="col-26" title="{{$ctrl.EcartDAD(tache1)}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('DadEcart')">{{$ctrl.EcartDAD(tache1) | number:2}} {{$ctrl.symboleDevise}}</div>
+                <div class="sep3" ng-show="$ctrl.enteteDadCumuleWidth > 0"></div>
+                <div class="col-27" title="{{tache1.RAD}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('RadMontant')">{{tache1.RAD | number:2}} {{$ctrl.symboleDevise}}</div>
+                <div class="col-28" title="{{$ctrl.CalculPourcentageRAD(tache1)}} %" ng-show="$ctrl.isShowableColumn('RadPourcent')">{{$ctrl.CalculPourcentageRAD(tache1) | number:2}} %</div>
+                <div class="col-29" title="{{$ctrl.CalculQuantiteRAD(tache1)}}" ng-show="$ctrl.isShowableColumn('RadQuantite')">{{$ctrl.CalculQuantiteRAD(tache1) | number:2}}</div>
+                <div class="sep4" ng-show="$ctrl.enteteRadCumuleWidth > 0"></div>
+                <div class="col-commentaire-avancement">
+                    <input type="text"
+                           class="form-control ng-pristine ng-valid ng-empty ng-valid-maxlength ng-touched"
+                           maxlength="200"
+                           ng-model="tache1.CommentaireAvancement"
+                           ng-attr-title="{{tache1.CommentaireAvancement}}"
+                           ng-disabled="$ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache1.Disabled">
+                    <span class="material-icons"
+                          ng-if="!($ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache1.Disabled)"
+                          ng-click="$ctrl.ShowComment(tache1)"
+                          title="{{::$ctrl.resources.Budget_Detail_Tooltip_ModifierCommentaire}}">more_vert</span>
+                    <span class="material-icons disabled"
+                          ng-if="$ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache1.Disabled">more_vert</span>
+                </div>
+            </div>
+
+            <!--Liste niveau 2-->
+            <div class="collapse in" id="T1_{{tache1.TacheId}}">
+                <div ng-repeat="tache2 in tache1.TachesNiveau2 | filterTaches : $ctrl.filters.searchTache : 2 | orderBy: '+Code'">
+                    <div class="flex-line level-2" ng-class="{'hidden' : $ctrl.showAnalyticalAxis('T2')}">
+                        <div ng-click="$ctrl.onClickHideOrShowChildren(tache2)" class="col-1 fixed-col-header" data-toggle="collapse" aria-expanded="false" data-target="#T2_{{tache2.TacheId}}">
+                            <div class="chevron"></div>
+                            <span class="icon-T2"></span>
+                            {{tache2.Code}}
+                        </div>
+                        <div class="col-2 fixed-col-header">
+                            {{tache2.Libelle}}
+                        </div>
+                        <div class="col-commentaire"></div>
+                        <div class="col-unite"></div>
+                        <div class="col-3" ng-show="$ctrl.isShowableColumn('BudgetQuantite')"></div>
+                        <div class="col-4" ng-show="$ctrl.isShowableColumn('BudgetPU')"></div>
+                        <div class="col-5" title="{{tache2.Montant}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('BudgetMontant')">{{tache2.Montant | number:2}} {{$ctrl.symboleDevise}}</div>
+                        <div class="sep0" ng-show="$ctrl.enteteBudgetWidth > 0"></div>
+                        <div class="col-6" title="{{tache2.AvancementPourcentPrevious}} %" ng-show="$ctrl.isShowableColumn('AcMoisDernier')">{{tache2.AvancementPourcentPrevious | number:2}} %</div>
+                        <div class="col-7" ng-show="$ctrl.isShowableColumn('AcMoisActuel')">
+                            <input class="form-control"
+                                   type="text"
+                                   fred-input-number="2"
+                                   min="0"
+                                   max="100"
+                                   ng-model="tache2.AvancementPourcent"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   ng-class="{'value-modified' : tache2.IsTacheModified, 'cell-edited' : tache2.EditedColumn === $ctrl.EditedColumnEnum.Avancement}"
+                                   ng-change="$ctrl.ChangeAvancementTache(tache1, tache2)"
+                                   ng-disabled="$ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache2.Disabled"> %
+                        </div>
+                        <div class="col-8" ng-show="$ctrl.isShowableColumn('AcEcart')">
+                            <input class="form-control"
+                                   type="text"
+                                   fred-input-number="2"
+                                   ng-model="tache2.EcartAvancement"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   ng-class="{'value-modified' : tache2.IsTacheModified, 'cell-edited' : tache2.EditedColumn === $ctrl.EditedColumnEnum.Ecart}"
+                                   ng-change="$ctrl.ChangeEcartTache(tache1, tache2)"
+                                   ng-disabled="$ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache2.Disabled || !$ctrl.Budget.IsBudgetAvancementEcart"> %
+                        </div>
+                        <div class="sep1" ng-show="$ctrl.enteteAvancementCumuleWidth > 0"></div>
+                        <div class="col-24" title="{{tache2.DADPrevious}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('DadMoisDernier')">{{tache2.DADPrevious | number:2}} {{$ctrl.symboleDevise}}</div>
+                        <div class="col-25" title="{{tache2.DAD}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('DadMoisActuel')">{{tache2.DAD | number:2}} {{$ctrl.symboleDevise}}</div>
+                        <div class="col-26" title="{{$ctrl.EcartDAD(tache2)}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('DadEcart')">{{$ctrl.EcartDAD(tache2) | number:2}} {{$ctrl.symboleDevise}}</div>
+                        <div class="sep3" ng-show="$ctrl.enteteDadCumuleWidth > 0"></div>
+                        <div class="col-27" title="{{tache2.RAD}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('RadMontant')">{{tache2.RAD | number:2}} {{$ctrl.symboleDevise}}</div>
+                        <div class="col-28" title="{{$ctrl.CalculPourcentageRAD(tache2)}} %" ng-show="$ctrl.isShowableColumn('RadPourcent')">{{$ctrl.CalculPourcentageRAD(tache2) | number:2}} %</div>
+                        <div class="col-29" title="{{$ctrl.CalculQuantiteRAD(tache2)}}" ng-show="$ctrl.isShowableColumn('RadQuantite')">{{$ctrl.CalculQuantiteRAD(tache2) | number:2}}</div>
+                        <div class="sep4" ng-show="$ctrl.enteteRadCumuleWidth > 0"></div>
+                        <div class="col-commentaire-avancement">
+                            <input class="form-control"
+                                   type="text"
+                                   maxlength="200"
+                                   ng-model="tache2.CommentaireAvancement"
+                                   ng-attr-title="{{tache2.CommentaireAvancement}}"
+                                   ng-disabled="$ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache2.Disabled">
+                            <span class="material-icons"
+                                  ng-if="!($ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache2.Disabled)"
+                                  ng-click="$ctrl.ShowComment(tache1, tache2)"
+                                  title="{{::$ctrl.resources.Budget_Detail_Tooltip_ModifierCommentaire}}">more_vert</span>
+                            <span class="material-icons disabled"
+                                  ng-if="$ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache2.Disabled">more_vert</span>
+                        </div>
+                    </div>
+
+                    <!--Liste niveau 3-->
+                    <div class="collapse in" id="T2_{{tache2.TacheId}}">
+                        <div ng-repeat="tache3 in tache2.TachesNiveau3 | filterTaches : $ctrl.filters.searchTache : 3 | orderBy: '+Code'">
+                            <div class="flex-line level-3" ng-class="{'hidden' : $ctrl.showAnalyticalAxis('T3')}">
+                                <div ng-click="$ctrl.onClickHideOrShowChildren(tache3)" class="col-1 fixed-col-header" data-toggle="collapse" aria-expanded="false" data-target="#T3_{{tache3.TacheId}}">
+                                    <div class="chevron"></div>
+                                    <span class="icon-T3"></span>
+                                    {{tache3.Code}}
+                                </div>
+                                <div class="col-2 fixed-col-header">{{tache3.Libelle}}</div>
+                                <div class="col-commentaire"></div>
+                                <div class="col-unite"></div>
+                                <div class="col-3" ng-show="$ctrl.isShowableColumn('BudgetQuantite')"></div>
+                                <div class="col-4" ng-show="$ctrl.isShowableColumn('BudgetPU')"></div>
+                                <div class="col-5" title="{{tache3.Montant}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('BudgetMontant')">{{tache3.Montant | number:2}} {{$ctrl.symboleDevise}}</div>
+                                <div class="sep0" ng-show="$ctrl.enteteBudgetWidth > 0"></div>
+                                <div class="col-6" title="{{tache3.AvancementPourcentPrevious}} %" ng-show="$ctrl.isShowableColumn('AcMoisDernier')">{{tache3.AvancementPourcentPrevious | number:2}} %</div>
+                                <div class="col-7" ng-show="$ctrl.isShowableColumn('AcMoisActuel')">
+                                    <input class="form-control"
+                                           type="text"
+                                           fred-input-number="2"
+                                           min="0"
+                                           max="100"
+                                           ng-model="tache3.AvancementPourcent"
+                                           ng-model-options="{updateOn: 'blur'}"
+                                           ng-class="{'value-modified' : tache3.IsTacheModified, 'cell-edited' : tache3.EditedColumn === $ctrl.EditedColumnEnum.Avancement}"
+                                           ng-change="$ctrl.ChangeAvancementTache(tache1, tache2, tache3)"
+                                           ng-disabled="$ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache3.Disabled"> %
+                                </div>
+                                <div class="col-8" ng-show="$ctrl.isShowableColumn('AcEcart')">
+                                    <input class="form-control"
+                                           type="text"
+                                           fred-input-number="2"
+                                           ng-model="tache3.EcartAvancement"
+                                           ng-model-options="{updateOn: 'blur'}"
+                                           ng-class="{'value-modified' : tache3.IsTacheModified, 'cell-edited' : tache3.EditedColumn === $ctrl.EditedColumnEnum.Ecart}"
+                                           ng-change="$ctrl.ChangeEcartTache(tache1, tache2, tache3)"
+                                           ng-disabled="$ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache3.Disabled || !$ctrl.Budget.IsBudgetAvancementEcart"> %
+                                </div>
+                                <div class="sep1" ng-show="$ctrl.enteteAvancementCumuleWidth > 0"></div>
+                                <div class="col-24" title="{{tache3.DADPrevious}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('DadMoisDernier')">{{tache3.DADPrevious | number:2}} {{$ctrl.symboleDevise}}</div>
+                                <div class="col-25" title="{{tache3.DAD}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('DadMoisActuel')">{{tache3.DAD | number:2}} {{$ctrl.symboleDevise}}</div>
+                                <div class="col-26" title="{{$ctrl.EcartDAD(tache3)}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('DadEcart')">{{$ctrl.EcartDAD(tache3) | number:2}} {{$ctrl.symboleDevise}}</div>
+                                <div class="sep3" ng-show="$ctrl.enteteDadCumuleWidth > 0"></div>
+                                <div class="col-27" title="{{tache3.RAD}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('RadMontant')">{{tache3.RAD | number:2}} {{$ctrl.symboleDevise}}</div>
+                                <div class="col-28" title="{{$ctrl.CalculPourcentageRAD(tache3)}} %" ng-show="$ctrl.isShowableColumn('RadPourcent')">{{$ctrl.CalculPourcentageRAD(tache3) | number:2}} %</div>
+                                <div class="col-29" title="{{$ctrl.CalculQuantiteRAD(tache3)}}" ng-show="$ctrl.isShowableColumn('RadQuantite')">{{$ctrl.CalculQuantiteRAD(tache3) | number:2}}</div>
+                                <div class="sep4" ng-show="$ctrl.enteteRadCumuleWidth > 0"></div>
+                                <div class="col-commentaire-avancement">
+                                    <input class="form-control"
+                                           type="text"
+                                           maxlength="200"
+                                           ng-model="tache3.CommentaireAvancement"
+                                           ng-attr-title="{{tache3.CommentaireAvancement}}"
+                                           ng-disabled="$ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache3.Disabled">
+                                    <span class="material-icons"
+                                          ng-if="!($ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache3.Disabled)"
+                                          ng-click="$ctrl.ShowComment(tache1, tache2, tache3)"
+                                          title="{{::$ctrl.resources.Budget_Detail_Tooltip_ModifierCommentaire}}">more_vert</span>
+                                    <span class="material-icons disabled"
+                                          ng-if="($ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache3.Disabled)">more_vert</span>
+                                </div>
+                            </div>
+
+                            <!--Liste niveau 4-->
+                            <div class="collapse in" id="T3_{{tache3.TacheId}}">
+                                <div ng-repeat="tache4 in tache3.TachesNiveau4 | filterTaches : $ctrl.filters.searchTache : 4 | orderBy: '+Code'">
+                                    <div class="flex-line level-4" ng-class="{'hidden' : $ctrl.showAnalyticalAxis('T4')}">
+                                        <div class="col-1 fixed-col-header">
+                                            <span class="icon-T4"></span>
+                                            {{tache4.Code}}
+                                        </div>
+                                        <div class="col-2 fixed-col-header">{{tache4.Libelle}}</div>
+                                        <div class="col-commentaire">
+                                            <span class="flaticon flaticon-info"
+                                                  ng-if="tache4.Commentaire && tache4.Commentaire != ''"
+                                                  title="{{tache4.Commentaire}}">
+                                            </span>
+                                        </div>
+                                        <div class="col-unite">{{tache4.UniteLibelle}}</div>
+                                        <div class="col-4" ng-show="$ctrl.isShowableColumn('BudgetQuantite')">{{tache4.Quantite | number:2}}</div>
+                                        <div class="col-3" title="{{tache4.PU}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('BudgetPU')">{{tache4.PU | number:2}} {{$ctrl.symboleDevise}}</div>
+                                        <div class="col-5" title="{{tache4.Montant}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('BudgetMontant')">{{tache4.Montant | number:2}} {{$ctrl.symboleDevise}}</div>
+                                        <div class="sep0" ng-show="$ctrl.enteteBudgetWidth > 0"></div>
+                                        <div class="col-6" title="{{$ctrl.GetAvancementPrevious(tache4)}} {{$ctrl.GetUniteAvancementPrevious(tache4)}}" ng-show="$ctrl.isShowableColumn('AcMoisDernier')">{{$ctrl.GetAvancementPrevious(tache4) | number:2}} {{$ctrl.GetUniteAvancementPrevious(tache4)}}</div>
+                                        <div class="col-7" ng-show="$ctrl.isShowableColumn('AcMoisActuel')">
+                                            <input class="form-control"
+                                                   type="text"
+                                                   min="0"
+                                                   ng-pattern="/^\d+([.,]\d+)?%?$/"
+                                                   ng-model="tache4.ValeurAvancement"
+                                                   ng-model-options="{updateOn: 'blur'}"
+                                                   ng-class="{'value-modified' : tache4.IsTacheModified, 'cell-edited' : tache4.EditedColumn === $ctrl.EditedColumnEnum.Avancement}"
+                                                   ng-change="$ctrl.ChangeAvancementTache(tache1, tache2, tache3, tache4)"
+                                                   ng-disabled="$ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache4.Readonly">
+                                            {{$ctrl.GetUniteAvancement(tache4)}}
+                                        </div>
+                                        <div class="col-8" ng-show="$ctrl.isShowableColumn('AcEcart')">
+                                            <input class="form-control"
+                                                   type="text"
+                                                   fred-input-number="2"
+                                                   ng-model="tache4.EcartAvancement"
+                                                   ng-model-options="{updateOn: 'blur'}"
+                                                   ng-class="{'value-modified' : tache4.IsTacheModified, 'cell-edited' : tache4.EditedColumn === $ctrl.EditedColumnEnum.Ecart}"
+                                                   ng-change="$ctrl.ChangeEcartTache(tache1, tache2, tache3, tache4)"
+                                                   ng-disabled="$ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache4.Readonly || !$ctrl.Budget.IsBudgetAvancementEcart">
+                                            {{$ctrl.GetUniteAvancement(tache4)}}
+                                        </div>
+                                        <div class="sep1" ng-show="$ctrl.enteteAvancementCumuleWidth > 0"></div>
+                                        <div class="col-24" title="{{tache4.DADPrevious}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('DadMoisDernier')">{{tache4.DADPrevious | number:2}} {{$ctrl.symboleDevise}}</div>
+                                        <div class="col-25" title="{{tache4.DAD}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('DadMoisActuel')">{{tache4.DAD | number:2}} {{$ctrl.symboleDevise}}</div>
+                                        <div class="col-26" title="{{$ctrl.EcartDAD(tache4)}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('DadEcart')">{{$ctrl.EcartDAD(tache4) | number:2}} {{$ctrl.symboleDevise}}</div>
+                                        <div class="sep3" ng-show="$ctrl.enteteDadCumuleWidth > 0"></div>
+                                        <div class="col-27" title="{{tache4.RAD}} {{$ctrl.symboleDevise}}" ng-show="$ctrl.isShowableColumn('RadMontant')">{{tache4.RAD | number:2}} {{$ctrl.symboleDevise}}</div>
+                                        <div class="col-28" title="{{$ctrl.CalculPourcentageRAD(tache4)}} %" ng-show="$ctrl.isShowableColumn('RadPourcent')">{{$ctrl.CalculPourcentageRAD(tache4) | number:2}} %</div>
+                                        <div class="col-29" title="{{$ctrl.CalculQuantiteRAD(tache4)}}" ng-show="$ctrl.isShowableColumn('RadQuantite')">{{$ctrl.CalculQuantiteRAD(tache4) | number:2}}</div>
+                                        <div class="sep4" ng-show="$ctrl.enteteRadCumuleWidth > 0"></div>
+                                        <div class="col-commentaire-avancement">
+                                            <input class="form-control"
+                                                   type="text"
+                                                   maxlength="200"
+                                                   ng-model="tache4.CommentaireAvancement"
+                                                   ng-attr-title="{{tache4.CommentaireAvancement}}"
+                                                   ng-disabled="$ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache4.Readonly">
+                                            <span class="material-icons"
+                                                  ng-if="!($ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache4.Readonly)"
+                                                  ng-click="$ctrl.ShowComment(tache1, tache2, tache3, tache4)"
+                                                  title="{{::$ctrl.resources.Budget_Detail_Tooltip_ModifierCommentaire}}">more_vert</span>
+                                            <span class="material-icons"
+                                                  ng-if="$ctrl.Budget.CodeEtatAvancement != $ctrl.CodeEtatAvancement.Enregistre || tache4.Readonly">more_vert</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row information" ng-show="!$ctrl.filters.ci">
+            <div class="col-md-4 icon">
+                <i class="flaticon flaticon-warning"></i>
+            </div>
+            <div class="col-md-8 message">
+                <h3>{{$ctrl.resources.Avancement_Message_Information}}</h3>
+            </div>
+        </div>
+    </fred-flex-table>
+
+    <!--Panneau de gestion des commentaires-->
+    <budget-commentaire-panel-component readonly="$ctrl.Readonly"
+                                        resources="$ctrl.resources">
+    </budget-commentaire-panel-component>
+</div>

@@ -1,0 +1,10 @@
+﻿IF OBJECT_ID('FRED_Get_Sous_Chapitre', 'V') IS NOT NULL
+    DROP VIEW FRED_Get_Sous_Chapitre
+GO
+
+CREATE VIEW FRED_Get_Sous_Chapitre
+	AS 
+		SELECT	FRED_SOUS_CHAPITRE.*, FRED_CHAPITRe.GroupeId
+		FROM	FRED_CHAPITRE INNER JOIN
+                FRED_SOUS_CHAPITRE ON FRED_CHAPITRE.ChapitreId = FRED_SOUS_CHAPITRE.ChapitreId 
+                

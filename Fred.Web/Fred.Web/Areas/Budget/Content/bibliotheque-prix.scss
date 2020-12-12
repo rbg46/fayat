@@ -1,0 +1,552 @@
+﻿$color_1: white;
+$color_2: #fff;
+$color_3: rgb(240,240,240);
+$color_4: rgb(195,195,195);
+$color_5: #67757F;
+$color_6: rgb(9,173,166);
+$color_7: rgb(239,51,8);
+$font_family_1: 'Material Icons';
+$background_color_1: rgb(9,173,166);
+$background_color_2: rgb(255,0,102);
+$background_color_3: rgb(255,216,0);
+$background_color_4: rgb(250,250,250);
+$background_color_5: transparent;
+$background_color_6: rgb(238,238,238);
+$background_color_7: #feb3aa;
+
+
+.chev.material-icons {
+    display: inline-block;
+    line-height: 0.7;
+    background-color: $background_color_1;
+    height: 29px;
+    width: 30px;
+    text-align: center;
+    color: $color_1;
+    font-size: 25px;
+    right: 0;
+    top: 0;
+    padding-top: 6px;
+}
+
+fred-toolbar {
+    flex-flow: row wrap;
+    justify-content: flex-start;
+
+    .form-control {
+        height: 30px;
+    }
+
+    .inner-addon.right-addon {
+        width: 100%;
+
+        input {
+            cursor: pointer;
+        }
+    }
+
+    .input-group {
+        width: 100%;
+    }
+
+    .input-group-btn {
+        border: 1px solid #BBBBBB;
+        border-left: none;
+        width: 30px;
+    }
+
+    .chev.material-icons {
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .organisation-section {
+        width: 35%;
+    }
+
+    .devise-section {
+        margin-left: 1%;
+
+        .devise {
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            text-align: center;
+            margin-top: 0;
+            margin-left: 3px;
+            margin-right: 3px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .devise-active {
+            background-color: $background_color_1;
+            color: $color_3;
+            border: 1px, groove, rgb(210,210,210);
+            cursor: default;
+        }
+
+        .devise-inactive {
+            background-color: $background_color_4 !important;
+            color: $color_4 !important;
+            border: 1px, groove, rgb(210,210,210) !important;
+            cursor: pointer;
+        }
+    }
+
+    .validation-section {
+        margin-left: 1%;
+    }
+
+    .actions-section {
+        margin-left: 1%;
+    }
+}
+
+fred-button.add-to-favorite {
+    background-color: $background_color_2;
+    color: $color_2;
+}
+
+fred-button.copy-values {
+    background-color: $background_color_3;
+    color: $color_2;
+}
+
+.information {
+    padding-top: 45px;
+
+    .icon {
+        text-align: right;
+
+        I {
+            font-size: 60px;
+            font-style: normal;
+            text-align: right;
+        }
+    }
+}
+
+.subentete {
+    font-weight: 500;
+    text-align: center;
+    color: $color_1;
+
+    .col-chapitre {
+        border-left: 5px solid white;
+        background: white;
+    }
+
+    .col-sep {
+        background: white;
+    }
+
+    .col-organisation {
+        padding-top: 7px;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .col-organisation.orange {
+        background: rgb(254,187,95);
+    }
+
+    .col-organisation.pink {
+        background: rgb(255,0,102);
+    }
+}
+
+.entete {
+    color: $color_1;
+
+    .col-chapitre {
+        border-left: 5px solid rgb(0,85,160);
+        background: rgb(0,85,160);
+    }
+
+    .col-sep {
+        background: rgb(0,85,160);
+    }
+
+    .col-organisation {
+        padding-top: 7px;
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+
+        .composante-first {
+            width: 120px;
+        }
+
+        .composante-next {
+            width: 104px;
+        }
+    }
+
+    .col-organisation.orange {
+        background: rgb(254,187,95);
+    }
+
+    .col-organisation.pink {
+        background: rgb(255,0,102);
+    }
+}
+
+.level-1 {
+    cursor: pointer;
+
+    .col-chapitre {
+        border-top: 1px solid rgb(221, 221, 221);
+        background: rgb(230,230,230);
+        padding-left: 5px;
+        border-left: 5px solid rgb(255,216,0);
+    }
+
+    .col-organisation-block {
+        border-top: 1px solid rgb(221, 221, 221);
+    }
+
+    .col-sep {
+        background: rgb(230,230,230);
+    }
+
+    .col-organisation {
+        justify-content: flex-start;
+        padding-left: 0;
+
+        .col-composantes {
+            padding-left: 5px;
+        }
+
+        .col-composante {
+            input {
+                background-color: $background_color_5 !important;
+            }
+        }
+    }
+
+    .col-organisation.orange {
+        background: rgb(254,211,148);
+    }
+
+    .col-organisation.pink {
+        background: rgb(255,202,223);
+    }
+}
+
+.level-2 {
+    cursor: pointer;
+
+    .col-chapitre {
+        border-top: 1px solid rgb(221, 221, 221);
+        background: rgb(242,242,242);
+        padding-left: 20px;
+        border-left: 5px solid rgb(255,234,113);
+    }
+
+    .col-organisation-block {
+        border-top: 1px solid rgb(221, 221, 221);
+    }
+
+    .col-sep {
+        background: rgb(242,242,242);
+    }
+
+    .col-organisation {
+        justify-content: flex-start;
+        padding-left: 0;
+
+        .col-composantes {
+            padding-left: 15px;
+        }
+
+        .col-composante {
+            input {
+                background-color: $background_color_5 !important;
+            }
+        }
+    }
+
+    .col-organisation.orange {
+        background: rgb(254,215,156);
+    }
+
+    .col-organisation.pink {
+        background: rgb(255,206,225);
+    }
+}
+
+.level-3 {
+    .col-chapitre {
+        border-top: 1px solid rgb(221, 221, 221);
+        background: rgb(253,253,253);
+        padding-left: 55px;
+        border-left: 5px solid rgb(255,244,187);
+    }
+
+    .col-organisation-block {
+        border-top: 1px solid rgb(221, 221, 221);
+    }
+
+    .col-sep {
+        background: rgb(253,253,253);
+    }
+
+    .col-organisation {
+        display: flex;
+        flex-direction: row;
+
+        .col-composantes {
+            padding-left: 25px;
+        }
+    }
+
+    .col-organisation.orange {
+        background: rgb(254,219,164);
+    }
+
+    .col-organisation.pink {
+        background: rgb(255,213,230);
+    }
+}
+
+.col-chapitre {
+    min-width: 462px;
+    flex: 1 1 auto;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    padding-left: 2px;
+}
+
+.col-organisations {
+    display: flex;
+    flex-direction: row;
+    height: 35px;
+}
+
+.col-organisation-block {
+    display: flex;
+    flex-direction: row;
+    height: 35px;
+}
+
+.col-organisation {
+    justify-content: flex-start;
+    padding-left: 0;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    padding-left: 2px;
+}
+
+.col-organisation.editable {
+    width: 360px;
+}
+
+.col-organisation.readonly {
+    width: 236px;
+}
+
+.col-sep {
+    width: 30px;
+}
+
+.col-composantes {
+    height: 35px;
+    width: 260px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.col-actions {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.col-icon {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.col-composante {
+    width: 104px;
+    margin-right: 5px;
+}
+
+.composante-readonly {
+    font-size: 9px !important;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.composante-readonly.sub-cln-prix {
+    font-weight: 600;
+    min-width: 100%;
+    display: block;
+}
+
+.composante-readonly.sub-cln-chauffeur {
+    min-width: 100%;
+    padding-left: 10px;
+    margin-left: 5px;
+    background-image: url('/medias/images/ico/chauffeur_mini.png');
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.composante-readonly.sub-cln-conduite {
+    min-width: 100%;
+    padding-left: 10px;
+    margin-left: 5px;
+    background-image: url('/medias/images/ico/conducteur_mini.png');
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.col-composante.unite {
+    display: flex;
+    flex-direction: row;
+
+    .form-control {
+        width: 70%;
+    }
+
+    input.unite-editable {
+        cursor: pointer;
+    }
+
+    i {
+        cursor: pointer;
+    }
+
+    input.unite-readonly {
+        cursor: not-allowed;
+        background-color: $background_color_6;
+    }
+}
+
+.col-composante.prix {
+    input {
+        text-align: right;
+    }
+}
+
+.chevron {
+    &:before {
+        color: $color_5;
+        clear: both;
+        content: 'keyboard_arrow_down';
+        font-family: $font_family_1;
+    }
+
+    line-height: 15px;
+    padding-left: 3px;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+.collapsed {
+    .chevron {
+        &:before {
+            color: $color_5;
+            content: 'keyboard_arrow_right';
+            font-family: $font_family_1;
+        }
+    }
+}
+
+.chevron-collapsed {
+    color: $color_5;
+    content: 'keyboard_arrow_right';
+    font-family: $font_family_1;
+    line-height: 15px;
+    padding-left: 3px;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+.icon-R1 {
+    height: 25px;
+    width: 25px;
+    display: block;
+    background-repeat: no-repeat;
+    background-image: url('/medias/images/ico/R2.png');
+    background-position: center;
+}
+
+.icon-R2 {
+    height: 25px;
+    width: 25px;
+    display: block;
+    background-repeat: no-repeat;
+    background-image: url('/medias/images/ico/R1.png');
+    background-position: center;
+}
+
+.icon-R3 {
+    height: 25px;
+    width: 25px;
+    display: block;
+    background-repeat: no-repeat;
+    background-image: url('/medias/images/ico/R3.png');
+    background-position: center;
+}
+
+.icon-R3MO {
+    height: 25px;
+    width: 25px;
+    display: block;
+    background-repeat: no-repeat;
+}
+
+.icon-R3MA {
+    height: 25px;
+    width: 25px;
+    display: block;
+    background-repeat: no-repeat;
+}
+
+.info-icon {
+    color: $color_6;
+    cursor: default;
+}
+
+.warning-icon {
+    color: $color_7;
+    cursor: default;
+}
+
+.clickable-icon {
+    cursor: pointer;
+}
+
+.bibliotheque-prix-copier-valeurs-dialog {
+    .lookup-ci {
+        padding: 20px;
+    }
+}
+
+.col-organisation.erreur {
+    background-color: $background_color_7 !important;
+}
+
+.modal.rec-dup-budg {
+    .modal-dialog {
+        top: 10%;
+
+        .modal-body {
+            .prop-list {
+                max-height: 250px;
+                overflow-y: auto;
+            }
+        }
+    }
+}

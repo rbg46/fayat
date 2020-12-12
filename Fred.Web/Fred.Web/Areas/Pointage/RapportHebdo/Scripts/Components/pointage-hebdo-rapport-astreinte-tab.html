@@ -1,0 +1,500 @@
+﻿<div ng-repeat="node in $ctrl.data | filter:{IsAbsence:false} track by $index">
+
+    <div class="flex-line level-1 as" data-toggle="collapse" aria-expanded="false" data-target="#LAS1-{{$index}}">
+        <div class="col-1">
+            <div class="chevron"></div>
+            <span ng-show="$ctrl.isAffichageCi" class="sapicon-E165 biz"></span>
+            <span class="lbl">{{node.NodeText}} </span>
+            <span class="tot-txt">{{::$ctrl.resources.RapportHebdo_Total_Astreinte}}</span>
+        </div>
+        <div class="col-2" ng-style="{'color':node.TotalHoursItems[0] > 24 ?'red':''}">{{node.TotalHoursItems[0]}}</div>
+        <div class="col-3" ng-style="{'color':node.TotalHoursItems[1] > 24 ?'red':''}">{{node.TotalHoursItems[1]}}</div>
+        <div class="col-4" ng-style="{'color':node.TotalHoursItems[2] > 24 ?'red':''}">{{node.TotalHoursItems[2]}}</div>
+        <div class="col-5" ng-style="{'color':node.TotalHoursItems[3] > 24 ?'red':''}">{{node.TotalHoursItems[3]}}</div>
+        <div class="col-6" ng-style="{'color':node.TotalHoursItems[4] > 24 ?'red':''}">{{node.TotalHoursItems[4]}}</div>
+        <div class="col-7" ng-style="{'color':node.TotalHoursItems[5] > 24 ?'red':''}">{{node.TotalHoursItems[5]}}</div>
+        <div class="col-8" ng-style="{'color':node.TotalHoursItems[6] > 24 ?'red':''}">{{node.TotalHoursItems[6]}}</div>
+        <div class="col-9">{{node.TotalHoursPerWeek}}</div>
+    </div>
+    <!--Liste niveau 2-->
+    <div class="collapse in" id="LAS1-{{$index}}">
+        <div ng-repeat="(subNodeIndex, subNode) in node.SubNodeList | filter:{'IsAbsence':false , 'IsPersonnelCiDesaffected':false} track by $index">
+            <div>
+                <!--Liste de sous-niveau 1-->
+                <div class="flex-line sub-level1 biz">
+                    <div class="col-1">
+                        <div class="chevron" ng-style="subNode.SubNodeList[0].Items.length ?{'visibility':'visible'}:{'visibility':'hidden'}" data-toggle="collapse" aria-expanded="false" data-target="#LAS2-{{$parent.$index}}-{{$index}}"></div>
+                        <span class="material-icons ng-scope" ng-click="!subNode.PersonnelToReadOnly && $ctrl.addSortie(subNode)">add_box</span>
+                        <span class="biz-lbl">{{subNode.NodeText}}</span>
+                    </div>
+                    <div class="col-2">
+                        {{subNode.TotalHoursItems[0]}}
+                    </div>
+                    <div class="col-3">
+                        {{subNode.TotalHoursItems[1]}}
+                    </div>
+                    <div class="col-4">
+                        {{subNode.TotalHoursItems[2]}}
+                    </div>
+                    <div class="col-5">
+                        {{subNode.TotalHoursItems[3]}}
+                    </div>
+                    <div class="col-6">
+                        {{subNode.TotalHoursItems[4]}}
+                    </div>
+                    <div class="col-7">
+                        {{subNode.TotalHoursItems[5]}}
+                    </div>
+                    <div class="col-8">
+                        {{subNode.TotalHoursItems[6]}}
+                    </div>
+                    <div class="col-9">{{subNode.TotalHoursPerWeek}}</div>
+                </div>
+
+                <!--Liste de sous-niveau 2-->
+                <div class="collapse in" id="LAS2-{{$parent.$index}}-{{$index}}">
+                    <div ng-repeat="subSubNode in subNode.SubNodeList">
+                        <div class="flex-line level-2 astr">
+                            <div class="col-1">
+                                <span class="sapicon-E072 ast"></span>
+                                <span class="lbl">{{subSubNode.NodeText}} {{$index+1}}</span>
+                            </div>
+                            <div class="col-2">
+                                <div class="astr-wrap">
+                                    <div class="text-center">
+                                        <span ng-hide="$ctrl.displayNoAstreinte(subSubNode.Items[0])" class="col-lg-12 sapicon-E249 abs-as"></span>
+                                        <span ng-show="$ctrl.displayButtonAddAstreinte(subSubNode.Items[0])"
+                                              class="col-lg-12 fa fa-plus fa-lg action-icone" style="cursor: pointer;" title="{{::$ctrl.resources.RapportHebdo_Add_Sortie_Astreinte}}"
+                                              ng-click="($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[0].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === subNode.NodeId) || (!subNode.PersonnelToReadOnly && ((!subSubNode.Items[0].PersonnelVerrouille && !subSubNode.Items[0].RapportValide) || (subSubNode.Items[0].RapportValide && $ctrl.isManagerPointing)) && $ctrl.handleAddSortieAstreinte(subSubNode.Items[0]))"></span>
+                                    </div>
+                                    <div ng-show="{{subSubNode.Items[0].HasAstreinte}}" class="edit-ast" ng-repeat="ligneAstreinte in subSubNode.Items[0].ListRapportLigneAstreintes">
+                                        <input type="text" disabled="disabled" value="{{$ctrl.handleGetAstreinteTime(subSubNode.Items[0].ListRapportLigneAstreintes[0].DateDebutAstreinte)}}" />
+                                        <span class="glyphicon glyphicon-play"></span>
+                                        <input type="text" disabled="disabled" value="{{$ctrl.handleGetAstreinteTime(subSubNode.Items[0].ListRapportLigneAstreintes[0].DateFinAstreinte)}}" />
+                                        <br />
+                                        <div class="edit-ast-icons">
+                                            <span class="fa fa-pencil fa-lg action-icone" style="cursor:pointer;" ng-click="$ctrl.handleChangeAstreinteDates(node, subNode, subSubNode, 0, subSubNode.Items[0], subSubNode.Items[0].ListRapportLigneAstreintes[0])" ng-hide="subNode.PersonnelToReadOnly|| (subSubNode.Items[0].PersonnelVerrouille) || (subSubNode.Items[0].RapportValide && !$ctrl.isManagerPointing)"></span>
+                                            <span class="fa fa-trash fa-lg action-icone" style="cursor:pointer;" ng-click="$ctrl.handleDeleteSortieAstreinte(subNode, $parent.$index, subSubNode.Items[0], subSubNode.Items[0].ListRapportLigneAstreintes[0]) " ng-hide="subNode.PersonnelToReadOnly || (subSubNode.Items[0].PersonnelVerrouille) || (subSubNode.Items[0].RapportValide && !$ctrl.isManagerPointing)" title="{{::$ctrl.resources.RapportHebdo_Suppression_Astreinte_Tooltip}}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="astr-wrap">
+                                    <div class="text-center">
+                                        <span ng-hide="$ctrl.displayNoAstreinte(subSubNode.Items[1])" class="col-lg-12 sapicon-E249 abs-as"></span>
+                                        <span ng-show="$ctrl.displayButtonAddAstreinte(subSubNode.Items[1])"
+                                              class="col-lg-12 fa fa-plus fa-lg action-icone" style="cursor: pointer;" title="{{::$ctrl.resources.RapportHebdo_Add_Sortie_Astreinte}}"
+                                              ng-click="($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[1].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === subNode.NodeId) ||(!subNode.PersonnelToReadOnly && ((!subSubNode.Items[1].PersonnelVerrouille && !subSubNode.Items[1].RapportValide) || (subSubNode.Items[1].RapportValide && $ctrl.isManagerPointing)) && $ctrl.handleAddSortieAstreinte(subSubNode.Items[1]))"></span>
+                                    </div>
+                                    <div ng-show="{{subSubNode.Items[1].HasAstreinte}}" class="edit-ast" ng-repeat="ligneAstreinte in subSubNode.Items[1].ListRapportLigneAstreintes">
+                                        <input style="width: 40px;" type="text" disabled="disabled" value="{{$ctrl.handleGetAstreinteTime(subSubNode.Items[1].ListRapportLigneAstreintes[0].DateDebutAstreinte)}}" />
+                                        <span class="glyphicon glyphicon-play"></span>
+                                        <input style="width: 40px;" type="text" disabled="disabled" value="{{$ctrl.handleGetAstreinteTime(subSubNode.Items[1].ListRapportLigneAstreintes[0].DateFinAstreinte)}}" />
+                                        <br />
+                                        <div class="edit-ast-icons">
+                                            <span class="fa fa-pencil fa-lg action-icone" style="cursor:pointer;" ng-click="$ctrl.handleChangeAstreinteDates(node, subNode, subSubNode, 1, subSubNode.Items[1], subSubNode.Items[1].ListRapportLigneAstreintes[0])" ng-hide="subNode.PersonnelToReadOnly|| (subSubNode.Items[1].PersonnelVerrouille) || (subSubNode.Items[0].RapportValide && !$ctrl.isManagerPointing)"></span>
+                                            <span class="fa fa-trash fa-lg action-icone" style="cursor:pointer;" ng-click="$ctrl.handleDeleteSortieAstreinte(subNode, $parent.$index, subSubNode.Items[1], subSubNode.Items[1].ListRapportLigneAstreintes[0]) " ng-hide="subNode.PersonnelToReadOnly || (subSubNode.Items[1].PersonnelVerrouille) || (subSubNode.Items[0].RapportValide && !$ctrl.isManagerPointing)" title="{{::$ctrl.resources.RapportHebdo_Suppression_Astreinte_Tooltip}}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="astr-wrap">
+                                    <div class="text-center">
+                                        <span ng-hide="$ctrl.displayNoAstreinte(subSubNode.Items[2])" class="col-lg-12 sapicon-E249 abs-as"></span>
+                                        <span ng-show="$ctrl.displayButtonAddAstreinte(subSubNode.Items[2])"
+                                              class="col-lg-12 fa fa-plus fa-lg action-icone" style="cursor: pointer;" title="{{::$ctrl.resources.RapportHebdo_Add_Sortie_Astreinte}}"
+                                              ng-click="($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[2].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === subNode.NodeId) ||(!subNode.PersonnelToReadOnly && ((!subSubNode.Items[2].PersonnelVerrouille && !subSubNode.Items[2].RapportValide) || (subSubNode.Items[2].RapportValide && $ctrl.isManagerPointing)) && $ctrl.handleAddSortieAstreinte(subSubNode.Items[2]))"></span>
+                                    </div>
+                                    <div ng-show="{{subSubNode.Items[2].HasAstreinte}}" class="edit-ast" ng-repeat="ligneAstreinte in subSubNode.Items[2].ListRapportLigneAstreintes">
+                                        <input style="width: 40px;" type="text" disabled="disabled" value="{{$ctrl.handleGetAstreinteTime(subSubNode.Items[2].ListRapportLigneAstreintes[0].DateDebutAstreinte)}}" />
+                                        <span class="glyphicon glyphicon-play"></span>
+                                        <input style="width: 40px;" type="text" disabled="disabled" value="{{$ctrl.handleGetAstreinteTime(subSubNode.Items[2].ListRapportLigneAstreintes[0].DateFinAstreinte)}}" />
+                                        <br />
+                                        <div class="edit-ast-icons">
+                                            <span class="fa fa-pencil fa-lg action-icone" style="cursor:pointer;" ng-click="$ctrl.handleChangeAstreinteDates(node, subNode, subSubNode, 2, subSubNode.Items[2], subSubNode.Items[2].ListRapportLigneAstreintes[0])" ng-hide="subNode.PersonnelToReadOnly|| (subSubNode.Items[2].PersonnelVerrouille) || (subSubNode.Items[2].RapportValide && !$ctrl.isManagerPointing)"></span>
+                                            <span class="fa fa-trash fa-lg action-icone" style="cursor:pointer;" ng-click="$ctrl.handleDeleteSortieAstreinte(subNode, $parent.$index, subSubNode.Items[2], subSubNode.Items[2].ListRapportLigneAstreintes[0]) " ng-hide="subNode.PersonnelToReadOnly || (subSubNode.Items[2].PersonnelVerrouille) || (subSubNode.Items[2].RapportValide && !$ctrl.isManagerPointing)" title="{{::$ctrl.resources.RapportHebdo_Suppression_Astreinte_Tooltip}}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="astr-wrap">
+                                    <div class="text-center">
+                                        <span ng-hide="$ctrl.displayNoAstreinte(subSubNode.Items[3])" class="col-lg-12 sapicon-E249 abs-as"></span>
+                                        <span ng-show="$ctrl.displayButtonAddAstreinte(subSubNode.Items[3])"
+                                              class="col-lg-12 fa fa-plus fa-lg action-icone" style="cursor: pointer;" title="{{::$ctrl.resources.RapportHebdo_Add_Sortie_Astreinte}}"
+                                              ng-click="($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[3].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === subNode.NodeId) ||(!subNode.PersonnelToReadOnly && ((!subSubNode.Items[3].PersonnelVerrouille && !subSubNode.Items[3].RapportValide) || (subSubNode.Items[3].RapportValide && $ctrl.isManagerPointing)) && $ctrl.handleAddSortieAstreinte(subSubNode.Items[3]))"></span>
+                                    </div>
+                                    <div ng-show="{{subSubNode.Items[3].HasAstreinte}}" class="edit-ast" ng-repeat="ligneAstreinte in subSubNode.Items[3].ListRapportLigneAstreintes">
+                                        <input style="width: 40px;" type="text" disabled="disabled" value="{{$ctrl.handleGetAstreinteTime(subSubNode.Items[3].ListRapportLigneAstreintes[0].DateDebutAstreinte)}}" />
+                                        <span class="glyphicon glyphicon-play"></span>
+                                        <input style="width: 40px;" type="text" disabled="disabled" value="{{$ctrl.handleGetAstreinteTime(subSubNode.Items[3].ListRapportLigneAstreintes[0].DateFinAstreinte)}}" />
+                                        <br />
+                                        <div class="edit-ast-icons">
+                                            <span class="fa fa-pencil fa-lg action-icone" style="cursor:pointer;" ng-click="$ctrl.handleChangeAstreinteDates(node, subNode, subSubNode, 3, subSubNode.Items[3], subSubNode.Items[3].ListRapportLigneAstreintes[0])" ng-hide="subNode.PersonnelToReadOnly|| (subSubNode.Items[3].PersonnelVerrouille) || (subSubNode.Items[3].RapportValide && !$ctrl.isManagerPointing)"></span>
+                                            <span class="fa fa-trash fa-lg action-icone" style="cursor:pointer;" ng-click="$ctrl.handleDeleteSortieAstreinte(subNode, $parent.$index, subSubNode.Items[3], subSubNode.Items[3].ListRapportLigneAstreintes[0]) " ng-hide="subNode.PersonnelToReadOnly || (subSubNode.Items[3].PersonnelVerrouille) || (subSubNode.Items[3].RapportValide && !$ctrl.isManagerPointing)" title="{{::$ctrl.resources.RapportHebdo_Suppression_Astreinte_Tooltip}}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="astr-wrap">
+                                    <div class="text-center">
+                                        <span ng-hide="$ctrl.displayNoAstreinte(subSubNode.Items[4])" class="col-lg-12 sapicon-E249 abs-as"></span>
+                                        <span ng-show="$ctrl.displayButtonAddAstreinte(subSubNode.Items[4])"
+                                              class="col-lg-12 fa fa-plus fa-lg action-icone" style="cursor: pointer;" title="{{::$ctrl.resources.RapportHebdo_Add_Sortie_Astreinte}}"
+                                              ng-click="($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[4].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === subNode.NodeId) ||(!subNode.PersonnelToReadOnly && ((!subSubNode.Items[4].PersonnelVerrouille && !subSubNode.Items[4].RapportValide) || (subSubNode.Items[4].RapportValide && $ctrl.isManagerPointing)) && $ctrl.handleAddSortieAstreinte(subSubNode.Items[4]))"></span>
+                                    </div>
+                                    <div ng-show="{{subSubNode.Items[4].HasAstreinte}}" class="edit-ast" ng-repeat="ligneAstreinte in subSubNode.Items[4].ListRapportLigneAstreintes">
+                                        <input style="width: 40px;" type="text" disabled="disabled" value="{{$ctrl.handleGetAstreinteTime(subSubNode.Items[4].ListRapportLigneAstreintes[0].DateDebutAstreinte)}}" />
+                                        <span class="glyphicon glyphicon-play"></span>
+                                        <input style="width: 40px;" type="text" disabled="disabled" value="{{$ctrl.handleGetAstreinteTime(subSubNode.Items[4].ListRapportLigneAstreintes[0].DateFinAstreinte)}}" />
+                                        <br />
+                                        <div class="edit-ast-icons">
+                                            <span class="fa fa-pencil fa-lg action-icone" style="cursor:pointer;" ng-click="$ctrl.handleChangeAstreinteDates(node, subNode, subSubNode, 4, subSubNode.Items[4], subSubNode.Items[4].ListRapportLigneAstreintes[0])" ng-hide="subNode.PersonnelToReadOnly|| (subSubNode.Items[4].PersonnelVerrouille) || (subSubNode.Items[4].RapportValide && !$ctrl.isManagerPointing)"></span>
+                                            <span class="fa fa-trash fa-lg action-icone" style="cursor:pointer;" ng-click="$ctrl.handleDeleteSortieAstreinte(subNode, $parent.$index, subSubNode.Items[4], subSubNode.Items[4].ListRapportLigneAstreintes[0]) " ng-hide="subNode.PersonnelToReadOnly || (subSubNode.Items[4].PersonnelVerrouille) || (subSubNode.Items[4].RapportValide && !$ctrl.isManagerPointing)" title="{{::$ctrl.resources.RapportHebdo_Suppression_Astreinte_Tooltip}}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <div class="astr-wrap">
+                                    <div class="text-center">
+                                        <span ng-hide="$ctrl.displayNoAstreinte(subSubNode.Items[5])" class="col-lg-12 sapicon-E249 abs-as"></span>
+                                        <span ng-show="$ctrl.displayButtonAddAstreinte(subSubNode.Items[5])"
+                                              class="col-lg-12 fa fa-plus fa-lg action-icone" style="cursor: pointer;" title="{{::$ctrl.resources.RapportHebdo_Add_Sortie_Astreinte}}"
+                                              ng-click="($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[5].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === subNode.NodeId) ||(!subNode.PersonnelToReadOnly && ((!subSubNode.Items[5].PersonnelVerrouille && !subSubNode.Items[5].RapportValide) || (subSubNode.Items[5].RapportValide && $ctrl.isManagerPointing)) && $ctrl.handleAddSortieAstreinte(subSubNode.Items[5]))"></span>
+                                    </div>
+                                    <div ng-show="{{subSubNode.Items[5].HasAstreinte}}" class="edit-ast" ng-repeat="ligneAstreinte in subSubNode.Items[5].ListRapportLigneAstreintes">
+                                        <input style="width: 40px;" type="text" disabled="disabled" value="{{$ctrl.handleGetAstreinteTime(subSubNode.Items[5].ListRapportLigneAstreintes[0].DateDebutAstreinte)}}" />
+                                        <span class="glyphicon glyphicon-play"></span>
+                                        <input style="width: 40px;" type="text" disabled="disabled" value="{{$ctrl.handleGetAstreinteTime(subSubNode.Items[5].ListRapportLigneAstreintes[0].DateFinAstreinte)}}" />
+                                        <br />
+                                        <div class="edit-ast-icons">
+                                            <span class="fa fa-pencil fa-lg action-icone" style="cursor:pointer;" ng-click="$ctrl.handleChangeAstreinteDates(node, subNode, subSubNode, 5, subSubNode.Items[5], subSubNode.Items[5].ListRapportLigneAstreintes[0])" ng-hide="subNode.PersonnelToReadOnly|| (subSubNode.Items[5].PersonnelVerrouille) || (subSubNode.Items[5].RapportValide && !$ctrl.isManagerPointing)"></span>
+                                            <span class="fa fa-trash fa-lg action-icone" style="cursor:pointer;" ng-click="$ctrl.handleDeleteSortieAstreinte(subNode, $parent.$index, subSubNode.Items[5], subSubNode.Items[5].ListRapportLigneAstreintes[0]) " ng-hide="subNode.PersonnelToReadOnly || (subSubNode.Items[5].PersonnelVerrouille) || (subSubNode.Items[5].RapportValide && !$ctrl.isManagerPointing)" title="{{::$ctrl.resources.RapportHebdo_Suppression_Astreinte_Tooltip}}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="astr-wrap">
+                                    <div class="text-center">
+                                        <span ng-hide="$ctrl.displayNoAstreinte(subSubNode.Items[6])" class="col-lg-12 sapicon-E249 abs-as"></span>
+                                        <span ng-show="$ctrl.displayButtonAddAstreinte(subSubNode.Items[6])"
+                                              class="col-lg-12 fa fa-plus fa-lg action-icone" style="cursor: pointer;" title="{{::$ctrl.resources.RapportHebdo_Add_Sortie_Astreinte}}"
+                                              ng-click="($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[6].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === subNode.NodeId) ||(!subNode.PersonnelToReadOnly && ((!subSubNode.Items[6].PersonnelVerrouille && !subSubNode.Items[6].RapportValide) || (subSubNode.Items[6].RapportValide && $ctrl.isManagerPointing)) && $ctrl.handleAddSortieAstreinte(subSubNode.Items[6]))"></span>
+                                    </div>
+                                    <div ng-show="{{subSubNode.Items[6].HasAstreinte}}" class="edit-ast" ng-repeat="ligneAstreinte in subSubNode.Items[6].ListRapportLigneAstreintes">
+                                        <input style="width: 40px;" type="text" disabled="disabled" value="{{$ctrl.handleGetAstreinteTime(subSubNode.Items[6].ListRapportLigneAstreintes[0].DateDebutAstreinte)}}" />
+                                        <span class="glyphicon glyphicon-play"></span>
+                                        <input style="width: 40px;" type="text" disabled="disabled" value="{{$ctrl.handleGetAstreinteTime(subSubNode.Items[6].ListRapportLigneAstreintes[0].DateFinAstreinte)}}" />
+                                        <br />
+                                        <div class="edit-ast-icons">
+                                            <span class="fa fa-pencil fa-lg action-icone" style="cursor:pointer;" ng-click="$ctrl.handleChangeAstreinteDates(node, subNode, subSubNode, 6, subSubNode.Items[6], subSubNode.Items[6].ListRapportLigneAstreintes[0])" ng-hide="subNode.PersonnelToReadOnly|| (subSubNode.Items[6].PersonnelVerrouille) || (subSubNode.Items[6].RapportValide && !$ctrl.isManagerPointing)"></span>
+                                            <span class="fa fa-trash fa-lg action-icone" style="cursor:pointer;" ng-click="$ctrl.handleDeleteSortieAstreinte(subNode, $parent.$index, subSubNode.Items[6], subSubNode.Items[6].ListRapportLigneAstreintes[0]) " ng-hide="subNode.PersonnelToReadOnly || (subSubNode.Items[6].PersonnelVerrouille) || (subSubNode.Items[6].RapportValide && !$ctrl.isManagerPointing)" title="{{::$ctrl.resources.RapportHebdo_Suppression_Astreinte_Tooltip}}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-9">{{subSubNode.TotalHoursPerWeek}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal de changement des dates d'astreinte*@ -->
+<div class="modal fade" id="changeAstreinteDateModalDayOfWeek0" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fa fa-pencil"></i>{{::$ctrl.resources.RapportHebdo_Change_Date_Astreinte}}</h2>
+                <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+            </div>
+            <div class="modal-body">
+                <span class="text-danger" ng-show="!$ctrl.handleShevalCondition($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[0].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte,$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[0].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte)">&#8226 {{::$ctrl.resources.RapportHebdo_Warning_Heures_Astreintes}}</span>
+                <span class="text-danger" ng-show="!$ctrl.handleSuperieureCondition($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[0].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte,$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[0].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte)">&#8226 {{::$ctrl.resources.Rapport_Warning_Astrieintes_Change}}</span>
+                <span class="text-danger" ng-show="!$ctrl.TestTotalHoursByDay(0)">&#8226 {{::$ctrl.resources.RapportHebdo_Warning_total_astrieintes}}</span>
+                <div class="row">
+                    <div class="col-md-5">
+                        <fred-date-picker name="DateDebutAstreinte"
+                                          locale="fr"
+                                          format="DD/MM/YYYY HH:mm"
+                                          ng-model="$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[0].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte"
+                                          min="{{$ctrl.handleGetDebutAstreinteMinDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[0].Date)}}"
+                                          max="{{$ctrl.handleGetDebutAstreinteMaxDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[0].Date)}}"
+                                          stepping="15"
+                                          ng-change="$ctrl.handleChangeDateDebutAstreinte(0)"
+                                          placeholder="{{::$ctrl.resources.RapportHebdo_Date_Debut_Asteinte}}"></fred-date-picker>
+                    </div>
+                    <div class="col-md-5">
+                        <fred-date-picker name="DateFinAstreinte"
+                                          locale="fr"
+                                          format="DD/MM/YYYY HH:mm"
+                                          ng-model="$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[0].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte"
+                                          min="{{$ctrl.handleGetFinAstreinteMinDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[0].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte)}}"
+                                          max="{{$ctrl.handleGetFinAstreinteMaxDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[0].Date)}}"
+                                          stepping="15"
+                                          ng-change="$ctrl.handleChangeDateFinAstreinte(0)"
+                                          placeholder="{{::$ctrl.resources.RapportHebdo_Date_Fin_Asteinte}}"></fred-date-picker>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de changement des dates d'astreinte*@ -->
+<div class="modal fade" id="changeAstreinteDateModalDayOfWeek1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fa fa-pencil"></i>{{::$ctrl.resources.RapportHebdo_Change_Date_Astreinte}}</h2>
+                <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+            </div>
+            <div class="modal-body">
+                <span class="text-danger" ng-show="!$ctrl.handleShevalCondition($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[1].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte,$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[1].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte)">&#8226 {{::$ctrl.resources.RapportHebdo_Warning_Heures_Astreintes}}</span>
+                <span class="text-danger" ng-show="!$ctrl.handleSuperieureCondition($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[1].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte,$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[1].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte)">&#8226 {{::$ctrl.resources.Rapport_Warning_Astrieintes_Change}}</span>
+                <span class="text-danger" ng-show="!$ctrl.TestTotalHoursByDay(1)">&#8226 {{::$ctrl.resources.RapportHebdo_Warning_total_astrieintes}}</span>
+                <div class="row">
+                    <div class="col-md-5">
+                        <fred-date-picker name="DateDebutAstreinte"
+                                          locale="fr"
+                                          format="DD/MM/YYYY HH:mm"
+                                          ng-model="$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[1].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte"
+                                          min="{{$ctrl.handleGetDebutAstreinteMinDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[1].Date)}}"
+                                          max="{{$ctrl.handleGetDebutAstreinteMaxDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[1].Date)}}"
+                                          stepping="15"
+                                          ng-change="$ctrl.handleChangeDateDebutAstreinte(1)"
+                                          placeholder="{{::$ctrl.resources.RapportHebdo_Date_Debut_Asteinte}}"></fred-date-picker>
+                    </div>
+                    <div class="col-md-5">
+                        <fred-date-picker name="DateFinAstreinte"
+                                          locale="fr"
+                                          format="DD/MM/YYYY HH:mm"
+                                          ng-model="$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[1].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte"
+                                          min="{{$ctrl.handleGetFinAstreinteMinDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[1].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte)}}"
+                                          max="{{$ctrl.handleGetFinAstreinteMaxDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[1].Date)}}"
+                                          stepping="15"
+                                          ng-change="$ctrl.handleChangeDateFinAstreinte(1)"
+                                          placeholder="{{::$ctrl.resources.RapportHebdo_Date_Fin_Asteinte}}"></fred-date-picker>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de changement des dates d'astreinte*@ -->
+<div class="modal fade" id="changeAstreinteDateModalDayOfWeek2" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fa fa-pencil"></i>{{::$ctrl.resources.RapportHebdo_Change_Date_Astreinte}}</h2>
+                <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+            </div>
+            <div class="modal-body">
+                <span class="text-danger" ng-show="!$ctrl.handleShevalCondition($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[2].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte,$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[2].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte)">&#8226 {{::$ctrl.resources.RapportHebdo_Warning_Heures_Astreintes}}</span>
+                <span class="text-danger" ng-show="!$ctrl.handleSuperieureCondition($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[2].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte,$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[2].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte)">&#8226 {{::$ctrl.resources.Rapport_Warning_Astrieintes_Change}}</span>
+                <span class="text-danger" ng-show="!$ctrl.TestTotalHoursByDay(2)">&#8226 {{::$ctrl.resources.RapportHebdo_Warning_total_astrieintes}}</span>
+                <div class="row">
+                    <div class="col-md-5">
+                        <fred-date-picker name="DateDebutAstreinte"
+                                          locale="fr"
+                                          format="DD/MM/YYYY HH:mm"
+                                          ng-model="$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[2].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte"
+                                          min="{{$ctrl.handleGetDebutAstreinteMinDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[2].Date)}}"
+                                          max="{{$ctrl.handleGetDebutAstreinteMaxDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[2].Date)}}"
+                                          stepping="15"
+                                          ng-change="$ctrl.handleChangeDateDebutAstreinte(2)"
+                                          placeholder="{{::$ctrl.resources.RapportHebdo_Date_Debut_Asteinte}}"></fred-date-picker>
+                    </div>
+                    <div class="col-md-5">
+                        <fred-date-picker name="DateFinAstreinte"
+                                          locale="fr"
+                                          format="DD/MM/YYYY HH:mm"
+                                          ng-model="$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[2].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte"
+                                          min="{{$ctrl.handleGetFinAstreinteMinDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[2].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte)}}"
+                                          max="{{$ctrl.handleGetFinAstreinteMaxDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[2].Date)}}"
+                                          stepping="15"
+                                          ng-change="$ctrl.handleChangeDateFinAstreinte(2)"
+                                          placeholder="{{::$ctrl.resources.RapportHebdo_Date_Fin_Asteinte}}"></fred-date-picker>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de changement des dates d'astreinte*@ -->
+<div class="modal fade" id="changeAstreinteDateModalDayOfWeek3" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fa fa-pencil"></i>{{::$ctrl.resources.RapportHebdo_Change_Date_Astreinte}}</h2>
+                <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+            </div>
+            <div class="modal-body">
+                <span class="text-danger" ng-show="!$ctrl.handleShevalCondition($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[3].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte,$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[3].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte)">&#8226 {{::$ctrl.resources.RapportHebdo_Warning_Heures_Astreintes}}</span>
+                <span class="text-danger" ng-show="!$ctrl.handleSuperieureCondition($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[3].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte,$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[3].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte)">&#8226 {{::$ctrl.resources.Rapport_Warning_Astrieintes_Change}}</span>
+                <span class="text-danger" ng-show="!$ctrl.TestTotalHoursByDay(3)">&#8226 {{::$ctrl.resources.RapportHebdo_Warning_total_astrieintes}}</span>
+                <div class="row">
+                    <div class="col-md-5">
+                        <fred-date-picker name="DateDebutAstreinte"
+                                          locale="fr"
+                                          format="DD/MM/YYYY HH:mm"
+                                          ng-model="$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[3].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte"
+                                          min="{{$ctrl.handleGetDebutAstreinteMinDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[3].Date)}}"
+                                          max="{{$ctrl.handleGetDebutAstreinteMaxDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[3].Date)}}"
+                                          stepping="15"
+                                          ng-change="$ctrl.handleChangeDateDebutAstreinte(3)"
+                                          placeholder="{{::$ctrl.resources.RapportHebdo_Date_Debut_Asteinte}}"></fred-date-picker>
+                    </div>
+                    <div class="col-md-5">
+                        <fred-date-picker name="DateFinAstreinte"
+                                          locale="fr"
+                                          format="DD/MM/YYYY HH:mm"
+                                          ng-model="$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[3].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte"
+                                          min="{{$ctrl.handleGetFinAstreinteMinDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[3].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte)}}"
+                                          max="{{$ctrl.handleGetFinAstreinteMaxDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[3].Date)}}"
+                                          stepping="15"
+                                          ng-change="$ctrl.handleChangeDateFinAstreinte(3)"
+                                          placeholder="{{::$ctrl.resources.RapportHebdo_Date_Fin_Asteinte}}"></fred-date-picker>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de changement des dates d'astreinte*@ -->
+<div class="modal fade" id="changeAstreinteDateModalDayOfWeek4" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fa fa-pencil"></i>{{::$ctrl.resources.RapportHebdo_Change_Date_Astreinte}}</h2>
+                <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+            </div>
+            <div class="modal-body">
+                <span class="text-danger" ng-show="!$ctrl.handleShevalCondition($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[4].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte,$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[4].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte)">&#8226 {{::$ctrl.resources.RapportHebdo_Warning_Heures_Astreintes}}</span>
+                <span class="text-danger" ng-show="!$ctrl.handleSuperieureCondition($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[4].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte,$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[4].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte)">&#8226 {{::$ctrl.resources.Rapport_Warning_Astrieintes_Change}}</span>
+                <span class="text-danger" ng-show="!$ctrl.TestTotalHoursByDay(4)">&#8226 {{::$ctrl.resources.RapportHebdo_Warning_total_astrieintes}}</span>
+                <div class="row">
+                    <div class="col-md-5">
+                        <fred-date-picker name="DateDebutAstreinte"
+                                          locale="fr"
+                                          format="DD/MM/YYYY HH:mm"
+                                          ng-model="$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[4].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte"
+                                          min="{{$ctrl.handleGetDebutAstreinteMinDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[4].Date)}}"
+                                          max="{{$ctrl.handleGetDebutAstreinteMaxDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[4].Date)}}"
+                                          stepping="15"
+                                          ng-change="$ctrl.handleChangeDateDebutAstreinte(4)"
+                                          placeholder="{{::$ctrl.resources.RapportHebdo_Date_Debut_Asteinte}}"></fred-date-picker>
+                    </div>
+                    <div class="col-md-5">
+                        <fred-date-picker name="DateFinAstreinte"
+                                          locale="fr"
+                                          format="DD/MM/YYYY HH:mm"
+                                          ng-model="$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[4].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte"
+                                          min="{{$ctrl.handleGetFinAstreinteMinDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[4].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte)}}"
+                                          max="{{$ctrl.handleGetFinAstreinteMaxDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[4].Date)}}"
+                                          stepping="15"
+                                          ng-change="$ctrl.handleChangeDateFinAstreinte(4)"
+                                          placeholder="{{::$ctrl.resources.RapportHebdo_Date_Fin_Asteinte}}"></fred-date-picker>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de changement des dates d'astreinte*@ -->
+<div class="modal fade" id="changeAstreinteDateModalDayOfWeek5" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fa fa-pencil"></i>{{::$ctrl.resources.RapportHebdo_Change_Date_Astreinte}}</h2>
+                <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+            </div>
+            <div class="modal-body">
+                <span class="text-danger" ng-show="!$ctrl.handleShevalCondition($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[5].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte,$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[5].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte)">&#8226 {{::$ctrl.resources.RapportHebdo_Warning_Heures_Astreintes}}</span>
+                <span class="text-danger" ng-show="!$ctrl.handleSuperieureCondition($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[5].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte,$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[5].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte)">&#8226 {{::$ctrl.resources.Rapport_Warning_Astrieintes_Change}}</span>
+                <span class="text-danger" ng-show="!$ctrl.TestTotalHoursByDay(5)">&#8226 {{::$ctrl.resources.RapportHebdo_Warning_total_astrieintes}}</span>
+                <div class="row">
+                    <div class="col-md-5">
+                        <fred-date-picker name="DateDebutAstreinte"
+                                          locale="fr"
+                                          format="DD/MM/YYYY HH:mm"
+                                          ng-model="$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[5].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte"
+                                          min="{{$ctrl.handleGetDebutAstreinteMinDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[5].Date)}}"
+                                          max="{{$ctrl.handleGetDebutAstreinteMaxDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[5].Date)}}"
+                                          stepping="15"
+                                          ng-change="$ctrl.handleChangeDateDebutAstreinte(5)"
+                                          placeholder="{{::$ctrl.resources.RapportHebdo_Date_Debut_Asteinte}}"></fred-date-picker>
+                    </div>
+                    <div class="col-md-5">
+                        <fred-date-picker name="DateFinAstreinte"
+                                          locale="fr"
+                                          format="DD/MM/YYYY HH:mm"
+                                          ng-model="$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[5].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte"
+                                          min="{{$ctrl.handleGetFinAstreinteMinDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[5].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte)}}"
+                                          max="{{$ctrl.handleGetFinAstreinteMaxDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[5].Date)}}"
+                                          stepping="15"
+                                          ng-change="$ctrl.handleChangeDateFinAstreinte(5)"
+                                          placeholder="{{::$ctrl.resources.RapportHebdo_Date_Fin_Asteinte}}"></fred-date-picker>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de changement des dates d'astreinte*@ -->
+<div class="modal fade" id="changeAstreinteDateModalDayOfWeek6" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fa fa-pencil"></i>{{::$ctrl.resources.RapportHebdo_Change_Date_Astreinte}}</h2>
+                <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+            </div>
+            <div class="modal-body">
+                <span class="text-danger" ng-show="!$ctrl.handleShevalCondition($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[6].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte,$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[6].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte)">&#8226 {{::$ctrl.resources.RapportHebdo_Warning_Heures_Astreintes}}</span>
+                <span class="text-danger" ng-show="!$ctrl.handleSuperieureCondition($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[6].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte,$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[6].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte)">&#8226 {{::$ctrl.resources.Rapport_Warning_Astrieintes_Change}}</span>
+                <span class="text-danger" ng-show="!$ctrl.TestTotalHoursByDay(6)">&#8226 {{::$ctrl.resources.RapportHebdo_Warning_total_astrieintes}}</span>
+                <div class="row">
+                    <div class="col-md-5">
+                        <fred-date-picker id="DateDebutAstreinte"
+                                          name="DateDebutAstreinte"
+                                          locale="fr"
+                                          format="DD/MM/YYYY HH:mm"
+                                          ng-model="$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[6].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte"
+                                          min="{{$ctrl.handleGetDebutAstreinteMinDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[6].Date)}}"
+                                          max="{{$ctrl.handleGetDebutAstreinteMaxDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[6].Date)}}"
+                                          stepping="15"
+                                          ng-change="$ctrl.handleChangeDateDebutAstreinte(6)"
+                                          placeholder="{{::$ctrl.resources.RapportHebdo_Date_Debut_Asteinte}}"></fred-date-picker>
+                    </div>
+                    <div class="col-md-5">
+                        <fred-date-picker id="DateFinAstreinte"
+                                          name="DateFinAstreinte"
+                                          locale="fr"
+                                          format="DD/MM/YYYY HH:mm"
+                                          ng-model="$ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[6].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateFinAstreinte"
+                                          min="{{$ctrl.handleGetFinAstreinteMinDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[6].ListRapportLigneAstreintes[$ctrl.AstreinteIndexToUpdate].DateDebutAstreinte)}}"
+                                          max="{{$ctrl.handleGetFinAstreinteMaxDate($ctrl.data[$ctrl.FirstLevelItemIndex].SubNodeList[$ctrl.SecondeLevelItemIndex].SubNodeList[$ctrl.ThirdLevelItemIndex].Items[6].Date)}}"
+                                          stepping="15"
+                                          ng-change="$ctrl.handleChangeDateFinAstreinte(6)"
+                                          placeholder="{{::$ctrl.resources.RapportHebdo_Date_Fin_Asteinte}}"></fred-date-picker>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿$color_1: rgb(166,166,166);
+$color_2: #fff;
+$font_family_1: 'Material Icons';
+$background_color_1: none;
+
+
+.grey-closing {
+    font-family: $font_family_1;
+    background-color: $background_color_1;
+    font-size: 25px;
+    padding: 0px;
+    color: $color_1;
+    cursor: pointer;
+    word-wrap: initial;
+}
+
+.close-up {
+    font-size: 35px;
+    padding-top: 9px;
+    padding-right: 8px;
+}
+
+.btn-nopad {
+    margin-top: 0px !important;
+}
+
+.version-title {
+    font-size: 9px;
+    color: $color_2;
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+    .btn-nopad {
+        font-size: 11px;
+        padding: 4px 6px;
+        margin-bottom: 0;
+    }
+}

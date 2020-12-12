@@ -1,0 +1,322 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+  ViewBag.Title = FeatureObjectifFlash.ObjectifFlash_Title;
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/ObjectifFlashBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/ObjectifFlashBundle.js")
+    @this.RenderResources("FeatureObjectifFlash", "FeatureReferentielTache", "FeatureBilanFlash")
+}
+
+<div class="container objectif-flash" ng-controller="ObjectifFlashController as $ctrl" ng-init="init('@ViewBag.id')">
+
+    <div class="row">
+        <div class="div-header">
+            <h1>{{::$ctrl.resources.ObjectifFlash_Title}}</h1>
+        </div>
+
+        <div class="div-header div-span" ng-if="$ctrl.objectifFlash.ObjectifFlashId > 0">
+            <div class="colorNumber span-header">{{::$ctrl.resources.ObjectifFlash_Span_Numero}}{{::$ctrl.objectifFlash.ObjectifFlashId}}</div>
+        </div>
+
+        <div class="div-header div-span">
+            <div class="colorBR span-header" ng-if="!$ctrl.IsActif && !$ctrl.IsClosed">{{::$ctrl.resources.ObjectifFlash_Span_Brouillon}}</div>
+            <div class="colorAC span-header" ng-if="$ctrl.IsActif">{{::$ctrl.resources.ObjectifFlash_Span_Actif}}</div>
+            <div class="colorCL span-header" ng-if="$ctrl.IsClosed">{{::$ctrl.resources.ObjectifFlash_Span_Cloture}}</div>
+        </div>
+
+    </div>
+
+    <fred-toolbar>
+
+        <fred-section class="picklist-section">
+            <fred-section-title>{{::$ctrl.resources.ObjectifFlash_CI}}</fred-section-title>
+            <fred-section-controls>
+                <div class="inner-addon right-addon">
+                    <lookup ng-model="$ctrl.objectifFlash.Ci"
+                            search-placeholder="{{::$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                            search-title="{{::$ctrl.resources.Global_ReferentielCI}}"
+                            custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                            on-select="$ctrl.handleLookupSelection(item, 'CI')"
+                            url="/api/CI/SearchLight"
+                            ng-disabled="$ctrl.objectifFlash.ObjectifFlashId">
+                        <input type="text"
+                               class="form-control"
+                               ng-value="$ctrl.objectifFlash.Ci.CodeLibelle"
+                               placeholder="{{::$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                               title="{{$ctrl.objectifFlash.Ci.CodeLibelle}}"
+                               ng-disabled="$ctrl.objectifFlash.ObjectifFlashId"
+                               readonly />
+                        <i class="chev material-icons">chevron_right</i>
+                    </lookup>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <fred-section class="text-section">
+            <fred-section-title>{{::$ctrl.resources.ObjectifFlash_Libelle}}</fred-section-title>
+            <fred-section-controls>
+                <div class="inner-addon right-addon">
+                    <input type="text"
+                           class="form-control"
+                           ng-model="$ctrl.objectifFlash.Libelle"
+                           placeholder="{{::$ctrl.resources.ObjectifFlash_Libelle}}"
+                           title="{{::$ctrl.resources.ObjectifFlash_Libelle}}"
+                           ng-disabled="$ctrl.IsActif || $ctrl.IsClosed"
+                           maxlength="50">
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <fred-section class="date-section">
+            <fred-section-title>{{::$ctrl.resources.ObjectifFlash_DateDebut}}</fred-section-title>
+            <fred-section-controls>
+                <div class="input-group date">
+                    <app-date-picker name="DateDebut" format="DD/MM/YYYY" lang="fr"
+                                     min-date="{{$ctrl.DateMin}}"
+                                     max-date="{{$ctrl.DateMax}}"
+                                     ng-model="$ctrl.objectifFlash.DateDebut"
+                                     placeholder="{{::$ctrl.resources.ObjectifFlash_DateDebut}}"
+                                     ng-disabled="$ctrl.IsActif || $ctrl.IsClosed || $ctrl.IsJournalise" 
+                                     readonly/>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <fred-section class="date-section">
+            <fred-section-title>{{::$ctrl.resources.ObjectifFlash_DateFin}}</fred-section-title>
+            <fred-section-controls>
+                <div class="input-group date">
+                    <app-date-picker name="DateFin" format="DD/MM/YYYY" lang="fr"
+                                     min-date="{{$ctrl.DateMin}}"
+                                     max-date="{{$ctrl.DateMax}}"
+                                     ng-model="$ctrl.objectifFlash.DateFin"
+                                     placeholder="{{::$ctrl.resources.ObjectifFlash_DateFin}}"
+                                     ng-disabled="$ctrl.IsActif || $ctrl.IsClosed || $ctrl.IsJournalise" 
+                                     readonly/>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <fred-section class="action-section">
+            <fred-section-title>{{::$ctrl.resources.ObjectifFlash_Action}}</fred-section-title>
+            <fred-section-controls>
+                <lookup ng-model="$ctrl.tacheSelected"
+                        search-placeholder="{{::$ctrl.resources.Global_ReferentielTache_Placeholder}}"
+                        search-title="{{$ctrl.resources.Global_ReferentielTache}}"
+                        on-select="$ctrl.handleLookupSelection(item, 'Tache')"
+                        url="/api/Tache/SearchLight/?ciId={{$ctrl.objectifFlash.CiId}}&"
+                        custom-template-url="~/Scripts/directive/Lookup/custom-templates/tache.template.html">
+                    <button class="btn btn-default btn-flex" type="button" ng-disabled="!$ctrl.objectifFlash.Ci || $ctrl.IsActif || $ctrl.IsClosed">
+                        <i class="action-icone material-icons">add</i>
+                        {{::$ctrl.resources.ObjectifFlash_Button_ChoixTaches}}
+                    </button>
+                </lookup>
+
+                <button class="fred-button warning text" type="button" ng-click="$ctrl.handleJournalisation()" ng-disabled="!$ctrl.objectifFlash.Taches.length > 0 || $ctrl.IsActif || $ctrl.IsClosed">
+                    {{::$ctrl.resources.ObjectifFlash_Button_Journalisation}}
+                </button>
+
+                <button class="btn btn-default" type="button" ng-click="$ctrl.handleReportObjectif()" ng-disabled="$ctrl.IsActif || $ctrl.IsClosed">
+                    {{::$ctrl.resources.ObjectifFlash_Button_Reporter}}
+                </button>
+
+                <button class="btn btn-default action-button" type="button" ng-if="!$ctrl.IsActif && !$ctrl.IsClosed" ng-disabled="!$ctrl.objectifFlash.Taches.length > 0 || !$ctrl.objectifFlash.ObjectifFlashId" ng-click="$ctrl.handleConfirmation('Activate')">
+                    {{::$ctrl.resources.ObjectifFlash_Button_Activer}}
+                </button>
+
+                <button class="btn btn-default action-button" type="button" ng-if="$ctrl.IsActif" ng-click="$ctrl.handleConfirmation('Close')">
+                    {{::$ctrl.resources.ObjectifFlash_Button_Cloturer}}
+                </button>
+               
+                <button class="btn btn-default btn-flex" type="button" ng-click="$ctrl.handleExportObjectifFlash()" ng-disabled="!$ctrl.IsActif && !$ctrl.IsClosed">
+                    <i class="action-icone material-icons">print</i>
+                    {{::$ctrl.resources.ObjectifFlash_Button_Impression}}
+                </button>
+            </fred-section-controls>
+        </fred-section>
+
+    </fred-toolbar>
+
+
+    <div class="row action-Objectif-Flash">
+        <div class="pull-right">
+            <button class="btn btn-default" ng-click="$ctrl.handleSave()">{{::$ctrl.resources.Global_Bouton_Enregistrer}}</button>
+            <button class="btn btn-link" ng-click="$ctrl.handleConfirmation('Cancel')">{{::$ctrl.resources.Global_Bouton_Annuler}}</button>
+        </div>
+    </div>
+
+    <fred-flex-table class="flex-table fred-scroll" id="FLEX_TABLE">
+        <div class="fixed-line-header top-header">
+            <div class="col-1 centered fixed-col-header">{{::$ctrl.resources.ObjectifFlash_Table_Clef}}</div>
+            <div class="col-2 centered fixed-col-header">{{::$ctrl.resources.ObjectifFlash_Table_LibelleTacheRessource}}</div>
+            <div class="col-3 centered fixed-col-header">{{::$ctrl.resources.ObjectifFlash_Table_PUHT}}</div>
+            <div class="col-4 centered fixed-col-header">{{::$ctrl.resources.ObjectifFlash_Table_Unite}}</div>
+            <div class="col-5 centered fixed-col-header">{{::$ctrl.resources.ObjectifFlash_Table_Quantite}}</div>
+            <div class="col-6 centered fixed-col-header">{{::$ctrl.resources.ObjectifFlash_Table_Montant}}</div>
+            <div class="col-7 centered fixed-col-header">{{::$ctrl.resources.ObjectifFlash_Table_Actions}}</div>
+            <div class="col-J centered fixed-col-header" ng-if="$ctrl.IsJournalise">{{::$ctrl.resources.ObjectifFlash_Table_Total}}</div>
+            <div class="col-J centered repart-pro" ng-class="journalisation.IsWeekEndOrHoliday === true ? 'isWeekEndOrHoliday': ''" 
+                ng-if="$ctrl.IsJournalise" ng-repeat="journalisation in $ctrl.objectifFlash.Journalisations" 
+                title="{{journalisation.DateJournalisation | date: 'dd/MM/yyyy'}}">J{{$index+1}}</div>
+        </div>
+
+        <div>
+            <!-- Taches -->
+            <div ng-repeat="tache in $ctrl.objectifFlash.Taches" ng-click="$ctrl.tacheSelected = tache; ">
+                <div class="tache flex-line" aria-expanded="false">
+                    <div class="col-1 centered fixed-col-header" data-target="#R_{{tache.TacheId}}" data-toggle="collapse" aria-expanded="true">
+                        <a class="accordion-toggle">
+                            <span class="material-icons">chevron_right</span>
+                        </a>
+                    </div>
+                    <div class="col-2 libelle-pad fixed-col-header">
+                        {{tache.Libelle}}
+                        <span class="material-icons icone-warning" ng-if="tache.ListErreurs.length > 0" ng-mouseover="$ctrl.handleShowErrors(tache)" 
+                              uib-popover-template="'popoverTemplate'" popover-trigger="'mouseenter'" popover-placement="left-top">warning</span>
+                    </div>
+                    <div class="col-3 centered fixed-col-header"></div>
+                    <div class="col-4 centered fixed-col-header">
+                        <lookup-standalone name="unite"
+                                        ng-model="tache.Unite"
+                                        text="tache.Unite.Code"
+                                        search-title="{{::$ctrl.resources.Global_ReferentielUnite}}"
+                                        search-placeholder="{{::$ctrl.resources.Global_ReferentielUnite_Placeholder}}"
+                                        on-select="$ctrl.handleLigneTacheLookupSelection(item, tache, 'Unite')"
+                                        on-delete="$ctrl.handleLookupDeletionUnite(tache)"
+                                        url="/api/Unite/SearchLight"
+                                        show-delete-button="true"
+                                        class="formulaire middle"
+                                        ng-disabled="$ctrl.IsActif || $ctrl.IsClosed">
+                        </lookup-standalone>
+                    </div>
+                    <div class="col-5 centered fixed-col-header">
+                        <input id="ipt_tache_quantite_{{$index}}" ng-model="tache.QuantiteObjectif" type="text" class="input-number" fred-input-number="3" 
+                               ng-click="$ctrl.handleSelectInput('ipt_tache_quantite_'+$index)" ng-disabled="$ctrl.IsActif || $ctrl.IsClosed || $ctrl.IsJournalise">
+                    </div>
+                    <div class="col-6 montant fixed-col-header">{{tache.TotalMontantRessource | number : 3}}</div>
+                    <div class="col-7 centered fixed-col-header">
+                        <span class="material-icons" title="Ajouter une ressource" ng-click="$ctrl.showRessources = true; $ctrl.tacheSelected = tache;" ng-if="!$ctrl.IsActif && !$ctrl.IsClosed">add</span>
+                        <span class="material-icons clear" ng-click="$ctrl.handleDeleteTache(tache)" ng-if="!tache.Ressources.length > 0 && (!$ctrl.IsActif && !$ctrl.IsClosed)">clear</span>
+                    </div>
+                    <div class="col-J montant fixed-col-header" ng-if="$ctrl.IsJournalise">{{tache.TotalQuantiteJournalise | number : 3}}</div>
+                    <div ng-if="$ctrl.IsJournalise" ng-class="journalisation.IsWeekEndOrHoliday === true ? 'isWeekEndOrHoliday': ''" ng-repeat="journalisation in $ctrl.objectifFlash.Journalisations" ng-init=""class="col-J total repart-pro">
+                        <input id="ipt_tache_journalisation_{{$ctrl.objectifFlash.Taches.indexOf(tache)}}_{{$index}}" 
+                            type="text" class="input-number" fred-input-number="3"
+                            ng-model="tache.TacheJournalisations[$index].QuantiteObjectif" 
+                            ng-change="$ctrl.handleRatioRepartitionAndTache(tache, null, $ctrl.objectifFlash.Journalisations.indexOf(journalisation))"
+                            ng-click="$ctrl.handleSelectInput('ipt_tache_journalisation_'+$ctrl.objectifFlash.Taches.indexOf(tache)+'_'+$index)"
+                            ng-disabled="$ctrl.IsActif || $ctrl.IsClosed">
+                    </div>
+                </div>
+                <!-- Ressources -->
+                <div id="R_{{tache.TacheId}}" aria-expanded="true" class="collapse in">
+                    <div ng-repeat="ressource in tache.Ressources | orderBy : 'ChapitreCode'">
+                        <div class="ressources flex-line">
+                            <div class="col-1 centered fixed-col-header">
+                                <input id="chb{{$ctrl.objectifFlash.Taches.indexOf(tache)}}_{{$index}}" ng-model="ressource.IsRepartitionKey" ng-change="$ctrl.handleRessourceRepartitionSelection(tache, ressource)" type="checkbox" ng-disabled="$ctrl.IsActif || $ctrl.IsClosed">
+                                <label for="chb{{$ctrl.objectifFlash.Taches.indexOf(tache)}}_{{$index}}"><span></span></label>
+                            </div>
+                            <div class="col-2 libelle-pad fixed-col-header">
+                                {{ressource.Libelle}}
+                                <span class="material-icons icone-warning" ng-if="ressource.ListErreurs.length > 0" ng-mouseover="$ctrl.handleShowErrors(ressource)" 
+                                      uib-popover-template="'popoverTemplate'" popover-trigger="'mouseenter'" popover-placement="left-top">warning</span>
+                            </div>
+                            <div class="col-3 centered fixed-col-header">
+                                <input id="ipt_ressource_puht_{{$ctrl.objectifFlash.Taches.indexOf(tache)}}_{{$index}}" ng-model="ressource.PuHT" type="text" class="input-number" fred-input-number="3" 
+                                       ng-click="$ctrl.handleSelectInput('ipt_ressource_puht_'+$ctrl.objectifFlash.Taches.indexOf(tache)+'_'+$index)"
+                                       ng-disabled="$ctrl.IsActif || $ctrl.IsClosed" ng-change="$ctrl.handleCalculMontant(ressource, tache)">
+                            </div>
+                            <div class="col-4 centered fixed-col-header">
+                                <lookup-standalone ng-model="ressource.Unite"
+                                                text="ressource.Unite.Code"
+                                                search-title="{{::$ctrl.resources.Global_ReferentielUnite}}"
+                                                search-placeholder="{{::$ctrl.resources.Global_ReferentielUnite_Placeholder}}"
+                                                on-select="$ctrl.handleLigneRessourceLookupSelection(item, ressource, 'Unite')"
+                                                on-delete="$ctrl.handleLookupDeletionUnite(ressource)"
+                                                url="/api/Unite/SearchLight"
+                                                show-delete-button="true"
+                                                class="formulaire middle"
+                                                placeholder="Sélectionner une unité"
+                                                ng-disabled="$ctrl.IsActif || $ctrl.IsClosed">
+                                </lookup-standalone>
+                            </div>
+                            <div class="col-5 centered fixed-col-header">
+                                <input id="ipt_ressource_quantite_{{$ctrl.objectifFlash.Taches.indexOf(tache)}}_{{$index}}" ng-model="ressource.QuantiteObjectif" type="text" class="input-number" fred-input-number="3"
+                                       ng-click="$ctrl.handleSelectInput('ipt_ressource_quantite_'+$ctrl.objectifFlash.Taches.indexOf(tache)+'_'+$index)"
+                                       ng-disabled="$ctrl.IsActif || $ctrl.IsClosed || $ctrl.IsJournalise" ng-change="$ctrl.handleCalculMontant(ressource, tache)">
+                            </div>
+                            <div class="col-6 montant fixed-col-header">
+                                <span>{{ressource.Montant | number : 3}}</span>
+                            </div>
+                            <div class="col-7 centered fixed-col-header">
+                                <span class="material-icons clear" ng-click="$ctrl.handleDeleteRessource(tache, ressource)" ng-if="!$ctrl.IsActif && !$ctrl.IsClosed">clear</span>
+                            </div>
+                            <div class="col-J montant fixed-col-header" ng-if="$ctrl.IsJournalise">{{ressource.TotalQuantiteJournalise | number : 3}}</div>
+                            <div ng-if="$ctrl.IsJournalise" ng-class="journalisation.IsWeekEndOrHoliday === true ? 'isWeekEndOrHoliday': ''" ng-repeat="journalisation in $ctrl.objectifFlash.Journalisations" class="col-J repart-pro">
+                                <input id="ipt_ressource_journalisation_{{$ctrl.objectifFlash.Taches.indexOf(tache)}}_{{tache.Ressources.indexOf(ressource)}}_{{$index}}"
+                                    type="text" class="input-number" fred-input-number="3"
+                                    ng-model="ressource.TacheRessourceJournalisations[$index].QuantiteObjectif" 
+                                    ng-change="$ctrl.handleRatioRepartitionAndTache(tache, ressource, $ctrl.objectifFlash.Journalisations.indexOf(journalisation))"
+                                    ng-click="$ctrl.handleSelectInput('ipt_ressource_journalisation_'+$ctrl.objectifFlash.Taches.indexOf(tache)+'_'+tache.Ressources.indexOf(ressource)+'_'+$index)"
+                                    ng-disabled="$ctrl.IsActif || $ctrl.IsClosed">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="total total-tache flex-line" ng-if="$ctrl.IsJournalise">
+                    <div class="col-l-total fixed-col-header">{{::$ctrl.resources.ObjectifFlash_TotalDebourse}}</div>
+                    <div class="col-J montant fixed-col-header">
+                        <div>{{tache.TotalMontantJournalise | number : 3}}</div>
+                    </div>
+                    <div class="col-J repart-pro" ng-repeat="journalisation in $ctrl.objectifFlash.Journalisations" >
+                        <div>{{tache.TacheJournalisations[$index].TotalMontantRessource | number : 3}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="total total-global flex-line" ng-if="$ctrl.IsJournalise">
+            <div class="col-l-total fixed-col-header">{{::$ctrl.resources.ObjectifFlash_TotalGeneral}}</div>
+            <div class="col-J montant fixed-col-header">
+                <div>{{$ctrl.objectifFlash.TotalMontantJournalise | number : 3}}</div>
+            </div>
+            <div class="col-J repart-pro" ng-repeat="journalisation in $ctrl.objectifFlash.Journalisations" >
+                <div>{{journalisation.TotalMontant | number : 3}}</div>
+            </div>
+        </div>
+
+    </fred-flex-table>
+
+    <!-- Panneau Ressources-->
+    <div class="blockScreen" ng-click="$ctrl.showRessources = false" ng-if="$ctrl.showRessources">    </div>
+    <div class="bloc-ressources" ng-if="$ctrl.showRessources" ng-class="{'opened':$ctrl.showRessources, 'closed':!$ctrl.showRessources}">
+        <div class="row">
+            <div class="res-main">
+                <of-ressources-component resources="$ctrl.resources" ci="$ctrl.objectifFlash.Ci" devise="$ctrl.deviseSelected" tache="$ctrl.tacheSelected" date-debut="$ctrl.objectifFlash.DateDebut">
+                </of-ressources-component>
+                <div class="close_panel" ng-click="$ctrl.showRessources = false" title="{{::$ctrl.resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+                    <i class="fa fa-angle-right" aria-hidden="true"></i> <span class="ng-binding">{{::$ctrl.resources.Global_Bouton_RefermerPanneau}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tooltip Erreur Taches/Ressources -->
+    <script type="text/ng-template" id="popoverTemplate">
+        <ul ng-if="$ctrl.errorList.length > 0" class="popoverList">
+            <li ng-repeat="erreur in $ctrl.errorList">
+                {{::erreur}}
+            </li>
+        </ul>
+    </script>
+
+
+</div>

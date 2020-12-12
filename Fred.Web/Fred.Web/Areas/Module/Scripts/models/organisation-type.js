@@ -1,0 +1,12 @@
+﻿
+var ORGANISATION_TYPE = {
+  HOLDING: 1,
+  POLE: 2,
+  GROUPE: 3,
+  SOCIETE: 4,
+  PUO: 5,
+  UO: 6,
+  ETABLISSEMENT: 7,
+  CI: 8,
+};
+

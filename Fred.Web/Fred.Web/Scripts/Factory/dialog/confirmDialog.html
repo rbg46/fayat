@@ -1,0 +1,33 @@
+﻿<div class="modal-header">
+  <h2 class="modal-title">
+    <i class="{{$ctrl.titleIcon}}"></i>
+    {{$ctrl.resources.Global_Modal_Confirmation}}
+  </h2>
+  <span class="flaticon flaticon-multiply close-modal pull-right" ng-click="$ctrl.cancel()"
+        title="{{$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></span>
+</div>
+
+<div class="modal-body">
+  <div class="modal-body-content" style="{{ $ctrl.bodyContentStyle }}">
+    <b ng-bind-html="$ctrl.message"></b>
+  </div>
+</div>
+<div class="modal-footer">
+
+    <button type="button" class="btn  btn-lg btn-default pull-left"
+            ng-click="$ctrl.ok()"
+            title="{{$ctrl.okayButtonText}}">
+        {{$ctrl.resolve.okayButtonText}}
+    </button>
+
+    <button type="button" class="btn  btn-lg btn-default pull-left"
+            ng-show="$ctrl.resolve.option" ng-click="$ctrl.handleOption()"
+            title="{{$ctrl.resolve.optionButtonText}}">
+        {{$ctrl.resolve.optionButtonText}}
+    </button>
+
+  <button type="button" class="btn  btn-lg btn-link pull-right"
+          ng-click="$ctrl.cancel()">
+      {{$ctrl.resolve.cancelButtonText}}
+  </button>
+</div>

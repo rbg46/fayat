@@ -1,0 +1,55 @@
+= Tests unitaires - la FAQ
+
+== Prequel
+
+A lire :
+
+Guide des Test Unitaires (si pas tout le guide, au moins le glossaire)
+
+== FAQ
+
+> Je ne vois pas trop comment commencer mon test et initialiser mon Actual, mes mocks et builder ?
+
+- Pour l'initialisation des mocks et shims, la référence est le *SocieteClassificationTest* du projet test pour s'inspirer.
+- Pour une idée de builder fluent, regardez dans le dossier Commande et le *CommandeBuilder* ainsi que son utilisation dans *CommandeValidatorTest*.
+
+> Comment tester le fluent *Query()* dans un manager ?
+
+- Initialiser une instance d'Unit of Work et mocker son FredDbContext avec un shim *Set<TEntity>* qui renvoie alors un *FakeDbSet<TEntity>*.
+
+Exemple :
+
+[source,c#]
+----
+var fakeContext = GetFake<FredDbContext>();
+fakeContext.Setup(c => c.Set<RessourceEnt>()).Returns(new RessourceMock().GetFakeDbSet());
+var uow = new UnitOfWork(fakeContext.Object);
+SubstituteConstructorArgument<IUnitOfWork>(uow);
+----
+
+- Note: une evolution reutilisable serait de mettre l' initialisation du vrai Unit of Work avec le fakeDbSet dans la classe de mock.
+
+> Mon test ne fonctionne pas en local quand je le lance en local plus d'une fois ?
+
+- La plupart des tests qui sont en DbDepend doivent avoir des operations de cleanup apres les asserts. Il y a de fortes chances pour que 
+le test ne fonctionne pas car celui-ci fait des insert de la meme entite. 
+
+- Il se peut que certains tests en DbDepend ne fonctionnent pas car il manque une référence dans la classe de base qui crée le conteneur
+Unity. Il faut dans ce cas rajouter la référence a cette classe dans la classe de base et relancer les tests. 
+
+> Dois-je absolument utiliser le pattern Arrange / Act / Assert ?
+
+- Pour un souci de consistence, il est préférable d'utiliser ce pattern car il sert de template pour l'écriture et la lecture du test...
+
+> Ma classe a au moins 15 références sur d'autres classes, doit-je vraiment mocker toutes ces références ?
+
+- Pour un Test Unitaire, en principe oui. Le souci de dependance vient du projet en lui-meme. Pour voir un exemple, regardez la methode d'initialization
+de CommandeValidatorTest. 
+
+- Pour un Test d'intégration avec insertion de 3 ou 4 entités, le test peut se faire en DbDepend avec les injections dans la classe de base FredBaseTest.
+Toutefois, cette approche sera proscrite dans le cas d'un test unitaire simple.
+
+> Lorsque je configure mon mock et que je lance mon test, j'ai cette erreur "Invalid setup on a non-virtual (overridable in VB) member: ...". Que puis-je faire ?
+
+- Cette erreur vient du fait que le mock ne peut pas remplacer une methode d'une *classe d'implementation*. Le Mock ne peut travailler qu'avec des
+interfaces ou methodes virtual. Au moment du runtime, celui-ci stocke la nouvelle implementation fake (le mock) et mappe les methodes configurees.

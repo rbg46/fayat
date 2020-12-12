@@ -1,0 +1,161 @@
+﻿<div ng-repeat="ObjItem in $ctrl.data | filter:{IsAbsence:false} track by $index">
+    <div class="flex-line level-1 maj">
+
+        <div class="col-1">
+            <div class="chevron" ng-style="ObjItem.SubNodeList.length ?{'visibility':'visible'}:{'visibility':'hidden'}" data-toggle="collapse" aria-expanded="false" data-target="#Lprim-{{$index}}"></div>
+            <span class="lbl">{{ObjItem.NodeText}}</span>
+            <span class="tot-txt"></span>
+            <span class="sapicon-E0A0 abs" title="{{::$ctrl.resources.RapportHebdo_Absence_Message}}"></span>
+        </div>
+        <!--add calcule-->
+        <div class="col-2">
+            <div>
+                <div class="contenor">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round($ctrl.totalMajorationParDayForAllCi(ObjItem.SubNodeList, 0) * 100) / 100}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div>
+                <div class="contenor">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round($ctrl.totalMajorationParDayForAllCi(ObjItem.SubNodeList, 1) * 100) / 100}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div>
+                <div class="contenor">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round($ctrl.totalMajorationParDayForAllCi(ObjItem.SubNodeList, 2) * 100) / 100}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div>
+                <div class="contenor">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round($ctrl.totalMajorationParDayForAllCi(ObjItem.SubNodeList, 3) * 100) / 100}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div>
+                <div class="contenor">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round($ctrl.totalMajorationParDayForAllCi(ObjItem.SubNodeList, 4) * 100) / 100}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-7">
+            <div>
+                <div class="contenor">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round($ctrl.totalMajorationParDayForAllCi(ObjItem.SubNodeList, 5) * 100) / 100}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div>
+                <div class="contenor">
+                    <span class="tot-datas form-control">{{$ctrl.Math.round($ctrl.totalMajorationParDayForAllCi(ObjItem.SubNodeList, 6) * 100) / 100}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <span>
+                {{$ctrl.Math.round($ctrl.calculateSumFieldsTotal(ObjItem.SubNodeList) * 100) / 100}}
+            </span>
+
+        </div>
+        <!--add calcule-->
+        <!--add calcule-->
+    </div>
+    <div class="collapse in" id="Lprim-{{$index}}">
+        <div ng-repeat="(subNodeIndex, subNode) in ObjItem.SubNodeList | filter:{'IsAbsence':false , 'IsPersonnelCiDesaffected':false} track by $index">
+            <div class="flex-line sub-level1 biz">
+                <div class="col-1">
+                    <div class="chevron" ng-style="subNode.SubNodeList[0].Items.length ?{'visibility':'visible'}:{'visibility':'hidden'}" data-toggle="collapse" aria-expanded="false" data-target="#MAJ-{{$parent.$index}}-{{$index}}"></div>
+                    <lookup ng-model="selectedRef"
+                            search-placeholder="{{::$ctrl.resources.Global_ReferentielCodeMajoration_Placeholder}}"
+                            search-title="{{::$ctrl.resources.Global_ReferentielCodeMajoration}}"
+                            url="/api/CodeMajoration/SearchLight/?groupeId={{$ctrl.groupeId}}&isHeureNuit=false&{{$ctrl.getReferentielRhUrl(ObjItem.Statut,subNode.Statut)}}"
+                            on-select="handleLookupSelection(item, subNode, ObjItem)"
+                            ng-disabled="subNode.PersonnelToReadOnly">
+                        <span class="material-icons">add_box</span>
+                    </lookup>
+                    <span class="lbl">{{subNode.NodeText}}</span>
+                    <span class="tot-txt">{{::$ctrl.resources.RapportHebdo_TotalMajoration}}</span>
+                </div>
+                <div class="col-2">{{handleTotalMajorationPerDay(subNode.SubNodeList , 0)}}</div>
+                <div class="col-3">{{handleTotalMajorationPerDay(subNode.SubNodeList , 1)}}</div>
+                <div class="col-4">{{handleTotalMajorationPerDay(subNode.SubNodeList , 2)}}</div>
+                <div class="col-5">{{handleTotalMajorationPerDay(subNode.SubNodeList , 3)}}</div>
+                <div class="col-6">{{handleTotalMajorationPerDay(subNode.SubNodeList , 4)}}</div>
+                <div class="col-7">{{handleTotalMajorationPerDay(subNode.SubNodeList , 5)}}</div>
+                <div class="col-8">{{handleTotalMajorationPerDay(subNode.SubNodeList , 6)}}</div>
+                <div class="col-9">{{handleTotalWeekPourOuvrier(subNode.SubNodeList)}}</div>
+            </div>
+            <!--Liste niveau 2-->
+            <div class="collapse in" id="MAJ-{{$parent.$index}}-{{$index}}">
+                <div ng-repeat="majorationItems in subNode.SubNodeList">
+                    <div ng-repeat="majoration in majorationItems.Items">
+                        <div class="flex-line level-2 majo">
+                            <div class="col-1">
+                                <span class="sapicon-E263 majs"></span>
+                                <span class="lbl">{{majoration.CodeMajoration}}</span>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="col-2">
+                                <input type="number" oninput="validity.valid||(value='0');" min="0" class="form-control"
+                                       max="{{$ctrl.isAffichageParOuvrier ? disableAddMajorationPerDayForAllCi(0,majoration.MajorationHeurePerDayList[0].HeureMajoration): stopAddMajorationPerDayInAffichageParCi(subNode.SubNodeList ,0,majoration.MajorationHeurePerDayList[0].HeureMajoration)}}"
+                                       ng-model="majoration.MajorationHeurePerDayList[0].HeureMajoration"
+                                       ng-change="$ctrl.handleChangeHeureMajoration(majoration.MajorationHeurePerDayList[0],subNode.SubNodeList,ObjItem,$ctrl.data,majoration)"
+                                       ng-readonly="subNode.PersonnelToReadOnly || (majoration.MajorationHeurePerDayList[0].PersonnelVerrouille) || (majoration.MajorationHeurePerDayList[0].RapportValide && !$ctrl.isManagerPointing) || ($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[0].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === majorationItems.NodeId)">
+                            </div>
+                            <div class="col-3">
+                                <input type="number" oninput="validity.valid||(value='0');" min="0" class="form-control"
+                                       max="{{$ctrl.isAffichageParOuvrier ? disableAddMajorationPerDayForAllCi(1,majoration.MajorationHeurePerDayList[1].HeureMajoration): stopAddMajorationPerDayInAffichageParCi(subNode.SubNodeList ,1,majoration.MajorationHeurePerDayList[1].HeureMajoration)}}"
+                                       ng-model="majoration.MajorationHeurePerDayList[1].HeureMajoration"
+                                       ng-change="$ctrl.handleChangeHeureMajoration(majoration.MajorationHeurePerDayList[1],subNode.SubNodeList,ObjItem,$ctrl.data,majoration)"
+                                       ng-readonly="subNode.PersonnelToReadOnly || (majoration.MajorationHeurePerDayList[1].PersonnelVerrouille) || (majoration.MajorationHeurePerDayList[1].RapportValide && !$ctrl.isManagerPointing) || ($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[1].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === majorationItems.NodeId)">
+                            </div>
+                            <div class="col-4">
+                                <input type="number" oninput="validity.valid||(value='0');" min="0" class="form-control"
+                                       max="{{$ctrl.isAffichageParOuvrier ? disableAddMajorationPerDayForAllCi(2,majoration.MajorationHeurePerDayList[2].HeureMajoration): stopAddMajorationPerDayInAffichageParCi(subNode.SubNodeList ,2,majoration.MajorationHeurePerDayList[2].HeureMajoration)}}"
+                                       ng-model="majoration.MajorationHeurePerDayList[2].HeureMajoration"
+                                       ng-change="$ctrl.handleChangeHeureMajoration(majoration.MajorationHeurePerDayList[2],subNode.SubNodeList,ObjItem,$ctrl.data,majoration)"
+                                       ng-readonly="subNode.PersonnelToReadOnly || (majoration.MajorationHeurePerDayList[2].PersonnelVerrouille) || (majoration.MajorationHeurePerDayList[2].RapportValide && !$ctrl.isManagerPointing) || ($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[2].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === majorationItems.NodeId)">
+                            </div>
+                            <div class="col-5">
+                                <input type="number" oninput="validity.valid||(value='0');" min="0" class="form-control"
+                                       max="{{$ctrl.isAffichageParOuvrier ? disableAddMajorationPerDayForAllCi(3,majoration.MajorationHeurePerDayList[3].HeureMajoration):stopAddMajorationPerDayInAffichageParCi(subNode.SubNodeList ,3,majoration.MajorationHeurePerDayList[3].HeureMajoration)}}"
+                                       ng-model="majoration.MajorationHeurePerDayList[3].HeureMajoration"
+                                       ng-change="$ctrl.handleChangeHeureMajoration(majoration.MajorationHeurePerDayList[3],subNode.SubNodeList,ObjItem,$ctrl.data,majoration)"
+                                       ng-readonly="subNode.PersonnelToReadOnly || (majoration.MajorationHeurePerDayList[3].PersonnelVerrouille) || (majoration.MajorationHeurePerDayList[3].RapportValide && !$ctrl.isManagerPointing) || ($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[3].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === majorationItems.NodeId)">
+                            </div>
+                            <div class="col-6">
+                                <input type="number" oninput="validity.valid||(value='0');" min="0" class="form-control"
+                                       max="{{$ctrl.isAffichageParOuvrier ? disableAddMajorationPerDayForAllCi(4,majoration.MajorationHeurePerDayList[4].HeureMajoration):stopAddMajorationPerDayInAffichageParCi(subNode.SubNodeList ,4,majoration.MajorationHeurePerDayList[4].HeureMajoration)}}"
+                                       ng-model="majoration.MajorationHeurePerDayList[4].HeureMajoration"
+                                       ng-change="$ctrl.handleChangeHeureMajoration(majoration.MajorationHeurePerDayList[4],subNode.SubNodeList,ObjItem,$ctrl.data,majoration)"
+                                       ng-readonly="subNode.PersonnelToReadOnly || (majoration.MajorationHeurePerDayList[4].PersonnelVerrouille) || (majoration.MajorationHeurePerDayList[4].RapportValide && !$ctrl.isManagerPointing) || ($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[4].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === majorationItems.NodeId)">
+                            </div>
+                            <div class="col-7">
+                                <input type="number" oninput="validity.valid||(value='0');" min="0" class="form-control"
+                                       max="{{$ctrl.isAffichageParOuvrier ? disableAddMajorationPerDayForAllCi(5,majoration.MajorationHeurePerDayList[5].HeureMajoration):stopAddMajorationPerDayInAffichageParCi(subNode.SubNodeList ,5,majoration.MajorationHeurePerDayList[5].HeureMajoration)}}"
+                                       ng-model="majoration.MajorationHeurePerDayList[5].HeureMajoration"
+                                       ng-change="$ctrl.handleChangeHeureMajoration(majoration.MajorationHeurePerDayList[5],subNode.SubNodeList,ObjItem,$ctrl.data,majoration)"
+                                       ng-readonly="subNode.PersonnelToReadOnly || (majoration.MajorationHeurePerDayList[5].PersonnelVerrouille) || (majoration.MajorationHeurePerDayList[5].RapportValide && !$ctrl.isManagerPointing) || ($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[5].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === majorationItems.NodeId)">
+                            </div>
+                            <div class="col-8">
+                                <input type="number" oninput="validity.valid||(value='0');" min="0" class="form-control"
+                                       max="{{$ctrl.isAffichageParOuvrier ? disableAddMajorationPerDayForAllCi(6,majoration.MajorationHeurePerDayList[6].HeureMajoration):stopAddMajorationPerDayInAffichageParCi(subNode.SubNodeList ,6,majoration.MajorationHeurePerDayList[6].HeureMajoration)}}"
+                                       ng-model="majoration.MajorationHeurePerDayList[6].HeureMajoration"
+                                       ng-change="$ctrl.handleChangeHeureMajoration(majoration.MajorationHeurePerDayList[6],subNode.SubNodeList,ObjItem,$ctrl.data,majoration)"
+                                       ng-readonly="subNode.PersonnelToReadOnly || (majoration.MajorationHeurePerDayList[6].PersonnelVerrouille) || (majoration.MajorationHeurePerDayList[6].RapportValide && !$ctrl.isManagerPointing) || ($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[6].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === majorationItems.NodeId)">
+                            </div>
+                            <div class="col-9">{{handleTotalDayMajoration(majoration)}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

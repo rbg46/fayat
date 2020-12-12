@@ -1,0 +1,191 @@
+﻿<div class="blockScreen" ng-show="$ctrl.Visible"></div>
+<div class="options small filter-panel" ng-show="$ctrl.Visible">
+
+    <!--Header-->
+    <div class="form-header">
+        <h2>{{::$ctrl.resources.BudgetComparaison_FilterPanel_Titre}}</h2>
+    </div>
+
+    <div class="form fred-scroll">
+
+        <!--Axe analytique-->
+        <div class="group-title">
+            <span class="material-icons">chevron_right</span>
+            <span class="txt">{{::$ctrl.resources.BudgetComparaison_FilterPanel_AxeAnalytique}}</span>
+        </div>
+        <div class="axe-analytique">
+            <button type="button"
+                    ng-class="{'active': $ctrl.Filter.AxeAnalytique.Type === $ctrl.BudgetComparaisonService.AxeAnalytique.Type.TacheRessource}"
+                    ng-click="$ctrl.OnAxeTacheRessourceButtonClick()">
+                {{::$ctrl.resources.BudgetComparaison_FilterPanel_AxeTacheRessource}}
+            </button>
+            <button type="button"
+                    ng-class="{'active': $ctrl.Filter.AxeAnalytique.Type === $ctrl.BudgetComparaisonService.AxeAnalytique.Type.RessourceTache}"
+                    ng-click="$ctrl.OnAxeRessourceTacheButtonClick()">
+                {{::$ctrl.resources.BudgetComparaison_FilterPanel_AxeRessourceTache}}
+            </button>
+        </div>
+
+        <!--Détail de l'axe analytique-->
+        <div class="group-title next">
+            <span class="material-icons">chevron_right</span>
+            <span class="txt">{{::$ctrl.resources.BudgetComparaison_FilterPanel_DetailAxe}}</span>
+        </div>
+        <div class="alert alert-warning" ng-show="$ctrl.Filter.AxeAnalytique.NodeTypes.length === 0">{{::$ctrl.resources.BudgetComparaison_FilterPanel_DetailAxe_Erreur_SelectionnerUnAxe}}</div>
+        <div class="detail-axe-analytique"
+             ng-class="{'axe-tache-ressource': $ctrl.Filter.AxeAnalytique.Type === $ctrl.BudgetComparaisonService.AxeAnalytique.Type.TacheRessource,
+                        'axe-ressource-tache': $ctrl.Filter.AxeAnalytique.Type === $ctrl.BudgetComparaisonService.AxeAnalytique.Type.RessourceTache}">
+            <div class="group tache">
+                <div class="button"
+                     ng-class="{'selected': $ctrl.IsAxeAnalytiqueSelected($ctrl.BudgetComparaisonService.AxeAnalytique.NodeType.Tache1)}"
+                     ng-click="$ctrl.OnToggleAxeAnalytiqueNodeType($ctrl.BudgetComparaisonService.AxeAnalytique.NodeType.Tache1)">
+                    <span>{{::$ctrl.resources.BudgetComparaison_FilterPanel_DetailAxe_T1}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+                <div class="button"
+                     ng-class="{'selected': $ctrl.IsAxeAnalytiqueSelected($ctrl.BudgetComparaisonService.AxeAnalytique.NodeType.Tache2)}"
+                     ng-click="$ctrl.OnToggleAxeAnalytiqueNodeType($ctrl.BudgetComparaisonService.AxeAnalytique.NodeType.Tache2)">
+                    <span>{{::$ctrl.resources.BudgetComparaison_FilterPanel_DetailAxe_T2}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+                <div class="button"
+                     ng-class="{'selected': $ctrl.IsAxeAnalytiqueSelected($ctrl.BudgetComparaisonService.AxeAnalytique.NodeType.Tache3)}"
+                     ng-click="$ctrl.OnToggleAxeAnalytiqueNodeType($ctrl.BudgetComparaisonService.AxeAnalytique.NodeType.Tache3)">
+                    <span>{{::$ctrl.resources.BudgetComparaison_FilterPanel_DetailAxe_T3}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+                <div class="button"
+                     ng-class="{'selected': $ctrl.IsAxeAnalytiqueSelected($ctrl.BudgetComparaisonService.AxeAnalytique.NodeType.Tache4)}"
+                     ng-click="$ctrl.OnToggleAxeAnalytiqueNodeType($ctrl.BudgetComparaisonService.AxeAnalytique.NodeType.Tache4)">
+                    <span>{{::$ctrl.resources.BudgetComparaison_FilterPanel_DetailAxe_T4}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+            </div>
+            <div class="group referentiel">
+                <div class="button"
+                     ng-class="{'selected': $ctrl.IsAxeAnalytiqueSelected($ctrl.BudgetComparaisonService.AxeAnalytique.NodeType.Chapitre)}"
+                     ng-click="$ctrl.OnToggleAxeAnalytiqueNodeType($ctrl.BudgetComparaisonService.AxeAnalytique.NodeType.Chapitre)">
+                    <span>{{::$ctrl.resources.BudgetComparaison_FilterPanel_DetailAxe_Chapitre}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+                <div class="button"
+                     ng-class="{'selected': $ctrl.IsAxeAnalytiqueSelected($ctrl.BudgetComparaisonService.AxeAnalytique.NodeType.SousChapitre)}"
+                     ng-click="$ctrl.OnToggleAxeAnalytiqueNodeType($ctrl.BudgetComparaisonService.AxeAnalytique.NodeType.SousChapitre)">
+                    <span>{{::$ctrl.resources.BudgetComparaison_FilterPanel_DetailAxe_SousChapitre}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+                <div class="button"
+                     ng-class="{'selected': $ctrl.IsAxeAnalytiqueSelected($ctrl.BudgetComparaisonService.AxeAnalytique.NodeType.Ressource)}"
+                     ng-click="$ctrl.OnToggleAxeAnalytiqueNodeType($ctrl.BudgetComparaisonService.AxeAnalytique.NodeType.Ressource)">
+                    <span>{{::$ctrl.resources.BudgetComparaison_FilterPanel_DetailAxe_Ressource}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+            </div>
+        </div>
+
+        <!--Colonnes affichées-->
+        <div class="group-title">
+            <span class="material-icons">chevron_right</span>
+            <span class="txt">{{::$ctrl.resources.BudgetComparaison_FilterPanel_ColonnesAffichees}}</span>
+        </div>
+        <div class="colonnes-affichees">
+            <!--Budget 1-->
+            <div class="group colonne">
+                <div class="colonne-title">
+                    {{::$ctrl.resources.BudgetComparaison_FilterPanel_ColonnesAffichees_Budget1}}
+                </div>
+                <div class="button"
+                     ng-class="{'selected': $ctrl.Filter.Colonnes.Budget1.HasQuantite}"
+                     ng-click="$ctrl.Filter.Colonnes.Budget1.HasQuantite = !$ctrl.Filter.Colonnes.Budget1.HasQuantite">
+                    <span>{{::$ctrl.resources.BudgetComparaison_FilterPanel_ColonnesAffichees_Quantite}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+                <div class="button"
+                     ng-class="{'selected': $ctrl.Filter.Colonnes.Budget1.HasUnite}"
+                     ng-click="$ctrl.Filter.Colonnes.Budget1.HasUnite = !$ctrl.Filter.Colonnes.Budget1.HasUnite">
+                    <span>{{::$ctrl.resources.BudgetComparaison_FilterPanel_ColonnesAffichees_Unite}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+                <div class="button"
+                     ng-class="{'selected': $ctrl.Filter.Colonnes.Budget1.HasPrixUnitaire}"
+                     ng-click="$ctrl.Filter.Colonnes.Budget1.HasPrixUnitaire = !$ctrl.Filter.Colonnes.Budget1.HasPrixUnitaire">
+                    <span>{{::$ctrl.resources.BudgetComparaison_FilterPanel_ColonnesAffichees_RpixUnitaire}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+            </div>
+
+            <!--Budget 2-->
+            <div class="group colonne">
+                <div class="colonne-title">
+                    {{::$ctrl.resources.BudgetComparaison_FilterPanel_ColonnesAffichees_Budget2}}
+                </div>
+                <div class="button"
+                     ng-class="{'selected': $ctrl.Filter.Colonnes.Budget2.HasQuantite}"
+                     ng-click="$ctrl.Filter.Colonnes.Budget2.HasQuantite = !$ctrl.Filter.Colonnes.Budget2.HasQuantite">
+                    <span>{{::$ctrl.resources.BudgetComparaison_FilterPanel_ColonnesAffichees_Quantite}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+                <div class="button"
+                     ng-class="{'selected': $ctrl.Filter.Colonnes.Budget2.HasUnite}"
+                     ng-click="$ctrl.Filter.Colonnes.Budget2.HasUnite = !$ctrl.Filter.Colonnes.Budget2.HasUnite">
+                    <span>{{::$ctrl.resources.BudgetComparaison_FilterPanel_ColonnesAffichees_Unite}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+                <div class="button"
+                     ng-class="{'selected': $ctrl.Filter.Colonnes.Budget2.HasPrixUnitaire}"
+                     ng-click="$ctrl.Filter.Colonnes.Budget2.HasPrixUnitaire = !$ctrl.Filter.Colonnes.Budget2.HasPrixUnitaire">
+                    <span>{{::$ctrl.resources.BudgetComparaison_FilterPanel_ColonnesAffichees_RpixUnitaire}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+            </div>
+
+            <!--Ecart-->
+            <div class="group colonne">
+                <div class="colonne-title">
+                    {{::$ctrl.resources.BudgetComparaison_FilterPanel_ColonnesAffichees_Ecart}}
+                </div>
+                <div class="button"
+                     ng-class="{'selected': $ctrl.Filter.Colonnes.Ecart.HasQuantite}"
+                     ng-click="$ctrl.Filter.Colonnes.Ecart.HasQuantite = !$ctrl.Filter.Colonnes.Ecart.HasQuantite">
+                    <span>{{::$ctrl.resources.BudgetComparaison_FilterPanel_ColonnesAffichees_Quantite}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+                <div class="button"
+                     ng-class="{'selected': $ctrl.Filter.Colonnes.Ecart.HasUnite}"
+                     ng-click="$ctrl.Filter.Colonnes.Ecart.HasUnite = !$ctrl.Filter.Colonnes.Ecart.HasUnite">
+                    <span>{{::$ctrl.resources.BudgetComparaison_FilterPanel_ColonnesAffichees_Unite}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+                <div class="button"
+                     ng-class="{'selected': $ctrl.Filter.Colonnes.Ecart.HasPrixUnitaire}"
+                     ng-click="$ctrl.Filter.Colonnes.Ecart.HasPrixUnitaire = !$ctrl.Filter.Colonnes.Ecart.HasPrixUnitaire">
+                    <span>{{::$ctrl.resources.BudgetComparaison_FilterPanel_ColonnesAffichees_RpixUnitaire}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Footer-->
+    <div class="form-footer">
+        <div class="group">
+            <button type="button" class="btn btn-default"
+                    ng-click="$ctrl.OnSaveButtonClick()"
+                    ng-disabled="!$ctrl.CanSave()">
+                {{::$ctrl.resources.Global_Bouton_Enregistrer}}
+            </button>
+            <button type="button"
+                    class="btn"
+                    ng-click="$ctrl.OnCancelButtonClick()">
+                {{::$ctrl.resources.Global_Bouton_Annuler}}
+            </button>
+        </div>
+        <div class="group">
+            <div class="refermer-le-panneau"
+                 ng-click="$ctrl.Hide()">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                <span>{{$ctrl.resources.BudgetComparaison_FilterPanel_RefermerLePanneau}}</span>
+            </div>
+        </div>
+    </div>
+</div>

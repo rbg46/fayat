@@ -1,0 +1,31 @@
+﻿
+    <div class="lookup-panel-header flexV flexAround padding-10">
+
+        <!--########  Titre  ########-->
+        <div class="component-lookup-panel-title">
+            <div class="color-white flex1 bold txt-size-140">{{$ctrl.resources.Global_ReferentielFournisseur}}</div>
+            <span class="color-white material-icons txt-link" title="Cliquer pour fermer" ng-click="$ctrl.handleCancel()">close</span>
+        </div>
+
+        <!--########  1er champ de recherche (champ par défaut)  ########-->
+        <input type="text"
+               style="margin-bottom:10px !important"
+               ng-keypress="($event.which === 13)?$ctrl.handleFilterChange():0"
+               ng-model-options="{debounce: 700 }"
+               ng-change="$ctrl.handleFilterChange()"
+               ng-model="$ctrl.filter.recherche1"
+               class="form-control"
+               placeholder="Début du nom du fournisseur..."
+               title="{{$ctrl.resources.Commande_Holder_Saisie_Nom}}"
+               focus-on="focus-input-text" />
+
+        <!--########  2eme champ de recherche (champ optionnel)  ########-->
+        <input type="text"
+               ng-keypress="($event.which === 13)?$ctrl.handleFilterChange():0"
+               ng-model-options="{debounce: 700 }"
+               ng-change="$ctrl.handleFilterChange()"
+               ng-model="$ctrl.filter.recherche2"
+               class="form-control"
+               placeholder="{{$ctrl.resources.Commande_Holde_Autreinfo}}" />
+
+    </div>

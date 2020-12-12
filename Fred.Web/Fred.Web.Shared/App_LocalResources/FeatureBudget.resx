@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Budget_BudgetDetail_Template_Autheur" xml:space="preserve">
+    <value>Auteur du budget :</value>
+    <comment>Areas\Budget\Scripts\BudgetDetail\BudgetDetailTemplate.html</comment>
+  </data>
+  <data name="Budget_BudgetDetail_Template_CreerLe" xml:space="preserve">
+    <value>Crée le :</value>
+    <comment>Areas\Budget\Scripts\BudgetDetail\BudgetDetailTemplate.html</comment>
+  </data>
+  <data name="Budget_BudgetDetail_Template_DateModification" xml:space="preserve">
+    <value>Date de la dernière modification :</value>
+    <comment>Areas\Budget\Scripts\BudgetDetail\BudgetDetailTemplate.html</comment>
+  </data>
+  <data name="Budget_BudgetDetail_Template_AuteurModification" xml:space="preserve">
+    <value>Dernière modification par :</value>
+    <comment>Areas\Budget\Scripts\BudgetDetail\BudgetDetailTemplate.html</comment>
+  </data>
+  <data name="Budget_BudgetDetail_Template_MontantTotal" xml:space="preserve">
+    <value>Montant Total</value>
+    <comment>Areas\Budget\Scripts\BudgetDetail\BudgetDetailTemplate.html</comment>
+  </data>
+  <data name="Budget_BudgetDetail_Template_Recette" xml:space="preserve">
+    <value>Recette</value>
+    <comment>Areas\Budget\Scripts\BudgetDetail\BudgetDetailTemplate.html</comment>
+  </data>
+  <data name="Budget_BudgetDetail_Template_Valideur" xml:space="preserve">
+    <value>Valideur :</value>
+    <comment>Areas\Budget\Scripts\BudgetDetail\BudgetDetailTemplate.html</comment>
+  </data>
+  <data name="BudgetRessourcesComponent_actionLoadError" xml:space="preserve">
+    <value>Une erreur est survenue lors du chargement des taches.</value>
+  </data>
+  <data name="Code_lb" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="CreateBudgetRessourceCpt_saveError" xml:space="preserve">
+    <value>Une erreur est survenue lors de la sauvegarde de la ressource.</value>
+  </data>
+  <data name="CreateBudgetRessourceCpt_updateError" xml:space="preserve">
+    <value>Une erreur est survenue lors de la mise a jour de la ressource.</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_annulation" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_creation" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_creer_ressource" xml:space="preserve">
+    <value>Créer une ressource</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_devise" xml:space="preserve">
+    <value>Devise</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_error_max" xml:space="preserve">
+    <value>Le montant ne peux pas dépassé 999 999 999 999,99</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_error_min" xml:space="preserve">
+    <value>La recette doit être strictement positif.</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_error_number" xml:space="preserve">
+    <value>Le montant doit être un nombre.</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_error_precision" xml:space="preserve">
+    <value>Le montant doit avoir une précision de 2 chiffres aprés la virgule.</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_mise_a_jour" xml:space="preserve">
+    <value>Mise à jour</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_mise_a_jour_ressource" xml:space="preserve">
+    <value>Mise à jour d'une ressource</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_prix" xml:space="preserve">
+    <value>Prix</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_ressource" xml:space="preserve">
+    <value>Ressource</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_ressource_parent" xml:space="preserve">
+    <value>Ressource parent</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_unite" xml:space="preserve">
+    <value>Unité</value>
+  </data>
+  <data name="SavePriceRessourceDialogTemplate_titre" xml:space="preserve">
+    <value>Voulez vous étendre la modification au referentiel ?</value>
+  </data>
+  <data name="SavePriceRessourceDialogTemplate_oui" xml:space="preserve">
+    <value>Oui</value>
+  </data>
+  <data name="SavePriceRessourceDialogTemplate_non" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="SavePriceRessourceDialogTemplate_annuler" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="SavePriceRessourceDialogTemplate_confirmation" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="index_Annuler" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="index_Annuler2" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Budget_Index_Titre" xml:space="preserve">
+    <value>Budget</value>
+    <comment>Areas\Budget\Views\Budget\Index.cshtml</comment>
+  </data>
+  <data name="index_Coller" xml:space="preserve">
+    <value>Coller</value>
+  </data>
+  <data name="index_Demande_de_validation" xml:space="preserve">
+    <value>Demande de validation</value>
+  </data>
+  <data name="index_Enregistrer" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="index_Enregistrer2" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="Budget_Index_SousTitre" xml:space="preserve">
+    <value>Paramétrage budgétaire du CI</value>
+    <comment>Areas\Budget\Views\Budget\Index.cshtml</comment>
+  </data>
+  <data name="Index_picklist_display_label" xml:space="preserve">
+    <value>Référentiel des CI</value>
+  </data>
+  <data name="Index_picklist_placeholder" xml:space="preserve">
+    <value>CI...</value>
+  </data>
+  <data name="Index_picklist_search_placeholder" xml:space="preserve">
+    <value>CI...</value>
+  </data>
+  <data name="index_Plans_des_taches" xml:space="preserve">
+    <value>Plans des tâches</value>
+  </data>
+  <data name="index_refermer_le_panneau" xml:space="preserve">
+    <value>Cliquer pour refermer le panneau</value>
+  </data>
+  <data name="index_Refermer_le_panneau2" xml:space="preserve">
+    <value>Refermer le panneau</value>
+  </data>
+  <data name="index_rejeter_le_Budget" xml:space="preserve">
+    <value>rejeter le Budget</value>
+  </data>
+  <data name="Budget_Index_Bouton_AjouterRessource" xml:space="preserve">
+    <value>Ressources</value>
+    <comment>Areas\Budget\Views\Budget\Index.cshtml</comment>
+  </data>
+  <data name="index_Retour_au_budget" xml:space="preserve">
+    <value>Retour au budget</value>
+  </data>
+  <data name="Index_Taches" xml:space="preserve">
+    <value>Tâches</value>
+  </data>
+  <data name="index_Valider_le_Budget" xml:space="preserve">
+    <value>Valider le Budget</value>
+  </data>
+  <data name="Libelle_lb" xml:space="preserve">
+    <value>Libelle</value>
+  </data>
+  <data name="TachesBudgetComponent_getBudgetError" xml:space="preserve">
+    <value>Une erreur est survenue lors du chargement du budget.</value>
+  </data>
+  <data name="TachesBudgetComponent_getBudgetRevisionTachesError" xml:space="preserve">
+    <value>Une erreur est survenue lors du chargement des taches.</value>
+  </data>
+  <data name="TachesBudgetComponent_updateBudgetRevisionForDaftError" xml:space="preserve">
+    <value>Une erreur est survenue lors du passage du budget à l'état brouillon.</value>
+  </data>
+  <data name="TachesBudgetComponent_updateBudgetRevisionForDaftSuccess" xml:space="preserve">
+    <value>Le budget est à l'état brouillon.</value>
+  </data>
+  <data name="TachesBudgetComponent_updateBudgetRevisionForDoValidationError" xml:space="preserve">
+    <value>Une erreur est survenue lors de la soumission du budget.</value>
+  </data>
+  <data name="TachesBudgetComponent_updateBudgetRevisionForDoValidationSuccess" xml:space="preserve">
+    <value>Soumission pour validation réussie.</value>
+  </data>
+  <data name="TachesBudgetComponent_updateBudgetRevisionForValidationError" xml:space="preserve">
+    <value>Une erreur est survenue lors de la validation du budget.</value>
+  </data>
+  <data name="TachesBudgetComponent_updateBudgetRevisionForValidationSuccess" xml:space="preserve">
+    <value>Validation du budget réussie.</value>
+  </data>
+  <data name="TachesBudgetComponent_updateBudgetRevisionTachesError" xml:space="preserve">
+    <value>Une erreur est survenue lors de la sauvegarde des taches.</value>
+  </data>
+  <data name="TachesBudgetComponent_updateBudgetRevisionTachesSuccess" xml:space="preserve">
+    <value>Enregistrement réussi.</value>
+  </data>
+  <data name="TacheBudgetComponent_message_dialog" xml:space="preserve">
+    <value>En modifiant la recette de cette tache, vous mettez à zero la recette sur les niveaux inferieurs et vous modifiez les recettes parentes. Voulez vous continuer ?</value>
+  </data>
+  <data name="TacheBudgetTemplate_AVANCEMENT" xml:space="preserve">
+    <value>Avancement</value>
+  </data>
+  <data name="TacheBudgetTemplate_iNFOS" xml:space="preserve">
+    <value>Infos</value>
+  </data>
+  <data name="TacheBudgetTemplate_MONTANT" xml:space="preserve">
+    <value>Montant</value>
+  </data>
+  <data name="TacheBudgetTemplate_PRIX_UNITAIRE" xml:space="preserve">
+    <value>Prix Unitaire</value>
+  </data>
+  <data name="TacheBudgetTemplate_QUANTITE" xml:space="preserve">
+    <value>Quantité</value>
+  </data>
+  <data name="TacheBudgetTemplate_quantiteARealise_error_max" xml:space="preserve">
+    <value>Le montant ne peux pas dépasser 999 999 999 999,99.</value>
+  </data>
+  <data name="TacheBudgetTemplate_quantiteARealise_error_number" xml:space="preserve">
+    <value>Le montant doit être un nombre.</value>
+  </data>
+  <data name="TacheBudgetTemplate_quantiteARealise_error_pattern" xml:space="preserve">
+    <value>Le montant doit avoir une précision de 2 chiffres aprés la virgule.</value>
+  </data>
+  <data name="TacheBudgetTemplate_RECETTE" xml:space="preserve">
+    <value>Recette</value>
+  </data>
+  <data name="TacheBudgetTemplate_recette_error_max" xml:space="preserve">
+    <value>La recette ne peux pas dépassé 999 999 999 999,99</value>
+  </data>
+  <data name="TacheBudgetTemplate_recette_error_number" xml:space="preserve">
+    <value>La recette doit être un nombre.</value>
+  </data>
+  <data name="TacheBudgetTemplate_recette_error_pattern" xml:space="preserve">
+    <value>La recette doit avoir une précision de 2 chiffres aprés la virgule.</value>
+  </data>
+  <data name="TacheBudgetTemplate_RNP" xml:space="preserve">
+    <value>ressources non parametrées</value>
+  </data>
+  <data name="TacheBudgetTemplate_TYPE_AVANCEMENT" xml:space="preserve">
+    <value>Type d'Avancement</value>
+  </data>
+  <data name="TacheDetailComponent_createParameterSuccess" xml:space="preserve">
+    <value>Modification du référentiel réussie.</value>
+  </data>
+  <data name="TacheDetailComponent_saveTaskError" xml:space="preserve">
+    <value>Une erreur est survenue lors de l'enregistrement de la tache.</value>
+  </data>
+  <data name="TacheDetailComponent_saveTaskSuccess" xml:space="preserve">
+    <value>Enregistrement réussi.</value>
+  </data>
+  <data name="TacheDetailComponent_updateRessourceError" xml:space="preserve">
+    <value>Une erreur est survenue lors de la sauvegarde du référentiel.</value>
+  </data>
+  <data name="TacheDetailTemplate_chapitre" xml:space="preserve">
+    <value>Chapitre</value>
+  </data>
+  <data name="TacheDetailTemplate_Formule" xml:space="preserve">
+    <value>Formule</value>
+  </data>
+  <data name="TacheDetailTemplate_Heures_MO_par_unite" xml:space="preserve">
+    <value>Heures MO par unité</value>
+  </data>
+  <data name="TacheDetailTemplate_Libelle_Ressource" xml:space="preserve">
+    <value>Libellé Ressource</value>
+  </data>
+  <data name="TacheDetailTemplate_Montant" xml:space="preserve">
+    <value>Montant</value>
+  </data>
+  <data name="TacheDetailTemplate_Prix_Total_QB" xml:space="preserve">
+    <value>Prix Total QB</value>
+  </data>
+  <data name="TacheDetailTemplate_Prix_Total_T4" xml:space="preserve">
+    <value>Prix Total T4</value>
+  </data>
+  <data name="TacheDetailTemplate_Prix_Unitaire" xml:space="preserve">
+    <value>Prix Unitaire</value>
+  </data>
+  <data name="TacheDetailTemplate_Prix_unitaire_QB" xml:space="preserve">
+    <value>Prix unitaire QB</value>
+  </data>
+  <data name="TacheDetailTemplate_Prix_unitaire_T4" xml:space="preserve">
+    <value>Prix unitaire T4</value>
+  </data>
+  <data name="TacheDetailTemplate_Quantite" xml:space="preserve">
+    <value>Quantité</value>
+  </data>
+  <data name="TacheDetailTemplate_Quantite_a_realiser" xml:space="preserve">
+    <value>Quantité à réaliser</value>
+  </data>
+  <data name="TacheDetailTemplate_Quantite_de_base" xml:space="preserve">
+    <value>Quantité de base</value>
+  </data>
+  <data name="TacheDetailTemplate_Ressource" xml:space="preserve">
+    <value>Ressource</value>
+  </data>
+  <data name="TacheDetailTemplate_Sous_Chapitre" xml:space="preserve">
+    <value>Sous-Chapitre</value>
+  </data>
+  <data name="TacheDetailTemplate_Sous_detail" xml:space="preserve">
+    <value>Sous détail</value>
+  </data>
+  <data name="TacheDetailTemplate_Supprimer" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="TacheDetailTemplate_Total_Heures_MO" xml:space="preserve">
+    <value>Total Heures MO</value>
+  </data>
+  <data name="TacheDetailTemplate_Total_heures_MO_T4" xml:space="preserve">
+    <value>Total heures MO T4</value>
+  </data>
+  <data name="TacheDetailTemplate_Unite" xml:space="preserve">
+    <value>Unité</value>
+  </data>
+  <data name="index_Copier" xml:space="preserve">
+    <value>Copier</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_error_code_required" xml:space="preserve">
+    <value>Le code de la ressource doit être renseignée.</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_error_libelle_required" xml:space="preserve">
+    <value>Le libellé de la ressource doit être renseigné.</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_error_price_required" xml:space="preserve">
+    <value>Le prix est requis.</value>
+  </data>
+  <data name="CreateBudgetRessourceTpl_error_unite_required" xml:space="preserve">
+    <value>L'unité de la ressource doit être renseigné.</value>
+  </data>
+  <data name="Budget_Index_TitreOnglet" xml:space="preserve">
+    <value>Budget</value>
+    <comment>Areas\Budget\Views\Budget\Index.cshtml</comment>
+  </data>
+  <data name="Budget_Controller_Notification_ChargementCI_Erreur" xml:space="preserve">
+    <value>Une erreur est survenue lors de la recupération du CI.</value>
+    <comment>Areas\Budget\Scripts\BudgetController.js</comment>
+  </data>
+  <data name="Budget_Controller_Notification_ChargementDeviseDuCI_Erreur" xml:space="preserve">
+    <value>Une erreur est survenue lors de la recupération des devises du ci.</value>
+    <comment>Areas\Budget\Scripts\BudgetController.js</comment>
+  </data>
+  <data name="Budget_Controller_Notification_CISansOrganisation_Erreur" xml:space="preserve">
+    <value>Le CI n'a pas d'organisation.</value>
+    <comment>Areas\Budget\Scripts\BudgetController.js</comment>
+  </data>
+  <data name="Budget_Index_Bouton_RetourBudget" xml:space="preserve">
+    <value>Retour au Budget</value>
+    <comment>Areas\Budget\Views\Budget\Index.cshtml</comment>
+  </data>
+  <data name="Budget_Ressources_Template_Chapitre_Code" xml:space="preserve">
+    <value>Code</value>
+    <comment>Areas\Budget\Scripts\Ressources\BudgetRessourcesTemplate.html</comment>
+  </data>
+  <data name="Budget_Ressources_Template_Chapitre_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+    <comment>Areas\Budget\Scripts\Ressources\BudgetRessourcesTemplate.html</comment>
+  </data>
+  <data name="Budget_Ressources_Template_SousChapitre_Code" xml:space="preserve">
+    <value>Code</value>
+    <comment>Areas\Budget\Scripts\Ressources\BudgetRessourcesTemplate.html</comment>
+  </data>
+  <data name="Budget_Ressources_Template_SousChapitre_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+    <comment>Areas\Budget\Scripts\Ressources\BudgetRessourcesTemplate.html</comment>
+  </data>
+  <data name="Budget_Detail_ChangeTache4_Tooltip" xml:space="preserve">
+    <value>Cliquez pour modifier la tâche</value>
+  </data>
+  <data name="_Budget_Erreur_Enregistrement" xml:space="preserve">
+    <value>Erreur d'enregistrement</value>
+  </data>
+  <data name="_Budget_Erreur_Chargement" xml:space="preserve">
+    <value>Erreur de chargement</value>
+  </data>
+  <data name="_Budget_Erreur_Chargement_BudgetInexistant" xml:space="preserve">
+    <value>Le budget demandé n'existe pas.</value>
+  </data>
+  <data name="_Budget_Enregistrement_Effectue" xml:space="preserve">
+    <value>Enregistrement effectué</value>
+  </data>
+  <data name="_Budget_PasDeModificationAEnregistrer" xml:space="preserve">
+    <value>Pas de modification à enregistrer</value>
+  </data>
+  <data name="_Budget_ConfirmationAnnulation" xml:space="preserve">
+    <value>Etes-vous certain de vouloir annuler ?</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_Budget_Validation_Effectue" xml:space="preserve">
+    <value>Validation du budget effectuée</value>
+  </data>
+  <data name="_Budget_PasDeModificationAAnnuler" xml:space="preserve">
+    <value>Pas de modification à annuler</value>
+  </data>
+  <data name="Budget_Recalage_Selection_Periode" xml:space="preserve">
+    <value>Veuillez sélectionnez la période de fin pour votre recalage budgétaire.</value>
+  </data>
+  <data name="Budget_Recalage_Titre" xml:space="preserve">
+    <value>Recalage budgétaire</value>
+  </data>
+  <data name="PageAvancementTitre" xml:space="preserve">
+    <value>Avancement d'un budget</value>
+  </data>
+  <data name="TachesBudgetCreeApresMiseEnApplicationWarning" xml:space="preserve">
+    <value>Attention cette tache a été créée après la mise en application du budget</value>
+  </data>
+  <data name="_Budget_RetourBrouillon_Effectue" xml:space="preserve">
+    <value>La remise en brouillon à été effectuée</value>
+  </data>
+  <data name="Budget_Recalage_Error_AucunBudgetEnApplication" xml:space="preserve">
+    <value>Aucun budget en application pour le CI</value>
+  </data>
+  <data name="Budget_Recalage_Error_AucunControleBudgetaireValide" xml:space="preserve">
+    <value>Aucun Controle Budgétaire validé pour le budget en application</value>
+  </data>
+  <data name="Budget_Recalage_Error_AucunControleBudgetaireValideSurPeriodeCloture" xml:space="preserve">
+    <value>Aucun Controle Budgétaire validé sur période cloturée pour le budget en application</value>
+  </data>
+</root>

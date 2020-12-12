@@ -1,0 +1,195 @@
+﻿
+<div class="row line panel-default"
+     ng-show="$ctrl.handleGetTaskVisibility($ctrl.tache)"
+     ng-class="{'isOpen':$ctrl.isOpen,'selected':$ctrl.tache === $ctrl.taskSelected,'in':$ctrl.isOpen ,'sdfsd':$ctrl.isOpen}"
+     ng-click="$ctrl.handleClickHeader()">
+
+  <div ng-class="$ctrl.handleGetLevel()" class="panel-heading">
+
+    <div ng-if="!$ctrl.isLargeList" class="main_row">
+      <div class="col-md-1 task_head no_padding"
+           ng-click="$ctrl.handleOpenChild()">
+        <div>T{{$ctrl.tache.Niveau}}</div>
+      </div>
+      <div class="col-md-1 dropSlide no_padding"
+           ng-click="$ctrl.handleOpenChild()">
+        <div class="arrow"></div>
+      </div>
+      <div class="col-md-2 no_padding" ng-click="$ctrl.handleSelect($event)">
+        <div class="lb">{{$ctrl.resources.Code_lb}}</div>
+        <span class="t1">{{$ctrl.tache.Code}}</span>
+      </div>
+      <div class="col-md-5 no_padding pad_l" ng-click="$ctrl.handleSelect($event)">
+        <div class="lb">{{$ctrl.resources.Libelle_lb}}</div>
+        <span class="t2">{{$ctrl.tache.Libelle}}</span>
+      </div>
+      <div class="col-md-3 no_padding">
+        <div ng-show="$ctrl.tache.Niveau === 4">
+          <button class="btn btn-primary add_task pull-right"
+                  ng-click="$ctrl.handleSelect($event)">
+            <i class="flaticon flaticon-add"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <form name="$ctrl.formTacheBudget{{$ctrl.tache.TacheId}}" autocomplete="off" novalidate>
+      <div ng-if="$ctrl.isLargeList" class="main_row">
+
+        <div class="col-md-1 task_head no_padding"
+             ng-click="$ctrl.handleOpenChild()">
+          <div>T{{$ctrl.tache.Niveau}}</div>
+        </div>
+
+        <div class="col-md-1 dropSlide no_padding"
+             ng-click="$ctrl.handleOpenChild()">
+          <div class="arrow" ng-show="$ctrl.handlecanShowArrow($ctrl.tache)"></div>
+        </div>
+
+        <!--Code-->
+        <div class="col-md-1 no_padding" ng-click="$ctrl.handleSelect($event)">
+          <div class="lb">{{$ctrl.resources.Code_lb}}</div>
+          <span class="t1">{{$ctrl.tache.Code}}</span>
+        </div>
+
+        <!--Libelle-->
+        <div class="col-md-2 no_padding" ng-click="$ctrl.handleSelect($event)">
+          <div class="lb">{{$ctrl.resources.Libelle_lb}}</div>
+          <span class="t2">{{$ctrl.tache.Libelle}}</span>
+        </div>
+
+        <!--Quantite-->
+        <div class="col-md-1 no_padding quant">
+          <div ng-if="$ctrl.tache.Niveau === 4 && $ctrl.taskSelected !== $ctrl.tache">
+            <div class="lb">{{$ctrl.resources.TacheBudgetTemplate_QUANTITE}}</div>
+            <span class="t2">{{$ctrl.tache.QuantiteARealise}}</span>
+          </div>
+          <div ng-if="$ctrl.tache.Niveau === 4 && $ctrl.taskSelected === $ctrl.tache">
+            <div class="lb">{{$ctrl.resources.TacheBudgetTemplate_QUANTITE}}</div>
+            <input type="text"
+                   fred-input-number
+                   ng-disabled="$ctrl.bugetRevisionStatut === 'Valide'"
+                   name="quantiteARealise"
+                   class="t2 input-number"                   
+                   max="999999999999.99"
+                   min="0"                   
+                   ng-model="$ctrl.tache.QuantiteARealise"                  
+                   ng-change="$ctrl.handleQuantiteChanged($ctrl.tache,$ctrl.formTacheBudget{{$ctrl.tache.TacheId}})"
+                   required />
+          </div>      
+        </div>
+
+        <!--PrixUnitaire-->
+        <div class="col-md-1 no_padding">
+          <div ng-show="$ctrl.tache.Niveau === 4">
+            <div class="lb">{{$ctrl.resources.TacheBudgetTemplate_PRIX_UNITAIRE}}</div>
+            <span class="t2">{{$ctrl.tache.PrixUnitaireQB}}</span>
+          </div>
+        </div>
+
+        <!--Montant-->
+        <div class="col-md-1 no_padding">
+          <div>
+            <div class="lb">{{$ctrl.resources.TacheBudgetTemplate_MONTANT}}</div>
+            <span class="t2">{{$ctrl.tache.TotalT4}}</span>
+          </div>
+        </div>
+
+        <!--RECETTE-->
+        <div class="col-md-1 no_padding recette">
+          <div ng-show="$ctrl.taskSelected !== $ctrl.tache">
+            <div class="lb">{{$ctrl.resources.TacheBudgetTemplate_RECETTE}}</div>
+            <span class="t2">{{$ctrl.tache.Recette}}</span>
+          </div>
+          <div ng-show="$ctrl.taskSelected === $ctrl.tache">
+            <div class="lb">{{$ctrl.resources.TacheBudgetTemplate_RECETTE}}</div>
+            <input ng-disabled="$ctrl.bugetRevisionStatut === 'Valide'"
+                   type="text"
+                   fred-input-number
+                   name="recette"
+                   class="t2 input-number"                  
+                   max="999999999999.99"                                 
+                   ng-model="$ctrl.tache.Recette"
+                   ng-focus="$ctrl.handleSaveRecette($ctrl.tache)"
+                   ng-blur="$ctrl.handleBlurRecette($ctrl.tache)"                  
+                   ng-change="$ctrl.handleRecetteChanged($ctrl.tache,$ctrl.formTacheBudget{{$ctrl.tache.TacheId}})" />
+          </div>         
+        </div>
+
+        <!--AVANCEMENT-->
+        <div class="col-md-1 no_padding">
+          <div class="lb">{{$ctrl.resources.TacheBudgetTemplate_AVANCEMENT}}</div>
+          <input type="checkbox" id="rec-{{$ctrl.tache.TacheId}}"
+                 ng-disabled="$ctrl.bugetRevisionStatut === 'Valide'"
+                 ng-model="$ctrl.tache.Avancement"
+                 ng-change="$ctrl.handleAvancementChanged($ctrl.tache)" />
+          <label for="rec-{{$ctrl.tache.TacheId}}"><span></span></label>
+
+        </div>
+
+
+        <!--TYPE D'AVANCEMENT-->
+        <div class="col-md-1 no_padding">
+          <div ng-show="$ctrl.tache.Niveau === 4 && $ctrl.taskSelected === $ctrl.tache">
+            <div class="lb">{{$ctrl.resources.TacheBudgetTemplate_TYPE_AVANCEMENT}}</div>
+            <select ng-change="$ctrl.handleTypeAvancementChanged($ctrl.tache)"
+                    ng-disabled="$ctrl.bugetRevisionStatut === 'Valide'"
+                    ng-options="option.name for option in $ctrl.typeAvancements track by option.id"
+                    ng-model="$ctrl.selectedTypeAvancement"></select>
+          </div>
+          <div ng-show="$ctrl.tache.Niveau === 4 &&  $ctrl.taskSelected !== $ctrl.tache">
+            <div class="lb">{{$ctrl.resources.TacheBudgetTemplate_TYPE_AVANCEMENT}}</div>
+            <span>{{$ctrl.selectedTypeAvancement.name}}</span>
+          </div>
+        </div>
+
+        <div class="col-md-1 no_padding">
+          <div ng-show="$ctrl.errorInfo.taskIsInError">
+            <div class="lb">{{$ctrl.resources.TacheBudgetTemplate_iNFOS}}</div>
+            <span class="t2">{{$ctrl.errorInfo.ressourcesWithoutParameters}} {{$ctrl.resources.TacheBudgetTemplate_RNP}}</span>
+          </div>
+        </div>
+
+
+        <div class="col-md-1 no_padding">
+          <div ng-show="$ctrl.tache.Niveau === 4">
+            <button class="btn btn-primary add_task pull-right" ng-click="$ctrl.handleSelect($event)">
+              <i class="flaticon flaticon-add"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div ng-show="$ctrl.tache.Niveau === 4">
+    <div class="taskError" ng-show="$ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.quantiteARealise.$invalid">
+      <span ng-show="$ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.quantiteARealise.$invalid && $ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.quantiteARealise.$error.min">La quantité doit être supérieure ou égale à zéro.</span>
+      <span ng-show="$ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.quantiteARealise.$invalid && $ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.quantiteARealise.$error.required">La quantité est obligatoire.</span>
+      <span ng-show="$ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.quantiteARealise.$invalid && $ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.quantiteARealise.$error.pattern">{{$ctrl.resources.TacheBudgetTemplate_quantiteARealise_error_pattern}}</span>
+      <span ng-show="$ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.quantiteARealise.$invalid && $ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.quantiteARealise.$error.max">{{$ctrl.resources.TacheBudgetTemplate_quantiteARealise_error_max}}</span>
+      <span ng-show="$ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.quantiteARealise.$invalid && $ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.quantiteARealise.$error.number">{{$ctrl.resources.TacheBudgetTemplate_quantiteARealise_error_number}}</span>
+    </div>
+  </div>
+  <div>
+    <div class="taskError" ng-show="$ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.recette.$invalid">
+      <span ng-show="$ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.recette.$invalid && $ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.recette.$error.pattern">{{$ctrl.resources.TacheBudgetTemplate_recette_error_pattern}}</span>
+      <span ng-show="$ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.recette.$invalid && $ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.recette.$error.max">{{$ctrl.resources.TacheBudgetTemplate_recette_error_max}}</span>
+      <span ng-show="$ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.recette.$invalid && $ctrl.formTacheBudget{{$ctrl.tache.TacheId}}.recette.$error.number">{{$ctrl.resources.TacheBudgetTemplate_recette_error_number}}</span>
+    </div>
+  </div>
+</div>
+
+<div ng-if="$ctrl.isOpen" class="row">
+  <div ng-repeat="task in $ctrl.tache.TachesEnfants track by $index">
+    <tache-budget-component tache="task"
+                            is-large-list="$ctrl.isLargeList"
+                            task-selected="$ctrl.taskSelected"
+                            devise-selected="$ctrl.deviseSelected"
+                            buget-revision-statut="$ctrl.bugetRevisionStatut"
+                            resources="$ctrl.resources">
+    </tache-budget-component>
+  </div>
+</div>
+

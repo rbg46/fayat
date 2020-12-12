@@ -1,0 +1,16 @@
+﻿INSERT INTO [importExport].[Flux] ([Code], 
+                                   [Libelle], 
+                                   [Titre], 
+                                   [Description], 
+                                   [IsActif], 
+                                   [SocieteCode], 
+                                   [SocieteModeleCode], 
+                                   [DateDerniereExecution])
+VALUES (N'VALIDATION_POINTAGE_FON',
+        N'Validation des lots de pointage personnel Fondation', 
+        NULL, 
+        N'Validation des lots de pointage personnel Fondation (Contrôle Vrac, Remontée Vrac)',
+        1, 
+        N'', 
+        N'', 
+        NULL)

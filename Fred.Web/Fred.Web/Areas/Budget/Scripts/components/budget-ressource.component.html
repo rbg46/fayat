@@ -1,0 +1,89 @@
+﻿<div class="row panel-default ressource pad_l"
+     ng-class="{'isopen': $ctrl.isOpen ,'empty-ressource':!$ctrl.hasAnyBibliothequePrix($ctrl.budgetRessource)}">
+    <div class="col-md-1 lev3-firstcol">
+        <div class="arrow"
+             ng-click="$ctrl.handleClickHeader()"
+             ng-show="$ctrl.budgetRessource.RessourcesEnfants.length>0"></div>
+        <div class="empty-warning"
+             ng-show="!$ctrl.hasAnyBibliothequePrix($ctrl.budgetRessource)">
+            <i class="material-icons" title="Pas de valeurs dans la bibliotheque des prix pour cette ressource !">announcement</i>
+        </div>
+    </div>
+    <div class="col-md-1 new">
+        <span class="flaticon flaticon-plus"
+              ng-show="false"
+              ng-click="$ctrl.handleClickCreateNew($ctrl.budgetRessource)"
+              title="Cliquer pour ajouter une nouvelle ressource personnalisée à votre référentiel de ressource">
+        </span>
+        <span ng-show="$ctrl.hasAnyBibliothequePrix($ctrl.budgetRessource)">
+        </span>
+    </div>
+    <div class="col-md-2">
+        <div class="lb">{{$ctrl.resources.Code_lb}}</div>
+        <span class="field" fred-wrap-in-tag="{{$ctrl.budgetRessource.RessourceCode}}" words="$ctrl.upperCaseArrayedSearch">{{$ctrl.budgetRessource.RessourceCode}}</span>
+    </div>
+    <div class="col-md-4">
+        <div class="lb">{{$ctrl.resources.Libelle_lb}}</div>
+        <span class="field" fred-wrap-in-tag="{{$ctrl.budgetRessource.RessourceLibelle}}" words="$ctrl.upperCaseArrayedSearch">{{$ctrl.budgetRessource.RessourceLibelle}}</span>
+    </div>
+    <div class="col-md-1 no_pad_r">
+        <div class="lb">Unité</div>
+        <span class="field" title="{{$ctrl.budgetRessource.Unite.Code}}">{{$ctrl.budgetRessource.Unite.Code}}</span>
+    </div>
+    <div class="col-md-1 no_pad_r">
+        <div class="lb">Prix</div>
+        <span>{{$ctrl.budgetRessource.BibliothequePrixMontant}}</span>
+        <span ng-show="$ctrl.budgetRessource.BibliothequePrixMontant">{{$ctrl.deviseSelected.Symbole}}</span>
+    </div>
+    <div class="col-md-1 no_pad_r recommandees-uniquement-icon">
+        <i class="fa fa-align-right fa-check-circle-o" ng-if="$ctrl.budgetRessource.IsRecommandee"></i>
+    </div>
+    <div class="col-md-1 no_pad_l">
+        <button class="btn btn-primary add_task pull-right"
+                ng-click="$ctrl.handleClickAddToTask($ctrl.budgetRessource)"
+                title="Cliquer pour ajouter cette ressource à votre budget">
+            <i class="flaticon flaticon-add"></i>
+        </button>
+    </div>
+</div>
+
+
+<div ng-show="$ctrl.budgetRessource.RessourcesEnfants.length>0 && $ctrl.isOpen">
+    <div class="row panel-default ressource child pad_l"
+         ng-repeat="childRessource in $ctrl.budgetRessource.RessourcesEnfants track by $index">
+        <div class="col-md-1 pad_l">
+            <span class="action-icone material-icons"
+                  ng-click="$ctrl.handleClickEditChild($ctrl.budgetRessource,childRessource)"
+                  title="Cliquer pour modifier la ressource personnalisée">more_vert</span>
+        </div>
+        <div class="col-md-1 pad_l">
+        </div>
+        <div class="col-md-2 pad_l">
+            <div class="lb">{{$ctrl.resources.Code_lb}}</div>
+            <span>{{childRessource.RessourceCode}}</span>
+        </div>
+        <div class="col-md-4 pad_l">
+            <div class="lb">{{$ctrl.resources.Libelle_lb}}</div>
+            <span class="field" title="{{childRessource.RessourceLibelle}}">{{childRessource.RessourceLibelle}}</span>
+        </div>
+        <div class="col-md-1 no_pad_r">
+            <div class="lb">Unité</div>
+            <span>{{childRessource.Unite.Code}}</span>
+        </div>
+        <div class="col-md-1 no_pad_r">
+            <div class="lb">Prix</div>
+            <span>{{childRessource.BibliothequePrixMontant}}</span>
+            <span>{{childRessource.symbole}}</span>
+        </div>
+        <div class="col-md-1 no_pad_r recommandees-uniquement-icon">
+            <i class="fa fa-align-right fa-check-circle-o" ng-if="$ctrl.budgetRessource.IsRecommandee"></i>
+        </div>
+        <div class="col-md-1 no_pad_l">
+            <button class="btn btn-primary add_task pull-right"
+                    ng-click="$ctrl.handleClickAddToTask(childRessource)"
+                    title="Cliquer pour ajouter cette ressource à votre budget">
+                <i class="flaticon flaticon-add"></i>
+            </button>
+        </div>
+    </div>
+</div>

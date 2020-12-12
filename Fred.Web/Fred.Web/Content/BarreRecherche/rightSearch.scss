@@ -1,0 +1,388 @@
+﻿$color_1: initial;
+$color_2: #fff;
+$color_3: #2c77ba;
+$color_4: rgb(103, 117, 127);
+$color_5: lightgrey;
+$color_6: rgb(44, 119, 186);
+$color_7: grey;
+$font_family_1: FontAwesome;
+$font_family_2: 'Material Icons';
+$background_color_1: rgb(225,227,229);
+$background_color_2: #F1F2F3;
+$background_color_3: rgb(9, 125, 160);
+$background_color_4: rgb(242,242,242);
+$background_color_5: rgb(222,63,126);
+$background_color_6: rgb(0,112,192);
+$background_color_7: #09ada6;
+$background_color_8: white;
+
+
+fred-overlay {
+    background: black;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1301;
+    opacity: 0.5;
+    display: none;
+    visibility: hidden;
+}
+
+fred-overlay.open {
+    display: block;
+    visibility: visible;
+    animation-name: none;
+    animation-duration: none;
+}
+
+fred-overlay.close {
+    display: none;
+    visibility: hidden;
+}
+
+fred-side {
+    position: fixed;
+    width: 350px;
+    top: 0px;
+    left: -350px;
+    height: 100%;
+    z-index: 1301;
+    background: white;
+
+    header {
+        height: 75px;
+        background: rgb(225,227,229);
+        text-align: center;
+
+        icon {
+            &:before {
+                content: '\f0b0';
+                font-size: 30px;
+                font-family: $font_family_1;
+                display: block;
+                padding-top: 5px;
+                vertical-align: middle;
+            }
+        }
+
+        label {
+            font-weight: 500;
+            font-size: 15px;
+        }
+    }
+
+    main {
+        max-height: 60%;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        .row {
+            padding-left: 15px;
+        }
+
+        section-title {
+            cursor: pointer;
+            color: $color_3;
+            font-size: 20px;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            margin-top: 30px;
+
+            &::before {
+                font-family: $font_family_2;
+                font-style: normal;
+                font-weight: 400;
+                content: 'keyboard_arrow_down';
+                font-size: 40px;
+                color: $color_4;
+            }
+        }
+
+        section-title.collapsed {
+            &::before {
+                font-family: $font_family_2;
+                font-style: normal;
+                font-weight: 400;
+                content: 'chevron_right';
+                font-size: 40px;
+                color: $color_4;
+            }
+        }
+
+        .toogle-section {
+            display: flex;
+            width: 100%;
+            padding-left: 20px;
+
+            .toogle-bloc {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                width: 30%;
+
+                .toogle-btn {
+                    font-size: 11px;
+                    background-color: $background_color_4;
+                    min-width: 100px;
+                    height: 30px;
+                    margin-bottom: 10px;
+                    margin-right: 10px;
+                    color: $color_5;
+                    border: none;
+                    box-shadow: none;
+
+                    &:hover {
+                        font-weight: normal;
+                        box-shadow: none;
+                    }
+                }
+
+                .toogle-btn.active-pink {
+                    background-color: $background_color_5;
+                    color: $color_2;
+                }
+
+                .toogle-btn.active-blue {
+                    background-color: $background_color_6;
+                    color: $color_2;
+                }
+
+                .toogle-btn.active-green {
+                    background-color: $background_color_7;
+                    color: $color_2;
+                }
+            }
+        }
+
+        h2 {
+            color: $color_6;
+            font-size: 12px;
+            font-weight: 400;
+            text-align: center;
+            padding: 0px;
+            margin: 0px;
+        }
+    }
+
+    .legend {
+        font-size: 12px;
+        border: none;
+        font-weight: 400;
+        color: $color_4;
+    }
+
+    footer {
+        height: 100px;
+        background-color: $background_color_8;
+        color: $color_7;
+        font-weight: 400;
+        font-size: 12px;
+        text-align: center;
+        display: inline-block;
+
+        action {
+            padding-top: 5px;
+            height: 50px;
+            bottom: 0px;
+            display: flex;
+            justify-content: center;
+            flex-direction: row-reverse;
+        }
+
+        close {
+            height: 50px;
+            display: block;
+
+            label {
+                display: inline-block;
+                vertical-align: middle;
+                margin-top: 5px;
+                font-size: 12px;
+                font-weight: 400;
+                cursor: pointer;
+            }
+
+            icon {
+                &:before {
+                    content: '\f104';
+                    font-size: 40px;
+                    padding-right: 10px;
+                    font-family: $font_family_1;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}
+
+.explorateur-depense {
+    fred-side {
+        width: 850px;
+        left: -850px;
+    }
+}
+
+fred-side.open {
+    -webkit-animation-name: transition_open;
+    -webkit-animation-duration: .5s;
+    animation-name: transition_open;
+    animation-duration: .5s;
+    top: 0px;
+    left: 0px;
+}
+
+@-webkit-keyframes transition_open {
+    from {
+        left: -350px;
+    }
+
+    to {
+        left: 0px;
+    }
+}
+
+@keyframes transition_open {
+    from {
+        left: -350px;
+    }
+
+    to {
+        left: 0px;
+    }
+}
+
+.filter-tiles {
+    background-color: $background_color_1;
+    padding: 7px;
+    margin-top: 15px;
+    min-height: 44px;
+}
+
+.ico-filter {
+    padding-left: 15px;
+}
+
+.filter-types {
+    width: 80px;
+    height: 30px;
+    display: flex;
+    background-color: $background_color_2;
+    color: $color_1;
+    font-size: 11px;
+    font-weight: 400;
+    margin-right: 5px;
+    justify-content: center;
+    align-items: center;
+    float: inherit;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.filter-types.active {
+    background-color: $background_color_3;
+    color: $color_2;
+}
+
+.sub-types {
+    margin-top: 20px;
+}
+
+.bootstrap-datetimepicker-widget {
+    z-index: 9999;
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+    fred-side {
+        header {
+            height: 50px;
+
+            icon {
+                &:before {
+                    font-size: 15px;
+                }
+            }
+
+            label {
+                font-size: 11px;
+            }
+        }
+
+        main {
+            section-title {
+                font-size: 15px;
+                margin-top: 15px;
+
+                &::before {
+                    font-size: 20px;
+                }
+            }
+
+            section-title.collapsed {
+                &::before {
+                    font-size: 20px;
+                }
+            }
+
+            .control-label {
+                font-size: 11px;
+            }
+
+            .filter-types {
+                font-size: 9px;
+                width: 60px;
+                height: 25px;
+            }
+
+            .glyphicon-calendar {
+                float: none !important;
+            }
+        }
+
+        footer {
+            height: 70px;
+
+            action {
+                height: 35px;
+                padding-top: 0;
+
+                .fred-button[type=button] {
+                    font-size: 9px;
+                    height: 25px;
+                }
+            }
+
+            close {
+                height: 25px;
+
+                icon {
+                    &:before {
+                        font-size: 20px;
+                    }
+                }
+
+                label {
+                    font-size: 9px;
+                }
+            }
+        }
+    }
+
+    .filter-tiles {
+        padding: 3px;
+        margin-top: 5px;
+        min-height: 35px;
+
+        .btn {
+            font-size: 11px;
+            height: 25px;
+        }
+    }
+
+    .ico-filter {
+        padding-left: 7px;
+    }
+}

@@ -1,0 +1,109 @@
+﻿<div class="blockScreen" ng-click="$ctrl.Hide()" ng-show="$ctrl.Visible"></div>
+<div class="options" id="optionRightPanel" ng-show="$ctrl.Visible">
+
+    <!--Icon-->
+    <div class="toolbar">
+        <div class="flaticon flaticon-clock-1 grandicone"></div>
+    </div>
+
+    <!--Header-->
+    <div class="form-header">
+        <h2>{{::$ctrl.resources.Budget_BibliothequePrix_Histo_Titre}}</h2>
+    </div>
+
+    <div class="form fred-scroll">
+
+        <!--Informations-->
+        <div class="historique-informations">
+            <div class="chap-title">
+                <span class="material-icons">chevron_right</span>
+                <span class="txt">{{::$ctrl.resources.Budget_BibliothequePrix_Histo_RappelInfos}}</span>
+            </div>
+            <div class="historique-table">
+                <div class="historique-line">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="sum-bloc">
+                                <div class="historique-cln1">{{::$ctrl.resources.Budget_BibliothequePrix_Code}}</div>
+                                <div class="historique-cln2">{{$ctrl.Item.Ressource.Code}}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="sum-bloc">
+                                <div class="historique-cln1">{{::$ctrl.resources.Budget_BibliothequePrix_Libelle}}</div>
+                            </div>
+                            <div class="historique-cln2">{{$ctrl.Item.Ressource.Libelle}}</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--Pas d'historique-->
+        <div class="historique-aucun" ng-if="$ctrl.Histo.length === 0">
+            <div>{{::$ctrl.resources.Budget_BibliothequePrix_Histo_Aucune_Donnees}}</div>
+        </div>
+
+        <!--Valeurs courantes-->
+        <div class="historique-baremes" ng-if="$ctrl.ItemHasAnyValue()">
+            <div class="chap-title">
+                <span class="material-icons">chevron_right</span>
+                <span class="txt">{{::$ctrl.resources.Budget_BibliothequePrix_Histo_ValeursAppliquees}}</span>
+            </div>
+            <div class="historique-table historique-bareme-courant">
+                <div class="historique-periode">
+                    {{$ctrl.GetPeriodeToStringItemCourant()}}
+                </div>
+                <div class="historique-line barems">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="historique-cln1">{{::$ctrl.resources.Budget_BibliothequePrix_Prix}}</div>
+                            <div class="historique-cln1">{{::$ctrl.resources.Budget_BibliothequePrix_Unite}}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="historique-cln2">{{$ctrl.Item.Original.Prix}} {{::$ctrl.devise.Libelle}}</div>
+                            <div class="historique-cln2">{{$ctrl.Item.Original.Unite.Libelle}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="inner-triangle"></div>
+            </div>
+        </div>
+
+        <!--Valeurs archivées -->
+        <div class="historique-baremes" ng-if="$ctrl.Histo.length > 0">
+            <div class="chap-title">
+                <span class="material-icons">chevron_right</span>
+                <span class="txt">{{::$ctrl.resources.Budget_BibliothequePrix_Histo_EnTete}}</span>
+            </div>
+            <div class="historique-table historique-bareme-archive" ng-repeat="histoItem in $ctrl.Histo track by $index">
+                <div class="historique-periode">
+                    {{$ctrl.GetPeriodeOfItemHisto(histoItem, $index - 1)}}
+                </div>
+                <div class="historique-line barems">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="historique-cln1">{{::$ctrl.resources.Budget_BibliothequePrix_Prix}}</div>
+                            <div class="historique-cln1">{{::$ctrl.resources.Budget_BibliothequePrix_Unite}}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="historique-cln2">{{histoItem.Prix}} {{::$ctrl.devise.Libelle}}</div>
+                            <div class="historique-cln2">{{histoItem.UniteLibelle}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Footer-->
+    <div class="form-footer">
+        <div class="historique-btn-fermer">
+            <button type="button" class="btn btn-default" ng-click="$ctrl.Hide()">{{$ctrl.resources.Global_Bouton_Fermer}}</button>
+        </div>
+    </div>
+
+</div>
+
+

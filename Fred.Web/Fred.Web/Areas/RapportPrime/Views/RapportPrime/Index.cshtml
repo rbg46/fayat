@@ -1,0 +1,531 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureRapportPrime.RapportPrime_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/RapportPrimeIndexBundle.css")
+}
+
+@section scripts {
+
+    @Scripts.Render("~/RapportPrimeIndexBundle.js")
+    @this.RenderResources("FeatureRapportPrime")
+}
+
+<div class="container rapport-primes" id="main" ng-controller="RapportPrimeController as $ctrl" ng-init="init()">
+    <!-- Titre de la page -->
+    <h1>Rapport de primes</h1>
+
+    <!-- Barre de recherche + Barre d'outils-->
+    <fred-toolbar>
+
+        <!--Numéro de rapport-->
+        <fred-section class="rapport-number">
+            <fred-section-title>Numéro</fred-section-title>
+            <fred-section-controls>
+                <span>{{$ctrl.RapportPrime.RapportPrimeId}}</span>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Sélection de la date-->
+        <fred-section class="date-picker-section">
+            <fred-section-title>Mois de</fred-section-title>
+            <fred-section-controls>
+                <div class="input-group date datepicker-daterapport"
+                     id="datePickerMoisRapportPrime"
+                     data-date-autoclose="true"
+                     data-date-format="M-yy"
+                     data-date-max-view-mode="years"
+                     data-date-min-view-mode="months"
+                     data-date-end-date="0m">
+                    <input type="text"
+                           class="form-control"
+                           ng-model="$ctrl.RapportPrime.DateRapportPrimePicker"
+                           ng-change="$ctrl.changeDateRapportPrime()">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </div>
+                </div>
+                <fred-section-controls>
+        </fred-section>
+
+        <!--Recherche-->
+        <fred-section class="text-search-section">
+            <fred-section-title>&nbsp;</fred-section-title>
+            <fred-section-controls>
+                <div class="input-group input-search">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Rechercher un rapport de primes..."
+                           ng-model="$ctrl.searchText">
+                    <span class="input-group-addon button-search">
+                        <span class="material-icons"
+                              ng-click="$ctrl.searchFilter = $ctrl.searchText">
+                            search
+                        </span>
+                    </span>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Actions sur le rapport-->
+        <fred-section class="boutons-actions">
+            <fred-section-title>Actions sur le rapport</fred-section-title>
+            <fred-section-controls>
+
+                <!--Lignes saisies par l’utilisateur connecté-->
+                <fred-button class="connected-user default"
+                             title="Visualiser seulement les lignes saisies par l’utilisateur connecté"
+                             ng-click="$ctrl.viewLinesFromCurrentUser = !$ctrl.viewLinesFromCurrentUser;"
+                             ng-class="{'usr': $ctrl.viewLinesFromCurrentUser}">
+                    <span class="material-icons">
+                        person
+                    </span>
+                </fred-button>
+
+                <!--Enregistrer-->
+                <button class="fred-button warning text"
+                        type="button"
+                        title="{{$ctrl.resources.Global_Bouton_Enregistrer_Tooltip}}"
+                        ng-click="$ctrl.handleSave($ctrl.RapportPrime)"
+                        ng-disabled="$ctrl.saveButtonLocked()">
+                    {{$ctrl.resources.Global_Bouton_Enregistrer}}
+                </button>
+
+            </fred-section-controls>
+        </fred-section>
+    </fred-toolbar>
+
+    <!-- Début liste -->
+    <div class="display-list" style="margin-top: 0;" id="rapport-container">
+        <table id="fixedTable" class="rapport-table" fred-table fred-fixed-col="1, 2">
+            <!-------------------------------------------------------------------------------------------------------------------->
+            <!--                                                    HEADER                                                      -->
+            <!-------------------------------------------------------------------------------------------------------------------->
+            <thead>
+                <!----------------------------------------------------- HEADER 1 ------------------------------------------------------>
+                <tr class="header1">
+                    <!-- HEADER 1 - PERSONNEL -->
+                    <th class="col-personnel1"></th>
+                    <th class="col-personnel2">
+                        <div class="icons-materiel-conteneur pick-add">
+                            <span class="flaticon flaticon-add button-add-ligne-pointage"
+                                  ng-class="{'fred-disabled':$ctrl.rights.isReadOnly}"
+                                  title="{{$ctrl.resources.RapportPrime_EnteteNiv1_Bouton_AjouterLigne}}"
+                                  ng-click="$ctrl.handleClickAddRow()"></span>
+                            <span class="icon-materiel-txt">Personnel</span>
+                        </div>
+                    </th>
+                    <!-- HEADER 1 - PRIMES -->
+                    <th class="col-prime"
+                        colspan="{{$ctrl.RapportPrime.ListPrimesHeader.length}}"
+                        
+                        ng-class="{'default-size' : $ctrl.RapportPrime.ListPrimesHeader.length === 0, '' : $ctrl.RapportPrime.ListPrimesHeader.length > 0}">
+                        <div class="icons-materiel-conteneur pick-add">
+                            <lookup ng-model="selectedRef"
+                                    search-placeholder="{{$ctrl.resources.Global_ReferentielPrime_Placeholder}}"
+                                    search-title="{{$ctrl.resources.Global_ReferentielPrime}}"
+                                    custom-template-url="~/Scripts/directive/lookup/custom-templates/prime.template.html"
+                                    url="/api/Prime/SearchLight/?societeId={{$ctrl.currentUser.SocieteId}}&isRapportPrime=true&"
+                                    on-select="$ctrl.handleLookupSelection('Prime', item, null)"
+                                    ng-disabled="$ctrl.rights.isReadOnly">
+                                <span class="lookup-image-plus"
+                                      title="Ajouter une Prime"></span>
+                            </lookup>
+                            <span class="icon-materiel-txt">Prime</span>
+                        </div>
+                    </th>
+                    <!-- HEADER 1 - ASTREINTES -->
+                    <th class="col-astreinte border-left">
+                        <span class="icon-materiel-txt">Astreinte</span>
+                    </th>
+                    <!-- HEADER 1 - CI -->
+                    <th class="col-ci border-left">
+                        <span class="icon-materiel-txt">CI</span>
+                    </th>
+                    <!-- HEADER 1 - VALIDATION -->
+                    <th class="col-validate border-left" ng-disabled="$ctrl.validatedButtonPrimes.isReadOnly" ng-show="$ctrl.validatedButtonPrimes.isVisible || ($ctrl.validatedButtonPrimes.isVisible === false && item.CurrentUser) || $ctrl.validatedButtonPrimes.isSuperAdmin">
+                        <span class="icon-materiel-txt">Valider/Dévalider tout</span>
+                    </th>
+
+                    <!-- HEADER 1 - HISTORIQUE -->
+                    <th class="col-history border-left">
+                        <span class="icon-materiel-txt">Historique</span>
+                    </th>
+                </tr>
+                <!----------------------------------------------------- HEADER 2 ------------------------------------------------------>
+                <tr class="header2">
+                    <!-- HEADER 2 - PERSONNEL -->
+                    <th class="col-personnel1"></th>
+                    <th class="col-personnel2"></th>
+                    <!-- HEADER 2 - PRIMES -->
+                    <th ng-repeat="prime in $ctrl.RapportPrime.ListPrimesHeader"
+                        class="col-prime border-right"
+                        title="{{prime.CodeRef}}">
+                        {{prime.Code}}
+                        <div class="prime-tache-toolbar">
+                            <span class="material-icons gly_bk"
+                                  title="{{$ctrl.resources.Global_Bouton_Supprimer_Tooltip}}"
+                                  ng-click="$ctrl.handleClickDeletePrime(prime)"
+                                  ng-show="$ctrl.viewLinesFromCurrentUser"
+                                  ng-disabled="$ctrl.rights.isReadOnly">
+                                clear
+                            </span>
+                        </div>
+                    </th>
+                    <th ng-show="!$ctrl.RapportPrime.ListPrimesHeader.length"
+                        class="dynamic-col border-left border-right col-prime">
+                        &nbsp;
+                    </th>
+                    <!-- HEADER 2 - ASTREINTES -->
+                    <th class="col-astreinte border-right"></th>
+                    <!-- HEADER 2 - CI -->
+                    <th class="col-ci border-right">
+                    </th>
+                    <!-- HEADER 2 - VALIDATION -->
+
+                    <th class="col-validate border-right" ng-disabled="$ctrl.validatedButtonPrimes.isReadOnly" ng-show="$ctrl.validatedButtonPrimes.isVisible || ($ctrl.validatedButtonPrimes.isVisible === false && item.CurrentUser) || $ctrl.rights.isSuperAdmin">
+                        <input type="checkbox"
+                               id="chkall"
+                               ng-model="checkMassValidation"
+                               ng-change="$ctrl.handleMassValidation(checkMassValidation)"
+                               ng-disabled="$ctrl.validatedButtonPrimes.isReadOnly">
+                        <label for="chkall"><span></span></label>
+                    </th>
+
+                    <!-- HEADER 2 - HISTORIQUE -->
+                    <th class="col-history border-right"></th>
+                </tr>
+            </thead>
+
+            <!-------------------------------------------------------------------------------------------------------------------->
+            <!--                                                    BODY                                                        -->
+            <!-------------------------------------------------------------------------------------------------------------------->
+            <tbody>
+                <tr id="ligne{{$index}}"
+                    ng-repeat="(lindex, ligne) in $ctrl.RapportPrime.ListLignes | rapportPrimePersonnelTypePrimeCIFilter: $ctrl.searchFilter"
+                    ng-show="$ctrl.handleShowLigne(ligne)">
+                    <!-- BODY - BOUTONS ACTION -->
+                    <td class="col-action col-personnel1"
+                        ng-class="{'tr-validated' :ligne.IsValidated || ligne.IsPeriodClosed}">
+                        <div class="action-conteneur">
+                            <span class="material-icons"
+                                  ng-click="!ligne.IsValidated && $ctrl.handleClickDeleteRow(ligne)"
+                                  ng-class="{'fred-disabled':$ctrl.rights.isReadOnly}"
+                                  ng-show="$ctrl.currentUser.PersonnelId === ligne.AuteurCreationId">
+                                clear
+                            </span>
+                            <span class="material-icons"
+                                  ng-class="{'fred-disabled':$ctrl.rights.isReadOnly}"
+                                  ng-click="!ligne.IsValidated && !ligne.IsPeriodClosed && $ctrl.handleClickDuplicateRow(ligne)">
+                                content_copy
+                            </span>
+                            <span class="material-icons user">person</span>
+                            <span class="material-icons error"
+                                  ng-show="ligne.ErrorValidation"
+                                  uib-popover-template="'popoverTemplateError'"
+                                  popover-trigger="'mouseenter'"
+                                  popover-placement="right"
+                                  popover-append-to-body="true">error</span>
+                            <span class="material-icons warning"
+                                  ng-show="ligne.WarningValidation"
+                                  uib-popover-template="'popoverTemplateWarning'"
+                                  popover-trigger="'mouseenter'"
+                                  popover-placement="right"
+                                  popover-append-to-body="true">warning</span>
+                        </div>
+                    </td>
+                    <!-- BODY - PERSONNEL -->
+                    <td class="col-personnel2 border-right"
+                        ng-class="{'tr-validated' :ligne.IsValidated || ligne.IsPeriodClosed}">
+                        <div class="td-lookup">
+                            <!--Sélection du Personnel-->
+                            <feature-flag invert feature-key="PersonnelsNouveauxFiltres">
+                                <lookup-standalone ng-model="ligne.Personnel"
+                                                   enable-default-selection="true"
+                                                   text="ligne.PersonnelSelectionne"
+                                                   search-max-length="100"
+                                                   search-title="{{$ctrl.resources.Global_ReferentielPersonnel}}"
+                                                   search-placeholder="{{$ctrl.resources.Global_ReferentielPersonnel_Placeholder}}"
+                                                   url="/api/Personnel/SearchLight2/?dateChantier={{$ctrl.RapportPrime.DateRapportPrime | date:'MM-dd-yyyy'}}&"
+                                                   on-select="$ctrl.handleLookupSelection('Personnel', item, ligne)"
+                                                   on-delete="$ctrl.popupRemovePersonnel(ligne)"
+                                                   class="formulaire middle"
+                                                   ng-disabled="ligne.IsValidated || ligne.IsPeriodClosed || $ctrl.rights.isReadOnly">
+                                </lookup-standalone>
+                            </feature-flag>
+                            <feature-flag feature-key="PersonnelsNouveauxFiltres">
+                                <lookup-standalone ng-model="ligne.Personnel"
+                                                   enable-default-selection="true"
+                                                   text="ligne.PersonnelSelectionne"
+                                                   search-max-length="100"
+                                                   search-title="{{$ctrl.resources.Global_ReferentielPersonnel}}"
+                                                   search-placeholder="{{$ctrl.resources.RapportPrime_Nom_Placeholder}}"
+                                                   search-placeholder2="{{$ctrl.resources.RapportPrime_Prenom_Placeholder}}"
+                                                   search-placeholder3="{{$ctrl.resources.RapportPrime_Autre_Information_Placeholder}}"
+                                                   active-second-search-input="true"
+                                                   active-third-search-input="true"
+                                                   url="/api/Personnel/SearchLight2/?dateChantier={{$ctrl.RapportPrime.DateRapportPrime | date:'MM-dd-yyyy'}}&IncludeInterimaire=false&"
+                                                   on-select="$ctrl.handleLookupSelection('Personnel', item, ligne)"
+                                                   on-delete="$ctrl.popupRemovePersonnel(ligne)"
+                                                    ng-disabled="ligne.IsValidated || ligne.IsPeriodClosed || $ctrl.rights.isReadOnly"
+                                                   class="formulaire middle">
+                                </lookup-standalone>
+                            </feature-flag>
+                        </div>
+                    </td>
+                    <!-- BODY - PRIMES -->
+                    <td ng-repeat="lignePrime in ligne.ListPrimes"
+                        ng-show="!lignePrime.IsDeleted"
+                        class="dynamic-col col-prime border-right"
+                        ng-class="{'tr-validated' :ligne.IsValidated || ligne.IsPeriodClosed}">
+                        <div class="prime-numbers">
+                            <input type="text"
+                                   fred-input-number="2"
+                                   fred-input-default-value="0"
+                                   select-on-click class="input-light input-light-prime input-number"
+                                   min="0"
+                                   max="{{lignePrime.Prime.SeuilMensuel}}"
+                                   ng-model="lignePrime.Montant"
+                                   ng-change="$ctrl.handleMontantChanged(ligne, lignePrime)"
+                                   ng-model-options="{ updateOn: 'blur' }"
+                                   ng-disabled="ligne.IsValidated || ligne.IsPeriodClosed || $ctrl.rights.isReadOnly" />
+                        </div>
+                    </td>
+                    <td ng-show="!$ctrl.RapportPrime.ListPrimesHeader.length"
+                        class="dynamic-col border-left col-prime border-right"
+                        ng-class="{'tr-validated' :ligne.IsValidated || ligne.IsPeriodClosed}">
+                        <fred-ui-icon icon="add"
+                                      title=" {{$ctrl.resources.RapportPrime_Ligne_Prime_Info}}"></fred-ui-icon>
+                    </td>
+                    <!-- BODY - ASTREINTES -->
+                    <td class="col-astreinte border-right"
+                        ng-class="{'tr-validated' :ligne.IsValidated || ligne.IsPeriodClosed}">
+                        <div class="astreinte-dates">
+                            <input type="text"
+                                   name=""
+                                   id=""
+                                   class="days"
+                                   readonly
+                                   value="{{ligne.NombreJourAstreinte}}"
+                                   ng-disabled="ligne.IsValidated || ligne.IsPeriodClosed || $ctrl.rights.isReadOnly">
+                            <!-- Datepicker des Astreintes -->
+                            <div class="input-group date datepicker-astreintes"
+                                 id="datepicker-astreintes{{$index}}"
+                                 data-date-multidate="true"
+                                 data-date-orientation="bottom"
+                                 data-date-format="dd"
+                                 data-date-max-view-mode="days"
+                                 data-date-min-view-mode="days">
+                                <input type="text"
+                                       class="form-control"
+                                       ng-model="ligne.ListAstreintes"
+                                       ng-disabled="ligne.IsValidated || ligne.IsPeriodClosed  || $ctrl.rights.isReadOnly"
+                                       ng-change="$ctrl.changeDatePickerAstreinte(ligne)">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <!-- BODY - CI -->
+                    <td class="col-ci border-right"
+                        ng-class="{'tr-validated' :ligne.IsValidated || ligne.IsPeriodClosed}">
+                        <div class="td-lookup">
+                            <!--Sélection du CI-->
+                            <lookup-standalone ng-model="ligne.Ci"
+                                               text="ligne.Ci.CodeLibelle"
+                                               search-title="{{$ctrl.resources.Global_ReferentielCI}}"
+                                               search-placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                               custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                               on-click="$ctrl.handleLookupUrl('CI')"
+                                               on-select="$ctrl.handleLookupSelection('CI', item, ligne)"
+                                               on-delete="$ctrl.popupRemoveCI(ligne)"
+                                               class="formulaire long"
+                                               has-confirm="true"
+                                               on-confirm="$ctrl.handleClickChangeCI()"
+                                               placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                               ng-disabled="ligne.IsValidated || ligne.IsPeriodClosed  || $ctrl.rights.isReadOnly">
+                            </lookup-standalone>
+                        </div>
+                    </td>
+                    <!-- BODY - VALIDATION -->
+                    <td class="col-validate border-right"
+                        ng-class="{'tr-validated' :ligne.IsPeriodClosed}" ng-disabled="$ctrl.validatedButtonPrimes.isReadOnly" ng-show="$ctrl.validatedButtonPrimes.isVisible || ($ctrl.validatedButtonPrimes.isVisible === false && item.CurrentUser) || $ctrl.validatedButtonPrimes.isSuperAdmin">
+                        <input type="checkbox"
+                               id="chk{{$index}}"
+                               ng-click="$ctrl.handleValidation(ligne)"
+                               ng-model="ligne.IsValidated"
+                               ng-disabled="ligne.IsPeriodClosed || $ctrl.validatedButtonPrimes.isReadOnly">
+                        <label for="chk{{$index}}"><span></span></label>
+                    </td>
+                    <!-- BODY - HISTORIQUE -->
+                    <td class="col-history border-right">
+                        <div class="shield-conteneur">
+                            <fred-button class="display shield"
+                                         ng-click="$ctrl.fredSide=true; $ctrl.validation=true; $ctrl.historiqueLigne = ligne;"
+                                         ng-disabled="$ctrl.rights.isReadOnly"
+                                         title="{{$ctrl.resources.RapportPrime_Bouton_StatutValidation_Tooltip}}">
+                                <i class="material-icons">security</i>
+                            </fred-button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!--RefPickList-->
+    <!--Popover template-->
+    <script type="text/ng-template" id="popoverTemplateError">
+        <span>{{$ctrl.resources.RapportPrime_PopoverValidation_Erreur}}</span>
+    </script>
+
+    <script type="text/ng-template" id="popoverTemplateWarning">
+        <div class="form-group">
+            <label>{{$ctrl.resources.RapportPrime_PopoverValidation_Warning}}</label>
+
+            <span ng-repeat="auteurNomPrenom in ligne.ListeAuteurDoublonPrime">
+                {{auteurNomPrenom}}
+            </span>
+
+            <span ng-show="!ligne.ListeAuteurDoublonPrime.length">
+                {{$ctrl.resources.RapportPrime_PopoverValidation_Warning_Duplicate}}
+            </span>
+        </div>
+    </script>
+
+    @*Modal de confirmation de suppression Personnel*@
+    <div class="modal fade" id="confirmationDeletePersonnelModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title"><i class="flaticon flaticon-garbage-2"></i>{{$ctrl.resources.Global_Modal_Confirmation}}</h2>
+                    <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+                </div>
+                <div class="modal-body">
+                    <b>{{$ctrl.resources.RapportPrime_ModalSuppressionPersonnel_MessageConfirmation}}</b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default pull-left" data-dismiss="modal" ng-click="$ctrl.handleDeletePickListItemPersonnel()" title="{{$ctrl.resources.Global_Bouton_Valider_Tooltip}}">{{$ctrl.resources.Global_Bouton_Valider}}</button>
+                    <button type="button" class="btn  btn-link pull-right" data-dismiss="modal" title="{{$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">{{$ctrl.resources.Global_Bouton_Annuler}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*Modal de confirmation de suppression CI*@
+    <div class="modal fade" id="confirmationDeleteCIModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title"><i class="flaticon flaticon-garbage-2"></i>{{$ctrl.resources.Global_Modal_Confirmation}}</h2>
+                    <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+                </div>
+                <div class="modal-body">
+                    <b>{{$ctrl.resources.RapportPrime_ModalSuppressionCI_MessageConfirmation}}</b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default pull-left" data-dismiss="modal" ng-click="$ctrl.handleDeletePickListCI()" title="{{$ctrl.resources.Global_Bouton_Valider_Tooltip}}">{{$ctrl.resources.Global_Bouton_Valider}}</button>
+                    <button type="button" class="btn  btn-link pull-right" data-dismiss="modal" title="{{$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">{{$ctrl.resources.Global_Bouton_Annuler}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- BEGIN : Modal en fonction du contexte requis-->
+    <fred-overlay ng-init="$ctrl.fredSide=false" class="open" ng-click="$ctrl.fredSide = false; $ctrl.validation = false;" ng-class="{'open' :$ctrl.fredSide  ,'close' :!$ctrl.fredSide}"></fred-overlay>
+    <fred-side ng-class="{'open' :$ctrl.fredSide  ,'close' :!$ctrl.fredSide}" esc-key="Test()">
+
+        <!--En tete-->
+        <header>
+            <span class="material-icons icon">add_alert</span>
+        </header>
+
+        <!--Partie Historique -->
+        <main class="fred-scroll" ng-show="$ctrl.validation">
+            <h2>Historique de la ligne</h2>
+            <section-block>
+                <section-content>
+                    <cards>
+                        <!--AuteurCreation-->
+                        <card class="active" ng-show="$ctrl.historiqueLigne.AuteurCreation != null">
+                            <titre>{{$ctrl.resources.RapportPrime_Historique_Creation_SousTitre}}</titre>
+                            <infos>
+                                <info>
+                                    <fred-label>{{$ctrl.resources.RapportPrime_Historique_Creation_Auteur}}</fred-label>
+                                    <fred-val>{{$ctrl.historiqueLigne.AuteurCreation.NomPrenom}}</fred-val>
+                                </info>
+                                <info>
+                                    <fred-label>{{$ctrl.resources.RapportPrime_Historique_Creation_Date}}</fred-label>
+                                    <fred-val>{{$ctrl.historiqueLigne.DateCreation | date: "dd/MM/yyyy"}}</fred-val>
+                                </info>
+                            </infos>
+                        </card>
+                        <card class="inactive" ng-show="$ctrl.historiqueLigne.AuteurCreation == null">
+                            <titre>{{$ctrl.resources.RapportPrime_Historique_Creation_SousTitre}}</titre>
+                            <infos>
+                                Aucune validation
+                            </infos>
+                        </card>
+
+                        <!--AuteurModification-->
+                        <card class="active" ng-show="$ctrl.historiqueLigne.AuteurModification != null">
+                            <titre>{{$ctrl.resources.RapportPrime_Historique_Modification_SousTitre}}</titre>
+                            <infos>
+                                <info>
+                                    <fred-label>{{$ctrl.resources.RapportPrime_Historique_Modification_Auteur}}</fred-label>
+                                    <fred-val>{{$ctrl.historiqueLigne.AuteurModification.NomPrenom}}</fred-val>
+                                </info>
+                                <info>
+                                    <fred-label>{{$ctrl.resources.RapportPrime_Historique_Modification_Date}}</fred-label>
+                                    <fred-val>{{$ctrl.historiqueLigne.DateModification | date: "dd/MM/yyyy"}}</fred-val>
+                                </info>
+                            </infos>
+                        </card>
+                        <card class="inactive" ng-show="$ctrl.historiqueLigne.AuteurModification == null">
+                            <titre>{{$ctrl.resources.RapportPrime_Historique_Modification_SousTitre}}</titre>
+                            <infos>
+                                Aucune validation
+                            </infos>
+                        </card>
+
+                        <!--AuteurValidation-->
+                        <card class="active" ng-show="$ctrl.historiqueLigne.AuteurValidation != null">
+                            <titre>{{$ctrl.resources.RapportPrime_Historique_Validation_SousTitre}}</titre>
+                            <infos>
+                                <info>
+                                    <fred-label>{{$ctrl.resources.RapportPrime_Historique_Validation_Auteur}}</fred-label>
+                                    <fred-val>{{$ctrl.historiqueLigne.AuteurValidation.NomPrenom}}</fred-val>
+                                </info>
+                                <info>
+                                    <fred-label>{{$ctrl.resources.RapportPrime_Historique_Validation_Date}}</fred-label>
+                                    <fred-val>{{$ctrl.historiqueLigne.DateValidation | date: "dd/MM/yyyy"}}</fred-val>
+                                </info>
+                            </infos>
+                        </card>
+                        <card class="inactive" ng-show="$ctrl.historiqueLigne.AuteurValidation == null">
+                            <titre>{{$ctrl.resources.RapportPrime_Historique_Validation_SousTitre}}</titre>
+                            <infos>
+                                Aucune validation
+                            </infos>
+                        </card>
+                    </cards>
+                </section-content>
+            </section-block>
+        </main>
+
+        <footer ng-click="$ctrl.fredSide = false; $ctrl.validation = false;">
+            <close ng-click="$ctrl.validation = false;">
+                <icon /><label>Refermer le panneau</label>
+            </close>
+        </footer>
+
+    </fred-side>
+
+</div>

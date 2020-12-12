@@ -1,0 +1,98 @@
+﻿@*--------------------------------------------------------------------------------------------------------------*@
+@*                                          GESTION DES DÉLÉGATIONS                                             *@
+@*--------------------------------------------------------------------------------------------------------------*@
+
+<div class="panel panel-default" ng-show="personnelEdit.Personnel.UtilisateurId > 0 && personnelEdit.Personnel.IsUtilisateur && !personnelEdit.Personnel.IsInterimaire">
+  <div class="panel-heading collapsed" data-toggle="collapse" data-parent="#personnel-accordion" data-target="#collapse-delegation" id="panel-heading-delegation">
+    <i class="chevron fa fa-fw"></i> {{personnelEdit.resources.Personnel_PartialDelegation_Titre}}
+  </div>
+  <div id="collapse-delegation" class="panel-collapse collapse delegation">
+    <div class="panel-body">
+      <!--BEGIN : LISTE DES DÉLÉGATIONS-->
+      <div class="row surlign">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+          <button type="submit" ng-class="personnelEdit.currentFilter === 'Emise' ? 'emise' : ''"
+          class="btn btn-filter " ng-click="personnelEdit.onFilterDelegation('Emise')">{{personnelEdit.resources.Personnel_PartialDelegation_Emise}}</button>
+        </div>
+        <div class="col-md-2">
+          <button type="submit" ng-class="personnelEdit.currentFilter === 'Reçue' ? 'recue' : ''"
+          class="btn btn-filter" ng-click="personnelEdit.onFilterDelegation('Reçue')">{{personnelEdit.resources.Personnel_PartialDelegation_Recue}}</button>
+        </div>
+        <div class="col-md-2">
+          <button type="submit" ng-class="personnelEdit.currentFilter === 'Active' ? 'active': ''"
+          class="btn btn-filter" ng-click="personnelEdit.onFilterDelegation('Active')">{{personnelEdit.resources.Personnel_PartialDelegation_Active}}</button>
+        </div>
+        <div class="col-md-2">
+          <button type="submit" ng-class="personnelEdit.currentFilter === 'Inactive' ? 'inactive' : ''"
+          class="btn btn-filter" ng-click="personnelEdit.onFilterDelegation('Inactive')">{{personnelEdit.resources.Personnel_PartialDelegation_Inactive}}</button>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-2 no-pr">
+          <button type="button" class="fred-button default pull-right" ng-click="personnelEdit.handleOpenFormDelegationModal()"
+                  title="Cliquez ici pour créer une nouvelle délégation de droit à un personnel. En émmettant une délégation, le personnel recevant récupère automatiquement, pour une période donnée, les droits du personnel sélectionné.">
+            <span class="material-icons">person_add</span> 
+            {{personnelEdit.resources.Personnel_PartialDelegation_EmettreDelegation}}
+          </button>
+        </div>
+      </div>
+      <div class="delegation-list">
+        <table class="table-fixed">
+          <thead>
+            <tr>
+              <th class="col-md-1">{{personnelEdit.resources.Personnel_PartialDelegation_TableETT_Entete_TypeDeDelegation}}</th>
+              <th class="col-md-2">{{personnelEdit.resources.Personnel_PartialDelegation_TableETT_Entete_Personnel}}</th>
+              <th class="col-md-2">{{personnelEdit.resources.Personnel_PartialDelegation_TableETT_Entete_StatutRH}}</th>
+              <th class="col-md-2">{{personnelEdit.resources.Personnel_PartialDelegation_TableETT_Entete_DateDeDebut}}</th>
+              <th class="col-md-2">{{personnelEdit.resources.Personnel_PartialDelegation_TableETT_Entete_DateDeFin}}</th>
+              <th class="col-md-1">{{personnelEdit.resources.Personnel_PartialDelegation_TableETT_Entete_Commentaire}}</th>
+              <th class="col-md-1">{{personnelEdit.resources.Personnel_PartialDelegation_TableETT_Entete_Statut}}</th>
+              <th class="col-md-1">{{personnelEdit.resources.Personnel_PartialDelegation_TableETT_Entete_Action}}</th>
+            </tr>
+          </thead>
+          <tbody id="delegationList" class="fred-scroll">
+            <tr title="" ng-repeat="delegation in personnelEdit.DelegationList | orderBy:['-DateCreation']">
+              <td class="col-md-1">
+                <span class="emise" ng-show="delegation.Issued">{{personnelEdit.resources.Personnel_PartialDelegation_Emise}}</span>
+                <span class="recue" ng-show="!delegation.Issued">{{personnelEdit.resources.Personnel_PartialDelegation_Recue}}</span>
+              </td>
+              <td class="col-md-2" ng-show="delegation.Issued">{{delegation.PersonnelDelegue.PrenomNom}}</td>
+              <td class="col-md-2" ng-show="!delegation.Issued">{{delegation.PersonnelDelegant.PrenomNom}}</td>
+              <td class="col-md-2">{{delegation.StatutRH}}</td>
+              <td class="col-md-2">{{delegation.DateDeDebut | date:'dd/MM/yyyy'}}</td>
+              <td class="col-md-2">{{delegation.DateDeFin | date:'dd/MM/yyyy'}}</td>
+              <td class="col-md-1 td-flaticon-info">
+                <span class="flaticon flaticon-info" title="{{delegation.Commentaire}}"></span> 
+              </td>
+              <td class="col-md-1">
+                <span class="active"ng-show="delegation.Activated">{{personnelEdit.resources.Personnel_PartialDelegation_Active}}</span>
+                <span class="inactive" ng-show="!delegation.Activated">{{personnelEdit.resources.Personnel_PartialDelegation_Inactive}}</span>
+              </td>
+              <td class="col-md-1 icons-td">
+                <span ng-click="personnelEdit.handleOpenFormDelegationModal(delegation)" class="material-icons" aria-hidden="true"
+                      ng-show="!delegation.Activated && delegation.Issued && delegation.DateDesactivation == null && personnelEdit.compareToDateDelegation(delegation.DateDeFin)" title="{{personnelEdit.resources.Personnel_PartialInterim_TableETT_Bouton_Modifier_Tooltip}}">more_vert</span>
+                <span ng-click="personnelEdit.handleOpenDeleteDelegationModal(delegation)" class="material-icons clear-icon" aria-hidden="true"
+                      ng-show="delegation.Issued" title="{{personnelEdit.resources.Personnel_PartialInterim_TableETT_Bouton_Desaffecter_Tooltip}}">clear</span>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--END : LISTE DES DÉLÉGATIONS-->
+
+    </div>
+    <div class="panel-footer">
+      <!--BEGIN  > BOUTONS-->
+      <button type="submit" class="btn btn-default pull-left" ng-click="personnelEdit.handleSave('utilisateur')"
+              title="{{personnelEdit.resources.Global_Bouton_Enregistrer_Tooltip}}">
+        {{personnelEdit.resources.Global_Bouton_Enregistrer}}
+      </button>
+      <button type="button" class="btn btn-link pull-right" ng-click="personnelEdit.handleCancel('utilisateur')"
+              title="{{personnelEdit.resources.Global_Bouton_Annuler_Tooltip}}">
+        {{personnelEdit.resources.Global_Bouton_Annuler}}
+      </button>
+      <!--END  > BOUTONS-->
+    </div>
+  </div>
+</div>

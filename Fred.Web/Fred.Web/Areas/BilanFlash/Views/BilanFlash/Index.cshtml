@@ -1,0 +1,119 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+  ViewBag.Title = FeatureBilanFlash.BilanFlash_Title;
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+  @Styles.Render("~/ObjectifFlashListBundleFactory.css")
+}
+
+@section scripts {
+  @Scripts.Render("~/ObjectifFlashListBundleFactory.js")
+  @this.RenderResources("FeatureBilanFlash")
+}
+
+    <div class="container BilanFlash" ng-controller="ObjectifFlashListController as $ctrl">
+
+        <h1>{{::$ctrl.resources.BilanFlash_Title}}</h1>
+
+        <fred-toolbar>
+            <fred-section class="picklist-section">
+                <fred-section-title>{{::$ctrl.resources.BilanFlash_CI}}</fred-section-title>
+
+                <fred-section-controls>
+                    <div class="inner-addon right-addon">
+                        <lookup-standalone ng-model="$ctrl.filters.CI"
+                                text="$ctrl.filters.CI.CodeLibelle"
+                                search-placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                search-title="{{$ctrl.resources.Global_ReferentielCI}}"
+                                placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                on-select="$ctrl.handleLookupSelectionCI()"
+                                on-delete="$ctrl.handleLookupDeletionCI()"
+                                url="/api/CI/SearchLight"
+                                show-delete-button="true"
+                                class="formulaire long">
+                        </lookup-standalone>
+                    </div>
+                </fred-section-controls>
+            </fred-section>
+
+            <fred-section class="date-section">
+                <fred-section-title>{{::$ctrl.resources.BilanFlash_DateDebut}}</fred-section-title>
+                <fred-section-controls>
+                    <div class="input-group date">
+                        <app-date-picker format="DD/MM/YYYY" lang="fr" ng-model="$ctrl.filters.DateDebut"
+                                         placeholder="{{$ctrl.resources.BilanFlash_DateDebut}}" ng-change="$ctrl.handleChangeDate()" />
+                    </div>
+                </fred-section-controls>
+            </fred-section>
+
+            <fred-section class="date-section">
+                <fred-section-title>{{::$ctrl.resources.BilanFlash_DateFin}}</fred-section-title>
+                <fred-section-controls>
+                    <div class="input-group date">
+                        <app-date-picker id="datePickDebut" format="DD/MM/YYYY" lang="fr" ng-model="$ctrl.filters.DateFin"
+                                         placeholder="{{$ctrl.resources.BilanFlash_DateFin}}" ng-change="$ctrl.handleChangeDate()" />
+                    </div>
+                </fred-section-controls>
+            </fred-section>
+
+            <!--Bouton Actions-->
+            <fred-section class="action-section">
+                <fred-section-title>{{::$ctrl.resources.BilanFlash_Actions}}</fred-section-title>
+                <fred-section-controls>
+                    <button class="btn btn-default" ng-click="$ctrl.handleDisplayObjectifFlashClosed()" ng-if="!$ctrl.filters.DisplayClosed">{{::$ctrl.resources.BilanFlash_Button_ObjectifFlash_Afficher_Cloturer}}</button>
+                    <button class="btn btn-default" ng-click="$ctrl.handleDisplayObjectifFlashClosed()" ng-if="$ctrl.filters.DisplayClosed">{{::$ctrl.resources.BilanFlash_Button_ObjectifFlash_Cacher_Cloturer}}</button>
+                    <button class="btn btn-default" ng-click="$ctrl.handleRedirectionNewObjectifFlash()">{{::$ctrl.resources.BilanFlash_Button_NewObjectifFlash}}</button>
+                </fred-section-controls>
+            </fred-section>
+
+        </fred-toolbar>
+
+        <div>
+            <h5> {{$ctrl.objectifFlashList.length}} {{::$ctrl.resources.BilanFlash_Sur}} {{$ctrl.TotalCount}}  {{::$ctrl.resources.BilanFlash_ObjectifFlashTotal}}</h5>
+        </div>
+
+        <fred-flex-table class="flex-table fred-scroll" id="objectif-flash-list">
+            <div class="fixed-line-header top-header">
+                <div class="col-1 centered">{{::$ctrl.resources.BilanFlash_Numero}}</div>
+                <div class="col-2 centered">{{::$ctrl.resources.BilanFlash_CI}}</div>
+                <div class="col-3 centered">{{::$ctrl.resources.BilanFlash_Libelle}}</div>
+                <div class="col-4 centered">{{::$ctrl.resources.BilanFlash_Statut}}</div>
+                <div class="col-5 centered">{{::$ctrl.resources.BilanFlash_Objectif}}</div>
+                <div class="col-6 centered">{{::$ctrl.resources.BilanFlash_Realise}}</div>
+                <div class="col-7 centered">{{::$ctrl.resources.BilanFlash_Ecart}}</div>
+                <div class="col-8 centered">{{::$ctrl.resources.BilanFlash_DateDebut}}</div>
+                <div class="col-9 centered">{{::$ctrl.resources.BilanFlash_DateFin}}</div>
+                <div class="col-10 centered">{{::$ctrl.resources.BilanFlash_DateCloture}}</div>
+                <div class="col-action centered">{{::$ctrl.resources.BilanFlash_Actions}}</div>
+            </div>
+
+            <div ng-repeat="objectif in $ctrl.objectifFlashList track by $index">
+                <div class="flex-line line-objectifFlash" aria-expanded="false">
+                    <div class="col-1 centered">{{::objectif.ObjectifFlashId}}</div>
+                    <div class="col-2 centered">{{::objectif.CiCodeLibelle}}</div>
+                    <div class="col-3 centered">{{::objectif.Libelle}}</div>
+                    <div class="col-4 centered">
+                        <div class="colorBR span-line" ng-if="!objectif.IsActif && !objectif.IsClosed">{{::$ctrl.resources.BilanFlash_Span_Brouillon}}</div>
+                        <div class="colorAC span-line" ng-if="objectif.IsActif">{{::$ctrl.resources.BilanFlash_Span_Actif}}</div>
+                        <div class="colorCL span-line" ng-if="objectif.IsClosed">{{::$ctrl.resources.BilanFlash_Span_Cloture}}</div>
+                    </div>
+                    <div class="col-5 montant">{{::objectif.TotalMontantObjectif | number : 3}} €</div>
+                    <div class="col-6 montant">{{::objectif.TotalMontantRealise | number : 3}} €</div>
+                    <div class="col-7 montant">{{::objectif.EcartRealiseObjectif | number : 3}} €</div>
+                    <div class="col-8 centered">{{::objectif.DateDebut | date : 'dd/MM/yyyy'}}</div>
+                    <div class="col-9 centered">{{::objectif.DateFin | date : 'dd/MM/yyyy'}}</div>
+                    <div class="col-10 centered">{{::objectif.DateCloture | date : 'dd/MM/yyyy'}}</div>
+                    <div class="col-action">
+                        <i class="action-icone material-icons" ng-click="$ctrl.handleDuplicateObjectifFlash(objectif)">content_copy</i>
+                        <i class="action-icone material-icons" ng-if="!objectif.IsActif && !objectif.IsClosed" ng-click="$ctrl.handleDeleteObjectifFlash(objectif)">clear</i>
+                        <i class="action-icone material-icons" ng-if="objectif.IsActif || objectif.IsClosed" ng-click="$ctrl.handleExportObjectifFlash(objectif)">print</i>
+                        <i class="action-icone material-icons" ng-click="$ctrl.handleRedirectionObjectifFlash(objectif.ObjectifFlashId)">chevron_right</i>
+                    </div>
+                </div>
+            </div>                                      
+        </fred-flex-table>
+    </div>

@@ -1,0 +1,46 @@
+﻿<div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i>Séléction des dates</h2>
+            <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" aria-label="Close" title="Cliquer pour annuler et fermer"></i>
+        </div>
+        <div class="modal-body">
+            <div class="row dp">
+                <div class="col-md-12">
+                    <label class="control-label">Date de début</label>
+                    <span class="text-danger" ng-show="$ctrl.datesInvalid">
+                        Merci de choisir une date de fin postérieure à la date de début choisie .
+                    </span>
+                    <div class="input-group date">
+                        <app-date-picker id="dtDebut"
+                                         name="DateOuverture"
+                                         format="DD/MM/YYYY"
+                                         lang="fr"
+                                         placeholder="Date de début"
+                                         initial-date="{{$ctrl.dateDebut}}"
+                                         ng-change="$ctrl.handleDateChanges()"
+                                         ng-model="$ctrl.dateDebut" />
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label class="control-label">Date de fin</label>
+                    <div class="input-group date">
+                        <app-date-picker id="dtFin"
+                                         name="DateFin"
+                                         format="DD/MM/YYYY"
+                                         lang="fr"
+                                         placeholder="Date de fin"
+                                         initial-date="{{$ctrl.dateFin}}"
+                                         ng-model="$ctrl.dateFin"
+                                         ng-change="$ctrl.handleDateChanges()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default pull-left" data-dismiss="modal" ng-disabled="$ctrl.datesInvalid" ng-click="$ctrl.Validate()">Valider</button>
+            <button class="btn btn-link pull-right" data-dismiss="modal">Retour</button>
+        </div>
+    </div>
+</div>

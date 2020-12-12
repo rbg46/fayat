@@ -1,0 +1,600 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BudgetDetail_NewTaskCloseNotificationTitle" xml:space="preserve">
+    <value>J'ai bien compris que de nouvelles tâches ont été ajoutée. Ne plus afficher ce message pour cette version.</value>
+    <comment>Areas\Budget\Scripts\BudgetDetail\BudgetDetailTemplate.html</comment>
+  </data>
+  <data name="BudgetDetail_NewTaskNotification" xml:space="preserve">
+    <value>De nouvelles tâches ont été créées.</value>
+    <comment>Areas\Budget\Scripts\BudgetDetail\BudgetDetailTemplate.html</comment>
+  </data>
+  <data name="BudgetDetail_NewTaskWarningTitle" xml:space="preserve">
+    <value>Cette tâche a été nouvellement ajoutée au plan de tâche. Vous pouvez la renseigner.</value>
+    <comment>Areas\Budget\Scripts\BudgetDetail\BudgetDetailTemplate.html</comment>
+  </data>
+  <data name="BudgetSousDetail_RessourcePanel_RecommandeesUniquement" xml:space="preserve">
+    <value>Recommandées uniquement</value>
+  </data>
+  <data name="BudgetTacheWarningT4Rev" xml:space="preserve">
+    <value>Tâche d'écart</value>
+  </data>
+  <data name="Budget_Detail_Avancement_Indefini" xml:space="preserve">
+    <value>?</value>
+  </data>
+  <data name="Budget_Detail_Avancement_Pourcentage" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="Budget_Detail_Avancement_Quantite" xml:space="preserve">
+    <value>Quantité</value>
+  </data>
+  <data name="Budget_Detail_CommentairePanel_Commentaire" xml:space="preserve">
+    <value>Commentaire :</value>
+  </data>
+  <data name="Budget_Detail_CommentairePanel_Erreur_TropLong" xml:space="preserve">
+    <value>Le commentaire est trop long ({0} caractères), il ne doit pas dépasser {1} caractères.</value>
+  </data>
+  <data name="Budget_Detail_CommentairePanel_Titre" xml:space="preserve">
+    <value>Tâche</value>
+  </data>
+  <data name="Budget_Detail_DisabledTasksButtonCaption" xml:space="preserve">
+    <value>Tâches inactives</value>
+  </data>
+  <data name="Budget_Detail_DisabledTasksHidden" xml:space="preserve">
+    <value>Les tâches inactives sont masquées</value>
+  </data>
+  <data name="Budget_Detail_DisabledTasksShown" xml:space="preserve">
+    <value>Les tâches inactives sont affichées</value>
+  </data>
+  <data name="Budget_Detail_Erreur_Chargement_DeviseInvalide" xml:space="preserve">
+    <value>La devise du budget n'est pas une devise possible du CI</value>
+  </data>
+  <data name="Budget_Detail_Erreur_Chargement_Inexistant" xml:space="preserve">
+    <value>Le détail du T4 n'existe pas</value>
+  </data>
+  <data name="Budget_Detail_Liste_Entete_Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Budget_Detail_Liste_Entete_Budget" xml:space="preserve">
+    <value>Budget</value>
+  </data>
+  <data name="Budget_Detail_Liste_Entete_Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Budget_Detail_Liste_Entete_Commentaire" xml:space="preserve">
+    <value>Commentaire</value>
+  </data>
+  <data name="Budget_Detail_Liste_Entete_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+  </data>
+  <data name="Budget_Detail_Liste_Entete_Montant" xml:space="preserve">
+    <value>Montant</value>
+  </data>
+  <data name="Budget_Detail_Liste_Entete_PU" xml:space="preserve">
+    <value>PU</value>
+  </data>
+  <data name="Budget_Detail_Liste_Entete_Quantie" xml:space="preserve">
+    <value>Quantité</value>
+  </data>
+  <data name="Budget_Detail_Liste_Entete_Recalage" xml:space="preserve">
+    <value>Recalage</value>
+  </data>
+  <data name="Budget_Detail_Liste_Entete_T4" xml:space="preserve">
+    <value>T4</value>
+  </data>
+  <data name="Budget_Detail_Liste_Entete_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Budget_Detail_Liste_Entete_Unite" xml:space="preserve">
+    <value>Unité</value>
+  </data>
+  <data name="Budget_Detail_RevenirListeSansEnregistrer" xml:space="preserve">
+    <value>Les changements n'ont pas été enregistrés, êtes-vous certain de vouloir revenir à la liste sans enregistrer ?</value>
+  </data>
+  <data name="Budget_Detail_Titre" xml:space="preserve">
+    <value>Détail d'un budget</value>
+  </data>
+  <data name="Budget_Detail_TitrePage" xml:space="preserve">
+    <value>Détail d'un budget</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Action_Annuler" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Action_CopierBudget" xml:space="preserve">
+    <value>Copier les ressources d'un budget</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Action_Enregistrer" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Action_RetourBrouillon" xml:space="preserve">
+    <value>Remettre en brouillon</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Action_Valider" xml:space="preserve">
+    <value>Valider</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Affichage_PU" xml:space="preserve">
+    <value>PU</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Affichage_SD" xml:space="preserve">
+    <value>SD</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Affichage_T4" xml:space="preserve">
+    <value>T4</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_PlaceHolder_Rechercher" xml:space="preserve">
+    <value>Rechercher une tâche</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Titre_Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Titre_Affichage" xml:space="preserve">
+    <value>Affichage</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Titre_CI" xml:space="preserve">
+    <value>CI</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Titre_Devise" xml:space="preserve">
+    <value>Devise</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Titre_Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Titre_Indicateur" xml:space="preserve">
+    <value>Indicateur</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Titre_Indicateur_Montant" xml:space="preserve">
+    <value>Montant HT budgétisé</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Titre_Navigation" xml:space="preserve">
+    <value>Navigation</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Titre_Rechercher" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Titre_Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Tooltip_Affichage_PU" xml:space="preserve">
+    <value>Mode PU</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Tooltip_Affichage_SD" xml:space="preserve">
+    <value>Mode sous-détail</value>
+  </data>
+  <data name="Budget_Detail_ToolBar_Tooltip_Affichage_T4" xml:space="preserve">
+    <value>Mode T4</value>
+  </data>
+  <data name="Budget_Detail_Tooltip_ChangerTypeAvancement" xml:space="preserve">
+    <value>Cliquer pour changer le type d'avancement</value>
+  </data>
+  <data name="Budget_Detail_Tooltip_CreerT4" xml:space="preserve">
+    <value>Cliquer pour ajouter une tâche de niveau 4</value>
+  </data>
+  <data name="Budget_Detail_Tooltip_GoBackButton" xml:space="preserve">
+    <value>Retour à la liste des budgets</value>
+  </data>
+  <data name="Budget_Detail_Tooltip_ModifierCommentaire" xml:space="preserve">
+    <value>Cliquer pour modifier le commentaire</value>
+  </data>
+  <data name="Budget_Detail_Tooltip_SupprimerBudgetT4" xml:space="preserve">
+    <value>Cliquer pour supprimer la ligne</value>
+  </data>
+  <data name="Budget_Detail_Tooltip_SupprimerT4" xml:space="preserve">
+    <value>Cliquer pour supprimer la tâche</value>
+  </data>
+  <data name="Budget_Detail_Tooltip_Tache1" xml:space="preserve">
+    <value>Tâche de niveau 1</value>
+  </data>
+  <data name="Budget_Detail_Tooltip_Tache2" xml:space="preserve">
+    <value>Tâche de niveau 2</value>
+  </data>
+  <data name="Budget_Detail_Tooltip_Tache3" xml:space="preserve">
+    <value>Tâche de niveau 3</value>
+  </data>
+  <data name="Budget_Detail_Tooltip_Tache4" xml:space="preserve">
+    <value>Tâche de niveau 4</value>
+  </data>
+  <data name="Budget_Detail_Tooltip_VoirCommentaire" xml:space="preserve">
+    <value>Cliquer pour voir le commentaire</value>
+  </data>
+  <data name="Budget_Detail_Tooltip_VoirSousDetail" xml:space="preserve">
+    <value>Voir le sous-détail</value>
+  </data>
+  <data name="Budget_GestionT4_Bouton_Ajouter" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="Budget_GestionT4_Bouton_Ajouter_Tooltip" xml:space="preserve">
+    <value>Cliquer pour Ajouter</value>
+  </data>
+  <data name="Budget_GestionT4_Checkbox_Creer" xml:space="preserve">
+    <value>Créer une nouvelle T4</value>
+  </data>
+  <data name="Budget_GestionT4_Checkbox_Existante" xml:space="preserve">
+    <value>Sélectionner une T4 existante</value>
+  </data>
+  <data name="Budget_GestionT4_Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Budget_GestionT4_Erreur_CodeManquant" xml:space="preserve">
+    <value>Veuillez saisir un code.</value>
+  </data>
+  <data name="Budget_GestionT4_Erreur_LibelleManquant" xml:space="preserve">
+    <value>Veuillez saisir un libellé.</value>
+  </data>
+  <data name="Budget_GestionT4_Erreur_Suppression" xml:space="preserve">
+    <value>Erreur à la suppression.</value>
+  </data>
+  <data name="Budget_GestionT4_Erreur_TacheExistante" xml:space="preserve">
+    <value>La tâche de code '{0}' existe déjà pour le CI.</value>
+  </data>
+  <data name="Budget_GestionT4_Erreur_TacheInexistante" xml:space="preserve">
+    <value>La tâche demandée n'existe pas.</value>
+  </data>
+  <data name="Budget_GestionT4_Erreur_TacheManquante" xml:space="preserve">
+    <value>Veuillez sélectionner une tâche</value>
+  </data>
+  <data name="Budget_GestionT4_Erreur_TacheMauvaisCI" xml:space="preserve">
+    <value>La tâche n'est pas sur le bon CI.</value>
+  </data>
+  <data name="Budget_GestionT4_Erreur_TacheParenteInexistante" xml:space="preserve">
+    <value>La tâche parente n'existe pas.</value>
+  </data>
+  <data name="Budget_GestionT4_Erreur_TacheParenteMauvaisCI" xml:space="preserve">
+    <value>La tâche parente n'est pas sur le bon CI.</value>
+  </data>
+  <data name="Budget_GestionT4_Erreur_TacheParentePasDeNiveau3" xml:space="preserve">
+    <value>La tâche parente doit être de niveau 3.</value>
+  </data>
+  <data name="Budget_GestionT4_Erreur_TachePasDeNiveau4" xml:space="preserve">
+    <value>La tâche doit être de nivea 4.</value>
+  </data>
+  <data name="Budget_GestionT4_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+  </data>
+  <data name="Budget_GestionT4_RegroupementT1" xml:space="preserve">
+    <value>Regroupement T1</value>
+  </data>
+  <data name="Budget_GestionT4_RegroupementT2" xml:space="preserve">
+    <value>Regroupement T2</value>
+  </data>
+  <data name="Budget_GestionT4_RegroupementT3" xml:space="preserve">
+    <value>Regroupement T3</value>
+  </data>
+  <data name="Budget_GestionT4_Titre_Ajouter" xml:space="preserve">
+    <value>Ajout d'une tâche de niveau 4</value>
+  </data>
+  <data name="Budget_GestionT4_Titre_Changer" xml:space="preserve">
+    <value>Modification d'une tâche de niveau 4</value>
+  </data>
+  <data name="Budget_GestionT4_Titre_SupprimerBudgetT4" xml:space="preserve">
+    <value>Etes-vous certain de vouloir supprimer cette ligne de détail ?</value>
+  </data>
+  <data name="Budget_GestionT4_Titre_SupprimerT4" xml:space="preserve">
+    <value>Etes-vous certain de vouloir supprimer cette tâche ?</value>
+  </data>
+  <data name="Budget_GestionT4_Tooltip_EnregistrerPasDeModification" xml:space="preserve">
+    <value>Il n'y a pas de modification à enregistrer</value>
+  </data>
+  <data name="Budget_Ouvrir_BibliothequePrix_Button" xml:space="preserve">
+    <value>Ouvrir la bibliotheque des prix</value>
+  </data>
+  <data name="Budget_Validation_AValider" xml:space="preserve">
+    <value>Renseigner un commentaire pour mettre cette version à valider</value>
+  </data>
+  <data name="Budget_Validation_Avertissement_Date" xml:space="preserve">
+    <value>En confirmant la mise en application de cette version, elle sera active dès le {0}.</value>
+  </data>
+  <data name="Budget_Validation_Avertissement_VersionActuelle" xml:space="preserve">
+    <value> - La version {0} actellement en application sera archivée.</value>
+  </data>
+  <data name="Budget_Validation_Avertissement_VersionIncrementee" xml:space="preserve">
+    <value> - La version {0} sera incrémentée en {1}.</value>
+  </data>
+  <data name="Budget_Validation_Confirmation" xml:space="preserve">
+    <value>Confirmez-vous l'application de cette version ?</value>
+  </data>
+  <data name="Budget_Validation_Confirmation_Checkbox" xml:space="preserve">
+    <value>Je confirme la mise en application de cette version</value>
+  </data>
+  <data name="Budget_Validation_EnApplication" xml:space="preserve">
+    <value>Renseigner un commentaire pour remettre cette version en application</value>
+  </data>
+  <data name="Budget_Validation_RetourBrouillon" xml:space="preserve">
+    <value>Renseigner un commentaire pour remettre cette version en brouillon</value>
+  </data>
+  <data name="Budget_Validation_Titre" xml:space="preserve">
+    <value>Workflow de validation</value>
+  </data>
+  <data name="CopierBudgetConfirm_AucuneBibliothequeSelectionnee" xml:space="preserve">
+    <value>Aucune bibliothèque n'a été sélectionnée. Comment voulez-vous initialiser les prix et unités ?</value>
+  </data>
+  <data name="CopierBudgetConfirm_AucuneBibliothequeSelectionnee_BudgetSource" xml:space="preserve">
+    <value>Prix et unités du budget source</value>
+  </data>
+  <data name="CopierBudgetConfirm_AucuneBibliothequeSelectionnee_Vides" xml:space="preserve">
+    <value>Prix à 0 et unités vides</value>
+  </data>
+  <data name="CopierBudgetConfirm_BibliothequeInexistante" xml:space="preserve">
+    <value>Aucune bibliothèque sur le CI sélectionné. Comment voulez-vous initialiser les prix et unités ?</value>
+  </data>
+  <data name="CopierBudgetConfirm_ConfirmerCopie" xml:space="preserve">
+    <value>Confirmez-vous la copie ? Attention cette opération est irréversible</value>
+  </data>
+  <data name="CopierBudgetConfirm_ConfirmerCopie_Integralement" xml:space="preserve">
+    <value>Copier l'intégralité des informations</value>
+  </data>
+  <data name="CopierBudgetConfirm_ConfirmerCopie_SeulementLigneVide" xml:space="preserve">
+    <value>Effectuer seulement la copie sur les lignes vides</value>
+  </data>
+  <data name="CopierBudgetConfirm_CopierRessourcesSpecifiques" xml:space="preserve">
+    <value>Copier également les ressources spécifiques</value>
+  </data>
+  <data name="CopierBudgetConfirm_Entete_Bibliotheque" xml:space="preserve">
+    <value>Bibliothèque</value>
+  </data>
+  <data name="CopierBudgetConfirm_Entete_Budget" xml:space="preserve">
+    <value>Budget</value>
+  </data>
+  <data name="CopierBudgetConfirm_Entete_Source" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="CopierBudgetConfirm_ModificationsNonEnregistrees" xml:space="preserve">
+    <value>Vous devez enregistrer ou annuler les modifications avant de pouvoir copier.</value>
+  </data>
+  <data name="CopierBudgetConfirm_Titre" xml:space="preserve">
+    <value>Confirmation de la copie</value>
+  </data>
+  <data name="CopierBudget_CI_BudgetSource_PasDeBudget" xml:space="preserve">
+    <value>Le CI sélectionné ne possède aucun budget</value>
+  </data>
+  <data name="CopierBudget_CopieEffectuee" xml:space="preserve">
+    <value>La copie a été effectuée</value>
+  </data>
+  <data name="CopierBudget_CopieEffectuee_SansChangement" xml:space="preserve">
+    <value>La copie a été effectuée mais il n'y a aucun changement</value>
+  </data>
+  <data name="CopierBudget_Entete_Bibliotheque" xml:space="preserve">
+    <value>Bibliothèque</value>
+  </data>
+  <data name="CopierBudget_Entete_BudgetSource" xml:space="preserve">
+    <value>Budget source</value>
+  </data>
+  <data name="CopierBudget_Entete_CI" xml:space="preserve">
+    <value>CI</value>
+  </data>
+  <data name="CopierBudget_Entete_Revision" xml:space="preserve">
+    <value>Révision</value>
+  </data>
+  <data name="CopierBudget_Erreur_PlanDeTacheDifferent" xml:space="preserve">
+    <value>Impossible de faire la copie car les plans de tâches des deux CI ne sont pas identiques. Veuillez faire la copie du plan de tâche avant de copier le budget.</value>
+  </data>
+  <data name="CopierBudget_Error_BudgetCibleInexistant" xml:space="preserve">
+    <value>Le budget cible n'existe pas</value>
+  </data>
+  <data name="CopierBudget_Error_BudgetSourceInexistantOuInvisible" xml:space="preserve">
+    <value>Le budget source n'existe pas ou il n'est pas visible pour vous</value>
+  </data>
+  <data name="CopierBudget_Titre" xml:space="preserve">
+    <value>Copier les ressources d'un budget</value>
+  </data>
+  <data name="CopierDeplacerT4Code_Colonne_Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="CopierDeplacerT4Code_Colonne_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+  </data>
+  <data name="CopierDeplacerT4Code_Title" xml:space="preserve">
+    <value>Copier des tâches 4</value>
+  </data>
+  <data name="CopierDeplacerT4Confirmation_Copier_Radio_Ajouter" xml:space="preserve">
+    <value>Ajouter les T4 aux T4 existantes</value>
+  </data>
+  <data name="CopierDeplacerT4Confirmation_Copier_Radio_Remplacer" xml:space="preserve">
+    <value>Remplacer les T4 existantes</value>
+  </data>
+  <data name="CopierDeplacerT4Confirmation_ImpossibleCreerTache" xml:space="preserve">
+    <value>Impossible de créer les tâches. Veuillez corriger les ereurs indiquées.</value>
+  </data>
+  <data name="CopierDeplacerT4Confirmation_Message_Copier" xml:space="preserve">
+    <value>Confirmez-vous la copie des tâches selectionnées et de leur sous-détails associés ?</value>
+  </data>
+  <data name="CopierDeplacerT4Confirmation_Message_Deplacer" xml:space="preserve">
+    <value>Confirmez-vous le déplacement des tâches selectionnées et de leur sous-détails associés ?</value>
+  </data>
+  <data name="CopierDeplacerT4Confirmation_Message_Remplacer" xml:space="preserve">
+    <value>Confirmez-vous le remplacement de la tâche selectionnée et de son sous-détail associé ?</value>
+  </data>
+  <data name="CopierDeplacerT4Confirmation_NePlusDemander" xml:space="preserve">
+    <value>Ne plus me demander</value>
+  </data>
+  <data name="CopierDeplacerT4Confirmation_PropositionCodeTache" xml:space="preserve">
+    <value>Proposition de code tâche</value>
+  </data>
+  <data name="CopierDeplacerT4Confirmation_Title_Copier" xml:space="preserve">
+    <value>Confirmation de la copie</value>
+  </data>
+  <data name="CopierDeplacerT4Confirmation_Title_Deplacer" xml:space="preserve">
+    <value>Confirmation du déplacement</value>
+  </data>
+  <data name="CopierDeplacerT4Confirmation_Title_Remplacer" xml:space="preserve">
+    <value>Confirmation du remplacement</value>
+  </data>
+  <data name="CopierDeplacerT4_Action_Copier" xml:space="preserve">
+    <value>Copier une ou plusieurs T4</value>
+  </data>
+  <data name="CopierDeplacerT4_Action_Deplacer" xml:space="preserve">
+    <value>Déplacer une ou plusieurs T4</value>
+  </data>
+  <data name="CopierDeplacerT4_AucunT4Eligibles" xml:space="preserve">
+    <value>Aucun T4 n'est éligibles</value>
+  </data>
+  <data name="CopierDeplacerT4_Bouton_Copier" xml:space="preserve">
+    <value>Copier</value>
+  </data>
+  <data name="CopierDeplacerT4_Bouton_Déplacer" xml:space="preserve">
+    <value>Déplacer</value>
+  </data>
+  <data name="CopierDeplacerT4_Bouton_Remplacer" xml:space="preserve">
+    <value>Remplacer</value>
+  </data>
+  <data name="CopierDeplacerT4_CibleT3" xml:space="preserve">
+    <value>Cible T3</value>
+  </data>
+  <data name="CopierDeplacerT4_CibleT4" xml:space="preserve">
+    <value>Cible T4</value>
+  </data>
+  <data name="CopierDeplacerT4_Label_CI" xml:space="preserve">
+    <value>CI</value>
+  </data>
+  <data name="CopierDeplacerT4_Label_RegroupementT3" xml:space="preserve">
+    <value>Regroupement T3</value>
+  </data>
+  <data name="CopierDeplacerT4_Label_Revision" xml:space="preserve">
+    <value>Révision</value>
+  </data>
+  <data name="CopierDeplacerT4_QueVoulezVousFaire" xml:space="preserve">
+    <value>Que voulez-vous faire ?</value>
+  </data>
+  <data name="CopierDeplacerT4_RegroupementT1" xml:space="preserve">
+    <value>Regroupement T1</value>
+  </data>
+  <data name="CopierDeplacerT4_RegroupementT2" xml:space="preserve">
+    <value>Regroupement T2</value>
+  </data>
+  <data name="CopierDeplacerT4_RegroupementT3" xml:space="preserve">
+    <value>Regroupement T3</value>
+  </data>
+  <data name="CopierDeplacerT4_T4Eligibles" xml:space="preserve">
+    <value>Liste des T4 éligibles</value>
+  </data>
+  <data name="CopierDeplacerT4_Title_T3" xml:space="preserve">
+    <value>Copie / déplacement de T4</value>
+  </data>
+  <data name="CopierDeplacerT4_Title_T4" xml:space="preserve">
+    <value>Remplacement de T4</value>
+  </data>
+  <data name="CopierDeplacerT4_Tooltip_T3" xml:space="preserve">
+    <value>Copier / déplacer des tâches dans cette tâche</value>
+  </data>
+  <data name="CopierDeplacerT4_Tooltip_T4" xml:space="preserve">
+    <value>Remplacer cette tache par une autre</value>
+  </data>
+  <data name="CopierDeplacerT4_ToutesLesTaches3" xml:space="preserve">
+    <value>Toutes les tâches de niveau 3</value>
+  </data>
+</root>

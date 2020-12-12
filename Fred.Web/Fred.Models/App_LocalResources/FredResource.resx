@@ -1,0 +1,975 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LabelCodeIso" xml:space="preserve">
+    <value>Code ISO</value>
+  </data>
+  <data name="LabelNameGb" xml:space="preserve">
+    <value>Nom (GB)</value>
+  </data>
+  <data name="LabelNameFr" xml:space="preserve">
+    <value>Nom (FR)</value>
+  </data>
+  <data name="LabelCreate" xml:space="preserve">
+    <value>Créer nouveau</value>
+  </data>
+  <data name="LabelEdit" xml:space="preserve">
+    <value>Editer</value>
+  </data>
+  <data name="Button_Delete_lb" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="Button_Valider_lb" xml:space="preserve">
+    <value>Valider</value>
+  </data>
+  <data name="Reinitialiser" xml:space="preserve">
+    <value>Réinitialiser</value>
+  </data>
+  <data name="CommandesNonCloturees" xml:space="preserve">
+    <value>Voir seulement les commandes non clôturées</value>
+  </data>
+  <data name="FiltresAvances_lb" xml:space="preserve">
+    <value>Filtres avancés</value>
+  </data>
+  <data name="Date_lb" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Statut" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="Fournisseur_lb" xml:space="preserve">
+    <value>Fournisseur</value>
+  </data>
+  <data name="tit_CommandeInterne_lb" xml:space="preserve">
+    <value>Commande</value>
+  </data>
+  <data name="CommandeType_lb" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Chantier_lb" xml:space="preserve">
+    <value>Chantier</value>
+  </data>
+  <data name="TypeDepense" xml:space="preserve">
+    <value>Type de dépenses</value>
+  </data>
+  <data name="Tache" xml:space="preserve">
+    <value>Tâche</value>
+  </data>
+  <data name="PUHT" xml:space="preserve">
+    <value>PU HT</value>
+  </data>
+  <data name="MontantHT" xml:space="preserve">
+    <value>Montant HT</value>
+  </data>
+  <data name="SupprimerMaj" xml:space="preserve">
+    <value>SUPPRIMER</value>
+  </data>
+  <data name="Button_Sortir_lb" xml:space="preserve">
+    <value>Sortir</value>
+  </data>
+  <data name="Libelle" xml:space="preserve">
+    <value>LIBELLE</value>
+  </data>
+  <data name="MsgSupportContactFci" xml:space="preserve">
+    <value>Merci de contacter le support FCI</value>
+  </data>
+  <data name="Btn_Authenticate_lb" xml:space="preserve">
+    <value>S'authentifier</value>
+  </data>
+  <data name="LinkMailAppManager" xml:space="preserve">
+    <value>fred@razel-bec.fayat.com</value>
+  </data>
+  <data name="LinkWebsiteSupportFci" xml:space="preserve">
+    <value>http://fci.fayat.fr/support</value>
+  </data>
+  <data name="MsgSupportAppManager" xml:space="preserve">
+    <value>Responsable métier :  </value>
+  </data>
+  <data name="MsgSupportFciCallcenter" xml:space="preserve">
+    <value>Call center : 01 69 85 68 68 de 7h à 19h</value>
+  </data>
+  <data name="MsgSupportFciWeb" xml:space="preserve">
+    <value>Support FCI : </value>
+  </data>
+  <data name="Msg_AuthError_PleaseRetry" xml:space="preserve">
+    <value>Cliquer sur le bouton S'authentifier pour ressayer une nouvelle fois</value>
+  </data>
+  <data name="DateSuperieure" xml:space="preserve">
+    <value>Date supérieure à date du jour</value>
+  </data>
+  <data name="PersonnelExterne_Adresse1" xml:space="preserve">
+    <value>Adresse 1</value>
+  </data>
+  <data name="PersonnelExterne_Adresse2" xml:space="preserve">
+    <value>Adresse 2</value>
+  </data>
+  <data name="PersonnelExterne_Adresse3" xml:space="preserve">
+    <value>Adresse 3</value>
+  </data>
+  <data name="PersonnelExterne_CategoriePerso" xml:space="preserve">
+    <value>Catégorie</value>
+  </data>
+  <data name="PersonnelExterne_CodePostal" xml:space="preserve">
+    <value>Code postal</value>
+  </data>
+  <data name="PersonnelExterne_DateEntree" xml:space="preserve">
+    <value>Date entrée</value>
+  </data>
+  <data name="PersonnelExterne_DateSortie" xml:space="preserve">
+    <value>Date Sortie</value>
+  </data>
+  <data name="PersonnelExterne_IsInterimaire" xml:space="preserve">
+    <value>Est intérimaire</value>
+  </data>
+  <data name="PersonnelExterne_Matricule" xml:space="preserve">
+    <value>Matricule</value>
+  </data>
+  <data name="PersonnelExterne_Nom" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="PersonnelExterne_PaysId" xml:space="preserve">
+    <value>Pays</value>
+  </data>
+  <data name="PersonnelExterne_PersonnelExterneId" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="PersonnelExterne_Prenom" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="PersonnelExterne_SocieteId" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="PersonnelExterne_Ville" xml:space="preserve">
+    <value>Ville</value>
+  </data>
+  <data name="Pays_Label" xml:space="preserve">
+    <value>Pays</value>
+  </data>
+  <data name="Created" xml:space="preserve">
+    <value>Créé</value>
+  </data>
+  <data name="Deleted" xml:space="preserve">
+    <value>Supprimé</value>
+  </data>
+  <data name="Modified" xml:space="preserve">
+    <value>Modifié</value>
+  </data>
+  <data name="Par" xml:space="preserve">
+    <value>par</value>
+  </data>
+  <data name="Modules" xml:space="preserve">
+    <value>Modules</value>
+  </data>
+  <data name="AjouterFonc" xml:space="preserve">
+    <value>Ajouter une fonctionnalité</value>
+  </data>
+  <data name="Button_Cancel_lb" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="ExportExcel_lb" xml:space="preserve">
+    <value>Exporter au format Excel</value>
+  </data>
+  <data name="Dupliquer_lb" xml:space="preserve">
+    <value>Dupliquer</value>
+  </data>
+  <data name="Supprimer_lb" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="Total_lb" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="ToutSelectionner_lb" xml:space="preserve">
+    <value>Tout sélectionner</value>
+  </data>
+  <data name="Non_lb" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="Oui_lb" xml:space="preserve">
+    <value>Oui</value>
+  </data>
+  <data name="Affecter_lb" xml:space="preserve">
+    <value>Affecter</value>
+  </data>
+  <data name="Code_lb" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="ExempleNonImplemente_lb" xml:space="preserve">
+    <value>Exemple non-implémenté !!!</value>
+  </data>
+  <data name="Libelle_lb" xml:space="preserve">
+    <value>Libellé</value>
+  </data>
+  <data name="NotificationFred_lb" xml:space="preserve">
+    <value>Notification Fred</value>
+  </data>
+  <data name="Public_lb" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="Filters_lb" xml:space="preserve">
+    <value>Filtres</value>
+  </data>
+  <data name="Date_placeholder" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="IsActif_lb" xml:space="preserve">
+    <value>Actif ?</value>
+  </data>
+  <data name="ImportationEnCours_lb" xml:space="preserve">
+    <value>Importation en cours...</value>
+  </data>
+  <data name="Button_Add_lb" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="Button_Modifier_lb" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="ClickHere_lb" xml:space="preserve">
+    <value>Cliquer ici</value>
+  </data>
+  <data name="Desactiver_lb" xml:space="preserve">
+    <value>Désactiver</value>
+  </data>
+  <data name="Position_lb" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="Activer_lb" xml:space="preserve">
+    <value>Activer</value>
+  </data>
+  <data name="AjouterModule_lb" xml:space="preserve">
+    <value>Ajouter un module</value>
+  </data>
+  <data name="ArgentTrouveCmdBuyer_lb" xml:space="preserve">
+    <value>L'agent a trouvé {0} commandes</value>
+  </data>
+  <data name="Button_Close_lb" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="Button_OK_lb" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="Button_Save_lb" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="Devise_lb" xml:space="preserve">
+    <value>Devise</value>
+  </data>
+  <data name="ErreurSurvenue_error" xml:space="preserve">
+    <value>Désolé, une erreur est survenue</value>
+  </data>
+  <data name="LibelleModule_placeholder" xml:space="preserve">
+    <value>Nom du groupe</value>
+  </data>
+  <data name="ModuleCode_placeholder" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Module_lb" xml:space="preserve">
+    <value>Module</value>
+  </data>
+  <data name="PUHT_placeholder" xml:space="preserve">
+    <value>PU HT</value>
+  </data>
+  <data name="Quantite_lb" xml:space="preserve">
+    <value>Quantité</value>
+  </data>
+  <data name="Quantite_placeholder" xml:space="preserve">
+    <value>Quantité</value>
+  </data>
+  <data name="Rechercher_lb" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="Seuil_lb" xml:space="preserve">
+    <value>Seuil</value>
+  </data>
+  <data name="Unite_placeholder" xml:space="preserve">
+    <value>Unité</value>
+  </data>
+  <data name="Button_CancelDelete_lb" xml:space="preserve">
+    <value>Annuler la suppression</value>
+  </data>
+  <data name="Infos_lb" xml:space="preserve">
+    <value>Infos</value>
+  </data>
+  <data name="SuperAdmin_lb" xml:space="preserve">
+    <value>SuperAdmin</value>
+  </data>
+  <data name="Menu_Administration_lb" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="Menu_CI_lb" xml:space="preserve">
+    <value>Centres d'imputations (CI)</value>
+  </data>
+  <data name="Menu_CodeDeplacement_lb" xml:space="preserve">
+    <value>Codes déplacement</value>
+  </data>
+  <data name="Menu_CodeMajoration_lb" xml:space="preserve">
+    <value>Codes majoration</value>
+  </data>
+  <data name="Menu_EtabPaie_lb" xml:space="preserve">
+    <value>Etablissements de paie</value>
+  </data>
+  <data name="Menu_MesFavoris_lb" xml:space="preserve">
+    <value>Mes favoris</value>
+  </data>
+  <data name="Menu_Modules_lb" xml:space="preserve">
+    <value>Modules</value>
+  </data>
+  <data name="Menu_Organisations_lb" xml:space="preserve">
+    <value>Organisations</value>
+  </data>
+  <data name="Menu_PaginationSocietes_lb" xml:space="preserve">
+    <value>Pagination sociétés</value>
+  </data>
+  <data name="Menu_Personnel_lb" xml:space="preserve">
+    <value>Personnel</value>
+  </data>
+  <data name="Menu_Primes_lb" xml:space="preserve">
+    <value>Primes</value>
+  </data>
+  <data name="Menu_Receptions_lb" xml:space="preserve">
+    <value>Réceptions</value>
+  </data>
+  <data name="Menu_Roles_lb" xml:space="preserve">
+    <value>Rôles</value>
+  </data>
+  <data name="Menu_Societes_lb" xml:space="preserve">
+    <value>Societés</value>
+  </data>
+  <data name="MesAffaires_lb" xml:space="preserve">
+    <value>Mes affaires</value>
+  </data>
+  <data name="MesFavoris_lb" xml:space="preserve">
+    <value>Mes favoris</value>
+  </data>
+  <data name="MesKPI_lb" xml:space="preserve">
+    <value>Mes KPI (Exemples fictifs)</value>
+  </data>
+  <data name="Evenements_lb" xml:space="preserve">
+    <value>Evenements</value>
+  </data>
+  <data name="CentreImputationId" xml:space="preserve">
+    <value>CiId</value>
+  </data>
+  <data name="RapportId" xml:space="preserve">
+    <value>Rapport</value>
+  </data>
+  <data name="AuteurCreation_lb" xml:space="preserve">
+    <value>Auteur Creation</value>
+  </data>
+  <data name="Societe_lb" xml:space="preserve">
+    <value>Société</value>
+  </data>
+  <data name="Ajouter_lb" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="Accueil_lb" xml:space="preserve">
+    <value>Accueil</value>
+  </data>
+  <data name="CodePostal_lb" xml:space="preserve">
+    <value>Code postal</value>
+  </data>
+  <data name="CodePostal_placeholder" xml:space="preserve">
+    <value>Code postal</value>
+  </data>
+  <data name="Ville_lb" xml:space="preserve">
+    <value>Ville</value>
+  </data>
+  <data name="Ville_placeholder" xml:space="preserve">
+    <value>Ville</value>
+  </data>
+  <data name="Viseur_lb" xml:space="preserve">
+    <value>Viseur</value>
+  </data>
+  <data name="Centre_Imputation_lb" xml:space="preserve">
+    <value>Centre d'Imputation</value>
+  </data>
+  <data name="LectureSeule_lb" xml:space="preserve">
+    <value>Lecture seule</value>
+  </data>
+  <data name="SuppressionSuccess_lb" xml:space="preserve">
+    <value>Suppression effectuée avec succès !</value>
+  </data>
+  <data name="ConfirmSuppression_msg" xml:space="preserve">
+    <value>Confirmez-vous la suppression ?</value>
+  </data>
+  <data name="RapportJournalier_lb" xml:space="preserve">
+    <value>Rapport Journalier du</value>
+  </data>
+  <data name="ErreursSaisie_warning" xml:space="preserve">
+    <value>Il y a des erreurs de saisie</value>
+  </data>
+  <data name="Enregistrement_success" xml:space="preserve">
+    <value>Enregistrement effectué avec succès !</value>
+  </data>
+  <data name="Creation_lb" xml:space="preserve">
+    <value>Création</value>
+  </data>
+  <data name="Modification_lb" xml:space="preserve">
+    <value>Modification</value>
+  </data>
+  <data name="Retour_lb" xml:space="preserve">
+    <value>Retour</value>
+  </data>
+  <data name="Continuer_lb" xml:space="preserve">
+    <value>Continuer</value>
+  </data>
+  <data name="Active_lb" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Adminsitration_lb" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="CodeExistant_lb" xml:space="preserve">
+    <value>Ce code existe déjà !</value>
+  </data>
+  <data name="Inactive_lb" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="SaisieCode_lb" xml:space="preserve">
+    <value>Veuillez saisir un code</value>
+  </data>
+  <data name="SaisieLibelle_lb" xml:space="preserve">
+    <value>Veuillez saisir un libellé</value>
+  </data>
+  <data name="ToutDeplier_lb" xml:space="preserve">
+    <value>Tout déplier</value>
+  </data>
+  <data name="ToutReplier_lb" xml:space="preserve">
+    <value>Tout replier</value>
+  </data>
+  <data name="Type_lb" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="ConfirmSave_msg" xml:space="preserve">
+    <value>Confirmez-vous l'enregistrement ?</value>
+  </data>
+  <data name="Parametrage_lb" xml:space="preserve">
+    <value>Paramétrage</value>
+  </data>
+  <data name="Prix_lb" xml:space="preserve">
+    <value>Prix</value>
+  </data>
+  <data name="Button_Excel_lb" xml:space="preserve">
+    <value>Excel</value>
+  </data>
+  <data name="Button_Pdf_lb" xml:space="preserve">
+    <value>PDF</value>
+  </data>
+  <data name="SaisieChapitre_lb" xml:space="preserve">
+    <value>Veuillez saisir un chapitre</value>
+  </data>
+  <data name="SaisieSousChapitre_lb" xml:space="preserve">
+    <value>Veuillez saisir un sous chapitre</value>
+  </data>
+  <data name="DatesIncorrectes_warning" xml:space="preserve">
+    <value>Dates incorrectes</value>
+  </data>
+  <data name="JourneeDu_lb" xml:space="preserve">
+    <value>Journée du</value>
+  </data>
+  <data name="Actif_lb" xml:space="preserve">
+    <value>Actif</value>
+  </data>
+  <data name="Button_CollapseWindow_lb" xml:space="preserve">
+    <value>Réduire la fenêtre</value>
+  </data>
+  <data name="Button_ExpandWindow_lb" xml:space="preserve">
+    <value>Etendre la fenêtre</value>
+  </data>
+  <data name="DataRequired_warning" xml:space="preserve">
+    <value>Champ(s) obligatoire(s)</value>
+  </data>
+  <data name="FiltrerResultats_lb" xml:space="preserve">
+    <value>Filtrer les résultats</value>
+  </data>
+  <data name="Gerer_lb" xml:space="preserve">
+    <value>Gérer</value>
+  </data>
+  <data name="Horaire_lb" xml:space="preserve">
+    <value>Horaire</value>
+  </data>
+  <data name="Inactif_lb" xml:space="preserve">
+    <value>Inactif</value>
+  </data>
+  <data name="Journalier_lb" xml:space="preserve">
+    <value>Journalier</value>
+  </data>
+  <data name="Modifier_lb" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="Button_SaveAndNew_lb" xml:space="preserve">
+    <value>Enregistrer et Nouveau</value>
+  </data>
+  <data name="Externe_lb" xml:space="preserve">
+    <value>Externe</value>
+  </data>
+  <data name="Interne_lb" xml:space="preserve">
+    <value>Interne</value>
+  </data>
+  <data name="Success_Load" xml:space="preserve">
+    <value>Chargement terminé</value>
+  </data>
+  <data name="SelectSociete_lb" xml:space="preserve">
+    <value>Veuillez sélectionner une société</value>
+  </data>
+  <data name="Affaires_lb" xml:space="preserve">
+    <value>Affaires</value>
+  </data>
+  <data name="Button_AddFavoris_lb" xml:space="preserve">
+    <value>Ajouter aux favoris</value>
+  </data>
+  <data name="Button_ApplyFilter_lb" xml:space="preserve">
+    <value>Appliquer les filtres</value>
+  </data>
+  <data name="Button_Reinitialiser_lb" xml:space="preserve">
+    <value>Réinitialiser</value>
+  </data>
+  <data name="Dates_lb" xml:space="preserve">
+    <value>Dates :</value>
+  </data>
+  <data name="Filters_actifs_lb" xml:space="preserve">
+    <value>Filters actifs</value>
+  </data>
+  <data name="Filter_lb" xml:space="preserve">
+    <value>Filtrer</value>
+  </data>
+  <data name="Montants_lb" xml:space="preserve">
+    <value>Montants :</value>
+  </data>
+  <data name="MontantTotalHTMax_placeholder" xml:space="preserve">
+    <value>Montant total HT max.</value>
+  </data>
+  <data name="MontantTotalHTMin_placeholder" xml:space="preserve">
+    <value>Montant total HT min.</value>
+  </data>
+  <data name="Selections_lb" xml:space="preserve">
+    <value>Sélections :</value>
+  </data>
+  <data name="Statut_lb" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="Revenir_recherche_simple_lb" xml:space="preserve">
+    <value>Revenir à la recherche simple</value>
+  </data>
+  <data name="AucunReferentielTrouve_lb" xml:space="preserve">
+    <value>Aucun référentiel trouvé.</value>
+  </data>
+  <data name="Action_Delete_Fail" xml:space="preserve">
+    <value>Impossible de supprimer cet élément car il est utilisé par d'autres</value>
+  </data>
+  <data name="Aide_AnnulerEtFermer_lb" xml:space="preserve">
+    <value>Cliquer pour annuler et fermer</value>
+  </data>
+  <data name="Aide_Valider_lb" xml:space="preserve">
+    <value>Cliquer pour valider</value>
+  </data>
+  <data name="Confirmation_lb" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="AnnulerEtRefermer_lb" xml:space="preserve">
+    <value>Cliquez pour annuler et refermer</value>
+  </data>
+  <data name="Elargir_lb" xml:space="preserve">
+    <value>Elargir</value>
+  </data>
+  <data name="RechercherSocietes_lb" xml:space="preserve">
+    <value>Rechercher des sociétés</value>
+  </data>
+  <data name="ReferentielSocietes_lb" xml:space="preserve">
+    <value>Référentiel des Sociétés</value>
+  </data>
+  <data name="RefermerLePanneau_lb" xml:space="preserve">
+    <value>Cliquer pour refermer le panneau</value>
+  </data>
+  <data name="Refermer_lb" xml:space="preserve">
+    <value>Refermer</value>
+  </data>
+  <data name="Code_pattern_error" xml:space="preserve">
+    <value>Le code doit être composé de chiffres et de lettres</value>
+  </data>
+  <data name="Commentaire_lb" xml:space="preserve">
+    <value>Commentaire</value>
+  </data>
+  <data name="ConfirmCancel_msg" xml:space="preserve">
+    <value>Confirmez-vous l'annulation ?</value>
+  </data>
+  <data name="RechercherRessource_lb" xml:space="preserve">
+    <value>Rechercher une Ressource</value>
+  </data>
+  <data name="Button_Add_title" xml:space="preserve">
+    <value>Ajouter et fermer</value>
+  </data>
+  <data name="Button_Cancel_title" xml:space="preserve">
+    <value>Cliquer pour annuler et fermer</value>
+  </data>
+  <data name="Button_NewReference_title" xml:space="preserve">
+    <value>Cliquer pour ajouter une nouvelle référence</value>
+  </data>
+  <data name="LegendeAsterisque_lb" xml:space="preserve">
+    <value>Les champs marqués d'un astérisque (*) sont obligatoires</value>
+  </data>
+  <data name="RefermerPanneau_lb" xml:space="preserve">
+    <value>Refermer le panneau</value>
+  </data>
+  <data name="RefermerPanneau_Title" xml:space="preserve">
+    <value>Cliquer pour refermer le panneau</value>
+  </data>
+  <data name="RechercheAffiner_lb" xml:space="preserve">
+    <value>Affiner votre recherche</value>
+  </data>
+  <data name="RechercherSociete_placeholder" xml:space="preserve">
+    <value>Rechercher une Société ...</value>
+  </data>
+  <data name="SelectionnerSociete_lb" xml:space="preserve">
+    <value>Sélectionner une Société</value>
+  </data>
+  <data name="RechercheAffiner_title" xml:space="preserve">
+    <value>Cliquer pour affiner les résultats</value>
+  </data>
+  <data name="Code_existInSociete_error" xml:space="preserve">
+    <value>Ce code existe déjà pour cette société</value>
+  </data>
+  <data name="EtablissementPaie_lb" xml:space="preserve">
+    <value>Etablissement de paie</value>
+  </data>
+  <data name="Prive_lb" xml:space="preserve">
+    <value>Privé</value>
+  </data>
+  <data name="ReferentielCIs_lb" xml:space="preserve">
+    <value>Référentiel des CI</value>
+  </data>
+  <data name="ReferentielDevises_lb" xml:space="preserve">
+    <value>Référentiel des Devises</value>
+  </data>
+  <data name="ReferentielPersonnels_lb" xml:space="preserve">
+    <value>Référentiel des Personnels</value>
+  </data>
+  <data name="ConfirmationAnnulation_lb" xml:space="preserve">
+    <value>Confirmer l'annulation de votre saisie</value>
+  </data>
+  <data name="RechercherEtablissementsPaie_placeholder" xml:space="preserve">
+    <value>Rechercher un Etablissement Paie ...</value>
+  </data>
+  <data name="ReferentielEtablissementsPaie_lb" xml:space="preserve">
+    <value>Référentiel des Etablissements Paie</value>
+  </data>
+  <data name="DroitsInsuffisants_lb" xml:space="preserve">
+    <value>Vous n'avez pas les droits suffisants pour accéder à cet élément</value>
+  </data>
+  <data name="Code_exist_error" xml:space="preserve">
+    <value>Ce code existe déjà</value>
+  </data>
+  <data name="Code_patternNumeric_error" xml:space="preserve">
+    <value>Le code doit être composé uniquement de chiffres</value>
+  </data>
+  <data name="ReferentielCodeDeplacement_lb" xml:space="preserve">
+    <value>Référentiel des Codes Déplacement</value>
+  </data>
+  <data name="RechercherCI_placeholder" xml:space="preserve">
+    <value>Rechercher un CI ...</value>
+  </data>
+  <data name="RechercherCodeDeplacement_placeholder" xml:space="preserve">
+    <value>Rechercher un Code Déplacement ...</value>
+  </data>
+  <data name="RechercherCodeZoneDeplacement_placeholder" xml:space="preserve">
+    <value>Rechercher un Code Zone Déplacement ...</value>
+  </data>
+  <data name="ReferentielRessources_lb" xml:space="preserve">
+    <value>Référentiel des Ressources</value>
+  </data>
+  <data name="RechercherOrganisations_lb" xml:space="preserve">
+    <value>Rechercher une Organisation</value>
+  </data>
+  <data name="ReferentielOrganisations_lb" xml:space="preserve">
+    <value>Référentiel des Organisations</value>
+  </data>
+  <data name="RechercherDevise_lb" xml:space="preserve">
+    <value>Rechercher une Devise</value>
+  </data>
+  <data name="ReferentielCodeZoneDeplacement_lb" xml:space="preserve">
+    <value>Référentiel des Codes Zone Déplacement</value>
+  </data>
+  <data name="SelectionnerOrganisation_lb" xml:space="preserve">
+    <value>Sélectionner une Organisation</value>
+  </data>
+  <data name="RechercherOrganisations_placeholder" xml:space="preserve">
+    <value>Rechercher une Organisation ...</value>
+  </data>
+  <data name="Identifiant_lb" xml:space="preserve">
+    <value>Identifiant</value>
+  </data>
+  <data name="RechercherFournisseur_lb" xml:space="preserve">
+    <value>Rechercher un Fournisseur...</value>
+  </data>
+  <data name="RechercherSocietePartenaire_lb" xml:space="preserve">
+    <value>Rechercher une Société partenaire...</value>
+  </data>
+  <data name="ReferentielFournisseur_lb" xml:space="preserve">
+    <value>Référentiel des Fournisseurs</value>
+  </data>
+  <data name="Action_lb" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Adresse_lb" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="Detail_tooltip" xml:space="preserve">
+    <value>Cliquez pour accéder au détail</value>
+  </data>
+  <data name="Email_lb" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Entree_lb" xml:space="preserve">
+    <value>Entrée</value>
+  </data>
+  <data name="Groupe_lb" xml:space="preserve">
+    <value>Groupe</value>
+  </data>
+  <data name="Informations_lb" xml:space="preserve">
+    <value>Informations</value>
+  </data>
+  <data name="Latitude_lb" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="Longitude_lb" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+  <data name="PlusDetail_tooltip" xml:space="preserve">
+    <value>Cliquez pour obtenir plus d'informations</value>
+  </data>
+  <data name="Sortie_lb" xml:space="preserve">
+    <value>Sortie</value>
+  </data>
+  <data name="Activite_lb" xml:space="preserve">
+    <value>Activité</value>
+  </data>
+  <data name="Localisation_lb" xml:space="preserve">
+    <value>Localisation</value>
+  </data>
+  <data name="Ignorer_lb" xml:space="preserve">
+    <value>Ignorer</value>
+  </data>
+  <data name="Modifier_tooltip" xml:space="preserve">
+    <value>Cliquer pour modifier</value>
+  </data>
+  <data name="Fax_lb" xml:space="preserve">
+    <value>Fax</value>
+  </data>
+  <data name="Telephone_lb" xml:space="preserve">
+    <value>Téléphone</value>
+  </data>
+  <data name="AucunElement_lb" xml:space="preserve">
+    <value>Aucun élément</value>
+  </data>
+  <data name="Description_lb" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="RechercherNature_placeholder" xml:space="preserve">
+    <value>Rechercher une Nature...</value>
+  </data>
+  <data name="RechercherRessource_placeholder" xml:space="preserve">
+    <value>Rechercher une Ressource...</value>
+  </data>
+  <data name="no_data_message" xml:space="preserve">
+    <value>Aucune donnée trouvée. </value>
+  </data>
+  <data name="CreationSucces_lb" xml:space="preserve">
+    <value>Création effectuée avec succès !</value>
+  </data>
+  <data name="ModificationSucces_lb" xml:space="preserve">
+    <value>Modification effectuée avec succès !</value>
+  </data>
+  <data name="Devises_lb" xml:space="preserve">
+    <value>Devises</value>
+  </data>
+  <data name="StatutTransfert_0" xml:space="preserve">
+    <value>Aucun</value>
+  </data>
+  <data name="StatutTransfert_1" xml:space="preserve">
+    <value>En cours</value>
+  </data>
+  <data name="StatutTransfert_2" xml:space="preserve">
+    <value>Succès</value>
+  </data>
+  <data name="StatutTransfert_3" xml:space="preserve">
+    <value>Refusé</value>
+  </data>
+  <data name="StatutTransfert_4" xml:space="preserve">
+    <value>Echec</value>
+  </data>
+  <data name="ReferentielPersonnels_Placeholder" xml:space="preserve">
+    <value>Rechercher un Personnel ...</value>
+  </data>
+  <data name="ExportExcel_Tooltip" xml:space="preserve">
+    <value>Cliquer pour exporter au format Excel</value>
+  </data>
+  <data name="Global_Notification_Chargement_Error" xml:space="preserve">
+    <value>Erreur durant le chargement des données</value>
+  </data>
+  <data name="Global_Notification_Error" xml:space="preserve">
+    <value>Désolé, une erreur est survenue</value>
+  </data>
+  <data name="Global_Notification_Favaoris_Success" xml:space="preserve">
+    <value>Création du favori effectuée avec succès !</value>
+  </data>
+  <data name="Global_Notification_Titre" xml:space="preserve">
+    <value>Notification Fred</value>
+  </data>
+  <data name="Global_ReferentielChantier" xml:space="preserve">
+    <value>Référentiel des Chantiers</value>
+  </data>
+  <data name="Global_ReferentielChantier_Placeholder" xml:space="preserve">
+    <value>Rechercher un Chantier ...</value>
+  </data>
+  <data name="Global_ReferentielContact" xml:space="preserve">
+    <value>Référentiel des Contacts</value>
+  </data>
+  <data name="Global_ReferentielContact_Placeholder" xml:space="preserve">
+    <value>Rechercher un Contact ...</value>
+  </data>
+  <data name="Global_ReferentielDevise" xml:space="preserve">
+    <value>Référentiel des Devises</value>
+  </data>
+  <data name="Global_ReferentielDevise_Placeholder" xml:space="preserve">
+    <value>Rechercher une Devise ...</value>
+  </data>
+  <data name="Global_ReferentielFournisseur" xml:space="preserve">
+    <value>Référentiel des Fournisseurs</value>
+  </data>
+  <data name="Global_ReferentielFournisseur_Placeholder" xml:space="preserve">
+    <value>Rechercher un Fournisseur ...</value>
+  </data>
+  <data name="Global_ReferentielPersonnel" xml:space="preserve">
+    <value>Référentiel des Personnels</value>
+  </data>
+  <data name="Global_ReferentielPersonnel_Placeholder" xml:space="preserve">
+    <value>Rechercher un Personnel ...</value>
+  </data>
+  <data name="Global_ReferentielRessource" xml:space="preserve">
+    <value>Référentiel des Ressources</value>
+  </data>
+  <data name="Global_ReferentielRessource_Placeholder" xml:space="preserve">
+    <value>Rechercher une Ressource ...</value>
+  </data>
+  <data name="Global_ReferentielTache" xml:space="preserve">
+    <value>Référentiel des Tâches</value>
+  </data>
+  <data name="Global_ReferentielTache_Placeholder" xml:space="preserve">
+    <value>Rechercher une Tâche ...</value>
+  </data>
+</root>

@@ -1,0 +1,15 @@
+﻿<div class="bkg-item pk-{{ref.CodeRef}}-item materiel"
+     ng-repeat="ref in $ctrl.referentiels track by $index "
+     ng-click="$ctrl.handleSelection(ref)"
+     ng-class="{selected : $index == $ctrl.selectedIndex}"
+     title="Cliquer pour sélectionner l'information {{ref.CodeRef}} / {{ref.LibelleRef}}">
+        <div style="display:flex; flex-direction: row; align-items: center; justify-content: space-between ">
+            <div>
+                <h2 fred-wrap-in-tag="{{ref.CodeRef}}" words="$ctrl.searchTexts">{{ref.CodeRef}}</h2>
+                <h3 fred-wrap-in-tag="{{ref.LibelleRef}}" words="$ctrl.searchTexts">{{ref.LibelleRef}}</h3>
+            </div>
+            <div ng-if="ref.IsRecommandee">
+                <i class="fa fa-align-right fa-check-circle-o"></i>
+            </div>
+        </div>
+</div>

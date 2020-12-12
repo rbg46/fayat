@@ -1,0 +1,80 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+@model Fred.Web.Models.Authentification.ConnectViewModel
+
+@{
+    ViewBag.Title = @Authentification.Authentification_Connect_TitreOnglet;
+    Layout = "~/Views/Shared/_NoLayout.new.cshtml";
+}
+
+@section scripts {
+    @Scripts.Render("~/ViewsAuthenticationConnectBundle.js")
+}
+<link href="~/Content/Auth.css" rel="stylesheet">
+
+<div class="page"
+     ng-style="{'background-image':'url({{connectCtrl.loginImage}})'}"
+     ng-controller="connectController as connectCtrl">
+
+    <!-- <div class="box">
+     <div class="ribbon"><span class="dev">Developpement</span></div>
+    </div> -->
+
+    <div class="login" id="login">
+        <div class="authentication">
+            <div class="logo-fred">
+
+            </div>
+            <div class="auth" id="auth">
+                @using (Html.BeginForm("Connect", "Authentication", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div>
+                        <label for="UserName">
+                            @Authentification.Authentification_Connect_Identifiant
+                            @Html.TextBoxFor(m => m.UserName, new { @placeholder = Authentification.Authentification_Connect_Identifiant_Placeholder })
+                        </label>
+                    </div>
+
+                    <div>
+                        <label for="Password">
+                            @Authentification.Authentification_Connect_MotDePasse
+                            @Html.PasswordFor(m => m.Password, new { @placeholder = Authentification.Authentification_Connect_MotDePasse_Placeholder })
+                        </label>
+                        <a class="link" href="/Authentication/ResetPassword">@Authentification.Authentification_Connect_MotDePasseOublie</a>
+                    </div>
+                    <div class="button">
+                        <input type="submit" value="@Authentification.Authentification_Connect_Bouton_Connexion" />
+                    </div>
+                    if (!Html.ViewData.ModelState.IsValid)
+                    {
+                        <div class="information">
+                            @Html.ValidationSummary()
+                        </div>
+                    }
+                    else
+                    {
+                        if (Html.ViewData.Model != null && Html.ViewData.Model.Error != string.Empty)
+                        {
+                            <div class="information">
+                                @Html.ViewData.Model.Error
+                            </div>
+                            <div id="technicalInformation" style="display: none;">
+                               @Html.ViewData.Model.TechnicalError
+                            </div>
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="footer">
+    @Authentification.Authentification_PiedDePage
+
+    <img class="cp-logo" src="~/medias/images/logo/FAYAT-IT-FAYAT-GROUP-PNv.jpg" alt="logo fayat IT">
+
+</div>

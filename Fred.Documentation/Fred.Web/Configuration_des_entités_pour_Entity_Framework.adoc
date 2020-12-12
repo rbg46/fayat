@@ -1,0 +1,147 @@
+= Configuration des entités pour Entity Framework
+
+== Data annotation VS Fluent API
+
+Il existe deux façons de configurer les entités pour Entity Framework :
+
+1. Data annotations : Il s'agit d'annotations que l'on place au desssus des propriétés de la classe mappée au dbset. Elle a l'avantage d'être simple à comprendre mais est rapidement limitée en terme de fonctionnalités.
+2. Fluent API : Elle se présente sous la forme d'un fichier de configuration à part et d'un ensemble de méthodes d'extensions. Elle a l'avantage d'être bien plus complète que les data annotations.
+
+Le problème avec l'utilisation des data annotations, c'est que l'on doit rapidement la mixer avec la Fluent API pour tous les cas un peu complexes. Cela amène à melanger les deux méthodes et ouvre la porte à la redondance de configuration ainsi qu'à des conflits entre les deux. C'est pourquoi il est préférable de n'utilier que le Fluent API.
+
+== Présentation de la Fluent API
+
+Lorsque'il est necessaire de configurer une nouvelle entité, il faut créer un fichier de configuration dans le projet Fred.EntityFramwork et le placer dans le dossier Configurations. Son nom est le suivant [EntityName]Configuration.cs.
+
+La configuration standard est la suivante : 
+
+[source,csharp]
+----
+    public class AstreinteEntConfiguration : IEntityTypeConfiguration<AstreinteEnt>
+    {
+        public void Configure(EntityTypeBuilder<AstreinteEnt> builder)
+        {
+            builder.ToTable("FRED_ASTREINTE");
+            builder.HasKey(a => a.AstreintId);
+            builder.Property(a => a.AstreintId)
+                .ValueGeneratedOnAdd();
+        }
+    }
+----
+
+L'extension ToTable() permet de specifier le nom de la table. HasKey() sa clé primaire et ValueGeneratedOnAdd() permet de specifier à EF que cette clé primaire est générée lors de l'ajout de la ligne en base.
+
+=== Ignorer une propriété
+
+[source,csharp]
+----
+    builder.Ignore(rpl => rpl.IsUpdated);
+----
+
+=== Spécifier le type d'une propriété
+
+[source,csharp]
+----
+    builder.Property(cod => cod.DateValidation)
+        .HasColumnType("datetime");
+----
+
+=== Appliquer une valeur par défaut
+
+Attention il faut parfois caster son type comme l'exemple ci-dessous : 
+
+[source,csharp]
+----
+    builder.Property(ci => ci.Valorisation)
+        .HasDefaultValue((decimal)0);
+----
+
+Si sa valeur par défaut prend le resultat d'une fonction SQL, comme par exemple la fonction getdate(), il faut utiliser la méthode suivante : 
+
+[source,csharp]
+----
+    builder.Property(cod => cod.DateCreation)
+        .HasDefaultValueSql("getdate()");
+----
+
+=== Rendre un champ optionnel
+
+Cette fonctionnalité a été retirée avec l'arivée d'EF Core. En effet, EF se base désormais sur le type de la propriété pour savoir si il est optionnel. Dans le cas d'un int par exemple, il faut lui appliquer le type nullable int? afin qu'il soit automatiquement nullable en SQL. Il n'est plus possible d'avoir un int non nullable dans l'entité et de le rendre optionnel en SQL. Cela permet de garder une consistence et un logique entre les entités et le schema de la base.  
+
+=== Rendre un champ obligatoire 
+
+A utiliser sur des types references tels que string ou sur les entités nullables dans les entités mais pas en base (cas qui ne devrait normalement pas ou très peu exister).
+
+[source,csharp]
+----
+    builder.Property(j => j.Code)
+        .IsRequired()
+----
+
+=== Appliquer une valeur maximale
+
+[source,csharp]
+----
+    builder.Property(j => j.Libelle)
+        .HasMaxLength(250);
+----
+
+=== Créer un index
+
+[source,csharp]
+----
+    builder.HasIndex(j => new { j.Code, j.SocieteId })
+        .HasName("IX_UniqueCodeAndSociete")
+        .IsUnique();
+----
+
+L'index ci dessus est construit sur deux propriétés. Le principe est le même lorsque c'est sur une seule.
+
+=== Créer une relation
+
+EF Core a été conçu de manière à ne pas avoir besoin de specifier les relations dans la fluent API si les propriétés respectent les conventions de nommages. Hélas, dans Fred les classes d'entité sont toutes suffixées par "Ent" alors que le nom des variables de navigation dans les entités ne le sont pas. Exemple : 
+
+[source,csharp]
+----
+    public int UniteId { get; set; }
+    public UniteEnt Unite { get; set; }
+----
+
+Le nom du type de la variable de navigation ne correspond pas avec le nom de la variable. Il est donc necessaire de spécifier manuellement dans les fichiers de configuration toutes les relations.
+
+==== Relation 1-N
+
+[source,csharp]
+----
+    builder.HasOne(j => j.Societe)
+        .WithMany(s => s.Journals)
+        .HasForeignKey(j => j.SocieteId)
+----
+
+Cette instruction est renseignée dans le fichier de configuration de JournalEnt. Dans le cas où Société ne contient pas de liste de journaux, il faut écrire relation comme suit (cela n'a aucun impact sur le schéma SQL): 
+
+[source,csharp]
+----
+    builder.HasOne(j => j.Societe)
+        .WithMany()
+        .HasForeignKey(j => j.SocieteId)
+----
+
+==== Relation 1-1
+
+[source,csharp]
+----
+    builder.HasOne(u => u.Personnel)
+        .WithOne(p => p.Utilisateur)
+        .HasForeignKey<UtilisateurEnt>(u => u.UtilisateurId)
+----
+
+Cette instruction est renseignée dans le fichier de configuration de UtilisateurEnt. A noter que le type renseigné entre chevrons est celui de l'entité du fichier de configuration courant. Il est de la même manière que pour une relation 1-N possible de ne pas spécifier de type en paramètre de WithOne.
+
+==== Relation N-N
+
+Il était possible avant EF Core de simplement créer une liste de l'entité cible dans chacune des entités afin qu'il créé de lui même une table de jointure. Ce n'est plus possible en EF Core et il est essentiel de créer la classe d'entité correspondant à la table de jointure. Les relations se font ensuite de manière 1-N entre les entités et la table de jointure. Pour plus d'informations : https://www.learnentityframeworkcore.com/configuration/many-to-many-relationship-configuration
+
+=== Ressources
+
+Afin d'avoir de plus amples informations, veuillez vous référer à la doc Microsoft qui est très complète ou alors ce site qui l'est egualement : https://www.learnentityframeworkcore.com 

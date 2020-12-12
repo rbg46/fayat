@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="A quoi sert cette classe abstraite ?&#xD;&#xA;A fusionner avec FredRepo ?&#xD;&#xA;">
+    <Position X="6.062" Y="4.698" Height="0.542" Width="2.19" />
+  </Comment>
+  <Class Name="Fred.DataAccess.Common.DataAccessContext" Collapsed="true">
+    <Position X="10.75" Y="1.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAgAAAACAAAAAAAAAACAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Common\DataAccessContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fred.DataAccess.Common.DbRepository&lt;TEntity, TContext&gt;" Collapsed="true">
+    <Position X="3.5" Y="4.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\DbRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fred.DataAccess.Common.FredRepository&lt;TEntity&gt;" Collapsed="true">
+    <Position X="3.5" Y="6" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Common\FredRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Fred.DataAccess.Common.RepositoryQuery&lt;TEntity&gt;" Collapsed="true">
+    <Position X="10.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAACAABAEAAACACAABAQAAAAAAAAAEgAABA=</HashCode>
+      <FileName>Common\RepositoryQuery.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fred.DataAccess.Common.UnitOfWork" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAIIAAiAAAAAAgAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Data.Entity.DbContext" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Fred.DataAccess.Common.DbRepository&lt;TEntity&gt;" Collapsed="true">
+    <Position X="3.5" Y="3.25" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQCAEAAAgAIAABIAAAAAAAAACEJgAgACAAACAAAACA=</HashCode>
+      <FileName>Common\DbRepository.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Context" />
+      <Property Name="UnitOfWork" />
+      <Property Name="DbSet" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Fred.DataAccess.Common.IFredRepository&lt;TEntity&gt;" Collapsed="true">
+    <Position X="0.5" Y="6" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Common\IFredRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Fred.DataAccess.Common.IRepository" Collapsed="true">
+    <Position X="0.5" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\IRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Fred.DataAccess.Common.IRepository&lt;TEntity&gt;" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAIAAAAAAAAAAAAACEBAAgAAAAAAAAAACA=</HashCode>
+      <FileName>Common\IRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Fred.DataAccess.Common.IUnitOfWork" Collapsed="true">
+    <Position X="7" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIIAACAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\Ics</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="System.Data.Entity.IDbSet&lt;TEntity&gt;" Collapsed="true">
+    <Position X="7" Y="1.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

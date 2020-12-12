@@ -1,0 +1,9 @@
+﻿<div ng-class="{ 'bloc-auth-overflow-hidden' : $ctrl.isOverflowHidden,
+                  'bloc-auth': (!$ctrl.isOverflowHidden && !$ctrl.isToAdjustCss && !$ctrl.isToAdjustCssNoMargin),
+                  'bloc-auth-adjusted' : $ctrl.isToAdjustCss,
+                  'bloc-auth-adjusted-no-margin' : $ctrl.isToAdjustCssNoMargin}"
+     ng-show="$ctrl.isVisible">
+    <ng-transclude></ng-transclude>
+    <div class="recover-auth" ng-show="$ctrl.isReadOnly"></div>
+    <div class="triangle-auth" title="{{$ctrl.adminToolTip}}" ng-show="$ctrl.isSuperAdmin"></div>
+</div>

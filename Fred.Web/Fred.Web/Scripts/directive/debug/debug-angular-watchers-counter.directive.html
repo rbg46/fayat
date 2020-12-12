@@ -1,0 +1,19 @@
+﻿<div class="fred-debug-panel"     
+     ng-attr-title="{{GetTooltip()}}"
+     ng-click="Refresh()">
+    <div class="fred-debug-watchers-good" ng-if="Count < Good">
+        <div class="fred-debug-watchers-content">
+            {{::resources.Debug_Nombre_Watchers_Angular}} {{Count}}
+        </div>
+    </div>
+    <div class="fred-debug-watchers-warning" ng-if="Count >= Good && Count < Warning">
+        <div class="fred-debug-watchers-content">
+            {{::resources.Debug_Nombre_Watchers_Angular}} {{Count}}
+        </div>
+    </div>
+    <div class="fred-debug-watchers-bad" ng-if="Count >= Warning">
+        <div class="fred-debug-watchers-content">
+            {{::resources.Debug_Nombre_Watchers_Angular}} {{Count}}
+        </div>
+    </div>
+</div>

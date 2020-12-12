@@ -1,0 +1,92 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+  ViewBag.Title = FeaturePersonnel.Personnel_Edit_TitreOnglet;
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+  @Styles.Render("~/PersonnelEditBundle.css")
+}
+
+@section scripts {
+  @Scripts.Render("~/PersonnelEditBundle.js")
+  @Scripts.Render("https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places&key=AIzaSyDwru8fGuoaw-edau7EllAiihzwf2ogF4Y")
+  @this.RenderResources("FeaturePersonnel")
+
+}
+
+<div class="personnel_edit"
+     ng-controller="PersonnelEditController as personnelEdit"
+     ng-init="personnelEdit.loadPage('@ViewBag.id', '@ViewBag.typePersonnel')">
+
+  <h6 ng-click="personnelEdit.goBack()" ng-show="!personnelEdit.JustDelegationShow"
+      title="{{personnelEdit.resources.Personnel_Edit_RetourIndex_Tooltip}}">
+    {{personnelEdit.resources.Personnel_Edit_RetourIndex}}
+  </h6>
+
+  <h1> {{personnelEdit.resources.Personnel_Edit_Titre}}</h1>
+
+  <div class="col-md-2 summary">
+    <p>
+      <label class="t1">
+        <span class="intern" ng-show="personnelEdit.Personnel.IsInterne">{{personnelEdit.resources.Global_Interne}}</span>
+        <span class="outsider" ng-show="!personnelEdit.Personnel.IsInterne && !personnelEdit.Personnel.IsInterimaire">{{personnelEdit.resources.Global_Externe}}</span>
+        <span class="active" ng-show="personnelEdit.Personnel.IsActif">{{personnelEdit.resources.Global_Actif}}</span>
+        <span class="inactive" ng-show="!personnelEdit.Personnel.IsActif">{{personnelEdit.resources.Global_Inactif}}</span>
+      </label>
+      <label class="t2a">{{personnelEdit.resources.Personnel_Edit_Societe}} :</label>
+      <label class="t2b">{{personnelEdit.Personnel.Societe.LibelleRef}}</label>
+      <label class="t2a">{{personnelEdit.resources.Personnel_Edit_Matricule}} :</label>
+      <label class="t2b">{{personnelEdit.Personnel.Matricule}}</label>
+      <label class="t2a">{{personnelEdit.resources.Personnel_Edit_Nom}} :</label>
+      <label class="t2b">{{personnelEdit.Personnel.Nom}}</label>
+      <label class="t2a">{{personnelEdit.resources.Personnel_Edit_Prenom}} :</label>
+      <label class="t2b">{{personnelEdit.Personnel.Prenom}}</label>
+      <br />
+
+      <div ng-show="personnelEdit.Personnel.UtilisateurId > 0">
+        <label class="t1"><span class="user" ng-show="personnelEdit.Personnel.UtilisateurId > 0 && personnelEdit.Personnel.IsUtilisateur && personnelEdit.Personnel.Utilisateur.ExternalDirectory.IsActived">{{personnelEdit.resources.Global_UtilisateurFred}}</span></label>
+        <label class="t1"><span class="user_inactif" ng-show="personnelEdit.Personnel.UtilisateurId > 0 && personnelEdit.Personnel.IsUtilisateur && !personnelEdit.Personnel.Utilisateur.ExternalDirectory.IsActived">{{personnelEdit.resources.Global_UtilisateurFred}}</span></label>
+        <label class="t2a">{{personnelEdit.resources.Personnel_Edit_Login}}</label>
+        <label class="t2b">{{personnelEdit.Personnel.Utilisateur.Login}}</label>
+      </div>
+
+      <br />
+
+      <div ng-show="personnelEdit.Personnel.IsInterimaire ">
+        <label class="t1">
+          <span class="interim" ng-show="personnelEdit.actifAffectationInterim !== null">{{personnelEdit.resources.Global_Interimaire}}</span>
+          <span class="interimSansEtt" ng-show="personnelEdit.actifAffectationInterim === null">{{personnelEdit.resources.Personnel_Edit_InterimaireInactif}}</span>
+        </label>
+        <label class="t2a">{{personnelEdit.resources.Personnel_Edit_Identifiant}}</label>
+        <label class="t2b">{{personnelEdit.Personnel.Matricule}}</label>
+        <label class="t2a">{{personnelEdit.resources.Personnel_Edit_FournisseurETT}}</label>
+        <label class="t2b">{{personnelEdit.actifAffectationInterim.Fournisseur.LibelleRef}}</label>
+        <br />
+        <button ng-show="personnelEdit.Personnel.PersonnelId > 0 && personnelEdit.Personnel.IsInterimaire" type="button" class="btn btn-default"
+                onclick="@("window.location.href='" + @Url.Action("Edit", new { id=0, type="interimaire" }) + "'")"
+                title="{{personnelEdit.resources.Personnel_Edit_Bouton_NouvelInterimaire_Tooltip}}">
+          <span class="glyphicon glyphicon-plus">&nbsp;</span>{{personnelEdit.resources.Personnel_Edit_Bouton_NouvelInterimaire}}
+        </button>
+      </div>
+    </p>
+  </div>
+
+  <br />
+
+  <div class="col-md-10">
+
+    <div class="panel-group" id="personnel-accordion">
+
+      @Html.Partial("_PartialGeneral")
+      @Html.Partial("_PartialContact")
+      @Html.Partial("_PartialSignatureProfil")
+      @Html.Partial("_PartialContratInterim")
+      @Html.Partial("_PartialDelegation")
+      @Html.Partial("_PartialUtilisateur")
+      @Html.Partial("_PartialHabilitation")
+
+    </div>
+  </div>
+</div>

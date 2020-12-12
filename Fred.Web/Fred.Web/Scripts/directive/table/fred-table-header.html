@@ -1,0 +1,8 @@
+﻿<div class="fred-table-header {{style}}">
+    <div class="fred-table-header-icon" ng-dblclick="handleOnHeaderClick(null)">
+        <div class="arrow-up" ng-click="handleOnHeaderClick(false)" ng-class="{'active': model === false}" title="{{tooltipAsc}}"></div>
+        <div class="arrow-down" ng-click="handleOnHeaderClick(true)" ng-class="{'active': model === true}" title="{{tooltipDesc}}"></div>
+    </div>
+    <span ng-show="!headerText" class="fred-table-header-label" ng-click="handleOnHeaderClick()" title="{{tooltipCancel}}"><ng-transclude></ng-transclude></span>
+    <span ng-show="headerText" class="fred-table-header-label" ng-click="handleOnHeaderClick()" title="{{tooltipCancel}}">{{headerText}}</span>
+</div>

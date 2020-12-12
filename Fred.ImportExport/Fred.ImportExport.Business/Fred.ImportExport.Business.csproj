@@ -1,0 +1,821 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2BEE77D7-295D-48A4-924E-8574E3E22321}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fred.ImportExport.Business</RootNamespace>
+    <AssemblyName>Fred.ImportExport.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Fred.ImportExport.Business.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Fred.ImportExport.Business.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'SpeedDebug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\SpeedDebug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>Fred.ImportExport.Business.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CommonServiceLocator.2.0.4\lib\net46\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentValidation.8.5.0\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.Core, Version=1.7.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Hangfire.Core.1.7.6\lib\net46\Hangfire.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.SqlServer, Version=1.7.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Hangfire.SqlServer.1.7.6\lib\net45\Hangfire.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Host.SystemWeb.4.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Security.4.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Security.Cookies.4.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Security.OAuth.3.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NLog.4.6.7\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=17.1460.0.32, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Syncfusion.Licensing.17.1.0.32-beta\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ComponentModel.Annotations.4.6.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Compression.Base, Version=17.1451.0.32, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Syncfusion.Compression.Base.17.1.0.32-beta\lib\net451\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.XlsIO.Base, Version=17.1450.0.32, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Syncfusion.XlsIO.AspNet.Mvc5.17.1.0.32-beta\lib\net45\Syncfusion.XlsIO.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Anael\StringExtensions.cs" />
+    <Compile Include="EcritureComptable\Interfaces\IEcritureComptableFluxManager.cs" />
+    <Compile Include="Personnel\Etl\Input\PersonnelInputFon.cs" />
+    <Compile Include="Personnel\Etl\Process\Custom\PersonnelProcessFon.cs" />
+    <Compile Include="Personnel\Etl\Transform\Custom\Fes\PersonnelTransformFon.cs" />
+    <Compile Include="Reception\Migo\Interfaces\IMigoService.cs" />
+    <Compile Include="Reception\Migo\Service\MigoService.cs" />
+    <Compile Include="Reception\Migo\Service\MigoServiceFtp.cs" />
+    <Compile Include="Utilisateur\CleaningOutgoingUsersFluxManager.cs" />
+    <Compile Include="ContratInterimaire\ContratInterimaireFluxManager.cs" />
+    <Compile Include="ContratInterimaire\ContratInterimaireFluxTibcoSystemService.cs" />
+    <Compile Include="ContratInterimaire\IContratInterimaireFluxTibcoSystemService.cs" />
+    <Compile Include="CommandeLigne\VME22\IVme22FluxManager.cs" />
+    <Compile Include="CommandeLigne\VME22\Vme22FluxManager.cs" />
+    <Compile Include="EcritureComptable\EcritureComptableConverter.cs" />
+    <Compile Include="ApplicationSap\IApplicationsSapManager.cs" />
+    <Compile Include="Commande\CommandeFluxHelper.cs" />
+    <Compile Include="Commande\ICommandeFluxHelper.cs" />
+    <Compile Include="CI\WebApi\IImportCiWebApiSystemService.cs" />
+    <Compile Include="CI\WebApi\ImportCiWebApiSystemService.cs" />
+    <Compile Include="Commande\ICommandeStormImporter.cs" />
+    <Compile Include="CI\WebApi\Context\ImportCiByApiContextProvider.cs" />
+    <Compile Include="CI\WebApi\Context\Inputs\ImportCisByApiInputs.cs" />
+    <Compile Include="CI\WebApi\Context\Interfaces\IImportCiByApiContextProvider.cs" />
+    <Compile Include="CI\WebApi\Context\Models\ImportCiByWebApiContext.cs" />
+    <Compile Include="CI\WebApi\Context\Models\ImportCiByWebApiSocieteContext.cs" />
+    <Compile Include="CI\WebApi\Fred\CiFinderInWebApiSystemService.cs" />
+    <Compile Include="CI\WebApi\Fred\FredCiImportForWebApiService.cs" />
+    <Compile Include="CI\WebApi\Fred\Interfaces\ICiFinderInWebApiSystemService.cs" />
+    <Compile Include="CI\WebApi\Fred\Interfaces\IFredCiImportForWebApiService.cs" />
+    <Compile Include="CI\WebApi\Fred\Interfaces\IOrganisationManagerOnImportCiService.cs" />
+    <Compile Include="CI\WebApi\Fred\OrganisationManagerOnImportCiService.cs" />
+    <Compile Include="CI\WebApi\Mapper\WebApiModelToCiEntMapper.cs" />
+    <Compile Include="CI\WebApi\Validator\ConsistencyValidator.cs" />
+    <Compile Include="CI\WebApi\Validator\EtablissementValidator.cs" />
+    <Compile Include="CI\WebApi\Validator\Interfaces\IEtablissementValidator.cs" />
+    <Compile Include="CI\WebApi\Validator\Interfaces\IConsistencyValidator.cs" />
+    <Compile Include="CI\WebApi\Validator\Interfaces\IImportCiByWebApiValidator.cs" />
+    <Compile Include="CI\WebApi\Validator\ImportCiByWebApiValidator.cs" />
+    <Compile Include="CI\WebApi\Validator\Interfaces\ISocieteValidator.cs" />
+    <Compile Include="CI\WebApi\Validator\SocieteValidator.cs" />
+    <Compile Include="Cache\SynchronizationFredWeb\HangfireFilter\CacheSynchronizationAttribute.cs" />
+    <Compile Include="Cache\SynchronizationFredWeb\Services\CacheSynchronizationService.cs" />
+    <Compile Include="Cache\SynchronizationFredWeb\Services\ICacheSynchronizationService.cs" />
+    <Compile Include="Etablissement\Etl\Process\IEtablissementComptableEtlProcess.cs" />
+    <Compile Include="Facturation\Helpers\FactureSansCommande.cs" />
+    <Compile Include="EcritureComptable\Validator\EcritureComptableFluxManagerFayatTPValidator.cs" />
+    <Compile Include="EcritureComptable\Validator\IEcritureComptableFluxManagerFayatTPValidator.cs" />
+    <Compile Include="EcritureComptable\Validator\AutreDepenseFayatTpValidator.cs" />
+    <Compile Include="EcritureComptable\Validator\MaterielInternePointeFayatTpValidator.cs" />
+    <Compile Include="EcritureComptable\Validator\MaterielImmobiliseFayatTpValidator.cs" />
+    <Compile Include="EcritureComptable\Validator\RecettesFayatTpValidator.cs" />
+    <Compile Include="EcritureComptable\Validator\AchatAvecCommandeFayatTpValidator.cs" />
+    <Compile Include="EcritureComptable\Validator\MoPointeFayatTpValidator.cs" />
+    <Compile Include="Facturation\Validators\BaseFluxImporterValidator.cs" />
+    <Compile Include="Facturation\Validators\FluxFB60ImporterValidator.cs" />
+    <Compile Include="Facturation\Validators\GFTP\FluxFB60ImporterValidatorFtp.cs" />
+    <Compile Include="Facturation\Validators\IFluxFB60ImporterValidator.cs" />
+    <Compile Include="Facturation\Validators\IFluxValidator.cs" />
+    <Compile Include="Figgo\FiggoManager.cs" />
+    <Compile Include="Figgo\IFiggoManager.cs" />
+    <Compile Include="Flux\IFluxManager.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Anael\AnaelFournisseurProvider.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Context\Common\CommonAnaelSystemContextProvider.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Context\Common\ICommonAnaelSystemContextProvider.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Context\Common\ImportFournisseurContext.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Context\Common\ImportFournisseurSocieteContext.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Context\Excel\Excel\ExcelFournisseurExtractorService.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Context\Excel\Excel\IExcelFournisseurExtractorService.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Context\Excel\Excel\ParseImportFournisseursResult.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Context\Excel\Excel\RepriseImportFournisseur.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Context\Excel\ImportFournisseurByExcelAnaelSystemContextProvider.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Context\Excel\Input\ImportFournisseursByExcelInputs.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Context\Excel\Interfaces\IImportFournisseurByExcelAnaelSystemContextProvider.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Context\Excel\Validator\ImportFournisseurExcelValidator.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Context\Fournisseur\ImportFournisseurByFournisseurListAnaelSystemContextProvider.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Context\Fournisseur\Input\ImportFournisseurByIdsListInputs.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Context\Fournisseur\Interfaces\IImportFournisseurByFournisseurListAnaelSystemContextProvider.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Context\Fournisseur\Validator\ImportFournisseurValidator.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Converter\AnaelModelToFournisseurFredModelConverter.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Converter\FournisseurEntToSapModelConverter.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Converter\FournisseurFredModelToFournisseurEntConverter.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\IImportFournisseurAnaelSystemManager.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\ImportFournisseurAnaelSystemManager.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Logger\FournisseurImportExportLogger.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Sap\FournisseurSapSender.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Sap\IFournisseurSapSender.cs" />
+    <Compile Include="Fournisseur\AnaelSystem\Sap\SapFilter.cs" />
+    <Compile Include="Fournisseur\FournisseurFluxService.cs" />
+    <Compile Include="Fournisseur\IFournisseurFluxService.cs" />
+    <Compile Include="Groupe\IGroupeInterimaireManager.cs" />
+    <Compile Include="Hangfire\Credentials.cs" />
+    <Compile Include="Hangfire\HangfireManager.cs" />
+    <Compile Include="Hangfire\JobRunnerApiRestHelper.cs" />
+    <Compile Include="Hangfire\Parameters\ControleVracJobParameter.cs" />
+    <Compile Include="Hangfire\Parameters\ControleVracJobWithEntityParameter.cs" />
+    <Compile Include="Hangfire\Parameters\ExportByCIParameter.cs" />
+    <Compile Include="Hangfire\Parameters\ExportByRapportParameter.cs" />
+    <Compile Include="Hangfire\Parameters\ExportByRapportsParameter.cs" />
+    <Compile Include="Hangfire\Parameters\ExportBySocieteParameter.cs" />
+    <Compile Include="Hangfire\Parameters\ExportCommandeAvenantToSapParameter.cs" />
+    <Compile Include="Hangfire\Parameters\ExportManualLockUnlockLigneDeCommandeParameters.cs" />
+    <Compile Include="Hangfire\Parameters\ExportReceptionToSapForSocieteParameter.cs" />
+    <Compile Include="Hangfire\Parameters\ImportationByCodeFluxParameter.cs" />
+    <Compile Include="Hangfire\Parameters\ImportationByInputPathParameter.cs" />
+    <Compile Include="Hangfire\Parameters\ImportationFournisseurParameter.cs" />
+    <Compile Include="Hangfire\Parameters\ImportationProcessParameter.cs" />
+    <Compile Include="Hangfire\Parameters\ImportationProcessRangeParameter.cs" />
+    <Compile Include="Hangfire\Parameters\ImportationProcessRecurringParameter.cs" />
+    <Compile Include="Hangfire\Parameters\ImportationProcessRecurringRangeParameter.cs" />
+    <Compile Include="Hangfire\Parameters\RemonteePrimesJobParameter.cs" />
+    <Compile Include="Hangfire\Parameters\RemonteeVracJobParameter.cs" />
+    <Compile Include="Hangfire\Parameters\UpdatePersonnelsParameter.cs" />
+    <Compile Include="IFredIEService.cs" />
+    <Compile Include="JournauxComptable\JournauxComptableFluxManagerRzb.cs" />
+    <Compile Include="JournauxComptable\JournauxComptableFluxManagerMoulins.cs" />
+    <Compile Include="LogAdmin\ILoggingAdministratorService.cs" />
+    <Compile Include="LogAdmin\LoggingAdministratorService.cs" />
+    <Compile Include="BaremeExploitation\BaremeExploitationFluxManager.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Ci\ImportCiByCiListAnaelSystemContextProvider.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Ci\Interfaces\IImportCiByCiListAnaelSystemContextProvider.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Common\CommonAnaelSystemContextProvider.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Common\ICommonAnaelSystemContextProvider.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Excel\ImportCiByExcelAnaelSystemContextProvider.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Excel\Interfaces\IImportCiByExcelAnaelSystemContextProvider.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Societe\ImportCiBySocieteAnaelSystemContextProvider.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Societe\Interfaces\IImportCiBySocieteAnaelSystemContextProvider.cs" />
+    <Compile Include="CI\AnaelSystem\IImportCiAnaelSystemManager.cs" />
+    <Compile Include="CI\AnaelSystem\ImportCiAnaelSystemManager.cs" />
+    <Compile Include="CI\CiFluxAnaelSystemService.cs" />
+    <Compile Include="CI\CIFluxManager.cs" />
+    <Compile Include="CI\ICiFluxAnaelSystemService.cs" />
+    <Compile Include="CI\AnaelSystem\Anael\AnaelCiProvider.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Ci\Input\ImportCisByCiListInputs.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Ci\Validator\ImportCiValidator.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Common\ImportCiContext.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Common\ImportCiSocieteContext.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Common\ImportResult.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Excel\Input\ImportCisByExcelInputs.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Societe\Input\ImportCisBySocieteInputs.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Societe\Validator\ImportCiBySocieteValidator.cs" />
+    <Compile Include="CI\AnaelSystem\Converter\AnaelModelToCiEntConverter.cs" />
+    <Compile Include="CI\AnaelSystem\Converter\CiEntToSapModelConverter.cs" />
+    <Compile Include="CI\AnaelSystem\Etablissement\DefaultEtablissementProvider.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Excel\Excel\ExcelCiExtractorService.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Excel\Excel\IExcelCiExtractorService.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Excel\Excel\ParseImportCisResult.cs" />
+    <Compile Include="CI\AnaelSystem\Fred\FredCiImporter.cs" />
+    <Compile Include="CI\AnaelSystem\Fred\IFredCiImporter.cs" />
+    <Compile Include="CI\AnaelSystem\Logger\CiImportExportLogger.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Excel\Excel\RepriseImportCi.cs" />
+    <Compile Include="CI\AnaelSystem\Sap\CiSapSender.cs" />
+    <Compile Include="CI\AnaelSystem\Context\Excel\Validator\ImportCiExcelValidator.cs" />
+    <Compile Include="CI\AnaelSystem\Sap\ICiSapSender.cs" />
+    <Compile Include="CI\AnaelSystem\Sap\SapFilter.cs" />
+    <Compile Include="Commande\CommandeFluxManager.cs" />
+    <Compile Include="ApplicationSap\ApplicationSapFredConfigHelper.cs" />
+    <Compile Include="ApplicationSap\ApplicationSapParameter.cs" />
+    <Compile Include="Commande\CommandeStormImporter.cs" />
+    <Compile Include="Common\Extensions\IncludeExpressionExtension.cs" />
+    <Compile Include="Common\IEBusiness.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IEBusiness.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ImportResult.cs" />
+    <Compile Include="Common\JobInfoProvider.cs" />
+    <Compile Include="Depense\DepenseFluxManager.cs" />
+    <Compile Include="Common\AbstractFluxManager.cs" />
+    <Compile Include="Email\ActivitySummary\EmailActivitySummaryHanfireJob.cs" />
+    <Compile Include="Email\ActivitySummary\IEmailActivitySummaryHanfireJob.cs" />
+    <Compile Include="Email\EmailScheduler.cs" />
+    <Compile Include="Email\IEmailScheduler.cs" />
+    <Compile Include="Etablissement\EtablissementComptableFluxService.cs" />
+    <Compile Include="Etablissement\Etl\Input\EtablissementComptableInput.cs" />
+    <Compile Include="Etablissement\Etl\Output\EtablissementComptableOuput.cs" />
+    <Compile Include="Etablissement\Etl\Process\EtablissementComptableEtlProcess.cs" />
+    <Compile Include="Etablissement\Etl\Result\EtablissementComptableResult.cs" />
+    <Compile Include="Etablissement\Etl\Transform\EtablissementComptableTransform.cs" />
+    <Compile Include="EcritureComptable\EcritureComptableFluxManager.cs" />
+    <Compile Include="Etablissement\IEtablissementComptableFluxService.cs" />
+    <Compile Include="Etl\EtlExecutionLogger.cs" />
+    <Compile Include="Facturation\Helpers\AnnulationFar.cs" />
+    <Compile Include="Facturation\Helpers\AvoirMontant.cs" />
+    <Compile Include="Facturation\Helpers\AvoirQuantite.cs" />
+    <Compile Include="Facturation\Helpers\AvoirSansCommande.cs" />
+    <Compile Include="Facturation\Helpers\ChargementDechargement.cs" />
+    <Compile Include="Facturation\Helpers\CoutAdditionnel.cs" />
+    <Compile Include="Facturation\Helpers\FacturationMontant.cs" />
+    <Compile Include="Facturation\Helpers\Facturation.cs" />
+    <Compile Include="Facturation\FacturationFluxManager.cs" />
+    <Compile Include="Facturation\Helpers\FacturationHelper.cs" />
+    <Compile Include="Facturation\Helpers\NonCommande.cs" />
+    <Compile Include="Facturation\Models\FacturationSapValidationResult.cs" />
+    <Compile Include="Facturation\Importers\FluxMr11Importer.cs" />
+    <Compile Include="Facturation\Importers\FluxFb60Importer.cs" />
+    <Compile Include="Facturation\Importers\FluxMiroImporter.cs" />
+    <Compile Include="Fournisseur\ImportFournisseurAnaelEtl\Input\FournisseurAnaelInput.cs" />
+    <Compile Include="Fournisseur\ImportFournisseurAnaelEtl\Output\FournisseurFredAnaelOuput.cs" />
+    <Compile Include="Fournisseur\ImportFournisseurAnaelEtl\Output\FournisseurStormAnaelOuput.cs" />
+    <Compile Include="Fournisseur\ImportFournisseurAnaelEtl\Process\FournisseurAnaelProcess.cs" />
+    <Compile Include="Fournisseur\ImportFournisseurAnaelEtl\Result\FournisseurAnaelResult.cs" />
+    <Compile Include="Fournisseur\ImportFournisseurAnaelEtl\Transform\FournisseurAnaelTransform.cs" />
+    <Compile Include="Fournisseur\ImportFournisseurEtl\Input\ImportFournisseurInput.cs" />
+    <Compile Include="Fournisseur\ImportFournisseurEtl\Output\ImportFournisseurOuput.cs" />
+    <Compile Include="Fournisseur\ImportFournisseurEtl\Process\ImportFournisseurProcess.cs" />
+    <Compile Include="Fournisseur\ImportFournisseurEtl\Result\ImportFournisseurResult.cs" />
+    <Compile Include="Fournisseur\ImportFournisseurEtl\Transform\ImportFournisseurTransform.cs" />
+    <Compile Include="FredImportExportBusinessResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FredImportExportBusinessResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Groupe\GroupeInterimaireManager.cs" />
+    <Compile Include="JournauxComptable\Etl\Input\JournauxComptableInput.cs" />
+    <Compile Include="JournauxComptable\Etl\Output\JournauxComptableOuput.cs" />
+    <Compile Include="JournauxComptable\Etl\Result\JournauxComptableResult.cs" />
+    <Compile Include="JournauxComptable\Etl\Transform\JournauxComptableTransform.cs" />
+    <Compile Include="JournauxComptable\JournauxComptableFluxManager.cs" />
+    <Compile Include="JournauxComptable\Etl\Process\JournauxComptableEtlProcess.cs" />
+    <Compile Include="Kilometre\AnaelIndemniteDeplacement.cs" />
+    <Compile Include="Kilometre\KlmFluxManager.cs" />
+    <Compile Include="Log\BaseFredIELogger.cs" />
+    <Compile Include="Log\TypeLog.cs" />
+    <Compile Include="Materiel\AbstractMaterielImport.cs" />
+    <Compile Include="Materiel\Common\EnumerationMateriel.cs" />
+    <Compile Include="Materiel\ExportMaterielToSap\ExportMaterielToSapManager.cs" />
+    <Compile Include="Materiel\ExportMaterielToSap\IExportMaterielToSapManager.cs" />
+    <Compile Include="Materiel\ImportMaterielEtl\Input\ImportMaterielInput.cs" />
+    <Compile Include="Materiel\ImportMaterielEtl\Output\ImportMaterielOutput.cs" />
+    <Compile Include="Materiel\ImportMaterielEtl\Process\ImportMaterielProcess.cs" />
+    <Compile Include="Materiel\ImportMaterielEtl\Result\ImportMaterielResult.cs" />
+    <Compile Include="Materiel\ImportMaterielEtl\Transform\ImportMaterielTransform.cs" />
+    <Compile Include="Materiel\ImportMaterielEtl\ImportMaterielManager.cs" />
+    <Compile Include="Materiel\ImportMaterielFaytTp\MaterielFluxFayatTpManager.cs" />
+    <Compile Include="Materiel\IServiceImportMateriel.cs" />
+    <Compile Include="Materiel\MaterielFluxManager.cs" />
+    <Compile Include="Materiel\ServiceImportMateriel.cs" />
+    <Compile Include="Materiel\SocieteCodeImportMateriel\ISocieteCodeImportMaterielManager.cs" />
+    <Compile Include="Materiel\SocieteCodeImportMateriel\SocieteCodeImportMaterielManager.cs" />
+    <Compile Include="Moyen\ExportPointageMoyenEtl\Common\EnvoiPointageMoyenResultModel.cs" />
+    <Compile Include="Moyen\ExportPointageMoyenEtl\Common\ExportPointageErrorCode.cs" />
+    <Compile Include="Moyen\ExportPointageMoyenEtl\Input\ExportPointageMoyenInput.cs" />
+    <Compile Include="Moyen\ExportPointageMoyenEtl\Output\ExportPointageMoyenOutput.cs" />
+    <Compile Include="Moyen\ExportPointageMoyenEtl\Process\ExportPointageMoyenProcess.cs" />
+    <Compile Include="Moyen\ExportPointageMoyenEtl\Result\ExportPointageMoyenResult.cs" />
+    <Compile Include="Moyen\ExportPointageMoyenEtl\Transform\ExportPointageMoyenTransform.cs" />
+    <Compile Include="Moyen\ImportMoyenEtl\Input\ImportMoyenInput.cs" />
+    <Compile Include="Moyen\ImportMoyenEtl\Output\ImportMoyenOutput.cs" />
+    <Compile Include="Moyen\ImportMoyenEtl\Process\ImportMoyenProcess.cs" />
+    <Compile Include="Moyen\ImportMoyenEtl\Result\ImportMoyenResult.cs" />
+    <Compile Include="Moyen\ImportMoyenEtl\Transform\ImportMoyenTransform.cs" />
+    <Compile Include="Moyen\MoyenFluxManager.cs" />
+    <Compile Include="Personnel\AnaelSystem\Anael\AnaelPersonnelProvider.cs" />
+    <Compile Include="Personnel\AnaelSystem\Context\Common\CommonAnaelSystemContextProvider.cs" />
+    <Compile Include="Personnel\AnaelSystem\Context\Common\ICommonAnaelSystemContextProvider.cs" />
+    <Compile Include="Personnel\AnaelSystem\Context\Common\ImportPersonnelContext.cs" />
+    <Compile Include="Personnel\AnaelSystem\Context\Common\ImportPersonnelSocieteContext.cs" />
+    <Compile Include="Personnel\AnaelSystem\Context\Personnel\IImportByPersonnelListContextProvider.cs" />
+    <Compile Include="Personnel\AnaelSystem\Context\Personnel\ImportByPersonnelListContextProvider.cs" />
+    <Compile Include="Personnel\AnaelSystem\Context\Personnel\Input\ImportByPersonnelListInputs.cs" />
+    <Compile Include="Personnel\AnaelSystem\Context\Personnel\Validator\IImportByPersonnelListValidator.cs" />
+    <Compile Include="Personnel\AnaelSystem\Context\Personnel\Validator\ImportByPersonnelListValidator.cs" />
+    <Compile Include="Personnel\AnaelSystem\Context\Societe\ImportPersonnelBySocieteContextProvider.cs" />
+    <Compile Include="Personnel\AnaelSystem\Context\Societe\Input\ImportPersonnelsBySocieteInput.cs" />
+    <Compile Include="Personnel\AnaelSystem\Context\Societe\Interfaces\IImportPersonnelBySocieteContextProvider.cs" />
+    <Compile Include="Personnel\AnaelSystem\Context\Societe\validator\IImportPersonnelsBySocieteValidator.cs" />
+    <Compile Include="Personnel\AnaelSystem\Context\Societe\validator\ImportPersonnelsBySocieteValidator.cs" />
+    <Compile Include="Personnel\AnaelSystem\Converter\AnaelModelToPersonnelEntConverter.cs" />
+    <Compile Include="Personnel\AnaelSystem\Converter\PersonnelEntToSapModelConverter.cs" />
+    <Compile Include="Personnel\AnaelSystem\IImportPersonnelAnaelSystemManager.cs" />
+    <Compile Include="Personnel\AnaelSystem\ImportPersonnelAnaelSystemManager.cs" />
+    <Compile Include="Personnel\AnaelSystem\Logger\PersonnelImportExportLogger.cs" />
+    <Compile Include="Personnel\AnaelSystem\Sap\PersonnelSapSender.cs" />
+    <Compile Include="Personnel\AnaelSystem\Sap\IPersonnelSapSender.cs" />
+    <Compile Include="Personnel\AnaelSystem\Sap\SapFilter.cs" />
+    <Compile Include="Personnel\EtlFactory\IPersonnelEtl.cs" />
+    <Compile Include="Personnel\EtlFactory\IPersonnelEtlParameter.cs" />
+    <Compile Include="Personnel\EtlFactory\PersonnelEtlFactory.cs" />
+    <Compile Include="Personnel\EtlFactory\PersonnelFluxCode.cs" />
+    <Compile Include="Personnel\Etl\Transform\Custom\Fes\Comparator\AffectationComparator.cs" />
+    <Compile Include="Personnel\Etl\Transform\Custom\Fes\Mapper\AffectationMapper.cs" />
+    <Compile Include="Personnel\Etl\Transform\Custom\Fes\TransformExecutor\ManagerTransformExecutor.cs" />
+    <Compile Include="Personnel\Etl\Transform\Custom\Fes\TransformExecutor\AffectationTransformExecutor.cs" />
+    <Compile Include="Personnel\Etl\Transform\Custom\Fes\EntityProvider\AffectationDataProvider.cs" />
+    <Compile Include="Personnel\Etl\Transform\Custom\Fes\TransformExecutor\PersonnelTransformExecutor.cs" />
+    <Compile Include="Personnel\EtlFactory\TableauCorrespondances.cs" />
+    <Compile Include="Personnel\Etl\Input\PersonnelInputFes.cs" />
+    <Compile Include="Personnel\Etl\Output\Fes\PersonnelFredOutput.cs" />
+    <Compile Include="Personnel\Etl\Process\AbstractBasePersonnelProcess.cs" />
+    <Compile Include="Personnel\Etl\Process\Custom\PersonnelProcessFes.cs" />
+    <Compile Include="Personnel\Etl\Process\PersonnelEtlParameter.cs" />
+    <Compile Include="Personnel\Etl\Process\PersonnelFluxParameter.cs" />
+    <Compile Include="Personnel\Etl\Result\PersonnelResult.cs" />
+    <Compile Include="Personnel\Etl\Transform\Custom\Fes\GlobalProvider\ImportPersonnelsGlobalData.cs" />
+    <Compile Include="Personnel\Etl\Transform\Custom\Fes\GlobalProvider\ImportPersonnelsSocieteData.cs" />
+    <Compile Include="Personnel\Etl\Transform\Custom\Fes\Comparator\PersonnelComparator.cs" />
+    <Compile Include="Personnel\Etl\Transform\Custom\Fes\EntityProvider\PersonnelEntityDataProvider.cs" />
+    <Compile Include="Personnel\Etl\Transform\Custom\Fes\GlobalProvider\PersonnelGlobalDataProvider.cs" />
+    <Compile Include="Personnel\Etl\Transform\Custom\Fes\Mapper\PersonnelMapper.cs" />
+    <Compile Include="Personnel\Etl\Transform\Custom\Fes\PersonnelTransformFes.cs" />
+    <Compile Include="Personnel\EtlFactory\FluxPersonnelCorrespondance.cs" />
+    <Compile Include="Personnel\IPersonnelFluxTibcoSystemService.cs" />
+    <Compile Include="Personnel\Logs\IImportPersonnelFesLogs.cs" />
+    <Compile Include="Personnel\Logs\IImportPersonnelFonLogs.cs" />
+    <Compile Include="Personnel\Logs\IImportPersonnelLogs.cs" />
+    <Compile Include="Personnel\Logs\ImportPersonnelFonLogs.cs" />
+    <Compile Include="Personnel\Logs\ImportPersonnelFesLogs.cs" />
+    <Compile Include="Personnel\IPersonnelFluxAnaelSystemService.cs" />
+    <Compile Include="Personnel\PersonnelFluxAnaelSystemService.cs" />
+    <Compile Include="Personnel\PersonnelCodeSocietePayeSpliter.cs" />
+    <Compile Include="Personnel\PersonnelFluxManager.cs" />
+    <Compile Include="Etablissement\EtablissementComptableFluxManager.cs" />
+    <Compile Include="Flux\FluxManager.cs" />
+    <Compile Include="Fournisseur\FournisseurFluxManager.cs" />
+    <Compile Include="Log\LogManager.cs" />
+    <Compile Include="Personnel\PersonnelFluxMultipleSocieteManager.cs" />
+    <Compile Include="Personnel\PersonnelFluxTibcoSystemService.cs" />
+    <Compile Include="Pointage\PointageEtl\Input\BaseFredPointageInput.cs" />
+    <Compile Include="Pointage\PointageEtl\IPointageFluxManager.cs" />
+    <Compile Include="Pointage\PointageEtl\Output\BasePointageOutput.cs" />
+    <Compile Include="Pointage\PointageEtl\PointageEtlDependenciesWrapper.cs" />
+    <Compile Include="Pointage\PointageEtl\PointageEtlFactory.cs" />
+    <Compile Include="Pointage\PointageEtl\PointageFluxManager.cs" />
+    <Compile Include="Pointage\PointageEtl\Process\AbstractBasePointageProcess.cs" />
+    <Compile Include="Pointage\PointageEtl\Process\BasePointageProcess.cs" />
+    <Compile Include="Pointage\PointageEtl\Process\IPointageProcess.cs" />
+    <Compile Include="Pointage\PointageEtl\Result\BasePointageResult.cs" />
+    <Compile Include="Pointage\PointageEtl\Settings\EtlExecutionHelper.cs" />
+    <Compile Include="Pointage\PointageEtl\Settings\EtlPointageParameter.cs" />
+    <Compile Include="Pointage\PointageEtl\Transform\BasePointageTransform.cs" />
+    <Compile Include="Pointage\PointageEtl\Transform\Features\PointagePersonnelFeatureHelper.cs" />
+    <Compile Include="Pointage\PointageEtl\Transform\Models\Base\ExportPersonnelModel.cs" />
+    <Compile Include="Pointage\PointageEtl\Transform\Models\Base\ExportRapportLigneAstreinteModel.cs" />
+    <Compile Include="Pointage\PointageEtl\Transform\Models\Base\ExportRapportLigneModel.cs" />
+    <Compile Include="Pointage\PointageEtl\Transform\Models\Base\ExportRapportLignePrimeHoraireModel.cs" />
+    <Compile Include="Pointage\PointageEtl\Transform\Models\Base\ExportRapportLignePrimeModel.cs" />
+    <Compile Include="Pointage\PointageEtl\Transform\Models\Base\ExportRapportTacheModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Commande\CommandeScheduler.cs" />
+    <Compile Include="Rapport\RapportFluxManager.cs" />
+    <Compile Include="ReceptionInterimaire\ReceptionInterimaireFluxManager.cs" />
+    <Compile Include="Reception\Migo\IMigoManager.cs" />
+    <Compile Include="Reception\Migo\MigoManager.cs" />
+    <Compile Include="Reception\Migo\ReceptionFilterForSap.cs" />
+    <Compile Include="Reception\RMigo\IRMigoManager.cs" />
+    <Compile Include="Reception\RMigo\RMigoManager.cs" />
+    <Compile Include="Reception\Services\DateComptableModifierForMigo.cs" />
+    <Compile Include="Reception\Services\IDateComptableModifierForMigo.cs" />
+    <Compile Include="RepriseDonnees\IRepriseDonneesViewManager.cs" />
+    <Compile Include="RepriseDonnees\RepriseDonneesViewManager.cs" />
+    <Compile Include="Sap\SapImporter.cs" />
+    <Compile Include="Securite\ApplicationSignInManager.cs" />
+    <Compile Include="Securite\ApplicationUserManager.cs" />
+    <Compile Include="Stair\AbstractStairManager.cs" />
+    <Compile Include="Stair\ExportCI\StairCiFluxManager.cs" />
+    <Compile Include="Stair\ExportPersonnel\StairPersonnelFluxManager.cs" />
+    <Compile Include="Stair\ImportSphinxEtl\Input\SphinxEtlInput.cs" />
+    <Compile Include="Stair\ImportSphinxEtl\Output\SphinxEtlOutput.cs" />
+    <Compile Include="Stair\ImportSphinxEtl\Process\SphinxEtlProcess.cs" />
+    <Compile Include="Stair\ImportSphinxEtl\RestClientSphinx.cs" />
+    <Compile Include="Stair\ImportSphinxEtl\Result\SphinxEtlResult.cs" />
+    <Compile Include="Stair\ImportSphinxEtl\Transform\SphinxEtlTransform.cs" />
+    <Compile Include="Stair\SphinxFluxManager.cs" />
+    <Compile Include="Stair\SphinxFormulaireManager.cs" />
+    <Compile Include="Stair\StairFluxManager.cs" />
+    <Compile Include="ApplicationSap\ApplicationSapRequestParameter.cs" />
+    <Compile Include="ApplicationSap\ApplicationsSapManager.cs" />
+    <Compile Include="ApplicationSap\GeneratedApplicationSapParameter.cs" />
+    <Compile Include="ApplicationSap\GeneratedApplicationSapParameterHelper.cs" />
+    <Compile Include="ApplicationSap\SapParameterHelper.cs" />
+    <Compile Include="Tache\ImportTacheEtl\Input\ImportTacheInput.cs" />
+    <Compile Include="Tache\ImportTacheEtl\Output\ImportTacheOutput.cs" />
+    <Compile Include="Tache\ImportTacheEtl\Process\ImportTacheProcess.cs" />
+    <Compile Include="Tache\ImportTacheEtl\Result\ImportTacheResult.cs" />
+    <Compile Include="Tache\ImportTacheEtl\Transform\ImportTacheTransform.cs" />
+    <Compile Include="Tache\TacheFluxManager.cs" />
+    <Compile Include="ValidationPointage\Factory\Interfaces\IValidationPointageSettingsProvider.cs" />
+    <Compile Include="ValidationPointage\Factory\ValidationPointageFactorySetting.cs" />
+    <Compile Include="ValidationPointage\Factory\Interfaces\IValidationPointageFluxFactory.cs" />
+    <Compile Include="ValidationPointage\Factory\ValidationPointageSettingsProvider.cs" />
+    <Compile Include="ValidationPointage\Fes\Common\FesQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Fes\Common\Interfaces\IFesQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Fes\Common\Interfaces\IFesQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Fes\Common\FesQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Fes\ControleVrac\Analyzers\AstreinteAnalyser.cs" />
+    <Compile Include="ValidationPointage\Fes\ControleVrac\Analyzers\AstreinteResult.cs" />
+    <Compile Include="ValidationPointage\Fes\ControleVrac\Analyzers\MajorationAnalyzer.cs" />
+    <Compile Include="ValidationPointage\Fes\ControleVrac\Analyzers\MajorationResult.cs" />
+    <Compile Include="ValidationPointage\Fes\ControleVrac\Analyzers\PointageIpdAnalyzer.cs" />
+    <Compile Include="ValidationPointage\Fes\ControleVrac\Analyzers\PointageIpdResult.cs" />
+    <Compile Include="ValidationPointage\Fes\ControleVrac\Analyzers\PointageTypeEtudeResult.cs" />
+    <Compile Include="ValidationPointage\Fes\ControleVrac\Analyzers\PrimeAnalyser.cs" />
+    <Compile Include="ValidationPointage\Fes\ControleVrac\Analyzers\PrimeResult.cs" />
+    <Compile Include="ValidationPointage\Fes\ControleVrac\ControleVracFesQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Fes\ControleVrac\ControleVracFesQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Fes\ControleVrac\ControleVracFes.cs" />
+    <Compile Include="ValidationPointage\Fes\ControleVrac\ControleVracFesHangFireJob.cs" />
+    <Compile Include="ValidationPointage\Fes\Common\ValidationPointageFesFilter.cs" />
+    <Compile Include="ValidationPointage\Fes\ControleVrac\Interfaces\IControleVracFesHangFireJob.cs" />
+    <Compile Include="ValidationPointage\Fes\ControleVrac\Interfaces\IControleVracFesQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Fes\ControleVrac\Interfaces\IControleVracFesQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Fes\IValidationPointageFluxManagerFes.cs" />
+    <Compile Include="ValidationPointage\Fes\ControleVrac\Analyzers\PointageTypeEtudeAnalyser.cs" />
+    <Compile Include="ValidationPointage\Fes\Common\QueryInfo.cs" />
+    <Compile Include="ValidationPointage\Fes\Logs\IValidationPointageFesLogger.cs" />
+    <Compile Include="ValidationPointage\Fes\Logs\ValidationPointageFesLogger.cs" />
+    <Compile Include="ValidationPointage\Fes\Mail\ValidationPointageMailSender.cs" />
+    <Compile Include="ValidationPointage\Fes\RemonteeVrac\Interfaces\IRemonteeVracFesQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Fes\RemonteeVrac\Interfaces\IRemonteeVracFesQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Fes\RemonteeVrac\Interfaces\IRemonteeVracFesHangFireJob.cs" />
+    <Compile Include="ValidationPointage\Fes\RemonteeVrac\RemonteeVracFesQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Fes\RemonteeVrac\RemonteeVracFesQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Fes\RemonteeVrac\RemonteeVracFes.cs" />
+    <Compile Include="ValidationPointage\Fes\RemonteeVrac\RemonteeVracFesHangFireJob.cs" />
+    <Compile Include="ValidationPointage\Fes\ValidationPointageFluxManagerFes.cs" />
+    <Compile Include="ValidationPointage\Fon\Common\FonQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Fon\Common\Interfaces\IFonQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Fon\Common\FonQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Fon\Common\Interfaces\IFonQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Fon\ControleVrac\ControleVracFonQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Fon\ControleVrac\ControleVracFonQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Common\EtablissementFormator.cs" />
+    <Compile Include="ValidationPointage\Fon\ControleVrac\ControleVracFon.cs" />
+    <Compile Include="ValidationPointage\Fon\ControleVrac\ControleVracFonHangFireJob.cs" />
+    <Compile Include="ValidationPointage\Fon\Common\ValidationPointageFonFilter.cs" />
+    <Compile Include="ValidationPointage\Common\ControlePointageProvider.cs" />
+    <Compile Include="ValidationPointage\Common\ValidationPointageContextData.cs" />
+    <Compile Include="ValidationPointage\Common\ValidationPointageContextDataProvider.cs" />
+    <Compile Include="ValidationPointage\Common\Interfaces\IControlePointageProvider.cs" />
+    <Compile Include="ValidationPointage\Fon\ControleVrac\Interfaces\IControleVracFonQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Fon\ControleVrac\Interfaces\IControleVracFonQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Common\Interfaces\IValidationPointageContextDataProvider.cs" />
+    <Compile Include="ValidationPointage\Common\Interfaces\IEtablissementFormator.cs" />
+    <Compile Include="ValidationPointage\Fon\ControleVrac\Interfaces\IControleVracFonHangFireJob.cs" />
+    <Compile Include="ValidationPointage\Fon\IValidationPointageFluxManagerFon.cs" />
+    <Compile Include="ValidationPointage\Fon\Common\QueryInfo.cs" />
+    <Compile Include="ValidationPointage\Fon\Logs\IValidationPointageFonLogger.cs" />
+    <Compile Include="ValidationPointage\Fon\Logs\ValidationPointageFonLogger.cs" />
+    <Compile Include="ValidationPointage\Fon\Mail\ValidationPointageMailSender.cs" />
+    <Compile Include="ValidationPointage\Common\RemonteeVracProvider.cs" />
+    <Compile Include="ValidationPointage\Fon\RemonteeVrac\Interfaces\IRemonteeVracFonQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Fon\RemonteeVrac\Interfaces\IRemonteeVracFonQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Fon\RemonteeVrac\Interfaces\IRemonteeVracFonHangFireJob.cs" />
+    <Compile Include="ValidationPointage\Common\Interfaces\IRemonteeVracProvider.cs" />
+    <Compile Include="ValidationPointage\Fon\RemonteeVrac\RemonteeVracFonQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Fon\RemonteeVrac\RemonteeVracFonQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Fon\RemonteeVrac\RemonteeVracFon.cs" />
+    <Compile Include="ValidationPointage\Fon\RemonteeVrac\RemonteeVracFonHangFireJob.cs" />
+    <Compile Include="ValidationPointage\Fon\ValidationPointageFluxManagerFon.cs" />
+    <Compile Include="ValidationPointage\Ftp\Common\FtpQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Ftp\Common\FtpQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Ftp\Common\Interfaces\IFtpQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Ftp\Common\Interfaces\IFtpQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Ftp\Common\ValidationPointageFtpFilter.cs" />
+    <Compile Include="ValidationPointage\Ftp\ControleVrac\ControleVracFtp.cs" />
+    <Compile Include="ValidationPointage\Ftp\ControleVrac\ControleVracFtpHangFireJob.cs" />
+    <Compile Include="ValidationPointage\Ftp\ControleVrac\ControleVracFtpQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Ftp\ControleVrac\ControleVracFtpQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Ftp\ControleVrac\Interfaces\IControleVracFtpQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Ftp\ControleVrac\Interfaces\IControleVracFtpQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Ftp\ControleVrac\Interfaces\IControleVracFtpHangFireJob.cs" />
+    <Compile Include="ValidationPointage\Ftp\IValidationPointageFluxManagerFtp.cs" />
+    <Compile Include="ValidationPointage\Ftp\Mail\ValidationPointageMailSenderFtp.cs" />
+    <Compile Include="ValidationPointage\Ftp\RemonteeVrac\Interfaces\IRemonteeVracFtpHangFireJob.cs" />
+    <Compile Include="ValidationPointage\Ftp\RemonteeVrac\Interfaces\IRemonteeVracFtpQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Ftp\RemonteeVrac\Interfaces\IRemonteeVracFtpQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Ftp\RemonteeVrac\RemonteeVracFtp.cs" />
+    <Compile Include="ValidationPointage\Ftp\RemonteeVrac\RemonteeVracFtpHangFireJob.cs" />
+    <Compile Include="ValidationPointage\Ftp\RemonteeVrac\RemonteeVracFtpQueryBuilder.cs" />
+    <Compile Include="ValidationPointage\Ftp\RemonteeVrac\RemonteeVracFtpQueryExecutor.cs" />
+    <Compile Include="ValidationPointage\Ftp\ValidationPointageFluxManagerFtp.cs" />
+    <Compile Include="ValidationPointage\Rzb\ControleHelper.cs" />
+    <Compile Include="ValidationPointage\Factory\Interfaces\IValidationPointageFluxManager.cs" />
+    <Compile Include="ValidationPointage\Rzb\IValidationPointageFluxManagerRzb.cs" />
+    <Compile Include="ValidationPointage\Rzb\RemonteePrimes.cs" />
+    <Compile Include="ValidationPointage\Rzb\RemonteeVrac.cs" />
+    <Compile Include="ValidationPointage\Rzb\ControleVrac.cs" />
+    <Compile Include="ValidationPointage\Rzb\RvgPointage.cs" />
+    <Compile Include="ValidationPointage\Rzb\RvgControleHelper.cs" />
+    <Compile Include="ValidationPointage\Rzb\RvgPointagesAndPrimes.cs" />
+    <Compile Include="ValidationPointage\Rzb\RvgPrime.cs" />
+    <Compile Include="ValidationPointage\Factory\ValidationPointageFluxFactory.cs" />
+    <Compile Include="ValidationPointage\Rzb\ValidationPointageFluxManager.cs" />
+    <Compile Include="ValidationPointage\PrimesMail.cs" />
+    <Compile Include="ValidationPointage\VracMail.cs" />
+    <Compile Include="WorkflowLogicielTiers\ILogicielTiersManager.cs" />
+    <Compile Include="WorkflowLogicielTiers\IWorkflowPointageManager.cs" />
+    <Compile Include="WorkflowLogicielTiers\IWorkflowLogicielTiersManager.cs" />
+    <Compile Include="WorkflowLogicielTiers\LogicielTiersManager.cs" />
+    <Compile Include="WorkflowLogicielTiers\WorkflowPointageManager.cs" />
+    <Compile Include="WorkflowLogicielTiers\WorkflowLogicielTiersManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\Fred.Web\Fred.Analysis\LogicalFredIEArchitecture.layerdiagram">
+      <Link>LogicalFredIEArchitecture.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
+    <AdditionalFiles Include="..\..\Fred.Web\Fred.Analysis\LogicalWebArchitecture.layerdiagram">
+      <Link>LogicalWebArchitecture.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ClassDiagram.cd" />
+    <None Include="Fred.ImportExport.Business.ruleset" />
+    <None Include="libman.json" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ValidationPointage\Fes\ControleVrac\Analyzers\AstreintesDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.10.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
+    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.10.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\Google.Protobuf.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\SonarAnalyzer.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\GroupSpecific\Fred.GroupSpecific.Infrastructure\Fred.GroupSpecific.Infrastructure.csproj">
+      <Project>{1D92BA5A-088D-490F-B4BF-A651DE44D4F3}</Project>
+      <Name>Fred.GroupSpecific.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Fred.Web\Fred.Business\Fred.Business.csproj">
+      <Project>{039e00b1-5f56-484c-82ba-5855684a1bbc}</Project>
+      <Name>Fred.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Fred.Web\Fred.DataAccess.Interfaces\Fred.DataAccess.Interfaces.csproj">
+      <Project>{35DEBE33-BEF2-4E52-A453-59B893EA748C}</Project>
+      <Name>Fred.DataAccess.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Fred.Web\Fred.DataAccess\Fred.DataAccess.csproj">
+      <Project>{F86F9F7F-2269-4779-9064-515F94070CBD}</Project>
+      <Name>Fred.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Fred.Web\Fred.Entities\Fred.Entities.csproj">
+      <Project>{D84768F7-F096-4E6D-997E-AC1D9232B47A}</Project>
+      <Name>Fred.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Fred.Web\Fred.Framework\Fred.Framework.csproj">
+      <Project>{92478535-02C7-44E0-975E-E31D77E78CCA}</Project>
+      <Name>Fred.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Fred.Web\Fred.Web.Shared\Fred.Web.Shared.csproj">
+      <Project>{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}</Project>
+      <Name>Fred.Web.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.ImportExport.DataAccess.ExternalService\Fred.ImportExport.DataAccess.ExternalService.csproj">
+      <Project>{acb25339-9a18-4ec1-9f5c-7a3df49d574e}</Project>
+      <Name>Fred.ImportExport.DataAccess.ExternalService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.ImportExport.DataAccess.Interfaces\Fred.ImportExport.DataAccess.Interfaces.csproj">
+      <Project>{93EAD1C4-0709-4402-947B-9308BFD428C8}</Project>
+      <Name>Fred.ImportExport.DataAccess.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.ImportExport.DataAccess\Fred.ImportExport.DataAccess.csproj">
+      <Project>{eb202e1c-5dd4-499c-baf6-7afd92caec95}</Project>
+      <Name>Fred.ImportExport.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.ImportExport.Database\Fred.ImportExport.Database.csproj">
+      <Project>{d3d12f17-3ba4-4b4c-bd9e-2e3fd0923049}</Project>
+      <Name>Fred.ImportExport.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.ImportExport.Entities\Fred.ImportExport.Entities.csproj">
+      <Project>{3800678C-0906-458A-BC65-8CBBD1A3AA99}</Project>
+      <Name>Fred.ImportExport.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.ImportExport.Framework\Fred.ImportExport.Framework.csproj">
+      <Project>{73B1B051-675C-44EE-A521-CBF9AE2B349C}</Project>
+      <Name>Fred.ImportExport.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.ImportExport.Models\Fred.ImportExport.Models.csproj">
+      <Project>{f1e54d6f-eadb-4c6a-ae5c-7d2dfdd023c8}</Project>
+      <Name>Fred.ImportExport.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Common\IEBusiness.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>IEBusiness.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fournisseur\SELECT_FOURNISSEUR.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Etablissement\SELECT_ETABLISSEMENT_COMPTABLE.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FredImportExportBusinessResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FredImportExportBusinessResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Personnel\SELECT_PERSONNEL.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EcritureComptable\SELECT_ECRITURES_COMPTABLES.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EcritureComptable\SELECT_ECRITURES_COMPTABLES_BY_CI.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ValidationPointage\Rzb\SELECT_ERREUR_REMONTEE_VRAC.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Kilometre\INSERT_ANAEL_KLM_HEADER.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Kilometre\INIT_ANAEL_KLM.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Kilometre\SELECT_RVG_KLM_CHANTIER_FRED_EXISTS.sql" />
+    <EmbeddedResource Include="Kilometre\SELECT_RVG_KLM_NO_CHANTIER_FRED_EXISTS.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Etl\Process\" />
+    <Folder Include="Personnel\AnaelSystem\Context\List\" />
+    <Folder Include="Stair\importStairEtl\" />
+    <Folder Include="Stair\Process\" />
+    <Folder Include="Sync\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Personnel\SELECT_PERSONNEL_FES.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Personnel\AnaelSystem\Anael\GFTP\SELECT_PERSONNEL_GFTP.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Personnel\SELECT_PERSONNEL_GRZB.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ValidationPointage\Fes\SELECT_ERREUR_REMONTEE_VRAC.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ValidationPointage\Fon\SELECT_ERREUR_REMONTEE_VRAC.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CI\AnaelSystem\Anael\GRZB\Sql\SELECT_CI_BY_CODE_CI.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CI\AnaelSystem\Anael\GRZB\Sql\SELECT_CI_BY_CODE_SOCIETE.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Personnel\AnaelSystem\Anael\GRZB\SELECT_PERSONNEL_GRZB.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JournauxComptable\SELECT_JOURNAUX_COMPTABLE.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EcritureComptable\SELECT_ECRITURES_COMPTABLES_FROM_DINT.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ValidationPointage\Ftp\SELECT_ERREUR_REMONTEE_VRAC.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EcritureComptable\SELECT_ECRITURES_COMPTABLES_BY_CIs.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Fournisseur\AnaelSystem\Anael\GRZB\Sql\SELECT_FOURNISSEUR_BY_CODE.sql" />
+    <EmbeddedResource Include="Fournisseur\AnaelSystem\Anael\GRZB\Sql\SELECT_FOURNISSEUR_BY_DATE.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Personnel\SELECT_PERSONNEL_FON.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EcritureComptable\SELECT_ECRITURES_COMPTABLES_PARTIEL.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,76 @@
+﻿<div ng-class="$ctrl.PanelClass" class="blockScreen"></div>
+<div class="budget-commentaire-panel options" ng-class="$ctrl.PanelClass">
+
+    <!--Icon-->
+    <div class="toolbar">
+        <div class="flaticon flaticon-clock-1 grandicone"></div>
+    </div>
+
+    <!--Header-->
+    <div class="form-header">
+        <h2 ng-if="$ctrl.Tache">{{::$ctrl.resources.Budget_CommentairePanel_Titre}} : {{$ctrl.Tache.Code}} - {{$ctrl.Tache.Libelle}}</h2>
+        <h2 ng-if="$ctrl.SousDetailItem">{{::$ctrl.resources.Budget_CommentairePanel_SousDetail}}</h2>
+    </div>
+
+    <div class="form fred-scroll">
+
+        <!--Informations-->
+        <div class="informations" ng-if="$ctrl.Tache">
+            <div class="row" ng-if="$ctrl.Niveau > 1">
+                <div class="col-lg-4 col-md-4 col-sm-4">{{::$ctrl.resources.Budget_CommentairePanel_RegroupementT1}}</div>
+                <div class="col-lg-8 col-md-8 col-sm-8">{{$ctrl.Tache1.Code}} - {{$ctrl.Tache1.Libelle}}</div>
+            </div>
+            <div class="row" ng-if="$ctrl.Niveau > 2">
+                <div class="col-lg-4 col-md-4 col-sm-4">{{::$ctrl.resources.Budget_CommentairePanel_RegroupementT2}}</div>
+                <div class="col-lg-8 col-md-8 col-sm-8">{{$ctrl.Tache2.Code}} - {{$ctrl.Tache2.Libelle}}</div>
+            </div>
+            <div class="row" ng-if="$ctrl.Niveau > 3">
+                <div class="col-lg-4 col-md-4 col-sm-4">{{::$ctrl.resources.Budget_CommentairePanel_RegroupementT3}}</div>
+                <div class="col-lg-8 col-md-8 col-sm-8">{{$ctrl.Tache3.Code}} - {{$ctrl.Tache3.Libelle}}</div>
+            </div>
+        </div>
+        <div class="informations" ng-if="$ctrl.SousDetailItem">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">{{::$ctrl.resources.Budget_CommentairePanel_Chapitre}}</div>
+                <div class="col-lg-8 col-md-8 col-sm-8">{{$ctrl.SousDetailItem.Chapitre.Code}} - {{$ctrl.SousDetailItem.Chapitre.Libelle}}</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">{{::$ctrl.resources.Budget_CommentairePanel_SousChapitre}}</div>
+                <div class="col-lg-8 col-md-8 col-sm-8">{{$ctrl.SousDetailItem.SousChapitre.Code}} - {{$ctrl.SousDetailItem.SousChapitre.Libelle}}</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">{{::$ctrl.resources.Budget_CommentairePanel_Ressource}}</div>
+                <div class="col-lg-8 col-md-8 col-sm-8">{{$ctrl.SousDetailItem.Ressource.Code}} - {{$ctrl.SousDetailItem.Ressource.Libelle}}</div>
+            </div>
+        </div>
+        <div class="data">
+            <div>
+                {{::$ctrl.resources.Budget_CommentairePanel_Commentaire}}
+                <textarea id="TEXTAREA" class="form-control" rows="15" ng-model="$ctrl.View.Commentaire" ng-change="$ctrl.CommentaireChanged()" ng-readonly="$ctrl.Readonly" />
+            </div>
+            <div class="row erreur" ng-if="$ctrl.CommentaireErreur">
+                {{$ctrl.CommentaireErreur}}
+            </div>
+        </div>
+    </div>
+
+    <!--Footer-->
+    <div class="form-footer action-controls">
+
+        <!--Bouton valider-->
+        <button class="btn btn-validate pull-left"
+                ng-if="!$ctrl.Readonly"
+                ng-click="$ctrl.Validate()"
+                ng-disabled="$ctrl.CommentaireErreur"
+                title="{{::$ctrl.resources.Global_Bouton_Valider_Tooltip}}">
+            {{::$ctrl.resources.Global_Bouton_Valider}}
+        </button>
+
+        <!--Bouton annuler-->
+        <button class="btn btn-link btn-annuler pull-right"
+                ng-click="$ctrl.Hide()"
+                title="{{::$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">
+            {{::$ctrl.resources.Global_Bouton_Annuler}}
+        </button>
+    </div>
+</div>

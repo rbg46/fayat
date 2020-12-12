@@ -1,0 +1,34 @@
+﻿<div class="modal-content">
+  <div class="modal-header">
+    <h2 class="modal-title"><i class="flaticon flaticon-notebook-4"></i>{{modalTitle}}</h2>
+    <span class="flaticon flaticon-multiply" ng-click="close()" data-dismiss="modal" title="{{resources.Global_Modal_Annuler_Tooltip}}"></span>
+  </div>
+
+  <div class="modal-body">
+    <div ng-show="ErrorMessage.length > 0" class="alert alert-warning">
+      {{ErrorMessage}}
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label for="ddlChapitres">{{resources.ReferentielFixe_ModalSousChapitre_Chapitre}}</label>
+        <select id="ddlChapitres" class="form-control" ng-options="item as item.Libelle for item in chapterList track by item.ChapitreId" ng-model="modalSelectedChapitre" ng-change="getSelectedChapitre()" ng-disabled="clone.SousChapitreId > 0"></select>
+      </div>
+    </div>
+    <div class="row">
+      <input type="hidden" ng-model="clone.SousChapitreId" />
+      <div class="col-md-4">
+        <label for="txtCodeReferentiel">{{resources.ReferentielFixe_ModalSousChapitre_Code}}</label>
+        <input type="text" id="txtCodeReferentiel" placeholder="{{resources.ReferentielFixe_ModalSousChapitre_Code_Placeholder}}" maxlength="20" class="form-control" ng-disabled="clone.SousChapitreId > 0" ng-model="clone.Code" autofocus>
+      </div>
+      <div class="col-md-8">
+        <label for="txtLabelReferentiel">{{resources.ReferentielFixe_ModalSousChapitre_Libelle}}</label>
+        <input type="text" id="txtLabelReferentiel" placeholder="{{resources.ReferentielFixe_ModalSousChapitre_Libelle_Placeholder}}" class="form-control" ng-model="clone.Libelle">
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn  btn-default pull-left" ng-click="save()" title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">{{resources.Global_Bouton_Enregistrer}}</button>
+    <button type="button" class="btn  btn-link pull-right" ng-click="close()" title="{{resources.Global_Bouton_Annuler_Tooltip}}">{{resources.Global_Bouton_Annuler}}</button>
+  </div>
+</div>

@@ -1,0 +1,451 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Erreur_PersonnelNonExistant" xml:space="preserve">
+    <value>Le personnel indiqué n'existe pas.</value>
+    <comment>RapportHabdoManager</comment>
+  </data>
+  <data name="RapportHebdoDeplacement_Personnel_Absent" xml:space="preserve">
+    <value>Les pointages ne concernent pas tous le personnel</value>
+  </data>
+  <data name="RapportHebdoHelper_Code_Postal_Invalide" xml:space="preserve">
+    <value>Le code postal est invalide.</value>
+  </data>
+  <data name="RapportHebdoValidator_Code_Postal_Erreur" xml:space="preserve">
+    <value>Le code postal du CI {0} n'est pas renseigné ou est ivalide</value>
+  </data>
+  <data name="RapportHebdoValidator_Majo_THRA_Prime_GDI_Erreur" xml:space="preserve">
+    <value>Au moins un personnel possède une majoration THRA mais pas de prime GDI / GDP sur le CI {0} le même jour</value>
+  </data>
+  <data name="RapportHebdoValidator_Prime_Departement_Erreur" xml:space="preserve">
+    <value>Au moins un personnel possède une prime GDI / GDP qui ne correspond pas au département du CI {0}</value>
+  </data>
+  <data name="RapportHebdoValidator_Prime_GDI_GDP_Erreur" xml:space="preserve">
+    <value>Au moins un personnel possède une prime GDI et une prime GDP sur le CI {0} le même jour</value>
+  </data>
+  <data name="RapportHebdoValidator_Prime_GDI_Majo_THRR_Erreur" xml:space="preserve">
+    <value>Au moins un personnel possède une prime GDI / GDP et une majoration THRR sur le CI {0} le même jour</value>
+  </data>
+  <data name="RapportHebdo_Absence" xml:space="preserve">
+    <value>Absence</value>
+    <comment>Areas\Pointage\Scripts\components\RapportHebdo</comment>
+  </data>
+  <data name="RapportHebdo_Absence_Message" xml:space="preserve">
+    <value>Des absences ont été signalées. Cliquez pour visualiser le détail</value>
+  </data>
+  <data name="RapportHebdo_Add_Sortie_Astreinte" xml:space="preserve">
+    <value>Ajouter une sortie astreinte</value>
+  </data>
+  <data name="RapportHebdo_Already_Validated" xml:space="preserve">
+    <value>Le rapport a déjà été validé par un supérieur.</value>
+    <comment>pointage-hebdo-rapport.component.js</comment>
+  </data>
+  <data name="RapportHebdo_Change_Date_Astreinte" xml:space="preserve">
+    <value>Changer les dates de l'astreinte</value>
+  </data>
+  <data name="RapportHebdo_Commentaire_Message" xml:space="preserve">
+    <value>Renseignez si besoin un commentaire (visible par le manager et le gestionnaire de paie)...</value>
+  </data>
+  <data name="RapportHebdo_Date" xml:space="preserve">
+    <value>Date du rapport hebdomadaire</value>
+  </data>
+  <data name="RapportHebdo_Date_Debut_Asteinte" xml:space="preserve">
+    <value>Date début astreinte</value>
+  </data>
+  <data name="RapportHebdo_Date_Fin_Astreinte" xml:space="preserve">
+    <value>Date fin astreinte</value>
+  </data>
+  <data name="RapportHebdo_Date_Synthese" xml:space="preserve">
+    <value>Date du rapport de synthése hebdomadaire</value>
+  </data>
+  <data name="RapportHebdo_DefaultTaskCode" xml:space="preserve">
+    <value>000000</value>
+    <comment>pointage-hebdo-rapport-pointage-tab.html</comment>
+  </data>
+  <data name="RapportHebdo_Dimanche" xml:space="preserve">
+    <value>Dimanche</value>
+    <comment>pointage-hebdo-rapport.component</comment>
+  </data>
+  <data name="RapportHebdo_Ecran_Entree" xml:space="preserve">
+    <value>Écran d'entrée</value>
+  </data>
+  <data name="RapportHebdo_Erreur_Tooltip" xml:space="preserve">
+    <value>Cliquer pour afficher le message d'erreur, Re-cliquer pour le fermer</value>
+  </data>
+  <data name="RapportHebdo_ErrorMessage_Personnel_HasNoPointage" xml:space="preserve">
+    <value>Validation impossible: le personnel {0} {1} n'a aucune pointage.</value>
+  </data>
+  <data name="RapportHebdo_Etat_Rapport" xml:space="preserve">
+    <value>Etat du rapport</value>
+  </data>
+  <data name="RapportHebdo_Export" xml:space="preserve">
+    <value>Export du pointage personnel</value>
+  </data>
+  <data name="RapportHebdo_Export_Excel" xml:space="preserve">
+    <value>Export au format Excel</value>
+  </data>
+  <data name="RapportHebdo_Export_Hebdo" xml:space="preserve">
+    <value>Export du pointage hebdomadaire</value>
+  </data>
+  <data name="RapportHebdo_FailureValidationMessage" xml:space="preserve">
+    <value>Le rapport n'a pas été validé, merci de consulter la liste des erreurs.</value>
+    <comment>Areas\Pointage\Scripts\components\RapportHebdo</comment>
+  </data>
+  <data name="RapportHebdo_Heures_Sup" xml:space="preserve">
+    <value>Heures Sup</value>
+    <comment>pointage-hebdo-rapport.component</comment>
+  </data>
+  <data name="RapportHebdo_Jeudi" xml:space="preserve">
+    <value>Jeudi</value>
+    <comment>pointage-hebdo-rapport.component</comment>
+  </data>
+  <data name="RapportHebdo_Lundi" xml:space="preserve">
+    <value>Lundi</value>
+    <comment>pointage-hebdo-rapport.component</comment>
+  </data>
+  <data name="RapportHebdo_Mardi" xml:space="preserve">
+    <value>Mardi</value>
+    <comment>pointage-hebdo-rapport.component</comment>
+  </data>
+  <data name="RapportHebdo_Mercredi" xml:space="preserve">
+    <value>Mercredi</value>
+    <comment>pointage-hebdo-rapport.component</comment>
+  </data>
+  <data name="RapportHebdo_Message_Bloquant" xml:space="preserve">
+    <value>Le nombre d'heures renseigné est erroné, rapprochez-vous du responsable hiérarchique</value>
+    <comment>pointage-hebdo-rapport.component</comment>
+  </data>
+  <data name="RapportHebdo_Message_Cannot_Pointe_For_Etam_Iac" xml:space="preserve">
+    <value>Votre statut ne permet pas le pointage ETAM \\ IAC, Merci d'utiliser l'écran de pointage ouvrier.</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapportETAMIAC.cshtml</comment>
+  </data>
+  <data name="RapportHebdo_Message_Non_Bloquant" xml:space="preserve">
+    <value>Le nombre d'heures renseigné implique des heures supplémentaires</value>
+    <comment>pointage-hebdo-rapport.component</comment>
+  </data>
+  <data name="RapportHebdo_Message_Use_SpecificTask_For_CiTypeEtude" xml:space="preserve">
+    <value>Merci de saisir sur une tâche spécifique pour les CI de type etude.</value>
+    <comment>pointage-hebdo-rapport-pointage-tab.html</comment>
+  </data>
+  <data name="RapportHebdo_Modifier_Selection" xml:space="preserve">
+    <value>Modifier ma sélection</value>
+  </data>
+  <data name="RapportHebdo_Mon_Service" xml:space="preserve">
+    <value>Mon service</value>
+  </data>
+  <data name="RapportHebdo_NbAbs" xml:space="preserve">
+    <value>Nb. abs</value>
+    <comment>pointage-etam-iac-entree-synthese-mensuelle</comment>
+  </data>
+  <data name="RapportHebdo_NbJourPintes" xml:space="preserve">
+    <value>Nb. jours pointés</value>
+    <comment>pointage-etam-iac-entree-synthese-mensuelle</comment>
+  </data>
+  <data name="RapportHebdo_NbPrimes" xml:space="preserve">
+    <value>Nb. primes</value>
+    <comment>pointage-etam-iac-entree-synthese-mensuelle</comment>
+  </data>
+  <data name="RapportHebdo_Samedi" xml:space="preserve">
+    <value>Samedi</value>
+    <comment>pointage-hebdo-rapport.component</comment>
+  </data>
+  <data name="RapportHebdo_Selection_Date" xml:space="preserve">
+    <value>Sélectionner une date</value>
+  </data>
+  <data name="RapportHebdo_Selection_Month" xml:space="preserve">
+    <value>Séléction du mois</value>
+    <comment>pointage-etam-iac-entree-synthese-mensuelle</comment>
+  </data>
+  <data name="RapportHebdo_Select_Semaine" xml:space="preserve">
+    <value>Sélection de la semaine</value>
+  </data>
+  <data name="RapportHebdo_Service_De" xml:space="preserve">
+    <value>Service de ...</value>
+  </data>
+  <data name="RapportHebdo_Sortie_Astreinte" xml:space="preserve">
+    <value>Sortie</value>
+    <comment>Areas\Pointage\Scripts\components\RapportHebdo</comment>
+  </data>
+  <data name="RapportHebdo_SucessValidationMessage" xml:space="preserve">
+    <value>Le rapport a été validé avec succés.</value>
+    <comment>Areas\Pointage\Scripts\components\RapportHebdo</comment>
+  </data>
+  <data name="RapportHebdo_Suppression_Astreinte_Tooltip" xml:space="preserve">
+    <value>Cliquer pour Supprimer la sortie astreinte</value>
+  </data>
+  <data name="RapportHebdo_Synthese_Action" xml:space="preserve">
+    <value>Action</value>
+    <comment>pointage-etam-iac-entree-synthese-mensuelle</comment>
+  </data>
+  <data name="RapportHebdo_Synthese_DisplayAll" xml:space="preserve">
+    <value>Tout afficher</value>
+  </data>
+  <data name="RapportHebdo_Synthese_Personnel" xml:space="preserve">
+    <value>Personnel</value>
+    <comment>pointage-etam-iac-entree-synthese-mensuelle</comment>
+  </data>
+  <data name="RapportHebdo_Synthese_Statut" xml:space="preserve">
+    <value>Statut</value>
+    <comment>pointage-etam-iac-entree-synthese-mensuelle</comment>
+  </data>
+  <data name="RapportHebdo_Synthese_Validate_Service" xml:space="preserve">
+    <value>Validation de mon service</value>
+    <comment>pointage-etam-iac-entree-synthese-mensuelle</comment>
+  </data>
+  <data name="RapportHebdo_Synthese_Valider" xml:space="preserve">
+    <value>Valider</value>
+    <comment>pointage-etam-iac-entree-synthese-mensuelle</comment>
+  </data>
+  <data name="RapportHebdo_Synthese_Voir" xml:space="preserve">
+    <value>Voir</value>
+    <comment>pointage-etam-iac-entree-synthese-mensuelle</comment>
+  </data>
+  <data name="RapportHebdo_Task" xml:space="preserve">
+    <value>Tâches</value>
+    <comment>Areas\Pointage\Scripts\components\RapportHebdo</comment>
+  </data>
+  <data name="RapportHebdo_TitreOnglet" xml:space="preserve">
+    <value>Rapport Hebdomadaire</value>
+  </data>
+  <data name="RapportHebdo_TotalMajoration" xml:space="preserve">
+    <value>Total Majoration</value>
+    <comment>pointage-hebdo-rapport-majoration-tab.html</comment>
+  </data>
+  <data name="RapportHebdo_TotalPrime" xml:space="preserve">
+    <value>Total Prime</value>
+    <comment>pointage-hebdo-rapport-prime-tab.html</comment>
+  </data>
+  <data name="RapportHebdo_Total_Absence" xml:space="preserve">
+    <value>Total Absence</value>
+    <comment>pointage-hebdo-rapport.component</comment>
+  </data>
+  <data name="RapportHebdo_Total_Astreinte" xml:space="preserve">
+    <value>Total Sortie Astreinte</value>
+  </data>
+  <data name="RapportHebdo_Total_Heure" xml:space="preserve">
+    <value>Total des heures</value>
+  </data>
+  <data name="RapportHebdo_Total_Heure_Sup" xml:space="preserve">
+    <value>Total Heure Sup</value>
+  </data>
+  <data name="RapportHebdo_Total_Jour" xml:space="preserve">
+    <value>Total des jours</value>
+  </data>
+  <data name="RapportHebdo_Tout_Selectionner" xml:space="preserve">
+    <value>Tout selectionner</value>
+    <comment>pointage-etam-iac-entree-synthese-mensuelle</comment>
+  </data>
+  <data name="RapportHebdo_Validation_Error_Personnel_Without_Pointage" xml:space="preserve">
+    <value>Les personnels qui n'ont aucune pointage ne sont pas éligibles au validation. Merci de selectionner seulement des personnels qui ont au moins un pointage.</value>
+  </data>
+  <data name="RapportHebdo_Vendredi" xml:space="preserve">
+    <value>Vendredi</value>
+    <comment>pointage-hebdo-rapport.component</comment>
+  </data>
+  <data name="RapportHebdo_Warning_Empty_Personnel" xml:space="preserve">
+    <value>Merci de sélectionner les personnels dont vous voulez valider le pointage .</value>
+    <comment>pointage-etam-iac-entree-synthese-mensuelle</comment>
+  </data>
+  <data name="RapportHebdo_Warning_IPD_CI" xml:space="preserve">
+    <value>Calcul des IPD impossible : le CI {0} n'a pas de coordonnées GPS.</value>
+  </data>
+  <data name="RapportHebdo_Warning_IPD_CodeDeplacement" xml:space="preserve">
+    <value>Calcul des IPD impossible : aucun code de déplacement correspondant à la zone {0} trouvé</value>
+  </data>
+  <data name="RapportHebdo_Warning_IPD_PersonnelPasTravaille" xml:space="preserve">
+    <value>Calcul des IPD impossible : le personnel n'a pas travaillé ce jour sur le CI</value>
+  </data>
+  <data name="RapportHebdo_Warning_IPD_Rattachement" xml:space="preserve">
+    <value>Calcul des IPD impossible : le rattachement du personnel n'a pas de coordonnées GPS.</value>
+  </data>
+  <data name="RapportHebdo_Warning_IPD_SocieteCalculType" xml:space="preserve">
+    <value>Calcul des IPD impossible : le type de calcul des indemnités de déplacement n'est pas configuré pour la société du personnel</value>
+  </data>
+  <data name="RapportHebdo_Warning_IPD_Zone" xml:space="preserve">
+    <value>Calcul des IPD impossible : zone concernée non configurée</value>
+  </data>
+  <data name="Rapport_Hebdo_Ci_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Code_Ci" xml:space="preserve">
+    <value>Code Ci</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Code_Soc" xml:space="preserve">
+    <value>Code société Matricule</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Code_Total_Heure" xml:space="preserve">
+    <value>Total heure</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Code_Total_Heure_Sup" xml:space="preserve">
+    <value>Total H Sup</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Incomplet" xml:space="preserve">
+    <value>Il y a des pointages incomplets pour</value>
+    <comment>pointage-etam-iac-entree-synthese-mensuelle</comment>
+  </data>
+  <data name="Rapport_Hebdo_InsufficientRights_ForValidation" xml:space="preserve">
+    <value>Vous n'avez pas les droits nécessaires pour valider le rapport journalier numéro: {0} du date {1}, rapprochez-vous du responsable hiérarchique.</value>
+    <comment>Areas\Pointage\Scripts\components\RapportHebdo</comment>
+  </data>
+  <data name="Rapport_Hebdo_LessThanSevenHoursPerDay_WarningMessage" xml:space="preserve">
+    <value>Il y a des pointages incomplets dans la journée {0} pour {1} {2}.</value>
+    <comment>Areas\Pointage\Scripts\components\RapportHebdo</comment>
+  </data>
+  <data name="Rapport_Hebdo_MoreThanSevenHoursPerDay_WarningMessage" xml:space="preserve">
+    <value>L’ouvrier {0} {1} a dépassé 7 heures dans la journée {2}.</value>
+    <comment>Areas\Pointage\Scripts\components\RapportHebdo</comment>
+  </data>
+  <data name="Rapport_Hebdo_MoreThanTenHoursPerDay_ErrorMessage" xml:space="preserve">
+    <value>L’ouvrier {0} {1} a dépassé 10 heures dans la journée {2}, rapprochez-vous du responsable hiérarchique.</value>
+    <comment>Areas\Pointage\Scripts\components\RapportHebdo</comment>
+  </data>
+  <data name="Rapport_Hebdo_Validation_OK" xml:space="preserve">
+    <value>La validation a été effectuée avec succés</value>
+    <comment>pointage-etam-iac-entree-synthese-mensuelle</comment>
+  </data>
+  <data name="ValidationAffaires_CI_CodeAndLibelle" xml:space="preserve">
+    <value>Code CI-Libellé</value>
+  </data>
+  <data name="ValidationAffaires_CI_Statut" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="ValidationAffaires_Code_Societe" xml:space="preserve">
+    <value>Code Société</value>
+  </data>
+  <data name="ValidationAffaires_Code_Societe_comptable" xml:space="preserve">
+    <value>Code établissement comptable</value>
+  </data>
+  <data name="ValidationAffaires_Select_Ci" xml:space="preserve">
+    <value>Selectionner tous mes CI</value>
+  </data>
+  <data name="ValidationAffaires_Title" xml:space="preserve">
+    <value>Validation de mes affaires</value>
+  </data>
+  <data name="ValidationAffaires_Total_Heure_Absence" xml:space="preserve">
+    <value>Total heure absence</value>
+  </data>
+  <data name="ValidationAffaires_Total_Heure_Astreinte" xml:space="preserve">
+    <value>Total heure astreinte</value>
+  </data>
+</root>

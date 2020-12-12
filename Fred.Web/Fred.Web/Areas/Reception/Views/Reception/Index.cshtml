@@ -1,0 +1,609 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+@{
+    ViewBag.Title = FeatureReception.Reception_Index_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+    @Styles.Render("~/ReceptionIndexBundle.css")
+}
+@section scripts {
+    @Scripts.Render("~/ReceptionIndexBundle.js")
+    @this.RenderResources("FeatureReception")
+    @this.RenderResources("FeaturePieceJointe")
+}
+
+<div class="gerer-reception container" ng-controller="ReceptionController as ctrl" ng-init="ctrl.handleLoadPage('@ViewBag.id', '@Html.Raw(ViewBag.commandeSoldee?.ToString().ToLower())', '@ViewBag.favoriId')">
+    <h1>{{ctrl.totalCount}} {{ctrl.resources.Reception_Index_Titre}}</h1>
+    <!--START : Barre de recherche + Barre d'outils-->
+    <fred-toolbar>
+        <!--Recherche-->
+        <fred-section class="text-search-section">
+            <fred-section-title>Rechercher une commande</fred-section-title>
+            <fred-section-controls>
+                <div class="input-group input-search">
+                    <input type="text" placeholder="{{ctrl.resources.Reception_Index_Rechercher_Placeholder}}"
+                           ng-model="ctrl.viewRecherche"
+                           on-enter="ctrl.handleReload(false)"
+                           class="form-control ng-pristine ng-valid ng-empty ng-touched">
+                    <span class="input-group-addon btn button-search"
+                          ng-click="ctrl.handleReload(false)">
+                        <i class="material-icons">search</i>
+                    </span>
+                </div>
+                <fred-button class="btn-dark-gray filter hidden-xs" ng-click="ctrl.handleResetFilter()" title="{{ctrl.resources.Global_Filtre_Bouton_ReinitialiserFiltre}}">
+                    <span class="fa fa-filter"></span>
+                    <span class="fa fa-times"></span>
+                </fred-button>
+                <fred-button class="white icon"
+                             ng-click="status ? status=false : status=true; ctrl.handleSaveFilter()">
+                    <span class="fa fa-circle filterActivated"
+                          ng-show="ctrl.hasFilterActive()">
+                    </span>
+                    <span ng-class="{'fa fa-filter' :!buttonFilterClick  ,'material-icons closing' :buttonFilterClick}">
+                        <span ng-show="buttonFilterClick">clear</span>
+                    </span>
+                </fred-button>
+            </fred-section-controls>
+            <!-- BEGIN : Bloc de Filtre -->
+            <fred-overlay ng-click="status=false;" ng-class="{'open' :status  ,'close' :!status}"></fred-overlay>
+            <fred-side ng-init="status=false;" ng-class="{'open' :status  ,'close' :!status }" esc-key="Test()">
+                <!--En tete-->
+                <header>
+                    <icon><label>Affiner votre recherche : </label></icon>
+                </header>
+                <div class="filter-tiles"
+                     ng-show="ctrl.hasFilterActive()">
+                    <filter-selected-tiles-component filter="ctrl.filter"></filter-selected-tiles-component>
+                </div>
+                <!-- Body -->
+                <main class="fred-scroll" style="padding: 5px;">
+                    <div>
+                        <div class="row row-lookup">
+                            <div class="col-sm-4 lb_l">
+                                <label class="control-label">Fournisseur</label>
+                            </div>
+                            <div class="col-sm-8 lbl_r">
+                                <input-select is-selected="ctrl.filter.AgenceId || ctrl.filter.FournisseurId"
+                                              is-editable="false"
+                                              placeholder="ctrl.resources.Global_ReferentielFournisseur_Placeholder"
+                                              on-select="ctrl.handleShowPicklistFournisseurAgence()"
+                                              on-delete="ctrl.handleClearAgenceAndFournisseur()"
+                                              text="ctrl.filter.AgenceId ? ctrl.filter.Agence.CodeLibelle : ctrl.filter.Fournisseur.CodeLibelle">
+                                </input-select>
+                            </div>
+                        </div>
+                        <div class="row row-lookup">
+                            <div class="col-sm-4 lb_l">
+                                <label class="control-label">CI</label>
+                            </div>
+                            <div class="col-sm-8 lbl_r">
+                                <lookup-standalone ng-model="ctrl.filter.CI"
+                                                   text="ctrl.filter.CI.CodeLibelle"
+                                                   search-title="{{ctrl.resources.Global_ReferentielCI}}"
+                                                   search-placeholder="{{ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                                   custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                                   on-click="ctrl.handleShowLookup('CI');"
+                                                   on-select="ctrl.handleLookupSelection('CI', item);"
+                                                   on-delete="ctrl.handleLookupDeletion('CI');"
+                                                   placeholder="{{ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                                   tooltip="ctrl.filter.CI.CodeLibelle"
+                                                   class="formulaire long">
+                                </lookup-standalone>
+                            </div>
+                        </div>
+                        <div class="row row-lookup">
+                            <div class="col-sm-4 lb_l">
+                                <label class="control-label">Ressource</label>
+                            </div>
+                            <div class="col-sm-8 lbl_r">
+                                <lookup-standalone ng-model="ctrl.filter.Ressource"
+                                                   text="ctrl.filter.Ressource.CodeLibelle"
+                                                   search-title="{{ctrl.resources.Global_ReferentielRessource}}"
+                                                   search-placeholder="{{ctrl.resources.Global_ReferentielRessource_Placeholder}}"
+                                                   on-select="ctrl.handleLookupSelection('Ressource', item);"
+                                                   on-delete="ctrl.handleLookupDeletion('Ressource');"
+                                                   placeholder="{{ctrl.resources.Global_ReferentielRessource_Placeholder}}"
+                                                   tooltip="ctrl.filter.Ressource.CodeLibelle"
+                                                   class="formulaire long"
+                                                   active-second-search-input="true"
+                                                   search-placeholder2="{{ctrl.resources.Global_ReferentielRessource_Placeholder2}}"
+                                                   disabled-tooltip="{{ctrl.resources.Reception_SelectACi}}"
+                                                   ng-disabled="!ctrl.filter.CI"
+                                                   custom-template-url="/Scripts/directive/lookup/custom-templates/ressources.recommandees.html"
+                                                   url="/api/Achat/SearchRessources?ciId={{ctrl.filter.CI.CiId}}&ressourcesRecommandeesOnly={{ctrl.resssourcesRecommandeesOnly}}&achatsEnable=true&"
+                                                   active-checkbox-ressources-recomandee="ctrl.resssourcesRecommandeesOnly">
+                                </lookup-standalone>
+                            </div>
+                        </div>
+                        <div class="row row-lookup">
+                            <div class="col-sm-4 lb_l">
+                                <label class="control-label">Tâche</label>
+                            </div>
+                            <div class="col-sm-8 lbl_r">
+                                <lookup-standalone ng-model="ctrl.filter.Tache"
+                                                   text="ctrl.filter.Tache.CodeLibelle"
+                                                   search-title="{{ctrl.resources.Global_ReferentielTache}}"
+                                                   search-placeholder="{{ctrl.resources.Global_ReferentielTache_Placeholder}}"
+                                                   url="/api/Tache/SearchLight/?ciId={{ctrl.filter.CI.CiId}}&activeOnly=false&isTechnicalTask=false&"
+                                                   on-select="ctrl.handleLookupSelection('Tache', item);"
+                                                   on-delete="ctrl.handleLookupDeletion('Tache');"
+                                                   placeholder="{{ctrl.resources.Global_ReferentielTache_Placeholder}}"
+                                                   tooltip="ctrl.filter.Tache.CodeLibelle"
+                                                   class="formulaire long"
+                                                   disabled-tooltip="{{ctrl.resources.Reception_SelectACi}}"
+                                                   ng-disabled="!ctrl.filter.CI"
+                                                   custom-template-url="~/Scripts/directive/Lookup/custom-templates/tache.template.html">
+                                </lookup-standalone>
+                            </div>
+                        </div>
+                        <section-title data-toggle="collapse" data-target="#section1">Dates</section-title>
+                        <section-content class="collapse in" id="section1">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="" class="control-label">Date création début</label>
+                                    <app-date-picker id="DateFrom"
+                                                     format="DD/MM/YYYY"
+                                                     lang="fr"
+                                                     initial-date="{{ctrl.filter.DefaultDateDepenseFrom}}"
+                                                     placeholder="Date création début"
+                                                     max-date="{{ctrl.filter.DateTo}}"
+                                                     ng-model="ctrl.filter.DateFrom"
+                                                     name="DateFrom"
+                                                     on-change="ctrl.handleFilterSelection('dateCreationDebut')">
+                                    </app-date-picker>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="" class="control-label">Date création fin</label>
+                                    <app-date-picker id="DateTo"
+                                                     format="DD/MM/YYYY"
+                                                     lang="fr"
+                                                     initial-date="{{ctrl.filter.DefaultDateDepenseFrom}}"
+                                                     placeholder="Date création fin"
+                                                     min-date="{{ctrl.filter.DateFrom}}"
+                                                     ng-model="ctrl.filter.DateTo"
+                                                     name="DateTo"
+                                                     on-change="ctrl.handleFilterSelection('dateCreationFin')">
+                                    </app-date-picker>
+                                </div>
+                            </div>
+                            <div class="row row-lookup">
+                                <div class="col-sm-4 lb_l">
+                                    <label class="control-label">{{ctrl.resources.Reception_Search_AuteurCreation}}</label>
+                                </div>
+                                <div class="col-sm-8 lbl_r ">
+                                    <lookup-standalone ng-model="ctrl.filter.AuteurCreation"
+                                                       text="ctrl.filter.AuteurCreation.LibelleLong"
+                                                       search-title="{{ctrl.resources.Global_ReferentielPersonnel}}"
+                                                       search-placeholder="{{ctrl.resources.Reception_Index_Nom_Placeholder}}"
+                                                       search-placeholder2="{{ctrl.resources.Reception_Index_Prenom_Placeholder}}"
+                                                       search-placeholder3="{{ctrl.resources.Reception_Index_Autre_Information_Placeholder}}"
+                                                       active-second-search-input="true"
+                                                       active-third-search-input="true"
+                                                       url="/api/Personnel/SearchLight/?societeId={{$ctrl.filter.CI.SocieteId}}&onlyUtilisateur=true&"
+                                                       on-select="ctrl.handleLookupSelection('AuteurCreation', item);"
+                                                       on-delete="ctrl.handleLookupDeletion('AuteurCreation');"
+                                                       placeholder="Sélectionner un Utilisateur"
+                                                       tooltip="ctrl.filter.AuteurCreation.NomPrenom"
+                                                       class="formulaire long">
+                                    </lookup-standalone>
+                                </div>
+                            </div>
+                        </section-content>
+
+                        <section-title data-toggle="collapse" data-target="#section3">Autres critères</section-title>
+                        <section-content class="collapse in" id="section3">
+
+                            <div class="row">
+                                <div class="selection_filters">
+                                    <div class="col-sm-4 lbl_l">
+                                        <label class="control-label lbl_txt">Types de commande</label>
+                                    </div>
+                                    <div class="col-sm-8 no-pad">
+                                        <span class="filter-types" ng-class="{'active': ctrl.filter.TypeCodes.indexOf(ctrl.typeCodes.fourniture) > -1}" ng-click="ctrl.handleFilterSelection('fourniture')">Fourniture</span>
+                                        <span class="filter-types" ng-class="{'active': ctrl.filter.TypeCodes.indexOf(ctrl.typeCodes.prestation) > -1 }" ng-click="ctrl.handleFilterSelection('prestation')">Prestation</span>
+                                        <span class="filter-types" ng-class="{'active': ctrl.filter.TypeCodes.indexOf(ctrl.typeCodes.location) > -1 }" ng-click="ctrl.handleFilterSelection('location')">Location</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="selection_filters">
+                                    <div class="pull-left">
+                                        <label class="switch">
+                                            <input type="checkbox"
+                                                   ng-model="ctrl.filter.IsAbonnement"
+                                                   name="cbIsAbonnement"
+                                                   id="cbIsAbonnement"
+                                                   ng-change="ctrl.handleFilterSelection('onlyAbonnement')">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <label class="lbl">Seulement les commandes Abonnement</label>
+                                </div>
+                            </div>
+                            <fred-authorization key="{{ctrl.permissionKeys.AffichageCheckboxMaterielAPointer}}">
+                                <div class="row">
+                                    <div class="selection_filters">
+                                        <div class="pull-left">
+                                            <label class="switch">
+                                                <input type="checkbox" ng-model="ctrl.filter.IsMaterielAPointer" name="cbIsMaterielAPointer" id="cbIsMaterielAPointer" ng-change="ctrl.handleFilterSelection('onlyMaterielAPointer')">
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                        <label class="lbl">Seulement les commandes Matériels à pointer</label>
+                                    </div>
+                                </div>
+                            </fred-authorization>
+                            <fred-authorization key="{{ctrl.permissionKeys.AffichageBoutonValidationCommandeEnergie}}">
+                                <div class="row">
+                                    <div class="selection_filters">
+                                        <div class="pull-left">
+                                            <label class="switch">
+                                                <input type="checkbox" ng-model="ctrl.filter.IsEnergie" name="cbIsEnergie" id="cbIsEnergie" ng-change="ctrl.handleFilterSelection('onlyEnergie')">
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                        <label class="lbl">Seulement les commandes Energies</label>
+                                    </div>
+                                </div>
+                            </fred-authorization>
+                            <div class="row"
+                                    ng-show="ctrl.canShowFilterOnlyCommandeLigneLocked()">
+                                <div class="selection_filters">
+                                    <div class="pull-left">
+                                        <label class="switch">
+                                            <input type="checkbox"
+                                                    ng-model="ctrl.filter.OnlyCommandeWithAtLeastOneCommandeLigneLocked"
+                                                    name="chkOnlyReceptionsVerrouillees"
+                                                    id="chkOnlyReceptionsVerrouillees"
+                                                    ng-change="ctrl.handleFilterSelection('OnlyCommandeWithAtLeastOneCommandeLigneLocked')">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <label class="lbl">{{ctrl.resources.Reception_Index_OnlyReceptionsVerrouillees}}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="selection_filters">
+                                    <div class="pull-left">
+                                        <label class="switch">
+                                            <input type="checkbox" ng-model="ctrl.filter.IsSoldee"
+                                                    name="chkFiltreAvecSoldee"
+                                                    id="chkFiltreAvecSoldee"
+                                                    ng-change="ctrl.handleFilterSelection('soldee')">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <label class="lbl">{{ctrl.resources.Reception_Index_Search_CommandesSoldees}}</label>
+                                </div>
+                            </div>
+                        </section-content>
+                    </div>
+                </main>
+                <!-- Footer -->
+                <footer ng-click="status=false;">
+                    <!--BEGIN : Bouton Start-->
+                    <action>
+                        <button type="button" class="fred-button primary" ng-click="ctrl.handleReload(true)">{{ctrl.resources.Global_Filtre_Bouton_Appliquer}}</button>
+                        <button type="button" class="fred-button cancel" ng-click="ctrl.handleCancelFilter()"> {{ctrl.resources.Global_Bouton_Annuler}} </button>
+                    </action>
+                    <!--END : Bouton Start-->
+                    <close>
+                        <icon /><label>Refermer le panneau</label>
+                    </close>
+                </footer>
+            </fred-side>
+        </fred-section>
+        <!-- Sélectionner un CI -->
+        <fred-section class="picklist-ci-section">
+            <fred-section-title>Centre d'Imputation</fred-section-title>
+            <fred-section-controls>
+                <div style="width: 100%">
+                    <lookup-standalone ng-model="ctrl.filter.CI"
+                                       text="ctrl.filter.CI.CodeLibelle"
+                                       search-title="{{ctrl.resources.Global_ReferentielCI}}"
+                                       search-placeholder="{{ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                       custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                       on-click="ctrl.handleShowLookup('CI');"
+                                       on-select="ctrl.handleLookupSelection('CI', item, true);"
+                                       on-delete="ctrl.handleLookupDeletion('CI', true);"
+                                       placeholder="{{ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                       tooltip="ctrl.filter.CI.CodeLibelle"
+                                       class="formulaire long">
+                    </lookup-standalone>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+        <!-- Sélectionner un Fournisseur -->
+        <fred-section class="picklist-fournisseur-section">
+            <fred-section-title>Fournisseur</fred-section-title>
+            <fred-section-controls>
+                <div style="width: 100%">
+                    <input-select is-selected="ctrl.filter.AgenceId || ctrl.filter.FournisseurId"
+                                  is-editable="false"
+                                  placeholder="ctrl.resources.Global_ReferentielFournisseur_Placeholder"
+                                  on-select="ctrl.handleShowPicklistFournisseurAgenceWithReload()"
+                                  on-delete="ctrl.handleClearAgenceAndFournisseurWithReload()"
+                                  text="ctrl.filter.AgenceId ? ctrl.filter.Agence.CodeLibelle : ctrl.filter.Fournisseur.CodeLibelle">
+                    </input-select>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+        <!-- Display -->
+        <fred-section class="display-section">
+            <fred-section-title>Afficher</fred-section-title>
+            <fred-section-controls class="display-controls">
+                <button type="button" class="toogle-btn" ng-class="{'active-com': ctrl.selectedDisplayId === 1}" ng-click="ctrl.handleDisplay('TB_COMMANDE_', null)">Commandes</button>
+                <button type="button" class="toogle-btn" ng-class="{'active-lineCom': ctrl.selectedDisplayId === 2}" ng-click="ctrl.handleDisplay('TB_LIGNE_', null)">Lignes de commande</button>
+                <button type="button" class="toogle-btn" ng-class="{'active-recep': ctrl.selectedDisplayId === 3}" ng-click="ctrl.handleDisplay(null, null)">Réceptions</button>
+            </fred-section-controls>
+        </fred-section>
+        <!--Actions-->
+        <fred-section class="action-section">
+            <fred-section-title>{{ctrl.resources.Reception_Index_Table_Action}}</fred-section-title>
+            <fred-section-controls class="action-controls">
+                <button type="button" class="fred-button default text"
+                        ng-disabled="!ctrl.canOpenReceptionListModal()"
+                        ng-click="ctrl.handleAddReceptionList()">
+                    {{ctrl.resources.Reception_Index_Button_Reception_Lignes_Selection}}
+                </button>
+                <!-- Favori -->
+                <fred-button class="fred-button white-star col-sm-4" type="button" ng-click="ctrl.handleAddFilter2Favoris()" title="{{ctrl.resources.Reception_Index_Button_Favori}}">
+                    <i class="material-icons">star</i>
+                </fred-button>
+            </fred-section-controls>
+        </fred-section>
+
+        <fred-section class="export-section">
+            <fred-section-title>Export</fred-section-title>
+            <fred-section-controls>
+                <!--Export Excel-->
+                <button type="button" class="btn button-excel" ng-disabled="ctrl.data.length === 0 "
+                        ng-click="ctrl.handleExtractExcel()" title="{{ctrl.resources.Global_Bouton_ExportExcel_Tooltip}}">
+                </button>
+            </fred-section-controls>
+        </fred-section>
+    </fred-toolbar>
+    <!--START : Barre de recherche + Barre d'outils-->
+    <!-- BEGIN : RESULTS-->
+    <div id="reception-list" fred-resize onwheeldown="ctrl.actionLoadMore()">
+        <div ng-repeat="commande in ctrl.data">
+            <!-- BEGIN : LISTE COMMANDES-->
+            <table class="table table-hover">
+                <tbody>
+                    <tr class="bkg-light-1" title="{{ctrl.resources.Reception_Index_TableNiv1_Commande}}">
+                        <td class="tab1col1 level1">
+                            <div class="icons-group">
+                                <div class="chbox">
+                                    <input type="checkbox"
+                                           id="chbx_cmd_{{commande.CommandeId}}"
+                                           ng-disabled="!ctrl.canSelectCommande(commande)"
+                                           ng-model="commande.isSelected"
+                                           ng-change="ctrl.handleSelectCommande(commande)">
+                                    <label for="chbx_cmd_{{commande.CommandeId}}"><span></span></label>
+                                </div>
+                                <div ng-click="ctrl.handleCollapse('#TB_COMMANDE_'+commande.CommandeId)"
+                                     class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-target="#TB_COMMANDE_{{commande.CommandeId}}"
+                                     ng-show="commande.Lignes && commande.Lignes.length > 0">
+                                </div>
+                            </div>
+                        </td>
+                        <td class="tab1col2">
+                            <span class="icon-level1">
+                                <span class="sapicon-E11A"></span>
+                            </span>
+                            <span class="icon-level1 cmd-pj-icon" ng-show="commande.PiecesJointesCommande.length > 0"
+                                  ng-click="ctrl.handleDownloadAllAttachmentsCommande($index)"
+                                  title="Cliquer pour télécharger la pièce jointe de la commande">
+                                <span class="material-icons">attach_file</span>
+                            </span>
+                            <a class="external-link" href="/Commande/Commande/Detail/{{commande.CommandeId}}/false"
+                               target="_blank">
+                                <span class="material-icons open-icon"
+                                      title="{{ctrl.resources.Reception_Index_TableNiv1_Open_Order}}">reply</span>
+                            </a>
+                            <fred-val>{{commande.NumeroCommandeExterne === null || commande.NumeroCommandeExterne === '' ?  commande.Numero : commande.NumeroCommandeExterne}} - {{commande.Libelle}}</fred-val>
+                        </td>
+                        <td class="tab1col3">
+                            <fred-val>{{commande.CI.CodeLibelle}}</fred-val>
+                        </td>
+                        <td class="tab1col4">
+                            <fred-val>
+                                {{commande.Fournisseur.CodeLibelle}}
+                                <span class="sapicon-E0CB abo-icon pull-right" ng-show="commande.IsAbonnement" title="Commande abonnement"></span>
+                                <span class="ico-materielExterne pull-right" ng-show="commande.IsMaterielAPointer" title="Commande Matériels à pointer"></span>
+                                <span class="sapicon-E024 abo-icon pull-right" ng-show="commande.IsEnergie" title="Commande Energies"></span>
+                            </fred-val>
+                        </td>
+                        <td class="tab1col5 border-left border-right  spec-quantity">
+                            <fred-val>{{commande.PourcentageReceptionne | number:2}}%</fred-val>
+                        </td>
+                        <td class="tab1col6"></td>
+                        <td class="tab1col7">
+                            <div class="amounts">
+                                <fred-val>{{commande.MontantHT | number:2}}</fred-val>
+                            </div>
+                            <div class="devises">
+                                <fred-val>{{commande.Devise.Symbole}}</fred-val>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- END : LISTE COMMANDES-->
+            <!-- BEGIN : LISTE LIGNE COMMANDES-->
+            <div id="TB_COMMANDE_{{commande.CommandeId}}"
+                 class="collapse in"
+                 aria-expanded="false">
+                <div ng-repeat="cmdLigne in commande.Lignes | orderBy:'+CommandeLigneId'"
+                     ng-if="ctrl.getIfCommandeLigneIsVisible(cmdLigne)"
+                     ng-class="{'commande-ligne' : cmdLigne.IsCommande, 'avenant-ligne' : cmdLigne.IsAvenantValide}">
+                    <table class="table">
+                        <tbody>
+                            <tr class="bkg-light-2" title="{{ctrl.resources.Reception_Index_Ligne_Commande}}">
+                                <td class="tab2col1 level2 trees">
+                                    <div class="icons-group">
+                                        <div class="chbox"
+                                             ng-if="cmdLigne.IsReceptionnable">
+                                            <input type="checkbox"
+                                                   ng-model="cmdLigne.isSelected"
+                                                   ng-disabled="!ctrl.canSelectCommandeLigne(cmdLigne)"
+                                                   id="chbx_cmdLigne_{{cmdLigne.CommandeLigneId}}"
+                                                   ng-change="ctrl.handleSelectCommandeLigne(commande, cmdLigne)">
+                                            <label for="chbx_cmdLigne_{{cmdLigne.CommandeLigneId}}"><span></span></label>
+                                        </div>
+                                        <div ng-click="ctrl.handleCollapse('#TB_LIGNE_'+cmdLigne.CommandeLigneId)"
+                                             ng-if="cmdLigne.IsReceptionnable && cmdLigne.DepensesReception && cmdLigne.DepensesReception.length > 0"
+                                             class="accordion-toggle collapsed"
+                                             data-toggle="collapse"
+                                             data-parent="#accordion"
+                                             data-target="#TB_LIGNE_{{cmdLigne.CommandeLigneId}}">
+                                        </div>
+                                        <commande-ligne-verrou-component commande-ligne="cmdLigne"></commande-ligne-verrou-component>
+                                    </div>
+                                </td>
+                                <td class="tab2col2">
+                                    <span class="icon-level2">
+                                        <span class="sapicon-E048"></span>
+                                    </span>
+                                    <fred-val>{{cmdLigne.Libelle}}</fred-val>
+                                </td>
+                                <td class="tab2col3" ng-if="cmdLigne.IsAvenantValide">
+                                    <fred-val>{{cmdLigne.AvenantLigne.Avenant.NumeroAvenant}}</fred-val>
+                                </td>
+                                <td class="tab2col4" ng-if="cmdLigne.IsAvenantValide">
+                                    <fred-val>{{cmdLigne.AvenantLigne.Avenant.DateValidation | date:'dd/MM/yyyy'}}</fred-val>
+                                </td>
+                                <td class="tab2col3" ng-if="cmdLigne.IsCommande"></td>
+                                <td class="tab2col4" ng-if="cmdLigne.IsCommande"></td>
+                                <td class="tab2col5">
+                                    <fred-val>{{cmdLigne.Ressource.CodeLibelle}}</fred-val>
+                                </td>
+                                <td class="tab2col6">
+                                    <fred-val class="wrap-text" title="{{cmdLigne.Tache.CodeLibelle}}">{{cmdLigne.Tache.CodeLibelle}}</fred-val>
+                                </td>
+                                <td class="tab2col7 border-left spec-quantity">
+                                    <fred-val>{{cmdLigne.Unite.Code}}</fred-val>
+                                </td>
+                                <td class="tab2col8  spec-quantity">
+                                    <fred-val>{{cmdLigne.PUHT}}</fred-val>
+                                </td>
+                                <td class="tab2col9 border-right spec-quantity">
+                                    <div ng-if="cmdLigne.AvenantLigne.IsDiminution">
+                                        <fred-val ng-if="cmdLigne.IsReceptionnable"
+                                                  class="wrap-text"
+                                                  title="{{cmdLigne.QuantiteReceptionnee}} / -{{cmdLigne.Quantite}}">
+                                            {{cmdLigne.QuantiteReceptionnee}} / -{{cmdLigne.Quantite}}
+                                        </fred-val>
+                                    </div>
+                                  
+                                    <div ng-if="!cmdLigne.AvenantLigne.IsDiminution">
+                                        <fred-val ng-if="cmdLigne.IsReceptionnable"
+                                                  class="wrap-text"
+                                                  title="{{cmdLigne.QuantiteReceptionnee}} / {{cmdLigne.Quantite}}">
+                                            {{cmdLigne.QuantiteReceptionnee}} / {{cmdLigne.Quantite}}
+                                        </fred-val>
+                                    </div>
+                                    <fred-val ng-if="!cmdLigne.IsReceptionnable"
+                                              class="wrap-text" title="{{cmdLigne.Quantite}}">
+                                        {{cmdLigne.Quantite}}
+                                    </fred-val>
+                                </td>
+                                <td class="tab2col10">
+                                    <button type="button"
+                                            ng-if="cmdLigne.IsReceptionnable"
+                                            class="btn btn-default add_More"
+                                            ng-disabled="ctrl.getIfCommandeLigneAddButtonIsDisabled(cmdLigne, reception)"
+                                            ng-click="$event.stopPropagation(); ctrl.handleAddReceptionAsync(commande, cmdLigne)"
+                                            title="{{ctrl.resources.Reception_Index_Add_New_Reception}}">
+                                        <span class="material-icons">add</span>
+                                    </button>
+                                </td>
+                                <td class="tab2col11">
+                                    <fred-val>{{cmdLigne.MontantHT  | number:2}}</fred-val>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- END : LISTE LIGNE COMMANDES-->
+                    <!-- BEGIN : LISTE RECEPTION-->
+                    <div id="TB_LIGNE_{{cmdLigne.CommandeLigneId}}" class="collapse" aria-expanded="false">
+                        <table class="table">
+                            <tbody>
+                                <tr class="bkg-light-3" ng-repeat="reception in cmdLigne.DepensesReception">
+                                    <td class="tab3col1 level3 trees"></td>
+                                    <td class="tab3col2">
+                                        <span class="icon-level3">
+                                            <span class="sapicon-E0B3"></span>
+                                        </span>
+                                        <span class="icon-level3 rcpt-pj-icon" ng-show="reception.PiecesJointesReception.length > 0" ng-click="ctrl.handleDownloadAllAttachmentsReception($parent.$parent.$parent.$index,$parent.$parent.$index,$index)" title="Cliquer pour télécharger la pièce jointe de la réception">
+                                            <span class="material-icons">attach_file</span>
+                                        </span>
+                                        <fred-val>{{reception.Libelle}}</fred-val>
+                                    </td>
+                                    <td class="tab3col3">
+                                        <fred-val>{{reception.NumeroBL}}</fred-val>
+                                    </td>
+                                    <td class="tab3col4">
+                                        <fred-val>{{reception.Date | date : "dd/MM/yyyy"}}</fred-val>
+                                    </td>
+                                    <td class="tab3col5">
+                                        <fred-val>{{reception.Ressource.CodeLibelle}}</fred-val>
+                                    </td>
+                                    <td class="tab3col6">
+                                        <fred-val class="wrap-text" title="{{reception.Tache.CodeLibelle}}">{{reception.Tache.CodeLibelle}}</fred-val>
+                                    </td>
+                                    <td class="tab3col7  border-left spec-quantity"></td>
+                                    <td class="tab3col8  spec-quantity"></td>
+                                    <td class="tab3col9  border-right  spec-quantity">
+                                        <fred-val>{{reception.Quantite}}</fred-val>
+                                    </td>
+                                    <td class="tab3col10">
+                                        <button type="button" class="btn btn-default add_More"
+                                                ng-click="ctrl.handleUpdateReceptionAsync(commande, cmdLigne, reception)"
+                                                ng-disabled="ctrl.getIfReceptionUpdateButtonsIsDisabled(cmdLigne, reception)"
+                                                title="{{ctrl.resources.Reception_Index_TableNiv3_Modification_Tooltip }}">
+                                            <span class="icon-menu material-icons">more_vert</span>
+                                        </button>
+                                        <button type="button" class="btn btn-default add_More"
+                                                ng-click="ctrl.handleDeleteReception(cmdLigne, reception, $index)"
+                                                ng-disabled="ctrl.getIfReceptionDeleteButtonsIsDisabled(cmdLigne, reception)"
+                                                title="{{ctrl.resources.Reception_Index_TableNiv3_Suppression_Tooltip}}">
+                                            <span class="material-icons">clear</span>
+                                        </button>
+                                        <button type="button" class="btn btn-default add_More"
+                                                ng-click="ctrl.handleDuplicateReceptionAsync(commande, cmdLigne, reception)"
+                                                ng-disabled="ctrl.getIfReceptionDuplicateButtonsIsDisabled(cmdLigne)"
+                                                title="{{ctrl.resources.Reception_Index_TableNiv3_Duplication_Tooltip}}">
+                                            <span class="material-icons">content_copy</span>
+                                        </button>
+                                    </td>
+                                    <td class="tab3col11">
+                                        <fred-val>{{reception.MontantHT | number:2}}</fred-val>
+                                    </td>
+                                    <td class="tab3col12 bkg-light-3">
+                                        <span class="fa fa-lock" ng-show="reception.DateVisaReception" title="Visée"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- END : LISTE RECEPTION-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <lookup-panel-fournisseur-agence on-item-selected="ctrl.handleSelectFournisseurAgence(fournisseur,agence)"
+                                     current-fournisseur="ctrl.filter.Fournisseur"
+                                     current-agence="ctrl.filter.Agence"
+                                     current-ci="ctrl.filter.CiId"
+                                     with-commande-valide="true">
+    </lookup-panel-fournisseur-agence>
+    <lookup-panel-fournisseur-agence on-item-selected="ctrl.handleSelectFournisseurAgenceWithReload(fournisseur,agence)"
+                                     show-event-name="showDualPicklistWithReload"
+                                     current-fournisseur="ctrl.filter.Fournisseur"
+                                     current-agence="ctrl.filter.Agence"
+                                     current-ci="ctrl.filter.CiId"
+                                     with-commande-valide="true">
+    </lookup-panel-fournisseur-agence>
+    <!-- END : RESULTS-->
+</div>

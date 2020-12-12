@@ -1,0 +1,85 @@
+﻿<!--BEGIN : Titre du module-->
+
+<div class="row search-container">
+
+    <div class="row bloc-cont">
+
+        <div class="col-md-3 col-sm-3">
+            <div class="rapp-chant" ng-show="$ctrl.selectedLotPointage">
+                <button type="button" class="btn btn-rapp"
+                        ng-class="{active: $ctrl.selectedTypeControle === $ctrl.typeControle.ControleChantier }"
+                        ng-click="$ctrl.handleControlePointageSelection($ctrl.typeControle.ControleChantier)">
+                    {{ $ctrl.resources.VPWeb_Chantier}}
+                </button>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-3">
+            <div class="rapp-vrac" ng-show="$ctrl.selectedLotPointage">
+                <button type="button" class="btn btn-rapp"
+                        ng-class="{active: $ctrl.selectedTypeControle === $ctrl.typeControle.ControleVrac }"
+                        ng-click="$ctrl.handleControlePointageSelection($ctrl.typeControle.ControleVrac)">
+                    {{ $ctrl.resources.VPWeb_Vrac}}
+                </button>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-4">
+            <div class="input-group">
+                <input type="text" placeholder="{{$ctrl.resources.Global_ReferentielPersonnel_Placeholder}}" class="form-control" ng-model="$ctrl.searchText" ng-change="$ctrl.handleSearch()" ng-model-options="{ debounce : 500 }">
+                <span class="input-group-addon button-search">
+                    <span class="material-icons" ng-click="$ctrl.handleSearch()">search</span>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-2 col-sm-2 no_pad_l" ng-show="$ctrl.selectedLotPointage">
+            <div class="pull-right error-message" ng-show="$ctrl.erreurCount > 0">
+                <span class="error-text">{{ $ctrl.erreurCount }} {{ $ctrl.resources.VPWeb_Erreurs}}</span>
+                <span class="material-icons">warning</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!--END : Titre du module-->
+
+<div id="personnel-erreur-list" class="fred-scroll" style="height: calc(100vh - 320px)">
+
+    <p ng-show="$ctrl.selectedLotPointage && $ctrl.selectedControle === null" class="empty-list-message">{{ $ctrl.resources.VPWeb_ControleJamaisExecute }}</p>
+    <p ng-show="$ctrl.selectedLotPointage && $ctrl.selectedControle && $ctrl.controlePointageErreurList.length === 0" class="empty-list-message">{{ $ctrl.resources.VPWeb_AucuneErreur }}</p>
+
+    <!-- TABLEAU DES ERREURS DE CONTROLE POINTAGE -->
+    <div class="row" ng-repeat="item in $ctrl.controlePointageErreurList">
+        <div class="list-content">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no_padding">
+
+                <!--BEGIN : Détail des lignes-->
+                <div class="row ligne">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 no_padding">
+                        <fred-val class="manager manager-controls" ng-show="item.PersonnelId !== 0">{{ item.Personnel.MatriculePrenomNom }} ({{ item.Personnel.EtablissementPaie.Code }})</fred-val>
+                        <fred-val class="manager manager-controls" ng-show="item.PersonnelId === 0">{{ item.Personnel.Nom }}</fred-val>
+                        <span ng-repeat="error in item.Erreurs | orderBy : '-DateRapport' : true" class="error-reason">
+                            <span class="gras" ng-show="!error.DateRapportPeriode">{{ error.DateRapport | date:'dd/MM/yyyy' }}</span>
+                            <span class="gras" ng-show="error.DateRapportPeriode">{{ error.DateRapportPeriode | date:'MM/yyyy' }}</span>
+                            : {{ error.Message }}
+                        </span>
+                    </div>
+
+                    <!--Icone Alerte Erreur-->
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                        <div ng-show="item.Erreurs.length > 0">
+                            <span class="error-text-alert">{{ item.Erreurs.length }}</span>
+                            <span class="material-icons red-alert" aria-hidden="true">announcement</span>
+                        </div>
+                    </div>
+
+                    <!--Bouton Détail Lignes du rapport-->
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                        <a ng-show="item.PersonnelId !== 0" href="/PointagePersonnel/PointagePersonnel/Index/{{ item.Personnel.PersonnelId }}/{{ $ctrl.period }}" class="chevron-droit"><span class="material-icons" title="{{ $ctrl.resources.VPWeb_VoirDetailRapportTooltip }}">chevron_right</span></a>
+                    </div>
+                </div>
+                <!--END : Détail des lignes-->
+            </div>
+        </div>
+    </div>
+</div>

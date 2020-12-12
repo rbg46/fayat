@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A0ACFD5F-F48B-4836-9250-D46973C22F0F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fred.Business.ExternalService</RootNamespace>
+    <AssemblyName>Fred.Business.ExternalService</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>fred.business.externalservice.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>fred.business.externalservice.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'SpeedDebug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\SpeedDebug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>fred.business.externalservice.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CommonServiceLocator.2.0.4\lib\net46\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentValidation.8.5.0\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NLog.4.6.7\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ComponentModel.Annotations.4.6.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ci\CiManagerExterne.cs" />
+    <Compile Include="Ci\ICiManagerExterne.cs" />
+    <Compile Include="CommandeLigne\CommandeLigneManagerExterne.cs" />
+    <Compile Include="CommandeLigne\ICommandeLigneManagerExterne.cs" />
+    <Compile Include="Commande\CommandeEnergieManagerExterne.cs" />
+    <Compile Include="Commande\ICommandeEnergieManagerExterne.cs" />
+    <Compile Include="Materiel\MaterielManagerExterne.cs" />
+    <Compile Include="Materiel\IMaterielManagerExterne.cs" />
+    <Compile Include="Moyen\MoyenManagerExterne.cs" />
+    <Compile Include="Moyen\IMoyenManagerExterne.cs" />
+    <Compile Include="Notification\INotificationManagerExterne.cs" />
+    <Compile Include="Notification\NotificationManagerExterne.cs" />
+    <Compile Include="Personnel\PersonnelManagerExterne.cs" />
+    <Compile Include="Personnel\IPersonnelManagerExterne.cs" />
+    <Compile Include="Rapport\IRapportManagerExterne.cs" />
+    <Compile Include="Rapport\RapportManagerExterne.cs" />
+    <Compile Include="Reception\ReceptionManagerExterne.cs" />
+    <Compile Include="Reception\IReceptionManagerExterne.cs" />
+    <Compile Include="Common\IManagerExterne.cs" />
+    <Compile Include="Fournisseur\FournisseurManagerExterne.cs" />
+    <Compile Include="Fournisseur\IFournisseurManagerExterne.cs" />
+    <Compile Include="Commande\CommandeManagerExterne.cs" />
+    <Compile Include="Commande\ICommandeManagerExterne.cs" />
+    <Compile Include="EcritureComptable\EcritureComptableManagerExterne.cs" />
+    <Compile Include="EcritureComptable\IEcritureComptableManagerExterne.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidationPointage\IValidationPointageManagerExterne.cs" />
+    <Compile Include="ValidationPointage\ValidationPointageManagerExterne.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\GroupSpecific\Fred.GroupSpecific.Infrastructure\Fred.GroupSpecific.Infrastructure.csproj">
+      <Project>{1D92BA5A-088D-490F-B4BF-A651DE44D4F3}</Project>
+      <Name>Fred.GroupSpecific.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.Business\Fred.Business.csproj">
+      <Project>{039e00b1-5f56-484c-82ba-5855684a1bbc}</Project>
+      <Name>Fred.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.DataAccess.ExternalService\Fred.DataAccess.ExternalService.csproj">
+      <Project>{17451402-6778-4A17-8DB1-542D50DB8C94}</Project>
+      <Name>Fred.DataAccess.ExternalService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.Entities\Fred.Entities.csproj">
+      <Project>{D84768F7-F096-4E6D-997E-AC1D9232B47A}</Project>
+      <Name>Fred.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.Framework\Fred.Framework.csproj">
+      <Project>{92478535-02C7-44E0-975E-E31D77E78CCA}</Project>
+      <Name>Fred.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.Web.Shared\Fred.Web.Shared.csproj">
+      <Project>{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}</Project>
+      <Name>Fred.Web.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\Fred.Analysis\LogicalWebArchitecture.layerdiagram">
+      <Link>LogicalWebArchitecture.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
+    <AdditionalFiles Include="..\Fred.Analysis\LogicalFredIEArchitecture.layerdiagram">
+      <Link>LogicalFredIEArchitecture.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
+    <None Include="app.config" />
+    <None Include="Fred.Business.ExternalService.ruleset">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.10.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
+    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.10.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\Google.Protobuf.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\SonarAnalyzer.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,254 @@
+﻿/*Couleurs*/
+/*Toolbar*/
+fred-toolbar .picklist-ci-section {
+    width: 45%;
+}
+
+fred-toolbar .picklist-ci-section .search-bloc {
+    width: 100%;
+}
+
+fred-toolbar .picklist-ci-section button {
+    height: 30px;
+    font-size: 11px;
+    margin-top: 0;
+    margin-left: auto;
+}
+
+fred-toolbar .export-section {
+    margin-left: 1%;
+    width: 3%;
+}
+
+fred-toolbar .export-section fred-section-controls {
+    justify-content: center;
+}
+
+fred-toolbar .export-section fred-section-controls button {
+    margin-right: 0;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    fred-toolbar .export-section fred-section-controls .button-excel {
+        width: 25px;
+        height: 25px;
+        margin-right: 0;
+    }
+}
+
+.information {
+    padding-top: 45px;
+}
+
+.information .icon {
+    text-align: right;
+}
+
+.information .icon .flaticon-warning {
+    font-size: 60px;
+    font-style: normal;
+    text-align: right;
+}
+
+.search-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 0 !important;
+}
+
+.search-container .input-group.input-search {
+    width: 30%;
+}
+
+.search-container .fold {
+    display: flex;
+    margin-left: auto;
+}
+
+.search-container .fold button {
+    height: 30px;
+    font-size: 11px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+}
+
+.spec-res-body {
+    height: calc(100vh - 350px);
+}
+
+.spec-res-body #accordion .panel {
+    webkit-box-shadow: none;
+    border-radius: 0;
+    border-width: 0;
+    box-shadow: none;
+    margin-bottom: -5px;
+}
+
+.spec-res-body #accordion .panel .panel-heading {
+    font-size: 11px;
+    background-color: #fff;
+    border-top: 1px solid #dddddd;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-width: 0;
+    padding: 10px 6px;
+}
+
+.spec-res-body #accordion .panel .panel-heading .accordion-toggle:after {
+    color: #67757f;
+    content: "\f078";
+    float: left;
+    font-family: 'FontAwesome';
+}
+
+.spec-res-body #accordion .panel .panel-heading .accordion-toggle.collapsed:after {
+    color: #67757f;
+    content: "\f054";
+}
+
+.spec-res-body #accordion .panel .panel-heading.level1 {
+    background-color: rgba(14, 134, 169, 0.05);
+    color: #333333;
+}
+
+.spec-res-body #accordion .panel .panel-heading.level2 {
+    background-color: rgba(14, 134, 169, 0.05);
+    color: #333333;
+}
+
+.spec-res-body #accordion .panel .panel-heading .t-first {
+    width: 100%;
+}
+
+.spec-res-body #accordion .panel .panel-body {
+    border: none;
+    padding: 0;
+}
+
+.spec-res-body #accordion .panel .panel-body .t-third td {
+    padding: 0 0 0 6px;
+}
+
+.spec-res-body #accordion table {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.spec-res-body #accordion table .inline-header {
+    color: #67757f;
+    font-size: 10px !important;
+    font-style: normal;
+    margin: 0 0 -2px;
+}
+
+.spec-res-body #accordion table .inline-description {
+    margin: 0;
+    font-size: 11px !important;
+}
+
+.spec-res-body #accordion table .badge-notify {
+    background: none;
+    color: #ffa90d;
+    margin-right: 10px;
+    position: relative;
+}
+
+.spec-res-body #accordion table .tile-bloc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spec-res-body #accordion table .tile-bloc .tile {
+    padding: 4px 12px;
+    background-color: red;
+    color: #fff;
+}
+
+.spec-res-body #accordion table .add-res-bloc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spec-res-body #accordion table .add-res-bloc .add-res {
+    font-size: 30px;
+}
+
+.spec-res-body #accordion table .warn-mess {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spec-res-body #accordion table .warn-mess .warn-txt {
+    font-size: 11px !important;
+}
+
+.spec-res-body #accordion table .act-icons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.spec-res-body #accordion table .col1 {
+    width: 5%;
+}
+
+.spec-res-body #accordion table .col2 {
+    width: 7%;
+}
+
+.spec-res-body #accordion table .col3 {
+    width: 25%;
+}
+
+.spec-res-body #accordion table .col4 {
+    width: 25%;
+}
+
+.spec-res-body #accordion table .col5 {
+    width: 25%;
+}
+
+.spec-res-body #accordion table .col6 {
+    width: 13%;
+}
+
+/*Boutons radio*/
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"] + label {
+    font-size: 14px;
+}
+
+input[type="radio"] + label span {
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-block;
+    height: 19px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    width: 19px;
+}
+
+input[type="radio"] + label span {
+    background-color: #fcfcfc;
+    border: 3px #2c77ba solid;
+}
+
+input[type="radio"]:checked + label span {
+    background-color: #1F98C7;
+    border: 3px #78C1DD solid;
+}
+
+input[type="radio"] + label span,
+input[type="radio"]:checked + label span {
+    -moz-transition: background-color 0.4s linear;
+    -o-transition: background-color 0.4s linear;
+    -webkit-transition: background-color 0.4s linear;
+    transition: background-color 0.4s linear;
+}

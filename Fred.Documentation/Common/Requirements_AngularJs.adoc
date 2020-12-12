@@ -1,0 +1,51 @@
+= Recommandations AngularJS
+
+Statut : En cours de rédaction
+
+[cols=",^,>",options="header",]
+|===
+|Date |Auteur |Date
+|18/04/2017 |B.PEYTOUR |Création
+|===
+
+== Chapitre
+
+*Titre de la règle*
+
+Description de règle
+
+Ne pas faire :
+
+[source,csharp]
+----
+throw new Exception("mon message"); // ne pas instancier une exception de type Exception => warning StyleCop/Sonar/Resharper etc...
+----
+
+Mais faire :
+
+[source,csharp]
+----
+throw new FredSocieteRepositoryException("mon message"); 
+----
+
+____
+Tips : +
+* Tips 1 * Tips 2 * Tips 3 * Tips 4
+____
+
+Liste avec des puces : 1. Item 1 2. Item 2 3. Item 3
+
+Exemple de tableau
+
+[cols="<,<,<",options="header",]
+|===
+|Colonne1 |Colonne2 |Colonne3
+|DataA1 |DataA2 |DataA3
+|DataB1 |DataB2 |DataB3
+|DataC1 |DataC2 |DataC3
+|DataD1 |DataD2 |DataD3
+|===
+
+== AntiPattern !
+
+=== Exemple de mauvaise règle

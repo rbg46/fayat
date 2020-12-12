@@ -1,0 +1,131 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+<div id="commande-card" class="fred-scroll" change-height-on-resize='{"size":350,"isActive": true}'>
+  <div id="ci_{{commandesByCI.CI.CiId}}" ng-repeat="commandesByCI in ctrl.listCommandesByCI">
+    <div class="ci-header">
+      <label><span></span>{{commandesByCI.CI.CodeLibelle}}</label>
+    </div>
+    <div id="cmd_{{commande.CommandeId}}" class="cmd-header" ng-repeat="commande in commandesByCI.Commandes" ng-class="{colorBR: commande.isChecked && commande.IsStatutBrouillon,colorAV: commande.isChecked && commande.IsStatutAValider,colorVA: commande.isChecked && commande.IsStatutValidee,colorCL: commande.isChecked && commande.IsStatutCloturee}">
+
+      <label for="chkSelectionCmd_{{commande.CommandeId}}"><span></span></label>
+      <div class="status-separator" ng-class="{colorBR: commande.IsStatutBrouillon,colorAV: commande.IsStatutAValider,colorVA: commande.IsStatutValidee,colorCL: commande.IsStatutCloturee}"></div>
+
+      <div class="cmd-details">
+        <!-- BEGIN : 1er colonne -->
+        <div class="col-md-2 col-sm-4 col-xs-11" ng-click="ctrl.handleClickDetail(commande)" title="{{ctrl.resources.Commande_Index_Table_Detail_Tooltip}}">
+          <p class="title tuile first_col" ng-class="{colorBR: commande.IsStatutBrouillon,colorAV: commande.IsStatutAValider,colorVA: commande.IsStatutValidee,colorCL: commande.IsStatutCloturee}">{{commande.StatutCommande.Libelle}}</p>
+          <p class="ffi">{{commande.NumeroCommandeExterne === null || commande.NumeroCommandeExterne === '' ?  commande.Numero : commande.NumeroCommandeExterne}} {{commandesByCI.isChecked}}</p>
+          <p class="ffi frc">{{commande.Libelle}}</p>
+          <p class="title">{{ctrl.resources.Commande_Index_Table_Demandeur}}</p>
+          <p class="ffi">{{commande.SaisisseurDataGridColumn || 'N/A'}}</p>
+        </div>
+        <!-- END : 1er colonne -->
+        <!-- BEGIN : 2ème colonne -->
+        <div class="col-md-2 col-sm-4 hidden-xs cmd-separator" ng-click="ctrl.handleClickDetail(commande)" title="{{ctrl.resources.Commande_Index_Table_Detail_Tooltip}}">
+          <p class="title">{{ctrl.resources.Commande_Index_Table_CI}}</p>
+          <p class="ffi">{{commande.CI.Code}}</p>
+          <p class="ffi frc">{{commande.CI.Libelle}}</p>
+          <p class="title">{{ctrl.resources.Commande_Index_Table_Fournisseur}}</p>
+          <p class="ffi">{{commande.Fournisseur.Libelle}} ({{commande.Fournisseur.Code}})</p>
+        </div>
+        <!-- END : 2ème colonne -->
+        <!-- BEGIN : 3ème colonne -->
+        <div class="col-md-2 hidden-sm hidden-xs cmd-separator" ng-click="ctrl.handleClickDetail(commande)" title="{{ctrl.resources.Commande_Index_Table_Detail_Tooltip}}">
+          <div class="row" title="{{ctrl.resources.Commande_Index_Table_MontantCommande_Tooltip}}">
+            <div class="title pull-left">{{ctrl.resources.Commande_Index_Table_MontantCommande}}</div>
+            <div class="pull-right">{{commande.MontantHT | number:2}} &nbsp; {{commande.Devise.Symbole}}</div>
+          </div>
+          <div class="row" title="{{ctrl.resources.Commande_Index_Table_MontantReception_Tooltip}}">
+            <div class="title pull-left">{{ctrl.resources.Commande_Index_Table_MontantReception}}</div>
+            <div class="pull-right">{{commande.MontantHTReceptionne | number:2}} &nbsp; {{commande.Devise.Symbole}}</div>
+          </div>
+          <div class="row" title="{{ctrl.resources.Commande_Index_Table_Solde_placeholder}}">
+            <div class="title pull-left">{{ctrl.resources.Commande_Index_Table_Solde}}</div>
+            <div class="pull-right">{{commande.MontantHTSolde | number:2}} &nbsp; {{commande.Devise.Symbole}}</div>
+          </div>
+          <div class="row" title="{{ctrl.resources.Commande_Index_Table_MontantFacture}}">
+            <div class="title pull-left">{{ctrl.resources.Commande_Index_Table_MontantFacture}}</div>
+            <div class="pull-right">{{commande.MontantFacture | number:2}} &nbsp; {{commande.Devise.Symbole}}</div>
+          </div>
+          <div class="row" title="{{ctrl.resources.Commande_Index_Table_RestantAFacturer}}">
+            <div class="title pull-left">{{ctrl.resources.Commande_Index_Table_RestantAFacturer}}</div>
+            <div class="pull-right">{{commande.MontantHTRestantAFacturer | number:2}} &nbsp; {{commande.Devise.Symbole}}</div>
+          </div>
+          
+          <div class="row cmd-progress">
+            <div ng-if="commande.PourcentageReceptionne == 100" class="progress-bar progress-bar-success" role="progressbar"
+                 aria-valuenow="{{commande.PourcentageReceptionne}}" aria-valuemin="0" aria-valuemax="100" style="width:{{commande.PourcentageReceptionne}}%">
+              {{commande.PourcentageReceptionne}}%
+            </div>
+            <div ng-if="commande.PourcentageReceptionne < 100" class="progress-bar " role="progressbar"
+                 aria-valuenow="{{commande.PourcentageReceptionne}}" aria-valuemin="0" aria-valuemax="100" style="width:{{commande.PourcentageReceptionne}}%">
+              {{commande.PourcentageReceptionne}}%
+            </div>
+            <div ng-if="commande.PourcentageReceptionne > 100" class="progress-bar progress-bar-danger" role="progressbar"
+                 aria-valuenow="{{commande.PourcentageReceptionne}}" aria-valuemin="0" aria-valuemax="{{commande.PourcentageReceptionne}}">
+              {{commande.PourcentageReceptionne}}%
+            </div>
+          </div>
+        </div>
+        <!-- END : 3ème colonne -->
+        <!-- BEGIN : 4ème colonne -->
+        <div class="col-md-2 col-sm-1 hidden-sm hidden-xs cmd-separator" ng-click="ctrl.handleClickDetail(commande)" title="{{ctrl.resources.Commande_Index_Table_Detail_Tooltip}}">
+          <p class="title mini">{{ctrl.resources.Commande_Index_Table_DateEmission}}</p>
+          <p class="ffi mini">{{commande.DateCreation | date:'dd/MM/yyyy'}}</p>
+          <p class="title mini">{{ctrl.resources.Commande_Index_Table_Valideur}}</p>
+          <p class="ffi mini">{{commande.ValideurDataGridColumn || 'N/A'}}</p>
+          <p class="title mini">{{ctrl.resources.Commande_Index_Table_Date}}</p>
+          <p class="ffi mini">{{commande.Date | date:'dd/MM/yyyy'}}</p>
+          <p class="title mini" ng-if="commande.DateModification != null">@string.Format(FeatureCommande.Commande_Index_Table_DerniereModification, "{{commande.DateModification | date:'dd/MM/yyyy'}}", "{{commande.AuteurModificationDataGridColumn}}")</p>
+        </div>
+        <!-- END : 4ème colonne -->
+        <!-- BEGIN : 5ème colonne -->
+        <div class="col-md-2 hidden-sm cmd-separator hidden-xs" title="{{ctrl.resources.Commande_Index_Table_Detail_Tooltip}}">
+            <p class="title">{{ctrl.resources.Commande_Index_Table_DateValidation}}</p>
+            <p class="ffi">{{commande.DateValidation | date:'dd/MM/yyyy'}}</p>
+            <br />
+            <div class="checkbox val checkreadOnly" title="{{ctrl.resources.Commande_Index_Table_Rapprochee_ToolTip}}" ng-show="false">
+                <input id="chkRapprochee" type="checkbox" disabled />
+                <label for="chkRapprochee"><span></span>{{ctrl.resources.Commande_Index_Table_Rapprochee}}</label>
+            </div>
+        </div>
+        <!-- END : 5ème colonne -->
+        <!-- BEGIN : 6ème colonne -->
+        <div class="col-md-1 col-sm-3 hidden-xs cmd-separator" ng-click="ctrl.handleClickDetail(commande)" title="{{ctrl.resources.Commande_Index_Table_Detail_Tooltip}}">
+          <div class="desktop">
+            <button class="btn btn-link disabled btn-sm btn-cmd"
+                    type="button"
+                    ng-show="commande.NbReceptions == 0  && !commande.IsStatutCloturee"
+                    title="{{ctrl.resources.Commande_Index_Table_AucuneReception_Tooltip}}">
+              {{ctrl.resources.Commande_Index_Table_Reception}} ({{commande.NbReceptions}})
+            </button>
+            <a ng-href="/Reception/Reception/Search?id={{commande.Numero}}&commandeSoldee=true"
+               class="btn btn-primary btn-sm btn-cmd"
+               ng-show="commande.NbReceptions != 0 && !commande.IsStatutCloturee"
+               title="{{ctrl.resources.Commande_Index_Table_Reception_Tooltip}}">
+              {{ctrl.resources.Commande_Index_Table_Reception}} ({{commande.NbReceptions}})
+            </a>
+
+            <!-- Détail commande-->
+            <button class="btn btn-default btn-sm btn-cmd" type="button" ng-click="$event.stopPropagation(); ctrl.handleClickDetail(commande)" title="{{ctrl.resources.Commande_Index_Table_Detail_Tooltip}}">{{ctrl.resources.Commande_Index_Table_Detail}}</button>
+
+            <!--Clôture de la commande validée-->
+            <button class="btn btn-primary btn-sm btn-cmd" type="button" ng-click="$event.stopPropagation(); ctrl.handleCloturer(commande)" ng-show="commande.IsStatutValidee" title="{{ctrl.resources.Commande_Index_Table_Cloturer_Tooltip}}">{{ctrl.resources.Commande_Index_Table_Cloturer}}</button>
+
+            <div>
+              <span class="title">{{ctrl.resources.Commande_Index_Table_Devise}} </span> <span class="ffi">{{commande.Devise.Symbole}}</span>
+            </div>
+
+          </div>
+
+          <div class="btn-group smartphone">
+            <button class="btn  btn-primary btn-xs">
+              <i class="material-icons" aria-hidden="true" ng-click="ctrl.handleClickDetail(commande)">add_circle_outline</i>
+            </button>
+          </div>
+        </div>
+        <!-- END : 6ème colonne -->
+      </div>
+    </div>
+  </div>
+</div>

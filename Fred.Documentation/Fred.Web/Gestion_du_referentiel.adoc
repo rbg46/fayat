@@ -1,0 +1,84 @@
+﻿= Gestion du référentiel de données
+
+== Définition
+Les données de référence sont des données indispensables au fonctionnement de l'application comme les types d'organisations, les types de commandes etc...  
+Ces données ne font pas partie du schéma sql.  
+Ces données sont insérées en base via des scripts sql.
+
+== Dépôt du référentiel
+Les scripts SQL doivent être à l'emplacement suivant : 
+Fred.Referential/Referential
+
+== Structure : 
+
+Les données sont organisées par environnements :
+
+* 001-Common		  Pour tout le monde
+* 002-Developpement	  Uniquement en local et sur le serveur de dev
+* 003-Recette         Sur tous les serveurs hors production (donc aussi en local et sur le serveur de dev)
+* 004-Production      Uniquement sur les serveurs de production
+  
+
+L'application de ces dossiers passe par le paramètre -Filter du script powershell
+par exemple 
+* En local et sur les serveurs hors prod : -Filter 'Common|Developpement|Recette'
+* Sur les serveurs de prod : -Filter 'Common|Production'
+
+
+== Règles :
+* Ne pas modifier un fichier existant !
+* Au lieu de cela, ajouter un nouveau fichier en :
+** Augmentant l'indice
+** Augmentant le numéro de version
+* Chaque nom de fichier doit être unique
+* Les fichiers doivent être en UTF8 (avec Bom),  c'est obligatoire
+
+== Comment ça marche ?
+
+=== Principe :
+Pour jouer les fichiers, on utilise la librairie DbUp. +  
+Ca fonctionne sur le même principe que les migrations Entity Framework. +
+DbUp crée une table dans la base appelée : dbo._ReferentialHistory. +
+Lorsque l'on demande à DbUp de jouer les scripts, il regarde dans la table si un script a déjà été joué. Si oui, il passe, si non, il le joue et l'ajoute dans la table. +
+Ceci permet de garantir que les scripts sont joués une seule fois.
+
+=== DbUp Extension
+* FileSystemScriptProvider ajoute à DbUp la possibilité de faire une recherche récursive des fichiers dans les sous-répertoires.
+* FileSearchOrder ajoute des fonctionnalités de tri des fichiers pour déterminer l'ordre d'exécution.
+
+
+=== Exécution
+
+==== Sur le poste de dev
+Lancer le script _DeployReferentialLocal.ps1._
+
+==== Sur la pic
+Pendant le déploiement, le même script est utilisé.  
+Pour les TUA, DbUp rejoue tous les scripts sql sur une base vierge dans la build qui exécute les tua.
+
+== How to :
+
+== Ajouter des données de référence
+* Créer un fichier sql dans le dossier Fred.Referencial\Referencial
+** Le nommer correctement
+** Le mettre dans le bon dossier
+* Lancer le script DeployReferentialLocal.ps1 pour vérifier que tout se passe bien
+* Commit => Le script sera joué lors du déploiement par la pic.
+
+
+== Mettre à jour ma base locale :
+Lancer le script _DeployReferentialLocal.ps1._ +
+Seul les nouveaux scripts seront joués.
+
+== Jouer tous les scripts :
+* Supprimer la table dbo_ReferentialHistory 
+* puis lancer le script PowerShell
+
+== Lancer DbUp mais j'ai déjà des données :
+Si les scripts sont joués alors que les données sont déjà présentes, ça va péter. (Les scripts sont prévus pour être exécuté qu'une fois).
+Dans ce cas :  
+
+* Jouer manuellement les scripts qui sont dans le dossier InCaseOfNotEmptyDatabase.
+* Lancer le PowerShell
+* Mettre à jour les scripts du dossier InCaseOfNotEmptyDatabase pour les copains.
+

@@ -1,0 +1,68 @@
+﻿$color_1: #ffffff;
+$background_color_1: #ffffff;
+$background_color_2: #E1E3E5;
+$background_color_3: #67757F;
+$border_color_1: #E1E3E5;
+$border_right_color_1: #E1E3E5;
+$border_bottom_color_1: #67757F;
+$border_left_color_1: #E1E3E5;
+
+
+.tableauFred {
+    font-size: large !important;
+    width: 1450px !important;
+    border-bottom-width: thick !important;
+    border-bottom-color: $border_bottom_color_1 !important;
+    border-bottom-style: outset !important;
+    border-left-style: outset !important;
+    border-left-color: $border_left_color_1 !important;
+    border-left-width: thin !important;
+    border-right-style: outset !important;
+    border-right-color: $border_right_color_1 !important;
+    border-right-width: thin !important;
+
+    tr {
+        &:nth-child(odd) {
+            &:not(:first-child) {
+                &:not(:hover) {
+                    background-color: $background_color_1 !important;
+                }
+            }
+        }
+
+        &:nth-child(even) {
+            &:not(:first-child) {
+                &:not(:hover) {
+                    background-color: $background_color_2 !important;
+                }
+            }
+        }
+
+        &:hover {
+            color: $color_1 !important;
+            background-color: $background_color_3 !important;
+            border-style: inset !important;
+            border-width: thin !important;
+            border-color: $border_color_1 !important;
+            font-weight: normal !important;
+        }
+
+        border-style: inset !important;
+        border-width: thin !important;
+        border-color: $border_color_1 !important;
+        font-weight: normal !important;
+    }
+
+    th {
+        font-size: small !important;
+        font-weight: normal !important;
+    }
+
+    td {
+        padding: 5px !important;
+    }
+}
+
+.entete {
+    position: absolute;
+}

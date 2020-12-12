@@ -1,0 +1,27 @@
+﻿<div class="inputPL lookup-content"
+     title="{{$ctrl.tooltip ? $ctrl.tooltip : $ctrl.text}}">
+    <button class="inputPLSearch"
+            ng-click="$ctrl.click()"
+            ng-class="{'inputPLSearchParent' : $ctrl.styleParent, 'disabled': $ctrl.ngDisabled }"
+            ng-disabled="$ctrl.ngDisabled"
+            type="button">
+        <span class="inputPLLabel placeholder"
+              ng-if="!$ctrl.text && $ctrl.placeholder">{{$ctrl.placeholder}}</span>
+        <span class="inputPLLabel"
+              ng-if="$ctrl.text">{{$ctrl.text}}</span>
+        <i ng-show="!$ctrl.buttonModel"
+           class="chev material-icons">chevron_right</i>
+    </button>
+    <div class="cross-bloc"
+         ng-show="$ctrl.buttonModel">
+        <div class="rm-but">
+            <button class="inputPLRemove inputPLSearchParent"
+                    ng-click="$ctrl.handleDelete($event)"
+                    ng-disabled="$ctrl.ngDisabled"
+                    ng-if="$ctrl.buttonModel != null || $ctrl.buttonModel != undefined"
+                    type="button">
+                <i class="material-icons closing">close</i>
+            </button>
+        </div>
+    </div>
+</div>

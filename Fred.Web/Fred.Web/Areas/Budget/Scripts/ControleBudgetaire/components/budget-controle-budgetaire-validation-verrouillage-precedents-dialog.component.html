@@ -1,0 +1,32 @@
+﻿<div class="modal fade controle-budgetaire-validation-verrouillage-precedents-dialog" id="CONTROLE_BUDGETAIRE_VALIDATION_VERROUILLAGE_PRECEDENTS_DIALOG_ID" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="flaticon flaticon-warning"></i>{{::$ctrl.resources.Global_Information}}</h2>
+                <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{::$ctrl.resources.Global_Bouton_Annuler_Tooltip}}"></i>
+            </div>
+            <div class="modal-body">
+                <b>{{::$ctrl.resources.Budget_ControleBudgetaire_Validation_Verrouillage_Precedents_Message}}</b>
+            </div>
+            <hr>
+            <div class="controle-budgetaire-validation-verrouillage-precedents-dialog-periodes">
+                <div ng-repeat="periode in $ctrl.Periodes" class="controle-budgetaire-validation-verrouillage-precedents-dialog-periode">
+                    {{periode}}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!--Bouton Valider-->
+                <button class="btn btn-default pull-left"
+                        ng-click="$ctrl.Validate()">
+                    {{::$ctrl.resources.Global_Bouton_Valider}}
+                </button>
+
+                <!--Bouton Annuler-->
+                <button class="btn btn-default pull-right"
+                        ng-click="$ctrl.Hide()">
+                    {{::$ctrl.resources.Global_Bouton_Annuler}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

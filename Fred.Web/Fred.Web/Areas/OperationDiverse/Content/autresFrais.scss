@@ -1,0 +1,573 @@
+﻿$color_1: #fff;
+$color_2: rgb(166,172,195);
+$color_3: rgb(127,127,127);
+$color_4: rgb(0,85,160);
+$color_5: rgb(222,63,126);
+$color_6: rgb(216,216,216);
+$color_7: rgb(157,187,97);
+$color_8: rgb(234,112,13);
+$color_9: rgb(49,133,155);
+$color_10: rgb(64,128,184);
+$color_11: rgb(165,165,165);
+$background_color_1: rgb(157,187,97);
+$background_color_2: rgb(64,128,184);
+$background_color_3: rgb(234,112,13);
+$background_color_4: rgb(222,63,126);
+$background_color_5: rgb(242,242,242);
+$background_color_6: rgb(238,247,249);
+$background_color_7: #fff;
+$background_color_8: rgb(192,80,70);
+$border_color_1: rgb(192,80,70);
+
+
+.no-p {
+    padding: 0;
+}
+
+.no-pr {
+    padding-right: 0;
+}
+
+.no-pl {
+    padding-left: 0;
+}
+
+.infobar {
+    display: flex;
+    justify-content: flex-start;
+
+    .period {
+        .lbl {
+            font-size: 11px;
+        }
+
+        .val {
+            font-size: 18px;
+            text-align: right;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .anael {
+        margin-left: 1%;
+        width: 200px;
+        height: 44px;
+        background-color: $background_color_1;
+        color: $color_1;
+        padding-right: 5px;
+        padding-left: 5px;
+        display: flex;
+        align-items: center;
+    }
+
+    .ecarts {
+        .sapicon-E158 {
+            margin-right: 20px;
+
+            &::before {
+                font-size: 25px;
+            }
+        }
+
+        .sapicon-E1A7 {
+            margin-right: 20px;
+
+            &::before {
+                font-size: 25px;
+            }
+        }
+
+        .sapicon-E02F {
+            margin-right: 20px;
+
+            &::before {
+                font-size: 25px;
+            }
+        }
+
+        .material-icons {
+            margin-right: 20px;
+
+            &::before {
+                font-size: 25px;
+            }
+        }
+
+        .amount {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            .txt {
+                text-align: left;
+                font-size: 11px;
+            }
+
+            .data {
+                text-align: right;
+                font-size: 18px;
+            }
+        }
+    }
+
+    .linked {
+        margin-left: 1%;
+        width: 180px;
+        height: 44px;
+        background-color: $background_color_2;
+        color: $color_1;
+        padding-right: 5px;
+        padding-left: 5px;
+        display: flex;
+        align-items: center;
+    }
+
+    .unlinked {
+        margin-left: 1%;
+        width: 180px;
+        height: 44px;
+        background-color: $background_color_3;
+        color: $color_1;
+        padding-right: 5px;
+        padding-left: 5px;
+        display: flex;
+        align-items: center;
+    }
+
+    .to-affect {
+        margin-left: 1%;
+        width: 180px;
+        height: 44px;
+        background-color: $background_color_4;
+        color: $color_1;
+        padding-right: 5px;
+        padding-left: 5px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.autres-frais-lists {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 30px;
+
+    .list {
+        width: 420px;
+        position: relative;
+
+        .list-header {
+            height: 40px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            .action {
+                width: 35px;
+                font-size: 40px;
+                cursor: pointer;
+            }
+
+            .sap {
+                font-size: 25px;
+            }
+
+            .txt {
+                font-size: 15px;
+                margin-left: 15px;
+            }
+        }
+
+        .list-filt {
+            position: relative;
+            width: 420px;
+            background-color: $background_color_5;
+            padding: 7px;
+
+            .tiles {
+                margin-top: 15px;
+
+                .tiles-title {
+                    font-size: 11px;
+                    color: $color_2;
+                }
+            }
+        }
+
+        .ec-compt-list-content {
+            padding: 7px 10px 0 10px;
+            border-bottom: 3px solid rgb(165,165,165);
+
+            .date {
+                font-size: 11px;
+                color: $color_3;
+            }
+
+            .amounts {
+                color: $color_4;
+                display: flex;
+
+                .lbl {
+                    font-size: 15px;
+                    width: 45%;
+                }
+
+                .dollar-sap {
+                    margin-left: 1%;
+                }
+
+                .amount {
+                    margin-left: 5%;
+                }
+
+                .indic {
+                    font-size: 13px;
+                    background-color: $background_color_1;
+                    color: $color_1;
+                    border-radius: 50%;
+                    width: 22px;
+                    height: 22px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-left: auto;
+                }
+            }
+
+            .datas {
+                width: 100%;
+                height: 40px;
+                display: flex;
+                align-items: center;
+
+                .warn {
+                    color: $color_5;
+                    margin-right: 4%;
+                }
+
+                .warn-txt {
+                    color: $color_5;
+                    margin-right: 10%;
+                }
+
+                .next {
+                    font-size: 35px;
+                    color: $color_6;
+                    cursor: pointer;
+                }
+
+                .datas-sap.green {
+                    color: $color_7;
+                }
+
+                .amount.green {
+                    color: $color_7;
+                }
+
+                .datas-sap.orange {
+                    color: $color_8;
+                }
+
+                .amount.orange {
+                    color: $color_8;
+                }
+
+                .datas-sap.pink {
+                    color: $color_5;
+                }
+
+                .amount.pink {
+                    color: $color_5;
+                }
+            }
+
+            .sommes {
+                color: $color_4;
+                display: flex;
+                align-items: center;
+
+                .lbl {
+                    font-size: 11px;
+                    width: 45%;
+                }
+
+                .sommes-sap {
+                    margin-left: 1%;
+                }
+
+                .amount {
+                    margin-left: 5%;
+                }
+
+                .next {
+                    font-size: 35px;
+                    color: $color_6;
+                    cursor: pointer;
+                    margin-left: auto;
+                }
+            }
+        }
+
+        .ec-compt-list-content.selected {
+            background-color: $background_color_6;
+
+            .datas {
+                .next {
+                    color: $color_4;
+                }
+            }
+        }
+
+        .od-list-content {
+            padding: 7px 10px;
+            border-bottom: 3px solid rgb(165,165,165);
+
+            .date {
+                font-size: 11px;
+                color: $color_3;
+            }
+
+            .labels {
+                display: flex;
+                align-items: center;
+
+                .lbl {
+                    font-size: 15px;
+                    color: $color_4;
+                    width: 45%;
+                }
+
+                .bkmk {
+                    color: $color_8;
+                    font-size: 18px;
+                    margin-left: auto;
+                    cursor: default;
+                }
+
+                .bkmk.rat {
+                    color: $color_10;
+                }
+
+                .unplug.on {
+                    font-size: 25px;
+                    margin-left: auto;
+                    color: $color_5;
+                }
+
+                .plug.on {
+                    font-size: 25px;
+                    margin-left: auto;
+                    color: $color_5;
+                }
+
+                .unplug.off {
+                    font-size: 25px;
+                    margin-left: auto;
+                    color: $color_11;
+                }
+
+                .plug.off {
+                    font-size: 25px;
+                    margin-left: auto;
+                    color: $color_11;
+                }
+            }
+
+            .data {
+                font-size: 11px;
+                color: $color_3;
+            }
+
+            .amounts {
+                display: flex;
+                align-items: center;
+                font-size: 11px;
+                margin-top: 10px;
+
+                .col {
+                    display: flex;
+                    flex-direction: column;
+
+                    .lbl {
+                        color: $color_3;
+                    }
+
+                    .val {
+                        color: $color_4;
+                    }
+                }
+
+                .col.unit {
+                    margin-left: 7%;
+                    min-width: 35px;
+                }
+
+                .col.quant {
+                    min-width: 50px;
+                }
+
+                .col.pu {
+                    margin-left: 10%;
+                    min-width: 50px;
+                }
+
+                .col.mont {
+                    margin-left: 10%;
+                    min-width: 70px;
+                }
+
+                .col.edit {
+                    margin-left: auto;
+                    color: $color_6;
+
+                    .material-icons {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+
+    .list.ec-compt {
+        .list-header {
+            background-color: $background_color_1;
+            color: $color_1;
+        }
+    }
+
+    .list-bloc {
+        height: 500px;
+        overflow-y: scroll;
+    }
+
+    .list.od-linked {
+        .list-header {
+            background-color: $background_color_2;
+            color: $color_1;
+
+            button {
+                display: flex;
+                align-items: center;
+                background-color: $background_color_7;
+                color: $color_9;
+                font-size: 11px;
+                border: none;
+                margin-left: auto;
+                margin-right: 5px;
+
+                .material-icons {
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+
+    .list.od-unlinked {
+        .list-header {
+            background-color: $background_color_3;
+            color: $color_1;
+
+            button {
+                display: flex;
+                align-items: center;
+                background-color: $background_color_7;
+                color: $color_8;
+                font-size: 11px;
+                border: none;
+                margin-left: auto;
+                margin-right: 5px;
+
+                .material-icons {
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+}
+
+.c-box {
+    display: flex;
+    align-items: center;
+    height: 30px;
+
+    label {
+        margin-bottom: 0;
+    }
+
+    input[type="checkbox"] {
+        & + label {
+            span {
+                margin-right: 15px !important;
+            }
+        }
+    }
+}
+
+.options {
+    .montant {
+        width: 50%;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $color_1;
+        background-color: $background_color_1;
+        font-size: 20px;
+    }
+
+    textarea {
+        display: block;
+        width: 100%;
+        height: 100px;
+        resize: none;
+    }
+
+    .btn-danger {
+        background-color: $background_color_8;
+        border-color: $border_color_1;
+
+        &:hover {
+            color: $color_1;
+        }
+    }
+
+    #abonnement-panel {
+        .control-label {
+            font-size: 11px;
+        }
+    }
+
+    .glyphicon-calendar {
+        float: left;
+    }
+}
+
+#cbCommandeAbo {
+    &:disabled {
+        & + label {
+            span {
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+.bloc-abonnement {
+    label.abo-head {
+        background: rgb(225, 227, 229);
+        display: block;
+        padding: 5px 0 5px 5px;
+        margin-bottom: 0;
+    }
+}
+
+#abonnement-panel {
+    border: 10px solid rgb(225, 227, 229);
+}
+
+.pad-abo {
+    padding: 5px 10px 5px 10px;
+}

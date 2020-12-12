@@ -1,0 +1,1 @@
+﻿//var app = angular.module('Fred', ['kendo.directives', 'ui-notification', 'ngProgress', 'ui.bootstrap', 'ngAnimate', 'ngSanitize']);

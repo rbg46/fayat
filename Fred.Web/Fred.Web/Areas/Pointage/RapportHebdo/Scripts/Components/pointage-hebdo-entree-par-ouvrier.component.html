@@ -1,0 +1,59 @@
+﻿<div ng-class="{ 'col-lg-12 col-md-12 no-pad' : !$ctrl.isAffichageCi, 'col-lg-6 col-md-6 no-pad': $ctrl.isAffichageCi}">
+  <div class="header_grid">
+    <div class="select-all crew" ng-show="$ctrl.isAffichageCi">
+      <div class="chbx">
+        <input type="checkbox"
+               id="chbxSelectAllOuvrier"
+               ng-model="$ctrl.SelectAllOuvrier"
+               ng-change="$ctrl.selectAllOuvrier($ctrl.SelectAllOuvrier)">
+        <label for="chbxSelectAllOuvrier"><span></span></label>
+      </div>
+      <span class="lbl" ng-show="$ctrl.isAffichageCi">{{$ctrl.resources.Rapport_Hebdo_Voir_Select_Tout_Personnel}}</span>
+    </div>
+    <div ng-click="$ctrl.handleSelectionEquipeFavorite()"
+         ng-show="!$ctrl.isAffichageCi"
+         ng-class="{ 'center' : !$ctrl.isAffichageCi}"
+         class="lbl_equipe">{{$ctrl.resources.Rapport_Hebdo_Voir_Select_Equipe}}</div>
+    <div ng-click="$ctrl.handleCheckEquipeFavoriteMembers()"
+         ng-show="$ctrl.isAffichageCi"
+         ng-disabled="$ctrl.favoriteTeamList.length === 0"      
+         ng-class="{ 'center' : $ctrl.isAffichageCi,'fred-disabled': $ctrl.check()}"
+         class="lbl_equipe">{{$ctrl.resources.Rapport_Hebdo_Voir_Select_Equipe_Favorite}}</div>
+  </div>
+  <div class="personnel-list">
+    <table class="table table-fixed biz-ouv">
+      <thead>
+        <tr>
+          <th ng-show="$ctrl.isAffichageCi" class="col-xs-1 col-1"></th>
+          <th ng-class="{ 'col-lg-4 col-md-4' : !$ctrl.isAffichageCi, 'col-lg-3 col-md-3': $ctrl.isAffichageCi}">{{$ctrl.resources.Rapport_Hebdo_Code_Soc}}</th>
+          <th class="col-xs-1 col-1"></th>
+          <th class="col-xs-2 col-2">{{$ctrl.resources.Rapport_Hebdo_Personnel}}</th>
+          <th class="col-xs-2 col-2">{{$ctrl.resources.Rapport_Hebdo_Code_Total_Heure}}</th>
+          <th class="col-xs-2 col-2">{{$ctrl.resources.Rapport_Hebdo_Code_Total_Heure_Sup}}</th>
+          <th class="col-xs-1 col-1"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="ouvrier in $ctrl.ouvrierListByMode | equipeFilter:$ctrl.filterEquipeFavorite | filter:$ctrl.filterCi"
+            ng-click="$ctrl.handleSelectOuvrier(ouvrier.PersonnelId)">
+          <td ng-show="$ctrl.isAffichageCi" class="col-xs-1 col-1">
+            <div class="chbx-tab">
+              <input type="checkbox" id="chbxTab_{{ouvrier.PersonnelId}}_{{ouvrier.CiCode}}" 
+                     ng-model="ouvrier.Selected"
+                     ng-change="$ctrl.toggleOuvrierSelection({PersonnelId: ouvrier.PersonnelId, checkState: ouvrier.Selected, CiId: ouvrier.CiId})">
+              <label for="chbxTab_{{ouvrier.PersonnelId}}_{{ouvrier.CiCode}}"><span></span></label>
+            </div>
+          </td>
+          <td ng-class="{ 'col-lg-4 col-md-4' : !$ctrl.isAffichageCi, 'col-lg-3 col-md-3': $ctrl.isAffichageCi}">{{ouvrier.SocieteCode}}-{{ouvrier.Matricule}}</td>
+          <td class="col-xs-1 col-1"><span ng-show="ouvrier.IsInFavouriteTeam" class="material-icons icon-tab star-on">star</span></td>
+          <td class="col-xs-2 col-2">
+            {{ouvrier.Nom}} {{ouvrier.Prenom}}
+          </td>
+          <td class="col-xs-2 col-2">{{ouvrier.TotalHeure}}</td>
+          <td class="col-xs-2 col-2">{{ouvrier.TotalHeureSup}}</td>
+          <td class="col-xs-1 col-1"><span ng-show="!$ctrl.isAffichageCi" class="material-icons cr">chevron_right</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

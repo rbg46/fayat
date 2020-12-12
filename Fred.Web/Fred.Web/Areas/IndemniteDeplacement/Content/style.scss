@@ -1,0 +1,31 @@
+﻿$background_color_1: #fff;
+
+.filter {
+    input.form-control.txt[type="text"] {
+        cursor: text;
+    }
+}
+
+.last_calc {
+    margin-top: 70px;
+
+    > label {
+        padding-left: 0;
+    }
+}
+
+input.form-control {
+    &:read-only {
+        background-color: $background_color_1;
+    }
+}
+
+.formulaire {
+    lookup {
+        .inputPL {
+            .inputPLSearch {
+                text-align: left;
+            }
+        }
+    }
+}

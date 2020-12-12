@@ -1,0 +1,763 @@
+﻿.inputPL {
+  border: 1px solid #d9d9d9;
+  display: flex;
+  width: 100%;
+  height: inherit;
+  height: 30px;
+}
+
+.inputPL .inputPLSearch {
+  border: none;
+  background: none;
+  vertical-align: central;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 0;
+  width: 100%;
+}
+
+.formulaire.middle .inputPL .disabled {
+  background-color: rgb(227, 227, 227) !important;
+}
+
+.inputPLSearchParent {
+  text-align: left;
+}
+
+.inputPL .glyphicon {
+  color: #c4c4c4;
+  float: right;
+}
+
+.inputPL .inputPLSearch:disabled {
+    background-color: #eee;
+    opacity: 1;
+    cursor:not-allowed;
+    color: rgb(103, 117, 127);
+}
+
+.inputPL .inputPLSearch:disabled .chev {
+    background-color: #ccc !important;
+}
+
+.inputPL .inputPLRemove:disabled .closing {
+    background-color: #ccc !important;
+    cursor: not-allowed;
+}
+
+.inputPL .glyphicon-search {
+    padding-top: 2px;
+}
+
+.inputPL .inputPLLabel {
+  text-align: left;
+  margin-right: 2em;
+  font-style: normal;
+  color: rgb(103, 117, 127);
+  font-weight: 400;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+}
+
+  .inputPL .inputPLLabel.placeholder {
+    white-space: pre;
+    word-wrap: normal;
+    overflow: hidden;    
+    font-style: italic;
+    color: darkGray;
+    pointer-events: none !important;
+  }
+
+.inputPL button .glyphicon-remove {
+  font-size: 14px;
+  padding-left: 5px;
+}
+
+.inputPL button:hover span {
+  color: #626262;
+}
+
+.inputPL .inputPLRemove {
+  position: absolute;
+  top: 8px;
+  right: 0;
+  border: none;
+  background: none;
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  margin-left: 3px;
+  height: 30px;
+  width: 30px;
+}
+
+.rapport_detail .searchBar lookup .inputPL {
+  border: none;
+  display: flex !important;
+  align-items: center;
+  height: 28px;
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+
+  .rapport_detail .searchBar lookup .inputPL {height: 22px; }
+}
+
+/* LookupPane */
+
+.table tbody tr td lookup .lookupPane I {
+  color: rgb(51, 51, 51);
+  font-size: initial;
+}
+
+.table tbody tr td lookup .lookupPane .fa-check-circle-o {
+    font-size: 25px;
+}
+
+#lookupOverLay {
+  position: fixed;
+  top: 0;right: 0;
+  bottom: 0;left: 0;
+  z-index: 1200;
+  background-color: #000;
+  transition: 0.2s opacity ease;
+  opacity: 0.25;
+}
+
+.lookupPane {
+  position:fixed;
+  overflow:hidden;
+  width:330px;
+  right:0;
+  top:0;
+  bottom:0;
+  background-color:#fbfbfb;
+  z-index:1200;
+  box-shadow: 0 5px 5px 0 #aeaeae, 0 -5px 5px 0 #aeaeae;
+}
+
+.lookupPane input[type="text"].form-control { width: 100%; }
+
+#lookupHeader {
+  background-color: #005ba2;  
+  text-align: left;
+}
+
+.lookup-header {
+  padding: 15px 8px;
+}
+
+.searchLookupPanelRight {
+  margin-bottom: 5px !important;
+}
+
+.lookup-empty {
+    font-weight: bold !important;
+    color: #848484 !important;
+    text-align:center !important;
+    padding:10px !important;
+}
+
+#lookupHeader .flaticon-multiply {
+    color: #fff;
+    margin: -8px 0;
+    cursor: pointer;
+    position: relative;
+}
+
+#lookupHeader label {
+  color: #fff;
+  font-size:medium;
+  font-weight:400;
+  position: relative;
+  margin-bottom: 5px;
+  margin-top: 0 !important;
+}
+
+#lookupHeader .inner-addon.right-addon {
+  position:absolute;
+  width:96%;
+}
+
+#lookupHeader .inner-addon.right-addon .form-control {
+  width: 100%;
+  height: 30px;
+  text-align: left;
+  cursor: text;
+}
+
+.large #lookupHeader .glyphicon-search {
+  top: 1px;
+  right: 1px;
+  z-index: 3;
+  background-color: #fff;
+  height: initial;
+  font-size: initial;
+}
+
+.large #lookupHeader .inner-addon .glyphicon-search:before {
+  font-family: 'Glyphicons Halflings';
+  content: "\e003";
+  color: rgb(51, 51, 51);
+}
+
+.search-container #lookupHeader .glyphicon-search {
+  top: 1px;
+  right: 1px;
+  z-index: 4;
+  background-color: #fff;
+  height: initial;
+  font-size: initial;
+}
+
+.search-container lookupPane #lookupHeader .inner-addon .glyphicon-search:before {
+  font-family: 'Glyphicons Halflings';
+  content: "\e003";
+  color: rgb(51, 51, 51);
+}
+
+.search-container #lookupHeader .inner-addon .glyphicon-search:before {
+  font-family: 'Glyphicons Halflings';
+  content: "\e003";
+  color: rgb(51, 51, 51);
+}
+
+.search-container .bizness .inner-addon .glyphicon { padding-top: 8px; }
+
+.bizness #lookupHeader .inner-addon .glyphicon-search {
+  height: 39px;
+  background-color: rgb(9, 173, 166);
+  color: white;
+  content: 'glyphicon glyphicon-record';
+  font-size: 25px;
+  line-height: 0.7;
+  pointer-events: none;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  right: 0;
+  padding-top: 6px !important;
+  width: 45px;
+}
+
+.bizness #lookupHeader .inner-addon .glyphicon-search:before {
+  content: '\f0f7' !important;
+  font-family: 'FontAwesome' !important;
+  color: #fff !important;
+}
+
+.bizness #lookupHeader .inner-addon .form-control { height: 40px !important; }
+
+#divScroll {
+  overflow:auto;
+  width:100%;
+  background-color:#fff;
+}
+
+#divScroll div.text-center {
+  padding-top: 40%;
+}
+
+#divScroll .lookupBody {
+  padding: 8px;
+  background-color: #fbfbfb;
+  min-height: 100%;
+  height: inherit;
+}
+
+#divScroll .lookupBody .error {
+  color: red;
+}
+
+#divScroll .lookupBody .bkg-item {
+  border: 1px solid #e4e4e4;
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  text-align: left;
+}
+
+#divScroll .lookupBody .bkg-item h2 {
+  font-size: 18px;
+  color: #67757F;
+  font-weight: 400;
+  margin: 0 0 6px 0;
+  text-align: left;
+}
+
+#divScroll .lookupBody .bkg-item h3 {
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0;
+}
+
+#divScroll .lookupBody .bkg-item.selected {
+  background-color: rgb(83,168,193);
+}
+
+#divScroll .lookupBody .bkg-item.selected h2 {
+  color: #fff;
+  text-align: left;
+}
+
+#divScroll .lookupBody .bkg-item.selected h3 {
+  color: #fff;
+}
+
+#divScroll .lookupBody .bkg-item.selected:hover h2 { color: #000000; }
+
+#divScroll .lookupBody .bkg-item.selected:hover h3 { color: #000000; }
+
+@media (max-width:1366px) and (max-height:768px) {
+
+  #lookupHeader label { font-size: 12px; }
+
+  .bizness #lookupHeader .inner-addon .form-control { height: 30px !important; }
+
+  .filter #lookupHeader input[type="text"] {
+    height: 25px !important;
+    font-size: 11px;
+  }
+
+  #divScroll { top: 80px; }
+
+  #divScroll.fred-scroll .lookupBody .bkg-item { padding: 5px; }
+
+  #divScroll.fred-scroll .lookupBody .bkg-item h2 {
+    font-size: 12px;
+  }
+
+  #divScroll.fred-scroll .lookupBody .bkg-item h3 {
+    font-size: 11px;
+  }
+
+  #divScroll.fred-scroll .lookupBody .bkg-item h4 {
+    font-size: 10px;
+  }
+
+  #divScroll.fred-scroll .lookupBody p { font-size: 11px; }
+}
+
+/* Formulaires */
+
+.formulaire lookup .inputPL {
+  background-color: #fafafa;
+  border: 1px solid #BBBBBB;
+}
+
+.formulaire.bar-rech lookup .inputPL { height: 30px; }
+
+.formulaire lookup .inputPL .inputPLSearch {
+  position: relative;
+  padding-bottom: 0.27em;
+  padding-left: 12px;
+}
+
+.formulaire .inputPL .glyphicon-search { padding-right: 5px; }
+
+.rm-but { position: relative; }
+
+.formulaire.long .chev.material-icons,
+.formulaire.long .material-icons.closing {
+  font-size: 22px;
+  padding: 3px;
+  background-color: #09ada6;
+  color: #fff;
+  top: 0;
+  right: 0;
+  position: absolute;
+}
+
+.formulaire.long.bar-rech .chev.material-icons,
+.formulaire.long.bar-rech .material-icons.closing {
+  position: absolute;
+  display: inline-block;
+  line-height: 0.7;
+  pointer-events: none;
+  background-color: rgb(9,173,166);
+  height: 29px;
+  width: 30px;
+  text-align: center;
+  color: white;
+  font-size: 25px;
+  right: 0;
+  padding-top: 6px;
+}
+
+.formulaire.middle .inputPL .inputPLLabel { font-size: 11px; }
+
+.formulaire.middle .chev.material-icons,
+.formulaire.middle .material-icons.closing {
+  font-size: 28px;
+  padding: 0;
+  background-color: #fff;
+  color: #09ada6;
+  top: 0;
+  right: 0;
+  position: absolute;
+  border-left: 1px solid #BBBBBB;
+}
+
+.formulaire.long .material-icons.closing { top: -8px; }
+
+.formulaire.middle .material-icons.closing {
+  top: -8px;
+  border-left: 1px solid #BBBBBB;
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+
+  .formulaire lookup .inputPL,
+  .formulaire.bar-rech lookup .inputPL {
+    min-height: 25px;
+    height: 25px;
+  }
+
+  .formulaire.long .chev.material-icons,
+  .formulaire.long .material-icons.closing { font-size: 17px; }
+
+  .formulaire.middle .chev.material-icons,
+  .formulaire.middle .material-icons.closing {
+    height: 23px;
+    width: 23px;
+    font-size: 23px;
+  }
+
+  .formulaire.long.bar-rech .chev.material-icons,
+  .formulaire.long.bar-rech .material-icons.closing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    height: 23px;
+    width: 23px;
+    font-size: 23px;
+  }
+
+  .formulaire.long .inputPL .inputPLLabel {
+    font-size: 11px;
+    padding-bottom: 0;
+  }
+}
+
+/* Barre de recherche */
+
+.searchBar { width: 100%; }
+
+.searchBar .preLook { width: 100%; }
+
+.searchBar .preLook lookup { width: 100%; }
+
+.searchBar .preLook lookup .lookup-content { width: 100%; }
+
+.searchBar lookup .inputPL {
+  border: 1px solid #BBBBBB;
+  background-color: #fafafa;
+}
+
+.searchBar lookup .inputPL .inputPLLabel { color: #999; }
+
+.searchBar .preLook lookup .lookup-content .inputPLSearch {
+  position: relative;
+  vertical-align: middle;
+}
+
+.searchBar .preLook lookup .lookup-content .inputPLSearch .chev.material-icons {
+  position: absolute;
+  right: 0px;
+  padding-top: 2px;
+  padding-left: 2px;
+  top: -4px;
+  background-color: #09ada6;
+  color: #fff;
+  font-size: 25px;
+  width: 30px;
+  height: 28px;
+}
+
+.searchBar .preLook lookup .lookup-content .inputPLRemove .material-icons.closing {
+  position: absolute;
+  right: 0px;
+  top: -22px;
+  background-color: #09ada6;
+  color: #fff;
+  font-size: 25px;
+  width: 30px;
+  height: 29px;
+  padding-left: 3px;
+  padding-top: 2px;
+}
+
+.filter .inner-addon .chev.material-icons,
+.filter .inner-addon .material-icons.closing {
+  position: absolute;
+  display: inline-block;
+  line-height: 0.7;
+  pointer-events: none;
+  background-color: rgb(9,173,166);
+  height: 29px;
+  width: 30px;
+  text-align: center;
+  color: white;
+  font-size: 25px;
+  right: 0;
+  padding-top: 6px;
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+
+  .searchBar .preLook lookup .lookup-content .inputPLSearch {
+    height: 25px;
+  }
+
+  .searchBar .preLook lookup .lookup-content .inputPLSearch .chev.material-icons {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    top: -2px;
+  }
+
+  .searchBar .preLook lookup .lookup-content .inputPLRemove .material-icons.closing {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    top: -22px;
+  }
+
+  /* spécifique à firefox */
+  @-moz-document url-prefix() {
+
+    .searchBar .preLook lookup .lookup-content .inputPLSearch .chev.material-icons {
+      top: 1px;
+    }
+
+    .searchBar .preLook lookup .lookup-content .inputPLRemove .material-icons.closing {
+      top: -19px;
+    }
+  }
+
+  .filter .inner-addon.right-addon .chev.material-icons,
+  .filter .inner-addon.right-addon .material-icons.closing {
+    height: 25px;
+    width: 25px;
+    font-size: 25px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* boutons */
+
+.boutons lookup .inputPL { border: none; }
+
+.boutons lookup .inputPL .inputPLSearch {
+  padding: 0;
+  width: initial;
+  height: 32px;
+}
+
+.boutons lookup .inputPL .inputPLSearch .inputPLLabel {
+  margin-right: initial;
+  text-align: center;
+  padding-left: 10px;
+  font-size: 14px;
+  font-weight: normal;
+  color: #7d7d7d;
+  padding-top: 3px;
+  padding-right: 5px;
+  padding-bottom: 4px;
+  white-space: initial;
+  overflow: initial;
+  display: initial;
+  text-overflow: initial;
+}
+
+.boutons lookup .inputPL .inputPLSearch .flaticon-add {
+  color: rgb(0, 82, 160);
+  font-weight: bold;
+  margin-left: 21px;
+}
+
+.noRemove lookup .inputPL { background-color: #fafafa; }
+
+.boutons lookup .chev.material-icons {
+  color: #09ada6;
+  border: 1px solid #BBBBBB;
+  padding-top: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 100%;
+}
+
+.boutons lookup .inputPLRemove {
+  margin-left: 0;
+  left: -4px;
+  top: 0;
+}
+
+.boutons lookup .material-icons.closing {
+  margin-top: -1px;
+  padding-top: 0;
+  padding-right: 0;
+  padding-left: 0;
+  border: none;
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+
+  .boutons lookup .inputPL {
+    min-height: 25px;
+  }
+
+  .boutons lookup .chev.material-icons {
+    padding: 0 5px;
+  }
+}
+
+/* Texte maximal */
+
+.maxText lookup .inputPL { background-color: #fafafa; }
+
+/* body Overflow hidden on lookup open */
+.ovh {
+  overflow: hidden;
+}
+
+/* Picklist tâches */
+
+.task-line {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.task-line h3 { margin-left: 5px; }
+
+.task-line.t3 {
+  padding-left: 15px;
+}
+
+.task-line.t3 h3 {
+  color: rgb(51, 51, 51);
+  margin-left: 10px;
+}
+
+/* Picklist fournisseur */
+
+#divScroll .lookupBody .bkg-item .fournisseur-h2 {
+  font-size: 17px;
+  color: #67757F;
+  font-weight: 400;
+  margin: 0;
+  padding-bottom: 2px;
+  text-align: left;
+}
+
+#divScroll .lookupBody .bkg-item .fournisseur-h3 {
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0;
+  padding-bottom: 2px;
+}
+
+#divScroll .lookupBody .bkg-item .fournisseur-h4 {
+  font-size: 13px;
+  font-weight: 400;
+  margin:0;
+  color: rgb(1, 110, 123);
+  border-bottom: none;  
+}
+
+#divScroll .lookupBody .bkg-item.selected .fournisseur-h2,
+#divScroll .lookupBody .bkg-item.selected .fournisseur-h3,
+#divScroll .lookupBody .bkg-item.selected .fournisseur-h4 {
+  color: #fff;
+}
+
+#divScroll .lookupBody .bkg-item.selected:hover .fournisseur-h2,
+#divScroll .lookupBody .bkg-item.selected:hover .fournisseur-h3,
+#divScroll .lookupBody .bkg-item.selected:hover .fournisseur-h4 {
+  color: #000000;
+}
+
+/* Filters style */
+.lookup-filter {
+  float: left;
+  margin-right: 5px;
+  margin-top: 2px;
+  width: 70px;
+  color: #005ba2;
+  background-color: white;
+}
+
+.btn.btn-filter {
+  background-color: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+  color : lightgrey;
+  box-shadow: inset 0 -5px 0 #fff;
+  border-bottom-color: white;
+  line-height: 20px !important;
+  width:100%
+}
+
+.btn.btn-filter:hover {
+  font-weight: bold;
+  border-bottom-color: lightgrey;
+  box-shadow: inset 0 -5px 0 lightgrey;
+}
+
+.btn.btn-filter.selected-0 {
+  font-weight: bold;
+  color:  #318CE7;
+  box-shadow: inset 0 -5px 0 #318CE7;
+  outline: none;
+  margin-top: 3px !important;
+}
+
+.btn.btn-filter.selected-1 {
+  font-weight: bold;
+  color: #DE3F7E;
+  box-shadow: inset 0 -5px 0 #DE3F7E;
+  outline: none;
+}
+
+.btn.btn-filter.selected-2 {
+  font-weight: bold;
+  color: #ADCB60;
+  box-shadow: inset 0 -5px 0 #ADCB60;
+  outline: none;
+}
+
+.btn.btn-filter.selected-3 {
+  font-weight: bold;
+  color: #ED7F10;
+  box-shadow: inset 0 -5px 0 #ED7F10;
+  outline: none;
+}
+
+/* Picklist Materiel */
+
+.libelle-materiel-rose {
+  color : #DE3F7E;
+}
+
+#divScroll .lookupBody .bkg-item.materiel.rose.selected {
+  background-color: #DE3F7E;
+}
+
+
+
+/* Picklist Habilitations personnel */
+
+.libelle-quiet {
+  font-size: 0.8em;
+  color: darkgrey;
+}
+

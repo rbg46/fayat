@@ -1,0 +1,704 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureControleBudgetaire.PageTitre;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/BudgetControleBudgetaireBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/BudgetControleBudgetaireBundle.js")
+    @this.RenderResources("FredResource", "FeatureBudget", "FeatureControleBudgetaire", "FeatureFavori")
+}
+
+<div class="container controle-budgetaire" ng-controller="BudgetControleBudgetaireController as ctrl" ng-init="ctrl.getFilterOrFavoris('@ViewBag.favoriId')">
+
+    <!-- START : Titre de la page -->
+    <h1>{{::ctrl.resources.Budget_ControleBudgetaire_Titre}}</h1>
+
+    <!--START : Barre de recherche + Barre d'outils-->
+    <fred-toolbar>
+
+        <!--Organisation-->
+        <fred-section class="ci-section">
+            <fred-section-title>{{::ctrl.resources.Budget_ControleBudgetaire_Section_SelectionOrganisation}}</fred-section-title>
+            <fred-section-controls>
+                <div class="inner-addon right-addon">
+                    <lookup-standalone ng-model="ctrl.ci"
+                                       text="ctrl.ci.CodeLibelle"
+                                       search-title="{{ctrl.resources.Global_ReferentielCI}}"
+                                       search-placeholder="{{ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                       custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                       url="/api/CI/SearchLight"
+                                       on-select="ctrl.onCiSelected()"
+                                       on-delete="ctrl.onClearCiLookup()"
+                                       placeholder="Rechercher un Etablissement ou un CI..."
+                                       class="formulaire long">
+                    </lookup-standalone>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Période-->
+        <fred-section class="date-section">
+            <fred-section-title>{{::ctrl.resources.Budget_ControleBudgetaire_Section_SelectionPeriode}}</fred-section-title>
+            <fred-section-controls>
+                <button class="btn btn-primary cumul"
+                        ng-class="{'bkg-white': !ctrl.filter.Cumul}"
+                        ng-click="ctrl.onClickCumulButton()">
+                    {{::ctrl.resources.Budget_ControleBudgetaire_Bouton_Cumul}}
+                </button>
+                <span class="input-group date">
+                    <app-date-picker id="periode"
+                                     ng-model="ctrl.periode"
+                                     initial-date="{{ctrl.periode}}"
+                                     format="MM/YYYY"
+                                     lang="fr"
+                                     placeholder="Période"
+                                     on-update="ctrl.onChangePeriod()">
+                    </app-date-picker>
+                </span>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Axe d'analyse-->
+        <fred-section class="aa-section">
+            <fred-section-title>{{::ctrl.resources.Budget_ControleBudgetaire_Section_AxeAnalyse}}</fred-section-title>
+            <fred-section-controls>
+                <fred-button type="button" class="task" ng-click="ctrl.onAxePrincipalChanged(ctrl.AxePrincipalTaches)" title="{{::ctrl.resources.Budget_ControleBudgetaire_Tooltip_ChoiceAxeTaches}}">
+                    <span ng-class="{'T-icon' : ctrl.axePrincipal == ctrl.AxePrincipalTaches, 'T-icon inactive' : ctrl.axePrincipal != ctrl.AxePrincipalTaches}" class="T-icon"></span>
+                </fred-button>
+                <fred-button type="button" class="chap" ng-click="ctrl.onAxePrincipalChanged(ctrl.AxePrincipalRessources)" title="{{::ctrl.resources.Budget_ControleBudgetaire_Tooltip_ChoiceAxeRessources}}">
+                    <span ng-class="{'chap-icon' : ctrl.axePrincipal == ctrl.AxePrincipalRessources, 'chap-icon inactive' : ctrl.axePrincipal != ctrl.AxePrincipalRessources}"></span>
+                </fred-button>
+                <fred-button type="button" class="ax-param" ng-click="ctrl.onAfficheBandeauParametres()" title="{{::ctrl.resources.Budget_ControleBudgetaire_Tooltip_BandeauParametres}}">
+                    <span ng-class="{'sapicon-E056': ctrl.filterActiveOnAxe, 'sapicon-E056 inactive': !ctrl.filterActiveOnAxe}"></span>
+                </fred-button>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Devise-->
+        <fred-section class="devise-section">
+            <fred-section-title>{{::ctrl.resources.Budget_ControleBudgetaire_Section_Devise}}</fred-section-title>
+            <fred-section-controls class="devise-section-controls">
+                <div class="currency active">€</div>
+                <div class="currency">£</div>
+                <div class="currency">$</div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Actions-->
+        <fred-section class="action-section" ng-hide="ctrl.Locked || ctrl.axeTree === null">
+            <fred-section-title>{{::ctrl.resources.Budget_ControleBudgetaire_Section_Action}}</fred-section-title>
+            <fred-section-controls class="action-controls">
+                <button class="btn btn-link" ng-hide="ctrl.etat !== 'BR' || ctrl.Locked || !ctrl.filter.Cumul || ctrl.axeTree === null" ng-click="ctrl.onClickBoutonAnnuler()">{{::ctrl.resources.Budget_ControleBudgetaire_Bouton_Annuler}}</button>
+                <button class="btn btn-default" ng-hide="ctrl.etat !== 'BR' || !ctrl.isLastLevelDisplayed() || ctrl.Locked || !ctrl.filter.Cumul || ctrl.axeTree === null" ng-click="ctrl.onClickBoutonEnregistrer()">{{::ctrl.resources.Budget_ControleBudgetaire_Bouton_Enregistrer}}</button>
+                <button class="btn btn-default" ng-hide="ctrl.etat === 'BR' || ctrl.etat === 'EA' || ctrl.Locked || !ctrl.filter.Cumul || ctrl.axeTree === null" ng-click="ctrl.onCLickBoutonModifier()">{{::ctrl.resources.Budget_ControleBudgetaire_Bouton_Modifier}}</button>
+                <button class="btn btn-default" ng-hide="ctrl.etat !== 'BR' || ctrl.Locked || ctrl.axeTree === null" ng-click="ctrl.onClickBoutonAValider()">{{::ctrl.resources.Budget_ControleBudgetaire_Bouton_AValider}}</button>
+                <button class="btn btn-validate" ng-hide="ctrl.etat !== 'AV' || ctrl.Locked || ctrl.axeTree === null" ng-click="ctrl.onClickBoutonValider()">{{::ctrl.resources.Budget_ControleBudgetaire_Bouton_Valider}}</button>
+                <button class="btn btn-validate" ng-hide="ctrl.etat !== 'EA' || ctrl.Locked || ctrl.axeTree === null" ng-click="ctrl.onClickButtonDeverouiller()">{{::ctrl.resources.Budget_ControleBudgetaire_Bouton_Deverrouiller}}</button>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Export-->
+        <fred-section class="export-section">
+            <fred-section-title>{{::ctrl.resources.Budget_ControleBudgetaire_Section_Export}}</fred-section-title>
+            <fred-section-controls>
+                <fred-button type="button" ng-click="ctrl.onExportExcel(false)" class="export-section-button" title="{{::ctrl.resources.Global_Bouton_ExportExcel_Tooltip}}">
+                    <span class="excel-icon" ng-class="{'deactivate-export': !ctrl.isExportAllowed()}"></span>
+                </fred-button>
+                <fred-button type="button" ng-click="ctrl.onExportExcel(true)" class="export-section-button" title="{{::ctrl.resources.Global_Bouton_ExportPDF_Tooltip}}">
+                    <span class="pdf-icon" ng-class="{'deactivate-export': !ctrl.isExportAllowed()}"></span>
+                </fred-button>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Favoris-->
+        <fred-section class="favoris-section" ng-show="ctrl.ci && ctrl.periode">
+            <fred-section-title>{{::ctrl.resources.ControleBudgetaire_Favoris}}</fred-section-title>
+            <fred-section-controls>
+                <fred-button class="fred-button white-star" type="button" ng-click="ctrl.addFilter2Favoris()"
+                    title="{{ ctrl.getTooltipFavoris() }}">
+                    <i class="material-icons">star</i>
+                </fred-button>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Avancement/Dépense-->
+        <fred-section class="avdep-section">
+            <fred-section-title style="color: transparent">{{::ctrl.resources.Budget_ControleBudgetaire_Section_AvancementDepense}}</fred-section-title>
+            <div class="avance" ng-class="ctrl.isAvancementValide ? 'valide' : 'non-valide'">
+                <div class="amount">
+                    <span class="txt">{{::ctrl.resources.Budget_ControleBudgetaire_Span_Avancement}}</span>
+                    <span class="taxless">{{ctrl.isAvancementValide ? 'Validé' : 'En Cours'}}</span>
+                </div>
+                <span class="material-icons">chevron_right</span>
+            </div>
+        </fred-section>
+        <fred-section class="avdep-section">
+            <fred-section-title style="color: transparent">{{::ctrl.resources.Budget_ControleBudgetaire_Section_AvancementDepense}}</fred-section-title>
+            <div class="depense" ng-class="ctrl.isPeriodeCloturee ? 'valide' : 'non-valide'">
+                <div class="amount">
+                    <span class="txt">{{::ctrl.resources.Budget_ControleBudgetaire_Span_Depense}}</span>
+                    <span class="taxless">{{ctrl.isPeriodeCloturee ? 'Clôturée' : 'En Cours'}}</span>
+                </div>
+                <span class="material-icons">chevron_right</span>
+            </div>
+        </fred-section>
+    </fred-toolbar>
+
+    <!--Tableau du contrôle budgétaire-->
+    <fred-flex-table class="flex-table fred-scroll" id="FLEX_TABLE" anchor-bottom="25">
+
+        <!--Premier en-tête-->
+        <div class="fixed-line-header top-header">
+            <div class="col-1 fixed-col-header">
+                <span class="foldUnfold" ng-click="ctrl.onToutPlier()">{{::ctrl.resources.Budget_ControleBudgetaire_Bouton_ToutPlier}}</span>
+                <span class="foldUnfold" ng-click="ctrl.onToutDeplier()">{{::ctrl.resources.Budget_ControleBudgetaire_Bouton_ToutDeplier}}</span>
+            </div>
+            <div class="col-2" style="min-width:{{ctrl.enteteColonneBudgetLargeur}}px; width:{{ctrl.enteteColonneBudgetLargeur}}px">
+                <span class="material-icons onglets" ng-show="ctrl.showColumn.Budget" ng-click="ctrl.hideAllColumnByTitle('Budget')">chevron_left</span>
+                <span class="material-icons onglets" ng-show="!ctrl.showColumn.Budget" ng-click="ctrl.showAllColumnByTitle('Budget')">chevron_right</span>
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Budget}}
+                <span class="material-icons help" title="Version du Budget : {{ctrl.budgetVersion}} , Date d'application : {{ctrl.dateBudget}} ">live_help</span>
+            </div>
+            <div class="col-sep"></div>
+            <div class="col-3" style="min-width:{{ctrl.enteteColonneDadLargeur}}px; width:{{ctrl.enteteColonneDadLargeur}}px">
+                <span class="material-icons onglets" ng-show="ctrl.showColumn.Dad" ng-click="ctrl.hideAllColumnByTitle('Dad')">chevron_left</span>
+                <span class="material-icons onglets" ng-show="!ctrl.showColumn.Dad" ng-click="ctrl.showAllColumnByTitle('Dad')">chevron_right</span>
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_DAD}}
+            </div>
+            <div class="col-sep"></div>
+            <div class="col-4" style="min-width:{{ctrl.enteteColonneDepensesLargeur}}px; width:{{ctrl.enteteColonneDepensesLargeur}}px">
+                <span class="material-icons onglets" ng-show="ctrl.showColumn.Dep" ng-click="ctrl.hideAllColumnByTitle('Dep')">chevron_left</span>
+                <span class="material-icons onglets" ng-show="!ctrl.showColumn.Dep" ng-click="ctrl.showAllColumnByTitle('Dep')">chevron_right</span>
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Depense}}
+            </div>
+            <div class="col-sep"></div>
+            <div class="col-5" style="min-width:{{ctrl.enteteColonneEcartLargeur}}px; width:{{ctrl.enteteColonneEcartLargeur}}px">
+                <span class="material-icons onglets" ng-show="ctrl.showColumn.Ecart" ng-click="ctrl.hideAllColumnByTitle('Ecart')">chevron_left</span>
+                <span class="material-icons onglets" ng-show="!ctrl.showColumn.Ecart" ng-click="ctrl.showAllColumnByTitle('Ecart')">chevron_right</span>
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Ecart}}
+            </div>
+            <div class="col-sep"></div>
+            <div class="col-6" style="min-width:{{ctrl.enteteColonneRadLargeur}}px; width:{{ctrl.enteteColonneRadLargeur}}px">
+                <span class="material-icons onglets" ng-show="ctrl.showColumn.Rad" ng-click="ctrl.hideAllColumnByTitle('Rad')">chevron_left</span>
+                <span class="material-icons onglets" ng-show="!ctrl.showColumn.Rad" ng-click="ctrl.showAllColumnByTitle('Rad')">chevron_right</span>
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_RAD}}
+            </div>
+            <div class="col-sep" ng-show="ctrl.filter.Cumul"></div>
+            <div class="col-7" ng-show="ctrl.filter.Cumul" style="min-width:{{ctrl.enteteColonneAjustementLargeur}}px; width:{{ctrl.enteteColonneAjustementLargeur}}px">
+                <span class="material-icons onglets" ng-show="ctrl.showColumn.Ajustement" ng-click="ctrl.hideAllColumnByTitle('Ajustement')">chevron_left</span>
+                <span class="material-icons onglets" ng-show="!ctrl.showColumn.Ajustement" ng-click="ctrl.showAllColumnByTitle('Ajustement')">chevron_right</span>
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Ajustement}}
+                <span class="material-icons download-ajustement" ng-show="ctrl.isLastLevelDisplayed() && !ctrl.Readonly && !ctrl.Locked" ng-click="ctrl.onClickDownloadPreviousAjustement()">cloud_download</span>
+                <span class="material-icons reset-ajustement" ng-show="ctrl.isLastLevelDisplayed() && !ctrl.Readonly && !ctrl.Locked" ng-click="ctrl.onClickResetAjustement()">clear</span>
+            </div>
+            <div class="col-sep" ng-show="ctrl.filter.Cumul"></div>
+            <div class="col-8"></div>
+            <div class="col-9"></div>
+            <div class="col-10"></div>
+        </div>
+
+        <!--Second en-tête-->
+        <div class="fixed-line-header bottom-header">
+            <div class="col-1 fixed-col-header">{{ctrl.getDescriptionAxes()}}</div>
+            <div class="col-3 closable" ng-show="ctrl.colonnesAffichees.includes('BudgetQte')">
+                <fred-table-header ng-model="ctrl.colonnesOrder.BudgetQte"
+                                   ng-change="ctrl.onOrderChange('BudgetQte')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Quantite}}">
+                </fred-table-header>
+                <span class="material-icons close-button" ng-click="ctrl.onClickBoutonCacheColonne('BudgetQte');">clear</span>
+            </div>
+            <div class="col-4 closable" ng-show="ctrl.colonnesAffichees.includes('BudgetPu')">
+                <fred-table-header ng-model="ctrl.colonnesOrder.BudgetPu"
+                                   ng-change="ctrl.onOrderChange('BudgetPu')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Pu}}">
+                </fred-table-header>
+                <span class="material-icons close-button" ng-click="ctrl.onClickBoutonCacheColonne('BudgetPu');">clear</span>
+            </div>
+            <div class="col-2">
+                <fred-table-header ng-model="ctrl.colonnesOrder.BudgetMontant"
+                                   ng-change="ctrl.onOrderChange('BudgetMontant')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Montant}}">
+                </fred-table-header>
+            </div>
+            <div class="col-sep"></div>
+            <div class="col-8">
+                <fred-table-header ng-model="ctrl.colonnesOrder.DadPourcent"
+                                   ng-change="ctrl.onOrderChange('DadPourcent')"
+                                   header-style="blue"
+                                   header-text="%">
+                </fred-table-header>
+            </div>
+
+            <div class="col-6 closable" ng-show="ctrl.colonnesAffichees.includes('DadQte')">
+                <fred-table-header ng-model="ctrl.colonnesOrder.DadQte"
+                                   ng-change="ctrl.onOrderChange('DadQte')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Quantite}}">
+                </fred-table-header>
+                <span class="material-icons close-button" ng-click="ctrl.onClickBoutonCacheColonne('DadQte');">clear</span>
+            </div>
+            <div class="col-7 closable" ng-show="ctrl.colonnesAffichees.includes('DadPu')">
+                <fred-table-header ng-model="ctrl.colonnesOrder.DadPu"
+                                   ng-change="ctrl.onOrderChange('DadPu')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Pu}}">
+                </fred-table-header>
+                <span class="material-icons close-button" ng-click="ctrl.onClickBoutonCacheColonne('DadPu');">clear</span>
+            </div>
+            <div class="col-9">
+                <fred-table-header ng-model="ctrl.colonnesOrder.DadMontant"
+                                   ng-change="ctrl.onOrderChange('DadMontant')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Montant}}">
+                </fred-table-header>
+            </div>
+            <div class="col-sep"></div>
+            <div class="col-8">
+                <fred-table-header ng-model="ctrl.colonnesOrder.DepPourcentage"
+                                   ng-change="ctrl.onOrderChange('DepPourcentage')"
+                                   header-style="blue"
+                                   header-text="%">
+                </fred-table-header>
+            </div>
+
+            <div class="col-10 closable" ng-show="ctrl.colonnesAffichees.includes('DepQte')">
+                <fred-table-header ng-model="ctrl.colonnesOrder.DepQte"
+                                   ng-change="ctrl.onOrderChange('DepQte')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Quantite}}">
+                </fred-table-header>
+                <span class="material-icons close-button" ng-click="ctrl.onClickBoutonCacheColonne('DepQte');">clear</span>
+            </div>
+            <div class="col-11 closable" ng-show="ctrl.colonnesAffichees.includes('DepPu')">
+                <fred-table-header ng-model="ctrl.colonnesOrder.DepPu"
+                                   ng-change="ctrl.onOrderChange('DepPu')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Pu}}">
+                </fred-table-header>
+                <span class="material-icons close-button" ng-click="ctrl.onClickBoutonCacheColonne('DepPu');">clear</span>
+            </div>
+            <div class="col-9">
+                <fred-table-header ng-model="ctrl.colonnesOrder.DepMontant"
+                                   ng-change="ctrl.onOrderChange('DepMontant')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Montant}}">
+                </fred-table-header>
+            </div>
+
+            <div class="col-sep"></div>
+
+            <div class="col-13 closable" ng-show="ctrl.colonnesAffichees.includes('EcartQte')">
+                <fred-table-header ng-model="ctrl.colonnesOrder.EcartQte"
+                                   ng-change="ctrl.onOrderChange('EcartQte')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Quantite}}">
+                </fred-table-header>
+                <span class="material-icons close-button" ng-click="ctrl.onClickBoutonCacheColonne('EcartQte');">clear</span>
+            </div>
+            <div class="col-14 closable" ng-show="ctrl.colonnesAffichees.includes('EcartPu')">
+                <fred-table-header ng-model="ctrl.colonnesOrder.EcartPu"
+                                   ng-change="ctrl.onOrderChange('EcartPu')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Pu}}">
+                </fred-table-header>
+                <span class="material-icons close-button" ng-click="ctrl.onClickBoutonCacheColonne('EcartPu');">clear</span>
+            </div>
+            <div class="col-12">
+                <fred-table-header ng-model="ctrl.colonnesOrder.EcartMontant"
+                                   ng-change="ctrl.onOrderChange('EcartMontant')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Montant}}">
+                </fred-table-header>
+            </div>
+
+            <div class="col-sep"></div>
+
+            <div class="col-16 closable" ng-show="ctrl.colonnesAffichees.includes('RadQte')">
+                <fred-table-header ng-model="ctrl.colonnesOrder.RadQte"
+                                   ng-change="ctrl.onOrderChange('RadQte')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Quantite}}">
+                </fred-table-header>
+                <span class="material-icons close-button" ng-click="ctrl.onClickBoutonCacheColonne('RadQte');">clear</span>
+            </div>
+            <div class="col-17 closable" ng-show="ctrl.colonnesAffichees.includes('RadPu')">
+                <fred-table-header ng-model="ctrl.colonnesOrder.RadPu"
+                                   ng-change="ctrl.onOrderChange('RadPu')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Pu}}">
+                </fred-table-header>
+                <span class="material-icons close-button" ng-click="ctrl.onClickBoutonCacheColonne('RadPu');">clear</span>
+            </div>
+            <div class="col-15">
+                <fred-table-header ng-model="ctrl.colonnesOrder.RadMontant"
+                                   ng-change="ctrl.onOrderChange('RadMontant')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Montant}}">
+                </fred-table-header>
+            </div>
+
+            <div class="col-sep" ng-show="ctrl.filter.Cumul"></div>
+            <div class="col-18" ng-show="ctrl.filter.Cumul">
+                <fred-table-header ng-model="ctrl.colonnesOrder.AjustementMontant"
+                                   ng-change="ctrl.onOrderChange('AjustementMontant')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Montant}}">
+                </fred-table-header>
+            </div>
+            <div class="col-19 closable" ng-show="ctrl.colonnesAffichees.includes('AjustementCommentaire') && ctrl.filter.Cumul">
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Commentaire}}
+                <span class="material-icons close-button" ng-click="ctrl.onClickBoutonCacheColonne('AjustementCommentaire');">clear</span>
+            </div>
+            <div class="col-sep" ng-show="ctrl.filter.Cumul"></div>
+            <div class="col-20 closable" ng-show="ctrl.filter.Cumul && ctrl.colonnesAffichees.includes('PrevisionnelFinAffaire')">
+                <fred-table-header ng-model="ctrl.colonnesOrder.PrevisionnelFinAffaire"
+                                   ng-change="ctrl.onOrderChange('PrevisionnelFinAffaire')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_PFA}}">
+                </fred-table-header>
+                <span class="material-icons close-button" ng-click="ctrl.onClickBoutonCacheColonne('PrevisionnelFinAffaire');">clear</span>
+            </div>
+            <div class="col-21 closable" ng-show="ctrl.colonnesAffichees.includes('PfaMoisPrecedent') && ctrl.filter.Cumul">
+                <fred-table-header ng-model="ctrl.colonnesOrder.PfaMoisPrecedent"
+                                   ng-change="ctrl.onOrderChange('PfaMoisPrecedent')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_PFA_Precedent}}">
+                </fred-table-header>
+                <span class="material-icons close-button" ng-click="ctrl.onClickBoutonCacheColonne('PfaMoisPrecedent');">clear</span>
+            </div>
+            <div class="col-22 closable" ng-show="ctrl.colonnesAffichees.includes('ProjectionLineaireDepense') && ctrl.filter.Cumul">
+                <fred-table-header ng-model="ctrl.colonnesOrder.ProjectionLineaireDepense"
+                                   ng-change="ctrl.onOrderChange('ProjectionLineaireDepense')"
+                                   header-style="blue"
+                                   header-text="{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_ProjectionLineaire}}">
+                </fred-table-header>
+                <span class="material-icons close-button" ng-click="ctrl.onClickBoutonCacheColonne('ProjectionLineaireDepense');">clear</span>
+            </div>
+            <div class="col-23"></div>
+        </div>
+        <!--Liste niveau 1-->
+        <budget-controle-budgetaire-arbre-axes-component locked="ctrl.Locked"
+                                                         readonly="ctrl.Readonly"
+                                                         tree="ctrl.axeTree"
+                                                         axe-principal="ctrl.filter.AxePrincipal"
+                                                         colonnes-affichees="ctrl.colonnesAffichees"
+                                                         symbole-devise="ctrl.symboleDeviseSelectionnee"
+                                                         cumul="ctrl.filter.Cumul"
+                                                         axe-affichees="ctrl.filter.AxeAffichees">
+        </budget-controle-budgetaire-arbre-axes-component>
+
+        <!--Footer
+        Seules les cases correspondant aux montants sont affichés, les autres sont cachés par le css
+        voir la classe bottom-footer
+        -->
+        <div class="flex-line bottom-footer">
+            <div class="col-1 fixed-col-header really-really-wide-column">Somme des montants</div>
+
+            <div class="col-3 small-column" ng-show="ctrl.colonnesAffichees.includes('BudgetQte')">
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Quantite}}
+            </div>
+            <div class="col-4 small-column" ng-show="ctrl.colonnesAffichees.includes('BudgetPu')">
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Pu}}
+            </div>
+            <div class="col-2 medium-column">
+                <div>
+                    <div>{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_TotalBudget}}</div>
+                    <div>{{ctrl.getTotalMontantBudget(ctrl.axeTree) | number:2}} {{ctrl.symboleDeviseSelectionnee}}</div>
+                </div>
+            </div>
+            <div class="col-sep"></div>
+            <div class="col-8 really-small-column">%</div>
+
+            <div class="col-6 small-column" ng-show="ctrl.colonnesAffichees.includes('DadQte')">
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Quantite}}
+            </div>
+            <div class="col-7 small-column" ng-show="ctrl.colonnesAffichees.includes('DadPu')">
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Pu}}
+            </div>
+            <div class="col-9 medium-column">
+                <div>
+                    <div>{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_TotalDAD}}</div>
+                    <div>{{ctrl.getTotalDaD(ctrl.axeTree) | number:2}} {{ctrl.symboleDeviseSelectionnee}}</div>
+                </div>
+            </div>
+
+            <div class="col-sep"></div>
+            <div class="col-8 really-small-column">%</div>
+
+            <div class="col-10 small-column" ng-show="ctrl.colonnesAffichees.includes('DepQte')">
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Quantite}}
+            </div>
+            <div class="col-11 small-column" ng-show="ctrl.colonnesAffichees.includes('DepPu')">
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Pu}}
+            </div>
+            <div class="col-9 medium-column">
+                <div>
+                    <div>{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_TotalDepenses}}</div>
+                    <div>{{ctrl.getTotalDepense(ctrl.axeTree) | number:2}} {{ctrl.symboleDeviseSelectionnee}}</div>
+                </div>
+            </div>
+
+            <div class="col-sep"></div>
+
+            <div class="col-13 small-column" ng-show="ctrl.colonnesAffichees.includes('EcartQte')">
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Quantite}}
+            </div>
+            <div class="col-14 small-column" ng-show="ctrl.colonnesAffichees.includes('EcartPu')">
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Pu}}
+            </div>
+            <div class="col-12 medium-column">
+                <div>
+                    <div>{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_TotalEcart}}</div>
+                    <div> {{ctrl.getTotalEcart(ctrl.axeTree) | number:2}} {{ctrl.symboleDeviseSelectionnee}}</div>
+                </div>
+            </div>
+
+            <div class="col-sep"></div>
+
+            <div class="col-16 small-column" ng-show="ctrl.colonnesAffichees.includes('RadQte')">
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Quantite}}
+            </div>
+            <div class="col-17 small-column" ng-show="ctrl.colonnesAffichees.includes('RadPu')">
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Pu}}
+            </div>
+            <div class="col-15 medium-column">
+                <div>
+                    <div>{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_TotalRAD}}</div>
+                    <div> {{ctrl.getTotalRad(ctrl.axeTree) | number:2}} {{ctrl.symboleDeviseSelectionnee}}</div>
+                </div>
+            </div>
+            <div class="col-sep" ng-show="ctrl.filter.Cumul"></div>
+            <div class="col-18 wide-column" ng-show="ctrl.filter.Cumul">
+                <div>
+                    <div>{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_TotalAjustement}}</div>
+                    <div>
+                        {{ctrl.getTotalAjustement(ctrl.axeTree) | number:2}} {{ctrl.symboleDeviseSelectionnee}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-19 really-wide-column" ng-show="ctrl.colonnesAffichees.includes('AjustementCommentaire')">
+                {{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Commentaire}}
+            </div>
+            <div class="col-sep" ng-show="ctrl.filter.Cumul"></div>
+            <div class="col-20 wide-column" ng-show="ctrl.colonnesAffichees.includes('PrevisionnelFinAffaire') && ctrl.filter.Cumul">
+                <div>
+                    <div>{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_TotalPFA}}</div>
+                    <div> {{ctrl.getTotalPfa(ctrl.axeTree) | number:2}} {{ctrl.symboleDeviseSelectionnee}}</div>
+                </div>
+            </div>
+            <div class="col-21 medium-column" ng-show="ctrl.colonnesAffichees.includes('PfaMoisPrecedent') && ctrl.filter.Cumul">
+                <div>
+                    <div>{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_TotalPFA_Precedent}}</div>
+                    <div>{{ctrl.getTotalPfaMoisPrecedent(ctrl.axeTree) | number:2}} {{ctrl.symboleDeviseSelectionnee}}</div>
+                </div>
+            </div>
+            <div class="col-22 medium-column" ng-show="ctrl.colonnesAffichees.includes('ProjectionLineaireDepense') && ctrl.filter.Cumul">
+                <div>
+                    <div>{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_TotalPLD}}</div>
+                    <div>{{ctrl.getTotalProjectionLineaireDepenses(ctrl.axeTree) | number:2}} {{ctrl.symboleDeviseSelectionnee}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row information" ng-show="!ctrl.ci || !ctrl.periode">
+            <div class="col-md-4 icon">
+                <i class="flaticon flaticon-warning"></i>
+            </div>
+            <div class="col-md-8 message">
+                <h3>{{ctrl.resources.Budget_ControleBudgetaire_Message_Information}}</h3>
+            </div>
+        </div>
+    </fred-flex-table>
+
+    <!--START : Bandeau paramétrage-->
+    <div ng-show="ctrl.displayBanner">
+        <div class="blockScreen"
+             ng-click="ctrl.onAfficheBandeauParametres()"
+             style="z-index:99">
+        </div>
+        <div class="options small"
+             id="PanelRight"
+             style="z-index:100">
+
+            <!--HEADER TOOLBAR : BEGIN-->
+            <div class="toolbar">
+                <div class="material-icons grandicone">group_work</div>
+            </div>
+            <!--HEADER TOOLBAR : END-->
+            <!-- Titre : BEGIN -->
+            <div class="form-header" id="Titre">
+                <h2>
+                    <span>{{::ctrl.resources.Budget_ControleBudgetaire_Panneau_Titre}}</span>
+                </h2>
+            </div>
+            <!-- Titre : END -->
+            <!-- Body : BEGIN -->
+            <div class="form">
+
+                <div class="row bloc-info">
+                    <div class="col-md-12 bloc-info-title">
+                        <i class="fa fa-angle-right"
+                           aria-hidden="true"></i>
+                        <span>{{::ctrl.resources.Budget_ControleBudgetaire_Panneau_Section_AxeAnalytique}}</span>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="axe-choice">
+                            <button ng-click="ctrl.onChangeAxePrincipalDansParametrage(ctrl.AxePrincipalTaches)" type="button" ng-class="{'active': ctrl.parametreAxePrincipal === ctrl.AxePrincipalTaches }" class="btn-axe">Axe Tâches> Ressources</button>
+                            <button ng-click="ctrl.onChangeAxePrincipalDansParametrage(ctrl.AxePrincipalRessources)" type="button" ng-class="{'active': ctrl.parametreAxePrincipal === ctrl.AxePrincipalRessources }" class="btn-axe">Axe Ressources > Tâches</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row bloc-info">
+                    <div class="col-md-12 bloc-info-title">
+                        <i class="fa fa-angle-right"
+                           aria-hidden="true"></i>
+                        <span>{{::ctrl.resources.Budget_ControleBudgetaire_Panneau_Section_DetailAxeAnalytique}}</span>
+                    </div>
+
+                    <div class="bloc-info-erreur alert alert-warning" ng-show="ctrl.msgAxeAnalytique">{{ctrl.msgAxeAnalytique}}</div>
+
+                    <div class="col-md-12 bloc-axe-detail">
+                        <div class="axe-detail">
+                            <div ng-repeat="axeType in ctrl.axeAnalytiqueAffichable" class="detail-element" ng-class="{'selected' : ctrl.IsAxeAnalytiqueSelected(axeType)}" ng-click="ctrl.onClickCacheOuAfficheAxe(axeType)">
+                                <span class="detail-element-txt">{{axeType.Name}}</span>
+                                <div class="inner-triangle" ng-show="ctrl.IsAxeAnalytiqueSelected(axeType)"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row bloc-info">
+                    <div class="col-md-12 bloc-info-title">
+                        <i class="fa fa-angle-right"
+                           aria-hidden="true"></i>
+                        <span>{{::ctrl.resources.Budget_ControleBudgetaire_Panneau_Section_ColonnesAffichees}}</span>
+                    </div>
+
+                    <div class="col-md-12 bloc-axe-detail">
+                        <div class="axe-detail cols">
+                            <div class="detail-element borderless">
+                                <span class="detail-element-txt">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Budget}}</span>
+                            </div>
+                            <div class="detail-element" ng-class="{'selected' : ctrl.colonnesParametreesAffichees.includes('BudgetQte')}" ng-click="ctrl.onCacheOuAfficheColonneDansParametre('BudgetQte')">
+                                <span class="detail-element-txt caps">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Quantite}}</span>
+                                <div class="inner-triangle" ng-show="ctrl.colonnesParametreesAffichees.includes('BudgetQte')"></div>
+                            </div>
+                            <div class="detail-element" ng-class="{'selected' : ctrl.colonnesParametreesAffichees.includes('BudgetPu')}" ng-click="ctrl.onCacheOuAfficheColonneDansParametre('BudgetPu')">
+                                <span class="detail-element-txt caps">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Pu}}</span>
+                                <div class="inner-triangle" ng-show="ctrl.colonnesParametreesAffichees.includes('BudgetPu')"></div>
+                            </div>
+                            <div class="detail-element borderless">
+                                <span class="detail-element-txt">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_DAD}}</span>
+                            </div>
+                            <div class="detail-element" ng-class="{'selected' : ctrl.colonnesParametreesAffichees.includes('DadQte')}" ng-click="ctrl.onCacheOuAfficheColonneDansParametre('DadQte')">
+                                <span class="detail-element-txt caps">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Quantite}}</span>
+                                <div class="inner-triangle" ng-show="ctrl.colonnesParametreesAffichees.includes('DadQte')"></div>
+                            </div>
+                            <div class="detail-element" ng-class="{'selected' : ctrl.colonnesParametreesAffichees.includes('DadPu')}" ng-click="ctrl.onCacheOuAfficheColonneDansParametre('DadPu')">
+                                <span class="detail-element-txt caps">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Pu}}</span>
+                                <div class="inner-triangle" ng-show="ctrl.colonnesParametreesAffichees.includes('DadPu')"></div>
+                            </div>
+                            <div class="detail-element borderless">
+                                <span class="detail-element-txt">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Depense}}</span>
+                            </div>
+                            <div class="detail-element" ng-class="{'selected' : ctrl.colonnesParametreesAffichees.includes('DepQte')}" ng-click="ctrl.onCacheOuAfficheColonneDansParametre('DepQte')">
+                                <span class="detail-element-txt caps">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Quantite}}</span>
+                                <div class="inner-triangle" ng-show="ctrl.colonnesParametreesAffichees.includes('DepQte')"></div>
+                            </div>
+                            <div class="detail-element" ng-class="{'selected' : ctrl.colonnesParametreesAffichees.includes('DepPu')}" ng-click="ctrl.onCacheOuAfficheColonneDansParametre('DepPu')">
+                                <span class="detail-element-txt caps">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Pu}}</span>
+                                <div class="inner-triangle" ng-show="ctrl.colonnesParametreesAffichees.includes('DepPu')"></div>
+                            </div>
+                            <div class="detail-element borderless">
+                                <span class="detail-element-txt">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Ecart}}</span>
+                            </div>
+                            <div class="detail-element" ng-class="{'selected' : ctrl.colonnesParametreesAffichees.includes('EcartQte')}" ng-click="ctrl.onCacheOuAfficheColonneDansParametre('EcartQte')">
+                                <span class="detail-element-txt caps">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Quantite}}</span>
+                                <div class="inner-triangle" ng-show="ctrl.colonnesParametreesAffichees.includes('EcartQte')"></div>
+                            </div>
+                            <div class="detail-element" ng-class="{'selected' : ctrl.colonnesParametreesAffichees.includes('EcartPu')}" ng-click="ctrl.onCacheOuAfficheColonneDansParametre('EcartPu')">
+                                <span class="detail-element-txt caps">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Pu}}</span>
+                                <div class="inner-triangle" ng-show="ctrl.colonnesParametreesAffichees.includes('EcartPu')"></div>
+                            </div>
+                            <div class="detail-element borderless">
+                                <span class="detail-element-txt">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_RAD_Abrege}}</span>
+                            </div>
+                            <div class="detail-element" ng-class="{'selected' : ctrl.colonnesParametreesAffichees.includes('RadQte')}" ng-click="ctrl.onCacheOuAfficheColonneDansParametre('RadQte')">
+                                <span class="detail-element-txt caps">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Quantite}}</span>
+                                <div class="inner-triangle" ng-show="ctrl.colonnesParametreesAffichees.includes('RadQte')"></div>
+                            </div>
+                            <div class="detail-element" ng-class="{'selected' : ctrl.colonnesParametreesAffichees.includes('RadPu')}" ng-click="ctrl.onCacheOuAfficheColonneDansParametre('RadPu')">
+                                <span class="detail-element-txt caps">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Pu}}</span>
+                                <div class="inner-triangle" ng-show="ctrl.colonnesParametreesAffichees.includes('RadPu')"></div>
+                            </div>
+                            <div class="detail-element borderless">
+                                <span class="detail-element-txt">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Ajustement}}</span>
+                            </div>
+                            <div class="detail-element double" ng-class="{'selected' : ctrl.colonnesParametreesAffichees.includes('AjustementCommentaire')}" ng-click="ctrl.onCacheOuAfficheColonneDansParametre('AjustementCommentaire')">
+                                <span class="detail-element-txt">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_Commentaire}}</span>
+                                <div class="inner-triangle" ng-show="ctrl.colonnesParametreesAffichees.includes('AjustementCommentaire')"></div>
+                            </div>
+                            <div class="detail-element double" ng-class="{'selected' : ctrl.colonnesParametreesAffichees.includes('PrevisionnelFinAffaire')}" ng-click="ctrl.onCacheOuAfficheColonneDansParametre('PrevisionnelFinAffaire')">
+                                <span class="detail-element-txt">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_PFA}}</span>
+                                <div class="inner-triangle" ng-show="ctrl.colonnesParametreesAffichees.includes('PrevisionnelFinAffaire')"></div>
+                            </div>
+                            <div class="detail-element double" ng-class="{'selected' : ctrl.colonnesParametreesAffichees.includes('PfaMoisPrecedent')}" ng-click="ctrl.onCacheOuAfficheColonneDansParametre('PfaMoisPrecedent')">
+                                <span class="detail-element-txt">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_PFA_Precedent}}</span>
+                                <div class="inner-triangle" ng-show="ctrl.colonnesParametreesAffichees.includes('PfaMoisPrecedent')"></div>
+                            </div>
+                            <div class="detail-element double" ng-class="{'selected' : ctrl.colonnesParametreesAffichees.includes('ProjectionLineaireDepense')}" ng-click="ctrl.onCacheOuAfficheColonneDansParametre('ProjectionLineaireDepense')">
+                                <span class="detail-element-txt">{{::ctrl.resources.Budget_ControleBudgetaire_Colonne_ProjectionLineaire}}</span>
+                                <div class="inner-triangle" ng-show="ctrl.colonnesParametreesAffichees.includes('ProjectionLineaireDepense')"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Body : END -->
+                <!--FOOTER TOOLBAR : BEGIN-->
+                <div class="footer">
+                    <div class="buttons">
+                        <button class="btn btn-default"
+                                ng-class="ctrl.msgAxeAnalytique.length === 0 ? 'btn-default' : 'btn-link'"
+                                type="submit"
+                                ng-click="ctrl.onSaveParametresControleBudgetaire()"
+                                ng-disabled="ctrl.msgAxeAnalytique.length != 0"
+                                title="">
+                            {{::ctrl.resources.Budget_ControleBudgetaire_Bouton_Enregistrer}}
+                        </button>
+                        <button class="btn btn-link"
+                                type="button"
+                                ng-click="ctrl.onCancelParametresChangesControleBudgetaire()"
+                                title="">
+                            {{::ctrl.resources.Budget_ControleBudgetaire_Bouton_Annuler}}
+                        </button>
+                    </div>
+                </div>
+                <!--FOOTER TOOLBAR : END-->
+                <div class="close_panel" ng-click="ctrl.displayBanner = !ctrl.displayBanner" title="">
+                    <i class="fa fa-angle-right"
+                       aria-hidden="true"></i>
+                    <span>{{::ctrl.resources.Budget_ControleBudgetaire_Bouton_RefermerLePanneau}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--END : Bandeau paramétrage-->
+    <!--Dialogue d'erreur de validation-->
+    <budget-controle-budgetaire-validation-erreur-dialog-component resources="ctrl.resources">
+    </budget-controle-budgetaire-validation-erreur-dialog-component>
+
+    <!--Dialogue de verrouillage des contrôles budgétaire précédents-->
+    <budget-controle-budgetaire-validation-verrouillage-precedents-dialog-component resources="ctrl.resources">
+    </budget-controle-budgetaire-validation-verrouillage-precedents-dialog-component>
+</div>

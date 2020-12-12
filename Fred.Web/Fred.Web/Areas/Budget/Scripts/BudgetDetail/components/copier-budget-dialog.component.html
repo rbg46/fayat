@@ -1,0 +1,92 @@
+﻿<div class="copier-budget-dialog modal fade" id="{{$ctrl.Identifiers.Dialog}}" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <i class="flaticon flaticon-shuffle-1"></i>{{::$ctrl.resources.CopierBudget_Titre}}
+                </h2>
+                <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+            </div>
+
+            <!-- Budget source -->
+            <div class="modal-body modal-body-separator">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 groupe">{{::$ctrl.resources.CopierBudget_Entete_BudgetSource}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 row-header-2">{{::$ctrl.resources.CopierBudget_Entete_CI}}</div>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <lookup-standalone ng-model="$ctrl.View.BudgetSource.CI"
+                                           text="$ctrl.View.BudgetSource.CI.CodeLibelle"
+                                           search-title="{{::$ctrl.resources.Global_ReferentielCI}}"
+                                           search-placeholder="{{::$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                           url="/api/CI/SearchLight"
+                                           on-select="$ctrl.OnBudgetSourceCiChanged()"
+                                           placeholder="Rechercher un CI..."
+                                           class="formulaire long"
+                                           ng-disabled="$ctrl.Busy"
+                                           show-delete-button="false"
+                                           show-in-popup="true">
+                        </lookup-standalone>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 row-header-2">{{::$ctrl.resources.CopierBudget_Entete_Revision}}</div>
+                    <div class="col-lg-9 col-md-9 col-sm-9" ng-if="$ctrl.View.BudgetSource.Revisions && $ctrl.View.BudgetSource.Revisions.length > 0">
+                        <select required
+                                class="form-control"
+                                ng-model="$ctrl.View.BudgetSource.Revision"
+                                ng-options="revision as revision.Revision for revision in $ctrl.View.BudgetSource.Revisions"
+                                ng-disabled="$ctrl.Busy"
+                                ng-change="$event.stopPropagation(); $ctrl.OnRevisionChanged()" />
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9" ng-if="$ctrl.View.BudgetSource.Revisions && $ctrl.View.BudgetSource.Revisions.length === 0">
+                        {{::$ctrl.resources.CopierBudget_CI_BudgetSource_PasDeBudget}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bibliothèque -->
+            <div class="modal-body modal-body-separator">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 groupe">{{::$ctrl.resources.CopierBudget_Entete_Bibliotheque}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 row-header-2">{{::$ctrl.resources.CopierBudget_Entete_CI}}</div>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <lookup-standalone ng-model="$ctrl.View.Bibliotheque.CI"
+                                           text="$ctrl.View.Bibliotheque.CI.CodeLibelle"
+                                           search-title="{{::$ctrl.resources.Global_ReferentielCI}}"
+                                           search-placeholder="{{::$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                           url="/api/CI/SearchLight"
+                                           placeholder="Rechercher un CI..."
+                                           class="formulaire long"
+                                           ng-disabled="$ctrl.Busy"
+                                           show-delete-button="true"
+                                           on-delete="$ctrl.View.Bibliotheque.CI = null"
+                                           show-in-popup="true">
+                        </lookup-standalone>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!--Bouton d'action-->
+                <button class="btn btn-default pull-left"
+                        ng-click="$ctrl.OnValiderButtonClick()"
+                        title="{{::$ctrl.resources.Global_Bouton_Valider_Tooltip}}"
+                        ng-disabled="$ctrl.Busy || $ctrl.View.BudgetSource.Revision === null">
+                    {{::$ctrl.resources.Global_Bouton_Valider}}
+                </button>
+
+                <!--Bouton annuler-->
+                <button class="btn btn-link pull-right"
+                        data-dismiss="modal"
+                        title="{{::$ctrl.resources.Global_Bouton_Annuler_Tooltip}}"
+                        ng-disabled="$ctrl.Busy">
+                    {{::$ctrl.resources.Global_Bouton_Annuler}}
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

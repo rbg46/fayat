@@ -1,0 +1,825 @@
+﻿/*
+  FAYAT CONSTRUCTION INFORMATIQUE
+  2016
+  FRED
+  Personnalisation du bootsrap Twitter
+*/
+
+/*Chargement de la police global */
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+/*Intégration de la police par défaut*/
+
+.row { margin: 0; }
+
+/* ************************************
+ *
+ * @Section: Typography > Définition des styles H1 to H6 pour les titres de pages
+ *
+************************************* */
+
+h1, h2, h3, h4 { padding-left: 0; }
+
+/*Intégration du chevron*/
+
+h1 {
+  background-image: url('/medias/images/ico/arrow.png');
+  background-position: left;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  padding-left: 35px !important;
+  color: #555555;
+  font-weight: 600;
+  padding: 0px;
+  margin: 0px 0px 20px 0px;
+}
+
+/*Gestion de l'affichage de la barre de recherche*/
+
+h1.expanded {
+  background-image: url('/medias/images/ico/arrow.png');
+  cursor: pointer;
+  background-position: left;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  padding-left: 35px;
+}
+
+h1.reduice {
+  background-image: url('/medias/images/ico/arrow_up.png');
+  cursor: pointer;
+  background-position: left;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  padding-left: 35px;
+}
+
+h1 b { font-weight: 800; }
+
+/*Custom si */
+
+.header_toolbar .btn { margin-top: 17px; }
+
+h2 {
+  color: #2c77ba;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+h3 {
+  color: #2c77ba;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+h4 {
+  border-bottom: rgb(225, 227, 229) 1px solid;
+  color: #2c77ba;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+
+  h4 { font-size: 15px; }
+}
+
+/*Style pour les items de retour de page*/
+
+h6 {
+  background-image: url('/medias/images/ico/arrow_return.png');
+  background-position: left;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  color: rgb(103, 117, 127);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 400;
+  height: 25px;
+  margin: 0;
+  padding-left: 20px;
+  padding-top: 5px;    
+}
+
+/* ************************************
+ *
+ * @Section: Formulaire
+ *
+************************************* */
+
+/*Libellé des sections des formulaires*/
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  color: #0052A0;
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+}
+
+/*---------------------------------------
+   Gestion particulière pour les écrans supérieurs à 1350 px de largeur
+   pour forcer les labels sur une seule ligne
+----------------------------------------*/
+
+@media screen and (min-width: 1350px) {
+  /*Force le passage à un seule ligne*/
+  fieldset .form-group {
+    display: flex;
+    margin-left: 0;
+    padding-left: 15px;
+  }
+
+  .form-horizontal .form-group {
+    margin-left: 0 !important;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  /*Force le passage à un seule ligne*/
+  fieldset .form-group .control-label {
+    clear: both;
+    display: block;
+    max-width: 150px !important;
+    padding-left: 0 !important;
+    width: 100%;
+  }
+
+  fieldset .form-group > * {
+    padding: 0;
+    padding-left: 15px;
+    padding-right: 0;
+  }
+}
+
+/*---------------------------------------
+   Gestion particulière pour les écrans inférieurs à 1350 px de largeur
+   pour forcer les labels en double ligne au dessus des contrôles Input
+----------------------------------------*/
+
+@media screen and (max-width: 1349px) {
+  .form-horizontal .form-group {
+    margin-left: 0 !important;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  fieldset { margin: 0; }
+
+  /*Force le passage à un seule ligne*/
+  fieldset .form-group {
+    margin-left: 0;
+    padding: 0;
+  }
+
+  /*Force le passage du label en dessus des contrôles*/
+  fieldset .form-group .control-label {
+    clear: both;
+    display: block;
+    min-width: 150px !important;
+    width: 100%;
+  }
+}
+
+/* ************************************
+ *
+ * @Section: Errors > Définition des styles d'erreur
+ *
+************************************* */
+
+/*Surcharge sur la gestion des erreurs*/
+
+.has-error .form-control { border-color: rgb(239, 51, 8) !important; }
+
+/*Surcharge sur la gestion des erreurs au niveau du text*/
+
+.text-danger {
+  background-color: rgb(239, 51, 8) !important;
+  color: white !important;
+  display: block !important;
+  font-size: 15px;
+  font-weight: 300;
+  padding-left: 3px;
+}
+
+.alert { border-radius: 0; }
+
+.alert-warning {
+  background-color: rgb(239, 51, 8);
+  border: none;
+  color: white;
+  padding: 10px;    
+}
+
+/* ************************************
+ *
+ * @Section: Modals > Surcharge pour mise en forme des modals
+ *
+************************************* */
+
+.modal { z-index: 5000; }
+
+.modal-dialog { top: 25%; }
+
+.modal-title {
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.modal-title i {
+  font-size: 25px !important;
+  font-style: normal;
+  padding-right: 15px;
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: row;
+}
+
+/*Surcharge par défaut sur la croix fermer*/
+
+.modal-header button, .modal-header button {
+  background-color: red;
+  height: 15px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: 0;
+}
+
+.close {
+  font-size: 50px;
+  font-weight: 100;
+  justify-content: flex-end;
+  margin: 0;
+  top: 0;
+}
+
+/*utilisation spécifique mais préférée*/
+
+.modal-header .close {
+  align-items: flex-end;
+  color: rgb(103, 117, 127) !important;
+  float: right;
+  font-size: 35px;
+  font-style: normal;
+  margin-left: auto;
+}
+
+/*Contenu de la */
+
+.modal-content {
+  border-radius: 0 !important;
+  width: 100%;
+}
+
+.modal-content b {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+/*Surcharge sur les formulaires en Modal*/
+
+.modal-body .row label {
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+/* ************************************
+ *
+ * @Section: Progress Bar (perso sur Commandes)
+ *
+************************************* */
+
+/*Ajustement du texte*/
+
+.progress-bar {
+  color: #0052A0;
+  font-weight: 800;
+  height: 15px;
+  line-height: 15px;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/*Pour personnaliser le fond gris si nécessaure*/
+
+.cmd-progress { }
+
+/*Personnalisation Etat success*/
+
+.progress-bar-success {
+  background-color: rgb(173, 203, 96);
+  color: #394718;
+  font-weight: 800;
+}
+
+/*personnalisation Etat Erreur*/
+
+.progress-bar-danger {
+  background-color: rgb(239, 51, 8);
+  color: white;
+  font-weight: 800;
+}
+
+/*Surchage de Kendo suur les champs de saisi en vue de désactivier les radius sur cette  berezina de composant Kendo*/
+
+.k-autocomplete.k-state-default .k-input, .k-combobox .k-state-default .k-input, .k-multiselect-wrap, .k-numeric-wrap.k-state-default .k-input, .k-picker-wrap.k-state-default .k-input, .k-progress-status-wrap, .k-slider-selection, .k-slider-track,
+.k-autocomplete, .k-block, .k-button, .k-calendar .k-link, .k-calendar td, .k-calendar-container, .k-colorpicker, .k-combobox, .k-datepicker, .k-datetimepicker, .k-drag-clue, .k-dropdown, .k-dropdown-wrap, .k-editor-inline, .k-grid .k-filter-options, .k-grouping-header .k-group-indicator, .k-inline-block, .k-list-container, .k-multiselect, .k-notification, .k-numeric-wrap, .k-numerictextbox, .k-picker-wrap, .k-slider-selection, .k-slider-track, .k-split-button, .k-textbox, .k-tile, .k-timepicker, .k-tooltip, .k-touch-scrollbar, .k-treeview .k-in, .k-upload, .k-window, .k-window-action, .k-window-titleless .k-window-content {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.k-dropdown-wrap.k-state-focused, .k-picker-wrap.k-state-focused, .k-state-hover {
+  border: 1px solid #f7c307;
+  box-shadow: none;
+}
+
+/* ************************************
+ *
+ * @Section: Progress Bar (perso sur Commandes)
+ *
+************************************* */
+
+/*Surcharge  des controles inputs  du bootstrap*/
+
+.form-control {
+  background: #fafafa;
+  border: 1px solid #BBBBBB;
+  border-radius: 0;
+  box-shadow: none;
+  color: rgb(103, 117, 127);
+  font-size: 14px;
+  font-weight: 400;
+  height: 30px;
+}
+
+/*surcharge des effets focus pour supprimer le côté ultra vintage et hasbeen*/
+
+.form-control:focus {
+  background: #FFFFFF !important;
+  box-shadow: none !important;
+  color: black !important;
+}
+
+/*Surcharge Bootstrap pour donner un coté Steve Jobs à l'affaire*/
+
+.control-label {
+  color: #111111;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left !important;
+}
+
+.form-group { margin-bottom: 4px; }
+
+.page-header { margin: auto; }
+
+/*Surchage du Grid pour supprimer les border dessus*/
+
+.k-editor, .k-grid, .k-menu, .k-scheduler { border-radius: 0; }
+
+.checkbox-inline,
+.checkbox-inline + .checkbox-inline,
+.checkbox-inline + .radio-inline,
+.radio-inline,
+.radio-inline + .radio-inline,
+.radio-inline + .checkbox-inline {
+  margin-left: 0;
+  margin-right: 10px;
+}
+
+.checkbox-inline:last-child,
+.radio-inline:last-child { margin-right: 0; }
+
+/* ************************************
+ *
+ * @Section: Surcharge sur les boutons
+ *
+************************************* */
+
+/*Surchage du boutton pour supprimer les border dessus*/
+
+.btn {
+  border-radius: 0 !important;
+  margin-right: 3px;
+  margin-top: 3px;
+}
+
+.btn .flaticon { font-style: normal; }
+
+.btn-default {
+  background-color: rgb(0, 82, 160);
+  border: 1px !important;
+  border: 1px red !important;
+
+  color: white;
+}
+
+.btn-primary {
+  background-color: rgb(9, 125, 160);
+  border: 1px rgb(9, 125, 160) !important;
+}
+
+.btn-success {
+  background-color: rgb(9, 173, 166) !important;
+  border: 1px rgb(9, 173, 166) !important;
+}
+
+.btn-info {
+  background-color: rgb(255, 216, 0) !important;
+  border: 1px rgb(255, 216, 0) !important;
+}
+
+.btn-warning {
+  background-color: rgb(255, 169, 13) !important;
+  border: 1px rgb(255, 169, 13) !important;
+}
+
+.btn-danger {
+  background-color: rgb(222, 63, 126);
+  border: 1px rgb(222, 63, 126) !important;
+}
+
+.btn-link {
+  background-color: #F1F2F3 !important;
+  border: #F1F2F3 1px !important;
+  text-decoration: none;
+}
+
+/*Suppression du lien sur le bouton annuler*/
+
+.btn-link:hover { text-decoration: none; }
+
+/*Surchage sur le style over*/
+
+.btn:hover {
+  background-color: #F1F2F3;
+  color: rgb(0, 82, 160);
+}
+
+/*Couleur Spécifique à Fred*/
+
+.bkg-blue { 
+  background: rgb(0, 82, 160); 
+
+}
+.bkg-blue-light1 { 
+  background: rgb(76, 134, 188);
+
+}
+.bkg-blue-light2 {
+  background: rgb(204, 220, 236);
+}
+.bkg-blue-light3 {
+  background: rgb(229, 237, 245);
+}
+.bkg-blue-light4 {
+  background: rgb(242, 246, 250);
+}
+
+
+.bkg-yellow { background: rgb(255, 216, 0); }
+
+.bkg-yellow1 { background-color:rgb(255, 224, 51); }
+
+.bkg-yellow-light1 { background-color: #FFEF99; }
+
+.bkg-grey { background: rgb(103, 117, 127); }
+
+.bkg-greylight { background: rgb(225, 227, 229); }
+
+.bkg-rose { background: rgb(222, 63, 126); }
+
+.bkg-greylight { background: rgb(225, 227, 229); }
+
+bkg-counter-success { background: rgb(173, 203, 96); }
+
+bkg-counter-warning { background: rgb(254, 187, 95); }
+
+bkg-counter-alert { background: rgb(222, 63, 126); }
+
+.bkg-secondary-blue1 { background: rgb(0, 82, 160); }
+
+.bkg-secondary-blue2 { background: rgb(11, 9, 173); }
+
+.bkg-secondary-blue3 { background: rgb(9, 52, 183); }
+
+.bkg-secondary-blue4 { background: rgb(9, 144, 183); }
+
+.bkg-secondary-blue5 { background: rgb(9, 173, 166); }
+
+.bkg-secondary-blue5light1 { background: rgba(9, 173, 166, 0.2); }
+
+.bkg-secondary-yellow1 { background: rgb(255, 216, 0); }
+
+.bkg-secondary-green2 { background: rgb(214, 255, 13); }
+
+.bkg-secondary-yellow3 { background: rgb(232, 221, 12); }
+
+.bkg-secondary-yellow4 { background: rgb(232, 208, 12); }
+
+.bkg-secondary-orange1 { background: rgb(255, 169, 13); }
+
+.bkg-secondary-grey1 { background: rgb(103, 117, 127); }
+
+.bkg-secondary-grey2 { background: rgb(106, 108, 140); }
+
+.bkg-secondary-grey3 { background: rgb(114, 126, 150); }
+
+.bkg-secondary-grey4 { background: rgb(114, 144, 150); }
+
+.bkg-secondary-grey5 { background: rgb(106, 140, 136); }
+
+.bkg-secondary-greylight1 { background: rgb(225, 227, 229); }
+
+.bkg-secondary-greylight2 { background: rgb(218, 218, 242); }
+
+.bkg-secondary-greylight3 { background: rgb(227, 233, 252); }
+
+/* enable absolute positioning */
+
+.inner-addon { position: relative; }
+
+/* style glyph */
+
+.inner-addon .glyphicon {
+  padding: 10px;
+  pointer-events: none;
+  position: absolute;
+}
+
+/* align glyph */
+
+.left-addon .glyphicon { left: 0; }
+
+.right-addon .glyphicon { right: 0; }
+
+/* add padding  */
+
+.left-addon input { padding-left: 30px; }
+
+.right-addon input { padding-right: 30px; }
+
+.bkg-secondary-greylight4 { background: rgb(227, 246, 252); }
+
+.bkg-secondary-greylight5 { background: rgb(218, 242, 241); }
+
+/*Debut Styles importants por label picklist*/
+
+.bkg-item:hover { background-color: #f5f5f5 !important; }
+
+/*Fin Styles importants por label picklist*/
+
+.borderless table {
+  border-bottom-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-top-style: none;
+}
+
+/* ************************************
+ *
+ * @Section: surcharge sur le design des tableaux
+ *
+************************************* */
+
+.table-container {
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/***************************************
+Tags particulier pour obtenir un tableau à hauteur fixe 
+****************************************/
+
+.table-fixed { width: 100%; }
+
+/*Fixation du corps de tableau pour gérer le scrolling*/
+
+.table-fixed tbody {
+  height: 500px;
+  overflow-x: auto;
+  overflow-y: auto;
+  width: 100%;  
+}
+
+/*Suppression du border*/
+
+.table > thead > tr > th { border: none; }
+
+.table-fixed thead, .table-fixed tfoot, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th { display: block; }
+
+.table-fixed tbody td { float: left; }
+
+.table-fixed thead tr th,
+.table-fixed tfoot tr td {
+  display: block;
+  float: left;
+}
+
+/***************************************
+Surcharge du tableau de base
+****************************************/
+
+/*Correction des espaces supplémentaires*/
+
+.table tbody tr td {
+  cursor: pointer;
+  height: 35px;
+  margin: 0;
+  overflow: hidden;
+  padding-left: 10px;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.table { font-size: 15px !important; }
+
+@media (max-width:1366px) and (max-height:768px) {
+
+  .table { font-size: 12px !important; }
+}
+
+/*Custo sur les entêtes des tableaux*/
+
+.table thead tr th {
+  background-color: #0052A0 !important;
+  color: white;
+  font-size: 15px;
+  font-weight: 300;
+  height: 55px;
+  vertical-align: middle;
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+
+  .table thead tr th {
+    font-size: 12px;
+    height: 34px;
+  }
+
+}
+
+/*Custo si bouton dans le header*/
+
+.table thead tr th .action {
+  border: 1px solid;
+  cursor: pointer;
+  float: right;
+  font-size: 20px;
+  padding: 5px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/*Gestion du rollover sur les lignes*/
+
+.table tbody:hover tr:hover > td {
+  background-color: #E1E3E5;
+  color: black;
+}
+
+.table tbody tr td {
+  height: 45px;
+  margin: 0;
+  vertical-align: middle;
+}
+
+/*Surchage au niveaux des boutons*/
+
+.table tbody tr td a {
+  background-color: transparent;
+  margin: 0;
+  margin-right: 15px;
+  padding: 0 !important;
+}
+
+.table tbody tr td a:hover {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+/*Ajustement Style Icone dans le bouton*/
+
+.table tbody tr td I {
+  font-size: 25px;
+  font-style: normal;
+  vertical-align: middle;   
+}
+
+/*Surchage Boutons*/
+
+.table .badge {
+  border-radius: 0;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+/*Surchage visuelle de la colonne de gauche si nécessaire*/
+
+.table .info-key {
+  font-size: 19px;
+  font-weight: 500;
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+
+  .table .info-key { font-size: 17px; }
+}
+
+/***************************************
+Tags particulier pour obtenir un mini tableau 
+****************************************/
+
+.table-reduced thead tr th {
+  background: rgba(0, 82, 160, 0.8) !important;
+  font-size: 10px;
+  height: 13px;
+  padding: 3px;
+}
+
+.table-reduced tbody tr td { padding: 3px; }
+
+.table-reduced tbody tr td INPUT {
+  margin: 3px;
+  width: 80%;
+}
+
+.action-icone {
+  color: rgb(103, 117, 127);
+  font-size: 30px;
+}
+
+/* ************************************
+ *
+ * @Section: Surcharge sur les Panels
+ *
+************************************* */
+
+/*Suppression de radius pas défaut*/
+
+panel-group, .panel,
+.panel-group .panel,
+.panel-heading,
+.panel-title,
+.panel-body,
+.panel-footer { border-radius: 0; }
+
+.panel-body { border-bottom: 1px solid rgb(225, 227, 229); }
+
+.panel-footer {
+  background: white;
+  border-top: 1px solid rgb(225, 227, 229);
+  height: 50px;
+  margin: 7px;
+}
+
+.panel-title a {
+  display: block;
+  height: 35px;
+  margin: 0;
+  padding: 0;
+  padding-left: 5px;
+  padding-right: 15px;
+  padding-top: 5px;
+  text-decoration: none;
+  width: 100%;
+}
+
+h4.panel-title {
+  border-bottom: 0 !important;
+  font-size: 22px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+/************************************
+*    Ajout des chevrons             *
+*************************************/
+
+.panel-heading {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.panel-heading .chevron:before, .chevron {
+  color: rgb(103, 117, 127);
+  content: "\f078";
+  float: left;
+}
+
+.panel-heading.collapsed .chevron:before, .collapsed .chevron {
+  color: #0052A0;
+  content: "\f054";
+  float: left;
+}

@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="VPWeb_Index_Title" xml:space="preserve">
+    <value>Validation des pointages</value>
+  </data>
+  <data name="VPManager_CTRL_CHT_001" xml:space="preserve">
+    <value>Le nombre total d'heures normales et majorées est supérieur à 16h.</value>
+  </data>
+  <data name="VPManager_CTRL_CHT_002" xml:space="preserve">
+    <value>Le nombre total d'heures normales est supérieur à 12h.</value>
+  </data>
+  <data name="VPManager_CTRL_CHT_003" xml:space="preserve">
+    <value>La même prime journalière est attribuée plus d'une fois.</value>
+  </data>
+  <data name="VPManager_AuteurCreationObligatoire" xml:space="preserve">
+    <value>L'auteur de la création est obligatoire.</value>
+  </data>
+  <data name="VPManager_DateDebutObligatoire" xml:space="preserve">
+    <value>La date de début est obligatoire.</value>
+  </data>
+  <data name="VPManager_LotPointageIdObligatoire" xml:space="preserve">
+    <value>L'identifiant du lot de pointage est obligatoire.</value>
+  </data>
+  <data name="VPManager_PeriodeObligatoire" xml:space="preserve">
+    <value>La période est obligatoire.</value>
+  </data>
+  <data name="VPManager_StatutObligatoire" xml:space="preserve">
+    <value>Le statut du contrôle pointage est obligatoire.</value>
+  </data>
+  <data name="VPManager_TypeControleObligatoire" xml:space="preserve">
+    <value>Le type du contrôle pointage est obligatoire.</value>
+  </data>
+  <data name="VPWeb_AjouterEtablissementButton" xml:space="preserve">
+    <value>Ajouter un établissement</value>
+  </data>
+  <data name="VPWeb_AjouterEtablissementTooltip" xml:space="preserve">
+    <value>Cliquer pour ajouter un établissement</value>
+  </data>
+  <data name="VPWeb_AucuneErreur" xml:space="preserve">
+    <value>Aucune erreur</value>
+  </data>
+  <data name="VPWeb_AucunVerrouillage" xml:space="preserve">
+    <value>Aucun verrouillage</value>
+  </data>
+  <data name="VPWeb_ChoixEtablissements" xml:space="preserve">
+    <value>Choix des établissements</value>
+  </data>
+  <data name="VPWeb_ChoixMatricule" xml:space="preserve">
+    <value>Choix du matricule</value>
+  </data>
+  <data name="VPWeb_ControleChantier" xml:space="preserve">
+    <value>Contrôle Chantier</value>
+  </data>
+  <data name="VPWeb_ControleChantierNotif" xml:space="preserve">
+    <value>Le contrôle chantier vient d'être lancé.</value>
+  </data>
+  <data name="VPWeb_ControleJamaisExecute" xml:space="preserve">
+    <value>Le contrôle n'a pas encore été exécuté</value>
+  </data>
+  <data name="VPWeb_ControleVrac" xml:space="preserve">
+    <value>Contrôle Vrac</value>
+  </data>
+  <data name="VPWeb_ControleVracNotif" xml:space="preserve">
+    <value>Le contrôle vrac vient d'être lancé.</value>
+  </data>
+  <data name="VPWeb_Correspondants" xml:space="preserve">
+    <value>Correspondants</value>
+  </data>
+  <data name="VPWeb_EtablissementDejaChoisi" xml:space="preserve">
+    <value>Cet établissement de paie est déjà dans la liste</value>
+  </data>
+  <data name="VPWeb_EtablissementLimite" xml:space="preserve">
+    <value>Vous ne pouvez choisir que 4 établissements de paie.</value>
+  </data>
+  <data name="VPWeb_EtablissementsPaie" xml:space="preserve">
+    <value>Etablissements de paie</value>
+  </data>
+  <data name="VPWeb_ExecuterControleChantier" xml:space="preserve">
+    <value>Exécuter le contrôle chantier</value>
+  </data>
+  <data name="VPWeb_ExecuterControleChantierConfirmation" xml:space="preserve">
+    <value>Confirmez-vous l'exécution du contrôle chantier sur ce lot ?</value>
+  </data>
+  <data name="VPWeb_ExecuterControleVrac" xml:space="preserve">
+    <value>Exécuter le contrôle vrac</value>
+  </data>
+  <data name="VPWeb_ExecuterRemonteeVrac" xml:space="preserve">
+    <value>Exécuter la remontée vrac</value>
+  </data>
+  <data name="VPWeb_ExecuterSignature" xml:space="preserve">
+    <value>Viser le lot de pointage</value>
+  </data>
+  <data name="VPWeb_ExecuterSignatureConfirmation" xml:space="preserve">
+    <value>Voulez-vous apposer votre visa sur ce lot ?</value>
+  </data>
+  <data name="VPWeb_ExecutionTooltip" xml:space="preserve">
+    <value>{0} par {1}</value>
+  </data>
+  <data name="VPWeb_MaJAbsences" xml:space="preserve">
+    <value>Mise à jour des absences</value>
+  </data>
+  <data name="VPWeb_NombrePointages" xml:space="preserve">
+    <value>Nombre de pointages</value>
+  </data>
+  <data name="VPWeb_RemonteeVrac" xml:space="preserve">
+    <value>Remontée Vrac</value>
+  </data>
+  <data name="VPWeb_RemonteeVracNotif" xml:space="preserve">
+    <value>La remontée vrac vient d'être lancée.</value>
+  </data>
+  <data name="VPWeb_SupprimerEtablissementTooltip" xml:space="preserve">
+    <value>Cliquer pour supprimer l'établissement</value>
+  </data>
+  <data name="VPWeb_TousEtablissements" xml:space="preserve">
+    <value>Tous les établissements</value>
+  </data>
+  <data name="VPWeb_TousMatricules" xml:space="preserve">
+    <value>Tous les matricules</value>
+  </data>
+  <data name="VPWeb_VisaCorrespondant" xml:space="preserve">
+    <value>Visa Correspondant</value>
+  </data>
+  <data name="VPWeb_Erreurs" xml:space="preserve">
+    <value>erreur(s)</value>
+  </data>
+  <data name="VPWeb_VoirDetailRapportTooltip" xml:space="preserve">
+    <value>Accéder à la liste des pointages du personnel</value>
+  </data>
+  <data name="VPWeb_Vous" xml:space="preserve">
+    <value>Vous ({0})</value>
+  </data>
+  <data name="VPWeb_Chantier" xml:space="preserve">
+    <value>Rapport Contrôle Chantier</value>
+  </data>
+  <data name="VPWeb_Vrac" xml:space="preserve">
+    <value>Rapport Contrôle Vrac</value>
+  </data>
+  <data name="VPManager_ControleChantierExportFilename" xml:space="preserve">
+    <value>ControleChantier_{0}_{1}_{2}</value>
+  </data>
+  <data name="VPManager_ControleVracExportFilename" xml:space="preserve">
+    <value>ControleVrac_{0}_{1}_{2}</value>
+  </data>
+  <data name="VPManager_RemonteeVracExportFilename" xml:space="preserve">
+    <value>RemonteeVrac_{0}_{1}_{2}</value>
+  </data>
+  <data name="VPWeb_SocieteOuEtablissementObligatoire" xml:space="preserve">
+    <value>Il est obligatoire de saisir une société ou un établissement.</value>
+    <comment>Modal Contrôle Vrac</comment>
+  </data>
+  <data name="VPWeb_RemonteeVracErreur" xml:space="preserve">
+    <value>DOUBLON CODE ABSENCE - ANAEL: {0} - FRED: {1}</value>
+  </data>
+  <data name="VPWeb_ConsulterRapportErreur" xml:space="preserve">
+    <value>Veuillez consulter le rapport d'erreurs</value>
+  </data>
+  <data name="VPManager_ControleChantierJobFailed" xml:space="preserve">
+    <value>Le Contrôle Chantier du {0} s'est terminé en échec, veuillez contacter le support.</value>
+  </data>
+  <data name="VPManager_ControleChantierJobSuccess" xml:space="preserve">
+    <value>Le Contrôle Chantier du {0} s'est terminé avec succès, veuillez actualiser la page 'Validation des pointages' pour consulter les résultats.</value>
+  </data>
+  <data name="VPManager_ControleVracJobFailed" xml:space="preserve">
+    <value>Le Contrôle Vrac du {0} s'est terminé en échec, veuillez contacter le support.</value>
+  </data>
+  <data name="VPManager_ControleVracJobSuccess" xml:space="preserve">
+    <value>Le Contrôle Vrac du {0} s'est terminé avec succès, veuillez actualiser la page 'Validation des pointages' pour consulter les résultats.</value>
+  </data>
+  <data name="VPManager_RemonteVracJobFailed" xml:space="preserve">
+    <value>La Remontée Vrac du {0} s'est terminée en échec, veuillez contacter le support.</value>
+  </data>
+  <data name="VPManager_RemonteVracJobSuccess" xml:space="preserve">
+    <value>La Remontée Vrac du {0} s'est terminée avec succès, veuillez actualiser la page 'Validation des pointages' pour consulter les résultats.</value>
+  </data>
+  <data name="VPManager_CTRL_RHebdo_043" xml:space="preserve">
+    <value>Le pointage est incomplet, il manque {0} heures</value>
+  </data>
+  <data name="VPWeb_Controle" xml:space="preserve">
+    <value>Contrôle</value>
+  </data>
+  <data name="VPWeb_Gestionnaire" xml:space="preserve">
+    <value>Gestionnaire de paie</value>
+  </data>
+  <data name="VPWeb_En_Cours_Execution" xml:space="preserve">
+    <value>Exécution en cours lancée</value>
+  </data>
+  <data name="VPWeb_ExecutionControleVracFailed" xml:space="preserve">
+    <value>Dernière tentative échouée</value>
+  </data>
+  <data name="VPWeb_ExecutionTooltip2" xml:space="preserve">
+    <value>{0} le {1} par {2}</value>
+  </data>
+  <data name="VPManager_RemontePrimeJobSuccess" xml:space="preserve">
+    <value>La Remontée des Primes du {0} s'est terminée avec succès, veuillez actualiser la page 'Validation des pointages' pour consulter les résultats.</value>
+  </data>
+  <data name="ValidationPointage_CiSepModal_ControleVrac" xml:space="preserve">
+    <value>Le Contrôle Vrac n'a pas pu être lancé car les comptes internes des CI SEP suivants ne sont pas paramétrés dans FRED, veuillez contacter leurs administrateurs respectifs :</value>
+  </data>
+  <data name="ValidationPointage_CiSepModal_RemonteeVrac" xml:space="preserve">
+    <value>La Remontée Vrac n'a pas pu être lancée car les comptes internes des CI SEP suivants ne sont pas paramétrés dans FRED, veuillez contacter leurs administrateurs respectifs :</value>
+  </data>
+  <data name="ValidationPointage_CiSepModal_Titre" xml:space="preserve">
+    <value>CI SEP non paramétrés</value>
+  </data>
+  <data name="Personnel_Filter_Autre_Information_Placeholder" xml:space="preserve">
+    <value>Autre information...(matricule, société, étab.)</value>
+  </data>
+  <data name="Personnel_PartialGeneral_Nom_Placeholder" xml:space="preserve">
+    <value>Nom du personnel...</value>
+  </data>
+  <data name="Personnel_PartialGeneral_Prenom_Placeholder" xml:space="preserve">
+    <value>Prénom du  personnel...</value>
+  </data>
+  <data name="ValidationPointage_Statut" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="ValidationPointage_StatutCadre" xml:space="preserve">
+    <value>Cadre</value>
+  </data>
+  <data name="ValidationPointage_StatutEtam" xml:space="preserve">
+    <value>ETAM</value>
+  </data>
+  <data name="ValidationPointage_StatutOuvrier" xml:space="preserve">
+    <value>Ouvrier</value>
+  </data>
+</root>

@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BudgetComparaison_Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="BudgetComparaison_Action_ToutDeplier_ButtonTooltip" xml:space="preserve">
+    <value>Tout déplier</value>
+  </data>
+  <data name="BudgetComparaison_Action_ToutPlier_ButtonTooltip" xml:space="preserve">
+    <value>Tout plier</value>
+  </data>
+  <data name="BudgetComparaison_AxeAnalyse" xml:space="preserve">
+    <value>Axe d'analyse</value>
+  </data>
+  <data name="BudgetComparaison_AxeRessourceTacheButtonTooltip" xml:space="preserve">
+    <value>Cliquer pour afficher la comparaison sur l’axe Ressources / Tâches</value>
+  </data>
+  <data name="BudgetComparaison_AxeTacheRessourceButtonTooltip" xml:space="preserve">
+    <value>Cliquer pour afficher la comparaison sur l’axe Tâches / Ressources</value>
+  </data>
+  <data name="BudgetComparaison_AxeTooltipHeader_Chapitre" xml:space="preserve">
+    <value>Chapitre</value>
+  </data>
+  <data name="BudgetComparaison_AxeTooltipHeader_Ressource" xml:space="preserve">
+    <value>Ressource</value>
+  </data>
+  <data name="BudgetComparaison_AxeTooltipHeader_SousChapitre" xml:space="preserve">
+    <value>Sous-chapitre</value>
+  </data>
+  <data name="BudgetComparaison_AxeTooltipHeader_Tache1" xml:space="preserve">
+    <value>Tâche 1</value>
+  </data>
+  <data name="BudgetComparaison_AxeTooltipHeader_Tache2" xml:space="preserve">
+    <value>Tâche 2</value>
+  </data>
+  <data name="BudgetComparaison_AxeTooltipHeader_Tache3" xml:space="preserve">
+    <value>Tâche 3</value>
+  </data>
+  <data name="BudgetComparaison_AxeTooltipHeader_Tache4" xml:space="preserve">
+    <value>Tâche 4</value>
+  </data>
+  <data name="BudgetComparaison_BudgetDejaSelectionne" xml:space="preserve">
+    <value>Budget déjà sélectionné, veuillez en choisir un autre</value>
+  </data>
+  <data name="BudgetComparaison_BudgetsAComparer" xml:space="preserve">
+    <value>Budgets à comparer</value>
+  </data>
+  <data name="BudgetComparaison_ChangementDeCiMessage" xml:space="preserve">
+    <value>Le changement de CI implique la réinitialisation de la recherche. Il sera donc nécessaire de sélectionner les budgets. Confirmez-vous le changement de CI ?</value>
+  </data>
+  <data name="BudgetComparaison_ChangementDeCiTitre" xml:space="preserve">
+    <value>Confirmation de réinitialisation</value>
+  </data>
+  <data name="BudgetComparaison_Devise" xml:space="preserve">
+    <value>Devise</value>
+  </data>
+  <data name="BudgetComparaison_Erreur_BudgetNonTrouve" xml:space="preserve">
+    <value>Impossible de trouver le budget {0}</value>
+  </data>
+  <data name="BudgetComparaison_Erreur_BudgetsCiDifferents" xml:space="preserve">
+    <value>Les budgets à comparer ne sont pas sur le même CI</value>
+  </data>
+  <data name="BudgetComparaison_Erreur_BudgetsDevisesDifferentes" xml:space="preserve">
+    <value>Les budgets à comparer n'ont pas la même devise</value>
+  </data>
+  <data name="BudgetComparaison_Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="BudgetComparaison_ExportExcel_Ecart" xml:space="preserve">
+    <value>ECART</value>
+  </data>
+  <data name="BudgetComparaison_ExportExcel_Revision" xml:space="preserve">
+    <value>BUDGET {0} : Version {1} {2}</value>
+  </data>
+  <data name="BudgetComparaison_ExportExcel_Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="BudgetComparaison_Export_Excel_Tooltip" xml:space="preserve">
+    <value>Cliquer pour exporter au format Excel</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_Annuler" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_AxeAnalytique" xml:space="preserve">
+    <value>Axe analytique</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_AxeRessourceTache" xml:space="preserve">
+    <value>Axe Ressources &gt; Tâches</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_AxeTacheRessource" xml:space="preserve">
+    <value>Axe Tâches &gt; Ressources</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_ColonnesAffichees" xml:space="preserve">
+    <value>Colonnes affichées</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_ColonnesAffichees_Budget1" xml:space="preserve">
+    <value>Budget 1</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_ColonnesAffichees_Budget2" xml:space="preserve">
+    <value>Budget 2</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_ColonnesAffichees_Ecart" xml:space="preserve">
+    <value>Ecart</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_ColonnesAffichees_Quantite" xml:space="preserve">
+    <value>Quantité</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_ColonnesAffichees_RpixUnitaire" xml:space="preserve">
+    <value>PU</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_ColonnesAffichees_Unite" xml:space="preserve">
+    <value>Unité</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_DetailAxe" xml:space="preserve">
+    <value>Détail de l'axe analytique</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_DetailAxe_Chapitre" xml:space="preserve">
+    <value>Chapitre</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_DetailAxe_Erreur_SelectionnerUnAxe" xml:space="preserve">
+    <value>Veuillez sélectionner au moins un axe</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_DetailAxe_Ressource" xml:space="preserve">
+    <value>Ressource</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_DetailAxe_SousChapitre" xml:space="preserve">
+    <value>Sous-chapitre</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_DetailAxe_T1" xml:space="preserve">
+    <value>T1</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_DetailAxe_T2" xml:space="preserve">
+    <value>T2</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_DetailAxe_T3" xml:space="preserve">
+    <value>T3</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_DetailAxe_T4" xml:space="preserve">
+    <value>T4</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_Enregistrer" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_RefermerLePanneau" xml:space="preserve">
+    <value>Refermer le panneau</value>
+  </data>
+  <data name="BudgetComparaison_FilterPanel_Titre" xml:space="preserve">
+    <value>Paramétrage de la comparaison de budget</value>
+  </data>
+  <data name="BudgetComparaison_Information_Budget1_Vide" xml:space="preserve">
+    <value>Le budget 1 ne contient pas de sous-détail</value>
+  </data>
+  <data name="BudgetComparaison_Information_Budget2_Vide" xml:space="preserve">
+    <value>Le budget 2 ne contient pas de sous-détail</value>
+  </data>
+  <data name="BudgetComparaison_Information_Budgets_Identique" xml:space="preserve">
+    <value>Les budgets sont identiques</value>
+  </data>
+  <data name="BudgetComparaison_Information_Budgets_Vide" xml:space="preserve">
+    <value>Les budgets ne contiennent pas de sous-détail</value>
+  </data>
+  <data name="BudgetComparaison_ListeDesBudgets" xml:space="preserve">
+    <value>Liste des budgets</value>
+  </data>
+  <data name="BudgetComparaison_PersonnalisationAffichageButtonTooltip" xml:space="preserve">
+    <value>Cliquer pour afficher les options de personnalisation d’affichage</value>
+  </data>
+  <data name="BudgetComparaison_Print_Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="BudgetComparaison_RechercherBudget" xml:space="preserve">
+    <value>Rechercher budget</value>
+  </data>
+  <data name="BudgetComparaison_RechercherUnBudget" xml:space="preserve">
+    <value>Rechercher un budget</value>
+  </data>
+  <data name="BudgetComparaison_SansUnite_Code" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="BudgetComparaison_SansUnite_Libelle" xml:space="preserve">
+    <value>Sans unité</value>
+  </data>
+  <data name="BudgetComparaison_SelectionnerBudgetMessage" xml:space="preserve">
+    <value>Veuillez sélectionner les budgets à comparer</value>
+  </data>
+  <data name="BudgetComparaison_SelectionnerCiLabel" xml:space="preserve">
+    <value>Sélectionnez votre CI</value>
+  </data>
+  <data name="BudgetComparaison_SelectionnerCiMessage" xml:space="preserve">
+    <value>Veuillez sélectionner une affaire</value>
+  </data>
+  <data name="BudgetComparaison_TableHeader_AxeRessourcesTaches" xml:space="preserve">
+    <value>Ressources / Tâches</value>
+  </data>
+  <data name="BudgetComparaison_TableHeader_AxeTachesRessources" xml:space="preserve">
+    <value>Tâches / Ressources</value>
+  </data>
+  <data name="BudgetComparaison_TableHeader_Budget1" xml:space="preserve">
+    <value>BUDGET 1</value>
+  </data>
+  <data name="BudgetComparaison_TableHeader_Budget2" xml:space="preserve">
+    <value>BUDGET 2</value>
+  </data>
+  <data name="BudgetComparaison_TableHeader_Ecart" xml:space="preserve">
+    <value>ECART</value>
+  </data>
+  <data name="BudgetComparaison_TableHeader_HideColumn" xml:space="preserve">
+    <value>Cacher la colonne</value>
+  </data>
+  <data name="BudgetComparaison_TableHeader_Montant" xml:space="preserve">
+    <value>Montant</value>
+  </data>
+  <data name="BudgetComparaison_TableHeader_PrixUnitaire" xml:space="preserve">
+    <value>PU</value>
+  </data>
+  <data name="BudgetComparaison_TableHeader_Quantite" xml:space="preserve">
+    <value>Quantité</value>
+  </data>
+  <data name="BudgetComparaison_TableHeader_Unite" xml:space="preserve">
+    <value>Unité</value>
+  </data>
+  <data name="BudgetComparaison_Titre" xml:space="preserve">
+    <value>Comparaison de budget</value>
+  </data>
+  <data name="BudgetComparaison_TitrePage" xml:space="preserve">
+    <value>Comparaison de budget</value>
+  </data>
+  <data name="BudgetComparaison_TotalEcart" xml:space="preserve">
+    <value>Total écart</value>
+  </data>
+  <data name="BudgetComparaison_Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+</root>

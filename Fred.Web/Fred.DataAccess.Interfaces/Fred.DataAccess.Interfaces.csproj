@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{35DEBE33-BEF2-4E52-A453-59B893EA748C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fred.DataAccess.Interfaces</RootNamespace>
+    <AssemblyName>Fred.DataAccess.Interfaces</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IActionCommandeLigneRepository.cs" />
+    <Compile Include="IActionTypeRepository.cs" />
+    <Compile Include="IActionStatusRepository.cs" />
+    <Compile Include="IActionRepository.cs" />
+    <Compile Include="IActionJobRepository.cs" />
+    <Compile Include="IActivitySummaryRepository.cs" />
+    <Compile Include="IAdresseRepository.cs" />
+    <Compile Include="IAffectationMoyenRepository.cs" />
+    <Compile Include="IAffectationMoyenTypeRepository.cs" />
+    <Compile Include="IAffectationRepository.cs" />
+    <Compile Include="IAffectationSeuilOrgaRepository.cs" />
+    <Compile Include="IAffectationSeuilUtilisateurRepository.cs" />
+    <Compile Include="IAgenceRepository.cs" />
+    <Compile Include="IAssocieSepRepository.cs" />
+    <Compile Include="IAstreinteRepository.cs" />
+    <Compile Include="IAuthentificationLogRepository.cs" />
+    <Compile Include="IAvancementEtatRepository.cs" />
+    <Compile Include="IAvancementRecetteRepository.cs" />
+    <Compile Include="IAvancementRepository.cs" />
+    <Compile Include="IAvancementTacheRepository.cs" />
+    <Compile Include="IAvancementWorkflowRepository.cs" />
+    <Compile Include="IAvisCommandeAvenantRepository.cs" />
+    <Compile Include="IAvisCommandeRepository.cs" />
+    <Compile Include="IAvisRepository.cs" />
+    <Compile Include="IBaremeExploitationCIRepository.cs" />
+    <Compile Include="IBaremeExploitationCISurchargeRepository.cs" />
+    <Compile Include="IBaremeExploitationOrganisationRepository.cs" />
+    <Compile Include="IBudgetBibliothequePrixItemRepository.cs" />
+    <Compile Include="IBudgetBibliothequePrixItemValuesHistoRepository.cs" />
+    <Compile Include="IBudgetBibliothequePrixRepository.cs" />
+    <Compile Include="IBudgetEtatRepository.cs" />
+    <Compile Include="IBudgetRecetteRepository.cs" />
+    <Compile Include="IBudgetRepository.cs" />
+    <Compile Include="IBudgetRepositoryOld.cs" />
+    <Compile Include="IBudgetSousDetailRepository.cs" />
+    <Compile Include="IBudgetT4Repository.cs" />
+    <Compile Include="IBudgetTacheRepository.cs" />
+    <Compile Include="IBudgetWorkflowRepository.cs" />
+    <Compile Include="ICarburantOrganisationDeviseRepository.cs" />
+    <Compile Include="IChapitreRepository.cs" />
+    <Compile Include="IChekingPointingReposity.cs" />
+    <Compile Include="ICIPrimeRepository.cs" />
+    <Compile Include="ICIRepository.cs" />
+    <Compile Include="ICodeAbsenceRepository.cs" />
+    <Compile Include="ICodeAstreinteRepository.cs" />
+    <Compile Include="ICodeDeplacementRepository.cs" />
+    <Compile Include="ICodeMajorationRepository.cs" />
+    <Compile Include="ICodeZoneDeplacementRepository.cs" />
+    <Compile Include="ICommandeAvenantRepository.cs" />
+    <Compile Include="ICommandeContratInterimaireRepository.cs" />
+    <Compile Include="ICommandeEnergieRepository.cs" />
+    <Compile Include="ICommandeLigneAvenantRepository.cs" />
+    <Compile Include="ICommandeLignesRepository.cs" />
+    <Compile Include="ICommandeRepository.cs" />
+    <Compile Include="IContratInterimaireImportRepository.cs" />
+    <Compile Include="IContratInterimaireRepository.cs" />
+    <Compile Include="IControleBudgetaireRepository.cs" />
+    <Compile Include="IControlePointageErreurRepository.cs" />
+    <Compile Include="IControlePointageRepository.cs" />
+    <Compile Include="IDatesCalendrierPaieRepository.cs" />
+    <Compile Include="IDatesClotureComptableRepository.cs" />
+    <Compile Include="IDelegationRepository.cs" />
+    <Compile Include="IDepenseRepository.cs" />
+    <Compile Include="IDepenseTemporaireRepository.cs" />
+    <Compile Include="IDeviseRepository.cs" />
+    <Compile Include="IEcritureComptableCumulRepository.cs" />
+    <Compile Include="IEcritureComptableRejetRepository.cs" />
+    <Compile Include="IEcritureComptableRepository.cs" />
+    <Compile Include="IEmailSouscriptionRepository.cs" />
+    <Compile Include="IEquipeRepository.cs" />
+    <Compile Include="IEtablissementComptableRepository.cs" />
+    <Compile Include="IEtablissementPaieRepository.cs" />
+    <Compile Include="IEtatContratInterimaireRepository.cs" />
+    <Compile Include="IExternalDirectoryRepository.cs" />
+    <Compile Include="IExterneDirectoryRepository.cs" />
+    <Compile Include="IFacturationRepository.cs" />
+    <Compile Include="IFactureARRepository.cs" />
+    <Compile Include="IFamilleOperationDiverseRepository.cs" />
+    <Compile Include="IFavoriRepository.cs" />
+    <Compile Include="IFeatureFlippingRepository.cs" />
+    <Compile Include="IFonctionnaliteDesactiveRepository.cs" />
+    <Compile Include="IFonctionnaliteRepository.cs" />
+    <Compile Include="IFournisseurRepository.cs" />
+    <Compile Include="IFredIePointageFluxRepository.cs" />
+    <Compile Include="IFredRepository.cs" />
+    <Compile Include="IGroupeRemplacementTacheRepository.cs" />
+    <Compile Include="IGroupeRepository.cs" />
+    <Compile Include="IHoldingRepository.cs" />
+    <Compile Include="IImageRepository.cs" />
+    <Compile Include="IIndemniteDeplacementRepository.cs" />
+    <Compile Include="IJournalRepository.cs" />
+    <Compile Include="ILogImportRepository.cs" />
+    <Compile Include="ILotFarRepository.cs" />
+    <Compile Include="ILotPointageRepository.cs" />
+    <Compile Include="IMaterielLocationRepository.cs" />
+    <Compile Include="IMaterielRepository.cs" />
+    <Compile Include="IMatriculeExterneRepository.cs" />
+    <Compile Include="IModuleDesactiveRepository.cs" />
+    <Compile Include="IModuleRepository.cs" />
+    <Compile Include="IMontantFactureRepository.cs" />
+    <Compile Include="IMontantHtReceptionneeRepository.cs" />
+    <Compile Include="IMontantHtRepository.cs" />
+    <Compile Include="IMultipleRepository.cs" />
+    <Compile Include="INatureRepository.cs" />
+    <Compile Include="INLogRepository.cs" />
+    <Compile Include="INotificationRepository.cs" />
+    <Compile Include="IObjectifFlashRepository.cs" />
+    <Compile Include="IObjectifFlashTacheRepository.cs" />
+    <Compile Include="IOperationDiverseRepository.cs" />
+    <Compile Include="IOrganisationRepository.cs" />
+    <Compile Include="IOrganisationTreeRepository.cs" />
+    <Compile Include="IParametrageReferentielEtenduRepository.cs" />
+    <Compile Include="IParametreRepository.cs" />
+    <Compile Include="IParamsRepository.cs" />
+    <Compile Include="IPaysRepository.cs" />
+    <Compile Include="IPermissionFonctionnaliteRepository.cs" />
+    <Compile Include="IPermissionRepository.cs" />
+    <Compile Include="IPersonnelImageRepository.cs" />
+    <Compile Include="IPersonnelRepository.cs" />
+    <Compile Include="IPieceJointeCommandeRepository.cs" />
+    <Compile Include="IPieceJointeReceptionRepository.cs" />
+    <Compile Include="IPieceJointeRepository.cs" />
+    <Compile Include="IPieceJointeStockagePhysiqueRepository.cs" />
+    <Compile Include="IPointageAnticipePrimeRepository.cs" />
+    <Compile Include="IPointageAnticipeRepository.cs" />
+    <Compile Include="IPointageBaseRepository.cs" />
+    <Compile Include="IPointageRepository.cs" />
+    <Compile Include="IPrimeRepository.cs" />
+    <Compile Include="IRapportLigneAstreinteRepository.cs" />
+    <Compile Include="IRapportLigneCodeAstreinteRepository.cs" />
+    <Compile Include="IRapportLigneMajorationRepository.cs" />
+    <Compile Include="IRapportLignePrimeRepository.cs" />
+    <Compile Include="IRapportLigneTacheRepository.cs" />
+    <Compile Include="IRapportPrimeLigneAstreinteRepository.cs" />
+    <Compile Include="IRapportPrimeLignePrimeRepository.cs" />
+    <Compile Include="IRapportPrimeLigneRepository.cs" />
+    <Compile Include="IRapportPrimeRepository.cs" />
+    <Compile Include="IRapportRepository.cs" />
+    <Compile Include="IRapportTacheRepository.cs" />
+    <Compile Include="IReferentielEtenduRepository.cs" />
+    <Compile Include="IRemonteeVracErreurRepository.cs" />
+    <Compile Include="IRemonteeVracRepository.cs" />
+    <Compile Include="IRemplacementTacheRepository.cs" />
+    <Compile Include="IRepartitionEcartRepository.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="IRepositoryQuery.cs" />
+    <Compile Include="IRepriseCiRepository.cs" />
+    <Compile Include="IRepriseCommandeRepository.cs" />
+    <Compile Include="IRepriseDonneesRepository.cs" />
+    <Compile Include="IRepriseIndemniteDeplacementRepository.cs" />
+    <Compile Include="IRepriseMaterielRepository.cs" />
+    <Compile Include="IRepriseODRepository.cs" />
+    <Compile Include="IReprisePersonnelRepository.cs" />
+    <Compile Include="IReprisePlanTachesRepository.cs" />
+    <Compile Include="IRepriseRapportRepository.cs" />
+    <Compile Include="IRepriseValidationCommandeRepository.cs" />
+    <Compile Include="IRessourceRecommandeeRepository.cs" />
+    <Compile Include="IRessourceRepository.cs" />
+    <Compile Include="IRessourceTacheRepositoryOld.cs" />
+    <Compile Include="IRoleFonctionnaliteRepository.cs" />
+    <Compile Include="IRoleRepository.cs" />
+    <Compile Include="ISeuilValidationRepository.cs" />
+    <Compile Include="ISiteRepository.cs" />
+    <Compile Include="ISocieteClassificationRepository.cs" />
+    <Compile Include="ISocieteDeviseRepository.cs" />
+    <Compile Include="ISocieteRepository.cs" />
+    <Compile Include="ISoldeFarRepository.cs" />
+    <Compile Include="ISousChapitreRepository.cs" />
+    <Compile Include="IStatutAbsenceRepository.cs" />
+    <Compile Include="ISystemeExterneRepository.cs" />
+    <Compile Include="ISystemeImportRepository.cs" />
+    <Compile Include="ITacheRepository.cs" />
+    <Compile Include="ITranscoImportRepository.cs" />
+    <Compile Include="ITypeDepenseRepository.cs" />
+    <Compile Include="ITypeOrganisationRepository.cs" />
+    <Compile Include="ITypeSocieteRepository.cs" />
+    <Compile Include="IUniteReferentielEtenduRepository.cs" />
+    <Compile Include="IUniteRepository.cs" />
+    <Compile Include="IUniteSocieteRepository.cs" />
+    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="IUtilisateurRepository.cs" />
+    <Compile Include="IValorisationRepository.cs" />
+    <Compile Include="IZoneDeTravailRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fred.Entities\Fred.Entities.csproj">
+      <Project>{d84768f7-f096-4e6d-997e-ac1d9232b47a}</Project>
+      <Name>Fred.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.EntityFramework\Fred.EntityFramework.csproj">
+      <Project>{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}</Project>
+      <Name>Fred.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.Framework\Fred.Framework.csproj">
+      <Project>{92478535-02C7-44E0-975E-E31D77E78CCA}</Project>
+      <Name>Fred.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.Web.Shared\Fred.Web.Shared.csproj">
+      <Project>{8ea425da-8eec-45c5-b5a1-b150fb84ae7e}</Project>
+      <Name>Fred.Web.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

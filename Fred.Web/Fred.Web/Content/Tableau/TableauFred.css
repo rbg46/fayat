@@ -1,0 +1,50 @@
+﻿.tableauFred {
+    font-size: large !important;
+    width: 1450px !important;
+    border-bottom-width: thick !important;
+    border-bottom-color: #67757F !important;
+    border-bottom-style: outset !important;
+    border-left-style: outset !important;
+    border-left-color: #E1E3E5 !important;
+    border-left-width: thin !important;
+    border-right-style: outset !important;
+    border-right-color: #E1E3E5 !important;
+    border-right-width: thin !important;
+}
+
+.tableauFred tr {
+    border-style: inset !important;
+    border-width: thin !important;
+    border-color: #E1E3E5 !important;
+    font-weight: normal !important;
+}
+
+.tableauFred tr:nth-child(odd):not(:first-child):not(:hover) {
+    background-color: #ffffff !important;
+}
+
+.tableauFred tr:nth-child(even):not(:first-child):not(:hover) {
+    background-color: #E1E3E5 !important;
+}
+
+.tableauFred tr:hover {
+    color: #ffffff !important;
+    background-color: #67757F !important;
+    border-style: inset !important;
+    border-width: thin !important;
+    border-color: #E1E3E5 !important;
+    font-weight: normal !important;
+}
+
+.tableauFred th {
+    font-size: small !important;
+    font-weight: normal !important;
+}
+
+.tableauFred td {
+    padding: 5px !important;
+}
+
+.entete {
+    position: absolute;
+}

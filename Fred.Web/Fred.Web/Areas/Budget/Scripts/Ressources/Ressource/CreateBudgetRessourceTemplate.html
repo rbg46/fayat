@@ -1,0 +1,149 @@
+﻿<div>
+  
+  <form name="$ctrl.formRessource" autocomplete="off" novalidate>
+    <div class="modal-header">
+      <h2 class="modal-title" ng-show="!$ctrl.isEditMode"><i class="flaticon flaticon-notebook-4"></i>{{$ctrl.resources.CreateBudgetRessourceTpl_creer_ressource}}</h2>
+      <h2 class="modal-title" ng-show="$ctrl.isEditMode"><i class="flaticon flaticon-notebook-4"></i>{{$ctrl.resources.CreateBudgetRessourceTpl_mise_a_jour_ressource}}</h2>
+    </div>
+
+    <div class="modal-body">
+      <div>       
+        <div ng-show="$ctrl.formRessource.$invalid || $ctrl.errorMessage"
+             class="row alert alert-warning">
+          <div ng-show="$ctrl.formRessource.montant.$invalid && $ctrl.formRessource.montant.$error.min">{{$ctrl.resources.CreateBudgetRessourceTpl_error_min}}</div>
+          <!--<div ng-show="$ctrl.formRessource.montant.$invalid && $ctrl.formRessource.montant.$error.pattern">{{$ctrl.resources.CreateBudgetRessourceTpl_error_precision}}</div>-->
+          <div ng-show="$ctrl.formRessource.montant.$invalid && $ctrl.formRessource.montant.$error.max">{{$ctrl.resources.CreateBudgetRessourceTpl_error_max}}</div>
+          <div ng-show="$ctrl.formRessource.montant.$invalid && $ctrl.formRessource.montant.$error.number">{{$ctrl.resources.CreateBudgetRessourceTpl_error_number}}</div>
+          <div ng-show="$ctrl.formRessource.montant.$invalid && $ctrl.formRessource.montant.$error.required">{{$ctrl.resources.CreateBudgetRessourceTpl_error_price_required}}</div>
+          <div ng-show="$ctrl.formRessource.code.$invalid && $ctrl.formRessource.code.$error.required">{{$ctrl.resources.CreateBudgetRessourceTpl_error_code_required}}</div>
+          <div ng-show="$ctrl.formRessource.libelle.$invalid && $ctrl.formRessource.libelle.$error.required">{{$ctrl.resources.CreateBudgetRessourceTpl_error_libelle_required}}</div>
+          <div ng-show="$ctrl.formRessource.unite.$invalid && $ctrl.formRessource.unite.$error.required">{{$ctrl.resources.CreateBudgetRessourceTpl_error_unite_required}}</div>
+          <div ng-show="$ctrl.errorMessage">{{$ctrl.errorMessage}}</div>
+        </div>
+      </div>
+      <!--RESSOURCE PARENT-->
+      <div class="row">
+        <div class="col-md-12">
+          <label for="">{{$ctrl.resources.CreateBudgetRessourceTpl_ressource_parent}}</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <label for="">{{$ctrl.resources.Code_lb}}</label>
+          <input type="text"
+                 class="form-control"
+                 ng-model="$ctrl.ressourceParent.Code"
+                 readonly
+                 disabled>
+        </div>
+        <div class="col-md-8">
+          <label for="">{{$ctrl.resources.Libelle_lb}}</label>
+          <input type="text"
+                 class="form-control"
+                 ng-model="$ctrl.ressourceParent.Libelle"
+                 readonly
+                 disabled>
+        </div>
+      </div>
+
+      <!--NOUVELLE RESSOURCE-->
+      <div class="row">
+        <div class="col-md-12">
+          <label for="">{{$ctrl.resources.CreateBudgetRessourceTpl_ressource}}</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <label for="">{{$ctrl.resources.Code_lb}}</label>
+          <input type="text"
+                 name="code"
+                 maxlength="20"
+                 class="form-control"
+                 ng-model="$ctrl.ressource.Code"
+                 required>
+        </div>
+        <div class="col-md-8">
+          <label for="">{{$ctrl.resources.Libelle_lb}}</label>
+          <input type="text"
+                 name="libelle"
+                 class="form-control"
+                 maxlength="500"
+                 ng-model="$ctrl.ressource.Libelle"
+                 required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <label for="">{{$ctrl.resources.CreateBudgetRessourceTpl_unite}}</label>
+         
+          <lookup-standalone name="unite"
+                             ng-model="$ctrl.unite"                            
+                             text="$ctrl.unite.Libelle"
+                             search-title="Référentiel des unités"
+                             search-placeholder="Recherchez une unité"
+                             url="/api/Unite/SearchLight"
+                             show-in-popup="true"
+                             class="formulaire long"
+                             on-select="$ctrl.handleSelectUnite(item)"
+                             on-delete="$ctrl.handleDeleteUnite()"
+                             ng-required="true">
+          </lookup-standalone>
+
+        </div>
+        <div class="col-md-4">
+          <label for="">{{$ctrl.resources.CreateBudgetRessourceTpl_prix}}</label>
+          <input type="text"
+                 fred-input-number 
+                 class="form-control input-number"
+                 ng-class="{ 'has-error' : $ctrl.formRessource.montant.$invalid}"
+                 ng-model="$ctrl.montant"
+                 min="0"
+                 max="999999999999.99"
+                 name="montant"                 
+                 required />
+        </div>
+        <div class="col-md-4">
+          <label for="">{{$ctrl.resources.CreateBudgetRessourceTpl_devise}}</label>
+          <input type="text" class="form-control" ng-model="$ctrl.symbole"
+                 readonly
+                 disabled>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <div class="row">
+        <div class="col-md-12">
+          
+          <button class="btn btn-lg btn-link pull-right"
+                  ng-show="$ctrl.isEditMode"
+                  ng-disabled="$ctrl.formRessource.$invalid"
+                  ng-click="$ctrl.handleUpdate()">
+            {{$ctrl.resources.CreateBudgetRessourceTpl_mise_a_jour}}
+          </button>
+
+          <button class="btn btn-lg btn-link pull-right"
+                  ng-click="$ctrl.handleCancel()">
+            {{$ctrl.resources.CreateBudgetRessourceTpl_annulation}}
+
+          </button>
+
+          <button class="btn btn-lg btn-default pull-right"
+                  ng-show="!$ctrl.isEditMode"
+                  ng-disabled="$ctrl.formRessource.$invalid"
+                  ng-click="$ctrl.handleSave()">
+            {{$ctrl.resources.CreateBudgetRessourceTpl_creation}}
+
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+
+  </form>
+
+</div>

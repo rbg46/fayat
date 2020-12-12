@@ -1,0 +1,73 @@
+= Paramétrage par organisation
+
+== Objectifs
+
+Le paramétrage par organisation a deux buts :
+
+* _stocker des valeurs spéciales pour chaque organisation_ : nombre d’heures travaillées, nombre de jours par semaine …
+* _indiquer s’il faut afficher un composant d’un écran_ *alors qu’il n’est pas lié à une habilitation*.
+
+Ce dernier point illustre une difficulté de ce sujet : il ne fait pas mélanger le paramétrage par organisation avec la gestion des habilitations et avec le feature flipping.
+
+== Stockage en base de données
+
+Tout se base sur deux tables : *FRED_PARAM_KEY* et *FRED_PARAM_VALUE*.
+
+Dans la première (*FRED_PARAM_KEY*), nous allons stocker le paramètre, *détaché de toute organisation et de toute valeur*. Pour faire une analogie, on pourrait dire qu’il s’agit d’une classe abstraite, qui sera implémentée dans la seconde table.
+
+Dans *FRED_PARAM_VALUE*, nous allons stocker la valeur associée à l’organisation. Il faut noter la valeur (champ ``__Value__'') est stocké en nvarchar, donc en chaîne de caractères.
+
+== Utilisation côté serveur
+
+Pour récupérer la valeur d’un paramètre, il suffit de passer par *ParamsManager*, qui contient deux méthodes : - *GetParamValue* qui retourne la première valeur trouvée pour la clef et l’organisation
+spécifiée. - *GetParamValues* qui retourne la liste des valeurs trouvées pour la clef et l’organisation spécifiée.
+
+Encore une fois, les valeurs sont des string, il est donc nécessaire de les convertir.
+
+== Utilisation côté Web
+
+Pour remonter aux pages les valeurs paramétrées, il faut utiliser le controller *ParamsController*, qui contient deux méthodes équivalentes à celles du manager.
+
+On peut noter que les valeurs sont stockées en cache, au niveau du controller.
+
+Pour récupérer les valeurs dans du javascript, il faut utiliser le service *.js*, qui contient toujours les deux mêmes méthodes.
+
+== Gestion d’affichage par Organisation 
+Pour la partie HTML, afin d’afficher ou de masquer des composants pour une Organisation donnée, il
+faut utiliser la directive *fred-display-handler* en lui précisant la clef à rechercher. 
+
+== Masquer un composant pour une Organisation 
+Pour Masquer une composant ou un block html il faut préciser :
+
+* L’identifiant de l’élément 
+* Ajouter la derictive *fred-display-handler*
+on passant dedans OrganizationId 
+* Ajouter l’attribut *display* avec la valeur **hidden** 
+* Ajouter dans la table *FRED_PARAM_VALUE*
+l’identifiant du composant avec l’id du PARAM_KEY = `hiddenInputs' et OrganizationId
+
+[source,html]
+----
+<div id="search-field" fred-Display-Handler="ctrl.panels.general.data.Societe.Organisation.OrganisationId" display="hidden" >
+    ...
+</div>
+----
+
+NOTE: cet élément va être masquer seulement pour l’oganisation donnée et va être afficher par defaut pour les autres organisations* 
+
+== Afficher un composant pour une Organisation
+Pour afficher une composant ou un block html il faut préciser :
+
+* L’identifiant de l’élément 
+* Ajouter la derictive *fred-display-handler* en passant dedans OrganizationId 
+* Ajouter l’attribut *display* avec la valeur **visible** 
+* Ajouter dans la table *FRED_PARAM_VALUE* l’identifiant du composant avec l’id du PARAM_KEY = `showenInputs' et OrganizationId
+
+[source,html]
+----
+<div id="search-field" fred-Display-Handler="ctrl.panels.general.data.Societe.Organisation.OrganisationId" display="visible" >
+    ...
+</div>
+----
+
+NOTE: cet élément va être afficher seulement pour l’oganisation donnée et va être masquer par defaut pour les autres organisations.

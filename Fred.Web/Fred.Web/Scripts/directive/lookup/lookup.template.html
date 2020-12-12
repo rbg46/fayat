@@ -1,0 +1,81 @@
+﻿<ng-transclude class="lookup-content"></ng-transclude>
+<div ng-if="$ctrl.isOpen">
+    <div ng-click="$ctrl.handleCancel()" id="lookupOverLay"></div>
+    <div class="lookupPane" ng-keydown="$ctrl.handleKeyDown($event)">
+        <span class="grey-closing pull-right" title="Cliquer pour fermer" ng-click="$ctrl.handleCancel()">close</span>
+        <div id="lookupHeader" class="lookup-header" ng-class="{'custom-header': $ctrl.activeSecondSearchInput || $ctrl.filters || $ctrl.activeCheckboxRessourcesRecomandee || $ctrl.customHeaderTemplateUrl, 'three-header': $ctrl.activeThirdSearchInput }">
+            <label>{{$ctrl.searchTitle}}</label>
+            <div>
+                <i class=""></i>
+                <!-- 1er champ de recherche (champ par défaut) -->
+                <input type="text"
+                       maxlength="{{$ctrl.searchMaxLength}}"
+                       ng-keypress="($event.which === 13)?$ctrl.enterKeyPress($event):0"
+                       ng-model-options="{debounce: 700 }"
+                       ng-change="$ctrl.handleChangeSearchText()"
+                       ng-model="$ctrl.searchText"
+                       class="form-control searchLookupPanelRight"
+                       placeholder="{{$ctrl.searchPlaceholder}}"
+                       title="{{$ctrl.searchTooltip}}" />
+                <!-- 2eme champ de recherche (champ optionnel) -->
+                <input type="text"
+                       maxlength="{{$ctrl.searchMaxLength}}"
+                       ng-keypress="($event.which === 13)?$ctrl.enterKeyPress($event):0"
+                       ng-model-options="{debounce: 700 }"
+                       ng-change="$ctrl.handleChangeSearchText()"
+                       ng-model="$ctrl.searchText2"
+                       class="form-control searchLookupPanelRight"
+                       placeholder="{{$ctrl.searchPlaceholder2}}"
+                       ng-show="$ctrl.activeSecondSearchInput" />
+                <!-- 3eme champ de recherche (champ optionnel) -->
+                <input type="text"
+                       maxlength="{{$ctrl.searchMaxLength}}"
+                       ng-keypress="($event.which === 13)?$ctrl.enterKeyPress($event):0"
+                       ng-model-options="{debounce: 700 }"
+                       ng-change="$ctrl.handleChangeSearchText()"
+                       ng-model="$ctrl.searchText3"
+                       class="form-control searchLookupPanelRight"
+                       placeholder="{{$ctrl.searchPlaceholder3}}"
+                       ng-show="$ctrl.activeThirdSearchInput" />
+                <div ng-if="$ctrl.activeCheckboxRessourcesRecomandee" style="margin-top: 3%">
+                    <input type="checkbox" id="{{'cbRessourcesRecommandees-' + $ctrl.id}}" ng-model="$ctrl.IsRessourcesRecommandees" ng-change="$ctrl.handleSelectRessourcesRecommandees()">
+                    <label for="{{'cbRessourcesRecommandees-' + $ctrl.id}}"><span></span>Recommandées uniquement</label>
+                </div>
+                <div ng-if="$ctrl.customHeaderTemplateUrl" style="margin-top: 3%">
+                    <div ng-include="$ctrl.customHeaderTemplateUrl"></div>
+                </div>
+            </div>
+        </div>
+        <!--jsm-->
+        <!-- boutons de filtres -->
+        <div id="listButtonFilterLookup" ng-if="$ctrl.filters" style="padding: 10px">
+            <button class="btn btn-filter"
+                    ng-class="{'selected-{{$ctrl.filters.indexOf(filter)}}' : filter.Id == $ctrl.selectedFilter.Id }"
+                    ng-click="$ctrl.handleSelectFilter(filter)"
+                    ng-repeat="filter in $ctrl.filters"
+                    ng-disabled="$ctrl.busy"
+                    ng-style="{'max-width' : 300 / $ctrl.filters.length +'px'}">
+                {{filter.Libelle}}
+            </button>
+        </div>
+        <div id="divScroll" class="fred-scroll" ng-class="$ctrl.scrollName">
+            <div ng-show="$ctrl.busy && !$ctrl.scrolling" class="text-center">
+                <img src="../../../../Content/images/loader.gif" />
+            </div>
+            <div ng-hide="$ctrl.busy && !$ctrl.scrolling" class="lookupBody">
+                <p class="error" ng-show="$ctrl.error">{{$ctrl.error}}</p>
+                <p class="lookup-empty" ng-show="$ctrl.message">{{$ctrl.resources.AucunReferentielTrouve_lb}}</p>
+                <div class="bkg-item pk-{{ref.CodeRef}}-item"
+                     ng-repeat="ref in $ctrl.referentiels track by $index "
+                     ng-click="$ctrl.handleSelection(ref)"
+                     ng-class="{selected : $index == $ctrl.selectedIndex}"
+                     title="Cliquer pour sélectionner l'information {{ref.CodeRef}} / {{ref.LibelleRef}}"
+                     ng-if="!$ctrl.customTemplateUrl">
+                    <h2 fred-wrap-in-tag="{{ref.CodeRef}}" words="$ctrl.searchTexts">{{ref.CodeRef}}</h2>
+                    <h3 fred-wrap-in-tag="{{ref.LibelleRef}}" words="$ctrl.searchTexts">{{ref.LibelleRef | truncateText:$ctrl.letterLimit}}</h3>
+                </div>
+                <div ng-if="$ctrl.customTemplateUrl" ng-include="$ctrl.customTemplateUrl"></div>
+            </div>
+        </div>
+    </div>
+</div>

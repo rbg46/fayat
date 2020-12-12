@@ -1,0 +1,4 @@
+﻿INSERT INTO FRED_PERMISSION_FONCTIONNALITE 
+	SELECT P.PermissionId, f.FonctionnaliteId
+	FROM FRED_PERMISSION p, FRED_FONCTIONNALITE f
+	where p.Code='0047' and f.code='1101'

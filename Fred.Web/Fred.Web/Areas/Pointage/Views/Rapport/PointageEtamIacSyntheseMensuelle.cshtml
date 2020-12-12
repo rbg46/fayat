@@ -1,0 +1,32 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+  ViewBag.Title = FeatureRapport.ValidationService_TitreOnglet;
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+  @Styles.Render("~/ValidationDeMonServiceBundle.css")
+  @Styles.Render("~/RapportHebdoBundle.css")
+}
+
+@section scripts {
+  @Scripts.Render("~/ValidationDeMonServiceBundle.js")
+  @this.RenderResources("FeatureRapport", "FeatureRapportHebdo", "FeatureFavori")
+}
+
+<div class="container pointage-hebdo" ng-controller="PointageEtamIacSyntheseMensuelleController as $ctrl">
+  <div class="row" ng-show="!$ctrl.isShowRapport">
+    <pointage-etam-iac-entree-synthese-mensuelle-component 
+           resources="$ctrl.resources">
+    </pointage-etam-iac-entree-synthese-mensuelle-component>
+  </div>
+  <div class="row" ng-show="$ctrl.isShowRapport">
+    <pointage-hebdo-rapport-component 
+           resources="$ctrl.resources"
+           is-etam-iac="true"
+           personnel-to-show-is-iac="$ctrl.personnelToShowIsIac"
+           is-manager-pointing="true">
+    </pointage-hebdo-rapport-component>
+  </div>
+</div>

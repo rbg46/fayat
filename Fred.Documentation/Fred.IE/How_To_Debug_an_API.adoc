@@ -1,0 +1,51 @@
+= Comment débugger une API de FRED IE ?
+
+Les API de FRED IE sont documentées via une interface graphique présentée par Swagger. +
+Pour accéder à cette interface, il faut naviguer par exemple vers : +
+http://fred-io-api-dev-main.fayat.lan +
+ou en debug +
+http://localhost:20525/
+
+Cette interface permet de voir la documentation des apis et des tester des appels, sauf que les api demandent une authentification. Pour tester, on va donc utiliser PostMan.
+
+== PostMan
+
+=== Installation
+
+allez sur https://www.getpostman.com/apps télécharger et installer postman.
+
+=== Créer votre requête
+
+Dans postman, ajouter la requête post ou get, par exemple : +
+http://localhost:20525/api/Facturation/ImportDateTransfertFar
+
+Dans l’onglet Body, choisir le type JSON et coller votre json, par exemple :
+
+[source,json]
+----
+{ 
+  "annee":2018,
+  "mois":7,
+  "auteursap":"CEDRIC LEJORT",
+  "societecode":"1000",
+  "cicodes":["435141"]
+}
+----
+
+=== S’authentifier
+
+* Dans l’onglet _Authorization_, choisir _OAuth 2.0_ puis cliquer sur _Get new access token_
+* Dans la fenêtre qui s’ouvre mettre les informations suivantes : 
+** Grant Type : Password Credential
+** Access Token Url : http://localhost:20525/OAuth/Token
+** User : le user autorisé à ce connecter à cette api (par exemple userserviceStorm)
+** Password : le password du user
+** Client Authentication : Send as basic header
+* Cliquer sur _Request Tocken_. Si l’authent, ce passe bien, Fred IE Api renvoie un token qui s’affiche dans PostMan.
+* Cliquer sur _Use Token_
+
+=== Tester la requête
+
+* Cliquer sur _Send_.
+* le token est ajouté dans le header (Authorization : Bearer [token]) puis
+* la requête est envoyée.

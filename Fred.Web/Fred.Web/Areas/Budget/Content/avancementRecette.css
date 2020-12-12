@@ -1,0 +1,241 @@
+﻿@charset "UTF-8";
+/* Couleurs */
+/* Toolbar */
+fred-toolbar fred-section.orga-section {
+    width: 30%;
+}
+
+fred-toolbar fred-section.orga-section .formulaire.long {
+    width: 100%;
+    position: relative;
+}
+
+fred-toolbar fred-section.orga-section .formulaire.long .form-control {
+    cursor: pointer;
+}
+
+fred-toolbar fred-section.orga-section .formulaire.long .chev.material-icons {
+    top: 1px;
+    right: 0;
+    cursor: pointer;
+}
+
+fred-toolbar fred-section.devise-section {
+    margin-left: 1%;
+}
+
+fred-toolbar fred-section.devise-section .devise-section-controls {
+    width: 120px;
+    justify-content: space-between;
+}
+
+fred-toolbar fred-section.devise-section .devise-section-controls .currency {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    color: #bfbfbf;
+    font-size: 18px;
+    font-weight: normal;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+fred-toolbar fred-section.devise-section .devise-section-controls .currency.active {
+    background-color: #09ada6;
+    border: 1px solid #09ada6;
+    color: #fff;
+}
+
+fred-toolbar fred-section.period-section {
+    margin-left: 1%;
+}
+
+fred-toolbar fred-section.period-section .glyphicon-calendar {
+    float: left;
+}
+
+fred-toolbar fred-section.action-section {
+    margin-left: auto;
+}
+
+/* liste */
+.AvancementRecette-list {
+    padding-bottom: 50px;
+}
+
+.AvancementRecette-list .bloc1 {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.AvancementRecette-list .bloc1 .bloc2, .AvancementRecette-list .bloc1 .bloc3, .AvancementRecette-list .bloc1 .bloc4 {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.AvancementRecette-list .bloc1 .bloc2 .colm-col, .AvancementRecette-list .bloc1 .bloc3 .colm-col, .AvancementRecette-list .bloc1 .bloc4 .colm-col {
+    display: flex;
+    width: 17%;
+    flex-direction: column;
+}
+
+.AvancementRecette-list .bloc1 .bloc2 .colm-col .cell, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell, .AvancementRecette-list .bloc1 .bloc4 .colm-col .cell {
+    display: flex;
+    width: 100%;
+    margin-top: 6px;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 40px;
+    align-items: center;
+}
+
+.AvancementRecette-list .bloc1 .bloc2 .colm-col .cell .lbl, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell .lbl, .AvancementRecette-list .bloc1 .bloc4 .colm-col .cell .lbl {
+    font-size: 12px;
+    width: 60%;
+}
+
+.AvancementRecette-list .bloc1 .bloc2 .colm-col .cell .val, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell .val, .AvancementRecette-list .bloc1 .bloc4 .colm-col .cell .val {
+    font-size: 15px;
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.AvancementRecette-list .bloc1 .bloc2 .colm-col .cell .form-control, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell .form-control, .AvancementRecette-list .bloc1 .bloc4 .colm-col .cell .form-control {
+    height: 25px;
+    text-align: right;
+    background-color: #fff;
+    color: initial;
+}
+
+.AvancementRecette-list .bloc1 .bloc2 .colm-col .cell span, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell span, .AvancementRecette-list .bloc1 .bloc4 .colm-col .cell span {
+    display: flex;
+    justify-content: flex-end;
+    width: 50%;
+}
+
+.AvancementRecette-list .bloc1 .bloc2 .colm-col .cell .amount:after, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell .amount:after, .AvancementRecette-list .bloc1 .bloc4 .colm-col .cell .amount:after {
+    content: '€';
+    font-size: 15px;
+    justify-content: flex-end;
+}
+
+.AvancementRecette-list .bloc1 .bloc2 .colm-col .cell .percent:after, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell .percent:after, .AvancementRecette-list .bloc1 .bloc4 .colm-col .cell .percent:after {
+    content: '%';
+    font-size: 14px;
+    justify-content: flex-end;
+}
+
+.AvancementRecette-list .bloc1 .bloc2 .colm-col .cell.first, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.first, .AvancementRecette-list .bloc1 .bloc4 .colm-col .cell.first {
+    background-color: #80aad0;
+    color: #fff;
+}
+
+.AvancementRecette-list .bloc1 .bloc2 .colm-col .cell.second, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.second, .AvancementRecette-list .bloc1 .bloc4 .colm-col .cell.second, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.third, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.fourth, .AvancementRecette-list .bloc1 .bloc2 .colm-col .cell.third, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.third, .AvancementRecette-list .bloc1 .bloc4 .colm-col .cell.third, .AvancementRecette-list .bloc1 .bloc2 .colm-col .cell.fourth, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.fourth, .AvancementRecette-list .bloc1 .bloc4 .colm-col .cell.fourth {
+    border: 1px solid #BBBBBB;
+    color: #808080;
+}
+
+.AvancementRecette-list .bloc1 .bloc2 .colm-col .cell.fifth, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.fifth, .AvancementRecette-list .bloc1 .bloc4 .colm-col .cell.fifth {
+    background-color: #92d050;
+    color: #fff;
+}
+
+.AvancementRecette-list .bloc1 .bloc2 .colm-col .col-items, .AvancementRecette-list .bloc1 .bloc3 .colm-col .col-items, .AvancementRecette-list .bloc1 .bloc4 .colm-col .col-items {
+    display: flex;
+}
+
+.AvancementRecette-list .bloc1 .bloc2 .colm-col .col-items .warn, .AvancementRecette-list .bloc1 .bloc3 .colm-col .col-items .warn, .AvancementRecette-list .bloc1 .bloc4 .colm-col .col-items .warn {
+    font-size: 14px;
+    padding-top: 5px;
+    margin-right: 5px;
+    color: #c05046;
+    cursor: pointer;
+}
+
+.AvancementRecette-list .bloc1 .bloc2 .colm-col .col-items .edit, .AvancementRecette-list .bloc1 .bloc3 .colm-col .col-items .edit, .AvancementRecette-list .bloc1 .bloc4 .colm-col .col-items .edit {
+    background-color: #09ada6;
+    color: #fff;
+    font-size: 20px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.AvancementRecette-list .bloc1 .bloc3 .colm-col {
+    display: flex;
+    width: 17%;
+    flex-direction: column;
+}
+
+.AvancementRecette-list .bloc1 .bloc3 .colm-col .cell {
+    display: flex;
+    width: 100%;
+    margin-top: 6px;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 40px;
+}
+
+.AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.first {
+    background-color: #ffa90d;
+    color: #fff;
+}
+
+.AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.second, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.third, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.fourth {
+    background-color: #ffd486;
+    color: #808080;
+}
+
+.AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.second.b, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.b.third, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.b.fourth {
+    background-color: #ffbf4a;
+}
+
+.AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.second.b .form-control, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.b.third .form-control, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.b.fourth .form-control {
+    background-color: #ffdfa4;
+}
+
+.AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.second.c, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.c.third, .AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.c.fourth {
+    background-color: #ffa90d;
+    color: #fff;
+}
+
+.AvancementRecette-list .bloc1 .bloc3 .colm-col .cell.fifth {
+    background-color: #c9e8a8;
+    color: #808080;
+}
+
+.AvancementRecette-list .bloc1 .bloc4 .colm-col {
+    display: flex;
+    width: 17%;
+    flex-direction: column;
+}
+
+.AvancementRecette-list .bloc1 .bloc4 .colm-col .cell {
+    display: flex;
+    width: 100%;
+    margin-top: 6px;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 40px;
+    background-color: #47c2bc;
+    color: #fff;
+}
+
+.AvancementRecette-list .bloc1 .bloc4 .colm-col .cell .form-control {
+    background-color: #d1f0ee;
+}
+
+.AvancementRecette-list .bloc1 .bloc4 .colm-col .cell .lbl {
+    width: 75%;
+}
+
+.AvancementRecette-list .bloc1 .bloc4 .colm-col .cell span {
+    display: flex;
+    justify-content: flex-end;
+    width: 65%;
+}

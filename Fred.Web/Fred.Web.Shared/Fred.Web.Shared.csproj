@@ -1,0 +1,1353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fred.Web.Shared</RootNamespace>
+    <AssemblyName>Fred.Web.Shared</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Fred.Web.Shared.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Fred.Web.Shared.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'SpeedDebug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\SpeedDebug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>Fred.Web.Shared.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CommonServiceLocator.2.0.4\lib\net46\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ComponentModel.Annotations.4.6.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_LocalResources\Enumeration.Designer.cs">
+      <DependentUpon>Enumeration.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\Authentification.Designer.cs">
+      <DependentUpon>Authentification.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\AuthentificationLog.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuthentificationLog.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\EmailResetPassword.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmailResetPassword.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureAvancement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureAvancement.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureBareme.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureBareme.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureBilanFlash2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureBilanFlash.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureBudgetBibliothequePrix.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureBudgetBibliothequePrix.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureAvancementRecette.Designer.cs">
+      <DependentUpon>FeatureAvancementRecette.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureBudget.Designer.cs">
+      <DependentUpon>FeatureBudget.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureBudgetCommentairePanel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureBudgetCommentairePanel.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureBudgetComparaison.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureBudgetComparaison.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureBudgetDetail.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureBudgetDetail.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureBudgetListe.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureBudgetListe.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureBudgetSousDetail.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureBudgetSousDetail.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureEcritureComptable.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureEcritureComptable.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureExportTableauSynthese.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureExportTableauSynthese.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureCache.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureCache.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureFamilleOperationDiverse.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureFamilleOperationDiverse.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureCI.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureCI.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureClassificationSocietes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureClassificationSocietes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureCodeAbsence.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureCodeAbsence.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureCodeDeplacement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureCodeDeplacement.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureCodeMajoration.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureCodeMajoration.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureCodeZoneDeplacement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureCodeZoneDeplacement.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureCommande.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureCommande.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureCommandeEnergie.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureCommandeEnergie.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureCompteExploitation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureCompteExploitation.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureControleBudgetaire.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureControleBudgetaire.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureDatesCalendrierPaie.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureDatesCalendrierPaie.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureDatesClotureComptable.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureDatesClotureComptable.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureDepense.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureDepense.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureDevise.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureDevise.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureEtablissementComptable.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureEtablissementComptable.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureEtablissementPaie.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureEtablissementPaie.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureExportBilanTechnique.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureExportBilanTechnique.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureExportExcel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureExportExcel.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureFacture.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureFacture.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureFavori.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureFavori.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureFeatureFlipping.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureFeatureFlipping.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureFournisseur.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureFournisseur.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureHome.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureHome.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureImage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureImage.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureIndemniteDeplacement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureIndemniteDeplacement.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureJournalComptable.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureJournalComptable.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureMateriel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureMateriel.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureModule.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureModule.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureMoyen.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureMoyen.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeaturePieceJointe.Designer.cs">
+      <DependentUpon>FeaturePieceJointe.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureNature.Designer.cs">
+      <DependentUpon>FeatureNature.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureObjectifFlash.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureObjectifFlash.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureOperationDiverse.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureOperationDiverse.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureOrganisation.Designer.cs">
+      <DependentUpon>FeatureOrganisation.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureParamReferentielEtendu.Designer.cs">
+      <DependentUpon>FeatureParamReferentielEtendu.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeaturePermission.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeaturePermission.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeaturePersonnel.Designer.cs">
+      <DependentUpon>FeaturePersonnel.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureRapportPrime.Designer.cs">
+      <DependentUpon>FeatureRapportPrime.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeaturePrime.Designer.cs">
+      <DependentUpon>FeaturePrime.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureRapportHebdo.Designer.cs">
+      <DependentUpon>FeatureRapportHebdo.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureRapport.Designer.cs">
+      <DependentUpon>FeatureRapport.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureReception.Designer.cs">
+      <DependentUpon>FeatureReception.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureReferential.Designer.cs">
+      <DependentUpon>FeatureReferential.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureReferentielEtendu.Designer.cs">
+      <DependentUpon>FeatureReferentielEtendu.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureReferentielFixe.Designer.cs">
+      <DependentUpon>FeatureReferentielFixe.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureReferentielTache.Designer.cs">
+      <DependentUpon>FeatureReferentielTache.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureRessourcesSpecifiquesCI.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureRessourcesSpecifiquesCI.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureRole.Designer.cs">
+      <DependentUpon>FeatureRole.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureSociete.Designer.cs">
+      <DependentUpon>FeatureSociete.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureTache.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureTache.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureValidationPointage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureValidationPointage.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FredResource.Designer.cs">
+      <DependentUpon>FredResource.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\LogRessource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LogRessource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\Page_Title.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Page_Title.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\ResourceMails.Designer.cs">
+      <DependentUpon>ResourceMails.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_LocalResources\ResourceHelper.cs" />
+    <Compile Include="App_LocalResources\FeatureRessourcesRecommandees.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureRessourcesRecommandees.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\FeatureCloturesPeriodes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureCloturesPeriodes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Comparer\CiComparer.cs" />
+    <Compile Include="Comparer\MoyenImmatriculationComparer.cs" />
+    <Compile Include="Constantes.cs" />
+    <Compile Include="Extentions\DateTimeExtensions.cs" />
+    <Compile Include="Extentions\HelperExtensions.cs" />
+    <Compile Include="Extentions\WebGridExtensions.cs" />
+    <Compile Include="Helpers\BoolParsingHelper.cs" />
+    <Compile Include="Helpers\ChunkListHelper.cs" />
+    <Compile Include="Models\AffectationInterimaire\AffectationInterimaireModel.cs" />
+    <Compile Include="Models\Affectation\CalendarAffectationViewModel.cs" />
+    <Compile Include="Models\Affectation\AstreinteViewModel.cs" />
+    <Compile Include="Models\Affectation\AffectationViewModel.cs" />
+    <Compile Include="Models\Affectation\EquipeViewModel.cs" />
+    <Compile Include="Models\Affectation\ImportedEquipeModel.cs" />
+    <Compile Include="Models\AuthentificationLog\AuthentificationLogDeletedModel.cs" />
+    <Compile Include="Models\AuthentificationLog\AuthentificationLogDetailModel.cs" />
+    <Compile Include="Models\AuthentificationLog\AuthentificationLogListModel.cs" />
+    <Compile Include="Models\AuthentificationModel.cs" />
+    <Compile Include="Models\Authentification\ConnectViewModel.cs" />
+    <Compile Include="Models\Authentification\NewPasswordViewModel.cs" />
+    <Compile Include="Models\Authentification\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\Avis\AvisCommandeAvenantModel.cs" />
+    <Compile Include="Models\Avis\AvisCommandeModel.cs" />
+    <Compile Include="Models\Avis\AvisModel.cs" />
+    <Compile Include="Models\Bareme\BaremeExploitationCIModel.cs" />
+    <Compile Include="Models\Bareme\BaremeExploitationCIRappelBaremeOrganisationModel.cs" />
+    <Compile Include="Models\Bareme\BaremeExploitationCIRessourceToUpdateModel.cs" />
+    <Compile Include="Models\Bareme\BaremeExploitationCISaveResultModel.cs" />
+    <Compile Include="Models\Bareme\BaremeExploitationCISurchargeAddedModel.cs" />
+    <Compile Include="Models\Bareme\BaremeExploitationCIToUpdateModel.cs" />
+    <Compile Include="Models\Bareme\BaremeExploitationComposanteMaterielModel.cs" />
+    <Compile Include="Models\Bareme\BaremeExploitationComposantesModel.cs" />
+    <Compile Include="Models\Bareme\BaremeExploitationOrganisationModel.cs" />
+    <Compile Include="Models\Bareme\BaremeExploitationOrganisationRessourceToUpdateModel.cs" />
+    <Compile Include="Models\Bareme\BaremeExploitationOrganisationToUpdateModel.cs" />
+    <Compile Include="Models\Bareme\BaremeExploitationSaveResultModel.cs" />
+    <Compile Include="Models\Bareme\BaremeExploitationValeurParDefautModel.cs" />
+    <Compile Include="Models\Bareme\Search\SearchBaremeExploitationCIModel.cs" />
+    <Compile Include="Models\Bareme\Search\SearchBaremeExploitationOrganisationModel.cs" />
+    <Compile Include="Models\Bareme\SurchargeBaremeExploitationCIModel.cs" />
+    <Compile Include="Models\Bareme\SurchargeBaremeExploitationCIToUpdateModel.cs" />
+    <Compile Include="Models\Budget\BudgetCopyHistoModel.cs" />
+    <Compile Include="Models\Budget\ControleBudgetaire\ControleBudgetaireExportModel.cs" />
+    <Compile Include="Models\Budget\Depense\BudgetDepenseModel.cs" />
+    <Compile Include="Models\Budget\Recette\PeriodAvancementRecetteLoadModel.cs" />
+    <Compile Include="Models\Budget\Search\SearchDetailBudgetModel.cs" />
+    <Compile Include="Models\Commande\CommandeEcritureComptableOdModel.cs" />
+    <Compile Include="Models\Commande\ExportManualLockUnlockLigneDeCommandeToSapModel.cs" />
+    <Compile Include="Models\Commande\Light\CloturerCommandeModel.cs" />
+    <Compile Include="Models\Commande\SearchReceivableOrdersFilterModel.cs" />
+    <Compile Include="Models\CompteExploitation\GenerateExcel13CParameterModel.cs" />
+    <Compile Include="Models\CompteExploitation\GenerateExcel4CParameterModel.cs" />
+    <Compile Include="Models\CompteExploitation\TableauSynthese\TableauSyntheseLoadExportModel.cs" />
+    <Compile Include="Models\Depense\DepenseExhibition.cs" />
+    <Compile Include="Models\EcritureComptable\EcritureComptableValorisationModel.cs" />
+    <Compile Include="Models\EcritureComptable\ExistingEcritureComptableByNumeroFactureSAPModel.cs" />
+    <Compile Include="Models\EcritureComptable\EcritureComptableValorisationPointageFayatTpModel.cs" />
+    <Compile Include="Models\Enum\EnumModel.cs" />
+    <Compile Include="Models\EcritureComptable\EcritureComptableFayatTpRejetModel.cs" />
+    <Compile Include="Models\EcritureComptable\EcritureComptableMappingModel.cs" />
+    <Compile Include="Models\ExplorateurDepense\TypeOdFilterExplorateurDepense.cs" />
+    <Compile Include="Models\Facture\FactureEcritureComptableModel.cs" />
+    <Compile Include="Models\Journal\JournalFamilleODModel.cs" />
+    <Compile Include="Models\Materiel\Search\MaterielSearchModel.cs" />
+    <Compile Include="Models\Materiel\Search\MaterielSearchParameter.cs" />
+    <Compile Include="Models\Moyen\AffectationMoyenRapportModel.cs" />
+    <Compile Include="Models\Moyen\ModeleLocationModel.cs" />
+    <Compile Include="Models\Moyen\MaterielLocationModelFull.cs" />
+    <Compile Include="Models\Commande\CommandeAvenantModel.cs" />
+    <Compile Include="Models\Commande\CommandeEventModel.cs" />
+    <Compile Include="Models\Commande\PersonnelWithPermissionAndSeuilModel.cs" />
+    <Compile Include="Models\Nature\NatureFamilleOdModel.cs" />
+    <Compile Include="Models\ObjectifFlash\ObjectifFlashJournalisationModel.cs" />
+    <Compile Include="Models\ObjectifFlash\ObjectifFlashLightModel.cs" />
+    <Compile Include="Models\ObjectifFlash\ObjectifFlashTacheJournalisationModel.cs" />
+    <Compile Include="Models\ObjectifFlash\ObjectifFlashTacheModel.cs" />
+    <Compile Include="Models\ObjectifFlash\ObjectifFlashTacheRapportRealiseModel.cs" />
+    <Compile Include="Models\ObjectifFlash\ObjectifFlashTacheRessourceJournalisationModel.cs" />
+    <Compile Include="Models\ObjectifFlash\ObjectifFlashTacheRessourceModel.cs" />
+    <Compile Include="Models\ObjectifFlash\ObjectifFlashModel.cs" />
+    <Compile Include="Models\BudgetOld\BudgetModelOld.cs" />
+    <Compile Include="Models\BudgetOld\BudgetRevisionModelOld.cs" />
+    <Compile Include="Models\BudgetOld\RessourceTacheDeviseModelOld.cs" />
+    <Compile Include="Models\BudgetOld\RessourceTacheModelOld.cs" />
+    <Compile Include="Models\BudgetOld\TacheRecetteModelOld.cs" />
+    <Compile Include="Models\Budget\Avancement\AvancementSaveModel.cs" />
+    <Compile Include="Models\Budget\Avancement\Excel\AvancementExcelLoadModel.cs" />
+    <Compile Include="Models\Budget\Avancement\Excel\AvancementExcelModelValeurs.cs" />
+    <Compile Include="Models\Budget\Avancement\Excel\AxeAnalyseAvancementModel.cs" />
+    <Compile Include="Models\Budget\BibliothequePrix\ApplyBibliothequePrixBudgetsBrouillonsModel.cs" />
+    <Compile Include="Models\Budget\BibliothequePrix\BibliothequePrixItemHistoLoadModel.cs" />
+    <Compile Include="Models\Budget\BibliothequePrix\SousDetail\BudgetSousDetailChapitreBibliothequePrixModel.cs" />
+    <Compile Include="Models\Budget\BibliothequePrix\SousDetail\BudgetSousDetailRessourceBibliothequePrixModel.cs" />
+    <Compile Include="Models\Budget\BibliothequePrix\SousDetail\BudgetSousDetailSousChapitreBibliothequePrixModel.cs" />
+    <Compile Include="Models\Budget\BibliothequePrix\BibliothequePrixForCopyLoadModel.cs" />
+    <Compile Include="Models\Budget\Details\SousDetail\BibliothequePrixItemModel.cs" />
+    <Compile Include="Models\Budget\Liste\BudgetVersionAuteurModel.cs" />
+    <Compile Include="Models\Budget\Search\SearchBibliothequePrixModel.cs" />
+    <Compile Include="Models\CommandeEnergie\Edition\LigneSupplementaireExportModel.cs" />
+    <Compile Include="Models\CommandeEnergie\Edition\PointageEtAjustementExportModel.cs" />
+    <Compile Include="Models\CommandeEnergie\Edition\CommandeEnergieExportModel.cs" />
+    <Compile Include="Models\CompteExploitation\BilanTechnique\BilanTechniqueExportBulkDataModel.cs" />
+    <Compile Include="Models\CompteExploitation\BilanTechnique\BilanTechniqueExportModel.cs" />
+    <Compile Include="Models\CompteExploitation\BilanTechnique\LoadBilanTechniqueExportModel.cs" />
+    <Compile Include="Models\Budget\BibliothequePrix\BibliothequePrixLoadModel.cs" />
+    <Compile Include="Models\Budget\BibliothequePrix\BibliothequePrixSaveModel.cs" />
+    <Compile Include="Models\Budget\BudgetRevisionLoadModel.cs" />
+    <Compile Include="Models\Budget\BudgetSousDetailCopierModel.cs" />
+    <Compile Include="Models\Budget\CreateTaches4Model.cs" />
+    <Compile Include="Models\Budget\Details\BudgetDetailsExportExcelEditableModel.cs" />
+    <Compile Include="Models\Budget\Search\SearchAvancementModel.cs" />
+    <Compile Include="Models\Budget\BudgetDetailSaveModel.cs" />
+    <Compile Include="Models\Budget\Liste\BudgetSuppressionSuccessModel.cs" />
+    <Compile Include="Models\Budget\Recette\AvancementRecetteSaveModel.cs" />
+    <Compile Include="Models\Budget\Recette\BudgetRecetteModel.cs" />
+    <Compile Include="Models\Budget\BudgetSousDetailSaveModel.cs" />
+    <Compile Include="Models\Budget\ControleBudgetaireValeursModel.cs" />
+    <Compile Include="Models\Budget\ControleBudgetaire\ChangeEtatResultModel.cs" />
+    <Compile Include="Models\Budget\ControleBudgetaire\ControleBudgetaireExportModelValeurs.cs" />
+    <Compile Include="Models\Budget\ControleBudgetaire\ControleBudgetaireSaveModelValeurs.cs" />
+    <Compile Include="Models\Budget\ControleBudgetaire\ControleBudgetaireSaveModel.cs" />
+    <Compile Include="Models\Budget\ControleBudgetaire\TacheRessourceAjustementModel.cs" />
+    <Compile Include="Models\Budget\Details\BudgetDetailsExportExcelLoadModel.cs" />
+    <Compile Include="Models\Budget\Details\BudgetDetailsExportExcelModel.cs" />
+    <Compile Include="Models\Budget\ErreurResultModel.cs" />
+    <Compile Include="Models\Budget\Liste\ListPeriodeRecalageModel.cs" />
+    <Compile Include="Models\Budget\ManageT4ChangeModel.cs" />
+    <Compile Include="Models\Budget\ManageT4DeleteModel.cs" />
+    <Compile Include="Models\Budget\ManageT4CreateModel.cs" />
+    <Compile Include="Models\Budget\Avancement\AvancementLoadModel.cs" />
+    <Compile Include="Models\Budget\BudgetEtatModel.cs" />
+    <Compile Include="Models\Budget\Liste\ListeBudgetModel.cs" />
+    <Compile Include="Models\Budget\BudgetWorkflowModel.cs" />
+    <Compile Include="Models\Budget\BudgetDetailLoadModel.cs" />
+    <Compile Include="Models\Budget\BudgetSousDetailLoadModel.cs" />
+    <Compile Include="Models\Budget\Recette\AvancementRecetteLoadModel.cs" />
+    <Compile Include="Models\Budget\Recette\AvancementRecetteModel.cs" />
+    <Compile Include="Models\Budget\ResultModelBase.cs" />
+    <Compile Include="Models\Budget\Search\SearchControleBudgetaireFilterModel.cs" />
+    <Compile Include="Models\Budget\Search\SearchControleBudgetaireModel.cs" />
+    <Compile Include="Models\Budget\Search\SearchListeBudgetModel.cs" />
+    <Compile Include="Models\Budget\Tache4InutiliseesModel.cs" />
+    <Compile Include="Models\Budget\TacheResultModel.cs" />
+    <Compile Include="Models\Budget\NiveauxTaches.cs" />
+    <Compile Include="Models\Cache\CacheModel.cs" />
+    <Compile Include="Models\Carburant\CarburantOrganisationDeviseModel.cs" />
+    <Compile Include="Models\CI\CICodeMajorationModel.cs" />
+    <Compile Include="Models\CI\CIDeviseModel.cs" />
+    <Compile Include="Models\CI\CIFullLibelleModel.cs" />
+    <Compile Include="Models\CI\CIModel.cs" />
+    <Compile Include="Models\CI\CIPrimeModel.cs" />
+    <Compile Include="Models\CI\CIRessourceModel.cs" />
+    <Compile Include="Models\CI\CiSummaryPointageModel.cs" />
+    <Compile Include="Models\CI\CITypeModel.cs" />
+    <Compile Include="Models\CI\Light\CILightModel.cs" />
+    <Compile Include="Models\CI\RapportHebdoEntreeSummary.cs" />
+    <Compile Include="Models\CI\SearchCIModel.cs" />
+    <Compile Include="Models\CloturesPeriodes\SearchCloturesPeriodesForCiModel.cs" />
+    <Compile Include="Models\CodeAbsence\CodeAbsenceModel.cs" />
+    <Compile Include="Models\CodeAbsence\SearchCodeAbsenceModel.cs" />
+    <Compile Include="Models\CodeZoneDeplacement\CodeZoneDeplacementModel.cs" />
+    <Compile Include="Models\CodeZoneDeplacement\SearchCodeZoneDeplacementModel.cs" />
+    <Compile Include="Models\CommandeEnergie\CommandeEnergieModel.cs" />
+    <Compile Include="Models\CommandeEnergie\CommandeEnergieLigneModel.cs" />
+    <Compile Include="Models\CommandeEnergie\List\CommandeEnergieItemModel.cs" />
+    <Compile Include="Models\CommandeEnergie\TypeEnergieModel.cs" />
+    <Compile Include="Models\Commande\CommandeAvenantLoadModel.cs" />
+    <Compile Include="Models\Commande\CommandeAvenantSaveModel.cs" />
+    <Compile Include="Models\Commande\CommandeContratInterimaireModel.cs" />
+    <Compile Include="Models\Commande\CommandeGroupByCIModel.cs" />
+    <Compile Include="Models\Commande\CommandeLigneModel.cs" />
+    <Compile Include="Models\Commande\CommandeModel.cs" />
+    <Compile Include="Models\Commande\CommandeReturnToSapResultModel.cs" />
+    <Compile Include="Models\Commande\CommandeTypeModel.cs" />
+    <Compile Include="Models\Commande\Light\CommandeLightModel.cs" />
+    <Compile Include="Models\Commande\Light\CommandeLigneLightModel.cs" />
+    <Compile Include="Models\Commande\List\CIForCommandeListModel.cs" />
+    <Compile Include="Models\Commande\List\CommandeListModel.cs" />
+    <Compile Include="Models\Commande\List\DeviseForCommandeListModel.cs" />
+    <Compile Include="Models\Commande\List\FournisseurForCommandeListModel.cs" />
+    <Compile Include="Models\Commande\List\StatutCommandeForCommandeListModel.cs" />
+    <Compile Include="Models\Commande\List\UtilisateurForCommandeListModel.cs" />
+    <Compile Include="Models\CompteExploitation\SearchCompteExploitationEditionModel.cs" />
+    <Compile Include="Models\DatesClotureComptable\DateClotureComptableWithOptionModel.cs" />
+    <Compile Include="Models\EtatPaie\EtatPaieExportModel.cs" />
+    <Compile Include="Models\Import\SystemeExterneLightModel.cs" />
+    <Compile Include="Models\IndemniteDeplacement\IndemniteDeplacementCalculTypeModel.cs" />
+    <Compile Include="Models\Moyen\AffectationMoyenFamilleByTypeModel.cs" />
+    <Compile Include="Models\Moyen\AffectationMoyenFamilleModel.cs" />
+    <Compile Include="Enum\EnumerationsShared.cs" />
+    <Compile Include="Models\Moyen\FicheGeneriqueModel.cs" />
+    <Compile Include="Models\Moyen\MaterielLocationModel.cs" />
+    <Compile Include="Models\Moyen\MoyenImmatriculationModel.cs" />
+    <Compile Include="Models\Moyen\MoyenModel.cs" />
+    <Compile Include="Models\Moyen\RapportMoyenLigneExcelModel.cs" />
+    <Compile Include="Models\Moyen\RapportMoyenLigneModel.cs" />
+    <Compile Include="Models\Moyen\SearchBaseMoyenModel.cs" />
+    <Compile Include="Models\Moyen\SearchRapportLigneMoyenModel.cs" />
+    <Compile Include="Models\Moyen\SearchAffectationMoyenModel.cs" />
+    <Compile Include="Models\Moyen\SearchEtablissementMoyenModel.cs" />
+    <Compile Include="Models\Moyen\SearchSocieteMoyenModel.cs" />
+    <Compile Include="Models\Moyen\SearchImmatriculationMoyenModel.cs" />
+    <Compile Include="Models\Moyen\SearchMoyenModel.cs" />
+    <Compile Include="Models\Moyen\EnvoiPointageMoyenResultModel.cs" />
+    <Compile Include="Models\Moyen\ValidateAffectationMoyenModel.cs" />
+    <Compile Include="Models\OperationDiverse\CiIdAndTacheCodeModel.cs" />
+    <Compile Include="Models\OperationDiverse\ConsolidationDataModelByMonthModel.cs" />
+    <Compile Include="Models\OperationDiverse\ConsolidationFamilyByMonthModel.cs" />
+    <Compile Include="Models\ObjectifFlash\Search\SearchObjectifFlashListWithFilterResultModel.cs" />
+    <Compile Include="Models\ObjectifFlash\Search\SearchObjectifFlashModel.cs" />
+    <Compile Include="Models\OperationDiverse\ControleParametrageFamilleOperationDiverseModel.cs" />
+    <Compile Include="Models\OperationDiverse\ExportExcel\FamilleOperationDiverseErreurExportModel.cs" />
+    <Compile Include="Models\OperationDiverse\ExportExcel\FamilleOperationDiverseExportModel.cs" />
+    <Compile Include="Models\OperationDiverse\FamilleOperationDiverseNatureJournalModel.cs" />
+    <Compile Include="Models\OperationDiverse\FamilleOperationDiverseOrderModel.cs" />
+    <Compile Include="Models\OperationDiverse\OperationDiverseCommandeFtpModel.cs" />
+    <Compile Include="Models\OperationDiverse\OperationDiverseEcritureComptableModel.cs" />
+    <Compile Include="Models\OperationDiverse\PreFillingOperationDiverseModel.cs" />
+    <Compile Include="Models\OperationDiverse\SearchOperationDiverseModel.cs" />
+    <Compile Include="Models\OperationDiverse\ConsolidationDetailPerAmountByMonthModel.cs" />
+    <Compile Include="Models\Param\ParamValueModel.cs" />
+    <Compile Include="Models\Personnel\Excel\HabilitationsUtilisateursExcelModel.cs" />
+    <Compile Include="Models\Personnel\Excel\PersonnelExcelModel.cs" />
+    <Compile Include="Models\Personnel\Interimaire\DatesMaxInterimaireModel.cs" />
+    <Compile Include="Models\Personnel\Interimaire\MatriculeExterneModel.cs" />
+    <Compile Include="Models\Personnel\Interimaire\NumeroContratInterimaireModel.cs" />
+    <Compile Include="Models\Personnel\Light\PersonnelLightForPickListModel.cs" />
+    <Compile Include="Models\Personnel\Light\PersonnelLightModel2.cs" />
+    <Compile Include="Models\Commande\SearchCommandeListWithFilterResultModel.cs" />
+    <Compile Include="Models\Commande\SearchCommandeModel.cs" />
+    <Compile Include="Models\Commande\SearchReceptionnableResultModel.cs" />
+    <Compile Include="Models\Commande\StatutCommandeModel.cs" />
+    <Compile Include="Models\CompteExploitation\CompteExploitationDefaultRowModel.cs" />
+    <Compile Include="Models\CompteExploitation\CompteExploitation4CRowModel.cs" />
+    <Compile Include="Models\CompteExploitation\CompteExploitation13CRowModel.cs" />
+    <Compile Include="Models\Depense\RemplacementTacheModel.cs" />
+    <Compile Include="Models\EcritureComptable\EcritureComptableModel.cs" />
+    <Compile Include="Models\OperationDiverse\ConsolidationDataModel.cs" />
+    <Compile Include="Models\OperationDiverse\ConsolidationFamilyModel.cs" />
+    <Compile Include="Models\OperationDiverse\VentilationModel.cs" />
+    <Compile Include="Models\Personnel\Interimaire\ContratInterimaireModel.cs" />
+    <Compile Include="Models\CoreModel.cs" />
+    <Compile Include="Models\DatesCalendrierPaie\DatesCalendrierPaieModel.cs" />
+    <Compile Include="Models\DatesClotureComptable\DatesClotureComptable.cs" />
+    <Compile Include="Models\DatesClotureComptable\PeriodeClotureModel.cs" />
+    <Compile Include="Models\Delegation\DelegationModel.cs" />
+    <Compile Include="Models\Depense\DepenseAchatModel.cs" />
+    <Compile Include="Models\Depense\DepenseTemporaireModel.cs" />
+    <Compile Include="Models\Depense\DepenseTypeModel.cs" />
+    <Compile Include="Models\Depense\Light\DepenseAchatLightModel.cs" />
+    <Compile Include="Models\Depense\SearchDepenseModel.cs" />
+    <Compile Include="Models\Depense\SearchDepenseTemporaireModel.cs" />
+    <Compile Include="Models\Directory\ExternalDirectoryModel.cs" />
+    <Compile Include="Models\Affectation\AffectationModel.cs" />
+    <Compile Include="Models\Affectation\AstreinteModel.cs" />
+    <Compile Include="Models\Affectation\EquipeModel.cs" />
+    <Compile Include="Models\Affectation\EquipePersonnelModel.cs" />
+    <Compile Include="Models\ExplorateurDepense\AxeModel.cs" />
+    <Compile Include="Models\ExplorateurDepense\ExplorateurAxeModel.cs" />
+    <Compile Include="Models\ExplorateurDepense\ExplorateurDepenseModel.cs" />
+    <Compile Include="Models\ExplorateurDepense\ExplorateurDepenseResultModel.cs" />
+    <Compile Include="Models\ExplorateurDepense\SearchExplorateurDepenseModel.cs" />
+    <Compile Include="Models\Facturation\FacturationModel.cs" />
+    <Compile Include="Models\Facturation\FacturationTypeModel.cs" />
+    <Compile Include="Models\Facture\FactureLigneModel.cs" />
+    <Compile Include="Models\Facture\FactureModel.cs" />
+    <Compile Include="Models\Facture\SearchFactureModel.cs" />
+    <Compile Include="Models\Favori\FavoriModel.cs" />
+    <Compile Include="Models\FeatureFlipping\FeatureFlippingModel.cs" />
+    <Compile Include="Models\Fonctionnalite\FonctionnaliteLightModel.cs" />
+    <Compile Include="Models\Groupe\GroupeModel.cs" />
+    <Compile Include="Models\Holding\HoldingModel.cs" />
+    <Compile Include="Models\Image\ImageModel.cs" />
+    <Compile Include="Models\ImportResultModel.cs" />
+    <Compile Include="Models\IndemniteDeplacement\IndemniteDeplacementModel.cs" />
+    <Compile Include="Models\IndemniteDeplacement\SearchIndemniteDeplacementModel.cs" />
+    <Compile Include="Models\Journal\JournalModel.cs" />
+    <Compile Include="Models\Module\EnableDisableInfoModel.cs" />
+    <Compile Include="Models\Fonctionnalite\FonctionnaliteModel.cs" />
+    <Compile Include="Models\Module\ModuleModel.cs" />
+    <Compile Include="Models\Notification\NotificationModel.cs" />
+    <Compile Include="Models\OperationDiverse\FamilleOperationDiverseModel.cs" />
+    <Compile Include="Models\OperationDiverse\OperationDiverseAbonnementModel.cs" />
+    <Compile Include="Models\OperationDiverse\ReferentielEtenduForOdModel.cs" />
+    <Compile Include="Models\OrganisationGenerique\OrganisationGeneriqueModel.cs" />
+    <Compile Include="Models\Organisation\AffectationSeuilOrgaModel.cs" />
+    <Compile Include="Models\Organisation\OrganisationLienModel.cs" />
+    <Compile Include="Models\Organisation\OrganisationLightModel.cs" />
+    <Compile Include="Models\Organisation\OrganisationModel.cs" />
+    <Compile Include="Models\Organisation\TypeOrganisationModel.cs" />
+    <Compile Include="Models\PermissionFonctionnalite\PermissionFonctionnaliteModel.cs" />
+    <Compile Include="Models\Permission\PermissionModel.cs" />
+    <Compile Include="Models\Personnel\Interimaire\ZoneDeTravailModel.cs" />
+    <Compile Include="Models\Personnel\Light\PersonnelLightModel.cs" />
+    <Compile Include="Models\Personnel\PersonnelImageModel.cs" />
+    <Compile Include="Models\Personnel\DateEntreeSortieModel.cs" />
+    <Compile Include="Models\Personnel\PersonnelModel.cs" />
+    <Compile Include="Models\Personnel\PersonnelSummaryPointageModel.cs" />
+    <Compile Include="Models\Personnel\SearchPersonnelModel.cs" />
+    <Compile Include="Models\Personnel\SearchPersonnelsWithFiltersResultModel.cs" />
+    <Compile Include="Models\Personnel\TypeRattachementModel.cs" />
+    <Compile Include="Models\PieceJointe\PieceJointeReceptionModel.cs" />
+    <Compile Include="Models\PieceJointe\PieceJointeCommandeModel.cs" />
+    <Compile Include="Models\PieceJointe\PieceJointeModel.cs" />
+    <Compile Include="Models\PointagePersonnel\PointagePersonnelExportModel.cs" />
+    <Compile Include="Models\PointagePersonnel\PointagePersonnelSaveResultModel.cs" />
+    <Compile Include="Models\PointagePersonnel\SearchListePointagePersonnelModel.cs" />
+    <Compile Include="Models\Pole\PoleModel.cs" />
+    <Compile Include="Models\RapportPrime\Get\CiGetModel.cs" />
+    <Compile Include="Models\RapportPrime\Get\PersonnelGetModel.cs" />
+    <Compile Include="Models\RapportPrime\Get\PrimeGetModel.cs" />
+    <Compile Include="Models\RapportPrime\Get\RapportPrimeGetModel.cs" />
+    <Compile Include="Models\RapportPrime\Get\RapportPrimeLigneGetModel.cs" />
+    <Compile Include="Models\RapportPrime\Get\RapportPrimeLignePrimeGetModel.cs" />
+    <Compile Include="Models\RapportPrime\Get\UtilisateurGetModel.cs" />
+    <Compile Include="Models\RapportPrime\Update\RapportPrimeLignePrimeUpdateModel.cs" />
+    <Compile Include="Models\RapportPrime\Update\RapportPrimeLigneUpdateModel.cs" />
+    <Compile Include="Models\RapportPrime\Update\RapportPrimeUpdateModel.cs" />
+    <Compile Include="Models\Rapport\EtatPaieListeCodeMajorationModel.cs" />
+    <Compile Include="Models\Rapport\EtatPaieListeIGDModel.cs" />
+    <Compile Include="Models\Rapport\EtatPaieListePrimesModel.cs" />
+    <Compile Include="Models\Rapport\ExportPointagePersonnel\ControleSaisiesErreurTibcoModel.cs" />
+    <Compile Include="Models\Rapport\ExportPointagePersonnel\ControleSaisiesTibcoModel.cs" />
+    <Compile Include="Models\Rapport\ExportPointagePersonnel\ExportAnalytiqueFilterModel.cs" />
+    <Compile Include="Models\Rapport\ExportPointagePersonnel\ExportPersonnelRapportLigneModel.cs" />
+    <Compile Include="Models\Rapport\ExportPointagePersonnel\ExportPersonnelSousRapportLignesModel.cs" />
+    <Compile Include="Models\Rapport\ExportPointagePersonnel\ExportPointagePersonnelTibcoModel.cs" />
+    <Compile Include="Models\Rapport\ExportPointagePersonnel\ExportPointagePersonnelFilterModel.cs" />
+    <Compile Include="Models\Rapport\ExportPointagePersonnel\LigneAstreinteSelectModel.cs" />
+    <Compile Include="Models\Rapport\ExportPointagePersonnel\LigneMajorationSelectModel.cs" />
+    <Compile Include="Models\Rapport\ExportPointagePersonnel\LignePrimeSelectModel.cs" />
+    <Compile Include="Models\Rapport\ExportPointagePersonnel\PersonnelSelectModel.cs" />
+    <Compile Include="Models\Rapport\ExportPointagePersonnel\RapportLigneSelectModel.cs" />
+    <Compile Include="Models\Rapport\ExportPointagePersonnel\LigneTacheSelectModel.cs" />
+    <Compile Include="Models\Rapport\FiggoLogModel.cs" />
+    <Compile Include="Models\Rapport\PointageDuplicateModel.cs" />
+    <Compile Include="Models\Rapport\PointageDuplicateResultModel.cs" />
+    <Compile Include="Models\Rapport\PointageMensuelModel.cs" />
+    <Compile Include="Models\Rapport\PointageMensuelPersonModel.cs" />
+    <Compile Include="Models\Rapport\VerrouillageRapportResponse.cs" />
+    <Compile Include="Models\Rapport\VerrouillageRapportModel.cs" />
+    <Compile Include="Models\Rapport\PointagePersonnelLoadModel.cs" />
+    <Compile Include="Models\Rapport\ChekingPointingMonthModel.cs" />
+    <Compile Include="Models\Rapport\RapportAndPrimeModel.cs" />
+    <Compile Include="Models\Rapport\RapportAndTacheModel.cs" />
+    <Compile Include="Models\Rapport\PointagePersonnelAndPrimeModel.cs" />
+    <Compile Include="Models\Rapport\RapportDuplicateModel.cs" />
+    <Compile Include="Models\Rapport\RapportDuplicateResultModel.cs" />
+    <Compile Include="Models\Rapport\RapportHebdoEntreeSummaryModel.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\AstreintePointageHebdoCell.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\CheckPointageState.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\MajorationHeurePerDay.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\MajorationPersonnelCiModel.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\MajorationPointageHebdoCell.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\MajorationRapportHebdoModel.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\NodeType.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\PersonnelTotalHourByDayAndByCiModel.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\PersonnelTotalHourByDayModel.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\PointageCell.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\PrimePointageHebdoCell.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\PrimeRapportHebdoModel.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\RapportHebdoEntreeEntViewModel.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\RapportHebdoEntreeViewModel.cs.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\RapportHebdoNode.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\RapportHebdoNodeAbstract.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\RapportHebdoPersonnelWithAllCiModel.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\RapportHebdoPersonnelWithTotalHourModel.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\RapportHebdoNewPointageStatutModel.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\RapportHebdoPrimePerDay.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\RapportHebdoSaveResultModel.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\RapportHebdoSaveViewModel.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\RapportHebdoSubNode.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\RapportHebdoSyntheseMensuelleModel.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\RapportHebdoValidationReponseViewModel.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\ValidateSyntheseMensuelleModel.cs" />
+    <Compile Include="Models\Rapport\RapportHebdo\ValueInPanelModel.cs" />
+    <Compile Include="Models\Rapport\RapportLightModel.cs" />
+    <Compile Include="Models\Rapport\RapportLigneAndPrimeModel.cs" />
+    <Compile Include="Models\Rapport\PointagePersonnelAndTacheModel.cs" />
+    <Compile Include="Models\Rapport\RapportLigneAndTacheModel.cs" />
+    <Compile Include="Models\Rapport\PointagePersonnelModel.cs" />
+    <Compile Include="Models\Rapport\RapportLigneAstreinteModel.cs" />
+    <Compile Include="Models\Rapport\RapportLigneMajorationModel.cs" />
+    <Compile Include="Models\Rapport\RapportLigneModel.cs" />
+    <Compile Include="Models\Rapport\RapportLignePrimeModel.cs" />
+    <Compile Include="Models\Rapport\RapportLigneTacheModel.cs" />
+    <Compile Include="Models\Rapport\RapportLigneToDuplicateModel.cs" />
+    <Compile Include="Models\Rapport\RapportModel.cs" />
+    <Compile Include="Models\Rapport\RapportStatutModel.cs" />
+    <Compile Include="Models\Rapport\RapportTacheModel.cs" />
+    <Compile Include="Models\Rapport\SearchRapportLigneModel.cs" />
+    <Compile Include="Models\Rapport\SearchRapportListWithFilterResultModel.cs" />
+    <Compile Include="Models\Rapport\Search\SearchRapportModel.cs" />
+    <Compile Include="Models\Rapport\Search\FilterChekingPointingModel.cs" />
+    <Compile Include="Models\Rapport\SummaryMensuelPersoModel.cs" />
+    <Compile Include="Models\Rapport\SyntheseValidationAffairesModel.cs" />
+    <Compile Include="Models\Rapport\TibcoModel.cs" />
+    <Compile Include="Models\Rapport\ValidationAffaireModel.cs" />
+    <Compile Include="Models\Reception\ReceptionEcritureComptableOdModel.cs" />
+    <Compile Include="Models\Reception\ReceptionExportModel.cs" />
+    <Compile Include="Models\Reception\ReceptionModel.cs" />
+    <Compile Include="Models\Reception\SearchNextReceptionModel.cs" />
+    <Compile Include="Models\Reception\TableauReceptionResultModel.cs" />
+    <Compile Include="Models\Referential\AdresseModel.cs" />
+    <Compile Include="Models\Referential\AgenceLightModel.cs" />
+    <Compile Include="Models\Referential\AgenceModel.cs" />
+    <Compile Include="Models\Referential\CarburantModel.cs" />
+    <Compile Include="Models\Referential\CodeDeplacementModel.cs" />
+    <Compile Include="Models\Referential\CodeFonctionModel.cs" />
+    <Compile Include="Models\Referential\CodeMajorationModel.cs" />
+    <Compile Include="Models\Referential\DeviseModel.cs" />
+    <Compile Include="Models\Referential\EtablissementComptableModel.cs" />
+    <Compile Include="Models\Referential\EtablissementPaieModel.cs" />
+    <Compile Include="Models\Referential\FournisseurModel.cs" />
+    <Compile Include="Models\Referential\IReferentialModel.cs" />
+    <Compile Include="Models\Referential\Light\DeviseLightModel.cs" />
+    <Compile Include="Models\Referential\Light\EtablissementComptableLightModel.cs" />
+    <Compile Include="Models\Referential\Light\FournisseurLightModel.cs" />
+    <Compile Include="Models\Referential\Light\TacheLightModel.cs" />
+    <Compile Include="Models\Referential\Light\UniteLightModel.cs" />
+    <Compile Include="Models\Referential\MajorationAffectationModel.cs" />
+    <Compile Include="Models\Referential\MajorationPersonnelAffectationModel.cs" />
+    <Compile Include="Models\Referential\MajorationPersonnelGetModel.cs" />
+    <Compile Include="Models\Referential\MaterielDetailModel.cs" />
+    <Compile Include="Models\Referential\MaterielDetailsPostModel.cs" />
+    <Compile Include="Models\Referential\MaterielModel.cs" />
+    <Compile Include="Models\Referential\NatureModel.cs" />
+    <Compile Include="Models\Referential\PaysModel.cs" />
+    <Compile Include="Models\Referential\PrimeAffectationModel.cs" />
+    <Compile Include="Models\Referential\PrimeModel.cs" />
+    <Compile Include="Models\Referential\PrimePersonnelAffectationModel.cs" />
+    <Compile Include="Models\Referential\PrimesPersonnelsGetModel.cs" />
+    <Compile Include="Models\Referential\SearchActiveModel.cs" />
+    <Compile Include="Models\Referential\SearchCodeDeplacementModel.cs" />
+    <Compile Include="Models\Referential\SearchDeviseModel.cs" />
+    <Compile Include="Models\Referential\SearchEtablissementComptableModel.cs" />
+    <Compile Include="Models\Referential\SearchFournisseurModel.cs" />
+    <Compile Include="Models\Referential\SearchTacheModel.cs" />
+    <Compile Include="Models\Referential\SearchValuedActiveModel.cs" />
+    <Compile Include="Models\Referential\SeuilValidationModel.cs" />
+    <Compile Include="Models\Referential\TacheModel.cs" />
+    <Compile Include="Models\Referential\TypeDepenseModel.cs" />
+    <Compile Include="Models\Referential\TypeUniteModel.cs" />
+    <Compile Include="Models\Referential\UniteModel.cs" />
+    <Compile Include="Models\ReferentielEtendu\Light\ParametrageReferentielEtenduLightModel.cs" />
+    <Compile Include="Models\ReferentielEtendu\Light\ReferentielEtenduLightModel.cs" />
+    <Compile Include="Models\ReferentielEtendu\ParametrageParentModel.cs" />
+    <Compile Include="Models\ReferentielEtendu\ParametrageReferentielEtenduExportModel.cs" />
+    <Compile Include="Models\ReferentielEtendu\ParametrageReferentielEtenduModel.cs" />
+    <Compile Include="Models\ReferentielEtendu\ReferentielEtenduModel.cs" />
+    <Compile Include="Models\ReferentielEtendu\UniteReferentielEtenduModel.cs" />
+    <Compile Include="Models\ReferentielFixe\ChapitreModel.cs" />
+    <Compile Include="Models\ReferentielFixe\Light\ChapitreLightModel.cs" />
+    <Compile Include="Models\ReferentielFixe\Light\RessourceLightModel.cs" />
+    <Compile Include="Models\ReferentielFixe\Light\SousChapitreLightModel.cs" />
+    <Compile Include="Models\ObjectifFlash\Panel\ChapitrePanelModel.cs" />
+    <Compile Include="Models\ObjectifFlash\Panel\RessourcePanelModel.cs" />
+    <Compile Include="Models\ObjectifFlash\Panel\SousChapitrePanelModel.cs" />
+    <Compile Include="Models\ReferentielFixe\RessourceModel.cs" />
+    <Compile Include="Models\ReferentielFixe\SousChapitreModel.cs" />
+    <Compile Include="Models\ReferentielFixe\TypeRessourceModel.cs" />
+    <Compile Include="Models\RepartitionEcart\RepartitionEcartModel.cs" />
+    <Compile Include="Models\RepartitionEcart\RepartitionEcartWrapperModel.cs" />
+    <Compile Include="Models\RessourceRecommandee\RessourceRecommandeeFromEtablissementCIOrganisationModel.cs" />
+    <Compile Include="Models\RessourceRecommandee\RessourceRecommandeeModel.cs" />
+    <Compile Include="Models\RoleFonctionnalite\RoleFonctionnaliteModel.cs" />
+    <Compile Include="Models\Role\RoleModel.cs" />
+    <Compile Include="Models\Search\ISearchValueModel.cs" />
+    <Compile Include="Models\Societe\AssocieSepModel.cs" />
+    <Compile Include="Models\Societe\Classification\SocieteClassificationModel.cs" />
+    <Compile Include="Models\Societe\Light\SocieteLightModel.cs" />
+    <Compile Include="Models\Societe\SearchSocieteModel.cs" />
+    <Compile Include="Models\Societe\SocieteDeviseModel.cs" />
+    <Compile Include="Models\Societe\SocieteModel.cs" />
+    <Compile Include="Models\Societe\TypeParticipationSepModel.cs" />
+    <Compile Include="Models\Societe\TypeSocieteModel.cs" />
+    <Compile Include="Models\Societe\UniteSocieteModel.cs" />
+    <Compile Include="Models\Utilisateur\AffectationGroupByOrganisationModel.cs" />
+    <Compile Include="Models\Utilisateur\AffectationGroupByRoleAndOrganisationModel.cs" />
+    <Compile Include="Models\Utilisateur\AffectationSeuilUtilisateurModel.cs" />
+    <Compile Include="Models\Utilisateur\Light\UtilisateurLightModel2.cs" />
+    <Compile Include="Models\Utilisateur\Light\UtilisateurLightModel.cs" />
+    <Compile Include="Models\Utilisateur\UtilisateurModel.cs" />
+    <Compile Include="Models\Utilisateur\UtilisateurSansPersonnelModel.cs" />
+    <Compile Include="Models\ValidationPointage\RemonteeVracResult.cs" />
+    <Compile Include="Models\ValidationPointage\ControlePointageResult.cs" />
+    <Compile Include="Models\ValidationPointage\ControlePointageModel.cs" />
+    <Compile Include="Models\ValidationPointage\InsertQueryPointageParametersModel.cs" />
+    <Compile Include="Models\ValidationPointage\InsertQueryPrimeParametersModel.cs" />
+    <Compile Include="Models\ValidationPointage\PointageFiltreModel.cs" />
+    <Compile Include="Models\ValidationPointage\LotPointageModel.cs" />
+    <Compile Include="Models\ValidationPointage\ControlePointageErreurModel.cs" />
+    <Compile Include="Models\ValidationPointage\PersonnelErreurModel.cs" />
+    <Compile Include="Models\ValidationPointage\RemonteeVracModel.cs" />
+    <Compile Include="Models\ValidationPointage\RemonteeVracErreurModel.cs" />
+    <Compile Include="Models\ValidationPointage\SearchValidationResultModel.cs" />
+    <Compile Include="Models\Valorisation\ValorisationEcritureComptableODModel.cs" />
+    <Compile Include="Models\Valorisation\ValorisationMaterielModel.cs" />
+    <Compile Include="Models\Valorisation\ValorisationRapportLigneEtTache.cs" />
+    <Compile Include="Models\Valorisation\ValorisationModel.cs" />
+    <Compile Include="Models\Moyen\AffectationMoyenModel.cs" />
+    <Compile Include="Models\Moyen\AffectationMoyenTypeModel.cs" />
+    <Compile Include="Models\Moyen\SiteModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_LocalResources\Enumeration.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Enumeration.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\Authentification.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\AuthentificationLog.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\EmailResetPassword.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureAvancement.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureBareme.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureBudgetBibliothequePrix.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureBilanFlash.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>FeatureBilanFlash2.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureAvancementRecette.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureBudget.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureBudgetCommentairePanel.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureBudgetComparaison.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureBudgetComparaison.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureBudgetDetail.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureBudgetListe.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureBudgetSousDetail.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureEcritureComptable.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureEcritureComptable.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureExportTableauSynthese.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureExportTableauSynthese.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureFamilleOperationDiverse.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureFamilleOperationDiverse.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeaturePieceJointe.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeaturePieceJointe.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureCI.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureCI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureClassificationSocietes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureClassificationSocietes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureCodeAbsence.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>FeatureCodeAbsence.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureCodeDeplacement.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>FeatureCodeDeplacement.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureCodeMajoration.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureCodeMajoration.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureCodeZoneDeplacement.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureCodeZoneDeplacement.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureCommande.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>FeatureCommande.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureCommandeEnergie.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureCommandeEnergie.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureCompteExploitation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>FeatureCompteExploitation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureControleBudgetaire.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureControleBudgetaire.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureDatesCalendrierPaie.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>FeatureDatesCalendrierPaie.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureCloturesPeriodes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureDatesClotureComptable.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>FeatureDatesClotureComptable.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureDepense.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>FeatureDepense.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureDevise.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>FeatureDevise.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureEtablissementComptable.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureEtablissementComptable.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureEtablissementPaie.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureEtablissementPaie.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureExportBilanTechnique.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureExportBilanTechnique.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureExportExcel.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>FeatureExportExcel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureFacture.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureFacture.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureFavori.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureFavori.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureCache.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureCache.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureFeatureFlipping.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureFeatureFlipping.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureFournisseur.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureFournisseur.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureHome.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>FeatureHome.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureImage.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureImage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureIndemniteDeplacement.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>FeatureIndemniteDeplacement.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureJournalComptable.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureJournalComptable.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureMateriel.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>FeatureMateriel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureModule.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureModule.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureMoyen.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>FeatureMoyen.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureNature.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureNature.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureObjectifFlash.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureObjectifFlash.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureOperationDiverse.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureOperationDiverse.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureOrganisation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureOrganisation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureParamReferentielEtendu.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureParamReferentielEtendu.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeaturePermission.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeaturePermission.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeaturePersonnel.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeaturePersonnel.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureRapportPrime.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureRapportPrime.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeaturePrime.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeaturePrime.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureRapportHebdo.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureRapportHebdo.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureRapport.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureRapport.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureReception.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureReception.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureReferential.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureReferential.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureReferentielEtendu.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureReferentielEtendu.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureReferentielFixe.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureReferentielFixe.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureReferentielTache.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureReferentielTache.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureRessourcesSpecifiquesCI.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureRessourcesSpecifiquesCI.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureRole.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureRole.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureSociete.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureSociete.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureTache.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureTache.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureValidationPointage.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureValidationPointage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FredResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FredResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\LogRessource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogRessource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\Page_Title.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Page_Title.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\FeatureRessourcesRecommandees.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeatureRessourcesRecommandees.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\ResourceMails.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceMails.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\Fred.Analysis\LogicalWebArchitecture.layerdiagram">
+      <Link>LogicalWebArchitecture.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
+    <AdditionalFiles Include="..\Fred.Analysis\LogicalFredIEArchitecture.layerdiagram">
+      <Link>LogicalFredIEArchitecture.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
+    <None Include="app.config" />
+    <None Include="Fred.Web.Shared.ruleset" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fred.Entities\Fred.Entities.csproj">
+      <Project>{d84768f7-f096-4e6d-997e-ac1d9232b47a}</Project>
+      <Name>Fred.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.Framework\Fred.Framework.csproj">
+      <Project>{92478535-02C7-44E0-975E-E31D77E78CCA}</Project>
+      <Name>Fred.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.10.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
+    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.10.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\Google.Protobuf.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\SonarAnalyzer.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,311 @@
+= Utilisation des Exceptions dans FRED
+
+== Les classes de bases des exceptions de Fred
+
+* *FredException* +
+Classe abstraite, parent de toutes les customs exceptions
+* *FredBusinessException* +
+Pour lancer une exception dans la couche Business. Exemple : règle métier non respecté
+* *FredRepositoryException* +
+Pour lancer une exception dans la couche Repository
+* *FredTechnicalException* +
+Pour lancer une exception technique.
+* *FredBusinessMessageResponseException* +
+Même utilisation que FredBusinessException En revanche elle ne transmet pas l’exception dans la réponse mais juste son message Ceci parce que IIS Server ne transmet pas l’exception vers le front comme le fait IIS
+Express
+* *IFredMessageResponseException* +
+Interface à implémenter par une exception pour transmettre le message plutôt que l’exception au front
+
+____
+Règles : 
+
+* La couche Repo ne lance que des exceptions de type FredRepositoryException 
+* La couche Business ne lance que des exceptions de type FredBusinessException 
+* Lorsque que je catch une exception, je l’encapsule dans une exception de type Fred 
+* C’est le dernier catch qui log.
+____
+
+== How To : Traiter une exception
+
+* *N’abusez pas des exceptions…* +
+Utilisez les exceptions seulement pour des conditions/erreurs inattendues. +
+Par exemple, vous pouvez renvoyer null plutôt qu’une exception, +
+genre GetNexItem : return null pas throw YaPlusRienException +
+* *N’abusez pas des catch* Ce n’est pas necessaire de faire un catch dans toutes les fonctions… Par exemple, une fonction Private peut ne pas gérer, mais les fonctions Public oui.
+* *Respecter l’ordre de capture* +
+Commencez toujours de l’exception la plus spécialisée pour finir à la moins spécialisée
+* *Exception* +
+Ne pas capturer la classe Exception, ou la capturer en dernier.
+* *Spécialiser* Si vous capturez une exception d’un repo dans la couche Business, transformez la en FredBusinessException pour la remonter plus haut. +
+Dit autrement, respecter la hiérarchie, de la couche la plus basse vers la couche la plus haute.
+* *Nettoyer*
+* Avant d’appeler throw, nettoyer ! Fermer les fichiers, faite un rollback sur une transaction etc… +
+*Finaly* : le bloc Finaly est toujours appelé même quand vous lancez une exception +
+Vous pouvez l’utilisez pour nettoyer.
+* *Test unitaire* Dans vos tests, tester aussi et surtout les cas d’erreurs. +
+Un test doit faire des Assert(true), mais aussi des Assert(false). +
+Utiliser la couverture de code pour vérifier que vous avez couvert les bloc catch/finaly +
+Exemple : (avec FluentAssertion) Action.ShouldThrow();
+* *Log* +
+Logger en haut de la pile. (dans le catch le plus haut, la couche service par exemple). +
+Si chaque catch fait un log, c’est le bordel après pour lire les fichiers de logs. Voir le chapitre _AntiPattern_.
+
+*Exemple de gestion d’exception*
+
+[source,csharp]
+----
+try 
+{
+    // exemple de code dans la couche business
+}
+catch (FredSocieteRepositoryException socEx)
+{
+    // Je sais que c'est le repo société qui a merdé
+    // Je traite l'erreur
+    // par exemple, nettoyage de données
+    // puis information à la couche supérieure en passant l'exception originale en InnerException...
+    // Je peux passer en objet en paramètre, il sera dumpé dans les logs
+    throw new FredSocieteBussinessException("Erreur d'accès à la société", societeEnt, socEx)    
+}
+catch (FredRepositoryException repoEx)
+{
+    // J'ai une erreur dans un repo, mais je ne sais pas laquelle
+    // Je traite puis information à la couche supérieure en passant l'exception originale en InnerException...
+    throw new FredSocieteBussinessException("Erreur d'accès aux données", repoEx)
+}
+catch (FredBusinessException busiEx)
+{
+    // J'ai une erreur métier, je peux la traiter et/ou la relancer directement pour la couche présentation
+    if ("c'est bon je gère")
+    { 
+        // code qui gère, puis
+        LogManager.TraceException("C'est bon je gère", e);
+    }
+    else throw;
+}
+catch (FredException fredEx)
+{
+    // Ici, on a une exception dont on ne connait pas trop la nature
+    throw new FredSocieteBussinessException("Erreur de Fred, mais quoi ?", fredEx)
+}
+catch (NullReferenceException nullEx)
+{
+    throw new FredBusinessException("La variable est null, il faut faire ça", nullEx);
+}
+catch (ValidationException valEx)
+{
+    // je gère, si je ne veux pas gérer, alors je ne mets pas ce catch
+    throw;
+}
+catch (UnauthorizedAccessException accEx)
+{
+    // je gère, si je ne veux pas gérer, alors je ne mets pas ce catch
+    throw;
+}
+catch (Exception ex) // ! NON ! Ne pas faire ! Interdit !
+{
+    // Quelle est l'erreur ici ? On n'en sait rien...
+    // je ne mets pas ce catch
+}
+finally
+{
+    // je nettoie,
+    // par exemple je ferme un fichier, je fais un rollback sur une transaction etc...
+}
+----
+
+== How To : Lancer une Exception
+
+* *XML Comment* +
+On ne peut pas déclarer les exceptions qui sont lancées par une méthode en C# comme en C++ ou en Java. +
+Par contre, on peut les déclarer dans le Xml Comment, c’est utile pour le code appelant +
+et c’est aussi utilisé pour le recfactoring comme dans Resharper. +
+Si votre méthode lance trop d’exceptions différentes, il vaut peut-être mieux créer une seule exception custom. (Pensez au code appelant qui doit tout catcher…)
+
+Exemple :
+
+[source,csharp]
+----
+/// <summary>
+/// Ma méthode fait ça  
+/// </summary>
+/// <exception cref="FredSocieteRepositoryException">
+/// Cette exception est lancée si je n'ai pas pu faire ça
+/// </exception>
+public void foo()
+{
+    throw new FredSocieteRepositoryException("ouille");
+}
+----
+
+* *Ne pas utiliser la classe Exception*
+
+Ne pas faire :
+
+[source,csharp]
+----
+// ne pas instancier une exception de type Exception => warning StyleCop/Sonar/Resharper etc...
+throw new Exception("mon message"); 
+----
+
+Mais faire :
+
+[source,csharp]
+----
+throw new FredSocieteRepositoryException("mon message"); 
+----
+
+== How To : Créer une exception
+
+2 Solutions :
+
+. Si vous avez juste besoin de lancer une exception métier standard :
+`+throw new FredBusinessException("mon message");+`
+. Si vous avez besoin de créer votre propre exception (méthode préférée)
+* Dérivez FredBusinessException ou FredRepositoryException etc …
+* Exemple :
+
+[source,csharp]
+----
+  class FredNotFoundBusinessException : FredBusinessException 
+  {
+      public FredNotFoundBusinessException()
+      {}
+      public FredNotFoundBusinessException(string message)
+      : base(message)
+      {}
+      // autre constructeur si nécessaire
+  }
+----
+* Sauvegardez le fichier au même niveau dans la solution que le manager ou le repo etc…
+
+== AntiPattern !
+
+=== Log and throw
+
+Ne pas faire ça !!
+
+[source,csharp]
+----
+catch (FredException e)
+{
+    // le log ne sert à rien, l'exception sera loggée plus haut : ça fera 2 logs...
+    Log.Trace("bla bla", e); 
+    throw;
+}
+----
+
+Ou encore
+
+[source,csharp]
+----
+catch (FredException e)
+{
+    // le log ne sert à rien, l'exception sera loggée plus haut : ça fera 2 logs...
+    Log.Trace(e);
+    throw new MyServiceException("bla bla", e);
+}
+----
+
+Soit tu logges, soit tu throw, mais pas les deux. Logger et relancer entraine des logs multiples pour un seul problème dans le code, ce qui rend difficile la lecture des logs.
+
+=== Re-Throw pas comme il faut
+
+[source,csharp]
+----
+catch (FredException e)
+{
+    // Non ! => Perte du call stack, jamais de "throw e"
+    throw e;
+    
+    // Oui ! => Pas de perte du call stack, l'exception continue sa propagation
+    throw;   
+    
+    // Non ! => Perte du call stack, l'exception originale est perdue
+    throw new MyException(e.Message);  
+    
+    // Oui ! => Je spécialise l'exception et je conserve l'exception originale
+    throw new MyException("Erreur parce que...", e); 
+}
+----
+
+=== Throwing "Exception"
+
+Exemple:
+
+[source,csharp]
+----
+public void foo()
+{
+  throws new Exception("Bla bla");
+}
+----
+
+C’est tout simplement négligeant, et détruit complètement le but d’utiliser des exceptions. +
+Cela dit au code appelant : ``Quelque chose a foiré mais quoi ?``. +
+Très utile… +
+Lancez une exception typée.
+
+=== Catch Exception
+
+Exemple:
+
+[source,csharp]
+----
+catch (Exception e)
+{
+  Log.Error(e);
+}
+----
+
+Ce code n’est pas bon. Je traite une erreur du style : ``Quelque chose a
+foiré mais quoi ?``. +
+Très utile… +
+Le problème en catchant Exception est que si la méthode appelée évolue et crée une nouvelle exception, ça veut dire que le développeur à pour intention de vous dire qu’il y a un nouveau type d’erreur possible. En capturant ``Exception``, vous ne saurait probablement jamais ce changement
+et donc votre code est maintenant faux.
+
+=== Log and Return Null
+
+Exemple:
+
+[source,csharp]
+----
+catch (NoSuchMethodException e) 
+{ 
+    LOG.error("Blah", e); 
+    return null; 
+}
+----
+
+Même si ce n’est pas toujours incorrect, ce n’est généralement pas bon. Plutôt que de retourner null, relancer l’exception et laisser l’appelant traiter l’exception. Il est préférable de retourner null dans un cas normal (non exceptionnel). +
+Exemple : ``This method returns null if the search string was not found.``
+
+=== Catch and Ignore
+
+Exemple:
+
+[source,csharp]
+----
+catch (NoSuchMethodException e) 
+{ 
+    return null; 
+}
+----
+
+Là c’est plus insidieux. Non seulement le code retourne null au lieu de traiter ou relancer l’exception, mais surtout il engloutit totalement l’exception perdant l’information pour toujours.
+
+== Idées d’évolutions
+
+on peut faire : 
+
+[source,csharp]
+----
+class FredGenericBusinessException<TManager> : FredBusinessException where TManager is IManager
+FredSocieteBusinessException : FredGenericBusinessException // création d’une classe spécialisée pour le business société
+----
+
+== Ajout du middleware et impacts sur la gestion des exceptions
+
+Un middleware a été ajouté afin de traiter les exceptions. Il se trouve dans le fichier ExceptionHandlerMiddleware.cs. Celui-ci est traversé par chaque requête d'API. Cela signifie que toute exception lancée dans l'application sera capturée par le middleware.
+Il n'est donc plus necessaire d'encapsuler le contenu des méthodes de la couche controller dans les méthodes de l'ApiControllerBase. 
+Dans le cas où vous avez de nouvelles exceptions à ajouter, vous pouvez les ajouter dans le middleware uniquement si celles-ci ont pour vocation à être utilisées plusieurs fois dans l'application. Si c'est pour un cas specifique, alors vous pouvez catch l'exception directement dans le controller.

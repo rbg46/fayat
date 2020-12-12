@@ -1,0 +1,57 @@
+﻿
+
+/*
+* @summary     Style pour le ribbon au dessus des pages pour informer qu'il s'agit d'une page Maquette
+* @author      FCI-BPE
+* @version     1.0
+* @exemple      
+    <div class="box">
+        <div class="ribbon"><span>Mocks</span></div>
+    </div>
+*/
+
+
+.ribbon {
+  position: absolute;
+  left: -5px; top: -5px;
+  
+  overflow: hidden;
+  width: 200px; height: 200px;
+  text-align: right;
+  z-index:2000;
+}
+.ribbon span {
+  font-size: 10px;
+  font-weight: bold;
+  color: #FFF;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 20px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  width: 100px;
+  display: block;
+  background: rgb(222,63,126);
+  background: linear-gradient(DE3F7E 0%, red 100%);
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 19px; left: -21px;
+}
+.ribbon span::before {
+  content: "";
+  position: absolute; left: 0px; top: 100%;
+  z-index: -1;
+  border-left: 3px solid #1e5799;
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-top: 3px solid #1e5799;
+}
+.ribbon span::after {
+  content: "";
+  position: absolute; right: 0px; top: 100%;
+  z-index: -1;
+  border-left: 3px solid transparent;
+  border-right: 3px solid #1e5799;
+  border-bottom: 3px solid transparent;
+  border-top: 3px solid #1e5799;
+}

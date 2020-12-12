@@ -1,0 +1,1044 @@
+﻿$color_1: white;
+$color_2: #000000;
+$color_3: initial;
+$color_4: rgb(3,84,161);
+$color_5: #fff;
+$color_6: rgb(254,187,95);
+$color_7: lightgray;
+$color_8: rgb(193, 207, 217);
+$color_9: rgb(163, 177, 187);
+$color_10: rgb(133, 147, 157);
+$color_11: rgb(103, 117, 127);
+$color_12: rgb(0,85,160);
+$color_13: rgb(241,150,18);
+$color_14: orange;
+$color_15: red;
+$font_family_1: 'Material Icons';
+$background_color_1: #fff;
+$background_color_2: rgb(255,212,134);
+$background_color_3: rgb(64,109,161);
+$background_color_4: rgb(255,215,140);
+$background_color_5: rgb(159,182,208);
+$background_color_6: rgb(102,138,180);
+$background_color_7: rgb(255,220,155);
+$background_color_8: rgb(160,182,208);
+$background_color_9: rgb(255,228,178);
+$background_color_10: rgb(207,218,231);
+$background_color_11: rgb(213,224,237);
+$background_color_12: rgb(255,216,0);
+$background_color_13: rgb(255,235,127);
+$background_color_14: rgb(255,250,239);
+$background_color_15: rgb(255,252,247);
+$background_color_16: rgb(231,236,243);
+$background_color_17: rgb(0,85,160);
+$background_color_18: rgb(255,192,0);
+$background_color_19: rgb(255,0,102);
+$border_left_color_1: rgb(255,182,49);
+$border_left_color_2: rgb(255, 0, 0);
+
+
+.budget-detail {
+    .top-header {
+        font-weight: 500;
+        text-align: left;
+        color: $color_1;
+
+        .col-1 {
+            border-left: 5px solid white;
+            background: rgb(242,242,242);
+
+            .foldUnfold {
+                padding: 6px;
+                text-align: center;
+                background-color: $background_color_1;
+                color: $color_2;
+                font-weight: 400;
+                cursor: pointer;
+                margin-left: 2%;
+            }
+        }
+
+        .col-2 {
+            background: rgb(242,242,242);
+            border-left: none;
+        }
+
+        .col-6 {
+            background: white;
+        }
+
+        .col-8 {
+            background: white;
+        }
+
+        .col-11 {
+            background: white;
+        }
+
+        .col-3 {
+            background: rgb(254, 187, 95);
+            padding-left: 5px;
+            justify-content: flex-start;
+            border-left: none;
+        }
+
+        .col-unite {
+            background: rgb(255,202,102);
+            color: $color_3;
+            padding: 5px;
+            justify-content: flex-start;
+        }
+
+        .col-4 {
+            background: rgb(255,202,102);
+            color: $color_3;
+            padding: 5px;
+            justify-content: flex-start;
+            border-left: none;
+        }
+
+        .col-5 {
+            background: rgb(255,202,102);
+            color: $color_3;
+            padding: 5px;
+            justify-content: flex-start;
+            border-left: none;
+        }
+    }
+
+    .mid-header {
+        color: $color_1;
+
+        .col-1 {
+            border-left: 5px solid rgb(0,85,160);
+            background: rgb(0,85,160);
+            padding-left: 5px;
+            justify-content: flex-start;
+        }
+
+        .col-2 {
+            background: rgb(0,85,160);
+            padding-left: 5px;
+            justify-content: flex-start;
+            background: rgb(0,85,160);
+        }
+
+        .col-6 {
+            background: rgb(0,85,160);
+            padding-left: 5px;
+            justify-content: flex-start;
+            background: rgb(0,85,160);
+        }
+
+        .col-8 {
+            background: rgb(0,85,160);
+            padding-left: 5px;
+            justify-content: flex-start;
+            background: rgb(0,85,160);
+        }
+
+        .col-11 {
+            background: rgb(0,85,160);
+            padding-left: 5px;
+            justify-content: flex-start;
+        }
+
+        .col-3 {
+            background: rgb(255,182,49);
+            padding-left: 5px;
+            justify-content: flex-start;
+        }
+
+        .col-unite {
+            background: rgb(255,210,125);
+            color: $color_3;
+            justify-content: center;
+        }
+
+        .col-4 {
+            background: rgb(255,210,125);
+            color: $color_3;
+            justify-content: center;
+        }
+
+        .col-5 {
+            background: rgb(255,210,125);
+            color: $color_3;
+            justify-content: center;
+        }
+    }
+
+    .col-2 {
+        border-left: rgba(235,235,235, 0.7) 1px solid;
+        min-height: 30px;
+        display: flex;
+        align-items: center;
+    }
+
+    .col-3 {
+        border-left: rgba(235,235,235, 0.7) 1px solid;
+        min-height: 30px;
+        display: flex;
+        align-items: center;
+        width: 10%;
+        min-width: 100px;
+    }
+
+    .col-unite {
+        border-left: rgba(235,235,235, 0.7) 1px solid;
+        min-height: 30px;
+        display: flex;
+        align-items: center;
+        width: 5%;
+        min-width: 100px;
+        justify-content: center;
+    }
+
+    .col-4 {
+        border-left: rgba(235,235,235, 0.7) 1px solid;
+        min-height: 30px;
+        display: flex;
+        align-items: center;
+        width: 5%;
+        min-width: 100px;
+        justify-content: center;
+    }
+
+    .col-5 {
+        border-left: rgba(235,235,235, 0.7) 1px solid;
+        min-height: 30px;
+        display: flex;
+        align-items: center;
+        width: 5%;
+        min-width: 100px;
+        justify-content: center;
+    }
+
+    .col-6 {
+        border-left: rgba(235,235,235, 0.7) 1px solid;
+        min-height: 30px;
+        display: flex;
+        align-items: center;
+        width: 19%;
+        min-width: 200px;
+        padding: 0 10px;
+    }
+
+    .col-8 {
+        border-left: rgba(235,235,235, 0.7) 1px solid;
+        min-height: 30px;
+        display: flex;
+        align-items: center;
+        width: 5%;
+        min-width: 100px;
+        padding: 0 10px;
+    }
+
+    .col-11 {
+        border-left: rgba(235,235,235, 0.7) 1px solid;
+        min-height: 30px;
+        display: flex;
+        align-items: center;
+        padding: 0 !important;
+        justify-content: center;
+        width: 8%;
+        min-width: 150px;
+
+        .material-icons {
+            margin: 0 3px;
+        }
+    }
+
+    .flex-line {
+        .form-control {
+            color: $color_2;
+        }
+    }
+
+    .level-1 {
+        div[class^=col] {
+            border-top: 1px solid rgb(226, 226, 226);
+        }
+
+        div[class^=col-1] {
+            padding-left: 5px;
+        }
+
+        div[class^=col-2] {
+            padding-left: 5px;
+        }
+
+        div[class^=col-3] {
+            padding-right: 5px;
+        }
+
+        .col-1 {
+            background-color: $background_color_3;
+            color: $color_5;
+        }
+
+        .col-2 {
+            background-color: $background_color_3;
+            color: $color_5;
+            justify-content: flex-start;
+        }
+
+        .col-6 {
+            background-color: $background_color_3;
+            color: $color_5;
+
+            .form-control {
+                width: 95%;
+                height: 65%;
+                background-color: $background_color_5;
+                font-size: 11px;
+            }
+
+            .material-icons {
+                color: $color_8;
+                cursor: pointer;
+            }
+        }
+
+        .col-8 {
+            background-color: $background_color_3;
+            color: $color_5;
+        }
+
+        .col-11 {
+            background-color: $background_color_3;
+            color: $color_5;
+        }
+
+        .col-3 {
+            background: rgb(255,191,74);
+            justify-content: flex-end;
+            color: $color_5;
+        }
+
+        .col-unite {
+            background-color: $background_color_4;
+        }
+
+        .col-4 {
+            background-color: $background_color_4;
+        }
+
+        .col-5 {
+            background-color: $background_color_4;
+        }
+    }
+
+    .level-2 {
+        div[class^=col] {
+            border-top: 1px solid rgb(226, 226, 226);
+        }
+
+        div[class^=col-1] {
+            padding-left: 15px;
+        }
+
+        div[class^=col-2] {
+            padding-left: 15px;
+        }
+
+        div[class^=col-3] {
+            padding-right: 5px;
+        }
+
+        .col-1 {
+            background-color: $background_color_6;
+            color: $color_5;
+        }
+
+        .col-2 {
+            background-color: $background_color_6;
+            color: $color_5;
+            justify-content: flex-start;
+        }
+
+        .col-6 {
+            background-color: $background_color_6;
+            color: $color_5;
+
+            .form-control {
+                width: 95%;
+                height: 65%;
+                background-color: $background_color_5;
+                font-size: 11px;
+            }
+
+            .material-icons {
+                color: $color_9;
+                cursor: pointer;
+            }
+        }
+
+        .col-8 {
+            background-color: $background_color_6;
+            color: $color_5;
+        }
+
+        .col-11 {
+            background-color: $background_color_6;
+            color: $color_5;
+        }
+
+        .col-3 {
+            background: rgb(255,199,97);
+            justify-content: flex-end;
+            color: $color_3;
+        }
+
+        .col-unite {
+            background-color: $background_color_7;
+        }
+
+        .col-4 {
+            background-color: $background_color_7;
+        }
+
+        .col-5 {
+            background-color: $background_color_7;
+        }
+    }
+
+    .level-3 {
+        div[class^=col] {
+            border-top: 1px solid rgb(226, 226, 226);
+        }
+
+        div[class^=col-1] {
+            padding-left: 25px;
+        }
+
+        div[class^=col-2] {
+            padding-left: 25px;
+        }
+
+        div[class^=col-3] {
+            padding-right: 5px;
+        }
+
+        .col-1 {
+            background-color: $background_color_8;
+            color: $color_5;
+        }
+
+        .col-2 {
+            background-color: $background_color_8;
+            color: $color_5;
+            justify-content: flex-start;
+        }
+
+        .col-6 {
+            background-color: $background_color_8;
+            color: $color_5;
+
+            .form-control {
+                width: 95%;
+                height: 65%;
+                background-color: $background_color_10;
+                font-size: 11px;
+            }
+
+            .material-icons {
+                color: $color_10;
+                cursor: pointer;
+            }
+        }
+
+        .col-8 {
+            background-color: $background_color_8;
+            color: $color_5;
+        }
+
+        .col-11 {
+            background-color: $background_color_8;
+            color: $color_5;
+        }
+
+        .col-3 {
+            background: rgb(255,212,134);
+            justify-content: flex-end;
+            color: $color_3;
+        }
+
+        .col-unite {
+            background-color: $background_color_9;
+        }
+
+        .col-4 {
+            background-color: $background_color_9;
+        }
+
+        .col-5 {
+            background-color: $background_color_9;
+        }
+    }
+
+    .level-4 {
+        div[class^=col] {
+            border-top: 1px solid rgb(226, 226, 226);
+        }
+
+        .col-1 {
+            background-color: $background_color_11;
+            color: $color_2;
+            position: relative;
+
+            .form-control {
+                width: 33%;
+                height: 65%;
+                background-color: $background_color_13;
+                font-size: 11px;
+            }
+        }
+
+        .col-2 {
+            background-color: $background_color_11;
+            color: $color_2;
+            justify-content: flex-start;
+
+            .form-control {
+                width: 70%;
+                height: 65%;
+                background-color: $background_color_13;
+                font-size: 11px;
+            }
+        }
+
+        .col-6 {
+            background-color: $background_color_11;
+            color: $color_2;
+
+            .form-control {
+                width: 95%;
+                height: 65%;
+                background-color: $background_color_16;
+                font-size: 11px;
+            }
+
+            .material-icons {
+                color: $color_11;
+                cursor: pointer;
+            }
+        }
+
+        .col-8 {
+            background-color: $background_color_11;
+            color: $color_2;
+
+            .form-control {
+                width: 70%;
+                height: 65%;
+                background-color: $background_color_1;
+                font-size: 11px;
+                border: 1px solid rgb(241,150,18);
+
+                &::-webkit-input-placeholder {
+                    text-align: center;
+                    border: 1px solid rgb(0,85,160);
+                    background-color: $background_color_1;
+                    color: $color_12;
+                    font-style: normal;
+                }
+
+                &::-moz-placeholder {
+                    text-align: center;
+                    color: $color_13;
+                    font-style: normal;
+                }
+            }
+
+            .form-control.qt {
+                border: 1px solid rgb(0,85,160);
+                background-color: $background_color_17;
+                color: $color_5;
+
+                &::-webkit-input-placeholder {
+                    text-align: center;
+                    background-color: $background_color_1;
+                    color: $color_12;
+                    font-style: normal;
+                }
+
+                &::-moz-placeholder {
+                    text-align: center;
+                    background-color: $background_color_1;
+                    color: $color_12;
+                    font-style: normal;
+                }
+            }
+
+            .form-control.pct {
+                border: 1px solid #fff;
+                background-color: $background_color_18;
+                color: $color_2;
+
+                &::-moz-placeholder {
+                    color: $color_2;
+                }
+            }
+        }
+
+        .col-11 {
+            background-color: $background_color_11;
+            color: $color_2;
+
+            .action-icons {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+
+        .col-1.selected {
+            background-color: $background_color_12;
+        }
+
+        .col-2.selected {
+            background-color: $background_color_12;
+        }
+
+        .col-3.selected {
+            background-color: $background_color_12;
+        }
+
+        .col-unite.selected {
+            background-color: $background_color_12;
+        }
+
+        .col-4.selected {
+            background-color: $background_color_12;
+
+            .form-control {
+                background-color: $background_color_13;
+            }
+        }
+
+        .col-5.selected {
+            background-color: $background_color_12;
+
+            .form-control {
+                background-color: $background_color_13;
+            }
+        }
+
+        .col-6.selected {
+            background-color: $background_color_12;
+
+            .form-control {
+                background-color: $background_color_13;
+            }
+        }
+
+        .col-8.selected {
+            background-color: $background_color_12;
+        }
+
+        .col-11.selected {
+            background-color: $background_color_12;
+        }
+
+        div[class^=col-1] {
+            padding-left: 35px;
+        }
+
+        div[class^=col-2] {
+            padding-left: 35px;
+        }
+
+        div[class^=col-3] {
+            padding-right: 5px;
+        }
+
+        .col-3 {
+            background: rgb(255,246,230);
+            justify-content: flex-end;
+            color: $color_3;
+        }
+
+        .col-unite {
+            span {
+                text-overflow: ellipsis;
+                border: 1px solid red;
+            }
+
+            background-color: $background_color_14;
+        }
+
+        .col-4 {
+            background-color: $background_color_14;
+
+            .form-control {
+                width: 80%;
+                height: 65%;
+                background-color: $background_color_15;
+                font-size: 11px;
+            }
+        }
+
+        .col-5 {
+            background-color: $background_color_14;
+
+            .form-control {
+                width: 80%;
+                height: 65%;
+                background-color: $background_color_15;
+                font-size: 11px;
+            }
+        }
+
+        .col-1.new-task {
+            &::before {
+                position: absolute;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 3%;
+                content: "";
+                background-color: $background_color_19;
+            }
+        }
+    }
+
+    .col-1 {
+        justify-content: flex-start;
+        min-height: 30px;
+        display: flex;
+        align-items: center;
+        width: 15%;
+        min-width: 200px;
+    }
+
+    .col-2-small {
+        width: 26%;
+        min-width: 300px;
+    }
+
+    .col-2-large {
+        width: 31%;
+        min-width: 300px;
+    }
+
+    .chevron {
+        &:before {
+            color: $color_5;
+            clear: both;
+            content: 'keyboard_arrow_down';
+            font-family: $font_family_1;
+        }
+
+        line-height: 15px;
+        padding-left: 3px;
+        font-size: 21px;
+        cursor: pointer;
+    }
+
+    .collapsed {
+        .chevron {
+            &:before {
+                color: $color_5;
+                content: 'keyboard_arrow_right';
+                font-family: $font_family_1;
+            }
+        }
+    }
+
+    .icon-T1 {
+        background-image: url('/medias/images/ico/AA1.png');
+        background-position: center;
+        background-size: 100%;
+        height: 20px;
+        width: 20px;
+        min-width: 20px;
+        display: inline-block;
+        background-repeat: no-repeat;
+    }
+
+    .icon-T2 {
+        background-image: url('/medias/images/ico/AA2.png');
+        background-position: center;
+        background-size: 90%;
+        height: 20px;
+        width: 20px;
+        min-width: 20px;
+        display: inline-block;
+        background-repeat: no-repeat;
+    }
+
+    .icon-T3 {
+        background-image: url('/medias/images/ico/AA3.png');
+        background-position: center;
+        background-size: 90%;
+        height: 20px;
+        width: 20px;
+        min-width: 20px;
+        display: inline-block;
+        background-repeat: no-repeat;
+    }
+
+    .icon-T4 {
+        background-image: url('/medias/images/ico/T4_BLUE.png');
+        background-position: center;
+        background-size: 70%;
+        height: 20px;
+        width: 20px;
+        min-width: 20px;
+        display: inline-block;
+        background-repeat: no-repeat;
+    }
+
+    .level-1.task-disabled {
+        .col-1 {
+            color: $color_7;
+        }
+
+        .col-2 {
+            color: $color_7;
+        }
+
+        .col-3 {
+            color: $color_7;
+        }
+
+        .col-6 {
+            color: $color_7;
+        }
+
+        .col-8 {
+            color: $color_7;
+        }
+
+        .col-11 {
+            color: $color_7;
+        }
+    }
+
+    .level-2.task-disabled {
+        .col-1 {
+            color: $color_7;
+        }
+
+        .col-2 {
+            color: $color_7;
+        }
+
+        .col-3 {
+            color: $color_7;
+        }
+
+        .col-6 {
+            color: $color_7;
+        }
+
+        .col-8 {
+            color: $color_7;
+        }
+
+        .col-11 {
+            color: $color_7;
+        }
+    }
+
+    .level-3.task-disabled {
+        .col-1 {
+            color: $color_7;
+        }
+
+        .col-2 {
+            color: $color_7;
+        }
+
+        .col-3 {
+            color: $color_7;
+        }
+
+        .col-6 {
+            color: $color_7;
+        }
+
+        .col-8 {
+            color: $color_7;
+        }
+
+        .col-11 {
+            color: $color_7;
+        }
+    }
+
+    .level-4.task-disabled {
+        .col-1 {
+            color: $color_7;
+        }
+
+        .col-2 {
+            color: $color_7;
+        }
+
+        .col-3 {
+            color: $color_7;
+        }
+
+        .col-unite {
+            color: $color_7;
+        }
+
+        .col-4 {
+            color: $color_7;
+        }
+
+        .col-5 {
+            color: $color_7;
+        }
+
+        .col-6 {
+            color: $color_7;
+        }
+
+        .col-8 {
+            color: $color_7;
+        }
+
+        .col-11 {
+            color: $color_7;
+        }
+    }
+
+    .add-t4 {
+        width: 55px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 10px;
+        margin-left: 10px;
+        border: 1px solid #fff;
+        cursor: pointer;
+
+        span {
+            margin-left: auto;
+        }
+    }
+
+    .action-icons {
+        .material-icons {
+            cursor: pointer;
+            color: $color_5;
+        }
+    }
+
+    .type-avancement {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 65%;
+        font-size: 11px;
+        background-color: $background_color_1;
+        cursor: pointer;
+    }
+
+    .type-avancement.indefini {
+        border: 1px solid orange;
+        color: $color_14;
+    }
+
+    .type-avancement.pourcent {
+        border: 1px solid red;
+        color: $color_15;
+    }
+
+    .type-avancement.quantite {
+        border: 1px solid rgb(0,85,160);
+        color: $color_12;
+    }
+}
+
+.div-task {
+    width: 90%;
+}
+
+.warning-size {
+    font-size: 16px;
+}
+
+fred-toolbar {
+    .icon-button {
+        span {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+
+        .excel-icon {
+            background-image: url('/medias/images/ico/excel-icon.png');
+        }
+
+        .pdf-icon {
+            background-image: url('/medias/images/ico/pdf-icon.png');
+        }
+
+        .deactivate-export {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+    }
+}
+
+.budget-detail.bandeau-lateral {
+    .col-1 {
+        width: 100%;
+
+        .material-icons {
+            color: $color_4;
+            cursor: pointer;
+        }
+    }
+
+    padding-left: 5px;
+    padding-right: 5px;
+
+    .col-1.can-navigate-to-t4 {
+        &:hover {
+            border-left-color: $border_left_color_1;
+            background-color: $background_color_2;
+            cursor: pointer;
+        }
+    }
+
+    .col-1.already-displayed-t4 {
+        border-left-color: $border_left_color_2;
+
+        .material-icons {
+            visibility: hidden;
+        }
+    }
+}
+
+.warning-tache-ecart {
+    color: $color_6;
+    float: left;
+    font-size: 15px;
+    margin-top: 3px;
+}
+
+.chevron.not-visible {
+    visibility: hidden;
+}
+
+.action-t3 {
+    display: flex;
+}
+
+.commentaire-validation {
+    textarea {
+        resize: none !important;
+        width: 100%;
+    }
+}

@@ -1,0 +1,446 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+  ViewBag.Title = FeatureFournisseur.Fournisseur_Index_TitreOnglet;
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+  @Styles.Render("~/FournisseurIndexBundle.css")
+}
+
+@section scripts {
+  @Scripts.Render("~/FournisseurIndexBundle.js")
+  @Scripts.Render("https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places&key=AIzaSyDwru8fGuoaw-edau7EllAiihzwf2ogF4Y");
+  @this.RenderResources("FeatureFournisseur", "FeatureFavori")
+}
+
+<div ng-controller="FournisseurController as ctrl" class="container" ng-init="ctrl.handleLoadPage('@ViewBag.favoriId')">
+
+    <h1>{{ctrl.resources.Fournisseur_Index_Titre}}</h1>
+
+    <div class="row">
+        <div class="container-fluid fournisseurs">
+            <div class="search-container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 no_padding">
+
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-model="ctrl.inputSearch" on-enter="ctrl.handleSearch(ctrl.filter)" placeholder="{{ctrl.resources.Global_ReferentielFournisseur_Placeholder}}" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary y_search" type="button" ng-click="ctrl.handleSearch(ctrl.filter)" title="{{resources.Global_RechercheAffiner_Tooltip}}" ng-disabled="busy"><i class="material-icons">search</i></button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-2 no_padding import-anael">
+                        <fred-authorization is-overflow-hidden="true" key="button.show.import.fournisseur.anael">
+                            <button class="btn btn-primary" ng-click="ctrl.handleExecuteImportFournisseur()">{{ctrl.resources.Fournisseur_Bouton_Import_Anael}}</button>
+                        </fred-authorization>
+                    </div>
+
+                    <div class="col-md-5 col-sm-5 btns">
+                        <!-- Localisation -->
+                        <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="ctrl.filter.dept" ng-click="ctrl.filter.Departement=null; ctrl.filter.dept=null; ctrl.handleSearch(ctrl.filter)">
+                            {{ ctrl.filter.dept.Code }} - {{ ctrl.filter.dept.Libelle }}
+                            <span class="flaticon-multiply"></span>
+                        </span>
+                        <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="ctrl.filter.Ville" ng-click="ctrl.filter.Ville=null; ctrl.handleSearch(ctrl.filter)">
+                            {{ctrl.resources.Fournisseur_Search_Ville_Placeholder}} : {{ ctrl.filter.Ville }}
+                            <span class="flaticon-multiply"></span>
+                        </span>
+                        <!-- Activité -->
+                        <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="ctrl.filter.SIREN" ng-click="ctrl.filter.SIREN=null; ctrl.handleSearch(ctrl.filter)">
+                            {{ctrl.resources.Fournisseur_Search_Siren_Placeholder}} : {{ctrl.filter.SIREN}}
+                            <span class="flaticon-multiply"></span>
+                        </span>
+                        <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="ctrl.filter.Locatier" ng-click="ctrl.filter.Locatier=!ctrl.filter.Locatier; ctrl.handleSearch(ctrl.filter)">
+                            {{ctrl.resources.Fournisseur_Search_Locatier}}
+                            <span class="flaticon-multiply"></span>
+                        </span>
+                        <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="ctrl.filter.ETT" ng-click="ctrl.filter.ETT=!ctrl.filter.ETT; ctrl.handleSearch(ctrl.filter)">
+                            {{ctrl.resources.Fournisseur_Search_ETT}}
+                            <span class="flaticon-multiply"></span>
+                        </span>
+                    </div>
+
+                    <div class="col-md-1 col-sm-1 btns">
+                        <fred-button class="white icon" ng-click="status ? status=false : status=true;">
+                            <span ng-class="{'fa fa-filter' :!buttonFilterClick  ,'material-icons closing' :buttonFilterClick}"
+                                  title="{{!ctrl.buttonFilterClicked ? ctrl.resources.Global_Filtre_Titre : ctrl.resources.Global_Bouton_Fermer}}">
+                                <span ng-show="buttonFilterClick">clear</span>
+                            </span>
+                        </fred-button>
+                    </div>
+                </div>
+
+                <!-- BEGIN : Bloc de Filtre -->
+                <fred-overlay ng-click="status=false;" ng-class="{'open' :status  ,'close' :!status}"></fred-overlay>
+
+                <fred-side ng-init="status=false;" ng-class="{'open' :status  ,'close' :!status }" esc-key="Test()">
+
+                    <!--En tete-->
+                    <header>
+                        <icon><label>Affiner votre recherche : </label></icon>
+                    </header>
+
+                    <main style="padding: 5px;">
+
+                        <div class="filter-tiles">
+                            <!-- Localisation -->
+                            <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="ctrl.filter.dept" ng-click="ctrl.filter.Departement=null; ctrl.filter.dept=null; ctrl.handleSearch(ctrl.filter)">
+                                {{ ctrl.filter.dept.Code }} - {{ ctrl.filter.dept.Libelle }}
+                                <span class="flaticon-multiply"></span>
+                            </span>
+                            <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="ctrl.filter.Ville" ng-click="ctrl.filter.Ville=null; ctrl.handleSearch(ctrl.filter)">
+                                {{ctrl.resources.Fournisseur_Search_Ville_Placeholder}} : {{ ctrl.filter.Ville }}
+                                <span class="flaticon-multiply"></span>
+                            </span>
+                            <!-- Activité -->
+                            <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="ctrl.filter.SIREN" ng-click="ctrl.filter.SIREN=null; ctrl.handleSearch(ctrl.filter)">
+                                {{ctrl.resources.Fournisseur_Search_Siren_Placeholder}} : {{ctrl.filter.SIREN}}
+                                <span class="flaticon-multiply"></span>
+                            </span>
+                            <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="ctrl.filter.Locatier" ng-click="ctrl.filter.Locatier=!ctrl.filter.Locatier; ctrl.handleSearch(ctrl.filter)">
+                                {{ctrl.resources.Fournisseur_Search_Locatier}}
+                                <span class="flaticon-multiply"></span>
+                            </span>
+                            <span type="button" class="btn-nopad btn btn-sm btn-primary" ng-show="ctrl.filter.ETT" ng-click="ctrl.filter.ETT=!ctrl.filter.ETT; ctrl.handleSearch(ctrl.filter)">
+                                {{ctrl.resources.Fournisseur_Search_ETT}}
+                                <span class="flaticon-multiply"></span>
+                            </span>
+                        </div>
+
+                        <div class="fred-scroll main-body">
+                            <section-title data-toggle="collapse" data-target="#section1">Localisation :</section-title>
+
+                            <section-content class="collapse in" id="section1">
+                                <div class="row">
+                                    <div class="selection_filters">
+                                        <div class="col-md-12">
+                                            @* *********************** FAIRE EVOLUER VERS UNE PICKLIST ?? MANQUE DES DONNEES GEO EN BASE *********************@
+                                            <select class="form-control input-filter"
+                                                    ng-model="ctrl.filter.dept"
+                                                    ng-options="item as (item.Code + ' - ' + item.Libelle) for item in ctrl.departements"
+                                                    ng-change="ctrl.handleSelect('Departement', ctrl.filter.dept)">
+                                                    <option value="">{{ctrl.resources.Fournisseur_Search_Departement_Placeholder}}</option>
+                                            </select>
+                                            @* *********************** FAIRE EVOLUER VERS UNE PICKLIST ?? MANQUE DES DONNEES GEO EN BASE *********************@
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control inputText" placeholder="{{ctrl.resources.Fournisseur_Search_Ville_Placeholder}}" ng-model="ctrl.filter.Ville" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </section-content>
+
+                            <section-title data-toggle="collapse" data-target="#section2">Activité :</section-title>
+
+                            <section-content class="collapse in" id="section2">
+                                <div class="row">
+                                    <div class="selection_filters">
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control inputText" placeholder="{{ctrl.resources.Fournisseur_Search_Siren_Placeholder}}" ng-model="ctrl.filter.SIREN" />
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input id="chkTypeFournisseurIsLocatier" type="checkbox" ng-model="ctrl.filter.Locatier">
+                                            <label for="chkTypeFournisseurIsLocatier">
+                                                <span></span>{{ctrl.resources.Fournisseur_Search_Locatier}}
+                                            </label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input id="chkTypeFournisseurIsEtt" type="checkbox" ng-model="ctrl.filter.ETT">
+                                            <label for="chkTypeFournisseurIsEtt">
+                                                <span></span>{{ctrl.resources.Fournisseur_Search_ETT}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section-content>
+
+                        </div>
+                    </main>
+
+                    <footer ng-click="status=false;">
+                        <!--BEGIN : Bouton Start-->
+                        <action>
+                            <button type="button" class="fred-button primary" ng-click="ctrl.handleSearch(ctrl.filter)">{{ctrl.resources.Global_Filtre_Bouton_Appliquer}}</button>
+                            <button type="button" class="fred-button warning" ng-click="ctrl.handleGetNewFavori()">{{ctrl.resources.Global_Filtre_Bouton_AjouterFavoris}}</button>
+                            <button type="button" class="fred-button cancel" ng-click="ctrl.cancelFilter()">{{ctrl.resources.Global_Filtre_Bouton_Reinitialiser}}</button>
+                        </action>
+                        <!--END : Bouton Start-->
+
+                        <close>
+                            <icon /><label>Refermer le panneau</label>
+                        </close>
+                    </footer>
+                </fred-side>
+            </div>
+        </div>
+    </div>
+
+    <h4>{{ctrl.resources.Fournisseur_Index_SousTitre_ListeFournisseur}}</h4>
+
+    <div class="table-container">
+        <table class="table table-hover table-fixed">
+            <thead>
+                <tr>
+                    <!--Affichage du tableau en mode Extra small devices (col-xs) -->
+                    <th class="col-xs-10 visible-xs">{{ctrl.resources.Fournisseur_Index_Table_Entete_Code}} / {{ctrl.resources.Fournisseur_Index_Table_Entete_Libelle}}</th>
+
+                    <!--Affichage du tableau en mode Small (col-sm)-->
+                    <th class="col-xs-8 visible-sm">{{ctrl.resources.Fournisseur_Index_Table_Entete_Code}} / {{ctrl.resources.Fournisseur_Index_Table_Entete_Libelle}}</th>
+                    <th class="col-sm-2  visible-sm">{{ctrl.resources.Fournisseur_Index_Table_Entete_Siret}} / {{ctrl.resources.Fournisseur_Index_Table_Entete_Siren}}</th>
+
+                    <!--Affichage du tableau en mode Medium + Large (col-md + col-lg )-->
+                    <th class="col-md-2 visible-md visible-lg">{{ctrl.resources.Fournisseur_Index_Table_Entete_Code}}</th>
+                    <th class="col-md-3 visible-md visible-lg">{{ctrl.resources.Fournisseur_Index_Table_Entete_Libelle}}</th>
+                    <th class="col-md-2 visible-md visible-lg">{{ctrl.resources.Fournisseur_Index_Table_Entete_Siret}}</th>
+                    <th class="col-md-2 visible-md visible-lg">{{ctrl.resources.Fournisseur_Index_Table_Entete_Siren}}</th>
+                    <th class="col-md-2 visible-md visible-lg">{{ctrl.resources.Fournisseur_Index_Table_Entete_TypeTiers}}</th>
+                    <th class="col-xs-2 visible-xs col-sm-2 visible-sm col-md-1 visible-md visible-lg">{{ctrl.resources.Fournisseur_Index_Table_Entete_Action}}</th>
+                </tr>
+            </thead>
+            <tbody id="fournisseurList" class="fred-scroll">
+                <tr ng-repeat="f in ctrl.fournisseurList">
+
+                    <!--Affichage du tableau en mode Extra small devices (col-xs) -->
+                    <td class="col-xs-10 visible-xs">{{f.Code}} / {{f.Libelle}}</td>
+
+                    <!--Affichage du tableau en mode Small (col-sm)-->
+                    <td class="col-xs-8 visible-sm">{{f.Code}} / {{f.Libelle}}</td>
+                    <td class="col-sm-2 visible-sm">{{f.SIRET | checkEmpty}} / {{f.SIREN | checkEmpty}}</td>
+
+                    <!--Affichage du tableau en mode Medium + Large (col-md + col-lg )-->
+                    <td class="col-md-2 visible-md visible-lg">{{f.Code}}</td>
+                    <td class="col-md-3 visible-md visible-lg">{{f.Libelle}}</td>
+                    <td class="col-md-2 visible-md visible-lg">{{f.SIRET | checkEmpty}}</td>
+                    <td class="col-md-2 visible-md visible-lg">{{f.SIREN | checkEmpty}}</td>
+                    <td class="col-md-2 visible-md visible-lg">{{f.TypeTiers | checkEmpty}}</td>
+
+                    <!--
+                        Colonne Action commune aux trois mode
+                        Extra small devices : col-xs-2  visible-xs
+                        Small : col-sm-2  visible-sm
+                        Medium + Large : col-md-2 visible-md visible-lg
+                        > Au global : col-xs-2  visible-xs  col-sm-2  visible-sm col-md-2 visible-md visible-lg
+                    -->
+                    <td class="col-xs-2 visible-xs col-sm-2 visible-sm col-md-1 visible-md visible-lg">
+                        <span ng-click="ctrl.handleOpenDetailFournisseur(f)" title="{{ctrl.resources.Fournisseur_Index_Table_Bouton_Detail_Tooltip}}" class="action-icone material-icons" aria-hidden="true">more_vert</span>
+                        <span ng-click="ctrl.handleAffectedPersonnelList(f.FournisseurId)" title="{{ctrl.resources.Fournisseur_Index_Table_Bouton_Personnel_Tooltip}}" class="action-icone material-icons" aria-hidden="true" ng-show="f.CountPersonnelInterimaire > 0">group</span>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    @* Overlay gris *@
+    <div ng-class="ctrl.checkDisplayFournisseurDetail" class="blockScreen"></div>
+
+    <!--BEGIN : Formulaire pour visualisation des informations sur le fournisseurs-->
+    <div class="options" id="optionRightPanel" ng-class="ctrl.checkDisplayFournisseurDetail">
+        <!--HEADER TOOLBAR : BEGIN-->
+        <div class="toolbar">
+            <div class="flaticon flaticon flaticon-house grandicone"></div>
+        </div>
+        <!--HEADER TOOLBAR : END-->
+        <!-- Titre : BEGIN -->
+        <div class="form-header">
+            <h2>
+                {{ctrl.resources.Fournisseur_Index_PanelDetail_Titre}}
+            </h2>
+        </div>
+        <!-- Titre : END -->
+
+        <div class="form fred-scroll">
+            <!--Formulaire: START-->
+            <form autocomplete="off" novalidate>
+                <div>
+
+                    <h5>{{ctrl.resources.Fournisseur_Index_PanelDetail_SousTitre_Information}}</h5>
+
+                    <div class="row">
+                        <div class="col-xs-6 label-key">{{ctrl.resources.Fournisseur_Index_PanelDetail_Code}}</div>
+                        <div class="col-xs-6 label-key">{{ctrl.resources.Fournisseur_Index_PanelDetail_Fournisseur}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 label-val">{{ctrl.selectedFournisseur.Code}}</div>
+                        <div class="col-xs-6 label-val">{{ctrl.selectedFournisseur.Libelle | checkEmpty}}</div>
+                    </div>
+                    <div class="row label-group">
+                        <div class="col-xs-12 label-key">{{ctrl.resources.Global_Adresse}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 label-val">{{ctrl.selectedFournisseur.Adresse | checkEmpty}}</div>
+                    </div>
+                    <div class="row label-group">
+                        <div class="col-xs-6 label-key">{{ctrl.resources.Global_CodePostal}}</div>
+                        <div class="col-xs-6 label-key">{{ctrl.resources.Global_Ville}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 label-val">{{ctrl.selectedFournisseur.CodePostal | checkEmpty}}</div>
+                        <div class="col-xs-6 label-val">{{ctrl.selectedFournisseur.Ville | checkEmpty}}</div>
+                    </div>
+                    <div class="row label-group">
+                        <div class="col-xs-6 label-key">{{ctrl.resources.Global_Pays}}</div>
+                        <div class="col-xs-6 label-key">{{ctrl.resources.Global_Email}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 label-val">{{ctrl.selectedFournisseur.Pays.CodeLibelle | checkEmpty}}</div>
+                        <div class="col-xs-6 label-val">{{ctrl.selectedFournisseur.Email | checkEmpty}}</div>
+                    </div>
+                    <div class="row label-group">
+                        <div class="col-xs-6 label-key">{{ctrl.resources.Global_Telephone}}</div>
+                        <div class="col-xs-6 label-key">{{ctrl.resources.Global_Fax}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 label-val">{{ctrl.selectedFournisseur.Telephone | checkEmpty}}</div>
+                        <div class="col-xs-6 label-val">{{ctrl.selectedFournisseur.Fax | checkEmpty}}</div>
+                    </div>
+
+                    <br />
+                    <div class="row">
+                        <ng-map default-style="true" id="map" center="[{{ctrl.selectedFournisseur.lat}}, {{ctrl.selectedFournisseur.lng}}]" zoom="12" type>
+                            <marker position="{{ctrl.selectedFournisseur.lat}}, {{ctrl.selectedFournisseur.lng}}" id="fournisseurMap" on-click="ctrl.map.showInfoWindow('foo-iw')"></marker>
+                            <info-window id="foo-iw" visible-on-marker="fournisseurMap">
+                                <div ng-non-bindable>
+                                    <b>{{ctrl.resources.Global_GoogleMap_Adresse}}</b>: {{ctrl.selectedFournisseur.Adresse | checkEmpty}}<br />
+                                    <b>{{ctrl.resources.Global_GoogleMap_CodePostal}}</b>: {{ctrl.selectedFournisseur.CodePostal | checkEmpty}}<br />
+                                    <b>{{ctrl.resources.Global_GoogleMap_Ville}}</b>: {{ctrl.selectedFournisseur.Ville | checkEmpty}}<br />
+                                    <b>{{ctrl.resources.Global_GoogleMap_Pays}}</b>: {{ctrl.selectedFournisseur.Pays | checkEmpty}}<br />
+                                    <b>{{ctrl.resources.Global_GoogleMap_Latitude}}</b>: {{ctrl.selectedFournisseur.lat | checkEmpty}}<br />
+                                    <b>{{ctrl.resources.Global_GoogleMap_Longitude}}</b>: {{ctrl.selectedFournisseur.lng | checkEmpty}}<br />
+                                </div>
+                            </info-window>
+                        </ng-map>
+                    </div>
+
+                    <h5>{{ctrl.resources.Fournisseur_Index_PanelDetail_SousTitre_InfoComptable}}</h5>
+                    <div class="row label-group">
+                        <div class="col-xs-6 label-key">{{ctrl.resources.Fournisseur_Index_PanelDetail_Siret}}</div>
+                        <div class="col-xs-6 label-key">{{ctrl.resources.Fournisseur_Index_PanelDetail_Siren}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 label-val">{{ctrl.selectedFournisseur.SIRET | checkEmpty}}</div>
+                        <div class="col-xs-6 label-val">{{ctrl.selectedFournisseur.SIREN | checkEmpty}}</div>
+                    </div>
+
+                    <div class="row label-group">
+                        <div class="col-xs-6 label-key">{{ctrl.resources.Fournisseur_Index_PanelDetail_DateOuverture}}</div>
+                        <div class="col-xs-6 label-key">{{ctrl.resources.Fournisseur_Index_PanelDetail_DateCloture}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 label-val">{{ctrl.selectedFournisseur.DateOuverture | toLocaleDate | date:"dd/MM/yyyy" | checkEmpty}}</div>
+                        <div class="col-xs-6 label-val">{{ctrl.selectedFournisseur.DateCloture | toLocaleDate | date:"dd/MM/yyyy" | checkEmpty}}</div>
+                    </div>
+
+                    <div class="row label-group">
+                        <div class="col-xs-6 label-key">{{ctrl.resources.Fournisseur_Index_PanelDetail_TypeSequence}}</div>
+                        <div class="col-xs-6 label-key">{{ctrl.resources.Fournisseur_Index_PanelDetail_TypeTiers}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 label-val">{{ctrl.selectedFournisseur.TypeSequence | checkEmpty}}</div>
+                        <div class="col-xs-6 label-val">{{ctrl.selectedFournisseur.TypeTiers | checkEmpty}}</div>
+                    </div>
+
+                    <div class="row label-group">
+                        <div class="col-xs-6 label-key">{{ctrl.resources.Fournisseur_Index_PanelDetail_ModeReglement}}</div>
+                        <div class="col-xs-6 label-key">{{ctrl.resources.Fournisseur_Index_PanelDetail_RegleGestion}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 label-val">{{ctrl.selectedFournisseur.ModeReglement | checkEmpty}}</div>
+                        <div class="col-xs-6 label-val">{{ctrl.selectedFournisseur.RegleGestion | checkEmpty}}</div>
+                    </div>
+
+                </div>
+
+                <!--FOOTER TOOLBAR : BEGIN -->
+                <div class="footer">
+                    <div class="buttons">
+                        <button class="btn btn-default" ng-show="ctrl.selectedFournisseur.CountPersonnelInterimaire > 0" ng-click="ctrl.handleAffectedPersonnelList(ctrl.selectedFournisseur.FournisseurId);">{{ctrl.resources.Fournisseur_Index_PanelDetail_Bouton_PersonnelETT}}</button>
+                    </div>
+                    <div class="close_panel" ng-click="ctrl.handleClickCancel();" title="{{ctrl.resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i> <span>{{ctrl.resources.Global_Bouton_RefermerPanneau}}</span>
+                    </div>
+                </div>
+                <!--FOOTER TOOLBAR : END-->
+
+            </form>
+
+        </div>
+    </div>
+    <!--END : Formulaire pour visualisation des informations sur le fournisseurs-->
+    <!--BEGIN : Liste du personnel pour une société-->
+    <div class="options" id="optionRightPanel" ng-class="ctrl.checkDisplayListPersonnel">
+        <!--HEADER TOOLBAR : BEGIN-->
+        <div class="toolbar">
+            <div class="flaticon flaticon-users-1 grandicone"></div>
+        </div>
+        <!--HEADER TOOLBAR : END-->
+        <!-- Titre : BEGIN -->
+        <div class="form-header">
+            <h2>
+                {{ctrl.resources.Fournisseur_Index_PanelETT_Titre}}
+            </h2>
+            <!--BEGIN : Barre de recherche Liste personnel-->
+            <div class="search-personnel">
+                <input type="text" class="search-personnel-input form-control inputText" placeholder="{{ctrl.resources.Global_ReferentielPersonnel_Placeholder}}" ng-model="ctrl.searchPersonnel" />
+                <button type="submit" class="search-personnel-btn btn btn-primary"><span class="material-icons">search</span></button>
+            </div>
+            <!--END : Barre de recherche Liste personnel-->
+        </div>
+        <!-- Titre : END -->
+
+        <div class="form fred-scroll">
+            <!--Formulaire: START-->
+            <form autocomplete="off" novalidate>
+                <h4>{{ctrl.personnelList.length}} {{ctrl.resources.Fournisseur_Index_PanelETT_Interimaire}}</h4>
+                <div ng-repeat="personnel in ctrl.personnelList | nomPrenomMatriculeFilter: ctrl.searchPersonnel" class="personnels">
+                    <!--BEGIN : RESUME PERSONNEL LIE A ETT-->
+                    <div class="list-item">
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <h2>{{personnel.Matricule}}</h2>
+                                <h3>{{personnel.Nom}} {{personnel.Prenom}}</h3>
+                            </div>
+                            <div class="col-xs-5">
+                                <div class="row">
+                                    <fred-label-key class="col-xs-6">{{ctrl.resources.Fournisseur_Index_PanelETT_Entree}}</fred-label-key>
+                                    <fred-label-val class="col-xs-6">{{personnel.DateEntree | toLocaleDate | date:"dd/MM/yyyy" | checkEmpty }}</fred-label-val>
+                                </div>
+                                <div class="row">
+                                    <fred-label-key class="col-xs-6">{{ctrl.resources.Fournisseur_Index_PanelETT_Sortie}}</fred-label-key>
+                                    <fred-label-val class="col-xs-6">{{personnel.DateSortie | toLocaleDate | date:"dd/MM/yyyy" | checkEmpty}}</fred-label-val>
+                                </div>
+                                <div class="row">
+                                    <fred-label-key class="col-xs-6">{{ctrl.resources.Fournisseur_Index_PanelETT_Statut}}</fred-label-key>
+                                    <fred-label-val class="col-xs-6">
+                                        <span ng-show="personnel.IsActif">{{ctrl.resources.Global_Actif}}</span>
+                                        <span ng-show="!personnel.IsActif">{{ctrl.resources.Global_Inactif}}</span>
+                                    </fred-label-val>
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <span ng-click="ctrl.handleRedirectPersonnelDetail(personnel)" title="{{ctrl.resources.Fournisseur_Index_PanelETT_Bouton_Detail_Tooltip}}" class="action-icone material-icons set-right" aria-hidden="true">more_vert</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--END : RESUME PERSONNEL LIE A ETT-->
+                </div>
+            </form>
+        </div>
+
+        <!--FOOTER TOOLBAR : BEGIN -->
+        <div class="footer">
+            <div class="buttons">
+                <!--MKT : Pas de boutons prévus-->
+
+            </div>
+            <div class="close_panel" ng-click="ctrl.handleClickCancel();" title="{{ctrl.resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+                <i class="fa fa-angle-right" aria-hidden="true"></i> <span>{{ctrl.resources.Global_Bouton_RefermerPanneau}}</span>
+            </div>
+        </div>
+        <!--FOOTER TOOLBAR : END-->
+    </div>
+    <!--END : Liste du personnel pour une société-->
+</div>

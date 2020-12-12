@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="4.2.1" />
+    <PackageReference Include="FluentAssertions" Version="5.10.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+    <PackageReference Include="Moq" Version="4.13.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.0.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.0.0" />
+    <PackageReference Include="coverlet.collector" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Fred.Common.Tests.Data\Fred.Common.Tests.Data.csproj" />
+    <ProjectReference Include="..\Common\Fred.Common.Tests\Fred.Common.Tests.csproj" />
+    <ProjectReference Include="..\Fred.ImportExport\Fred.ImportExport.Bootstrapper\Fred.ImportExport.Bootstrapper.csproj" />
+    <ProjectReference Include="..\Fred.ImportExport\Fred.ImportExport.Business\Fred.ImportExport.Business.csproj" />
+  </ItemGroup>
+
+</Project>

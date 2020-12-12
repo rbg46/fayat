@@ -1,0 +1,305 @@
+﻿$color_1: #fff;
+$color_2: rgb(0,82,160);
+$color_3: #67757f;
+$color_4: #fffafa;
+$background_color_1: rgb(255,0,102);
+$background_color_2: rgb(0,82,160);
+$background_color_3: rgb(102,151,198);
+$background_color_4: rgb(225,227,229);
+$background_color_5: rgb(49,133,155);
+$background_color_6: #fffafa;
+$background_color_7: #fcfcfc;
+$background_color_8: #1F98C7;
+
+.no-pad {
+    padding: 0;
+}
+
+fred-toolbar {
+    .action-section {
+        margin-left: 1%;
+
+        .btn {
+            font-size: 11px;
+            margin-top: 0;
+            height: 30px;
+        }
+
+        .btn-validate {
+            background-color: $background_color_1;
+            color: $color_1;
+            margin-right: 0;
+        }
+    }
+
+    .niveau-section {
+        margin-left: 1%;
+        width: 30%;
+
+        .rdio-btns {
+            display: flex;
+        }
+
+        .inner-addon.right-addon {
+            width: 45%;
+        }
+
+        fred-button {
+            margin-left: auto;
+        }
+    }
+}
+
+.monthly-synth {
+    tbody {
+        display: block;
+        height: calc( 100vh - 350px );
+        overflow: auto;
+
+        tr {
+            border-top: 1px solid #ddd;
+        }
+
+        tr.odd {
+            background-color: $background_color_6;
+        }
+
+        td {
+            font-size: 11px;
+            height: 30px;
+            text-align: center;
+
+            .more-detail {
+                height: 30px;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                padding-right: 20px;
+
+                .material-icons {
+                    font-size: 26px;
+                    color: $color_3;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    thead {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+        width: calc( 100% - 17px );
+
+        th {
+            text-align: center;
+            height: 30px;
+        }
+    }
+
+    width: 100%;
+
+    .header1 {
+        background-color: $background_color_2;
+        color: $color_1;
+        font-size: 11px;
+        height: 40px;
+
+        th {
+            height: 40px;
+        }
+
+        th.select-all-s {
+            display: flex;
+            align-items: center;
+        }
+
+        .chb {
+            height: 40px;
+        }
+
+        .search-serv-bloc {
+            display: flex;
+
+            .input-group-btn {
+                width: 30px;
+            }
+        }
+
+        .sh-all {
+            background-color: $background_color_2;
+            color: $color_1;
+
+            option {
+                background-color: $background_color_4;
+                color: $color_2;
+            }
+        }
+    }
+
+    .chb {
+        background-color: $background_color_3;
+        width: 40px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+    }
+
+    .header2 {
+        background-color: $background_color_5;
+        color: $color_1;
+        font-size: 11px;
+        height: 30px;
+    }
+}
+
+tbody {
+    tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+}
+
+input[type="checkbox"] {
+    display: none;
+
+    & + label {
+        font-size: 14px;
+        margin-bottom: 0;
+
+        span {
+            display: inline-block;
+            width: 19px;
+            height: 19px;
+            margin: 0;
+            vertical-align: middle;
+            cursor: pointer;
+            -moz-border-radius: 20%;
+            border-radius: 20%;
+            background-color: $background_color_7;
+            border: 3px #78C1DD solid;
+            -webkit-transition: background-color 0.4s linear;
+            -o-transition: background-color 0.4s linear;
+            -moz-transition: background-color 0.4s linear;
+            transition: background-color 0.4s linear;
+        }
+    }
+
+    &:checked {
+        & + label {
+            span {
+                border: 3px #2c77ba solid;
+                background-image: url('/medias/images/ico/checked.png');
+                background-repeat: no-repeat;
+                background-position: center;
+                -webkit-transition: background-color 0.4s linear;
+                -o-transition: background-color 0.4s linear;
+                -moz-transition: background-color 0.4s linear;
+                transition: background-color 0.4s linear;
+            }
+        }
+    }
+}
+
+.input-group.date {
+    height: 30px;
+    width: 90%;
+    margin-right: auto;
+    margin-left: 0;
+    margin-bottom: 0 !important;
+}
+
+.btn-voir {
+    background-color: $background_color_5;
+    color: $color_4;
+    margin: 5px;
+    font-size: 11px;
+    height: 24px;
+    width: 90px;
+    border: none;
+}
+
+input[type="radio"] {
+    display: none;
+
+    & + label {
+        font-size: 11px;
+        margin-right: 15px;
+
+        span {
+            border-radius: 50%;
+            cursor: pointer;
+            display: inline-block;
+            height: 19px;
+            margin: -1px 4px 0 0;
+            vertical-align: middle;
+            width: 19px;
+            background-color: $background_color_7;
+            border: 3px #2c77ba solid;
+            -moz-transition: background-color 0.4s linear;
+            -o-transition: background-color 0.4s linear;
+            -webkit-transition: background-color 0.4s linear;
+            transition: background-color 0.4s linear;
+        }
+    }
+
+    &:checked {
+        & + label {
+            span {
+                background-color: $background_color_8;
+                border: 3px #78C1DD solid;
+                -moz-transition: background-color 0.4s linear;
+                -o-transition: background-color 0.4s linear;
+                -webkit-transition: background-color 0.4s linear;
+                transition: background-color 0.4s linear;
+            }
+        }
+    }
+}
+
+.bootstrap-datetimepicker-widget {
+    table {
+        tbody {
+            tr {
+                display: table-row;
+            }
+        }
+    }
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+    fred-toolbar {
+        .niveau-section {
+            .inner-addon.right-addon {
+                width: 35%;
+            }
+        }
+    }
+
+    .monthly-synth {
+        .header1 {
+            font-size: 9px;
+        }
+
+        .header2 {
+            font-size: 9px;
+        }
+
+        tbody {
+            td {
+                font-size: 9px;
+            }
+
+            height: calc( 100vh - 265px );
+        }
+    }
+
+    input[type="radio"] {
+        & + label {
+            font-size: 9px !important;
+        }
+    }
+}

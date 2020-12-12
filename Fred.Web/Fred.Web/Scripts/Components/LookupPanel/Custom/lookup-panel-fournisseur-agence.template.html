@@ -1,0 +1,40 @@
+﻿<div class="component-overlay" ng-show="$ctrl.isComponentVisible">
+
+    <div class="component-overlay-shadow" ng-click="$ctrl.handleHidePanel()">
+
+    </div>
+
+    <div class="component-overlay-container">
+
+        <lookup-panel ng-show="$ctrl.isPanelFournisseursVisible"
+                      on-cancel="$ctrl.handleHidePanel()"
+                      on-select="$ctrl.handleSelectFournisseur(item)"
+                      on-load-more="$ctrl.handleLoadMore()"
+                      on-add="$ctrl.handleAddItem(itemToAdd)"
+                      on-filter-change="$ctrl.handleFilterChange(filter)"
+                      filter="$ctrl.currentFilter"
+                      value="$ctrl.currentFournisseur"
+                      items="$ctrl.fournisseursItems"
+                      busy="$ctrl.busy"
+                      can-add="$ctrl.canAdd"
+                      template-header="/Scripts/Components/LookupPanel/Headers/header-fournisseur.template.html"
+                      template-new-item="/Scripts/Components/LookupPanel/Items/item-new.template.html"
+                      template-item="/Scripts/Components/LookupPanel/Items/item-fournisseur.template.html">
+
+        </lookup-panel>
+
+
+        <lookup-panel-filter title="{{$ctrl.resources.Global_ReferentielAgence}}"
+                             placeholder="{{$ctrl.resources.Global_ReferentielAgence_Filter}}"
+                             value="$ctrl.currentAgence"
+                             on-cancel="$ctrl.handleHidePanel()"
+                             on-item-selected="$ctrl.handleSelectAgence(item)"
+                             on-filter-change="$ctrl.handleFilterAgencesChange(text)"
+                             items="$ctrl.agencesItems"
+                             ng-show="$ctrl.isPanelAgencesVisible"
+                             item-template="/Scripts/Components/LookupPanel/Items/item-agence.template.html"
+                             search-tooltip='{{$ctrl.resources.Commande_Holder_Saisie_Nom}}'>
+        </lookup-panel-filter>
+
+    </div>
+</div>

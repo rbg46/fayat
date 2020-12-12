@@ -1,0 +1,572 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActivitySummaryServiceSujetDuMail" xml:space="preserve">
+    <value>[FRED] Récapitulatif actions à mener et état des clôtures</value>
+  </data>
+  <data name="AvenantManager_Model_Erreur_CommandeNull" xml:space="preserve">
+    <value>La commande est null</value>
+    <comment>AvenantManager</comment>
+  </data>
+  <data name="CaracteresSpeciauxInterdit" xml:space="preserve">
+    <value>Les caractères spéciaux ne sont pas autorisés.</value>
+  </data>
+  <data name="CaracteresSpeciauxInterditCode" xml:space="preserve">
+    <value>Code : Les caractères spéciaux ne sont pas autorisés.</value>
+  </data>
+  <data name="CaracteresSpeciauxInterditLibelle" xml:space="preserve">
+    <value>Libellé : Les caractères spéciaux ne sont pas autorisés.</value>
+  </data>
+  <data name="Chapitre" xml:space="preserve">
+    <value>Chapitre</value>
+  </data>
+  <data name="CIObligatoire" xml:space="preserve">
+    <value>Le CI est obligatoire.</value>
+  </data>
+  <data name="CodeDejaExistant" xml:space="preserve">
+    <value>Ce code {0} existe déjà.</value>
+  </data>
+  <data name="CodeObligatoire" xml:space="preserve">
+    <value>Le code est obligatoire.</value>
+  </data>
+  <data name="Commande_Export_Excel_Service_TotalHT" xml:space="preserve">
+    <value>Total HT</value>
+    <comment>Fred.Business\Commande\Reporting\CommandeExportExcelService.cs</comment>
+  </data>
+  <data name="DeviseObligatoire" xml:space="preserve">
+    <value>La devise doit être spécifiée.</value>
+  </data>
+  <data name="ErrorDuplicateTache" xml:space="preserve">
+    <value>Vous ne pouvez plus dupliquer la tâche {0}. La limite maximale de 15 caractères est dépassée.</value>
+  </data>
+  <data name="ErrorDuplicateTacheNTimes" xml:space="preserve">
+    <value>La copie de la tâche {0} est impossible. Vous ne pouvez pas dupliquer la tâche {0} plus de {1} fois.</value>
+  </data>
+  <data name="ErrorMaterielLocationNull" xml:space="preserve">
+    <value>Erreur materiel location null</value>
+  </data>
+  <data name="Export_Header_DateEdition" xml:space="preserve">
+    <value>Date d'édition : </value>
+  </data>
+  <data name="Export_Header_EditePar" xml:space="preserve">
+    <value>Edité par : </value>
+  </data>
+  <data name="Fonctionnalite" xml:space="preserve">
+    <value>Fonctionnalité</value>
+  </data>
+  <data name="FournisseurObligatoire" xml:space="preserve">
+    <value>Le fournisseur est obligatoire.</value>
+  </data>
+  <data name="Global_Non" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="Global_Oui" xml:space="preserve">
+    <value>Oui</value>
+  </data>
+  <data name="Global_Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="ImportCIAndSocieteRequiredErrorMessage" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Champ(s) obligatoire(s) non renseigné(s) (Code CI, Code Societe).</value>
+  </data>
+  <data name="ImportCIErrorMessageAucunCiAvecCeCodeExiste" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Aucun ci trouvé avec le code {1}</value>
+  </data>
+  <data name="ImportCIErrorMessageAucunResponsableAdministratifConnu" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Matricule Responsable Administratif invalide</value>
+  </data>
+  <data name="ImportCIErrorMessageAucunResponsableChantierConnu" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Matricule Responsable Chantier invalide</value>
+  </data>
+  <data name="ImportCIErrorMessageCiDateOuvertureFormatIncorrect" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Date ouverture invalide.</value>
+  </data>
+  <data name="ImportCIErrorMessageCodeCiInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code CI invalide.</value>
+  </data>
+  <data name="ImportCIErrorMessageCodePaysFacturationInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code Pays Facturation invalide.</value>
+  </data>
+  <data name="ImportCIErrorMessageCodePaysInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code Pays invalide.</value>
+  </data>
+  <data name="ImportCIErrorMessageCodePaysLivraisonInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code Pays Livraison invalide.</value>
+  </data>
+  <data name="ImportCIErrorMessageCodeSocieteInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code Société invalide.</value>
+  </data>
+  <data name="ImportCIErrorMessageDateCommandeIncorrect" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Date Commande invalide.</value>
+  </data>
+  <data name="ImportCIErrorMessageInvalidInformationSent" xml:space="preserve">
+    <value>L'import des CIs ne peut pas continuer, erreur dans les informations envoyees depuis l'API. (CI code : {0})</value>
+  </data>
+  <data name="ImportCIErrorMessageLatitudeFormatinvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : latitude invalide</value>
+  </data>
+  <data name="ImportCIErrorMessageLatitudeManquante" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Latitude manquante</value>
+  </data>
+  <data name="ImportCIErrorMessageLongitudeFormatinvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : longitude invalide</value>
+  </data>
+  <data name="ImportCIErrorMessageLongitudeManquante" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Longitude manquante</value>
+  </data>
+  <data name="ImportCIErrorMessageZoneModifiableInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Zone Modifiable invalide</value>
+  </data>
+  <data name="ImportCommandeCodeFournisseurInvalideError" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code Fournisseur invalide.</value>
+  </data>
+  <data name="ImportCommandeCodeTacheForCommandeLigneInvalid" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code Tâche invalide.</value>
+  </data>
+  <data name="ImportCommandeCoherenceInformationEnteteError" xml:space="preserve">
+    <value>Rejet N° Commande Externe {0} : les informations d’en-tête ne sont pas cohérentes entre elles</value>
+  </data>
+  <data name="ImportCommandeDateReceptionForReceptionInvalid" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Date Réception invalide.</value>
+  </data>
+  <data name="ImportCommandeDeviseInvalideError" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code Devise invalide.</value>
+  </data>
+  <data name="ImportCommandePatternNumeroCommandeExterneError" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Le pattern du numéro de commande externe n'est pas correct.</value>
+  </data>
+  <data name="ImportCommandePuhtForCommandeLigneInvalid" xml:space="preserve">
+    <value>Rejet ligne n°{0} : PU HT invalide.</value>
+  </data>
+  <data name="ImportCommandeQuantiteAnyFormatErrorForCommandeLigneInvalid" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Impossible de calculer la quantité.</value>
+  </data>
+  <data name="ImportCommandeQuantiteCommandeeForCommandeLigneFormatInvalid" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Qté commandée format invalide.</value>
+  </data>
+  <data name="ImportCommandeQuantiteFactureeRapprocheeForCommandeLigneFormatInvalid" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Qté facturée rapprochée format invalide.</value>
+  </data>
+  <data name="ImportCommandeQuantiteForCommandeLigneInvalid" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Qté commandée invalide</value>
+  </data>
+  <data name="ImportCommandeQuantiteReceptionneeForCommandeLigneFormatInvalid" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Qté réceptionnée format invalide.</value>
+  </data>
+  <data name="ImportCommandeRequiredFieldError" xml:space="preserve">
+    <value>Rejet ligne n°{0} : champ(s) obligatoire(s) non renseigné(s).</value>
+  </data>
+  <data name="ImportCommandeRessourceForCommandeLigneInvalid" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code Ressource invalide.</value>
+  </data>
+  <data name="ImportCommandeTypeCommandeInvalideError" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Type Commande invalide.</value>
+  </data>
+  <data name="ImportCommandeUniciteNumeroExterneError" xml:space="preserve">
+    <value>Rejet N° Commande Externe {0} : le numéro existe déjà dans FRED.</value>
+  </data>
+  <data name="ImportCommandeUniteForCommandeLigneInvalid" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code Unité invalide.</value>
+  </data>
+  <data name="ImportIndemniteDeplacementErrorMessageCodeCIInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code CI invalide.</value>
+  </data>
+  <data name="ImportIndemniteDeplacementErrorMessageCodeDeplacementInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code Déplacement invalide.</value>
+  </data>
+  <data name="ImportIndemniteDeplacementErrorMessageCodeZoneDeplacementInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code Zone Déplacement invalide.</value>
+  </data>
+  <data name="ImportIndemniteDeplacementErrorMessageDateDernierCalculInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Date Dernier Calcul invalide.</value>
+  </data>
+  <data name="ImportIndemniteDeplacementErrorMessageIVDInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : IVD invalide.</value>
+  </data>
+  <data name="ImportIndemniteDeplacementErrorMessageMatriculePersonnelInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Matricule Personnel invalide.</value>
+  </data>
+  <data name="ImportIndemniteDeplacementErrorMessagePersonnelAndCINonUnique" xml:space="preserve">
+    <value>Rejet ligne n°{0} : le personnel a déjà une indémnité pour ce CI.</value>
+  </data>
+  <data name="ImportIndemniteDeplacementErrorMessageSaisieManuelleInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Saisie Manuelle invalide.</value>
+  </data>
+  <data name="ImportIndemniteDeplacementErrorMessageSocieteDesCodeDeplacementInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Société des Codes Dep invalide.</value>
+  </data>
+  <data name="ImportIndemniteDeplacementErrorMessageSocieteDuCIInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Société du CI invalide.</value>
+  </data>
+  <data name="ImportIndemniteDeplacementErrorMessageSocieteDuPersonnelInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Société du Personnel invalide.</value>
+  </data>
+  <data name="ImportMaterielErrorMessageCodeMaterielNonUnique" xml:space="preserve">
+    <value>Rejet ligne n°{0} : le code Matériel existe déjà pour cette société.</value>
+  </data>
+  <data name="ImportOdDateComptableFormatErrorMessage" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Date comptable invalide.</value>
+  </data>
+  <data name="ImportOdDeviseUnkowErrorMessage" xml:space="preserve">
+    <value>Rejet ligne n°{0} : code devise invalide.</value>
+  </data>
+  <data name="ImportOdFamilleUnkowErrorMessage" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code famille invalide.</value>
+  </data>
+  <data name="ImportOdFileErrorMessage" xml:space="preserve">
+    <value>Format de fichier invalide. Le format doit être conforme à celui du fichier exemple.</value>
+  </data>
+  <data name="ImportODIsCiAuthorizedErrorMessage" xml:space="preserve">
+    <value>Rejet ligne n°{0} : CI non autorisé</value>
+  </data>
+  <data name="ImportODPeriodClosedErrorMessage" xml:space="preserve">
+    <value>Rejet ligne n°{0} : periode clôturée pour le ci.</value>
+  </data>
+  <data name="ImportOdPuHTFormatErrorMessage" xml:space="preserve">
+    <value>Rejet ligne n°{0} : PuHT invalide.</value>
+  </data>
+  <data name="ImportOdQuantiteFormatErrorMessage" xml:space="preserve">
+    <value>Rejet ligne n°{0} : quantite invalide.</value>
+  </data>
+  <data name="ImportOdRessourceUnkowErrorMessage" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code ressource invalide.</value>
+  </data>
+  <data name="ImportOdUniteUnkowErrorMessage" xml:space="preserve">
+    <value>Rejet ligne n°{0} : code unite invalide.</value>
+  </data>
+  <data name="ImportPersonnelErrorMessageCodePaysInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code Pays invalide.</value>
+  </data>
+  <data name="ImportPersonnelErrorMessageDateEntreeInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Date Entrée invalide.</value>
+  </data>
+  <data name="ImportPersonnelErrorMessageDateSortieInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Date Sortie invalide.</value>
+  </data>
+  <data name="ImportPersonnelErrorMessageEmailInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Adresse Mail déjà existante.</value>
+  </data>
+  <data name="ImportPersonnelErrorMessageMatriculeNonUnique" xml:space="preserve">
+    <value>Rejet ligne n°{0} : le matricule existe déjà pour cette société.</value>
+  </data>
+  <data name="ImportPersonnelErrorMessageTypePersonnelInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Type Personnel invalide.</value>
+  </data>
+  <data name="ImportPlanTachesErrorMessageCodeTacheInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code Tâche T1/T2/T3 invalide.</value>
+  </data>
+  <data name="ImportPlanTachesErrorMessageCodeTacheParentInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code Tâche Parent invalide.</value>
+  </data>
+  <data name="ImportPlanTachesErrorMessageNiveauTacheInvalide" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Niveau T1/T2/T3 invalide.</value>
+  </data>
+  <data name="ImportRapportMessageErrorCodeCiInvalid" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code CI invalide.</value>
+  </data>
+  <data name="ImportRapportMessageErrorCodeDepartementNonConnu" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code Déplacement invalide. </value>
+  </data>
+  <data name="ImportRapportMessageErrorCodeZoneDepartementNonConnu" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code Zone Déplacement invalide.</value>
+  </data>
+  <data name="ImportRapportMessageErrorDateFormatInvalid" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Date Rapport invalide.</value>
+  </data>
+  <data name="ImportRapportMessageErrorHeureTotalFormatInvalid" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Heures totales invalides.</value>
+  </data>
+  <data name="ImportRapportMessageErrorIVDNonConnu" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Champ IVD invalide.</value>
+  </data>
+  <data name="ImportRapportMessageErrorPersonnelNonConnu" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Matricule Personnel invalide.</value>
+  </data>
+  <data name="ImportRapportMessageErrorTacheNonConnu" xml:space="preserve">
+    <value>Rejet ligne n°{0} : Code Tâche invalide.</value>
+  </data>
+  <data name="ImportRapportRequiredFieldError" xml:space="preserve">
+    <value>Rejet ligne n°{0} : champ(s) obligatoire(s) non renseigné(s).</value>
+  </data>
+  <data name="LibelleObligatoire" xml:space="preserve">
+    <value>Le libellé est obligatoire.</value>
+  </data>
+  <data name="Module" xml:space="preserve">
+    <value>Module</value>
+  </data>
+  <data name="ModuleObligatoire" xml:space="preserve">
+    <value>Le Module est obligatoire.</value>
+  </data>
+  <data name="MontantObligatoire" xml:space="preserve">
+    <value>Le montant est obligatoire</value>
+  </data>
+  <data name="PasLeDroitDaccederACetteEntite" xml:space="preserve">
+    <value>Vous n'avez pas le droit d'accéder à cette entité</value>
+  </data>
+  <data name="Pointage_Anticipe_Manager_ErreurGeneration" xml:space="preserve">
+    <value>erreur à la génération d'un pointage anticipé</value>
+    <comment>Fred.Business\Rapport\Pointage\PointageAnticipeManager.cs</comment>
+  </data>
+  <data name="Pointage_Interimaire_Export_DateEdition" xml:space="preserve">
+    <value>Date d'édition : </value>
+  </data>
+  <data name="Pointage_Interimaire_Export_EditePar" xml:space="preserve">
+    <value>Edité par : </value>
+  </data>
+  <data name="Pointage_Interimaire_Export_Periode" xml:space="preserve">
+    <value>Période: Du </value>
+  </data>
+  <data name="Pointage_Interimaire_Export_Titre" xml:space="preserve">
+    <value>Édition du personnel intérimaire</value>
+  </data>
+  <data name="Pointage_Interimaire_Export__A" xml:space="preserve">
+    <value> à </value>
+    <comment>Fred.Business\Rapport\Reporting\PointageInterimaireExport.cs</comment>
+  </data>
+  <data name="Pointage_Interimaire_Export__Au" xml:space="preserve">
+    <value> Au </value>
+    <comment>Fred.Business\Rapport\Reporting\PointageInterimaireExport.cs</comment>
+  </data>
+  <data name="Pointage_Interimaire_Export__Du" xml:space="preserve">
+    <value>Du </value>
+    <comment>Fred.Business\Rapport\Reporting\PointageInterimaireExport.cs</comment>
+  </data>
+  <data name="Pointage_Interimaire_Export__Espace" xml:space="preserve">
+    <value> </value>
+    <comment>Fred.Business\Rapport\Pointage\Reporting\PointageInterimaireExport.cs</comment>
+  </data>
+  <data name="Pointage_Personnel_Export_X" xml:space="preserve">
+    <value>x</value>
+    <comment>Fred.Business\Rapport\Reporting\PointagePersonnelExport.cs</comment>
+  </data>
+  <data name="Pointage_Personnel_Hebdomadaire_Export_A" xml:space="preserve">
+    <value> à </value>
+    <comment>Fred.Business\Rapport\Reporting\PointagePersonnelHebdomadaireExport.cs</comment>
+  </data>
+  <data name="Pointage_Personnel_Hebdomadaire_Export_T" xml:space="preserve">
+    <value>T</value>
+    <comment>Fred.Business\Rapport\Reporting\PointagePersonnelHebdomadaireExport.cs</comment>
+  </data>
+  <data name="PUObligatoire" xml:space="preserve">
+    <value>Le prix unitaire est obligatoire</value>
+  </data>
+  <data name="QuantiteObligatoire" xml:space="preserve">
+    <value>La quantité est obligatoire</value>
+  </data>
+  <data name="Reception_Manager_TotalHT" xml:space="preserve">
+    <value>Total HT</value>
+    <comment>Fred.Business\Reception\ReceptionManager.cs</comment>
+  </data>
+  <data name="Reception_Quantity_Rules_Validator_GFTP_Error_Quantity_Inf_Or_Egual" xml:space="preserve">
+    <value>La quantité doit être inférieure ou égale à {0}</value>
+  </data>
+  <data name="Reception_Quantity_Rules_Validator_GFTP_Error_Quantity_Negative" xml:space="preserve">
+    <value>La somme des réceptions sur la ligne de commande doit être négative.</value>
+  </data>
+  <data name="Reception_Quantity_Rules_Validator_GFTP_Error_Quantity_Positive" xml:space="preserve">
+    <value>La somme des réceptions sur la ligne de commande doit être positive.</value>
+  </data>
+  <data name="Reception_Quantity_Rules_Validator_GFTP_Error_Quantity_Supp_Or_Egual" xml:space="preserve">
+    <value>La diminution ne peut pas être supérieure à la quantité réceptionnée ({0} unités)</value>
+  </data>
+  <data name="RechercheMoyen_Erreur_Doublon" xml:space="preserve">
+    <value>Erreur de doublon : plusieurs moyens ont été trouvés pour le code ({0}).</value>
+  </data>
+  <data name="RepriseDonnees_Erreur_Extraction_Cis" xml:space="preserve">
+    <value>Une erreur est survenue lors de l'extraction des cis à partir du fichier excel.</value>
+  </data>
+  <data name="RepriseDonnees_Erreur_Extraction_CommandeReceptions" xml:space="preserve">
+    <value>Une erreur est survenue lors de l'extraction des commandes à partir du fichier excel.</value>
+  </data>
+  <data name="RepriseDonnees_Erreur_Extraction_Import_Cis" xml:space="preserve">
+    <value>Une erreur est survenue lors de l'extraction des cis à partir du fichier excel.</value>
+  </data>
+  <data name="RepriseDonnees_Erreur_Extraction_Import_Fournisseurs" xml:space="preserve">
+    <value>Une erreur est survenue lors de l'extraction des fournisseurs à partir du fichier excel.</value>
+  </data>
+  <data name="RepriseDonnees_Erreur_Extraction_IndemniteDeplacement" xml:space="preserve">
+    <value>Une erreur est survenue lors de l'extraction des Indemnités de Déplacement à partir du fichier excel.</value>
+  </data>
+  <data name="RepriseDonnees_Erreur_Extraction_Materiel" xml:space="preserve">
+    <value>Une erreur est survenue lors de l'extraction des Materiels à partir du fichier excel.</value>
+  </data>
+  <data name="RepriseDonnees_Erreur_Extraction_Personnel" xml:space="preserve">
+    <value>Une erreur est survenue lors de l'extraction des Personnels à partir du fichier excel.</value>
+  </data>
+  <data name="RepriseDonnees_Erreur_Extraction_PlanTaches" xml:space="preserve">
+    <value>Une erreur est survenue lors de l'extraction du plan de tâches à partir du fichier excel.</value>
+  </data>
+  <data name="RepriseDonnees_Erreur_StructureFichierIncorrecte" xml:space="preserve">
+    <value>Structure fichier incorrecte</value>
+  </data>
+  <data name="Ressource" xml:space="preserve">
+    <value>Ressource</value>
+  </data>
+  <data name="RessourceObligatoire" xml:space="preserve">
+    <value>La ressource doit être spécifiée.</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Rôle</value>
+  </data>
+  <data name="RoleDejaExistant" xml:space="preserve">
+    <value>Code déjà existant, veuillez-en choisir un autre</value>
+  </data>
+  <data name="RoleObligatoire" xml:space="preserve">
+    <value>Le Rôle est obligatoire.</value>
+  </data>
+  <data name="Search_Ressources_Current_user_Is_Null" xml:space="preserve">
+    <value>L'utilisateur courant ne peut pas etre null.</value>
+  </data>
+  <data name="Search_Ressources_Etablissement_Empty" xml:space="preserve">
+    <value>La recherche ne peut s'effectuer que si le ci a un établissement comptable.</value>
+  </data>
+  <data name="SousChapitre" xml:space="preserve">
+    <value>Sous-Chapitre</value>
+  </data>
+  <data name="SuppressionImpossibleGenerique" xml:space="preserve">
+    <value>Impossible de supprimer cet élément car il est lié à d'autre(s) élement(s).</value>
+  </data>
+  <data name="Tache" xml:space="preserve">
+    <value>Tâche</value>
+  </data>
+  <data name="TacheObligatoire" xml:space="preserve">
+    <value>La tâche doit être spécifiée.</value>
+  </data>
+  <data name="TypeAvancementObligatoire" xml:space="preserve">
+    <value>Le type d'avancement est obligatoire</value>
+  </data>
+  <data name="TypeExport_Error" xml:space="preserve">
+    <value>Le type d'export n'est pas reconnu.</value>
+  </data>
+  <data name="UniteObligatoire" xml:space="preserve">
+    <value>L'unité est obligatoire.</value>
+  </data>
+  <data name="ValidationCommandeReconnaissanceDesNumerosDeCommandeError" xml:space="preserve">
+    <value>Rejet ligne n°{0} : commande non reconnue.</value>
+  </data>
+  <data name="Validator_Update_Or_Delete_Reception_Already_Visee_Is_Not_Possible" xml:space="preserve">
+    <value>Impossible de supprimer ou de mettre à jour une réception déjà visée.</value>
+  </data>
+  <data name="VerificationDesCommandesDejaEnvoyeesASapError" xml:space="preserve">
+    <value>Rejet ligne n°{0} : commande déjà envoyée au Module Rapprochement.</value>
+  </data>
+  <data name="Favori_UnauthorizedCI" xml:space="preserve">
+    <value>Vous n'avez pas les autorisations nécessaires sur le CiId :</value>
+  </data>
+</root>

@@ -1,0 +1,1222 @@
+﻿
+@{
+  ViewBag.Title = "Budget";
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+
+
+
+@section styles {
+  @Styles.Render("~/RapprochementFactureIndexBundle.css")
+}
+
+@section scripts {
+  @Scripts.Render("~/RapprochementFactureIndexBundle.js")
+  @this.RenderResources("FredResource")
+}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<div class="container rapprochementFacture" ng-controller="RapprochementFactureController">
+
+  <h6 title="Cliquer pour retourner à la liste des factures à rapprocher"><a href="/Facture/Facture">Retourner à la liste des factures à rapprocher</a></h6>
+
+  <div class="row">
+
+    <div class="col-lg-10 col-md-10 bloc-liste">
+      <h1>Facture à rapprocher : 59644 / 420466837</h1><span class="flaticon flaticon-document" title="Ouvrir le scan de la facture"></span>
+
+      <div class="stats">
+        <div class="totFacture">
+          <span class="flaticon flaticon-magnet"></span>
+          <div class="data">
+            <p>total facture</p>
+            <p><span>3 456,00</span></p>
+          </div>
+        </div>
+        <div class="totDepenses">
+          <span class="flaticon flaticon-folder-13"></span>
+          <div class="data">
+            <p>total dépenses</p>
+            <p><span>2 700,00</span></p>
+          </div>
+        </div>
+        <div class="ecart">
+          <div class="data">
+            <p>ecart total</p>
+            <p><span>756,00</span></p>
+          </div>
+        </div>
+        <div class="devise">
+          <div class="data">
+            <p>devise</p>
+            <p><span>EUR</span></p>
+          </div>
+        </div>
+        <div class="dateFacture">
+          <div class="data">
+            <p>date facture</p>
+            <p><span>21/06/2017</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="liste">
+        <liste-facture-component></liste-facture-component>
+      </div>
+    </div>
+
+    <div class="col-lg-2 col-md-2 bloc-infos no_pr">
+
+      <div class="sum-bloc furn">
+        <div class="data">
+          <p>fournisseur</p>
+          <p><span>cwtd0001</span></p>
+          <p><span>cwt distribution havas vo</span></p>
+          <p><span>401110</span></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6 col-md-6 taxes-free">
+          <div class="data">
+            <p><span>3 456,00 HT</span></p>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 taxes">
+          <div class="data">
+            <p class="tva">711,94 <span>tva</span></p>
+            <p class="ttc"><span>4 167,94 ttc</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sum-bloc">
+        <div class="data">
+          <p>n° facture FMFI</p>
+          <p><span>59644</span></p>
+        </div>
+      </div>
+
+      <div class="sum-bloc">
+        <div class="data">
+          <p>n° facture fournisseur</p>
+          <p><span>420466837</span></p>
+        </div>
+      </div>
+
+      <div class="sum-bloc">
+        <div class="data">
+          <p>n° facture système</p>
+          <p><span>21621515222200z641000</span></p>
+        </div>
+      </div>
+
+      <div class="row groups">
+        <div class="col-lg-3 col-md-3 sum-bloc no_pad">
+          <div class="data squeeze">
+            <p>tiers</p>
+            <p><span>f</span></p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 sum-bloc no_pad">
+          <div class="data squeeze">
+            <p>mode régl.</p>
+            <p><span>pv</span></p>
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-5 sum-bloc no_pad">
+          <div class="data squeeze">
+            <p>échéance</p>
+            <p><span>31/07/2017</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6 col-md-6 dateCompt no_pad">
+          <div class="data">
+            <p>date comptable</p>
+            <p><span>06/2017</span></p>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 dateGest no_pad">
+          <div class="data">
+            <p>date gestion</p>
+            <p><span>30/06/2017</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row groups">
+        <div class="col-lg-4 col-md-4 sum-bloc no_pad">
+          <div class="data">
+            <p>société</p>
+            <p><span>RB</span></p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 sum-bloc no_pad">
+          <div class="data">
+            <p>etab.</p>
+            <p><span>50</span></p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 sum-bloc no_pad">
+          <div class="data">
+            <p>journal</p>
+            <p><span>ach</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sum-bloc">
+        <div class="data">
+          <p>centre d'imputation</p>
+          <p><span>437317</span></p>
+          <p><span>sep</span><span class="cap"> tram nice 13-16</span></p>
+        </div>
+      </div>
+
+      <div class="sum-bloc">
+        <div class="data">
+          <p>commentaire</p>
+        </div>
+        <textarea name=""></textarea>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- Bandeau Recherche Dépenses -->
+<div class="blocPopUp" ng-show="displayBanner" ng-class="{'opened':displayBanner, 'closed':!displayBanner}">
+
+  <div class="blocPopUp-header">
+    <div class="pull-left totSelect">
+      <p>Total Sélection</p>
+      <p><span>3 456,00 HT</span></p>
+    </div>
+
+    <div class="pull-right buttons">
+      <div class="open" data-toggle="modal" data-target="#rechDepenses" ng-click="displayBanner = !displayBanner">
+        <p>Agrandir</p>
+        <span class="fa fa-expand"></span>
+      </div>
+      <div class="closed" ng-click="displayBanner = !displayBanner">
+        <p>Fermer</p>
+        <span class="flaticon flaticon-multiply"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="headDepenses">
+    <div class="title">
+      <h3>Dépenses à rapprocher</h3>
+    </div>
+  </div>
+
+
+  <div class="searchBloc">
+    <div class="row">
+      <div class="container-fluid rechListDepenses">
+        <div class="filter-container">
+          <div class="row">
+            <div class="col-md-6 col-sm-6 no_padding">
+              <div class="input-group">
+                <input type="text" name="" id="" class="form-control" placeholder="Rechercher des dépenses...">
+                <span class="input-group-btn">
+                  <button class="btn btn-secondary y_search" type="button">
+                    <i class="material-icons">search</i>
+                  </button>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6 filt-buttons">
+              <button type="button" class="btn btn-sm btn-primary">
+                "Fournisseur facture"
+                <i class="flaticon-multiply"></i>
+              </button>
+              <button type="button" class="btn btn-sm btn-primary">
+                "CI(s) facture"
+                <i class="flaticon-multiply"></i>
+              </button>
+            </div>
+          </div>
+          <!-- <div class="row">
+              <div class="col-md-12 col-sm-12 no_padding" style="margin-top: 5px;">
+                  <button type="button" class="btn btn-sm btn-primary">
+                      "Fournisseur facture"
+                      <i class="flaticon-multiply" style="font-size: 12px;"></i>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-primary">
+                      "CI(s) facture"
+                      <i class="flaticon-multiply" style="font-size: 12px;"></i>
+                  </button>
+              </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mainTab">
+
+    <div class="toolbar clearfix">
+      <div class="selectAll">
+        <div class="checkAll">
+          <input type="checkbox" name="" id="chkAktif">
+          <label for="chkAktif"><span></span></label>
+        </div>
+        <span class="spText">Tout sélectionner</span>
+      </div>
+    </div>
+
+    <div class="container pop">
+
+      <div class="fixedTable" id="popDepTable">
+        <header class="fixedTable-header">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Réception</th>
+                <th>N°BC</th>
+                <th>N°BL</th>
+                <th class="amount a">Montant HT</th>
+                <th class="amount">Qté</th>
+                <th class="amount">PU</th>
+                <th colspan="2" ng-show="!showCol">+ d'infos</th>
+                <th colspan="2" ng-show="showCol">- d'infos</th>
+                <th ng-show="showCol">Fournisseur</th>
+                <th ng-show="showCol">CI</th>
+                <th ng-show="showCol">Tâche</th>
+                <th ng-show="showCol">Nature</th>
+                <th ng-show="showCol">N°BC manuel</th>
+                <th ng-show="showCol">Ressource</th>
+                <th ng-show="showCol">Gestion</th>
+                <th ng-show="showCol">Devise</th>
+                <th ng-show="showCol">Tiers</th>
+              </tr>
+            </thead>
+          </table>
+        </header>
+        <aside class="fixedTable-sidebar bandeauS">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td>
+                  <input id="chbx1" type="checkbox" name="" checked="checked" /><label for="chbx1"><span></span></label>
+                </td>
+              </tr>
+              <tr>
+                <td><input id="chbx2" type="checkbox" name="" checked="checked" /><label for="chbx2"><span></span></label></td>
+              </tr>
+              <tr>
+                <td><input id="chbx3" type="checkbox" name="" checked="checked" /><label for="chbx3"><span></span></label></td>
+              </tr>
+              <tr>
+                <td><input id="chbx4" type="checkbox" name="" /><label for="chbx4"><span></span></label></td>
+              </tr>
+              <tr>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+              </tr>
+              <tr>
+                <td><input id="chbx7" type="checkbox" name="" /><label for="chbx7"><span></span></label></td>
+              </tr>
+              <tr>
+                <td><input id="chbx8" type="checkbox" name="" /><label for="chbx8"><span></span></label></td>
+              </tr>
+              <tr>
+                <td><input id="chbx9" type="checkbox" name="" /><label for="chbx9"><span></span></label></td>
+              </tr>
+              <tr>
+                <td><input id="chbx10" type="checkbox" name="" /><label for="chbx10"><span></span></label></td>
+              </tr>
+              <tr>
+                <td><input id="chbx11" type="checkbox" name="" /><label for="chbx11"><span></span></label></td>
+              </tr>
+              <tr>
+                <td><input id="chbx12" type="checkbox" name="" /><label for="chbx12"><span></span></label></td>
+              </tr>
+            </tbody>
+          </table>
+        </aside>
+        <div class="fixedTable-body bandeauB fred-scroll">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>06/06/2017</td>
+                <td>FDT35676</td>
+                <td>DRF3453</td>
+                <td class="amount a">951</td>
+                <td class="amount">1</td>
+                <td class="amount">951</td>
+                <td><i class="material-icons" title="Afficher plus d'infos" ng-click="showCol = !showCol">layers</i></td>
+                <td ng-show="showCol">CWTD0001</td>
+                <td ng-show="showCol">437317</td>
+                <td ng-show="showCol">ECARTTS</td>
+                <td ng-show="showCol">162101</td>
+                <td ng-show="showCol"></td>
+                <td ng-show="showCol">10103-03</td>
+                <td ng-show="showCol"><i class="material-icons md-18">check</i></td>
+                <td ng-show="showCol">EUR</td>
+                <td ng-show="showCol">F</td>
+              </tr>
+              <tr>
+                <td>06/06/2017</td>
+                <td>FDT35676</td>
+                <td>DRF3453</td>
+                <td class="amount a">951</td>
+                <td class="amount">1</td>
+                <td class="amount">951</td>
+                <td><i class="material-icons" title="Afficher plus d'infos" ng-click="showCol = !showCol">layers</i></td>
+                <td ng-show="showCol">CWTD0001</td>
+                <td ng-show="showCol">437317</td>
+                <td ng-show="showCol">ECARTTS</td>
+                <td ng-show="showCol">162101</td>
+                <td ng-show="showCol"></td>
+                <td ng-show="showCol">10103-03</td>
+                <td ng-show="showCol"><i class="material-icons md-18">check</i></td>
+                <td ng-show="showCol">EUR</td>
+                <td ng-show="showCol">F</td>
+              </tr>
+              <tr>
+                <td>06/06/2017</td>
+                <td>FDT35676</td>
+                <td>DRF3453</td>
+                <td class="amount a">951</td>
+                <td class="amount">1</td>
+                <td class="amount">951</td>
+                <td><i class="material-icons" title="Afficher plus d'infos" ng-click="showCol = !showCol">layers</i></td>
+                <td ng-show="showCol">CWTD0001</td>
+                <td ng-show="showCol">437317</td>
+                <td ng-show="showCol">ECARTTS</td>
+                <td ng-show="showCol">162101</td>
+                <td ng-show="showCol"></td>
+                <td ng-show="showCol">10103-03</td>
+                <td ng-show="showCol"><i class="material-icons md-18">check</i></td>
+                <td ng-show="showCol">EUR</td>
+                <td ng-show="showCol">F</td>
+              </tr>
+              <tr>
+                <td>06/06/2017</td>
+                <td>FDT35676</td>
+                <td>DRF3453</td>
+                <td class="amount a">951</td>
+                <td class="amount">1</td>
+                <td class="amount">951</td>
+                <td><i class="material-icons" title="Afficher plus d'infos" ng-click="showCol = !showCol">layers</i></td>
+                <td ng-show="showCol">CWTD0001</td>
+                <td ng-show="showCol">437317</td>
+                <td ng-show="showCol">ECARTTS</td>
+                <td ng-show="showCol">162101</td>
+                <td ng-show="showCol"></td>
+                <td ng-show="showCol">10103-03</td>
+                <td ng-show="showCol"><i class="material-icons md-18">check</i></td>
+                <td ng-show="showCol">EUR</td>
+                <td ng-show="showCol">F</td>
+              </tr>
+              <tr>
+                <td>06/06/2017</td>
+                <td>FDT35676</td>
+                <td>DRF3453</td>
+                <td class="amount a">951</td>
+                <td class="amount">1</td>
+                <td class="amount">951</td>
+                <td><i class="material-icons" title="Afficher plus d'infos" ng-click="showCol = !showCol">layers</i></td>
+                <td ng-show="showCol">CWTD0001</td>
+                <td ng-show="showCol">437317</td>
+                <td ng-show="showCol">ECARTTS</td>
+                <td ng-show="showCol">162101</td>
+                <td ng-show="showCol"></td>
+                <td ng-show="showCol">10103-03</td>
+                <td ng-show="showCol"><i class="material-icons md-18">check</i></td>
+                <td ng-show="showCol">EUR</td>
+                <td ng-show="showCol">F</td>
+              </tr>
+              <tr>
+                <td>06/06/2017</td>
+                <td>FDT35676</td>
+                <td>DRF3453</td>
+                <td class="amount a">951</td>
+                <td class="amount">1</td>
+                <td class="amount">951</td>
+                <td><i class="material-icons" title="Afficher plus d'infos" ng-click="showCol = !showCol">layers</i></td>
+                <td ng-show="showCol">CWTD0001</td>
+                <td ng-show="showCol">437317</td>
+                <td ng-show="showCol">ECARTTS</td>
+                <td ng-show="showCol">162101</td>
+                <td ng-show="showCol"></td>
+                <td ng-show="showCol">10103-03</td>
+                <td ng-show="showCol"><i class="material-icons md-18">check</i></td>
+                <td ng-show="showCol">EUR</td>
+                <td ng-show="showCol">F</td>
+              </tr>
+              <tr>
+                <td>06/06/2017</td>
+                <td>FDT35676</td>
+                <td>DRF3453</td>
+                <td class="amount a">951</td>
+                <td class="amount">1</td>
+                <td class="amount">951</td>
+                <td><i class="material-icons" title="Afficher plus d'infos" ng-click="showCol = !showCol">layers</i></td>
+                <td ng-show="showCol">CWTD0001</td>
+                <td ng-show="showCol">437317</td>
+                <td ng-show="showCol">ECARTTS</td>
+                <td ng-show="showCol">162101</td>
+                <td ng-show="showCol"></td>
+                <td ng-show="showCol">10103-03</td>
+                <td ng-show="showCol"><i class="material-icons md-18">check</i></td>
+                <td ng-show="showCol">EUR</td>
+                <td ng-show="showCol">F</td>
+              </tr>
+              <tr>
+                <td>06/06/2017</td>
+                <td>FDT35676</td>
+                <td>DRF3453</td>
+                <td class="amount a">951</td>
+                <td class="amount">1</td>
+                <td class="amount">951</td>
+                <td><i class="material-icons" title="Afficher plus d'infos" ng-click="showCol = !showCol">layers</i></td>
+                <td ng-show="showCol">CWTD0001</td>
+                <td ng-show="showCol">437317</td>
+                <td ng-show="showCol">ECARTTS</td>
+                <td ng-show="showCol">162101</td>
+                <td ng-show="showCol"></td>
+                <td ng-show="showCol">10103-03</td>
+                <td ng-show="showCol"><i class="material-icons md-18">check</i></td>
+                <td ng-show="showCol">EUR</td>
+                <td ng-show="showCol">F</td>
+              </tr>
+              <tr>
+                <td>06/06/2017</td>
+                <td>FDT35676</td>
+                <td>DRF3453</td>
+                <td class="amount a">951</td>
+                <td class="amount">1</td>
+                <td class="amount">951</td>
+                <td><i class="material-icons" title="Afficher plus d'infos" ng-click="showCol = !showCol">layers</i></td>
+                <td ng-show="showCol">CWTD0001</td>
+                <td ng-show="showCol">437317</td>
+                <td ng-show="showCol">ECARTTS</td>
+                <td ng-show="showCol">162101</td>
+                <td ng-show="showCol"></td>
+                <td ng-show="showCol">10103-03</td>
+                <td ng-show="showCol"><i class="material-icons md-18">check</i></td>
+                <td ng-show="showCol">EUR</td>
+                <td ng-show="showCol">F</td>
+              </tr>
+              <tr>
+                <td>06/06/2017</td>
+                <td>FDT35676</td>
+                <td>DRF3453</td>
+                <td class="amount a">951</td>
+                <td class="amount">1</td>
+                <td class="amount">951</td>
+                <td><i class="material-icons" title="Afficher plus d'infos" ng-click="showCol = !showCol">layers</i></td>
+                <td ng-show="showCol">CWTD0001</td>
+                <td ng-show="showCol">437317</td>
+                <td ng-show="showCol">ECARTTS</td>
+                <td ng-show="showCol">162101</td>
+                <td ng-show="showCol"></td>
+                <td ng-show="showCol">10103-03</td>
+                <td ng-show="showCol"><i class="material-icons md-18">check</i></td>
+                <td ng-show="showCol">EUR</td>
+                <td ng-show="showCol">F</td>
+              </tr>
+              <tr>
+                <td>06/06/2017</td>
+                <td>FDT35676</td>
+                <td>DRF3453</td>
+                <td class="amount a">951</td>
+                <td class="amount">1</td>
+                <td class="amount">951</td>
+                <td><i class="material-icons" title="Afficher plus d'infos" ng-click="showCol = !showCol">layers</i></td>
+                <td ng-show="showCol">CWTD0001</td>
+                <td ng-show="showCol">437317</td>
+                <td ng-show="showCol">ECARTTS</td>
+                <td ng-show="showCol">162101</td>
+                <td ng-show="showCol"></td>
+                <td ng-show="showCol">10103-03</td>
+                <td ng-show="showCol"><i class="material-icons md-18">check</i></td>
+                <td ng-show="showCol">EUR</td>
+                <td ng-show="showCol">F</td>
+              </tr>
+              <tr>
+                <td>06/06/2017</td>
+                <td>FDT35676</td>
+                <td>DRF3453</td>
+                <td class="amount a">951</td>
+                <td class="amount">1</td>
+                <td class="amount">951</td>
+                <td><i class="material-icons" title="Afficher plus d'infos" ng-click="showCol = !showCol">layers</i></td>
+                <td ng-show="showCol">CWTD0001</td>
+                <td ng-show="showCol">437317</td>
+                <td ng-show="showCol">ECARTTS</td>
+                <td ng-show="showCol">162101</td>
+                <td ng-show="showCol"></td>
+                <td ng-show="showCol">10103-03</td>
+                <td ng-show="showCol"><i class="material-icons md-18">check</i></td>
+                <td ng-show="showCol">EUR</td>
+                <td ng-show="showCol">F</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <button type="button" class="btn pull-left add">Ajouter les dépenses sélectionnées</button>
+    <button type="button" class="btn pull-right cancel" ng-click="displayBanner = !displayBanner">Annuler</button>
+  </div>
+</div>
+
+<footer>
+
+  <div class="actions-buttons">
+    <button class="btn save pull-left">Enregistrer</button>
+    <button class="btn validate pull-left">Valider le rapprochement</button>
+    <span class="pull-right material-icons">search</span>
+    <button class="btn add-charge pull-right" ng-click="displayBanner = !displayBanner">Rechercher les dépenses à rapprocher</button>
+  </div>
+</footer>
+
+<!-- Modal pop up Recherche Dépenses -->
+<div class="modal fade" id="rechDepenses" tabindex="-1" role="dialog" aria-labelledby="rechDepensesLabel">
+  <div class="modal-dialog popRechDepDialog" role="document">
+    <div class="modal-content popRechDepContent">
+
+      <div class="blocPopUp-header">
+        <div class="pull-left totSelect">
+          <p>Total Sélection</p>
+          <p><span>3 456,00 HT</span></p>
+        </div>
+
+        <div class="pull-right buttons">
+          <div class="open" data-dismiss="modal" ng-click="displayBanner = !displayBanner">
+            <p>Réduire</p>
+            <span class="glyphicon glyphicon-menu-right"></span>
+          </div>
+          <div class="closed" data-dismiss="modal">
+            <p>Fermer</p>
+            <span class="flaticon flaticon-multiply"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="headDepenses">
+        <div class="title">
+          <h2>Dépenses à rapprocher</h2>
+        </div>
+        <!-- <div class="moveButton pull-right">
+            <span class="lib">Déplacer la fenêtre</span>
+            <span class="flaticon flaticon-albums"></span>
+        </div> -->
+      </div>
+
+      <div class="row">
+
+        <div class="container-fluid rechListDepenses">
+          <div class="filter-container">
+            <div class="row">
+
+              <div class="col-md-4 col-sm-4 no_padding">
+
+                <div class="input-group">
+                  <input type="text" name="" id="" class="form-control" placeholder="Rechercher des dépenses...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-secondary y_search" type="button"><i class="material-icons">search</i></button>
+                  </span>
+                </div>
+
+                <button class="btn btn-sm btn-white filter visible-xs pull-right" data-toggle="collapse" data-target="#demo"><span class="flaticon-funnel"></span></button>
+
+              </div>
+
+              <div class="col-md-7 col-sm-7">
+                <button type="button" class="btn btn-sm btn-primary">Fournisseur facture<i class="flaticon-multiply"></i></button>
+                <button type="button" class="btn btn-sm btn-primary">CI(s) facture<i class="flaticon-multiply"></i></button>
+                <button type="button" class="btn btn-sm btn-primary">Devise facture<i class="flaticon-multiply"></i></button>
+                <button type="button" class="btn btn-sm btn-primary">A rapprocher facture<i class="flaticon-multiply"></i></button>
+              </div>
+
+              <div class="col-md-1 col-sm-1">
+                <button class="btn btn-sm btn-white filter hidden-xs pull-right" data-toggle="collapse" data-target="#demo">
+                  <span class="flaticon-funnel"></span>
+                </button>
+              </div>
+
+            </div>
+            <div id="demo" class="collapse filters_bloc">
+              <h3><i class="glyphicon glyphicon-filter"></i>Filtrer</h3>
+              <div class="row">
+
+                <div class="col-md-4">
+                  <div class="selection_filters">
+                    <label class="pull-left">Fournisseur de la facture</label>
+                    <div class="pull-right">
+                      <label class="switch">
+                        <input type="checkbox" name="" id="">
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="selection_filters">
+                    <label class="pull-left">CI(s) de la facture</label>
+                    <div class="pull-right">
+                      <label class="switch">
+                        <input type="checkbox" name="" id="">
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="selection_filters">
+                    <label class="pull-left">Nature(s) de la facture</label>
+                    <div class="pull-right">
+                      <label class="switch">
+                        <input type="checkbox" name="" id="">
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="selection_filters">
+                    <label class="pull-left">N°BC de la facture</label>
+                    <div class="pull-right">
+                      <label class="switch">
+                        <input type="checkbox" name="" id="">
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="selection_filters">
+                    <label class="pull-left">Devise de la facture</label>
+                    <div class="pull-right">
+                      <label class="switch">
+                        <input type="checkbox" name="" id="">
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="selection_filters">
+                    <label class="pull-left">Dépenses à rapprocher uniquement</label>
+                    <div class="pull-right">
+                      <label class="switch">
+                        <input type="checkbox" name="" id="">
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 no_pl no_pr">
+                    <div class="row">
+                      <div class="selection_filters">
+                        <div class="col-lg-4 col-md-4 lbl_l no_pl">
+                          <label for="" class="control-label lbl_txt">Date réception</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 no_pl sm_pad_r">
+                          <div class="input-group date">
+                            <input type="text" class="form-control" placeholder="Après le...">
+                            <span class="input-group-addon">
+                              <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 no_pr sm_pad_l">
+                          <div class="input-group date">
+                            <input type="text" class="form-control" placeholder="Avant le...">
+                            <span class="input-group-addon">
+                              <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4">
+                  <div class="col-lg-12 col-md-12 no_pl no_pr">
+                    <div class="row">
+                      <div class="selection_filters">
+                        <div class="col-lg-4 col-md-4 lbl_l">
+                          <label class="control-label lbl_txt">Montant total HT</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 no_pl sm_pad_r">
+                          <input type="text" id="" class="form-control input-filter" placeholder="min...">
+                        </div>
+                        <div class="col-lg-4 col-md-4 no_pr sm_pad_l">
+                          <input type="text" id="" class="form-control input-filter" placeholder="max...">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="selection_filters">
+                        <div class="col-lg-4 col-md-4 lbl_l">
+                          <label class="control-label lbl_txt">Prix Unitaire</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 no_pl sm_pad_r">
+                          <input type="text" id="" class="form-control input-filter" placeholder="min...">
+                        </div>
+                        <div class="col-lg-4 col-md-4 no_pr sm_pad_l">
+                          <input type="text" id="" class="form-control input-filter" placeholder="max...">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="selection_filters">
+                        <div class="col-lg-4 col-md-4 lbl_l">
+                          <label class="control-label lbl_txt">Quantité</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 no_pl sm_pad_r">
+                          <input type="text" id="" class="form-control input-filter" placeholder="min...">
+                        </div>
+                        <div class="col-lg-4 col-md-4 no_pr sm_pad_l">
+                          <input type="text" id="" class="form-control input-filter" placeholder="max...">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row buttons_row">
+                <button type="button" class="btn btn-primary btn-grand pull-right">Appliquer les filtres</button>
+                <button type="button" class="btn btn-gold btn-grand pull-right">Ajouter aux favoris</button>
+                <button type="button" class="btn btn-gray btn-grand pull-right">Réinitialiser</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="toolbar clearfix">
+        <div class="selectAll">
+          <div class="checkAll">
+            <input type="checkbox" name="" id="chkAktif">
+            <label for="chkAktif"><span></span></label>
+          </div>
+          <span class="spText">Tout sélectionner</span>
+        </div>
+
+        <!-- <div class="pull-right">
+            <div class="fold" ng-show="!displayCol" ng-click="displayCol = !displayCol">
+                <span class="glyphicon glyphicon-plus" ng-class="{'glyphicon-plus' : !displayCol, 'glyphicon-minus' : displayCol}"></span>
+                <span>Déplier la liste</span>
+            </div>
+            <div class="fold ng-hide" ng-show="displayCol" ng-click="displayCol = !displayCol">
+                <span class="glyphicon glyphicon-plus" ng-class="{'glyphicon-plus' : !displayCol, 'glyphicon-minus' : displayCol}"></span>
+                <span>Replier la liste</span>
+            </div>
+        </div> -->
+      </div>
+
+      <div class="container pop">
+
+        <div class="fixedTable" id="popDepTable2">
+          <header class="fixedTable-header">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Réception</th>
+                  <th>N°BC</th>
+                  <th>N°BL</th>
+                  <th class="amount a">Montant HT</th>
+                  <th class="amount">Qté</th>
+                  <th class="amount">PU</th>
+                  <th>Fournisseur</th>
+                  <th>CI</th>
+                  <th>Tâche</th>
+                  <th>Nature</th>
+                  <th>N°BC manuel</th>
+                  <th>Ressource</th>
+                  <th>Gestion</th>
+                  <th>Devise</th>
+                  <th>Tiers</th>
+                </tr>
+              </thead>
+            </table>
+          </header>
+          <aside class="fixedTable-sidebar">
+            <table class="table table-bordered">
+              <tbody>
+                <tr>
+                  <td>
+                    <input id="chbx1" type="checkbox" name="" checked="checked" /><label for="chbx1"><span></span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input id="chbx2" type="checkbox" name="" checked="checked" /><label for="chbx2"><span></span></label></td>
+                </tr>
+                <tr>
+                  <td><input id="chbx3" type="checkbox" name="" checked="checked" /><label for="chbx3"><span></span></label></td>
+                </tr>
+                <tr>
+                  <td><input id="chbx4" type="checkbox" name="" /><label for="chbx4"><span></span></label></td>
+                </tr>
+                <tr>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><input id="chbx7" type="checkbox" name="" /><label for="chbx7"><span></span></label></td>
+                </tr>
+                <tr>
+                  <td><input id="chbx8" type="checkbox" name="" /><label for="chbx8"><span></span></label></td>
+                </tr>
+                <tr>
+                  <td><input id="chbx9" type="checkbox" name="" /><label for="chbx9"><span></span></label></td>
+                </tr>
+                <tr>
+                  <td><input id="chbx10" type="checkbox" name="" /><label for="chbx10"><span></span></label></td>
+                </tr>
+                <tr>
+                  <td><input id="chbx11" type="checkbox" name="" /><label for="chbx11"><span></span></label></td>
+                </tr>
+                <tr>
+                  <td><input id="chbx12" type="checkbox" name="" /><label for="chbx12"><span></span></label></td>
+                </tr>
+              </tbody>
+            </table>
+          </aside>
+          <div class="fixedTable-body fred-scroll">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>06/06/2017</td>
+                  <td>FDT35676</td>
+                  <td>DRF3453</td>
+                  <td class="amount a">951</td>
+                  <td class="amount">1</td>
+                  <td class="amount">951</td>
+                  <td>CWTD0001</td>
+                  <td>437317</td>
+                  <td>ECARTTS</td>
+                  <td>162101</td>
+                  <td></td>
+                  <td>10103-03</td>
+                  <td><i class="material-icons md-18">check</i></td>
+                  <td>EUR</td>
+                  <td>F</td>
+                </tr>
+                <tr>
+                  <td>06/06/2017</td>
+                  <td>FDT35676</td>
+                  <td>DRF3453</td>
+                  <td class="amount a">951</td>
+                  <td class="amount">1</td>
+                  <td class="amount">951</td>
+                  <td>CWTD0001</td>
+                  <td>437317</td>
+                  <td>ECARTTS</td>
+                  <td>162101</td>
+                  <td></td>
+                  <td>10103-03</td>
+                  <td><i class="material-icons md-18">check</i></td>
+                  <td>EUR</td>
+                  <td>F</td>
+                </tr>
+                <tr>
+                  <td>06/06/2017</td>
+                  <td>FDT35676</td>
+                  <td>DRF3453</td>
+                  <td class="amount a">951</td>
+                  <td class="amount">1</td>
+                  <td class="amount">951</td>
+                  <td>CWTD0001</td>
+                  <td>437317</td>
+                  <td>ECARTTS</td>
+                  <td>162101</td>
+                  <td></td>
+                  <td>10103-03</td>
+                  <td><i class="material-icons md-18">check</i></td>
+                  <td>EUR</td>
+                  <td>F</td>
+                </tr>
+                <tr>
+                  <td>06/06/2017</td>
+                  <td>FDT35676</td>
+                  <td>DRF3453</td>
+                  <td class="amount a">951</td>
+                  <td class="amount">1</td>
+                  <td class="amount">951</td>
+                  <td>CWTD0001</td>
+                  <td>437317</td>
+                  <td>ECARTTS</td>
+                  <td>162101</td>
+                  <td></td>
+                  <td>10103-03</td>
+                  <td><i class="material-icons md-18">check</i></td>
+                  <td>EUR</td>
+                  <td>F</td>
+                </tr>
+                <tr>
+                  <td>06/06/2017</td>
+                  <td>FDT35676</td>
+                  <td>DRF3453</td>
+                  <td class="amount a">951</td>
+                  <td class="amount">1</td>
+                  <td class="amount">951</td>
+                  <td>CWTD0001</td>
+                  <td>437317</td>
+                  <td>ECARTTS</td>
+                  <td>162101</td>
+                  <td></td>
+                  <td>10103-03</td>
+                  <td><i class="material-icons md-18">check</i></td>
+                  <td>EUR</td>
+                  <td>F</td>
+                </tr>
+                <tr>
+                  <td>06/06/2017</td>
+                  <td>FDT35676</td>
+                  <td>DRF3453</td>
+                  <td class="amount a">951</td>
+                  <td class="amount">1</td>
+                  <td class="amount">951</td>
+                  <td>CWTD0001</td>
+                  <td>437317</td>
+                  <td>ECARTTS</td>
+                  <td>162101</td>
+                  <td></td>
+                  <td>10103-03</td>
+                  <td><i class="material-icons md-18">check</i></td>
+                  <td>EUR</td>
+                  <td>F</td>
+                </tr>
+                <tr>
+                  <td>06/06/2017</td>
+                  <td>FDT35676</td>
+                  <td>DRF3453</td>
+                  <td class="amount a">951</td>
+                  <td class="amount">1</td>
+                  <td class="amount">951</td>
+                  <td>CWTD0001</td>
+                  <td>437317</td>
+                  <td>ECARTTS</td>
+                  <td>162101</td>
+                  <td></td>
+                  <td>10103-03</td>
+                  <td><i class="material-icons md-18">check</i></td>
+                  <td>EUR</td>
+                  <td>F</td>
+                </tr>
+                <tr>
+                  <td>06/06/2017</td>
+                  <td>FDT35676</td>
+                  <td>DRF3453</td>
+                  <td class="amount a">951</td>
+                  <td class="amount">1</td>
+                  <td class="amount">951</td>
+                  <td>CWTD0001</td>
+                  <td>437317</td>
+                  <td>ECARTTS</td>
+                  <td>162101</td>
+                  <td></td>
+                  <td>10103-03</td>
+                  <td><i class="material-icons md-18">check</i></td>
+                  <td>EUR</td>
+                  <td>F</td>
+                </tr>
+                <tr>
+                  <td>06/06/2017</td>
+                  <td>FDT35676</td>
+                  <td>DRF3453</td>
+                  <td class="amount a">951</td>
+                  <td class="amount">1</td>
+                  <td class="amount">951</td>
+                  <td>CWTD0001</td>
+                  <td>437317</td>
+                  <td>ECARTTS</td>
+                  <td>162101</td>
+                  <td></td>
+                  <td>10103-03</td>
+                  <td><i class="material-icons md-18">check</i></td>
+                  <td>EUR</td>
+                  <td>F</td>
+                </tr>
+                <tr>
+                  <td>06/06/2017</td>
+                  <td>FDT35676</td>
+                  <td>DRF3453</td>
+                  <td class="amount a">951</td>
+                  <td class="amount">1</td>
+                  <td class="amount">951</td>
+                  <td>CWTD0001</td>
+                  <td>437317</td>
+                  <td>ECARTTS</td>
+                  <td>162101</td>
+                  <td></td>
+                  <td>10103-03</td>
+                  <td><i class="material-icons md-18">check</i></td>
+                  <td>EUR</td>
+                  <td>F</td>
+                </tr>
+                <tr>
+                  <td>06/06/2017</td>
+                  <td>FDT35676</td>
+                  <td>DRF3453</td>
+                  <td class="amount a">951</td>
+                  <td class="amount">1</td>
+                  <td class="amount">951</td>
+                  <td>CWTD0001</td>
+                  <td>437317</td>
+                  <td>ECARTTS</td>
+                  <td>162101</td>
+                  <td></td>
+                  <td>10103-03</td>
+                  <td><i class="material-icons md-18">check</i></td>
+                  <td>EUR</td>
+                  <td>F</td>
+                </tr>
+                <tr>
+                  <td>06/06/2017</td>
+                  <td>FDT35676</td>
+                  <td>DRF3453</td>
+                  <td class="amount a">951</td>
+                  <td class="amount">1</td>
+                  <td class="amount">951</td>
+                  <td>CWTD0001</td>
+                  <td>437317</td>
+                  <td>ECARTTS</td>
+                  <td>162101</td>
+                  <td></td>
+                  <td>10103-03</td>
+                  <td><i class="material-icons md-18">check</i></td>
+                  <td>EUR</td>
+                  <td>F</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-popup">
+        <div class="footer">
+          <button type="button" class="btn pull-left add">Ajouter les dépenses sélectionnées</button>
+          <button type="button" class="btn pull-right cancel" data-dismiss="modal">Annuler</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal pop in de rapprochement -->
+<div class="modal fade" id="compRap" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title"><i class="flaticon flaticon-notebook-4"></i>Compléter les dépenses rapprochées</h2>
+        <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" aria-label="Close" title="Cliquer pour annuler et fermer"></i>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <h4>Récapitulatif ligne de facture</h4>
+        </div>
+        <div class="modal-factureTab">
+          <div class="modal-tabline table-responsive">
+            <table class="modal-facture">
+              <thead>
+                <tr class="modal-main-head">
+                  <th colspan="1" class="header1"># Ligne</th>
+                  <th colspan="4" class="header1">CI</th>
+                  <th colspan="4" class="header1">Nature</th>
+                  <th colspan="2" class="header2">Montant HT</th>
+                  <th colspan="1" class="header2">Qté</th>
+                  <th colspan="2" class="header2">PU</th>
+                  <th colspan="2" class="header2">Ecart</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="1" class="txt">3</td>
+                  <td colspan="4" class="txt">437317 - SEP tram Nice 13-16</td>
+                  <td colspan="4" class="txt">152708 - LOC.MATERIEL DE POMPAGE</td>
+                  <td colspan="2" class="numbers">756,00</td>
+                  <td colspan="1" class="numbers">3</td>
+                  <td colspan="2" class="numbers">252,00</td>
+                  <td colspan="2" class="numbers red">-5,00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="dep-infos">
+          <h4>Vous allez créer une nouvelle dépense avec les informations suivantes :</h4>
+          <div class="modal-factureTab">
+            <div class="modal-tabline">
+              <table class="modal-facture">
+                <thead>
+                  <tr class="modal-main-head">
+                    <th colspan="2" class="header2">Montant HT</th>
+                    <th colspan="1" class="header2">Qté</th>
+                    <th colspan="2" class="header2">PU</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="2" class="numbers">-5,00</td>
+                    <td colspan="1" class="numbers"><span>1</span></td>
+                    <td colspan="2" class="numbers"><span>-5,00</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-4 no_pl">
+            <label for="">N° Bon de Commande</label>
+            <input type="text" id="" class="form-control" maxlenght="" ng-required="">
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <label for="">N° Bon de Commande Manuel</label>
+            <input type="text" id="" class="form-control" maxlenght="" ng-required="">
+          </div>
+          <div class="col-lg-4 col-md-4 no_pr">
+            <label for="">N° Bon de Livraison</label>
+            <input type="text" id="" class="form-control" maxlength="" ng-required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-4 no_pl">
+            <label for="">Tâches</label>
+            <input type="text" id="" class="form-control" maxlength="" ng-required>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <label for="">Nature</label>
+            <p>162101 - LOC.MATERIEL DE POMPAGE</p>
+          </div>
+          <div class="col-lg-4 col-md-4 no_pr">
+            <label for="">Ressource</label>
+            <input type="text" id="" class="form-control" maxlength="" ng-required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 no_pl no_pr">
+            <label for="">Commentaire</label>
+            <input type="text" id="" class="form-control" maxlength="" ng-required>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default pull-left">Ajouter</button>
+        <button class="btn btn-link pull-right" data-dismiss="modal">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>

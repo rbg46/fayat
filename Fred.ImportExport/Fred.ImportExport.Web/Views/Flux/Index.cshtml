@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Fred.ImportExport.Entities.ImportExport.FluxEnt>
+@using Fred.ImportExport.Web.Extentions;
+
+@{
+    ViewBag.Title = "Flux";
+    var grid = new WebGrid(canPage: true, rowsPerPage: 10);
+    grid.Bind(source: Model, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
+}
+
+@section styles {
+    @Styles.Render("~/Content/bootstrap-toggle.min.css")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/Scripts/Common/checkbox.js")
+    @Scripts.Render("~/Scripts/Common/order.js")
+    @Scripts.Render("~/Scripts/bootstrap-toggle.js")
+}
+
+<div class="container">
+    <h2>@ViewBag.Title </h2>
+
+    <div>
+        @grid.Table(
+              tableStyle: "table table-responsive table-bordered table-hover",
+              columns: grid.Columns(
+                grid.Column("FluxId", "Id"),
+                grid.Column("Code", "Code"),
+                grid.Column("Libelle", "Libellé"),
+                grid.Column("Description", "Description"),
+                grid.Column("SocieteCode", "Code société", format: @<code>@item.SocieteCode</code> ),
+                grid.Column("GroupCode", "Code groupe", format: @<code>@item.GroupCode</code> ),
+                grid.Column("DateDerniereExecution", "Dernière exécution (heure locale)", format: @<span>@(item.DateDerniereExecution != null ? item.DateDerniereExecution.ToLocalTime().ToString("dd/MM/yyyy HH:mm:ss") : "") </span>),
+                grid.Column("IsActif", "Actif", format: @<input type='checkbox' @(item.IsActif ? "checked" : "") value='@item.FluxId' class='chkactif' data-toggle='toggle' data-on='Actif' data-off='Inactif'>) @*checked data - toggle = 'toggle' data - on = 'Actif' data - off = 'Inactif'*@
+                )
+            )
+
+        <div class="row">
+            <div class="col-sm-6">
+                @grid.PagerList(mode: WebGridPagerModes.All, paginationStyle: "pagination pagination-small pagination-right")
+            </div>
+        </div>
+
+        @Html.Hidden("dir", grid.SortDirection)
+        @Html.Hidden("col", grid.SortColumn)
+
+    </div>
+
+</div>

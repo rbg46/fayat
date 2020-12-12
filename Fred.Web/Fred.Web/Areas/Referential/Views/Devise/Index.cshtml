@@ -1,0 +1,199 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+  ViewBag.Title = FeatureDevise.Devise_Index_TitreOnglet;
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+  @Styles.Render("~/AreasReferentialViewsDeviseIndexBundle.css")
+}
+
+@section scripts {
+  @Scripts.Render("~/AreasReferentialViewsDeviseIndexBundle.js")
+  @this.RenderResources("FeatureDevise")
+}
+
+<div class="codes_devise container" ng-controller="DeviseController">
+
+  <div class="toleft">
+
+    <!-- START : Titre de la page -->
+    <h1><span class="flat">{{resources.Devise_Index_Titre}}</span></h1>
+    <!--END : Titre de la page -->
+
+    <div class="row">
+      <!--BEGIN : Recherche -->
+      <div class="col-md-10">
+        <label class="infoFilter">{{resources.Global_RechercheAffiner}}</label>
+        <div class="filter">
+          <div class="input-group">
+            <input class="form-control txt"
+                   type="text"
+                   id="txtRecherche"
+                   name="Recherche"
+                   placeholder="{{resources.Devise_Index_Rechercher_Placeholder}}"
+                   ng-model="recherche"
+                   ng-model-options="{ debounce: 500 }"
+                   ng-change="handleSearch(recherche)" />
+            <span class="input-group-btn">
+              <button class="btn btn-secondary y_search"
+                      title="{{resources.Global_RechercheAffiner_Tooltip}}"
+                      type="button"
+                      ng-click="handleSearch(recherche)">
+                <i class="material-icons">search</i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!--END : Recherche -->
+      <!--BEGIN : Bouton pour ajouter Items -->
+      <div class="col-md-2 add-search">
+        <span class="pull-right">
+          <label class="infoFilter">{{resources.Global_Ajouter}}</label>
+          <i class="flaticon flaticon-add  icoplus " title="{{resources.Global_Bouton_AjouterReference_Tooltip}}" ng-click="handleClickCreateNew()"></i>
+        </span>
+      </div>
+      <!--END : Bouton pour ajouter Items -->
+    </div>
+
+    <!--LISTE : START-->
+    <div class="row results">
+      <div class="col-md-12 refs-list">
+        <div ng-repeat="item in items" ng-if="!item.IsDeleted">
+          <div class="row line" ng-click="handleSelect(item)">
+            <div class="col-md-2">
+              <span class="t1">{{item.IsoCode}}</span>
+            </div>
+            <div class="col-md-2">
+              <div class="lb">{{resources.Devise_Index_PanelMain_IsoNombre}}</div>
+              <div class="val">{{item.IsoNombre}}</div>
+            </div>
+            <div class="col-md-2">
+              <div class="lb">{{resources.Devise_Index_PanelMain_Symbole}}</div>
+              <div class="val">{{item.Symbole}}</div>
+            </div>
+            <div class="col-md-5">
+              <div class="lb">{{resources.Devise_Index_PanelMain_Libelle}}</div>
+              <div class="val">{{item.Libelle}}</div>
+            </div>
+            <div class="col-md-1">
+              <div class="bdg actif" ng-if="item.Active">{{resources.Global_Actif}}</div>
+              <div class="bdg inactif" ng-if="!item.Active">{{resources.Global_Inactif}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--LISTE : END-->
+
+  </div>
+
+  <div ng-class="checkDisplayOptions"
+       class="blockScreen"
+       style="z-index:99"></div>
+  <div class="options"
+       id="optionRightPanel"
+       ng-class="checkDisplayOptions + ' ' + checkFormatOptions">
+
+
+    <!--HEADER TOOLBAR : BEGIN-->
+    <div class="toolbar"
+         ng-class="{'is-already-used':isAlreadyUsed}">
+      <div class="flaticon flaticon flaticon-diamond grandicone"></div>
+    </div>
+    <span ng-show="isAlreadyUsed" class="is-already-used-text">{{resources.Global_Item_Already_Used}}</span>
+    <!--HEADER TOOLBAR : END-->
+    <!-- Titre : BEGIN -->
+    <div class="form-header">
+      <h2>
+        <span ng-if="devise.DeviseId == 0">{{resources.Devise_Index_PanelRight_Titre_Ajouter}}</span>
+        <span ng-if="devise.DeviseId != 0">{{resources.Devise_Index_PanelRight_Titre_Modifier}}</span>
+      </h2>
+      <label class="legend">{{resources.Global_LegendeAsterisque}}</label>
+    </div>
+    <!-- Titre : END -->
+
+    <div class="form fred-scroll">
+      <!--Formulaire: START-->
+      <form name="formDevise" autocomplete="off" novalidate>
+
+        <div class="form-group chb_r">
+          <input id="chkActif" type="checkbox" ng-model="devise.Active" /><label for="chkActif"><span></span>{{resources.Global_Actif}}</label>
+        </div>
+
+        <!--FIELD IsoCode: START-->
+        <div class="form-group" ng-class="{ 'has-error' : (formDevise.IsoCode.$invalid && formDevise.$submitted) || formDevise.IsoCode.$error.exist}">
+          <label for="txtIsoCode">{{resources.Devise_Index_PanelRight_IsoCode}} *</label>
+          <span class="text-danger" ng-show="formDevise.IsoCode.$error.required && formDevise.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+          <span class="text-danger" ng-show="formDevise.IsoCode.$error.exist">{{resources.Global_Control_Code_Exist_Erreur}}</span>
+          <input class="form-control" type="text" id="txtIsoCode" name="IsoCode" ng-change="handleChangeCode()" required placeholder="{{resources.Devise_Index_PanelRight_IsoCode_Placeholder}}" ng-model="devise.IsoCode" maxlength="3" />
+        </div>
+        <!--FIELD IsoCode: END-->
+        <!--FIELD IsoNombre: START-->
+        <div class="form-group" ng-class="{ 'has-error' : (formDevise.IsoNombre.$invalid && formDevise.$submitted) || formDevise.IsoNombre.$error.exist || formDevise.IsoNombre.$error.pattern}">
+          <label for="txtIsoNombre">{{resources.Devise_Index_PanelRight_IsoNombre}} *</label>
+          <span class="text-danger" ng-show="formDevise.IsoNombre.$invalid && formDevise.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+          <span class="text-danger" ng-show="formDevise.IsoNombre.$error.pattern">{{resources.Global_Control_Code_FormatNumeric_Erreur}}</span>
+          <input class="form-control" type="text" id="txtIsoNombre" name="IsoNombre" ng-pattern="/^[0-9]{1,5}$/" required placeholder="{{resources.Devise_Index_PanelRight_IsoNombre_Placeholder}}" ng-model="devise.IsoNombre" maxlength="5" />
+        </div>
+        <!--FIELD IsoNombre: END-->
+        <!--FIELD Symbole: START-->
+        <div class="form-group" ng-class="{ 'has-error' : (formDevise.IsoSymbole.$invalid && formDevise.$submitted) || formDevise.IsoSymbole.$error.exist}">
+          <label for="txtSymbole">{{resources.Devise_Index_PanelRight_Symbole}} *</label>
+          <span class="text-danger" ng-show="formDevise.IsoSymbole.$invalid && formDevise.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+          <input class="form-control" type="text" id="txtSymbole" name="IsoSymbole" required placeholder="{{resources.Devise_Index_PanelRight_Symbole_Placeholder}}" ng-model="devise.Symbole" maxlength="10" />
+        </div>
+        <!--FIELD Symbole: END-->
+        <!--FIELD Libelle: START-->
+        <div class="form-group" ng-class="{ 'has-error' : (formDevise.Libelle.$invalid && formDevise.$submitted) || formDevise.Libelle.$error.exist}">
+          <label for="txtLibelle">{{resources.Devise_Index_PanelRight_Libelle}} *</label>
+          <span class="text-danger" ng-show="formDevise.Libelle.$invalid && formDevise.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+          <input class="form-control" type="text" id="txtLibelle" name="Libelle" required placeholder="{{resources.Devise_Index_PanelRight_Libelle_Placeholder}}" ng-model="devise.Libelle" maxlength="150" />
+        </div>
+        <!--FIELD Libelle: END-->
+        <!--FOOTER TOOLBAR : BEGIN-->
+        <div class="footer">
+          <div class="buttons">
+            <button class="btn btn-default"
+                    type="submit"
+                    ng-disabled="isBusy"
+                    ng-click="handleClickAddOrUpdate();"
+                    title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">
+              {{resources.Global_Bouton_Enregistrer}}
+            </button>
+            <button class="btn btn-primary"
+                    type="submit"
+                    ng-disabled="isBusy"
+                    ng-click="handleClickAddOrUpdateAndNew();"
+                    title="{{resources.Global_Bouton_EnregistrerEtNouveau_Tooltip}}">
+              {{resources.Global_Bouton_EnregistrerEtNouveau}}
+            </button>
+            <button ng-hide="devise.DeviseId==0"
+                    class="btn valid-again"
+                    type="submit"
+                    ng-click="handleClickDelete(devise);"
+                    title="{{resources.Global_Bouton_Supprimer_Tooltip}}">
+              {{resources.Global_Bouton_Supprimer}}
+            </button>
+            <button class="btn btn-link"
+                    type="button"
+                    ng-click="handleClickCancel();"
+                    title="{{resources.Global_Bouton_Annuler_Tooltip}}">
+              {{resources.Global_Bouton_Annuler}}
+            </button>
+          </div>
+          <div class="close_panel" ng-click="handleClickCancel();"
+               title="{{resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <span>{{resources.Global_Bouton_RefermerPanneau}}</span>
+          </div>
+        </div>
+        <!--FOOTER TOOLBAR : END-->
+
+      </form>
+      <!--Formulaire: END-->
+
+    </div>
+  </div>
+</div>

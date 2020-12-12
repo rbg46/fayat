@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="BudgetRevision.Recettes = somme des recettes de toutes les tâches dans la device de référence.">
+    <Position X="4.75" Y="12.25" Height="0.75" Width="5.773" />
+  </Comment>
+  <Class Name="Fred.Entities.Budget.BudgetEnt" Collapsed="true">
+    <Position X="0.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAACAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Budget\BudgetEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Ci" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Fred.Entities.Referential.TacheEnt" Collapsed="true">
+    <Position X="7.5" Y="10.5" Width="2.75" />
+    <AssociationLine Name="CI" Type="Fred.Entities.CI.CIEnt" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9.134" Y="10.5" />
+        <Point X="9.134" Y="9.195" />
+        <Point X="2" Y="9.195" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="TachesEnfants" Type="Fred.Entities.Referential.TacheEnt" ManuallyRouted="true">
+      <Path>
+        <Point X="8.44" Y="11.062" />
+        <Point X="8.44" Y="11.312" />
+        <Point X="9.331" Y="11.312" />
+        <Point X="9.331" Y="11.062" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.11" Y="0.186" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="BudgetRevision" Type="Fred.Entities.Budget.BudgetRevisionEnt" FixedToPoint="true">
+      <Path>
+        <Point X="7.5" Y="11" />
+        <Point X="5.75" Y="11" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="RessourceTaches" Type="Fred.Entities.Budget.RessourceTacheEnt" FixedFromPoint="true">
+      <Path>
+        <Point X="10.25" Y="11" />
+        <Point X="12.25" Y="11" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="TacheRecettes" Type="Fred.Entities.Budget.TacheRecetteEnt" FixedFromPoint="true">
+      <Path>
+        <Point X="9.992" Y="10.5" />
+        <Point X="9.992" Y="7.812" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AASCAQACAEgADAAAAAAgQEQACAEQAgAgAgCEAACA6dQ=</HashCode>
+      <FileName>Referential\TacheEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CI" />
+      <Property Name="BudgetRevision" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="TachesEnfants" />
+      <Property Name="RessourceTaches" />
+      <Property Name="TacheRecettes" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Fred.Entities.Budget.BudgetRevisionEnt" Collapsed="true">
+    <Position X="4" Y="10.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AECiIBAEAEgAAAIAACgAAAwgAAYQAAAAAAAAAAAB4BA=</HashCode>
+      <FileName>Budget\BudgetRevisionEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Budget" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Taches" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Fred.Entities.CI.CIEnt" Collapsed="true">
+    <Position X="0.5" Y="9" Width="1.5" />
+    <AssociationLine Name="Societe" Type="Fred.Entities.Societe.SocieteEnt" FixedToPoint="true">
+      <Path>
+        <Point X="0.938" Y="9" />
+        <Point X="0.938" Y="4.812" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Taches" Type="Fred.Entities.Referential.TacheEnt" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2" Y="9.41" />
+        <Point X="8.875" Y="9.41" />
+        <Point X="8.875" Y="10.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AQCFAAQAAEUBhAIAFAAhECQAEAAhCAKAIASgVIAECDA=</HashCode>
+      <FileName>CI\CIEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Societe" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Taches" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Fred.Entities.Societe.SocieteEnt" Collapsed="true">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEQIIAFAAAAEACAiAAAAEAAAAAAgEACAUAAAMgA=</HashCode>
+      <FileName>Societe\SocieteEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Organisation" />
+      <Property Name="Groupe" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Fred.Entities.Budget.RessourceTacheEnt" Collapsed="true">
+    <Position X="12.25" Y="10.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAEAIYAAABAAgAAAAQIAAAAQFA=</HashCode>
+      <FileName>Budget\RessourceTacheEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Tache" />
+      <Property Name="Ressource" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="RessourceTacheDevises" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Fred.Entities.ReferentielFixe.RessourceEnt" Collapsed="true">
+    <Position X="9" Y="4.25" Width="1.5" />
+    <AssociationLine Name="ReferentielEtendus" Type="Fred.Entities.ReferentielEtendu.ReferentielEtenduEnt" FixedToPoint="true">
+      <Path>
+        <Point X="9" Y="4.688" />
+        <Point X="6.5" Y="4.688" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AQCAAAAAAEgAASAAFAAgQIAAAAAQAAAgAgCkAAAgYJA=</HashCode>
+      <FileName>ReferentielFixe\RessourceEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SousChapitre" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="ReferentielEtendus" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Fred.Entities.Groupe.GroupeEnt" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAACAgAAAAAgAEAAAAAACAEAAAAAA=</HashCode>
+      <FileName>Groupe\GroupeEnt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fred.Entities.ReferentielFixe.ChapitreEnt" Collapsed="true">
+    <Position X="9" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAEAAAAgAAAAAACAgAAAAAAAQAAAAAACAAEAAIIA=</HashCode>
+      <FileName>ReferentielFixe\ChapitreEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Groupe" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="SousChapitres" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Fred.Entities.ReferentielFixe.SousChapitreEnt" Collapsed="true">
+    <Position X="9" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAgAAAAAEAAgAAIAAAAQAgAAAACAAAAAIIA=</HashCode>
+      <FileName>ReferentielFixe\SousChapitreEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Chapitre" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Ressources" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Fred.Entities.ReferentielEtendu.ReferentielEtenduEnt" Collapsed="true">
+    <Position X="4.75" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAEAAAIAAAAEAIAQAAAgEAAAAAAAAAAAQBA=</HashCode>
+      <FileName>ReferentielEtendu\ReferentielEtenduEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Societe" />
+      <Property Name="Ressource" />
+      <Property Name="Nature" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="ParametrageReferentielEtendus" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Fred.Entities.Referential.NatureEnt" Collapsed="true">
+    <Position X="6.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAkAIAIAAAAgAAAgAAIwAAAAAACAAAAAIAA=</HashCode>
+      <FileName>Referential\NatureEnt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fred.Entities.ReferentielEtendu.ParametrageReferentielEtenduEnt" Collapsed="true">
+    <Position X="3" Y="5.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>gACAAACAAAgABCAEAgAAAAAAAAAQAAAAAAIAEAAQYJA=</HashCode>
+      <FileName>ReferentielEtendu\ParametrageReferentielEtenduEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Organisation" />
+      <Property Name="Devise" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Fred.Entities.Referential.DeviseEnt" Collapsed="true">
+    <Position X="4.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAICAAAgAAAEAAAAAAAAgAAKAAAAgABKAAYAQIIA=</HashCode>
+      <FileName>Referential\DeviseEnt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fred.Entities.Organisation.OrganisationEnt" Collapsed="true">
+    <Position X="2.5" Y="7.25" Width="1.5" />
+    <AssociationLine Name="Societe" Type="Fred.Entities.Societe.SocieteEnt" FixedFromPoint="true">
+      <Path>
+        <Point X="2.5" Y="7.687" />
+        <Point X="1.781" Y="7.687" />
+        <Point X="1.781" Y="4.812" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAEAAAEAAAAgAAoAAAAkAAAIABKAAAAAIGA=</HashCode>
+      <FileName>Organisation\OrganisationEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Societe" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Fred.Entities.Budget.TacheRecetteEnt" Collapsed="true">
+    <Position X="8.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAIAAAACQAAAAAAAAAAAAAAAAQAFA=</HashCode>
+      <FileName>Budget\TacheRecetteEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Tache" />
+      <Property Name="Devise" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Fred.Entities.Budget.RessourceTacheDeviseEnt" Collapsed="true">
+    <Position X="10.75" Y="7.25" Width="2" />
+    <AssociationLine Name="Devise" Type="Fred.Entities.Referential.DeviseEnt" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.812" Y="7.25" />
+        <Point X="10.812" Y="6.875" />
+        <Point X="5.438" Y="6.875" />
+        <Point X="5.438" Y="7.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAACAAAAAAAIAAAAAAAAAAAQEAAAQABA=</HashCode>
+      <FileName>Budget\RessourceTacheDeviseEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="RessourceTache" />
+      <Property Name="Devise" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

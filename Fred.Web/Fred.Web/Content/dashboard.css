@@ -1,0 +1,68 @@
+﻿.home-page {
+    height: auto;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.home-page .home-overlay {
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.5));
+    position: fixed;
+    top: 0px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+.home-page .title {
+    color: #fff;
+    display: block;
+    font-size: 32px;
+    padding-left: 5%;
+    text-shadow: 1px 1px 0 #0055a0;
+}
+
+.home-page .pages {
+    width: 10%;
+    height: 5%;
+    margin: 20px auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.home-page .pages .indic {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+
+.home-page .pages .indic.off {
+    background-color: transparent;
+}
+
+.home-page .pages .indic.on {
+    background-color: #fff;
+}
+
+.home-page .background-img {
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .home-page .title {
+        font-size: 22px;
+    }
+}

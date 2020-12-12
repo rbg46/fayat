@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Organisation\OrganisationTree\EntiteOrganisationBase.cs" />
+    <Compile Remove="Organisation\OrganisationTree\OrganisationBaseExt.cs" />
+    <Compile Remove="Organisation\OrganisationTree\OrganisationTreeRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="4.2.1" />
+    <PackageReference Include="CommonServiceLocator" Version="2.0.4" />
+    <PackageReference Include="LinqKit.Core" Version="1.1.16" />
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.9.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.18" />
+    <PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="2.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fred.DataAccess.Interfaces\Fred.DataAccess.Interfaces.csproj" />
+    <ProjectReference Include="..\Fred.Entities\Fred.Entities.csproj" />
+    <ProjectReference Include="..\Fred.EntityFramework\Fred.EntityFramework.csproj" />
+    <ProjectReference Include="..\Fred.Framework\Fred.Framework.csproj" />
+    <ProjectReference Include="..\Fred.Web.Shared\Fred.Web.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Organisation\OrganisationTree\" />
+  </ItemGroup>
+
+</Project>

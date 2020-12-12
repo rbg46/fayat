@@ -1,0 +1,234 @@
+﻿.header-toolbar {
+    background-color: #E1E3E5;
+    margin-bottom: 0;
+    padding: 6px;
+}
+
+.header-toolbar label {
+    font-size: 18px;
+    margin-top: 6px;
+}
+
+.pickListCallerOrganisation > .inputPLSearchParent::before {
+    content: "\f100";
+    cursor: pointer;
+    font-family: "Flaticon";
+    font-weight: 100;
+}
+
+.pickListCallerDevise > .inputPLSearchParent::before {
+    content: "\f100";
+    cursor: pointer;
+    font-family: "Flaticon";
+    font-weight: 100;
+}
+
+.table .info-key {
+    font-size: 15px;
+}
+
+#listPersonnel {
+    height: 490px;
+}
+
+.active {
+    color: #fff;
+    font-size: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #ADCB60;
+}
+
+.inactive {
+    color: #fff;
+    font-size: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: red;
+}
+
+.intern {
+    color: #fff;
+    font-size: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #0934B7;
+}
+
+.user {
+    color: #fff;
+    font-size: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #FEBB5F;
+}
+
+.outsider {
+    color: #fff;
+    font-size: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #DE3F7E;
+}
+
+.temporary {
+    color: #fff;
+    font-size: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: brown;
+}
+
+.summary .active {
+    background-color: #ADCB60;
+}
+
+.summary .interim {
+    background-color: #0934b7;
+    color: #fff;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.summary .interimSansEtt {
+    background-color: #ef3308;
+    color: #fff;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.fa.fa-filter::before {
+    font-size: 19px;
+    color: #0070c0;
+}
+
+.fa.fa-close::before {
+    font-size: 19px;
+    color: #0070c0;
+}
+
+.material-icons.closing {
+    font-size: 35px;
+    padding-top: 2px;
+    color: #a5a5a5;
+}
+
+.buttons_row button {
+    padding: 5px 10px;
+    border: none;
+}
+
+.rattachement-actif {
+    background-color: #adcb60;
+    color: black;
+    float: left;
+    margin-top: 15px;
+    padding-left: 15px;
+    width: 70px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"] + label {
+    font-size: 14px;
+}
+
+input[type="radio"] + label span {
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-block;
+    height: 19px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    width: 19px;
+    background-color: #fcfcfc;
+    border: 3px #2c77ba solid;
+    -moz-transition: background-color 0.4s linear;
+    -o-transition: background-color 0.4s linear;
+    -webkit-transition: background-color 0.4s linear;
+    transition: background-color 0.4s linear;
+}
+
+input[type="radio"]:checked + label span {
+    background-color: #1F98C7;
+    border: 3px #78C1DD solid;
+    -moz-transition: background-color 0.4s linear;
+    -o-transition: background-color 0.4s linear;
+    -webkit-transition: background-color 0.4s linear;
+    transition: background-color 0.4s linear;
+}
+
+.surlign {
+    border-bottom: 1px solid #e1e3e5;
+    margin-bottom: 5px;
+}
+
+.surlign h4 {
+    border-bottom: none;
+}
+
+.cln1 {
+    width: 300px !important;
+    min-width: 300px !important;
+}
+
+.cln2 {
+    width: 150px !important;
+    min-width: 150px;
+}
+
+.cln3 {
+    width: 150px !important;
+    min-width: 150px;
+}
+
+.cln4 {
+    width: 150px !important;
+    min-width: 150px;
+}
+
+.cln5 {
+    width: 150px !important;
+    min-width: 150px;
+}
+
+.cln6 {
+    width: 150px !important;
+    min-width: 150px;
+}
+
+.cln7 {
+    width: 150px !important;
+    min-width: 150px;
+    text-align: center;
+    border-bottom: solid white 1px !important;
+}
+
+.cln8 {
+    width: 150px !important;
+    min-width: 150px;
+    text-align: center;
+    border-bottom: solid white 1px !important;
+}
+
+.cln9 {
+    width: 150px !important;
+    min-width: 150px;
+}
+
+tbody tr td.cln8 {
+    border-left: white 1px solid;
+}
+
+thead tr th.cln8 {
+    border-left: white 1px solid;
+}
+
+@media (min-width: 1370px) {
+    [class^="cln"] {
+        width: 250px !important;
+        min-width: 250px;
+    }
+}

@@ -1,0 +1,372 @@
+﻿/*.main-content {
+  padding-bottom: 200px;
+}*/
+
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.no_pad {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.no_pad_l {
+  padding-left: 0;
+}
+
+.no_pad_r {
+  padding-right: 0;
+}
+
+.sm_pad_l {
+  padding-left: 4px;
+}
+
+.sm_pad_r {
+  padding-right: 4px;
+}
+
+/*Barre de recherche*/
+
+.lbl_l {
+  display: table;
+  height: 100%;
+}
+
+.lbl_l .lbl_txt {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.lbl_r input {
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.lbl_r .glyphicon-search {
+  position: absolute;
+  top: 9px;
+  cursor: pointer;
+}
+
+.control-label {
+  width: 285px;
+}
+
+.selection_filters.section_montant {
+  height: initial;
+  margin-bottom: 15px;
+}
+
+.selection_filters {
+  position: relative;
+}
+
+.selection_filters .lbl_chb {
+  position: absolute;
+  left: 0;
+  top: 20px;
+}
+
+.selection_filters.section_montant .control-label {
+  width: 150px;
+}
+
+.filters_bloc .buttons_row {
+  margin-top: -20px;
+}
+
+.filters_bloc .mid {
+  top: 28px;
+}
+
+.filters_bloc .btm {
+  top: 32px;
+}
+
+.selection_filters .sm_pad_l .input-group.date input,
+.selection_filters .sm_pad_r .input-group.date input {
+  font-size: 13px;
+}
+
+/*Liste*/
+
+.bloc_liste {
+  overflow-x: auto;
+  margin-bottom:20px
+}
+
+/* .liste_factures {
+  border-collapse: collapse;
+  overflow-x: auto;
+}
+
+.liste_factures tr {
+  font-size: 14px;
+  color: rgb(51, 51, 51);
+  border-bottom: 1px solid #ddd;
+  font-weight: 400;
+}
+
+.liste_factures thead tr th {height:55px;
+  background-color: #0052A0;
+  color: #fff;
+  text-align: left;
+  padding: 8px 5px;
+  font-size: 15px;
+  font-weight: 300;
+  height:55px;
+}
+
+.liste_factures thead {
+  width: 100%;
+}
+
+.liste_factures tbody {
+  display: block;
+  overflow-y: scroll;
+  max-height: 500px;
+}
+
+.liste_factures tbody tr {
+  width: 100%;
+}
+
+.liste_factures tbody tr td {
+  text-align: left;
+  height: 35px;
+  font-size: 15px;
+  padding-left: 5px;
+}
+
+.liste_factures thead,
+.liste_factures tbody tr {
+  display: table;
+  table-layout: fixed;
+}
+
+
+.liste_factures thead tr .cachee {
+  background-color: rgb(9,125,160);
+}
+
+.liste_factures tbody tr .money {
+  text-align: right;
+  padding-right: 15px;
+}
+
+TAILLES FIXES DES COLONNES POUR LE HEADER
+.liste_factures thead tr th:nth-child(1) { width: 70px; }
+.liste_factures thead tr th:nth-child(2) { width: 90px; }
+.liste_factures thead tr th:nth-child(3) { width: 90px; }
+.liste_factures thead tr th:nth-child(4) { width: 60px; }
+.liste_factures thead tr th:nth-child(5) { width: 90px; }
+.liste_factures thead tr th:nth-child(6) { width: 250px;}
+.liste_factures thead tr th:nth-child(7) { width: 100px; }
+.liste_factures thead tr th:nth-child(8) { width: 70px; }
+.liste_factures thead tr th:nth-child(9) { width: 90px; }
+.liste_factures thead tr th:nth-child(10) { width: 80px; }
+.liste_factures thead tr th:nth-child(11) { width: 70px; }
+.liste_factures thead tr th:nth-child(12) { width: 100px; }
+.liste_factures thead tr th:nth-child(13) { width: 100px; }
+.liste_factures thead tr th:nth-child(14) { width: 70px; }
+.liste_factures thead tr th:nth-child(15) { width: 70px; }
+.liste_factures thead tr th:nth-child(16) { width: 120px; }
+.liste_factures thead tr th:nth-child(17) { width: 40px; border-right: none; }
+.liste_factures thead tr th:nth-child(18) { width: 40px; }
+.liste_factures thead tr th:nth-child(19) { width: 40px; }
+
+TAILLES FIXES DES COLONNES POUR LES LIGNES
+.liste_factures tbody tr td:nth-child(1) { width: 70px; }
+.liste_factures tbody tr td:nth-child(2) { width: 90px; }
+.liste_factures tbody tr td:nth-child(3) { width: 90px; }
+.liste_factures tbody tr td:nth-child(4) { width: 60px; }
+.liste_factures tbody tr td:nth-child(5) { width: 90px; }
+.liste_factures tbody tr td:nth-child(6) { width: 250px;}
+.liste_factures tbody tr td:nth-child(7) { width: 100px; }
+.liste_factures tbody tr td:nth-child(8) { width: 70px; }
+.liste_factures tbody tr td:nth-child(9) { width: 90px; }
+.liste_factures tbody tr td:nth-child(10) { width: 80px; }
+.liste_factures tbody tr td:nth-child(11) { width: 70px; }
+.liste_factures tbody tr td:nth-child(12) { width: 100px; }
+.liste_factures tbody tr td:nth-child(13) { width: 100px; }
+.liste_factures tbody tr td:nth-child(14) { width: 70px; }
+.liste_factures tbody tr td:nth-child(15) { width: 70px; }
+.liste_factures tbody tr td:nth-child(16) { width: 120px; }
+.liste_factures tbody tr td:nth-child(17) { width: 40px; border-right: none; }
+.liste_factures tbody tr td:nth-child(18) { width: 40px; }
+.liste_factures tbody tr td:nth-child(19) { width: 40px; }
+
+.liste_factures tbody tr td:nth-child(17),
+.liste_factures tbody tr td:nth-child(18),
+.liste_factures tbody tr td:nth-child(19) {
+  text-align: center;
+} */
+
+/* spécifique à firefox */
+@-moz-document url-prefix() {
+  .liste_factures thead tr th:nth-child(19) { width: 56px; }
+}
+
+.en_cours {
+  background-color: #FEBB5F;
+  color: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 12px;
+}
+
+.rapprocher {
+  background-color: #ADCB60;
+  color: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 12px;
+}
+
+.a_rapprocher {
+  background-color: #0934B7;
+  color: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 12px;
+}
+
+.iconz {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  padding-left: 10px;
+}
+
+.flaticon {
+  font-size: 20px;
+}
+
+.flaticon-view,
+.flaticon-hide {
+  font-size: 24px;
+}
+
+.material-icons,
+.flaticon {
+  cursor: pointer;
+}
+
+.fold {
+  background-color: #0052A0;
+  color: #fff;
+  padding: 6px 12px;
+  cursor: pointer;
+  width: 160px;
+}
+
+.fold .glyphicon {
+  margin-right: 15px;
+}
+
+/* .liste_factures tbody:hover tr:hover > td {
+  background-color: #E1E3E5; */
+
+@media (max-width:1366px) and (max-height:768px) {
+
+  /* .liste_factures thead tr th {
+    font-size: 12px;
+    height: 34px;
+  }
+  
+  .liste_factures tbody tr td { font-size: 12px; } */
+
+  .fold {
+    padding: 3px 6px;
+    width: 120px;
+  }
+
+  .fold .fold-text { font-size: 11px; }
+
+  .fold .glyphicon { margin-right: 8px; }
+
+  .fold .glyphicon::before { font-size: 11px; }
+}
+
+/*Placeholder*/
+
+.filters_bloc .form-control::-moz-placeholder {
+  font-size: 12px;
+}
+
+.filters_bloc .form-control::-webkit-input-placeholder {
+  font-size: 12px;
+}
+
+.filters_bloc .form-control:-ms-input-placeholder {
+  font-size: 12px;
+}
+
+.header-toolbar {
+  background-color: #E1E3E5;
+  padding: 8px;
+}
+
+.header-toolbar label {
+  font-size: 18px;
+  margin-top: 6px;
+}
+
+.inner-addon {
+  position: relative;
+}
+
+.lookupPane .glyphicon-search {
+  top: initial;
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+
+  .header-toolbar { padding-bottom: 5px; }
+
+  .header-toolbar label { font-size: 13px; }
+}
+
+/* **************************************
+    @section : Surcharge du tableau
+    *************************************** */
+
+[class^="cln"] {
+  width: 100px !important;
+  min-width: 100px;
+}
+
+/*valeur spécifique si le tableau est mode Haute résolution*/
+@media (min-width:1370px) {
+  [class^="cln"] {
+    width: 100px !important;
+    min-width: 100px;
+  }
+}
+
+tbody tr td.cln1 > span {
+  font-weight: 500;
+  float: right;
+  padding-right: 15px;
+  padding-top: 5px;
+  font-size: 12px;
+}
+
+/*Colonne CI*/
+.cln6 {
+  width: 250px !important;
+  min-width: 250px !important;
+}
+
+/*Colonne Montant HT*/
+tbody tr td.cln7 {
+  font-weight: 500 !important;
+  font-size: 12px;
+}
+
+.cln12, .cln13, .cln14, .cln15 {
+  text-align: center;
+}

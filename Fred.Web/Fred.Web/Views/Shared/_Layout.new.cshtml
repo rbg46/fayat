@@ -1,0 +1,74 @@
+﻿@using Fred.Web.Modules.Authorization.Asp;
+<!DOCTYPE html>
+<html lang="fr" ng-app="Fred">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/vendor/css", "~/app/css")
+    <link rel="stylesheet" href="~/Content/Fonts.css">
+    @RenderSection("styles", required: false)
+
+    <!--
+    To collect user behavior analytics about your application,
+    insert the following script into each page you want to track.
+    Place this code immediately before the closing </head> tag,
+    and before any other scripts. Your first data will appear
+    automatically in just a few seconds.
+    -->
+    <script type="text/javascript">
+        var appInsights=window.appInsights||function(a){
+            function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c
+        }({
+            instrumentationKey:"@System.Web.Configuration.WebConfigurationManager.AppSettings["Microsoft:ApplicationInsight:Key"]"
+        });
+
+        window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+    </script>
+</head>
+
+<body class="container"
+      ng-cloak
+      ng-controller="mainController as mainCtrl">
+    <div id="BLOCK_SCREEN_EXCEPT_MENU"></div>
+    <div id="mask" ng-class="{'open':mainCtrl.headerMobileIsOpen===true}"></div>
+
+    <fred-application-header logo="mainCtrl.logo"
+                             user="mainCtrl.utilisateur"
+                             version="mainCtrl.version"
+                             resources="mainCtrl.resources"
+                             mode-menu="mainCtrl.modeMenu"
+                             display-menu-modern="mainCtrl.displayMenuModern">
+    </fred-application-header>
+    <fred-application-header-mobile header-mobile-is-open="mainCtrl.headerMobileIsOpen">
+    </fred-application-header-mobile>
+    <fred-user-panel user="mainCtrl.utilisateur"
+                     photo-profil="mainCtrl.photoProfil"
+                     is-open="mainCtrl.panelUserIsOpen"
+                     ng-show="mainCtrl.panelUserIsOpen"
+                     version="mainCtrl.version">
+    </fred-user-panel>
+    <fred-menu header-mobile-is-open="mainCtrl.headerMobileIsOpen"
+               resources="mainCtrl.resources"
+               mode-menu="mainCtrl.modeMenu"
+               modern-menu-is-open="mainCtrl.ModernMenuIsOpen"
+               modules-autorized="mainCtrl.modulesAutorized"
+               menu-admin-is-visible="mainCtrl.menuAdminIsVisible"
+               background-img-url="mainCtrl.backgroundImgUrl">
+
+    </fred-menu>
+
+    <div class="content" ng-class="{'menu-modern': mainCtrl.modeMenu=='modern', 'page-home': isHomePage()}" ng-if="mainCtrl.utilisateur">
+        @Html.SetGlobalHabilitation()
+        @Html.GetFeatureFlipping()
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/vendor/js", "~/app/js")
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    @RenderSection("scripts", required: false)
+    @this.RenderResources("FredResource", "FeatureHome", "FeatureFavori")
+</body>
+</html>

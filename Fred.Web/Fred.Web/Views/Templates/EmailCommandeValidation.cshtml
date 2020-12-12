@@ -1,0 +1,58 @@
+﻿@using Fred.Business.Template.Models.CommandeValidation
+@using Fred.Entities
+
+@model CommandeValidationTemplateModel
+
+<html>
+<head>
+</head>
+<body>
+    <div style="padding-top: 5px;padding-bottom: 5px;">Bonjour,</div>
+    @if (Model.CommandeAvenantId == null)
+    {
+        <div style="padding-top: 5px;padding-bottom: 5px;">
+            Merci de valider/revoir la commande ci-jointe d'un montant de @Model.MontantTotalHt.ToString("0.00") €.
+        </div>
+    }
+    else
+    {
+        <div style="padding-top: 5px;padding-bottom: 5px;">
+            Merci de valider/revoir l’avenant de commande ci-joint d'un montant de @Model.MontantTotalHt.ToString("0.00") €.
+        </div>
+    }
+    <div style="padding-top: 15px;padding-bottom: 15px;">
+        <a href="@Model.Url">Veuillez cliquer sur ce lien pour ouvrir la commande dans FRED</a>
+    </div>
+    <div>Historique de relecture de la commande :</div>
+    <ul>
+        @if (Model.Avis != null)
+        {
+            foreach (var avis in Model.Avis)
+            {
+                <li style="padding-top: 5px;padding-bottom: 5px;">
+                    @avis.Expediteur le @avis.DateCreation : <b>@avis.TypeAvis.GetDescription()</b>
+                    <div style="font-size: 0.85rem;padding: 10px;">
+                        @avis.Commentaire
+                    </div>
+                </li>
+            }
+        }
+        else
+        {
+            <li style="padding-top: 5px;padding-bottom: 5px;">Aucune donnée trouvée</li>
+        }
+    </ul>
+    <div>
+        Cordialement,
+    </div>
+    <br />
+    <div>
+        Equipe Fred
+    </div>
+    <br />
+    <div style="font-size: 0.85rem;">Ceci est un email automatique, merci de ne pas répondre.</div>
+    <br />
+    <br />
+    <br />
+</body>
+</html>

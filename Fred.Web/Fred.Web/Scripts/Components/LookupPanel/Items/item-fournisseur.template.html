@@ -1,0 +1,21 @@
+﻿
+<div class="lookup-panel-item flexH"
+     ng-class="{'lookup-panel-item-selected' : $ctrl.value.FournisseurId == item.FournisseurId}"
+     title="{{'Libelle('+ item.Libelle + ')------Code('+ item.Code + ')------TypeSequence('+ item.TypeSequence + ')------Siren('+ item.SIREN + ')'}}">
+    <div class="flex1">
+        <div class="lookup-panel-item-line1">{{item.Libelle}}</div>
+        <div class="lookup-panel-item-line2">
+            {{item.Code}}
+            <span ng-show="!!item.TypeSequence"> ({{item.TypeSequence}})</span>
+            <span ng-show="!!item.SIREN"> - {{item.SIREN}}</span>
+        </div>
+        <div class="lookup-panel-item-line3">
+            {{item.Adresse}}
+            <span ng-show="!!item.Ville"> - {{item.Ville}}</span>
+            <span ng-show="!!item.CodePostal"> ({{item.CodePostal}})</span>
+        </div>
+    </div>
+    <div class="alignCenter padding-05" ng-show="item.Agences.length > 0" title="Afficher les agences">
+        <i class="material-icons">store</i>
+    </div>
+</div>

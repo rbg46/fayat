@@ -1,0 +1,90 @@
+﻿/* -------------------------------------------------------------------------------
+  Fayat Construction Informatique
+  Application Fred
+  Module <NOM_DU_MODULE>
+---------------------------------------------------------------------------------*/
+fred-toolbar {
+    flex-flow: row wrap;
+    justify-content: flex-end;
+}
+
+fred-toolbar .picklist-section {
+    width: 41%;
+    margin-right: auto;
+}
+
+fred-toolbar .search-section {
+    margin-left: 2%;
+    flex-grow: 1;
+}
+
+fred-toolbar .action-section {
+    margin-left: 15%;
+}
+
+fred-toolbar .inner-addon.right-addon {
+    width: 100%;
+}
+
+fred-toolbar .inner-addon.right-addon input {
+    cursor: pointer;
+}
+
+fred-toolbar .chev.material-icons {
+    position: absolute;
+    display: inline-block;
+    line-height: 0.7;
+    pointer-events: none;
+    background-color: #09ada6;
+    height: 29px;
+    width: 30px;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+    right: 0;
+    top: 0;
+    padding-top: 6px;
+}
+
+fred-toolbar .input-group {
+    width: 100%;
+}
+
+fred-toolbar .input-group-btn {
+    border: 1px solid #BBBBBB;
+    border-left: none;
+    width: 30px;
+}
+
+fred-toolbar .input-group-btn .btn.btn-secondary.y_search {
+    height: 28px;
+    width: 30px;
+    padding: 0;
+    background-color: #ffde0e;
+    color: #555555;
+    margin: 0;
+}
+
+fred-toolbar .input-group-btn .btn.btn-secondary.y_search .material-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+fred-toolbar .action-icone {
+    width: 30px;
+    height: 30px;
+    font-size: 25px;
+    font-style: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1F55A0;
+    color: #fff;
+    cursor: pointer;
+}
+
+fred-toolbar .action-icone:hover {
+    color: #0052a0;
+    background-color: #F1F2F3;
+}

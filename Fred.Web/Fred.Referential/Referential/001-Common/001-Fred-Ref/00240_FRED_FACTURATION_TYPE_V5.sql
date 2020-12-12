@@ -1,0 +1,5 @@
+﻿
+SET IDENTITY_INSERT  FRED_FACTURATION_TYPE ON;
+ --Ajout facture sans commande
+ INSERT INTO  FRED_FACTURATION_TYPE (FacturationTypeId, Code, Libelle) VALUES  (11, 11, 'Facture Sans Commande')
+SET IDENTITY_INSERT FRED_FACTURATION_TYPE  OFF;

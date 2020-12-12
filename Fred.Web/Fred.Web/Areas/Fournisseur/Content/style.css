@@ -1,0 +1,154 @@
+﻿.no-pr {
+    padding-right: 0;
+}
+
+.form-header .search-personnel {
+    display: flex;
+    padding-left: 18%;
+}
+
+.form-header .search-personnel .search-personnel-input {
+    width: 250px;
+    border-right: none;
+}
+
+.form-header .row .col-xs-8 {
+    padding: 0;
+}
+
+.form-header .row .col-xs-4 {
+    padding: 0;
+}
+
+.form-header .search-personnel-btn {
+    clear: none;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    width: 44px;
+    background-color: #ffde0e;
+    border-top: 1px solid #bbbbbb !important;
+    border-right: 1px solid #bbbbbb !important;
+    border-bottom: 1px solid #bbbbbb !important;
+    border-left: none;
+}
+
+.form-header .search-personnel-btn .glyphicon-search {
+    color: #333333;
+}
+
+.table thead {
+    height: 30px;
+}
+
+.import-anael .btn-primary {
+    font-size: 11px;
+    margin-top: 0;
+    margin-left: 10%;
+    height: 30px;
+}
+
+.container-fluid.fournisseurs {
+    margin-bottom: 0;
+}
+
+.personnels .list-item {
+    border: 1px solid #e4e4e4;
+    background-color: white;
+    padding: 10px 10px inherit 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.personnels .list-item h2 {
+    font-size: 18px;
+    color: #67757F;
+    font-weight: 500;
+    margin: 0 0 6px 0;
+}
+
+.personnels .list-item h3 {
+    font-size: 14px;
+    font-weight: 400 !important;
+    color: #0052a0;
+    margin: 0 0 6px 0;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 55px;
+    height: 28px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.fournisseurs fred-side {
+    width: 500px;
+    left: -500px;
+}
+
+.fournisseurs fred-side icon {
+    color: #0052a0;
+}
+
+.options .form-header .search-personnel-btn {
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    color: #555555;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .options .form-header .search-personnel-btn {
+        height: 25px;
+    }
+}

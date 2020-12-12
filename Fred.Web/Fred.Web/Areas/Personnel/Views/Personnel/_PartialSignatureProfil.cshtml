@@ -1,0 +1,135 @@
+﻿@*--------------------------------------------------------------------------------------------------------------*@
+@*                                                 SIGNATURE ET PROFIL                                          *@
+@*--------------------------------------------------------------------------------------------------------------*@
+
+<div class="panel panel-default"  id="personnel-signature" fred-display-handler="personnelEdit.userOrganisationId" display="hidden" ng-show="personnelEdit.Personnel.PersonnelId > 0 && !personnelEdit.JustDelegationShow">
+  <div class="panel-heading collapsed" data-toggle="collapse" data-parent="#personnel-accordion" data-target="#collapse-signatureProfil" id="panel-heading-signatureProfil">
+    <i class="chevron fa fa-fw"></i> Signature et profil
+  </div>
+  <div id="collapse-signatureProfil" class="panel-collapse collapse">
+    <div class="panel-body">
+
+      <div class="row">
+
+        <!-- DEBUT - SIGNATURE -->
+        <div class="col-md-6">
+
+          <div id="signature-result-container">
+            <!-- Résultat-->
+            <label>Signature actuellement utilisée</label>
+            <span class="material-icons delete-img" title="Cliquer pour supprimer la signature actuelle" ng-show="personnelEdit.PersonnelImage.SignatureBase64" ng-click="personnelEdit.handleDeleteImage(personnelEdit.inputFileType.signature.id)">clear</span>
+
+            <div id="signature-result">
+              <img id="signature-img" src="{{personnelEdit.signature}}" ng-show="personnelEdit.PersonnelImage.SignatureBase64">
+              <span ng-show="!personnelEdit.PersonnelImage.SignatureBase64">
+                <span class="material-icons">not_interested</span> Pas de signature
+              </span>
+            </div>
+          </div>
+
+          <!-- Sélection image -->
+          <div class="row no-padding">
+            <div class="col-md-12 no-padding">
+              <div class="input-group">
+                <label class="input-group-btn">
+                  <span class="btn btn-default btn-file">
+                    Sélectionner une signature&hellip;
+                    <input type="file"
+                           style="display:none;"
+                           id="signature-upload"
+                           onchange="angular.element(this).scope().personnelEdit.handleSelectImage(event, angular.element(this).scope().personnelEdit.inputFileType.signature, this, '#empty-signature-raw', '#signature-buttons')"
+                           accept="{{personnelEdit.acceptedImageFormat}}">
+                  </span>
+                </label>
+                <input type="text" class="form-control" disabled>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Traitement image -->
+          <div id="signature-raw-container">
+            <img id="signature-raw" />
+          </div>
+
+          <div id="empty-signature-raw">
+            <span>
+              <span class="material-icons">photo_size_select_large</span> Charger une signature
+            </span>
+          </div>
+
+          <div class="row" id="signature-buttons">
+            <button class="btn btn-primary" title="Cliquer pour pivoter l'image à 90°" ng-click="personnelEdit.handleRotation(personnelEdit.inputFileType.signature.id)">Pivoter</button>
+            <button class="btn btn-danger" title="Cliquer pour réinitialiser" ng-click="personnelEdit.handleReset(personnelEdit.inputFileType.signature.id)">Ré-initialiser</button>
+            <button class="btn btn-default pull-right" title="Cliquer pour valider la sélection de l'image" ng-click="personnelEdit.handleValidateImage(personnelEdit.inputFileType.signature.id)">Valider</button>
+          </div>
+        </div>
+        <!-- FIN - SIGNATURE -->
+        <!-- DEBUT - PHOTO PROFIL -->
+        <div class="col-md-6">
+
+          <div id="photo-profil-result-container">
+            <!-- Résultat-->
+            <label>Photo de profil actuellement utilisée</label>
+            <span class="material-icons delete-img" title="Cliquer pour supprimer la photo de profil actuelle" ng-show="personnelEdit.PersonnelImage.PhotoProfilBase64" ng-click="personnelEdit.handleDeleteImage(personnelEdit.inputFileType.photoProfil.id)">clear</span>
+
+            <div id="photo-profil-result">
+              <img id="photo-profil-img" src="{{personnelEdit.photoProfil}}" ng-show="personnelEdit.PersonnelImage.PhotoProfilBase64">
+              <span ng-show="!personnelEdit.PersonnelImage.PhotoProfilBase64">
+                <span class="material-icons">not_interested</span> Pas de photo de profil
+              </span>
+            </div>
+          </div>
+
+          <!-- Sélection image -->
+          <div class="row no-padding">
+            <div class="col-md-12 no-padding">
+              <div class="input-group">
+                <label class="input-group-btn">
+                  <span class="btn btn-default btn-file">
+                    Sélectionner une photo de profil&hellip;
+                    <input type="file"
+                           style="display:none;"
+                           id="photo-profil-upload"
+                           onchange="angular.element(this).scope().personnelEdit.handleSelectImage(event, angular.element(this).scope().personnelEdit.inputFileType.photoProfil, this, '#empty-photo-profil-raw', '#photo-profil-buttons')"
+                           accept="{{personnelEdit.acceptedImageFormat}}">
+                  </span>
+                </label>
+                <input type="text" class="form-control" disabled>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Traitement image -->
+          <div id="photo-profil-raw-container">
+            <img id="photo-profil-raw" />
+          </div>
+
+          <div id="empty-photo-profil-raw">
+            <span>
+              <span class="material-icons">photo_size_select_large</span> Charger une photo de profil
+            </span>
+          </div>
+
+          <div class="row" id="photo-profil-buttons">
+            <button class="btn btn-primary" title="Cliquer pour pivoter l'image à 90°" ng-click="personnelEdit.handleRotation(personnelEdit.inputFileType.photoProfil.id)">Pivoter</button>
+            <button class="btn btn-danger" title="Cliquer pour réinitialiser" ng-click="personnelEdit.handleReset(personnelEdit.inputFileType.photoProfil.id)">Ré-initialiser</button>
+            <button class="btn btn-default pull-right" title="Cliquer pour valider la sélection de l'image" ng-click="personnelEdit.handleValidateImage(personnelEdit.inputFileType.photoProfil.id)">Valider</button>
+          </div>
+        </div>
+        <!-- FIN - PHOTO PROFIL -->
+      </div>
+    </div>
+    <div class="panel-footer">
+      <!--BEGIN  > BOUTONS-->
+      <button type="submit" class="btn btn-default pull-left" ng-click="personnelEdit.handleSave('signatureProfil')" title="{{personnelEdit.resources.Global_Bouton_Enregistrer_Tooltip}}">
+        {{personnelEdit.resources.Global_Bouton_Enregistrer}}
+      </button>
+      <button type="button" class="btn btn-link pull-right" ng-click="personnelEdit.handleCancel('signatureProfil')" title="{{personnelEdit.resources.Global_Bouton_Annuler_Tooltip}}">
+        {{personnelEdit.resources.Global_Bouton_Annuler}}
+      </button>
+      <!--END  > BOUTONS-->
+    </div>
+  </div>
+</div>

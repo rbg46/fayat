@@ -1,0 +1,647 @@
+﻿$color_1: #000000;
+$color_2: #fff;
+$color_3: #005ba2;
+$color_4: rgb(103,117,127);
+$color_5: rgb(0,82,160);
+$color_6: #9a9a9a;
+$color_7: gray;
+$color_8: #595959;
+$color_9: rgb(103, 117, 127);
+$color_10: rgb(0, 82, 160);
+$color_11: grey;
+$color_12: red;
+$color_13: rgb(222,63,126);
+$color_14: #67757F;
+$color_15: rgb(166,166,166);
+$color_16: #2c77ba;
+$font_family_1: 'Roboto', sans-serif;
+$background_color_1: #e4e4e4;
+$background_color_2: #005ba2;
+$background_color_3: initial;
+$background_color_4: #fff;
+$background_color_5: rgb(225,227,229);
+$background_color_6: rgb(255,216,0);
+$background_color_7: lightgray;
+$background_color_8: #898989;
+$background_color_9: #fbfbfb;
+$border_color_1: lightgrey;
+
+
+@import "https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700";
+
+.switch-field {
+    padding: 10px;
+    overflow: hidden;
+    display: block;
+
+    input {
+        display: none;
+
+        &:checked {
+            & + label {
+                background-color: $background_color_2;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                color: $color_2;
+            }
+        }
+    }
+
+    label {
+        float: left;
+        display: inline-block;
+        width: 60px;
+        background-color: $background_color_1;
+        color: $color_1;
+        font-size: 14px;
+        font-weight: normal;
+        text-align: center;
+        text-shadow: none;
+        padding: 6px 14px;
+        -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+        -webkit-transition: all 0.1s ease-in-out;
+        -moz-transition: all 0.1s ease-in-out;
+        -ms-transition: all 0.1s ease-in-out;
+        -o-transition: all 0.1s ease-in-out;
+        transition: all 0.1s ease-in-out;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.switch-title {
+    width: 55%;
+    font-family: $font_family_1;
+    font-size: 12px;
+    font-weight: normal;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    padding-left: 0px;
+    padding-right: 10px;
+    text-align: right;
+}
+
+.monCompte {
+    width: 400px;
+    box-shadow: 2px 0px 40px 5px #67757F;
+    z-index: 20000;
+
+    .title1 {
+        color: $color_3;
+        font-size: xx-large;
+        margin-top: 5px;
+        font-weight: bold;
+    }
+
+    .title2 {
+        color: $color_3;
+        font-size: 16px;
+        width: 100%;
+        font-weight: bold;
+    }
+
+    .manageTeam {
+        padding-bottom: 5px;
+        padding-top: 5px;
+    }
+
+    .bloc {
+        padding-right: 20px;
+        padding-left: 20px;
+        height: 100%;
+    }
+
+    .line {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        background-color: $background_color_3;
+
+        &:hover {
+            background-color: $background_color_3;
+            cursor: initial;
+        }
+    }
+
+    .line.bloc-bas {
+        margin-top: 40px;
+        height: 90px;
+        background-color: $background_color_4;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: -7px;
+        text-align: center;
+        padding-top: 30px;
+        border: red;
+    }
+
+    .div {
+        padding-bottom: 5px;
+        padding-top: 5px;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+    .divFlex {
+        display: flex;
+        height: 80px;
+        margin-bottom: 15px;
+    }
+
+    .blocDeconnexion {
+        width: 30%;
+        background-color: $background_color_5;
+        color: $color_4;
+        text-align: center;
+        cursor: pointer;
+
+        #deconnexion-icon {
+            &::before {
+                font-size: 35px;
+            }
+        }
+
+        &:hover {
+            background-color: $background_color_6;
+
+            > .deconnexion-label {
+                color: $color_5;
+            }
+
+            > #deconnexion-icon {
+                color: $color_5;
+            }
+        }
+    }
+
+    .blocInfoUtilisateur {
+        height: 65%;
+        overflow-y: auto;
+
+        .line {
+            font-family: $font_family_1;
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+        .summary {
+            margin-top: 25px;
+        }
+
+        .summary.myTools {
+            padding-left: 15px;
+            margin-top: 5px;
+
+            a {
+                font-weight: normal;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                color: $color_6;
+
+                &:hover {
+                    color: $color_3;
+                }
+
+                .saps {
+                    font-size: 25px;
+                    margin-left: 20px;
+                }
+            }
+        }
+    }
+
+    .infoUtilisateur.centrage {
+        padding-top: 20px;
+        padding-left: 15px;
+    }
+
+    .infoUtilisateur {
+        width: 50%;
+        background-color: $background_color_7;
+    }
+
+    .logoUtilisateur {
+        width: 20%;
+        background-color: $background_color_7;
+        font-size: xx-large;
+        text-align: center;
+    }
+
+    .logoUtilisateur.centrage {
+        padding-top: 8px;
+        margin-right: -10px;
+    }
+
+    .separateur {
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-color: $border_color_1;
+        border-left: none;
+        padding-left: 0;
+
+        span {
+            font-family: $font_family_1;
+            font-size: 14px;
+            font-weight: normal;
+            display: block;
+            padding-top: 10px;
+        }
+    }
+
+    .divSelectLangue {
+        width: 100%;
+        text-align: center;
+    }
+
+    .selectLangue {
+        width: 80%;
+    }
+
+    .headerInfoCompte {
+        height: 100px;
+        padding-top: 17px;
+        background-color: $background_color_5;
+        text-align: center;
+        color: $color_7;
+
+        div {
+            div {
+                pointer-events: none;
+            }
+        }
+
+        .text {
+            font-weight: normal;
+            color: $color_8;
+        }
+
+        span.flaticon-more-1 {
+            font-size: 35px;
+            font-weight: 600;
+            color: $color_1;
+
+            &::before {
+                font-size: 35px;
+            }
+        }
+    }
+
+    .line.headerInfoCompte {
+        &:hover {
+            background-color: $background_color_5;
+        }
+    }
+
+    .societe {
+        color: $color_7;
+    }
+
+    .blockScreen {
+        z-index: 2999;
+        background-color: $background_color_8;
+        opacity: 0.5;
+        top: 0px;
+        left: 0px;
+        bottom: 0px;
+        right: 0px;
+        position: fixed;
+    }
+
+    .centrage {
+        padding-top: 5px;
+    }
+
+    .centrage.flaticon-exit {
+        display: block;
+        font-size: 26px;
+        color: $color_1;
+        cursor: pointer;
+    }
+}
+
+.contextUtilisateur {
+    background-color: $background_color_9;
+    width: 400px;
+    height: 100% !important;
+    position: fixed;
+    visibility: hidden;
+
+    .content {
+        padding: 0px;
+        padding-left: 5px;
+        font-family: $font_family_1;
+        font-weight: 100;
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.contextUtilisateurOpen {
+    position: absolute;
+    top: 0;
+    right: 0;
+    visibility: visible;
+    z-index: 1200;
+}
+
+.contextUtilisateurClose {
+    right: -450px;
+    visibility: hidden;
+}
+
+.monCompte.content {
+    margin: 0;
+    padding-left: 0;
+
+    .line {
+        i.fa.fa-angle-right {
+            position: absolute;
+            top: 24px;
+            left: 117px;
+            font-size: 40px;
+            color: $color_9;
+            cursor: pointer;
+
+            &:hover {
+                color: $color_10;
+            }
+        }
+
+        span.close_it {
+            text-align: center;
+            font-weight: normal;
+            color: $color_11;
+            display: block;
+            cursor: pointer;
+            margin-top: 7px;
+        }
+    }
+}
+
+.infoUserRedux {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .user-notif {
+        position: relative;
+
+        .counter {
+            background-color: $background_color_4;
+            border: 2px solid red;
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            left: -12px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            display: flex;
+            font-size: 10px;
+            font-weight: bold;
+            color: $color_12;
+        }
+
+        .not-bell {
+            font-size: 30px;
+            color: $color_2;
+            cursor: pointer;
+        }
+    }
+
+    .user-pic {
+        display: flex;
+        width: 300px;
+        justify-content: end;
+        align-items: center;
+    }
+
+    .iconeUser {
+        font-style: normal;
+        font-size: 25px;
+        border-right: 1px solid rgb(51,51,51);
+    }
+
+    .icon-menu {
+        color: $color_13;
+        font-size: 40px;
+        cursor: pointer;
+        margin-left: 5%;
+
+        &:hover {
+            color: $color_2;
+        }
+    }
+
+    .user-identity {
+        margin-left: 5%;
+    }
+
+    .firstname {
+        font-size: 11px;
+        font-weight: 500;
+        color: $color_2;
+    }
+
+    .lastname {
+        font-size: 11px;
+        font-weight: 500;
+        color: $color_2;
+    }
+
+    .company {
+        color: $color_2;
+        font-size: 11px;
+    }
+
+    .action {
+        font-size: 25px;
+        font-style: normal;
+        font-weight: 500;
+        padding-left: 55px;
+        cursor: pointer;
+    }
+}
+
+.profil-image {
+    border-radius: 40px 40px 40px 40px;
+    -moz-border-radius: 40px 40px 40px 40px;
+    -webkit-border-radius: 40px 40px 40px 40px;
+    border: 1px solid #FFF;
+    height: 40px;
+    width: 40px;
+}
+
+.notif-blockscreen {
+    z-index: 1300;
+    background-color: $background_color_8;
+    opacity: 0.5;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    position: fixed;
+}
+
+.notif-tab {
+    position: fixed;
+    overflow: hidden;
+    width: 330px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: $background_color_9;
+    z-index: 1301;
+    box-shadow: 0 5px 5px 0 #aeaeae, 0 -5px 5px 0 #aeaeae;
+
+    label {
+        color: $color_2;
+        font-size: medium;
+        font-weight: 400;
+        position: relative;
+        margin-bottom: 5px;
+        margin-top: 0 !important;
+    }
+
+    .form-control {
+        margin-bottom: 10px;
+    }
+
+    .notif-tab-body {
+        width: 100%;
+        height: calc(100vh - 120px);
+        padding: 8px;
+        background-color: $background_color_4;
+
+        .notif-tab-body-bloc {
+            border: 1px solid #e4e4e4;
+            padding: 5px;
+            margin-bottom: 8px;
+            text-align: left;
+
+            .infos-line {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                height: 40px;
+
+                .date {
+                    font-size: 18px;
+                    color: $color_14;
+                    font-weight: 400;
+                }
+
+                .sap-icon {
+                    font-size: 25px;
+                    margin-left: 5px;
+                }
+
+                .material-icons {
+                    margin-left: auto;
+                    color: $color_15;
+                    cursor: pointer;
+                }
+            }
+
+            .notif-mess {
+                font-size: 15px;
+                font-weight: 400;
+                color: $color_16;
+            }
+        }
+    }
+}
+
+.notif-tab-header {
+    padding: 15px 8px;
+    height: 120px;
+    background-color: $background_color_2;
+}
+
+.notification-modal {
+    z-index: 1500 !important;
+
+    & + .modal-backdrop {
+        z-index: 1499 !important;
+    }
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+    .infoUserRedux {
+        .user-notif {
+            .not-bell {
+                font-size: 20px;
+            }
+
+            .counter {
+                font-size: 8px;
+                width: 20px;
+                height: 13px;
+                border-radius: 20px;
+                left: -10px;
+            }
+
+            margin-right: 5%;
+        }
+
+        .user-pic {
+            width: 150px;
+        }
+
+        .profil-image {
+            width: 25px;
+            height: 25px;
+        }
+
+        .user-identity {
+            line-height: 8px;
+
+            .firstname {
+                font-size: 8px;
+            }
+
+            .lastname {
+                font-size: 8px;
+            }
+
+            .company {
+                font-size: 8px;
+            }
+        }
+
+        .icon-menu {
+            font-size: 30px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .infoUserRedux {
+        .company {
+            visibility: hidden !important;
+            display: none !important;
+        }
+
+        .iconeUser {
+            visibility: hidden !important;
+            display: none !important;
+        }
+
+        .firstname {
+            font-size: 13px;
+            display: block;
+        }
+
+        .lastname {
+            font-size: 13px;
+            display: block;
+        }
+    }
+}

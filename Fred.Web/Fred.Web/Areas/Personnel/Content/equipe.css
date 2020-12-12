@@ -1,0 +1,133 @@
+﻿.equipe .infofilter {
+    font-weight: 400;
+    color: #757575;
+    display: block;
+}
+
+.equipe .filterOuvrier {
+    background-color: #E1E3E5;
+    padding: 7px;
+    background-repeat: no-repeat;
+    margin-bottom: 5px;
+}
+
+.equipe .filterOuvrier .inner-addon .chev.material-icons {
+    position: absolute;
+    display: inline-block;
+    line-height: 0.7;
+    pointer-events: none;
+    background-color: #09ada6;
+    height: 29px;
+    width: 30px;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+    right: 0;
+    padding-top: 6px;
+}
+
+.equipe .filterOuvrier .inner-addon .material-icons.closing {
+    position: absolute;
+    display: inline-block;
+    line-height: 0.7;
+    pointer-events: none;
+    background-color: #09ada6;
+    height: 29px;
+    width: 30px;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+    right: 0;
+    padding-top: 6px;
+}
+
+table-content {
+    margin: 15px 15px 0 15px;
+}
+
+.teams .no-border {
+    border-bottom: 0;
+}
+
+.teams .legend {
+    color: #2c77ba;
+    font-size: 18px;
+    font-weight: 600;
+    border-bottom: 0;
+}
+
+.teams .tabline {
+    overflow-y: hidden;
+}
+
+.teams .teams-table thead tr {
+    padding-right: 16px;
+}
+
+.teams .teams-table thead tr th {
+    height: 30px;
+    color: #fff;
+}
+
+.teams .teams-table thead tr th.blue {
+    background-color: #0052a0;
+    color: #fff;
+}
+
+.teams .teams-table thead tr.top-header th {
+    background-color: #0052a0;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.teams .teams-table thead tr.mid-header th {
+    height: 30px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.teams .teams-table thead tr.bottom-header th {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.teams .teams-table tbody {
+    overflow-x: auto;
+    overflow-y: auto;
+    width: 100%;
+    max-height: 500px;
+}
+
+.teams .teams-table tbody tr td {
+    height: 30px;
+    text-align: center;
+    font-size: 11px;
+    border-top: 1px solid #ddd;
+    position: relative;
+}
+
+.teams .teams-table tbody tr td:first-child::before {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 2%;
+    content: "";
+    background-color: #f2f2f2;
+}
+
+.teams .teams-table tbody tr td.action-icons .material-icons {
+    margin-left: 2%;
+    margin-right: 2%;
+    cursor: pointer;
+}
+
+.teams-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}

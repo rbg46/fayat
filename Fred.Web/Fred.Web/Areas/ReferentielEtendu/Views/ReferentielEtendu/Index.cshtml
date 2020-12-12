@@ -1,0 +1,423 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureReferentielEtendu.ReferentielEtendu_Index_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/ReferentielEtenduIndexBundle.css")
+}
+
+@section scripts {
+
+    @Scripts.Render("~/ReferentielEtenduIndexBundle.js")
+    @this.RenderResources("FeatureReferentielEtendu")
+}
+
+<div class="referentiel_etendu container-fluid" ng-controller="ReferentielEtenduController as ctrl" ng-cloak>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1>{{ctrl.resources.ReferentielEtendu_Index_Titre}}</h1>
+        </div>
+    </div>
+
+    <!-- <fred-section class="y_margin">{{ctrl.resources.ReferentielEtendu_Index_Societe_SousTitre}}</fred-section> -->
+
+    <fred-toolbar>
+        <fred-section class="picklist-section">
+            <fred-section-title>{{ctrl.resources.ReferentielEtendu_Index_Societe_SousTitre}}</fred-section-title>
+            <fred-section-controls>
+                <div class="inner-addon right-addon">
+                    <i class="chev material-icons">chevron_right</i>
+                    <lookup ng-model="ctrl.selectedSociete"
+                            search-placeholder="{{ctrl.resources.Global_ReferentielSociete_Placeholder}}"
+                            search-title="{{ctrl.resources.Global_ReferentielSociete}}"
+                            on-select="ctrl.handleLoadData()"
+                            url="/api/Societe/SearchLightForRoles?{{ctrl.typeSocieteCodesParams}}">
+                        <input type="text"
+                            class="form-control"
+                            ng-value="ctrl.selectedSociete.Libelle"
+                            placeholder="{{ctrl.resources.Global_ReferentielSociete_Placeholder}}"
+                            title="{{ctrl.selectedSociete.Libelle}}"
+                            readonly />
+                    </lookup>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Actions-->
+        <fred-section class="action-section">
+            <fred-section-title>Actions</fred-section-title>
+            <fred-section-controls>
+                <button type="button" class="btn btn-default" ng-disabled="!ctrl.selectedSociete" ng-click="ctrl.handleSave()" value="{{ctrl.resources.Global_Bouton_Enregistrer}}">Enregistrer</button>
+                <button type="button" class="btn btn-default btn-link" ng-disabled="!ctrl.selectedSociete" ng-click="ctrl.handleCancel()" value="{{ctrl.resources.Global_Bouton_Annuler}}">Annuler</button>
+            </fred-section-controls>
+        </fred-section>
+
+        <fred-section class="export-section">
+            <fred-section-title>Export</fred-section-title>
+            <fred-section-controls>
+                <!--Export Excel-->
+                <button type="button" class="btn button-excel" ng-disabled="!ctrl.selectedSociete" ng-click="ctrl.handleExport()" value="{{ctrl.resources.Global_Bouton_ExportExcel}}" title="{{ctrl.resources.Global_Bouton_ExportExcel_Tooltip}}">
+                </button>
+            </fred-section-controls>
+        </fred-section>
+    </fred-toolbar>
+    <!-- <div class="row search-container y_margin">
+
+        <div class="col-md-8 no_pad">
+            <div class="inner-addon right-addon">
+
+                <i class="material-icons chevron-search">chevron_right</i>
+                <lookup ng-model="ctrl.selectedSociete"
+                        search-placeholder="{{ctrl.resources.Global_ReferentielSociete_Placeholder}}"
+                        search-title="{{ctrl.resources.Global_ReferentielSociete}}"
+                        on-select="ctrl.handleLoadData()"
+                        url="/api/Societe/SearchLightForRoles?{{ctrl.typeSocieteCodesParams}}">
+                    <input type="text"
+                           class="form-control"
+                           ng-value="ctrl.selectedSociete.Libelle"
+                           placeholder="{{ctrl.resources.Global_ReferentielSociete_Placeholder}}"
+                           title="{{ctrl.selectedSociete.Libelle}}"
+                           readonly />
+
+                </lookup>
+            </div>
+        </div>
+        <div class="col-md-4 no_pad">
+            <input type="button" class="btn btn-primary pull-right excel-export" ng-disabled="!ctrl.selectedSociete" ng-click="ctrl.handleExport()" value="{{ctrl.resources.Global_Bouton_ExportExcel}}" />
+            <input type="button" class="btn btn-link pull-right" ng-disabled="!ctrl.selectedSociete" ng-click="ctrl.handleCancel()" value="{{ctrl.resources.Global_Bouton_Annuler}}" />
+            <input type="button" class="btn btn-default pull-right" ng-disabled="!ctrl.selectedSociete" ng-click="ctrl.handleSave()" value="{{ctrl.resources.Global_Bouton_Enregistrer}}" />
+        </div>
+    </div> -->
+
+    @* Message : Pas d'Ã©lÃ©ments chargÃ©s *@
+    <div class="row information" ng-show="!ctrl.selectedSociete">
+        <div class="col-md-4 icon">
+            <i class="flaticon flaticon-warning"></i>
+        </div>
+        <div class="col-md-4 msg">
+            <h3>{{ctrl.resources.ReferentielEtendu_Index_SelectionnerSocietePourCommencer}}</h3>
+        </div>
+    </div>
+
+    <div class="row" ng-show="ctrl.selectedSociete">
+
+        <div class="col-md-7">
+            <fred-section>{{ctrl.resources.ReferentielEtendu_Index_Ressource_SousTitre}}</fred-section>
+            <!--BEGIN : BARRE RECHERCHE ET BOUTON RESSOURCES -->
+            <div class="row search-container">
+                <div class="col-md-5 no_pl">
+                    <div class="input-group input-search">
+                        <input type="text" placeholder="{{ctrl.resources.Global_ReferentielRessource_Placeholder}}" ng-model="ctrl.searchRessource" class="form-control">
+                        <span class="input-group-addon button-search"><i class="material-icons">search</i></span>
+                    </div>
+                </div>
+                <div class="col-md-7 add no_pr">
+                    <input type="button" class="btn btn-primary pull-right" ng-disabled="!ctrl.selectedSociete" ng-click="ctrl.handleOpenAll()" value="{{ctrl.resources.Global_Bouton_ToutDeplier}}" />
+                    <input type="button" class="btn btn-primary pull-right" ng-disabled="!ctrl.selectedSociete" ng-click="ctrl.handleCloseAll()" value="{{ctrl.resources.Global_Bouton_ToutReplier}}" />
+                    <input type="button" class="btn bg-inverse-light pull-right" ng-class="{'disabled': btnDisallocateNaturesVisibility}" ng-disabled="!ctrl.selectedSociete" ng-click="ctrl.handleDesallocateNature()" value="{{ctrl.resources.ReferentielEtendu_Index_Ressource_DesallouerNatures}}" />
+                </div>
+            </div>
+            <!--END : BARRE RECHERCHE ET BOUTON RESSOURCES -->
+            <div class="row">
+                <table class="table left_list_header">
+                    <colgroup>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <tr>
+                        <th class="header-referentiel-etendu">{{ctrl.resources.ReferentielEtendu_Index_Ressource_Table_Entete_ReferentielFixe}}</th>
+                        <th class="header-nature-analytique">{{ctrl.resources.ReferentielEtendu_Index_Ressource_Table_Entete_NatureAnalytique}}</th>
+                    </tr>
+                </table>
+            </div>
+
+            @* Tableau du rÃ©fÃ©rentiel Ã©tendu *@
+            <div id="divRefEtendus" class="table-responsive fred-scroll">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default" ng-repeat="chapitre in ctrl.referentielEtenduList | orderBy: '+Code' | filter: ctrl.chapitresFilter(ctrl.searchRessource)">
+                        <div class="panel-heading level1 trees">
+                            <table class="t_first">
+                                <colgroup>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col style="width: 47%;">
+                                    <col>
+                                </colgroup>
+                                <tr>
+                                    <td class="with-checkbox">
+                                        <input type="checkbox" id="chkChapitre-{{chapitre.ChapitreId}}"
+                                               ng-model="chapitre.IsChecked"
+                                               ng-change="ctrl.handleChapitreChange(chapitre)" /><label for="chkChapitre-{{chapitre.ChapitreId}}"><span></span></label>
+                                    </td>
+                                    <td>
+                                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#ss-{{chapitre.Code}}-{{chapitre.ChapitreId}}"></a>
+                                    </td>
+                                    <td>
+                                        <p class="inline-header">{{ctrl.resources.ReferentielEtendu_Index_Ressource_Table_Code}}</p>
+                                        <p class="inline-desctiption">{{chapitre.Code}}</p>
+                                    </td>
+                                    <td>
+                                        <p class="inline-header">{{ctrl.resources.ReferentielEtendu_Index_Ressource_Table_Libelle}}</p>
+                                        <p class="inline-desctiption">{{chapitre.Libelle }}</p>
+                                    </td>
+                                    <!--<td></td>-->
+                                    <td>
+                                        <table class="pull-left t_second">
+                                            <colgroup>
+                                                <col ng-if="ctrl.params_LimitationUnitesRessource">
+                                                <col ng-if="ctrl.params_LimitationUnitesRessource">
+                                                <col>
+                                                <col>
+                                            </colgroup>
+                                            <tr>
+                                                <td ng-if="ctrl.params_LimitationUnitesRessource">
+                                                    <span ng-show="chapitre.CountUnitesRessourceToBeTreated > 0" class="material-icons badge-notify pull-right">warning</span>
+                                                </td>
+                                                <td ng-if="ctrl.params_LimitationUnitesRessource">
+                                                    <p class="inline-header" ng-show="chapitre.CountUnitesRessourceToBeTreated > 0">{{chapitre.CountUnitesRessourceToBeTreated}} TEST</p>
+                                                </td>
+                                                <td>
+                                                    <span ng-show="chapitre.CountRessourcesToBeTreated > 0" class="material-icons badge-notify pull-right">warning</span>
+                                                </td>
+                                                <td>
+                                                    <p class="inline-header">{{chapitre.SousChapitres.length}} {{ctrl.resources.ReferentielEtendu_Index_Ressource_Table_SousChapitre}}</p>
+                                                    <p class="inline-header" ng-show="chapitre.CountRessourcesToBeTreated > 0">{{chapitre.CountRessourcesToBeTreated}} {{ctrl.resources.ReferentielEtendu_Index_Ressource_Table_RessourceAParametrer}}</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div><!--/.panel-heading -->
+                        <div id="ss-{{chapitre.Code}}-{{chapitre.ChapitreId}}" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <!-- sous chapitre -->
+                                <div class="panel panel-default" ng-repeat="souschapitre in chapitre.SousChapitres | orderBy: '+Code' | filter: ctrl.sousChapitresFilter(ctrl.searchRessource)">
+                                    <div class="panel-heading level2 trees">
+                                        <table class="t_first">
+                                            <colgroup>
+                                                <col>
+                                                <col>
+                                                <col>
+                                                <col>
+                                                <col>
+                                            </colgroup>
+                                            <tr>
+                                                <td class="with-checkbox">
+                                                    <input type="checkbox"
+                                                           id="chkSousChapitre-{{souschapitre.SousChapitreId}}"
+                                                           ng-model="souschapitre.IsChecked"
+                                                           ng-change="ctrl.handleSousChapitreChange(souschapitre, chapitre)" /><label for="chkSousChapitre-{{souschapitre.SousChapitreId}}"><span></span></label>
+                                                </td>
+                                                <td>
+                                                    <a class="accordion-toggle collapsed" data-toggle="collapse"
+                                                       data-parent="#ss-{{chapitre.Code}}-{{chapitre.ChapitreId}}"
+                                                       data-target="#ress-{{souschapitre.Code}}-{{souschapitre.SousChapitreId}}"></a>
+                                                </td>
+                                                <td>
+                                                    <p class="inline-header">{{ctrl.resources.ReferentielEtendu_Index_Ressource_Table_Code}}</p>
+                                                    <p class="inline-desctiption">{{souschapitre.Code}}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="inline-header">{{ctrl.resources.ReferentielEtendu_Index_Ressource_Table_Libelle}}</p>
+                                                    <p class="inline-desctiption">{{souschapitre.Libelle}}</p>
+                                                </td>
+                                                <!--<td></td>-->
+                                                <td class="sep">
+                                                    <table class="pull-left t_second">
+                                                        <colgroup>
+                                                            <col ng-if="ctrl.params_LimitationUnitesRessource">
+                                                            <col ng-if="ctrl.params_LimitationUnitesRessource">
+                                                            <col>
+                                                            <col>
+                                                        </colgroup>
+                                                        <tr>
+                                                            <td ng-if="ctrl.params_LimitationUnitesRessource">
+                                                                <span ng-show="souschapitre.CountUnitesRessourceToBeTreated > 0" class="material-icons badge-notify pull-right">warning</span>
+                                                            </td>
+                                                            <td ng-if="ctrl.params_LimitationUnitesRessource">
+                                                                <p class="inline-header" ng-show="souschapitre.CountUnitesRessourceToBeTreated > 0">{{souschapitre.CountUnitesRessourceToBeTreated}} TEST</p>
+                                                            </td>
+                                                            <td>
+                                                                <span ng-show="souschapitre.CountRessourcesToBeTreated > 0" class="material-icons badge-notify pull-right">warning</span>
+                                                            </td>
+                                                            <td>
+                                                                <p class="inline-header">{{souschapitre.Ressources.length}} {{ctrl.resources.ReferentielEtendu_Index_Ressource_Table_Ressource}}</p>
+                                                                <p class="inline-header" ng-show="souschapitre.CountRessourcesToBeTreated > 0">{{souschapitre.CountRessourcesToBeTreated}} {{ctrl.resources.ReferentielEtendu_Index_Ressource_Table_RessourceAParametrer}}</p>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div><!--/.panel-heading -->
+                                    <div id="ress-{{souschapitre.Code}}-{{souschapitre.SousChapitreId}}" class="panel-collapse collapse">
+                                        <div class="panel-body level3 trees">
+                                            <table class="table t_third">
+                                                <colgroup>
+                                                    <col>
+                                                    <col>
+                                                    <col>
+                                                    <col>
+                                                    <col>
+                                                    <col>
+                                                    <col>
+                                                    <col>
+                                                </colgroup>
+                                                <tr class="accordion-heading " ng-repeat="ressource in souschapitre.Ressources | orderBy: '+Code' | filter: ctrl.ressourcesFilter(ctrl.searchRessource)">
+                                                    <td class="with-checkbox">
+                                                        <input type="checkbox" class="chk-ressource" id="{{ressource.RessourceId}}"
+                                                               ng-change="ctrl.handleRessourceChange(ressource, chapitre, souschapitre)"
+                                                               ng-model="ressource.IsChecked" /><label for="{{ressource.RessourceId}}"><span></span></label>
+                                                    </td>
+                                                    <td class="font-referentiel-etendu">
+                                                        <p class="inline-header">{{ctrl.resources.ReferentielEtendu_Index_Ressource_Table_Code}}</p>
+                                                        <p class="inline-desctiption">{{ressource.Code}}</p>
+                                                    </td>
+                                                    <td class="font-referentiel-etendu">
+                                                        <p class="inline-header">{{ctrl.resources.ReferentielEtendu_Index_Ressource_Table_Libelle}}</p>
+                                                        <p class="inline-desctiption">{{ressource.Libelle}}</p>
+                                                    </td>
+                                                    <td class="font-referentiel-etendu">
+                                                        <p class="inline-header">{{ctrl.resources.ReferentielEtendu_Index_Achats}}</p>
+                                                        <p class="inline-desctiption">
+                                                            <label class="switch">
+                                                                <input type="checkbox" ng-model="ressource.ReferentielEtendus[0].Achats" ng-change="ctrl.handleChangeAchats(ressource)">
+                                                                <span class="slider"></span>
+                                                            </label>
+                                                        </p>
+                                                    </td>
+                                                    <td class="font-nature-analytique">
+                                                        <!--ressource.ReferentielEtendus[0].NatureId != null && ressource.ReferentielEtendus[0].Achats && ctrl.params_LimitationUnitesRessource-->
+                                                        <p class="inline-header" ng-show="ressource.ReferentielEtendus[0].NatureId != null && ressource.ReferentielEtendus[0].Achats && ctrl.params_LimitationUnitesRessource">{{ctrl.resources.Global_Unit}}</p>
+                                                        <p class="inline-desctiption" ng-show="ressource.ReferentielEtendus[0].NatureId != null && ressource.ReferentielEtendus[0].Achats && ctrl.params_LimitationUnitesRessource">
+                                                            <fred-ui-detail ng-click="ctrl.handleOpenUnitesModal(ressource)" title={{ctrl.resources.ReferentielEtendu_Index_TitleUnites}}></fred-ui-detail>
+                                                            {{ressource.ReferentielEtendus[0].ListeUnitesAbregees}}
+                                                        </p>
+                                                    </td>
+                                                    <td class="font-nature-analytique">
+                                                        <span ng-show="!ressource.ReferentielEtendus[0].Nature" class="material-icons badge-notify pull-left">warning</span>
+                                                        <p class="inline-header" ng-show="ressource.ReferentielEtendus[0].Nature">{{ctrl.resources.ReferentielEtendu_Index_Ressource_Table_Code}}</p>
+                                                        <p class="inline-desctiption">{{ressource.ReferentielEtendus[0].Nature.Code}}</p>
+                                                    </td>
+                                                    <td class="font-nature-analytique">
+                                                        <p class="inline-header" ng-show="ressource.ReferentielEtendus[0].Nature">{{ctrl.resources.ReferentielEtendu_Index_Ressource_Table_Libelle}}</p>
+                                                        <p class="inline-desctiption">{{ressource.ReferentielEtendus[0].Nature.Libelle}}</p>
+                                                    </td>
+                                                    <td>
+                                                        <span class="flaticon flaticon-multiply" ng-show="ressource.ReferentielEtendus[0].NatureId" ng-click="ctrl.handleDesallocateNature(ressource)" title="{{ctrl.resources.ReferentielEtendu_Index_Ressource_Table_DesallouerNature_Tooltip}}"></span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+
+                                    </div><!--/.panel-collapse -->
+                                </div>
+                                <!-- nested -->
+                            </div>
+                        </div><!--/.panel-collapse -->
+                    </div><!-- /.panel -->
+                </div>
+
+            </div>
+            <div class="row bg-gray under_controls">
+                @*<input type="button" class="btn btn-primary" ng-disabled="!ctrl.selectedSociete" ng-click="ctrl.openall()" value="{{ctrl.resources.Global_Bouton_ToutDeplier}}" />
+                    <input type="button" class="btn btn-primary" ng-disabled="!ctrl.selectedSociete" ng-click="ctrl.closeall()" value="{{ctrl.resources.Global_Bouton_ToutReplier}}" />
+                    <input type="button" class="btn btn-primary" ng-disabled="!ctrl.selectedSociete" ng-click="ctrl.extractExcel()" value="{{ctrl.resources.Global_Bouton_ExportExcel}}" />
+                    <input type="button" class="btn btn-default " ng-disabled="!ctrl.selectedSociete" ng-click="ctrl.popupSave()" value="{{ctrl.resources.Global_Bouton_Enregistrer}}" />
+                    <input type="button" class="btn bg-inverse-light" ng-disabled="!ctrl.selectedSociete" ng-click="ctrl.popupCancel()" value="{{ctrl.resources.Global_Bouton_Annuler}}" />*@
+            </div>
+        </div>
+
+        @* Tableau des Natures *@
+        <div class="col-md-5">
+            <fred-section>{{ctrl.resources.ReferentielEtendu_Index_Nature_SousTitre}}</fred-section>
+            <div class="row search-container">
+                <div class="col-md-6 nospace">
+                    <div class="input-group input-search">
+                        <input type="text" placeholder="{{ctrl.resources.ReferentielEtendu_Index_Nature_Rechercher_Placeholder}}" ng-model="ctrl.searchNature" class="form-control">
+                        <span class="input-group-addon button-search"><i class="material-icons">search</i></span>
+                    </div>
+                </div>
+                <div class="col-md-6 nospace">
+                    <span class="pull-right">
+                        <input type="button" class="btn btn-primary pull-right" ng-show="ctrl.selectedNature" ng-click="ctrl.handleAllocateNature()" value="{{ctrl.resources.ReferentielEtendu_Index_Nature_Affeter}}" />
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="divNatures" class="table-responsive fred-scroll">
+                    <table class="table">
+                        <tr ng-repeat="nature in ctrl.natureList | codeLibelleFilter: ctrl.searchNature" ng-class="{'bg-success': nature.NatureId === ctrl.selectedNature.NatureId, active: nature.NatureId !== ctrl.selectedNature.NatureId && $index % 2 == 0}" ng-click="ctrl.handleSelectNature(nature)">
+                            <td>
+                                <p class="inline-header">{{ctrl.resources.ReferentielEtendu_Index_Nature_Table_Code}}</p>
+                                <p class="inline-desctiption font-nature-analytique">{{nature.Code}}</p>
+                            </td>
+                            <td>
+                                <p class="inline-header">{{ctrl.resources.ReferentielEtendu_Index_Nature_Table_Libelle}}</p>
+                                <p class="inline-desctiption font-nature-analytique">{{nature.Libelle }}</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Liste UnitÃ©s-->
+    <div class="modal fade" id="UNITES_DIALOG_ID" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div ng-if="ctrl.errorUnite.Display">
+                    {{ctrl.errorUnite.Message}}
+                </div>
+                <div class="modal-header">
+                    <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1s"></i>{{ctrl.resources.ReferentielEtendu_Index_UniteModal_Titre}}</h2>
+                    <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+                </div>
+                <div class="modal-header">{{ctrl.currentRessource.CodeLibelle}}</div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 item" ng-repeat="unite in ctrl.currentRessource.ReferentielEtendus[0].UniteReferentielEtendus | orderBy: 'Unite.Libelle' | filter: {IsDeleted: false}">
+                            <label>{{unite.Unite.CodeLibelle}}</label>
+                            <button class="btn btn-link flaticon flaticon-multiply pull-right" ng-click="ctrl.handleRemoveUnite(unite.Unite.UniteId)" title="{{ctrl.resources.Global_Bouton_Supprimer_Tooltip}}" aria-hidden="true"></button>
+                        </div>
+                        <div class="col-md-4 item">
+                            <lookup ng-model="ctrl.selectedRef"
+                                    search-placeholder="{{ctrl.resources.Global_ReferentielUnite_Placeholder}}"
+                                    search-title="{{ctrl.resources.Global_ReferentielUnite}}"
+                                    on-click="'/api/Unite/SearchLight/'"
+                                    on-select="ctrl.handleAddUnite(item)"
+                                    show-in-popup="true">
+                                <input type="button" class="btn btn-default" value="{{ctrl.resources.ReferentielEtendu_Index_UniteModal_Ajout}}" />
+                            </lookup>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!--Bouton pour valider le budget-->
+                    <button class="btn btn-default pull-left"
+                            ng-click="ctrl.handleValidateUnitesModal()"
+                            ng-if="ctrl.CurrentMode === $ctrl.Mode.Create"
+                            title="{{ctrl.resources.Global_Bouton_Valider_Tooltip}}">
+                        {{ctrl.resources.Global_Bouton_Valider}}
+                    </button>
+
+                    <!--Bouton annuler-->
+                    <button class="btn btn-link pull-right"
+                            data-dismiss="modal"
+                            title="{{ctrl.resources.Global_Bouton_Annuler_Tooltip}}">
+                        {{ctrl.resources.Global_Bouton_Annuler}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

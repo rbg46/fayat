@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Fred.Entities.Referential.NatureEnt">
+    <Position X="8.25" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AACgCAAAAAkAICIAAAAgAAAgAAIwAAAIAACAAAAAIAA=</HashCode>
+      <FileName>Referential\NatureEnt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fred.Entities.ReferentielEtendu.ReferentielEtenduEnt">
+    <Position X="12" Y="7" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAEAAAIAAAAEAIAQAAAgEAAAAAAAAAAAQBA=</HashCode>
+      <FileName>ReferentielEtendu\ReferentielEtenduEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Societe" />
+      <Property Name="Ressource" />
+      <Property Name="Nature" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Fred.Entities.ReferentielFixe.RessourceEnt">
+    <Position X="5" Y="6" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AUSgCAAAAEhAASAAFAAkQIAgAAIQAAAgAgCkgKAgaJA=</HashCode>
+      <FileName>ReferentielFixe\RessourceEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="RessourceTaches" />
+      <Property Name="CIRessources" />
+      <Property Name="ReferentielEtendus" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Fred.Entities.Societe.SocieteEnt">
+    <Position X="15.75" Y="3.75" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AARAAEZIIgFAACgEQCSqEAAQEkFBAAAiEACQWABAOgA=</HashCode>
+      <FileName>Societe\SocieteEnt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fred.Entities.ReferentielFixe.ChapitreEnt">
+    <Position X="1" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AACgCEAAAAgAAAAAACAgAAAgAAIQAAAAAACAgMAAIIA=</HashCode>
+      <FileName>ReferentielFixe\ChapitreEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="SousChapitres" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Fred.Entities.ReferentielFixe.SousChapitreEnt">
+    <Position X="1" Y="8.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AACgCAAAAAgAAAAAEAAgAAIgAAIQAgAAAACAgIAAIIA=</HashCode>
+      <FileName>ReferentielFixe\SousChapitreEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Ressources" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Fred.Entities.Referential.TacheEnt">
+    <Position X="5.25" Y="18.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AESiCUACAEgADAAAAAAkQEQgCAMQAgAgAgCEgKCA6dQ=</HashCode>
+      <FileName>Referential\TacheEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CI" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="RessourceTaches" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Fred.Entities.Budget.RessourceTacheEnt">
+    <Position X="10" Y="18.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Ressource" Type="Fred.Entities.ReferentielFixe.RessourceEnt" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="11.438" Y="18.75" />
+        <Point X="11.438" Y="10.414" />
+        <Point X="7.5" Y="10.414" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAEAIYAAABAAgAAAAQIAAAAQFA=</HashCode>
+      <FileName>Budget\RessourceTacheEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Tache" />
+      <Property Name="Ressource" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Fred.Entities.CI.CIEnt">
+    <Position X="1" Y="18" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AUDVAASAIUVBhAIAHgAlECQAEgRxDEaIMASgVIBMqHA=</HashCode>
+      <FileName>CI\CIEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Taches" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Fred.Entities.ReferentielEtendu.ParametrageReferentielEtenduEnt">
+    <Position X="15.75" Y="14.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>gACgCECAAAgABCAEAgAAAAAgAAIQAAAAAAIAkIAQYJA=</HashCode>
+      <FileName>ReferentielEtendu\ParametrageReferentielEtenduEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ReferentielEtendu" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Fred.Entities.CI.CIRessourceEnt">
+    <Position X="5.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAQAAAAAEAIAAQAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>CI\CIRessourceEnt.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CI" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Fred.Entities.OperationDiverse.OperationDiverseEnt">
+    <Position X="13.25" Y="22.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>gAAAAFCAAEAABCAAAgACQAQAAAAAAAAAgBCIAIAQAEA=</HashCode>
+      <FileName>OperationDiverse\OperationDiverseEnt.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

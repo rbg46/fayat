@@ -1,0 +1,1 @@
+﻿UPDATE FRED_UNITE SET Code = 'FRT', Libelle = 'Forfait' where UniteId = 1;

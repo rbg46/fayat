@@ -1,0 +1,106 @@
+﻿= Documentation de la documentation...
+
+
+* La documentation est automatiquement générée sur la Pic lors du commit
+* Pour la syntaxe AsciiDoc, 
+** voir le cheatsheet suivant : https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+** ou alors celui-ci : https://powerman.name/doc/asciidoc
+
+== Pour installer AsciiDoctor
+
+NOTE: il est possible qui faille fermer/réouvrir la ligne de commande pour intégrer les changements sur le path.
+
+[source]
+----
+Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+choco upgrade ruby /y
+choco upgrade javaruntime /y
+choco upgrade Graphviz /y
+# Attention, il est possible ici qu'il soit nécessaire de rouvir powershell pour mettre à jour le path
+gem install asciidoctor
+gem install asciidoctor-diagram
+----
+
+
+== Pour générer la documentation en local : 
+. lancer le script `GenerateDoc.bat`
+
+
+== Pour ajouter une nouvelle documentation :
+. créer un fichier .adoc
+. mettre en haut du fichier :
+*** `= titre du document`
+*** `ifndef::imagesdir[:imagesdir: ../]`
+. Si vous avez des images, mettez les dans le dossier Images déjà existant
+. inclure le document dans le fichier Index.adoc.
+. Pour écrire la documentation, utilisez VS Code, il y a une extension AsciiDoc.
+
+
+== Quelques astuces AsciiDoc
+
+=== Preview dans VS Code
+
+Dans Command Palette (Ctrl + Shift + P) +
+Taper AsciiDoc: Open Preview to the side (Ctrl+KV) 
+
+=== Faire une liste à puce
+
+* Niveau 1
+* Niveau 1
+** Niveau 2
+*** Niveau 3
+
+=== Faire une liste numérotée
+
+. Niveau 1
+. Niveau 1
+.. Niveau 2
+... Niveau 3
+
+=== Faire un diagramme
+
+Les diagrammes sont écrits avec le format PlantUml.
+
+Vous devez spécifier le chemin ou sera généré l'image. Elle est générée automatiquement lors du lancement de `GenerateDoc.bat`
+
+[plantuml, images/mondiagramme, png]     
+....
+class BlockProcessor
+class DiagramBlock
+class DitaaBlock
+class PlantUmlBlock
+
+BlockProcessor <|-- DiagramBlock
+DiagramBlock <|-- DitaaBlock
+DiagramBlock <|-- PlantUmlBlock
+....
+ 
+=== Mettre un paragraphe en avant 
+
+.AsciiDoc history
+****
+AsciiDoc was first released in Nov 2002 by Stuart Rackham.
+It was designed from the start to be a shorthand syntax
+for producing professional documents like DocBook and LaTeX.
+****
+
+ou encore :
+====
+*AsciiDoc history* +
+AsciiDoc was first released in Nov 2002 by Stuart Rackham.
+It was designed from the start to be a shorthand syntax
+for producing professional documents like DocBook and LaTeX.
+====
+
+
+=== Faire des notes, Warnings, etc...
+
+TIP: blabla
+
+NOTE: blabla
+
+IMPORTANT: blabla
+
+WARNING: blabla
+
+CAUTION: blabla

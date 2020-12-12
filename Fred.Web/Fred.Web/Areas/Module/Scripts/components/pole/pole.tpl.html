@@ -1,0 +1,25 @@
+﻿<div id="accordion" class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading level1">
+      <table class="t-first">
+        <tr>
+          <td>
+            <a ng-show="$ctrl.pole.children"
+               class="accordion-toggle"
+               data-toggle="collapse"
+               data-target="#sub{{$ctrl.pole.OrganisationId}}">
+               <span class="material-icons">chevron_right</span>
+            </a>
+         
+            <label for="chkActif_{{$ctrl.pole.OrganisationId}}"><span></span>{{$ctrl.pole.Libelle}}</label>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="sub{{$ctrl.pole.OrganisationId}}" class="panel-collapse collapse in">
+      <groupe-component ng-repeat="groupe in $ctrl.pole.children | orderBy:'libelle'"
+                        groupe="groupe">
+      </groupe-component>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+﻿<fred-section class="picklist-section">
+    <fred-section-title ng-show="$ctrl.showLabel">{{::$ctrl.resources.Pointage_Index_Filtre_Personnel}}</fred-section-title>
+    <fred-section-controls id="personnel-pickList" fred-display-handler="$ctrl.userOrganizationId" display="visible">
+        <div class="inner-addon right-addon">
+            <i class="chev material-icons">chevron_right</i>
+            <lookup ng-model="$ctrl.personnel"
+                search-placeholder="{{::$ctrl.resources.Global_ReferentielPersonnel_Placeholder}}"
+                search-title="{{::$ctrl.resources.Global_ReferentielPersonnel}}" on-select="$ctrl.handleChangePersonnel()"
+                url="/api/Personnel/SearchLight/?periodeChantier={{$ctrl.periode | date:'yyyyMM'}}&"
+                show-in-popup="$ctrl.showInPopup">
+        
+        
+                <input type="text" class="form-control" ng-value="$ctrl.personnel.CodeSocieteMatriculePrenomNom"
+                    placeholder="{{::$ctrl.resources.Global_ReferentielPersonnel_Placeholder}}"
+                    title="{{$ctrl.personnel.MatriculeNomPrenom}}" />
+            </lookup>
+        </div>
+    </fred-section-controls>
+    <fred-section-controls id="personnel-pickList-multi-search" fred-display-handler="$ctrl.userOrganizationId" display="hidden">
+        <div class="inner-addon right-addon">
+            <lookup-standalone ng-model="$ctrl.personnel" name="Personnel" show-in-popup="$ctrl.showInPopup"
+                text="$ctrl.personnel.MatriculeNomPrenom" search-title="{{::$ctrl.resources.Global_ReferentielPersonnel}}"
+                search-placeholder="{{::$ctrl.resources.Personnel_PartialGeneral_Nom_Placeholder}}"
+                search-placeholder2="{{::$ctrl.resources.Personnel_PartialGeneral_Prenom_Placeholder}}"
+                search-placeholder3="{{::$ctrl.resources.Personnel_Filter_Autre_Information_Placeholder}}"
+                active-second-search-input="true" active-third-search-input="true"
+                placeholder="{{::$ctrl.resources.Global_ReferentielPersonnel_Placeholder}}"
+                url="/api/Personnel/SearchLight2/?periodeChantier={{$ctrl.periode | date:'yyyyMM'}}&"
+                on-select="$ctrl.handleChangePersonnel()" on-delete="$ctrl.handleDeletePersonnel()"
+                class="no-padding formulaire long">
+            </lookup-standalone>
+        </div>
+    </fred-section-controls>
+</fred-section>

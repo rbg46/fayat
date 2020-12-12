@@ -1,0 +1,18 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+@using Fred.Web.Helpers;
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts {
+  @Scripts.Render("~/Areas/Referential/Scripts/Controllers/countryController.js")
+  @Scripts.Render("/api/resource/FredResource")
+  @Scripts.Render("/api/resource/FeatureReferential")
+}
+
+<div ng-controller="countryController">
+  <div class="row">
+    <div kendo-grid k-options="countryGrid"></div>
+  </div>
+</div>
+
+

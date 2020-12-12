@@ -1,0 +1,100 @@
+﻿<div class="modal-content">
+  <div class="modal-header">
+    <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i>{{$ctrl.resources.RT_Title}}</h2>
+    <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" ng-click="$ctrl.handleCancel()" title="{{resources.Global_Modal_Annuler_Tooltip}}"></i>
+  </div>
+  <div class="modal-body">
+
+    <div class="row">
+      <div class="col-md-12">
+        <label class="blu">{{$ctrl.resources.RT_InformationDepense}}</label>
+      </div>
+    </div>
+
+    <div class="row spc">
+      <div class="col-md-5">
+        <label>Ressource</label>
+        <input type="text" name="" id="" class="form-control" value="{{$ctrl.selectedDepense.Ressource.CodeLibelle}}" readonly="readonly">
+      </div>
+      <div class="col-md-5">
+        <label>Libellé 1</label>
+        <input type="text" name="" id="" class="form-control" value="{{$ctrl.selectedDepense.Libelle1}}" readonly="readonly">
+      </div>
+      <div class="col-md-2">
+        <label>Code</label>
+        <input type="text" name="" id="" class="form-control" value="{{$ctrl.selectedDepense.Code}}" readonly="readonly">
+      </div>
+    </div>
+
+    <div class="row spc">
+      <div class="col-md-2">
+        <label>Unité</label>
+        <input type="text" name="" id="" class="form-control" value="{{$ctrl.selectedDepense.Unite.Code}}" readonly="readonly">
+      </div>
+      <div class="col-md-2">
+        <label>Quantité</label>
+        <input type="text" name="" id="" class="form-control" value="{{$ctrl.selectedDepense.Quantite | number:2}}" readonly="readonly">
+      </div>
+      <div class="col-md-2">
+        <label>PU</label>
+        <input type="text" name="" id="" class="form-control" value="{{$ctrl.selectedDepense.PUHT | number:2 }}" readonly="readonly">
+      </div>
+      <div class="col-md-2">
+        <label>Montant HT</label>
+        <input type="text" name="" id="" class="form-control" value="{{$ctrl.selectedDepense.MontantHT | number:2 }}" readonly="readonly">
+      </div>
+      <div class="col-md-2">
+        <label>Date dépense</label>
+        <input type="text" name="" id="" class="form-control" value="{{$ctrl.selectedDepense.DateDepense | date:'dd/MM/yy'}}" readonly="readonly">
+      </div>
+    </div>
+
+    <div class="row spc">
+      <div class="col-md-2">
+        <label>Type Dépense</label>
+        <input type="text" name="" id="" class="form-control" value="{{$ctrl.selectedDepense.TypeDepense}}" readonly="readonly">
+      </div>
+      <div class="col-md-2">
+        <label>Sous-Type</label>
+        <input type="text" name="" id="" class="form-control" value="{{$ctrl.selectedDepense.SousTypeDepense}}" readonly="readonly">
+      </div>
+      <div class="col-md-8">
+        <label>Libellé 2</label>
+        <input type="text" name="" id="" class="form-control" value="{{$ctrl.selectedDepense.Libelle2}}" readonly="readonly">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <label class="blu">Historique des tâches</label>
+      </div>
+    </div>
+
+    <div class="task-history">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Tâche</th>
+            <th>Auteur remplacement</th>
+            <th>Date remplacement</th>
+            <th>Période</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="d in $ctrl.history | orderBy:'+RangRemplacement'">
+            <td>{{d.Tache.Code}} - {{d.Tache.Libelle}}</td>
+            <td>{{d.AuteurCreation.Nom}}</td>
+            <td>{{d.DateRemplacement | date:'dd/MM/yy'}}</td>
+            <td>{{d.DateComptableRemplacement | date:'MM/yy'}} <span class="material-icons" ng-show="d.canBeDeleted && d.Annulable" title="{{$ctrl.resources.RT_Annuler_Remplacement}}" ng-click="$ctrl.handleDelete(d.RemplacementTacheId)">clear</span></td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn  btn-link pull-left" data-dismiss="modal" ng-click="$ctrl.handleCancel()" title="Annuler">Annuler</button>
+    <button type="button" class="btn  btn-default pull-right" data-dismiss="modal" ng-click="$ctrl.handleValidate()"  title="OK">OK</button>
+  </div>
+</div>    

@@ -1,0 +1,92 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+                ViewBag.Title = FeatureValidationPointage.VPWeb_Index_Title;
+                Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/ValidationPointageIndexBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/ValidationPointageIndexBundle.js")
+    @this.RenderResources("FeatureValidationPointage")
+}
+
+<div class="container validation-pointages" ng-controller="ValidationPointageController as ctrl">
+
+    <div class="row index-header">
+        <div class="col-lg-9 col-md-9">
+            <h1>{{ctrl.resources.VPWeb_Index_Title}}</h1>
+        </div>
+
+        <div class="col-lg-3 col-md-3">
+            <div class="row">
+                <label class="infoFilter">{{ ctrl.resources.Global_SelectionnerPeriode }}</label>
+                <div class="filter">
+                    <div class="row">
+                        <div class="col-md-8 col-lg-8 no_pad_l">
+                            <app-date-picker id="periode" ng-model="ctrl.periode" initial-date="{{ctrl.periode}}" format="MM/YYYY" lang="fr" on-update="ctrl.handleChangePeriod()"></app-date-picker>
+                        </div>
+                        <div class="col-md-4 col-lg-4 no_pad_r">
+                            <button class="btn btn-primary refresh pull-right" ng-click="ctrl.handleChangePeriod()" title="{{ ctrl.resources.Global_Bouton_Actualiser_Tooltip }}">{{ ctrl.resources.Global_Bouton_Actualiser }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        @* LOT DE POINTAGE *@
+        <div class="col-md-6 col-lg-6 col-sm-6">
+            <lot-pointage-component></lot-pointage-component>
+        </div>
+        @* LISTE DES ERREURS DES CONTROLES *@
+        <div class="col-sm-6 col-lg-6 col-sm-6">
+            <controle-pointage-erreur-component></controle-pointage-erreur-component>
+        </div>
+    </div>
+
+    <footer display="hidden" id="footer-lot-pointage" fred-Display-Handler="$ctrl.userOrganizationId">
+        <div class="action-buttons">
+            <fred-authorization key="{{ctrl.permissionKeys.AffichageRemonteeVracValidationPointageIndex}}">
+                <div type="button" class="btn btn-primary btn-remontee-vrac" ng-click="ctrl.handleRemonteeVrac()">
+                    <span title="{{ ctrl.resources.VPWeb_ExecuterRemonteeVrac }}">{{ctrl.resources.VPWeb_ExecuterRemonteeVrac}}</span>
+                    <i class="material-icons icons todo" ng-show="!ctrl.remonteeVrac.RemonteeVracId" title="{{ ctrl.resources.VPWeb_ExecuterRemonteeVrac }}">radio_button_unchecked</i>
+                    <i class="material-icons icons success" ng-show="ctrl.remonteeVrac.Statut===ctrl.status.Done" title="{{ ctrl.remonteeVrac.ExecutionTooltip }}">radio_button_checked</i>
+                    <i class="material-icons icons error" ng-show="ctrl.remonteeVrac.Statut===ctrl.status.Failed" title="{{ ctrl.remonteeVrac.ExecutionTooltip }}">report</i>
+                    <i class="material-icons icons rotation" ng-show="ctrl.remonteeVrac.Statut===ctrl.status.InProgress" title="{{ ctrl.remonteeVrac.ExecutionTooltip }}">loop</i>
+                    <i class="material-icons icons" ng-show="ctrl.remonteeVrac.Erreurs.length > 0" title="{{ ctrl.remonteeVrac.ErreurTooltip }}">warning</i>
+                    </div>
+            </fred-authorization>
+            <fred-authorization key="{{ctrl.permissionKeys.AffichageRemonteeVracValidationPointageIndex}}">
+                @* Modal consultation des erreurs de remontée vrac *@
+                <button type="button" class="btn btn-default" ng-click="ctrl.handleShowRemonteeVracErreur()" ng-disabled="ctrl.remonteeVrac.Erreurs.length === 0" title="Cliquer pour consulter la liste des erreurs de remontée vrac.">
+                    <span>Consulter le rapport d'erreurs</span>
+                </button>
+            </fred-authorization>
+
+            @* Consultation Validation des Prime *@
+            <fred-authorization key="{{ctrl.permissionKeys.AffichageButtonValidationPrimes}}">
+                <button type="button" class="btn btn-default" onclick="window.location.href='/RapportPrime/RapportPrime'" ng-disabled="" title="Cliquer pour consulter la validation des primes">
+                    <span>Consulter la validation des primes</span>
+                </button>
+            </fred-authorization>
+            <fred-authorization key="{{ctrl.permissionKeys.AffichageButtonRemontesPrimes}}">
+                @* Exécuter remontée des Primes *@
+                <div type="button" class="btn btn-primary btn-remontee-vrac" ng-click="ctrl.handleExecuteRemonteePrimes()">
+                    <span title="Exécuter la remontée primes">Exécuter la remontée primes</span>
+                </div>
+            </fred-authorization>
+
+            <span class="fill-space"></span>
+
+            <button type="button" class="btn button-pdf" ng-click="ctrl.handleExportPdf()" ng-disabled="(!ctrl.selectedControlePointageId && ctrl.currentTotalErreurCount === 0) || ctrl.currentTotalErreurCount === 0" title="Cliquer pour exporter au format PDF">
+            </button>
+
+        </div>
+    </footer>
+
+</div>

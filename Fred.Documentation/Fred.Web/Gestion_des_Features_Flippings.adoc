@@ -1,0 +1,40 @@
+= Gestion des Features Flippings
+
+== Principe
+
+Le feature flipping à pour objectif de permettre l’activation ou la désactivation de certaines fonctionalitées
+
+== Fonctionnement
+
+La gestion des features flipping se fait au travers de l’écran de gestion des features flipping sous FRED. Il n’est pas possible (et cela est volontaire) de créé ou de supprimer une feature flipping depuis FRED.
+
+== Ajout d’une nouvelle Feature Flipping
+
+Afin d’ajouter une nouvelle feature flipping il est impératif de suivre les étapes ci-dessous : 
+
+* Insérer une ligne dans la table FRED_FEATURE_FLIPPING (son nom doit être UNIQUE) 
+* Ajouter une ligne
+dans l’EnumFeatureFlipping (Fred.Framework.cs) avec le même Code (colonne Code) 
+* *Faire un TUA sur la feature activée et désactivée pour vérifier que le code s’exécute comme attendu dans les deux cas.*
+
+== Implémantation
+
+=== Back
+
+Il suffit simplement d’appeler la méthode d’extention IsActivated de la classe statique FeatureFlippingExtension afin de déterminer si la fonctionnalitée est active ou non. exemple : 
+
+ if (FeatureFlipping.FeatureFlippingExtension.IsActivated(Framework.FeatureFlipping.EnumFeatureFlipping.SampleFeature))
+{ [Code quand la feature est active] }
+
+=== Front 
+
+Pour la partie front, il suffit d’ajouter la balise __<feature-flag feature-key=[Nom de
+la feature en base]>* et le code ne sera visible que si la fonctionnalité est active. exemple :
+
+`+html <feature-flag feature-key="SampleFeature">             <div>                 <h1>This is my cool new feature!</h1>             </div>             </feature-flag>+`
+
+NOTE: Il est tout à fait possible qu’une feature ne s’occupe que de la partie Front ou Back.
+
+== Suppression d’une Feature
+
+La solution la plus simple consiste dans un premier temps à supprimer la ligne de la feature dans l’Enum et de lancer une compilation. De cette manière, il sera plus facile de distingué les endroits dans le code ou la feature est appelée. Une fois que cela sera fait, il suffira de supprimer la ligne en base de donnée.

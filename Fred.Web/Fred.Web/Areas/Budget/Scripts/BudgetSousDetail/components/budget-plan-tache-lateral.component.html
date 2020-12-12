@@ -1,0 +1,103 @@
+﻿<div ng-show="$ctrl.showBandeauLateral">
+    <div class="blockScreen"
+         style="z-index:99"
+         ng-click="$ctrl.showBandeauLateral = false">
+    </div>
+    <div class="options small"
+         id="PanelRight"
+         style="left: 0px">
+
+
+        <!--HEADER TOOLBAR : BEGIN-->
+        <div class="toolbar">
+            <div class="material-icons grandicone">group_work</div>
+        </div>
+        <!--HEADER TOOLBAR : END-->
+        <!-- Titre : BEGIN -->
+        <div class="form-header" id="Titre">
+            <h2>
+                <span>Plan de tâches du budget</span>
+            </h2>
+        </div>
+
+        <div class="form">
+            <fred-flex-table class="budget-detail bandeau-lateral flex-table fred-scroll" id="FLEX_TABLE_PLAN_TACHE_LATERAL">
+
+                <!--Second en-tête-->
+                <div class="fixed-line-header mid-header">
+                    <div class="col-1 fixed-col-header selector">{{::$ctrl.resources.Budget_Detail_Liste_Entete_Code}}</div>
+                </div>
+
+                <!--Liste des tâches de niveau 1-->
+                <div ng-repeat="tache1 in $ctrl.taches | orderBy: '+Code'">
+
+                    <div class="flex-line level-1" data-toggle="collapse" aria-expanded="false" data-target="#BL_T1_{{tache1.TacheId}}">
+                        <div class="col-1 fixed-col-header selector">
+                            <div class="chevron" ng-class="tache1.Taches2.length != 0 ? '' : 'not-visible'"></div>
+                            <span class="icon-T1" ng-attr-title="{{::$ctrl.resources.Budget_Detail_Tooltip_Tache1}}"></span>
+                            {{tache1.Code}} - {{tache1.Libelle}}
+                        </div>
+                    </div>
+
+                    <!--Liste des tâches de niveau 2-->
+                    <div class="collapse in" id="BL_T1_{{tache1.TacheId}}">
+                        <div ng-repeat="tache2 in tache1.Taches2 | orderBy: '+Code'">
+                            <div class="flex-line level-2" data-toggle="collapse" aria-expanded="false" data-target="#BL_T2_{{tache2.TacheId}}">
+                                <div class="col-1 fixed-col-header selector">
+                                    <div class="chevron" ng-class="tache2.Taches3.length != 0 ? '' : 'not-visible'"></div>
+                                    <span class="icon-T2" ng-attr-title="{{::$ctrl.resources.Budget_Detail_Tooltip_Tache2}}"></span>
+                                    {{tache2.Code}} - {{tache2.Libelle}}
+                                </div>
+                            </div>
+
+                            <!--Liste des tâches de niveau 3-->
+                            <div class="collapse in" id="BL_T2_{{tache2.TacheId}}">
+                                <div ng-repeat="tache3 in tache2.Taches3 | orderBy: '+Code'">
+                                    <div class="flex-line level-3" data-toggle="collapse" aria-expanded="false" data-target="#BL_T3_{{tache3.TacheId}}">
+                                        <div class="col-1 fixed-col-header selector">
+                                            <div class="chevron" ng-class="tache3.Taches4.length != 0 ? '' : 'not-visible' "></div>
+                                            <span class="icon-T3" ng-attr-title="{{::$ctrl.resources.Budget_Detail_Tooltip_Tache3}}"></span>
+                                            {{tache3.Code}} - {{tache3.Libelle}}
+                                        </div>
+                                    </div>
+
+                                    <!--Liste des tâches de niveau 4-->
+                                    <div class="collapse in" id="BL_T3_{{tache3.TacheId}}">
+                                        <div ng-repeat="tache4 in tache3.Taches4 | orderBy: '+Code' | filter:{Deleted:false}">
+                                            <div class="flex-line level-4">
+                                                <div class="col-1 fixed-col-header selector row"
+                                                     ng-click="$ctrl.displayThisT4(tache4)"
+                                                     ng-class="tache4.IsEdited ? 'already-displayed-t4' : 'can-navigate-to-t4'"
+                                                     title="{{::$ctrl.resources.Budget_Detail_Tooltip_VoirSousDetail}}
+T4 {{tache4.Code}} - {{tache4.Libelle}}
+{{::$ctrl.resources.Montant_lb}} : {{tache4.BudgetT4.MontantT4 | number:2}} €
+{{::$ctrl.resources.Unite_lb}} : {{tache4.BudgetT4.Unite.Code}}
+{{::$ctrl.resources.Quantite_lb}} : {{tache4.BudgetT4.QuantiteARealiser | number:2}}
+{{::$ctrl.resources.PU_lb}} : {{tache4.BudgetT4.PU | number:2}} €">
+
+
+                                                    <div class="col-md-1"/>
+                                                    <div class="col-md-1">
+                                                        <span class="icon-T4" title="{{::$ctrl.resources.Budget_Detail_Tooltip_Tache4}}"></span>
+                                                    </div>
+                                                    <span class="col-md-8">{{tache4.Code}} - {{tache4.Libelle}}</span>
+                                                    <span class="material-icons col-md-2">chevron_right</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fred-flex-table>
+        </div>
+
+        <div class="close_panel form-footer action-controls" ng-click="$ctrl.showBandeauLateral = false">
+            <i class="fa fa-angle-right"
+               aria-hidden="true"></i>
+            <span>Refermer le panneau</span>
+        </div>
+    </div>
+</div>

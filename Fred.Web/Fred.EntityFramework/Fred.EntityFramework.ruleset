@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Fred Rules" ToolsVersion="14.0">
+  <Include Path="..\..\fred.importexport\sonarqube\fayat.fred.importexportcsharp.ruleset" Action="Default" />
+  <Include Path="..\fred.ruleset" Action="Default" />
+  <Include Path="..\sonarqube\fayat.fredwebcsharp.ruleset" Action="Default" />
+  <Rules AnalyzerId="Microsoft.DependencyValidation.Analyzers" RuleNamespace="Microsoft.DependencyValidation.Analyzers">
+    <Rule Id="DV2002" Action="Info" />
+  </Rules>
+</RuleSet>

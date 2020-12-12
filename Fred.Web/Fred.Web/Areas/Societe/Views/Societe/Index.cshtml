@@ -1,0 +1,523 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    /**/
+
+    ViewBag.Title = FeatureSociete.Societe_Index_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/SocieteIndexBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/SocieteIndexBundle.js")
+    @this.RenderResources("FeatureSociete", "FeatureDevise", "FeatureImage")
+}
+
+<div class="societes container" ng-controller="SocieteController as ctrl">
+
+    <div class="toleft">
+        <!-- START : Titre de la page -->
+        <h1>{{ctrl.resources.Societe_Index_Titre}}</h1>
+        <!--END : Titre de la page -->
+
+        <div class="row">
+            <!--BEGIN : Recherche -->
+            <div class="col-md-10 search_bloc">
+                <label class="infoFilter">{{resources.Global_RechercheAffiner}}</label>
+                <div class="filter">
+                    <div class="input-group">
+                        <input class="form-control"
+                               type="text"
+                               id="txtRecherche"
+                               name="Recherche"
+                               placeholder="{{ctrl.resources.Societe_Index_PanelMain_Rechercher_Placeholder}}"
+                               ng-model="ctrl.filter.ValueText"
+                               ng-change="ctrl.handleSearch()"
+                               ng-model-options="{ debounce: 500 }" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary y_search"
+                                    title="{{resources.Global_RechercheAffiner_Tooltip}}"
+                                    type="button"
+                                    ng-click="ctrl.handleSearch()">
+                                <i class="material-icons">search</i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--END : Recherche-->
+            <!--BEGIN : Bouton pour ajouter Items -->
+            <div class="col-md-2 add-search">
+                <span class="pull-right">
+                    <label class="infoFilter">{{resources.Global_Ajouter}}</label>
+                    <i class="flaticon flaticon-add  icoplus " title="{{resources.Global_Bouton_AjouterReference_Tooltip}}" ng-click="ctrl.handleNew()"></i>
+                </span>
+            </div>
+            <!--END : Bouton pour ajouter Items -->
+        </div>
+
+        <!-- LISTE DES SOCIETES -->
+        <div class="row results">
+            <div class="col-md-12 refs-list">
+                <div ng-repeat="item in ctrl.societeList" ng-if="!item.IsDeleted">
+                    <div class="row line">
+                        <div class="col-md-2" ng-click="ctrl.handleSelect(item)">
+                            <span class="t1">{{item.Code}}</span>
+                        </div>
+                        <div class="col-md-3" ng-click="ctrl.handleSelect(item)">
+                            <div class="lb">{{ctrl.resources.Societe_Index_PanelMain_Table_Libelle}}</div>
+                            <span class="t2">{{item.Libelle}}</span>
+                        </div>
+                        <div class="col-md-3" ng-click="ctrl.handleSelect(item)">
+                            <div class="lb">{{ctrl.resources.ClassificationLibelle}}</div>
+                            <span class="t2">{{item.Classification.Libelle}}</span>
+                            </div>
+
+                        <div class="col-md-1" ng-click="ctrl.handleSelectImageScreenLogin(item)">
+                            <div class="lb">Fond d'écran</div>
+                            <span class="t2"><i class="material-icons">collections</i></span>
+                        </div>
+                        <div class="col-md-1" ng-click="ctrl.handleSelectImageLogo(item)">
+                            <div class="lb">Logo type</div>
+                            <span class="t2"><i class="material-icons">insert_photo</i></span>
+                        </div>
+                        <div class="col-md-1" ng-click="ctrl.handleSelect(item)">
+                            <span class="bdg actif" ng-if="item.Active">{{ctrl.resources.Global_Actif}}</span>
+                            <span class="bdg inactif" ng-if="!item.Active">{{ctrl.resources.Global_Inactif}}</span>
+                        </div>
+                        <div class="col-md-1" ng-click="ctrl.handleSelect(item)">
+                            <span class="bdg actif" ng-if="item.TypeSociete.Code === ctrl.typeSocieteCodes.INTERNE">{{ctrl.resources.Global_Interne}}</span>
+                            <span class="bdg inactif" ng-if="item.TypeSociete.Code === ctrl.typeSocieteCodes.PARTENAIRE">{{ctrl.resources.Global_Partenaire}}</span>
+                            <span class="bdg sep" ng-if="item.TypeSociete.Code === ctrl.typeSocieteCodes.SEP">{{ctrl.resources.Global_SEP}}</span>
+                            <span class="bdg interimaire" ng-if="item.IsInterimaire">{{ctrl.resources.Societe_Index_Interimaire}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div ng-class="ctrl.checkDisplayOptions" class="blockScreen" style="z-index:99"></div>
+    <div class="options" id="optionRightPanel" style="z-index:1115" ng-class="ctrl.checkDisplayOptions + ' ' + ctrl.checkFormatOptions">
+
+        <!--HEADER TOOLBAR : BEGIN-->
+        <div class="toolbar">
+            <div class="flaticon flaticon flaticon-share-2 grandicone"></div>
+        </div>
+        <!--HEADER TOOLBAR : END-->
+        <!-- Titre : BEGIN -->
+        <div class="form-header">
+            <h2>
+                <span ng-if="ctrl.societe.SocieteId === 0">{{ctrl.resources.Societe_Index_PanelRight_Titre_Ajouter}}</span>
+                <span ng-if="ctrl.societe.SocieteId !== 0">{{ctrl.resources.Societe_Index_PanelRight_Titre_Modifier}}</span>
+            </h2>
+            <label class="legend">{{resources.Global_LegendeAsterisque}}</label>
+        </div>
+        <!-- Titre : END -->
+
+        <div class="form fred-scroll">
+            <!--Formulaire: START-->
+            <form autocomplete="off" name="ctrl.formSociete" novalidate>
+                <!--FIELD Active: START-->
+                <div class="col-md-offset-8 chb_r">
+                    <input id="chkActive" type="checkbox" ng-model="ctrl.societe.Active" />
+                    <label for="chkActive"><span></span>{{ctrl.resources.Global_Active}}</label>
+                </div>
+                <!--FIELD Active: END-->
+                <!--FIELD Code: START-->
+                <div class="form-group"
+                     ng-class="{ 'has-error' : (ctrl.formSociete.Code.$invalid && ctrl.formSociete.$submitted) || ctrl.formSociete.Code.$error.exist || ctrl.formSociete.Code.$error.pattern}">
+                    <label for="txtCode">
+                        {{ctrl.resources.Societe_Index_PanelRight_Code}} *
+                    </label>
+                    <span class="text-danger"
+                          ng-show="ctrl.formSociete.Code.$error.required && ctrl.formSociete.$submitted">
+                        * {{ctrl.resources.Global_Control_DataRequired_Erreur}}
+                    </span>
+                    <span class="text-danger"
+                          ng-show="ctrl.formSociete.Code.$error.codeIdentique">
+                        {{ctrl.resources.Global_Control_Code_Exist_Erreur}}
+                    </span>
+                    <span class="text-danger"
+                          ng-show="ctrl.formSociete.Code.$error.pattern">
+                        {{ctrl.resources.Global_Control_Code_FormatAlphanumeric_Erreur}}
+                    </span>
+                    <input class="form-control"
+                           type="text"
+                           id="txtCode"
+                           name="Code"
+                           maxlength="20"
+                           ng-pattern="/^[a-zA-Z0-9\-\_]*$/"
+                           ng-change="ctrl.handleChangeCode()"
+                           ng-required="true"
+                           placeholder="{{ctrl.resources.Societe_Index_PanelRight_Code_Placeholder}}"
+                           ng-model="ctrl.societe.Code"
+                           ng-model-options="{ debounce: 500 }" />
+                </div>
+                <!--FIELD Code: END-->
+                <!--FIELD Libelle: START-->
+                <div class="form-group"
+                     ng-class="{ 'has-error' : ctrl.formSociete.Libelle.$invalid && ctrl.formSociete.$submitted}">
+                    <label for="txtLibelle">{{ctrl.resources.Societe_Index_PanelRight_Libelle}} *</label>
+                    <span class="text-danger"
+                          ng-show="ctrl.formSociete.Libelle.$error.required && ctrl.formSociete.$submitted">
+                        * {{ctrl.resources.Global_Control_DataRequired_Erreur}}
+                    </span>
+                    <span class="text-danger"
+                          ng-show="ctrl.formSociete.Libelle.$error.libelleIdentique">
+                        {{ctrl.resources.Global_Control_Libelle_Exist_Erreur}}
+                    </span>
+                    <input class="form-control"
+                           type="text"
+                           id="txtLibelle"
+                           name="Libelle"
+                           ng-change="ctrl.handleChangeCode()"
+                           required
+                           placeholder="{{ctrl.resources.Societe_Index_PanelRight_Libelle_Placeholder}}"
+                           ng-model="ctrl.societe.Libelle" />
+                </div>
+                <!--FIELD Libelle: END-->
+                <!--FIELD CodeSocietePaye: START-->
+                <div class="form-group" ng-show="!ctrl.societe.Externe">
+                    <label for="txtCodeSocPaye">{{ctrl.resources.Societe_Index_PanelRight_CodeSocietePaye}}</label>
+                    <input class="form-control" maxlength="3" name="CodeSocPaye" type="text" id="txtCodeSocPaye" placeholder="{{ctrl.resources.Societe_Index_PanelRight_CodeSocietePaye_Placeholder}}" ng-model="ctrl.societe.CodeSocietePaye" />
+                </div>
+                <!--FIELD CodeSocietePaye: END-->
+                <!--FIELD CodeSocieteComptable: START-->
+                <div class="form-group" ng-show="!ctrl.societe.Externe">
+                    <label for="txtCodeSocCompta">{{ctrl.resources.Societe_Index_PanelRight_CodeSocieteComptable}}</label>
+                    <input class="form-control" maxlength="5" name="CodeSocCompta" type="text" id="txtCodeSocCompta" placeholder="{{ctrl.resources.Societe_Index_PanelRight_CodeSocieteComptable_Placeholder}}" ng-model="ctrl.societe.CodeSocieteComptable" />
+                </div>
+                <!--FIELD CodeSocieteComptable: END-->
+                <!--FIELD CodeSocieteStorm: START-->
+                <organisation-related-feature key="Societe.CodeSocieteStorm" default-value="true">
+                    <div class="form-group" ng-show="!ctrl.societe.Externe">
+                        <label for="txtCodeSocCompta">{{ctrl.resources.Societe_Index_PanelRight_CodeSocieteStorm}}</label>
+                        <input class="form-control" name="CodeSocStorm" type="text" id="txtCodeSocStorm" placeholder="{{ctrl.resources.Societe_Index_PanelRight_CodeSocieteStorm_Placeholder}}" ng-model="ctrl.societe.CodeSocieteStorm" />
+                    </div>
+                </organisation-related-feature>
+                <!--FIELD CodeSocieteStorm: END-->
+                <!--FIELD SIREN: START-->
+                <div class="form-group">
+                    <label for="txtSIREN">{{ctrl.resources.Societe_Index_PanelRight_Siren}}</label>
+                    <input class="form-control" type="text" id="txtSIREN" name="SIREN" placeholder="{{ctrl.resources.Societe_Index_PanelRight_Siren_Placeholder}}" ng-model="ctrl.societe.SIREN" />
+                </div>
+                <!--FIELD SIREN: END-->
+                <!--FIELD Fournisseur: START-->
+                <organisation-related-feature key="Societe.Fournisseur" default-value="true">
+                    <div class="form-group" ng-hide="ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.SEP">
+                        <label>{{ctrl.resources.Societe_Index_PanelRight_Fournisseur}}</label>
+                        <lookup-standalone ng-model="ctrl.societe.Fournisseur"
+                                           text="ctrl.societe.Fournisseur.CodeLibelle"
+                                           placeholder="{{ctrl.resources.Societe_Index_PanelRight_Fournisseur_Placeholder}}"
+                                           search-title="{{ctrl.resources.Global_ReferentielFournisseur}}"
+                                           search-placeholder="{{ctrl.resources.Global_ReferentielFournisseur_Placeholder}}"
+                                           url="/api/Fournisseur/SearchLight?groupeId={{ctrl.currentUser.Societe.GroupeId}}&"
+                                           on-select="ctrl.handleLookupSelection('Fournisseur', item)"
+                                           on-delete="ctrl.handleLookupDeletion('Fournisseur')"
+                                           class="formulaire long"
+                                           style-parent="true"
+                                           custom-template-url="/Scripts/directive/Lookup/custom-templates/fournisseur.template.html"
+                                           active-second-search-input="true"
+                                           search-placeholder2="Autres informations...(Adresse, Code, SIREN)"
+                                           search-tooltip='Commencez votre saisie par * si vous ne connaissez pas le début du nom (exemple : "*location").'>
+                        </lookup-standalone>
+                    </div>
+                </organisation-related-feature>
+                <!--FIELD Fournisseur: END-->
+                <!--FIELD Adresse: START-->
+                <div class="form-group">
+                    <label for="txtAdresse">{{ctrl.resources.Global_Adresse}}</label>
+                    <textarea class="form-control" type="text" id="txtAdresse" name="Adresse" placeholder="{{ctrl.resources.Global_Adresse_Placeholder}}" rows="3" ng-model="ctrl.societe.Adresse"></textarea>
+                </div>
+                <!--FIELD Adresse: END-->
+                <!--FIELD Ville: START-->
+                <div class="form-group">
+                    <label for="txtVille">{{ctrl.resources.Global_Ville}}</label>
+                    <input class="form-control" type="text" id="txtVille" name="Ville" placeholder="{{ctrl.resources.Global_Ville_Placeholder}}" ng-model="ctrl.societe.Ville" />
+                </div>
+                <!--FIELD Ville: END-->
+                <!--FIELD CodePostal: START-->
+                <div class="form-group">
+                    <label for="txtCodePostal">{{ctrl.resources.Global_CodePostal}}</label>
+                    <input class="form-control" type="text" id="txtCodePostal" name="CodePostal" placeholder="{{ctrl.resources.Global_CodePostal_Placeholder}}" ng-model="ctrl.societe.CodePostal" />
+                </div>
+                <!--FIELD CodePostal: END-->
+                <!--FIELD Intérimaire: START-->
+                <div class="form-group">
+                    <span class="text-danger" ng-show="ctrl.erreurSocieteInterim">{{ctrl.resources.Societe_Index_PanelRight_ErreurSocieteInterim}}</span>
+                    <input id="chkInterimaire" name="chkInterimaire" type="checkbox" ng-disabled="ctrl.societe.SocieteId > 0" ng-model="ctrl.societe.IsInterimaire" ng-change="ctrl.GetSocieteInterimExistInGroupe()" />
+                    <label for="chkInterimaire"><span></span>{{ ctrl.resources.Societe_Index_Interimaire}}</label>
+                </div>
+
+                <!--FIELD Intérimaire: END-->
+                <!--FIELD Externe: START-->
+                @*<div class="form-group">
+            <input id="chkExterne" name="chkExterne" type="checkbox" ng-disabled="ctrl.societe.SocieteId > 0" ng-model="ctrl.societe.Externe" />
+            <label for="chkExterne"><span></span>{{ctrl.resources.Global_Externe}}</label>
+        </div>*@
+                <!--FIELD Externe: END-->
+
+                <div class=" form-group row" ng-hide="ctrl.societe.IsInterimaire">
+                    <div class="col-md-4 no-padding-left" ng-repeat="i in ctrl.typeSocietes">
+                        <input type="radio"
+                               id="{{i.Code}}"
+                               ng-disabled="ctrl.societe.SocieteId > 0"
+                               ng-model="ctrl.societe.TypeSocieteId"
+                               value="{{i.TypeSocieteId}}"
+                               ng-change="ctrl.handleOnSelectTypeSociete(i)"><label for="{{i.Code}}"><span></span>{{i.Libelle}}</label>
+                    </div>
+
+                </div>
+                <div class="form-group row" ng-hide="ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.SEP">
+                    <label for="classification">{{ctrl.resources.SocieteClassification_Title}}</label>
+                    <lookup-standalone ng-model="ctrl.societe.Classification"
+                                       text="ctrl.societe.Classification.CodeLibelle"
+                                       search-placeholder="{{ctrl.resources.SocieteClassification_PlaceHolder_Input}}"
+                                       search-title="{{ctrl.resources.SocieteClassification_Title}}"
+                                       on-select="ctrl.handleLookupSelection('Classification', item)"
+                                       on-delete="ctrl.handleLookupDeletion('Classification')"
+                                       class="formulaire long"
+                                       url="/api/SocieteClassification/GetGroupeById/?groupeId={{ctrl.societe.GroupeId}}&onlyActive=true&">
+                    </lookup-standalone>
+                </div>
+
+                <button class="btn btn-primary" ng-click="ctrl.handleOpenAssocieSepModal()" ng-show="ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.SEP" ng-disabled="!ctrl.societe.SocieteId" title="{{ctrl.btnAssocieSepTitle}}"> {{ctrl.resources.Societe_Index_PanelRight_AssocieSep}}</button>
+
+                <!--FIELD Exercice comptable: START-->
+                <div class="row subheader" ng-hide="ctrl.societe.IsInterimaire || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.PARTENAIRE || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.SEP">
+                    <h3 data-toggle="collapse" data-target="#divPaie"><i class="material-icons chevron" aria-hidden="true">keyboard_arrow_right</i>{{ctrl.resources.Societe_Index_PanelRight_SousTitre_ExercicePaie}}</h3>
+                </div>
+
+                <div class="collapse" id="divPaie" ng-hide="ctrl.societe.IsInterimaire || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.PARTENAIRE || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.SEP">
+                    <div class="form-group">
+                        <label for="txtCodePostal">{{ctrl.resources.Societe_Index_PanelRight_ExercicePaie_MoisDebut}}</label>
+                        <select class="form-control"
+                                ng-options="moisExercice.id as moisExercice.name for moisExercice in ctrl.months"
+                                ng-model="ctrl.societe.MoisDebutExercice"></select>
+                        <br />
+                        <label for="txtCodePostal">{{ctrl.resources.Societe_Index_PanelRight_ExercicePaie_MoisFin}}</label>
+                        <select class="form-control"
+                                ng-options="moisExercice.id as moisExercice.name for moisExercice in ctrl.months"
+                                ng-model="ctrl.societe.MoisFinExercice"></select>
+                        <br />
+                        <div ng-show="ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.INTERNE">
+                            <input id="txtIsGenerationSamediCPActive" name="IsGenerationSamediCPActive" type="checkbox" ng-model="ctrl.societe.IsGenerationSamediCPActive" />
+                            <label for="txtIsGenerationSamediCPActive"><span></span>{{ctrl.resources.Societe_Index_PanelRight_GenerationAutoSamediCP}}</label>
+                        </div>
+                    </div>
+                </div>
+                <!--FIELD Exercice comptable: END-->
+                <!--FIELD Devise: START-->
+                <div class="row subheader" ng-hide="ctrl.societe.IsInterimaire || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.PARTENAIRE">
+                    <h3 data-toggle="collapse" data-target="#divDevise"><i class="material-icons chevron" aria-hidden="true">keyboard_arrow_right</i>{{ctrl.resources.Societe_Index_PanelRight_SousTitre_Devise}}</h3>
+                </div>
+
+                <div class="collapse" id="divDevise" ng-hide="ctrl.societe.IsInterimaire || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.PARTENAIRE">
+                    <label>{{ctrl.resources.Societe_Index_PanelRight_DeviseReference}}
+                        <organisation-related-feature key="Societe.DeviseDeReferenceRequired" default-value="true"> *</organisation-related-feature>
+                    </label>
+                    <span class="text-danger" ng-show="ctrl.devise.reference.Devise && ctrl.formSociete.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span><br />
+                    <div class="pickListCallerDeviseRefContainer">
+                        <lookup-standalone ng-model="ctrl.devise.reference.Devise"
+                                           text="ctrl.devise.reference.Devise.Libelle"
+                                           search-title="{{ctrl.resources.Global_ReferentielDevise}}"
+                                           search-placeholder="{{ctrl.resources.Global_ReferentielDevise_Placeholder}}"
+                                           on-click="ctrl.handleShowLookup('Devise')"
+                                           on-select="ctrl.handleLookupSelection('DeviseRef', item)"
+                                           on-delete="ctrl.handleLookupDeletion('DeviseRef')"
+                                           required
+                                           class="formulaire long">
+                        </lookup-standalone>
+                    </div>
+                    <br />
+                    <label>{{ctrl.resources.Societe_Index_PanelRight_AutreDevise}}</label>
+                    <br />
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    {{ctrl.resources.Societe_Index_PanelRight_TableDevise_Entete_Devise}}
+                                </th>
+                                <th>
+                                    <div class="pull-right">
+                                        <lookup ng-model="ctrl.selectedRef"
+                                                search-placeholder="{{ctrl.resources.Global_ReferentielDevise_Placeholder}}"
+                                                search-title="{{ctrl.resources.Global_ReferentielDevise}}"
+                                                on-click="ctrl.handleShowLookup('Devise')"
+                                                on-select="ctrl.handleLookupSelection('DeviseSec', item)">
+                                            <button title="{{ctrl.resources.Societe_Index_PanelRight_TableDevise_Bouton_Ajouter_Tooltip}}" class="btn btn-link pull-right">{{ctrl.resources.Societe_Index_PanelRight_TableDevise_Bouton_Ajouter}}</button>
+                                        </lookup>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="devise in ctrl.devise.secondaires">
+                            <td>{{devise.Devise.CodeLibelle}}</td>
+                            <td align="right">
+                                <button class="btn btn-link flaticon flaticon-multiply" title="{{ctrl.resources.Societe_Index_PanelRight_TableDevise_Bouton_Supprimer_Tooltip}}" ng-click="ctrl.handleDeleteDeviseSec(devise)" aria-hidden="true"></button>
+                            </td>
+                        </tr>
+                    </table>
+                    <label ng-show="ctrl.devise.secondaires.length === 0">{{ctrl.resources.Global_Message_AucunElement}}</label>
+                </div>
+                <!--FIELD Devise: END-->
+                <!--FIELD Unite: START-->
+                <div class="row subheader" ng-hide="ctrl.societe.IsInterimaire || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.PARTENAIRE">
+                    <h3 data-toggle="collapse" data-target="#divUnite"><i class="material-icons chevron" aria-hidden="true">keyboard_arrow_right</i>{{ctrl.resources.Societe_Index_PanelRight_SousTitre_Unite}}</h3>
+                </div>
+
+                <div class="collapse" id="divUnite" ng-hide="ctrl.societe.IsInterimaire || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.PARTENAIRE">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    {{ctrl.resources.Societe_Index_PanelRight_TableUnite_Entete}}
+                                </th>
+                                <th>
+                                    @*empty*@
+                                </th>
+                                <th>
+                                    <div class="pull-right">
+                                        <lookup ng-model="ctrl.selectedRef"
+                                                search-placeholder="{{ctrl.resources.Global_ReferentielUnite_Placeholder}}"
+                                                search-title="{{ctrl.resources.Global_ReferentielUnite}}"
+                                                on-click="ctrl.handleShowLookup('Unite')"
+                                                on-select="ctrl.handleLookupSelection('Unite', item)">
+                                            <button title="{{ctrl.resources.Societe_Index_PanelRight_TableUnite_Bouton_Ajouter_Tooltip}}" class="btn btn-link pull-right">{{ctrl.resources.Societe_Index_PanelRight_TableUnite_Bouton_Ajouter}}</button>
+                                        </lookup>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="uniteSociete in ctrl.unites">
+                            <td>{{uniteSociete.Unite.CodeLibelle}}</td>
+                            <td style="">
+                                <select class="form-control"
+                                        ng-options="TypeUnite.TypeUniteId as TypeUnite.Libelle for TypeUnite in ctrl.societe.TypesUnite"
+                                        ng-model="uniteSociete.Type"></select>
+                            </td>
+                            <td class="del-clear">
+                                <span class="material-icons" title="{{ctrl.resources.Societe_Index_PanelRight_TableUnite_Bouton_Supprimer_Tooltip}}" ng-click="ctrl.handleDeleteUnite(uniteSociete)" aria-hidden="true">clear</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <label ng-show="ctrl.unites.length === 0">{{ctrl.resources.Global_Message_AucunElement}}</label>
+                </div>
+
+
+                <div class="row subheader" ng-hide="ctrl.societe.IsInterimaire || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.PARTENAIRE">
+                    <h3 data-toggle="collapse" data-target="#divBudget"><i class="material-icons chevron" aria-hidden="true">keyboard_arrow_right</i>{{ctrl.resources.Societe_Index_PanelRight_SousTitre_Budget}}</h3>
+                </div>
+                <div class="collapse" id="divBudget" ng-hide="ctrl.societe.IsInterimaire || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.PARTENAIRE">
+                    <div>
+                        <label>{{ctrl.resources.Societe_Index_PanelRight_TableBudget_Avancement_TypeDynamique}}</label>
+                        <label class="switch pull-right">
+                            <input type="checkbox" ng-model="ctrl.societe.IsBudgetTypeAvancementDynamique" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <br />
+                    <div>
+                        <label>{{ctrl.resources.Societe_Index_PanelRight_TableBudget_Avancement_Ecart}}</label>
+                        <label class="switch pull-right">
+                            <input type="checkbox" ng-model="ctrl.societe.IsBudgetAvancementEcart" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <br />
+                    <div>
+                        <label>{{ctrl.resources.Societe_Index_PanelRight_TableBudget_SaisieRecette}}</label>
+                        <label class="switch pull-right">
+                            <input type="checkbox" ng-model="ctrl.societe.IsBudgetSaisieRecette" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+
+                <!--FIELD Unite: END-->
+                <!--FIELD Indeminités de déplacement: START-->
+                <div class="row subheader" ng-hide="ctrl.societe.IsInterimaire || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.PARTENAIRE || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.SEP">
+                    <h3 data-toggle="collapse" data-target="#divIndemniteDeplacement"><i class="material-icons chevron" aria-hidden="true">keyboard_arrow_right</i>{{ctrl.resources.Societe_Index_PanelRight_SousTitre_IndemniteDeplacement}}</h3>
+                </div>
+
+                <div class="collapse" id="divIndemniteDeplacement" ng-hide="ctrl.societe.IsInterimaire || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.PARTENAIRE || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.SEP">
+                    <div class="form-group">
+                        <label for="optionIndemniteDeplacement">{{ctrl.resources.Societe_Index_PanelRight_SousTitre_IndemniteDeplacement_CalculType}}</label>
+                        <select class="form-control"
+                                id="optionIndemniteDeplacement"
+                                ng-options="calculType as calculType.Libelle for calculType in ctrl.indeminiteDeplacementCalculTypes"
+                                ng-model="ctrl.societe.IndemniteDeplacementCalculType"></select>
+                    </div>
+                </div>
+                <!--FIELD Indeminités de déplacement: END-->
+                <!--FIELD Journaux: BEGIN--><!--MAQUETTE US1620 : BEGIN -->
+                <div class="row subheader" ng-hide="ctrl.societe.IsInterimaire || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.PARTENAIRE || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.SEP">
+                    <h3 data-toggle="collapse" data-target="#divJournal"><i class="material-icons chevron" aria-hidden="true">keyboard_arrow_right</i>{{ctrl.resources.Societe_Index_PanelRight_SousTitre_Journaux}}</h3>
+                </div>
+
+                <div class="collapse" id="divJournal" ng-hide="ctrl.societe.IsInterimaire || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.PARTENAIRE || ctrl.selectedTypeSociete.Code === ctrl.typeSocieteCodes.SEP">
+                    <div class="form-group">
+                        <label>{{ctrl.resources.Societe_Index_PanelRight_JournalFAR}}</label>
+                        <input class="form-control" maxlength="20" name="journalFAR" type="text" id="txtjournalFAR" placeholder="{{ctrl.resources.Societe_Index_PanelRight_JournalFAR_Placeholder}}" ng-model="ctrl.journal.journalFAR.Code" />
+                    </div>
+                    <div class="form-group">
+                        <label>{{ctrl.resources.Societe_Index_PanelRight_JournalAchat}}</label>
+
+                        <input class="form-control" maxlength="20" name="newJournalAchat" type="text" id="txtnewJournalAchat" placeholder="{{ctrl.resources.Societe_Index_PanelRight_JournalAchat_Placeholder}}" ng-model="ctrl.journal.newJournalAchat.Code" />
+
+                        <table class="table table-hover journal-table">
+                            <thead>
+                                <tr>
+                                    <th>{{ctrl.resources.Societe_Index_PanelRight_TableJournal_Entete_Code}}</th>
+                                    <th><button class="btn btn-link pull-right" ng-click="ctrl.handleAddJournalAchat()" ng-disabled="!ctrl.journal.newJournalAchat.Code">{{ctrl.resources.Societe_Index_PanelRight_TableJournal_Bouton_Ajouter}}</button></th>
+                                </tr>
+                            </thead>
+                            <tbody class="fred-scroll">
+                                <tr ng-repeat="journal in ctrl.journal.journalAchatList">
+                                    <td colspan="2">
+                                        <div class="col-md-10 no-padding-left">
+                                            <input class="form-control journal" maxlength="20" name="nomJournalFAR" type="text" id="txtNomJournalFAR" ng-model="journal.Code" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-link flaticon flaticon-multiply btnJournal" title="{{ctrl.resources.Societe_Index_PanelRight_TableJournal_Bouton_Supprimer_Tooltip}}" ng-click="ctrl.handleDeleteJournalAchat(journal)"></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label ng-show="ctrl.journal.journalAchatList.length === 0">{{ctrl.resources.Global_Message_AucunElement}}</label>
+                    </div>
+                </div>
+
+                <!--FIELD Journaux: END--><!--MAQUETTE US1620 : END-->
+                <!--FOOTER TOOLBAR : BEGIN-->
+                <div class="footer">
+                    <div class="multi-rows">
+                        <button class="btn btn-default" type="submit" ng-click="ctrl.handleSave();" title="{{resources.Global_Bouton_Enregistrer_Tooltip}}" ng-disabled="ctrl.erreurSocieteInterim">{{ctrl.resources.Global_Bouton_Enregistrer}}</button>
+                        <button class="btn btn-primary" type="submit" ng-click="ctrl.handleSaveAndNew();" title="{{resources.Global_Bouton_EnregistrerEtNouveau_Tooltip}}" ng-disabled="ctrl.erreurSocieteInterim">{{ctrl.resources.Global_Bouton_EnregistrerEtNouveau}}</button>
+                        <button ng-hide="ctrl.societe.SocieteId===0" class="btn valid-again" type="submit" ng-click="ctrl.handleDelete(ctrl.societe);" title="{{resources.Global_Bouton_Supprimer_Tooltip}}">{{ctrl.resources.Global_Bouton_Supprimer}}</button>
+                        <button class="btn btn-link" type="button" ng-click="ctrl.handleCancel();" title="{{resources.Global_Bouton_Annuler_Tooltip}}">{{ctrl.resources.Global_Bouton_Annuler}}</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Formulaire: END -->
+
+        </div>
+    </div>
+
+    <societe-image-selector ng-if="ctrl.openImageSelector"
+                            societe="ctrl.societe"
+                            resources="ctrl.resources"
+                            is-open="ctrl.openImageSelector"
+                            is-logo="ctrl.isLogo">
+    </societe-image-selector>
+
+
+</div>

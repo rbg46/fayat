@@ -1,0 +1,298 @@
+﻿<div class="budget-sous-detail" ng-class="$ctrl.GetMainClass()">
+    <!--Taches hierarchie-->
+    <div class="tache-liste">
+        <div class="tache-box level-1">T1 : {{$ctrl.SousDetail.BudgetT4.Tache.Tache3.Tache2.Tache1.Code}} {{$ctrl.SousDetail.BudgetT4.Tache.Tache3.Tache2.Tache1.Libelle}}</div>
+        <span class="fa fa-chevron-right"></span>
+        <div class="tache-box level-2">T2 : {{$ctrl.SousDetail.BudgetT4.Tache.Tache3.Tache2.Code}} {{$ctrl.SousDetail.BudgetT4.Tache.Tache3.Tache2.Libelle}}</div>
+        <span class="fa fa-chevron-right"></span>
+        <div class="tache-box level-3">T3 : {{$ctrl.SousDetail.BudgetT4.Tache.Tache3.Code}} {{$ctrl.SousDetail.BudgetT4.Tache.Tache3.Libelle}}</div>
+    </div>
+    <table class="budget-sous-detail-table" fred-table fred-table-resize-trigger="{{ $ctrl.SousDetail.Items.length > 0}}" row-count="$ctrl.SousDetail.Items.length">
+        <thead>
+            <!--Premier en-tête-->
+            <tr class="top-header">
+                <th class="col-1 col-42-percent">{{::$ctrl.resources.Budget_SousDetail_Toolbar_Titre_T4}} : {{$ctrl.SousDetail.BudgetT4.Tache.Code}} {{$ctrl.SousDetail.BudgetT4.Tache.Libelle}}</th>
+                <th class="col-3 col-24-percent" ng-show="$ctrl.VueSD">
+                    <div class="textdata">
+                        <span class="title">{{::$ctrl.resources.Budget_SousDetail_Liste_Entete_SousDetail}}</span>
+                        <span class="txt">{{::$ctrl.resources.Budget_SousDetail_Liste_Entete_QuantiteDeBase}}</span>
+                        <input type="text"
+                               fred-input-number="3"
+                               min="-9999999"
+                               max="9999999"
+                               class="form-control quantite numeric-field"
+                               ng-model="$ctrl.SousDetail.BudgetT4.View.QuantiteDeBase"
+                               ng-change="$ctrl.BudgetDetailService.QuantiteDeBaseChanged($ctrl.SousDetail)"
+                               ng-readonly="$ctrl.Budget.Readonly || ($ctrl.SousDetail.BudgetT4.Tache.Code.indexOf('T4REV') > -1)" />
+                    </div>
+                </th>
+                <th class="col-3 col-24-percent" ng-show="$ctrl.VueT4"></th>
+                <th class="sep col-1-percent"></th>
+                <th class="col-4 col-24-percent">
+                    <div class="textdata">
+                        <span class="title">{{::$ctrl.resources.Budget_SousDetail_Liste_Entete_T4}}</span>
+                        <span class="txt">{{::$ctrl.resources.Budget_SousDetail_Liste_Entete_QuantiteARealiser}}</span>
+                        <input type="text"
+                               fred-input-number="3"
+                               min="-9999999"
+                               max="9999999"
+                               class="form-control quantite numeric-field"
+                               ng-model="$ctrl.SousDetail.BudgetT4.View.QuantiteARealiser"
+                               ng-change="$ctrl.BudgetDetailService.QuantiteARealiserChanged($ctrl.SousDetail)"
+                               ng-readonly="$ctrl.Budget.Readonly || ($ctrl.SousDetail.BudgetT4.Tache.Code.indexOf('T4REV') > -1)" />
+                    </div>
+                </th>
+                <th class="col-5 col-9-percent">
+                    <div class="inner-addon right-addon unite-block">
+                        <div class="txt">{{::$ctrl.resources.Budget_SousDetail_Liste_Entete_Unite}}</div>
+                        <div class="lookup" ng-show="!($ctrl.Budget.Readonly && !($ctrl.SousDetail.BudgetT4.Tache.Code.indexOf('T4REV') > -1))">
+                            <lookup-standalone name="unite"
+                                               ng-model="$ctrl.SousDetail.BudgetT4.View.Unite"
+                                               text="$ctrl.SousDetail.BudgetT4.View.Unite.Code"
+                                               search-title="{{$ctrl.resources.Global_ReferentielUnite}}"
+                                               search-placeholder="{{$ctrl.resources.Global_ReferentielUnite_Placeholder}}"
+                                               url="/api/Unite/SearchLightBySocieteId/?societeId={{$ctrl.Budget.SocieteId}}&"
+                                               show-delete-button="true"
+                                               on-delete="$ctrl.SousDetail.BudgetT4.View.Unite = null"
+                                               class="formulaire middle"
+                                               placeholder="{{::$ctrl.resources.Budget_SousDetail_Placeholder_SelectionnerUnite}}"
+                                               title="{{::$ctrl.resources.Budget_SousDetail_Placeholder_SelectionnerUnite}}">
+                            </lookup-standalone>
+                        </div>
+                        <div ng-show="$ctrl.Budget.Readonly || ($ctrl.SousDetail.BudgetT4.Tache.Code.indexOf('T4REV') > -1)">
+                            <div class="txt">{{$ctrl.SousDetail.BudgetT4.View.Unite ? $ctrl.SousDetail.BudgetT4.View.Unite.Libelle : $ctrl.resources.Budget_SousDetail_Indefinie}}</div>
+                        </div>
+                    </div>
+                </th>
+            </tr>
+
+            <!--Second en-tête-->
+            <tr class="bottom-header">
+                <th class="col-1 col-10-percent">{{::$ctrl.resources.Budget_SousDetail_Liste_Entete_Chapitre}}</th>
+                <th class="col-2 col-15-percent">{{::$ctrl.resources.Budget_SousDetail_Liste_Entete_Ressource}}</th>
+                <th class="col-commentaire col-9-percent">{{::$ctrl.resources.Budget_SousDetail_Liste_Entete_Commentaire}}</th>
+                <th class="col-commentaire-button col-2-percent"></th>
+                <th class="col-unite col-6-percent">{{::$ctrl.resources.Budget_SousDetail_Liste_Entete_Unite}}</th>
+                <th class="col-3 col-24-percent" ng-show="$ctrl.VueT4"></th>
+                <th class="col-3 col-8-percent" ng-show="$ctrl.VueSD">{{::$ctrl.resources.Budget_SousDetail_Liste_Entete_Quantite}}</th>
+                <th class="col-4 col-8-percent" ng-show="$ctrl.VueSD">{{::$ctrl.resources.Budget_SousDetail_Liste_Entete_PrixUnitaire}}</th>
+                <th class="col-5 col-8-percent" ng-show="$ctrl.VueSD">{{::$ctrl.resources.Budget_SousDetail_Liste_Entete_Montant}}</th>
+                <th class="sep  col-1-percent"></th>
+                <th class="col-7 col-8-percent">{{::$ctrl.resources.Budget_SousDetail_Liste_Entete_Quantite}}</th>
+                <th class="col-8 col-8-percent">{{::$ctrl.resources.Budget_SousDetail_Liste_Entete_PrixUnitaire}}</th>
+                <th class="col-9 col-8-percent">{{::$ctrl.resources.Budget_SousDetail_Liste_Entete_Montant}}</th>
+                <th class="col-10 col-9-percent">
+                    <span class="material-icons"
+                          ng-show="!$ctrl.Budget.Readonly && !($ctrl.SousDetail.BudgetT4.Tache.Code.indexOf('T4REV') > -1)"
+                          title="{{::$ctrl.resources.Budget_SousDetail_Tooltip_AjouterSousDetailItem}}"
+                          ng-click="$ctrl.ShowRessourcePanel()">add</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="fred-scroll" id="tbody-sousDetail">
+
+            <!--Lignes de sous-détail-->
+            <tr ng-repeat="sousDetailItem in $ctrl.SousDetail.Items | filter: {Deleted: false}">
+
+                <!--Partie du sous-détail-->
+                <td class="col-1 col-10-percent">
+                    <span class="data">{{sousDetailItem.Chapitre.Code}}</span> - <span class="lbl">{{sousDetailItem.Chapitre.Libelle}}</span>
+                </td>
+                <td class="col-2 col-15-percent">
+                    <span class="data">{{sousDetailItem.Ressource.Code}} - {{sousDetailItem.Ressource.Libelle}}</span>
+                </td>
+                <td class="col-commentaire col-9-percent"
+                    ng-disabled="$ctrl.Budget.Readonly || ($ctrl.SousDetail.BudgetT4.Tache.Code.indexOf('T4REV') > -1)">
+                    <input type="text" class="form-control" ng-model="sousDetailItem.View.Commentaire" maxlength="200" ng-attr-title="{{sousDetailItem.View.Commentaire}}" ng-readonly="$ctrl.Budget.Readonly">
+                </td>
+                <td class="col-commentaire-button col-2-percent">
+                    <span class="material-icons" ng-click="$ctrl.ShowComment(sousDetailItem)" ng-attr-title="{{$ctrl.GetShowCommentButtonTooltip()}}">more_vert</span>
+                </td>
+                <td class="col-unite col-6-percent">
+                    <div class="inner-addon right-addon unite-block unit-col">
+                        <div class="lookup" ng-show="!$ctrl.Budget.Readonly && !($ctrl.SousDetail.BudgetT4.Tache.Code.indexOf('T4REV') > -1)">
+                            <lookup-standalone name="unite"
+                                               ng-disabled="$ctrl.IsUniteReadOnly(sousDetailItem)"
+                                               ng-model="sousDetailItem.View.Unite"
+                                               text="sousDetailItem.View.Unite.Code"
+                                               search-title="{{resources.Global_ReferentielUnite}}"
+                                               search-placeholder="{{resources.Global_ReferentielUnite_Placeholder}}"
+                                               url="/api/Unite/SearchLightBySocieteId/?societeId={{$ctrl.Budget.SocieteId}}&"
+                                               show-delete-button="true"
+                                               on-select="$ctrl.BudgetDetailService.SousDetailItemUniteChanged(sousDetailItem)"
+                                               on-delete="sousDetailItem.View.Unite = null; $ctrl.BudgetDetailService.SousDetailItemUniteChanged(sousDetailItem);"
+                                               class="formulaire middle"
+                                               placeholder="{{::$ctrl.resources.Budget_SousDetail_Placeholder_SelectionnerUnite}}"
+                                               title="{{::$ctrl.resources.Budget_SousDetail_Placeholder_SelectionnerUnite}}">
+                            </lookup-standalone>
+                        </div>
+                        <div ng-show="$ctrl.Budget.Readonly || ($ctrl.SousDetail.BudgetT4.Tache.Code.indexOf('T4REV') > -1)">
+                            <div class="txt">{{sousDetailItem.View.Unite ? sousDetailItem.View.Unite.Libelle : $ctrl.resources.Budget_SousDetail_Indefinie}}</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="col-3 col-8-percent" ng-show="$ctrl.VueSD">
+                    <feature-flag invert feature-key='budgetIntegrationFormules'>
+                        <input type="text"
+                               fred-input-number="3"
+                               min="-9999999.99"
+                               max="9999999.99"
+                               class="form-control numeric-field"
+                               ng-model="sousDetailItem.View.QuantiteSD"
+                               ng-change="$ctrl.BudgetDetailService.SousDetailItemQuantiteSdChanged(sousDetailItem)"
+                               ng-disabled="$ctrl.Budget.Readonly || ($ctrl.SousDetail.BudgetT4.Tache.Code.indexOf('T4REV') > -1)"
+                               title="{{$ctrl.BudgetDetailService.GetTooltip(sousDetailItem.View.QuantiteSD)}}" />
+                    </feature-flag>
+                    <feature-flag feature-key='budgetIntegrationFormules'>
+                        <input-formule-component valeur="sousDetailItem.View.QuantiteSD"
+                                                 formule="sousDetailItem.View.QuantiteSDFormule"
+                                                 item="sousDetailItem"
+                                                 on-change-item="$ctrl.OnChangeQuantiteSD(item, valeur, formule)"
+                                                 css-class="form-control numeric-field"
+                                                 disabled="$ctrl.Budget.Readonly || ($ctrl.SousDetail.BudgetT4.Tache.Code.indexOf('T4REV') > -1)"
+                                                 tooltip-formule="{{::$ctrl.resources.Budget_SousDetail_Tooltip_Formule}}"
+                                                 decimal-precision="3" />
+                    </feature-flag>
+                </td>
+                <td class="col-3 col-8-percent" ng-show="$ctrl.VueT4"></td>
+                <td class="col-4 col-8-percent" ng-show="$ctrl.VueSD">
+                    <input type="text"
+                           fred-input-number="3"
+                           min="-99999999999.9999"
+                           max="99999999999.9999"
+                           ng-class="{'prix-different-de-bibliotheque-prix': $ctrl.IsPuDifferentDeBibliothequePrix(sousDetailItem) && $ctrl.VueSD }"
+                           class="form-control numeric-field"
+                           ng-model="sousDetailItem.View.PrixUnitaire"
+                           ng-change="$ctrl.BudgetDetailService.SousDetailItemPrixUnitaireChanged(sousDetailItem)"
+                           ng-disabled="$ctrl.Budget.Readonly || ($ctrl.SousDetail.BudgetT4.Tache.Code.indexOf('T4REV') > -1)"
+                           title="{{$ctrl.GetTooltipPrixUnitaire(sousDetailItem)}}" />
+                </td>
+
+                <td class="col-4 col-8-percent" ng-show="$ctrl.VueT4"></td>
+                <td class="col-5 col-8-percent" ng-show="$ctrl.VueSD">
+                    <div class="cell-value" ng-attr-title="{{$ctrl.BudgetDetailService.GetTooltip(sousDetailItem.View.MontantSD)}}">{{sousDetailItem.View.MontantSD | number:2}}</div>
+                </td>
+                <td class="col-5 col-8-percent" ng-show="$ctrl.VueT4"></td>
+
+                <td class="sep col-1-percent"></td>
+
+                <!--Partie T4-->
+                <td class="col-7 col-8-percent">
+                    <feature-flag invert feature-key='budgetIntegrationFormules'>
+                        <input type="text"
+                               fred-input-number="3"
+                               min="-9999999.99"
+                               max="9999999.99"
+                               class="form-control numeric-field"
+                               ng-model="sousDetailItem.View.Quantite"
+                               ng-change="$ctrl.BudgetDetailService.SousDetailItemQuantiteChanged(sousDetailItem)"
+                               ng-disabled="!$ctrl.VueT4 || $ctrl.Budget.Readonly || ($ctrl.SousDetail.BudgetT4.Tache.Code.indexOf('T4REV') > -1)"
+                               title="{{$ctrl.BudgetDetailService.GetTooltip(sousDetailItem.View.QuantiteSD / $ctrl.SousDetail.BudgetT4.View.QuantiteDeBase * $ctrl.SousDetail.BudgetT4.View.QuantiteARealiser, 6)}}" />
+                    </feature-flag>
+                    <feature-flag feature-key='budgetIntegrationFormules'>
+                        <input-formule-component valeur="sousDetailItem.View.Quantite"
+                                                 formule="sousDetailItem.View.QuantiteFormule"
+                                                 item="sousDetailItem"
+                                                 on-change-item="$ctrl.OnChangeQuantite(item, valeur, formule)"
+                                                 css-class="form-control numeric-field"
+                                                 disabled="!$ctrl.VueT4 || $ctrl.Budget.Readonly || ($ctrl.SousDetail.BudgetT4.Tache.Code.indexOf('T4REV') > -1)"
+                                                 tooltip-formule="{{::$ctrl.resources.Budget_SousDetail_Tooltip_Formule}}"
+                                                 exact-value="sousDetailItem.View.QuantiteSD / $ctrl.SousDetail.BudgetT4.View.QuantiteDeBase * $ctrl.SousDetail.BudgetT4.View.QuantiteARealiser | number : 6"
+                                                 decimal-precision="3" />
+                    </feature-flag>
+                </td>
+
+                <td class="col-8 col-8-percent">
+                    <input type="text"
+                           fred-input-number="3"
+                           min="-99999999999.9999"
+                           max="99999999999.9999"
+                           ng-class="{'prix-different-de-bibliotheque-prix': $ctrl.IsPuDifferentDeBibliothequePrix(sousDetailItem) && $ctrl.VueT4}"
+                           class="form-control numeric-field"
+                           ng-model="sousDetailItem.View.PrixUnitaire"
+                           ng-change="$ctrl.BudgetDetailService.SousDetailItemPrixUnitaireChanged(sousDetailItem)"
+                           ng-disabled="!$ctrl.VueT4 || $ctrl.Budget.Readonly || ($ctrl.SousDetail.BudgetT4.Tache.Code.indexOf('T4REV') > -1)"
+                           title="{{$ctrl.GetTooltipPrixUnitaire(sousDetailItem)}}" />
+                </td>
+                <td class="col-9 col-8-percent">
+                    <div class="cell-value" ng-attr-title="{{$ctrl.BudgetDetailService.GetTooltip(sousDetailItem.View.Montant)}}">{{sousDetailItem.View.Montant | number:2}}</div>
+                </td>
+                <td class="col-10 col-9-percent">
+                    <span class="material-icons"
+                          ng-show="!$ctrl.Budget.Readonly && !($ctrl.SousDetail.BudgetT4.Tache.Code.indexOf('T4REV') > -1)"
+                          ng-click="$ctrl.DeleteSousDetailItem(sousDetailItem)"
+                          ng-attr-title="{{::$ctrl.resources.Budget_SousDetail_Tooltip_SupprimerSousDetailItem}}">clear</span>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="col-1 col-10-percent"></td>
+                <td class="col-2 col-15-percent"></td>
+                <td class="col-commentaire col-9-percent"></td>
+                <td class="col-commentaire-button col-2-percent"></td>
+                <td class="col-unite col-6-percent"></td>
+                <td class="col-3 col-24-percent" ng-show="$ctrl.VueSD">
+                    <div class="synthese syntheseSD" ng-class="{'collapsed': !$ctrl.filter.displaySyntheseQB}" data-toggle="collapse" id="titre_syntheseSD">
+                        <i class="chevron-synthese fa fa-fw" ng-click="$ctrl.ChangeDisplaySynthese('QB')"></i> {{::$ctrl.resources.Budget_SousDetail_Footer_AfficherSyntheseQB}}
+                    </div>
+                    <div id="collapse-syntheseSD" class="syntheseSD" ng-class="{'collapse in': $ctrl.filter.displaySyntheseQB, 'collapse': !$ctrl.filter.displaySyntheseQB}">
+                        <table class="table-synthese">
+                            <tr>
+                                <td class="td-left-synthese">{{::$ctrl.resources.Budget_SousDetail_Footer_PrixTotalQb}}</td>
+                                <td class="td-right-synthese"><div class="cell-value float-right" ng-attr-title="{{$ctrl.BudgetDetailService.GetTooltip($ctrl.SousDetail.BudgetT4.View.MontantSD)}}">{{$ctrl.SousDetail.BudgetT4.View.MontantSD | number:2}}</div></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left-synthese">{{::$ctrl.resources.Budget_SousDetail_Footer_PrixUnitaireQb}}</td>
+                                <td class="td-right-synthese"><div class="cell-value float-right" ng-attr-title="{{$ctrl.BudgetDetailService.GetTooltip($ctrl.SousDetail.PrixUnitaireQb)}}">{{$ctrl.SousDetail.PrixUnitaireQb | number:2}}</div></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left-synthese">{{::$ctrl.resources.Budget_SousDetail_Footer_TotalHeuresMo}}</td>
+                                <td class="td-right-synthese"><div class="cell-value float-right" ng-attr-title="{{$ctrl.BudgetDetailService.GetTooltip($ctrl.SousDetail.TotalHeuresMo)}}">{{$ctrl.SousDetail.TotalHeuresMo | number:2}}</div></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left-synthese">{{::$ctrl.resources.Budget_SousDetail_Footer_HeuresMoParUnite}}</td>
+                                <td class="td-right-synthese"><div class="cell-value float-right" ng-attr-title="{{$ctrl.BudgetDetailService.GetTooltip($ctrl.SousDetail.HeuresMoParUnite)}}">{{$ctrl.SousDetail.HeuresMoParUnite | number:2}}</div></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td class="col-3 col-24-percent" ng-show="$ctrl.VueT4"></td>
+                <td class="sep col-1-percent"></td>
+                <td class="col-4 col-24-percent">
+                    <div class="synthese syntheseT4" ng-class="{'collapsed': !$ctrl.filter.displaySyntheseT4}" data-toggle="collapse" id="titre_syntheseT4">
+                        <i class="chevron-synthese fa fa-fw" ng-click="$ctrl.ChangeDisplaySynthese('T4')"></i> {{::$ctrl.resources.Budget_SousDetail_Footer_AfficherSyntheseT4}}
+                    </div>
+                    <div id="collapse-syntheseT4" class="syntheseT4" ng-class="{'collapse in': $ctrl.filter.displaySyntheseT4, 'collapse': !$ctrl.filter.displaySyntheseT4}">
+                        <table class="table-synthese">
+                            <tr>
+                                <td class="td-left-synthese">{{::$ctrl.resources.Budget_SousDetail_Footer_PrixTotalT4}}</td>
+                                <td class="td-right-synthese"><div class="cell-value float-right" ng-attr-title="{{$ctrl.BudgetDetailService.GetTooltip($ctrl.SousDetail.BudgetT4.View.MontantT4)}}">{{$ctrl.SousDetail.BudgetT4.View.MontantT4 | number:2}}</div></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left-synthese">{{::$ctrl.resources.Budget_SousDetail_Footer_PrixUnitaireT4}}</td>
+                                <td class="td-right-synthese"><div class="cell-value float-right" ng-attr-title="{{$ctrl.BudgetDetailService.GetTooltip($ctrl.SousDetail.BudgetT4.View.PU)}}">{{$ctrl.SousDetail.BudgetT4.View.PU | number:2}}</div></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left-synthese">{{::$ctrl.resources.Budget_SousDetail_Footer_TotalHeuresMoT4}}</td>
+                                <td class="td-right-synthese"><div class="cell-value float-right" ng-attr-title="{{$ctrl.BudgetDetailService.GetTooltip($ctrl.SousDetail.TotalHeuresMoT4)}}">{{$ctrl.SousDetail.TotalHeuresMoT4 | number:2}}</div></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td class="col-5 col-9-percent"></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<!--Panneau de gestion des commentaires-->
+<budget-commentaire-panel-component ng-if="$ctrl.Budget"
+                                    readonly="$ctrl.Budget.Readonly"
+                                    resources="$ctrl.resources">
+</budget-commentaire-panel-component>
+
+<!--Panneau de gestion des ressources de sous-détail-->
+<budget-sous-detail-ressource-panel-component budget="$ctrl.Budget"
+                                              resources="$ctrl.resources">
+</budget-sous-detail-ressource-panel-component>

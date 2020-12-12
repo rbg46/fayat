@@ -1,0 +1,2160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Rapport_Detail_Pied_Absence" xml:space="preserve">
+    <value>Absence</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv2_Materiel_Attente" xml:space="preserve">
+    <value>Attente</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv1_Deplacement" xml:space="preserve">
+    <value>Déplacement</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv1_HeuresNormales" xml:space="preserve">
+    <value>H. Norm</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Entete_NumSemaineIntemperie" xml:space="preserve">
+    <value>N° Sem Int</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Entete_IVD" xml:space="preserve">
+    <value>IVD</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Entete_Ajout" xml:space="preserve">
+    <value>Ajout</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Entete_DeplierListeTache" xml:space="preserve">
+    <value>Tâches</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Entete_CI" xml:space="preserve">
+    <value>CI</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Entete_CodeAbsence" xml:space="preserve">
+    <value>Code Abs</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Entete_CodeDeplacement" xml:space="preserve">
+    <value>Code Dep</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Entete_CodeMajoration" xml:space="preserve">
+    <value>Code Maj</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Entete_HeureAbsence" xml:space="preserve">
+    <value>HAbs</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Entete_HeureMajoration" xml:space="preserve">
+    <value>H. Maj</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Entete_HeureNormale" xml:space="preserve">
+    <value>HNorm</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Entete_Total" xml:space="preserve">
+    <value>Total</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Entete_Prime" xml:space="preserve">
+    <value>Primes</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Entete_Zone" xml:space="preserve">
+    <value>Zone</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Popup_Titre" xml:space="preserve">
+    <value>&lt;b&gt;Controle des pointages&lt;/b&gt; réels manquants</value>
+    <comment>Views\Shared\popupPointage\_popupPointage.cshtml</comment>
+  </data>
+  <data name="Pointage_PointageController_Generation_NbrLigneNonTraitee" xml:space="preserve">
+    <value>Nombre de ligne non traitées : </value>
+    <comment>Areas\Pointage\Scripts\Pointage\PointageController.js</comment>
+  </data>
+  <data name="Rapport_Detail_Titre" xml:space="preserve">
+    <value>Rapport journalier du</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_RapportController_DoublonSaisiePersonnel_Info" xml:space="preserve">
+    <value>La ou les personnes suivantes ont été saisies plusieurs fois : </value>
+    <comment>Areas\Pointage\Scripts\RapportController.js</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv2_Materiel_Intemperie" xml:space="preserve">
+    <value>Intempérie</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Pointage_PointageController_Generation_Success" xml:space="preserve">
+    <value>Les pointages anticipés ont été générés avec succès</value>
+    <comment>Areas\Pointage\Scripts\Pointage\PointageController.js</comment>
+  </data>
+  <data name="Pointage_PointageController_Generation_NbrLigneErreur" xml:space="preserve">
+    <value>Nombre de lignes ayant rencontré des erreurs : </value>
+    <comment>Areas\Pointage\Scripts\Pointage\PointageController.js</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv2_Materiel_Panne" xml:space="preserve">
+    <value>Panne</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Pointage_PointageController_Generation_NbrLigneTraitee" xml:space="preserve">
+    <value>Nombre de lignes traitées : </value>
+    <comment>Areas\Pointage\Scripts\Pointage\PointageController.js</comment>
+  </data>
+  <data name="Pointage_Popup_Tri" xml:space="preserve">
+    <value>Tri :</value>
+    <comment>Views\Shared\popupPointage\_popupPointage.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Titre" xml:space="preserve">
+    <value>Liste des Rapports</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv1_Materiel" xml:space="preserve">
+    <value>Matériel</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv2_Materiel_Marche" xml:space="preserve">
+    <value>Marche</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv1_Majoration" xml:space="preserve">
+    <value>Majoration</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Pointage_Popup_TypeOrganisation" xml:space="preserve">
+    <value>Type Organisation</value>
+    <comment>Views\Shared\popupPointage\_popupPointage.cshtml</comment>
+  </data>
+  <data name="Pointage_Popup_Nom" xml:space="preserve">
+    <value>Nom</value>
+    <comment>Views\Shared\popupPointage\_popupPointage.cshtml</comment>
+  </data>
+  <data name="Pointage_Popup_Organisation" xml:space="preserve">
+    <value>Organisation</value>
+    <comment>Views\Shared\popupPointage\_popupPointage.cshtml</comment>
+  </data>
+  <data name="Pointage_Popup_TitreOnglet" xml:space="preserve">
+    <value>Commandes BUYER</value>
+    <comment>Views\Shared\popupPointage\_popupPointage.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_DateComptable_Placeholder" xml:space="preserve">
+    <value>Date comptable</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Popup_Autres" xml:space="preserve">
+    <value>Autres</value>
+    <comment>Views\Shared\popupPointage\_popupPointage.cshtml</comment>
+  </data>
+  <data name="Pointage_Popup_DateComptable" xml:space="preserve">
+    <value>Date comptable</value>
+    <comment>Views\Shared\popupPointage\_popupPointage.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Filtre_Bouton_Rechercher" xml:space="preserve">
+    <value>Rechercher</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Filtre_SaisieJourneeDeplier" xml:space="preserve">
+    <value>Déplier les journées</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Filtre_OptionSaisie" xml:space="preserve">
+    <value>Options de saisie</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Filtre_OptionRecherche" xml:space="preserve">
+    <value>Options de recherche</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Filtre_Personnel" xml:space="preserve">
+    <value>Sélectionner un personnel</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_TitreOnglet" xml:space="preserve">
+    <value>Liste des pointages</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Titre" xml:space="preserve">
+    <value>Liste des pointages personnels</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Filtre_Date" xml:space="preserve">
+    <value>Sélectionner une date</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Filtre_Bouton_Generer" xml:space="preserve">
+    <value>Générer</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Pied_Majoration" xml:space="preserve">
+    <value>Majorées</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_RapportController_PrimeExisteDeja_Info" xml:space="preserve">
+    <value>La prime existe déjà</value>
+    <comment>Areas\Pointage\Scripts\RapportController.js</comment>
+  </data>
+  <data name="Rapport_RapportController_TacheExisteDeja_Info" xml:space="preserve">
+    <value>La tâche existe déjà</value>
+    <comment>Areas\Pointage\Scripts\RapportController.js</comment>
+  </data>
+  <data name="Rapport_RapportController_NbrMaxPrime_Info" xml:space="preserve">
+    <value>Nombre maximum de prime atteint</value>
+    <comment>Areas\Pointage\Scripts\RapportController.js</comment>
+  </data>
+  <data name="Pointage_PointageController_UneTacheMinimum_Erreur" xml:space="preserve">
+    <value>Il est nécessaire de paramétrer au moins une tâche</value>
+    <comment>Areas\Pointage\Scripts\Pointage\PointageController.js</comment>
+  </data>
+  <data name="Pointage_PointageController_HNormAndHMajoNotMatchWithHTaches_Erreur" xml:space="preserve">
+    <value>Le nombre d'heures travaillées ne correspond pas à la somme des heures affectées aux tâches</value>
+    <comment>Areas\Pointage\Scripts\Pointage\PointageController.js</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_Journee" xml:space="preserve">
+    <value>Journée du </value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_Numero" xml:space="preserve">
+    <value>Rapport n°</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_Semaine" xml:space="preserve">
+    <value>Semaine</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_Statut" xml:space="preserve">
+    <value>Statut</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_Bouton_Detail" xml:space="preserve">
+    <value>Voir le rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_RapportListeController_ConfirmationSuppression" xml:space="preserve">
+    <value>Voulez-vous vraiment supprimer le rapport : {0}?</value>
+    <comment>Areas\Pointage\Scripts\RapportListeController.js</comment>
+  </data>
+  <data name="Rapport_RapportController_DupliquerRapport_Success" xml:space="preserve">
+    <value>Duplication du rapport effectué avec succès !</value>
+    <comment>Areas\Pointage\Scripts\RapportController.js</comment>
+  </data>
+  <data name="Pointage_Index_Filtre_SaisiePointageAnticipe" xml:space="preserve">
+    <value>Création de pointage anticipé</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Filtre_SaisiePointageReel" xml:space="preserve">
+    <value>Création de pointage réel</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_StatutNonVerrouille" xml:space="preserve">
+    <value>Non verrouillé</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_StatutValide" xml:space="preserve">
+    <value>Validé</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_StatutVerrouille" xml:space="preserve">
+    <value>Verrouillé</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_ToutStatut" xml:space="preserve">
+    <value>Tous les statuts</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_DateFin_Placeholder" xml:space="preserve">
+    <value>jusqu'au : </value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_DateDebut_Placeholder" xml:space="preserve">
+    <value>A partir du : </value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Bouton_Deverrouiller" xml:space="preserve">
+    <value>Déverrouiller</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Bouton_Verrouiller" xml:space="preserve">
+    <value>Verrouiller</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Chk_ToutSelectionner_lb" xml:space="preserve">
+    <value>Tout sélectionner</value>
+    <comment>ValidationPointage\Scripts\ListePointageMensuel\Template\Lots.html</comment>
+  </data>
+  <data name="Pointage_PointageController_DupliquerPointage_Success" xml:space="preserve">
+    <value>{0} ligne(s) de pointage on correctement été générée(s)</value>
+    <comment>Areas\Pointage\Scripts\Pointage\PointageController.js</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_ChefChantier_Auteur" xml:space="preserve">
+    <value>par</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_ChefChantier_Date" xml:space="preserve">
+    <value>le</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_ValidationChefChantier" xml:space="preserve">
+    <value>Validation Chef de chantier</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_RapportListeControler_Deverrouiller_Success" xml:space="preserve">
+    <value>Les rapports ont été déverrouillés avec succès</value>
+    <comment>Areas\Pointage\Scripts\RapportListeController.js</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_ConducteurTravaux_Auteur" xml:space="preserve">
+    <value>par</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_ConducteurTravaux_Date" xml:space="preserve">
+    <value>le</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_ValidationConducteurTravaux" xml:space="preserve">
+    <value>Validation Conducteur de travaux</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_DirecteurChantier_Auteur" xml:space="preserve">
+    <value>par</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_DirecteurChantier_Date" xml:space="preserve">
+    <value>le</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_ValidationDirecteurChantier" xml:space="preserve">
+    <value>Validation Directeur de chantier</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_VerrouillageGestionnairePaieAbsente" xml:space="preserve">
+    <value>Aucun verrouillage de la part d'un gestionnaire de paie</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_CorrespondantPaye_Auteur" xml:space="preserve">
+    <value>par</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_CorrespondantPaye_Date" xml:space="preserve">
+    <value>le</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_VerrouillageGestionnairePaie" xml:space="preserve">
+    <value>Verrouillage Gestion de paie</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_RapportListeControler_Verrouiller_Success" xml:space="preserve">
+    <value>Les rapports ont été verrouillés avec succès</value>
+    <comment>Areas\Pointage\Scripts\RapportListeController.js</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_ValidationAbsente" xml:space="preserve">
+    <value>Aucune Validation</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_AuteurModification" xml:space="preserve">
+    <value>Auteur Modification</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_ChefChantier_SousTitre" xml:space="preserve">
+    <value>Chef de Chantier</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_ConducteurTravaux_SousTitre" xml:space="preserve">
+    <value>Conducteur de travaux</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_CorrespondantPaye_SousTitre" xml:space="preserve">
+    <value>Correspondant paye</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_DirecteurChantier_SousTitre" xml:space="preserve">
+    <value>Directeur de chantier</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv1_Personnel" xml:space="preserve">
+    <value>Personnel</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Rechercher_Placeholder" xml:space="preserve">
+    <value>Rechercher un Rapport ...</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_Horaire_Tranche_Erreur" xml:space="preserve">
+    <value>Les tranches horaires sont incorrectes</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Bouton_VerificationTemps" xml:space="preserve">
+    <value> Vérification des temps</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Bouton_ControlePointage" xml:space="preserve">
+    <value> Contrôle des pointages</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Bouton_ListePrime" xml:space="preserve">
+    <value> Liste des primes</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalSuppressionCI_MessageConfirmation" xml:space="preserve">
+    <value>Attention, tout changement de CI va ré-initialiser entièrement ce rapport, voulez-vous continuer ?</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalModificationCI_MessageConfirmation_Partie1" xml:space="preserve">
+    <value>Vous pouvez modifier le CI actuel vers un nouveau CI de la même société. </value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_NouveauRapport" xml:space="preserve">
+    <value>Nouveau Rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_ValidationGestionnairePaie" xml:space="preserve">
+    <value>Validation Gestion de paie</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_TitreOnglet" xml:space="preserve">
+    <value>Recherche Rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_Tuile_StatutNonVerrouille" xml:space="preserve">
+    <value>Non Verrouillé</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_Tuile_StatutValide" xml:space="preserve">
+    <value>Validé</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_Tuile_StatutVerrouille" xml:space="preserve">
+    <value>Verrouillé</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_Tuile_ToutStatut" xml:space="preserve">
+    <value>Tous les Statuts</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Bouton_AjouterRapport" xml:space="preserve">
+    <value>Nouveau Rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Bouton_Deverrouiller_Placeholder" xml:space="preserve">
+    <value>Cliquer pour Déverrouiller les Rapports sélectionnés</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Bouton_Verrouiller_Placeholder" xml:space="preserve">
+    <value>Cliquer pour Verrouiller les Rapports sélectionnés</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_CheckBox_ToutSelectionner" xml:space="preserve">
+    <value>Tout sélectionner</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_NbrRapport" xml:space="preserve">
+    <value>Rapport(s)</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_TitreOnglet" xml:space="preserve">
+    <value>Liste des Rapports</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_SaisieLe" xml:space="preserve">
+    <value>le</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_SaisiePar" xml:space="preserve">
+    <value>Saisie par</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_ValidationChefChantierAuteur" xml:space="preserve">
+    <value>par</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_ValidationChefChantierDate" xml:space="preserve">
+    <value>le</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_ValidationConducteurTravauxAuteur" xml:space="preserve">
+    <value>par</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_ValidationConducteurTravauxDate" xml:space="preserve">
+    <value>le</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_ValidationDirecteurChantierAuteur" xml:space="preserve">
+    <value>par</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_ValidationDirecteurChantierDate" xml:space="preserve">
+    <value>le</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_ValidationGestionnairePaieAuteur" xml:space="preserve">
+    <value>par</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_ValidationGestionnairePaieDate" xml:space="preserve">
+    <value>le</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_VerrouillageGestionnairePaieAuteur" xml:space="preserve">
+    <value>par</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_VerrouillageGestionnairePaieDate" xml:space="preserve">
+    <value>le</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_TitreOnglet" xml:space="preserve">
+    <value>Détail du Rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_ListeRapport_Bouton_Detail_Tooltip" xml:space="preserve">
+    <value>Cliquer pour afficher le détail du Rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_DateComptable" xml:space="preserve">
+    <value>Date comptable</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_FiltrerPar" xml:space="preserve">
+    <value>Filtré par</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_Radio_Autre" xml:space="preserve">
+    <value>Autres</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_Radio_Matricule" xml:space="preserve">
+    <value>Matricule</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_Radio_Nom" xml:space="preserve">
+    <value>Nom</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_Radio_Perimetre" xml:space="preserve">
+    <value>Mon périmètre</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_Radio_Population" xml:space="preserve">
+    <value>Mes rapports verrouillés</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_Titre_Inconnu" xml:space="preserve">
+    <value>Libellé inconnu</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_Titre_ListeIGD" xml:space="preserve">
+    <value>Liste des IGD</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_Titre_ListePrime" xml:space="preserve">
+    <value>Liste des Primes</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_Titre_VerificationTemps" xml:space="preserve">
+    <value> Vérification des Temps</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_Aggrandir_Tooltip" xml:space="preserve">
+    <value>Cliquer pour agrandir le rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_Personnalisation_Tooltip" xml:space="preserve">
+    <value>Cliquer pour personnaliser le rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_StatutValidation_Tooltip" xml:space="preserve">
+    <value>Cliquer pour voir le Statut de validation du Rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_CentreImputation" xml:space="preserve">
+    <value>Centre d'Imputation</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_LectureSeul_Tooltip" xml:space="preserve">
+    <value>Rapport en Lecture seule</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_Titre" xml:space="preserve">
+    <value>Statuts de validation du rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_Evenement_SousTitre" xml:space="preserve">
+    <value>Evènements</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_Horaire_SousTitre" xml:space="preserve">
+    <value>Horaire</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_Meteo_SousTitre" xml:space="preserve">
+    <value>Problème Météo</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_Reduire_Tooltip" xml:space="preserve">
+    <value>Cliquer pour Réduire le Rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_CI_Titre" xml:space="preserve">
+    <value>CI</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Date_Titre" xml:space="preserve">
+    <value>Date</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv1_Absence" xml:space="preserve">
+    <value>Absence</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv1_Bouton_AjouterLigne" xml:space="preserve">
+    <value>Ajouter une ligne</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_OngletGlobal_Titre" xml:space="preserve">
+    <value>Pointage Global</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_OngletMateriel_Titre" xml:space="preserve">
+    <value>Pointage du matériel seul</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_OngletPersonnel_Titre" xml:space="preserve">
+    <value>Pointage du personnel seul</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_OngletVue_Titre" xml:space="preserve">
+    <value>Vue personnalisée</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Rapport_Titre" xml:space="preserve">
+    <value>Rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_AuteurCreation" xml:space="preserve">
+    <value>Auteur Creation</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv1_HeuresTotalesTravaillees" xml:space="preserve">
+    <value>H. totales travaillées</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv1_Bouton_AjouterPrime" xml:space="preserve">
+    <value>Ajouter une Prime</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv1_Bouton_AjouterTache" xml:space="preserve">
+    <value>Ajouter une Tâche</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv1_Prime" xml:space="preserve">
+    <value>Prime</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv1_Tache" xml:space="preserve">
+    <value>Tâche</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv2_Absence_Code" xml:space="preserve">
+    <value>Code</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv2_Absence_Heure" xml:space="preserve">
+    <value>Heures</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv2_Absence_NumSemaineIntemperie" xml:space="preserve">
+    <value>N° Sem Int</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv2_Deplacement_Code" xml:space="preserve">
+    <value>Code</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv2_Deplacement_IVD" xml:space="preserve">
+    <value>IVD</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv2_Deplacement_Zone" xml:space="preserve">
+    <value>Zone</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv2_Majoration_Code" xml:space="preserve">
+    <value>Code</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv2_Majoration_Heure" xml:space="preserve">
+    <value>Heures</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Ligne_Bouton_DupliquerLigne" xml:space="preserve">
+    <value>Cliquer pour Dupliquer la ligne du Rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Ligne_Bouton_SupprimeLigne" xml:space="preserve">
+    <value>Cliquer pour Supprimer la ligne du Rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Ligne_HeuresNormales_Tooltip" xml:space="preserve">
+    <value>Veuillez saisir les heures travaillées au niveau des tâches.</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Ligne_Prime_Info" xml:space="preserve">
+    <value>Cliquer sur + pour Ajouter une Prime</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Ligne_Tache_Info" xml:space="preserve">
+    <value>Cliquer sur + pour Ajouter une Tâche</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_AjouterLigne" xml:space="preserve">
+    <value>Ajouter une ligne</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_AjouterLigne_Tooltip" xml:space="preserve">
+    <value>Cliquer pour ajouter une ligne au rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_Commentaire" xml:space="preserve">
+    <value>Commentaires</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_DupliquerLigneSelectionner" xml:space="preserve">
+    <value>Dupliquer ligne(s)</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_DupliquerLigneSelectionner_Tooltip" xml:space="preserve">
+    <value>Cliquer pour Dupliquer les lignes sélectionnées</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_SupprimerLigneSelectionner" xml:space="preserve">
+    <value>Supprimer ligne(s)</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_SupprimerLigneSelectionner_Tooltip" xml:space="preserve">
+    <value>Cliquer pour Supprimer les lignes sélectionnées</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_NbrLigneSelectionnee" xml:space="preserve">
+    <value>ligne sélectionnée</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_NbrLignesSelectionnees" xml:space="preserve">
+    <value>lignes sélectionnées</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_DupliquerRapport" xml:space="preserve">
+    <value>Dupliquer Rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_DupliquerRapport_Tooltip" xml:space="preserve">
+    <value>Dupliquer Rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_NouveauRapport_Tooltip" xml:space="preserve">
+    <value>Nouveau Rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_SupprimerRapport" xml:space="preserve">
+    <value>Supprimer Rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_SupprimerRapport_Tooltip" xml:space="preserve">
+    <value>Supprimer Rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Personnalisation_Bouton_Sauvegarder" xml:space="preserve">
+    <value>Sauvegarder votre configuration</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Personnalisation_Colonne_SousTitre" xml:space="preserve">
+    <value>Configuration des colonnes</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Personnalisation_Entete_Afficher" xml:space="preserve">
+    <value>Afficher</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Personnalisation_Entete_Colonne" xml:space="preserve">
+    <value>Colonne</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Personnalisation_Entete_Couleur" xml:space="preserve">
+    <value>Couleur</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Personnalisation_Entete_Police" xml:space="preserve">
+    <value>Police</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Personnalisation_Theme" xml:space="preserve">
+    <value>Thème</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Personnalisation_Theme_SousTitre" xml:space="preserve">
+    <value>Configuration des thèmes</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Personnalisation_Titre" xml:space="preserve">
+    <value>Configuration du tableau</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Personnalisation_Bouton_Sauvegarder_Tooltip" xml:space="preserve">
+    <value>Sauvegarder votre configuration</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Pointage_PointageController_CI_Erreur" xml:space="preserve">
+    <value>Le CI actuel ne correspond pas au CI initial</value>
+    <comment>Areas\Pointage\Scripts\Pointage\PointageController.js</comment>
+  </data>
+  <data name="Pointage_PointageController_CodeAbsence_Erreur" xml:space="preserve">
+    <value>Le code absence actuel ne correspond pas au code absence initial</value>
+    <comment>Areas\Pointage\Scripts\Pointage\PointageController.js</comment>
+  </data>
+  <data name="Pointage_PointageController_CodeDeplacement_Erreur" xml:space="preserve">
+    <value>Le code déplacement actuel ne correspond pas au code déplacement initial</value>
+    <comment>Areas\Pointage\Scripts\Pointage\PointageController.js</comment>
+  </data>
+  <data name="Pointage_PointageController_CodeMajoration_Erreur" xml:space="preserve">
+    <value>Le code majoration actuel ne correspond pas au code majoration initial</value>
+    <comment>Areas\Pointage\Scripts\Pointage\PointageController.js</comment>
+  </data>
+  <data name="Pointage_PointageController_CodeZoneDeplacement_Erreur" xml:space="preserve">
+    <value>Le code zone déplacement actuel ne correspond pas au code zone déplacement initial</value>
+    <comment>Areas\Pointage\Scripts\Pointage\PointageController.js</comment>
+  </data>
+  <data name="Pointage_PointageController_Personnel_Erreur" xml:space="preserve">
+    <value>Le personnel actuel ne correspond pas au personnel initial</value>
+    <comment>Areas\Pointage\Scripts\Pointage\PointageController.js</comment>
+  </data>
+  <data name="Pointage_PointageController_PrimeExisteDeja_Info" xml:space="preserve">
+    <value>La prime existe déjà</value>
+    <comment>Areas\Pointage\Scripts\Pointage\PointageController.js</comment>
+  </data>
+  <data name="Pointage_PointageController_RecuperationFiltre_Erreur" xml:space="preserve">
+    <value>Erreur dans la récupération du filtre de recherche des pointages</value>
+    <comment>Areas\Pointage\Scripts\Pointage\PointageController.js</comment>
+  </data>
+  <data name="Pointage_PointageController_RecuperationPointage_Erreur" xml:space="preserve">
+    <value>Erreur dans la récupération des pointages</value>
+    <comment>Areas\Pointage\Scripts\Pointage\PointageController.js</comment>
+  </data>
+  <data name="Pointage_PointageController_TacheExisteDeja_Info" xml:space="preserve">
+    <value>La tâche existe déjà</value>
+    <comment>Areas\Pointage\Scripts\Pointage\PointageController.js</comment>
+  </data>
+  <data name="Rapport_RapportController_Continuer" xml:space="preserve">
+    <value>Continuer</value>
+    <comment>Areas\Pointage\Scripts\RapportController.js</comment>
+  </data>
+  <data name="Rapport_RapportController_Retour" xml:space="preserve">
+    <value>Retour</value>
+    <comment>Areas\Pointage\Scripts\RapportController.js</comment>
+  </data>
+  <data name="Rapport_Index_Bouton_ListeIGD" xml:space="preserve">
+    <value> Liste des IGD</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Bouton_AjouterRapport_Tooltip" xml:space="preserve">
+    <value>Cliquer pour ajouter un Nouveau Rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Filtre_PointageAnticipe" xml:space="preserve">
+    <value>Voir les pointages anticipés</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Filtre_PointageReel" xml:space="preserve">
+    <value>Voir les pointages réels</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_Titre_ControlePointage" xml:space="preserve">
+    <value>Contrôle des Pointages</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Index_Entete_Date" xml:space="preserve">
+    <value>Date</value>
+    <comment>Areas\Pointage\Views\Pointage\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_Tri" xml:space="preserve">
+    <value>Tri</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Popup_MonPerimetre" xml:space="preserve">
+    <value>Mon périmetre</value>
+    <comment>Views\Shared\popupPointage\_popupPointage.cshtml</comment>
+  </data>
+  <data name="Pointage_Popup_Extract" xml:space="preserve">
+    <value>Extract :</value>
+    <comment>Views\Shared\popupPointage\_popupPointage.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_ChoixPerimetre" xml:space="preserve">
+    <value>Choix du périmètre</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalSuppressionMateriel_MessageConfirmation" xml:space="preserve">
+    <value>Attention, la suppression du matériel de la ligne va ré-initialiser les données de pointage associées (marche, attente...). Voulez-vous continuer ?</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalSuppressionPersonnel_MessageConfirmation" xml:space="preserve">
+    <value>Attention, la suppression du personnel de la ligne va ré-initialiser les données de pointage associées (absence, majoration, prime...). Voulez-vous continuer ?</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_Tuile_StatutEnCours" xml:space="preserve">
+    <value>En cours</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_Tuile_StatutValide1" xml:space="preserve">
+    <value>Validé 1</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_Tuile_StatutValide2" xml:space="preserve">
+    <value>Validé 2</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_Tuile_StatutValide3" xml:space="preserve">
+    <value>Validé 3</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_StatutEnCours" xml:space="preserve">
+    <value>En cours</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_StatutValide1" xml:space="preserve">
+    <value>Validé 1</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_StatutValide2" xml:space="preserve">
+    <value>Validé 2</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_StatutValide3" xml:space="preserve">
+    <value>Validé 3</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_Commentaire_Placeholder" xml:space="preserve">
+    <value>Cliquer pour afficher les commentaires</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_DateComptable" xml:space="preserve">
+    <value>Date comptable</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_DateGestion" xml:space="preserve">
+    <value>Date de gestion</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_DateComptable_Placeholder" xml:space="preserve">
+    <value>Choisir période</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_Perimetre" xml:space="preserve">
+    <value>Périmètre</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_CI" xml:space="preserve">
+    <value>CI</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_Tuile_DateRapport" xml:space="preserve">
+    <value>Date rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_Tuile_Periode" xml:space="preserve">
+    <value>Période</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_DeverrouillerRapport" xml:space="preserve">
+    <value>Le rapport a été déverrouillé avec succès.</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_VerrouillerRapport" xml:space="preserve">
+    <value>Le rapport a été verrouillé avec succès.</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_SaveRapport" xml:space="preserve">
+    <value>Le rapport a été enregistré avec succès.</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Error_Validation" xml:space="preserve">
+    <value>Impossible de valider le rapport.</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="PointagePersonnel_ModalDeleteConfirmation" xml:space="preserve">
+    <value>Confirmez-vous la suppression de la ligne ?</value>
+    <comment>Areas\Pointage\Views\PointagePersonnel\Script\ListePointagesTemplate.cshtml</comment>
+  </data>
+  <data name="Pointage_List_Add" xml:space="preserve">
+    <value>Ajouter une ligne</value>
+    <comment>Areas\PointagePersonnel\Scripts\components\pointage-list.component.html</comment>
+  </data>
+  <data name="Pointage_List_Delete" xml:space="preserve">
+    <value>Supprimer la ligne</value>
+    <comment>Areas\PointagePersonnel\Scripts\components\pointage-list.component.html</comment>
+  </data>
+  <data name="Pointage_List_Duplicate" xml:space="preserve">
+    <value>Dupliquer la ligne</value>
+    <comment>Areas\PointagePersonnel\Scripts\components\pointage-list.component.html</comment>
+  </data>
+  <data name="Rapport_PointagePersonnel_Filename" xml:space="preserve">
+    <value>Pointage_{0}_{1}_{2}</value>
+    <comment>{0} = Nom du personnel, {1} = Matricule, {2} = Période</comment>
+  </data>
+  <data name="Pointage_List_Show" xml:space="preserve">
+    <value>Afficher le détail de la ligne</value>
+    <comment>Areas\PointagePersonnel\Scripts\components\pointage-list.component.html</comment>
+  </data>
+  <data name="PointagePersonnel_Index_Export" xml:space="preserve">
+    <value>Exporter</value>
+    <comment>Areas\PointagePersonnel\Views\PointagePersonnel\Index.cshtml</comment>
+  </data>
+  <data name="PointagePersonnel_Index_Lock" xml:space="preserve">
+    <value>Verrouiller</value>
+    <comment>Areas\PointagePersonnel\Views\PointagePersonnel\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_RapportController_TacheVide_Info" xml:space="preserve">
+    <value>Vous n’avez saisi aucun pointage pour la(les) tâche(s) suivante(s) :</value>
+    <comment>Areas\Pointage\Scripts\RapportController.js</comment>
+  </data>
+  <data name="Rapport_ModalProductionFlash_Production" xml:space="preserve">
+    <value>Production</value>
+    <comment>Areas\Pointage\Scripts\modals\avancement-bilanFlash-modal.html</comment>
+  </data>
+  <data name="Rapport_ModalProductionFlash_Saisissez" xml:space="preserve">
+    <value>Saisissez les quantités réalisées pour le bilan flash</value>
+    <comment>Areas\Pointage\Scripts\modals\avancement-bilanFlash-modal.html</comment>
+  </data>
+  <data name="Rapport_ModalProductionFlash_Tache" xml:space="preserve">
+    <value>Tâche</value>
+    <comment>Areas\Pointage\Scripts\modals\avancement-bilanFlash-modal.html</comment>
+  </data>
+  <data name="Rapport_ModalProductionFlash_Titre" xml:space="preserve">
+    <value>Production flash du </value>
+    <comment>Areas\Pointage\Scripts\modals\avancement-bilanFlash-modal.html</comment>
+  </data>
+  <data name="Rapport_ModalProductionFlash_Unite" xml:space="preserve">
+    <value>Unité</value>
+    <comment>Areas\Pointage\Scripts\modals\avancement-bilanFlash-modal.html</comment>
+  </data>
+  <data name="Rapport_ModalProductionFlash_ProductionObligatoire" xml:space="preserve">
+    <value>Veuillez saisir les productions de toutes les tâches.</value>
+    <comment>Areas\Pointage\Scripts\modals\avancement-bilanFlash-modal.html</comment>
+  </data>
+  <data name="Rapport_Detail_AvecChauffeur" xml:space="preserve">
+    <value>Si le matériel est accompagné d'un chauffeur, cocher la case pour activer la valorisation correspondante.</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv1_HeuresPersonnel" xml:space="preserve">
+    <value>Heures Personnel</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_Evenement_Tooltip" xml:space="preserve">
+    <value>Cliquer pour afficher la gestion des évènements</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_Personnel_Titre" xml:space="preserve">
+    <value>Export du pointage personnel</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_ChoixExport" xml:space="preserve">
+    <value>Choix de l'export</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_ChoixPerimetre" xml:space="preserve">
+    <value>Choix du périmètre *</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_ChoixPersonnel" xml:space="preserve">
+    <value>Choix du personnel</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Code_Groupe_FES" xml:space="preserve">
+    <value>GFES</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Modal_Initialisation_Ligne_Rapport" xml:space="preserve">
+    <value>Voulez-vous vraiment initialiser cette ligne de rapport ? tous les données de pointage associées serons perdus.</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Details_Change_AstreinteDates" xml:space="preserve">
+    <value>Modifier les dates de l'astreinte</value>
+  </data>
+  <data name="Rapport_Week_Sum_Error_B" xml:space="preserve">
+    <value>Le nombre d'heures renseigné est erroné, rapprochez-vous du responsable hiérarchique</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Week_Sum_Error_NB" xml:space="preserve">
+    <value>Le nombre d'heures renseigné implique des heures supplémentaires</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Personnel" xml:space="preserve">
+    <value>Personne</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Select_Affichage" xml:space="preserve">
+    <value>Gérer ma séléction</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Select_All_Ci" xml:space="preserve">
+    <value>Sélectionner tous mes CI</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Select_Date" xml:space="preserve">
+    <value>Sélection de la semaine</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Title" xml:space="preserve">
+    <value>Rapport de pointage hebdomadaire</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Voir_Affaire" xml:space="preserve">
+    <value>Voir mes affaires</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Voir_Equipe" xml:space="preserve">
+    <value>Voir mes équipes</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Voir_Rapport" xml:space="preserve">
+    <value>Voir mes rapports</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Voir_Select_Equipe" xml:space="preserve">
+    <value>Seulement les ouvriers de mon équipe favorite</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Voir_Select_Equipe_Favorite" xml:space="preserve">
+    <value>Sélectionner mon équipe favorite</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Voir_Select_Tout_Personnel" xml:space="preserve">
+    <value>Sélectionner tout le personnel</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_ErrorMessage_Total_Pointage_Depasse" xml:space="preserve">
+    <value>L’ouvrier a été pointé sur une autre affaire, son pointage total est supérieur à 7h</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Code_Societe_RZB" xml:space="preserve">
+    <value>RB</value>
+  </data>
+  <data name="Error_Code_Majoration_Param" xml:space="preserve">
+    <value>Le code majoration correspondant aux heures majorées n'est pas paramétré.</value>
+  </data>
+  <data name="Error_Majoration_Param" xml:space="preserve">
+    <value>Les heures majorées ne sont pas paramétrées.</value>
+  </data>
+  <data name="Error_Max_Hour_Majoration_FES" xml:space="preserve">
+    <value>Les heures majorées ne peuvent dépasser les 10 heures.</value>
+  </data>
+  <data name="Error_Max_Hour_Majoration_RZB" xml:space="preserve">
+    <value>Les heures majorées ne peuvent dépasser les 12 heures.</value>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv1_Bouton_AjouterMajoration" xml:space="preserve">
+    <value>Ajouter une Majoration</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Ligne_Majoration_Info" xml:space="preserve">
+    <value>Cliquer sur + pour Ajouter une Majoration</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_RapportController_MajorationExisteDeja_Info" xml:space="preserve">
+    <value>Le code majoration existe déja</value>
+    <comment>Areas\Pointage\Scripts\RapportController.js</comment>
+  </data>
+  <data name="Rapport_RapportController_NbrMaxMajoration_Info" xml:space="preserve">
+    <value>Nombre maximum des majorations atteint</value>
+    <comment>Areas\Pointage\Scripts\RapportController.js</comment>
+  </data>
+  <data name="Rapport_Majoration_Max_Bloquant_Error" xml:space="preserve">
+    <value>Le nombre d'heures majorées renseigné est erroné, rapprochez-vous du responsable hiérarchique</value>
+  </data>
+  <data name="Rapport_Hour_Week_Max" xml:space="preserve">
+    <value>Le nombre d'heures renseigné est erroné, rapprochez-vous du responsable hiérarchique</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_Radio_PrimesHeuresJours" xml:space="preserve">
+    <value>Primes heures/jour</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_Radio_PrimesMensuelles" xml:space="preserve">
+    <value>Primes mensuelles</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_Au" xml:space="preserve">
+    <value>Au</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_Du" xml:space="preserve">
+    <value>Du</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_FiltrePar" xml:space="preserve">
+    <value>Filtré par</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_Interimaire" xml:space="preserve">
+    <value>Export du pointage intérimaire</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_Interimaire_Titre" xml:space="preserve">
+    <value>Export du pointage intérimaire</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_MesRapportsVerrouilles" xml:space="preserve">
+    <value>Mes rapports verrouillés</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_Personnel" xml:space="preserve">
+    <value>Export du pointage personnel</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_TousRapportsVerrouilles" xml:space="preserve">
+    <value>Tous les rapports verrouillés</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_ChoixPerimetrePersonnel_Placeholder" xml:space="preserve">
+    <value>Sélectionner un établissement ou un CI</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_ChoixPersonnel_Placeholder" xml:space="preserve">
+    <value>Sélectionner un personnel</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_DateAu_Placeholder" xml:space="preserve">
+    <value>Date de fin </value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_DateComptable_Placeholder" xml:space="preserve">
+    <value>Date Comptable</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_DateDu_Placeholder" xml:space="preserve">
+    <value>Date de début</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Bouton_RecapHeuresSpecifiques" xml:space="preserve">
+    <value>Récapitulatif des heures spécifiques</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_Titre_ListeCodeMajoration" xml:space="preserve">
+    <value>Récapitulatif des heures spécifiques</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Bouton_SalarieAcompte" xml:space="preserve">
+    <value>Situation salariés pour acompte</value>
+    <comment>Areas\Pointage\Views\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Confirm_Change_Date" xml:space="preserve">
+    <value>Cette action peut entrainer une perte de données , voulez-vous continuer sans enregistrer ?</value>
+    <comment>RapportHebdo</comment>
+  </data>
+  <data name="Pointage_Export_ChoixPerimetreInterimaire_Placeholder" xml:space="preserve">
+    <value>Sélectionner un établissement</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_Filename_Interimaire" xml:space="preserve">
+    <value>PointageInterimaire_Du_{0}_Au_{1}</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_Filename_Personnel_Hebdomadaire" xml:space="preserve">
+    <value>PointagePersonnelHebdomadaire_Du_{0}_Au_{1}</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_VerificationDateDebut_Erreur" xml:space="preserve">
+    <value>La date de début doit être inférieure à la date de fin</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_VerificationDate_Erreur" xml:space="preserve">
+    <value>Une date comptable ou une période doit être remplie pour valider l'export</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv1_Astreinte" xml:space="preserve">
+    <value>Astreintes</value>
+  </data>
+  <data name="error_pointage_Journalier" xml:space="preserve">
+    <value>Le nombre d'heures renseigné est erroné, rapprochez-vous du responsable hiérarchique</value>
+  </data>
+  <data name="valeur_admises_error" xml:space="preserve">
+    <value>Les valeurs admises sont ‘0.5’ et ‘1’.</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_Titre_ListeAbsence" xml:space="preserve">
+    <value>Liste des absences</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Bouton_ListeAbsence" xml:space="preserve">
+    <value> Liste des absences</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="error_message_pointage_hebdo" xml:space="preserve">
+    <value>Le nombre d'heures renseigné est erroné</value>
+  </data>
+  <data name="error_message_pointage_implique_heur_sup" xml:space="preserve">
+    <value>Le nombre d'heures renseigné implique des heures supplémentaires</value>
+  </data>
+  <data name="Pointage_Export_DateComptable" xml:space="preserve">
+    <value>Date Comptable</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_Ou" xml:space="preserve">
+    <value>Ou</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_Periode" xml:space="preserve">
+    <value>Période *</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Title_Etamiac" xml:space="preserve">
+    <value>ETAM IAC</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_Hebdo_Title_Ouvrier" xml:space="preserve">
+    <value>Ouvrier</value>
+    <comment>Areas\Pointage\Views\Rapport\PointageHebdoRapport.cshtml</comment>
+  </data>
+  <data name="Rapport_RapportController_PrimeIRTRExisteDeja_Info" xml:space="preserve">
+    <value>Les primes IR et TR ne peuvent pas être attribuées la même journée</value>
+  </data>
+  <data name="Rapport_RapportListeController_SuppressionImpossible" xml:space="preserve">
+    <value>Vous n'avez pas le droit de supprimer ce rapport, pour une des raisons suivantes :&lt;ul&gt;&lt;li&gt; Le rapport a été validé par un autre utilisateur(seul le dernier valideur peut le supprimer)&lt;/li&gt;&lt;li&gt; Le rapport est verrouillé&lt;/li&gt;&lt;li&gt; Le CI du rapport est clôturé pour la période&lt;/li&gt;&lt;/ul&gt;</value>
+  </data>
+  <data name="Rapport_RapportController_PrimeAE_Info" xml:space="preserve">
+    <value>Impossible de saisir cette prime ! une prime égout déja pointée sur cette journée </value>
+  </data>
+  <data name="Rapport_ModalImport_AjouterEtablissementPaie" xml:space="preserve">
+    <value>Ajouter un établissement</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_AjouterEtablissementPaie_Tooltip" xml:space="preserve">
+    <value>Cliquer pour ajouter un établissement</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_EtablissementPaie" xml:space="preserve">
+    <value>Etablissement de Paie</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_Radio_ChoixEtablissementPaie" xml:space="preserve">
+    <value>Choix des établissements</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_Radio_TousEtablissementPaie" xml:space="preserve">
+    <value>Tous les établissements</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_SupprimerEtablissementPaie_Tooltip" xml:space="preserve">
+    <value>Cliquer pour supprimer l'établissement</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_EtablissementPaie_DejaChoisi" xml:space="preserve">
+    <value>Cet établissement de paie est déjà dans la liste</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_ModalImport_EtablissementPaie_Vide" xml:space="preserve">
+    <value>Veuillez sélectionner au moins un établissement. Sinon choisissez Tous les établissements.</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Deplacement_CodePlusFavorable" xml:space="preserve">
+    <value>Ce code de déplacement est le plus favorable</value>
+  </data>
+  <data name="Rapport_Deplacement_ZoneSaisiManuellement" xml:space="preserve">
+    <value>Ce code zone de déplacement a été saisi manuellement</value>
+  </data>
+  <data name="RapportHebdo_Warning_total_astrieintes" xml:space="preserve">
+    <value>il est impossible de cumuler plus de 24H par jour d'astreintes.</value>
+  </data>
+  <data name="Astreinte_sortie" xml:space="preserve">
+    <value>Sortie :</value>
+  </data>
+  <data name="Pointage_AnyErreur" xml:space="preserve">
+    <value>Le tableau contient au moins une erreur, veuillez consulter le détail au niveau des lignes</value>
+    <comment>Areas\PointagePersonnel\Scripts\components\pointage-list.component.html</comment>
+  </data>
+  <data name="Pointage_List_Confirm_Save_Before_Duplicate" xml:space="preserve">
+    <value>Vous devez d’abord enregistrer vos modifications sur cette page avant de lancer une duplication, voulez-vous enregistrer et continuer ?</value>
+    <comment>Areas\PointagePersonnel\Scripts\components\pointage-list.component.html</comment>
+  </data>
+  <data name="Duplicate_Pointage_Popup_Label" xml:space="preserve">
+    <value>Duplication à l’identique sur la période suivante (hors week-ends)</value>
+    <comment>Areas\PointagePersonnel\Scripts\components\duplicate-pointage-modal.tpl.html</comment>
+  </data>
+  <data name="Pointage_List_Duplicate_Button" xml:space="preserve">
+    <value>Dupliquer</value>
+    <comment>Areas\PointagePersonnel\Scripts\services\pointage-duplicator-proccess.service.js</comment>
+  </data>
+  <data name="Pointage_List_Duplicate_Error_Month_closed" xml:space="preserve">
+    <value>Certaines dates correspondent à une ou plusieurs périodes clôturées pour le CI, veuillez corriger la sélection.</value>
+    <comment>Areas\PointagePersonnel\Scripts\services\pointage-duplicator-proccess.service.js</comment>
+  </data>
+  <data name="Pointage_List_Duplicate_Error_Pointage_Has_Error" xml:space="preserve">
+    <value>Impossible de dupliquer en masse ce(s) pointage(s) car il(s) contien(nen)t une ou plusieurs anomalies.</value>
+    <comment>Areas\PointagePersonnel\Scripts\services\pointage-duplicator-proccess.service.js</comment>
+  </data>
+  <data name="Pointage_List_Duplicate_Message_Save_Before_Duplicate" xml:space="preserve">
+    <value>Veuillez sauvegarder avant de faire une duplication puis relancez la duplication.</value>
+    <comment>Areas\PointagePersonnel\Scripts\services\pointage-duplicator-proccess.service.js</comment>
+  </data>
+  <data name="Pointage_List_Duplicate_Popup_Title" xml:space="preserve">
+    <value>Dupliquer la ligne de pointage</value>
+    <comment>Areas\PointagePersonnel\Scripts\services\pointage-duplicator-proccess.service.js</comment>
+  </data>
+  <data name="Pointage_List_Duplicate_Success" xml:space="preserve">
+    <value>Nouveaux pointages créés avec succès</value>
+    <comment>Areas\PointagePersonnel\Scripts\services\pointage-duplicator-proccess.service.js</comment>
+  </data>
+  <data name="Rapport_ModalDuplication_Title" xml:space="preserve">
+    <value>Dupliquer le rapport journalier</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Detail_Bouton_DuppliquerRapportEnMasse" xml:space="preserve">
+    <value>Dupliquer le rapport en masse</value>
+  </data>
+  <data name="Personnel_Filter_Autre_Information_Placeholder" xml:space="preserve">
+    <value>Autres informations...(Adresse, Code, SIREN)</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Nom_Placeholder" xml:space="preserve">
+    <value>Nom du personnel...</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Prenom_Placeholder" xml:space="preserve">
+    <value>Prénom du personnel...</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Pointage_PointageController_message_hors_contrat" xml:space="preserve">
+    <value>Tous les pointages sont hors contrat, ils n'ont pas été dupliqués</value>
+  </data>
+  <data name="Pointage_PointageController_message_partial_contrat_actif" xml:space="preserve">
+    <value>Certains pointages sont hors contrat, ils n'ont pas été dupliqués, les pointages inclus dans un contrat actif ont été créés avec succès</value>
+  </data>
+  <data name="Pointage_List_Duplicate_Error_Duplication_Only_OnWeekend" xml:space="preserve">
+    <value>Tous les pointages sont hors jours ouvrés (week-ends), ils n'ont pas été dupliqués</value>
+  </data>
+  <data name="Pointage_List_Duplicate_Error_Duplication_Personnel_Inactif" xml:space="preserve">
+    <value>Le personnel n'est pas actif pendant cette période, les pointages n'ont pas été dupliqués</value>
+  </data>
+  <data name="Pointage_List_Duplicate_Error_Duplication_un_Personnel_Inactif_sur_periode" xml:space="preserve">
+    <value>Un personnel n'est pas actif pendant cette période, les pointages n'ont pas été dupliqués</value>
+  </data>
+  <data name="Pointage_List_Duplicate_Error_Interimaire_Without_Contrat" xml:space="preserve">
+    <value>La duplication n’a pas été effectuée car au moins un Intérimaire inclus dans le rapport n’a pas de contrat actif dans la période sélectionnée. Veuillez soit le(s) retirer du rapport soit corriger la période de duplication.</value>
+  </data>
+  <data name="RapportHebdo_Warning_Heures_Astreintes" xml:space="preserve">
+    <value>La tranche horaire sélectionnée est à cheval entre des heures de jour et des heures de nuit (21:00 et 6:00), Veuillez décomposer la sortie d’astreinte pour séparer les périodes !</value>
+  </data>
+  <data name="Erreur_Save_Lignes_Verrouillees" xml:space="preserve">
+    <value>Impossible d'enregistrer des lignes déjà verrouillées.</value>
+  </data>
+  <data name="CI_Etude_DefaultTaskCode" xml:space="preserve">
+    <value>000000</value>
+    <comment>sidebar-detail.componenent.js</comment>
+  </data>
+  <data name="CI_Search_CIType_Etude" xml:space="preserve">
+    <value>CI_Search_CIType_Etude</value>
+    <comment>sidebar-detail.componenent.js</comment>
+  </data>
+  <data name="Message_Use_SpecificTask_For_CiTypeEtude" xml:space="preserve">
+    <value>Merci de saisir sur une tâche spécifique pour les CI de type etude.</value>
+    <comment>sidebar-detail.componenent.js</comment>
+  </data>
+  <data name="PointagePersonnel_Index_Actions" xml:space="preserve">
+    <value>Actions</value>
+    <comment>Areas\PointagePersonnel\Views\PointagePersonnel</comment>
+  </data>
+  <data name="Pointage_Default_Error_Default_CI" xml:space="preserve">
+    <value>Le personnel {0} - {1} - {2} {3} n'est pas affecté à un CI par défaut !</value>
+  </data>
+  <data name="Pointage_Default_Error_Default_CI_Taches" xml:space="preserve">
+    <value>Le CI par défaut {0} - {1} - {2} n'a pas de tâche par défaut !</value>
+  </data>
+  <data name="Pointage_Error_CI_Periode_Cloturee" xml:space="preserve">
+    <value>Impossible d'ajouter une ligne de pointage sur ce CI car la période est clôturée.</value>
+  </data>
+  <data name="Pointage_Error_Heures_Taches_Invalides" xml:space="preserve">
+    <value>Le nombre d'heures travaillées ne correspond pas à la somme des heures affectées aux tâches.</value>
+  </data>
+  <data name="Pointage_Export_Challenge_Securite" xml:space="preserve">
+    <value>Export Challenge Sécurité</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_Filename_Challenge_Securite" xml:space="preserve">
+    <value>PointageChallengeSecurite_Du_{0}_Au_{1}</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="PointagePersonnel_Ci_Existe" xml:space="preserve">
+    <value>Il existe déjà une ligne dans le rapport pour ce CI et pour cette journée</value>
+  </data>
+  <data name="PointagePersonnel_Depassement_journee" xml:space="preserve">
+    <value>Le nombre d'heures saisies dépasse les 12h pour cette journée</value>
+  </data>
+  <data name="Rapport_Warning_Astrieintes_Change" xml:space="preserve">
+    <value>L'heure de fin doit être supérieure à l'heure de début</value>
+  </data>
+  <data name="PointagePersonnel_Depassement_journee_FES" xml:space="preserve">
+    <value>Le nombre d'heures saisies dépasse les 10h pour cette journée</value>
+  </data>
+  <data name="RapportHebdo_Error_MajorationAller_Retour" xml:space="preserve">
+    <value>cette journée contient une majoration de trajet Aller/Retour</value>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_Horaire_PremiereTrancheManquante" xml:space="preserve">
+    <value>La première tranche Horaires est obligatoire.</value>
+  </data>
+  <data name="Rapport_Detail_EnteteNiv2_Absence_Jours" xml:space="preserve">
+    <value>Jours</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="AttenteGenerationRapport" xml:space="preserve">
+    <value>Veuillez patienter pendant la génération du rapport.</value>
+    <comment>Areas\Pointage\Scripts\RapportController.js</comment>
+  </data>
+  <data name="Rapport_Detail_StatutValidation_Horaire_PremiereTrancheManquante_Error" xml:space="preserve">
+    <value>La première tranche Horaires est obligatoire. (Dans le panel Événement du rapport)</value>
+  </data>
+  <data name="Pointage_Default_Tooltip" xml:space="preserve">
+    <value>Génère des pointages par défaut pour l'ensemble du mois</value>
+    <comment>Areas\PointagePersonnel\Views\PointagePersonnel\Index.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_Challenge_Securite_Titre" xml:space="preserve">
+    <value>Export Challenge Sécurité</value>
+    <comment>Areas\PointagePersonnel\Views\Export\Index.cshtml</comment>
+  </data>
+  <data name="PointagePersonnel_SideBar_SaisieTacheEnJours" xml:space="preserve">
+    <value>La saisie jours des tâches doit être un multiple de 0,25 entre 0 et 1.</value>
+  </data>
+  <data name="PointagePersonnel_SideBar_SaisieAbsenceEnJours" xml:space="preserve">
+    <value>La saisie en jours des absences doit être un multiple de 0,5 entre 0 et 1.</value>
+  </data>
+  <data name="Rapport_ModalModificationCI_MessageConfirmation_Partie2" xml:space="preserve">
+    <value>Attention, au changement de CI  seul les personnels et les matériels internes seront conservés, tout le reste sera réinitialisé.</value>
+  </data>
+  <data name="Rapport_ModalModificationCI_MessageConfirmation_Partie3" xml:space="preserve">
+    <value>Voulez-vous continuer ?</value>
+  </data>
+  <data name="Rapport_ModalImport_Radio_PrimesMensuelles_FredAuthorization" xml:space="preserve">
+    <value>menu.show.rapport.prime.index</value>
+  </data>
+  <data name="Rapport_Search_Tuile_AuteurCreation" xml:space="preserve">
+    <value>Créé par</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_Tuile_Valideur1" xml:space="preserve">
+    <value>Validé 1 par</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_Tuile_Valideur2" xml:space="preserve">
+    <value>Validé 2 par</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_Tuile_Valideur3" xml:space="preserve">
+    <value>Validé 3 par</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Rapport_Search_Tuile_Verrouilleur" xml:space="preserve">
+    <value>Verrouillé par</value>
+    <comment>Areas\Pointage\Views\Rapport\SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Code_Majoration_TNH1" xml:space="preserve">
+    <value>TNH1</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Code_Majoration_TNH2" xml:space="preserve">
+    <value>TNH2</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="PointagePersonnel_Depassement_journee_FES_IAC" xml:space="preserve">
+    <value>La quantité pointée dépasse 1 jour pour la journée</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Pointage_Export_Controle_Pointage_Pdf_Personnel_Limit_Error" xml:space="preserve">
+    <value>Le nombre de personnel est trop élevé, veuillez réduire le périmètre à l'aide des filtres</value>
+    <comment>Fred.Business\EtatPaie\EtatPaieManager.cs</comment>
+  </data>
+  <data name="Rapport_Search_StatutEtam" xml:space="preserve">
+    <value>ETAM</value>
+  </data>
+  <data name="Rapport_Search_StatutCadre" xml:space="preserve">
+    <value>Cadre</value>
+  </data>
+  <data name="Rapport_Search_StatutOuvrier" xml:space="preserve">
+    <value>Ouvrier</value>
+  </data>
+  <data name="Rapport_Search_Tuile_StatutEtam" xml:space="preserve">
+    <value>ETAM</value>
+  </data>
+  <data name="Rapport_Search_Tuile_StatutCadre" xml:space="preserve">
+    <value>Cadre</value>
+  </data>
+  <data name="Rapport_Search_Tuile_StatutOuvrier" xml:space="preserve">
+    <value>Ouvrier</value>
+  </data>
+  <data name="Rapport_ModalImport_Checkbox_StatutCadre" xml:space="preserve">
+    <value>Cadre</value>
+  </data>
+  <data name="Rapport_ModalImport_Checkbox_StatutEtam" xml:space="preserve">
+    <value>ETAM</value>
+  </data>
+  <data name="Rapport_ModalImport_Checkbox_StatutOuvrier" xml:space="preserve">
+    <value>Ouvrier</value>
+  </data>
+  <data name="Rapport_ModalImport_Statut" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="Pointage_Export_Controle_Pointage_Periode_Non_Definie_Error" xml:space="preserve">
+    <value>Période hebdomadaire non définie.</value>
+  </data>
+  <data name="Rapport_ModalProductionFlash_Error_SaisieQuantiteProduction" xml:space="preserve">
+    <value>Veuillez saisir toutes les quantités de production réalisées</value>
+    <comment>Areas\Pointage\Scripts\modals\avancement-bilanFlash-modal.html</comment>
+  </data>
+  <data name="Rapport_ModalProductionFlash_Titre_Popup" xml:space="preserve">
+    <value>Avancement bilan flash</value>
+    <comment>Areas\Pointage\Scripts\modals\avancement-bilanFlash-modal.html</comment>
+  </data>
+  <data name="Rapport_Ci_Warning_Message_Before_Saving" xml:space="preserve">
+    <value>Veuillez ajouter un CI avant d'enregistrer ce pointage.</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Action" xml:space="preserve">
+    <value>Actions sur le rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Ajout_Sortie_Astreinte" xml:space="preserve">
+    <value>Ajouter une sortie astreinte</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Annuler_Tooltip" xml:space="preserve">
+    <value>Cliquer pour Annuler et Fermer</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Astreintes" xml:space="preserve">
+    <value>Astreintes</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Aucune_Validation" xml:space="preserve">
+    <value>Aucune validation</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Checkbox_AvecChauffeur_Tooltip" xml:space="preserve">
+    <value>Si le matériel est accompagné d'un chauffeur, cocher la case pour activer la valorisation correspondante</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_CI" xml:space="preserve">
+    <value>Centre d'imputation</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Date" xml:space="preserve">
+    <value>Date du rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Debut_Astreinte" xml:space="preserve">
+    <value>Date début astreinte</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Display_Materiel_Tooltip" xml:space="preserve">
+    <value>Cliquer pour afficher ou masquer le matériel</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Display_Personnel_Tooltip" xml:space="preserve">
+    <value>Cliquer pour afficher ou masquer le personnel</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Display_Total_Tooltip" xml:space="preserve">
+    <value>Cliquer pour afficher ou masquer le total</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Etat" xml:space="preserve">
+    <value>Etat du rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Evenement_Du" xml:space="preserve">
+    <value>Evènements du</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Fin_Astreinte" xml:space="preserve">
+    <value>Date fin astreinte</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Gestion_Evenement" xml:space="preserve">
+    <value>Gérer les évènements du rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Heure_Normal" xml:space="preserve">
+    <value>Heure Normale</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Heure_Total" xml:space="preserve">
+    <value>Heure Totale</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Journalier_Title" xml:space="preserve">
+    <value>Rapport journalier</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Number" xml:space="preserve">
+    <value>Numéro</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Personnaliser" xml:space="preserve">
+    <value>Personnaliser</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Rafraichir" xml:space="preserve">
+    <value>Rafraîchir</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Refermer_Panneau" xml:space="preserve">
+    <value>Refermer le panneau</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Suppression_Sortie_Astreinte" xml:space="preserve">
+    <value>Cliquer pour Supprimer la sortie astreinte</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Validation" xml:space="preserve">
+    <value>Validation du rapport</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Validations" xml:space="preserve">
+    <value>Validations</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Rapport_Selectionnes" xml:space="preserve">
+    <value>rapports sélectionnés.</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Valideur1" xml:space="preserve">
+    <value>Validé 1 par</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Valideur2" xml:space="preserve">
+    <value>Validé 2 par</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Valideur3" xml:space="preserve">
+    <value>Validé 3 par</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="Rapport_Index_Verrouilleur" xml:space="preserve">
+    <value>Verrouillé par</value>
+    <comment>Areas\Pointage\Views\Rapport\Index.cshtml</comment>
+  </data>
+  <data name="PointagePersonnel_Ajout_Prime" xml:space="preserve">
+    <value>Ajouter une Prime...</value>
+  </data>
+  <data name="PointagePersonnel_Changer_Date_Astreinte" xml:space="preserve">
+    <value>Changer les dates de l'astreinte</value>
+  </data>
+  <data name="PointagePersonnel_Heure_Travaillees" xml:space="preserve">
+    <value>Heures travaillées</value>
+  </data>
+  <data name="PointagePersonnel_H_Normales" xml:space="preserve">
+    <value>H. normales</value>
+  </data>
+  <data name="PointagePersonnel_H_Total" xml:space="preserve">
+    <value>H. totales</value>
+  </data>
+  <data name="PointagePersonnel_IVD" xml:space="preserve">
+    <value>IVD</value>
+  </data>
+  <data name="PointagePersonnel_Ligne" xml:space="preserve">
+    <value>Ligne de pointage</value>
+  </data>
+  <data name="PointagePersonnel_Modifier_Astreinte" xml:space="preserve">
+    <value>Modifier la sortie d'astreinte</value>
+  </data>
+  <data name="PointagePersonnel_Rafraichir_Indemnites" xml:space="preserve">
+    <value>Rafraîchir les indemnités</value>
+  </data>
+  <data name="PointagePersonnel_Statut_Validation" xml:space="preserve">
+    <value>Statut de validation</value>
+  </data>
+  <data name="Rapport_Detail_Erreur_Doublon" xml:space="preserve">
+    <value>Impossible d'enregistrer le rapport, il existe déjà ! Pour gérer le pointage du CI {0} consulter le rapport numero {1}.</value>
+  </data>
+  <data name="PointagePersonnel_Aucune_Ligne_Warning" xml:space="preserve">
+    <value>Aucune ligne à enregistrer</value>
+  </data>
+  <data name="Pointage_Date_Periode_Cloture_Erreur" xml:space="preserve">
+    <value>La date de pointage est dans de la période de clôture pour ce CI</value>
+  </data>
+  <data name="Pointage_Duppliquer_Exception" xml:space="preserve">
+    <value>Pour dupliquer un pointage il faut qu'il soit enregister dans la base.</value>
+  </data>
+  <data name="Pointage_Modifier_CI_Exception" xml:space="preserve">
+    <value>Le changement de CI n'est autorisé que si le pointage d'origine n'a pas d'heure travaillée.</value>
+  </data>
+  <data name="Rapport_Detail_Somme_Heure_Erreur" xml:space="preserve">
+    <value>Impossible d'enregistrer les modifications sur le rapport car le nombre d'heures travaillées ne correspond pas à la somme des heures affectées aux tâches.</value>
+  </data>
+  <data name="Rapport_Detail_Statut_Modifier_Erreur" xml:space="preserve">
+    <value>Impossible d'enregistrer les modifications sur le rapport car le statut a été modifié à {0}, veuillez recharger la page.</value>
+  </data>
+  <data name="Edition_Challenge_Securite_Titre" xml:space="preserve">
+    <value>Challenge Sécurité</value>
+  </data>
+  <data name="PointageValidator_Code_Absence_Nul" xml:space="preserve">
+    <value>Le code absence correspondant aux heures d'absence n'est pas paramétré.</value>
+  </data>
+  <data name="PointageValidator_Code_Deplacement_Requis" xml:space="preserve">
+    <value>Il est nécessaire de saisir une zone lorsque le code déplacement est une IPD.</value>
+  </data>
+  <data name="PointageValidator_Code_Majoration_Nul" xml:space="preserve">
+    <value>Le code majoration correspondant aux heures majorées n'est pas paramétré.</value>
+  </data>
+  <data name="PointageValidator_Date_Entree" xml:space="preserve">
+    <value>Ce personnel ne peut être pointé qu'à partir du {0}.</value>
+  </data>
+  <data name="PointageValidator_Date_Entree_Sortie" xml:space="preserve">
+    <value>Ce personnel ne peut être pointé que du {0} au {1}.</value>
+  </data>
+  <data name="PointageValidator_Doublon_Prime" xml:space="preserve">
+    <value>La prime {0} est déjà présente dans un autre pointage pour cette même journée et ce même personnel.</value>
+  </data>
+  <data name="PointageValidator_Exces_Heure_Materiel" xml:space="preserve">
+    <value>La somme toutes les heures du Matériel (M+A+P+I) doit être inférieure ou égale à 24h.</value>
+  </data>
+  <data name="PointageValidator_Exces_Heure_Materiel_Marche_Attente" xml:space="preserve">
+    <value>La somme des heures de Marche et d'Attente du Matériel doit être inférieure ou égale à 12h.</value>
+  </data>
+  <data name="PointageValidator_Exces_Heure_Prime" xml:space="preserve">
+    <value>Le nombre d'heures de chaque prime horaire ne doit pas dépasser la somme des heures normales et majorées.</value>
+  </data>
+  <data name="PointageValidator_Exces_Heure_Travaillee" xml:space="preserve">
+    <value>Le nombre d'heures maximales travaillées ({0}h) a été dépassé.</value>
+  </data>
+  <data name="PointageValidator_Heure_Absence_Nulle" xml:space="preserve">
+    <value>Les heures d'absence ne sont pas paramétrées.</value>
+  </data>
+  <data name="PointageValidator_Heure_Majoration_Nulle" xml:space="preserve">
+    <value>Les heures majorées ne sont pas paramétrées.</value>
+  </data>
+  <data name="PointageValidator_Heure_Majoration_Seuil" xml:space="preserve">
+    <value>Les heures majorées ne peuvent dépasser les 12 heures.</value>
+  </data>
+  <data name="PointageValidator_Heure_Materiel_Requise" xml:space="preserve">
+    <value>Veuillez renseigner un nombre d'heures sur le matériel.</value>
+  </data>
+  <data name="PointageValidator_Heure_Travaillee_Absence_Requise" xml:space="preserve">
+    <value>Il est nécessaire de saisir des heures de travail ou d'absence.</value>
+  </data>
+  <data name="PointageValidator_Hors_Date_Contrat_Interimaire" xml:space="preserve">
+    <value>L'intérimaire {0} ne possède pas de contrat ouvert pour la journée sélectionnée.</value>
+  </data>
+  <data name="PointageValidator_Hors_Zone_Contrat_Interimaire" xml:space="preserve">
+    <value>Cet intérimaire ne peut pas être pointé sur ce CI car il est en dehors de ses zones de travail autorisées.</value>
+  </data>
+  <data name="PointageValidator_IVD_Requis" xml:space="preserve">
+    <value>Il ne doit pas y avoir d’IVD lorsque le code déplacement est une IPD.</value>
+  </data>
+  <data name="PointageValidator_Materiel_Requis" xml:space="preserve">
+    <value>Veuillez renseigner un matériel.</value>
+  </data>
+  <data name="PointageValidator_Numero_Semaine_Requis" xml:space="preserve">
+    <value>Le numéro de semaine est obligatoire lorsque le code absence est de type intempérie.</value>
+  </data>
+  <data name="PointageValidator_Personnel_Materiel_Requis" xml:space="preserve">
+    <value>Veuillez saisir un personnel et/ou un matériel.</value>
+  </data>
+  <data name="PointageValidator_Personnel_Requis" xml:space="preserve">
+    <value>Veuillez renseigner un personnel.</value>
+  </data>
+  <data name="PointageValidator_Verifier_Heures" xml:space="preserve">
+    <value>Veuillez vérifier les heures renseignées.</value>
+  </data>
+  <data name="Pointage_Ajout_Prime_Nul_Erreur" xml:space="preserve">
+    <value>Le pointage et la prime ne peuvent être nuls</value>
+  </data>
+  <data name="Pointage_Ajout_Tache_Nul_Erreur" xml:space="preserve">
+    <value>Le pointage et la tâche ne peuvent être nuls</value>
+  </data>
+  <data name="Pointage_Aucune_Tache_Defaut_Erreur" xml:space="preserve">
+    <value>Aucune tâche par défaut n'est paramétrée pour ce CI</value>
+  </data>
+  <data name="Pointage_Suppression_Pointage_Nul_Erreur" xml:space="preserve">
+    <value>Le pointage à supprimer ne peut être nul</value>
+  </data>
+  <data name="EtatPaie_ControlePointage_Titre" xml:space="preserve">
+    <value>Contrôle des pointages</value>
+  </data>
+  <data name="EtatPaie_Deplacements_Titre" xml:space="preserve">
+    <value>Edition des grands déplacements pointés</value>
+  </data>
+  <data name="EtatPaie_HeuresSpecifiques_Titre" xml:space="preserve">
+    <value>Edition récapitulative des heures spécifiques</value>
+  </data>
+  <data name="EtatPaie_Primes_Titre" xml:space="preserve">
+    <value>Edition récapitulative des primes</value>
+  </data>
+  <data name="EtatPaie_VerificationTemps_Titre" xml:space="preserve">
+    <value>Vérification des temps</value>
+  </data>
+  <data name="PointagePersonnelExport_Titre" xml:space="preserve">
+    <value>Pointage Mensuel</value>
+  </data>
+  <data name="PointagePersonnelHebdomadaireExport_Titre" xml:space="preserve">
+    <value>Edition Pointage Hebdomaire du personnel</value>
+  </data>
+  <data name="RapportValidator_CI_Requis_Erreur" xml:space="preserve">
+    <value>Le CI est obligatoire.</value>
+  </data>
+  <data name="RapportValidator_Date_Requise_Erreur" xml:space="preserve">
+    <value>La date du rapport est obligatoire.</value>
+  </data>
+  <data name="RapportValidator_Lignes_Erreur" xml:space="preserve">
+    <value>Des erreurs sont présentes dans les lignes de pointage.</value>
+  </data>
+  <data name="RapportValidator_Ligne_Requise_Erreur" xml:space="preserve">
+    <value>Il est nécessaire de paramétrer au moins une ligne de pointage</value>
+  </data>
+  <data name="RapportValidator_Mois_Clos_Erreur" xml:space="preserve">
+    <value>Le mois de {0} est clôturé depuis le {1}.</value>
+  </data>
+  <data name="Erreur_Prime_Egout" xml:space="preserve">
+    <value>La prime d'égout ne peut pas être cumulée avec une prime de salissure ou d'insalubrité.</value>
+  </data>
+  <data name="ValidationService_TitreOnglet" xml:space="preserve">
+    <value>Validation de mon service</value>
+  </data>
+  <data name="PointagePersonnel_Index_ExportSection" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="EtatPaie_Primes_Titre_Journalier" xml:space="preserve">
+    <value>Edition des primes Heures/Jours</value>
+  </data>
+  <data name="EtatPaie_Primes_Titre_Mensuelles" xml:space="preserve">
+    <value>Edition des primes mensuelles</value>
+  </data>
+  <data name="Erreur_Prime_Repas" xml:space="preserve">
+    <value>Les primes IR et TR ne peuvent pas être attribuées la même journée.</value>
+  </data>
+  <data name="Rapport_ModalImport_ErrorMessage_Organisation" xml:space="preserve">
+    <value>Veuillez sélectionner une organisation</value>
+  </data>
+  <data name="Rapport_ModalImport_ErrorMessage_EtablissementPaie" xml:space="preserve">
+    <value>Veuillez sélectionner au moins un établissement. Sinon choisissez Tous les établissements</value>
+  </data>
+  <data name="Rapport_FIGGO_Error_CI" xml:space="preserve">
+    <value>Le matricule {0} du personnel de la société {1} n’a pas de CI par défaut</value>
+  </data>
+  <data name="Rapport_FIGGO_Error_Code_Absence" xml:space="preserve">
+    <value>Le code absence {0} n’est pas reconnu</value>
+  </data>
+  <data name="Rapport_FIGGO_Error_Personnel" xml:space="preserve">
+    <value>Le matricule {0} du personnel de la société YYYY n’existe pas</value>
+  </data>
+  <data name="Rapport_FIGGO_Error_Societe_Personnel" xml:space="preserve">
+    <value>La société {0} du personnel n’existe pas</value>
+  </data>
+  <data name="Rapport_FIGGO_Error_Societe_Valideur" xml:space="preserve">
+    <value>La société {0} du valideur n’existe pas</value>
+  </data>
+  <data name="Rapport_FIGGO_Error_Statut" xml:space="preserve">
+    <value>Le statut {0} n’est pas reconnu</value>
+  </data>
+  <data name="Rapport_FIGGO_Error_Valideur" xml:space="preserve">
+    <value>Le matricule {0} du valideur de la société YYYY n’existe pas</value>
+  </data>
+  <data name="Personnel_ContratInterim_Error_CompteInterneSepId_IsNull" xml:space="preserve">
+    <value>Il n’est pas possible de pointer sur ce CI car son compte de passage n’est pas paramétré : veuillez contacter votre administrateur fonctionnel.</value>
+  </data>
+  <data name="ExportPointagePersonnel_Error_Input" xml:space="preserve">
+    <value>Veuillez sélectionner au moins un établissement. Sinon choisissez Tous les établissements.</value>
+  </data>
+  <data name="RapportLigneValidator_DonneeIncomplete" xml:space="preserve">
+    <value>Incomplet</value>
+  </data>
+  <data name="RapportLigneValidator_DonneeManquante" xml:space="preserve">
+    <value>Manquant</value>
+  </data>
+  <data name="RapportLigneValidator_StatutNonVerrouille" xml:space="preserve">
+    <value>Non Verrouillé</value>
+  </data>
+  <data name="Rapport_ModalExport_AucunElement" xml:space="preserve">
+    <value>Aucun élément</value>
+  </data>
+  <data name="Rapport_ModalExport_ControleSaisieTitle" xml:space="preserve">
+    <value>Contrôle des saisies</value>
+  </data>
+  <data name="Rapport_ModalExport_ErreursTitle" xml:space="preserve">
+    <value>Erreurs</value>
+  </data>
+  <data name="Rapport_ModalExport_Etablissement" xml:space="preserve">
+    <value>Etablissement comptable</value>
+  </data>
+  <data name="Rapport_ModalExport_ExportAnaTitle" xml:space="preserve">
+    <value>Export Analytique</value>
+  </data>
+  <data name="Rapport_ModalExport_Mois" xml:space="preserve">
+    <value>Mois</value>
+  </data>
+  <data name="Rapport_ModalExport_Selection_Periode" xml:space="preserve">
+    <value>Sélectionner une période</value>
+  </data>
+  <data name="Rapport_ExportModal_Simulation" xml:space="preserve">
+    <value>Simulation</value>
+  </data>
+  <data name="Rapport_Exportation_Fail" xml:space="preserve">
+    <value>L'exportation vers Tibco a échoué</value>
+  </data>
+  <data name="Rapport_Exportation_Success" xml:space="preserve">
+    <value>L'exportation vers Tibco a réussi</value>
+  </data>
+  <data name="Rapport_Exportation_NoErrors" xml:space="preserve">
+    <value>Aucune erreur constatée lors du contrôle</value>
+  </data>
+  <data name="Rapport_Situation_Acompte_Titre" xml:space="preserve">
+    <value>EDITION RECAPITULATIVE DE LA SITUATION SALARIES POUR ACOMPTE</value>
+  </data>
+  <data name="Rapport_Absences_Titre" xml:space="preserve">
+    <value>EDITION RECAPITULATIVE DES ABSENCES</value>
+  </data>
+  <data name="MsgAucunPointages" xml:space="preserve">
+    <value>Aucun pointage existant sur la période sélectionnée</value>
+  </data>
+  <data name="RapportLigneValidator_ExportAnalytiqueErrors" xml:space="preserve">
+    <value>Des pointages sont manquants ou non verrouillés sur le périmètre sélectionné</value>
+  </data>
+  <data name="Pointage_Concurrence_acces" xml:space="preserve">
+    <value>Un ou plusieurs pointages ont été modifiés depuis une autre fenêtre. Veuillez rafraichir la page avant tout autre opération.</value>
+  </data>
+  <data name="Group_non_existent" xml:space="preserve">
+    <value>Groupe Inexistant</value>
+  </data>
+  <data name="Report_Not_Locked" xml:space="preserve">
+    <value>Le verrouillage a échoué, veuillez corriger les rapports en erreur</value>
+  </data>
+  <data name="Partial_Locked_Report" xml:space="preserve">
+    <value>Certains rapport n'ont pas été verrouillés car ils contiennent des personnels hors périmètre (les rapports lignes des personnels du périmètre ont bien été verrouillés), voici la liste concernée: </value>
+  </data>
+  <data name="Pointage_List_Duplicate_Error_no_commun_zones_de_travail" xml:space="preserve">
+    <value>Tous les pointages ne sont pas dans une période contenant un contrat ayant la même zone de travail, ils n'ont pas été dupliqués.</value>
+  </data>
+  <data name="RapportValidator_Duplication_sur_differentes_periodes" xml:space="preserve">
+    <value>Certains pointages ne sont pas dans une période contenant un contrat ayant la même zone de travail, ils n'ont pas été dupliqués, les pointages inclus dans un contrat ayant la même zone de travail ont été créés avec succès.</value>
+  </data>
+  <data name="Rapport_Detail_Avec_Personnel_Temp_Bloquer_Verrouillage_Warning" xml:space="preserve">
+    <value>Cette ligne contient un personnel temporaire, elle doit être complétée avant verrouillage.</value>
+    <comment>Areas\Pointage\Views\Rapport\Detail.cshtml</comment>
+  </data>
+</root>

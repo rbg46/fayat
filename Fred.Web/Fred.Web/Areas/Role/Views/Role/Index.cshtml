@@ -1,0 +1,375 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+  ViewBag.Title = FeatureRole.Role_Index_TitreOnglet;
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+  @Styles.Render("~/RoleIndexBundle.css")
+  @Styles.Render("~/Areas/Role/Content/style.css")
+}
+
+@section scripts {
+
+  @Scripts.Render("~/RoleIndexBundle.js")
+  @this.RenderResources("FeatureModule", "FeatureRole")
+  <style>
+    .ontop {
+      z-index: 1300 !important;
+    }
+  </style>
+}
+
+<div class="roles container-fluid" ng-controller="RoleController" ng-init="init()">
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <h1>{{resources.Role_Index_Titre}}</h1>
+    </div>
+  </div>
+
+  <fred-super-admin-authorization>
+    <div class="row pickFilter">
+      <div class="col-md-5 col-lg-5">
+        <fred-section>{{resources.Role_Index_Titre_Filtre}}</fred-section>
+        <div class="filter">
+          <div class="inner-addon right-addon">
+            <lookup-standalone ng-model="societeSelected"
+                               name="Societe"
+                               text="societeSelected.CodeLibelle"
+                               search-title="{{resources.Global_ReferentielSociete}}"
+                               search-placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+                               url="/api/Societe/SearchLightForRoles/"
+                               on-select="onSelectSocieteLookup(item)"
+                               on-delete="onDeleteSocieteLookup()"
+                               class="formulaire long no-padding">
+            </lookup-standalone>
+          </div>
+        </div>
+      </div>
+    </div>
+  </fred-super-admin-authorization>
+
+
+  <div class="row information"
+       ng-show="stateModel.showMessageForSelection">
+    <div class="col-md-4 icon">
+      <span class="flaticon flaticon-warning"></span>
+    </div>
+    <div class="col-md-4 msg">
+      <h3>
+        {{resources.Role_Index_Message_Selection}}
+      </h3>
+    </div>
+  </div>
+
+  <div class="row information"
+       ng-show="stateModel.showMessageNoRole">
+    <div class="col-md-4 icon">
+      <span class="flaticon flaticon-warning"></span>
+    </div>
+    <div class="col-md-4 msg">
+      <h3>
+        {{resources.Role_Index_Message_NoRole}}
+      </h3>
+    </div>
+  </div>
+
+  <div class="role-tiles"
+       ng-show="stateModel.showDashBoard">
+    <div class="role-tiles-left">
+      @*TILE CREATE MANUALLY*@
+      <div class="role-tiles-tile"
+           ng-class="{'selected-tile':stateModel.tileCreateManuallySelected}"
+           ng-click="clickTileCreateManually()">
+        <div class="text">{{resources.Role_Index_Tile_Create}}</div>
+        <span class="material-icons help-tool" title="{{resources.Role_Index_Tile_Title_Create}}">live_help</span>
+      </div>
+
+      @*TILE COPY*@
+      <div class="role-tiles-tile"
+           ng-class="{'selected-tile':stateModel.tileCopySelected}"
+           ng-click="clickTileCopy()">
+        <div class="text">{{resources.Role_Index_Tile_Select}}</div>
+        <span class="material-icons help-tool"
+              title="{{resources.Role_Index_Tile_Title_Select}}">live_help</span>
+      </div>
+
+
+      @*TILE COMPANY*@
+      <lookup ng-model="societeSelectedForDuplication"
+              name="societeSelectedForDuplication"
+              text="societeSelectedForDuplication.CodeLibelle"
+              search-title="{{resources.Global_ReferentielSociete}}"
+              search-placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+              url="/api/Societe/SearchLightForRoles/"
+              on-select="onSelectSocieteForDuplicationLookup(item)"
+              on-delete="onDeleteSocieteForDuplicationLookup()"
+              class="formulaire long no-padding">
+        <div class="role-tiles-tile"
+             ng-class="{'company':stateModel.tileCompanySelected}"
+             ng-show="stateModel.showTileCompany"            
+             ng-click="clickTileCompany()">
+
+          <div class="text">{{societeSelectedForDuplication !== null ? societeSelectedForDuplication.CodeLibelle : resources.Role_Index_Tile_Select}}</div>
+
+        </div>
+      </lookup>
+
+
+    </div>
+    <div class="role-tiles-right">
+      @*TILE COPY FONCTIONNALITE*@
+      <div class="role-tiles-tile"
+           ng-class="{'selected-tile':stateModel.tileExportFonctionnalitesSelected}"
+           ng-show="stateModel.showTileExportFonctionnalites"
+           ng-click="clickTileExportFonctionnalites()">
+        <div class="text">
+          {{resources.Role_Index_Tile_ExportPriv}}
+        </div>
+        <span class="material-icons help-tool"
+              title="{{resources.Role_Index_Tile_Title_ExportPriv}}">
+          live_help
+        </span>
+      </div>
+      @*TILE VALIDATE*@
+      <div class="role-tiles-tile validate"
+           ng-show="stateModel.showTileValidate"
+           ng-click="clickTileValidate()">
+        <div class="text">{{resources.Role_Index_Tile_Validate}}</div>
+      </div>
+
+      @*TILE SEUILS*@
+      <div class="role-tiles-tile"
+           ng-class="{'selected-tile':stateModel.tileExportSeuilsSelected}"
+           ng-show="stateModel.showTileExportSeuils"
+           ng-click="clickTileExportSeuils()">
+        <div class="text">{{resources.Role_Index_Tile_ExportCurrency}}</div>
+        <span class="material-icons help-tool"
+              title="{{resources.Role_Index_Tile_Title_ExportCurrency}}">
+          live_help
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"
+       ng-show="stateModel.showList">
+    <div class="col-md-12 no_padding">
+      <div class="row">
+        <div class="lists"
+             ng-class="{'col-md-12 col-lg-12' : showOrder, 'col-md-4 col-lg-4' : !showOrder}">
+          <fred-section>{{resources.Role_Index_SousTitre_Role}}</fred-section>
+          <!--BEGIN : BARRE RECHERCHE ROLE-->
+          <div class="row  search-container">
+            <div class="controls" ng-class="{'col-md-8 col-lg-8' : showOrder, 'col-md-7 col-lg-7' : !showOrder}">
+              <div class="input-group input-search">
+                <input type="text" placeholder="{{resources.Role_Index_Rechercher_Role_Placeholder}}"
+                       ng-model="searchRole"
+                       class="form-control">
+                <span class="input-group-addon button-search"><span class="material-icons">search</span></span>
+              </div>
+            </div>
+            <div class="col-md-1 col-lg-1" ng-show="!showOrder"></div>
+            <div class="col-md-1 orderTh" ng-show="showOrder"><span>Ordre Comptable</span></div>
+            <div class="col-md-1 orderTh" ng-show="showOrder"><span>Ordre Paye</span></div>
+            <div class="col-md-4 col-lg-4 add no_pr" ng-class="{'col-md-2 col-lg-2' : showOrder, 'col-md-4 col-lg-4' : !showOrder}">
+              <fred-button
+                class="active"
+                ng-click="handleAddRole(roleList,societeSelected.SocieteId)"
+                title="{{resources.Role_Index_Bouton_RoleAjouter_Tooltip}}">
+                <span class="material-icons">add</span>
+              </fred-button>
+          
+              <fred-button
+                ng-class="{active: !showInactifsRoles ,inactive:showInactifsRoles}"
+                ng-click="onClickShowActifsAndInatifsRoles()">
+                <span class="material-icons">visibility</span>
+              </fred-button>
+
+              <fred-button
+                
+                ng-class="{active: showInactifsRoles ,inactive:!showInactifsRoles}"
+                ng-click="onClickShowInatifsRoles()">
+                <span class="material-icons">visibility_off</span>
+              </fred-button>
+
+              <fred-button
+                class="active"
+                ng-click="showOrder = !showOrder">
+                <span class="material-icons">format_list_numbered</span>
+              </fred-button>
+            </div>
+          </div>
+          <!--END : BARRE RECHERCHE ROLE-->
+          <!--BEGIN : LISTE ROLE-->
+          <div class="row results">
+            <div class="list-content">
+              <div class="col-lg-12 col-md-12 col-sm-5 col-xs-5 no_padding"
+                   ng-repeat="role in roleList | filter: searchRole | filter:roleFilter(showInactifsRoles) | orderBy: '+CodeNomFamilier'"
+                   ng-class="{selected: role.RoleId === selectedRole.RoleId, active: role.RoleId !== selectedRole.RoleId && $index % 2 == 0}">
+                <div class="row ligne"
+                     ng-click="handleSelectRole(role,showInactifsRoles)">
+                  <div class="no_padding firstCell" ng-class="{'col-md-8 col-lg-8' : showOrder, 'col-md-6 col-lg-6' : !showOrder}">
+                    <div class="data">
+                      <div class="lb">{{role.CodeNomFamilier}}</div>
+                      <div class="val">{{role.Libelle}}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-1 orderCell" ng-class="{'no_padding' : !showOrder}"><span ng-show="showOrder">{{role.NiveauCompta}}</span></div>
+                  <div class="col-md-1 orderCell" ng-class="{'no_padding' : !showOrder}"><span ng-show="showOrder">{{role.NiveauPaie}}</span></div>
+                  <div class="add no_pr" ng-class="{'col-md-2 col-lg-2' : showOrder, 'col-md-4 col-lg-4' : !showOrder}">
+
+                    <span ng-if="!role.Actif" class="button-action material-icons inactiv">visibility_off</span>
+
+                    <span class="button-action material-icons"
+                          ng-click="handleDuplicateRole(role,societeSelected.SocieteId)"
+                          title="{{resources.Role_Index_Bouton_RoleDupliquer_Tooltip}}"
+                          ng-disabled="!role.Actif">
+                      content_copy
+                    </span>
+                    <span class="button-action material-icons" ng-click="handleDeleteRole(role)" title="{{resources.Role_Index_Bouton_RoleSupprimer_Tooltip}}">clear</span>
+                    <span class="button-action material-icons" ng-click="handleEditRole(role,societeSelected.SocieteId)"
+                          title="{{resources.Role_Index_Bouton_RoleEditer_Tooltip}}"
+                          ng-disabled="!role.Actif">more_vert</span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--END : LISTE ROLE-->
+        </div>
+
+        <div class="col-md-4" ng-show="!showOrder">
+          <fred-section>{{resources.Role_Index_SousTitre_Fonctionnalites}}</fred-section>
+          <!--BEGIN : BARRE RECHERCHE  ROLE-FONCTIONNALITE-->
+          <div class="row  search-container">
+            <div class="col-md-10 controls">
+              <div class="input-group input-search">
+                <input type="text"
+                       placeholder="{{resources.Role_Index_Rechercher_Fonctionnalites_Placeholder}}"
+                       ng-model="searchFeature" class="form-control">
+                <span class="input-group-addon  button-search">
+                  <span class="material-icons">search</span>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 add no_pr">
+              <button ng-show="canOpenAddRoleFeatureModal()"
+                      class="btn btn-default pull-right"
+                      ng-click="openAddRoleFeatureModal()"
+                      title="{{resources.Role_Index_Bouton_FonctionnaliteAjouter_Tooltip}}">
+                <span class="material-icons">add</span>
+              </button>
+            </div>
+          </div>
+          <!--END : BARRE RECHERCHE  ROLE-FONCTIONNALITE-->
+          <!--BEGIN: LISTE ROLE-FONCTIONNALITE-->
+          <div class="row">
+            <div class="list-content">
+              <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6 no_padding"
+                   ng-repeat="roleFeature in roleFeatures | filter: searchFeature |  orderBy: '+ModuleCode'"
+                   ng-class="{selected: roleFeature === roleFeatureSelected, active: roleFeature !== roleFeatureSelected && $index % 2 == 0}">
+                <div class="row ligne">
+                  <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 no_padding firstCell"
+                       ng-click="selectFeature(roleFeature)">
+                    <div class="data" title="{{roleFeature.Fonctionnalite.Description}}">
+                      <div class="lb">{{roleFeature.Fonctionnalite.Code}}</div>
+                      <div class="val">{{roleFeature.Fonctionnalite.Libelle}}</div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-1 col-sm-1 col-xs-1">
+                    <fred-tree-state-toggle-component change="modeChange(roleFeature,currentValue)"
+                                                      current-value="roleFeature.Mode"
+                                                      is-busy="isChangingMode"
+                                                      step-one="modes[0]"
+                                                      step-two="modes[1]"
+                                                      step-tree="modes[2]"
+                                                      resources="resources">
+                    </fred-tree-state-toggle-component>
+                  </div>
+                 
+                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                    <div class="add">
+                      <span class="material-icons button-action"
+                          title="{{resources.Role_Index_Bouton_FonctionnaliteSupprimer_Tooltip}}"
+                          ng-click="deleteFeature(roleFeature)">clear</span>
+                    </div>
+                  </div>
+                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                    <div class="add">
+                      <span class="button-action material-icons"
+                          ng-click="openRoleFonctionnaliteDetail(roleFeature.RoleFonctionnaliteId)"
+                          title="{{resources.Role_Index_Bouton_RoleEditer_Tooltip}}">more_vert</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--END : LISTE  ROLE-FONCTIONNALITE-->
+        </div>
+
+        <div class="col-md-4" ng-show="!showOrder">
+          <fred-section>{{resources.Role_Index_SousTitre_Seuil}}</fred-section>
+          <!--BEGIN : BARRE RECHERCHE SEUILS-->
+          <div class="row  search-container">
+            <div class="col-md-10 controls">
+              <div class="input-group input-search">
+                <input type="text"
+                       placeholder="{{resources.Role_Index_Rechercher_Seuil_Placeholder}}"
+                       ng-model="searchSeuilValidation"
+                       class="form-control">
+                <span class="input-group-addon button-search">
+                  <span class="material-icons">search</span>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 add no_pr">
+              <button ng-show="canAddSeuilValidation()" class="btn btn-default pull-right"
+                      ng-click="handleAddSeuilValidation(seuilValidationList,  idSelectedModule, this)"
+                      title="{{resources.Role_Index_Bouton_SeuilAjouter_Tooltip}}">
+                <span class="material-icons">add</span>
+              </button>
+            </div>
+          </div>
+          <!--BEGIN : BARRE RECHERCHE SEUILS-->
+          <!--BEGIN: LISTE SEUILS-->
+          <div class="row">
+            <div class="list-content">
+              <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6 no_padding"
+                   ng-repeat="seuilValidation in seuilValidationList | filter: searchSeuilValidation | orderBy:'+Devise.Libelle'"
+                   ng-class="{selected: seuilValidation.SeuilValidationId === selectedSeuil.SeuilValidationId, active: seuilValidation.SeuilValidationId !== selectedSeuil.SeuilValidationId && $index % 2 == 0}">
+                <div class="row ligne" ng-click="handleSelectSeuilValidation(seuilValidation)">
+                  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 no_padding firstCell">
+                    <div class="data">
+                      <div class="lb">{{seuilValidation.Montant}}</div>
+                      <div class="val">{{seuilValidation.Devise.Libelle}}</div>
+                    </div>
+                  </div>
+                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                    <div class="add">
+                      <span class="button-action flaticon material-icons"
+                          ng-click="handleDeleteSeuilValidation(seuilValidation)"
+                          title="{{resources.Role_Index_Bouton_SeuilSupprimer_Tooltip}}">clear</span>
+                    </div>
+                  </div>
+                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no_padding">
+                    <div class="add">
+                      <span class="button-action material-icons pt"
+                          ng-click="handleEditSeuilValidation(seuilValidation, this)"
+                          title="{{resources.Role_Index_Bouton_SeuilEditer_Tooltip}}">more_vert</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--END : LISTE SEUILS-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

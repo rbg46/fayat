@@ -1,0 +1,21 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title"><i class="flaticon flaticon-warning"></i> {{::$ctrl.resources.Avancement_Modal_Validation_Titre}}</h2>
+        <i class="flaticon flaticon-multiply close pull-right" ng-click="$ctrl.handleCancel()" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="row">
+                <div class="col-md-12">
+                    <b>{{::$ctrl.resources.Avancement_Modal_Validation_Texte}}</b>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-default pull-left" ng-click="$ctrl.handleValidate()" title="{{::$ctrl.resources.Global_Bouton_Valider_Tooltip}}">{{::$ctrl.resources.Global_Bouton_Valider}}</button>
+        <button type="button" class="btn btn-link pull-right" ng-click="$ctrl.handleCancel()" title="{{::$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">{{::$ctrl.resources.Global_Bouton_Annuler}}</button>
+    </div>
+</div>

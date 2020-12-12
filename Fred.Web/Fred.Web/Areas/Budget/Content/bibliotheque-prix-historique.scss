@@ -1,0 +1,84 @@
+﻿$color_1: #67757F;
+$color_2: #bfbfbf;
+
+.historique-informations {
+    margin-top: 10px;
+}
+
+.historique-aucun {
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.historique-baremes {
+    margin-top: 30px;
+}
+
+.historique-bareme-courant {
+    position: relative;
+    border: 2px solid rgb(0,112,192);
+    padding: 12px;
+    margin-top: 10px;
+
+    .inner-triangle {
+        border-left: 15px solid transparent;
+        border-right: 15px solid rgb(0,112,192);
+        border-bottom: 15px solid transparent;
+        height: 0;
+        width: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 2;
+    }
+}
+
+.historique-bareme-archive {
+    position: relative;
+    border: 2px solid rgb(216,216,216);
+    padding: 12px;
+    margin-top: 10px;
+}
+
+.historique-periode {
+    margin-bottom: 6px;
+    font-size: 18px;
+    color: $color_1;
+}
+
+.historique-line.barems.mt {
+    margin-top: 15px;
+}
+
+.historique-cln1 {
+    font-size: 11px;
+    color: $color_2;
+}
+
+.historique-cln2 {
+    font-size: 11px;
+}
+
+.historique-btn-fermer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.chap-title {
+    display: flex;
+    align-items: center;
+    color: $color_1;
+
+    .material-icons {
+        font-size: 35px;
+    }
+
+    .txt {
+        font-size: 20px;
+        margin-left: 0;
+    }
+}
+
+.sum-bloc {
+    margin-top: 10px;
+}

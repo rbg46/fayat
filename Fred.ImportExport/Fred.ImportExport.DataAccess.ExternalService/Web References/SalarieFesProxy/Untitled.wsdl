@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.fayatit.com/FRED-TIBCO/Salarie" xmlns:ns1="http://www.tibco.com/schemas/SalarieOut.xsd" xmlns:ns0="http://www.tibco.com/schemas/SalarieIn.xsd" name="Untitled" targetNamespace="http://www.fayatit.com/FRED-TIBCO/Salarie" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema xmlns="http://www.tibco.com/schemas/SalarieOut.xsd" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.tibco.com/schemas/SalarieOut.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="SalarieOut">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Record">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="societe" type="xs:string" />
+                  <xs:element name="etablissement" type="xs:string" />
+                  <xs:element name="matricule" type="xs:string" />
+                  <xs:element name="civilite" type="xs:string" />
+                  <xs:element name="nom" type="xs:string" />
+                  <xs:element name="prenom" type="xs:string" />
+                  <xs:element name="nom_jeune_fille" type="xs:string" />
+                  <xs:element name="code_imputation" type="xs:string" />
+                  <xs:element name="code_imputation2" type="xs:string" />
+                  <xs:element name="code_emploi" type="xs:string" />
+                  <xs:element name="libel_emploi" type="xs:string" />
+                  <xs:element name="date_embauche" type="xs:dateTime" />
+                  <xs:element minOccurs="0" name="date_sortie" type="xs:dateTime" />
+                  <xs:element name="nature" type="xs:string" />
+                  <xs:element name="centre_hierarchique_1" type="xs:string" />
+                  <xs:element name="centre_hierarchique_2" type="xs:string" />
+                  <xs:element name="categorie_perso" type="xs:string" />
+                  <xs:element name="statut_categorie" type="xs:string" />
+                  <xs:element name="categorie" type="xs:string" />
+                  <xs:element name="email" type="xs:string" />
+                  <xs:element name="login" type="xs:string" />
+                  <xs:element name="loginAD" type="xs:string" />
+                  <xs:element name="societe_comptable" type="xs:string" />
+                  <xs:element name="etabli_comptable" type="xs:string" />
+                  <xs:element name="societe_comptable_libelle" type="xs:string" />
+                  <xs:element name="etabli_comptable_libelle" type="xs:string" />
+                  <xs:element name="societe_comptable_salarie" type="xs:string" />
+                  <xs:element name="etabli_comptable_salarie" type="xs:string" />
+                  <xs:element name="annee_naissance" type="xs:string" />
+                  <xs:element name="mois_naissance" type="xs:string" />
+                  <xs:element name="jour_naissance" type="xs:string" />
+                  <xs:element name="date_modification" type="xs:dateTime" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns="http://www.tibco.com/schemas/SalarieIn.xsd" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.tibco.com/schemas/SalarieIn.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="SalarieIn">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="societe" type="xs:string" />
+            <xs:element minOccurs="0" name="date_modification" type="xs:dateTime" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="SalarieIn">
+    <wsdl:part name="parameters" element="ns0:SalarieIn" />
+  </wsdl:message>
+  <wsdl:message name="SalarieOut">
+    <wsdl:part name="parameters" element="ns1:SalarieOut" />
+  </wsdl:message>
+  <wsdl:portType name="portType">
+    <wsdl:operation name="SalarieOp">
+      <wsdl:input message="tns:SalarieIn" />
+      <wsdl:output message="tns:SalarieOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="intfwsSalarieEndpoint1Binding" type="tns:portType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SalarieOp">
+      <soap:operation soapAction="/BusinessProcesses/Interfaces/Salarie/intfSalarie-service.serviceagent/intfwsSalarieEndpoint1/SalarieOp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" parts="parameters" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="parameters" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="intfSalarie-service">
+    <wsdl:port name="intfwsSalarieEndpoint1" binding="tns:intfwsSalarieEndpoint1Binding">
+      <soap:address location="http://frsacpvt01v.fr.rz.lan:1650/BusinessProcesses/Interfaces/Salarie/intfSalarie-service.serviceagent/intfwsSalarieEndpoint1" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,254 @@
+﻿@*--------------------------------------------------------------------------------------------------------------*@
+@*                                  PARAMETRAGE DES EQUIPES ET AFFECTATION                                      *@
+@*--------------------------------------------------------------------------------------------------------------*@
+<div class="panel panel-default teams">
+    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse-teams" data-parent="#ci-accordion" id="panel-heading-teams">
+        <i class="chevron fa fa-fw"></i> {{ctrl.resources.CI_Detail_Team_Title}}
+    </div>
+
+    <div id="collapse-teams" class="panel-collapse collapse">
+        <div class="panel-body">
+            @*START TOOLBAR*@
+            <fred-toolbar>
+                <fred-section class="text-search-section">
+                    <fred-section-controls>
+                        <div class="input-group input-search">
+                            <input type="text" class="form-control" placeholder="{{ctrl.resources.CI_Detail_Team_Search_PlaceHolder}}" ng-model="ctrl.panels.team.data.searchFilter" ng-disabled="ctrl.disableSaveWhenLoad">
+                            <span class="input-group-addon button-search">
+                                <i class="material-icons">search</i>
+                            </span>
+                        </div>
+                        <select id="ci-team-statut-filter" fred-display-handler="userOrganizationId" display="hidden" class="fred-button default showAll" ng-model="ctrl.panels.team.data.statutFilter" ng-disabled="ctrl.disableSaveWhenLoad">
+                            <option value="">{{ctrl.resources.CI_Detail_Team_ShowAll}}</option>
+                            <option ng-repeat="statut in ctrl.panels.team.data.personnelStatutList" value="{{statut.Libelle}}">{{statut.Libelle}}</option>
+                        </select>
+                        <span id="ci-team-handle-astreintes" fred-display-handler="userOrganizationId" display="hidden" class="txt">{{ctrl.resources.CI_Detail_Team_ManageAstreints}}</span>
+                        <label id="ci-team-handle-astreintes" fred-display-handler="userOrganizationId" display="hidden" class="switch">
+                            <input type="checkbox"
+                                   ng-model="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive"
+                                   ng-change="ctrl.handleToggleManagingAstreints()"
+                                   ng-disabled="ctrl.disableSaveWhenLoad">
+                            <span class="slider" title="{{ctrl.resources.CI_Detail_Team_Click_To_Manage_Astreints}} || {{ctrl.resources.CI_Detail_Team_Click_To_Stop_Managing_Astreints}}"></span>
+                        </label>
+                        <span id="ci-team-handle-pointage-restrictions" fred-display-handler="userOrganizationId" display="visible" class="txt">{{ctrl.resources.CI_Detail_Team_Handle_Pointage_Restrictions}}</span>
+                        <label id="ci-team-handle-pointage-restrictions" fred-display-handler="userOrganizationId" display="visible" class="switch">
+                            <input type="checkbox"
+                                   ng-model="ctrl.panels.team.data.calendarAffectations.IsDisableForPointage"
+                                   ng-change="ctrl.handleToggleManagingPointage()"
+                                   ng-disabled="ctrl.disableSaveWhenLoad">
+                            <span class="slider" title="{{ctrl.resources.CI_Detail_Team_Handle_Pointage_Restrictions}}"></span>
+                        </label>
+                        <div id="personnel-pickList" fred-display-handler="userOrganizationId" display="visible">
+                            <lookup ng-model="ctrl.selectedRef"
+                                    search-placeholder="{{ctrl.resources.CI_Detail_Team_Select_Personnel}}"
+                                    search-title="{{ctrl.resources.CI_Detail_Team_Select_Personnel}}"
+                                    url="/api/Personnel/SearchLightForTeam/?statut=1&ciId={{ctrl.ciId}}&actifOnly=true&"
+                                    on-select="ctrl.handlePersonnelLookupSelection(item)"
+                                    tooltip="ctrl.resources.CI_Detail_Team_Select_Personnel"
+                                    filters="ctrl.panels.team.data.personnelStatutList">
+                                <button class="fred-button default" type="button" ng-disabled="ctrl.disableSaveWhenLoad">
+                                    <span class="material-icons">person_add</span>
+                                    {{ctrl.resources.CI_Detail_Team_Personnel}}
+                                </button>
+                            </lookup>
+                        </div>
+                        <div id="personnel-pickList-multi-search" fred-display-handler="userOrganizationId" display="hidden">
+                            <lookup ng-model="ctrl.selectedRef"
+                                    search-title="{{ctrl.resources.CI_Detail_Team_Select_Personnel}}"
+                                    search-placeholder="{{ctrl.resources.CI_Partial_Team_Personnel_Nom_Placeholder}}"
+                                    search-placeholder2="{{ctrl.resources.CI_Partial_Team_Personnel_Prenom_Placeholder}}"
+                                    search-placeholder3="{{ctrl.resources.CI_Partial_Team_Personnel_Filter_Autre_Information_Placeholder}}"
+                                    active-second-search-input="true"
+                                    active-third-search-input="true"
+                                    url="/api/Personnel/SearchLight2?ciId={{ctrl.ciId}}&isForAffectationWithoutInterim={{true}}&"
+                                    on-select="ctrl.handlePersonnelLookupSelection(item)">
+                                <button class="fred-button default" type="button" ng-disabled="ctrl.disableSaveWhenLoad && ctrl.isGFes || ctrl.disablePointage && !ctrl.isGFes">
+                                    <span class="material-icons">person_add</span>
+                                    {{ctrl.resources.CI_Detail_Team_Personnel}}
+                                </button>
+                            </lookup>
+                        </div>
+                        <button id="ci-team-import-team" fred-display-handler="userOrganizationId" display="hidden" class="fred-button gr" type="button" ng-click="ctrl.handleImportTeam()" title="{{ctrl.panels.team.data.teamMembers.length}} {{ctrl.resources.CI_Details_Team_Workers}}" ng-disabled="ctrl.disableSaveWhenLoad">
+                            <span class="material-icons">cloud_download</span>
+                            {{ctrl.resources.CI_Detail_Team_Import}}
+                        </button>
+                    </fred-section-controls>
+                </fred-section>
+            </fred-toolbar>
+            @*END TOOLBAR*@
+            <div class="pull-right cal" style="height: 30px; width: 30px;"
+                 ng-show="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                <app-date-picker id="DateAstreinte"
+                                 name="DateAstreinte"
+                                 format="DD/MM/YYYY"
+                                 lang="fr"
+                                 placeholder="Date des astreintes"
+                                 initial-date="{{ctrl.panels.team.data.calendarDates.selectedDate}}"
+                                 ng-model="ctrl.panels.team.data.calendarDates.selectedDate"
+                                 ng-change="ctrl.handleChangeCalendarDate()"
+                                 calendar-weeks="true"
+                                 input-hiden="true" />
+            </div>
+            @*START LISTE*@
+            <div class="table-content">
+                <div class="tabline table-responsive">
+                    <table class="teams-table">
+                        <thead>
+                            <tr class="top-header" ng-show="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                <th colspan="3" class="white"></th>
+                                <th colspan="7">
+                                    <div class="timeline">
+                                        <span class="material-icons" ng-click="ctrl.handlePreviousWeekAstreints()" ng-disabled="ctrl.disableSaveWhenLoad">chevron_left</span>
+                                        <span class="displayed-week">{{ctrl.panels.team.data.calendarDates.selectedWeekLabel}}</span>
+                                        <span class="material-icons" ng-click="ctrl.handleNextWeekAstreints()" ng-disabled="ctrl.disableSaveWhenLoad">chevron_right</span>
+                                    </div>
+                                </th>
+                                <th colspan="1" class="white"></th>
+                            </tr>
+                            <tr class="mid-header" ng-show="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                <th colspan="3" class="white"></th>
+                                <th colspan="1" class="odd-day">{{ctrl.resources.Global_Monday}}</th>
+                                <th colspan="1" class="even-day">{{ctrl.resources.Global_Tuesday}}</th>
+                                <th colspan="1" class="odd-day">{{ctrl.resources.Global_Wednesday}}</th>
+                                <th colspan="1" class="even-day">{{ctrl.resources.Global_Thursday}}</th>
+                                <th colspan="1" class="odd-day">{{ctrl.resources.Global_Friday}}</th>
+                                <th colspan="1" class="weekend1">{{ctrl.resources.Global_Saturday}}</th>
+                                <th colspan="1" class="weekend2">{{ctrl.resources.Global_Sunday}}</th>
+                                <th colspan="1" class="white"></th>
+                            </tr>
+                            <tr class="bottom-header">
+                                <th colspan="1" class="blue">{{ctrl.resources.CI_Detail_Team_Personnel}}</th>
+                                <th id="ci-team-statut-col" fred-display-handler="userOrganizationId" display="hidden" colspan="1" class="blue">{{ctrl.resources.CI_Detail_Team_Status}}</th>
+                                <th colspan="1" class="blue">{{ctrl.resources.CI_Detail_Team_Matricul}}</th>
+                                <th colspan="1" class="blue"
+                                    ng-hide="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                    {{ctrl.resources.Global_CodeSociete}}
+                                </th>
+                                <th colspan="1" class="odd-day"
+                                    ng-show="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                    {{ctrl.panels.team.data.calendarDates.mondayDate}}
+                                </th>
+                                <th colspan="1" class="even-day"
+                                    ng-show="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                    {{ctrl.panels.team.data.calendarDates.tuesdayDate}}
+                                </th>
+                                <th colspan="1" class="odd-day"
+                                    ng-show="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                    {{ctrl.panels.team.data.calendarDates.wendnesdayDate}}
+                                </th>
+                                <th colspan="1" class="even-day"
+                                    ng-show="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                    {{ctrl.panels.team.data.calendarDates.thursdayDate}}
+                                </th>
+                                <th colspan="1" class="odd-day"
+                                    ng-show="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                    {{ctrl.panels.team.data.calendarDates.fridayDate}}
+                                </th>
+                                <th colspan="1" class="weekend1"
+                                    ng-show="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                    {{ctrl.panels.team.data.calendarDates.saturdayDate}}
+                                </th>
+                                <th colspan="1" class="weekend2"
+                                    ng-show="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                    {{ctrl.panels.team.data.calendarDates.sundayDate}}
+                                </th>
+                                <th colspan="1" class="blue">{{ctrl.resources.Global_Action}}</th>
+                            </tr>
+                        </thead>
+                        <tbody class="fred-scroll">
+                            <tr ng-repeat="item in ctrl.panels.team.data.calendarAffectations.AffectationList | filter : ctrl.panels.team.data.searchFilter | filter : ctrl.panels.team.data.statutFilter">
+                                <td colspan="1" class="{{item.IsDelegate ?'del':''}}">
+                                    {{item.Prenom}} {{item.Nom}}
+                                </td>
+                                <td id="ci-team-statut" fred-display-handler="userOrganizationId" display="hidden" colspan="1">{{item.Statut}}</td>
+                                <td colspan="1">{{item.Matricule}}</td>
+                                <td colspan="1"
+                                    ng-hide="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                    {{item.CodeSociete}}
+                                </td>
+                                <td colspan="1" class="odd-day"
+                                    ng-show="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                    <button class="table-tile {{item.Astreintes[1].IsAstreinte ?'duty':'no-duty'}}"
+                                            ng-click="ctrl.handleToggleAstreinte(item.PersonnelId, item.Astreintes[1])" ng-disabled="ctrl.blockByPersonnel(item)">
+                                        {{item.Astreintes[1].IsAstreinte ? ctrl.resources.CI_Detail_Team_Astreinte:ctrl.resources.CI_Detail_Team_WithoutAstreinte}}
+                                    </button>
+                                </td>
+                                <td colspan="1" class="even-day"
+                                    ng-show="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                    <button class="table-tile {{item.Astreintes[2].IsAstreinte ?'duty':'no-duty'}}"
+                                            ng-click="ctrl.handleToggleAstreinte(item.PersonnelId, item.Astreintes[2])" ng-disabled="ctrl.blockByPersonnel(item)">
+                                        {{item.Astreintes[2].IsAstreinte ? ctrl.resources.CI_Detail_Team_Astreinte:ctrl.resources.CI_Detail_Team_WithoutAstreinte}}
+                                    </button>
+                                </td>
+                                <td colspan="1" class="odd-day"
+                                    ng-show="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                    <button class="table-tile {{item.Astreintes[3].IsAstreinte ?'duty':'no-duty'}}"
+                                            ng-click="ctrl.handleToggleAstreinte(item.PersonnelId, item.Astreintes[3])" ng-disabled="ctrl.blockByPersonnel(item)">
+                                        {{item.Astreintes[3].IsAstreinte ? ctrl.resources.CI_Detail_Team_Astreinte:ctrl.resources.CI_Detail_Team_WithoutAstreinte}}
+                                    </button>
+                                </td>
+                                <td colspan="1" class="even-day"
+                                    ng-show="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                    <button class="table-tile {{item.Astreintes[4].IsAstreinte ?'duty':'no-duty'}}"
+                                            ng-click="ctrl.handleToggleAstreinte(item.PersonnelId, item.Astreintes[4])" ng-disabled="ctrl.blockByPersonnel(item)">
+                                        {{item.Astreintes[4].IsAstreinte ? ctrl.resources.CI_Detail_Team_Astreinte:ctrl.resources.CI_Detail_Team_WithoutAstreinte}}
+                                    </button>
+                                </td>
+                                <td colspan="1" class="odd-day"
+                                    ng-show="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                    <button class="table-tile {{item.Astreintes[5].IsAstreinte ?'duty':'no-duty'}}"
+                                            ng-click="ctrl.handleToggleAstreinte(item.PersonnelId, item.Astreintes[5])" ng-disabled="ctrl.blockByPersonnel(item)">
+                                        {{item.Astreintes[5].IsAstreinte ? ctrl.resources.CI_Detail_Team_Astreinte:ctrl.resources.CI_Detail_Team_WithoutAstreinte}}
+                                    </button>
+                                </td>
+                                <td colspan="1" class="weekend1"
+                                    ng-show="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                    <button class="table-tile {{item.Astreintes[6].IsAstreinte ?'duty':'no-duty'}}"
+                                            ng-click="ctrl.handleToggleAstreinte(item.PersonnelId, item.Astreintes[6])" ng-disabled="ctrl.blockByPersonnel(item)">
+                                        {{item.Astreintes[6].IsAstreinte ? ctrl.resources.CI_Detail_Team_Astreinte:ctrl.resources.CI_Detail_Team_WithoutAstreinte}}
+                                    </button>
+                                </td>
+                                <td colspan="1" class="weekend2"
+                                    ng-show="ctrl.panels.team.data.calendarAffectations.IsAstreinteActive">
+                                    <button class="table-tile {{item.Astreintes[0].IsAstreinte ?'duty':'no-duty'}}"
+                                            ng-click="ctrl.handleToggleAstreinte(item.PersonnelId, item.Astreintes[0])" ng-disabled="ctrl.blockByPersonnel(item)">
+                                        {{item.Astreintes[0].IsAstreinte ? ctrl.resources.CI_Detail_Team_Astreinte:ctrl.resources.CI_Detail_Team_WithoutAstreinte}}
+                                    </button>
+                                </td>
+                                <td colspan="1" class="action-icons">
+                                    <span class="material-icons clear" ng-click="(!ctrl.disablePointage || ctrl.isGFes) && ctrl.handleDeleteAffectation(item)"
+                                          ng-hide="item.IsDefault">
+                                        clear
+                                    </span>
+
+                                    <span id="ci-team-favorite" fred-display-handler="userOrganizationId" display="hidden" class="material-icons {{item.IsInFavoriteTeam ?'star-on':'star-off'}}"
+                                          title="{{item.IsInFavoriteTeam ? ctrl.resources.CI_Detail_Team_Click_To_Remove_From_FavoriteTeam : ctrl.resources.CI_Detail_Team_Click_To_Add_To_FavoriteTeam}}"
+                                          ng-click="ctrl.handleToggleTeamFavorite(item)" ng-hide="ctrl.blockByPersonnel(item)">
+                                        star
+                                    </span>
+                                    <fred-authorization is-overflow-hidden="true" key="menu.ci.detail.gestion.equipe.delegation">
+                                        <span id="ci-team-delegation" fred-display-handler="userOrganizationId" display="hidden" class="material-icons {{item.IsDelegate ?'peop-del':'peop-off'}}"
+                                              title="{{item.IsDelegate ? ctrl.resources.CI_Detail_Team_Personnel_Has_Delegation:''}}"
+                                              ng-click="ctrl.handleToggleDelegation(item)" ng-hide="ctrl.blockByPersonnel(item)">
+                                            people_outline
+                                        </span>
+                                    </fred-authorization>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="text-center" ng-show="ctrl.panels.team.data.calendarAffectations.AffectationList.length === 0"> {{ctrl.resources.Global_Message_AucunElement}} </p>
+                </div>
+            </div>
+            @*END LISTE*@
+        </div>
+
+        <div class="panel-footer">
+            <!--BEGIN  > BOUTONS-->
+            <button type="submit" class="btn btn-link pull-right" ng-click="ctrl.handleCancel(ctrl.panels.team)" title="{{resources.Global_Bouton_Annuler_Tooltip}}">{{ctrl.resources.Global_Bouton_Annuler}}</button>
+            <button type="submit" class="btn btn-default pull-left" ng-disabled="ctrl.disableSaveWhenLoad" ng-click="ctrl.handleSave(ctrl.panels.team)" title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">{{ctrl.resources.Global_Bouton_Enregistrer}}</button>
+            <!--END  > BOUTONS-->
+        </div>
+    </div>
+
+</div>

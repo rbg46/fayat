@@ -1,0 +1,268 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+@using Fred.Framework.FeatureFlipping
+@using Fred.Business.FeatureFlipping
+@{
+
+    ViewBag.Title = FeatureOperationDiverse.RapprochementComptaGestion_Main_Title;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section scripts {
+    @Scripts.Render("~/OperationDiverseIndexBundle.js")
+    @this.RenderResources("FeatureOperationDiverse")
+}
+
+@section styles {
+    @Styles.Render("~/OperationDiverseIndexBundle.css")
+}
+
+<div class="container OperationDiverse" ng-controller="OperationDiverseController as $ctrl" ng-init="init('@ViewBag.CiId', '@ViewBag.Year', '@ViewBag.Month', '@ViewBag.favoriId')">
+    <!-- Titre de la page -->
+    <h1>
+        <feature-flag invert class="feature-select-date" feature-key="MultiplePeriodeOperationDiverses">
+            {{$ctrl.resources.OperationDiverse_Main_Title}}
+        </feature-flag>
+        <feature-flag class="feature-select-date" feature-key="MultiplePeriodeOperationDiverses">
+            {{$ctrl.resources.RapprochementComptaGestion_Main_Title}}
+        </feature-flag>
+    </h1>
+
+    <!-- Barre de recherche + Barre d'outils-->
+    <fred-toolbar>
+
+        <!--Sélection CI-->
+        <fred-section class="ci">
+            <fred-section-title>{{$ctrl.resources.OperationDiverse_centre_d_imputation}}</fred-section-title>
+            <fred-section-controls>
+                <div class="inner-addon right-addon">
+                    <lookup ng-model="$ctrl.ciSelected"
+                            search-placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                            search-title="{{$ctrl.resources.Global_ReferentielCI}}"
+                            custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                            on-select="$ctrl.ciSelectedChanged();"
+                            on-click="$ctrl.handleLookupUrl('CI')">
+                        <input type="text"
+                               class="form-control"
+                               ng-value="$ctrl.ciSelected.CodeLibelle"
+                               placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                               title="{{$ctrl.ciSelected.CodeLibelle}}"
+                               readonly />
+                    </lookup>
+                    <i class="chev material-icons">chevron_right</i>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Sélection Date-->
+        <feature-flag invert class="feature-select-date month" feature-key="MultiplePeriodeOperationDiverses">
+            <fred-section class="select-date">
+                <fred-section-title>{{$ctrl.resources.OperationDiverse_selectionner_une_date}}</fred-section-title>
+                <fred-section-controls>
+                    <div class="input-group date">
+                        <app-date-picker id="periode" min-date="{{$ctrl.minDate}}" ng-model="$ctrl.periode" format="MM/YYYY" lang="fr" on-update="$ctrl.handleChangePeriod()"></app-date-picker>
+                    </div>
+                </fred-section-controls>
+            </fred-section>
+        </feature-flag>
+
+        <feature-flag class="feature-select-date beg-end" feature-key="MultiplePeriodeOperationDiverses">
+            <fred-section class="select-date">
+                <fred-section-title>{{$ctrl.resources.OperationDiverse_PeriodeDebut}}</fred-section-title>
+                <fred-section-controls>
+                    <div class="input-group date">
+                        <app-date-picker id="periodeDebut" placeholder="" min-date="{{$ctrl.minDate}}" max-date="{{$ctrl.periodeFin}}" ng-model="$ctrl.periodeDebut" ng-disabled="$ctrl.isCumul" format="MM/YYYY" lang="fr" ng-change="$ctrl.handleChangePeriod();"></app-date-picker>
+                    </div>
+                    <div class="input-group date">
+                        <button type="button" class="btn btn-primary cumul" ng-class="{'bkg-white': !$ctrl.isCumul}" ng-click="$ctrl.handleCumul();">Cumul</button>
+                    </div>
+                </fred-section-controls>
+            </fred-section>
+            <fred-section class="select-date">
+                <fred-section-title>{{$ctrl.resources.OperationDiverse_PeriodeFin}}</fred-section-title>
+                <fred-section-controls>
+                    <div class="input-group date">
+                        <app-date-picker id="periodeFin" min-date="{{$ctrl.minDate}}" ng-model="$ctrl.periodeFin" initial-date="{{$ctrl.periodeFin}}" format="MM/YYYY" lang="fr" ng-change="$ctrl.handleChangePeriod();"></app-date-picker>
+                    </div>
+                    <div class="input-group date">
+                        <button type="button" class="fred-button default text" ng-disabled="$ctrl.isCumul" ng-click="$ctrl.handleDebut();">= Début</button>
+                    </div>
+                </fred-section-controls>
+            </fred-section>
+        </feature-flag>
+
+        <!-- Etat de la période comptable-->
+        <feature-flag invert class="feature-select-date month" feature-key="MultiplePeriodeOperationDiverses">
+            <fred-section class="status" ng-if="$ctrl.ciSelected && ($ctrl.periode || $ctrl.periodeRange)">
+                <fred-section-title>{{$ctrl.resources.OperationDiverse_Etat_Periode}}</fred-section-title>
+                <fred-section-controls>
+                    <div ng-class="{'orange' : $ctrl.periodeEnCours, 'green' : !$ctrl.periodeEnCours}" class="status-display text">
+                        {{$ctrl.periodeEnCours ? $ctrl.resources.OperationDiverse_Etat_Periode_EnCours : $ctrl.resources.OperationDiverse_Etat_Periode_Cloture}}
+                    </div>
+                </fred-section-controls>
+            </fred-section>
+        </feature-flag>
+        <feature-flag class="feature-select-date month state" feature-key="MultiplePeriodeOperationDiverses">
+            <fred-section class="status" ng-if="$ctrl.ciSelected && ($ctrl.periode || $ctrl.periodeRange)">
+                <fred-section-title>{{$ctrl.resources.OperationDiverse_Etat_Periode}}</fred-section-title>
+                <fred-section-controls>
+                    <div ng-class="{'orange' : $ctrl.periodeClose, 'green' : !$ctrl.periodeClose}" class="status-display text">
+                        {{$ctrl.periodeClose ? $ctrl.resources.OperationDiverse_Etat_Periode_Cloture : $ctrl.resources.OperationDiverse_Etat_Periode_EnCours}}
+                    </div>
+                </fred-section-controls>
+            </fred-section>
+        </feature-flag>
+        <feature-flag class="status" feature-key="MultiplePeriodeOperationDiverses">
+            <fred-section class="status" ng-if="($ctrl.listPeriodClosed.length > 0 || $ctrl.uniquePeriodeCloturee ) && $ctrl.ecartForClosedPeriod">
+                <fred-section-controls>
+                    <button ng-class="{'pink' : $ctrl.listPeriodClosedWhithEcart}" class="fred-button default text" type="button" ng-click="$ctrl.handleProcessEcart();">
+                        Ecarts sur périodes clôturées
+                    </button>
+                </fred-section-controls>
+            </fred-section>
+        </feature-flag>
+        <!--Bouton Actions-->
+        <fred-section class="boutons-actions">
+            <fred-section-title>{{$ctrl.resources.Global_Actions}}</fred-section-title>
+            <fred-section-controls>
+                <button title="{{$ctrl.resources.Global_Rechercher}}" ng-click="$ctrl.handleSearch();" class="fred-button search" type="button" ng-disabled="!$ctrl.rechercheAvailable">{{$ctrl.resources.Global_Rechercher}}</button>
+                <button title="{{$ctrl.isCumul ? $ctrl.resources.OperationDiverse_Import_Impossible_Cumul : $ctrl.resources.OperationDiverse_import_des_od_comptables }}" ng-disabled="(!$ctrl.importEcrituresAvailable ||  $ctrl.isCumul) || !$ctrl.firstSearchHasOccurred" ng-click="$ctrl.importEcritureComptables();" class="default text fred-button" type="button">{{$ctrl.resources.OperationDiverse_import_des_od_comptables}}</button>
+                <button data-toggle="collapse" data-target="#importEcartsModal" title="{{$ctrl.resources.OperationDiverse_chargement_excel_des_ecarts_title }}" class="default text fred-button yellow" type="button" ng-disabled="!$ctrl.firstSearchHasOccurred">
+                    {{$ctrl.resources.OperationDiverse_chargement_excel_des_ecarts}}
+                </button>
+                <button class="fred-button white-star" type="button" ng-click="$ctrl.handleAddFilter2Favoris()" title="{{$ctrl.resources.Button_Save_Favorite_Title}}" ng-disabled="!$ctrl.firstSearchHasOccurred">
+                    <i class="material-icons">star</i>
+                </button>
+            </fred-section-controls>
+        </fred-section>
+    </fred-toolbar>
+    <p class="mess-clot" ng-show="$ctrl.listPeriodClosedLength === 1"> La période comptable du {{$ctrl.uniquePeriodeCloturee | date:'MM/yyyy' }} est clôturée</p>
+    <p class="mess-clot" ng-show="$ctrl.listPeriodClosedLength > 1" style="color:rgb(222,63,126)">Il existe au moins une période comptable clôturée</p>
+    <!-- Tableau-->
+    <div class="OD-list table-responsive">
+        <table class="OD-table">
+            <thead>
+                <tr>
+                    <th class="col-lg-6 col-md-6 col-1">{{$ctrl.resources.Libelle_lb}}</th>
+                    <th class="col-lg-2 col-md-2">
+                        <div class="row">
+                            <div class="col-md-11 col-lg-11 tot-fred">{{$ctrl.resources.OperationDiverse_total_Fred}}</div>
+                            <div class="col-md-1 col-lg-1"></div>
+                        </div>
+                    </th>
+                    <th class="col-lg-2 col-md-2">
+                        <div class="row">
+                            <div class="col-md-11 col-lg-11 tot-anael">{{$ctrl.operationDiverseTotalComptaLibelle}}</div>
+                            <div class="col-md-1 col-lg-1"></div>
+                        </div>
+                    </th>
+                    <th class="col-lg-2 col-md-2">
+                        <div class="row">
+                            <div class="col-md-10 col-lg-10 tot-ecart">{{$ctrl.resources.OperationDiverse_Ecart}}</div>
+                            <div class="col-md-2 col-lg-2">
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="main-data">
+                <tr ng-repeat="(FamilyId, family) in $ctrl.consolidationLines.FamiliesAmounts">
+                    <td class="col-lg-6 col-md-6 firstCol">
+                        <div>
+                            {{family.FamilyName}}
+                            <span class="fred-icon" ng-show="family.MustHaveOrder"></span>
+                            <span class="sapicon-E0A5" ng-show="!family.IsAccrued"></span>
+                            <span class="sapicon-E060" ng-show="family.IsAccrued"></span>
+                            <feature-flag feature-key="ActivationUS13085_6000">
+                                <span ng-show="family.IsAccrued">
+                                    <a href="/Depense/Depense/Explorateur?id={{$ctrl.ciSelected.CiId}}&dateDebut={{$ctrl.periodeDebutFormatee.toString()}}&dateFin={{$ctrl.periodeFinFormatee.toString()}}&codeFamille={{family.FamilyCode}}" target="_blank">
+                                        <i class="material-icons open" title="{{$ctrl.resources.LibelleFamilyTooltip_OuvrirDepense}}">reply</i>
+                                    </a>
+                                </span>
+                            </feature-flag>
+                        </div>
+                    </td>
+                    <td class="col-lg-2 col-md-2">
+                        <div class="row">
+                            <div class="col-md-11 col-lg-11 tot-fred">{{family.FredAmount | currency }}</div>
+                            <div class="col-md-1 col-lg-1"></div>
+                        </div>
+                    </td>
+                    <td class="col-lg-2 col-md-2">
+                        <div class="row">
+                            <div class="col-md-11 col-lg-11 tot-anael">{{family.AccountingAmount | currency}}</div>
+                            <div class="col-md-1 col-lg-1"></div>
+                        </div>
+                    </td>
+                    <td class="col-lg-2 col-md-2 lastCol">
+                        <div class="row">
+                            <div class="col-md-10 col-lg-10 ecart">{{family.GapAmount - family.EcartAmount | currency}}</div>
+                            <div class="col-md-2 col-lg-2 ecart link" ng-class="{'fred-disabled': $ctrl.periodeDebut.toString() !== $ctrl.periodeFin.toString() || $ctrl.uniquePeriodeCloturee}" ng-click="$ctrl.openODofFamily(family);">
+                                <span class="material-icons" ng-hide="$ctrl.isCumul" title="{{$ctrl.isCumul ? $ctrl.resources.OperationDiverse_Import_Impossible_Cumul :''}}" ng-if="$ctrl.periodeEnCours">chevron_right</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="OD-table foot">
+            <tr>
+                <td class="col-lg-6 col-md-6 firstCol">{{$ctrl.resources.OperationDiverse_total_debourse}}</td>
+                <td class="col-lg-2 col-md-2">
+                    <div class="row">
+                        <div class="col-md-11 col-lg-11 tot-fred">{{$ctrl.consolidationLines.TotalFredAmount | currency}}</div>
+                        <div class="col-md-1 col-lg-1"></div>
+                    </div>
+                </td>
+                <td class="col-lg-2 col-md-2">
+                    <div class="row">
+                        <div class="col-md-11 col-lg-11 tot-anael">{{$ctrl.consolidationLines.TotalAccountingAmount | currency}}</div>
+                        <div class="col-md-1 col-lg-1"></div>
+                    </div>
+                </td>
+                <td class="col-lg-2 col-md-2">
+                    <div class="row">
+                        <div class="col-md-10 col-lg-10 tot-ecart">{{$ctrl.consolidationLines.TotalAccountingAmount - $ctrl.consolidationLines.TotalFredAmount | currency}}</div>
+                        <div class="col-md-2 col-lg-2">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- import des écarts Modal >  START-->
+    <div class="modal custom-modal fade" id="importEcartsModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content custom-modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i>{{$ctrl.resources.OperationDiverse_chargement_excel_des_ecarts_title}}</h2>
+                    <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{$ctrl.resources.Global_Modal_Annuler_Tooltip}}" data-toggle="collapse" data-target="#importEcartsModal"></i>
+                </div>
+                <div class="modal-body">
+                    <h5>{{$ctrl.resources.OperationDiverse_QuestionAction}}</h5>
+                    <div class="excel-choice-container">
+                        <div class="importButton" id="actionChoixImporter">
+                            <label class="importButton-txt" ng-click="$ctrl.choixClick($event, 'Importer')">
+                                {{$ctrl.resources.OperationDiverse_Importer}}
+                                <input type="file"
+                                       class="ng-hide"
+                                       id="attachment-upload"
+                                       onchange="angular.element(this).scope().handleSelectFile(event, this)"
+                                       accept="{{acceptedAttachmentFormat}}">
+                            </label>
+                            <div class="inner-triangle"></div>
+                        </div>
+                        <span style="padding:25px; font-size:35px">ou</span>
+                        <div class="importButton" id="actionChoixOuvrir" ng-click="$ctrl.choixClick($event, 'Ouvrir')">
+                            <span class="importButton-txt">{{$ctrl.resources.OperationDiverse_Ouvrir}}</span>
+                            <div class="inner-triangle"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default pull-left" data-dismiss="modal" data-toggle="collapse" data-target="#importEcartsModal" ng-show="$ctrl.btnValiderVisible" ng-click="$ctrl.continuer()" title="{{$ctrl.resources.Global_Bouton_Continuer_Tooltip}}">{{$ctrl.resources.OperationDiverse_Continuer}}</button>
+                    <button class="btn btn-annuler pull-right" data-dismiss="modal" data-toggle="collapse" data-target="#importEcartsModal" title="{{$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">{{$ctrl.resources.OperationDiverse_Annuler}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

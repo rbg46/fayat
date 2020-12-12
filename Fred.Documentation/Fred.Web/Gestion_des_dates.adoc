@@ -1,0 +1,103 @@
+= Utilisation des Dates dans FRED
+
+== Back-end
+
+=== Principe
+Toutes les dates gérées dans le Back doivent être au format UTC. (Champ _Kind_ de DateTime à _Utc_)
+
+=== Entités
+Les dates que l’on récpère de la base de données sont au format UTC mais le champ _Kind_ est _Unspecified_.
+
+Il faudrait spécifier chaque DateTime pour chaque entité.
+
+*Exemple de spécification du champ _Kind_*
+
+[source,csharp]
+----
+private DateTime? _dateOuverture;
+
+/// <summary>
+///   Obtient ou définit la date d'ouverture du CI
+/// </summary>
+[Column("DateOuverture")]
+public DateTime? DateOuverture
+{
+  get
+  {
+    return (_dateOuverture.HasValue) ? DateTime.SpecifyKind(_dateOuverture.Value, DateTimeKind.Utc) : default(DateTime?);
+  }
+  set
+  {
+    _dateOuverture = (value.HasValue) ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc) : default(DateTime?);
+  }
+}
+
+// OR
+
+private DateTime _date;
+/// <summary>
+///   Obtient ou définit la date de la commande.
+/// </summary>
+[Column("Date")]
+public DateTime Date
+{
+  get
+  {
+    return DateTime.SpecifyKind(_date, DateTimeKind.Utc);
+  }
+  set
+  {
+    _date = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+  }
+}
+----
+
+
+=== Date du jour
+
+Pour instancier la date du jour, il faut utiliser
+
+[source,csharp]
+----
+DateTime maintenant = DateTime.UtcNow; // Date du jour avec heure actuelle
+DateTime aujourdhui = DateTime.Today.ToUniversalTime(); // Date du jour avec heure = 00:00:00
+----
+
+Ne pas utiliser : [line-through]*`+DateTime.Now+`*
+
+== Front-end
+
+=== Principe
+
+Les dates sont reçues au format UTC dans les controller Angular. Il faut absolument convertir ces dates en LOCAL. Il existe un filter Angular `+toLocaleDate+` permettant de les convertir.
+
+=== Conversion
+Il faut tout d’abord ajouter le script du filter au _cshtml_
+
+[source,cshtml]
+----
+@Scripts.Render("~/Scripts/filter/toLocaleDate.filter.js")
+----
+
+Ajouter `+$filter+` dans les paramètres du controller Angular
+[source,javascript]
+----
+
+function CIController($filter, Notify, CIService, ProgressBar) { ... }
+----
+
+
+
+Exemple d’utilisation : 
+[source,javascript]
+----
+  CIService.GetById({ ciId: $ctrl.ciId }).$promise
+               .then(function (response) {
+                  response.DateOuverture= $filter('toLocaleDate')(response.DateOuverture);
+               });
+----
+
+
+Pas besoin de reconvertir les dates en UTC avant de les renvoyer au
+serveur (dans un POST ou un PUT). Elles sont automatiquement renvoyées
+en UTC.

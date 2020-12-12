@@ -1,0 +1,239 @@
+= Mise en place des bonnes pratiques et utilisation d'Entity Framework Core
+
+
+== Controller
+
+Il est important que :
+
+1. Les routes respectent les principes REST (méthode bien nommée, route lisible)
+2. Les managers doivent être injectés dans le constructeur du contrôleur et déclaré en tant que "private readonly field"
+3. Changer le type de retour des méthodes des contrôleurs, HttpResponseMessage -> IHttpActionResult  
+4. Mise en place de l'asynchronisme (sauf cas rare s'il n'y a pas de traitement particulier) :  
+    a. Appeler la méthode du manager de façon asynchrone grâce l'utilisation de async/await
+    b. Changer le type de retour de la méthode en Task<….>
+    c. Renommer la méthode en lui ajoutant "Async" à la fin pour la différencier des autres méthodes appelées de manière synchrone
+5. Appeler la méthode "Ok" pour la récupération d'entité avec en paramètre l'objet à retourner et la méthode "Created" pour une création d'entité (POST api/prime) le retour doit contenir la location dans le header du retour et dans son body l'entité crée grâce à cette instruction :
+
+
+[source,csharp]
+----
+return Created($"api/prime/{createdPrime.PrimeId}", createdPrime);
+----
+
+
+Ci-dessous un exemple avant/après des points listés ci-dessus :
+
+- Avant
+
+[source,csharp]
+----
+[HttpPost]
+[Route("api/Prime/SearchAll/{societeId}/{recherche?}")]
+public HttpResponseMessage SearchAll(SearchActiveModel filters, int societeId, string recherche = "")
+{
+    var listPrimes = this.PrimeMgr.SearchPrimeAllWithFilters(societeId, recherche, this.Mapper.Map<SearchPrimeEnt>(filters));
+    return Request.CreateResponse(HttpStatusCode.OK, this.Mapper.Map<IEnumerable<PrimeModel>>(listPrimes));
+}
+----
+
+- Après
+
+[source,csharp]
+----
+[HttpPost]
+[Route("api/Prime/SearchAll/{societeId}/{recherche?}")]
+public async Task<IHttpActionResult> SearchAllAsync(SearchActiveModel filters, int societeId, string recherche = "")
+{
+    var listPrimes = await PrimeMgr.SearchPrimeAllWithSearchPrimeTextAsync(societeId, recherche, this.Mapper.Map<SearchPrimeEnt>(filters));
+    return Ok(this.Mapper.Map<IEnumerable<PrimeModel>>(listPrimes));
+}
+----
+
+== Manager
+
+Il est important que :
+
+1. Mise en place de l'asynchronisme dans le manager ainsi que dans son interface :  
+    a. Appeler la méthode du repository de façon asynchrone grâce l'utilisation de async/await
+    b. Changer le type de retour de la méthode en Task de l'objet de retour
+    c. Renommer la méthode en lui ajoutant "Async" à la fin pour la différencier des autres méthodes appeler de manière synchrone
+2. La couche manager n'est pas responsable de la construction des requêtes EntityFramework, la méthode GetPredicate n'a donc pas sa place dans cette couche.
+3. Injecter le repository à la place du manager s’il n'y a pas de logique métier dans le manager
+
+Ci-dessous un exemple avant/après du point listé ci-dessus :
+
+
+- Avant
+
+[source,csharp]
+----
+public IEnumerable<PrimeEnt> SearchPrimeAllWithFilters(int societeId, string text, SearchPrimeEnt filters)
+{
+    return this.primeRepo.SearchPrimeAllWithFilters(societeId, GetPredicate(text, filters));
+}
+
+private Expression<Func<PrimeEnt, bool>> GetPredicate(string text, SearchPrimeEnt filters)
+{
+    if (string.IsNullOrEmpty(text))
+    {
+        return p => !filters.Actif || p.Actif;
+    }
+
+    return p => (filters.Code && p.Code.Contains(text)
+                 || filters.Libelle && p.Libelle.Contains(text))
+                && (!filters.Actif || p.Actif);
+}
+
+----
+
+- Apres
+
+[source,csharp]
+----
+public async Task<IEnumerable<PrimeEnt>> SearchPrimeAllWithSearchPrimeTextAsync(int societeId, string text, SearchPrimeEnt filters)
+{
+    return await primeRepo.SearchPrimeAllWithSearchPrimeTextAsync(societeId, text, filters);
+}
+----
+
+
+De plus, l'injection de dépendance du repository se fait via le passage dans le constructeur du manager (grâce a Unity) et non via la couche UnitOfWork (uow.Repository<IRepository==>==()), car cette méthode utilise le ServiceLocator pour récupérer une instance du repository, ce qui est un raccourci au pattern d'injection de dépendance de Unity.
+
+Ci-dessous un exemple avant/après du point listé ci-dessus :
+
+- Avant
+
+[source,csharp]
+----
+public PrimeManager(IUnitOfWork uow, IUtilisateurManager utilisateurMgr, IGroupeManager groupeManager, ISocieteManager societeManager, ISepService sepService)
+              : base(uow)
+{
+	this.primeRepo = uow.Repository<IPrimeRepository>();
+	this.utilisateurMgr = utilisateurMgr;
+	this.groupeManager = groupeManager;
+	this.societeManager = societeManager;
+	this.sepService = sepService;
+}
+----
+
+- Après
+
+[source,csharp]
+----
+public PrimeManager(IUnitOfWork uow,
+                    IUtilisateurManager utilisateurMgr,
+                    IGroupeManager groupeManager,
+                    ISocieteManager societeManager,
+                    ISepService sepService,
+                    IPrimeRepository primeRepo)
+      : base(uow)
+{
+    this.primeRepo = primeRepo;
+    this.utilisateurMgr = utilisateurMgr;
+    this.groupeManager = groupeManager;
+    this.societeManager = societeManager;
+    this.sepService = sepService;
+}
+----
+
+== Repository
+
+Il est important que :
+
+1. L'injection du FredDbContext dans le Repository via le constructeur
+2. La mise en place de l'asynchronisme dans le manager ainsi que dans son interface :
+    a. Appeler la méthode du repository de façon asynchrone grâce l'utilisation de async/await b. Changer le type de retour de la méthode en Task de l'objet de retour
+    c. Renommer la méthode en lui ajoutant "Async" à la fin pour la différencier des autres méthodes appeler de manière synchrone
+    d. Modifier l'appel à ToList() d'EntityFramework par un appel asynchrone grâce au ToListAsync() d'EF Core.
+
+Ci-dessous un exemple avant/après du point listé ci-dessus :
+
+- Avant
+
+[source,csharp]
+----
+public PrimeRepository(ILogManager logMgr) : base(logMgr) {}
+
+public IEnumerable<PrimeEnt> SearchPrimeAllWithFilters(int societeId, Expression<Func<PrimeEnt, bool>> predicate)
+{
+	return Context.Primes.Where(s => s.SocieteId != null && s.SocieteId.Value == societeId && s.IsPrimeAstreinte == null).Where(predicate).OrderBy(s => s.Code).ToList();
+}
+----
+
+- Apres
+
+[source,csharp]
+----
+private readonly FredDbContext context;
+
+public PrimeRepository(FredDbContext context, ILogManager logMgr) : base(logMgr)
+{
+    this.context = context;
+}
+
+public async Task<IEnumerable<PrimeEnt>> SearchPrimeAllWithSearchPrimeTextAsync(int societeId, string text, SearchPrimeEnt filters)
+{
+    return await _context.Primes
+        .Where(p => p.SocieteId != null
+            && p.SocieteId.Value == societeId
+            && p.IsPrimeAstreinte == null
+            && (!filters.Actif || p.Actif)
+            && (string.IsNullOrEmpty(text) 
+				|| filters.Code && p.Code.Contains(text) 
+				|| filters.Libelle && p.Libelle.Contains(text)))
+        .OrderBy(s => s.Code)
+        .ToListAsync();
+}
+----
+
+== Requete Entity Framework Core
+
+La méthode Include spécifie les objets associés à inclure dans les résultats de la requête. Il peut être utilisé pour extraire certaines informations de la base de données et également pour inclure des entités associées. 
+
+Mais que faire si plusieurs niveaux de profondeur sont nécessaires. Par exemple, le CI contient une liste de Workflows et chaque workflow contient ensuite une liste d'auteur.
+
+EF Core a une nouvelle méthode d'extension ThenInclude (). Vous pouvez explorer des relations pour inclure plusieurs niveaux de données liées à l'aide de la méthode ThenInclude.
+
+- Avant 
+
+[source,csharp]
+----
+public static IQueryable<BudgetEnt> WithIncludes(this IQueryable<BudgetEnt> query)
+{
+    return query
+    .Include(b => b.Ci)
+    .IncludeOptimized(b => b.Devise)
+    .IncludeOptimized(b => b.BudgetEtat)
+    .IncludeOptimized(b => b.Workflows)
+    .IncludeOptimized(b => b.Workflows.Select(w => w.EtatInitial))
+    .IncludeOptimized(b => b.Workflows.Select(w => w.EtatCible))
+    .IncludeOptimized(b => b.Workflows.Select(w => w.Auteur))
+    .IncludeOptimized(b => b.Workflows.Select(w => w.Auteur.Personnel))
+    .IncludeOptimized(b => b.BudgetT4s)
+    .IncludeOptimized(b => b.BudgetT4s.Select(t4 => t4.BudgetSousDetails.Select(sd => sd.Ressource.SousChapitre.Chapitre)))
+    .IncludeOptimized(b => b.BudgetT4s.Select(t4 => t4.T4.Parent.Parent.Parent))
+    .IncludeOptimized(b => b.Recette);
+}
+----
+
+- Apres
+
+[source,csharp]
+----
+public static IQueryable<BudgetEnt> WithIncludes(this IQueryable<BudgetEnt> query)
+{
+    return query
+        .Include(b => b.Ci)
+        .Include(b => b.Devise)
+        .Include(b => b.BudgetEtat)
+        .Include(b => b.Workflows)
+        .Include(b => b.Workflows).ThenInclude(w => w.EtatInitial)
+        .Include(b => b.Workflows).ThenInclude(w => w.EtatCible)
+        .Include(b => b.Workflows).ThenInclude(w => w.Auteur)
+        .Include(b => b.Workflows).ThenInclude(w => w.Auteur.Personnel)
+        .Include(b => b.BudgetT4s)
+        .Include(b => b.BudgetT4s).ThenInclude(t4 => t4.BudgetSousDetails).ThenInclude(sd => sd.Ressource.SousChapitre.Chapitre)
+        .Include(b => b.BudgetT4s).ThenInclude(t4 => t4.T4.Parent.Parent.Parent)
+        .Include(b => b.Recette);
+}
+----

@@ -1,0 +1,247 @@
+﻿.header-toolbar {
+    background-color: #E1E3E5;
+    margin-bottom: 15px;
+    padding: 6px;
+}
+
+.header-toolbar label {
+    font-size: 18px;
+    margin-top: 6px;
+}
+
+.pickListCallerDeviseRef > .inputPLSearchParent {
+    background-color: #FFFFFF;
+    color: #BBBBBB;
+}
+
+.add_currency {
+    background-color: #F1F2F3;
+    border: #F1F2F3 1px;
+    color: #337ab7;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-right: 3px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-weight: normal;
+}
+
+.add_currency:hover {
+    background-color: #fff;
+    color: #333333;
+}
+
+.journal {
+    padding-left: 0px;
+    background-color: white;
+    border: none;
+}
+
+.journal:focus {
+    border: 1px solid rgba(51, 122, 183, 0.5);
+}
+
+.btnJournal {
+    margin: 0px;
+    height: 32px;
+    background-color: white !important;
+}
+
+.no-padding-left {
+    padding-left: 0px;
+}
+
+.journal-table thead {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+}
+
+.journal-table tbody {
+    display: block;
+    overflow-y: scroll;
+    max-height: 300px;
+}
+
+.journal-table tbody tr {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+}
+
+.image-mini {
+    width: 350px;
+}
+
+.cc-selector {
+    height: 400px;
+    margin-bottom: 120px;
+}
+
+.cc-selector input {
+    margin: 0;
+    padding: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.cc-selector input:active + .imgcard-cc {
+    opacity: .9;
+}
+
+.cc-selector input:checked + .imgcard-cc {
+    -webkit-filter: none;
+    -moz-filter: none;
+    filter: none;
+    border: #DE3F7E 5px solid;
+    opacity: 1;
+}
+
+.cc-selector-2 input {
+    position: absolute;
+    z-index: 999;
+}
+
+.cc-selector-2 input:active + .imgcard-cc {
+    opacity: .9;
+}
+
+.cc-selector-2 input:checked + .imgcard-cc {
+    -webkit-filter: none;
+    -moz-filter: none;
+    filter: none;
+    border: #DE3F7E 5px solid;
+    opacity: 1;
+}
+
+.imgcard-cc {
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-size: 350px 250px;
+    display: inline-block;
+    width: 350px;
+    height: 250px;
+    border: white 5px solid;
+    opacity: 0.5;
+}
+
+a {
+    color: #444;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #888;
+}
+
+p {
+    margin-bottom: .3em;
+}
+
+.bdg.interimaire {
+    background-color: brown !important;
+    margin-top: 7px !important;
+    color: white;
+}
+
+.bdg.sep {
+    background-color: #0044ff !important;
+    margin-top: 7px !important;
+    color: white;
+}
+
+#optionRightPanel .form {
+    height: 73%;
+}
+
+#optionRightPanel .form-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    margin-bottom: 0;
+}
+
+#optionRightPanel .form-header h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#optionRightPanel .table {
+    table-layout: fixed;
+}
+
+#optionRightPanel .table thead tr th {
+    font-size: 11px;
+}
+
+#optionRightPanel .table thead tr th .btn {
+    font-size: 11px;
+    margin-top: 0;
+}
+
+#optionRightPanel .table tbody tr td {
+    font-size: 11px;
+    height: 35px;
+    padding: 0;
+}
+
+#optionRightPanel .table tbody tr .del-clear {
+    text-align: right;
+}
+
+#optionRightPanel .table tbody tr .del-clear .material-icons {
+    vertical-align: middle;
+}
+
+#optionRightPanel .footer {
+    position: fixed;
+    bottom: 0;
+    height: 100px;
+    width: 380px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#optionRightPanel .footer .buttons-bar {
+    height: 50px;
+}
+
+#optionRightPanel .footer .close-text {
+    align-items: center;
+    height: 50px;
+    cursor: pointer;
+    justify-content: center;
+    display: flex;
+}
+
+#optionRightPanel .footer .close-text span {
+    margin-left: 10px;
+    font-weight: normal;
+    color: grey;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+#optionRightPanel .footer .close-text i {
+    font-size: 40px;
+    color: #67757f;
+}
+
+.modal-associesep {
+    z-index: 1300 !important;
+}
+
+.modal-suppressionSociete {
+    z-index: 1300 !important;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    #optionRightPanel .form {
+        height: 69%;
+    }
+}

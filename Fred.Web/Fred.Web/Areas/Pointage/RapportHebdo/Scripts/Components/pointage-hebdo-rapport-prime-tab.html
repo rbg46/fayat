@@ -1,0 +1,153 @@
+﻿<div ng-repeat="ObjItem in $ctrl.data | filter:{IsAbsence:false} track by $index">
+    <div class="flex-line level-1 maj">
+
+        <div class="col-1">
+            <div class="chevron" ng-style="ObjItem.SubNodeList.length ?{'visibility':'visible'}:{'visibility':'hidden'}" data-toggle="collapse" aria-expanded="false" data-target="#Lmaj1-{{$index}}"></div>
+            <span class="lbl">{{ObjItem.NodeText}}</span>
+            <span class="tot-txt"></span>
+            <span class="sapicon-E0A0 abs" title="{{::resources.RapportHebdo_Absence_Message}}"></span>
+        </div>
+        <!--add calcule-->
+        <div class="col-2">
+            <div>
+                <div class="contenor">
+                    <span class="tot-datas form-control">{{handleTotalsPrimesPerDay(ObjItem.SubNodeList, 0)}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div>
+                <div class="contenor">
+                    <span class="tot-datas form-control">{{handleTotalsPrimesPerDay(ObjItem.SubNodeList, 1)}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div>
+                <div class="contenor">
+                    <span class="tot-datas form-control">{{handleTotalsPrimesPerDay(ObjItem.SubNodeList, 2)}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div>
+                <div class="contenor">
+                    <span class="tot-datas form-control">{{handleTotalsPrimesPerDay(ObjItem.SubNodeList, 3)}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div>
+                <div class="contenor">
+                    <span class="tot-datas form-control">{{handleTotalsPrimesPerDay(ObjItem.SubNodeList, 4)}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-7">
+            <div>
+                <div class="contenor">
+                    <span class="tot-datas form-control">{{handleTotalsPrimesPerDay(ObjItem.SubNodeList, 5)}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div>
+                <div class="contenor">
+                    <span class="tot-datas form-control">{{handleTotalsPrimesPerDay(ObjItem.SubNodeList, 6)}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <span>
+                {{calculateSumFieldsTotal(ObjItem.SubNodeList)}}
+            </span>
+
+        </div>
+        <!--add calcule-->
+        <!--add calcule-->
+    </div>
+    <div class="collapse in" id="Lmaj1-{{$index}}">
+
+        <div ng-repeat="(subNodeIndex, subNode) in ObjItem.SubNodeList | filter:{IsAbsence:false , IsPersonnelCiDesaffected:false} track by $index">
+            <div class="flex-line sub-level1 biz">
+                <div class="col-1">
+                    <div class="chevron" ng-style="subNode.SubNodeList[0].Items.length ?{'visibility':'visible'}:{'visibility':'hidden'}" data-toggle="collapse" aria-expanded="false" data-target="#PRIME-{{$parent.$index}}-{{$index}}"></div>
+                    <lookup ng-model="selectedRef"
+                            search-placeholder="{{::resources.Global_ReferentielPrime_Placeholder}}"
+                            search-title="{{::resources.Global_ReferentielPrime}}"
+                            url="{{handleLookupUrl( $ctrl.isAffichageParOuvrier ? subNode.NodeId :ObjItem.NodeId)}}{{$ctrl.getReferentielRhUrl(ObjItem.Statut,subNode.Statut)}}"
+                            on-select="handleLookupSelection(item, subNode, ObjItem)"
+                            ng-disabled="subNode.PersonnelToReadOnly">
+                        <span class="material-icons">add_box</span>
+                    </lookup>
+                    <span class="lbl">{{subNode.NodeText}}</span>
+                    <span class="tot-txt">{{::resources.RapportHebdo_TotalPrime}}</span>
+                </div>
+                <div class="col-2">{{handleTotalPrimePerDay(subNode.SubNodeList, 0)}}</div>
+                <div class="col-3">{{handleTotalPrimePerDay(subNode.SubNodeList, 1)}}</div>
+                <div class="col-4">{{handleTotalPrimePerDay(subNode.SubNodeList, 2)}}</div>
+                <div class="col-5">{{handleTotalPrimePerDay(subNode.SubNodeList, 3)}}</div>
+                <div class="col-6">{{handleTotalPrimePerDay(subNode.SubNodeList, 4)}}</div>
+                <div class="col-7">{{handleTotalPrimePerDay(subNode.SubNodeList, 5)}}</div>
+                <div class="col-8">{{handleTotalPrimePerDay(subNode.SubNodeList, 6)}}</div>
+                <div class="col-9">{{handleTotalWeekPourOuvrier(subNode.SubNodeList)}}</div>
+            </div>
+            <!--Liste niveau 2-->
+            <div class="collapse in" id="PRIME-{{$parent.$index}}-{{$index}}">
+                <div ng-repeat="primeItems in subNode.SubNodeList">
+                    <div ng-repeat="prime in primeItems.Items" ng-class="{ 'div-PrimeAstreinte-disabled': prime.IsPrimeAstreinte}">
+                        <div class="flex-line level-2 primes">
+                            <div class="col-1">
+                                <span class="sapicon-E0B6 prims"></span>
+                                <span class="lbl">{{prime.PrimeLibelle}}</span>
+                            </div>
+                            <div class="col-2">
+                                <label class="switch" ng-show="{{prime.IsPrimeJournaliere}}">
+                                    <input name="toggle-box" class="" type="checkbox" ng-model="prime.RapportHebdoPrimePerDayList[0].IsChecked" ng-change="$ctrl.handleChangePrime(prime, 0, ObjItem.NodeId, subNode.NodeId, primeItems.Items, subNode.SubNodeList)" ng-disabled="subNode.PersonnelToReadOnly || (prime.RapportHebdoPrimePerDayList[0].PersonnelVerrouille) || (prime.RapportHebdoPrimePerDayList[0].RapportValide && !$ctrl.isManagerPointing) || ($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[0].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === primeItems.NodeId)">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="col-3">
+                                <label class="switch" ng-show="{{prime.IsPrimeJournaliere}}">
+                                    <input name="toggle-box" class="" type="checkbox" ng-model="prime.RapportHebdoPrimePerDayList[1].IsChecked" ng-change="$ctrl.handleChangePrime(prime, 1, ObjItem.NodeId, subNode.NodeId, primeItems.Items, subNode.SubNodeList)" ng-disabled="subNode.PersonnelToReadOnly || (prime.RapportHebdoPrimePerDayList[1].PersonnelVerrouille) || (prime.RapportHebdoPrimePerDayList[1].RapportValide && !$ctrl.isManagerPointing) || ($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[1].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === primeItems.NodeId)">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch" ng-show="{{prime.IsPrimeJournaliere}}">
+                                    <input name="toggle-box" class="" type="checkbox" ng-model="prime.RapportHebdoPrimePerDayList[2].IsChecked" ng-change="$ctrl.handleChangePrime(prime, 2, ObjItem.NodeId, subNode.NodeId, primeItems.Items, subNode.SubNodeList)" ng-disabled="subNode.PersonnelToReadOnly || (prime.RapportHebdoPrimePerDayList[2].PersonnelVerrouille) || (prime.RapportHebdoPrimePerDayList[2].RapportValide && !$ctrl.isManagerPointing) || ($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[2].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === primeItems.NodeId)">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="col-5">
+                                <label class="switch" ng-show="{{prime.IsPrimeJournaliere}}">
+                                    <input name="toggle-box" class="" type="checkbox" ng-model="prime.RapportHebdoPrimePerDayList[3].IsChecked" ng-change="$ctrl.handleChangePrime(prime, 3, ObjItem.NodeId, subNode.NodeId, primeItems.Items, subNode.SubNodeList)" ng-disabled="subNode.PersonnelToReadOnly || (prime.RapportHebdoPrimePerDayList[3].PersonnelVerrouille) || (prime.RapportHebdoPrimePerDayList[3].RapportValide && !$ctrl.isManagerPointing) || ($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[3].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === primeItems.NodeId)">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="col-6">
+                                <label class="switch" ng-show="{{prime.IsPrimeJournaliere}}">
+                                    <input name="toggle-box" class="" type="checkbox" ng-model="prime.RapportHebdoPrimePerDayList[4].IsChecked" ng-change="$ctrl.handleChangePrime(prime, 4, ObjItem.NodeId, subNode.NodeId, primeItems.Items, subNode.SubNodeList)" ng-disabled="subNode.PersonnelToReadOnly || (prime.RapportHebdoPrimePerDayList[4].PersonnelVerrouille) || (prime.RapportHebdoPrimePerDayList[4].RapportValide && !$ctrl.isManagerPointing) || ($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[4].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === primeItems.NodeId)">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="col-7">
+                                <label class="switch" ng-show="{{prime.IsPrimeJournaliere}}">
+                                    <input name="toggle-box" class="" type="checkbox" ng-model="prime.RapportHebdoPrimePerDayList[5].IsChecked" ng-change="$ctrl.handleChangePrime(prime, 5, ObjItem.NodeId, subNode.NodeId, primeItems.Items, subNode.SubNodeList)" ng-disabled="subNode.PersonnelToReadOnly || (prime.RapportHebdoPrimePerDayList[5].PersonnelVerrouille) || (prime.RapportHebdoPrimePerDayList[5].RapportValide && !$ctrl.isManagerPointing) || ($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[5].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === primeItems.NodeId)">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="col-8">
+                                <label class="switch" ng-show="{{prime.IsPrimeJournaliere}}">
+                                    <input name="toggle-box" class="" type="checkbox" ng-model="prime.RapportHebdoPrimePerDayList[6].IsChecked" ng-change="$ctrl.handleChangePrime(prime, 6, ObjItem.NodeId, subNode.NodeId, primeItems.Items, subNode.SubNodeList)" ng-disabled="subNode.PersonnelToReadOnly || (prime.RapportHebdoPrimePerDayList[6].PersonnelVerrouille) || (prime.RapportHebdoPrimePerDayList[6].RapportValide && !$ctrl.isManagerPointing) || ($ctrl.subNodeList[subNodeIndex].SubNodeList[1].Items[6].PersonnelVerrouille && $ctrl.subNodeList[subNodeIndex].NodeId === primeItems.NodeId)">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="col-9">{{handleTotalDayPrime(prime)}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

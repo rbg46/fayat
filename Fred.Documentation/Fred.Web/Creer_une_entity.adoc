@@ -1,0 +1,108 @@
+= Créer une entité
+
+== Entité
+
+Tout d'abord qu'est ce qu'une entité ? 
+
+L'entité est le model de données sur lequel EntityFramework va se baser pour générer une migration. 
+Celle ci compose tous les caractéristique de la table qui finira dans la base de données (nom de table, clé primaire, clé étrngère, nom de colonne, type de colonne ...).
+
+Elle doit être réfléchis, le nom de l'entité doit être explicite et le mieux est de consulter un copain avant de déployer une nouvelle entité.
+
+== Les différentes propriétés
+
+[Table("nom_de_la_table")] : 
+
+    la propriété la plus importante, celle qui donne le nom à votre table. 
+    Le nom de la table doit commencer automatiquement par "FRED" pour les entités de FredWeb, doit être séparé uniquement par des "_",
+    doit porter le même que le fichier pour être plus facilement identifiable et doit être écrisu uniquement en majuscule.
+
+[Key] :
+
+    Cette propriété est a situé sur la colonne qui portera la plus grosse charge celle de la clé primaire.
+    Généralement et il est conséillé qu'elle soit suivi de la prpriété suivante.
+
+[DatabaseGenerated(DatabaseGeneratedOption.Identity)] :
+
+    Cette propriété permet à la clé primaire d'être généré automatiquement et d'être incrémenté.
+
+[Column("nom_de_la_column")] : 
+
+    Celle-ci permet de donner le nom que vous désirez à votre colonne mais ne vous emballez pas il faut comme même lui donner un nom explicite qui correspond bien à ce qu'elle devra contenir.
+
+[Column(Order = chiffre)] : 
+
+    Cette propriété permet de définir l'ordre dans lequel EntityFramework doit remonter les résultat de requête.
+
+[Required] :
+
+    Elle vous permettra de rendre vos colonnes non nullable est aucun enregistrement ne sera fait sans remplir les colonnes composé de cette propriété.
+
+[Index("nom_de_lindex", IsUnique = true)] :
+
+    Cette propriété vous permettra de créer une clé unique sur une colonne ou encore de créer un couple de colonne unique.
+    Sur les entités que vous creez, penser si vos lignes doivent être unique ou non. 
+    Pour définir un index il faut que la colonne ou les colonnes choisie(s) soit limité, si vous désirez mettre en place une unicité sur une colonne possédant le type nvarchar(max) EntityFramework vous rejettera en disant qu'il est impossible de mettre la clé d'unicité sur cette colonne ci.
+    Pour délimiter la taille référencez-vous à la propriété "StringLength()".
+    Par exemple : Pour un entité qui sera un référentiel doit avoir ces lignes uniques (ex: FRED_PAYS code -> unique). pour une entité qui n'est pas une référence ne doit pas comporter d'index unique (ex: FRED_COMMANDE)
+
+[NotMapped] :
+
+    Cette propriété n'influence pas la base de donnée.
+    Elle vous permettra de rajouter des variables qui ne sont pas dans la base de donnée mais que vous pourrez remplir avec des requêtes afin de les embarquer dans les models pour le front.
+
+[ForeignKey("nom_de_la_colonne")] :
+
+    Cette propriété vous permettra d'indiquer les clés étrangères sur les objets afin de les inclures lors des remontées de données pour les requêtes du back.
+
+[StringLength(taille)]
+
+    Cette propriété permet de délimiter la taille des champs de caractère.
+
+
+== Exemples
+
+Nom de la table :
+
+    [Table("FRED_ZONE_DE_TRAVAIL")]
+    public class ZoneDeTravailEnt {}
+
+Clé primaire + Génération automatique de la clé primaire :
+
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int DelegationId { get; set; }
+
+Nom de la colonne :
+
+    [Column("PersonnelAuteurId")]
+    public int PersonnelAuteurId { get; set; }
+
+Clé étrangère :
+
+    [ForeignKey("PersonnelAuteurId")]
+    public PersonnelEnt PersonnelAuteur { get; set; }
+
+Nom de la colonne + définition de la taille + clé d'unicité sur la colonne :
+
+    [Column("Code")]
+    [StringLength(3)]
+    [Index("IX_UniqueCode", IsUnique = true)]
+    public string Code { get; set; }
+
+Champs requis :
+
+    [Required]
+    public int InterimaireId { get; set; }
+
+Champs non récupérer en base de données :
+
+    [NotMapped]
+    public List<MatriculeExterneEnt> MatriculeExterne { get; set; }
+
+Clé primaire + ordre de colonne + champs requis :
+
+    [Key]
+    [Column(Order = 1)]
+    [Required]
+    public int ContratInterimaireId { get; set; }

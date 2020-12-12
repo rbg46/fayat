@@ -1,0 +1,391 @@
+﻿.blockScreen {
+    z-index: 1198;
+    background-color: #898989;
+    opacity: 0.5;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    position: fixed;
+}
+
+.options {
+    position: fixed;
+    width: 450px;
+    background-color: white;
+    height: 100%;
+    top: 0px;
+    right: 0px;
+    z-index: 1301;
+    border-left: #b4b4b4 solid 1px;
+    overflow: auto;
+}
+
+.options .toolbar {
+    background-color: #e1e3e5;
+    margin: 0px;
+    padding: 0px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.options .toolbar .icons {
+    text-align: right;
+    padding-right: 5px;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
+.options .toolbar LABEL {
+    visibility: hidden;
+    display: none;
+}
+
+.options .toolbar .grandicone {
+    font-size: 50px;
+    font-weight: lighter;
+    margin: auto;
+}
+
+.options .toolbar .grandicone:before {
+    font-size: 50px;
+}
+
+.options .toolbar.is-already-used {
+    background-color: #c05046;
+    color: #fff;
+}
+
+.options .is-already-used-text {
+    color: #c05046;
+    display: block;
+    text-align: center;
+}
+
+.options .form {
+    height: 65%;
+    padding: 10px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+}
+
+.options .footer {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.options .form-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.options .form-header H2 {
+    text-align: center;
+}
+
+.options .form-header label .legend {
+    color: #67757f;
+    text-align: center;
+    border: none;
+    font-size: 14px;
+}
+
+.options label {
+    color: #67757F;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.options .buttons {
+    float: right;
+    margin-top: 50px;
+    display: block;
+    width: 100%;
+}
+
+.options .form-group {
+    margin-bottom: 30px;
+}
+
+.options h5 {
+    border-bottom: 1px solid #0052a0;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-top: 15px;
+}
+
+.options .close_panel {
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    height: 70px;
+    width: 380px;
+    text-align: center;
+    padding-top: 35px;
+}
+
+.options .close_panel span {
+    text-align: center;
+    font-weight: normal;
+    color: grey;
+    display: block;
+    cursor: pointer;
+    margin-top: 2px;
+    font-size: 12px;
+}
+
+.options .close_panel span:hover {
+    cursor: pointer;
+    color: #0052a0;
+}
+
+.options .close_panel i {
+    font-size: 40px;
+    position: absolute;
+    top: 24px;
+    left: 108px;
+    color: #67757f;
+    cursor: pointer;
+}
+
+.options .close_panel i:hover {
+    color: #0052a0;
+}
+
+.options .chb_r {
+    text-align: right;
+}
+
+.options .chb_l {
+    text-align: left;
+}
+
+.options .rd_l {
+    text-align: left;
+}
+
+.form-header h2 {
+    font-size: 21px;
+}
+
+.close-right-panel {
+    visibility: hidden;
+    display: none;
+}
+
+.large {
+    width: 60% !important;
+    height: 75% !important;
+    left: 25%;
+    top: 10%;
+}
+
+.small {
+    width: 400px !important;
+    height: 100%;
+}
+
+.label-group {
+    padding-top: 15px !important;
+}
+
+input[type="radio"] {
+    display: none !important;
+}
+
+input[type="radio"] + label {
+    font-size: 14px;
+}
+
+input[type="radio"] + label span {
+    display: inline-block !important;
+    width: 19px !important;
+    height: 19px !important;
+    margin: -1px 4px 0 0 !important;
+    vertical-align: middle !important;
+    cursor: pointer !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+    background-color: #fcfcfc !important;
+    border: 3px #2c77ba solid;
+    -webkit-transition: background-color 0.4s linear !important;
+    -o-transition: background-color 0.4s linear !important;
+    -moz-transition: background-color 0.4s linear !important;
+    transition: background-color 0.4s linear !important;
+}
+
+input[type="radio"]:checked + label span {
+    background-color: #1F98C7 !important;
+    border: 3px #78C1DD solid;
+    -webkit-transition: background-color 0.4s linear !important;
+    -o-transition: background-color 0.4s linear !important;
+    -moz-transition: background-color 0.4s linear !important;
+    transition: background-color 0.4s linear !important;
+}
+
+input[type="checkbox"] {
+    display: none !important;
+}
+
+input[type="checkbox"] + label {
+    font-size: 14px;
+}
+
+input[type="checkbox"] + label span {
+    display: inline-block !important;
+    width: 19px !important;
+    height: 19px !important;
+    margin: -1px 4px 0 0 !important;
+    vertical-align: middle !important;
+    cursor: pointer !important;
+    -moz-border-radius: 20% !important;
+    border-radius: 20% !important;
+    background-color: #fcfcfc !important;
+    border: 3px #78C1DD solid;
+    -webkit-transition: background-color 0.4s linear !important;
+    -o-transition: background-color 0.4s linear !important;
+    -moz-transition: background-color 0.4s linear !important;
+    transition: background-color 0.4s linear !important;
+}
+
+input[type="checkbox"]:checked + label span {
+    border: 3px #2c77ba solid;
+    background-image: url("/medias/images/ico/checked.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-transition: background-color 0.4s linear !important;
+    -o-transition: background-color 0.4s linear !important;
+    -moz-transition: background-color 0.4s linear !important;
+    transition: background-color 0.4s linear !important;
+}
+
+@media all and (min-width: 350px) {
+    .options {
+        background-color: #FFFFFF;
+        width: 450px;
+        -webkit-box-shadow: 0px -1px 44px -2px rgba(0, 0, 0, 0.52);
+        -moz-box-shadow: 0px -1px 44px -2px rgba(0, 0, 0, 0.52);
+        box-shadow: 0px -1px 44px -2px rgba(0, 0, 0, 0.52);
+    }
+    .open {
+        -webkit-animation-name: transition_open;
+        -webkit-animation-duration: .5s;
+        animation-name: transition_open;
+        animation-duration: .5s;
+    }
+}
+
+@media all and (max-width: 650px) {
+    .options {
+        background-color: #fbfbfb;
+        width: 100%;
+    }
+    .open {
+        visibility: visible;
+        display: block;
+    }
+}
+
+@-webkit-keyframes transition_open {
+    from {
+        right: -350px;
+    }
+    to {
+        right: 0px;
+    }
+}
+
+@keyframes transition_open {
+    from {
+        right: -350px;
+    }
+    to {
+        right: 0px;
+    }
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .options .toolbar {
+        height: 50px;
+    }
+    .options .toolbar .grandicone {
+        font-size: initial;
+    }
+    .options .toolbar .grandicone:before {
+        font-size: 30px;
+    }
+    .options .toolbar .material-icons.grandicone {
+        font-size: 30px;
+    }
+    .options .toolbar .material-icons.grandicone:before {
+        font-size: 30px;
+    }
+    .options .form {
+        height: 75%;
+    }
+    .options .form-header {
+        margin-bottom: 15px;
+    }
+    .options .form-header h2 {
+        font-size: 15px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+    .options label {
+        font-size: 11px;
+    }
+    .options .form-control {
+        height: 25px;
+        font-size: 12px;
+    }
+    .options .form-group {
+        margin-bottom: 10px;
+    }
+    .options .buttons {
+        margin-top: 35px;
+    }
+    .options .buttons .btn {
+        font-size: 11px;
+        padding: 4px 6px;
+    }
+    .options .close_panel {
+        height: 50px;
+        display: flex;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+    }
+    .options .close_panel i {
+        font-size: 25px;
+        top: initial;
+        left: 125px;
+    }
+    .options .close_panel span {
+        font-size: 11px;
+    }
+    .options input[type="checkbox"] + label {
+        font-size: 11px;
+    }
+    .options input[type="checkbox"] + label span {
+        width: 15px !important;
+        height: 15px !important;
+        border: 2px #78C1DD solid;
+    }
+    .options input[type="checkbox"]:checked + label span {
+        border: 2px #2c77ba solid;
+        background-size: 9px;
+    }
+    .options input[type="radio"] + label {
+        font-size: 11px;
+        margin-right: 5px;
+    }
+    .options input[type="radio"] + label span {
+        border: 2px #2c77ba solid;
+        width: 15px !important;
+        height: 15px !important;
+    }
+}

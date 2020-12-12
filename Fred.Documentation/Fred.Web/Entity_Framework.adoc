@@ -1,0 +1,447 @@
+= Principe Général
+
+____
+PAS D’INSERTION DE DONNEES DE REFERENCE VIA LES MIGRATIONS EF +
+POUR CELA, UTILISER LE PROJET Fred.Refential
+____
+
+Code First Migrations permet d’effectuer des mises à jour de la base de données à partir des modifications apportées au modèle de données.
+
+Il n’y a donc pas de script SQL pour la création de la base de données, elle se créera à partir de fichier généré par EntityFramework (EF).
+
+Si vous changez le model de données, il faudra explicitement générer un fichier de migration, sinon, l’application lancera une exception à l’exécution.
+
+La responsabilité sera du côté du développeur. C’est lui qui créera un fichier de migration autorisant la suppression d’une colonne et donc entrainant une perte de données.
+
+== Prérequis
+
+Lien MSDN Entity Framework Code First Migrations: 
+
+- (EN) Entity Framework Code First Migrations :
+https://msdn.microsoft.com/en-us/library/jj591621(v=vs.113).aspx 
+- (EN) Entity Framework Code First Migrations in Team Environments :
+https://msdn.microsoft.com/en-us/library/dn481501(v=vs.113).aspx
+
+
+== Migration de la base de données
+
+=== Scénario 1 : A la première exécution de l’application : base de données inexistante
+
+Au premier lancement, l’application va créer la base de données automatiquement. Elle se basera sur les fichiers de migration situés dans le dossier du projet Fred.EntityFramework/Migrations.
+
+Le projet doit au moins contenir un fichier de migration d’initialisation, exemple : - 201708250710045_InitialMigration.cs
+
+Pour vérifier l’état des mises à jour, il vous suffit d’aller voir dans table « dbo.__MigrationHistory » de la base de données SQL, exemple :
+
+----
+201708250710045_InitialMigration
+Fred.EntityFramework.Migrations.Configuration
+0x1F8B080000000…..BECE764F3FBF 6.1.3-40302
+----
+
+Cette table permet de voir toutes les montées de version appliquées à la base, la colonne MigrationId correspond au nom du fichier de migration.
+
+=== Scénario 2 : Exécution de l’application après modification du modèle de données : une base existante.
+
+Au lancement de l’applications, si un fichier de migration a été généré en amont, une montée de version automatique sera effectuée sur la base de données. Une ligne sera ajoutée dans table « dbo.__MigrationHistory
+».
+
+En cas d’exception, voir le scénario 4
+
+=== Scénario 3 : Mise à jour du modèle de données.
+
+Une fois votre entité modifiée en C#, vous allez devoir générer un fichier de migration :
+
+. Ouvrir le Package Manger Console
+. Se placer sur le projet Fred.EntityFramework
+. Exécuter la commande : Add-Migration [NOM DU FICHIER DE MIGRATION]
+
+Un fichier de migration est généré dans le dossier du projet Fred.EntityFramework/Migrations.
+
+Règles de nommage :
+
+- Le nom du fichier doit être PascalCase. 
+- Le nom doit être unique. 
+- Le nom doit être explicite. 
+- Indiquer Update / Create / Add / Delete etc…. 
+- Le nom doit avoir `AndDataLoss` à la fin en cas de suppression de
+données. 
+- Ajouter Migration tout à la fin.
+
+==== Cas particulier : modification de la taille d’une colonne
+
+Pour modifier la taille d’une colonne, il faut savoir que l’attribut MaxLength n’est pas pris en compte pour générer des migrations, quand il et positionné sur l’entité. Il faut donc aller modifier le fichier de configuration (~/Fred.EntityFramework/Configurations/MonEntConfiguration.cs) à la main
+avant de générer la migration.
+
+=== Scénario 4 : Exception de migration au lancement de l’application
+
+Lors de l’exécution de l’application, il est possible d’obtenir l’exception « Une migration automatique n’est pas autorisée. ». Elle signifie que le modèle de données et la base de données sont différents.
+
+==== Cas 1 : Le fichier de migration n’a pas été généré.
+
+Pour résoudre le problème, il suffit de suivre le scénario 3.
+
+==== Cas 2 : Un conflit avec un autre commit
+
+Un autre développeur X a comité un fichier de migration entre le dernier « Get Last Version » et le « Check-in »
+
+Exemple : 
+
+- Le fichier de migration du développeur X s’appelle « XXXXXX_Dev1 » 
+- Votre fichier de migration s’appelle « XXXXXX_Dev2 »
+
+Pour résoudre le problème :
+
+. Ouvrir le Package Manger Console
+. Exécuter la commande : Update-Database +
+Permet d’appliquer les mises à jour du fichier de migration « XXXXXX_Dev1 »
+
+. Update-Database –TargetMigration XXXXXX_Dev1 +
+Permet de faire un rollback vers la version « XXXXXX_Dev1 ».
+Toute les modifications de la migration « XXXXXX_Dev2 » seront supprimées et la table « dbo.__MigrationHistory » sera à jour.
+
+. Supprimer votre fichier de migration XXXXXX_Dev2.cs
+. Exécuter la commande : Add-Migration Dev2
+. Lancer l’application.
+
+La base de données est à jour.
+
+Pour plus d’informations lire le lien « Entity Framework Code First Migrations in Team Environments » dans les prérequis.
+
+C’est à partir du model de données que l’on créer notre base.
+
+Il n’y a donc pas de script de création de table.
+
+Notre base de données va se créer à partir de fichier généré par
+EntityFramework(EF).
+
+Si vous changez le model de donnée alors il faudra explicitement générer ce fichier, sinon, a l’ouverture de l’appli EF l’ancera une erreur.
+
+=== Scénario 1 : Execution de l’application sans qu’une base existe.
+
+Lancement de l’appli
+
+Si Les fichiers de migrations correspondent au model alors il y a une création de la base par EF, Sinon erreur.
+
+En effet, il y aura des montées de version `semi-automatique` :
+
+Il y aura une montée de version automatique de la base si les fichiers de migration correspondent au model (pas de script sql pour création/modification de table).
+
+Il faut lancer une ligne de commande pour crééer le fichier de migration.
+
+Pourquoi cela :
+
+A - La création de ces fichiers de migration permettent de savoir exactement ou nous en sommes avec la version de la base et donc du model de donnée.
+
+Exemple table __MigrationHistory de la base générée :
+
+201708250710045_InitialMigration
+Fred.EntityFramework.Migrations.Configuration
+0x1F8B080000000…..BECE764F3FBF 6.1.3-40302
+
+201708250712059_ScriptsSqlMigration
+Fred.EntityFramework.Migrations.Configuration
+0x1F8B080000000…..BECE764F3FBF 6.1.3-40302
+
+201708250713508_InitDataMigration
+Fred.EntityFramework.Migrations.Configuration
+0x1F8B080000000…..BECE764F3FBF 6.1.3-40302
+
+On voit ici quelles sont les montées de version appliquées à la base.
+
+201708250710045_InitialMigration correspond au nom du fichier généré à partir d’une ligne de commande.
+
+=== Scénario 2 : Execution de l’application avec une base existante.
+
+Lancement de l’appli
+
+Si les fichiers de migrations correspondent au model alors il y a une montée de version de la base par EF, Sinon erreur.
+
+Rajout d’une ligne dans la table, exemple :
+
+201708250719999_SuppressionLibelleBudgetMigration
+Fred.EntityFramework.Migrations.Configuration
+0x1F8B080000000…..BECE764F3FBF 6.1.3-40302
+
+B - En mode REALESE, et donc sur les environemments INTEGRATION PRE-PROD PROD, EF est configuré pour une montée de version AUTOMATIQUE.
+
+Car cette configuration permet d’avoir une verfication de perte de donnée.
+
+C - Il y a maintenant une responsabilité coté developpeur.
+
+C’est lui qui créera un fichier de migration autorisant la supression d’une colonne et donc entrainant une perte de données.
+
+=== Scénario 3 : Le Dev veut mettre à jour le modèle de données.
+
+Il met à jour le modèle de données.
+
+Il execute la commande `Add-Migration` pour générer le fichier de migration, exemple :
+
+Add-Migration AddCommandeEntMigration
+
+Cela génère le fichier 201708250719999_AddCommandeEntMigration
+
+Remarque Importante sur les règles de nommage :
+
+Le nom du fichier doit etre PascalCase et doit finir par Migration.
+
+Le nom doit etre explicite et si il y a une supression de propriété ou un drop de colomn dans le fichier de migration ettre `AndDataLoss` dans le nom.
+
+`AndDataLoss` signalera explicitement que la perte de données est assumée et réfléchi par le Dev.
+
+== Remarques IMPORTANTES de bon fonctionnement
+
+=== Projet de démarrage
+
+Le project de démarrage contient le fichier de config avec la `connectionstring` correspondant au nom de la connection definit dans la classe `FredDbContext`
+
+Actuellement c’est `FredConnection`
+
+Mettre le projet Fred.Web comme projet de démmarage, cela marchera dans la plupart des cas.
+
+=== Exécution des commandes
+
+Lorsque l’on execute les commande se placer dans le `Package Manager Console` de visual studio
+
+Et choisir `Default project` le Projet Fred.EntityFramework
+
+=== Fichiers de migrations
+
+Ne pas renommer à la main le fichier de migration.
+
+=== Monter des données fakes à la main
+
+Pour montées des données à la main
+
+il va falloir lancer 2 ligne de commande avec PowerShell :
+
+D’abord se placer dans le project database puis avec sqlcmd inserer les données.
+
+1 - Se placer dans le projet Database :
+
+Pour moi c’est :
+
+cd D:-Web.Database
+
+2 - incérer les données :
+
+Fred.Referential/DeployReferential_Local.ps1
+
+== Créer des données fake c’est trés facile et c’est super pour les copains !!!!!!!!
+
+Après avoir fini votre dev c’est quand meme bien de mettres des fichiers des données fake.
+
+Comment on fait en 5 min (ou 10 clics)
+
+=== A - Je compare les bases
+
+1 - je genere une nouvelle base en montant les données fake deja existantes.
+
+Pour cela je remplace la connexion par exemple :
+
+....
+  <add name="FredConnection" connectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FredDatabase;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;"  providerName="System.Data.SqlClient"/>
+ 
+....
+
+2 - Je lance la commande update-Database, ce qui me créera la base.
+
+3 - Je monte les données fakes deja existantes avec les ligne de commande ci-dessus.
+
+4 - Puis je fais un compare de mes données entre base de données.
+
+* Je clique sur la base que je viens de créer dans Sql Server Object Explorer puis je clique sur `Data Comparaison`.
+* Enfin je selectionne l’ancienne base et je clique sur finish. Avec l’ecran qui suis je suis capable de voir la differance de données entre base.
+* Je repérer les tables qui ont des data différentes.
+
+### B Génération des scripts d’insertion des données fakes
+
+Il ne me reste plus qu’a faire les scripts d’insertion de données. La aussi, en trois clicks c’est fini.
+
+J’ai repéré donc les tables qui ont des datas différentes.
+
+1 - Sur la base avec ces données, dans Sql Server Object Explorer, je selectionne les tables, puis `view data`.
+
+2 - Cliquer sur `script` ou `script to file`
+
+3 - Ajouter le fichier dans Fred.Referential/Referential/2-Dev/1-Fred-FakeData
+
+4 - Le nommer correctement soit FRED_FakeData_[Table]_Vx.sql
+
+5 - C’est tout, il sera joué automatiquement par la PIC sur le Dev
+
+6 - (pour le jouer en local, exécuter le script Fred.Referential/DeployReferential_Local.ps1)
+
+
+== Principales commandes pour Code First
+
+=== Aides pour les commandes Code First :
+
+`Get-Help` suivi du nom de la commande, par exemple :
+
+Get-Help Enable-Migrations
+
+=== Activation de Code First Migrations sur le projet :
+
+(Normalement vous n’avez pas à lancer cette commande)
+
+Cette commande créer le repertoire de Migrations qui contient la classe `Migration`
+
+Enable-Migrations
+
+=== Affiche les migrations qui ont été appliquées à la base de données
+
+get-migrations
+
+=== Creation d’un script de migration (csharp) pour tout changement du modèle de donnée en attente.
+
+Add-Migration AddCommandeEntMigration
+
+Remarque Importante sur les règles de nommage :
+
+Le nom du fichier doit etre PascalCase et doit finir par Migration.
+
+=== Mise à jour la base de données vers le modèle actuel en appliquant les migrations en attente :
+
+Update-Database
+
+Update-Database -verbose
+
+=== Génération d’un script de mise à jour de la base de données vers le modèle actuel en appliquant les migrations en attente :
+
+Update-Database -script
+
+=== Rollback
+
+update-database -TargetMigration:``201803061618301_AddFacturationEntMigration``
+
+== Remarques IMPORTANTES de bon fonctionnement
+
+=== Projet de démarrage
+
+Le project de démarrage contient le fichier de config avec la `connectionstring` correspondant au nom de la connection definit dans la classe `FredDbContext`
+
+Actuellement c’est `FredConnection`
+
+Mettre le projet Fred.Web comme projet de démmarage, cela marchera dans la plupart des cas.
+
+=== Exécution des commandes
+
+Lorsque l’on execute les commande se placer dans le `Package Manager Console` de visual studio
+
+Et choisir `Default project` le Projet Fred.EntityFramework
+
+=== Fichiers de migrations
+
+Ne pas renommer à la main le fichier de migration.
+
+=== Monter des données fakes à la main
+
+Pour montées des données à la main
+
+il va falloir lancer 2 ligne de commande avec PowerShell :
+
+D’abord se placer dans le project database puis avec sqlcmd inserer les données.
+
+1 - Se placer dans le projet Database :
+
+Pour moi c’est :
+
+cd D:-Web.Database
+
+2 - incérer les données :
+
+Fred.Referential/DeployReferential_Local.ps1
+
+== Créer des données fake c’est trés facile et c’est super pour les copains !!!!!!!!
+
+Après avoir fini votre dev c’est quand meme bien de mettres des fichiers des données fake.
+
+Comment on fait en 5 min (ou 10 clics)
+
+=== A - Je compare les bases
+
+1 - je genere une nouvelle base en montant les données fake deja existantes.
+
+Pour cela je remplace la connexion par exemple :
+
+....
+  <add name="FredConnection" connectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FredDatabase;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;"  providerName="System.Data.SqlClient"/>
+ 
+....
+
+2 - Je lance la commande update-Database, ce qui me créera la base.
+
+3 - Je monte les données fakes deja existantes avec les ligne de commande ci-dessus.
+
+4 - Puis je fais un compare de mes données entre base de données.
+
+* Je clique sur la base que je viens de créer dans Sql Server Object Explorer puis je clique sur `Data Comparaison`.
+* Enfin je selectionne l’ancienne base et je clique sur finish. Avec l’ecran qui suis je suis capable de voir la differance de données entre base.
+* Je repérer les tables qui ont des data différentes.
+
+### B Génération des scripts d’insertion des données fakes
+
+Il ne me reste plus qu’a faire les scripts d’insertion de données. La aussi, en trois clicks c’est fini.
+
+J’ai repéré donc les tables qui ont des datas différentes.
+
+1 - Sur la base avec ces données, dans Sql Server Object Explorer, je selectionne les tables, puis `view data`.
+
+2 - Cliquer sur `script` ou `script to file`
+
+3 - Ajouter le fichier dans Fred.Referential/Referential/2-Dev/1-Fred-FakeData
+
+4 - Le nommer correctement soit FRED_FakeData_[Table]_Vx.sql
+
+5 - C’est tout, il sera joué automatiquement par la PIC sur le Dev
+
+6 - (pour le jouer en local, exécuter le script Fred.Referential/DeployReferential_Local.ps1)
+
+== Principales commandes pour Code First
+
+=== Aides pour les commandes Code First :
+
+`Get-Help` suivi du nom de la commande, par exemple :
+
+Get-Help Enable-Migrations
+
+=== Activation de Code First Migrations sur le projet :
+
+(Normalement vous n’avez pas à lancer cette commande)
+
+Cette commande créer le repertoire de Migrations qui contient la classe `Migration`
+
+Enable-Migrations
+
+=== Affiche les migrations qui ont été appliquées à la base de données
+
+get-migrations
+
+=== Creation d’un script de migration (csharp) pour tout changement du modèle de donnée en attente.
+
+Add-Migration AddCommandeEntMigration
+
+Remarque Importante sur les règles de nommage :
+
+Le nom du fichier doit etre PascalCase et doit finir par Migration.
+
+=== Mise à jour la base de données vers le modèle actuel en appliquant les migrations en attente :
+
+Update-Database
+
+Update-Database -verbose
+
+=== Génération d’un script de mise à jour de la base de données vers le modèle actuel en appliquant les migrations en attente :
+
+Update-Database -script
+
+=== Rollback
+
+update-database -TargetMigration:``201707110727415_addTypeToHarley``
+
+=== Fred IE
+
+Dans le cas d’une migration sur Fred IE, ajoutez à la fin de chaque instruction :
+`ConfigurationTypeName` 
+Fred.ImportExport.Database.ImportExport.Migrations.Configuration

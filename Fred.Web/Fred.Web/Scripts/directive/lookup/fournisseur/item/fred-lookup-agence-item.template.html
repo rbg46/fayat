@@ -1,0 +1,21 @@
+﻿<div class="$ctrl.agence bkg-item pk-{{$ctrl.agence.CodeRef}}-item"
+     title="Cliquer pour sélectionner l'information {{::$ctrl.agence.CodeRef}} / {{::$ctrl.agence.LibelleRef}}">
+    <h2 class="$ctrl.agence-h2"
+        ng-click="$ctrl.selectAgence($ctrl.agence)"
+        fred-wrap-in-tag="{{::$ctrl.agence.Libelle}}"
+        words="$ctrl.textsToHighlight.searchTexts">
+        {{::$ctrl.agence.Libelle}}
+    </h2>
+    <h3 class="$ctrl.agence-h3"
+        ng-click="$ctrl.selectAgence($ctrl.agence)"
+        fred-wrap-in-tag="{{::$ctrl.agence.Code}} ({{::$ctrl.agence.TypeSequence}}) - {{::$ctrl.agence.SIREN}}"
+        words="$ctrl.textsToHighlight.searchTexts2">
+        {{::$ctrl.agence.Code}} ({{::$ctrl.agence.TypeSequence}}) - {{::$ctrl.agence.SIREN}}
+    </h3>
+    <h4 class="$ctrl.agence-h4"
+        ng-click="$ctrl.selectAgence($ctrl.agence)"
+        fred-wrap-in-tag="{{::$ctrl.agence.Adresse}} - {{::$ctrl.agence.Ville}} ({{::$ctrl.agence.CodePostal}})"
+        words="$ctrl.textsToHighlight.searchTexts3">
+        {{::$ctrl.agence.Adresse}} - {{::$ctrl.agence.Ville}} ({{::$ctrl.agence.CodePostal}})
+    </h4>
+</div>

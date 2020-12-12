@@ -1,0 +1,2 @@
+﻿UPDATE FRED_ROLE SET Specification=1 WHERE CodeNomFamilier='RCI' and SocieteId in (select s.SocieteId from FRED_SOCIETE s inner join FRED_GROUPE g on s.GroupeId=g.GroupeId where g.Code='GFES')
+UPDATE FRED_ROLE SET Specification=2 WHERE CodeNomFamilier='DCI' and SocieteId in (select s.SocieteId from FRED_SOCIETE s inner join FRED_GROUPE g on s.GroupeId=g.GroupeId where g.Code='GFES')

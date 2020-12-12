@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BudgetListeCopieChoixCiDestination" xml:space="preserve">
+    <value>Sur quel CI souhaitez-vous copier la version</value>
+  </data>
+  <data name="BudgetListeCopieChoixUtilisationBibliothequePrix" xml:space="preserve">
+    <value>Initialiser le budget avec les valeurs de la bibliotheque des prix</value>
+  </data>
+  <data name="BudgetListeCopieChoixUtilisationBudgetSource" xml:space="preserve">
+    <value>Initialiser le budget avec les valeurs du budget source</value>
+  </data>
+  <data name="BudgetListeCopieWarningT4RecaleesCopieAvecBibliothequePrix" xml:space="preserve">
+    <value>Attention : Les T4 issues d'un recalage devront être reprises telles quelles</value>
+  </data>
+  <data name="BudgetListeCopyBudgetError" xml:space="preserve">
+    <value>Erreur lors de la copie du budget</value>
+  </data>
+  <data name="BudgetListeCreateEmptyBudgetError" xml:space="preserve">
+    <value>Erreur lors de la création du nouveau budget</value>
+  </data>
+  <data name="BudgetListeCreateEmptyBudgetNoCiSelectedError" xml:space="preserve">
+    <value>Impossible de créer un nouveau budget si aucun CI n'est sélectionné</value>
+  </data>
+  <data name="BudgetListeGetBudgetError" xml:space="preserve">
+    <value>Erreur lors de la récupération des budgets sur ce CI</value>
+  </data>
+  <data name="BudgetListeGetCiError" xml:space="preserve">
+    <value>Erreur lors de la récupération des CI</value>
+  </data>
+  <data name="BudgetListeNoBudgetFoundOnCI" xml:space="preserve">
+    <value>Aucun budget trouvé pour ce CI</value>
+  </data>
+  <data name="BudgetListePartageBudgetError" xml:space="preserve">
+    <value>Impossible de partager ou de privatiser le budget </value>
+  </data>
+  <data name="BudgetListeSaveResumeDetailError" xml:space="preserve">
+    <value>Erreur lors de la sauvegarde des changements apportés dans le résumé du détail</value>
+  </data>
+  <data name="BudgetPartageSuccess" xml:space="preserve">
+    <value>Budget partagé avec succes</value>
+  </data>
+  <data name="BudgetPrivatiseSuccess" xml:space="preserve">
+    <value>Budget privatisé avec succes</value>
+  </data>
+  <data name="BudgetRestaurerEchec" xml:space="preserve">
+    <value>Echec de la restauration du budget</value>
+  </data>
+  <data name="BudgetRestaurerSuccess" xml:space="preserve">
+    <value>Budget restauré avec succès</value>
+  </data>
+  <data name="BudgetSuppressionBudgetNonBrouillon" xml:space="preserve">
+    <value>Le budget manipulé n'est pas à l'état Brouillon</value>
+  </data>
+  <data name="BudgetSuppressionBudgetRevise" xml:space="preserve">
+    <value>Impossible de supprimer un budget révisé</value>
+  </data>
+  <data name="BudgetSupprimeSuccess" xml:space="preserve">
+    <value>Budget supprimé avec succès</value>
+  </data>
+  <data name="Budget_ListeChoix" xml:space="preserve">
+    <value>Que Souhaitez vous faire ?</value>
+  </data>
+  <data name="Budget_Liste_Tooltip_Favoris_Part1" xml:space="preserve">
+    <value>Mettre en favoris le détail d'un budget pour le CI </value>
+  </data>
+  <data name="Budget_Liste_Tooltip_Favoris_Part2" xml:space="preserve">
+    <value> pour la période </value>
+  </data>
+  <data name="ErreurSuppressionBudget" xml:space="preserve">
+    <value>Impossible de supprimer le budget</value>
+  </data>
+  <data name="ModalConfirmationAjoutBudget" xml:space="preserve">
+    <value>Voulez vous vraiment ajouter un nouveau budget vide ?</value>
+  </data>
+  <data name="ModalConfirmationPartageMessage" xml:space="preserve">
+    <value>Voulez vous vraiment partager ce budget ?</value>
+  </data>
+  <data name="ModalConfirmationPrivatiseBudget" xml:space="preserve">
+    <value>Voulez vous vraiment privatiser ce budget ?</value>
+  </data>
+  <data name="ModalConfirmationSuppressionBudget" xml:space="preserve">
+    <value>Voulez vous vraiment supprimer ce budget ?</value>
+  </data>
+  <data name="TitrePage" xml:space="preserve">
+    <value>Liste des Budgets</value>
+  </data>
+</root>

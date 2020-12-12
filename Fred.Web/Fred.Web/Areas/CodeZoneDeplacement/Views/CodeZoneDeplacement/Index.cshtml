@@ -1,0 +1,254 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+@{
+    ViewBag.Title = FeatureCodeZoneDeplacement.CodeZoneDeplacement_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+    @Styles.Render("~/CodeZoneDeplacementIndexBundle.css")
+}
+@section scripts {
+    @Scripts.Render("~/CodeZoneDeplacementIndexBundle.js")
+
+    @this.RenderResources("FeatureCodeZoneDeplacement")
+}
+<div class="container" ng-controller="CodeZoneDeplacementController">
+    <div class="toleft" id="PanelMain">
+        <!-- START : Titre de la page -->
+        <h1>{{resources.CodeZoneDeplacement_PanelMain_Titre}}</h1>
+        <!-- END : Titre de la page -->
+        <div class="row">
+            <!-- BEGIN : Picklist Societe -->
+            <div class="col-md-5">
+                <label class="infoFilter">{{resources.Global_SelectionnerSociete}}</label>
+                <div class="filter">
+                    <div class="inner-addon right-addon">
+                        <i class="chev material-icons">chevron_right</i>
+                        <lookup ng-model="societe"
+                                search-placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+                                search-title="{{resources.Global_ReferentielSociete}}"
+                                on-select="loadData()"
+                                url="/api/Societe/SearchLightForRoles?{{typeSocieteCodesParams}}">
+                            <input type="text"
+                                   class="form-control"
+                                   ng-value="societe.CodeLibelle"
+                                   placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+                                   title="{{societe.CodeLibelle}}" />
+                        </lookup>
+                    </div>
+                </div>
+            </div>
+            <!-- END : Picklist Societe -->
+            <!-- BEGIN : Recherche -->
+            <div class="col-md-5" ng-if="societeId != undefined">
+                <label class="infoFilter">{{resources.Global_RechercheAffiner}}</label>
+                <div class="filter">
+                    <div class="input-group">
+                        <input class="form-control txt" type="text"
+                               id="txtRecherche"
+                               name="Recherche"
+                               placeholder="{{resources.CodeZoneDeplacement_PanelMain_Recherche_Placeholder}}"
+                               ng-model="recherche"
+                               ng-model-options="{ debounce: 500 }"
+                               ng-change="handleSearch(recherche)" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary y_search"
+                                    title="{{resources.Global_RechercheAffiner_Tooltip}}"
+                                    type="button" ng-click="handleSearch(recherche)">
+                                <i class="material-icons">search</i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- END : Recherche -->
+            <!-- BEGIN : Bouton pour ajouter Items -->
+            <div class="col-md-2 add-search" ng-if="societeId != undefined">
+                <span class="pull-right">
+                    <label class="infoFilter">{{resources.Global_Ajouter}}</label>
+                    <i class="flaticon flaticon-add  icoplus " title="{{resources.Global_Bouton_AjouterReference_Tooltip}}" ng-click="handleClickCreate()"></i>
+                </span>
+            </div>
+            <!-- END : Bouton pour ajouter Items -->
+        </div>
+        <!--LISTE : START -->
+        <div class="row results" id="Table" ng-if="societeId != undefined">
+            <div class="col-md-12 refs-list">
+                <div ng-repeat="item in items">
+                    <div class="row line" ng-click="handleSelect(item)">
+                        <div class="col-md-2">
+                            <span class="t1">{{item.Code}}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="lb">{{resources.CodeZoneDeplacement_PanelMain_Table_Libelle}}</div>
+                            <span class="t2">{{item.Libelle}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="lb">{{resources.CodeZoneDeplacement_PanelMain_Table_KmMini}}</div>
+                            <span class="t2">{{item.KmMini}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="lb">{{resources.CodeZoneDeplacement_PanelMain_Table_KmMaxi}}</div>
+                            <span class="t2">{{item.KmMaxi}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="bdg actif" ng-if="item.IsActif">{{resources.Global_Actif}}</div>
+                            <div class="bdg inactif" ng-if="!item.IsActif">{{resources.Global_Inactif}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--LISTE : END-->
+    </div>
+
+    <!--DETAILS PANEL : START-->
+    @*PETRIT*@
+    <div ng-class="checkDisplayOptions"
+         class="blockScreen"
+         style="z-index:99"></div>
+    <div class="options"
+         id="PanelRight"
+         ng-class="checkDisplayOptions + ' ' + checkFormatOptions">
+        <!--HEADER TOOLBAR : BEGIN-->
+        <div class="toolbar"
+             ng-class="{'is-already-used':isAlreadyUsed}">
+            <div class="flaticon flaticon-compass grandicone"></div>
+        </div>
+        <span ng-show="isAlreadyUsed" class="is-already-used-text">{{resources.Global_Item_Already_Used}}</span>
+        <!--HEADER TOOLBAR : END-->
+        <!-- Titre : BEGIN -->
+        <div class="form-header" id="Titre">
+            <h2>
+                <span ng-if="codeZoneDeplacement.CodeZoneDeplacementId == 0">{{resources.CodeZoneDeplacement_PanelRight_Titre_Ajouter}}</span>
+                <span ng-if="codeZoneDeplacement.CodeZoneDeplacementId != 0">{{resources.CodeZoneDeplacement_PanelRight_Titre_Modifier}}</span>
+            </h2>
+            <label class="legend">{{resources.Global_LegendeAsterisque}}</label>
+        </div>
+        <!-- Titre : END -->
+        <div class="form fred-scroll">
+            <!--Formulaire: START-->
+            <form name="formCodeZoneDeplacement" autocomplete="off" novalidate>
+                <!--FIELD IsActif: START-->
+                <div class="col-md-offset-8 chb_r my_margin">
+                    <input id="chkActif" type="checkbox" ng-model="codeZoneDeplacement.IsActif" checked="checked" /><label for="chkActif"><span></span>{{resources.Global_Actif}}</label>
+                </div>
+                <!--FIELD IsActif: END-->
+                <!--FIELD SocieteId: START-->
+                <div class="my_margin">
+                    <label for="txtSocieteId" ng-show="false">{{"SocieteId"}}</label>
+                    <input class="form-control" name="SocieteId" ng-show="false" type="text" id="txtSocieteId" placeholder="{{resources.CodeSocieteComptable_placeholder}}" ng-model="codeZoneDeplacement.SocieteId" />
+                </div>
+                <!--FIELD SocieteId: END-->
+                <!--FIELD Code: START-->
+                <div class="my_margin" ng-class="{ 'has-error' : (formCodeZoneDeplacement.Code.$invalid && formCodeZoneDeplacement.$submitted) || formCodeZoneDeplacement.Code.$error.exist || formCodeZoneDeplacement.Code.$error.pattern}">
+                    <label for="txtCode">{{resources.CodeZoneDeplacement_PanelRight_Code}} *</label>
+                    <span class="text-danger" ng-show="formCodeZoneDeplacement.Code.$error.required && formCodeZoneDeplacement.$submitted">* {{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <span class="text-danger" ng-show="formCodeZoneDeplacement.Code.$error.exist">{{resources.Global_Control_Code_ExistInSociete_Erreur}}</span>
+                    <span class="text-danger" ng-show="formCodeZoneDeplacement.Code.$error.pattern">{{resources.Global_Control_Code_FormatAlphanumeric_Erreur}}</span>
+                    <input class="form-control" type="text" id="txtCode" name="Code" ng-pattern="/^[a-zA-Z0-9]*$/" ng-change="handleChangeCode(formCodeZoneDeplacement)" required placeholder="{{resources.CodeZoneDeplacement_PanelRight_Code_Placeholder}}" ng-model="codeZoneDeplacement.Code" maxlength="20" />
+                </div>
+                <!--FIELD Code: END-->
+                <!--FIELD Libelle: START-->
+                <div class="my_margin" ng-class="{ 'has-error' : formCodeZoneDeplacement.Libelle.$invalid && formCodeZoneDeplacement.$submitted}">
+                    <label for="txtLibelle">{{resources.CodeZoneDeplacement_PanelRight_Libelle}} *</label>
+                    <span class="text-danger" ng-show="formCodeZoneDeplacement.Libelle.$invalid && formCodeZoneDeplacement.$submitted">* {{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <input class="form-control" type="text" id="txtLibelle" name="Libelle" required placeholder="{{resources.CodeZoneDeplacement_PanelRight_Libelle_Placeholder}}" ng-model="codeZoneDeplacement.Libelle" maxlength="500" />
+                </div>
+                <!--FIELD Libelle: END-->
+                <!--FIELD KmMini: START-->
+                <div class="my_margin">
+                    <label for="txtKmMini">{{resources.CodeZoneDeplacement_PanelRight_KmMini}} *</label>
+                    <span class="text-danger" ng-show="formCodeZoneDeplacement.$submitted && MinMaxInvalid()">{{resources.CodeZoneDeplacement_PanelRight_ErrorKmMiniSup}}</span>
+                    <span class="text-danger" ng-show="formCodeZoneDeplacement.$submitted && formCodeZoneDeplacement.KmMini.$error.min">{{resources.CodeZoneDeplacement_PanelRight_ErrorKmMiniBorne}}</span>
+                    <span class="text-danger" ng-show="formCodeZoneDeplacement.$submitted && formCodeZoneDeplacement.KmMini.$error.max">{{resources.CodeZoneDeplacement_PanelRight_ErrorKmMaxiBorne}}</span>
+                    <span class="text-danger" ng-show="formCodeZoneDeplacement.$submitted && formCodeZoneDeplacement.KmMini.$error.required">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <input class="form-control"
+                           name="KmMini"
+                           type="text"
+                           fred-input-number
+                           min="0"
+                           max="9999"
+                           id="txtKmMini"
+                           placeholder="{{resources.CodeZoneDeplacement_PanelRight_KmMini_Placeholder}}"
+                           ng-model="codeZoneDeplacement.View.KmMini"
+                           required />
+                </div>
+                <!--FIELD KmMini: END-->
+                <!--FIELD KmMaxi: START-->
+                <div class="my_margin form-group">
+                    <label for="txtKmMaxi">{{resources.CodeZoneDeplacement_PanelRight_KmMaxi}} *</label>
+                    <span class="text-danger" ng-show="formCodeZoneDeplacement.$submitted && formCodeZoneDeplacement.KmMaxi.$error.min">{{resources.CodeZoneDeplacement_PanelRight_ErrorKmMaxiBorne}}</span>
+                    <span class="text-danger" ng-show="formCodeZoneDeplacement.$submitted && formCodeZoneDeplacement.KmMaxi.$error.max">{{resources.CodeZoneDeplacement_PanelRight_ErrorKmMaxiBorne}}</span>
+                    <span class="text-danger" ng-show="formCodeZoneDeplacement.$submitted && formCodeZoneDeplacement.KmMaxi.$error.required">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <input class="form-control"
+                           name="KmMaxi"
+                           type="text"
+                           fred-input-number
+                           min="0"
+                           max="9999"
+                           id="txtKmMaxi"
+                           placeholder="{{resources.CodeZoneDeplacement_PanelRight_KmMaxi_Placeholder}}"
+                           ng-model="codeZoneDeplacement.View.KmMaxi"
+                           required />
+                </div>
+                <!--FIELD KmMaxi: END-->
+                <!--FIELD IsOuvrier IsETAM IsCadre: START-->
+                <div ng-if="isUserFes">
+                    <input id="chkIsOuvrier"
+                           type="checkbox"
+                           ng-model="codeZoneDeplacement.IsOuvrier" />
+                    <label for="chkIsOuvrier"><span></span>{{resources.IsOuvrier_lb}}</label>
+                    <input id="chkIsETAM"
+                           type="checkbox"
+                           ng-model="codeZoneDeplacement.IsETAM" />
+                    <label for="chkIsETAM"><span></span>{{resources.IsETAM_lb}}</label>
+                    <input id="chkIsCadre"
+                           type="checkbox"
+                           ng-model="codeZoneDeplacement.IsCadre" />
+                    <label for="chkIsCadre"><span></span>{{resources.IsCadre_lb}}</label>
+                </div>
+                <!--FIELD IsOuvrier IsETAM IsCadre: END-->
+                <!--FOOTER TOOLBAR : BEGIN -->
+                <div class="my_margin footer">
+                    <div class="buttons">
+                        <button class="btn btn-default"
+                                type="submit"
+                                ng-disabled="isBusy"
+                                ng-click="handleClickAddOrUpdate();"
+                                title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">
+                            {{resources.Global_Bouton_Enregistrer}}
+                        </button>
+                        <button class="btn btn-primary"
+                                type="submit"
+                                ng-click="handleClickAddOrUpdateAndNew();"
+                                ng-disabled="isBusy"
+                                title="{{resources.Global_Bouton_EnregistrerEtNouveau_Tooltip}}">
+                            {{resources.Global_Bouton_EnregistrerEtNouveau}}
+                        </button>
+                        <button ng-hide="codeZoneDeplacement.CodeZoneDeplacementId==0"
+                                class="btn"
+                                type="submit"
+                                ng-click="handleClickDelete(codeZoneDeplacement);"
+                                title="{{resources.Global_Bouton_Supprimer_Tooltip}}">
+                            {{resources.Global_Bouton_Supprimer}}
+                        </button>
+                        <button class="btn btn-link"
+                                type="submit"
+                                ng-click="handleClickCancel();"
+                                title="{{resources.Global_Bouton_Annuler_Tooltip}}">
+                            {{resources.Global_Bouton_Annuler}}
+                        </button>
+                    </div>
+                    <div class="close_panel my_margin"
+                         ng-click="handleClickCancel();"
+                         title="{{resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+                        <i class="fa fa-angle-right"
+                           aria-hidden="true"></i>
+                        <span>{{resources.Global_Bouton_RefermerPanneau}}</span>
+                    </div>
+                </div>
+                <!--FOOTER TOOLBAR : END-->
+            </form>
+        </div>
+    </div>
+</div>

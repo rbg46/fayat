@@ -1,0 +1,78 @@
+﻿ <!-- Modal Commandes Buyer -->
+<div class="modal-content">
+  <div class="modal-header">
+    <h2 class="modal-title">
+      <i class="flaticon flaticons flaticon-checked"></i>{{$ctrl.resources.Reception_Index_ModalBuyer_Titre}} RRRRR
+    </h2>
+    <i class="flaticon flaticons flaticon-multiply close pull-right" ng-click="$ctrl.handleCancel()" title="{{$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+  </div>
+  <form name="$ctrl.cmdBuyerForm">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-12">
+          <label>{{$ctrl.resources.Reception_Index_ModalBuyer_Etablissement}}</label>
+          <span class="text-danger" ng-show="$ctrl.cmdBuyerForm.$submitted && $ctrl.cmdBuyerForm.EtabLookup.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>          
+          <div>
+            <lookup-standalone ng-model="$ctrl.cmdBuyer.EtablissementComptable"
+                               text="$ctrl.cmdBuyer.EtablissementComptable.LibelleRef"
+                               search-title="{{$ctrl.resources.Global_ReferentielEtablissementComptable}}"
+                               search-placeholder="{{$ctrl.resources.Global_ReferentielEtablissementComptable_Placeholder}}"
+                               on-click="$ctrl.handleShowLookup('EtablissementComptable')"
+                               on-select="$ctrl.handleLookupSelection(item)"
+                               on-delete="$ctrl.handleLookupDeletion()"
+                               class="formulaire long"
+                               show-in-popup="true"
+                               ng-required="true"
+                               name="EtabLookup">
+            </lookup-standalone>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6" ng-class="{'has-error': $ctrl.cmdBuyerForm.$submitted && $ctrl.cmdBuyerForm.DateDebut.$invalid}">
+          <label>{{$ctrl.resources.Reception_Index_ModalBuyer_DateDebut}}</label>
+          <span class="text-danger" ng-show="$ctrl.cmdBuyerForm.$submitted && $ctrl.cmdBuyerForm.DateDebut.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+          <span class="text-danger" ng-show="$ctrl.cmdBuyerForm.$submitted && $ctrl.cmdBuyerForm.DateDebut.$error.RangeError">{{$ctrl.resources.Reception_Index_ModalBuyer_VerificationDateDebut_Erreur}}</span>
+          <div>
+            <app-date-picker id="DateDebut"
+                             name="DateDebut"
+                             format="DD/MM/YYYY"
+                             lang="fr"
+                             placeholder="{{$ctrl.resources.Reception_Index_ModalBuyer_DateDebut}}"
+                             initial-date="{{$ctrl.cmdBuyer.DateDebut}}"
+                             ng-model="$ctrl.cmdBuyer.DateDebut"
+                             ng-change="$ctrl.handleDateValidation()"
+                             ng-required="true" />
+          </div>
+        </div>
+
+        <div class="col-md-6" ng-class="{'has-error': $ctrl.cmdBuyerForm.$submitted && $ctrl.cmdBuyerForm.DateFin.$invalid}">
+          <label>{{$ctrl.resources.Reception_Index_ModalBuyer_DateFin}}</label>
+          <span class="text-danger" ng-show="$ctrl.cmdBuyerForm.$submitted && $ctrl.cmdBuyerForm.DateFin.$error.required">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+          <div>
+            <app-date-picker id="DateFin"
+                             name="DateFin"
+                             format="DD/MM/YYYY"
+                             lang="fr"
+                             placeholder="{{$ctrl.resources.Reception_Index_ModalBuyer_DateFin}}"
+                             initial-date="{{$ctrl.cmdBuyer.DateFin}}"
+                             ng-model="$ctrl.cmdBuyer.DateFin"
+                             ng-change="$ctrl.handleDateValidation()"
+                             ng-required="true" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer dummy">
+      <div>
+        <img id="imgLoading" ng-show="$ctrl.isBusy" src="/Content/images/loader.gif" height="32" width="32" />
+        <label>{{$ctrl.message}}</label>
+      </div>
+      <div>
+        <button type="button" class="btn btn-link pull-right" ng-click="$ctrl.handleCancel()" title="{{$ctrl.resources.Reception_Index_ModalBuyer_Annuler_Tooltip}}">{{$ctrl.resources.Reception_Index_ModalBuyer_Annuler}}</button>
+        <button type="submit" ng-show="!$ctrl.isBusy && $ctrl.cmdBuyerCount === 0" ng-disabled="$ctrl.cmdBuyerForm.$submitted && $ctrl.cmdBuyerForm.$invalid" class="btn btn-default pull-right" ng-click="$ctrl.handleSearch()" title="{{$ctrl.resources.Reception_Index_ModalBuyer_Rechercher_Tooltip}}">{{$ctrl.resources.Reception_Index_ModalBuyer_Rechercher}}</button>
+        <button type="submit" ng-show="$ctrl.searchDone && $ctrl.cmdBuyerCount > 0" class="btn btn-default pull-right" ng-click="$ctrl.handleImport()" title="{{$ctrl.resources.Reception_Index_ModalBuyer_Importer_Tooltip}}">{{$ctrl.resources.Reception_Index_ModalBuyer_Importer}}</button>
+      </div>
+    </div>
+  </form>
+</div> 

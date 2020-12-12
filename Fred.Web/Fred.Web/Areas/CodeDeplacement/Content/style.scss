@@ -1,0 +1,99 @@
+﻿$color_1: white;
+$color_2: rgb(85, 85, 85);
+$color_3: #fff;
+$color_4: rgb(0, 82, 160);
+$background_color_1: rgb(9,173,166);
+$background_color_2: #ffde0e;
+$background_color_3: #1F55A0;
+$background_color_4: #F1F2F3;
+
+/* -------------------------------------------------------------------------------
+  Fayat Construction Informatique
+  Application Fred
+  Module <NOM_DU_MODULE>
+---------------------------------------------------------------------------------*/
+fred-toolbar {
+    flex-flow: row wrap;
+    justify-content: flex-end;
+
+    .picklist-section {
+        width: 41%;
+        margin-right: auto;
+    }
+
+    .search-section {
+        margin-left: 2%;
+        flex-grow: 1;
+    }
+
+    .action-section {
+        margin-left: 15%;
+    }
+
+    .inner-addon.right-addon {
+        width: 100%;
+
+        input {
+            cursor: pointer;
+        }
+    }
+
+    .chev.material-icons {
+        position: absolute;
+        display: inline-block;
+        line-height: 0.7;
+        pointer-events: none;
+        background-color: $background_color_1;
+        height: 29px;
+        width: 30px;
+        text-align: center;
+        color: $color_1;
+        font-size: 25px;
+        right: 0;
+        top: 0;
+        padding-top: 6px;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+
+    .input-group-btn {
+        border: 1px solid #BBBBBB;
+        border-left: none;
+        width: 30px;
+
+        .btn.btn-secondary.y_search {
+            height: 28px;
+            width: 30px;
+            padding: 0;
+            background-color: $background_color_2;
+            color: $color_2;
+            margin: 0;
+
+            .material-icons {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+
+    .action-icone {
+        width: 30px;
+        height: 30px;
+        font-size: 25px;
+        font-style: normal;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $background_color_3;
+        color: $color_3;
+        cursor: pointer;
+
+        &:hover {
+            color: $color_4;
+            background-color: $background_color_4;
+        }
+    }
+}

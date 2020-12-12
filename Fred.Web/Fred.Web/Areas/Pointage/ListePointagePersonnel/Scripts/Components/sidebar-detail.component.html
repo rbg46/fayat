@@ -1,0 +1,666 @@
+﻿  <!-- Bandeau droit -->
+<div class="bandeau" ng-class="{'opened':$ctrl.displayBanner, 'closed':!$ctrl.displayBanner}">
+
+    <div class="bandeau-header">
+        <span class="flaticon flaticon-calendar-1"></span>
+    </div>
+
+    <div class="bandeau-headline">
+        <ul>
+            <li class="tab-titles active">
+                <a href="#tab1" data-toggle="tab" class="tab1">
+                    <i class="material-icons verrou-bandeau" ng-if="$ctrl.pointage.IsLocked">lock_outline</i>{{::$ctrl.resources.PointagePersonnel_Ligne}}
+                </a>
+            </li>
+            <li class="tab-titles no-mr">
+                <a href="#tab2" data-toggle="tab"><h3 class="tab2">{{::$ctrl.resources.PointagePersonnel_Statut_Validation}}</h3></a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tab-content clearfix fred-scroll panneau-ligne">
+        <div class="tab-pane active" id="tab1">
+            <div class="container cadre-panneau">
+                <div class="bandeau-body">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6">
+                            <span class="libelle mb">{{::$ctrl.resources.Global_Personnel}}</span>
+                            <span class="data">{{$ctrl.pointage.Personnel.MatriculePrenomNom}}</span>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <span class="libelle mb">{{::$ctrl.resources.Global_Centre_Imputation}}</span>
+                            <span class="data">{{$ctrl.pointage.Ci.CodeLibelle}}</span>
+                        </div>
+                    </div>
+
+                    <div class="row box-line">
+
+                        <div ng-class="$ctrl.PointagePersonnelService.ShowDeplacement ? 'col-md-3 col-lg-3' : 'col-md-4 col-lg-4'">
+                            <span class="libelle">{{::$ctrl.resources.PointagePersonnel_Heure_Travaillees}}</span>
+                            <div class="box no-x">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 pl5">
+                                        <div class="box-libelle">{{::$ctrl.resources.PointagePersonnel_H_Total}}</div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="box-data">
+                                            <label>{{$ctrl.pointage.HeureTotalTravail | number:2}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 pl5">
+                                        <div class="box-libelle">{{::$ctrl.resources.PointagePersonnel_H_Normales}}</div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="box-data">
+                                            <label>{{$ctrl.pointage.HeureNormale | number:2}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-class="$ctrl.PointagePersonnelService.ShowDeplacement ? 'col-md-3 col-lg-3' : 'col-md-4 col-lg-4'" ng-show="!$ctrl.isUserFes">
+                            <span class="libelle">Majoration</span>
+                            <div class="box no-x">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 pl5">
+                                        <div class="box-libelle">{{::$ctrl.resources.Code_lb}}</div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 no-p">
+                                        <div class="box-data">
+                                            <lookup-standalone ng-model="$ctrl.pointage.CodeMajoration"
+                                                               text="$ctrl.pointage.CodeMajoration.Code"
+                                                               tooltip="$ctrl.pointage.CodeMajoration.Libelle"
+                                                               show-delete-button-on-mouse-over="true"
+                                                               show-search-icon-only-when-empty="true"
+                                                               search-icon-class="material-icons"
+                                                               search-title="{{::$ctrl.resources.Global_ReferentielCodeMajoration}}"
+                                                               search-placeholder="{{::$ctrl.resources.Global_ReferentielCodeMajoration_Placeholder}}"
+                                                               url="{{$ctrl.handleShowPickList('CodeMajoration')}}&{{$ctrl.getReferentielRhUrl()}}"
+                                                               on-select="$ctrl.handleSelectCodeMajoration(item,null)"
+                                                               on-delete="$ctrl.handleDeletePickListCodeMajoration()"
+                                                               class="boutons"
+                                                               ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked">
+                                            </lookup-standalone>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 pl5">
+                                        <div class="box-libelle">{{::$ctrl.resources.Heures_lb}}</div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 no-p">
+                                        <div class="box-data">
+                                            <input type="text" fred-input-number="2" select-on-click min="0" max="12" ng-model="$ctrl.pointage.HeureMajoration" ng-change="$ctrl.handleChangeHeureMajoration()" ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked || !$ctrl.pointage.CodeMajoration">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="$ctrl.PointagePersonnelService.ShowDeplacement ? 'col-md-3 col-lg-3' : 'col-md-4 col-lg-4'" ng-show="$ctrl.isUserFes">
+                            <div class="col-md-3 col-lg-3">
+                                <span class="libelle lighter">Ajouter une Majoration...</span>
+                                <div class="box prime-task">
+                                    <div class="square">
+                                        <lookup ng-model="selectedRef"
+                                                search-title="{{::$ctrl.resources.Global_ReferentielCodeMajoration}}"
+                                                search-placeholder="{{::$ctrl.resources.Global_ReferentielCodeMajoration_Placeholder}}"
+                                                url="{{$ctrl.handleShowPickList('CodeMajoration')}}&{{$ctrl.getReferentielRhUrl()}}"
+                                                on-select="$ctrl.handleAddMajoration(item)"
+                                                ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked">
+                                            <span class="flaticon flaticon-add-2" title="{{::$ctrl.resources.PointagePersonnel_Ajout_Prime}}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3" ng-repeat="pointageMajoration in $ctrl.pointage.ListRapportLigneMajorations track by $index" ng-if="!pointageMajoration.IsDeleted">
+                                <span class="libelle">Majoration</span>
+                                <div class="box no-x">
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-6 pl5">
+                                            <div class="box-libelle">{{::$ctrl.resources.Code_lb}}</div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6 no-p">
+                                            <div class="box-data">
+                                                <lookup-standalone ng-model="pointageMajoration.CodeMajoration.Code"
+                                                                   text="pointageMajoration.CodeMajoration.Code"
+                                                                   tooltip="pointageMajoration.CodeMajoration.Code"
+                                                                   show-delete-button-on-mouse-over="true"
+                                                                   show-search-icon-only-when-empty="true"
+                                                                   search-icon-class="material-icons"
+                                                                   search-title="{{::$ctrl.resources.Global_ReferentielCodeMajoration}}"
+                                                                   search-placeholder="{{::$ctrl.resources.Global_ReferentielCodeMajoration_Placeholder}}"
+                                                                   url="{{$ctrl.handleShowPickList('CodeMajoration')}}&{{$ctrl.getReferentielRhUrl()}}"
+                                                                   on-select="$ctrl.handleSelectCodeMajoration(item,$index)"
+                                                                   on-delete="$ctrl.handleDeletePickListCodeMajorationFES($index)"
+                                                                   class="boutons"
+                                                                   ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked">
+                                                </lookup-standalone>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-6 pl5">
+                                            <div class="box-libelle">{{::$ctrl.resources.Heures_lb}}</div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6 no-p">
+                                            <div class="box-data">
+                                                <input type="text" fred-input-number="2" select-on-click min="0" max="12" ng-model="pointageMajoration.HeureMajoration" ng-change="$ctrl.handleChangeHeureMajoration(pointageMajoration)" ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-class="$ctrl.PointagePersonnelService.ShowDeplacement ? 'col-md-3 col-lg-3' : 'col-md-4 col-lg-4'">
+                            <span class="libelle">Absence</span>
+                            <div class="box no-x">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 pl5">
+                                        <div class="box-libelle">{{::$ctrl.resources.Code_lb}}</div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 no-p">
+                                        <div class="box-data">
+                                            <lookup-standalone ng-model="$ctrl.pointage.CodeAbsence"
+                                                               text="$ctrl.pointage.CodeAbsence.Code"
+                                                               tooltip="$ctrl.pointage.CodeAbsence.Libelle"
+                                                               show-delete-button-on-mouse-over="true"
+                                                               show-search-icon-only-when-empty="true"
+                                                               search-icon-class="material-icons"
+                                                               search-title="{{::$ctrl.resources.Global_ReferentielCodeAbsence}}"
+                                                               search-placeholder="{{::$ctrl.resources.Global_ReferentielCodeAbsence_Placeholder}}"
+                                                               url="{{$ctrl.handleShowPickList('CodeAbsence')}}&{{$ctrl.getReferentielRhUrl()}}"
+                                                               on-select="$ctrl.handleSelectCodeAbsence(item)"
+                                                               on-delete="$ctrl.handleDeletePickListCodeAbsence()"
+                                                               class="boutons"
+                                                               ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked">
+                                            </lookup-standalone>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 pl5">
+                                        <div class="box-libelle" ng-if="!$ctrl.isUserFes || !$ctrl.isIac">{{::$ctrl.resources.Heures_lb}}</div>
+                                        <div class="box-libelle" ng-if="$ctrl.isUserFes && $ctrl.isIac">{{::$ctrl.resources.Jours_lb}}</div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 no-p">
+                                        <div class="box-data">
+                                            <input type="text" fred-input-number="2" select-on-click min="{{$ctrl.heuresAbsenceMin($ctrl.pointage)}}" max="{{$ctrl.heuresAbsenceMax($ctrl.pointage)}}" ng-if="!$ctrl.isUserFes" ng-model="$ctrl.pointage.HeureAbsence" ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked || !$ctrl.pointage.CodeAbsence" ng-change="$ctrl.handleChangeHeureAbsence()">
+                                            <input type="text" fred-input-number="2" select-on-click min="0" max="1" ng-if="$ctrl.isUserFes && $ctrl.isIac" ng-model="$ctrl.pointage.HeureAbsenceIac" ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked || !$ctrl.pointage.CodeAbsence" ng-blur="$ctrl.handleBlurHeureAbsenceIac()">
+                                            <input type="text" fred-input-number="2" select-on-click min="0" max="10" ng-if="$ctrl.isUserFes && !$ctrl.isIac" ng-model="$ctrl.pointage.HeureAbsence" ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked || !$ctrl.pointage.CodeAbsence" ng-change="$ctrl.handleChangeHeureAbsence()">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 pl5">
+                                        <div class="box-libelle">N° Sem Int</div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 no-p">
+                                        <div class="box-data">
+                                            <input type="text" fred-input-number="0" select-on-click min="1" max="52" ng-model="$ctrl.pointage.NumSemaineIntemperieAbsence" ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked || $ctrl.pointage.CodeAbsence == null  || !$ctrl.pointage.CodeAbsence.Intemperie">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-lg-3" ng-if="$ctrl.PointagePersonnelService.ShowDeplacement">
+                            <span class="libelle">{{::$ctrl.resources.Global_Deplacement}}</span>
+                            <span class="pull-right fa fa-refresh" title="{{::$ctrl.resources.Global_Rafraichir}}" ng-click="$ctrl.handleClickIndemnites()"></span>
+                            <div class="box no-x">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 pl5">
+                                        <div class="box-libelle">{{::$ctrl.resources.Code_lb}}</div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 no-p">
+                                        <div class="box-data">
+                                            <lookup-standalone ng-model="$ctrl.pointage.CodeDeplacement"
+                                                               text="$ctrl.pointage.CodeDeplacement.Code"
+                                                               tooltip="$ctrl.pointage.CodeDeplacement.Libelle"
+                                                               show-delete-button-on-mouse-over="true"
+                                                               show-search-icon-only-when-empty="true"
+                                                               search-icon-class="material-icons"
+                                                               search-title="{{::$ctrl.resources.Global_ReferentielCodeDeplacement}}"
+                                                               search-placeholder="{{::$ctrl.resources.Global_ReferentielCodeDeplacement_Placeholder}}"
+                                                               on-click="$ctrl.handleShowPickList('CodeDeplacement')"
+                                                               on-select="$ctrl.handleSelectCodeDeplacement(item)"
+                                                               on-delete="$ctrl.handleDeletePickListCodeDeplacement()"
+                                                               class="boutons"
+                                                               ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked || $ctrl.PointagePersonnelService.CodeDeplacementReadonly">
+                                            </lookup-standalone>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 pl5">
+                                        <div class="box-libelle">Zone</div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 no-p">
+                                        <div class="box-data">
+                                            <lookup-standalone ng-model="$ctrl.pointage.CodeZoneDeplacement"
+                                                               text="$ctrl.pointage.CodeZoneDeplacement.Code"
+                                                               tooltip="$ctrl.pointage.CodeZoneDeplacement.Libelle"
+                                                               show-delete-button-on-mouse-over="true"
+                                                               show-search-icon-only-when-empty="true"
+                                                               search-icon-class="material-icons"
+                                                               search-title="{{::$ctrl.resources.Global_ReferentielCodeZoneDeplacement}}"
+                                                               search-placeholder="{{::$ctrl.resources.Global_ReferentielCodeZoneDeplacement_Placeholder}}"
+                                                               url="{{$ctrl.handleShowPickList('CodeZoneDeplacement')}}&{{$ctrl.getReferentielRhUrl()}}"
+                                                               on-select="$ctrl.handleSelectCodeZoneDeplacement(item)"
+                                                               on-delete="$ctrl.handleDeletePickListCodeZoneDeplacement()"
+                                                               class="boutons"
+                                                               ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked || (!$ctrl.isGsp && !$ctrl.pointage.Ci.ZoneModifiable && $ctrl.pointage.Personnel.EtablissementPaie.GestionIndemnites)">
+                                            </lookup-standalone>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" id="ivd-detail" fred-display-handler="$ctrl.userOrganizationId" display="hidden">
+                                    <div class="col-md-6 col-lg-6 pl5">
+                                        <div class="box-libelle">{{::$ctrl.resources.PointagePersonnel_IVD}}</div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 no-pl">
+                                        <div class="box-data">
+                                            <input type="checkbox" select-on-click id="chivd" ng-model="$ctrl.pointage.DeplacementIV" ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked" ng-change="$ctrl.handleChangeIVD()">
+                                            <label for="chivd"><span class="coche"></span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row box-line">
+                        <div class="col-md-3 col-lg-3" ng-repeat="pointagePrime in $ctrl.pointage.ListRapportLignePrimes | filter:{IsDeleted:false} track by $index">
+                            <span class="libelle">Prime</span>
+                            <div class="box pt0">
+                                <div class="row" ng-class="{'div-PrimeAstreinte-disabled': pointagePrime.Prime.IsPrimeAstreinte}">
+                                    <i class="pull-right material-icons bandeau-delete" title="{{::$ctrl.resources.Global_Bouton_Supprimer}}" ng-click="$ctrl.handleDeletePrime(pointagePrime)">clear</i>
+                                </div>
+                                <div class="row" ng-class="{ 'div-PrimeAstreinte-disabled': pointagePrime.Prime.IsPrimeAstreinte}">
+                                    <div class="col-md-6 col-lg-6 pl5">
+                                        <div class="box-libelle">{{::$ctrl.resources.Code_lb}}</div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 no-p">
+                                        <div class="box-data" title="{{pointagePrime.Prime.Libelle}}">{{pointagePrime.Prime.Code}}</div>
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="$ctrl.IsPrimeHoraire(pointagePrime.Prime)">
+                                    <div class="col-md-6 col-lg-6 pl5">
+                                        <div class="box-libelle">{{::$ctrl.resources.Heures_lb}}</div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 no-p">
+                                        <div class="box-data">
+                                            <input type="text" fred-input-number="2" select-on-click min="0" max="12" ng-model="pointagePrime.HeurePrime" ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked" ng-change="$ctrl.handleChangeHeurePrime()">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="$ctrl.IsPrimeJournaliere(pointagePrime.Prime)" ng-class="{ 'div-PrimeAstreinte-disabled': pointagePrime.Prime.IsPrimeAstreinte}">
+                                    <div class="col-md-6 col-lg-6 pl5">
+                                        <div class="box-libelle">{{::$ctrl.resources.Global_Active}}</div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 no-p">
+                                        <div class="box-data">
+                                            <input type="checkbox" id="prime_{{$index}}" ng-model="pointagePrime.IsChecked" ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked" ng-change="$ctrl.handleCheckPrime()">
+                                            <label for="prime_{{$index}}"><span class="coche"></span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-show="!$ctrl.isUserFes" class="col-md-3 col-lg-3" ng-if="$ctrl.pointage.ListRapportLignePrimes.length < 4 && $ctrl.pointage.MonPerimetre && !$ctrl.pointage.Cloture && !$ctrl.pointage.IsGenerated">
+                            <span class="libelle lighter">{{::$ctrl.resources.PointagePersonnel_Ajout_Prime}}</span>
+                            <div class="box prime-task">
+                                <div class="square">
+                                    <lookup ng-model="selectedRef"
+                                            custom-template-url="../Scripts/directive/lookup/custom-templates/prime.template.html"
+                                            search-title="{{::$ctrl.resources.Global_ReferentielPrime}}"
+                                            search-placeholder="{{::$ctrl.resources.Global_ReferentielPrime_Placeholder}}"
+                                            url={{$ctrl.handleLookupUrl("Prime")}}
+                                            on-select="$ctrl.handleSelectPrime(item)"
+                                            ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked">
+                                        <span class="flaticon flaticon-add-2" title="{{::$ctrl.resources.PointagePersonnel_Ajout_Prime}}"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="$ctrl.isUserFes" class="col-md-3 col-lg-3" ng-if="$ctrl.pointage.MonPerimetre && !$ctrl.pointage.Cloture && !$ctrl.pointage.IsGenerated">
+                            <span class="libelle lighter">{{::$ctrl.resources.PointagePersonnel_Ajout_Prime}}</span>
+                            <div class="box prime-task">
+                                <div class="square">
+                                    <lookup ng-model="selectedRef"
+                                            search-title="{{::$ctrl.resources.Global_ReferentielPrime}}"
+                                            search-placeholder="{{::$ctrl.resources.Global_ReferentielPrime_Placeholder}}"
+                                            url={{$ctrl.handleLookupUrl("Prime")}}&{{$ctrl.getReferentielRhUrl()}}
+                                            on-select="$ctrl.handleSelectPrime(item)"
+                                            ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked">
+                                        <span class="flaticon flaticon-add-2" title="{{::$ctrl.resources.PointagePersonnel_Ajout_Prime}}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="materiel-detail" fred-display-handler="$ctrl.userOrganizationId" display="hidden">
+                        <div class="col-md-6 col-lg-6">
+                            <span class="libelle">{{::$ctrl.resources.Global_Materiel}}</span>
+                            <div class="box pl5-pr5">
+                                <div class="row">
+                                    <div class="box-data mb10">
+                                        <lookup-standalone ng-model="$ctrl.pointage.Materiel"
+                                                           text="$ctrl.pointage.Materiel.LibelleLong"
+                                                           search-title="{{::$ctrl.resources.Global_ReferentielMateriel}}"
+                                                           search-placeholder="{{::$ctrl.resources.Global_ReferentielMateriel_Placeholder}}"
+                                                           enable-default-selection="true"
+                                                           search-max-length="100"
+                                                           on-click="$ctrl.handleShowPickList('Materiel')"
+                                                           on-select="$ctrl.handleSelectMateriel(item)"
+                                                           on-delete="$ctrl.handleDeletePickListMateriel()"
+                                                           class="pickListCallerNom formulaire long"
+                                                           ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked"
+                                                           ng-show="$ctrl.currentUser.Societe.Groupe.Code != 'GRZB'">
+                                        </lookup-standalone>
+                                        <feature-flag invert feature-key="AfficherOngletMaterielsExternesRapports">
+                                            <lookup-standalone ng-model="$ctrl.pointage.Materiel"
+                                                               text="$ctrl.pointage.Materiel.LibelleLong"
+                                                               search-title="{{::$ctrl.resources.Global_ReferentielMateriel}}"
+                                                               search-placeholder="{{::$ctrl.resources.Global_ReferentielMateriel_Placeholder}}"
+                                                               enable-default-selection="true"
+                                                               search-max-length="100"
+                                                               on-click="$ctrl.handleShowPickList('Materiel')"
+                                                               on-select="$ctrl.handleSelectMateriel(item)"
+                                                               on-delete="$ctrl.handleDeletePickListMateriel()"
+                                                               class="pickListCallerNom formulaire long"
+                                                               ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked"
+                                                               ng-show="$ctrl.currentUser.Societe.Groupe.Code == 'GRZB'">
+                                            </lookup-standalone>
+                                        </feature-flag>
+                                        <feature-flag feature-key="AfficherOngletMaterielsExternesRapports">
+                                            <lookup-standalone ng-model="$ctrl.pointage.Materiel"
+                                                               text="$ctrl.pointage.Materiel.LibelleLong"
+                                                               search-title="{{::$ctrl.resources.Global_ReferentielMateriel}}"
+                                                               search-placeholder="{{::$ctrl.resources.Global_ReferentielMateriel_Placeholder}}"
+                                                               enable-default-selection="true"
+                                                               search-max-length="100"
+                                                               url="/api/Materiel/SearchLight/?statut=1&ciId={{$ctrl.pointage.CiId}}&"
+                                                               custom-template-url="/Scripts/directive/lookup/custom-templates/materiel.template.html"
+                                                               filters="$ctrl.materielTypeList"
+                                                               on-select="$ctrl.handleSelectMateriel(item)"
+                                                               on-delete="$ctrl.handleDeletePickListMateriel()"
+                                                               class="pickListCallerNom formulaire long"
+                                                               ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked"
+                                                               ng-show="$ctrl.currentUser.Societe.Groupe.Code == 'GRZB'">
+                                            </lookup-standalone>
+                                        </feature-flag>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 no-pl">
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6 no-pl">
+                                                <div class="box-libelle">{{::$ctrl.resources.Global_Marche}}</div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 pl12">
+                                                <div class="box-data">
+                                                    <input type="text" fred-input-number="2" select-on-click min="0" max="12" ng-model="$ctrl.pointage.MaterielMarche" ng-disabled="true" title="{{resources.Rapport_Detail_Ligne_HeuresNormales_Tooltip}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6 pl5">
+                                                <div class="box-libelle">{{::$ctrl.resources.Global_Panne}}</div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 pl25">
+                                                <div class="box-data">
+                                                    <input type="text" fred-input-number="2" select-on-click min="0" max="12" ng-model="$ctrl.pointage.MaterielPanne" ng-disabled="$ctrl.readOnly || $ctrl.readOnly || $ctrl.pointage.IsLocked" ng-change="$ctrl.handleChangeHeureMateriel()">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 no-pl">
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6 no-pl">
+                                                <div class="box-libelle">{{::$ctrl.resources.Global_Arret}}</div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 pl12">
+                                                <div class="box-data">
+                                                    <input type="text" fred-input-number="2" select-on-click min="0" max="12" ng-model="$ctrl.pointage.MaterielArret" ng-disabled="$ctrl.readOnly || $ctrl.readOnly || $ctrl.pointage.IsLocked" ng-change="$ctrl.handleChangeHeureMateriel()">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6 pl5">
+                                                <div class="box-libelle">{{::$ctrl.resources.Global_Intemperie}}</div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 pl25">
+                                                <div class="box-data">
+                                                    <input type="text" fred-input-number="2" select-on-click min="0" max="12" ng-model="$ctrl.pointage.MaterielIntemperie" ng-disabled="$ctrl.readOnly || $ctrl.readOnly || $ctrl.pointage.IsLocked" ng-change="$ctrl.handleChangeHeureMateriel()">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="astreinte-detail" fred-display-handler="$ctrl.userOrganizationId" display="visible">
+                        <div class="col-md-6 col-lg-6">
+                            <span class="libelle">Astreintes</span><br />
+                            <div class="row box pt0">
+                                <span class="libelle" style="margin-right:15px">Debut</span><span class="libelle" style="margin-left:15px">Fin</span>
+                                <div style="padding:0px;" ng-repeat="raportligneAstreinte in $ctrl.pointage.ListRapportLigneAstreintes | filter:{IsDeleted:false} track by $index ">
+                                    <input class="input-number" style="padding:0px;margin:0px;width: 40px;" readonly type="text" value="{{$ctrl.getDateTime(raportligneAstreinte.DateDebutAstreinte)}}" />
+                                    <span class="glyphicon glyphicon-play"></span>
+                                    <input class="input-number" style="padding:0px;margin:0px;width: 40px;" readonly type="text" value="{{$ctrl.getDateTime(raportligneAstreinte.DateFinAstreinte)}}" />
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 comments">
+                            <span class="libelle">Commentaire</span><br />
+                            <div class="row box pt0">
+                                <i class="pull-right material-icons bandeau-delete" title="{{::$ctrl.resources.Global_Bouton_Supprimer}}"
+                                   ng-click="$ctrl.pointage.Commentaire = null">
+                                    clear
+                                </i>
+                                <textarea type="text" name="txtCommentaire" ng-model="$ctrl.pointage.Commentaire"
+                                          ng-blur="$ctrl.handleChangeCommentaire()" maxlength="250" ng-disabled="$ctrl.readOnly || $ctrl.readOnly || $ctrl.pointage.IsLocked">
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6" ng-repeat="pointageTache in $ctrl.pointage.ListRapportLigneTaches | filter:{IsDeleted:false} track by $index">
+                            <span class="libelle">Tâche</span>
+                            <div class="box pt0">
+                                <div class="row">
+                                    <i class="pull-right material-icons bandeau-delete" title="{{::$ctrl.resources.Global_Bouton_Supprimer}}" ng-click="$ctrl.handleDeleteTache(pointageTache)">clear</i>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 no-pl">
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6 pl5">
+                                                <div class="box-libelle">{{::$ctrl.resources.Code_lb}}</div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 no-p">
+                                                <div class="box-data" title="{{pointageTache.Tache.Libelle}}">{{pointageTache.Tache.Code}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6 pl5">
+                                                <div class="box-libelle" ng-if="!$ctrl.isUserFes || !$ctrl.isIac">{{::$ctrl.resources.Heures_lb}}</div>
+                                                <div class="box-libelle" ng-if="$ctrl.isUserFes && $ctrl.isIac">{{::$ctrl.resources.Jours_lb}}</div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 pl25">
+                                                <div class="box-data">
+                                                    <input type="text" fred-input-number="2" select-on-click min="0" max="12" ng-if="!$ctrl.isUserFes" ng-model="pointageTache.HeureTache" ng-change="$ctrl.handleChangeHeureTache()" ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked">
+                                                    <input type="text" fred-input-number="2" select-on-click min="0" max="10" ng-if="$ctrl.isUserFes && !$ctrl.isIac" ng-model="pointageTache.HeureTache" ng-change="$ctrl.handleChangeHeureTache()" ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked">
+                                                    <input type="text" fred-input-number="2" select-on-click min="0" max="1" ng-if="$ctrl.isUserFes && $ctrl.isIac" ng-model="pointageTache.HeureTacheIac" ng-blur="$ctrl.handleBlurHeureTacheIac(pointageTache)" ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked" oninput="validity.valid||(value='0')||(value='0.25')||(value='0.5')||(value='0.75')||(value='1');" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12 comments">
+                                        <div class="box-libelle">{{::$ctrl.resources.Commentaire_lb}}</div>
+                                        <textarea ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked" ng-change="$ctrl.handleChangeTacheCommentaire()" ng-model="pointageTache.Commentaire"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-6" ng-if="!$ctrl.isUserFes && $ctrl.pointage.ListRapportLigneTaches.length < 10 && $ctrl.pointage.MonPerimetre && !$ctrl.pointage.Cloture && !$ctrl.pointage.IsGenerated">
+                            <span class="libelle lighter">Ajouter une tâche...</span>
+                            <div class="box prime-task">
+                                <div class="square">
+                                    <lookup ng-model="selectedRef"
+                                            search-title="{{::$ctrl.resources.Global_ReferentielTache}}"
+                                            search-placeholder="{{::$ctrl.resources.Global_ReferentielTache_Placeholder}}"
+                                            on-click="$ctrl.handleShowPickList('Tache')"
+                                            custom-template-url="/Scripts/directive/Lookup/custom-templates/tache.template.html"
+                                            on-select="$ctrl.handleSelectTache(item)"
+                                            ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked">
+                                        <span class="flaticon flaticon-add-2" title="Ajouter"></span>
+                                    </lookup>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6" ng-if="$ctrl.pointage.ListRapportLigneTaches !== undefined && $ctrl.isUserFes && !$ctrl.pointage.Cloture">
+                            <span class="libelle lighter">Ajouter une tâche...</span>
+                            <div class="box prime-task">
+                                <div class="square">
+                                    <lookup ng-model="selectedRef"
+                                            search-title="{{::$ctrl.resources.Global_ReferentielTache}}"
+                                            search-placeholder="{{::$ctrl.resources.Global_ReferentielTache_Placeholder}}"
+                                            on-click="$ctrl.handleShowPickList('Tache')"
+                                            custom-template-url="/Scripts/directive/Lookup/custom-templates/tache.template.html"
+                                            on-select="$ctrl.handleSelectTache(item)"
+                                            ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked">
+                                        <span class="flaticon flaticon-add-2" title="{{::$ctrl.resources.PointagePersonnel_Ajout_Prime}}"></span>
+                                    </lookup>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="tab2">
+            <!--Partie validation -->
+            <div style="width:330px; margin-left:auto; margin-right:auto" id="validators">
+
+                <h2 style="text-align : center">{{::$ctrl.resources.Rapport_Validation}}</h2>
+                <section-block>
+                    <section-content>
+                        <cards>
+                            <!--Validation Chef de chantier-->
+                            <card class="active" ng-show="$ctrl.pointage.Rapport.ValideurCDC != null">
+                                <titre>{{::$ctrl.resources.Rapport_Detail_StatutValidation_ChefChantier_SousTitre}}</titre>
+                                <infos>
+                                    <info>
+                                        <fred-label>{{::$ctrl.resources.Rapport_Detail_StatutValidation_ChefChantier_Auteur}}</fred-label>
+                                        <fred-val>{{$ctrl.pointage.Rapport.ValideurCDC.NomPrenom}}</fred-val>
+                                    </info>
+                                    <info>
+                                        <fred-label>{{::$ctrl.resources.Rapport_Detail_StatutValidation_ChefChantier_Date}}</fred-label>
+                                        <fred-val>{{$ctrl.pointage.Rapport.DateValidationCDC | date: "dd/MM/yyyy"}}</fred-val>
+                                    </info>
+                                </infos>
+                            </card>
+                            <card class="inactive" ng-show="$ctrl.pointage.Rapport.ValideurCDC == null">
+                                <titre>{{::$ctrl.resources.Rapport_Detail_StatutValidation_ChefChantier_SousTitre}}</titre>
+                                <infos>
+                                    {{::$ctrl.resources.Rapport_Aucune_Validation}}
+                                </infos>
+                            </card>
+
+                            <!--Validation ConducteurTravaux-->
+                            <card class="active" ng-show="$ctrl.pointage.Rapport.ValideurCDT != null">
+                                <titre>{{::$ctrl.resources.Rapport_Detail_StatutValidation_ConducteurTravaux_SousTitre}}</titre>
+                                <infos>
+                                    <info>
+                                        <fred-label>{{::$ctrl.resources.Rapport_Detail_StatutValidation_ConducteurTravaux_Auteur}}</fred-label>
+                                        <fred-val>{{$ctrl.pointage.Rapport.ValideurCDT.NomPrenom}}</fred-val>
+                                    </info>
+                                    <info>
+                                        <fred-label>{{::$ctrl.resources.Rapport_Detail_StatutValidation_ConducteurTravaux_Date}}</fred-label>
+                                        <fred-val>{{$ctrl.pointage.Rapport.DateValidationCDT | date: "dd/MM/yyyy"}}</fred-val>
+                                    </info>
+                                </infos>
+                            </card>
+                            <card class="inactive" ng-show="$ctrl.pointage.Rapport.ValideurCDT == null">
+                                <titre>{{::$ctrl.resources.Rapport_Detail_StatutValidation_ConducteurTravaux_SousTitre}}</titre>
+                                <infos>
+                                    {{::$ctrl.resources.Rapport_Aucune_Validation}}
+                                </infos>
+                            </card>
+
+                            <!--Validation Directeur de chantier-->
+                            <card class="active" ng-show="$ctrl.pointage.Rapport.ValideurDRC != null">
+                                <titre>{{::$ctrl.resources.Rapport_Detail_StatutValidation_DirecteurChantier_SousTitre}}</titre>
+                                <infos>
+                                    <info>
+                                        <fred-label>{{::$ctrl.resources.Rapport_Detail_StatutValidation_DirecteurChantier_Auteur}}</fred-label>
+                                        <fred-val>{{$ctrl.pointage.Rapport.ValideurDRC.NomPrenom}}</fred-val>
+                                    </info>
+                                    <info>
+                                        <fred-label>{{::$ctrl.resources.Rapport_Detail_StatutValidation_DirecteurChantier_Date}}</fred-label>
+                                        <fred-val>{{$ctrl.pointage.Rapport.DateValidationDRC | date: "dd/MM/yyyy"}}</fred-val>
+                                    </info>
+                                </infos>
+                            </card>
+                            <card class="inactive" ng-show="$ctrl.pointage.Rapport.ValideurDRC == null">
+                                <titre>{{::$ctrl.resources.Rapport_Detail_StatutValidation_DirecteurChantier_SousTitre}}</titre>
+                                <infos>
+                                    {{::$ctrl.resources.Rapport_Aucune_Validation}}
+                                </infos>
+                            </card>
+
+                            <!--Validatuon Correspondant Paye-->
+                            <card class="active" ng-show="$ctrl.pointage.Rapport.AuteurVerrou != null">
+                                <titre>{{::$ctrl.resources.Rapport_Detail_StatutValidation_CorrespondantPaye_SousTitre}}</titre>
+                                <infos>
+                                    <info>
+                                        <fred-label>{{::$ctrl.resources.Rapport_Detail_StatutValidation_CorrespondantPaye_Auteur}}</fred-label>
+                                        <fred-val>{{$ctrl.pointage.Rapport.AuteurVerrou.NomPrenom}}</fred-val>
+                                    </info>
+                                    <info>
+                                        <fred-label>{{::$ctrl.resources.Rapport_Detail_StatutValidation_CorrespondantPaye_Date}}</fred-label>
+                                        <fred-val>{{$ctrl.pointage.Rapport.DateVerrou | date: "dd/MM/yyyy"}}</fred-val>
+                                    </info>
+                                </infos>
+                            </card>
+
+                            <card class="inactive" ng-show="$ctrl.pointage.Rapport.AuteurVerrou == null">
+                                <titre>{{::$ctrl.resources.Rapport_Detail_StatutValidation_CorrespondantPaye_SousTitre}}</titre>
+                                <infos>
+                                    {{::$ctrl.resources.Rapport_Aucune_Validation}}
+                                </infos>
+                            </card>
+                        </cards>
+                    </section-content>
+                </section-block>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <button type="button" class="btn pull-left validation" ng-click="$ctrl.handleClickValidate()" ng-disabled="$ctrl.readOnly || $ctrl.pointage.IsLocked || $ctrl.notValidToSave ">{{::$ctrl.resources.Global_Bouton_Valider}}</button>
+        <button type="button" class="btn pull-right cancel" ng-click="$ctrl.handleCancel()">{{::$ctrl.resources.Global_Bouton_Annuler}}</button>
+    </div>
+</div>
+

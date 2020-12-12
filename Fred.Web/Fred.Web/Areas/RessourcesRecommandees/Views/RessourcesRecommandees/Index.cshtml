@@ -1,0 +1,192 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+@{
+    ViewBag.Title = FeatureRessourcesRecommandees.RessourcesRecommandees_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/RessourcesRecommandeesBundle.css")
+}
+@section scripts {
+    @Scripts.Render("~/RessourcesRecommandeesBundle.js")
+    @this.RenderResources("FeatureRessourcesRecommandees")
+}
+
+<div ng-controller="RessourcesRecommandeesController as ctrl">
+
+    <!--START : Titre de la page-->
+    <h1>Ressources recommandées</h1>
+
+    <!--START : Barre de recherche + Barre d'outils-->
+    <fred-toolbar>
+
+        <!--Sélection de l'établissement-->
+        <fred-section class="eta-section">
+            <fred-section-title>Sélectionner un établissement</fred-section-title>
+            <fred-section-controls>
+                <div class="search-bloc" style="width:100%;">
+                    <lookup-standalone ng-model="ctrl.Etablissement"
+                                       text="ctrl.Etablissement.CodeLibelle"
+                                       search-title="{{::ctrl.resources.Global_ReferentielOrganisation_Placeholder}}"
+                                       placeholder="{{::ctrl.resources.RessourcesRecommandees_Etablissement}}"
+                                       search-placeholder="{{::ctrl.resources.FeatureRessourcesRecommandees.Global_ReferentielOrganisation_Placeholder}}"
+                                       url="/api/EtablissementComptable/SearchLight/"
+                                       on-select="ctrl.handleLookupSelection(item)"
+                                       on-delete="ctrl.handleLookupDeletion()"
+                                       class="no-padding formulaire long">
+                    </lookup-standalone>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Actions-->
+        <fred-section class="action-section">
+            <fred-section-title>Actions</fred-section-title>
+            <fred-section-controls class="action-controls">
+                <button class="btn btn-link" ng-click="ctrl.handleCancel()">{{::ctrl.resources.Global_Bouton_Annuler}}</button>
+                <button class="btn btn-default" ng-click="ctrl.handleSave()">{{::ctrl.resources.Global_Bouton_Enregistrer}}</button>
+            </fred-section-controls>
+        </fred-section>
+    </fred-toolbar>
+
+    <!--BEGIN : BARRE RECHERCHE ET BOUTON RESSOURCES -->
+    <div class="row search-container">
+        <div class="col-md-3 col-lg-3 no-p">
+            <div class="input-group input-search">
+                <input type="text" placeholder="Rechercher une ressource" class="form-control" ng-model="ctrl.searchRessource">
+                <span class="input-group-addon button-search"><i class="material-icons">search</i></span>
+            </div>
+        </div>
+        <div class="col-md-9 col-lg-9 add no-p">
+            <div class="folding">
+                <input type="button" class="btn btn-primary pull-right" ng-disabled="!ctrl.Etablissement" ng-click="ctrl.handleCloseAll()" value="{{::ctrl.resources.Global_Bouton_ToutReplier}}" />
+                <input type="button" class="btn btn-primary pull-right" ng-disabled="!ctrl.Etablissement" ng-click="ctrl.handleOpenAll()" value="{{::ctrl.resources.Global_Bouton_ToutDeplier}}" />
+            </div>
+            <div class="marked">
+                <span class="btn bg-inverse-light" ng-bind-html="ctrl.resources.RessourcesRecommandees_Index_Ressource_Table_Marquer_Recommandee" ng-click="ctrl.handleRecommandee(true)"></span>
+                <span class="btn bg-inverse-light" ng-bind-html="ctrl.resources.RessourcesRecommandees_Index_Ressource_Table_Marquer_NonRecommandee" ng-click="ctrl.handleRecommandee(false)" />
+            </div>
+        </div>
+    </div>
+    <!--END : BARRE RECHERCHE ET BOUTON RESSOURCES -->
+    <!--BEGIN : Tableau des ressources -->
+    <div class="tab-head"></div>
+    <div class="res-rec-body fred-scroll">
+        <div id="accordion" class="panel-group">
+            <div class="panel panel-default" ng-repeat="chapitre in ctrl.referentielEtenduList | orderBy: '+Code' | filter: ctrl.chapitresFilter(ctrl.searchRessource)">
+                <div class="panel-heading level1 trees">
+                    <table class="t-first">
+                        <tbody>
+                            <tr class="chap">
+                                <td class="with-checkbox">
+                                    <input type="checkbox" id="chkChapitre-{{::chapitre.ChapitreId}}"
+                                           ng-model="chapitre.IsChecked"
+                                           ng-change="ctrl.handleChapitreChange(chapitre)" /><label for="chkChapitre-{{::chapitre.ChapitreId}}"><span></span></label>
+                                </td>
+                                <td class="col1 collapsed" data-toggle="collapse" data-target="#ss-{{::chapitre.Code}}-{{::chapitre.ChapitreId}}">
+                                    <a class="accordion-toggle"></a>
+                                </td>
+                                <td class="col2" data-toggle="collapse" data-target="#ss-{{::chapitre.Code}}-{{::chapitre.ChapitreId}}">
+                                    <p class="inline-header">{{::ctrl.resources.Code_lb}}</p>
+                                    <p class="inline-description">{{::chapitre.Code}}</p>
+                                </td>
+                                <td class="col3" data-toggle="collapse" data-target="#ss-{{::chapitre.Code}}-{{::chapitre.ChapitreId}}">
+                                    <p class="inline-header">{{::ctrl.resources.Libelle_lb}}</p>
+                                    <p class="inline-description">{{::chapitre.Libelle }}</p>
+                                </td>
+                                <td class="col4" data-toggle="collapse" data-target="#ss-{{::chapitre.Code}}-{{::chapitre.ChapitreId}}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="ss-{{::chapitre.Code}}-{{::chapitre.ChapitreId}}" class="panel-collapse collapse" aria-expanded="true">
+                    <div class="panel-body">
+                        <div class="panel panel-default" ng-repeat="souschapitre in chapitre.SousChapitres | orderBy: '+Code' | filter: ctrl.sousChapitresFilter(ctrl.searchRessource)">
+                            <div class="panel-heading level2 trees">
+                                <table class="t-first">
+                                    <tbody>
+                                        <tr class="sous-chap">
+                                            <td class="with-checkbox">
+                                                <input type="checkbox" id="chkSousChapitre-{{::souschapitre.SousChapitreId}}"
+                                                       ng-model="souschapitre.IsChecked"
+                                                       ng-change="ctrl.handleSousChapitreChange(souschapitre, chapitre)" /><label for="chkSousChapitre-{{::souschapitre.SousChapitreId}}"><span></span></label>
+                                            </td>
+                                            <td class="col1 collapsed"
+                                                data-toggle="collapse"
+                                                data-parent="#ss-{{::chapitre.Code}}-{{::chapitre.ChapitreId}}"
+                                                data-target="#ress-{{::souschapitre.Code}}-{{::souschapitre.SousChapitreId}}">
+                                                <a class="accordion-toggle"></a>
+                                            </td>
+                                            <td class="col2"
+                                                data-toggle="collapse"
+                                                data-parent="#ss-{{::chapitre.Code}}-{{::chapitre.ChapitreId}}"
+                                                data-target="#ress-{{::souschapitre.Code}}-{{::souschapitre.SousChapitreId}}">
+                                                <p class="inline-header">{{::ctrl.resources.Code_lb}}</p>
+                                                <p class="inline-description">{{::souschapitre.Code}}</p>
+                                            </td>
+                                            <td class="col3"
+                                                data-toggle="collapse"
+                                                data-parent="#ss-{{::chapitre.Code}}-{{::chapitre.ChapitreId}}"
+                                                data-target="#ress-{{::souschapitre.Code}}-{{::souschapitre.SousChapitreId}}">
+                                                <p class="inline-header">{{::ctrl.resources.Libelle_lb}}</p>
+                                                <p class="inline-description">{{::souschapitre.Libelle}}</p>
+                                            </td>
+                                            <td class="col4"
+                                                data-toggle="collapse"
+                                                data-parent="#ss-{{::chapitre.Code}}-{{::chapitre.ChapitreId}}"
+                                                data-target="#ress-{{::souschapitre.Code}}-{{::souschapitre.SousChapitreId}}">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="ress-{{::souschapitre.Code}}-{{::souschapitre.SousChapitreId}}" class="panel-collapse collapse">
+                                <div class="panel-body level3 trees">
+                                    <table class="t-third">
+                                        <tbody>
+                                            <tr ng-repeat="ressource in souschapitre.Ressources | orderBy: '+Code' | filter: ctrl.ressourcesFilter(ctrl.searchRessource)">
+                                                <td class="with-checkbox">
+                                                    <input type="checkbox" id="{{::ressource.RessourceId}}"
+                                                           ng-change="ctrl.handleRessourceChange(ressource, chapitre, souschapitre)"
+                                                           ng-model="ressource.IsChecked" /><label for="{{::ressource.RessourceId}}"><span></span></label>
+                                                </td>
+                                                <td class="col1"></td>
+                                                <td class="col2">
+                                                    <p class="inline-header">{{::ctrl.resources.Code_lb}}</p>
+                                                    <p class="inline-description">{{::ressource.Code}}</p>
+                                                </td>
+                                                <td class="col3">
+                                                    <p class="inline-header">{{::ctrl.resources.Libelle_lb}}</p>
+                                                    <p class="inline-description">{{::ressource.Libelle}}</p>
+                                                </td>
+                                                <td class="col4">
+                                                    <div class="toggle-bloc">
+                                                        <p class="inline-header">{{::ctrl.resources.RessourcesRecommandees_SwitchTitle}}</p>
+                                                        <label class="switch">
+                                                            <input type="checkbox" name="reco" id="reco" ng-model="ressource.IsRecommandee" />
+                                                            <span class="slider"></span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row information" ng-show="!ctrl.Etablissement">
+            <div class="col-md-4 icon">
+                <i class="flaticon flaticon-warning"></i>
+            </div>
+            <div class="col-md-8 message">
+                <h3>{{ctrl.resources.RessourcesRecommandees_Message_Information}}</h3>
+            </div>
+        </div>
+    </div>
+</div>

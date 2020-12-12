@@ -1,0 +1,52 @@
+﻿<div class="panel-historique">
+    <div class="panel-historique-header alignCenter">
+        <div class="panel-historique-icon">history</div>
+    </div>
+    <h3 class="panel-historique-title">Historique de la commande</h3>
+    <div class="panel-historique-content">
+        <!--########  Loader  ########-->
+        <div ng-show="$ctrl.busy" class="alignCenter flex1">
+            <img class="alignCenter" src="../../../../Content/images/loader.gif" />
+        </div>
+        <div ng-show="!$ctrl.busy" ng-repeat="historiqueItem in $ctrl.historique track by $index">
+
+            <div ng-if="historiqueItem.TypeCommandeEvent === $ctrl.EnumTypeCommandeEvent.Creation.Value" class="panel-historique-card-blue">
+                <div class="bold">{{historiqueItem.Title}}</div>
+                <div class="flexH"><span class="panel-historique-label">Par : </span>{{historiqueItem.Auteur}}</div>
+                <div class="flexH"><span class="panel-historique-label">Le : </span>{{historiqueItem.CreationFormatted}}</div>
+            </div>
+
+            <div ng-if="historiqueItem.TypeCommandeEvent === $ctrl.EnumTypeCommandeEvent.ValidationCommande.Value" class="panel-historique-card-green">
+                <div class="bold">{{historiqueItem.Title}}</div>
+                <div class="flexH"><span class="panel-historique-label">Par : </span>{{historiqueItem.Auteur}}</div>
+                <div class="flexH"><span class="panel-historique-label">Le : </span>{{historiqueItem.CreationFormatted}}</div>
+            </div>
+
+            <div ng-if="historiqueItem.TypeCommandeEvent === $ctrl.EnumTypeCommandeEvent.ValidationAvenant.Value" class="panel-historique-card-green">
+                <div class="bold">{{historiqueItem.Title}}</div>
+                <div class="flexH"><span class="panel-historique-label">Par : </span>{{historiqueItem.Auteur}}</div>
+                <div class="flexH"><span class="panel-historique-label">Le : </span>{{historiqueItem.CreationFormatted}}</div>
+            </div>
+
+            <div ng-if="historiqueItem.TypeCommandeEvent === $ctrl.EnumTypeCommandeEvent.Impression.Value" class="panel-historique-card-orange">
+                <div class="bold">{{historiqueItem.Title}}</div>
+                <div class="flexH"><span class="panel-historique-label">Par : </span>{{historiqueItem.Auteur}}</div>
+                <div class="flexH"><span class="panel-historique-label">Le : </span>{{historiqueItem.CreationFormatted}}</div>
+            </div>
+
+            <div ng-if="historiqueItem.TypeCommandeEvent === $ctrl.EnumTypeCommandeEvent.Avis.Value" class="panel-historique-card-yellow">
+                <div class="bold">{{historiqueItem.Title}}</div>
+                <div class="flexH"><span class="panel-historique-label">Par : </span>{{historiqueItem.Auteur}}</div>
+                <div class="flexH"><span class="panel-historique-label">Le : </span>{{historiqueItem.CreationFormatted}}</div>
+                <div class="flexH"><span class="panel-historique-label">Avis : </span>{{historiqueItem.TypeAvisFormatted}}</div>
+                <div class="flexH txt-break"><span class="panel-historique-label">Commentaire : </span>{{historiqueItem.Commentaire}}</div>
+                <div class="flexH"><span class="panel-historique-label">Envoyé à : </span>{{historiqueItem.Destinataire}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-historique-footer" ng-click="$ctrl.handleHide()">
+        <i class="material-icons">chevron_right</i>
+        {{$ctrl.resources.Global_Close_Panel}}
+    </div>
+</div>
+

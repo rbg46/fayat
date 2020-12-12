@@ -1,0 +1,95 @@
+﻿@{
+  ViewBag.Title = "Clôture de périodes";
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+  @Styles.Render("~/DatesClotureComptableIndexBundle.css")
+}
+
+@section scripts {
+  @Scripts.Render("~/DatesClotureComptableIndexBundle.js")
+  @this.RenderResources("FeatureDatesClotureComptable")
+}
+
+<div class="container cloture-comptable" ng-controller="DatesClotureComptableController as $ctrl">
+
+  <!-- START : Titre de la page -->
+  <h1>{{$ctrl.resources.Titre}}</h1>
+  <!--END : Titre de la page -->
+
+  <div class="row">
+    <div class="col-md-10">
+      <div class="toolbar">
+        <label class="infoFilter">{{$ctrl.resources.Section_Ci_lb}}</label>
+        <div class="controls selections">
+          <lookup-standalone ng-model="$ctrl.selectedCi"
+                             custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                             text="$ctrl.selectedCi.CodeLibelle"
+                             search-title="Référentiels CI"
+                             search-placeholder="Recherchez un centre d'imputation'"
+                             on-click="$ctrl.clickOnLookup('CI', 'ci')"
+                             on-select="$ctrl.ciSelectedChange(item)"
+                             on-delete="$ctrl.clearLookup()"
+                             ng-disabled="$ctrl.isBusy"
+                             class="pickListCaller formulaire long bar-rech">
+          </lookup-standalone>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="toolbar">
+        <label class="infoFilter">{{$ctrl.resources.Selectionner_Annee}}</label>
+        <div class="controls">
+          <input type="number"
+                 class="form-control"
+                 ng-model="$ctrl.currentYear"
+                 min="{{minAnnee}}"
+                 ng-change="$ctrl.changeYear()">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="liste-periodes">
+    <!--debut tableau bandeau haut-->
+    <div ng-show="!$ctrl.showMessageInfo"
+         class="row box2 header-liste">
+      <div class="col-md-6">
+        <div>
+          <fred-section>
+          </fred-section>
+        </div>
+      </div>
+
+      <div class="col-md-2 no-padding">
+        <div class="box1">
+          <div class="header-title">Date Transfert FAR</div>
+        </div>
+      </div>
+
+      <div class="col-md-2 no-padding">
+        <div class="box1">
+          <div class="header-title">{{$ctrl.resources.Cloture_Comptable_colonne_lb}}</div>
+        </div>
+      </div>
+    </div>
+
+    <dates-cloture-comptable-row-component ng-show="!$ctrl.showMessageInfo"
+                                           read-only="$ctrl.isBusy"
+                                           month-model="month"
+                                           ng-repeat="month in $ctrl.year"
+                                           month-number="$index"
+                                           resources="$ctrl.resources">
+    </dates-cloture-comptable-row-component>
+
+    <div class="row information" ng-show="$ctrl.showMessageInfo">
+      <div class="col-md-4 icon">
+        <span class="flaticon flaticon-warning"></span>
+      </div>
+      <div class="col-md-4 msg">
+        <h3>{{$ctrl.resources.Message_Selection_lb}}</h3>
+      </div>
+    </div>
+  </div>
+</div>

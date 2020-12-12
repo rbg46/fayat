@@ -1,0 +1,174 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+@{
+    ViewBag.Title = FeatureJournalComptable.JournalComptable_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+    @Styles.Render("~/JournalComptableIndexBundle.css")
+}
+@section scripts {
+    @Scripts.Render("~/JournalComptableIndexBundle.js")
+    @this.RenderResources("FeatureJournalComptable")
+}
+<div class="container" ng-controller="JournalComptableController">
+    <div class="toleft" id="PanelMain">
+        <h1>{{resources.JournalComptable_PanelMain_Titre}}</h1>
+        <div class="row">
+            <!-- Picklist Societe -->
+            <div class="col-md-5">
+                <label class="infoFilter">{{resources.Global_SelectionnerSociete}}</label>
+                <div class="filter">
+                    <div class="inner-addon right-addon">
+                        <i class="chev material-icons">chevron_right</i>
+                        <lookup ng-model="societe"
+                                search-placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+                                search-title="{{resources.Global_ReferentielSociete}}"
+                                on-select="loadJournauxComptables()"
+                                url="/api/Societe/SearchLightForRoles">
+                            <input type="text"
+                                   class="form-control"
+                                   ng-value="societe.CodeLibelle"
+                                   placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+                                   title="{{societe.CodeLibelle}}"
+                                   readonly />
+                        </lookup>
+                    </div>
+                </div>
+            </div>
+            <!-- Recherche -->
+            <div class="col-md-5" ng-if="societeId != undefined">
+                <label class="infoFilter">{{resources.Global_RechercheAffiner}}</label>
+                <div class="filter">
+                    <div class="input-group">
+                        <input class="form-control txt"
+                               type="text"
+                               id="txtRecherche"
+                               name="Recherche"
+                               placeholder="{{resources.JournalComptable_PanelMain_Recherche_Placeholder}}"
+                               ng-model="recherche"
+                               ng-model-options="{ debounce: 500 }"
+                               ng-change="searchJournalComptable(recherche)" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary y_search"
+                                    title="{{resources.Global_RechercheAffiner_Tooltip}}"
+                                    type="button" ng-click="searchJournalComptable(recherche)">
+                                <i class="material-icons">search</i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- Bouton pour ajouter Items -->
+            <div class="col-md-2 add-search"
+                 ng-if="societeId != undefined"
+                 ng-hide="isJournauxImported">
+                <span class="pull-right">
+                    <label class="infoFilter">{{resources.Global_Ajouter}}</label>
+                    <i class="flaticon flaticon-add icoplus " title="{{resources.Global_Bouton_AjouterReference_Tooltip}}" ng-click="createNewJournal()"></i>
+                </span>
+            </div>
+        </div>
+        <!-- Liste des journaux -->
+        <div class="row" id="Table" ng-if="societeId != undefined">
+            <div class="col-md-12">
+                <div ng-repeat="item in items">
+                    <div class="row line" ng-click="selectJournal(item)">
+                        <div class="col-md-2">
+                            <span class="t1">{{item.Code}}</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="lb">{{resources.JournalComptable_PanelMain_Table_Libelle}}</div>
+                            <span class="t2">{{item.Libelle}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="bdg actif" ng-if="item.IsActif">{{resources.Global_Actif}}</span>
+                            <span class="bdg inactif" ng-if="!item.IsActif">{{resources.Global_Inactif}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-class="checkDisplayOptions"
+         class="blockScreen"
+         style="z-index:99"></div>
+    <div class="options"
+         id="PanelRight"
+         ng-class="checkDisplayOptions + ' ' + checkFormatOptions">
+        <!-- HEADER TOOLBAR -->
+        <div class="toolbar" ng-class="{'is-already-used':isAlreadyUsed}">
+            <i class="material-icons grandicone">dialpad</i>
+        </div>
+        <span ng-hide="isJournauxImported" class="is-already-used-text">{{resources.Global_Item_Already_Used}}</span>
+        <!-- Titre -->
+        <div class="form-header" id="Titre">
+            <h2>
+                <span ng-if="journalComptable.JournalId == 0">{{resources.JournalComptable_PanelRight_Titre_Ajouter}}</span>
+                <span ng-if="journalComptable.JournalId != 0">{{resources.JournalComptable_PanelRight_Titre_Modifier}}</span>
+            </h2>
+            <label class="legend">{{resources.Global_LegendeAsterisque}}</label>
+        </div>
+        <div class="form fred-scroll">
+            <!-- Formulaire -->
+            <form name="formJournalComptable" autocomplete="off" novalidate>
+                <!-- FIELD Active-->
+                <div class="col-md-offset-8 chb_r">
+                    <input id="chkActif" type="checkbox" ng-model="journalComptable.IsActif" />
+                    <label for="chkActif"><span></span>{{resources.Global_Actif}}</label>
+                </div>
+                <!-- FIELD Code -->
+                <div class="form-group" ng-class="{ 'has-error' : (formJournalComptable.Code.$invalid && formJournalComptable.$submitted) || formJournalComptable.Code.$error.exist || formJournalComptable.Code.$error.pattern}">
+                    <label for="txtCode">{{resources.JournalComptable_PanelRight_Code}} *</label>
+                    <span class="text-danger" ng-show="formJournalComptable.Code.$error.required && formJournalComptable.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <span class="text-danger" ng-show="formJournalComptable.Code.$error.exist">{{resources.Global_Control_Code_ExistInSociete_Erreur}}</span>
+                    <span class="text-danger" ng-show="formJournalComptable.Code.$error.pattern">{{resources.Global_Control_Code_FormatAlphanumeric_Erreur}}</span>
+                    <input ng-disabled="isJournauxImported" class="form-control" type="text" maxlength="3" id="txtCode" name="Code" ng-pattern="/^[a-zA-Z0-9]*$/" ng-change="codeChanged();" required placeholder="{{resources.JournalComptable_PanelRight_Code_Placeholder}}" ng-model="journalComptable.Code" />
+                </div>
+                <!-- FIELD Libelle -->
+                <div class="form-group" ng-class="{ 'has-error' : formJournalComptable.Libelle.$invalid && formJournalComptable.$submitted}">
+                    <label for="txtLibelle">{{resources.JournalComptable_PanelRight_Libelle}} *</label>
+                    <span class="text-danger" ng-show="formJournalComptable.Libelle.$invalid && formJournalComptable.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <input ng-disabled="isJournauxImported" class="form-control" type="text" id="txtLibelle" name="Libelle" required placeholder="{{resources.JournalComptable_PanelRight_Libelle_Placeholder}}" ng-model="journalComptable.Libelle" maxlength="250" />
+                </div>
+                <!-- FOOTER TOOLBAR -->
+                <div class="footer">
+                    <div class="buttons">
+                        <button class="btn btn-default"
+                                type="submit"
+                                ng-disabled="isBusy"
+                                ng-click="clickSave();"
+                                title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">
+                            {{resources.Global_Bouton_Enregistrer}}
+                        </button>
+                        <button class="btn btn-primary"
+                                type="submit"
+                                ng-show="journalComptable.JournalId == 0"
+                                ng-disabled="isBusy"
+                                ng-click="clickSave(true);"
+                                title="{{resources.Global_Bouton_EnregistrerEtNouveau_Tooltip}}">
+                            {{resources.Global_Bouton_EnregistrerEtNouveau}}
+                        </button>
+                        <button ng-hide="isJournauxImported"
+                                class="btn btn-primary"
+                                type="submit"
+                                ng-show="journalComptable.JournalId != 0"
+                                ng-disabled="isBusy"
+                                ng-click="clickDelete();"
+                                title="{{resources.Global_Bouton_Supprimer_Tooltip}}">
+                            {{resources.Global_Bouton_Supprimer}}
+                        </button>
+                        <button class="btn btn-link"
+                                type="button"
+                                ng-click="closeModificationPanel();"
+                                title="{{resources.Global_Bouton_Annuler_Tooltip}}">
+                            {{resources.Global_Bouton_Annuler}}
+                        </button>
+                    </div>
+                    <div class="close_panel" ng-click="closeModificationPanel();" title="{{resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i> <span>{{resources.Global_Bouton_RefermerPanneau}}</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

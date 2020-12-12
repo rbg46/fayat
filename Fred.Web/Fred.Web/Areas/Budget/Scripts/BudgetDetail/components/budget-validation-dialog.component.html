@@ -1,0 +1,47 @@
+﻿<div class="modal fade" id="BUDGET_VALIDATION_DIALOG_ID" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1s"></i>{{$ctrl.resources.Budget_Validation_Titre}}</h2>
+                <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+            </div>
+            <div class="modal-body">
+                <div class="row" ng-if="$ctrl.budget.Etat.Code === $ctrl.CodeBudgetEtat.AValider && !$ctrl.RetourBrouillon">
+                    <div class="row">
+                        <label>{{$ctrl.resources.Budget_Validation_Confirmation}}</label>
+                        <label style="white-space: pre-wrap;">{{$ctrl.LibelleAvertissement}}</label>
+                    </div>
+                    <div class="row">
+                        <div>
+                            <input type="checkbox" id="up-miss" ng-model="$ctrl.ConfirmValidation">
+                            <label for="up-miss"><span></span>{{$ctrl.resources.Budget_Validation_Confirmation_Checkbox}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label>{{$ctrl.LibelleCommentaire}}</label>
+                </div>
+                <div class="row commentaire-validation">
+                    <textarea rows="4" cols="75" ng-model="$ctrl.Commentaire"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!--Bouton pour valider le budget-->
+                <button class="btn btn-default pull-left"
+                        ng-disabled="$ctrl.IsNotCheckToValidate()"
+                        ng-click="$ctrl.onClickButtonValidateDetail()"
+                        ng-if="$ctrl.CurrentMode === $ctrl.Mode.Create"
+                        title="{{$ctrl.resources.Global_Bouton_Valider_Tooltip}}">
+                    {{$ctrl.resources.Global_Bouton_Valider}}
+                </button>
+
+                <!--Bouton annuler-->
+                <button class="btn btn-link pull-right"
+                        data-dismiss="modal"
+                        title="{{$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">
+                    {{$ctrl.resources.Global_Bouton_Annuler}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

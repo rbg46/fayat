@@ -1,0 +1,12 @@
+﻿<div class="fournisseur bkg-item pk-{{ref.CodeRef}}-item"
+     ng-repeat="ref in $ctrl.referentiels track by $index "
+     ng-click="$ctrl.handleSelection(ref)"
+     ng-class="{selected : $index == $ctrl.selectedIndex}"
+     title="Cliquer pour sélectionner l'information {{ref.CodeRef}} / {{ref.LibelleRef}}">
+    <h2 class="fournisseur-h2" fred-wrap-in-tag="{{ref.Libelle}}" words="$ctrl.searchTexts">{{ref.Libelle}}</h2>
+    <h3 class="fournisseur-h3" fred-wrap-in-tag="{{ref.InfoFournisseur}}" words="$ctrl.searchTexts2">{{ref.InfoFournisseur}}</h3>
+    <!--afficher si jamais aucune données de retour-->
+    <h3 fred-wrap-in-tag="{{ref.LibelleRef}}" words="$ctrl.searchTexts" ng-if="$ctrl.referentiels.length!==0">{{ref.LibelleRef}}</h3>
+    <h4 class="fournisseur-h4" fred-wrap-in-tag="{{ref.InfoAdresseFournisseur}}" words="$ctrl.searchTexts2">{{ref.InfoAdresseFournisseur}}</h4>
+
+</div>

@@ -1,0 +1,49 @@
+﻿
+<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title"><i class="flaticon flaticon-notebook-4"></i>Edition contrôle budgétaire<!--::$ctrl.item.Libelle--></h2>
+        <i class="flaticon flaticon-multiply close pull-right" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}" ng-click="$ctrl.handleCancel()"></i>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="container-fluid">
+
+                <div class="row" id="ajoutCis">
+                    <div ng-class="$ctrl.isMaximumCiSelected()?'col-md-12':'col-md-10'">
+                        <div class="col-md-1 tuile secondary" ng-repeat="ciselected in $ctrl.ciSelectedlist" title="Cliquer pour supprimer">
+                            <div class="row">
+                                <span ng-if="ciselected != $ctrl.ci" class="pull-right" ng-click="$ctrl.removeCi($index)">×</span>
+                            </div>
+                            <div class="row">
+                                {{ciselected.CodeLibelle}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2" ng-if="!$ctrl.isMaximumCiSelected()">
+                        <lookup ng-model="$ctrl.input"
+                                search-icon-class="material-icons"
+                                show-search-icon-only-when-empty="true"
+                                search-placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                search-title="{{$ctrl.resources.Global_ReferentielCI}}"
+                                on-select="$ctrl.addCi()"
+                                show-in-popup="true"
+                                url="/api/CI/SearchLightForBudget?periodeApplication={{$ctrl.periode}}&">
+                            <div class="tuile primary pull-right">
+                                <div class="row">Ajouter CI</div>
+                                <div class="row">
+                                    <span class="pull-right add-ci">&#43</span>
+                                </div>
+                            </div>
+                        </lookup>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-link pull-left" data-dismiss="modal" ng-click="$ctrl.handleCancel()">{{$ctrl.resources.Global_Bouton_Annuler}}</button>
+        <button class="btn btn-default pull-right" ng-click="$ctrl.handleValidate()">{{$ctrl.resources.Global_Bouton_Continuer}}</button>
+    </div>
+</div>

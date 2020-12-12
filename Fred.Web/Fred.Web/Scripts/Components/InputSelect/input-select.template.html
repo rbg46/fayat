@@ -1,0 +1,20 @@
+﻿<div class="input-select">
+    <input type="text"
+           name="text"
+           placeholder="{{$ctrl.placeholder}}"
+           value="{{$ctrl.text}}"
+           ng-click="$ctrl.handleSelectClick()"
+           readonly="{{$ctrl.isEditable ? readonly : ''}}" />
+    <div class="input-select-icon"
+         ng-click="$ctrl.handleDeleteClick()"
+         ng-show="$ctrl.isSelected">
+        <i class="material-icons">close</i>
+    </div>
+    <div class="input-select-icon"
+         ng-click="$ctrl.handleSelectClick()"
+         ng-show="!$ctrl.isSelected">
+        chevron_right
+    </div>
+</div>
+
+

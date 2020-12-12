@@ -1,0 +1,279 @@
+﻿<form name="$ctrl.formTacheDetail" autocomplete="off" novalidate>
+
+  <div ng-show="$ctrl.serverError">
+    <div class="taskError" ng-show="$ctrl.serverError">{{$ctrl.serverError}}</div>
+  </div>
+
+  <table class="details">
+    <thead>
+      <tr>
+        <th colspan="5" class="empty_col"></th>
+        <th colspan="4" class="header lft">{{$ctrl.resources.TacheDetailTemplate_Sous_detail}}</th>
+        <th colspan="4" class="header rgt">T{{$ctrl.taskSelected.Niveau}}</th>
+      </tr>
+
+      <tr class="taskError" ng-if="$ctrl.formTacheDetail.quantiteBase.$invalid || $ctrl.formTacheDetail.quantiteARealise.$invalid ">
+        <th colspan="5" class="empty_col"></th>
+        <th class="taskError" colspan="8">
+          <div ng-show="$ctrl.formTacheDetail.quantiteBase.$invalid && $ctrl.formTacheDetail.quantiteBase.$error.min">La quantité de base doit être supérieure ou égale à zéro.</div>
+          <div ng-show="$ctrl.formTacheDetail.quantiteBase.$invalid && $ctrl.formTacheDetail.quantiteBase.$error.required">La quantité de base est obligatoire.</div>
+          <div ng-show="$ctrl.formTacheDetail.quantiteBase.$invalid && $ctrl.formTacheDetail.quantiteBase.$error.pattern">La quantité de base doit avoir une précision de 2 chiffres aprés la virgule.</div>
+          <div ng-show="$ctrl.formTacheDetail.quantiteBase.$invalid && $ctrl.formTacheDetail.quantiteBase.$error.max">>La quantité de base ne peux pas dépasser 999 999 999 999,99</div>
+          <div ng-show="$ctrl.formTacheDetail.quantiteBase.$invalid && $ctrl.formTacheDetail.quantiteBase.$error.number">La quantité de base doit être un chiffre.</div>
+          <div ng-show="$ctrl.formTacheDetail.quantiteARealise.$invalid && $ctrl.formTacheDetail.quantiteARealise.$error.min">La quantité à réaliser doit être supérieure ou égale à zéro.</div>
+          <div ng-show="$ctrl.formTacheDetail.quantiteARealise.$invalid && $ctrl.formTacheDetail.quantiteARealise.$error.required">La quantité à réaliser est obligatoire.</div>
+          <div ng-show="$ctrl.formTacheDetail.quantiteARealise.$invalid && $ctrl.formTacheDetail.quantiteARealise.$error.pattern">La quantité à réaliser doit avoir une précision de 2 chiffres aprés la virgule.</div>
+          <div ng-show="$ctrl.formTacheDetail.quantiteARealise.$invalid && $ctrl.formTacheDetail.quantiteARealise.$error.max">La quantité à réaliser ne peux pas dépasser 999 999 999 999,99</div>
+          <div ng-show="$ctrl.formTacheDetail.quantiteARealise.$invalid && $ctrl.formTacheDetail.quantiteARealise.$error.number">La quantité à réaliser doit être un chiffre.</div>
+        </th>
+      </tr>
+      <tr class="task_detail">
+        <th colspan="1">T4</th>
+        <th colspan="1">
+          <p class="inline_header">{{$ctrl.resources.Code_lb}}</p>
+          <p class="inline_description">{{$ctrl.taskSelected.Code}}</p>
+        </th>
+        <th colspan="3">
+          <p class="inline_header">{{$ctrl.resources.Libelle_lb}}</p>
+          <p class="inline_description">{{$ctrl.taskSelected.Libelle}}</p>
+        </th>
+        <th class="input_data" colspan="1">
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Quantite_de_base}}</p>
+          <input type="text"
+                 fred-input-number
+                 name="quantiteBase"
+                 min="0"
+                 required                 
+                 max="999999999999.99"
+                 ng-model-options="{ allowInvalid: true }"
+                 ng-model="$ctrl.taskSelected.QuantiteBase"
+                 ng-disabled="$ctrl.bugetRevisionStatut === 'Valide'"
+                 ng-change="$ctrl.handleTacheQuantitesChange()">
+
+        </th>
+        <th colspan="3">
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Unite}}</p>        
+          <!--todo I18N-->
+          <lookup-standalone name="unite"
+                             ng-model="$ctrl.taskSelected.Unite"
+                             text="$ctrl.taskSelected.Unite.Libelle"
+                             search-title="Référentiel des unités"
+                             search-placeholder="Recherchez une unité"
+                             url="/api/Unite/SearchLight"
+                             on-select="$ctrl.handleSelectUnite(item)"
+                             on-delete="$ctrl.handleDeleteUnite()"
+                             class="formulaire middle">
+          </lookup-standalone>
+        </th>
+        <th class="input_data" colspan="1">
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Quantite_a_realiser}}</p>
+          <input type="text"
+                 fred-input-number
+                 name="quantiteARealise"
+                 min="0"
+                 required                 
+                 max="999999999999.99"
+                 ng-model-options="{ allowInvalid: true }"
+                 ng-model="$ctrl.taskSelected.QuantiteARealise"
+                 ng-disabled="$ctrl.bugetRevisionStatut === 'Valide'"
+                 ng-change="$ctrl.handleTacheQuantitesChange()">
+
+        </th>
+        <th colspan="3">
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Unite}}</p>        
+          <!--todo I18N-->
+          <lookup-standalone name="unite"
+                             ng-model="$ctrl.taskSelected.Unite"
+                             text="$ctrl.taskSelected.Unite.Libelle"
+                             search-title="Référentiel des unités"
+                             search-placeholder="Recherchez une unité"
+                             url="/api/Unite/SearchLight"
+                             on-select="$ctrl.handleSelectUnite(item)"
+                             on-delete="$ctrl.handleDeleteUnite()"
+                             class="formulaire middle">
+          </lookup-standalone>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="fred-scroll">
+    
+      <tr ng-repeat-start="ressourceTache in $ctrl.taskSelected.RessourceTaches track by $index"
+         
+          ng-class="{'selected':$ctrl.selectedRessourceTache === ressourceTache }"
+          ng-click="$ctrl.handleSelectionRessourceTask(ressourceTache)">
+
+        <td>
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_chapitre}}</p>
+          <p class="inline_description">{{ressourceTache.Ressource.SousChapitre.Chapitre.Code || ressourceTache.Ressource.ChapitreCode}}</p>
+        </td>
+        <td>
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Sous_Chapitre}}</p>
+          <p class="inline_description">{{ressourceTache.Ressource.SousChapitre.Code || ressourceTache.Ressource.SousChapitreCode}}</p>
+        </td>
+        <td>
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Ressource}}</p>
+          <p class="inline_description">{{ressourceTache.Ressource.Code }}</p>
+        </td>
+        <td>
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Libelle_Ressource}}</p>
+          <p class="inline_description">{{ressourceTache.Ressource.Libelle}}</p>
+        </td>
+        <td>
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Unite}}</p>
+          <p class="inline_description">
+            {{ressourceTache.unite.Code}}
+          </p>
+        </td>
+        <td>
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Quantite}}</p>
+          <input type="text"
+                 fred-input-number
+                 ng-model="ressourceTache.QuantiteBase"
+                 name="quantiteBaseRessource{{$index}}"
+                 min="0"
+                 required
+                 ng-model-options="{ allowInvalid: true }"
+                 ng-disabled="$ctrl.bugetRevisionStatut === 'Valide'"
+                 ng-change="$ctrl.handleRessourceQuantiteBaseChange(ressourceTache)">          
+        </td>
+        <td>
+          <p class="inline_header">Prix Unitaire REF</p>
+          <input type="text"
+                 fred-input-number
+                 name="priceOfParam{{$index}}"
+                 min="0"
+                 ng-model-options="{ allowInvalid: true }"
+                 ng-disabled="$ctrl.bugetRevisionStatut === 'Valide'"
+                 ng-model="ressourceTache.priceOfParam"
+                 ng-class="{'use-referential-price': ressourceTache.priceOfRessourceTask !== null && ressourceTache.priceOfParam !== undefined}"
+                 ng-required="ressourceTache.priceOfRessourceTask === null && ressourceTache.priceOfParam === null"
+                 ng-change="$ctrl.handlePriceOfParamChange(ressourceTache)">
+
+        </td>
+        <td>
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Prix_Unitaire}}</p>
+
+          <input type="text"
+                 fred-input-number
+                 name="priceOfRessourceTask{{$index}}"
+                 min="0"
+                 ng-model-options="{ allowInvalid: true }"
+                 ng-disabled="$ctrl.bugetRevisionStatut === 'Valide'"
+                 ng-model="ressourceTache.priceOfRessourceTask"
+                 ng-required="ressourceTache.priceOfRessourceTask === null && ressourceTache.priceOfParam === null"
+                 ng-change="$ctrl.handlePriceRessourceTaskChange(ressourceTache)">
+
+
+        </td>
+
+        <td>
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Montant}}</p>
+          <p class="inline_description">{{ressourceTache.Montant}}</p>
+        </td>
+        <td>
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Formule}}</p>
+          <input type="text" ng-model="ressourceTache.Formule"
+                 ng-disabled="$ctrl.bugetRevisionStatut === 'Valide'"
+                 ng-change="$ctrl.handleRessourceFormuleChange(ressourceTache)">
+        </td>
+        <td>
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Quantite}}</p>
+          <p class="inline_description">{{ressourceTache.Quantite}}</p>
+        </td>
+        <td>
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Prix_Unitaire}}</p>
+          <p class="inline_description">
+            {{ressourceTache.priceOfRessourceTask === null ? ressourceTache.priceOfParam : ressourceTache.priceOfRessourceTask}}
+          </p>
+        </td>
+        <td>
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Montant}}</p>
+          <p class="inline_description">{{ressourceTache.MontantTotal}}</p>
+        </td>
+        <td>
+          <span class="button-action flaticon flaticon-multiply" title="{{$ctrl.resources.TacheDetailTemplate_Supprimer}}"
+                ng-hide="$ctrl.bugetRevisionStatut === 'Valide'"
+                ng-click="$ctrl.handleDeleteRessource(ressourceTache)"></span>
+        </td>
+      </tr>
+      <tr ng-repeat-end>
+        <td class="taskError" colspan="13"
+            ng-show="$ctrl.formTacheDetail.quantiteBaseRessource{{$index}}.$invalid || $ctrl.formTacheDetail.priceOfParam{{$index}}.$invalid ||  $ctrl.formTacheDetail.priceOfRessourceTask{{$index}}.$invalid || ressourceTache.hasFormuleError">
+          <div ng-show="$ctrl.formTacheDetail.quantiteBaseRessource{{$index}}.$invalid && $ctrl.formTacheDetail.quantiteBaseRessource{{$index}}.$error.required">La quantité est obligatoire.</div>
+          <div ng-show="$ctrl.formTacheDetail.quantiteBaseRessource{{$index}}.$invalid && $ctrl.formTacheDetail.quantiteBaseRessource{{$index}}.$error.min">La quantité doit être supérieur ou égal à zéro.</div>
+          <div ng-show="$ctrl.formTacheDetail.quantiteBaseRessource{{$index}}.$invalid && $ctrl.formTacheDetail.quantiteBaseRessource{{$index}}.$error.number">La quantité de base doit être un chiffre.</div>
+          <div ng-show="$ctrl.formTacheDetail.priceOfParam{{$index}}.$invalid && $ctrl.formTacheDetail.priceOfParam{{$index}}.$error.required">Le prix unitaire est obligatoire.</div>
+          <div ng-show="$ctrl.formTacheDetail.priceOfParam{{$index}}.$invalid && $ctrl.formTacheDetail.priceOfParam{{$index}}.$error.min">Le prix unitaire ne peux pas être inférieur à zéro.</div>
+          <div ng-show="$ctrl.formTacheDetail.priceOfParam{{$index}}.$invalid && $ctrl.formTacheDetail.priceOfParam{{$index}}.$error.number">Le prix unitaire doit être un chiffre.</div>
+          <div ng-show="ressourceTache.hasFormuleError">La formule n'est pas valide ou le résulat du calcul n'est pas valide. Vous pouvez utiliser + - / * et le caractère q pour désigner la quantité de base.</div>
+        </td>
+        <td class="taskError" colspan="13" ng-show="$ctrl.getServerErrors(ressourceTache.RessourceTacheId)">
+          <div ng-repeat="ressourceTacheError in $ctrl.getServerErrors(ressourceTache.RessourceTacheId)">{{ressourceTacheError}}</div>
+        </td>
+      </tr>
+    </tbody>
+    <tbody class="totals">
+      <tr>
+        <td colspan="5" class="empty_col"></td>
+        <td class="lft" colspan="4">
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Prix_Total_QB}}</p>
+          <p class="inline_description">{{$ctrl.taskSelected.PrixTotalQB}}</p>
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Prix_unitaire_QB}}</p>
+          <p class="inline_description">{{$ctrl.taskSelected.PrixUnitaireQB}}</p>
+        </td>
+        <td class="rgt" colspan="4">
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Prix_Total_T4}}</p>
+          <p class="inline_description">{{$ctrl.taskSelected.TotalT4}}</p>
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Prix_unitaire_T4}}</p>
+          <p class="inline_description">{{$ctrl.taskSelected.PrixUnitaireQB}}</p>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="5" class="empty_col"></td>
+        <td class="lft" colspan="4">
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Total_Heures_MO}}</p>
+          <p class="inline_description">{{$ctrl.taskSelected.TotalHeureMO}}</p>
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Heures_MO_par_unite}}</p>
+          <p class="inline_description">{{$ctrl.taskSelected.HeureMOUnite}}</p>
+        </td>
+        <td class="rgt" colspan="4">
+          <p class="inline_header">{{$ctrl.resources.TacheDetailTemplate_Total_heures_MO_T4}}</p>
+          <p class="inline_description">{{$ctrl.taskSelected.TotalHeureMOT4}}</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</form>
+<div class="action_buttons detail-actions">
+
+  <button class="btn cancel pull-right"
+          ng-show="$ctrl.bugetRevisionStatut !== 'Valide' && $ctrl.handleCanPasteTask()"
+          ng-disabled="$ctrl.formTacheDetail.$invalid || $ctrl.isBusy || $ctrl.handleCheckFormuleError()"
+          ng-click="$ctrl.handlePasteTask()">
+    {{$ctrl.resources.index_Coller}}
+
+  </button>
+  <button class="btn cancel pull-right"
+          ng-show="$ctrl.bugetRevisionStatut !== 'Valide'  && $ctrl.handleCanCopyTask()"
+          ng-disabled="$ctrl.formTacheDetail.$invalid || $ctrl.isBusy || $ctrl.handleCheckFormuleError()"
+          ng-click="$ctrl.handleCopyTask()">
+    {{$ctrl.resources.index_Copier}}
+
+  </button>
+  <button class="btn save pull-right"
+          ng-show="$ctrl.bugetRevisionStatut !== 'Valide'"
+          ng-disabled="$ctrl.formTacheDetail.$invalid || $ctrl.isBusy || $ctrl.handleCheckFormuleError()"
+          ng-click="$ctrl.handleSaveTask()">
+    {{$ctrl.resources.index_Enregistrer2}}
+
+  </button>
+  <button class="btn cancel pull-right"
+          ng-disabled="$ctrl.isBusy"
+          ng-click="$ctrl.handleCancelTask() || $ctrl.isBusy">
+    {{$ctrl.resources.index_Annuler2}}
+
+  </button>
+
+</div>

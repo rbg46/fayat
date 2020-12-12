@@ -1,0 +1,1262 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+@using Fred.Entities.Commande
+@using Fred.Web.Modules.Authorization.Asp;
+@{
+    /**/
+
+    ViewBag.Title = FeatureCommande.Commande_Detail_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+    @Styles.Render("~/CommandeDetailBundle.css")
+}
+@section scripts {
+    @Scripts.Render("~/CommandeDetailBundle.js")
+    @this.RenderResources("FeatureCommande")
+    @this.RenderResources("FeaturePieceJointe")
+}
+@Html.SetPermissionsContextuellesForCommande((int?)ViewBag.id)
+<div class="container"
+     ng-controller="DetailCommandeController"
+     ng-cloak
+     ng-init="init('@ViewBag.id', @Html.Raw(ViewBag.duplicate.ToString().ToLower()),'@Request.UrlReferrer', '@Url.Action("Detail", "Commande", new { id = "" })', '@CommandeTypeEnt.CommandeTypeL','@CommandeTypeEnt.CommandeTypeP', '@StatutCommandeEnt.ColorBR', '@StatutCommandeEnt.ColorAV', '@StatutCommandeEnt.ColorVA', '@StatutCommandeEnt.ColorCL')">
+
+    <!-- BEGIN : Entete de la commande -->
+    <form id="commandeDetails" name="FormCommande" class="form-horizontal" autocomplete="off">
+        <!-- ENTETE DE COMMANDE -->
+        <h1>Commande</h1>
+        <!-- Nouvel en-tête -->
+        <div class="toolbar-large" ng-click="displayBanner = !displayBanner" ng-hide="disabledCommandeHeader">
+            <div class="toolbar-large-division entete">
+                <div class="toolbar-large-section-title">Entête de la commande</div>
+                <div class="toolbar-large-section">
+                    <div class="toolbar-large-section-bloc num" data-toggle="modal" data-target="#edit-command">
+                        <div class="lbl">{{::resources.Commande_Detail_Titre_Numero}}</div>
+                        <span ng-show="!canShowNumeroCommandeExterne()">{{commande.Numero}}</span>
+                        <span ng-show="canShowNumeroCommandeExterne()">{{commande.NumeroCommandeExterne}}</span>
+                    </div>
+                    <div class="toolbar-large-section-bloc state" data-target="#edit-command">
+                        <div class="flexH alignYCenter">
+                            <div class="lbl">État</div>
+                            <div class="icon-avis" ng-if="commande.CommandeId > 0" ng-click="handleShowPanelAvis()" title="{{::resources.Commande_Btn_Tooltip_Avis}}">
+                                <i class="material-icons">
+                                    history
+                                </i>
+                            </div>
+                        </div>
+                        <span class="tile"
+                              ng-class="{colorBR: commande.IsStatutBrouillon, colorAV: commande.IsStatutAValider, colorVA: commande.IsStatutValidee, colorCL: commande.IsStatutCloturee, colorMVA: commande.IsStatutManuelleValidee}"
+                              ng-bind="commande.StatutCommande.Libelle"
+                              ng-if="commande.StatutCommande != null"></span>
+                        <span class="tile dummy" ng-if="commande.StatutCommande == undefined"></span>
+                    </div>
+                    <div class="toolbar-large-section-bloc type" data-toggle="modal" data-target="#edit-command">
+                        <div class="lbl">{{::resources.Commande_Detail_SectionDetail_Type}}</div>
+                        <span class="val">{{commande.Type.Libelle}}</span>
+                    </div>
+                    <div class="toolbar-large-section-bloc lib" data-toggle="modal" data-target="#edit-command">
+                        <div class="lbl">{{::resources.Commande_Detail_SectionDetail_Libelle}}</div>
+                        <span class="val">{{commande.Libelle}}</span>
+                    </div>
+                    <div class="toolbar-large-section-bloc dev" data-toggle="modal" data-target="#edit-command">
+                        <div class="lbl">{{::resources.Commande_Detail_SectionDetail_Devise}}</div>
+                        <span class="val" ng-if="(commandeReadonly || !commande.CI.IsCiHaveManyDevises)" name="Devise">{{commande.Devise.CodeLibelle}}</span>
+                    </div>
+                    <div class="toolbar-large-section-bloc day" data-toggle="modal" data-target="#edit-command">
+                        <div class="lbl">{{::resources.Commande_Detail_Ligne_Entete_Date}}</div>
+                        <span class="val">{{commande.Date | date:'dd/MM/yyyy'}}</span>
+                    </div>
+                    <div class="header-pj-icon" ng-show="((attachments||[]) | filter: {IsDeleted:false}).length > 0" title="{{::resources.Commande_Btn_Libelle_Pcsjointe}}">
+                        <span class="material-icons" ng-click="handleDownloadAllAttachments()">
+                            attach_file
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="toolbar-large-division prop">
+                <div class="toolbar-large-section-title">Propriété</div>
+                <div class="toolbar-large-section" data-toggle="modal" data-target="#edit-command">
+                    <div class="chkb">
+                        <input type="checkbox" id="chbkcom-man" disabled="disabled" ng-model="commande.CommandeManuelle"><label for="chbkcom-man"><span></span>{{::resources.Commande_Detail_SectionDetail_CommandeManuelle}}</label>
+                    </div>
+                    <div class="chkb">
+                        <input type="checkbox" id="chbkbuy" ng-checked="commande.TotalCommande > 15000" disabled="disabled"><label for="chbkbuy"><span></span>{{::resources.Commande_Detail_SectionDetail_AccordCadre}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="toolbar-large-division biz">
+                <div class="toolbar-large-section-title">Affaire</div>
+                <div class="toolbar-large-section">
+                    <div class="toolbar-large-section-bloc" data-toggle="modal" data-target="#edit-command">
+                        <div class="txt">{{commande.CI.Code}}</div>
+                        <div class="txt">{{commande.CI.CodeLibelle.substring(commande.CI.Code.length +3,commande.CI.CodeLibelle.length)}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="toolbar-large-division biz prov">
+                <div class="toolbar-large-section-title">{{!commande.FournisseurProvisoire ? 'Fournisseur' : 'Fournisseur provisoire'}}</div>
+                <div class="toolbar-large-section fournisseur">
+                    <div class="toolbar-large-section-bloc" data-toggle="modal" data-target="#edit-command">
+                        <div class="txt" ng-show="!commande.FournisseurProvisoire">{{getCodeFournisseur()}}</div>
+                        <div class="txt" ng-show="!commande.FournisseurProvisoire">{{getLibelleFournisseur()}}</div>
+                        <div class="txt" ng-show="commande.FournisseurProvisoire">{{commande.FournisseurProvisoire}}</div>
+                    </div>
+                    <span class="material-icons error-icon old-fournisseur" ng-show="commande.OldFournisseurId > 0" title="{{::resources.Commande_Libelle_Fournisseur_Corriger}}: {{commande.OldFournisseurCodeLibelle}}">warning</span>
+                </div>
+            </div>
+        </div>
+
+
+
+        @************************** LIGNES DE COMMANDE **************************@
+        <div class="commande-lignes" ng-class="statusDisplay? 'ligneCommandeRow' : 'ligneCommandeColumn'">
+            <!-- <div class="subtitle" data-toggle="collapse" data-target="#com-line" aria-expanded="false" ng-class="{'collapsed': !commande.IsStatutCloturee && !commande.IsStatutValidee }" ng-click="handleDisableCollapsiblePanel($event)">
+            <i class="fa fa-angle-right" ng-show="commande.IsStatutCloturee || commande.IsStatutValidee"></i>
+            <span>{{::resources.Commande_Detail_Ligne_Titre}}</span>
+
+            </div> -->
+            <div class="command-line-bloc">
+                <div class="subtitle pull-left" data-toggle="collapse" data-target="#com-line" aria-expanded="false" ng-class="{'collapsed': !commande.IsStatutCloturee || !commande.IsStatutValidee }"
+                     ng-click="handleDisableCollapsiblePanel($event)">
+                    <i class="fa fa-angle-right" ng-show=" !(commande.IsStatutCloturee || commande.IsStatutValidee)"></i>
+                    <span>{{::resources.Commande_Detail_Ligne_Titre}}</span>
+                </div>
+                <div class="pull-right flex">
+                    <!--Bouton import Fichier Excel!-->
+                    <div>
+                        <button type="button" class="btn btn-sm btn-warning more_add " ng-if="!avenantReadonly  || !commandeReadonly"
+                                ng-click="openModal(commande.lignes)">
+                            {{::resources.Commande_Detail_Ligne_Bouton_importer_FichierExcel_Ligne_Avenant}}
+                        </button>
+                    </div>
+                    <!--Bouton d'ajout d'une ligne d'avenant-->
+                    <div>
+                        <button type="button" class="btn btn-sm btn-primary more_add " ng-if="!avenantReadonly"
+                                ng-click="handleAddLigneAvenantNonValide()">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            {{::resources.Commande_Detail_Ligne_Bouton_Ajouter_Ligne_Avenant}}
+                        </button>
+                    </div>
+                    <!--Bouton d'ajout d'une ligne commande-->
+                    <fred-authorization key="{{::resources.permisssionKeyManageCommand}}" ng-if="!commandeReadonly">
+                        <button type="button" class="btn btn-sm btn-primary more_add" ng-click="handleAddLigneCommande()">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            {{::resources.Commande_Detail_Ligne_Bouton_Ajouter_Ligne_Commande}}
+                        </button>
+                    </fred-authorization>
+                </div>
+            </div>
+            <div id="com-line" class="collapse in">
+                <!--Lignes d'une commande non validée-->
+                <div class="unvalidated-cmd-table-container" ng-show="!commandeReadonly">
+                    <table class="table table-hover borderless nopadding">
+                        <thead>
+                            <tr class="headerCommandeLigne">
+                                <th id="D">{{::resources.Commande_Detail_Ligne_Entete_Libelle}}</th>
+                                <th id="R">{{::resources.Commande_Detail_Ligne_Entete_Ressource}}</th>
+                                <th id="T">{{::resources.Commande_Detail_Ligne_Entete_Tache}}</th>
+                                <th id="Q" class="maths">{{::resources.Commande_Detail_Ligne_Entete_Quantite}}</th>
+                                <th id="U" class="maths">{{::resources.Commande_Detail_Ligne_Entete_Unite}}</th>
+                                <th class="maths" id="P">{{::resources.Commande_Detail_Ligne_Entete_PUHT}} {{selectedDeviseSymbole}}</th>
+                                <th class="maths" id="M">{{::resources.Commande_Detail_Ligne_Entete_MontantHT}} {{selectedDeviseSymbole}}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="ligne in commande.Lignes track by $index" ng-if="!ligne.IsDeleted && ligne.IsCommande" id="f-line">
+                                <td class="col-md-3" headers="D">
+                                    <input class="inputCommandeLigne fill" id="LibelleCommande" ng-model="ligne.Libelle" ng-change="handleUpdateLigneCommande(ligne)" ng-disabled="commandeReadonly" />
+                                </td>
+                                <td class="col-md-2" headers="R">
+                                    <!-- Ressource : mode édition -->
+                                    <lookup-standalone ng-model="ligne.Ressource"
+                                                       text="ligne.Ressource.CodeLibelle"
+                                                       custom-template-url="/Scripts/directive/lookup/custom-templates/ressources.recommandees.html"
+                                                       search-title="{{::resources.Global_ReferentielRessource}}"
+                                                       search-placeholder="{{::resources.Global_ReferentielRessource_Placeholder}}"
+                                                       url="/api/Achat/SearchRessources?ciId={{commande.CiId}}&ressourcesRecommandeesOnly={{resssourcesRecommandeesOnly}}&achatsEnable=true&"
+                                                       on-select="handleCommandeLigneLookupSelection('Ressource', item, ligne);"
+                                                       on-delete="ligne.Ressource = null; ligne.RessourceId = null; handleUpdateLigneCommande(ligne);"
+                                                       ng-show="!commande.IsStatutCloturee && !commande.IsStatutValidee && !commande.IsStatutManuelleValidee && commande.CI != null"
+                                                       class="formulaire middle"
+                                                       placeholder="{{::resources.Commande_Holder_Select_Ressource}}"
+                                                       active-second-search-input="true"
+                                                       search-placeholder2="{{::resources.Global_ReferentielRessource_Placeholder2}}"
+                                                       active-checkbox-ressources-recomandee="resssourcesRecommandeesOnly"
+                                                       id="{{$index}}">
+                                    </lookup-standalone>
+                                    <!-- Ressource : mode ReadOnly -->
+                                    <p class="inputCommandeLigne" ng-if="ligne.RessourceId != null && commandeReadonly">
+                                        {{ligne.Ressource.CodeLibelle}}
+                                    </p>
+                                </td>
+                                <td class="col-md-2" headers="T">
+                                    <!-- Tâche : mode édition -->
+                                    <lookup-standalone ng-model="ligne.Tache"
+                                                       text="ligne.Tache.CodeLibelle"
+                                                       search-title="{{::resources.Global_ReferentielTache}}"
+                                                       search-placeholder="{{::resources.Global_ReferentielTache_Placeholder}}"
+                                                       on-click="showPickList('Tache')"
+                                                       on-select="handleCommandeLigneLookupSelection('Tache', item, ligne);"
+                                                       on-delete="ligne.Tache = null; ligne.TacheId = null; handleUpdateLigneCommande(ligne);"
+                                                       ng-show="!commande.IsStatutCloturee && !commande.IsStatutValidee && !commande.IsStatutManuelleValidee && commande.CI != null"
+                                                       class="formulaire middle"
+                                                       custom-template-url="~/Scripts/directive/Lookup/custom-templates/tache.template.html"
+                                                       placeholder="{{::resources.Commande_Holder_Select_Tache}}">
+                                    </lookup-standalone>
+                                    <!-- Tâche : mode ReadOnly -->
+                                    <p class="inputCommandeLigne" ng-if="ligne.TacheId != null && commandeReadonly">
+                                        {{ligne.Tache.CodeLibelle}}
+                                    </p>
+                                </td>
+                                <td class="col-md-1" headers="Q">
+                                    <!-- Quantite -->
+                                    <input type="text"
+                                           fred-input-number="3"
+                                           min="0"
+                                           fred-input-default-value="0"
+                                           class="inputCommandeLigne fill"
+                                           ng-class="{'red-text': commande.FournisseurProvisoire && ligne.Quantite <= 0}"
+                                           ng-model="ligne.Quantite"
+                                           ng-change="handleUpdateLigneCommande(ligne)"
+                                           ng-disabled="commandeReadonly"
+                                           ng-max="maxSeuilMontant" />
+                                </td>
+                                <td class="col-md-1" headers="U">
+                                    <lookup-standalone name="unite"
+                                                       ng-model="ligne.Unite"
+                                                       text="ligne.Unite.Code"
+                                                       search-title="{{::resources.Global_ReferentielUnite}}"
+                                                       search-placeholder="{{::resources.Global_ReferentielUnite_Placeholder}}"
+                                                       url="/api/Unite/SearchLightBySocieteAndRessourceId/?ciId={{commande.CiId}}&ressourceId={{ligne.RessourceId}}&"
+                                                       show-delete-button="false"
+                                                       on-select="handleCommandeLigneLookupSelection('Unite', item, ligne)"
+                                                       on-delete="ligne.Unite = null; ligne.UniteId = null; handleUpdateLigneCommande(ligne);"
+                                                       class="formulaire middle"
+                                                       ng-show="!commande.IsStatutCloturee && !commande.IsStatutValidee && !commande.IsStatutManuelleValidee && commande.CI != null"
+                                                       ng-disabled="commandeReadonly || !ligne.RessourceId"
+                                                       placeholder="{{::resources.Commande_Holder_Select_Unity}}">
+                                    </lookup-standalone>
+                                    <!-- Unite : mode ReadOnly -->
+                                    <p class="inputCommandeLigne" ng-if="ligne.RessourceId != null && commandeReadonly">
+                                        {{ligne.Unite.Code}}
+                                    </p>
+                                </td>
+                                <td class="col-md-1" headers="P">
+                                    <!-- PUHT -->
+                                    <input type="text"
+                                           fred-input-number
+                                           min="0"
+                                           fred-input-default-value="0"
+                                           class="inputCommandeLigne fill"
+                                           ng-model="ligne.PUHT"
+                                           ng-change="handleUpdateLigneCommande(ligne)"
+                                           ng-disabled="commandeReadonly"
+                                           ng-max="maxSeuilMontant" />
+                                </td>
+                                <td class="col-md-1" `>
+                                    <!-- MontantHT -->
+                                    <label class="inputCommandeLigne">{{ligne.MontantHT | number:2}}</label>
+                                </td>
+                                <td class="col-md-1">
+                                    <div class="action-icons">
+                                        <fred-authorization key="{{::resources.permisssionKeyManageCommand}}">
+                                            <span ng-click="handleDuplicateLigneCommande(ligne)"
+                                                  ng-if="!commandeReadonly"
+                                                  class="clicable material-icons"
+                                                  title="{{::resources.Commande_Detail_Ligne_Table_Bouton_Dupliquer}}">content_copy</span>
+                                            &nbsp; <span ng-if="handleCountLigneCommande() > 1 && !commandeReadonly"
+                                                         ng-click="handleDeleteLigneCommande(ligne, $index)"
+                                                         class="clicable material-icons"
+                                                         title="{{::resources.Commande_Detail_Ligne_Table_Bouton_Supprimer}}">clear</span>
+                                        </fred-authorization>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        @*<tfoot>
+                              <tr class="footerCommandeLigne">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="total">TOTAL HT :</td>
+                                <td class="total">{{commande.TotalCommandeLignes | number:2}} {{selectedDeviseSymbole}}</td>
+                                <td></td>
+                              </tr>
+                            </tfoot>*@
+                    </table>
+                </div>
+                <!--Lignes validées de commande / avenant-->
+                <div id="accordion" class="lignes-validees" ng-show="commandeReadonly">
+                    <!--Entête-->
+                    <div class="summary">
+                        <table class="table">
+                            <tbody>
+                                <tr class="bkg-light-0">
+                                    <td class="tab0col1"></td>
+                                    <td class="tab0col2" title="Validée le {{commande.DateValidation | date:'dd/MM/yyyy' }} par {{commande.Valideur.PrenomNom}}">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_DateValidationCommande}}</fred-label>
+                                        <fred-val>{{commande.DateValidation | date:'dd/MM/yy' }}</fred-val>
+                                    </td>
+                                    <td class="tab0col3"></td>
+                                    <td class="tab0col4" title="{{commande.MontantHT | number:2}} {{commande.Devise.Symbole}}">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_MtntCommande}}</fred-label>
+                                        <fred-val>{{commande.MontantHT | number:2}}&nbsp;{{commande.Devise.Symbole}}</fred-val>
+                                    </td>
+                                    <td class="tab0col5" title="{{commande.MontantHTReceptionne | number:2 }} {{commande.Devise.Symbole}}">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_MtntReceptionne}}</fred-label>
+                                        <fred-val>{{commande.MontantHTReceptionne | number:2 }}&nbsp;{{commande.Devise.Symbole}}</fred-val>
+                                    </td>
+                                    <td class="tab0col6" title="{{commande.MontantFacture | number:2}} {{commande.Devise.Symbole}}">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_MtntFacture}}</fred-label>
+                                        <fred-val>{{commande.MontantFacture | number:2}}&nbsp;{{commande.Devise.Symbole}}</fred-val>
+                                    </td>
+                                    <td class="tab0col7" title="{{commande.SoldeFar | number:2}} {{commande.Devise.Symbole}}">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_SoldeFar}}</fred-label>
+                                        <fred-val>{{commande.SoldeFar | number:2}}&nbsp;{{commande.Devise.Symbole}}</fred-val>
+                                    </td>
+                                    <td class="tab0col8"></td>
+                                    <td class="tab0col9">
+                                        <div style="right:0">
+                                            <button class="btn btn-primary" ng-hide="disabledCommandeHeader" ng-click="handleCloseAll()">{{::resources.Commande_Detail_Ligne_Entete_ToutReplier}}</button>
+                                            <button class="btn btn-primary" ng-hide="disabledCommandeHeader" ng-click="handleOpenAll()">{{::resources.Commande_Detail_Ligne_Entete_ToutDeplier}}</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--Lignes-->
+                    <div ng-repeat="cmdLigne in commande.Lignes"
+                         ng-if="cmdLigne.IsCommande || cmdLigne.IsAvenantValide"
+                         ng-class="{'commande-ligne-validee' : cmdLigne.IsCommande, 'avenant-ligne-validee' : cmdLigne.IsAvenantValide}">
+                        <!-- BEGIN : LISTE LIGNE COMMANDE-->
+                        <table class="table table-hover line-command">
+                            <tbody>
+                                <tr class="bkg-light-1" ng-click="handleCollapse('#TB_CMD_LIGNE_'+cmdLigne.CommandeLigneId)">
+                                    <td class="tab1col1 level1">
+                                        <commande-ligne-verrou-component commande-ligne="cmdLigne"></commande-ligne-verrou-component>
+                                        <span class="numeroLigne">{{cmdLigne.NumeroLigne}}</span>
+                                        <div class="icon-level1"></div>
+                                        <div class="accordion-toggle collapsed" ng-show="cmdLigne.DepensesReception && cmdLigne.DepensesReception.length > 0" data-toggle="collapse" data-parent="#accordion" data-target="#TB_CMD_LIGNE_{{cmdLigne.CommandeLigneId}}"></div>
+                                    </td>
+                                    <td class="tab1col2 long-word" title="{{cmdLigne.Libelle}}">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_LibellePoste}}</fred-label>
+                                        <fred-val>{{cmdLigne.Libelle}}</fred-val>
+                                    </td>
+                                    <td class="tab1col3" title="{{cmdLigne.Unite.CodeLibelle}}">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_Unite}}</fred-label>
+                                        <fred-val>{{cmdLigne.Unite.Code}}</fred-val>
+                                    </td>
+                                    <td class="tab1col4" title="{{cmdLigne.PUHT | customDecimal:2:3 }} {{cmdLigne.Devise.Symbole}}">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_PUHT}}</fred-label>
+                                        <fred-val>{{cmdLigne.PUHT | customDecimal:2:3 }} {{cmdLigne.Devise.Symbole}}</fred-val>
+                                    </td>
+                                    <td class="tab1col5" title="{{cmdLigne.Quantite | customDecimal:2:3}}">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_QteCommandee}}</fred-label>
+                                        <fred-val>{{cmdLigne.Quantite | customDecimal:2:3}}</fred-val>
+                                    </td>
+                                    <td class="tab1col6" title="{{cmdLigne.MontantHT | number:2}} {{cmdLigne.Devise.Symbole}}">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_MtntCommande}}</fred-label>
+                                        <fred-val>{{cmdLigne.MontantHT | number:2}} {{cmdLigne.Devise.Symbole}}</fred-val>
+                                    </td>
+                                    <td class="tab1col7" title="{{cmdLigne.MontantHTReceptionne | number:2}} {{cmdLigne.Devise.Symbole}}">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_MtntReceptionne}}</fred-label>
+                                        <fred-val>{{cmdLigne.MontantHTReceptionne | number:2}} {{cmdLigne.Devise.Symbole}}</fred-val>
+                                    </td>
+                                    <td class="tab1col8">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_MtntFacture}}</fred-label>
+                                        <fred-val>{{cmdLigne.MontantFacture | number:2}} {{cmdLigne.Devise.Symbole}}</fred-val>
+                                    </td>
+                                    <td class="tab1col9">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_SoldeFar}}</fred-label>
+                                        <fred-val>{{cmdLigne.SoldeFar | number:2}} {{cmdLigne.Devise.Symbole}}</fred-val>
+                                    </td>
+                                    <td class="tab1col10 long-word" title="{{cmdLigne.Ressource.CodeLibelle}}">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_RessourceCmd}}</fred-label>
+                                        <fred-val>{{cmdLigne.Ressource.CodeLibelle}}</fred-val>
+                                    </td>
+                                    <td class="tab1col11 long-word" title="{{cmdLigne.Tache.CodeLibelle}}">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_TacheCmd}}</fred-label>
+                                        <fred-val>{{cmdLigne.Tache.Code}}</fred-val>
+                                    </td>
+                                    <td class="tab1col12" ng-if="cmdLigne.IsCommande"></td>
+                                    <td class="tab1col13" ng-if="cmdLigne.IsCommande"></td>
+                                    <td class="tab1col14" ng-if="cmdLigne.IsCommande"></td>
+                                    <td class="tab1col12" ng-if="cmdLigne.IsAvenantValide">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_NumeroAvenant}}</fred-label>
+                                        <fred-val>{{cmdLigne.AvenantLigne.Avenant.NumeroAvenant}}</fred-val>
+                                    </td>
+                                    <td class="tab1col13" ng-if="cmdLigne.IsAvenantValide">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_DateValidationAvenant}}</fred-label>
+                                        <fred-val>{{cmdLigne.AvenantLigne.Avenant.DateValidation | date:'dd/MM/yy'}}</fred-val>
+                                    </td>
+                                    <td class="tab1col14" ng-if="cmdLigne.IsAvenantValide">
+                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_Diminution}}</fred-label>
+                                        <fred-val>{{cmdLigne.AvenantLigne.IsDiminution ? "oui" : "non"}}</fred-val>
+                                    </td>
+                                    <td class="tab1col15"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- END : LISTE LIGNE COMMANDE-->
+                        <!-- BEGIN : LISTE RECEPTION -->
+                        <div id="TB_CMD_LIGNE_{{cmdLigne.CommandeLigneId}}" class="collapse" aria-expanded="false">
+                            <div ng-repeat="reception in cmdLigne.DepensesReception | orderBy : '+Date'">
+                                <table class="table line-command">
+                                    <tbody>
+                                        <tr class="bkg-light-2" ng-click="handleCollapse('#TB_LIGNE_'+reception.DepenseId)" title="{{::resources.Reception_Index_Ligne_Commande}}">
+                                            <td class="tab2col1 level2 trees">
+                                                <div class="icon-level2"></div>
+                                                <div class="accordion-toggle collapsed" ng-show="reception.FacturationsReception && reception.FacturationsReception.length > 0" data-toggle="collapse" data-parent="#accordion" data-target="#TB_LIGNE_{{reception.DepenseId}}"></div>
+                                            </td>
+                                            <td class="tab2col2" title="{{reception.Date | date:'dd/MM/yyyy'}}">
+                                                <fred-label>{{::resources.Commande_Detail_Ligne_Entete_DateReception}}</fred-label>
+                                                <fred-val>{{reception.Date | date:'dd/MM/yy'}}</fred-val>
+                                            </td>
+                                            <td class="tab2col3 long-word" title="{{reception.Libelle}}">
+                                                <fred-label>{{::resources.Commande_Detail_Ligne_Entete_DesignationReception}}</fred-label>
+                                                <fred-val>{{reception.Libelle}}</fred-val>
+                                            </td>
+                                            <td class="tab2col4"></td>
+                                            <td class="tab2col5" title="{{reception.Quantite| customDecimal:2:3}}">
+                                                <fred-label>{{::resources.Commande_Detail_Ligne_Entete_QteReceptionnee}}</fred-label>
+                                                <fred-val>{{reception.Quantite| customDecimal:2:3}}</fred-val>
+                                            </td>
+                                            <td class="tab2col6" title="{{reception.MontantHT | number:2}} {{reception.Devise.Symbole}}">
+                                                <fred-label>{{::resources.Commande_Detail_Ligne_Entete_MtntReceptionne}}</fred-label>
+                                                <fred-val>{{reception.MontantHT | number:2}} {{reception.Devise.Symbole}}</fred-val>
+                                            </td>
+                                            <td class="tab2col7"></td>
+                                            <td class="tab2col8" title="{{reception.MontantFacture |number:2}} {{reception.Devise.Symbole}}">
+                                                <fred-label>{{::resources.Commande_Detail_Ligne_Entete_MtntFacture}}</fred-label>
+                                                <fred-val>{{reception.MontantFacture |number:2}} {{reception.Devise.Symbole}}</fred-val>
+                                            </td>
+                                            <td class="tab2col9" title="{{reception.SoldeFar | number:2}} {{reception.Devise.Symbole}}">
+                                                <fred-label>{{::resources.Commande_Detail_Ligne_Entete_SoldeFar}}</fred-label>
+                                                <fred-val title="{{ reception.HasAjustementFar ? 'FAR ajustée en compta, voir explorateur.' : ''}}" ng-class="{'red-text': reception.HasAjustementFar}">{{reception.SoldeFar | number:2}} {{reception.Devise.Symbole}}</fred-val>
+                                            </td>
+                                            <td class="tab2col10 long-word" title="{{reception.Ressource.CodeLibelle}}">
+                                                <fred-label>{{::resources.Commande_Detail_Ligne_Entete_RessourceReception}}</fred-label>
+                                                <fred-val>{{reception.Ressource.CodeLibelle}}</fred-val>
+                                            </td>
+                                            <td class="tab2col11 long-word" title="{{reception.Tache.CodeLibelle}}">
+                                                <fred-label>{{::resources.Commande_Detail_Ligne_Entete_TacheReception}}</fred-label>
+                                                <fred-val>{{reception.Tache.Code}}</fred-val>
+                                            </td>
+                                            <td class="tab2col12 long-word" title="{{reception.NumeroBL}}">
+                                                <fred-label>{{::resources.Commande_Detail_Ligne_Entete_NumeroBL}}</fred-label>
+                                                <fred-val>{{reception.NumeroBL}}</fred-val>
+                                            </td>
+                                            <td class="tab2col13 long-word" title="{{reception.Commentaire}}">
+                                                <fred-label>{{::resources.Commande_Detail_Ligne_Entete_Commentaire}}</fred-label>
+                                                <fred-val>{{reception.Commentaire}}</fred-val>
+                                            </td>
+                                            <td class="tab2col14" title="Créée le {{reception.DateCreation | date:'dd/MM/yyyy'}} par {{reception.AuteurCreation.PrenomNom}}">
+                                                <fred-label>{{::resources.Commande_Detail_Ligne_Entete_Creation}}</fred-label>
+                                                <fred-val>{{reception.DateCreation | date:'dd/MM/yy'}} {{reception.AuteurCreation.Personnel.Prenom | initialLetter}}.{{reception.AuteurCreation.Personnel.Nom}}</fred-val>
+                                            </td>
+                                            <td class="tab2col15" title="Modifiée le {{reception.DateModification | date:'dd/MM/yyyy'}} par {{reception.AuteurModification.PrenomNom}}">
+                                                <fred-label>{{::resources.Commande_Detail_Ligne_Entete_Modification}}</fred-label>
+                                                <fred-val>{{reception.DateModification | date:'dd/MM/yy'}} {{reception.AuteurModification.Personnel.Prenom | initialLetter}}.{{reception.AuteurModification.Personnel.Nom}}</fred-val>
+                                            </td>
+                                            <td class="tab2col16" title="Visée le {{reception.DateVisaReception | date:'dd/MM/yyyy'}} par {{reception.AuteurVisaReception.PrenomNom}}">
+                                                <fred-label>{{::resources.Commande_Detail_Ligne_Entete_VisaReception}}</fred-label>
+                                                <fred-val>{{reception.DateVisaReception | date:'dd/MM/yy'}} {{reception.AuteurVisaReception.Personnel.Prenom | initialLetter}}.{{reception.AuteurVisaReception.Personnel.Nom}}</fred-val>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- END : LISTE RECEPTION-->
+                                <!-- BEGIN : LISTE FACTURATION -->
+                                <div id="TB_LIGNE_{{reception.DepenseId}}" class="collapse" aria-expanded="false">
+                                    <table class="table line-command">
+                                        <tbody>
+                                            <tr class="bkg-light-3" ng-repeat="facturation in reception.FacturationsReception | orderBy: '+DateComptable'" title="{{::resources.Reception_Index_TitreOnglet}}">
+                                                <td class="tab3col1 level3 trees">
+                                                    <div class="icon-level3"></div>
+                                                </td>
+                                                <td class="tab3col2" title="{{facturation.DateComptable | date:'dd/MM/yyyy'}}">
+                                                    <fred-label>{{::resources.Commande_Detail_Ligne_Entete_Date}}</fred-label>
+                                                    <fred-val>{{facturation.DateComptable | date:'dd/MM/yy'}}</fred-val>
+                                                </td>
+                                                <td class="tab3col3" title="{{facturation.FacturationType.Libelle}}">
+                                                    <fred-label>{{::resources.Commande_Detail_Ligne_Entete_TypeFacturation}}</fred-label>
+                                                    <fred-val>{{facturation.FacturationType.Libelle}}</fred-val>
+                                                </td>
+                                                <td class="tab3col4" title="{{facturation.PuFacture | customDecimal:2:3}} {{facturation.Devise.Symbole}}">
+                                                    <div ng-hide="typeFacturations.CoutAdditionnel === facturation.FacturationTypeId
+                                        || typeFacturations.FacturationMontant === facturation.FacturationTypeId
+                                        || typeFacturations.AvoirMontant === facturation.FacturationTypeId">
+                                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_PUFacture}}</fred-label>
+                                                        <fred-val>{{facturation.PuFacture | customDecimal:2:3}} {{facturation.Devise.Symbole}}</fred-val>
+                                                    </div>
+                                                </td>
+                                                <td class="tab3col5" title="{{facturation.Quantite | customDecimal:2:3}}">
+                                                    <div ng-hide="typeFacturations.CoutAdditionnel === facturation.FacturationTypeId
+                                          || typeFacturations.FacturationMontant === facturation.FacturationTypeId
+                                          || typeFacturations.AvoirMontant === facturation.FacturationTypeId">
+                                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_QteFacture}}</fred-label>
+                                                        <fred-val>{{facturation.Quantite | customDecimal:2:3}}</fred-val>
+                                                    </div>
+                                                </td>
+                                                <td class="tab3col6" title="{{facturation.MontantHT | number:2}} {{facturation.Devise.Symbole}}">
+                                                    <fred-label>{{::resources.Commande_Detail_Ligne_Entete_MtntFacture}}</fred-label>
+                                                    <fred-val>{{facturation.MontantHT | number:2}} {{facturation.Devise.Symbole}}</fred-val>
+                                                </td>
+                                                <td class="tab3col7"></td>
+                                                <td class="tab3col8" title="{{facturation.EcartQuantite | number}}">
+                                                    <div ng-hide="typeFacturations.CoutAdditionnel === facturation.FacturationTypeId
+                                          || typeFacturations.FacturationMontant === facturation.FacturationTypeId
+                                          || typeFacturations.AvoirQuantite === facturation.FacturationTypeId
+                                          || typeFacturations.AvoirMontant === facturation.FacturationTypeId">
+                                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_EcartQte}}</fred-label>
+                                                        <fred-val>{{facturation.EcartQuantite | number}}</fred-val>
+                                                    </div>
+                                                </td>
+                                                <td class="tab3col9" title="{{facturation.EcartPu}} {{facturation.Devise.Symbole}}">
+                                                    <div ng-hide="typeFacturations.CoutAdditionnel === facturation.FacturationTypeId
+                                          || typeFacturations.FacturationMontant === facturation.FacturationTypeId
+                                          || typeFacturations.AvoirQuantite === facturation.FacturationTypeId
+                                          || typeFacturations.AvoirMontant === facturation.FacturationTypeId">
+                                                        <fred-label>{{::resources.Commande_Detail_Ligne_Entete_EcartPU}}</fred-label>
+                                                        <fred-val>{{facturation.EcartPu | number:2}} {{facturation.Devise.Symbole}}</fred-val>
+                                                    </div>
+                                                </td>
+                                                <td class="tab3col10" title="{{facturation.DatePieceSap | date:'dd/MM/yyyy'}}">
+                                                    <fred-label>{{::resources.Commande_Detail_Ligne_Entete_DatePiece}}</fred-label>
+                                                    <fred-val>{{facturation.DatePieceSap | date:'dd/MM/yy'}}</fred-val>
+                                                </td>
+                                                <td class="tab3col11" title="{{facturation.NumeroFactureFMFI}}">
+                                                    <fred-label>{{::resources.Commande_Detail_Ligne_Entete_NumeroFMFI}}</fred-label>
+                                                    <fred-val>{{facturation.NumeroFactureFMFI}}</fred-val>
+                                                </td>
+                                                <td class="tab3col12" title="{{facturation.NumeroFactureFournisseur}}">
+                                                    <fred-label>{{::resources.Commande_Detail_Ligne_Entete_NumeroFactureFournisseur}}</fred-label>
+                                                    <fred-val>{{facturation.NumeroFactureFournisseur}}</fred-val>
+                                                </td>
+                                                <td class="tab3col13" title="{{facturation.MontantTotalHT | number:2}} {{facturation.Devise.Symbole}}">
+                                                    <fred-label>{{::resources.Commande_Detail_Ligne_Entete_TotalHTFacture}}</fred-label>
+                                                    <fred-val>{{facturation.MontantTotalHT | number:2}} {{facturation.Devise.Symbole}}</fred-val>
+                                                </td>
+                                                <td class="tab3col14 long-word" title="{{facturation.Commentaire}}">
+                                                    <fred-label>{{::resources.Commande_Detail_Ligne_Entete_Commentaire}}</fred-label>
+                                                    <fred-val>{{facturation.Commentaire}}</fred-val>
+                                                </td>
+                                                <td class="tab3col15" title="Créé le {{facturation.DateSaisie |date:'dd/MM/yyyy'}} par {{facturation.AuteurCreation}}">
+                                                    <fred-label>{{::resources.Commande_Detail_Ligne_Entete_Creation}}</fred-label>
+                                                    <fred-val>{{facturation.DateSaisie |date:'dd/MM/yy'}} {{facturation.AuteurCreation}}</fred-val>
+                                                </td>
+                                                <td class="tab3col16"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- END : LISTE FACTURATION-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Lignes d'un avenant non validé-->
+                <div class="avenant-lignes-non-validees" ng-show="isAddingAvenant()">
+                    <table class="table table-hover borderless nopadding">
+                        <thead>
+                            <tr class="headerCommandeLigne">
+                                <th id="D">{{::resources.Commande_Detail_Ligne_Entete_Libelle}}</th>
+                                <th id="R">{{::resources.Commande_Detail_Ligne_Entete_Ressource}}</th>
+                                <th id="T">{{::resources.Commande_Detail_Ligne_Entete_Tache}}</th>
+                                <th id="Q" class="maths">{{::resources.Commande_Detail_Ligne_Entete_Quantite}}</th>
+                                <th id="U" class="maths">{{::resources.Commande_Detail_Ligne_Entete_Unite}}</th>
+                                <th class="small maths" id="P">{{::resources.Commande_Detail_Ligne_Entete_PUHT}} {{selectedDeviseSymbole}}</th>
+                                <th class="small maths" id="M">{{::resources.Commande_Detail_Ligne_Entete_MontantHT}} {{selectedDeviseSymbole}}</th>
+                                <th class="maths">{{::resources.Commande_Detail_Ligne_Entete_Diminution}}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="ligne in commande.Lignes track by $index" ng-if="!ligne.IsDeleted && ligne.IsAvenantNonValide">
+                                <td class="col-md-2" headers="D"><input class="inputCommandeLigne fill" ng-model="ligne.Libelle" ng-change="handleUpdateLigneAvenantNonValide(ligne)" ng-disabled="avenantReadonly" /></td>
+                                <td class="col-md-2" headers="R">
+                                    <!-- Ressource : mode édition -->
+                                    <lookup-standalone ng-model="ligne.Ressource"
+                                                       text="ligne.Ressource.CodeLibelle"
+                                                       custom-template-url="/Scripts/directive/lookup/custom-templates/ressources.recommandees.html"
+                                                       search-title="{{::resources.Global_ReferentielRessource}}"
+                                                       search-placeholder="{{::resources.Global_ReferentielRessource_Placeholder}}"
+                                                       url="/api/Achat/SearchRessources?ciId={{commande.CiId}}&ressourcesRecommandeesOnly={{resssourcesRecommandeesOnly}}&achatsEnable=true&"
+                                                       on-select="handleAvenantNonValideLigneLookupSelection('Ressource', item, ligne);"
+                                                       on-delete="ligne.Ressource = null; ligne.RessourceId = null; handleUpdateLigneAvenantNonValide(ligne);"
+                                                       ng-show="!avenantReadonly && commande.CI != null"
+                                                       class="formulaire middle"
+                                                       placeholder="{{::resources.Commande_Holder_Select_Ressource}}"
+                                                       active-second-search-input="true"
+                                                       search-placeholder2="{{::resources.Global_ReferentielRessource_Placeholder2}}"
+                                                       active-checkbox-ressources-recomandee="resssourcesRecommandeesOnly"
+                                                       id="{{$index}}">
+                                    </lookup-standalone>
+                                    <!-- Ressource : mode ReadOnly -->
+                                    <p class="inputCommandeLigne" ng-if="ligne.RessourceId != null && avenantReadonly">
+                                        {{ligne.Ressource.CodeLibelle}}
+                                    </p>
+                                </td>
+                                <td class="col-md-2" headers="T">
+                                    <!-- Tâche : mode édition -->
+                                    <lookup-standalone ng-model="ligne.Tache"
+                                                       text="ligne.Tache.CodeLibelle"
+                                                       search-title="{{::resources.Global_ReferentielTache}}"
+                                                       search-placeholder="{{::resources.Global_ReferentielTache_Placeholder}}"
+                                                       on-click="showPickList('Tache');"
+                                                       on-select="handleAvenantNonValideLigneLookupSelection('Tache', item, ligne);"
+                                                       on-delete="ligne.Tache = null; ligne.TacheId = null; handleUpdateLigneAvenantNonValide(ligne);"
+                                                       ng-show="!avenantReadonly && commande.CI != null"
+                                                       class="formulaire middle"
+                                                       custom-template-url="~/Scripts/directive/Lookup/custom-templates/tache.template.html"
+                                                       placeholder="{{::resources.Commande_Holder_Select_Tache}}">
+                                    </lookup-standalone>
+                                    <!-- Tâche : mode ReadOnly -->
+                                    <p class="inputCommandeLigne" ng-if="ligne.TacheId != null && avenantReadonly">
+                                        {{ligne.Tache.CodeLibelle}}
+                                    </p>
+                                </td>
+                                <td class="col-md-1" headers="Q">
+                                    <!-- Quantite -->
+                                    <input type="text"
+                                           fred-input-number="3"
+                                           fred-input-default-value="0"
+                                           class="inputCommandeLigne fill"
+                                           ng-model="ligne.Quantite"
+                                           ng-change="handleUpdateLigneAvenantNonValide(ligne)"
+                                           ng-disabled="avenantReadonly" />
+                                </td>
+                                <td class="col-md-1" headers="U">
+                                    <!-- Unite : mode edition -->
+                                    <lookup-standalone name="unite"
+                                                       ng-model="ligne.Unite"
+                                                       text="ligne.Unite.Code"
+                                                       search-title="{{::resources.Global_ReferentielUnite}}"
+                                                       search-placeholder="{{::resources.Global_ReferentielUnite_Placeholder}}"
+                                                       url="/api/Unite/SearchLightBySocieteAndRessourceId/?ciId={{commande.CiId}}&ressourceId={{ligne.RessourceId}}&"
+                                                       show-delete-button="false"
+                                                       on-select="handleAvenantNonValideLigneLookupSelection('Unite', item, ligne);"
+                                                       on-delete="ligne.Unite = null; ligne.UniteId = null; handleUpdateLigneAvenantNonValide(ligne);"
+                                                       class="formulaire middle"
+                                                       ng-show="!avenantReadonly && commande.CI != null"
+                                                       ng-disabled="avenantReadonly || !ligne.RessourceId"
+                                                       placeholder="{{::resources.Commande_Holder_Select_Unity}}">
+                                    </lookup-standalone>
+                                    <!-- Unite : mode ReadOnly -->
+                                    <p class="inputCommandeLigne" ng-if="ligne.RessourceId != null && avenantReadonly">
+                                        {{ligne.Unite.Code}}
+                                    </p>
+                                </td>
+                                <td class="col-md-1" headers="P">
+                                    <!-- PUHT -->
+                                    <input type="text"
+                                           fred-input-number
+                                           fred-input-default-value="0"
+                                           class="inputCommandeLigne fill"
+                                           ng-model="ligne.PUHT"
+                                           ng-change="handleUpdateLigneAvenantNonValide(ligne)"
+                                           ng-disabled="avenantReadonly" />
+                                </td>
+                                <td class="col-md-1" headers="M">
+                                    <!-- MontantHT -->
+                                    <label class="inputCommandeLigne">{{ligne.MontantHT | number:2}}</label>
+                                </td>
+                                <td class="col-md-1">
+                                    <input id="chkDiminutionAvenantNonValide_{{$index}}" type="checkbox" class="control-label" ng-model="ligne.AvenantLigne.IsDiminution" ng-change="handleUpdateLigneAvenantNonValide(ligne)" ng-disabled="avenantReadonly" />
+                                    <label for="chkDiminutionAvenantNonValide_{{$index}}" class="control-label"><span></span></label>
+                                </td>
+                                <td class="col-md-1">
+                                    <div class="action-icons">
+                                        <fred-authorization key="{{::resources.permisssionKeyManageCommand}}">
+                                            <span ng-click="handleDuplicateLigneAvenantNonValide(ligne)"
+                                                  ng-if="!avenantReadonly"
+                                                  class="clicable material-icons"
+                                                  title="{{::resources.Commande_Detail_Ligne_Table_Bouton_Dupliquer}}">content_copy</span>
+                                            &nbsp;
+                                            <span ng-if="!avenantReadonly"
+                                                  ng-click="handleDeleteLigneAvenantNonValide(ligne)"
+                                                  class="clicable material-icons"
+                                                  title="{{::resources.Commande_Detail_Ligne_Table_Bouton_Supprimer}}">clear</span>
+                                        </fred-authorization>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="footerCommandeLigne">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="total">{{::resources.Commande_Libelle_Sous_Total}}</td>
+                                <td class="total">{{commande.TotalAvenantNonValideLignes | number:2}} {{selectedDeviseSymbole}}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="row bottom-toolbar">
+                <div class="col-sm-12 btn-toolbar nopadding">
+                    <fred-authorization key="{{::resources.permisssionKeyManageCommand}}">
+                        <button id="BtnValide" type="button" class="btn btn-default"
+                                @*ng-if="!commande.IsCreated && !commande.IsStatutValidee && !commande.IsStatutCloturee"*@
+                                ng-disabled="busy"
+                                ng-show="commande.IsStatutAValider || commande.IsStatutBrouillon"
+                                ng-click="!busy && handleValidateCommande(commande)">
+                            {{::resources.Global_Bouton_Valider}}
+                        </button>
+                        <fred-authorization key="{{permissionKeys.AffichageBoutonRenvoyerCommandeSap}}">
+                            <button type="button" class="btn btn-danger" ng-if="RenvoyerVersStorm" ng-click="!busy && handleExportToSap()">{{::resources.Commande_Detail_Bouton_RenvoyerVersStorm}}</button>
+                        </fred-authorization>
+                        <button type="button" class="btn btn-default" ng-if="commande.IsStatutValidee || commande.IsStatutCloturee" ng-disabled="busy || commande.CommandeManuelle" ng-click="!busy && handleSendByMail()">{{::resources.Commande_Detail_Bouton_EnvoiMail}}</button>
+                        <button type="button" class="btn btn-default" ng-if="commande.IsStatutValidee || commande.IsStatutCloturee" ng-disabled="busy" ng-click="!busy && handleExtractBonDeCommande()">{{::resources.Commande_Detail_Bouton_Imprimer}} </button>
+                        <button type="button" class="btn btn-default" ng-if="(!commande.IsCreated && commande.IsStatutBrouillon) || commande.IsStatutAValider || commande.IsStatutManuelleValidee" ng-disabled="busy" ng-click="!busy && handleDeleteCommande()">{{::resources.Global_Bouton_Supprimer}}</button>
+                        @*<fred-authorization key="commande.button.duplicate">*@
+                        <button type="button" class="btn btn-default"
+                                ng-if="!commande.IsCreated"
+                                ng-disabled="busy"
+                                ng-click="!busy && handleDuplicateCommande(commande)">
+                            {{::resources.Commande_Detail_Bouton_Dupliquer}}
+                        </button>
+                        @*</fred-authorization>*@
+                        <fred-authorization key="{{permissionKeys.AffichageBoutonApercuBrouillon}}" style="float:left">
+                            <button ng-if="commande.IsStatutAValider || (commande.IsStatutValidee && isAddingAvenant())"
+                                    type="button"
+                                    class="btn btn-default"
+                                    ng-disabled="busy"
+                                    ng-click="!busy && handleExtractBrouillonBonDeCommande()">
+                                {{::resources.Commande_Detail_ApercuBrouillon}}
+                            </button>
+                        </fred-authorization>
+                        <fred-authorization key="{{permissionKeys.CreationCommandeBrouillonFournisseurTemporaire}}" style="float:left">
+                            <button ng-if="commande.IsStatutBrouillon"
+                                    type="button"
+                                    class="btn btn-default"
+                                    ng-disabled="busy"
+                                    ng-click="!busy && handleExtractBonDeCommandeDeCommandeBrouillon()">
+                                {{::resources.Commande_Detail_Bouton_Imprimer}}
+                            </button>
+                        </fred-authorization>
+                        <button type="button" class="btn btn-success" title="{{::resources.Commande_Detail_Bouton_EnregistrerBrouillon_Tooltip}}" ng-if="!commandeReadonly" ng-disabled="busy || (!commande.Libelle || FormCommande.$invalid)" ng-click="!busy && handleSaveCommandeBrouillon(commande)">{{::resources.Commande_Detail_Bouton_EnregistrerBrouillon}}</button>
+                        <button type="button" class="btn btn-success" title="{{::resources.Commande_Detail_Bouton_EnregistrerCommande_Tooltip}}" ng-show="avenantReadonly && !commande.IsStatutCloturee" ng-disabled="busy || (!commande.Libelle || FormCommande.$invalid)" ng-click="!busy && handleSaveCommandeAValider(commande)">{{::resources.Commande_Detail_Bouton_EnregistrerCommande}}</button>
+                        <button type="button" class="btn btn-success" title="{{::resources.Commande_Detail_Bouton_EnregistrerCommande_Tooltip}}" ng-show="!avenantReadonly && !commande.IsStatutCloturee" ng-disabled="busy" ng-click="!busy && handleSaveAvenantNonValides(commande, false)">{{::resources.Commande_Detail_Bouton_EnregistrerCommande}}</button>
+                        <button type="button" class="btn btn-return" title="{{::resources.Commande_Detail_RetourListeCommande_Tooltip}}" ng-if="!commande.IsCreated && !commande.IsStatutCloturee" ng-disabled="busy && (!commande.Libelle || FormCommande.$invalid)" ng-click="!busy && handleReturnToCommandeList()">{{::resources.Commande_Detail_RetourListeCommande}}</button>
+                        <button type="button" class="btn btn-secondary avenant-validate-btn" ng-if="isAddingAvenant()" ng-disabled="busy" ng-click="!busy && handleSaveAvenantNonValides(commande, true)">{{::resources.Commande_Detail_Bouton_Valider_Avenant}}</button>
+                    </fred-authorization>
+                    <div>
+                        <button class="btn btn-edit" type="button" data-toggle="modal" data-target="#edit-command" ng-disabled="disabledCommandeHeader" ng-click="displayBanner = !displayBanner">{{::resources.Commande_Detail_Ouvrir_Entete}}</button>
+                    </div>
+                    <span class="material-icons error-icon" ng-if="commandeErrors.length > 0" popover-title="{{::resources.Commande_Detail_ListeErreurs}}" uib-popover-template="'popoverTemplate'" popover-trigger="'mouseenter'" popover-placement="top-right">warning</span>
+                </div>
+                <div class="footer-datas">
+                    <div class="lbl">{{::resources.Commande_Detail_MontantHT}}</div>
+                    <div class="digits">{{commande.TotalCommande | number:2}} {{selectedDeviseSymbole}} HT</div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!--Popover template-->
+    <script type="text/ng-template" id="popoverTemplate">
+        <ul class="popoverList" ng-if="commandeErrors.length > 0">
+            <li ng-repeat="erreur in commandeErrors track by $index">
+                {{erreur}}
+            </li>
+        </ul>
+        <ul class="popoverList" ng-if="commandeHeaderErrors.length > 0">
+            <li ng-repeat="erreur in commandeHeaderErrors track by $index">
+                {{erreur}}
+            </li>
+        </ul>
+    </script>
+    <!-- Modal pop in de rapprochement -->
+    <form name="headerCommandeForm">
+        <div class="cmd-header-modal modal fade" id="edit-command" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i>{{::resources.Commande_Detail_Modal_Title}}</h2>
+                        <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" aria-label="Close" title="{{$ctrl.resources.Commande_Tilte_Annuler}}"></i>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <!-- START : Section Détail de la commande -->
+                            <fieldset class="col-lg-4 col-md-4 no_pl">
+                                <legend id="stby">{{::resources.Commande_Detail_SectionDetail}}</legend>
+                                <div class="bloc-achat" ng-show="commande.TotalCommande > 15000">
+                                    <div class="chkb">
+                                        <input id="chbkbuy-mod" type="checkbox" ng-checked="commande.TotalCommande > 15000" disabled="disabled"><label class="control-label" for="chbkbuy-mod"><span></span>{{::resources.Commande_Detail_SectionDetail_AccordCadre}}</label>
+                                    </div>
+                                    <input type="text" class="form-control" ng-model="commande.Justificatif" ng-disabled="commandeReadonly" placeholder="{{::resources.Commande_Detail_SectionDetail_Justificatif}}">
+                                </div>
+                                <div class="row">
+                                    <!--Type de commande-->
+                                    <div class="col-lg-6 col-md-6 no-pl">
+                                        <label class="control-label" style="padding-bottom:4px">{{::resources.Commande_Detail_SectionDetail_Type}}<span class="required_BR"> *</span></label>
+                                        <select id="ddlType" class="form-control input-filter" ng-model="commande.Type" ng-options="option as option.Libelle for option in commandeTypeList track by option.CommandeTypeId" ng-change="handleChangeType()" ng-disabled="commandeReadonly" aria-label="{{resources.Commande_Detail_SectionDetail_Type_Placeholder}}"></select>
+                                    </div>
+                                    <!-- Date -->
+                                    <div class="col-lg-6 col-md-6 no-pr">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionDetail_Date}}<span class="required_BR"> *</span></label>
+                                        <div class="input-group date">
+                                            <app-date-picker id="dtPk1" format="DD/MM/YYYY" lang="fr" initial-date="{{commande.Date}}" max-date="{{maxDateCommande}}" ng-model="commande.Date" ng-disabled="commandeReadonly"></app-date-picker>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!--Chantier-->
+                                    <div class="col-lg-12 col-md-12" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionDetail_Chantier}}<span class="required_BR"> *</span></label>
+                                        <!-- Chantier : mode édition -->
+                                        <lookup-standalone ng-model="commande.CI"
+                                                           name="CommandeCI"
+                                                           text="commande.CI.CodeLibelle"
+                                                           search-title="{{::resources.Global_ReferentielChantier}}"
+                                                           search-placeholder="{{::resources.Global_ReferentielChantier_Placeholder}}"
+                                                           custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                                           on-click="showPickList('CI');"
+                                                           on-select="handleLookupSelection('CI');"
+                                                           on-delete="handleLookupDeletion('CI');"
+                                                           class="no-padding formulaire long"
+                                                           placeholder="{{::resources.Commande_Holder_selectCi}}"
+                                                           style-parent="true"
+                                                           show-in-popup="true"
+                                                           ng-show="!commande.IsStatutCloturee && !commande.IsStatutValidee && !commande.IsStatutManuelleValidee">
+                                        </lookup-standalone>
+                                        <!-- Chantier : mode ReadOnly -->
+                                        <input ng-if="commande.CI != null && commandeReadonly" type="text" name="CI" class="form-control" ng-model="commande.CI.CodeLibelle" ng-disabled="true" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!--Devise-->
+                                    <div class="col-lg-12 col-md-12" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionDetail_Devise}}<span class="required_BR"> *</span></label>
+                                        <!-- Devise : mode édition -->
+                                        <lookup-standalone ng-model="commande.Devise"
+                                                           name="CommandeDevise"
+                                                           text="commande.Devise.CodeLibelle"
+                                                           search-title="{{::resources.Global_ReferentielDevise}}"
+                                                           search-placeholder="{{::resources.Global_ReferentielDevise_Placeholder}}"
+                                                           on-click="showPickList('Devise');"
+                                                           on-select="handleLookupSelection('Devise');"
+                                                           on-delete="handleLookupDeletion('Devise');"
+                                                           class="no-padding formulaire long"
+                                                           ng-disabled="commande.CI === null"
+                                                           style-parent="true"
+                                                           ng-if="!commandeReadonly && commande.CI.IsCiHaveManyDevises"
+                                                           ng-show="!commande.IsStatutCloturee && !commande.IsStatutValidee && !commande.IsStatutManuelleValidee">
+                                        </lookup-standalone>
+                                        <!-- Devise : mode ReadOnly -->
+                                        <input ng-if="(commandeReadonly || !commande.CI.IsCiHaveManyDevises)" type="text" name="Devise" class="form-control" ng-model="commande.Devise.CodeLibelle" ng-disabled="true" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!--Fournisseur-->
+                                    <div class="col-lg-12 col-md-12" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionDetail_Fournisseur}}<span class="required_BR"> *</span></label>
+                                        <!-- Fournisseur : mode édition -->
+                                        <input-select is-selected="commande.AgenceId || commande.FournisseurId || commande.FournisseurProvisoire"
+                                                      is-editable="false"
+                                                      placeholder="resources.Commande_Holder_select_fournisseur"
+                                                      on-select="handleShowDualPicklist()"
+                                                      on-delete="handleClearAgenceAndFournisseur()"
+                                                      ng-disabled="!commande.CI"
+                                                      ng-show="!commande.IsStatutCloturee && !commande.IsStatutValidee && !commande.IsStatutManuelleValidee"
+                                                      text="getLibelleFournisseur()">
+                                        </input-select>
+                                        <!-- Fournisseur : mode ReadOnly -->
+                                        <input ng-if="commande.Fournisseur != null && commandeReadonly" type="text" name="Fournisseur" class="form-control" ng-model="commande.Fournisseur.CodeLibelle" ng-disabled="true" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!--Libellé Commande -->
+                                    <div class="col-lg-12 col-md-12" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionDetail_Libelle}}<span class="required_BR">*</span></label>
+                                        <input type="text" name="Libelle" class="form-control" ng-model="commande.Libelle" ng-disabled="commandeReadonly" placeholder="{{::resources.Commande_Detail_SectionDetail_Libelle_Placeholder}}" />
+                                    </div>
+                                </div>
+                                <!-- Début - Pièce Jointe -->
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Libelle_Pcsjointe}}</label>
+                                        <label class="btn btn-default" style="display: table-cell">
+                                            {{::resources.Commande_Libelle_Choix_Pcsjointe}} <input type="file" multiple
+                                                                                                    class="ng-hide"
+                                                                                                    id="attachment-upload"
+                                                                                                    onclick="angular.element(this).scope().handleCheckBeforeSelectFile(event,angular.element(this))"
+                                                                                                    onchange="angular.element(this).scope().handleSelectFile(event, this)"
+                                                                                                    accept="{{attachmentAcceptedFormats}}">
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- Liste des pièces jointes -->
+                                <div ng-show="(attachments!=null) && (attachments.length >0)" ng-repeat="pieceJointe in attachments">
+                                    <div ng-show="(pieceJointe.IsDeleted==false)" ng-class="{'no-padding': statusDisplay}" class="row pj-bloc">
+                                        <i class="material-icons pj-icon">attach_file</i>
+                                        <a id="attachment-label" title="{{pieceJointe.Libelle}}" ng-click="handleDownloadAttachment(pieceJointe.PieceJointeId,pieceJointe.Libelle)">{{pieceJointe.Libelle}}</a>
+                                        <i id="delete-attachment"
+                                           class="material-icons"
+                                           title="{{::resources.Commande_Title_Delete_Pcsjointe}}"
+                                           ng-click="handleDeleteAttachment($index)"
+                                           ng-show="!(pieceJointe.IsLocked||false)">close</i>
+                                    </div>
+                                </div>
+                                <div class="bloc-energie" ng-show="commande.CI.Societe.TypeSociete.Code == 'SEP'">
+                                    <input type="checkbox" id="cbCommandeEnergie" ng-disabled="commande.IsStatutCloturee || commande.IsStatutValidee" ng-model="commande.IsEnergie"><label class="label-energie" for="cbCommandeEnergie"><span></span>{{::resources.Commande_Libelle_Energie}}</label>
+                                </div>
+                                <!-- Bloc abonnement -->
+                                <div class="bloc-abonnement">
+                                    <input type="checkbox" id="cbCommandeAbo" ng-disabled="commande.IsStatutCloturee" ng-model="commande.IsAbonnement" ng-change="handleCollapse('#abonnement-panel')"><label class="abo-head" for="cbCommandeAbo" ng-disabled="commande.IsStatutCloturee" ng-click="commande.IsMaterielAPointer = false"><span></span>{{::resources.Commande_Libelle_Abonnement}}</label>
+                                    <div id="abonnement-panel" class="collapse" ng-class="{'in': commande.IsAbonnement}">
+                                        <div class="row pad-abo">
+                                            <div class="col-sm-6 no-pl">
+                                                <label class="control-label">Périodicité abonnement</label>
+                                            </div>
+                                            <div class="col-sm-6 no-pr">
+                                                <select id="ddlFrequenceAbo" class="form-control col-lg-4 input-filter" ng-model="selectedFrequenceAbo" ng-options="option as option.Label for option in frequenceAboList track by option.Value" ng-change="handleChangeAboInputs()" ng-disabled="commande.IsStatutCloturee"></select>
+                                            </div>
+                                        </div>
+                                        <div class="row pad-abo">
+                                            <div class="col-sm-6 no-pl">
+                                                <label class="control-label">Nombre de réceptions à générer</label>
+                                            </div>
+                                            <div class="col-sm-6 no-pr">
+                                                <input type="text" ng-model="selectedDureeAbo" class="form-control" fred-input-number="0" fred-input-default-value="0" ng-disabled="commande.IsStatutCloturee" ng-change="handleChangeDureeAbonnement()" ng-model-options="{debounce: 500}" />
+                                            </div>
+                                        </div>
+                                        <div class="row pad-abo">
+                                            <div class="col-sm-6 no-pl">
+                                                <label class="control-label">Date prochaine génération réception</label>
+                                            </div>
+                                            <div class="col-sm-6 no-pr">
+                                                <app-date-picker id="DateProchaineReception"
+                                                                 format="DD/MM/YYYY"
+                                                                 lang="fr"
+                                                                 initial-date="{{commande.DateProchaineReception}}"
+                                                                 min-date="{{dateAbonnementMin}}"
+                                                                 placeholder="Date prochaine génération"
+                                                                 ng-model="commande.DateProchaineReception"
+                                                                 ng-disabled="commande.IsStatutCloturee"
+                                                                 ng-change="handleChangeAboInputs()"
+                                                                 name="DateProchaineReception">
+                                                </app-date-picker>
+                                            </div>
+                                        </div>
+                                        <div class="row pad-abo">
+                                            <div class="col-sm-6 no-pl">
+                                                <label class="control-label">Date première génération réception</label>
+                                            </div>
+                                            <div class="col-sm-6 no-pr">
+                                                <input type="text" value="{{commande.DatePremiereReception | date:'dd/MM/yyyy'}}" class="form-control" ng-disabled="true" />
+                                            </div>
+                                        </div>
+                                        <div class="row pad-abo">
+                                            <div class="col-sm-6 no-pl">
+                                                <label class="control-label">Date dernière réception (prév.)</label>
+                                            </div>
+                                            <div class="col-sm-6 no-pr">
+                                                <input type="text" value="{{commande.DateDerniereReception | date:'dd/MM/yyyy'}}" class="form-control" ng-disabled="true" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <fred-authorization key="{{permissionKeys.AffichageCheckboxMaterielAPointer}}" style="display: block;">
+                                    <div class="bloc-materielExterne" id="materiel-a-pointer-commande-location" fred-Display-Handler="currentUser.Societe.Organisation.OrganisationId" display="visible" ng-show="commande.Type.Code == 'L'">
+                                        <input type="checkbox" id="cbCommandeMaterielExterne" ng-disabled="commande.IsStatutCloturee" ng-model="commande.IsMaterielAPointer"><label class="label-materielExterne" for="cbCommandeMaterielExterne" ng-click="commande.IsAbonnement = false"><span></span>{{::resources.Commande_Libelle_Mac_Pointer}}</label>
+                                    </div>
+                                </fred-authorization>
+                            </fieldset>
+                            <!-- END : Section Détail de la commande -->
+                            <!-- START : Section Suivi de la commande -->
+                            <fieldset class="col-lg-4 col-md-4 no_pl">
+                                <legend>{{::resources.Commande_Detail_SectionSuivi}}</legend>
+                                <div class="row">
+                                    <!--Suivi-->
+                                    <div class="col-lg-12" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionSuivi_Suivi}}<span class="required_BR"> *</span></label>
+                                        <!-- Suivi : mode édition -->
+                                        <feature-flag feature-key="PersonnelsNouveauxFiltres">
+                                            <lookup-standalone ng-model="commande.Suivi"
+                                                               name="CommandeSuivi"
+                                                               text="commande.Suivi.CodeSocieteMatriculePrenomNom"
+                                                               search-title="{{::resources.Global_ReferentielPersonnel}}"
+                                                               search-placeholder="{{::resources.Personnel_PartialGeneral_Nom_Placeholder}}"
+                                                               search-placeholder2="{{::resources.Personnel_PartialGeneral_Prenom_Placeholder}}"
+                                                               search-placeholder3="{{::resources.Personnel_Filter_Autre_Information_Placeholder}}"
+                                                               active-second-search-input="true"
+                                                               active-third-search-input="true"
+                                                               placeholder="{{::resources.Commande_Holder_Select_Perso}}"
+                                                               url="/api/Personnel/SearchWithHabilitation?ciId={{commande.CiId}}&onlySocieteGerante=true&"
+                                                               on-select="handleLookupSelection('PersonnelSuivi', item)"
+                                                               on-delete="handleLookupDeletion('PersonnelSuivi')"
+                                                               class="no-padding formulaire long"
+                                                               style-parent="true"
+                                                               show-in-popup="true"
+                                                               ng-show="!commande.IsStatutCloturee && !commande.IsStatutValidee && !commande.IsStatutManuelleValidee">
+                                            </lookup-standalone>
+                                        </feature-flag>
+                                        <feature-flag invert feature-key="PersonnelsNouveauxFiltres">
+                                            <lookup-standalone ng-model="commande.Suivi"
+                                                               name="CommandeSuivi"
+                                                               text="commande.Suivi.CodeSocieteMatriculePrenomNom"
+                                                               search-title="{{::resources.Global_ReferentielPersonnel}}"
+                                                               search-placeholder="{{::resources.Global_ReferentielPersonnel_Placeholder}}"
+                                                               url="/api/Personnel/SearchWithHabilitation?ciId={{commande.CiId}}&onlySocieteGerante=true&"
+                                                               on-select="handleLookupSelection('PersonnelSuivi', item);"
+                                                               on-delete="handleLookupDeletion('PersonnelSuivi');"
+                                                               placeholder="{{::resources.Commande_Holder_Select_Perso}}"
+                                                               show-in-popup="true"
+                                                               class="no-padding formulaire long"
+                                                               style-parent="true"
+                                                               ng-show="!commande.IsStatutCloturee && !commande.IsStatutValidee && !commande.IsStatutManuelleValidee">
+                                            </lookup-standalone>
+                                        </feature-flag>
+                                        <!-- Suivi : mode ReadOnly -->
+                                        <input ng-if="commande.Suivi != null && commandeReadonly" type="text" name="Suivi" class="form-control" ng-model="commande.Suivi.CodeSocieteMatriculePrenomNom" ng-disabled="true" />
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="commande.Type.Code =='L'">
+                                    <div class="col-md-12 no-padding">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionSuivi_DateDispo}}<span class="required_AV">*</span></label>
+                                        <div class="input-group date">
+                                            <app-date-picker id="dtPk2" format="DD/MM/YYYY" lang="fr" initial-date="{{commande.DateMiseADispo}}" ng-model="commande.DateMiseADispo" ng-disabled="commandeReadonly"></app-date-picker>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="commande.Type.Code =='P' || commande.Type.Code =='F'">
+                                    <!-- Date -->
+                                    <div class="col-lg-12 col-md-12 no-padding">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionSuivi_DelaiLivraison}}<span class="required_AV"></span></label>
+                                        <input type="text" id="DelaiLivraison" class="form-control" placeholder="{{::resources.Commande_Detail_SectionSuivi_DelaiLivraison_Placeholder}}" ng-model="commande.DelaiLivraison" ng-disabled="commande.IsStatutCloturee" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!--Contact Livraison-->
+                                    <div class="col-lg-12" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionSuivi_Contact}}<span class="required_BR"> *</span></label>
+                                        <!-- Contact Livraison : mode édition -->
+                                        <feature-flag feature-key="PersonnelsNouveauxFiltres">
+                                            <lookup-standalone ng-model="commande.Contact"
+                                                               name="CommandeContact"
+                                                               text="commande.Contact.CodeSocieteMatriculePrenomNom"
+                                                               search-title="{{::resources.Global_ReferentielContact}}"
+                                                               search-placeholder="{{::resources.Personnel_PartialGeneral_Nom_Placeholder}}"
+                                                               search-placeholder2="{{::resources.Personnel_PartialGeneral_Prenom_Placeholder}}"
+                                                               search-placeholder3="{{::resources.Personnel_Filter_Autre_Information_Placeholder}}"
+                                                               active-second-search-input="true"
+                                                               active-third-search-input="true"
+                                                               url="/api/Personnel/SearchWithHabilitation?ciId={{commande.CiId}}&onlySocieteGerante=true&"
+                                                               on-select="handleLookupSelection('PersonnelContact', item)"
+                                                               on-delete="handleLookupDeletion('PersonnelContact')"
+                                                               class="no-padding formulaire long"
+                                                               placeholder="{{::resources.Commande_Holder_Select_Contact}}"
+                                                               style-parent="true"
+                                                               show-in-popup="true"
+                                                               ng-show="!commande.IsStatutCloturee && !commande.IsStatutValidee && !commande.IsStatutManuelleValidee">
+                                            </lookup-standalone>
+                                        </feature-flag>
+                                        <feature-flag invert feature-key="PersonnelsNouveauxFiltres">
+                                            <lookup-standalone ng-model="commande.Contact"
+                                                               name="CommandeContact"
+                                                               text="commande.Contact.CodeSocieteMatriculePrenomNom"
+                                                               search-title="{{::resources.Global_ReferentielContact}}"
+                                                               search-placeholder="{{::resources.Global_ReferentielContact_Placeholder}}"
+                                                               url="/api/Personnel/SearchWithHabilitation?ciId={{commande.CiId}}&onlySocieteGerante=true&"
+                                                               on-select="handleLookupSelection('PersonnelContact', item);"
+                                                               on-delete="handleLookupDeletion('PersonnelContact');"
+                                                               class="no-padding formulaire long"
+                                                               placeholder="{{::resources.Commande_Holder_Select_Contact}}"
+                                                               show-in-popup="true"
+                                                               style-parent="true"
+                                                               ng-show="!commande.IsStatutCloturee && !commande.IsStatutValidee && !commande.IsStatutManuelleValidee">
+                                            </lookup-standalone>
+                                        </feature-flag>
+                                        <!-- Contact Livraison : mode ReadOnly -->
+                                        <input ng-if="commande.Contact != null && commandeReadonly" type="text" name="Contact" class="form-control" ng-model="commande.Contact.CodeSocieteMatriculePrenomNom" ng-disabled="true" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!--Contact téléphonique-->
+                                    <div class="col-lg-12" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionSuivi_ContactTelephonique}}</label>
+                                        <input type="text" id="ContactTelephonique" class="form-control" placeholder="{{::resources.Commande_Detail_SectionSuivi_ContactTelephonique_Placeholder}}" ng-model="commande.ContactTel" ng-disabled="commande.IsStatutValidee || commande.IsStatutCloturee || commande.IsStatutManuelleValidee" maxlength="20" />
+                                    </div>
+                                </div>
+                                <!-- END : Section Suivi de la commande -->
+                                <!-- START : Section Identification de la commande -->
+                                <legend class="mt">{{::resources.Commande_Legende_Id_Commande}}</legend>
+                                <div class="chkb">
+                                    <input type="checkbox" id="chbkcom-man-mod" ng-disabled="commande.IsStatutValidee || commande.IsStatutCloturee || commande.IsStatutManuelleValidee || !commande.CommandeManuelleAllowed" ng-model="commande.CommandeManuelle" ng-click="handletoggleCommandeManuelle()">
+                                    <label class="abo-head" for="chbkcom-man-mod" ng-disabled="commande.IsStatutValidee || commande.IsStatutCloturee || commande.IsStatutManuelleValidee || !commande.CommandeManuelleAllowed"><span></span>{{::resources.Commande_Detail_SectionDetail_CommandeManuelle}}</label>
+                                </div>
+                                <div class="row">
+                                    <!--Numéro externe Commande -->
+                                    <div class="col-lg-12 col-md-12" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionDetail_NumeroExterne}}</label>
+                                        <input type="text" name="NumeroExterne" class="form-control" ng-model="commande.NumeroCommandeExterne" ng-disabled="!commande.CommandeManuelle || !(commande.IsCreated || commande.IsStatutAValider)" placeholder="{{::resources.Commande_Detail_SectionDetail_NumeroExterne_Placholder}}" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!--Système d'origine-->
+                                    <div class="col-lg-12 col-md-12" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionDetail_SystemeOrigine}}<span></span></label>
+                                        <input type="text" name="SystemeOrigine" class="form-control" ng-model="commande.SystemeExterne.LibelleAffiche" ng-disabled="true" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!--Numéro de commande interne-->
+                                    <div class="col-lg-12" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionSuivi_NumeroCommandeInterne}}<span></span></label>
+                                        <input type="text" id="NumeroCommandeInterne" class="form-control" ng-model="commande.Numero" ng-disabled="true" />
+                                    </div>
+                                </div>
+                                <!-- END : Section Identification de la commande -->
+
+
+                            </fieldset>
+                            <!-- START : Section Coordonnées -->
+                            <fieldset class="col-lg-4 col-md-4 no_pl">
+                                <legend>{{::resources.Commande_Detail_SectionCoordonnee}}</legend>
+                                <div class="row">
+                                    <!--Adresse Livraison-->
+                                    <div class="col-sm-12" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionCoordonnee_Livraison}}</label>
+                                        <input type="text" id="EnteteLivraison" class="form-control" placeholder="{{::resources.Commande_Detail_SectionCoordonnee_LivraisonEntete_Placeholder}}" ng-model="commande.LivraisonEntete" ng-disabled="commandeReadonly" />
+                                    </div>
+                                    <div class="col-sm-12 form-groups" ng-class="{'no-padding': statusDisplay}">
+                                        <input type="text" id="AdresseLivraison" class="form-control" placeholder="{{::resources.Commande_Detail_SectionCoordonnee_LivraisonAdresse_Placeholder}}" ng-model="commande.LivraisonAdresse" ng-disabled="commandeReadonly" />
+                                    </div>
+                                    <div class="col-sm-2 form-groups sm-pr" ng-class="{'no-padding': statusDisplay}">
+                                        <input type="text" id="CPLivraison" class="form-control" placeholder="{{::resources.Commande_Detail_SectionCoordonnee_LivraisonCodePostal_Placeholder}}" ng-model="commande.LivraisonCPostale" ng-disabled="commandeReadonly" />
+                                    </div>
+                                    <div class="col-sm-10 form-groups sm-pl" ng-class="{'no-padding': statusDisplay}">
+                                        <input type="text" id="VilleLivraison" class="form-control" placeholder="{{::resources.Commande_Detail_SectionCoordonnee_LivraisonVille_Placeholder}}" ng-model="commande.LivraisonVille" ng-disabled="commandeReadonly" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!--Adresse Facturation-->
+                                    <div class="col-sm-12" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionCoordonnee_Facturation}}</label>
+                                        <input type="text" id="AdresseFacturation" class="form-control" placeholder="{{::resources.Commande_Detail_SectionCoordonnee_FacturationAdresse_Placeholder}}" ng-model="commande.FacturationAdresse" ng-disabled="true" />
+                                    </div>
+                                    <div class="col-sm-2 form-groups sm-pr" ng-class="{'no-padding': statusDisplay}">
+                                        <input type="text" id="CPFacturation" class="form-control" placeholder="{{::resources.Commande_Detail_SectionCoordonnee_FacturationCodePostal_Placeholder}}" ng-model="commande.FacturationCPostale" ng-disabled="true" />
+                                    </div>
+                                    <div class="col-sm-10 form-groups sm-pl" ng-class="{'no-padding': statusDisplay}">
+                                        <input type="text" id="VilleFacturationn" class="form-control" placeholder="{{::resources.Commande_Detail_SectionCoordonnee_FacturationVille_Placeholder}}" ng-model="commande.FacturationVille" ng-disabled="true" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- Adresse Fournisseur -->
+                                    <div class="col-sm-12" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Libelle_Adresse_Fournisseur}}</label>
+                                        <input type="text" id="FournisseurAdresse" class="form-control" placeholder="{{::resources.Commande_Libelle_Adresse_Fournisseur}}" ng-model="commande.FournisseurAdresse" />
+                                    </div>
+                                    <div class="col-sm-2 form-groups sm-pr" ng-class="{'no-padding': statusDisplay}">
+                                        <input type="text" id="FournisseurCPostal" class="form-control" placeholder="{{::resources.Commande_Libelle_Code_Postal}}" ng-model="commande.FournisseurCPostal" />
+                                    </div>
+                                    <div class="col-sm-10 form-groups sm-pl" ng-class="{'no-padding': statusDisplay}">
+                                        <input type="text" id="FournisseurVille" class="form-control" placeholder="{{::resources.Commande_Libelle_Ville}}" ng-model="commande.FournisseurVille" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!--Commentaires-->
+                                    <div class="col-sm-12" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionCommentaire_Fournisseur}}</label><span class="control-span-right">({{commande.CommentaireFournisseur? commande.CommentaireFournisseur.length:0}}/500 car.)</span>
+                                        <textarea id="CommentaireFournisseur" name="commentParticulier" class="form-control" placeholder="{{::resources.Commande_Detail_SectionCommentaire_Fournisseur_Placeholder}}" ng-model="commande.CommentaireFournisseur" ng-disabled="commande.IsStatutCloturee" ng-maxlength=500></textarea>
+                                        <span style="color:Red" ng-show="headerCommandeForm.commentParticulier.$error.maxlength"> Maximum 500 caractères</span>
+                                    </div>
+                                    <div class="col-sm-12" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionCommentaire_Interne}}</label><span class="control-span-right">({{commande.CommentaireInterne? commande.CommentaireInterne.length:0}}/500 car.)</span>
+                                        <textarea id="CommandeInterne" name="commentInterne" class="form-control" placeholder="{{::resources.Commande_Detail_SectionCommentaire_Interne_Placeholder}}" ng-model="commande.CommentaireInterne" ng-disabled="commande.IsStatutCloturee" ng-maxlength=500></textarea>
+                                        <span style="color:Red" ng-show="headerCommandeForm.commentInterne.$error.maxlength"> Maximum 500 caractères</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="row" ng-show="commande.Type.Code =='L' ">
+                            <!-- START : Section Détail de la commande -->
+                            <fieldset class="col-md-12 col-lg-12">
+                                <legend>{{::resources.Commande_Legende_info_specifique}}</legend>
+                                <div class="row">
+                                    <div class="col-md-3 no-padding">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionInfo_TarifLocation}}</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div class="col-md-4 col-lg-4 no-padding">
+                                                <input id="checkMOConduite" type="checkbox" ng-model="commande.MOConduite" ng-disabled="commandeReadonly" />
+                                                <label for="checkMOConduite" class="checkbox-inline"><span></span>{{::resources.Commande_Detail_SectionInfo_MOConduite}}</label>
+                                                <input id="checkCarburant" type="checkbox" ng-model="commande.Carburant" ng-disabled="commandeReadonly" />
+                                                <label for="checkCarburant" class="checkbox-inline"><span></span>{{::resources.Commande_Detail_SectionInfo_Carburant}}</label>
+                                                <input id="checkLubrifiant" type="checkbox" ng-model="commande.Lubrifiant" ng-disabled="commandeReadonly" />
+                                                <label for="checkLubrifiant" class="checkbox-inline"><span></span>{{::resources.Commande_Detail_SectionInfo_Lubrifiant}}</label>
+                                            </div>
+                                            <div class="col-md-4 col-lg-4">
+                                                <input id="checkEntretienMecanique" type="checkbox" ng-model="commande.EntretienMecanique" ng-disabled="commandeReadonly" />
+                                                <label for="checkEntretienMecanique" class="checkbox-inline"><span></span>{{::resources.Commande_Detail_SectionInfo_EntretienMecanique}}</label>
+                                                <input id="checkFraisAmortissement" type="checkbox" ng-model="commande.FraisAmortissement" ng-disabled="commandeReadonly" />
+                                                <label for="checkFraisAmortissement" class="checkbox-inline"><span></span>{{::resources.Commande_Detail_SectionInfo_FraisAmortissement}}</label>
+                                            </div>
+                                            <div class="col-md-4 col-lg-4">
+                                                <input id="checkEntretienJournalier" type="checkbox" ng-model="commande.EntretienJournalier" ng-disabled="commandeReadonly" />
+                                                <label for="checkEntretienJournalier" class="checkbox-inline"><span></span>{{::resources.Commande_Detail_SectionInfo_EntretienJournalier}}</label>
+                                                <input id="checkFraisAssurance" type="checkbox" ng-model="commande.FraisAssurance" ng-disabled="commandeReadonly" />
+                                                <label for="checkFraisAssurance" class="checkbox-inline"><span></span>{{::resources.Commande_Detail_SectionInfo_FraisAssurance}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="row" ng-show="commande.Type.Code == 'P' ">
+                            <!-- START : Section Détail de la commande -->
+                            <fieldset class="col-md-12 col-lg-12">
+                                <legend>{{::resources.Commande_Legende_info_specifique}}</legend>
+                                <div class="row">
+                                    <!-- Condition Client -->
+                                    <div class="col-sm-6 sm-pr" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionInfo_ConditionClient}}</label>
+                                        <input type="text" class="form-control" placeholder="{{::resources.Commande_Detail_SectionInfo_ConditionClient_Placeholder}}" ng-model="commande.ConditionSociete" ng-disabled="commandeReadonly" maxlength="90" />
+                                    </div>
+                                    <!-- Condition Prestataire -->
+                                    <div class="col-sm-6 sm-pl" ng-class="{'no-padding': statusDisplay}">
+                                        <label class="control-label">{{::resources.Commande_Detail_SectionInfo_ConditionPresta}}</label>
+                                        <input type="text" class="form-control" placeholder="{{::resources.Commande_Detail_SectionInfo_ConditionPresta_Placeholder}}" ng-model="commande.ConditionPrestation" ng-disabled="commandeReadonly" maxlength="90" />
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default pull-left" type="submit" ng-click="handleValideEnteteCommande(commande)" ng-disabled="!headerCommandeForm.$valid">Valider</button>
+                        <span class="material-icons error-icon pull-left" popover-title="{{::resources.Commande_Detail_ListeErreurs}}" ng-show="commandeHeaderErrors.length > 0" uib-popover-template="'popoverTemplate'" popover-trigger="'mouseenter'" popover-placement="top-left">warning</span>
+                        <button class="btn btn-link pull-right" data-dismiss="modal">{{::resources.Global_Bouton_Back}}</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+
+    <lookup-panel-fournisseur-agence on-item-selected="handleSelectFournisseurAgence(fournisseur,agence)"
+                                     on-add-item="handleNewFournisseur(itemToAdd)"
+                                     default-search="commande.FournisseurProvisoire"
+                                     can-add="canAddFournisseurProvisoire"
+                                     current-fournisseur="commande.Fournisseur"
+                                     current-agence="commande.Agence"
+                                     current-ci="commande.CiId">
+    </lookup-panel-fournisseur-agence>
+
+    <overlay class="flexH alignRight" is-visible="isPanelAvisVisible" on-request-close="handleHidePanelAvis()">
+        <panel-historique historique="commandeHistorique" busy="isLoadingHistorique" on-request-close="handleHidePanelAvis()"></panel-historique>
+    </overlay>
+</div>

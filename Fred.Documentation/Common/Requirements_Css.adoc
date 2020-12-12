@@ -1,0 +1,144 @@
+= Recommandations CSS
+
+Statut : En cours de rédaction
+
+[cols=",^,>",options="header",]
+|===
+|Date |Auteur |Date
+|18/04/2017 |B.PEYTOUR |Création
+|===
+
+== Arborescence des répertoires et Organisation des fichiers
+
+*Les fichiers .css sont dans les répertoires /Content/*
+
+Les feuilles de styles sont dans un répertoire /Content.
+
+Le répertoire /Content peut être : 1. A la racine de la solution 2. A la
+racine des répertoire Area
+
+*Le mode inline est proscrit*
+
+Le style dit ``inline'' vise à définir dans les tags HTML les attributs
+CSS dans l’attribut style des tags HTML. Ce mode n’est pas recommandé et
+doit être intégré dans une feuille de style externe.
+
+*Les feuilles de styles interne ne sont pas recommandées*
+
+La définition du .css intégré dans la page HTML n’est pas commandé
+
+*Le fichier est organisé par section*
+
+La feuille de style doit présenter l’organisation dans l’ordre de
+lecture de la page HTML dans la mesure du possible 1. Style des Headers
+(optionnel) 2. Style de la structure des éléments comme les tables,
+grid, … 3. Style des éléments topographiques majeurs (H1, H2, H3,….)
+(optionnel) 4. Styles des boutons 5. …
+
+== Commentaire
+
+*les feuilles de style comprennent une cartouche en en-tête*
+
+La cartouche doit être la suivante : ```css @author /** * Style du Titre
+_ _ Ce titre permet d’informer l’utilisateur si * une anomalie est
+remontée. _ _ @appdef * @version 1 * @author * @copyright
+
+*/
+
+....
+
+
+**les commentaires suivent la norme DocBlock**
+
+Exemple basic : 
+ ```css
+/**
+* Style du Titre
+*/
+....
+
+Exemple avec un commentaire complémentaire
+
+[source,css]
+----
+/**
+* Style du Titre
+*
+* Ce titre permet d'informer l'utilisateur si
+* une anomalie est remontée. (Optionnel)
+* 
+* @ref (Optionnel) (Valeurs possible : Obsolete)
+* @todo (Optionnel) (Pour indiquer une tâche à accomplir à terme )
+* @see (Optionnel) (Pour mentionner une référence)
+* @media (Optionnel) (Pour indiquer le ou les médiais auxquelles la feuilles de styles est appliquées)
+*/
+----
+
+*La norme CSSDoc est recommandée*
+
+Dans la mesure du possible, la norme CSSDoc est recommandée :
+https://web.archive.org/web/20120930104541/http://cssdoc.net/wiki/CssdocDraft
+
+Les attributs suivants sont recommandés :
+
+[width="100%",cols="<34%,<33%,<33%",options="header",]
+|===
+|Attribut |Description |Obligatoire
+|@ref |Obsolete |Non
+
+|@todo |Pour indiquer une tâche à accomplir à terme |Non
+
+|@media |Pour indiquer le ou les médiais auxquelles la feuilles de
+styles est appliquées |Non
+
+|@note |Commentaire additionnel |Non
+
+|@author |Pour indentifier l’auteur de la modification |Oui si fichier
+transverse
+|===
+
+le formatage complet est le suivant :
+`+css  /**  * Comment with Tags  *  * This DocBlock comment has tags.  *  * @author Mina Margin  * @version 1.0  * @see http://mina.blogsaroundthe.net/  */+`
+
+*Les sections sont commentées* Les sections sont commentés de la manière
+suivantes
+
+[source,css]
+----
+/* ************************************
+*
+* @Section: Typography > Définition des styles H1 to H6 pour les titres de pages
+*
+************************************* */
+----
+
+Les sous-sections sont égalements commentées de la manière suivante
+
+[source,css]
+----
+/* ***** @subsection: Titres ****** */
+----
+
+== Nommage des classes
+
+A faire
+
+== Appel des fichiers de style
+
+*Les fichiers .css structurants sont définis dans le BundleConfig.cs*
+
+Les feuilles de styles utilisées sur l’ensemble de l’application sont
+appelées via le BundleConfig
+
+== Personnalisation de composants tiers
+
+*Les fichiers .css des composants tiers ne sont pas modifiés*
+
+Il n’est pas recommandé de modifier les feuilles de styles de composants
+comme Bootrap par exemple. Les modifications devront être apportés dans
+un fichier annexe, selon le plan de nommage suivant :
+
+[source,css]
+----
+nom_du_composant.custom.css
+----

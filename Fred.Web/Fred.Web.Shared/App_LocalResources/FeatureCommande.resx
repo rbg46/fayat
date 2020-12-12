@@ -1,0 +1,1675 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Commande_Detail_Ligne_Bouton_Ajouter_Ligne_Commande" xml:space="preserve">
+    <value>Ajout d'une ligne</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Index_ToutSelectionner" xml:space="preserve">
+    <value>Tout sélectionner</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_CI" xml:space="preserve">
+    <value>Centre d'imputation</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_ClotureManuelle" xml:space="preserve">
+    <value>Cloturée manuellement</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_SousTitre_ListeCommande" xml:space="preserve">
+    <value>Liste des commandes</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionDetail_Type" xml:space="preserve">
+    <value>Type</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionCommentaire_Interne" xml:space="preserve">
+    <value>Commentaire interne</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionSuivi_Suivi" xml:space="preserve">
+    <value>Suivi par </value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_DateEmission" xml:space="preserve">
+    <value>Date d'émission</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionSuivi_DelaiLivraison" xml:space="preserve">
+    <value>Délai Livraison</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_DateValidation" xml:space="preserve">
+    <value>Date de validation</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Demandeur" xml:space="preserve">
+    <value>Demandeur</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_DerniereModification" xml:space="preserve">
+    <value>Dernière actualisation le {0} par {1}</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionSuivi_DelaiLivraison_Placeholder" xml:space="preserve">
+    <value>Délai Livraison</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionSuivi_DateDispo" xml:space="preserve">
+    <value>Date de disponibilité</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Titre" xml:space="preserve">
+    <value>Commande du</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionDetail_Fournisseur" xml:space="preserve">
+    <value>Fournisseur</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionSuivi_ContactTelephonique" xml:space="preserve">
+    <value>Contact Téléphonique</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionCoordonnee_Livraison" xml:space="preserve">
+    <value>Adresse de livraison</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionCoordonnee_LivraisonEntete_Placeholder" xml:space="preserve">
+    <value>Entête</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionSuivi_ContactTelephonique_Placeholder" xml:space="preserve">
+    <value>Contact Téléphonique</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_MontantReception" xml:space="preserve">
+    <value>Montant réceptionné</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_MontantReception_Tooltip" xml:space="preserve">
+    <value>Montant réceptionné par l'utilisateur</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_MontantCommande" xml:space="preserve">
+    <value>Montant commandé</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_MontantCommande_Tooltip" xml:space="preserve">
+    <value>Montant commandé par l'utilisateur</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_NouvelleCommande" xml:space="preserve">
+    <value>Nouvelle commande</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionCoordonnee_LivraisonAdresse_Placeholder" xml:space="preserve">
+    <value>Adresse de livraison</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionCoordonnee_LivraisonCodePostal_Placeholder" xml:space="preserve">
+    <value>Code Postal</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionCoordonnee_LivraisonVille_Placeholder" xml:space="preserve">
+    <value>Ville</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Rapprochee" xml:space="preserve">
+    <value>Rapprochée</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Reception" xml:space="preserve">
+    <value>Voir les réceptions</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Solde" xml:space="preserve">
+    <value>Solde commande</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Solde_placeholder" xml:space="preserve">
+    <value>Restant à réceptionner de la commande</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Search_Tuile_Statut" xml:space="preserve">
+    <value>Statut : </value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionCoordonnee_FacturationAdresse_Placeholder" xml:space="preserve">
+    <value>Adresse de facturation</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionCoordonnee_Facturation" xml:space="preserve">
+    <value>Adresse de facturation</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_MontantHT" xml:space="preserve">
+    <value>Montant HT</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Valideur" xml:space="preserve">
+    <value>Valideur</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Visa" xml:space="preserve">
+    <value>Visa</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionDetail_Chantier" xml:space="preserve">
+    <value>Chantier</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionDetail_Type_Placeholder" xml:space="preserve">
+    <value>Type de commande</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionDetail_Justificatif" xml:space="preserve">
+    <value>JUSTIFICATIF</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionSuivi_Contact" xml:space="preserve">
+    <value>Contact Livraison</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionDetail_Date" xml:space="preserve">
+    <value>Date</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionCommentaire_Fournisseur" xml:space="preserve">
+    <value>Conditions particulières</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Notification_Saisie_Error" xml:space="preserve">
+    <value>Erreurs de saisie détectées : veuillez consulter la liste des erreurs à l'aide de l'icône d'erreur.</value>
+    <comment>commande-detail.controller.js</comment>
+  </data>
+  <data name="Commande_Detail_ListeErreurs" xml:space="preserve">
+    <value>Liste des erreurs</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionDetail_Devise" xml:space="preserve">
+    <value>Devise</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Rechercher_Placeholder" xml:space="preserve">
+    <value>Rechercher une Commande ...</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Search_Tuile_Type" xml:space="preserve">
+    <value>Type de commande : </value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Notification_ErreurBadUser_Error" xml:space="preserve">
+    <value>Seul le créateur de cette commande peut la supprimer</value>
+    <comment>commande-detail.controller.js</comment>
+  </data>
+  <data name="Commande_Detail_SousTitre_Detail" xml:space="preserve">
+    <value>En-tête de la commande</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Titre" xml:space="preserve">
+    <value>Lignes de la commande</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionDetail" xml:space="preserve">
+    <value>Détail de la commande</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionSuivi" xml:space="preserve">
+    <value>Suivi de la commande</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionCoordonnee" xml:space="preserve">
+    <value>Coordonnées</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionInfo" xml:space="preserve">
+    <value>Informations spécifiques</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionCommentaire" xml:space="preserve">
+    <value>Commentaires</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_RetourListeCommande_Tooltip" xml:space="preserve">
+    <value>Cliquer pour retourner à la liste des commandes</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_RetourListeCommande" xml:space="preserve">
+    <value>Retourner à la liste des commandes</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_AucuneReception_Tooltip" xml:space="preserve">
+    <value>Désolé, aucune réception disponible pour cette commande</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_NouvelleCommande_Tooltip" xml:space="preserve">
+    <value>Cliquer pour créer une nouvelle commande</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Detail_Tooltip" xml:space="preserve">
+    <value>Cliquer pour visualiser le détail de la commande</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Reception_Tooltip" xml:space="preserve">
+    <value>Cliquer pour visualiser les réceptions liées à cette commande</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionDetail_CommandeManuelle" xml:space="preserve">
+    <value>Commande manuelle</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Notification_EmailEnvoyer_Error" xml:space="preserve">
+    <value>Une erreur est survenue lors de l'envoie du message électronique. Veuillez consulter la liste des erreurs à l'aide de l'icône d'erreur.</value>
+    <comment>commande-detail.controller.js</comment>
+  </data>
+  <data name="Commande_Notification_EmailEnvoyer_Success" xml:space="preserve">
+    <value>Message électronique envoyé avec succés.</value>
+    <comment>commande-detail.controller.js</comment>
+  </data>
+  <data name="Commande_Detail_AffichageDetailPrioritaire" xml:space="preserve">
+    <value>Cliquer pour afficher le détail de la commande en priorité</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_AffichageLignePrioritaire" xml:space="preserve">
+    <value>Cliquer pour afficher les lignes de la commande sur le côté</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Bouton_Dupliquer" xml:space="preserve">
+    <value>Dupliquer</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Bouton_EnregistrerBrouillon" xml:space="preserve">
+    <value>Enregistrer Brouillon</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Bouton_EnregistrerBrouillon_Tooltip" xml:space="preserve">
+    <value>Cliquer pour enregistrer cette commande en mode brouillon. Cette commande ne pourra pas être validée par votre responsable hiérarchique.</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Bouton_EnregistrerCommande" xml:space="preserve">
+    <value>Enregistrer Commande</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Bouton_EnregistrerCommande_Tooltip" xml:space="preserve">
+    <value>Cliquer pour enregistrer cette commande. Votre responsable hiérarchique pourra ainsi valider la commande.</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Bouton_EnvoiMail" xml:space="preserve">
+    <value>Envoi par mail</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Bouton_Imprimer" xml:space="preserve">
+    <value>Imprimer</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Bouton_Viser" xml:space="preserve">
+    <value>Viser</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionCommentaire_Fournisseur_Placeholder" xml:space="preserve">
+    <value>Conditions particulières</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionCommentaire_Interne_Placeholder" xml:space="preserve">
+    <value>Commentaire interne</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionCoordonnee_FacturationCodePostal_Placeholder" xml:space="preserve">
+    <value>Code Postal</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionCoordonnee_FacturationVille_Placeholder" xml:space="preserve">
+    <value>Ville</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionDetail_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionDetail_Libelle_Placeholder" xml:space="preserve">
+    <value>Libellé Commande</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionInfo_Carburant" xml:space="preserve">
+    <value>Le carburant</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionInfo_ConditionClient" xml:space="preserve">
+    <value>CONDITIONS CLIENT</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionInfo_ConditionClient_Placeholder" xml:space="preserve">
+    <value>CONDITIONS CLIENT</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionInfo_ConditionPresta" xml:space="preserve">
+    <value>CONDITIONS PRESTATAIRE</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionInfo_ConditionPresta_Placeholder" xml:space="preserve">
+    <value>CONDITIONS PRESTATAIRE</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionInfo_EntretienJournalier" xml:space="preserve">
+    <value>L'entretien journalier, vidange, graissage, filtres</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionInfo_EntretienMecanique" xml:space="preserve">
+    <value>L'entretetien mécanique (pièces, main d'oeuvre)</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionInfo_FraisAmortissement" xml:space="preserve">
+    <value>Tous les frais d'amortissement</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionInfo_FraisAssurance" xml:space="preserve">
+    <value>Les impôts et assurances toutes natures</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionInfo_Lubrifiant" xml:space="preserve">
+    <value>Le lubrifiant</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionInfo_MOConduite" xml:space="preserve">
+    <value>La main d'oeuvre de conduite</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionInfo_TarifLocation" xml:space="preserve">
+    <value>Inclu(s) dans le tarif de location</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Date" xml:space="preserve">
+    <value>Date</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Detail" xml:space="preserve">
+    <value>Détail de la commande</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Devise" xml:space="preserve">
+    <value>Devise:</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Fournisseur" xml:space="preserve">
+    <value>Fournisseur</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_NbrVisa" xml:space="preserve">
+    <value>Visa(s)</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Visa_Tooltip" xml:space="preserve">
+    <value>Cliquez pour visualiser les visas</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Titre" xml:space="preserve">
+    <value>Gérer les commandes</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_Libelle" xml:space="preserve">
+    <value>Désignation</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_MontantHT" xml:space="preserve">
+    <value>Montant HT</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_PUHT" xml:space="preserve">
+    <value>PU HT</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_Quantite" xml:space="preserve">
+    <value>Quantité</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_Ressource" xml:space="preserve">
+    <value>Ressource</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_Tache" xml:space="preserve">
+    <value>Tâche</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_Unite" xml:space="preserve">
+    <value>Unité</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Table_Bouton_Dupliquer" xml:space="preserve">
+    <value>Dupliquer la ligne</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Table_Bouton_Supprimer" xml:space="preserve">
+    <value>Supprimer la ligne</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Search_ChoixStatut" xml:space="preserve">
+    <value>- Choisir Statut</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Search_ChoixType" xml:space="preserve">
+    <value>- Choisir Type</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Search_DateDebut_Placeholder" xml:space="preserve">
+    <value>De ...</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Search_DateFin_Placeholder" xml:space="preserve">
+    <value>A ...</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Search_MesCommandes" xml:space="preserve">
+    <value>Seulement mes commandes</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Search_MontantMax_Placeholder" xml:space="preserve">
+    <value>Montant Total HT max.</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Search_MontantMin_Placeholder" xml:space="preserve">
+    <value>Montant Total HT min.</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Search_Tuile_DateDebut" xml:space="preserve">
+    <value>Date de début</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Search_Tuile_DateFin" xml:space="preserve">
+    <value>Date de fin</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Search_Tuile_MesCommandes" xml:space="preserve">
+    <value>Mes Commandes</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Search_Tuile_MontantMax" xml:space="preserve">
+    <value>Montant &lt; </value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Search_Tuile_MontantMin" xml:space="preserve">
+    <value>Montant &gt; </value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_TitreOnglet" xml:space="preserve">
+    <value>Détail Commande</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Index_TitreOnglet" xml:space="preserve">
+    <value>Liste des Commandes</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Search_TitreOnglet" xml:space="preserve">
+    <value>Recherche Commande</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionDetail_Devise_Error" xml:space="preserve">
+    <value>Erreur : le CI sélectionné n'a pas de devise associée, veuillez contacter l'administrateur.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="Commande_Index_Table_ClotureManuellement_ToolTip" xml:space="preserve">
+    <value>La commande a été cloturée manuellement  si la case est cochée</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Rapprochee_ToolTip" xml:space="preserve">
+    <value>La commande est rapprochée si la case est cochée</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="CmdManager_AccordCadreRequis" xml:space="preserve">
+    <value>Les commandes d'un montant supérieur à 15 000 € sont soumises à un accord cadre.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_AdresseFacturationObligatoire" xml:space="preserve">
+    <value>L'adresse de facturation est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_AdresseLivraisonObligatoire" xml:space="preserve">
+    <value>L'adresse de livraison est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_ContactObligatoire" xml:space="preserve">
+    <value>Le contact de livraison est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_CPFacturationObligatoire" xml:space="preserve">
+    <value>Le code postale de facturation est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_CPLivraisonObligatoire" xml:space="preserve">
+    <value>Le code postale de livraison est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_DateAnterieure" xml:space="preserve">
+    <value>La date de la commande doît-etre antérieure ou égale à la date du jour.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_DateSuiviObligatoire" xml:space="preserve">
+    <value>La date de mise à disposition est obligatoire pour les commandes de type location.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_DesignationObligatoire" xml:space="preserve">
+    <value>La désignation des lignes de commande est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_DeviseObligatoire" xml:space="preserve">
+    <value>La devise est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_JustificatifRequis" xml:space="preserve">
+    <value>La saisie d'un justificatif est obligatoire pour les commandes nécessitant un accord cadre. (voir l'en-tête de commande)</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_LibelleObligatoire" xml:space="preserve">
+    <value>Le libellé de la commande est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_LigneObligatoire" xml:space="preserve">
+    <value>Une commande doit au moins avoir une ligne.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_MontantNotNull" xml:space="preserve">
+    <value>Le montant de la commande doît-être supérieur à 0.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_NumCommandeDoublon" xml:space="preserve">
+    <value>Le numéro de commande saisi existe déjà.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_NumCommandeObligatoire" xml:space="preserve">
+    <value>Le numéro de commande est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_QuantiteObligatoire" xml:space="preserve">
+    <value>La quantité des lignes de commande est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_RessourceObligatoire" xml:space="preserve">
+    <value>La ressource des lignes de commande est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_SeuilValidationInvalide" xml:space="preserve">
+    <value>Votre seuil de validation est de {0}.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_SocieteGerante" xml:space="preserve">
+    <value>L'affaire sélectionnée ne possède pas de société gérante. Veuillez contacter votre administrateur.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_SuiviObligatoire" xml:space="preserve">
+    <value>Le suivi est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_TypeObligatoire" xml:space="preserve">
+    <value>Le type de commande est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_UniteObligatoire" xml:space="preserve">
+    <value>L'unité des lignes de commande est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_VilleFacturationObligatoire" xml:space="preserve">
+    <value>La ville de facturation est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_VilleLivraisonObligatoire" xml:space="preserve">
+    <value>La ville de livraison est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="Commande_Notification_Creation_Commande_Brouillon_Success" xml:space="preserve">
+    <value>Votre commande brouillon a bien été enregistrée.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="Commande_Notification_Update_Error" xml:space="preserve">
+    <value>Seul le créateur de la commande peut repasser la commande en brouillon lorsque celle-ci est en cours de validation.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_SeuilValidationIndefini" xml:space="preserve">
+    <value>Le paramétrage des seuils pour la devise {0} n'a pas été effectué. Merci de faire la modification ou de vous rapprocher de votre administrateur fonctionnel.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_CommandeInconnu" xml:space="preserve">
+    <value>Commande introuvable</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_EmailErrorAdresseMail" xml:space="preserve">
+    <value>Votre adresse mail n'est pas paramétrée dans votre fiche contact.</value>
+  </data>
+  <data name="CmdManager_EmailErrorPdfIndispo" xml:space="preserve">
+    <value>Le fichier PDF n'est pas disponible.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_EmailErrorStatutCommande" xml:space="preserve">
+    <value>L'envoi par mail n'est accessible que pour les commandes validées.</value>
+  </data>
+  <data name="Commande_Index_Table_Action" xml:space="preserve">
+    <value>Actions</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Avancement" xml:space="preserve">
+    <value>Avancement</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_NumeroCommande" xml:space="preserve">
+    <value>Numéro de commande</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Pourcentage" xml:space="preserve">
+    <value>Pourcentage</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Statut" xml:space="preserve">
+    <value>Statut</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Tootip_OuvrirCI" xml:space="preserve">
+    <value>Cliquer pour ouvrir dans un nouvel onglet le détail du CI</value>
+  </data>
+  <data name="Commande_Index_ToolBar_Display" xml:space="preserve">
+    <value>Cliquer pour afficher les commandes </value>
+  </data>
+  <data name="Commande_Index_ToolBar_Display_Card" xml:space="preserve">
+    <value>en mode Card</value>
+  </data>
+  <data name="Commande_Index_ToolBar_Display_Table" xml:space="preserve">
+    <value>en mode Tableau</value>
+  </data>
+  <data name="Commande_Index_ToolBar_Display_Tile" xml:space="preserve">
+    <value>en mode Tuile</value>
+  </data>
+  <data name="Commande_Detail_Titre_Numero" xml:space="preserve">
+    <value>Numéro</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_Commentaire" xml:space="preserve">
+    <value>Commentaire</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_Creation" xml:space="preserve">
+    <value>Création</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_Date" xml:space="preserve">
+    <value>Date</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_DatePiece" xml:space="preserve">
+    <value>Date pièce</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_DateReception" xml:space="preserve">
+    <value>Date réception</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_DateValidationCommande" xml:space="preserve">
+    <value>Date validation commande</value>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_DesignationReception" xml:space="preserve">
+    <value>Désignation réception</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_EcartPU" xml:space="preserve">
+    <value>Ecart PU</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_EcartQte" xml:space="preserve">
+    <value>Ecart qté</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_LibellePoste" xml:space="preserve">
+    <value>Libellé poste</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_Modification" xml:space="preserve">
+    <value>Modification</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_MtntCommande" xml:space="preserve">
+    <value>Mtnt commandé</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_MtntFacture" xml:space="preserve">
+    <value>Mtnt facturé</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_MtntReceptionne" xml:space="preserve">
+    <value>Mtnt réceptionné</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_NumeroBL" xml:space="preserve">
+    <value>N°BL</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_NumeroFactureFournisseur" xml:space="preserve">
+    <value>N° facture Fourn.</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_NumeroFMFI" xml:space="preserve">
+    <value>N° facture FMFI</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_PUFacture" xml:space="preserve">
+    <value>PU facturé</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_QteCommandee" xml:space="preserve">
+    <value>Qte commandée</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_QteFacture" xml:space="preserve">
+    <value>Qte facturée</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_QteReceptionnee" xml:space="preserve">
+    <value>Qte réceptionnée</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_RessourceCmd" xml:space="preserve">
+    <value>Ressource commande</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_RessourceReception" xml:space="preserve">
+    <value>Ressource réception</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_SoldeFar" xml:space="preserve">
+    <value>Solde FAR</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_TacheCmd" xml:space="preserve">
+    <value>Tâche commande</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_TacheReception" xml:space="preserve">
+    <value>Tâche réception</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_TotalHTFacture" xml:space="preserve">
+    <value>Total HT facture</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_ToutDeplier" xml:space="preserve">
+    <value>Tout déplier</value>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_ToutReplier" xml:space="preserve">
+    <value>Tout replier</value>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_TypeFacturation" xml:space="preserve">
+    <value>Type</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_VisaReception" xml:space="preserve">
+    <value>Visa réception</value>
+    <comment>Tableau des lignes de commande validée</comment>
+  </data>
+  <data name="Commande_Index_Table_MontantFacture" xml:space="preserve">
+    <value>Montant facturé</value>
+  </data>
+  <data name="Commande_Index_Table_RestantAFacturer" xml:space="preserve">
+    <value>Restant à facturer</value>
+  </data>
+  <data name="Commande_Index_Table_Cloturer" xml:space="preserve">
+    <value>Clôturer la commande</value>
+  </data>
+  <data name="Commande_Index_Table_Cloturer_Tooltip" xml:space="preserve">
+    <value>Cliquer pour clôturer la commande</value>
+  </data>
+  <data name="permisssionKeyNewCommand" xml:space="preserve">
+    <value>menu.show.commande.detail</value>
+    <comment>Commande/Views/Commande/Index.cshtml</comment>
+  </data>
+  <data name="permisssionKeyManageCommand" xml:space="preserve">
+    <value>menu.show.commande.index</value>
+  </data>
+  <data name="Commande_Detail_Ligne_Bouton_Ajouter_Ligne_Avenant" xml:space="preserve">
+    <value>Ajout d'une ligne d'avenant</value>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_Diminution" xml:space="preserve">
+    <value>Diminution</value>
+  </data>
+  <data name="Commande_Detail_Bouton_Valider_Avenant" xml:space="preserve">
+    <value>Valider avenant</value>
+  </data>
+  <data name="CmdManager_Avenant_Ligne_Erreur_DesignationObligatoire" xml:space="preserve">
+    <value>La désignation des lignes d'avenant est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_Avenant_Ligne_Erreur_QuantiteObligatoire" xml:space="preserve">
+    <value>La quantité des lignes d'avenant est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_Avenant_Ligne_Erreur_RessourceObligatoire" xml:space="preserve">
+    <value>La ressource des lignes d'avenant est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_Avenant_Ligne_Erreur_UniteObligatoire" xml:space="preserve">
+    <value>L'unité des lignes d'avenant est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_Avenant_Erreur_CommandeStatut" xml:space="preserve">
+    <value>La commande doit être validée et non clôturée.</value>
+  </data>
+  <data name="CmdManager_Enregistrement_Succes" xml:space="preserve">
+    <value>Enregistrement effectué avec succès.</value>
+  </data>
+  <data name="CmdManager_Avenant_LigneModifiee_Erreur_Inexistante" xml:space="preserve">
+    <value>La ligne modifiée d'identifiant {0] n'existe pas.</value>
+  </data>
+  <data name="CmdManager_Avenant_LigneSupprimee_Erreur_Inexistante" xml:space="preserve">
+    <value>La ligne supprimée d'identifiant {0] n'existe pas.</value>
+  </data>
+  <data name="CmdManager_Avenant_Ligne_Erreur_Valide" xml:space="preserve">
+    <value>Impossible d'enregistrer une ligne d'un avenant validé</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_Avenant_Ligne_Interdit" xml:space="preserve">
+    <value>Une commande ne peut pas posséder un avenant.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_Enregistrement_Erreur_CommentaireFournisseurTropLong" xml:space="preserve">
+    <value>Le commentaire fournisseur ne doit pas exéder {0} caractères.</value>
+  </data>
+  <data name="CmdManager_Enregistrement_Erreur_CommentaireInterneTropLong" xml:space="preserve">
+    <value>Le commentaire interne ne doit pas exéder {0} caractères.</value>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_DateValidationAvenant" xml:space="preserve">
+    <value>Date de validation</value>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_IsDiminutionAvenant" xml:space="preserve">
+    <value>Diminution</value>
+  </data>
+  <data name="Commande_Detail_Ligne_Entete_NumeroAvenant" xml:space="preserve">
+    <value>Numéro d'avenant</value>
+  </data>
+  <data name="Commande_Detail_Bouton_RenvoyerVersStorm" xml:space="preserve">
+    <value>Renvoyer vers Module Rapprochement</value>
+  </data>
+  <data name="Commande_Detail_SectionDetail_Date_livraison" xml:space="preserve">
+    <value>Date de livraison</value>
+  </data>
+  <data name="Commande_Detail_SectionSuivi_ContactTelephonique_Createur" xml:space="preserve">
+    <value>(Contact du créateur)</value>
+  </data>
+  <data name="Commande_Detail_SectionSuivi_Contact_Createur" xml:space="preserve">
+    <value>(Note = Créateur de la commande)</value>
+  </data>
+  <data name="Commande_Detail_SectionSuivi_Suivi_Createur" xml:space="preserve">
+    <value>(créateur de la commande)</value>
+  </data>
+  <data name="Commande_Detail_SectionDetail_NumeroExterne" xml:space="preserve">
+    <value>Numéro de commande externe</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_SectionDetail_NumeroExterne_Placholder" xml:space="preserve">
+    <value>Numéro de commande externe</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="CmdManager_NumCommandeExterneObligatoire" xml:space="preserve">
+    <value>Le numéro de commande externe est obligatoire.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="Commande_Detail_SectionDetail_SystemeOrigine" xml:space="preserve">
+    <value>Système d'origine</value>
+  </data>
+  <data name="Commande_Detail_SectionSuivi_NumeroCommandeInterne" xml:space="preserve">
+    <value>Numéro de commande interne FRED</value>
+  </data>
+  <data name="Commande_Search_Tuile_SystemeOrigine" xml:space="preserve">
+    <value>Système d'origine :</value>
+  </data>
+  <data name="Commande_Search_ChoixSystemeOrigine" xml:space="preserve">
+    <value>- Choisir Système d'origine</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="CmdManager_SeuilEnregistrementAvenantDepasse" xml:space="preserve">
+    <value>Votre seuil d'enregistrement est de {0}.</value>
+  </data>
+  <data name="CmdManagerHeader_JustificatifRequis" xml:space="preserve">
+    <value>La saisie d'un justificatif est obligatoire pour les commandes nécessitant un accord cadre. </value>
+    <comment>CommandeManager/CommandeHeaderValidator</comment>
+  </data>
+  <data name="Commande_Detail_Modal_Title" xml:space="preserve">
+    <value>Entête de la commande</value>
+  </data>
+  <data name="Commande_Detail_Ouvrir_Entete" xml:space="preserve">
+    <value>Ouvrir l'en-tête</value>
+  </data>
+  <data name="CmdManager_DateObligatoire" xml:space="preserve">
+    <value>La date de commande est obligatoire</value>
+    <comment>CommmandeHeaderValidator.cs</comment>
+  </data>
+  <data name="CmdManager_FournisseurETTSirenObligatoire" xml:space="preserve">
+    <value>Impossible de valider ce contrat, car le fournisseur ETT sélectionné a un SIREN invalide : veuillez sélectionner un autre fournisseur ou contacter votre administrateur fonctionnel.</value>
+    <comment>CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_FournisseurSirenObligatoire" xml:space="preserve">
+    <value>Impossible de valider cette commande, car le fournisseur sélectionné a un SIREN invalide : veuillez sélectionner un autre fournisseur ou contacter votre administrateur fonctionnel.</value>
+    <comment>CommandeValidator</comment>
+  </data>
+  <data name="Commande_PostCommandeValidationModal_CetteCommande" xml:space="preserve">
+    <value>cette commande</value>
+    <comment>post-commande-validation-modal</comment>
+  </data>
+  <data name="Commande_PostCommandeValidationModal_Dupliquer" xml:space="preserve">
+    <value>Dupliquer</value>
+    <comment>post-commande-validation-modal</comment>
+  </data>
+  <data name="Commande_PostCommandeValidationModal_Imprimer" xml:space="preserve">
+    <value>imprimer</value>
+    <comment>post-commande-validation-modal</comment>
+  </data>
+  <data name="Commande_PostCommandeValidationModal_ListeCommande" xml:space="preserve">
+    <value>Retourner à la liste des commandes</value>
+    <comment>post-commande-validation-modal</comment>
+  </data>
+  <data name="Commande_PostCommandeValidationModal_NouvelleCommande" xml:space="preserve">
+    <value>Créer une nouvelle commande</value>
+    <comment>post-commande-validation-modal</comment>
+  </data>
+  <data name="Commande_PostCommandeValidationModal_Ou" xml:space="preserve">
+    <value>ou</value>
+    <comment>post-commande-validation-modal</comment>
+  </data>
+  <data name="Commande_PostCommandeValidationModal_Receptionner" xml:space="preserve">
+    <value>réceptionner</value>
+    <comment>post-commande-validation-modal</comment>
+  </data>
+  <data name="Commande_PostCommandeValidationModal_ResterSurCommande" xml:space="preserve">
+    <value>Rester sur cette commande</value>
+    <comment>post-commande-validation-modal</comment>
+  </data>
+  <data name="Commande_PostCommandeValidationModal_Titre" xml:space="preserve">
+    <value>Validation terminée</value>
+    <comment>post-commande-validation-modal</comment>
+  </data>
+  <data name="Commande_Index_Cloturer_Button" xml:space="preserve">
+    <value>Clôturer</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Cloturer_Confirmation" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir clôturer la commande {0} ?</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Cloturer_Non_Receptionnee_Confirmation" xml:space="preserve">
+    <value>La commande {0} n'est pas réceptionnée à 100%, Êtes-vous sûr de vouloir la clôturer ?</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Cloturer_Notification_Error" xml:space="preserve">
+    <value>La commande doit être validée pour pouvoir la clôturer.</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Cloturer_Notification_Success" xml:space="preserve">
+    <value>La commande a été clôturée avec succès.</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Decloturer_Button" xml:space="preserve">
+    <value>Déclôturer</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Decloturer_Confirmation" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir ré-ouvrir la commande {0} et autoriser la saisie de nouvelles réceptions ?</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Decloturer_Notification_Success" xml:space="preserve">
+    <value>La commande a été déclôturée avec succès.</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Index_Table_Decloturer_Tooltip" xml:space="preserve">
+    <value>Cliquer pour déclôturer la commande</value>
+    <comment>_PartialDisplayList.cshtml</comment>
+  </data>
+  <data name="Personnel_Filter_Autre_Information_Placeholder" xml:space="preserve">
+    <value>Autres informations...(Adresse, Code, SIREN)</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Nom_Placeholder" xml:space="preserve">
+    <value>Nom du personnel...</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Personnel_PartialGeneral_Prenom_Placeholder" xml:space="preserve">
+    <value>Prénom du personnel...</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="CmdManager_TacheObligatoire" xml:space="preserve">
+    <value>La tâche des lignes de commande est obligatoire pour une commande d'abonnement.</value>
+    <comment>CommandeManager/CommandeLigneValidator</comment>
+  </data>
+  <data name="Commande_Search_Abonnement" xml:space="preserve">
+    <value>Seulement les commandes Abonnement</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Search_MaterielAPointer" xml:space="preserve">
+    <value>Seulement les commandes Matériels à pointer</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Search_Tuile_Abonnement" xml:space="preserve">
+    <value>Abonnement</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Search_Tuile_MaterielAPointer" xml:space="preserve">
+    <value>Matériels à pointer</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_VerifyExternalMaterialUnity_Annuler" xml:space="preserve">
+    <value>Annuler</value>
+    <comment>verify-external-material-unity-modal</comment>
+  </data>
+  <data name="Commande_VerifyExternalMaterialUnity_Confirmer" xml:space="preserve">
+    <value>Confirmer</value>
+    <comment>verify-external-material-unity-modal</comment>
+  </data>
+  <data name="Commande_VerifyExternalMaterialUnity_Message" xml:space="preserve">
+    <value>Attention, certaines lignes de la commande liées à une ressource matérielle n'ont pas une unité autorisée (Heures, Jours ou Semaines), elles ne pourront pas être pointées dans les rapports.</value>
+    <comment>verify-external-material-unity-modal</comment>
+  </data>
+  <data name="Commande_VerifyExternalMaterialUnity_Question" xml:space="preserve">
+    <value>Désirez-vous annuler pour modifier ou confirmer la validation de la commande ?</value>
+    <comment>verify-external-material-unity-modal</comment>
+  </data>
+  <data name="Commande_VerifyExternalMaterialUnity_Titre" xml:space="preserve">
+    <value>Attention</value>
+    <comment>verify-external-material-unity-modal</comment>
+  </data>
+  <data name="Commande_Index_Button_Favori" xml:space="preserve">
+    <value>Cliquer pour enregistrer les critères de recherche comme favori</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Search_Tuile_AbonnementUniquement" xml:space="preserve">
+    <value>Abonnement uniquement</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Search_Energies" xml:space="preserve">
+    <value>Seulement les commandes Energies</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Commande_Search_Tuile_Energies" xml:space="preserve">
+    <value>Energies</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="CmdManager_Designation_Energie_Obligatoire" xml:space="preserve">
+    <value>La désignation des lignes de commande supplémentaires est obligatoire.</value>
+  </data>
+  <data name="CmdManager_PuHt_Energie_Obligatoire" xml:space="preserve">
+    <value>Le PUHT des lignes commande supplémentaires est obligatoire.</value>
+  </data>
+  <data name="CmdManager_Quantite_Energie_Obligatoire" xml:space="preserve">
+    <value>La quantité des lignes de commande supplémentaires est obligatoire.</value>
+  </data>
+  <data name="CmdManager_Ressource_Energie_Obligatoire" xml:space="preserve">
+    <value>La ressource des lignes commande supplémentaires est obligatoire.</value>
+  </data>
+  <data name="CmdManager_Tache_Energie_Obligatoire" xml:space="preserve">
+    <value>La tâche des lignes commande supplémentaires est obligatoire.</value>
+  </data>
+  <data name="CmdManager_Unite_Energie_Obligatoire" xml:space="preserve">
+    <value>L'unité des lignes commande supplémentaires est obligatoire.</value>
+  </data>
+  <data name="Commande_Btn_Libelle_Pcsjointe" xml:space="preserve">
+    <value>Cliquer pour télécharger la pièce jointe</value>
+  </data>
+  <data name="Commande_Detail_SectionDetail_AccordCadre" xml:space="preserve">
+    <value>Achat &gt; 15k€</value>
+  </data>
+  <data name="Commande_Holder_Saisie_Nom" xml:space="preserve">
+    <value>Commencez votre saisie par * si vous ne connaissez pas le début du nom (exemple : *location).</value>
+  </data>
+  <data name="Commande_Holder_selectCi" xml:space="preserve">
+    <value>Sélectionner un CI</value>
+  </data>
+  <data name="Commande_Holder_Select_Contact" xml:space="preserve">
+    <value>Sélectionner un Contact</value>
+  </data>
+  <data name="Commande_Holder_select_fournisseur" xml:space="preserve">
+    <value>Sélectionner un Fournisseur</value>
+  </data>
+  <data name="Commande_Holder_Select_Pays" xml:space="preserve">
+    <value>Sélectionner un Pays</value>
+  </data>
+  <data name="Commande_Holder_Select_Perso" xml:space="preserve">
+    <value>Sélectionner un personnel</value>
+  </data>
+  <data name="Commande_Holder_Select_Ressource" xml:space="preserve">
+    <value>Sélectionner une Ressource</value>
+  </data>
+  <data name="Commande_Holder_Select_Tache" xml:space="preserve">
+    <value>Sélectionner une Tâche</value>
+  </data>
+  <data name="Commande_Holder_Select_Unity" xml:space="preserve">
+    <value>Sélectionner une Unité</value>
+  </data>
+  <data name="Commande_Holde_Autreinfo" xml:space="preserve">
+    <value>Autres informations...(Adresse, Code, SIREN)</value>
+  </data>
+  <data name="Commande_Index_NbrCommande" xml:space="preserve">
+    <value>commande(s)</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Commande_Legende_Id_Commande" xml:space="preserve">
+    <value>Identification de la commande</value>
+  </data>
+  <data name="Commande_Legende_info_specifique" xml:space="preserve">
+    <value>Informations spécifiques</value>
+  </data>
+  <data name="Commande_Libelle_Abonnement" xml:space="preserve">
+    <value>Abonnement</value>
+  </data>
+  <data name="Commande_Libelle_Adresse_Fournisseur" xml:space="preserve">
+    <value>Adresse de fournisseur</value>
+  </data>
+  <data name="Commande_Libelle_Choix_Pcsjointe" xml:space="preserve">
+    <value>Choisir un fichier</value>
+  </data>
+  <data name="Commande_Libelle_Clear" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="Commande_Libelle_Close" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="Commande_Libelle_Code_Postal" xml:space="preserve">
+    <value>Code postal</value>
+  </data>
+  <data name="Commande_Libelle_Copie" xml:space="preserve">
+    <value>Copier</value>
+  </data>
+  <data name="Commande_Libelle_Date_dernier_reception" xml:space="preserve">
+    <value>Date dernière réception (prév.)</value>
+  </data>
+  <data name="Commande_Libelle_Date_premier_reception" xml:space="preserve">
+    <value>Date première génération réception</value>
+  </data>
+  <data name="Commande_libelle_Date_prochaine_reception" xml:space="preserve">
+    <value>Date prochaine génération réception</value>
+  </data>
+  <data name="Commande_Libelle_Energie" xml:space="preserve">
+    <value>Energies</value>
+  </data>
+  <data name="Commande_Libelle_Fournisseur_Corriger" xml:space="preserve">
+    <value>Fournisseur d'origine corrigé</value>
+  </data>
+  <data name="Commande_Libelle_Mac_Pointer" xml:space="preserve">
+    <value>Matériel à pointer dans les rapports</value>
+  </data>
+  <data name="Commande_libelle_Nb_Reception" xml:space="preserve">
+    <value>Nombre de réceptions à générer</value>
+  </data>
+  <data name="Commande_Libelle_Pays" xml:space="preserve">
+    <value>Pays</value>
+  </data>
+  <data name="Commande_Libelle_Pcsjointe" xml:space="preserve">
+    <value>Pièce jointe</value>
+  </data>
+  <data name="Commande_libelle_periodeabonnement" xml:space="preserve">
+    <value>Périodicité abonnement</value>
+  </data>
+  <data name="Commande_Libelle_Sous_Total" xml:space="preserve">
+    <value>Sous-Total HT :</value>
+  </data>
+  <data name="Commande_Libelle_Ville" xml:space="preserve">
+    <value>Ville</value>
+  </data>
+  <data name="Commande_Libelle_warning" xml:space="preserve">
+    <value>Attention</value>
+  </data>
+  <data name="Commande_Search_Holder_Pays" xml:space="preserve">
+    <value>Rechercher un Pays...</value>
+  </data>
+  <data name="Commande_Search_Holder_Select_Pays" xml:space="preserve">
+    <value>Rechercher un Pays...</value>
+  </data>
+  <data name="Commande_Search_Tiltle_Pays" xml:space="preserve">
+    <value>Référentiel des Pays</value>
+  </data>
+  <data name="Commande_Search_Title_Pays" xml:space="preserve">
+    <value>Référentiel des Pays</value>
+  </data>
+  <data name="Commande_Tiltel_en_tetecommande" xml:space="preserve">
+    <value>En-tête de la commande</value>
+  </data>
+  <data name="Commande_Tilte_Annuler" xml:space="preserve">
+    <value>Cliquer pour annuler et fermer</value>
+  </data>
+  <data name="Commande_Title_Delete_Pcsjointe" xml:space="preserve">
+    <value>Cliquer pour supprimer la pièce jointe</value>
+  </data>
+  <data name="Commande_Notification_Commande_Sauvegarde_Success" xml:space="preserve">
+    <value>La commande a été enregistrée avec succès</value>
+  </data>
+  <data name="Commande_Piece_Jointe" xml:space="preserve">
+    <value>Seulement les commandes avec PJ</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="CmdManager_Pu_Energie_Obligatoire" xml:space="preserve">
+    <value>Le PU des lignes de commande est obligatoire.</value>
+  </data>
+  <data name="CmdManager_NumCommandeExterne_ErreurNbCaractere" xml:space="preserve">
+    <value>Le nombre de caractères du numéro de commande externe doit être inférieur à {0}.</value>
+  </data>
+  <data name="CmdManager_NumCommandeExterne_ExisteDeja" xml:space="preserve">
+    <value>Ce numéro externe de commande existe déjà.</value>
+    <comment>CommandeManager/CommandeValidator</comment>
+  </data>
+  <data name="CmdManager_Numero_ErreurNbCaractere" xml:space="preserve">
+    <value>Le nombre de caractères du numéro de commande doit être inférieur à {0}.</value>
+  </data>
+  <data name="CmdManager_AbonnementPeriodicite_Requis" xml:space="preserve">
+    <value>La périodicité est obligatoire pour une commande Abonnement.</value>
+  </data>
+  <data name="CmdManager_DateProchaineGeneration_Obligatoire" xml:space="preserve">
+    <value>La date de prochaine génération est obligatoire pour une commande Abonnement.</value>
+  </data>
+  <data name="CmdManager_NbReception_Obligatoire" xml:space="preserve">
+    <value>Le nombre de réceptions à générer est obligatoire pour une commande Abonnement.</value>
+  </data>
+  <data name="permisssionKeyAvenantAlwaysActive" xml:space="preserve">
+    <value>button.show.btn.avenant.always</value>
+  </data>
+  <data name="CmdManager_SuppressionImpossiblePourCeStatut" xml:space="preserve">
+    <value>La suppression est impossible pour ce statut</value>
+    <comment>CommandeDeleteValidator</comment>
+  </data>
+  <data name="Commande_Detail_Notification_Erreur_Suppression" xml:space="preserve">
+    <value>Commande déjà validée. Suppression impossible.</value>
+    <comment>commande-detail.controller.js</comment>
+  </data>
+  <data name="Commande_ValidateCommande_Agreement" xml:space="preserve">
+    <value>Accord</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="Commande_ValidateCommande_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="Commande_ValidateCommande_Comment" xml:space="preserve">
+    <value>Commentaire</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="Commande_ValidateCommande_OpinionAvenant" xml:space="preserve">
+    <value>Mon avis sur l'avenant</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="Commande_ValidateCommande_OpinionCommande" xml:space="preserve">
+    <value>Mon avis sur la commande</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="Commande_ValidateCommande_Refusal" xml:space="preserve">
+    <value>Refus</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="Commande_ValidateCommande_SelectUser" xml:space="preserve">
+    <value>Sélectionner un utilisateur</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="Commande_ValidateCommande_SendAvenant" xml:space="preserve">
+    <value>J'envoie l'avenant pour validation/avis/revue à ...</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="Commande_ValidateCommande_SendCommande" xml:space="preserve">
+    <value>J'envoie la commande pour validation/avis/revue à ...</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="Commande_ValidateCommande_TitleAvenant" xml:space="preserve">
+    <value>Validation de l'avenant</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="Commande_ValidateCommande_TitleCommande" xml:space="preserve">
+    <value>Validation de la commande</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="Commande_ValidateCommande_Validate" xml:space="preserve">
+    <value>Valider</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="Commande_ValidateCommande_ValidateAvenant" xml:space="preserve">
+    <value>Je valide l'avenant</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="Commande_ValidateCommande_ValidateCommande" xml:space="preserve">
+    <value>Je valide la commande</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="Commande_ValidateCommande_WithoutOpinion" xml:space="preserve">
+    <value>Sans Avis</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="Commande_ValidateCommande_InsufficientThreshold" xml:space="preserve">
+    <value>Option non disponible : votre seuil de {0} est insuffisant.</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="Commande_Detail_Notification_Erreur_Enregistrement_Suppression" xml:space="preserve">
+    <value>Commande déjà supprimée.Impossible de la modifier!</value>
+    <comment>commande-detail.controller.js</comment>
+  </data>
+  <data name="Commande_Btn_Tooltip_Avis" xml:space="preserve">
+    <value>Ouvrir l’historique de la commande</value>
+  </data>
+  <data name="Commande_Error_ChargementHistorique" xml:space="preserve">
+    <value>Erreur lors du chargement de l'historique de la commande</value>
+    <comment>commande-detail.controller.js</comment>
+  </data>
+  <data name="Commande_Details_Controller_MessageErreurAjoutPj" xml:space="preserve">
+    <value>L'ajout de pièces jointes n'est pas possible sur une commande clôturée.</value>
+  </data>
+  <data name="Commande_Detail_PieceJointe_CommandeModifiee" xml:space="preserve">
+    <value>La commande a été modifiée. Merci de sauvegarder vos modifications avant.</value>
+    <comment>commande-detail-controller.js</comment>
+  </data>
+  <data name="CmdManager_MontantMinumum" xml:space="preserve">
+    <value>Le montant des lignes de commande ne peut pas être inférieur à 0.01.</value>
+  </data>
+  <data name="Commande_ValidateCommande_Email" xml:space="preserve">
+    <value>La commande va être envoyée automatiquement à l'adresse</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="Commande_ValidateCommande_NoEmail" xml:space="preserve">
+    <value>Cet utilisateur n'a pas d'adresse email paramétrée dans FRED: vous pouvez néanmoins saisir un avis/commentaire sur la commande mais vous devrez l'informer de votre demande par vos propres moyens.</value>
+    <comment>validate-commande-modal</comment>
+  </data>
+  <data name="CommandeHistoriqueService_Creation" xml:space="preserve">
+    <value>Création commande</value>
+    <comment>CommandeHistoriqueService.cs</comment>
+  </data>
+  <data name="CommandeHistoriqueService_Relecture" xml:space="preserve">
+    <value>Relecture/envoi commande</value>
+    <comment>CommandeHistoriqueService.cs</comment>
+  </data>
+  <data name="CommandeHistoriqueService_Validation" xml:space="preserve">
+    <value>Validation commande</value>
+    <comment>CommandeHistoriqueService.cs</comment>
+  </data>
+  <data name="Commande_Export_EntêteAvenant" xml:space="preserve">
+    <value>AVENANT DE COMMANDE DE {0}</value>
+  </data>
+  <data name="Commande_Export_EntêteAvenant_Diminution" xml:space="preserve">
+    <value>AVENANT DE DIMINUTION DE {0}</value>
+  </data>
+  <data name="Commande_Search_Tuile_AuteurCreation" xml:space="preserve">
+    <value>Créée par</value>
+  </data>
+  <data name="Commande_PostAvenantValidationModal_Firstlabel" xml:space="preserve">
+    <value>L' avenant a été validé avec succès. Que voulez-vous faire ?</value>
+    <comment>post-commande-validation-modal.html</comment>
+  </data>
+  <data name="Commande_PostAvenantValidationModal_secondlabel" xml:space="preserve">
+    <value>cet avenant</value>
+    <comment>post-commande-validation-modal.html</comment>
+  </data>
+  <data name="Commande_PostCommandeValidationModal_Firstlabel" xml:space="preserve">
+    <value>La commande a été validée avec succès. Que voulez-vous faire ?</value>
+    <comment>post-commande-validation-modal.html</comment>
+  </data>
+  <data name="Commande_PostCommandeValidationModal_secondlabel" xml:space="preserve">
+    <value>cette commande</value>
+    <comment>post-commande-validation-modal.html</comment>
+  </data>
+  <data name="Commande_Notification_Creation_Commande_Save_Success" xml:space="preserve">
+    <value>La commande a été validée avec succès</value>
+  </data>
+  <data name="Commande_WorkflowPopin_SaveAndSendSuccess" xml:space="preserve">
+    <value>La commande a été enregistrée avec succès et l'email a été envoyé avec succès.</value>
+    <comment>validate-commande-modal.js</comment>
+  </data>
+  <data name="Commande_WorkflowPopin_SaveSuccess" xml:space="preserve">
+    <value>La commande a été enregistrée avec succès.</value>
+    <comment>validate-commande-modal.js</comment>
+  </data>
+  <data name="Commande_WorkflowPopin_ValidationSuccess" xml:space="preserve">
+    <value>La commande a été validée avec succès.</value>
+    <comment>validate-commande-modal.js</comment>
+  </data>
+  <data name="Commande_ValidateCommande_Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="Commande_WorkflowPopin_Avenant_SaveAndSendSuccess" xml:space="preserve">
+    <value>L'avenant a été enregistré avec succès et l'email a été envoyé avec succès.</value>
+    <comment>validate-commande-modal.js</comment>
+  </data>
+  <data name="Commande_WorkflowPopin_Avenant_SaveSuccess" xml:space="preserve">
+    <value>L'avenant a été enregistré avec succès.</value>
+    <comment>validate-commande-modal.js</comment>
+  </data>
+  <data name="Commande_WorkflowPopin_Avenant_ValidationSuccess" xml:space="preserve">
+    <value>L'avenant a été validé avec succès.</value>
+    <comment>validate-commande-modal.js</comment>
+  </data>
+  <data name="Commande_Detail_Ligne_Bouton_importer_FichierExcel_Ligne_Avenant" xml:space="preserve">
+    <value>Importer lignes d’Excel</value>
+  </data>
+  <data name="Commande_Button_Continue" xml:space="preserve">
+    <value>Continuer</value>
+  </data>
+  <data name="Commande_Popin_ImportLignes_ImportFile" xml:space="preserve">
+    <value>Importer un fichier</value>
+  </data>
+  <data name="Commande_Popin_ImportLignes_OpenFile" xml:space="preserve">
+    <value>Ouvrir un fichier exemple</value>
+  </data>
+  <data name="Commande_Popin_ImportLignes_Question" xml:space="preserve">
+    <value>Que souhaitez -vous faire?</value>
+  </data>
+  <data name="Commande_Popin_ImportLignes_Title" xml:space="preserve">
+    <value>Importer des lignes de commande</value>
+  </data>
+  <data name="Commande_Erreurs_Excel_LigneCommande" xml:space="preserve">
+    <value>Rejet ligne n°{0} : {1}</value>
+  </data>
+  <data name="CmdManager_LigneCommandeObligatoire" xml:space="preserve">
+    <value>Numéro de ligne est obligatoire</value>
+  </data>
+  <data name="Commande_popin_ImportLignes_Btn_OpenAnomlie" xml:space="preserve">
+    <value>Ouvrir le rapport d'anomalie</value>
+  </data>
+  <data name="Commande_Popin_ImportLignes_Erreur_ChampObligatoire" xml:space="preserve">
+    <value>Champ {0} est obligatoire</value>
+  </data>
+  <data name="Commande_Popin_ImportLignes_Erreur_CheckCI" xml:space="preserve">
+    <value>Code {0} indisponible pour le CI</value>
+  </data>
+  <data name="Commande_Popin_ImportLignes_Erreur_DateCommande" xml:space="preserve">
+    <value>Date de commande différente de l’entête de commande</value>
+  </data>
+  <data name="Commande_Popin_ImportLignes_Erreur_Format" xml:space="preserve">
+    <value>Format {0} est invalide</value>
+  </data>
+  <data name="Commande_Popin_ImportLignes_Erreur_NumCommande" xml:space="preserve">
+    <value>Le numéro de commande est différent de l’entête de commande</value>
+  </data>
+  <data name="Commande_Popin_ImportLignes_Erreur_NumCommande_Obligaoire" xml:space="preserve">
+    <value>Champ numéro de commande obligatoire</value>
+  </data>
+  <data name="Commande_Popin_ImportLignes_Erreur_SupA0" xml:space="preserve">
+    <value>Le {0} doit être supérieur à 0.</value>
+  </data>
+  <data name="Commande_Popin_ImportLignes_FileLoadFealed_Text" xml:space="preserve">
+    <value>Les lignes n'ont pu être chargées \r\n car une ou plusieurs anomalies ont été détectées</value>
+  </data>
+  <data name="Commande_Popin_ImportLignes_FileLoadFealed_Titre" xml:space="preserve">
+    <value>Fichier en erreur</value>
+  </data>
+  <data name="Commande_Popin_ImportLignes_FileLoadSucces_Text" xml:space="preserve">
+    <value>Aucune anomalie, fichier chargé avec succès</value>
+  </data>
+  <data name="Commande_Popin_ImportLignes_FileLoadSucces_Titre" xml:space="preserve">
+    <value>Fichier Chargé avec succès</value>
+  </data>
+  <data name="Commande_Popin_ImportLignes_EmtyFileselected" xml:space="preserve">
+    <value>Aucun fichier sélectionné</value>
+  </data>
+  <data name="Commande_Export_Brouillon" xml:space="preserve">
+    <value>Brouillon</value>
+  </data>
+  <data name="Commande_Export_Provisoire" xml:space="preserve">
+    <value>COMMANDE PROVISOIRE</value>
+  </data>
+  <data name="Commande_Export_WaitForValidation" xml:space="preserve">
+    <value>EN ATTENTE DE VALIDATION</value>
+  </data>
+  <data name="Notif_Brouillon_With_Fournisseur_Provisoire" xml:space="preserve">
+    <value>Brouillon enregistré</value>
+    <comment>notif-fournisseur-provisoire-modal.html</comment>
+  </data>
+  <data name="Notif_Brouillon_With_Fournisseur_Provisoire_Message" xml:space="preserve">
+    <value>Attention, votre commande n'est pas conforme. Le fournisseur est provisoire. Celle-ci va passer en statut « Brouillon ». Vous ne pourrez pas enregistrer cette commande tant que le fournisseur ne sera pas corrigé.</value>
+    <comment>notif-fournisseur-provisoire-modal.html</comment>
+  </data>
+  <data name="Commande_Detail_ApercuBrouillon" xml:space="preserve">
+    <value>Aperçu brouillon</value>
+    <comment>Detail.cshtml</comment>
+  </data>
+  <data name="Commande_Detail_Notification_Erreur_Validation_Conccurente" xml:space="preserve">
+    <value>La commande ou l'avenant a été précedemment validé(e) depuis une autre fenêtre. Veuillez rafraichir la page avant tout autre opération.</value>
+    <comment>commande-detail.controller.js</comment>
+  </data>
+  <data name="Comande_Imprime_TypeCommande_Fourniture" xml:space="preserve">
+    <value>Fourniture</value>
+  </data>
+  <data name="Comande_Imprime_TypeCommande_Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Comande_Imprime_TypeCommande_Prestation" xml:space="preserve">
+    <value>Prestation</value>
+  </data>
+  <data name="Commande_Popin_Importlignes_Notify_Invalid_FileFormat" xml:space="preserve">
+    <value>Format fichier incorrect</value>
+  </data>
+  <data name="Commande_Popin_Importlignes_Notify_Invalid_FileLoad" xml:space="preserve">
+    <value>Erreur de chargement du fichier exemple</value>
+  </data>
+  <data name="Commande_ErreurAccesConcurrent" xml:space="preserve">
+    <value>La commande a été modifée. Veuillez rafraîchir votre navigateur.</value>
+  </data>
+  <data name="CmdManager_nbMaxCaractere" xml:space="preserve">
+    <value>Le nombre de caractères du numéro de commande externe doit être inférieur à 20.</value>
+  </data>
+  <data name="CmdManager_nbMinCaractere" xml:space="preserve">
+    <value>Le nombre de caractères du numéro de commande doit être inférieur à 10.</value>
+  </data>
+  <data name="CmdManager_NumCmdExistant" xml:space="preserve">
+    <value>Ce numéro externe de commande existe déjà.</value>
+  </data>
+  <data name="Commande_Detail_Ligne_Verrouillee_A_la_Reception" xml:space="preserve">
+    <value>Ligne verrouillée à la réception</value>
+  </data>
+  <data name="Commande_Detail_Notification_Erreur_Affichage_Commande_Supprimee" xml:space="preserve">
+    <value>Erreurs détectées : veuillez consulter la liste des erreurs à l'aide de l'icône d'erreur.</value>
+  </data>
+  <data name="Commande_Detail_Notification_Erreur_Affichage_Commande_Supprimee_With_Detail" xml:space="preserve">
+    <value>La commande {0} n'est plus disponible. Veuillez contacter {1} Matricule {2} (personne ayant supprimé la commande) pour plus d'informations.</value>
+  </data>
+</root>

@@ -1,0 +1,78 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title"><i class="flaticon flaticon-print"></i>{{::$ctrl.resources.BilanFlash_Modal_Export_Titre}}</h2>
+        <i class="flaticon flaticon-multiply close pull-right" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}" ng-click="$ctrl.handleCancel()"></i>
+    </div>
+
+    <div class="modal-body">
+        <div class="bloc-stepper">
+            <div class="stepper-line">
+                <div id="stepper1" class="stepper-step" ng-class="{'selected': $ctrl.exportStep===0}">1</div>
+                <div id="stepper2" class="stepper-step" ng-class="{'selected': $ctrl.exportStep===1}">2</div>
+            </div>
+            <div class="stepper-bloc-text">
+                <div class="stepper-text">{{::$ctrl.resources.BilanFlash_Modal_Export_StepPerimetre}}</div>
+                <div class="stepper-text central">{{::$ctrl.resources.BilanFlash_Modal_Export_StepFormat}}</div>
+            </div>
+        </div>
+        <!--step 1 Template-->
+        <div ng-show="$ctrl.exportStep === 0">
+            <div class="row">
+                <div class="col-md-6">
+                    <fred-section class="select-date">
+                        <label>{{::$ctrl.resources.BilanFlash_DateDebut}}</label>
+                        <fred-section-controls>
+                            <div class="input-group date">
+                                <app-date-picker format="DD/MM/YYYY" lang="fr" ng-model="$ctrl.dateDebut" min-date="{{$ctrl.dateMin}}" max-date="{{$ctrl.dateFin}}"
+                                                 ng-change="$ctrl.handleCanExport($ctrl.exportPdf)" placeholder="{{::$ctrl.resources.BilanFlash_DateDebut}}" readonly />
+                            </div>
+                        </fred-section-controls>
+                    </fred-section>
+                </div>
+                <div class="col-md-6">
+                    <fred-section class="select-date">
+                        <label>{{::$ctrl.resources.BilanFlash_DateFin}}</label>
+                        <fred-section-controls>
+                            <div class="input-group date">
+                                <app-date-picker format="DD/MM/YYYY" lang="fr" ng-model="$ctrl.dateFin" min-date="{{$ctrl.dateDebut}}" max-date="{{$ctrl.dateMax}}"
+                                                 ng-change="$ctrl.handleCanExport($ctrl.exportPdf)" placeholder="{{::$ctrl.resources.BilanFlash_DateFin}}" readonly />
+                            </div>
+                        </fred-section-controls>
+                    </fred-section>
+                </div>
+            </div>
+            <div class="line-button-export">
+                <div class="button-export" ng-class="$ctrl.templateName === 'BilanFlash'? 'selected' : ''" id="templateBilanFlash" ng-click="$ctrl.templateName = 'BilanFlash'">
+                    <span class="button-export-txt">{{::$ctrl.resources.BilanFlash_Modal_Export_TemplateBilanFlash}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+                <div class="or">
+                    OU
+                </div>
+                <div class="button-export" ng-class="$ctrl.templateName === 'SyntheseBilanFlash' ? 'selected' : ''" id="templateSyntheseBilanFlash" ng-click="$ctrl.templateName = 'SyntheseBilanFlash'">
+                    <span class="button-export-txt">{{::$ctrl.resources.BilanFlash_Modal_Export_TemplateSyntheseBilanFlash}}</span>
+                    <div class="inner-triangle"></div>
+                </div>
+            </div>
+        </div>
+        <!--step 2 Format-->
+        <div ng-show="$ctrl.exportStep === 1" class="line-button-export">
+            <div class="button-export" ng-class="$ctrl.exportPdf == true ? 'selected' : ''" id="formatExportPDF" ng-click="$ctrl.handleCanExport(true)">
+                <span class="button-export-txt">{{::$ctrl.resources.BilanFlash_Modal_Export_PDF}}</span>
+                <div class="inner-triangle"></div>
+                <span class="button-export-icon pdf"></span>
+            </div>
+            <div class="button-export" ng-class="$ctrl.exportPdf == false ? 'selected' : ''" id="formatExportExcel" ng-click="$ctrl.handleCanExport(false)">
+                <span class="button-export-txt">{{::$ctrl.resources.BilanFlash_Modal_Export_Excel}}</span>
+                <div class="inner-triangle"></div>
+                <span class="button-export-icon excel"></span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default pull-right" ng-if="$ctrl.exportStep === 0" ng-click="$ctrl.exportStep = 1" ng-disabled="!$ctrl.templateName || !$ctrl.dateDebut || !$ctrl.dateFin" title="{{::$ctrl.resources.Global_Bouton_Continuer_Tooltip}}">{{::$ctrl.resources.Global_Bouton_Continuer}}</button>
+        <button class="btn btn-default pull-right" ng-if="$ctrl.exportStep === 1" ng-click="$ctrl.handleExport()" ng-disabled="!$ctrl.canExport" title="{{::$ctrl.resources.Global_Bouton_Valider_Tooltip}}">{{::$ctrl.resources.Global_Bouton_Valider}}</button>
+        <button class="btn btn-link pull-left" ng-if="$ctrl.exportStep === 0" ng-click="$ctrl.handleCancel()" title="{{::$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">{{::$ctrl.resources.Global_Bouton_Annuler}}</button>
+        <button class="btn btn-link pull-left" ng-if="$ctrl.exportStep === 1" ng-click="$ctrl.exportStep = 0">{{::$ctrl.resources.Global_Bouton_Back}}</button>
+    </div>
+</div>

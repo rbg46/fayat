@@ -1,0 +1,973 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29021.104
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Common", "01-Common", "{C77694AA-C4FE-48F3-AD12-38FD276C5A23}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-FredWeb", "02-FredWeb", "{AD33F826-F2C3-4934-9CE6-044F15595BDD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-FredIE", "03-FredIE", "{0A9692BC-E68B-402E-9079-D6BB927924D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{60BB381A-9355-4505-89A7-64C133FEF9D4}"
+	ProjectSection(SolutionItems) = preProject
+		..\.editorconfig = ..\.editorconfig
+		.tfignore = .tfignore
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Presentation Layer", "01-Presentation Layer", "{87A76B7F-C75D-4CEF-8288-09ECF9949241}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Presentation Layer", "03-Presentation Layer", "{F83F302A-F18F-4095-9190-EC1F35C767B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Business Layer", "03-Business Layer", "{BBE3B562-D1D3-4924-BA6C-92606E0D3371}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-Business Layer", "04-Business Layer", "{DBFE333C-CC0A-453C-9258-8F21C34F430A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-Data Access Layer", "04-Data Access Layer", "{081AB82D-BD5A-4B8C-8B41-F8E3426F84E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05-Data Access Layer", "05-Data Access Layer", "{526B35AB-BF3A-4402-9E8D-7A5475131521}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05-Persistence Layer", "05-Persistence Layer", "{9E58548F-EF3E-4FAD-B192-ED6CF2338304}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "06-Persistence Layer", "06-Persistence Layer", "{D23F391D-FAF0-46A4-BEE1-C6021FAF00DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "06-Shared Layer", "06-Shared Layer", "{AAA61CD2-5099-43AE-A208-02259BBE39E6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "07-Shared Layer", "07-Shared Layer", "{53478EFF-9948-498F-BA10-1C58BD3C8AA1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "07-Tests", "07-Tests", "{EF11A862-AB02-41CC-B1F0-39D4EDEEBCE7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "08-Tests", "08-Tests", "{A36C36B3-12D9-4A57-946F-5645FFE276E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Entities", "Fred.Web\Fred.Entities\Fred.Entities.csproj", "{D84768F7-F096-4E6D-997E-AC1D9232B47A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Framework", "Fred.Web\Fred.Framework\Fred.Framework.csproj", "{92478535-02C7-44E0-975E-E31D77E78CCA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.EntityFramework", "Fred.Web\Fred.EntityFramework\Fred.EntityFramework.csproj", "{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.DataAccess", "Fred.Web\Fred.DataAccess\Fred.DataAccess.csproj", "{F86F9F7F-2269-4779-9064-515F94070CBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Web.Shared", "Fred.Web\Fred.Web.Shared\Fred.Web.Shared.csproj", "{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.Business", "Fred.Web\Fred.Business\Fred.Business.csproj", "{039E00B1-5F56-484C-82BA-5855684A1BBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.DataAccess.ExternalService", "Fred.Web\Fred.DataAccess.ExternalService\Fred.DataAccess.ExternalService.csproj", "{17451402-6778-4A17-8DB1-542D50DB8C94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Business.ExternalService", "Fred.Web\Fred.Business.ExternalService\Fred.Business.ExternalService.csproj", "{A0ACFD5F-F48B-4836-9250-D46973C22F0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Web.Bootstrapper", "Fred.Web\Bootstrapper\Fred.Web.Bootstrapper.csproj", "{34D7B42A-0D2F-46C4-A4F3-3842136FB86E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Web", "Fred.Web\Fred.Web\Fred.Web.csproj", "{A2C5D834-E219-4602-BA23-D47079371003}"
+EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Fred.Analysis", "Fred.Web\Fred.Analysis\Fred.Analysis.modelproj", "{B925EA1C-00A2-4F29-83C0-09A63CE33776}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.Business.Tests", "Fred.Web\Fred.Business.Tests\Fred.Business.Tests.csproj", "{5CF77ED1-5AF1-4AD6-AF4A-9E792A396E64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Framework.Tests", "Fred.Web\Fred.Framework.Tests\Fred.Framework.Tests.csproj", "{A87F469A-73DC-471A-AD20-A8084B02C1A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Referential", "Fred.Web\Fred.Referential\Fred.Referential.csproj", "{D4DCFE97-9577-487A-BF16-70216B74C445}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.Entities", "Fred.ImportExport\Fred.ImportExport.Entities\Fred.ImportExport.Entities.csproj", "{3800678C-0906-458A-BC65-8CBBD1A3AA99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.Database", "Fred.ImportExport\Fred.ImportExport.Database\Fred.ImportExport.Database.csproj", "{D3D12F17-3BA4-4B4C-BD9E-2E3FD0923049}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.Framework", "Fred.ImportExport\Fred.ImportExport.Framework\Fred.ImportExport.Framework.csproj", "{73B1B051-675C-44EE-A521-CBF9AE2B349C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.DataAccess", "Fred.ImportExport\Fred.ImportExport.DataAccess\Fred.ImportExport.DataAccess.csproj", "{EB202E1C-5DD4-499C-BAF6-7AFD92CAEC95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.Models", "Fred.ImportExport\Fred.ImportExport.Models\Fred.ImportExport.Models.csproj", "{F1E54D6F-EADB-4C6A-AE5C-7D2DFDD023C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.Business", "Fred.ImportExport\Fred.ImportExport.Business\Fred.ImportExport.Business.csproj", "{2BEE77D7-295D-48A4-924E-8574E3E22321}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.Bootstrapper", "Fred.ImportExport\Fred.ImportExport.Bootstrapper\Fred.ImportExport.Bootstrapper.csproj", "{02D4206E-9D2A-4612-B803-50E989F00A85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.Web", "Fred.ImportExport\Fred.ImportExport.Web\Fred.ImportExport.Web.csproj", "{9C7A2572-C9A2-4D87-B833-1BE00E2AC0E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.Api", "Fred.ImportExport\Fred.ImportExport.Api\Fred.ImportExport.Api.csproj", "{8904D5C1-9578-4F6C-A5AE-1316022762B9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analysis", "Analysis", "{AFFE2EEA-D61A-468B-87FF-16B880AFCA86}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{6FE54EF5-1A07-48AD-ACBD-D09E73A889B9}"
+	ProjectSection(SolutionItems) = preProject
+		Fred.Web\Fred.Documentation\Fred.Documentation.shfbproj = Fred.Web\Fred.Documentation\Fred.Documentation.shfbproj
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FredWeb", "FredWeb", "{4F26D29C-53D4-4875-8CAE-A07FD6B6583C}"
+	ProjectSection(SolutionItems) = preProject
+		Fred.Web\FredWebSolution.Build.bat = Fred.Web\FredWebSolution.Build.bat
+		Fred.Web\nuget.config = Fred.Web\nuget.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FredIe", "FredIe", "{1944E3C1-CFB7-4C4D-B873-46BB77CC1119}"
+	ProjectSection(SolutionItems) = preProject
+		Fred.ImportExport\.tfignore = Fred.ImportExport\.tfignore
+		Fred.ImportExport\nuget.config = Fred.ImportExport\nuget.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sonar", "Sonar", "{00F51B80-05C9-428E-9991-DF9518FAF9AF}"
+	ProjectSection(SolutionItems) = preProject
+		Fred.ImportExport\SonarQube\Fayat.Fred.ImportExportCSharp.ruleset = Fred.ImportExport\SonarQube\Fayat.Fred.ImportExportCSharp.ruleset
+		Fred.ImportExport\Fred.ImportExport.ruleset = Fred.ImportExport\Fred.ImportExport.ruleset
+		Fred.ImportExport\SonarQube\SolutionBinding.sqconfig = Fred.ImportExport\SonarQube\SolutionBinding.sqconfig
+		Fred.ImportExport\SonarQube\SonarFilter.target = Fred.ImportExport\SonarQube\SonarFilter.target
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sonar", "Sonar", "{E0414D24-1A53-4CB1-AA69-ADEC6CA7CF88}"
+	ProjectSection(SolutionItems) = preProject
+		Fred.Web\SonarQube\Fayat.FredWebCSharp.ruleset = Fred.Web\SonarQube\Fayat.FredWebCSharp.ruleset
+		Fred.Web\Fred.ruleset = Fred.Web\Fred.ruleset
+		Fred.Web\SonarQube\SolutionBinding.sqconfig = Fred.Web\SonarQube\SolutionBinding.sqconfig
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.EntityFramework.ToolsRunner", "Fred.Web\Fred.EntityFramework.ToolsRunner\Fred.EntityFramework.ToolsRunner.csproj", "{31B728F0-F66E-4244-92DF-C9207D8995CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.DataAccess.Interfaces", "Fred.Web\Fred.DataAccess.Interfaces\Fred.DataAccess.Interfaces.csproj", "{35DEBE33-BEF2-4E52-A453-59B893EA748C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.DataAccess.ExternalService", "Fred.ImportExport\Fred.ImportExport.DataAccess.ExternalService\Fred.ImportExport.DataAccess.ExternalService.csproj", "{ACB25339-9A18-4EC1-9F5C-7A3DF49D574E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Design Patterns", "Design Patterns", "{0399B63B-D8FD-4A8D-90BB-5929BF4B7201}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.DesignPatterns.DI.Unity", "Common\DesignPatterns\Fred.DesignPatterns.DI.Unity\Fred.DesignPatterns.DI.Unity.csproj", "{BBB7AD29-DD37-49D3-A7C9-C6DA00686268}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.DesignPatterns.DI.EntityFramework", "Common\DesignPatterns\Fred.DesignPatterns.DI.EntityFramework\Fred.DesignPatterns.DI.EntityFramework.csproj", "{3BA2A32E-B395-4284-844A-5719522C0A1C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.DesignPatterns.DI.FluentValidation", "Common\DesignPatterns\Fred.DesignPatterns.DI.FluentValidation\Fred.DesignPatterns.DI.FluentValidation.csproj", "{FF37C0F3-5D45-45B1-9EB3-2BCA073FE587}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.DesignPatterns.DI.Framework", "Common\DesignPatterns\Fred.DesignPatterns.DI.Framework\Fred.DesignPatterns.DI.Framework.csproj", "{BF611D8A-6A3B-4B06-AC2F-CF982530ECC8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.DesignPatterns.DI.Managers", "Common\DesignPatterns\Fred.DesignPatterns.DI.Managers\Fred.DesignPatterns.DI.Managers.csproj", "{0E1E1425-FEE7-40FC-98AF-2536C8A8A3EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.DesignPatterns.DI.Mvc", "Common\DesignPatterns\Fred.DesignPatterns.DI.Mvc\Fred.DesignPatterns.DI.Mvc.csproj", "{91230EDF-44E0-43AA-91A6-0A0AED0FF0EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.DesignPatterns.DI.Repositories", "Common\DesignPatterns\Fred.DesignPatterns.DI.Repositories\Fred.DesignPatterns.DI.Repositories.csproj", "{5E447072-D410-4DBD-9095-F732DC036C87}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.DesignPatterns.DI.Services", "Common\DesignPatterns\Fred.DesignPatterns.DI.Services\Fred.DesignPatterns.DI.Services.csproj", "{D278BBD9-28A1-4554-9386-FD1568A50BF1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.DesignPatterns.DI.Transversal", "Common\DesignPatterns\Fred.DesignPatterns.DI.Transversal\Fred.DesignPatterns.DI.Transversal.csproj", "{E92C854F-6989-45AB-AA3E-2C4E4689F414}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.DesignPatterns.DI.WebApi", "Common\DesignPatterns\Fred.DesignPatterns.DI.WebApi\Fred.DesignPatterns.DI.WebApi.csproj", "{B2D068EB-4C63-4583-8A81-E1169D67D12A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Group Specific", "Group Specific", "{50C03530-9F96-4520-A483-4C84B21DA6E7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Documentation", "_Documentation", "{C792417E-D28E-4886-B4A2-784BCD617D67}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Default", "Default", "{1B4F86E7-A056-46B4-8FA3-6DD2E19CB305}"
+	ProjectSection(SolutionItems) = preProject
+		Common\GroupSpecific\_Documentation\Default\Fred.GroupSpecific.Default.Sample\DefaultSampleManager.cs = Common\GroupSpecific\_Documentation\Default\Fred.GroupSpecific.Default.Sample\DefaultSampleManager.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fes", "Fes", "{40F8F1D4-3544-4B7B-8898-C3B5C0EB856D}"
+	ProjectSection(SolutionItems) = preProject
+		Common\GroupSpecific\_Documentation\Fes\Fred.GroupSpecific.Fes.Sample\FesSampleManager.cs = Common\GroupSpecific\_Documentation\Fes\Fred.GroupSpecific.Fes.Sample\FesSampleManager.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fred.Business", "Fred.Business", "{B9B4AB4F-9E1C-42F5-BA04-A6A280B67AB7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ftp", "Ftp", "{840974FE-91DB-4606-AC0B-F147E326DF33}"
+	ProjectSection(SolutionItems) = preProject
+		Common\GroupSpecific\_Documentation\Ftp\Fred.GroupSpecific.Ftp.Sample\FtpSampleManager.cs = Common\GroupSpecific\_Documentation\Ftp\Fred.GroupSpecific.Ftp.Sample\FtpSampleManager.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Rzb", "Rzb", "{86A2D2F6-2181-4E8C-AB98-3009971BF87B}"
+	ProjectSection(SolutionItems) = preProject
+		Common\GroupSpecific\_Documentation\Rzb\Fred.GroupSpecific.Rzb.Sample\RzbSampleManager.cs = Common\GroupSpecific\_Documentation\Rzb\Fred.GroupSpecific.Rzb.Sample\RzbSampleManager.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Managers", "Managers", "{E3B110AB-09C6-4940-88E8-4977D9357A7E}"
+	ProjectSection(SolutionItems) = preProject
+		Common\GroupSpecific\_Documentation\Fred.Business\Managers\ISampleManager.cs = Common\GroupSpecific\_Documentation\Fred.Business\Managers\ISampleManager.cs
+		Common\GroupSpecific\_Documentation\Fred.Business\Managers\SampleManager.cs = Common\GroupSpecific\_Documentation\Fred.Business\Managers\SampleManager.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Default", "Default", "{32D9B436-542E-4AEF-9D6F-4CA96294010E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fes", "Fes", "{897B9895-80F5-4EC6-BDBE-90F7256434D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ftp", "Ftp", "{0FAF34DD-FDD5-4113-B042-BC44C1CC5B34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Rzb", "Rzb", "{C7818A7C-C613-4DEF-AABA-D1D9C1582D46}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.GroupSpecific.Default.Societe", "Common\GroupSpecific\Default\Fred.GroupSpecific.Default.Societe\Fred.GroupSpecific.Default.Societe.csproj", "{E53FAB53-78E6-4C24-9752-7C2350318DE7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.GroupSpecific.Fes.Societe", "Common\GroupSpecific\Fes\Fred.GroupSpecific.Fes.Societe\Fred.GroupSpecific.Fes.Societe.csproj", "{647C7A15-869C-4CDA-82CF-A6E5D9BBDC5A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.GroupSpecific.Ftp.Societe", "Common\GroupSpecific\Ftp\Fred.GroupSpecific.Ftp.Societe\Fred.GroupSpecific.Ftp.Societe.csproj", "{F51EB26C-F312-4B43-8586-308F9299BCF1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.GroupSpecific.Rzb.Societe", "Common\GroupSpecific\Rzb\Fred.GroupSpecific.Rzb.Societe\Fred.GroupSpecific.Rzb.Societe.csproj", "{B267F8E2-C520-4270-8E96-0898C99A0BF2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.GroupSpecific.Infrastructure", "Common\GroupSpecific\Fred.GroupSpecific.Infrastructure\Fred.GroupSpecific.Infrastructure.csproj", "{1D92BA5A-088D-490F-B4BF-A651DE44D4F3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.GroupSpecific.GroupResolution", "Common\GroupSpecific\Fred.GroupSpecific.GroupResolution\Fred.GroupSpecific.GroupResolution.csproj", "{9BA01A68-4482-40FE-8F92-05D6F6A3ACE0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{F3277088-9638-4E1B-8B2F-315165264757}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Common.Tests.Data", "Common\Fred.Common.Tests.Data\Fred.Common.Tests.Data.csproj", "{1B4ECAF8-B340-4F15-8CF7-A5CEC64DDDF8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.Business.Tests.Integration", "Fred.Web\Fred.Business.Tests.Integration\Fred.Business.Tests.Integration.csproj", "{3D02FE02-CCF2-423D-BAF5-DD505BA8ADBD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.Common.Tests.EntityFramework", "Common\Fred.Common.Tests.EntityFramework\Fred.Common.Tests.EntityFramework.csproj", "{9E33C50E-A6BD-4197-AF93-5D8798D02662}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.Common.Tests", "Common\Fred.Common.Tests\Fred.Common.Tests.csproj", "{A0CF8E85-C5D0-4CB3-90BA-9C946FD992AC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.ImportExport.Bootstrapper.Tests", "Fred.ImportExport\Fred.ImportExport.Bootstrapper.Tests\Fred.ImportExport.Bootstrapper.Tests.csproj", "{2E70C650-4BF7-4C1F-8521-033E198C1269}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.Web.Bootstrapper.Tests", "Fred.Web\Fred.Web.Bootstrapper.Tests\Fred.Web.Bootstrapper.Tests.csproj", "{9420322E-BA88-4E0B-BF2F-ACDA6FC72CAF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.Framework.Web", "Fred.Web\Fred.Framework.Web\Fred.Framework.Web.csproj", "{AEF05789-A081-4109-AA45-3FE4DC792CE4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.Notifications.Interfaces", "Fred.Web\Fred.Notifications.Interfaces\Fred.Notifications.Interfaces.csproj", "{2D1182CF-6EA5-48F3-838F-98C3D9DA0B8E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.SignalR", "Fred.Web\Fred.SignalR\Fred.SignalR.csproj", "{179072C3-BC2E-4001-9072-059A0291599F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.DesignPatterns.DI.SignalR", "Common\DesignPatterns\Fred.DesignPatterns.DI.SignalR\Fred.DesignPatterns.DI.SignalR.csproj", "{6DDD00FE-A110-4DB4-B324-50BEDC2D591F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.DesignPatterns.DI", "Common\DesignPatterns\Fred.DesignPatterns.DI\Fred.DesignPatterns.DI.csproj", "{A222A7B3-DCC2-4DA9-B4AE-0AF7C9BA93EE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DI", "DI", "{D926872E-EDB7-4503-83EE-C6C00E431B5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unity", "Unity", "{7F102E66-C235-4F5D-AF0E-E25A18024F7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fred.ImportExport.Resources", "Fred.ImportExport\Fred.ImportExport.Resources\Fred.ImportExport.Resources.csproj", "{1ED99765-9E9D-4E03-AAFC-154FB18A42FD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.ImportExport.Business.Tests", "Fred.ImportExport.Business.Tests\Fred.ImportExport.Business.Tests.csproj", "{327A6B25-8E2D-415B-A0A6-0223E5D13D5A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.GroupSpecific.Default.ExternalServices", "Common\GroupSpecific\Default\Fred.GroupSpecific.Default.ExternalServices\Fred.GroupSpecific.Default.ExternalServices.csproj", "{CEAF77B2-32BB-4EC7-9502-D523A35A41DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.GroupSpecific.Fes.ExternalServices", "Common\GroupSpecific\Fes\Fred.GroupSpecific.Fes.ExternalServices\Fred.GroupSpecific.Fes.ExternalServices.csproj", "{49D3706A-83AF-4BFF-B960-98F1FFB52246}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.GroupSpecific.Ftp.ExternalServices", "Common\GroupSpecific\Ftp\Fred.GroupSpecific.Ftp.ExternalServices\Fred.GroupSpecific.Ftp.ExternalServices.csproj", "{7D623B4C-9BC3-48E7-8E29-D57552C58256}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.GroupSpecific.Rzb.ExternalServices", "Common\GroupSpecific\Rzb\Fred.GroupSpecific.Rzb.ExternalServices\Fred.GroupSpecific.Rzb.ExternalServices.csproj", "{2A1F170C-0A47-4FA1-BBC0-86ED9B7BA4A7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.ImportExport.DataAccess.Interfaces", "Fred.ImportExport\Fred.ImportExport.DataAccess.Interfaces\Fred.ImportExport.DataAccess.Interfaces.csproj", "{7E31B1AA-2353-4C7C-B79C-84828F04DF13}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Builder", "Builder", "{4432B85C-0A5C-4A62-B7E4-4A2DB5E9263F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fred.DesignPatterns.Builder", "Common\DesignPatterns\Fred.DesignPatterns.Builder\Fred.DesignPatterns.Builder.csproj", "{F3FF2201-FBDD-40EC-9595-A3E55C1FD6A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		SpeedDebug|Any CPU = SpeedDebug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{92478535-02C7-44E0-975E-E31D77E78CCA}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F86F9F7F-2269-4779-9064-515F94070CBD}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{039E00B1-5F56-484C-82BA-5855684A1BBC}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{17451402-6778-4A17-8DB1-542D50DB8C94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17451402-6778-4A17-8DB1-542D50DB8C94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17451402-6778-4A17-8DB1-542D50DB8C94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17451402-6778-4A17-8DB1-542D50DB8C94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17451402-6778-4A17-8DB1-542D50DB8C94}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{17451402-6778-4A17-8DB1-542D50DB8C94}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{A0ACFD5F-F48B-4836-9250-D46973C22F0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0ACFD5F-F48B-4836-9250-D46973C22F0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0ACFD5F-F48B-4836-9250-D46973C22F0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0ACFD5F-F48B-4836-9250-D46973C22F0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0ACFD5F-F48B-4836-9250-D46973C22F0F}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{A0ACFD5F-F48B-4836-9250-D46973C22F0F}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{34D7B42A-0D2F-46C4-A4F3-3842136FB86E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34D7B42A-0D2F-46C4-A4F3-3842136FB86E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34D7B42A-0D2F-46C4-A4F3-3842136FB86E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34D7B42A-0D2F-46C4-A4F3-3842136FB86E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34D7B42A-0D2F-46C4-A4F3-3842136FB86E}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{34D7B42A-0D2F-46C4-A4F3-3842136FB86E}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{A2C5D834-E219-4602-BA23-D47079371003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2C5D834-E219-4602-BA23-D47079371003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2C5D834-E219-4602-BA23-D47079371003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2C5D834-E219-4602-BA23-D47079371003}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2C5D834-E219-4602-BA23-D47079371003}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{A2C5D834-E219-4602-BA23-D47079371003}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{B925EA1C-00A2-4F29-83C0-09A63CE33776}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B925EA1C-00A2-4F29-83C0-09A63CE33776}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B925EA1C-00A2-4F29-83C0-09A63CE33776}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{5CF77ED1-5AF1-4AD6-AF4A-9E792A396E64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CF77ED1-5AF1-4AD6-AF4A-9E792A396E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CF77ED1-5AF1-4AD6-AF4A-9E792A396E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CF77ED1-5AF1-4AD6-AF4A-9E792A396E64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CF77ED1-5AF1-4AD6-AF4A-9E792A396E64}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CF77ED1-5AF1-4AD6-AF4A-9E792A396E64}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{A87F469A-73DC-471A-AD20-A8084B02C1A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A87F469A-73DC-471A-AD20-A8084B02C1A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A87F469A-73DC-471A-AD20-A8084B02C1A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A87F469A-73DC-471A-AD20-A8084B02C1A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A87F469A-73DC-471A-AD20-A8084B02C1A0}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{A87F469A-73DC-471A-AD20-A8084B02C1A0}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{D4DCFE97-9577-487A-BF16-70216B74C445}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4DCFE97-9577-487A-BF16-70216B74C445}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4DCFE97-9577-487A-BF16-70216B74C445}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4DCFE97-9577-487A-BF16-70216B74C445}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4DCFE97-9577-487A-BF16-70216B74C445}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{D4DCFE97-9577-487A-BF16-70216B74C445}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{3800678C-0906-458A-BC65-8CBBD1A3AA99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3800678C-0906-458A-BC65-8CBBD1A3AA99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3800678C-0906-458A-BC65-8CBBD1A3AA99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3800678C-0906-458A-BC65-8CBBD1A3AA99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3800678C-0906-458A-BC65-8CBBD1A3AA99}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3800678C-0906-458A-BC65-8CBBD1A3AA99}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{D3D12F17-3BA4-4B4C-BD9E-2E3FD0923049}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3D12F17-3BA4-4B4C-BD9E-2E3FD0923049}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3D12F17-3BA4-4B4C-BD9E-2E3FD0923049}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3D12F17-3BA4-4B4C-BD9E-2E3FD0923049}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3D12F17-3BA4-4B4C-BD9E-2E3FD0923049}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3D12F17-3BA4-4B4C-BD9E-2E3FD0923049}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{73B1B051-675C-44EE-A521-CBF9AE2B349C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73B1B051-675C-44EE-A521-CBF9AE2B349C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73B1B051-675C-44EE-A521-CBF9AE2B349C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73B1B051-675C-44EE-A521-CBF9AE2B349C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73B1B051-675C-44EE-A521-CBF9AE2B349C}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{73B1B051-675C-44EE-A521-CBF9AE2B349C}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{EB202E1C-5DD4-499C-BAF6-7AFD92CAEC95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB202E1C-5DD4-499C-BAF6-7AFD92CAEC95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB202E1C-5DD4-499C-BAF6-7AFD92CAEC95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB202E1C-5DD4-499C-BAF6-7AFD92CAEC95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB202E1C-5DD4-499C-BAF6-7AFD92CAEC95}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{EB202E1C-5DD4-499C-BAF6-7AFD92CAEC95}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{F1E54D6F-EADB-4C6A-AE5C-7D2DFDD023C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1E54D6F-EADB-4C6A-AE5C-7D2DFDD023C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1E54D6F-EADB-4C6A-AE5C-7D2DFDD023C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1E54D6F-EADB-4C6A-AE5C-7D2DFDD023C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1E54D6F-EADB-4C6A-AE5C-7D2DFDD023C8}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{F1E54D6F-EADB-4C6A-AE5C-7D2DFDD023C8}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{2BEE77D7-295D-48A4-924E-8574E3E22321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BEE77D7-295D-48A4-924E-8574E3E22321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BEE77D7-295D-48A4-924E-8574E3E22321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BEE77D7-295D-48A4-924E-8574E3E22321}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BEE77D7-295D-48A4-924E-8574E3E22321}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{2BEE77D7-295D-48A4-924E-8574E3E22321}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{02D4206E-9D2A-4612-B803-50E989F00A85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02D4206E-9D2A-4612-B803-50E989F00A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02D4206E-9D2A-4612-B803-50E989F00A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02D4206E-9D2A-4612-B803-50E989F00A85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02D4206E-9D2A-4612-B803-50E989F00A85}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02D4206E-9D2A-4612-B803-50E989F00A85}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{9C7A2572-C9A2-4D87-B833-1BE00E2AC0E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C7A2572-C9A2-4D87-B833-1BE00E2AC0E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C7A2572-C9A2-4D87-B833-1BE00E2AC0E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C7A2572-C9A2-4D87-B833-1BE00E2AC0E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C7A2572-C9A2-4D87-B833-1BE00E2AC0E0}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{9C7A2572-C9A2-4D87-B833-1BE00E2AC0E0}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{8904D5C1-9578-4F6C-A5AE-1316022762B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8904D5C1-9578-4F6C-A5AE-1316022762B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8904D5C1-9578-4F6C-A5AE-1316022762B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8904D5C1-9578-4F6C-A5AE-1316022762B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8904D5C1-9578-4F6C-A5AE-1316022762B9}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{8904D5C1-9578-4F6C-A5AE-1316022762B9}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{31B728F0-F66E-4244-92DF-C9207D8995CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31B728F0-F66E-4244-92DF-C9207D8995CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31B728F0-F66E-4244-92DF-C9207D8995CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31B728F0-F66E-4244-92DF-C9207D8995CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31B728F0-F66E-4244-92DF-C9207D8995CF}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31B728F0-F66E-4244-92DF-C9207D8995CF}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{35DEBE33-BEF2-4E52-A453-59B893EA748C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35DEBE33-BEF2-4E52-A453-59B893EA748C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35DEBE33-BEF2-4E52-A453-59B893EA748C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35DEBE33-BEF2-4E52-A453-59B893EA748C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35DEBE33-BEF2-4E52-A453-59B893EA748C}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35DEBE33-BEF2-4E52-A453-59B893EA748C}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{ACB25339-9A18-4EC1-9F5C-7A3DF49D574E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACB25339-9A18-4EC1-9F5C-7A3DF49D574E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACB25339-9A18-4EC1-9F5C-7A3DF49D574E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACB25339-9A18-4EC1-9F5C-7A3DF49D574E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACB25339-9A18-4EC1-9F5C-7A3DF49D574E}.SpeedDebug|Any CPU.ActiveCfg = SpeedDebug|Any CPU
+		{ACB25339-9A18-4EC1-9F5C-7A3DF49D574E}.SpeedDebug|Any CPU.Build.0 = SpeedDebug|Any CPU
+		{BBB7AD29-DD37-49D3-A7C9-C6DA00686268}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBB7AD29-DD37-49D3-A7C9-C6DA00686268}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBB7AD29-DD37-49D3-A7C9-C6DA00686268}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBB7AD29-DD37-49D3-A7C9-C6DA00686268}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBB7AD29-DD37-49D3-A7C9-C6DA00686268}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBB7AD29-DD37-49D3-A7C9-C6DA00686268}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{3BA2A32E-B395-4284-844A-5719522C0A1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BA2A32E-B395-4284-844A-5719522C0A1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BA2A32E-B395-4284-844A-5719522C0A1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BA2A32E-B395-4284-844A-5719522C0A1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BA2A32E-B395-4284-844A-5719522C0A1C}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BA2A32E-B395-4284-844A-5719522C0A1C}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{FF37C0F3-5D45-45B1-9EB3-2BCA073FE587}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF37C0F3-5D45-45B1-9EB3-2BCA073FE587}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF37C0F3-5D45-45B1-9EB3-2BCA073FE587}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF37C0F3-5D45-45B1-9EB3-2BCA073FE587}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF37C0F3-5D45-45B1-9EB3-2BCA073FE587}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF37C0F3-5D45-45B1-9EB3-2BCA073FE587}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{BF611D8A-6A3B-4B06-AC2F-CF982530ECC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF611D8A-6A3B-4B06-AC2F-CF982530ECC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF611D8A-6A3B-4B06-AC2F-CF982530ECC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF611D8A-6A3B-4B06-AC2F-CF982530ECC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF611D8A-6A3B-4B06-AC2F-CF982530ECC8}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF611D8A-6A3B-4B06-AC2F-CF982530ECC8}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{0E1E1425-FEE7-40FC-98AF-2536C8A8A3EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E1E1425-FEE7-40FC-98AF-2536C8A8A3EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E1E1425-FEE7-40FC-98AF-2536C8A8A3EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E1E1425-FEE7-40FC-98AF-2536C8A8A3EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E1E1425-FEE7-40FC-98AF-2536C8A8A3EC}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E1E1425-FEE7-40FC-98AF-2536C8A8A3EC}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{91230EDF-44E0-43AA-91A6-0A0AED0FF0EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91230EDF-44E0-43AA-91A6-0A0AED0FF0EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91230EDF-44E0-43AA-91A6-0A0AED0FF0EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91230EDF-44E0-43AA-91A6-0A0AED0FF0EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91230EDF-44E0-43AA-91A6-0A0AED0FF0EC}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91230EDF-44E0-43AA-91A6-0A0AED0FF0EC}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{5E447072-D410-4DBD-9095-F732DC036C87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E447072-D410-4DBD-9095-F732DC036C87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E447072-D410-4DBD-9095-F732DC036C87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E447072-D410-4DBD-9095-F732DC036C87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E447072-D410-4DBD-9095-F732DC036C87}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E447072-D410-4DBD-9095-F732DC036C87}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{D278BBD9-28A1-4554-9386-FD1568A50BF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D278BBD9-28A1-4554-9386-FD1568A50BF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D278BBD9-28A1-4554-9386-FD1568A50BF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D278BBD9-28A1-4554-9386-FD1568A50BF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D278BBD9-28A1-4554-9386-FD1568A50BF1}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D278BBD9-28A1-4554-9386-FD1568A50BF1}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{E92C854F-6989-45AB-AA3E-2C4E4689F414}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E92C854F-6989-45AB-AA3E-2C4E4689F414}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E92C854F-6989-45AB-AA3E-2C4E4689F414}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E92C854F-6989-45AB-AA3E-2C4E4689F414}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E92C854F-6989-45AB-AA3E-2C4E4689F414}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E92C854F-6989-45AB-AA3E-2C4E4689F414}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{B2D068EB-4C63-4583-8A81-E1169D67D12A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2D068EB-4C63-4583-8A81-E1169D67D12A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2D068EB-4C63-4583-8A81-E1169D67D12A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2D068EB-4C63-4583-8A81-E1169D67D12A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2D068EB-4C63-4583-8A81-E1169D67D12A}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2D068EB-4C63-4583-8A81-E1169D67D12A}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{E53FAB53-78E6-4C24-9752-7C2350318DE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E53FAB53-78E6-4C24-9752-7C2350318DE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E53FAB53-78E6-4C24-9752-7C2350318DE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E53FAB53-78E6-4C24-9752-7C2350318DE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E53FAB53-78E6-4C24-9752-7C2350318DE7}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E53FAB53-78E6-4C24-9752-7C2350318DE7}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{647C7A15-869C-4CDA-82CF-A6E5D9BBDC5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{647C7A15-869C-4CDA-82CF-A6E5D9BBDC5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{647C7A15-869C-4CDA-82CF-A6E5D9BBDC5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{647C7A15-869C-4CDA-82CF-A6E5D9BBDC5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{647C7A15-869C-4CDA-82CF-A6E5D9BBDC5A}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{647C7A15-869C-4CDA-82CF-A6E5D9BBDC5A}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{F51EB26C-F312-4B43-8586-308F9299BCF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F51EB26C-F312-4B43-8586-308F9299BCF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F51EB26C-F312-4B43-8586-308F9299BCF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F51EB26C-F312-4B43-8586-308F9299BCF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F51EB26C-F312-4B43-8586-308F9299BCF1}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F51EB26C-F312-4B43-8586-308F9299BCF1}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{B267F8E2-C520-4270-8E96-0898C99A0BF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B267F8E2-C520-4270-8E96-0898C99A0BF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B267F8E2-C520-4270-8E96-0898C99A0BF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B267F8E2-C520-4270-8E96-0898C99A0BF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B267F8E2-C520-4270-8E96-0898C99A0BF2}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B267F8E2-C520-4270-8E96-0898C99A0BF2}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{1D92BA5A-088D-490F-B4BF-A651DE44D4F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D92BA5A-088D-490F-B4BF-A651DE44D4F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D92BA5A-088D-490F-B4BF-A651DE44D4F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D92BA5A-088D-490F-B4BF-A651DE44D4F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D92BA5A-088D-490F-B4BF-A651DE44D4F3}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D92BA5A-088D-490F-B4BF-A651DE44D4F3}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{9BA01A68-4482-40FE-8F92-05D6F6A3ACE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BA01A68-4482-40FE-8F92-05D6F6A3ACE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BA01A68-4482-40FE-8F92-05D6F6A3ACE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BA01A68-4482-40FE-8F92-05D6F6A3ACE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BA01A68-4482-40FE-8F92-05D6F6A3ACE0}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BA01A68-4482-40FE-8F92-05D6F6A3ACE0}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{1B4ECAF8-B340-4F15-8CF7-A5CEC64DDDF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B4ECAF8-B340-4F15-8CF7-A5CEC64DDDF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B4ECAF8-B340-4F15-8CF7-A5CEC64DDDF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B4ECAF8-B340-4F15-8CF7-A5CEC64DDDF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B4ECAF8-B340-4F15-8CF7-A5CEC64DDDF8}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B4ECAF8-B340-4F15-8CF7-A5CEC64DDDF8}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{3D02FE02-CCF2-423D-BAF5-DD505BA8ADBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D02FE02-CCF2-423D-BAF5-DD505BA8ADBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D02FE02-CCF2-423D-BAF5-DD505BA8ADBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D02FE02-CCF2-423D-BAF5-DD505BA8ADBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D02FE02-CCF2-423D-BAF5-DD505BA8ADBD}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D02FE02-CCF2-423D-BAF5-DD505BA8ADBD}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{9E33C50E-A6BD-4197-AF93-5D8798D02662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E33C50E-A6BD-4197-AF93-5D8798D02662}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E33C50E-A6BD-4197-AF93-5D8798D02662}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E33C50E-A6BD-4197-AF93-5D8798D02662}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E33C50E-A6BD-4197-AF93-5D8798D02662}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E33C50E-A6BD-4197-AF93-5D8798D02662}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{A0CF8E85-C5D0-4CB3-90BA-9C946FD992AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0CF8E85-C5D0-4CB3-90BA-9C946FD992AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0CF8E85-C5D0-4CB3-90BA-9C946FD992AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0CF8E85-C5D0-4CB3-90BA-9C946FD992AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0CF8E85-C5D0-4CB3-90BA-9C946FD992AC}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0CF8E85-C5D0-4CB3-90BA-9C946FD992AC}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{2E70C650-4BF7-4C1F-8521-033E198C1269}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E70C650-4BF7-4C1F-8521-033E198C1269}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E70C650-4BF7-4C1F-8521-033E198C1269}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E70C650-4BF7-4C1F-8521-033E198C1269}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E70C650-4BF7-4C1F-8521-033E198C1269}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E70C650-4BF7-4C1F-8521-033E198C1269}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{9420322E-BA88-4E0B-BF2F-ACDA6FC72CAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9420322E-BA88-4E0B-BF2F-ACDA6FC72CAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9420322E-BA88-4E0B-BF2F-ACDA6FC72CAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9420322E-BA88-4E0B-BF2F-ACDA6FC72CAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9420322E-BA88-4E0B-BF2F-ACDA6FC72CAF}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9420322E-BA88-4E0B-BF2F-ACDA6FC72CAF}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{AEF05789-A081-4109-AA45-3FE4DC792CE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEF05789-A081-4109-AA45-3FE4DC792CE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEF05789-A081-4109-AA45-3FE4DC792CE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEF05789-A081-4109-AA45-3FE4DC792CE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEF05789-A081-4109-AA45-3FE4DC792CE4}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEF05789-A081-4109-AA45-3FE4DC792CE4}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{2D1182CF-6EA5-48F3-838F-98C3D9DA0B8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D1182CF-6EA5-48F3-838F-98C3D9DA0B8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D1182CF-6EA5-48F3-838F-98C3D9DA0B8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D1182CF-6EA5-48F3-838F-98C3D9DA0B8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D1182CF-6EA5-48F3-838F-98C3D9DA0B8E}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D1182CF-6EA5-48F3-838F-98C3D9DA0B8E}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{179072C3-BC2E-4001-9072-059A0291599F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{179072C3-BC2E-4001-9072-059A0291599F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{179072C3-BC2E-4001-9072-059A0291599F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{179072C3-BC2E-4001-9072-059A0291599F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{179072C3-BC2E-4001-9072-059A0291599F}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{179072C3-BC2E-4001-9072-059A0291599F}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{6DDD00FE-A110-4DB4-B324-50BEDC2D591F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DDD00FE-A110-4DB4-B324-50BEDC2D591F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DDD00FE-A110-4DB4-B324-50BEDC2D591F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DDD00FE-A110-4DB4-B324-50BEDC2D591F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DDD00FE-A110-4DB4-B324-50BEDC2D591F}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DDD00FE-A110-4DB4-B324-50BEDC2D591F}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{A222A7B3-DCC2-4DA9-B4AE-0AF7C9BA93EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A222A7B3-DCC2-4DA9-B4AE-0AF7C9BA93EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A222A7B3-DCC2-4DA9-B4AE-0AF7C9BA93EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A222A7B3-DCC2-4DA9-B4AE-0AF7C9BA93EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A222A7B3-DCC2-4DA9-B4AE-0AF7C9BA93EE}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A222A7B3-DCC2-4DA9-B4AE-0AF7C9BA93EE}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{1ED99765-9E9D-4E03-AAFC-154FB18A42FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ED99765-9E9D-4E03-AAFC-154FB18A42FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ED99765-9E9D-4E03-AAFC-154FB18A42FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ED99765-9E9D-4E03-AAFC-154FB18A42FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ED99765-9E9D-4E03-AAFC-154FB18A42FD}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ED99765-9E9D-4E03-AAFC-154FB18A42FD}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{327A6B25-8E2D-415B-A0A6-0223E5D13D5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{327A6B25-8E2D-415B-A0A6-0223E5D13D5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{327A6B25-8E2D-415B-A0A6-0223E5D13D5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{327A6B25-8E2D-415B-A0A6-0223E5D13D5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{327A6B25-8E2D-415B-A0A6-0223E5D13D5A}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{327A6B25-8E2D-415B-A0A6-0223E5D13D5A}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{CEAF77B2-32BB-4EC7-9502-D523A35A41DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEAF77B2-32BB-4EC7-9502-D523A35A41DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEAF77B2-32BB-4EC7-9502-D523A35A41DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEAF77B2-32BB-4EC7-9502-D523A35A41DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEAF77B2-32BB-4EC7-9502-D523A35A41DC}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEAF77B2-32BB-4EC7-9502-D523A35A41DC}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{49D3706A-83AF-4BFF-B960-98F1FFB52246}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49D3706A-83AF-4BFF-B960-98F1FFB52246}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49D3706A-83AF-4BFF-B960-98F1FFB52246}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49D3706A-83AF-4BFF-B960-98F1FFB52246}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49D3706A-83AF-4BFF-B960-98F1FFB52246}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49D3706A-83AF-4BFF-B960-98F1FFB52246}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{7D623B4C-9BC3-48E7-8E29-D57552C58256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D623B4C-9BC3-48E7-8E29-D57552C58256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D623B4C-9BC3-48E7-8E29-D57552C58256}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D623B4C-9BC3-48E7-8E29-D57552C58256}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D623B4C-9BC3-48E7-8E29-D57552C58256}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D623B4C-9BC3-48E7-8E29-D57552C58256}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{2A1F170C-0A47-4FA1-BBC0-86ED9B7BA4A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A1F170C-0A47-4FA1-BBC0-86ED9B7BA4A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A1F170C-0A47-4FA1-BBC0-86ED9B7BA4A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A1F170C-0A47-4FA1-BBC0-86ED9B7BA4A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A1F170C-0A47-4FA1-BBC0-86ED9B7BA4A7}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A1F170C-0A47-4FA1-BBC0-86ED9B7BA4A7}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{7E31B1AA-2353-4C7C-B79C-84828F04DF13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E31B1AA-2353-4C7C-B79C-84828F04DF13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E31B1AA-2353-4C7C-B79C-84828F04DF13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E31B1AA-2353-4C7C-B79C-84828F04DF13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E31B1AA-2353-4C7C-B79C-84828F04DF13}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E31B1AA-2353-4C7C-B79C-84828F04DF13}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{F3FF2201-FBDD-40EC-9595-A3E55C1FD6A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3FF2201-FBDD-40EC-9595-A3E55C1FD6A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3FF2201-FBDD-40EC-9595-A3E55C1FD6A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3FF2201-FBDD-40EC-9595-A3E55C1FD6A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3FF2201-FBDD-40EC-9595-A3E55C1FD6A5}.SpeedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3FF2201-FBDD-40EC-9595-A3E55C1FD6A5}.SpeedDebug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{87A76B7F-C75D-4CEF-8288-09ECF9949241} = {AD33F826-F2C3-4934-9CE6-044F15595BDD}
+		{F83F302A-F18F-4095-9190-EC1F35C767B8} = {0A9692BC-E68B-402E-9079-D6BB927924D3}
+		{BBE3B562-D1D3-4924-BA6C-92606E0D3371} = {AD33F826-F2C3-4934-9CE6-044F15595BDD}
+		{DBFE333C-CC0A-453C-9258-8F21C34F430A} = {0A9692BC-E68B-402E-9079-D6BB927924D3}
+		{081AB82D-BD5A-4B8C-8B41-F8E3426F84E3} = {AD33F826-F2C3-4934-9CE6-044F15595BDD}
+		{526B35AB-BF3A-4402-9E8D-7A5475131521} = {0A9692BC-E68B-402E-9079-D6BB927924D3}
+		{9E58548F-EF3E-4FAD-B192-ED6CF2338304} = {AD33F826-F2C3-4934-9CE6-044F15595BDD}
+		{D23F391D-FAF0-46A4-BEE1-C6021FAF00DB} = {0A9692BC-E68B-402E-9079-D6BB927924D3}
+		{AAA61CD2-5099-43AE-A208-02259BBE39E6} = {AD33F826-F2C3-4934-9CE6-044F15595BDD}
+		{53478EFF-9948-498F-BA10-1C58BD3C8AA1} = {0A9692BC-E68B-402E-9079-D6BB927924D3}
+		{EF11A862-AB02-41CC-B1F0-39D4EDEEBCE7} = {AD33F826-F2C3-4934-9CE6-044F15595BDD}
+		{A36C36B3-12D9-4A57-946F-5645FFE276E6} = {0A9692BC-E68B-402E-9079-D6BB927924D3}
+		{D84768F7-F096-4E6D-997E-AC1D9232B47A} = {AAA61CD2-5099-43AE-A208-02259BBE39E6}
+		{92478535-02C7-44E0-975E-E31D77E78CCA} = {AAA61CD2-5099-43AE-A208-02259BBE39E6}
+		{4DEBCCA1-16C5-4A93-AA94-7CDE07ED56AA} = {9E58548F-EF3E-4FAD-B192-ED6CF2338304}
+		{F86F9F7F-2269-4779-9064-515F94070CBD} = {081AB82D-BD5A-4B8C-8B41-F8E3426F84E3}
+		{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E} = {AAA61CD2-5099-43AE-A208-02259BBE39E6}
+		{039E00B1-5F56-484C-82BA-5855684A1BBC} = {BBE3B562-D1D3-4924-BA6C-92606E0D3371}
+		{17451402-6778-4A17-8DB1-542D50DB8C94} = {081AB82D-BD5A-4B8C-8B41-F8E3426F84E3}
+		{A0ACFD5F-F48B-4836-9250-D46973C22F0F} = {BBE3B562-D1D3-4924-BA6C-92606E0D3371}
+		{34D7B42A-0D2F-46C4-A4F3-3842136FB86E} = {87A76B7F-C75D-4CEF-8288-09ECF9949241}
+		{A2C5D834-E219-4602-BA23-D47079371003} = {87A76B7F-C75D-4CEF-8288-09ECF9949241}
+		{B925EA1C-00A2-4F29-83C0-09A63CE33776} = {AFFE2EEA-D61A-468B-87FF-16B880AFCA86}
+		{5CF77ED1-5AF1-4AD6-AF4A-9E792A396E64} = {EF11A862-AB02-41CC-B1F0-39D4EDEEBCE7}
+		{A87F469A-73DC-471A-AD20-A8084B02C1A0} = {EF11A862-AB02-41CC-B1F0-39D4EDEEBCE7}
+		{D4DCFE97-9577-487A-BF16-70216B74C445} = {9E58548F-EF3E-4FAD-B192-ED6CF2338304}
+		{3800678C-0906-458A-BC65-8CBBD1A3AA99} = {53478EFF-9948-498F-BA10-1C58BD3C8AA1}
+		{D3D12F17-3BA4-4B4C-BD9E-2E3FD0923049} = {D23F391D-FAF0-46A4-BEE1-C6021FAF00DB}
+		{73B1B051-675C-44EE-A521-CBF9AE2B349C} = {53478EFF-9948-498F-BA10-1C58BD3C8AA1}
+		{EB202E1C-5DD4-499C-BAF6-7AFD92CAEC95} = {526B35AB-BF3A-4402-9E8D-7A5475131521}
+		{F1E54D6F-EADB-4C6A-AE5C-7D2DFDD023C8} = {53478EFF-9948-498F-BA10-1C58BD3C8AA1}
+		{2BEE77D7-295D-48A4-924E-8574E3E22321} = {DBFE333C-CC0A-453C-9258-8F21C34F430A}
+		{02D4206E-9D2A-4612-B803-50E989F00A85} = {F83F302A-F18F-4095-9190-EC1F35C767B8}
+		{9C7A2572-C9A2-4D87-B833-1BE00E2AC0E0} = {F83F302A-F18F-4095-9190-EC1F35C767B8}
+		{8904D5C1-9578-4F6C-A5AE-1316022762B9} = {F83F302A-F18F-4095-9190-EC1F35C767B8}
+		{AFFE2EEA-D61A-468B-87FF-16B880AFCA86} = {C77694AA-C4FE-48F3-AD12-38FD276C5A23}
+		{6FE54EF5-1A07-48AD-ACBD-D09E73A889B9} = {C77694AA-C4FE-48F3-AD12-38FD276C5A23}
+		{4F26D29C-53D4-4875-8CAE-A07FD6B6583C} = {60BB381A-9355-4505-89A7-64C133FEF9D4}
+		{1944E3C1-CFB7-4C4D-B873-46BB77CC1119} = {60BB381A-9355-4505-89A7-64C133FEF9D4}
+		{00F51B80-05C9-428E-9991-DF9518FAF9AF} = {1944E3C1-CFB7-4C4D-B873-46BB77CC1119}
+		{E0414D24-1A53-4CB1-AA69-ADEC6CA7CF88} = {4F26D29C-53D4-4875-8CAE-A07FD6B6583C}
+		{31B728F0-F66E-4244-92DF-C9207D8995CF} = {9E58548F-EF3E-4FAD-B192-ED6CF2338304}
+		{35DEBE33-BEF2-4E52-A453-59B893EA748C} = {081AB82D-BD5A-4B8C-8B41-F8E3426F84E3}
+		{ACB25339-9A18-4EC1-9F5C-7A3DF49D574E} = {526B35AB-BF3A-4402-9E8D-7A5475131521}
+		{0399B63B-D8FD-4A8D-90BB-5929BF4B7201} = {C77694AA-C4FE-48F3-AD12-38FD276C5A23}
+		{BBB7AD29-DD37-49D3-A7C9-C6DA00686268} = {7F102E66-C235-4F5D-AF0E-E25A18024F7C}
+		{3BA2A32E-B395-4284-844A-5719522C0A1C} = {D926872E-EDB7-4503-83EE-C6C00E431B5C}
+		{FF37C0F3-5D45-45B1-9EB3-2BCA073FE587} = {D926872E-EDB7-4503-83EE-C6C00E431B5C}
+		{BF611D8A-6A3B-4B06-AC2F-CF982530ECC8} = {D926872E-EDB7-4503-83EE-C6C00E431B5C}
+		{0E1E1425-FEE7-40FC-98AF-2536C8A8A3EC} = {D926872E-EDB7-4503-83EE-C6C00E431B5C}
+		{91230EDF-44E0-43AA-91A6-0A0AED0FF0EC} = {D926872E-EDB7-4503-83EE-C6C00E431B5C}
+		{5E447072-D410-4DBD-9095-F732DC036C87} = {D926872E-EDB7-4503-83EE-C6C00E431B5C}
+		{D278BBD9-28A1-4554-9386-FD1568A50BF1} = {D926872E-EDB7-4503-83EE-C6C00E431B5C}
+		{E92C854F-6989-45AB-AA3E-2C4E4689F414} = {D926872E-EDB7-4503-83EE-C6C00E431B5C}
+		{B2D068EB-4C63-4583-8A81-E1169D67D12A} = {D926872E-EDB7-4503-83EE-C6C00E431B5C}
+		{50C03530-9F96-4520-A483-4C84B21DA6E7} = {C77694AA-C4FE-48F3-AD12-38FD276C5A23}
+		{C792417E-D28E-4886-B4A2-784BCD617D67} = {50C03530-9F96-4520-A483-4C84B21DA6E7}
+		{1B4F86E7-A056-46B4-8FA3-6DD2E19CB305} = {C792417E-D28E-4886-B4A2-784BCD617D67}
+		{40F8F1D4-3544-4B7B-8898-C3B5C0EB856D} = {C792417E-D28E-4886-B4A2-784BCD617D67}
+		{B9B4AB4F-9E1C-42F5-BA04-A6A280B67AB7} = {C792417E-D28E-4886-B4A2-784BCD617D67}
+		{840974FE-91DB-4606-AC0B-F147E326DF33} = {C792417E-D28E-4886-B4A2-784BCD617D67}
+		{86A2D2F6-2181-4E8C-AB98-3009971BF87B} = {C792417E-D28E-4886-B4A2-784BCD617D67}
+		{E3B110AB-09C6-4940-88E8-4977D9357A7E} = {B9B4AB4F-9E1C-42F5-BA04-A6A280B67AB7}
+		{32D9B436-542E-4AEF-9D6F-4CA96294010E} = {50C03530-9F96-4520-A483-4C84B21DA6E7}
+		{897B9895-80F5-4EC6-BDBE-90F7256434D7} = {50C03530-9F96-4520-A483-4C84B21DA6E7}
+		{0FAF34DD-FDD5-4113-B042-BC44C1CC5B34} = {50C03530-9F96-4520-A483-4C84B21DA6E7}
+		{C7818A7C-C613-4DEF-AABA-D1D9C1582D46} = {50C03530-9F96-4520-A483-4C84B21DA6E7}
+		{E53FAB53-78E6-4C24-9752-7C2350318DE7} = {32D9B436-542E-4AEF-9D6F-4CA96294010E}
+		{647C7A15-869C-4CDA-82CF-A6E5D9BBDC5A} = {897B9895-80F5-4EC6-BDBE-90F7256434D7}
+		{F51EB26C-F312-4B43-8586-308F9299BCF1} = {0FAF34DD-FDD5-4113-B042-BC44C1CC5B34}
+		{B267F8E2-C520-4270-8E96-0898C99A0BF2} = {C7818A7C-C613-4DEF-AABA-D1D9C1582D46}
+		{1D92BA5A-088D-490F-B4BF-A651DE44D4F3} = {50C03530-9F96-4520-A483-4C84B21DA6E7}
+		{9BA01A68-4482-40FE-8F92-05D6F6A3ACE0} = {50C03530-9F96-4520-A483-4C84B21DA6E7}
+		{F3277088-9638-4E1B-8B2F-315165264757} = {C77694AA-C4FE-48F3-AD12-38FD276C5A23}
+		{1B4ECAF8-B340-4F15-8CF7-A5CEC64DDDF8} = {F3277088-9638-4E1B-8B2F-315165264757}
+		{3D02FE02-CCF2-423D-BAF5-DD505BA8ADBD} = {EF11A862-AB02-41CC-B1F0-39D4EDEEBCE7}
+		{9E33C50E-A6BD-4197-AF93-5D8798D02662} = {F3277088-9638-4E1B-8B2F-315165264757}
+		{A0CF8E85-C5D0-4CB3-90BA-9C946FD992AC} = {F3277088-9638-4E1B-8B2F-315165264757}
+		{2E70C650-4BF7-4C1F-8521-033E198C1269} = {A36C36B3-12D9-4A57-946F-5645FFE276E6}
+		{9420322E-BA88-4E0B-BF2F-ACDA6FC72CAF} = {EF11A862-AB02-41CC-B1F0-39D4EDEEBCE7}
+		{AEF05789-A081-4109-AA45-3FE4DC792CE4} = {AAA61CD2-5099-43AE-A208-02259BBE39E6}
+		{2D1182CF-6EA5-48F3-838F-98C3D9DA0B8E} = {AAA61CD2-5099-43AE-A208-02259BBE39E6}
+		{179072C3-BC2E-4001-9072-059A0291599F} = {AAA61CD2-5099-43AE-A208-02259BBE39E6}
+		{6DDD00FE-A110-4DB4-B324-50BEDC2D591F} = {D926872E-EDB7-4503-83EE-C6C00E431B5C}
+		{A222A7B3-DCC2-4DA9-B4AE-0AF7C9BA93EE} = {D926872E-EDB7-4503-83EE-C6C00E431B5C}
+		{D926872E-EDB7-4503-83EE-C6C00E431B5C} = {0399B63B-D8FD-4A8D-90BB-5929BF4B7201}
+		{7F102E66-C235-4F5D-AF0E-E25A18024F7C} = {D926872E-EDB7-4503-83EE-C6C00E431B5C}
+		{1ED99765-9E9D-4E03-AAFC-154FB18A42FD} = {53478EFF-9948-498F-BA10-1C58BD3C8AA1}
+		{327A6B25-8E2D-415B-A0A6-0223E5D13D5A} = {A36C36B3-12D9-4A57-946F-5645FFE276E6}
+		{CEAF77B2-32BB-4EC7-9502-D523A35A41DC} = {32D9B436-542E-4AEF-9D6F-4CA96294010E}
+		{49D3706A-83AF-4BFF-B960-98F1FFB52246} = {897B9895-80F5-4EC6-BDBE-90F7256434D7}
+		{7D623B4C-9BC3-48E7-8E29-D57552C58256} = {0FAF34DD-FDD5-4113-B042-BC44C1CC5B34}
+		{2A1F170C-0A47-4FA1-BBC0-86ED9B7BA4A7} = {C7818A7C-C613-4DEF-AABA-D1D9C1582D46}
+		{7E31B1AA-2353-4C7C-B79C-84828F04DF13} = {526B35AB-BF3A-4402-9E8D-7A5475131521}
+		{4432B85C-0A5C-4A62-B7E4-4A2DB5E9263F} = {0399B63B-D8FD-4A8D-90BB-5929BF4B7201}
+		{F3FF2201-FBDD-40EC-9595-A3E55C1FD6A5} = {4432B85C-0A5C-4A62-B7E4-4A2DB5E9263F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CAEDED87-417D-4E9F-9A22-BA396FB752BC}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 62
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://fcistgweb-dev01v.fci.lan:8080/tfs/fred
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Fred.Web\\Fred.Entities\\Fred.Entities.csproj
+		SccProjectTopLevelParentUniqueName1 = Fred.sln
+		SccProjectName1 = Fred.Web/Fred.Entities
+		SccLocalPath1 = Fred.Web\\Fred.Entities
+		SccProjectUniqueName2 = Fred.Web\\Fred.Framework\\Fred.Framework.csproj
+		SccProjectTopLevelParentUniqueName2 = Fred.sln
+		SccProjectName2 = Fred.Web/Fred.Framework
+		SccLocalPath2 = Fred.Web\\Fred.Framework
+		SccProjectUniqueName3 = Fred.Web\\Fred.EntityFramework\\Fred.EntityFramework.csproj
+		SccProjectTopLevelParentUniqueName3 = Fred.sln
+		SccProjectName3 = Fred.Web/Fred.EntityFramework
+		SccLocalPath3 = Fred.Web\\Fred.EntityFramework
+		SccProjectUniqueName4 = Fred.Web\\Fred.DataAccess\\Fred.DataAccess.csproj
+		SccProjectTopLevelParentUniqueName4 = Fred.sln
+		SccProjectName4 = Fred.Web/Fred.DataAccess
+		SccLocalPath4 = Fred.Web\\Fred.DataAccess
+		SccProjectUniqueName5 = Fred.Web\\Fred.Web.Shared\\Fred.Web.Shared.csproj
+		SccProjectTopLevelParentUniqueName5 = Fred.sln
+		SccProjectName5 = Fred.Web/Fred.Web.Shared
+		SccLocalPath5 = Fred.Web\\Fred.Web.Shared
+		SccProjectUniqueName6 = Fred.Web\\Fred.Business\\Fred.Business.csproj
+		SccProjectTopLevelParentUniqueName6 = Fred.sln
+		SccProjectName6 = Fred.Web/Fred.Business
+		SccLocalPath6 = Fred.Web\\Fred.Business
+		SccProjectUniqueName7 = Fred.Web\\Fred.DataAccess.ExternalService\\Fred.DataAccess.ExternalService.csproj
+		SccProjectTopLevelParentUniqueName7 = Fred.sln
+		SccProjectName7 = Fred.Web/Fred.DataAccess.ExternalService
+		SccLocalPath7 = Fred.Web\\Fred.DataAccess.ExternalService
+		SccProjectUniqueName8 = Fred.Web\\Fred.Business.ExternalService\\Fred.Business.ExternalService.csproj
+		SccProjectTopLevelParentUniqueName8 = Fred.sln
+		SccProjectName8 = Fred.Web/Fred.Business.ExternalService
+		SccLocalPath8 = Fred.Web\\Fred.Business.ExternalService
+		SccProjectUniqueName9 = Fred.Web\\Bootstrapper\\Fred.Web.Bootstrapper.csproj
+		SccProjectTopLevelParentUniqueName9 = Fred.sln
+		SccProjectName9 = Fred.Web/Bootstrapper
+		SccLocalPath9 = Fred.Web\\Bootstrapper
+		SccProjectUniqueName10 = Fred.Web\\Fred.Web\\Fred.Web.csproj
+		SccProjectTopLevelParentUniqueName10 = Fred.sln
+		SccProjectName10 = Fred.Web/Fred.Web
+		SccLocalPath10 = Fred.Web\\Fred.Web
+		SccProjectUniqueName11 = Fred.Web\\Fred.Analysis\\Fred.Analysis.modelproj
+		SccProjectTopLevelParentUniqueName11 = Fred.sln
+		SccProjectName11 = Fred.Web/Fred.Analysis
+		SccLocalPath11 = Fred.Web\\Fred.Analysis
+		SccProjectUniqueName12 = Fred.Web\\Fred.Business.Tests\\Fred.Business.Tests.csproj
+		SccProjectTopLevelParentUniqueName12 = Fred.sln
+		SccProjectName12 = Fred.Web/Fred.Business.Tests
+		SccLocalPath12 = Fred.Web\\Fred.Business.Tests
+		SccProjectUniqueName13 = Fred.Web\\Fred.Framework.Tests\\Fred.Framework.Tests.csproj
+		SccProjectTopLevelParentUniqueName13 = Fred.sln
+		SccProjectName13 = Fred.Web/Fred.Framework.Tests
+		SccLocalPath13 = Fred.Web\\Fred.Framework.Tests
+		SccProjectUniqueName14 = Fred.Web\\Fred.Referential\\Fred.Referential.csproj
+		SccProjectTopLevelParentUniqueName14 = Fred.sln
+		SccProjectName14 = Fred.Web/Fred.Referential
+		SccLocalPath14 = Fred.Web\\Fred.Referential
+		SccProjectUniqueName15 = Fred.ImportExport\\Fred.ImportExport.Entities\\Fred.ImportExport.Entities.csproj
+		SccProjectTopLevelParentUniqueName15 = Fred.sln
+		SccProjectName15 = Fred.ImportExport/Fred.ImportExport.Entities
+		SccLocalPath15 = Fred.ImportExport\\Fred.ImportExport.Entities
+		SccProjectUniqueName16 = Fred.ImportExport\\Fred.ImportExport.Database\\Fred.ImportExport.Database.csproj
+		SccProjectTopLevelParentUniqueName16 = Fred.sln
+		SccProjectName16 = Fred.ImportExport/Fred.ImportExport.Database
+		SccLocalPath16 = Fred.ImportExport\\Fred.ImportExport.Database
+		SccProjectUniqueName17 = Fred.ImportExport\\Fred.ImportExport.Framework\\Fred.ImportExport.Framework.csproj
+		SccProjectTopLevelParentUniqueName17 = Fred.sln
+		SccProjectName17 = Fred.ImportExport/Fred.ImportExport.Framework
+		SccLocalPath17 = Fred.ImportExport\\Fred.ImportExport.Framework
+		SccProjectUniqueName18 = Fred.ImportExport\\Fred.ImportExport.DataAccess\\Fred.ImportExport.DataAccess.csproj
+		SccProjectTopLevelParentUniqueName18 = Fred.sln
+		SccProjectName18 = Fred.ImportExport/Fred.ImportExport.DataAccess
+		SccLocalPath18 = Fred.ImportExport\\Fred.ImportExport.DataAccess
+		SccProjectUniqueName19 = Fred.ImportExport\\Fred.ImportExport.Models\\Fred.ImportExport.Models.csproj
+		SccProjectTopLevelParentUniqueName19 = Fred.sln
+		SccProjectName19 = Fred.ImportExport/Fred.ImportExport.Models
+		SccLocalPath19 = Fred.ImportExport\\Fred.ImportExport.Models
+		SccProjectUniqueName20 = Fred.ImportExport\\Fred.ImportExport.Business\\Fred.ImportExport.Business.csproj
+		SccProjectTopLevelParentUniqueName20 = Fred.sln
+		SccProjectName20 = Fred.ImportExport/Fred.ImportExport.Business
+		SccLocalPath20 = Fred.ImportExport\\Fred.ImportExport.Business
+		SccProjectUniqueName21 = Fred.ImportExport\\Fred.ImportExport.Bootstrapper\\Fred.ImportExport.Bootstrapper.csproj
+		SccProjectTopLevelParentUniqueName21 = Fred.sln
+		SccProjectName21 = Fred.ImportExport/Fred.ImportExport.Bootstrapper
+		SccLocalPath21 = Fred.ImportExport\\Fred.ImportExport.Bootstrapper
+		SccProjectUniqueName22 = Fred.ImportExport\\Fred.ImportExport.Web\\Fred.ImportExport.Web.csproj
+		SccProjectTopLevelParentUniqueName22 = Fred.sln
+		SccProjectName22 = Fred.ImportExport/Fred.ImportExport.Web
+		SccLocalPath22 = Fred.ImportExport\\Fred.ImportExport.Web
+		SccProjectUniqueName23 = Fred.ImportExport\\Fred.ImportExport.Api\\Fred.ImportExport.Api.csproj
+		SccProjectTopLevelParentUniqueName23 = Fred.sln
+		SccProjectName23 = Fred.ImportExport/Fred.ImportExport.Api
+		SccLocalPath23 = Fred.ImportExport\\Fred.ImportExport.Api
+		SccProjectUniqueName24 = Fred.Web\\Fred.EntityFramework.ToolsRunner\\Fred.EntityFramework.ToolsRunner.csproj
+		SccProjectTopLevelParentUniqueName24 = Fred.sln
+		SccProjectName24 = Fred.Web/Fred.EntityFramework.ToolsRunner
+		SccLocalPath24 = Fred.Web\\Fred.EntityFramework.ToolsRunner
+		SccProjectUniqueName25 = Fred.Web\\Fred.DataAccess.Interfaces\\Fred.DataAccess.Interfaces.csproj
+		SccProjectTopLevelParentUniqueName25 = Fred.sln
+		SccProjectName25 = Fred.Web/Fred.DataAccess.Interfaces
+		SccLocalPath25 = Fred.Web\\Fred.DataAccess.Interfaces
+		SccProjectUniqueName26 = Fred.ImportExport\\Fred.ImportExport.DataAccess.ExternalService\\Fred.ImportExport.DataAccess.ExternalService.csproj
+		SccProjectTopLevelParentUniqueName26 = Fred.sln
+		SccProjectName26 = Fred.ImportExport/Fred.ImportExport.DataAccess.ExternalService
+		SccLocalPath26 = Fred.ImportExport\\Fred.ImportExport.DataAccess.ExternalService
+		SccProjectUniqueName27 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.Unity\\Fred.DesignPatterns.DI.Unity.csproj
+		SccProjectTopLevelParentUniqueName27 = Fred.sln
+		SccProjectName27 = Common/DesignPatterns/Fred.DesignPatterns.DI.Unity
+		SccLocalPath27 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.Unity
+		SccProjectUniqueName28 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.Mvc\\Fred.DesignPatterns.DI.Mvc.csproj
+		SccProjectTopLevelParentUniqueName28 = Fred.sln
+		SccProjectName28 = Common/DesignPatterns/Fred.DesignPatterns.DI.Mvc
+		SccLocalPath28 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.Mvc
+		SccProjectUniqueName29 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.WebApi\\Fred.DesignPatterns.DI.WebApi.csproj
+		SccProjectTopLevelParentUniqueName29 = Fred.sln
+		SccProjectName29 = Common/DesignPatterns/Fred.DesignPatterns.DI.WebApi
+		SccLocalPath29 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.WebApi
+		SccProjectUniqueName30 = Common\\GroupSpecific\\Default\\Fred.GroupSpecific.Default.Societe\\Fred.GroupSpecific.Default.Societe.csproj
+		SccProjectTopLevelParentUniqueName30 = Fred.sln
+		SccProjectName30 = Common/GroupSpecific/Default/Fred.GroupSpecific.Default.Societe
+		SccLocalPath30 = Common\\GroupSpecific\\Default\\Fred.GroupSpecific.Default.Societe
+		SccProjectUniqueName31 = Common\\GroupSpecific\\Fes\\Fred.GroupSpecific.Fes.Societe\\Fred.GroupSpecific.Fes.Societe.csproj
+		SccProjectTopLevelParentUniqueName31 = Fred.sln
+		SccProjectName31 = Common/GroupSpecific/Fes/Fred.GroupSpecific.Fes.Societe
+		SccLocalPath31 = Common\\GroupSpecific\\Fes\\Fred.GroupSpecific.Fes.Societe
+		SccProjectUniqueName32 = Common\\GroupSpecific\\Ftp\\Fred.GroupSpecific.Ftp.Societe\\Fred.GroupSpecific.Ftp.Societe.csproj
+		SccProjectTopLevelParentUniqueName32 = Fred.sln
+		SccProjectName32 = Common/GroupSpecific/Ftp/Fred.GroupSpecific.Ftp.Societe
+		SccLocalPath32 = Common\\GroupSpecific\\Ftp\\Fred.GroupSpecific.Ftp.Societe
+		SccProjectUniqueName33 = Common\\GroupSpecific\\Rzb\\Fred.GroupSpecific.Rzb.Societe\\Fred.GroupSpecific.Rzb.Societe.csproj
+		SccProjectTopLevelParentUniqueName33 = Fred.sln
+		SccProjectName33 = Common/GroupSpecific/Rzb/Fred.GroupSpecific.Rzb.Societe
+		SccLocalPath33 = Common\\GroupSpecific\\Rzb\\Fred.GroupSpecific.Rzb.Societe
+		SccProjectUniqueName34 = Common\\GroupSpecific\\Fred.GroupSpecific.Infrastructure\\Fred.GroupSpecific.Infrastructure.csproj
+		SccProjectTopLevelParentUniqueName34 = Fred.sln
+		SccProjectName34 = Common/GroupSpecific/Fred.GroupSpecific.Infrastructure
+		SccLocalPath34 = Common\\GroupSpecific\\Fred.GroupSpecific.Infrastructure
+		SccProjectUniqueName35 = Common\\GroupSpecific\\Fred.GroupSpecific.GroupResolution\\Fred.GroupSpecific.GroupResolution.csproj
+		SccProjectTopLevelParentUniqueName35 = Fred.sln
+		SccProjectName35 = Common/GroupSpecific/Fred.GroupSpecific.GroupResolution
+		SccLocalPath35 = Common\\GroupSpecific\\Fred.GroupSpecific.GroupResolution
+		SccProjectUniqueName36 = Common\\Fred.Common.Tests.Data\\Fred.Common.Tests.Data.csproj
+		SccProjectTopLevelParentUniqueName36 = Fred.sln
+		SccProjectName36 = Common/Fred.Common.Tests.Data
+		SccLocalPath36 = Common\\Fred.Common.Tests.Data
+		SccProjectUniqueName37 = Fred.Web\\Fred.Business.Tests.Integration\\Fred.Business.Tests.Integration.csproj
+		SccProjectTopLevelParentUniqueName37 = Fred.sln
+		SccProjectName37 = Fred.Web/Fred.Business.Tests.Integration
+		SccLocalPath37 = Fred.Web\\Fred.Business.Tests.Integration
+		SccProjectUniqueName38 = Common\\Fred.Common.Tests.EntityFramework\\Fred.Common.Tests.EntityFramework.csproj
+		SccProjectTopLevelParentUniqueName38 = Fred.sln
+		SccProjectName38 = Common/Fred.Common.Tests.EntityFramework
+		SccLocalPath38 = Common\\Fred.Common.Tests.EntityFramework
+		SccProjectUniqueName39 = Common\\Fred.Common.Tests\\Fred.Common.Tests.csproj
+		SccProjectTopLevelParentUniqueName39 = Fred.sln
+		SccProjectName39 = Common/Fred.Common.Tests
+		SccLocalPath39 = Common\\Fred.Common.Tests
+		SccProjectUniqueName40 = Fred.ImportExport\\Fred.ImportExport.Bootstrapper.Tests\\Fred.ImportExport.Bootstrapper.Tests.csproj
+		SccProjectTopLevelParentUniqueName40 = Fred.sln
+		SccProjectName40 = Fred.ImportExport/Fred.ImportExport.Bootstrapper.Tests
+		SccLocalPath40 = Fred.ImportExport\\Fred.ImportExport.Bootstrapper.Tests
+		SccProjectUniqueName41 = Fred.Web\\Fred.Web.Bootstrapper.Tests\\Fred.Web.Bootstrapper.Tests.csproj
+		SccProjectTopLevelParentUniqueName41 = Fred.sln
+		SccProjectName41 = Fred.Web/Fred.Web.Bootstrapper.Tests
+		SccLocalPath41 = Fred.Web\\Fred.Web.Bootstrapper.Tests
+		SccProjectUniqueName42 = Fred.Web\\Fred.Framework.Web\\Fred.Framework.Web.csproj
+		SccProjectTopLevelParentUniqueName42 = Fred.sln
+		SccProjectName42 = Fred.Web/Fred.Framework.Web
+		SccLocalPath42 = Fred.Web\\Fred.Framework.Web
+		SccProjectUniqueName43 = Fred.Web\\Fred.Notifications.Interfaces\\Fred.Notifications.Interfaces.csproj
+		SccProjectTopLevelParentUniqueName43 = Fred.sln
+		SccProjectName43 = Fred.Web/Fred.Notifications.Interfaces
+		SccLocalPath43 = Fred.Web\\Fred.Notifications.Interfaces
+		SccProjectUniqueName44 = Fred.Web\\Fred.SignalR\\Fred.SignalR.csproj
+		SccProjectTopLevelParentUniqueName44 = Fred.sln
+		SccProjectName44 = Fred.Web/Fred.SignalR
+		SccLocalPath44 = Fred.Web\\Fred.SignalR
+		SccProjectUniqueName45 = Common\\DesignPatterns\\Fred.DesignPatterns.DI\\Fred.DesignPatterns.DI.csproj
+		SccProjectTopLevelParentUniqueName45 = Fred.sln
+		SccProjectName45 = Common/DesignPatterns/Fred.DesignPatterns.DI
+		SccLocalPath45 = Common\\DesignPatterns\\Fred.DesignPatterns.DI
+		SccProjectUniqueName46 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.EntityFramework\\Fred.DesignPatterns.DI.EntityFramework.csproj
+		SccProjectTopLevelParentUniqueName46 = Fred.sln
+		SccProjectName46 = Common/DesignPatterns/Fred.DesignPatterns.DI.EntityFramework
+		SccLocalPath46 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.EntityFramework
+		SccProjectUniqueName47 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.FluentValidation\\Fred.DesignPatterns.DI.FluentValidation.csproj
+		SccProjectTopLevelParentUniqueName47 = Fred.sln
+		SccProjectName47 = Common/DesignPatterns/Fred.DesignPatterns.DI.FluentValidation
+		SccLocalPath47 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.FluentValidation
+		SccProjectUniqueName48 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.Managers\\Fred.DesignPatterns.DI.Managers.csproj
+		SccProjectTopLevelParentUniqueName48 = Fred.sln
+		SccProjectName48 = Common/DesignPatterns/Fred.DesignPatterns.DI.Managers
+		SccLocalPath48 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.Managers
+		SccProjectUniqueName49 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.Framework\\Fred.DesignPatterns.DI.Framework.csproj
+		SccProjectTopLevelParentUniqueName49 = Fred.sln
+		SccProjectName49 = Common/DesignPatterns/Fred.DesignPatterns.DI.Framework
+		SccLocalPath49 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.Framework
+		SccProjectUniqueName50 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.Repositories\\Fred.DesignPatterns.DI.Repositories.csproj
+		SccProjectTopLevelParentUniqueName50 = Fred.sln
+		SccProjectName50 = Common/DesignPatterns/Fred.DesignPatterns.DI.Repositories
+		SccLocalPath50 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.Repositories
+		SccProjectUniqueName51 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.Services\\Fred.DesignPatterns.DI.Services.csproj
+		SccProjectTopLevelParentUniqueName51 = Fred.sln
+		SccProjectName51 = Common/DesignPatterns/Fred.DesignPatterns.DI.Services
+		SccLocalPath51 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.Services
+		SccProjectUniqueName52 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.SignalR\\Fred.DesignPatterns.DI.SignalR.csproj
+		SccProjectTopLevelParentUniqueName52 = Fred.sln
+		SccProjectName52 = Common/DesignPatterns/Fred.DesignPatterns.DI.SignalR
+		SccLocalPath52 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.SignalR
+		SccProjectUniqueName53 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.Transversal\\Fred.DesignPatterns.DI.Transversal.csproj
+		SccProjectTopLevelParentUniqueName53 = Fred.sln
+		SccProjectName53 = Common/DesignPatterns/Fred.DesignPatterns.DI.Transversal
+		SccLocalPath53 = Common\\DesignPatterns\\Fred.DesignPatterns.DI.Transversal
+		SccProjectUniqueName54 = Fred.ImportExport\\Fred.ImportExport.Resources\\Fred.ImportExport.Resources.csproj
+		SccProjectTopLevelParentUniqueName54 = Fred.sln
+		SccProjectName54 = Fred.ImportExport/Fred.ImportExport.Resources
+		SccLocalPath54 = Fred.ImportExport\\Fred.ImportExport.Resources
+		SccProjectUniqueName55 = Fred.ImportExport.Business.Tests\\Fred.ImportExport.Business.Tests.csproj
+		SccProjectTopLevelParentUniqueName55 = Fred.sln
+		SccProjectName55 = Fred.ImportExport.Business.Tests
+		SccLocalPath55 = Fred.ImportExport.Business.Tests
+		SccProjectUniqueName56 = Common\\GroupSpecific\\Default\\Fred.GroupSpecific.Default.ExternalServices\\Fred.GroupSpecific.Default.ExternalServices.csproj
+		SccProjectTopLevelParentUniqueName56 = Fred.sln
+		SccProjectName56 = Common/GroupSpecific/Default/Fred.GroupSpecific.Default.ExternalServices
+		SccLocalPath56 = Common\\GroupSpecific\\Default\\Fred.GroupSpecific.Default.ExternalServices
+		SccProjectUniqueName57 = Common\\GroupSpecific\\Fes\\Fred.GroupSpecific.Fes.ExternalServices\\Fred.GroupSpecific.Fes.ExternalServices.csproj
+		SccProjectTopLevelParentUniqueName57 = Fred.sln
+		SccProjectName57 = Common/GroupSpecific/Fes/Fred.GroupSpecific.Fes.ExternalServices
+		SccLocalPath57 = Common\\GroupSpecific\\Fes\\Fred.GroupSpecific.Fes.ExternalServices
+		SccProjectUniqueName58 = Common\\GroupSpecific\\Ftp\\Fred.GroupSpecific.Ftp.ExternalServices\\Fred.GroupSpecific.Ftp.ExternalServices.csproj
+		SccProjectTopLevelParentUniqueName58 = Fred.sln
+		SccProjectName58 = Common/GroupSpecific/Ftp/Fred.GroupSpecific.Ftp.ExternalServices
+		SccLocalPath58 = Common\\GroupSpecific\\Ftp\\Fred.GroupSpecific.Ftp.ExternalServices
+		SccProjectUniqueName59 = Common\\GroupSpecific\\Rzb\\Fred.GroupSpecific.Rzb.ExternalServices\\Fred.GroupSpecific.Rzb.ExternalServices.csproj
+		SccProjectTopLevelParentUniqueName59 = Fred.sln
+		SccProjectName59 = Common/GroupSpecific/Rzb/Fred.GroupSpecific.Rzb.ExternalServices
+		SccLocalPath59 = Common\\GroupSpecific\\Rzb\\Fred.GroupSpecific.Rzb.ExternalServices
+		SccProjectUniqueName60 = Fred.ImportExport\\Fred.ImportExport.DataAccess.Interfaces\\Fred.ImportExport.DataAccess.Interfaces.csproj
+		SccProjectTopLevelParentUniqueName60 = Fred.sln
+		SccProjectName60 = Fred.ImportExport/Fred.ImportExport.DataAccess.Interfaces
+		SccLocalPath60 = Fred.ImportExport\\Fred.ImportExport.DataAccess.Interfaces
+		SccProjectUniqueName61 = Common\\DesignPatterns\\Fred.DesignPatterns.Builder\\Fred.DesignPatterns.Builder.csproj
+		SccProjectTopLevelParentUniqueName61 = Fred.sln
+		SccProjectName61 = Common/DesignPatterns/Fred.DesignPatterns.Builder
+		SccLocalPath61 = Common\\DesignPatterns\\Fred.DesignPatterns.Builder
+	EndGlobalSection
+EndGlobal

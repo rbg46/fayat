@@ -1,0 +1,348 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureBudgetComparaison.BudgetComparaison_TitrePage;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+    @Styles.Render("~/BudgetComparaisonBundle.css")
+}
+@section scripts {
+    @Scripts.Render("~/BudgetComparaisonBundle.js")
+    @this.RenderResources("FeatureBudgetComparaison")
+}
+
+<div class="container"
+     ng-controller="BudgetComparaisonController as $ctrl">
+
+    <h1>{{::$ctrl.resources.BudgetComparaison_Titre}}</h1>
+
+    <!--Toolbar-->
+    <fred-toolbar>
+
+        <!--CI-->
+        <fred-section class="organisation-section">
+            <fred-section-title>{{::$ctrl.resources.BudgetComparaison_SelectionnerCiLabel}}</fred-section-title>
+            <fred-section-controls>
+                <div class="inner-addon right-addon">
+                    <lookup search-placeholder="{{::$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                            search-title="{{::$ctrl.resources.Global_ReferentielCI}}"
+                            on-select="$ctrl.OnCiChanged()"
+                            url="/api/CI/SearchLight"
+                            ng-model="$ctrl.View.CI"
+                            ng-disabled="$ctrl.Loading"
+                            custom-template-url="/Scripts/directive/lookup/custom-templates/ci.template.html">
+                        <input type="text"
+                               class="form-control"
+                               placeholder="{{::$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                               title="{{$ctrl.View.CI.CodeLibelle}}"
+                               ng-value="$ctrl.View.CI.CodeLibelle"
+                               ng-disabled="$ctrl.Loading"
+                               readonly="readonly" />
+                        <i class="chev material-icons">chevron_right</i>
+                    </lookup>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Budgets à comparer-->
+        <fred-section class="budget-a-comparer-section"
+                      ng-if="$ctrl.CI !== null">
+            <fred-section-title>{{::$ctrl.resources.BudgetComparaison_BudgetsAComparer}}</fred-section-title>
+            <fred-section-controls>
+                <lookup-standalone ng-model="$ctrl.View.Revision1"
+                                   text="$ctrl.GetRevisionLookupText($ctrl.View.Revision1)"
+                                   search-title="{{::$ctrl.resources.BudgetComparaison_ListeDesBudgets}}"
+                                   search-placeholder="{{::$ctrl.resources.BudgetComparaison_RechercherUnBudget}}"
+                                   custom-template-url="/Areas/Budget/Scripts/Common/budget-revision-lookup.template.html"
+                                   url="/api/BudgetComparaison/SearchBudgetRevisions/?ciId={{$ctrl.CI.CiId}}&"
+                                   on-select="$ctrl.OnRevision1Changed()"
+                                   show-delete-button="true"
+                                   on-delete="$ctrl.OnRevision1Deleted()"
+                                   placeholder="{{::$ctrl.resources.BudgetComparaison_RechercherBudget}} 1 ..."
+                                   class="formulaire long budget-revision-1">
+                </lookup-standalone>
+                <lookup-standalone ng-model="$ctrl.View.Revision2"
+                                   text="$ctrl.GetRevisionLookupText($ctrl.View.Revision2)"
+                                   search-title="{{::$ctrl.resources.BudgetComparaison_ListeDesBudgets}}"
+                                   search-placeholder="{{::$ctrl.resources.BudgetComparaison_RechercherUnBudget}}"
+                                   custom-template-url="/Areas/Budget/Scripts/Common/budget-revision-lookup.template.html"
+                                   url="/api/BudgetComparaison/SearchBudgetRevisions/?ciId={{$ctrl.CI.CiId}}&"
+                                   on-select="$ctrl.OnRevision2Changed()"
+                                   show-delete-button="true"
+                                   on-delete="$ctrl.OnRevision2Deleted()"
+                                   placeholder="{{::$ctrl.resources.BudgetComparaison_RechercherBudget}} 2 ..."
+                                   class="formulaire long budget-revision-2">
+                </lookup-standalone>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Axes d'analyse-->
+        <fred-section class="axes-analyse-section"
+                      ng-if="$ctrl.Loaded">
+            <fred-section-title>{{::$ctrl.resources.BudgetComparaison_AxeAnalyse}}</fred-section-title>
+            <fred-section-controls>
+                <fred-button type="button"
+                             class="axe-tache-ressource-button"
+                             title="{{::$ctrl.resources.BudgetComparaison_AxeTacheRessourceButtonTooltip}}"
+                             ng-click="$ctrl.OnAxeTacheRessourceButtonClick()">
+                    <span ng-class="{'inactive' : $ctrl.BudgetComparaisonService.Filter.AxeAnalytique.Type !== $ctrl.BudgetComparaisonService.AxeAnalytique.Type.TacheRessource}"></span>
+                </fred-button>
+                <fred-button type="button"
+                             class="axe-ressource-tache-button"
+                             title="{{::$ctrl.resources.BudgetComparaison_AxeRessourceTacheButtonTooltip}}"
+                             ng-click="$ctrl.OnAxeRessourceTacheButtonClick()">
+                    <span ng-class="{'inactive' : $ctrl.BudgetComparaisonService.Filter.AxeAnalytique.Type !== $ctrl.BudgetComparaisonService.AxeAnalytique.Type.RessourceTache}"></span>
+                </fred-button>
+                <fred-button type="button"
+                             class="personnalisation-affichage-button"
+                             title="{{::$ctrl.resources.BudgetComparaison_PersonnalisationAffichageButtonTooltip}}"
+                             ng-click="$ctrl.OnPersonnalisationAffichageButtonClick()">
+                    <span class="sapicon-E056"
+                          ng-class="{'inactive' : !$ctrl.BudgetComparaisonService.Filter.IsPersonnalise()}"></span>
+                </fred-button>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Devise-->
+        <fred-section class="devise-section"
+                      ng-if="$ctrl.Loaded">
+            <fred-section-title>{{::$ctrl.resources.BudgetComparaison_Devise}}</fred-section-title>
+            <fred-section-controls>
+                <div ng-repeat="devise in $ctrl.Data.Devises">
+                    <div ng-if="devise.Symbole"
+                         class="button symbole">
+                        <div ng-class="{'active': devise.DeviseId === $ctrl.Data.DeviseId}"
+                             class="currency"
+                             title="{{devise.Libelle}}">
+                            {{devise.Symbole}}
+                        </div>
+                    </div>
+                    <div ng-if="!devise.Symbole"
+                         class="button iso-code">
+                        <div ng-class="{'active': devise.DeviseId === $ctrl.Data.DeviseId}"
+                             class="currency"
+                             title="{{devise.Libelle}}">
+                            {{devise.IsoCode}}
+                        </div>
+                    </div>
+                </div>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Actions-->
+        <fred-section class="actions-section"
+                      ng-if="$ctrl.Loaded">
+            <fred-section-title>{{::$ctrl.resources.BudgetComparaison_Actions}}</fred-section-title>
+            <fred-section-controls>
+                <fred-button type="button"
+                             class="btn btn-primary btn-options"
+                             title="{{::$ctrl.resources.BudgetComparaison_Action_ToutDeplier_ButtonTooltip}}"
+                             ng-click="$ctrl.OnExpandAllButtonClick()" >
+                    <i class="material-icons">expand_more</i>
+                </fred-button>
+                <fred-button type="button"
+                             class="btn btn-default btn-options"
+                             title="{{::$ctrl.resources.BudgetComparaison_Action_ToutPlier_ButtonTooltip}}"
+                             ng-click="$ctrl.OnCollapseAllButtonClick()" >
+                    <i class="material-icons">expand_less</i>
+                </fred-button>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Export-->
+        <fred-section class="export-section"
+                      ng-if="$ctrl.Loaded">
+            <fred-section-title>{{::$ctrl.resources.BudgetComparaison_Export}}</fred-section-title>
+            <fred-section-controls>
+                <fred-button type="button" 
+                             class="icon-button" 
+                             title="{{::$ctrl.resources.BudgetComparaison_Export_Excel_Tooltip}}"
+                             ng-click="$ctrl.OnExcelExportButtonClick()" >
+                    <span class="excel-icon"></span>
+                </fred-button>
+            </fred-section-controls>
+        </fred-section>
+
+    </fred-toolbar>
+
+    <!--Veuillez sélectionner une affaire / les budgets à comparer-->
+    <div class="row information"
+         ng-if="!$ctrl.Loaded && !$ctrl.Loading">
+        <div class="col-md-4 icon">
+            <i class="flaticon flaticon-warning"></i>
+        </div>
+        <div class="col-md-4 msg">
+            <h3 ng-if="$ctrl.CI === null">{{::$ctrl.resources.BudgetComparaison_SelectionnerCiMessage}}</h3>
+            <h3 ng-if="$ctrl.CI !== null">{{::$ctrl.resources.BudgetComparaison_SelectionnerBudgetMessage}}</h3>
+        </div>
+    </div>
+
+    <!--Tableau-->
+    <div ng-if="$ctrl.Loaded"
+         fred-one-time-binding-refresher="[$ctrl.CI.CiId, $ctrl.Revision1.BudgetId, $ctrl.Revision2.BudgetId, $ctrl.BudgetComparaisonService.Filter]">
+        <fred-flex-table class="flex-table" anchor-bottom="25">
+
+            <!--Sous-entête-->
+            <div class="fixed-line-header subentete">
+                <div class="col-axe fixed-col-header"></div>
+                <div ng-style="::$ctrl.ColWidths ? {width:'{{::$ctrl.ColWidths.Budget1}}px','min-width':'{{::$ctrl.ColWidths.Budget1}}px'} : {}"
+                     class="col-group col-budget-1">
+                    {{::$ctrl.resources.BudgetComparaison_TableHeader_Budget1}}
+                    <span class="material-icons help" title="{{::$ctrl.GetRevisionTooltip($ctrl.View.Revision1)}}">live_help</span>
+                </div>
+                <div ng-style="::$ctrl.ColWidths ? {width:'{{::$ctrl.ColWidths.Budget2}}px','min-width':'{{::$ctrl.ColWidths.Budget2}}px'} : {}"
+                     class="col-group col-budget-2">
+                    {{::$ctrl.resources.BudgetComparaison_TableHeader_Budget2}}
+                    <span class="material-icons help" title="{{::$ctrl.GetRevisionTooltip($ctrl.View.Revision2)}}">live_help</span>
+                </div>
+                <div ng-style="::$ctrl.ColWidths ? {width:'{{::$ctrl.ColWidths.Ecart}}px','min-width':'{{::$ctrl.ColWidths.Ecart}}px'} : {}"
+                     class="col-group col-ecart">{{::$ctrl.resources.BudgetComparaison_TableHeader_Ecart}}</div>
+            </div>
+
+            <!--En-tête-->
+            <div class="fixed-line-header entete">
+
+                <!--Axe-->
+                <div class="col-axe fixed-col-header"
+                     ng-if="$ctrl.BudgetComparaisonService.Filter.AxeAnalytique.Type === $ctrl.BudgetComparaisonService.AxeAnalytique.Type.TacheRessource">
+                    {{::$ctrl.resources.BudgetComparaison_TableHeader_AxeTachesRessources}}
+                </div>
+                <div class="col-axe fixed-col-header"
+                     ng-if="$ctrl.BudgetComparaisonService.Filter.AxeAnalytique.Type === $ctrl.BudgetComparaisonService.AxeAnalytique.Type.RessourceTache">
+                    {{::$ctrl.resources.BudgetComparaison_TableHeader_AxeRessourcesTaches}}
+                </div>
+
+                <!--Budget 1-->
+                <div class="col-group col-budget-1">
+                    <div id="{{::$ctrl.Identifiers.EnteteColQuantite}}"
+                         class="col-item col-item-quantite"
+                         ng-show="::$ctrl.BudgetComparaisonService.Filter.Colonnes.Budget1.HasQuantite">
+                        {{::$ctrl.resources.BudgetComparaison_TableHeader_Quantite}}
+                        <span class="material-icons close-button"
+                              title="{{::$ctrl.resources.BudgetComparaison_TableHeader_HideColumn}}"
+                              ng-click="$ctrl.OnHideColonneButtonClick($ctrl.BudgetComparaisonService.Filter.Colonnes.Budget1, $ctrl.BudgetComparaisonService.ColonneType.Quantite)">clear</span>
+                    </div>
+                    <div id="{{::$ctrl.Identifiers.EnteteColUnite}}"
+                         ng-show="::$ctrl.BudgetComparaisonService.Filter.Colonnes.Budget1.HasUnite"
+                         class="col-item col-item-unite">
+                        {{::$ctrl.resources.BudgetComparaison_TableHeader_Unite}}
+                        <span class="material-icons close-button"
+                              title="{{::$ctrl.resources.BudgetComparaison_TableHeader_HideColumn}}"
+                              ng-click="$ctrl.OnHideColonneButtonClick($ctrl.BudgetComparaisonService.Filter.Colonnes.Budget1, $ctrl.BudgetComparaisonService.ColonneType.Unite)">clear</span>
+                    </div>
+                    <div id="{{::$ctrl.Identifiers.EnteteColPrixUnitaire}}"
+                         class="col-item col-item-prix-unitaire"
+                         ng-show="::$ctrl.BudgetComparaisonService.Filter.Colonnes.Budget1.HasPrixUnitaire">
+                        {{::$ctrl.resources.BudgetComparaison_TableHeader_PrixUnitaire}}
+                        <span class="material-icons close-button"
+                              title="{{::$ctrl.resources.BudgetComparaison_TableHeader_HideColumn}}"
+                              ng-click="$ctrl.OnHideColonneButtonClick($ctrl.BudgetComparaisonService.Filter.Colonnes.Budget1, $ctrl.BudgetComparaisonService.ColonneType.PrixUnitaire)">clear</span>
+                    </div>
+                    <div id="{{::$ctrl.Identifiers.EnteteColMontant}}"
+                         class="col-item col-item-montant">
+                        {{::$ctrl.resources.BudgetComparaison_TableHeader_Montant}}
+                    </div>
+                </div>
+
+                <!--Budget 2-->
+                <div class="col-group col-budget-2">
+                    <div class="col-item col-item-quantite"
+                         ng-show="::$ctrl.BudgetComparaisonService.Filter.Colonnes.Budget2.HasQuantite">
+                        {{::$ctrl.resources.BudgetComparaison_TableHeader_Quantite}}
+                        <span class="material-icons close-button"
+                              title="{{::$ctrl.resources.BudgetComparaison_TableHeader_HideColumn}}"
+                              ng-click="$ctrl.OnHideColonneButtonClick($ctrl.BudgetComparaisonService.Filter.Colonnes.Budget2, $ctrl.BudgetComparaisonService.ColonneType.Quantite)">clear</span>
+                    </div>
+                    <div class="col-item col-item-unite"
+                         ng-show="::$ctrl.BudgetComparaisonService.Filter.Colonnes.Budget2.HasUnite">
+                        {{::$ctrl.resources.BudgetComparaison_TableHeader_Unite}}
+                        <span class="material-icons close-button"
+                              title="{{::$ctrl.resources.BudgetComparaison_TableHeader_HideColumn}}"
+                              ng-click="$ctrl.OnHideColonneButtonClick($ctrl.BudgetComparaisonService.Filter.Colonnes.Budget2, $ctrl.BudgetComparaisonService.ColonneType.Unite)">clear</span>
+                    </div>
+                    <div class="col-item col-item-prix-unitaire"
+                         ng-show="::$ctrl.BudgetComparaisonService.Filter.Colonnes.Budget2.HasPrixUnitaire">
+                        {{::$ctrl.resources.BudgetComparaison_TableHeader_PrixUnitaire}}
+                        <span class="material-icons close-button"
+                              title="{{::$ctrl.resources.BudgetComparaison_TableHeader_HideColumn}}"
+                              ng-click="$ctrl.OnHideColonneButtonClick($ctrl.BudgetComparaisonService.Filter.Colonnes.Budget2, $ctrl.BudgetComparaisonService.ColonneType.PrixUnitaire)">clear</span>
+                    </div>
+                    <div class="col-item col-item-montant">
+                        {{::$ctrl.resources.BudgetComparaison_TableHeader_Montant}}
+                    </div>
+                </div>
+
+                <!--Ecart-->
+                <div class="col-group col-ecart">
+                    <div class="col-item col-item-quantite"
+                         ng-show="::$ctrl.BudgetComparaisonService.Filter.Colonnes.Ecart.HasQuantite">
+                        {{::$ctrl.resources.BudgetComparaison_TableHeader_Quantite}}
+                        <span class="material-icons close-button"
+                              title="{{::$ctrl.resources.BudgetComparaison_TableHeader_HideColumn}}"
+                              ng-click="$ctrl.OnHideColonneButtonClick($ctrl.BudgetComparaisonService.Filter.Colonnes.Ecart, $ctrl.BudgetComparaisonService.ColonneType.Quantite)">clear</span>
+                    </div>
+                    <div class="col-item col-item-unite"
+                         ng-show="::$ctrl.BudgetComparaisonService.Filter.Colonnes.Ecart.HasUnite">
+                        {{::$ctrl.resources.BudgetComparaison_TableHeader_Unite}}
+                        <span class="material-icons close-button"
+                              title="{{::$ctrl.resources.BudgetComparaison_TableHeader_HideColumn}}"
+                              ng-click="$ctrl.OnHideColonneButtonClick($ctrl.BudgetComparaisonService.Filter.Colonnes.Ecart, $ctrl.BudgetComparaisonService.ColonneType.Unite)">clear</span>
+                    </div>
+                    <div class="col-item col-item-prix-unitaire"
+                         ng-show="::$ctrl.BudgetComparaisonService.Filter.Colonnes.Ecart.HasPrixUnitaire">
+                        {{::$ctrl.resources.BudgetComparaison_TableHeader_PrixUnitaire}}
+                        <span class="material-icons close-button"
+                              title="{{::$ctrl.resources.BudgetComparaison_TableHeader_HideColumn}}"
+                              ng-click="$ctrl.OnHideColonneButtonClick($ctrl.BudgetComparaisonService.Filter.Colonnes.Ecart, $ctrl.BudgetComparaisonService.ColonneType.PrixUnitaire)">clear</span>
+                    </div>
+                    <div class="col-item col-item-montant">
+                        {{::$ctrl.resources.BudgetComparaison_TableHeader_Montant}}
+                    </div>
+                </div>
+            </div>
+
+            <!--Noeuds de l'arbre-->
+            <div ng-repeat="node in ::$ctrl.Data.Tree.Nodes track by $index">
+                <budget-comparaison-node-component index="0" node="::node"></budget-comparaison-node-component>
+            </div>
+
+            <!--Total-->
+            <div class="flex-line total">
+                <div class="col-axe fixed-col-header"></div>
+                <div ng-style="::$ctrl.ColWidths ? {width:'{{::$ctrl.ColWidths.Budget1}}px','min-width':'{{::$ctrl.ColWidths.Budget1}}px'} : {}"
+                     class="col-group col-budget-1"></div>
+                <div ng-style="::$ctrl.ColWidths ? {width:'{{::$ctrl.ColWidths.Budget2}}px','min-width':'{{::$ctrl.ColWidths.Budget2}}px'} : {}"
+                     class="col-group col-budget-2">
+                    <div class="col-titre">{{::$ctrl.resources.BudgetComparaison_TotalEcart}}</div>
+                </div>
+                <div ng-style="::$ctrl.ColWidths ? {width:'{{::$ctrl.ColWidths.Ecart}}px','min-width':'{{::$ctrl.ColWidths.Ecart}}px'} : {}"
+                     class="col-group col-ecart">
+                    <div class="col-item col-item-quantite"
+                         ng-show="::$ctrl.BudgetComparaisonService.Filter.Colonnes.Ecart.HasQuantite"
+                         title="{{::$ctrl.Data.EcartTotal.Quantite}}">
+                        <span>{{::$ctrl.Data.EcartTotal.Quantite | number:2}}</span>
+                    </div>
+                    <div class="col-item col-item-unite"
+                         ng-show="::$ctrl.BudgetComparaisonService.Filter.Colonnes.Ecart.HasUnite"
+                         title="{{::$ctrl.BudgetComparaisonService.GetUnitesTooltip($ctrl.Data.EcartTotal.Unites)}}">
+                        <span>{{::$ctrl.BudgetComparaisonService.GetUniteToDisplay($ctrl.Data.EcartTotal.Unites)}}</span>
+                    </div>
+                    <div class="col-item col-item-prix-unitaire"
+                         ng-show="::$ctrl.BudgetComparaisonService.Filter.Colonnes.Ecart.HasPrixUnitaire"
+                         title="{{::$ctrl.Data.EcartTotal.PrixUnitaire}}">
+                        <span>{{::$ctrl.Data.EcartTotal.PrixUnitaire | number:2}}</span>
+                    </div>
+                    <div class="col-item col-item-montant"
+                         title="{{::$ctrl.Data.EcartTotal.Montant}}">
+                        <span>{{::$ctrl.Data.EcartTotal.Montant | number:2}}</span>
+                    </div>
+                </div>
+            </div>
+        </fred-flex-table>
+
+        <!--Panel de séléction du filtre-->
+        <budget-comparaison-filter-component>
+        </budget-comparaison-filter-component>
+    </div>
+</div>

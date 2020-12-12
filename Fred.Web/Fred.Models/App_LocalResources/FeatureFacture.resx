@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Col_Cachee" xml:space="preserve">
+    <value>Cachée ?</value>
+  </data>
+  <data name="Col_CI" xml:space="preserve">
+    <value>CI</value>
+  </data>
+  <data name="Col_CodeFournisseur" xml:space="preserve">
+    <value>Code Fournisseur</value>
+  </data>
+  <data name="Col_DateComptable" xml:space="preserve">
+    <value>Date comptable</value>
+  </data>
+  <data name="Col_DateFacture" xml:space="preserve">
+    <value>Date facture</value>
+  </data>
+  <data name="Col_Devise" xml:space="preserve">
+    <value>Dev.</value>
+  </data>
+  <data name="Col_Journal" xml:space="preserve">
+    <value>Journ.</value>
+  </data>
+  <data name="Col_Fournisseur" xml:space="preserve">
+    <value>Fournisseur</value>
+  </data>
+  <data name="Col_MontantHT" xml:space="preserve">
+    <value>Montant HT</value>
+  </data>
+  <data name="Col_MontantTTC" xml:space="preserve">
+    <value>Montant TTC</value>
+  </data>
+  <data name="Col_MontantTVA" xml:space="preserve">
+    <value>Montant TVA</value>
+  </data>
+  <data name="Col_CompteGeneral" xml:space="preserve">
+    <value>Compte Général</value>
+  </data>
+  <data name="Col_Etablissement" xml:space="preserve">
+    <value>Etab.</value>
+  </data>
+  <data name="Col_NumFactureFournisseur" xml:space="preserve">
+    <value>N° Facture Fourn.</value>
+  </data>
+  <data name="Col_NumFactureSysteme" xml:space="preserve">
+    <value>N° Facture Système</value>
+  </data>
+  <data name="Col_NumFMFI" xml:space="preserve">
+    <value>N° FMFI</value>
+  </data>
+  <data name="Col_Societe" xml:space="preserve">
+    <value>Soc.</value>
+  </data>
+  <data name="Col_Statut" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="Col_User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="Facture_Title" xml:space="preserve">
+    <value>Recherche des factures</value>
+  </data>
+  <data name="ChampRecherche_lb" xml:space="preserve">
+    <value>Champs de recherche</value>
+  </data>
+  <data name="SearchFacture_placeholder" xml:space="preserve">
+    <value>Rechercher des factures...</value>
+  </data>
+  <data name="CI_lb" xml:space="preserve">
+    <value>CI</value>
+  </data>
+  <data name="CompteGeneral_lb" xml:space="preserve">
+    <value>N° Compte Général</value>
+  </data>
+  <data name="CritereRecherche_lb" xml:space="preserve">
+    <value>Critères de recherche</value>
+  </data>
+  <data name="DateComptableMax_lb" xml:space="preserve">
+    <value>Date comptable max</value>
+  </data>
+  <data name="DateComptableMin_lb" xml:space="preserve">
+    <value>Date comptable min</value>
+  </data>
+  <data name="DateComptable_lb" xml:space="preserve">
+    <value>Date comptable</value>
+  </data>
+  <data name="DateEcheanceMax_lb" xml:space="preserve">
+    <value>Date échéance max</value>
+  </data>
+  <data name="DateEcheanceMin_lb" xml:space="preserve">
+    <value>Date échéance min</value>
+  </data>
+  <data name="DateEcheance_lb" xml:space="preserve">
+    <value>Date d'échéance</value>
+  </data>
+  <data name="DateFactureMax_lb" xml:space="preserve">
+    <value>Date facture max</value>
+  </data>
+  <data name="DateFactureMin_lb" xml:space="preserve">
+    <value>Date facture min</value>
+  </data>
+  <data name="DateFacture_lb" xml:space="preserve">
+    <value>Date facture</value>
+  </data>
+  <data name="DateGestionMax_lb" xml:space="preserve">
+    <value>Date de gestion max</value>
+  </data>
+  <data name="DateGestionMin_lb" xml:space="preserve">
+    <value>Date de gestion min</value>
+  </data>
+  <data name="DateGestion_lb" xml:space="preserve">
+    <value>Date de gestion</value>
+  </data>
+  <data name="DeviseCode_lb" xml:space="preserve">
+    <value>Devise</value>
+  </data>
+  <data name="EtablissementCode_lb" xml:space="preserve">
+    <value>N° Etablissement</value>
+  </data>
+  <data name="FournisseurCode_lb" xml:space="preserve">
+    <value>Code Fournisseur</value>
+  </data>
+  <data name="FournisseurLibelle_lb" xml:space="preserve">
+    <value>Libellé Fournisseur</value>
+  </data>
+  <data name="JournalCode_lb" xml:space="preserve">
+    <value>Journal</value>
+  </data>
+  <data name="MontantHTMax_lb" xml:space="preserve">
+    <value>max...</value>
+  </data>
+  <data name="MontantHTMin_lb" xml:space="preserve">
+    <value>min...</value>
+  </data>
+  <data name="MontantHT_lb" xml:space="preserve">
+    <value>Montant HT</value>
+  </data>
+  <data name="MontantTTCMax_lb" xml:space="preserve">
+    <value>max...</value>
+  </data>
+  <data name="MontantTTCMin_lb" xml:space="preserve">
+    <value>min...</value>
+  </data>
+  <data name="MontantTTC_lb" xml:space="preserve">
+    <value>Montant TTC</value>
+  </data>
+  <data name="MontantTVAMax_lb" xml:space="preserve">
+    <value>max...</value>
+  </data>
+  <data name="MontantTVAMin_lb" xml:space="preserve">
+    <value>min...</value>
+  </data>
+  <data name="MontantTVA_lb" xml:space="preserve">
+    <value>Montant TVA</value>
+  </data>
+  <data name="NoFactureFournisseur_lb" xml:space="preserve">
+    <value>N° Facture Fournisseur</value>
+  </data>
+  <data name="NoFacture_lb" xml:space="preserve">
+    <value>N° Facture</value>
+  </data>
+  <data name="NoFMFI_lb" xml:space="preserve">
+    <value>N° FMFI</value>
+  </data>
+  <data name="SocieteCode_lb" xml:space="preserve">
+    <value>N° Société</value>
+  </data>
+  <data name="Tri_lb" xml:space="preserve">
+    <value>Tri par champs</value>
+  </data>
+  <data name="Utilisateur_lb" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="SeulementMesFactures_lb" xml:space="preserve">
+    <value>Seulement mes factures</value>
+  </data>
+  <data name="Organisation_lb" xml:space="preserve">
+    <value>Organisation</value>
+  </data>
+  <data name="FacturesNonRapprochees_lb" xml:space="preserve">
+    <value>Seulement les factures non rapprochées</value>
+  </data>
+  <data name="FacturesNonCachees_lb" xml:space="preserve">
+    <value>Seulement les factures non cachées</value>
+  </data>
+  <data name="ChoixPeriode_placeholder" xml:space="preserve">
+    <value>Choisir période</value>
+  </data>
+  <data name="DateApres_placeholder" xml:space="preserve">
+    <value>après le...</value>
+  </data>
+  <data name="DateAvant_placeholder" xml:space="preserve">
+    <value>avant le...</value>
+  </data>
+  <data name="MesFactures_lb" xml:space="preserve">
+    <value>Mes factures</value>
+  </data>
+  <data name="Col_Folio" xml:space="preserve">
+    <value>Folio</value>
+  </data>
+  <data name="NonCachees_lb" xml:space="preserve">
+    <value>Non cachées</value>
+  </data>
+  <data name="NonRapprochees_lb" xml:space="preserve">
+    <value>Non rapprochées</value>
+  </data>
+  <data name="Dates_lb" xml:space="preserve">
+    <value>Dates :</value>
+  </data>
+  <data name="Montants_lb" xml:space="preserve">
+    <value>Montants :</value>
+  </data>
+  <data name="Selections_lb" xml:space="preserve">
+    <value>Sélections :</value>
+  </data>
+</root>

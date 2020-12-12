@@ -1,0 +1,65 @@
+﻿
+<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title">
+            <i class="flaticon flaticon-notebook-4"></i>Doublons détéctés
+        </h2>
+        <i class="flaticon flaticon-multiply close pull-right" aria-label="Close" title="{{::$ctrl.resolve.resources.Global_Modal_Annuler_Tooltip }}" ng-click="$ctrl.handleClose()"></i>
+    </div>
+    <div class="modal-body">
+        <div class="container od-journ-bloc">
+            <div class="od-bloc" style="width:100%;">
+                <!-- TABLEAU DES DOUBLONS -->
+                <table>
+                    <tbody class="fred-scroll">
+                        <tr>
+                            <td style="width:200px;">Famille </td>
+                            <td>{{::$ctrl.editFamille.Code}} - {{::$ctrl.editFamille.Libelle}}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:200px;">Commande en compta</td>
+                            <td>{{::$ctrl.editFamille.MustHaveOrder ? 'Oui' : 'Non'}}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:200px;">Journaux</td>
+                            <td>
+                                <span ng-repeat="item in $ctrl.journalCodeList" ng-bind="item + ($last ? '' : ', ')"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:200px;">Natures</td>
+                            <td>
+                                <span ng-repeat="item in $ctrl.natureCodeList" ng-bind="item + ($last ? '' : ', ')"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div  style="padding:15px 0 15px 0;">Impossible d'enregistrer. Des doublons ont été détéctés.</div>
+
+                <table style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th style="width:33%;">Famille</th>
+                            <th style="width:33%;">Journal</th>
+                            <th style="width:33%;">Nature</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in $ctrl.parametrageList">
+                            <td style="text-align:left;text-transform: uppercase;">{{item.FamilleOperationDiverse.Libelle}}</td>
+                            <td style="text-align:left;text-transform: uppercase;">{{item.Journal.Code}}-{{item.Journal.Libelle}}</td>
+                            <td style="text-align:left;text-transform: uppercase;">{{item.Nature.Code}}-{{item.Nature.Libelle}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-link pull-left" title="{{::$ctrl.resolve.resources.Global_Bouton_Valider }}" ng-click="$ctrl.handleClose()">{{::$ctrl.resolve.resources.Global_Bouton_Valider }}</button>
+    </div>
+</div>
+
+
+

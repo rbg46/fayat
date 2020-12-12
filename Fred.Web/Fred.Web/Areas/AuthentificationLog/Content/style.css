@@ -1,0 +1,105 @@
+﻿.no-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.infoFilter {
+    font-weight: 400;
+    color: #757575;
+    display: block;
+}
+
+.btn.btn-default {
+    margin-top: 0;
+    padding: 5px 12px;
+}
+
+.log-list {
+    margin-top: 90px;
+}
+
+.table-fixed tbody {
+    height: auto;
+}
+
+.table tbody tr td {
+    min-height: 60px;
+}
+
+.table tbody tr td I {
+    font-size: 35px;
+}
+
+.table tbody tr .td-btn {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.authentification-log-selected > td {
+    background-color: cadetblue;
+    color: #fff;
+}
+
+.log-details-header {
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+}
+
+.log-details-header .close {
+    align-items: flex-end;
+    color: #67757f;
+    font-size: 35px;
+    font-style: normal;
+    margin-left: auto;
+}
+
+.log-details-header .close:before {
+    font-size: 35px;
+}
+
+.log-details-title {
+    font-size: 25px;
+    font-weight: 400;
+    color: #2c77ba;
+}
+
+.log-details-title span {
+    font-size: 25px;
+    font-style: normal;
+    padding-right: 15px;
+}
+
+.log-details-body {
+    padding: 15px;
+}
+
+.log-details-label {
+    color: #333333;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.log-details-data {
+    color: #333333;
+    font-size: 13px;
+}
+
+.log-details-footer {
+    padding: 15px;
+    border-top: 1px solid #e5e5e5;
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .btn.btn-default {
+        height: 25px;
+        margin-top: 0;
+        font-size: 11px;
+        padding-top: 4px;
+    }
+}

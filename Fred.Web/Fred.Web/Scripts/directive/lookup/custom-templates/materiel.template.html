@@ -1,0 +1,19 @@
+﻿<div class="bkg-item pk-{{ref.CodeRef}}-item materiel rose"
+    ng-repeat="ref in $ctrl.referentiels track by $index "
+    ng-click="$ctrl.handleSelection(ref)"
+    ng-class="{selected : $index == $ctrl.selectedIndex}"
+    title="Cliquer pour sélectionner l'information {{ref.CodeRef}} / {{ref.LibelleRef}}"
+    ng-if="$ctrl.selectedFilter.Id == 2">
+<h2 fred-wrap-in-tag="{{ref.CodeRef}}" words="$ctrl.searchTexts">{{ref.CodeRef}}</h2>
+<h3 class="libelle-materiel-rose" fred-wrap-in-tag="{{ref.LibelleRef}}" words="$ctrl.searchTexts">{{ref.LibelleRef}}</h3>
+</div>
+
+<div class="bkg-item pk-{{ref.CodeRef}}-item materiel"
+    ng-repeat="ref in $ctrl.referentiels track by $index "
+    ng-click="$ctrl.handleSelection(ref)"
+    ng-class="{selected : $index == $ctrl.selectedIndex}"
+    title="Cliquer pour sélectionner l'information {{ref.CodeRef}} / {{ref.LibelleRef}}"
+    ng-if="$ctrl.selectedFilter.Id != 2">
+<h2 fred-wrap-in-tag="{{ref.CodeRef}}" words="$ctrl.searchTexts">{{ref.CodeRef}}</h2>
+<h3 fred-wrap-in-tag="{{ref.LibelleRef}}" words="$ctrl.searchTexts">{{ref.LibelleRef}}</h3>
+</div>

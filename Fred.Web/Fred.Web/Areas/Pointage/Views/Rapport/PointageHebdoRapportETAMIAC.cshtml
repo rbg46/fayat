@@ -1,0 +1,68 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureRapportHebdo.RapportHebdo_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/RapportHebdoBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/RapportHebdoBundle.js")
+
+    @this.RenderResources("FeatureRapport", "FeatureRapportHebdo", "FeatureFavori", "FeatureCI")
+
+    @Scripts.Render("~/Scripts/module/BarreRecherche/barre-recherche.js")
+}
+
+<div class="container pointage-hebdo" ng-controller="PointageHebdoEtamIacController as $ctrl">
+
+    <!-- START : Titre de la page -->
+    <h1>{{$ctrl.resources.Rapport_Hebdo_Title}} {{$ctrl.resources.Rapport_Hebdo_Title_Etamiac}}</h1>
+
+    <!--START : Barre de recherche + Barre d'outils-->
+    <fred-toolbar ng-show="!$ctrl.isShowRapport">
+
+        <!--Période-->
+        <fred-section class="date-section">
+            <fred-section-title>{{$ctrl.resources.Rapport_Hebdo_Select_Date}}</fred-section-title>
+            <fred-section-controls>
+                <span class="material-icons cl" ng-click="$ctrl.handleChangeWeek(false)">chevron_left</span>
+                <div class="label_date">
+                    <div class="label_date_text">{{$ctrl.selectedWeek}}</div>
+                    <div class="labe_date_date_selector">
+                        <app-date-picker id="dateRapportEntree"
+                                         name="dateRapportEntree"
+                                         format="DD/MM/YYYY"
+                                         lang="fr"
+                                         placeholder="Date du rapport hebdomadaire"
+                                         initial-date="{{$ctrl.selectedDate}}"
+                                         ng-model="$ctrl.selectedDate"
+                                         calendar-weeks="true"
+                                         input-hiden="true"
+                                         is-week-calendar="true"></app-date-picker>
+                    </div>
+                </div>
+                <span class="material-icons cr" ng-click="$ctrl.handleChangeWeek(true)">chevron_right</span>
+            </fred-section-controls>
+        </fred-section>
+
+    </fred-toolbar>
+
+    <!--liste-->
+    <div class="row" ng-show="!$ctrl.isShowRapport">
+        <!--Personnel-->
+        <div ng-show="!$ctrl.isUserEtamOrIac" class="text-center">
+            {{$ctrl.resources.RapportHebdo_Message_Cannot_Pointe_For_Etam_Iac}}
+        </div>
+    </div>
+
+    <div class="row" ng-show="$ctrl.isShowRapport">
+        <pointage-hebdo-rapport-component resources="$ctrl.resources"
+                                          is-etam-iac="true"
+                                          is-manager-pointing="false">
+        </pointage-hebdo-rapport-component>
+    </div>
+</div>

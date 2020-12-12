@@ -1,0 +1,87 @@
+﻿
+<div ng-show="$ctrl.isVisible">
+  <div class="blockScreen"
+       ng-click="$ctrl.close()"
+       style="z-index:99">
+  </div>
+  <div class="options small"
+       id="PanelRight"
+       style="z-index:100">
+
+
+    <!--HEADER TOOLBAR : BEGIN-->
+    <div class="toolbar">
+      <div class="material-icons grandicone">settings_input_svideo</div>
+    </div>
+    <!--HEADER TOOLBAR : END-->
+    <!-- Titre : BEGIN -->
+    <div class="form-header" id="Titre">
+      <h2>
+        <span>{{$ctrl.resources.Module_Arbo_Title}}</span>
+      </h2>
+    </div>
+    <!-- Titre : END -->
+
+    <div class="row bloc-info">
+      <div class="col-md-12 bloc-info-title">
+        <i class="fa fa-angle-right"
+           aria-hidden="true"></i>
+        <span>{{$ctrl.resources.Module_Arbo_Sub_Title}}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3 label-key">{{$ctrl.resources.Module_Arbo_Type}}</div>
+      <div class="col-xs-3 label-key">{{$ctrl.resources.Module_Arbo_Code}}</div>
+      <div class="col-xs-6 label-key">{{$ctrl.resources.Module_Arbo_Libelle}}</div>
+    </div>
+    <div class="row" ng-show="$ctrl.module !== null" >
+      <div class="col-xs-3 label-val">{{$ctrl.resources.Module_Arbo_Type_Module}}</div>
+      <div class="col-xs-3 label-val">{{$ctrl.module.Code}}</div>
+      <div class="col-xs-6 label-val">{{$ctrl.module.Libelle}}</div>
+    </div>
+    <div class="row" ng-show="$ctrl.fonctionnalite !== null">
+      <div class="col-xs-3 label-val">{{$ctrl.resources.Module_Arbo_Type_Fonctionnalite}}</div>
+      <div class="col-xs-3 label-val">{{$ctrl.fonctionnalite.Code}}</div>
+      <div class="col-xs-6 label-val">{{$ctrl.fonctionnalite.Libelle}}</div>
+    </div>
+
+    <div class="form fred-scroll">
+      <div class="row bandeau-list">
+        <div class="col-md-12 no_padding">
+          <div id="arboScroll" class="table-responsive">
+            <pole-component ng-if="$ctrl.pole" pole="$ctrl.pole"></pole-component>
+          </div>
+        </div>
+      </div>
+
+      <!--FOOTER TOOLBAR : BEGIN-->
+      <div class="footer">
+        <div class="buttons">
+          <button class="btn btn-default"
+                  type="submit"
+                  ng-click="$ctrl.save();"
+                  title="{{$ctrl.resources.Global_Bouton_Enregistrer_Tooltip}}">
+            {{$ctrl.resources.Global_Bouton_Enregistrer}}
+          </button>
+          <button class="btn btn-link"
+                  type="button"
+                  ng-click="$ctrl.cancel();"
+                  title="{{$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">
+            {{$ctrl.resources.Global_Bouton_Annuler}}
+          </button>
+        </div>
+      </div>
+      <!--FOOTER TOOLBAR : END-->
+      <div class="close_panel"
+           ng-click="$ctrl.close()"
+           title="{{$ctrl.resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+        <i class="fa fa-angle-right"
+           aria-hidden="true"></i>
+        <span>{{$ctrl.resources.Global_Bouton_RefermerPanneau}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+

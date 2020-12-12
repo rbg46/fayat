@@ -1,0 +1,222 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureNature.Nature_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/NatureIndexBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/NatureIndexBundle.js")
+    @this.RenderResources("FeatureNature")
+}
+
+<div class="container" ng-controller="NatureController">
+
+    <div class="toleft" id="PanelMain">
+
+        <!-- START : Titre de la page -->
+        <h1>{{resources.Nature_PanelMain_Titre}}</h1>
+        <!--END : Titre de la page -->
+
+        <div class="row">
+            <!--BEGIN : Picklist Societe -->
+            <div class="col-md-5">
+                <label class="infoFilter">{{resources.Global_SelectionnerSociete}}</label>
+                <div class="filter">
+                    <div class="inner-addon right-addon">
+                        <i class="chev material-icons">chevron_right</i>
+                        <lookup ng-model="societe"
+                                search-placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+                                search-title="{{resources.Global_ReferentielSociete}}"
+                                on-select="loadData()"
+                                url="/api/Societe/SearchLightForRoles">
+                            <input type="text"
+                                   class="form-control"
+                                   ng-value="societe.CodeLibelle"
+                                   placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+                                   title="{{societe.CodeLibelle}}"
+                                   readonly />
+                        </lookup>
+                    </div>
+                </div>
+            </div>
+            <!--END : Picklist Societe -->
+            <!--BEGIN : Recherche -->
+            <div class="col-md-5" ng-if="societeId != undefined">
+                <label class="infoFilter">{{resources.Global_RechercheAffiner}}</label>
+                <div class="filter">
+                    <div class="input-group">
+                        <input class="form-control txt"
+                               type="text"
+                               id="txtRecherche"
+                               name="Recherche"
+                               placeholder="{{resources.Nature_PanelMain_Recherche_Placeholder}}"
+                               ng-model="recherche"
+                               ng-model-options="{ debounce: 500 }"
+                               ng-change="handleSearch(recherche)" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary y_search"
+                                    title="{{resources.Global_RechercheAffiner_Tooltip}}"
+                                    type="button" ng-click="handleSearch(recherche)">
+                                <i class="material-icons">search</i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--END : Recherche -->
+            <!--BEGIN : Bouton pour ajouter Items -->
+            <div class="col-md-2 add-search" ng-if="societeId != undefined">
+                <div class="export-action-bloc">
+                     <fred-section-title>Export</fred-section-title>
+                    <!--Export Excel-->
+                    <span class="filter">
+                        <button type="button" class="btn button-excel"
+                                        title="{{resources.Global_Bouton_ExportExcel_Tooltip}}"
+                                        ng-click="handleExportExcel()">
+                        </button>
+                    </span>
+                    <span>
+                        <label class="infoFilter">{{resources.Global_Ajouter}}</label>
+                        <i class="flaticon flaticon-add  icoplus " title="{{resources.Global_Bouton_AjouterReference_Tooltip}}" ng-click="handleClickCreateNew()"></i>
+                    </span>
+                </div>
+                   
+            </div>
+            <!--END : Bouton pour ajouter Items -->
+        </div>
+
+        <!--LISTE : START-->
+        <div class="row results" id="Table" ng-if="societeId != undefined">
+            <div class="col-md-12 refs-list">
+                <div ng-repeat="item in items">
+                    <div class="row line" ng-click="handleSelect(item)">
+                        <div class="col-md-2">
+                            <span class="t1">{{item.Code}}</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="lb">{{resources.Nature_PanelMain_Table_Libelle}}</div>
+                            <span class="t2">{{item.Libelle}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="bdg actif" ng-if="item.IsActif">{{resources.Global_Actif}}</span>
+                            <span class="bdg inactif" ng-if="!item.IsActif">{{resources.Global_Inactif}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--LISTE : END-->
+
+    </div>
+    <div ng-class="checkDisplayOptions"
+         class="blockScreen"
+         style="z-index:99"></div>
+    <div class="options"
+         id="PanelRight"
+         ng-class="checkDisplayOptions + ' ' + checkFormatOptions">
+
+        <!--HEADER TOOLBAR : BEGIN-->
+        <div class="toolbar"
+             ng-class="{'is-already-used':isAlreadyUsed}">
+            <i class="material-icons grandicone">dialpad</i>
+        </div>
+        <span ng-show="isAlreadyUsed" class="is-already-used-text">{{resources.Global_Item_Already_Used}}</span>
+        <!--HEADER TOOLBAR : END-->
+        <!-- Titre : BEGIN -->
+        <div class="form-header" id="Titre">
+            <h2>
+                <span ng-if="nature.NatureId == 0">{{resources.Nature_PanelRight_Titre_Ajouter}}</span>
+                <span ng-if="nature.NatureId != 0">{{resources.Nature_PanelRight_Titre_Modifier}}</span>
+            </h2>
+            <label class="legend">{{resources.Global_LegendeAsterisque}}</label>
+        </div>
+        <!-- Titre : END -->
+
+        <div class="form fred-scroll">
+            <!--Formulaire: START-->
+            <form name="formNature" autocomplete="off" novalidate>
+                <!--FIELD Active: START-->
+                <div class="col-md-offset-8 chb_r">
+                    <input id="chkActif" type="checkbox" ng-model="nature.IsActif" />
+                    <label for="chkActif"><span></span>{{resources.Global_Actif}}</label>
+                </div>
+                <!--FIELD Active: END-->
+                <!--FIELD Code: START-->
+                <div class="form-group" ng-class="{ 'has-error' : (formNature.Code.$invalid && formNature.$submitted) || formNature.Code.$error.exist || formNature.Code.$error.pattern}">
+                    <label for="txtCode">{{resources.Nature_PanelRight_Code}} *</label>
+                    <span class="text-danger" ng-show="formNature.Code.$error.required && formNature.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <span class="text-danger" ng-show="formNature.Code.$error.exist">{{resources.Global_Control_Code_ExistInSociete_Erreur}}</span>
+                    <span class="text-danger" ng-show="formNature.Code.$error.pattern">{{resources.Global_Control_Code_FormatAlphanumeric_Erreur}}</span>
+                    <input class="form-control" type="text" maxlength="50" id="txtCode" name="Code" ng-pattern="/^[a-zA-Z0-9]*$/" ng-change="handleChangeCode(formNature)" required placeholder="{{resources.Nature_PanelRight_Code_Placeholder}}" ng-model="nature.Code" />
+                </div>
+                <!--FIELD Code: END-->
+                <!--FIELD Libelle: START-->
+                <div class="form-group" ng-class="{ 'has-error' : formNature.Libelle.$invalid && formNature.$submitted}">
+                    <label for="txtLibelle">{{resources.Nature_PanelRight_Libelle}} *</label>
+                    <span class="text-danger" ng-show="formNature.Libelle.$invalid && formNature.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <input class="form-control" type="text" id="txtLibelle" name="Libelle" required placeholder="{{resources.Nature_PanelRight_Libelle_Placeholder}}" ng-model="nature.Libelle" maxlength="500" />
+                </div>
+                <!--FIELD Libelle: END-->
+                <!--FIELD Ressource par défaut: START-->
+                <div class="form-group" ng-show="handleShowResource();" ng-class="{ 'has-error' : formNature.Ressource.$invalid && formNature.$submitted}">
+                    <label>{{resources.Nature_PanelRight_Ressource}}</label>
+                    <lookup-standalone ng-model="nature.Resource"
+                                       text="nature.Resource.Libelle"
+                                       custom-template-url="/Scripts/directive/lookup/custom-templates/ressources.recommandees.html"
+                                       search-title="{{resources.Global_ReferentielRessource}}"
+                                       search-placeholder="{{resources.Global_ReferentielRessource_Placeholder}}"
+                                       url="/api/Ressource/SearchLight/?societeId={{societeId}}&"
+                                       on-select="onSelectResource(item)"
+                                       on-delete="handleOnDeleteResource();"
+                                       class="formulaire middle"
+                                       placeholder="{{resources.Commande_Holder_Select_Ressource}}">
+                    </lookup-standalone>
+                </div>
+                <!--FIELD Ressource par défaut: END-->
+                <!--FOOTER TOOLBAR : BEGIN-->
+                <div class="footer">
+                    <div class="buttons">
+                        <button class="btn btn-default"
+                                type="submit"
+                                ng-disabled="isBusy"
+                                ng-click="handleClickAddOrUpdate();"
+                                title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">
+                            {{resources.Global_Bouton_Enregistrer}}
+                        </button>
+                        <button class="btn btn-primary"
+                                type="submit"
+                                ng-disabled="isBusy"
+                                ng-click="handleClickAddOrUpdateAndNew();"
+                                title="{{resources.Global_Bouton_EnregistrerEtNouveau_Tooltip}}">
+                            {{resources.Global_Bouton_EnregistrerEtNouveau}}
+                        </button>
+                        <button ng-hide="nature.NatureId==0"
+                                class="btn"
+                                type="submit"
+                                ng-click="handleClickDelete(nature);"
+                                title="{{resources.Global_Bouton_Supprimer_Tooltip}}">
+                            {{resources.Global_Bouton_Supprimer}}
+                        </button>
+                        <button class="btn btn-link"
+                                type="button"
+                                ng-click="handleClickCancel();"
+                                title="{{resources.Global_Bouton_Annuler_Tooltip}}">
+                            {{resources.Global_Bouton_Annuler}}
+                        </button>
+                    </div>
+                    <div class="close_panel" ng-click="handleClickCancel();" title="{{resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i> <span>{{resources.Global_Bouton_RefermerPanneau}}</span>
+                    </div>
+                </div>
+                <!--FOOTER TOOLBAR : END-->
+            </form>
+            <!--Formulaire: END-->
+
+        </div>
+    </div>
+</div>

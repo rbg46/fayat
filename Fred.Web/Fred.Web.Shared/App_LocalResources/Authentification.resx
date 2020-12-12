@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AuthentificationManager_AccountExpire" xml:space="preserve">
+    <value>Compte expiré.</value>
+  </data>
+  <data name="AuthentificationManager_AccountInactif" xml:space="preserve">
+    <value>Compte non actif.</value>
+  </data>
+  <data name="AuthentificationManager_AccountInternalBadlyFormated" xml:space="preserve">
+    <value>Identifiant mal formaté</value>
+  </data>
+  <data name="AuthentificationManager_AccountIsInterne" xml:space="preserve">
+    <value>Votre mot de passe ne peut être modifié, veuillez contacter le support Fayat à l'adresse suivante : support@fayat.com</value>
+  </data>
+  <data name="AuthentificationManager_AccountIsSuperAdmin" xml:space="preserve">
+    <value>Le mot de passe de l'administrateur ne peut pas être changé</value>
+  </data>
+  <data name="AuthentificationManager_AccountSupprime" xml:space="preserve">
+    <value>Compte supprimé.</value>
+  </data>
+  <data name="AuthentificationManager_EmailNotFound" xml:space="preserve">
+    <value>Votre email n'est pas renseigné dans le système, veuillez contacter le support de Fred à l'adresse suivante : support.FRED@fayatit.fayat.com</value>
+  </data>
+  <data name="AuthentificationManager_EmptyPasswordVerify" xml:space="preserve">
+    <value>Le champ "Vérification mot de passe" est obligatoire</value>
+  </data>
+  <data name="AuthentificationManager_LoginAndPasswordNotFound" xml:space="preserve">
+    <value>L'identifiant ou le mot de passe est incorrect.</value>
+  </data>
+  <data name="AuthentificationManager_LoginNotFound" xml:space="preserve">
+    <value>L'identifiant est incorrect.</value>
+  </data>
+  <data name="AuthentificationManager_NotEqualsPasswords" xml:space="preserve">
+    <value>Le champ "Mot de passe" et "Vérification mot de passe" ne correspondent pas</value>
+  </data>
+  <data name="AuthentificationManager_PasswordRequiredLength" xml:space="preserve">
+    <value>La longueur requise du mot de passe n'est pas respectée.</value>
+  </data>
+  <data name="AuthentificationManager_ResetPasswordSuccess" xml:space="preserve">
+    <value>Veuillez consulter votre boîte mail pour changer votre mot de passe.</value>
+  </data>
+  <data name="AuthentificationManager_TechnicalError" xml:space="preserve">
+    <value>Une erreur technique s'est produite.</value>
+  </data>
+  <data name="AuthentificationManager_UpdatePasswordSuccess" xml:space="preserve">
+    <value>Votre mot de passe a été modifié avec succès.</value>
+  </data>
+  <data name="AuthentificationManager_UserNotFound" xml:space="preserve">
+    <value>Utilisateur non retrouvé</value>
+  </data>
+  <data name="Authentification_Connect_Bouton_Connexion" xml:space="preserve">
+    <value>Connexion</value>
+    <comment>Connect.cshtml</comment>
+  </data>
+  <data name="Authentification_Connect_Identifiant" xml:space="preserve">
+    <value>Identifiant</value>
+    <comment>Connect.cshtml</comment>
+  </data>
+  <data name="Authentification_Connect_Identifiant_Placeholder" xml:space="preserve">
+    <value>Identifiant</value>
+    <comment>Connect.cshtml</comment>
+  </data>
+  <data name="Authentification_Connect_MotDePasse" xml:space="preserve">
+    <value>Mot de passe</value>
+    <comment>Connect.cshtml</comment>
+  </data>
+  <data name="Authentification_Connect_MotDePasseOublie" xml:space="preserve">
+    <value>Mot de passe oublié ?</value>
+    <comment>Connect.cshtml</comment>
+  </data>
+  <data name="Authentification_Connect_MotDePasse_Placeholder" xml:space="preserve">
+    <value>Mot de passe</value>
+    <comment>Connect.cshtml</comment>
+  </data>
+  <data name="Authentification_Connect_TitreOnglet" xml:space="preserve">
+    <value>FAYAT://Fred</value>
+    <comment>Connect.cshtml</comment>
+  </data>
+  <data name="Authentification_Error_Bouton_ReessayerConnexion" xml:space="preserve">
+    <value>S'authentifier</value>
+    <comment>Error.cshtml</comment>
+  </data>
+  <data name="Authentification_Error_ReessayerConnexion" xml:space="preserve">
+    <value>Cliquer sur le bouton S'authentifier pour ressayer une nouvelle fois</value>
+    <comment>Error.cshtml</comment>
+  </data>
+  <data name="Authentification_Error_SupportAppManager" xml:space="preserve">
+    <value>Responsable métier</value>
+    <comment>Error.cshtml</comment>
+  </data>
+  <data name="Authentification_Error_SupportAppManagerLien" xml:space="preserve">
+    <value>fred@razel-bec.fayat.com</value>
+    <comment>Error.cshtml</comment>
+  </data>
+  <data name="Authentification_Error_SupportCallCenter" xml:space="preserve">
+    <value>Call center : 01 69 85 68 68 de 7h à 19h</value>
+    <comment>Error.cshtml</comment>
+  </data>
+  <data name="Authentification_Error_SupportFci" xml:space="preserve">
+    <value>Merci de contacter le support FCI</value>
+    <comment>Error.cshtml</comment>
+  </data>
+  <data name="Authentification_Error_SupportFciWeb" xml:space="preserve">
+    <value>Support FCI</value>
+    <comment>Error.cshtml</comment>
+  </data>
+  <data name="Authentification_Error_SupportFciWebLien" xml:space="preserve">
+    <value>http://fci.fayat.fr/support</value>
+    <comment>Error.cshtml</comment>
+  </data>
+  <data name="Authentification_Login_Bouton_Connexion" xml:space="preserve">
+    <value>Connexion</value>
+    <comment>Login.cshtml</comment>
+  </data>
+  <data name="Authentification_Login_Bouton_DetailTicket" xml:space="preserve">
+    <value>Obtenir le ticket stocké</value>
+    <comment>Login.cshtml</comment>
+  </data>
+  <data name="Authentification_Login_Bouton_GenerationErreur401" xml:space="preserve">
+    <value>handleGenerate401</value>
+    <comment>Login.cshtml</comment>
+  </data>
+  <data name="Authentification_Login_Bouton_NouveauTicket" xml:space="preserve">
+    <value>Créer un nouveau ticket</value>
+    <comment>Login.cshtml</comment>
+  </data>
+  <data name="Authentification_Login_Bouton_RessourcePartagee" xml:space="preserve">
+    <value>Accéder à une ressource protégée</value>
+    <comment>Login.cshtml</comment>
+  </data>
+  <data name="Authentification_Login_Bouton_SupprimerTicket" xml:space="preserve">
+    <value>Supprimer le ticket</value>
+    <comment>Login.cshtml</comment>
+  </data>
+  <data name="Authentification_Login_Identifiant" xml:space="preserve">
+    <value>Identifiant</value>
+    <comment>Login.cshtml</comment>
+  </data>
+  <data name="Authentification_Login_Identifiant_Placeholder" xml:space="preserve">
+    <value>Identifiant</value>
+    <comment>Login.cshtml</comment>
+  </data>
+  <data name="Authentification_Login_MotDePasse" xml:space="preserve">
+    <value>Mot de passe</value>
+    <comment>Login.cshtml</comment>
+  </data>
+  <data name="Authentification_Login_MotDePasse_Placeholder" xml:space="preserve">
+    <value>Mot de passe</value>
+    <comment>Login.cshtml</comment>
+  </data>
+  <data name="Authentification_Login_Resultats" xml:space="preserve">
+    <value>Résultat(s)</value>
+    <comment>Login.cshtml</comment>
+  </data>
+  <data name="Authentification_Logout_Bouton_Connexion" xml:space="preserve">
+    <value>Se connecter</value>
+    <comment>Logout.cshtml</comment>
+  </data>
+  <data name="Authentification_Logout_Deconnexion" xml:space="preserve">
+    <value>Vous êtes déconnecté de Fred.</value>
+    <comment>Logout.cshtml</comment>
+  </data>
+  <data name="Authentification_Model_EmptyEmailAndLogin" xml:space="preserve">
+    <value>L'identifiant et l'email sont vide, vous devez remplir l'un de ces deux champs</value>
+  </data>
+  <data name="Authentification_Model_MotDePassRequis" xml:space="preserve">
+    <value>Le mot de passe est obligatoire</value>
+    <comment>Models\Authentification\ConnectViewModel.cs</comment>
+  </data>
+  <data name="Authentification_Model_UtilisateurRequis" xml:space="preserve">
+    <value>L'identifiant est obligatoire</value>
+    <comment>Models\Authentification\ConnectViewModel.cs</comment>
+  </data>
+  <data name="Authentification_NewPassword_Error" xml:space="preserve">
+    <value>Erreur</value>
+    <comment>NewPassword.cshtml</comment>
+  </data>
+  <data name="Authentification_NewPassword_GuidIsExpired" xml:space="preserve">
+    <value>Cette demande de réinitialisation de mot de passe est expirée</value>
+    <comment>NewPassword.cshtml</comment>
+  </data>
+  <data name="Authentification_NewPassword_GuidIsNotValid" xml:space="preserve">
+    <value>Cette demande de réinitialisation de mot de passe est invalide</value>
+    <comment>NewPassword.cshtml</comment>
+  </data>
+  <data name="Authentification_NewPassword_Password" xml:space="preserve">
+    <value>Nouveau mot de passe *</value>
+    <comment>NewPassword.cshtml</comment>
+  </data>
+  <data name="Authentification_NewPassword_PasswordVerify" xml:space="preserve">
+    <value>Vérification mot de passe *</value>
+    <comment>NewPassword.cshtml</comment>
+  </data>
+  <data name="Authentification_NewPassword_PasswordVerify_Placeholder" xml:space="preserve">
+    <value>Mot de passe </value>
+    <comment>NewPassword.cshtml</comment>
+  </data>
+  <data name="Authentification_NewPassword_Password_Length" xml:space="preserve">
+    <value>Votre mot de passe doit faire au minimum 6 caractères.</value>
+    <comment>NewPassword.cshtml</comment>
+  </data>
+  <data name="Authentification_NewPassword_Password_Placeholder" xml:space="preserve">
+    <value>Mot de passe</value>
+    <comment>NewPassword.cshtml</comment>
+  </data>
+  <data name="Authentification_NewPassword_Required" xml:space="preserve">
+    <value>* Champ requis.</value>
+  </data>
+  <data name="Authentification_NewPassword_UpdatePassword" xml:space="preserve">
+    <value>Mettre à jour le mot de passe</value>
+    <comment>NewPassword.cshtml</comment>
+  </data>
+  <data name="Authentification_PiedDePage" xml:space="preserve">
+    <value>Fayat IT - © 2018</value>
+    <comment>Connect.cshtml, Login.cshtml, Signin.cshtml, Logout.cshtml</comment>
+  </data>
+  <data name="Authentification_ResetPassword_Bouton_ResetPassword" xml:space="preserve">
+    <value>Réinitialiser le mot de passe</value>
+    <comment>ResetPassword.cshtml</comment>
+  </data>
+  <data name="Authentification_ResetPassword_Email" xml:space="preserve">
+    <value>Email</value>
+    <comment>ResetPassword.cshtml</comment>
+  </data>
+  <data name="Authentification_ResetPassword_Email_Placeholder" xml:space="preserve">
+    <value>Email</value>
+    <comment>ResetPassword.cshtml</comment>
+  </data>
+  <data name="Authentification_ResetPassword_Identifiant" xml:space="preserve">
+    <value>Identifiant</value>
+    <comment>ResetPassword.cshtml</comment>
+  </data>
+  <data name="Authentification_ResetPassword_Identifiant_Placeholder" xml:space="preserve">
+    <value>Identifiant</value>
+    <comment>ResetPassword.cshtml</comment>
+  </data>
+  <data name="Authentification_ResetPassword_Ou" xml:space="preserve">
+    <value>OU</value>
+    <comment>ResetPassword.cshtml</comment>
+  </data>
+  <data name="Authentification_ResetPassword_ReturnConnect" xml:space="preserve">
+    <value>Retourner à la connexion</value>
+    <comment>ResetPassword.cshtml</comment>
+  </data>
+  <data name="Authentification_Signin_Bienvenue" xml:space="preserve">
+    <value>Bienvenue sur Fred</value>
+    <comment>Signin.cshtml</comment>
+  </data>
+  <data name="Authentification_Signin_Bouton_Connexion" xml:space="preserve">
+    <value>Se connecter</value>
+    <comment>Signin.cshtml</comment>
+  </data>
+</root>

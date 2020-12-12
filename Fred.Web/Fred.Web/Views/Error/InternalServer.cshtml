@@ -1,0 +1,39 @@
+﻿@model Exception
+@{
+  Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>InternalServer</title>
+  <link rel="stylesheet" href="/Content/site.css" type="text/css">
+  <link rel="stylesheet" href="/Content/Auth.css" type="text/css">
+</head>
+<body>
+  <div class="conteneur server-error">
+    <div class="logo-fred"></div>
+    <div class="element">
+      @{
+          if (@Model != null)
+          {
+
+            <p>Une erreur est survenue !</p>
+            if (Request.IsLocal)
+            {
+              <p>@Model.StackTrace</p>
+              <p>@Model.Message</p>
+            };
+
+
+          }
+      }
+    </div>
+    <div class="element gros">Erreur 500</div>
+  </div>
+</body>
+
+
+</html>

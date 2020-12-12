@@ -1,0 +1,27 @@
+﻿<div class="report {{indexCss}}" ng-class="{'report-open':display, 'report-reduce':!display}">
+    <div class="report-header">
+        <h2 title="{{indexCss}}">{{title}}</h2>
+        <div class="icons close material-icons" title="cliquer pour fermer">close</div>
+        <div class="icons reduce material-icons" title="cliquer pour réduire" ng-click="setDisplayStatus(false)" ng-show="display">vertical_align_bottom</div>
+        <div class="icons reduce material-icons" title="cliquer pour ouvrir"  ng-click="setDisplayStatus(true)" ng-show="!display">vertical_align_top</div>
+        <div class="icons reduce material-icons" title="cliquer pour ouvrir le rapport dans une nouvelle fenêtre" onclick="javascript: window.open('https://wwww.google.com', '_blank'); window.open('https://wwww.google.com');" ng-show="reduce==0 ||  reduce==null;">panorama_wide_angle</div>
+
+    </div>
+    <div class="report-body fred-scroll" ng-show="display">
+        <ul>
+            <li>Erreur sur le pointage de Martin Dumont sur la journée du 15 janvier incohérent</li>
+            <li>Erreur sur le pointage de Martin Dumont sur la journée du 15 janvier incohérent</li>
+            <li>Erreur sur le pointage de Martin Dumont sur la journée du 15 janvier incohérent</li>
+            <li>Erreur sur le pointage de Martin Dumont sur la journée du 15 janvier incohérent</li>
+            <li>Erreur sur le pointage de Martin Dumont sur la journée du 15 janvier incohérent</li>
+            <li>Erreur sur le pointage de Martin Dumont sur la journée du 15 janvier incohérent</li>
+            <li>Erreur sur le pointage de Martin Dumont sur la journée du 15 janvier incohérent</li>
+            <li>Erreur sur le pointage de Martin Dumont sur la journée du 15 janvier incohérent</li>
+            <li>Erreur sur le pointage de Martin Dumont sur la journée du 15 janvier incohérent</li>
+            <li>Erreur sur le pointage de Martin Dumont sur la journée du 15 janvier incohérent</li>
+            <li>Erreur sur le pointage de Martin Dumont sur la journée du 15 janvier incohérent</li>
+            <li>Erreur sur le pointage de Martin Dumont sur la journée du 15 janvier incohérent</li>
+            <li>Erreur sur le pointage de Martin Dumont sur la journée du 15 janvier incohérent</li>
+        </ul>
+    </div>
+</div>

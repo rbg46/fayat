@@ -1,0 +1,78 @@
+﻿<div class="row panel-default ressource" ng-class="{'isopen': $ctrl.isOpen ,'empty-ressource': $ctrl.currentRessource.PuHT == 0}">
+
+  <div class="col-md-1 lev3-firstcol">
+    <div class="arrow" ng-click="$ctrl.clickHeader()" ng-if="$ctrl.currentRessource.RessourcesEnfants.length > 0"></div>
+    <div class="empty-warning" ng-if="$ctrl.currentRessource.PuHT == 0">
+      <i class="material-icons" title="{{::$ctrl.resources.ObjectifFlash_PanelRessource_AucunPrix}}">announcement</i>
+    </div>
+  </div>
+
+
+  <div class="col-md-3">
+    <div class="lb">{{::$ctrl.resources.ObjectifFlash_PanelRessource_Code}}</div>
+    <span>{{::$ctrl.currentRessource.Code}}</span>
+  </div>
+  <div class="col-md-3">
+    <div class="lb">{{::$ctrl.resources.ObjectifFlash_PanelRessource_Libelle}}</div>
+    <span class="field" title="{{::$ctrl.currentRessource.Libelle}}" >{{::$ctrl.currentRessource.Libelle}}</span>
+  </div>
+
+
+  <div class="col-md-1 no_pad_r">
+    <div class="lb">{{::$ctrl.resources.ObjectifFlash_PanelRessource_Unite}}</div>
+    <span>{{::$ctrl.currentRessource.Unite.Code}}</span>
+  </div>
+  <div class="col-md-2 no_pad_r">
+    <div class="lb">{{::$ctrl.resources.ObjectifFlash_PanelRessource_Prix}}</div>
+    <span>{{::$ctrl.currentRessource.PuHT}}</span>
+    <span>{{::$ctrl.currentRessource.Symbole}}</span>
+  </div>
+  <div class="col-md-1 no_pad_r no_pad_l margin-t-2" >
+    <i class="fa fa-align-right fa-check-circle-o icone-rr" title="{{::$ctrl.resources.ObjectifFlash_PanelRessource_RessourceRecommandee}}" ng-if="$ctrl.currentRessource.IsRecommandee"></i>
+  </div>
+  <div class="col-md-1 no_pad_l">
+    <button class="btn btn-primary add_task pull-right" ng-click="$ctrl.clickAddToTask($ctrl.currentRessource)" title="{{::$ctrl.resources.ObjectifFlash_AddRessourceToTache}}">
+      <i class="flaticon flaticon-add"></i>
+    </button>
+  </div>
+</div>
+
+
+<div ng-if="$ctrl.currentRessource.RessourcesEnfants.length > 0 && $ctrl.isOpen">
+  <div class="row panel-default ressource child" ng-repeat="childRessource in $ctrl.currentRessource.RessourcesEnfants">
+
+    <div class="col-md-1 lev3-firstcol">
+      <div class="empty-warning" ng-if="$ctrl.childRessource.PuHT == 0">
+        <i class="material-icons" title="{{::$ctrl.resources.ObjectifFlash_PanelRessource_AucunPrix}}">announcement</i>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="lb">{{::$ctrl.resources.ObjectifFlash_PanelRessource_Code}}</div>
+      <span >{{::childRessource.Code}}</span>
+    </div>
+    <div class="col-md-3">
+      <div class="lb">{{::$ctrl.resources.ObjectifFlash_PanelRessource_Libelle}}</div>
+      <span class="field" title="{{childRessource.Libelle}}">{{::childRessource.Libelle}}</span>
+    </div>
+
+
+    <div class="col-md-1 no_pad_r">
+      <div class="lb">{{::$ctrl.resources.ObjectifFlash_PanelRessource_Unite}}</div>
+      <span>{{::childRessource.Unite.Code}}</span>
+    </div>
+    <div class="col-md-2 no_pad_r">
+      <div class="lb">{{::$ctrl.resources.ObjectifFlash_PanelRessource_Prix}}</div>
+      <span>{{::childRessource.PuHT}}</span>
+      <span>{{::childRessource.Symbole}}</span>
+    </div>
+    <div class="col-md-1 no_pad_r no_pad_l margin-t-2" >
+      <i class="fa fa-align-right fa-check-circle-o icone-rr" title="{{::$ctrl.resources.ObjectifFlash_PanelRessource_RessourceRecommandee}}" ng-if="$ctrl.currentRessource.IsRecommandee"></i>
+    </div>
+    <div class="col-md-1 no_pad_l">
+      <button class="btn btn-primary add_task pull-right" ng-click="$ctrl.clickAddToTask(childRessource)" title="{{::$ctrl.resources.ObjectifFlash_AddRessourceToTache}}">
+        <i class="flaticon flaticon-add"></i>
+      </button>
+    </div>
+  </div>
+</div>

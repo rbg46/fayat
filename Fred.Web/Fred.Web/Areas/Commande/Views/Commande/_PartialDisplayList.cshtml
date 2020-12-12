@@ -1,0 +1,80 @@
+﻿<div class="display-list">
+    <table id="fixedTable" fred-table fred-fixed-col="1,2" fred-table-resize-trigger="{{ctrl.listCommandes.length > 0}}">
+        <thead>
+            <tr>
+                <th class="col1"><!--Statut--></th>
+                <th class="col2 bkg-white"><!--Fournisseur--></th>
+                <th class="col3"><!--Numéro de commande--></th>
+                <th class="col4"><!--Date--></th>
+                <th class="col5"><!--Libellé Commande--></th>
+                <th class="col6 bkg-blue" colspan="6">{{ctrl.resources.Commande_Index_Table_Avancement}}</th>
+                <th class="col12"><!--Numéro CI--></th>
+                <th class="col13"><!--Date Validation--></th>
+                <th class="col14"><!--Action--></th>
+            </tr>
+            <tr>
+                <th class="col1 bkg-blue">{{ctrl.resources.Commande_Index_Table_Statut}}</th>
+                <th class="col2 bkg-blue">{{ctrl.resources.Commande_Index_Table_Fournisseur}}</th>
+                <th class="col3 bkg-blue">{{ctrl.resources.Commande_Index_Table_NumeroCommande}}</th>
+                <th class="col4 bkg-blue">{{ctrl.resources.Commande_Index_Table_DateEmission}}</th>
+                <th class="col5 bkg-blue">{{ctrl.resources.Commande_Detail_SectionDetail_Libelle}}</th>
+                <th class="col6 bkg-blue-light1">{{ctrl.resources.Commande_Index_Table_MontantCommande}} </th>
+                <th class="col7 bkg-blue-light1">{{ctrl.resources.Commande_Index_Table_MontantReception}}</th>
+                <th class="col8 bkg-blue-light1">{{ctrl.resources.Commande_Index_Table_Solde}}</th>
+                <th class="col9 bkg-blue-light1">{{ctrl.resources.Commande_Index_Table_Pourcentage}}</th>
+                <th class="col10 bkg-secondary-yellow1">{{ctrl.resources.Commande_Index_Table_MontantFacture}}</th>
+                <th class="col11 bkg-secondary-yellow1">{{ctrl.resources.Commande_Index_Table_RestantAFacturer}}</th>
+                <th class="col12 bkg-blue">{{ctrl.resources.Commande_Index_Table_CI}}</th>
+                <th class="col13 bkg-blue">{{ctrl.resources.Commande_Index_Table_DateValidation}}</th>
+                <th class="col14 bkg-blue actions">{{ctrl.resources.Commande_Index_Table_Action}}</th>
+            </tr>
+        </thead>
+        <tbody id="commande-list" class="fred-scroll">
+            <tr ng-repeat="commande in ctrl.listCommandes" ng-click="ctrl.handleClickDetail(commande)" title="{{ctrl.resources.Commande_Index_Table_Detail_Tooltip}}">
+                <td class="col1">
+                    <div class="nested">
+                        <i class="material-icons" title="*Cliquer pour voir le détail de la commande">more_vert</i>
+                        <span class="badge-statut" ng-class="{colorBR: commande.IsStatutBrouillon,colorAV: commande.IsStatutAValider,colorVA: commande.IsStatutValidee,colorCL: commande.IsStatutCloturee}">{{commande.StatutCommande.Libelle}}</span>
+                        <span class="sapicon-E0CB abo-icon" ng-show="commande.IsAbonnement" title="Commande abonnement"></span>
+                        <span class="ico-materielExterne" ng-show="commande.IsMaterielAPointer" title="Commande Matériels à pointer"></span>
+                        <span class="sapicon-E024 abo-icon" ng-show="commande.IsEnergie" title="Commande Matériels à pointer"></span>
+                        <span class="material-icons pj-icon" ng-show="commande.PiecesJointesCommande.length > 0" title="Cliquer pour télécharger la pièce jointe de la commande" ng-click="$event.stopPropagation(); ctrl.handleDownloadAllAttachments($index)">attach_file</span>
+                    </div>
+                </td>
+                <td class="col2" ng-class="{checked:commande.isChecked}"><span>{{commande.Fournisseur.Libelle}}</span></td>
+                <td class="col3">{{commande.NumeroCommandeExterne === null || commande.NumeroCommandeExterne === '' ?  commande.Numero : commande.NumeroCommandeExterne}}</td>
+                <td class="col4">{{commande.DateCreation  | date:'dd/MM/yyyy'}}</td>
+                <td class="col5">{{commande.Libelle}}</td>
+                <td class="col6 bkg-blue-light2">{{commande.MontantHT | number:2}} {{commande.Devise.Symbole}}</td>
+                <td class="col7 bkg-blue-light2">{{commande.MontantHTReceptionne | number:2}} {{commande.Devise.Symbole}}</td>
+                <td class="col8 bkg-blue-light2">{{commande.MontantHTSolde | number:2}} {{commande.Devise.Symbole}}</td>
+                <td class="col9 bkg-blue-light2">{{commande.PourcentageReceptionne | number:2}} %</td>
+                <td class="col10 bkg-yellow-light1">{{commande.MontantFacture | number:2}} {{commande.Devise.Symbole}}</td>
+                <td class="col11 bkg-yellow-light1">{{commande.SoldeFar | number:2}} {{commande.Devise.Symbole}}</td>
+                <td class="col12">
+                    <a href="/CI/CI/Detail/{{commande.CI.CiId}}" target="_blank">
+                        <i class="material-icons open" title="{{ctrl.resources.Commande_Index_Table_Tootip_OuvrirCI}}">reply</i>
+                    </a>
+                    <span>{{commande.CI.CodeLibelle}}</span>
+                </td>
+                <td class="col13">{{commande.DateValidation | date:'dd/MM/yyyy'}}</td>
+                <td class="col14 actions">
+                    <!--Clôture de la commande validée-->
+                    <i class="material-icons" title="{{ctrl.resources.Commande_Index_Table_Cloturer_Tooltip}}" ng-show="commande.IsStatutValidee" ng-click="$event.stopPropagation(); ctrl.handleCloturer(commande)">lock_outline</i>
+                    <!--Déclôture de la commande-->
+                    <fred-authorization key="{{ctrl.permissionKeys.AffichageDeclotureCommandeIndex}}">
+                        <i class="material-icons" title="{{ctrl.resources.Commande_Index_Table_Decloturer_Tooltip}}" ng-show="commande.IsStatutCloturee" ng-click="$event.stopPropagation(); ctrl.handleDecloturer(commande)">lock_open</i>
+                    </fred-authorization>
+                    <!--Réception-->
+                    <a ng-href="/Reception/Reception/Search?id={{commande.Numero}}&commandeSoldee=true" ng-show="commande.NbReceptions != 0 && commande.IsStatutCloturee === false" title="{{ctrl.resources.Commande_Index_Table_Reception_Tooltip}} /  {{ctrl.resources.Commande_Index_Table_Reception}} ({{commande.NbReceptions}})">
+                        <i class="material-icons">shopping_cart</i>
+                    </a>
+                    <!--Détail de la commande-->
+                    <i class="material-icons" title="{{ctrl.resources.Commande_Index_Table_Detail_Tooltip}}">more_vert</i>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

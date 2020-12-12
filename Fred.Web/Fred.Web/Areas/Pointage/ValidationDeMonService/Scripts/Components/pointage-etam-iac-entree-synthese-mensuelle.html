@@ -1,0 +1,142 @@
+﻿<!-- START : Titre de la page -->
+<h1>{{::$ctrl.resources.RapportHebdo_Synthese_Validate_Service}}</h1>
+
+<!--START : Barre de recherche-->
+<fred-toolbar>
+
+    <!--Période-->
+    <fred-section class="date-section">
+        <fred-section-title>{{::$ctrl.resources.RapportHebdo_Tout_Selectionner}}</fred-section-title>
+        <fred-section-controls>
+            <span class="material-icons cl" ng-click="$ctrl.handleChangeMonth(false)">chevron_left</span>
+            <div class="label_date">
+                <div class="label_date_text">{{$ctrl.selectedMonth}}</div>
+                <div class="labe_date_date_selector">
+                    <app-date-picker id="dateRapport"
+                                     name="dateRapport"
+                                     format="MM/YYYY"
+                                     lang="fr"
+                                     placeholder="{{::$ctrl.resources.RapportHebdo_Date_Synthese}}"
+                                     initial-date="{{$ctrl.selectedDate}}"
+                                     ng-model="$ctrl.selectedDate"
+                                     ng-change="$ctrl.handleChangeCalendarDate()"
+                                     input-hiden="true"></app-date-picker>
+                </div>
+            </div>
+            <span class="material-icons cr" ng-click="$ctrl.handleChangeMonth(true)">chevron_right</span>
+        </fred-section-controls>
+    </fred-section>
+
+    <!--Actions-->
+    <fred-section class="action-section">
+        <fred-section-title>{{::$ctrl.resources.RapportHebdo_Synthese_Action}}</fred-section-title>
+        <fred-section-controls class="action-controls">
+            <button class="btn btn-validate" ng-disabled="!$ctrl.isValidToValidate" ng-click="$ctrl.handleValidate()">{{::$ctrl.resources.RapportHebdo_Synthese_Valider}}</button>
+        </fred-section-controls>
+    </fred-section>
+
+    <!--Sélection service-->
+    <fred-section class="niveau-section">
+        <fred-section-title>Niveau</fred-section-title>
+        <fred-section-controls class="action-controls">
+            <div class="rdio-btns">
+                <input type="radio" name="rbtnMonService" ng-model="$ctrl.Niveau" ng-change="$ctrl.handleSelectNiveau()"
+                       id="rbtnMonService" value="1">
+                <label for="rbtnMonService"><span></span>{{::$ctrl.resources.RapportHebdo_Mon_Service}}</label>
+                <input type="radio" name="rbtnServiceDe" ng-model="$ctrl.Niveau" ng-change="$ctrl.handleSelectNiveau()"
+                       id="rbtnServiceDe" value="2">
+                <label for="rbtnServiceDe"><span></span>{{::$ctrl.resources.RapportHebdo_Service_De}}</label>
+            </div>
+            <div class="inner-addon right-addon">
+                <lookup-standalone ng-model="$ctrl.personnel" enable-default-selection="true"
+                                   text="$ctrl.personnel.CodeSocieteMatriculePrenomNom" search-max-length="100"
+                                   search-title="{{::$ctrl.resources.Global_ReferentielPersonnel}}"
+                                   search-placeholder="{{::$ctrl.resources.Global_ReferentielPersonnel_Placeholder}}"
+                                   url="/api/Personnel/SearchHierarchieNmoins1/?personnelId={{$ctrl.userId}}&periodeChantier={{$ctrl.getPeriode()}}&"
+                                   on-select="$ctrl.handleChangePersonnel()" on-delete="$ctrl.handleDeletePersonnel()"
+                                   ng-disabled="!$ctrl.unlockSelectPersonnel" class="formulaire long">
+                </lookup-standalone>
+            </div>
+            <fred-button type="button" class="default text" ng-click="$ctrl.actionGetSyntheseData($ctrl.selectedDate)">{{::$ctrl.resources.Global_Apply}}</fred-button>
+        </fred-section-controls>
+    </fred-section>
+
+</fred-toolbar>
+
+<!-- START Liste -->
+<table class="monthly-synth">
+    <thead class="header1">
+        <tr>
+            <th class="select-all-s">
+                <div class="chb">
+                    <input type="checkbox" id="s-all"
+                           ng-model="$ctrl.IsSelectAllPersonnel"
+                           ng-change="$ctrl.handleSelectAllPersonnel($ctrl.IsSelectAllPersonnel)">
+                    <label for="s-all"><span></span></label>
+                </div>
+                {{::$ctrl.resources.RapportHebdo_Tout_Selectionner}}
+            </th>
+            <th colspan="2">
+                <feature-flag feature-key="ActivateDesactivateFiltrePointageSyntheseMensuelle">
+                    <div class="search-serv-bloc">
+                        <input type="text" class="form-control" ng-model="$ctrl.ValueText"
+                               on-enter="$ctrl.filterPersonnelParNomPrenomStatut($ctrl.ValueText, $ctrl.PersonnelsFilter)" placeholder="{{$ctrl.ValueText}}" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary y_search" type="button"
+                                    ng-click="$ctrl.filterPersonnelParNomPrenomStatut($ctrl.ValueText, $ctrl.PersonnelsFilter)" ng-disabled="busy">
+                                <i class="material-icons">search</i>
+                            </button>
+                        </span>
+                    </div>
+                </feature-flag>
+            </th>
+            <th>
+                <feature-flag feature-key="ActivateDesactivateFiltrePointageSyntheseMensuelle">
+                    <select class="sh-all" ng-model="$ctrl.PersonnelsFilter" ng-change="$ctrl.filterPersonnelParNomPrenomStatut($ctrl.ValueText, $ctrl.PersonnelsFilter)">
+                        <option value="">{{::$ctrl.resources.RapportHebdo_Synthese_DisplayAll}}</option>
+                        <option ng-repeat="statut in $ctrl.TypePersonnel" value="{{statut.Value}}">{{statut.Libelle}}</option>
+                    </select>
+                </feature-flag>
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <thead class="header2">
+        <tr>
+            <th>
+                <div class="chb"></div>
+            </th>
+            <th>{{::$ctrl.resources.RapportHebdo_Synthese_Personnel}}</th>
+            <th>{{::$ctrl.resources.RapportHebdo_Synthese_Statut}}</th>
+            <th>{{::$ctrl.resources.RapportHebdo_NbJourPintes}}</th>
+            <th>{{::$ctrl.resources.RapportHebdo_NbAbs}}</th>
+            <th>{{::$ctrl.resources.RapportHebdo_NbPrimes}}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="el in $ctrl.syntheseList" ng-class="$even ? '' : 'odd'">
+            <td>
+                <div class="chb">
+                    <input type="checkbox"
+                           id="chbxTab_{{el.Personnel}}"
+                           ng-change="$ctrl.toggelePersonneSelection()"
+                           ng-model="el.Selected">
+                    <label for="chbxTab_{{el.Personnel}}"><span></span></label>
+                </div>
+            </td>
+            <td>{{el.Personnel.Prenom}} {{el.Personnel.Nom}}</td>
+            <td>{{el.PointageStatut}}</td>
+            <td>{{el.NbreJoursPointes}}</td>
+            <td>{{el.NbreAbsences}}</td>
+            <td>{{el.NbrePrimes}}</td>
+            <td>
+                <div class="more-detail">
+                    <button ng-click="$ctrl.handlePersonnelSelection(el.Personnel)" class="btn-voir">{{::$ctrl.resources.RapportHebdo_Synthese_Voir}}</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

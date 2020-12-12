@@ -1,0 +1,49 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i>Export Excel du détail du budget</h2>
+        <i class="flaticon flaticon-multiply close pull-right" ng-click="$ctrl.Cancel()" title=""></i>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="select-box">
+                    <div class="detail-element box-lg"
+                         ng-class="{'selected' : $ctrl.IsReportAnalyseSelected}"
+                         ng-click="$ctrl.SelectReport(1)">
+                        <span class="detail-element-txt">Pour analyse</span>
+                        <div class="inner-triangle" ng-show="$ctrl.IsReportAnalyseSelected"></div>
+                    </div>
+                    <div class="select-box-label-lg">
+                        <span>ou</span>
+                    </div>
+                    <div class="detail-element box-lg"
+                         ng-class="{'selected' : $ctrl.IsReportEditableSelected}"
+                         ng-click="$ctrl.SelectReport(2)">
+                        <span class="detail-element-txt">Editable</span>
+                        <div class="inner-triangle" ng-show="$ctrl.IsReportEditableSelected"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <!--Bouton continuer-->
+        <button class="btn btn-default pull-left"
+                type="submit"
+                data-dismiss="modal"
+                ng-click="$ctrl.Export()"
+                ng-disabled="$ctrl.NoReportSelected()"
+                title="{{::$ctrl.resources.Global_Bouton_Continuer_Tooltip}}">
+            {{::$ctrl.resources.Global_Bouton_Continuer}}
+        </button>
+        <!--Bouton annuler-->
+        <button class="btn btn-link pull-right"
+                ng-click="$ctrl.Cancel()"
+                title="{{::$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">
+            {{::$ctrl.resources.Global_Bouton_Annuler}}
+        </button>
+    </div>
+</div>

@@ -1,0 +1,343 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureMateriel.Materiel_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+
+@section styles {
+    @Styles.Render("~/MaterielIndexBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/MaterielIndexBundle.js")
+    @this.RenderResources("FeatureMateriel")
+}
+
+<div class="materiel container" ng-controller="MaterielController">
+
+    <div class="toleft" id="PanelMain">
+
+        <!-- START : Titre de la page -->
+        <h1>{{resources.Materiel_PanelMain_Titre}}</h1>
+        <!--END : Titre de la page -->
+
+        <div class="row">
+            <!--BEGIN : Picklist Societe -->
+            <div class="col-md-5">
+                <label class="infoFilter">{{resources.Global_SelectionnerSociete}}</label>
+                <div class="filter">
+                    <div class="inner-addon right-addon">
+                        <i class="chev material-icons">chevron_right</i>
+                        <lookup ng-model="societe"
+                                search-placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+                                search-title="{{resources.Global_ReferentielSociete}}"
+                                on-select="resetAndSearchMateriels()"
+                                url="/api/Societe/SearchLightForRoles">
+                            <input type="text" class="form-control"
+                                   ng-value="societe.CodeLibelle"
+                                   placeholder="{{resources.Global_ReferentielSociete_Placeholder}}"
+                                   title="{{societe.CodeLibelle}}"
+                                   readonly />
+                        </lookup>
+                    </div>
+                </div>
+            </div>
+            <!--END : Picklist Societe -->
+            <!--BEGIN : Recherche -->
+            <div class="col-md-5" ng-if="societeId != undefined">
+                <label class="infoFilter">{{resources.Global_RechercheAffiner}}</label>
+                <div class="filter">
+                    <div class="input-group">
+                        <input class="form-control txt"
+                               type="text"
+                               id="txtRecherche"
+                               name="Recherche"
+                               placeholder="{{resources.Materiel_PanelMain_Recherche_Placeholder}}"
+                               ng-model="searchText"
+                               ng-model-options="{ debounce: 500 }"
+                               ng-change="handleSearch(searchText)" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary y_search"
+                                    title="{{resources.Global_RechercheAffiner_Tooltip}}"
+                                    type="button"
+                                    ng-click="handleSearch(searchText)">
+                                <i class="material-icons">search</i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--END : Recherche -->
+            <!--BEGIN : Bouton pour ajouter Items -->
+            <div class="col-md-2 add-search" ng-if="societeId != undefined">
+                <span class="pull-right">
+                    <label class="infoFilter">{{resources.Global_Ajouter}}</label>
+                    <i class="flaticon flaticon-add  icoplus " title="{{resources.Global_Bouton_AjouterReference_Tooltip}}" ng-click="handleClickCreateNew()"></i>
+                </span>
+            </div>
+            <!--END : Bouton pour ajouter Items -->
+        </div>
+
+        <!--LISTE : START-->
+        <div class="row results" id="Table" ng-if="societeId != undefined">
+            <div class="col-md-12 refs-list">
+                <div ng-repeat="item in items">
+                    <div class="row line" ng-click="editMateriel(item.Id)">
+                        <div class="col-md-2">
+                            <span class="t1">{{item.Code}}</span>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="lb">{{resources.Materiel_PanelMain_Etablissement}}</div>
+                            <span class="t2">{{item.EtablissementComptable}}</span>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="lb">{{resources.Materiel_PanelMain_Table_Libelle}}</div>
+                            <span class="t2">{{item.Libelle}}</span>
+                        </div>
+                        <div class="col-md-2 col-md-offset-2 tuile">
+                            <span class="bdg actif" ng-if="item.IsActif">{{resources.Global_Actif}}</span>
+                            <span class="bdg inactif" ng-if="!item.IsActif">{{resources.Global_Inactif}}</span>
+                            <span class="bdg storm" ng-if="item.IsStorm">{{resources.Global_Storm}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--LISTE : END-->
+
+    </div>
+
+
+    <!--DETAILS PANEL : START-->
+    <div ng-class="checkDisplayOptions"
+         class="blockScreen"
+         style="z-index:99"></div>
+    <div class="options"
+         id="PanelRight"
+         ng-class="checkDisplayOptions + ' ' + checkFormatOptions">
+
+        <!--HEADER TOOLBAR : BEGIN-->
+        <div class="toolbar"
+             ng-class="{'is-already-used':isAlreadyUsed}">
+            <div class="flaticon flaticon-settings-9 grandicone"></div>
+        </div>
+        <span ng-show="isAlreadyUsed" class="is-already-used-text">{{resources.Global_Item_Already_Used}}</span>
+        <!--HEADER TOOLBAR : END-->
+        <!-- Titre : BEGIN -->
+        <div class="form-header" id="Titre">
+            <h2>
+                <span ng-if="materiel.MaterielId == 0">{{resources.Materiel_PanelRight_Titre_Ajouter}}</span>
+                <span ng-if="materiel.MaterielId != 0">{{resources.Materiel_PanelRight_Titre_Modifier}}</span>
+            </h2>
+            <label class="legend">{{resources.Global_LegendeAsterisque}}</label>
+        </div>
+        <!-- Titre : END -->
+
+        <div class="form fred-scroll">
+            <!--Formulaire: START-->
+            <form name="formMateriel" autocomplete="off" novalidate>
+                <!--FIELD Actif: START-->
+                <div class="col-md-offset-7 chb_r margg">
+                    <span class="bdg storm storm-cursor-default" ng-if="materiel.IsStorm">{{resources.Global_Storm}}</span>
+                    <input id="chkActif" type="checkbox" ng-model="materiel.Actif" />
+                    <label for="chkActif"><span></span>{{resources.Global_Actif}}</label>
+                </div>
+                <!--FIELD Actif: END-->
+                <!--FIELD Code: START-->
+                <div class="margg" ng-class="{ 'has-error' : (formMateriel.Code.$invalid && formMateriel.$submitted) || formMateriel.Code.$error.exist || formMateriel.Code.$error.pattern}">
+                    <label for="txtCode">{{resources.Materiel_PanelRight_Code}} *</label>
+                    <span class="text-danger" ng-show="formMateriel.Code.$error.required && formMateriel.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <span class="text-danger" ng-show="formMateriel.Code.$error.exist">{{resources.Global_Control_Code_ExistInSociete_Erreur}}</span>
+                    <span class="text-danger" ng-show="formMateriel.Code.$error.pattern">{{resources.Global_Control_Code_FormatAlphanumeric_Erreur}}</span>
+                    <input class="form-control"
+                           type="text"
+                           id="txtCode"
+                           name="Code"
+                           ng-pattern="/^[a-zA-Z0-9]*$/"
+                           ng-change="handleChangeCode(formMateriel)"
+                           required
+                           placeholder="{{resources.Materiel_PanelRight_Code_Placeholder}}"
+                           ng-model="materiel.Code"
+                           maxlength="20" />
+                </div>
+                <!--FIELD Code: END-->
+                <!--FIELD Libelle: START-->
+                <div class="margg" ng-class="{ 'has-error' : formMateriel.Libelle.$invalid && formMateriel.$submitted}">
+                    <label for="txtLibelle">{{resources.Materiel_PanelRight_Libelle}} *</label>
+                    <span class="text-danger" ng-show="formMateriel.Libelle.$invalid && formMateriel.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <input class="form-control" type="text" id="txtLibelle" name="Libelle" required placeholder="{{resources.Materiel_PanelRight_Libelle_Placeholder}}" ng-model="materiel.Libelle" maxlength="500" />
+                </div>
+                <!--FIELD Libelle: END-->
+                <!--FIELD EtablissementComptable: START-->
+                <div class="margg">
+                    <label>{{resources.Materiel_PanelRight_EtablissementComptable}} *</label>
+                    <span class="text-danger" ng-show="isUserFes && !materiel.EtablissementComptable && formMateriel.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <lookup-standalone ng-model="materiel.EtablissementComptable"
+                                       text="materiel.EtablissementComptable.CodeLibelle"
+                                       search-title="{{resources.Global_ReferentielEtablissementComptable}}"
+                                       search-placeholder="{{resources.Global_ReferentielEtablissementComptable_Placeholder}}"
+                                       on-click="showPickList('EtablissementComptable')"
+                                       on-select="loadEtablissementComptable(item)"
+                                       on-delete="handleDeletePickListEtablissementComptable()"
+                                       class="formulaire long">
+                    </lookup-standalone>
+                </div>
+                <!--FIELD EtablissementComptable: END-->
+                <!--FIELD Ressource: START-->
+                <div class="margg">
+                    <label>{{resources.Materiel_PanelRight_Ressource}} *</label>
+                    <span class="text-danger" ng-show="!materiel.Ressource && formMateriel.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <lookup-standalone ng-model="materiel.Ressource"
+                                       text="materiel.Ressource.CodeLibelle"
+                                       search-title="{{resources.Global_ReferentielRessource}}"
+                                       search-placeholder="{{resources.Global_ReferentielRessource_Placeholder}}"
+                                       on-click="showPickList('RessourceMateriel')"
+                                       on-select="loadRessource(item)"
+                                       on-delete="handleDeletePickListRessource()"
+                                       required
+                                       class="formulaire long">
+                    </lookup-standalone>
+                </div>
+                <div class="margg">
+                    <input type="checkbox"
+                           id="chkb"
+                           ng-change="materielLocationChange()"
+                           ng-model="materiel.MaterielLocation"
+                           ng-class="isGroupRZb ? 'materiellocation-disabled' : ''"
+                           ng-disabled="isGroupRZb" />
+                    <label for="chkb" ng-class="isGroupRZb ? 'materiellocation-disabled' : ''"><span></span>{{resources.Materiel_PanelRight_MaterielLocation}}</label>
+
+                </div>
+                <!--FIELD Ressource: END-->
+
+
+
+                <div class="margg"
+                     ng-show="materiel.MaterielLocation"
+                     ng-class="{ 'has-error' : !materiel.fournisseur && formMateriel.$submitted}">
+                    <span class="text-danger" ng-show="!materiel.Fournisseur && formMateriel.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <label>{{resources.Materiel_PanelRight_Fournisseur}} *</label>
+                    <lookup-standalone id="lookupFournisseur"
+                                       name="fournisseur"
+                                       ng-model="materiel.Fournisseur"
+                                       text="materiel.Fournisseur.LibelleRef"
+                                       search-title="{{resources.Global_ReferentielFournisseur}}"
+                                       search-placeholder="{{resources.Global_ReferentielFournisseur_Placeholder}}"
+                                       on-select="onSelectFournisseurLookup(item)"
+                                       on-delete="onDeleteFournisseurLookup()"
+                                       url="/api/Materiel/GetActiveRentersForMateriel/?groupeId={{societe.GroupeId}}&"
+                                       class="no-padding formulaire long"
+                                       style-parent="true">
+                    </lookup-standalone>
+                </div>
+
+
+                <div class="margg"
+                     ng-show="materiel.MaterielLocation"
+                     ng-class="{ 'has-error' : formMateriel.DateDebutLocation.$invalid && formMateriel.$submitted}">
+                    <label for="txtDateDebutLocation">{{resources.Materiel_PanelRight_DateDebut}} *</label>
+                    <span class="text-danger" ng-show="formMateriel.DateDebutLocation.$invalid && formMateriel.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <div class="input-group date">
+                        <input type="text"
+                               id="txtDateDebutLocation"
+                               name="DateDebutLocation"
+                               ng-required="materiel.MaterielLocation"
+                               class="date form-control"
+                               show-button-bar="true"
+                               uib-datepicker-popup="dd/MM/yyyy"
+                               current-text="{{resources.Global_Bouton_Aujourdhui}}"
+                               close-text="{{resources.Global_Bouton_Fermer}}"
+                               clear-text="{{resources.Global_Bouton_Supprimer}}"
+                               ng-model="materiel.DateDebutLocation"
+                               is-open="dateDebutLocationOpened"
+                               readonly />
+                        <span class="input-group-addon"
+                              ng-click="openDateDebutLocation()"
+                              title="{{resources.Materiel_PanelRight_DateDebut_title}}">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="margg"
+                     ng-show="materiel.MaterielLocation"
+                     ng-class="{ 'has-error' : formMateriel.DateFinLocation.$invalid && formMateriel.$submitted}">
+                    <label for="txtDateFinLocation">{{resources.Materiel_PanelRight_DateFin}}</label>
+                    <div class="input-group date">
+                        <input type="text"
+                               id="txtDateFinLocation"
+                               name="DateFinLocation"
+                               class="date form-control"
+                               show-button-bar="true"
+                               uib-datepicker-popup="dd/MM/yyyy"
+                               current-text="{{resources.Global_Bouton_Aujourdhui}}"
+                               close-text="{{resources.Global_Bouton_Fermer}}"
+                               clear-text="{{resources.Global_Bouton_Supprimer}}"
+                               ng-model="materiel.DateFinLocation"
+                               is-open="dateFinLocationOpened"
+                               readonly />
+                        <span class="input-group-addon"
+                              ng-click="openDateFinLocation()"
+                              title="{{resources.Materiel_PanelRight_DateFin_title}}">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+                <!--FOOTER TOOLBAR : BEGIN-->
+                <div class="footer">
+                    <div class="buttons">
+                        <button class="btn btn-default"
+                                type="submit"
+                                ng-disabled="isBusy"
+                                ng-click="handleClickAddOrUpdate();"
+                                title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">
+                            {{resources.Global_Bouton_Enregistrer}}
+                        </button>
+                        <button class="btn btn-primary"
+                                type="submit"
+                                ng-disabled="isBusy"
+                                ng-click="handleClickAddOrUpdateAndNew();"
+                                title="{{resources.Global_Bouton_EnregistrerEtNouveau_Tooltip}}">
+                            {{resources.Global_Bouton_EnregistrerEtNouveau}}
+                        </button>
+                        <button ng-hide="materiel.MaterielId==0"
+                                class="btn"
+                                type="submit"
+                                ng-click="handleClickDelete(materiel);"
+                                title="{{resources.Global_Bouton_Supprimer_Tooltip}}">
+                            {{resources.Global_Bouton_Supprimer}}
+                        </button>
+                        <button class="btn btn-link"
+                                type="button"
+                                ng-click="handleClickCancel();"
+                                title="{{resources.Global_Bouton_Annuler_Tooltip}}">
+                            {{resources.Global_Bouton_Annuler}}
+                        </button>
+                    </div>
+                    <div class="close_panel"
+                         ng-click="handleClickCancel();"
+                         title="{{resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+                        <i class="fa fa-angle-right"
+                           aria-hidden="true"></i>
+                        <span>{{resources.Global_Bouton_RefermerPanneau}}</span>
+                    </div>
+                </div>
+                <!--FOOTER TOOLBAR : END-->
+
+            </form>
+            <!--Formulaire: END-->
+
+        </div>
+    </div>
+</div>

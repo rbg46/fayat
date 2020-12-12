@@ -1,0 +1,171 @@
+﻿@*--------------------------------------------------------------------------------------------------------------*@
+@*                                                HABILITATIONS                                                 *@
+@*--------------------------------------------------------------------------------------------------------------*@
+
+<div class="panel panel-default" ng-show="personnelEdit.Personnel.UtilisateurId > 0 && !personnelEdit.JustDelegationShow && personnelEdit.Personnel.IsUtilisateur && personnelEdit.showPartialUtilisateur">
+  <div class="panel-heading collapsed" data-toggle="collapse" data-parent="#personnel-accordion" data-target="#collapse-habilitation" id="panel-heading-habilitation">
+    <i class="chevron fa fa-fw"></i> {{personnelEdit.resources.Personnel_PartialHabilitation_Titre}}
+  </div>
+  <div id="collapse-habilitation" class="panel-collapse collapse">
+    <form class="form-horizontal" autocomplete="off" role="form" name="personnelEdit.formHabilitation" novalidate>
+      <div class="panel-body">
+
+        <div class="row">
+          <div class="tree col-md-12">
+
+            <!--NOUVELLE PRESENTATION-->
+            <div class="row">
+              <lookup ng-model="personnelEdit.societeForAffectation"
+                      search-placeholder="Choisissez une société"
+                      search-title="Choisissez une société"
+                      url="/api/Societe/SearchLightForRoles/"
+                      ng-disabled="personnelEdit.ContratInterimActifOrPlanifie != null"
+                      ng-class="personnelEdit.ContratInterimActifOrPlanifie != null ? 'lookupSociete' : ''">
+
+                <div title="Cliquer pour selectionner une société"
+                     class="habilitations new align-center">
+                  <i class="material-icons">add</i>
+                  <span class="add-padding-left">{{ personnelEdit.societeForAffectation ? personnelEdit.societeForAffectation.Libelle : 'Selectionner une Société'  }} </span>
+                </div>
+              </lookup>
+
+              <lookup ng-model="personnelEdit.selectedRef"
+                      ng-show="personnelEdit.societeForAffectation"
+                      search-placeholder="{{personnelEdit.resources.Global_ReferentielRole_Placeholder}}"
+                      search-title="{{personnelEdit.resources.Global_ReferentielRole}}"
+                      on-select="personnelEdit.loadData('Role', item)"
+                      on-click="personnelEdit.showPickList('Role')">
+
+                <div title="{{personnelEdit.resources.Personnel_PartialHabilitation_Bouton_AjouterOrganisation_Tootlip}}" class="habilitations new align-center">
+                  <i class="material-icons">add</i>
+                  <span class="add-padding-left"> Ajouter un nouveau rôle</span>
+                </div>
+              </lookup>
+            </div>
+
+            @************************************************** DEBUT - LISTE DES RÔLES **************************************************@
+            <div class="row habilitations" ng-repeat="role in personnelEdit.roleList">
+
+              <div class="col-md-2">
+                <fred-code>{{role.CodeNomFamilier}}</fred-code>
+                <fred-val>{{role.Libelle}}</fred-val>
+              </div>
+
+              <div class="col-md-9 ">
+
+                <div class="row">
+                  <lookup ng-model="personnelEdit.selectedRef"
+                          style-parent="true"
+                          enable-default-selection="true"
+                          search-placeholder="{{personnelEdit.resources.Global_ReferentielOrganisation_Placeholder}}"
+                          search-title="{{personnelEdit.resources.Global_ReferentielOrganisation}}"
+                          url="{{personnelEdit.handleOpenReferentialOrganisation()}}"
+                          custom-template-url="~/Scripts/directive/lookup/custom-templates/personnel.template.html"
+                          on-select="personnelEdit.loadData('Organisation', item, $index)">
+                    <div title="{{personnelEdit.resources.Personnel_PartialHabilitation_Bouton_AjouterOrganisation_Tootlip}}" class="organisations new align-center">
+                      <i class="material-icons">add</i>
+                      <span class="add-padding-left"> Ajouter une nouvelle organisation</span>
+                    </div>
+
+                  </lookup>
+                </div>
+
+                @*----------------------------------------------------- DEBUT - LISTE DES ORGA -----------------------------------------------------*@
+                <div class="row organisations" ng-repeat="orga in role.AffectationsByOrganisation">
+
+                  <div class="col-md-3">
+                    <fred-code>{{orga.Organisation.Code}}</fred-code>
+                    <fred-val>{{orga.Organisation.Libelle}}</fred-val>
+                  </div>
+
+                  <div class="col-md-8 affectations">
+
+                    @*++++++++++++++++++++++++++++++++++++++++++++++++++++ DEBUT - LISTE DES SEUILS ++++++++++++++++++++++++++++++++++++++++++++++++++++*@
+
+                    <div>
+                      <lookup ng-model="personnelEdit.selectedRef"
+                              enable-default-selection="true"
+                              search-placeholder="{{personnelEdit.resources.Global_ReferentielDevise_Placeholder}}"
+                              search-title="{{personnelEdit.resources.Global_ReferentielDevise}}"
+                              on-click="personnelEdit.handleOpenReferentialDevise('Devise', $parent.$index, $index)"
+                              on-select="personnelEdit.loadData('Devise', item)">
+
+                        <div title="{{personnelEdit.resources.Personnel_PartialHabilitation_Bouton_AjouterDevise_Tootlip}}" class="affectation new align-center">
+                          <i class="material-icons">add</i>
+                          <span class="add-padding-left"> Ajouter une nouvelle devise</span>
+                        </div>
+                      </lookup>
+                    </div>
+
+                    <div ng-repeat="affectation in orga.Affectations" class="affectation">
+                      <div class="row align-center">
+                        <div class="col-md-5" ng-class="{'has-error': personnelEdit.formHabilitation.$submitted && personnelEdit.formHabilitation.seuil_{{$index}}.$invalid}">
+                          <span class="text-danger" ng-show="personnelEdit.formHabilitation.$submitted && personnelEdit.formHabilitation.seuil_{{$index}}.$invalid">Le seuil ne peut dépasser 9 999 999.</span>
+                          <div class="input-group col-md-12">
+                            <input type="text"
+                                   fred-input-number
+                                   class="form-control"
+                                   name="seuil_{{$index}}"
+                                   min="0"
+                                   max="9999999"                                   
+                                   ng-model="affectation.CommandeSeuil" />
+                            <div class="input-group-addon" ng-show="affectation.Devise.Symbole">{{affectation.Devise.Symbole}}</div>
+                          </div>
+                        </div>
+                        <div class="col-md-5">
+                          <span class="label1 currency">{{affectation.Devise.CodeLibelle}}</span>
+                        </div>
+
+                        <div class="col-md-1 pull-right align-center">
+                          <i class="material-icons icon-info" title="{{affectation.SeuilRoleAndOrgaTooltip}}">info_outline</i>
+                        </div>
+                        <div class="col-md-1 pull-right align-center">
+                          <i class="material-icons icon-close" aria-hidden="true"
+                             ng-click="personnelEdit.handleDeleteDevise($parent.$parent.$index, $parent.$index, $index)"
+                             title="{{personnelEdit.resources.Personnel_PartialHabilitation_Bouton_SupprimerDevise_Tootlip}}">close</i>
+                        </div>
+
+                      </div>
+                    </div>
+                    @*++++++++++++++++++++++++++++++++++++++++++++++++++++ FIN - LISTE DES SEUILS ++++++++++++++++++++++++++++++++++++++++++++++++++++*@
+                  </div>
+                  <div class="col-md-1 icon-close-bloc">
+                    <i class="material-icons pull-right icon-close"
+                       aria-hidden="true"
+                       ng-click="personnelEdit.handleDeleteOrganisation($parent.$index, $index)"
+                       title="{{personnelEdit.resources.Personnel_PartialHabilitation_Bouton_SupprimerOrganisation_Tootlip}}">close</i>
+                  </div>
+                </div>
+                @*----------------------------------------------------- FIN - LISTE DES ORGA -----------------------------------------------------*@
+
+              </div>
+
+              <div class="col-md-1 icon-close-bloc">
+                <i class="material-icons pull-right icon-close"
+                   aria-hidden="true" ng-click="personnelEdit.handleDeleteRole($index)"
+                   title="{{personnelEdit.resources.Personnel_PartialHabilitation_Bouton_SupprimerRole_Tootlip}}">close</i>
+              </div>
+            </div>
+            @************************************************** FIN - LISTE DES RÔLES **************************************************@
+
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+          <button type="submit" class="btn btn-default pull-left"
+                  ng-click="personnelEdit.handleSave('habilitation')"
+                  title="{{personnelEdit.resources.Global_Bouton_Enregistrer_Tooltip}} ">
+              {{personnelEdit.resources.Global_Bouton_Enregistrer}}
+          </button>
+          <button type="button" class="btn button-excel" ng-click="personnelEdit.handleExportExcel()"
+                  title="{{personnelEdit.resources.Global_Bouton_ExportExcel_Tooltip}}">
+          </button>
+          <button class="btn btn-link pull-right"
+                  ng-click="personnelEdit.handleCancel('habilitation')"
+                  title="{{personnelEdit.resources.Global_Bouton_Annuler_Tooltip}}">
+              {{personnelEdit.resources.Global_Bouton_Annuler}}
+          </button>
+      </div>
+    </form>
+  </div>
+</div>

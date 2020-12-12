@@ -1,0 +1,47 @@
+﻿.autocomplete ul {
+    padding: 10px;
+    border: 1px solid #b7b7b7;
+    background: #fbfbfb;
+    display: flex;
+    flex-flow: wrap;
+}
+
+.autocomplete ul li {
+    width: 299px;
+    min-height: 61px;
+    background-color: white;
+    padding: 5px;
+    border: 1px solid #E1E3E5;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.autocomplete ul li:hover {
+    background: whitesmoke;
+    text-decoration: none;
+}
+
+.autocomplete ul li a:hover {
+    text-decoration: none;
+}
+
+.autocomplete ul li .zip-code-city {
+    color: #2c77ba;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.autocomplete ul li .zip-code-city .zip-code {
+    font-weight: 700;
+}
+
+.autocomplete ul li .address {
+    font-size: 14px;
+    color: #67757F;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.autocomplete ul li .country {
+    color: #2c77ba;
+}

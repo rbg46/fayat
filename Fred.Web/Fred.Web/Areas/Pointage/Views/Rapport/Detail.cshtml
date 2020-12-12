@@ -1,0 +1,1244 @@
+﻿@using Fred.Web.Shared.App_LocalResources;
+
+@{
+    ViewBag.Title = FeatureRapport.Rapport_Detail_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/RapportJournalierBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/RapportJournalierBundle.js")
+    @this.RenderResources("FeatureRapport")
+}
+
+<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+
+<div class="container-fluid rapport_detail" ng-controller="RapportController" id="page"
+     ng-init="init('@ViewBag.id', @Html.Raw(@ViewBag.duplicate.ToString().ToLower()))">
+
+    <!--Formulaire: START-->
+    <form name="formRapport" autocomplete="off">
+        <fieldset>
+            <span class="glyphicon glyphicon-lock" title="{{resources.Rapport_Detail_LectureSeul_Tooltip}}" ng-show="rapportIsLocked()"></span>
+
+            <!--START : Barre de recherche + Barre d'outils-->
+            <fred-toolbar>
+                <div class="crochet">
+                    <h1>{{resources.Rapport_Journalier_Title}}</h1>
+                </div>
+
+                <fred-section class="numero-section" ng-show="Rapport.RapportId > 0">
+                    <fred-section-title>{{resources.Rapport_Number}}</fred-section-title>
+                    <fred-section-controls>
+                        <span ng-show="Rapport.RapportId > 0">{{Rapport.RapportId}}&nbsp;</span>
+                        <fred-section-controls>
+                </fred-section>
+
+                <fred-section class="date-picker-section">
+                    <fred-section-title>{{resources.Rapport_Date}}</fred-section-title>
+                    <fred-section-controls>
+                        <app-date-picker class="datePickerRapport"
+                                         id="DateChantier"
+                                         name="DateChantier"
+                                         format="DD/MM/YYYY"
+                                         lang="fr"
+                                         initial-date="{{Rapport.DateChantier}}"
+                                         ng-disabled="dateSelectionLocked()"
+                                         ng-model="Rapport.DateChantier"
+                                         on-change="handleCheckDates()"></app-date-picker>
+                        <fred-section-controls>
+                </fred-section>
+
+                <!--Sélection de l'organisation ou du CI-->
+                <fred-section class="picklist-section">
+                    <fred-section-title>{{resources.Rapport_CI}}</fred-section-title>
+                    <fred-section-controls>
+                        <div class="inner-addon right-addon">
+                            <feature-flag feature-key="ModificationCiRapportJournalier">
+                                <lookup-standalone ng-model="Rapport.CI"
+                                                   text="Rapport.CI.CodeLibelle"
+                                                   search-title="{{resources.Global_ReferentielCI}}"
+                                                   search-placeholder="{{resources.Global_ReferentielCI_Placeholder}}"
+                                                   custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                                   url="{{handleLookupUrl('CI')}}"
+                                                   on-select="handleLookupSelection('CI', item)"
+                                                   on-delete="popupRemoveCI()"
+                                                   class="formulaire long"
+                                                   ng-disabled="Rapport.RapportId > 0"
+                                                   placeholder="{{resources.Global_ReferentielCI_Placeholder}}"
+                                                   show-delete-button="Rapport.RapportId === 0"
+                                                   no-refresh-model-in-lookup="true">
+                                </lookup-standalone>
+                            </feature-flag>
+                            <feature-flag invert feature-key="ModificationCiRapportJournalier">
+                                <lookup-standalone ng-model="Rapport.CI"
+                                                   text="Rapport.CI.CodeLibelle"
+                                                   search-title="{{resources.Global_ReferentielCI}}"
+                                                   search-placeholder="{{resources.Global_ReferentielCI_Placeholder}}"
+                                                   custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                                   on-click="handleLookupUrl('CI')"
+                                                   on-select="handleLookupSelection('CI', item)"
+                                                   on-delete="popupRemoveCI()"
+                                                   class="formulaire long"
+                                                   has-confirm="true"
+                                                   on-confirm="handleClickChangeCI()"
+                                                   ng-disabled="Rapport.RapportId > 0"
+                                                   placeholder="{{resources.Global_ReferentielCI_Placeholder}}"
+                                                   show-delete-button="Rapport.RapportId === 0">
+                                </lookup-standalone>
+                            </feature-flag>
+                        </div>
+                    </fred-section-controls>
+                </fred-section>
+
+                <!--Actions sur le rapport-->
+                <fred-section class="boutons-actions ">
+                    <fred-section-title>{{resources.Rapport_Action}}</fred-section-title>
+                    <fred-section-controls>
+                        <!--Méteo et Evènement-->
+                        <fred-button class="display" ng-click="fredSide=true; evenement=true;" title="{{resources.Rapport_Detail_Bouton_Evenement_Tooltip}}">
+                            <i class="material-icons">date_range</i>
+                        </fred-button>
+
+                        <!--Validation-->
+                        <fred-button class="display" ng-click="fredSide=true; validation=true;" title="{{resources.Rapport_Detail_Bouton_StatutValidation_Tooltip}}">
+                            <i class="material-icons">security</i>
+                        </fred-button>
+
+                        <!--Commentaire-->
+                        <fred-button class="display" ng-click="displayComments = !displayComments" ng-show="ListCommentaires.length > 0" title="{{resources.Rapport_Detail_Bouton_Commentaire_Placeholder}}">
+                            <i class="material-icons">chat</i>
+                        </fred-button>
+
+                        <fred-button ng-hide="IsFes" class="default playlist" title="{{resources.Rapport_Detail_Bouton_AjouterLigne_Tooltip}}" ng-click="handleClickAddRow()" ng-disabled="rapportIsLocked()">
+                            <span class="material-icons">playlist_add</span>
+                        </fred-button>
+
+                        <fred-button class="default" title="{{resources.Rapport_Detail_Bouton_NouveauRapport_Tooltip}}" ng-click="handleClickNewRapport(Rapport.CiId)" ng-show="Rapport.RapportId">
+                            <span class="material-icons">note_add</span>
+                        </fred-button>
+
+                        <fred-button class="default" title="{{resources.Rapport_Detail_Bouton_DupliquerRapport_Tooltip}}" ng-click="handleClickDuplicateRapport()" ng-show="Rapport.RapportId">
+                            <span class="material-icons">content_copy</span>
+                        </fred-button>
+
+                        <fred-button class="default" title="{{resources.Rapport_Detail_Bouton_SupprimerRapport_Tooltip}}" ng-click="popupDeleteRapport()" ng-show="Rapport.RapportId && Rapport.CanBeDeleted">
+                            <span class="material-icons">delete_forever</span>
+                        </fred-button>
+                        <!-- Dupliquer le rapport en masse -->
+                        <fred-button class="default"
+                                     title="Dupliquer le rapport en masse"
+                                     ng-show="canDuplicateEnMasse()"
+                                     ng-click="handleClickDuplicationEnMasseRapport()">
+                            <span class="material-icons">queue</span>
+                        </fred-button>
+                    </fred-section-controls>
+                </fred-section>
+
+                <fred-section class="boutons-actions ">
+                    <fred-section-title>{{resources.Rapport_Personnaliser}}</fred-section-title>
+                    <fred-section-controls>
+                        <!--Bascule du tableau en mode Full Page-->
+                        <fred-button class="pdf" title="{{resources.Rapport_Detail_Bouton_Aggrandir_Tooltip}} " ng-show="Rapport.CI != null" ng-click="handleToggleFullscreen(true)">
+                            <span class="material-icons">fullscreen</span>
+                        </fred-button>
+
+                        <!--Afficher Personnel-->
+                        <fred-button class="primary inactive" title="{{resources.Rapport_Display_Personnel_Tooltip}}"
+                                     ng-click="handleChangeDisplayPersonnel()" ng-show="!filter.displayPersonnelDetail">
+                            <span class="material-icons">group</span>
+                        </fred-button>
+
+                        <fred-button class="primary active" title="{{resources.Rapport_Display_Personnel_Tooltip}}"
+                                     ng-click="handleChangeDisplayPersonnel()" ng-show="filter.displayPersonnelDetail">
+                            <span class="material-icons">group</span>
+                        </fred-button>
+
+                        <!--Afficher Matériel-->
+                        <fred-button class="primary inactive" title="{{resources.Rapport_Display_Materiel_Tooltip}}"
+                                     ng-click="handleChangeDisplayMaterial()" ng-show="!filter.displayMaterial && !IsFes">
+                            <span class="mat sapicon-E15D"></span>
+                        </fred-button>
+
+                        <fred-button class="button-icon-materiel primary active" title="{{resources.Rapport_Display_Materiel_Tooltip}}"
+                                     ng-click="handleChangeDisplayMaterial()" ng-show="filter.displayMaterial && !IsFes">
+                            <span class="mat sapicon-E15D"></span>
+                        </fred-button>
+
+                        <!--Afficher Total tableau-->
+                        <fred-button class="primary inactive" title="{{resources.Rapport_Display_Total_Tooltip}}"
+                                     ng-click="displayTotal = !displayTotal" ng-init="displayTotal=true;" ng-show="!displayTotal">
+                            <span class="material-icons">poll</span>
+                        </fred-button>
+
+                        <fred-button class="primary active" title="{{resources.Rapport_Display_Total_Tooltip}}"
+                                     ng-click="displayTotal = !displayTotal" ng-init="displayTotal=true;" ng-show="displayTotal">
+                            <span class="material-icons">poll</span>
+                        </fred-button>
+                    </fred-section-controls>
+                </fred-section>
+
+                <fred-section class="boutons-actions ">
+                    <fred-authorization key="menu.show.areas.pointage.views.rapport.new">
+                        <fred-section-title>{{resources.Rapport_Validations}}</fred-section-title>
+                        <fred-section-controls>
+                            <button class="fred-button warning text" type="button" ng-disabled="saveButtonLocked()" ng-click="handleClickSave()" title="{{SaveButtonToolTip}}">{{resources.Global_Bouton_Enregistrer}}</button>
+                            <fred-authorization key="button.enabled.validate.rapport.index">
+                                <button class="fred-button default text" type="button" ng-show="IsMajorationMax || !IsRolePaie" ng-disabled="busy || !Rapport.CanBeValidated" ng-click="handleClickValidate()" title="{{resources.Global_Bouton_Valider_Tooltip}}">{{resources.Global_Bouton_Valider}}</button>
+                            </fred-authorization>
+                            <button class="fred-button default text" type="button" ng-show="IsRolePaie && !Rapport.Verrouille" ng-click="handleVerrouillerRapport()" ng-disabled="busy || Rapport.RapportId == 0 || !Rapport.CanBeValidated || !Rapport.CanBeLocked || !CanBeLockedBeforeSave" title="{{resources.Rapport_Index_Bouton_Verrouiller_Placeholder}}">{{resources.Rapport_Index_Bouton_Verrouiller}}</button>
+                            <button class="fred-button default text" type="button" ng-show="IsRolePaie && Rapport.Verrouille" ng-click="handleDeverrouillerRapport()" ng-disabled="Rapport.RapportId == 0|| Rapport.Cloture" title="{{resources.Rapport_Index_Bouton_Deverrouiller_Placeholder}}">{{resources.Rapport_Index_Bouton_Deverrouiller}}</button>
+                        </fred-section-controls>
+                    </fred-authorization>
+                </fred-section>
+
+                <fred-section class="icone-warning">
+                    <span class="glyphicon glyphicon-warning-sign" ng-mouseover="handleShowErrors(Rapport)" uib-popover-template="'popoverTemplate'" popover-trigger="'mouseenter'" popover-placement="right" ng-show="Rapport.ListErreurs.length > 0"></span>
+                </fred-section>
+
+                <fred-section class="statut-rapport">
+                    <fred-section-title>&nbsp;</fred-section-title>
+                    <fred-section-controls ng-class="{colorVE: Rapport.RapportStatut.Code =='VE', colorVA: (Rapport.RapportStatut.Code !='VE' && Rapport.RapportStatut.Code !='EC'), colorEC: Rapport.RapportStatut.Code =='EC'}">
+                        <div class="title">{{resources.Rapport_Etat}}</div>
+                        <div class="libelle">{{Rapport.RapportStatut.Libelle}}</div>
+                    </fred-section-controls>
+                </fred-section>
+            </fred-toolbar>
+
+            <fred-overlay></fred-overlay>
+            <fred-popin>
+                <fred-popin-header>
+                    <fred-popin-title>
+                        <left>{{resources.Rapport_Gestion_Evenement}}</left>
+                        <right>
+                            <i class="flaticon flaticons flaticon-multiply close pull-right" title="{{resources.Rapport_Annuler_Tooltip}}"></i>
+                        </right>
+                    </fred-popin-title>
+                </fred-popin-header>
+                <fred-popin-body>
+
+                </fred-popin-body>
+                <fred-popin-footer>
+                    <left>
+                        {{resources.Global_Bouton_Annuler}}
+                    </left>
+                    <right>
+                        {{resources.Global_Bouton_Valider}}
+                    </right>
+                </fred-popin-footer>
+            </fred-popin>
+
+            <div fred-fullscreen="{{isFullscreen}}"
+                 ng-class="{'spreadsheet':isFullscreen==true}"
+                 ng-show="Rapport.CI != null">
+
+                <!-- BEGIN : Rappel #CI + Date en mode FullScreen-->
+                <div class="header" ng-show="isFullscreen">
+                    <div class="row">
+
+                        <div class="col-lg-2 col-md-2">
+                            <!--Bouton fermeture du mode Spreadsheet-->
+                            <button class="btn btn-sm btn-danger filter hidden-xs pull-left " ng-click="handleToggleFullscreen(false)" title="{{resources.Rapport_Detail_Bouton_Reduire_Tooltip}}">
+                                <span class="icon-toolbar-option flaticon flaticon-multiply"></span>
+                            </button>
+                        </div>
+                        <div class="col-lg-8 col-md-7 fullscreen-header">
+                            <label>{{resources.Rapport_Detail_Rapport_Titre}}&nbsp;</label>
+                            <label><b>{{Rapport.RapportId}}</b></label>
+                            <label>&nbsp;/ {{resources.Rapport_Detail_CI_Titre}}&nbsp;</label>
+                            <label><b>{{Rapport.CI.CodeLibelle}}</b></label>
+                            <label>&nbsp;/ {{resources.Rapport_Detail_Date_Titre}}&nbsp;</label>
+                            <label ng-show="rapportIsLocked()"><b>{{Rapport.DateChantier | date:'dd/MM/yyyy'}}</b></label>
+                            <app-date-picker class="datePickerRapportFullScreen" id="DateChantier" name="DateChantier" format="DD/MM/YYYY" lang="fr" initial-date="{{Rapport.DateChantier}}" ng-show="!rapportIsLocked()" ng-model="Rapport.DateChantier" ng-change="handleCheckDates()"></app-date-picker>
+                        </div>
+                        <div class="col-lg-2 col-md-3">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 0;" id="rapport-container">
+                    <table class=rapport-table>
+                        <!-------------------------------------------------------------------------------------------------------------------->
+                        <!--                                                    HEADER                                                      -->
+                        <!-------------------------------------------------------------------------------------------------------------------->
+                        <thead>
+                            <!----------------------------------------------------- HEADER 1 ---------------------------------------------------->
+                            <tr class="header1">
+                                <th class="col-personnel"></th>
+                                <th class="col-personnel"></th>
+                                <th class="col-personnel">
+                                    <div class="icons-materiel-conteneur pick-add">
+                                        <span ng-hide="IsFes" class="flaticon flaticon-add button-add-ligne-pointage" ng-click="handleClickAddRow()" title="{{resources.Rapport_Detail_EnteteNiv1_Bouton_AjouterLigne}}"></span>
+                                        <span class="icon-materiel-txt">{{resources.Rapport_Detail_EnteteNiv1_Personnel}}</span>
+                                    </div>
+                                </th>
+                                <th class="border-left col-personnel col-heure-travail" ng-show="filter.displayPersonnelDetail" colspan="2">{{resources.Rapport_Detail_EnteteNiv1_HeuresPersonnel}}</th>
+                                <th ng-show="filter.displayPersonnelDetail && !IsFes" class="border-left col-majoration" colspan="2">{{resources.Rapport_Detail_EnteteNiv1_Majoration}}</th>
+                                <th class="border-left col-absence" colspan="3" ng-show="filter.displayPersonnelDetail">{{resources.Rapport_Detail_EnteteNiv1_Absence}}</th>
+                                <th class="col-dep border-left  col-deplacement" colspan="4" ng-show="(IsRolePaie || PermissionDeplacementVisible) && filter.displayPersonnelDetail">{{resources.Rapport_Detail_EnteteNiv1_Deplacement}}</th>
+                                <!-- HEADER 1 - MAJORATIONS -->
+                                <th ng-show="filter.displayPersonnelDetail && IsFes" class="dynamic-col border-left no-bdr col-majoration2" colspan="{{ListMajorations.length}}" style="width:{{ListMajorations.length}}px;" ng-class="{'default-size' : ListMajorations.length === 0, '' : ListMajorations.length > 0}">
+                                    <div class="icons-materiel-conteneur pick-add">
+                                        <lookup ng-disabled="rapportIsLocked()"
+                                                ng-model="selectedRef"
+                                                search-placeholder="{{resources.Global_ReferentielCodeMajoration_Placeholder}}"
+                                                search-title="{{resources.Global_ReferentielCodeMajoration}}"
+                                                on-click="handleLookupUrl('CodeMajoration', null)"
+                                                on-select="handleLookupSelection('ListCodeMajoration', item)">
+                                            <span class="lookup-image-plus" title="{{resources.Rapport_Detail_EnteteNiv1_Bouton_AjouterMajoration}}"></span>
+                                        </lookup>
+                                        <span class="icon-materiel-txt">{{resources.Rapport_Detail_EnteteNiv1_Majoration}}</span>
+                                    </div>
+                                </th>
+
+                                <!-- HEADER 1 - PRIMES -->
+                                <th class="dynamic-col border-left no-bdr col-prime" colspan="{{ListPrimes.length}}" style="width:{{ListPrimes.length*55}}px;" ng-class="{'default-size' : ListPrimes.length === 0, '' : ListPrimes.length > 0}" ng-show="filter.displayPersonnelDetail">
+                                    <div class="icons-materiel-conteneur pick-add">
+                                        <lookup ng-disabled="rapportIsLocked()"
+                                                ng-model="selectedRef"
+                                                custom-template-url="~/Scripts/directive/lookup/custom-templates/prime.template.html"
+                                                search-placeholder="{{resources.Global_ReferentielPrime_Placeholder}}"
+                                                search-title="{{resources.Global_ReferentielPrime}}"
+                                                on-click="handleLookupUrl('Prime', null)"
+                                                on-select="handleLookupSelection('Prime', item)">
+                                            <span class="lookup-image-plus" title="{{resources.Rapport_Detail_EnteteNiv1_Bouton_AjouterPrime}}"></span>
+                                        </lookup>
+                                        <span class="icon-materiel-txt">{{resources.Rapport_Detail_EnteteNiv1_Prime}}</span>
+                                    </div>
+                                </th>
+                                <!-- HEADER 1 - ASTREINTES -->
+                                <th ng-show="IsFes" class="dynamic-col border-left no-bdr col-astreinte">
+                                    {{resources.Rapport_Astreintes}}
+                                </th>
+
+                                <!-- HEADER 1 - MATERIEL -->
+                                <th ng-show="filter.displayMaterial && !IsFes" class="border-left col-materiel" colspan="3">
+                                    <div class="icons-materiel-conteneur pick-add">
+                                        <span class="flaticon flaticon-add button-add-ligne-pointage" ng-click="handleClickAddRow()" title="{{resources.Rapport_Detail_EnteteNiv1_Bouton_AjouterLigne}}" style="margin-left: auto;"></span>
+                                        <span class="icon-materiel-txt" style="margin-right: auto;margin-left: 5px;">{{resources.Rapport_Detail_EnteteNiv1_Materiel}}</span>
+                                        <span class="material-icons fold-action" ng-show="!filter.displayCol" ng-click="filter.displayCol = true" title="Afficher les colonnes supplémentaires" style="margin-left: auto;">chevron_right</span>
+                                    </div>
+                                </th>
+                                <th style="min-width: 60px !important;width: 60px !important;background-color: rgba(9, 173, 166,1.0);" ng-show="filter.displayCol && filter.displayMaterial && !IsFes"></th>
+                                <th style="min-width: 60px !important;width: 60px !important;background-color: rgba(9, 173, 166,1.0);" ng-show="filter.displayCol && filter.displayMaterial && !IsFes"></th>
+                                <th style="min-width: 60px !important;width: 60px !important;background-color: rgba(9, 173, 166,1.0);" ng-show="filter.displayCol && filter.displayMaterial && !IsFes"></th>
+                                <th style="min-width: 60px !important;width: 60px !important;background-color: rgba(9, 173, 166,1.0);" ng-show="filter.displayCol && filter.displayMaterial && !IsFes">
+                                    <span class="material-icons fold-action pull-right" ng-show="filter.displayCol" ng-click="filter.displayCol = false" title="Replier les colonnes" style="color: #fff;">chevron_left</span>
+                                </th>
+
+                                <!-- HEADER 1 - TACHES -->
+                                <th class="dynamic-col border-left col-tache" colspan="{{ListTaches.length}}" style="width:{{ListTaches.length*55}}px;" ng-class="{'default-size' : ListTaches.length === 0, '' : ListTaches.length > 0}">
+                                    <div class="icons-materiel-conteneur pick-add">
+                                        <lookup ng-disabled="rapportIsPartialLocked()"
+                                                ng-model="selectedRef"
+                                                search-placeholder="{{resources.Global_ReferentielTache_Placeholder}}"
+                                                search-title="{{resources.Global_ReferentielTache}}"
+                                                on-click="handleLookupUrl('Tache', null)"
+                                                on-select="handleLookupSelection('Tache', item)"
+                                                custom-template-url="~/Scripts/directive/Lookup/custom-templates/tache.template.html">
+                                            <span class="lookup-image-plus" title="{{resources.Rapport_Detail_EnteteNiv1_Bouton_AjouterTache}}"></span>
+                                        </lookup>
+                                        <span class="icon-materiel-txt">{{resources.Rapport_Detail_EnteteNiv1_Tache}}</span>
+                                    </div>
+                                </th>
+
+                            </tr>
+                            <!----------------------------------------------------- HEADER 2 ------------------------------------------------------>
+                            <tr class="header2">
+                                <th class="col-personnel"></th>
+                                <th class="col-personnel"></th>
+                                <th class="col-personnel"></th>
+                                <th class="col-personnel col-heure-travail" ng-show="filter.displayPersonnelDetail">
+                                    <div class="icons-materiel-conteneur">
+                                        <span class="icon-materiel hour-normal" title="{{resources.Rapport_Heure_Total}}"></span>
+                                    </div>
+                                </th>
+                                <th class="col-personnel col-heure-normal" ng-show="filter.displayPersonnelDetail">
+                                    <div class="icons-materiel-conteneur">
+                                        <span class="icon-materiel hour-total" title="{{resources.Rapport_Heure_Normal}}"></span>
+                                    </div>
+                                </th>
+
+                                <!-- HEADER 2 - MAJORATION -->
+                                <th class="border-left col-majoration" ng-show="filter.displayPersonnelDetail && !IsFes">
+                                    <div class="icons-materiel-conteneur">
+                                        <span class="icon-materiel code" title="{{resources.Rapport_Detail_EnteteNiv2_Majoration_Code}}"></span>
+                                    </div>
+                                </th>
+                                <th class="col-majoration" ng-show="filter.displayPersonnelDetail && !IsFes">
+                                    <div class="icons-materiel-conteneur">
+                                        <span class="icon-materiel clock" title="{{resources.Rapport_Detail_EnteteNiv2_Majoration_Heure}}"></span>
+                                    </div>
+                                </th>
+
+                                <!-- HEADER 2 - ABSENCE -->
+                                <th class="border-left col-absence" ng-show="filter.displayPersonnelDetail">
+                                    <div class="icons-materiel-conteneur">
+                                        <span class="icon-materiel code" title="{{resources.Rapport_Detail_EnteteNiv2_Absence_Code}}"></span>
+                                    </div>
+                                </th>
+                                <th class="col-absence" ng-show="filter.displayPersonnelDetail">
+                                    <div class="icons-materiel-conteneur">
+                                        <span class="icon-materiel clock" title="{{resources.Rapport_Detail_EnteteNiv2_Absence_Heure}}"></span>
+                                    </div>
+                                </th>
+                                <th class="col-absence" ng-show="filter.displayPersonnelDetail">
+                                    <div class="icons-materiel-conteneur">
+                                        <span class="icon-materiel calendar" title="{{resources.Rapport_Detail_EnteteNiv2_Absence_NumSemaineIntemperie}}"></span>
+                                    </div>
+                                </th>
+
+                                <!-- HEADER 2 - DEPLACEMENT -->
+                                <th class="col-dep border-left" ng-show="(IsRolePaie || PermissionDeplacementVisible) && filter.displayPersonnelDetail"></th>
+                                <th class="col-dep" ng-show="(IsRolePaie || PermissionDeplacementVisible) && filter.displayPersonnelDetail">{{resources.Rapport_Detail_EnteteNiv2_Deplacement_Code}}</th>
+                                <th class="col-dep" ng-show="(IsRolePaie || PermissionDeplacementVisible) && filter.displayPersonnelDetail">{{resources.Rapport_Detail_EnteteNiv2_Deplacement_Zone}}</th>
+                                <th class="col-dep" ng-show="(IsRolePaie || PermissionDeplacementVisible) && filter.displayPersonnelDetail">{{resources.Rapport_Detail_EnteteNiv2_Deplacement_IVD}}</th>
+                                <!-- HEADER 2 - MAJORATIONS -->
+                                <th ng-show="filter.displayPersonnelDetail && IsFes" ng-repeat="majoration in ListMajorations track by $index" class="dynamic-col border-left col-majoration2">
+                                    {{majoration.Code}}
+                                    <div class="prime-tache-toolbar">
+                                        <span class="material-icons gly_bk" title="{{resources.Global_Bouton_Supprimer_Tooltip}}" ng-click="handleClickDeleteMajoration($index)">clear</span>
+                                    </div>
+                                </th>
+                                <th ng-show="!ListMajorations.length && filter.displayPersonnelDetail && IsFes" class="dynamic-col border-left col-majoration">&nbsp;</th>
+                                <!-- HEADER 2 - PRIMES -->
+                                <th ng-repeat="prime in ListPrimes track by $index"
+                                    class="dynamic-col border-left col-prime"
+                                    ng-show="filter.displayPersonnelDetail" title="{{prime.CodeRef}}">
+                                    <span class="prime-tache-label-header">
+                                        {{prime.Code}}
+                                    </span>
+                                    <div class="prime-tache-toolbar" ng-class="{ 'div-PrimeAstreinte-disabled': prime.IsPrimeAstreinte}">
+                                        <span class="material-icons gly_bk" title="{{resources.Global_Bouton_Supprimer_Tooltip}}" ng-click="handleClickDeletePrime($index)">clear</span>
+                                    </div>
+                                </th>
+                                <th ng-show="!ListPrimes.length && filter.displayPersonnelDetail" class="dynamic-col border-left col-prime">&nbsp;</th>
+                                <!-- HEADER 2 - ASTREINTES-->
+                                <th ng-show="IsFes" class="dynamic-col border-left col-astreinte"></th>
+                                <!-- HEADER 2 - MATERIEL -->
+                                <th ng-show="filter.displayMaterial && !IsFes" class="col-materiel-chauffeur border-left" title="{{resources.Rapport_Checkbox_AvecChauffeur_Tooltip}}">
+                                    <i class="material-icons">airline_seat_recline_extra</i>
+                                </th>
+                                <th ng-show="filter.displayMaterial && !IsFes" class="col-materiel"></th>
+                                <th ng-show="filter.displayMaterial && !IsFes" class="col-materiel-heure">
+                                    <div class="icons-materiel-conteneur">
+                                        <span class="icon-materiel marche" title="{{resources.Rapport_Detail_EnteteNiv2_Materiel_Marche}}"></span>
+                                    </div>
+                                </th>
+                                <th ng-show="filter.displayMaterial && !IsFes ; filter.displayCol && filter.displayMaterial && !IsFes" class="col-materiel-heure">
+                                    <div class="icons-materiel-conteneur">
+
+                                        <span class="icon-materiel attente" title="{{resources.Rapport_Detail_EnteteNiv2_Materiel_Attente}}"></span>
+                                    </div>
+                                </th>
+                                <th ng-show="filter.displayMaterial && !IsFes ;filter.displayCol && filter.displayMaterial && !IsFes" class="col-materiel-heure">
+                                    <div class="icons-materiel-conteneur">
+                                        <span class="icon-materiel panne" title="{{resources.Rapport_Detail_EnteteNiv2_Materiel_Panne}}"></span>
+                                    </div>
+                                </th>
+                                <th ng-show="filter.displayMaterial && !IsFes ;filter.displayCol && filter.displayMaterial && !IsFes" class="col-materiel-heure">
+                                    <div class="icons-materiel-conteneur">
+                                        <span class="icon-materiel intemperie" title="{{resources.Rapport_Detail_EnteteNiv2_Materiel_Intemperie}}"></span>
+                                    </div>
+                                </th>
+                                <th ng-show="filter.displayMaterial && !IsFes ;filter.displayCol && filter.displayMaterial && !IsFes" class="col-materiel-heure"><b>Total</b></th>
+                                <!-- HEADER 2 - TACHES -->
+                                <th class="dynamic-col border-left col-tache" ng-repeat="tache in ListTaches track by $index">
+                                    <div class="prime-tache-label" title="{{tache.CodeLibelle}}">{{tache.Code}}</div>
+                                    <div class="prime-tache-toolbar">
+                                        <span title="{{tache.Libelle}}" class="glyphicon glyphicon-info-sign gly_bk i tache-commentaire-luncher" ng-click="displayComments = !displayComments"></span>
+                                        <i class="material-icons gly_bk" title="{{resources.Global_Bouton_Supprimer_Tooltip}}" ng-click="!rapportIsPartialLocked() && handleClickDeleteTache($index)">clear</i>
+                                    </div>
+                                </th>
+                                <th class="dynamic-col border-left col-tache" ng-show="!ListTaches.length"></th>
+                            </tr>
+                        </thead>
+
+                        <!-------------------------------------------------------------------------------------------------------------------->
+                        <!--                                                    BODY                                                        -->
+                        <!-------------------------------------------------------------------------------------------------------------------->
+                        <tbody ng-class="{'full-size': !displayTotal, 'new-brief': !Rapport.RapportId }">
+                            <tr id="ligne{{$index}}" ng-repeat="(lindex, rapportLigne) in Rapport.ListLignes track by $index" ng-show="rapportLigne.IsDeleted == false" class="ligneRapport personnal ligne{{$index}}" ng-class-odd="'odd'" ng-class-even="'even'">
+
+                                <!-- BODY - BOUTONS ACTION -->
+                                <td class="col-action col-personnel">
+                                    <div class="stickers-conteneur">
+                                        <div ng-class="{'sticker-person': rapportLigne.Personnel.PersonnelId  && rapportLigne.ListErreurs.length==0, 'sticker-materiel': rapportLigne.Materiel.MaterielId  && rapportLigne.ListErreurs.length==0, 'sticker-none': !rapportLigne.Materiel.MaterielId && !rapportLigne.Personnel.PersonnelId && rapportLigne.ListErreurs.length==0, 'sticker-error': rapportLigne.ListErreurs.length>0}">
+                                            <span class="material-icons delete-icon" ng-click="handleClickDeleteRow(rapportLigne)" ng-show="!IsFes && rapportLigneIsDeletable(rapportLigne)" title="{{resources.Rapport_Detail_Ligne_Bouton_SupprimeLigne}}">clear</span>
+                                            <span class="material-icons duplicate-icon" ng-click="handleClickDuplicateRow(rapportLigne)" title="{{resources.Rapport_Detail_Ligne_Bouton_DupliquerLigne}}" ng-show="!IsFes && !rapportIsLocked()">content_copy</span>
+                                            <span class="material-icons delete-icon" ng-click="handleClickInitializeRow(rapportLigne)" ng-show="IsFes">refresh</span>
+                                        </div>
+                                        <div class="icons-materiel-conteneur">
+                                            <span class="icon-materiel pointage-perso" title="Pointage personnel" ng-show="rapportLigne.Personnel.PersonnelId  && rapportLigne.ListErreurs.length==0"></span>
+                                            <span class="icon-materiel materiel sticker materiel" title="Pointage materiel" ng-show="rapportLigne.Materiel.MaterielId  && rapportLigne.ListErreurs.length==0"></span>
+                                            <span class="flaticon flaticon-warning" style="margin-left:5px;"
+                                                  ng-show="showIconeWarning(rapportLigne)"
+                                                  ng-mouseover="handleShowWarnings(rapportLigne)"
+                                                  uib-popover-template="'popoverWarningTemplate'"
+                                                  popover-trigger="'mouseenter'"
+                                                  popover-placement="right"
+                                                  popover-append-to-body="true"></span>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!-- BODY - PERSONNEL -->
+                                <td ng-class="{'tdNomErreur'  : rapportLigne.ListErreurs.length > 0, 'tdNom' : rapportLigne.ListErreurs.length == 0}" class="col-personnel">
+                                    <div class="material-warning" ng-show="rapportLigne.ListErreurs.length > 0">
+                                        <span class="material-icons"
+                                              ng-mouseover="handleShowErrors(rapportLigne)"
+                                              uib-popover-template="'popoverTemplate'"
+                                              popover-trigger="'mouseenter'"
+                                              popover-placement="right"
+                                              popover-append-to-body="true">warning</span>
+                                    </div>
+                                </td>
+
+                                <td class="border-left col-personnel">
+                                    <div class="pickListCallerNomContainer picks">
+                                        <feature-flag invert feature-key="PersonnelsNouveauxFiltres">
+                                            <lookup-standalone ng-model="rapportLigne.Personnel"
+                                                               enable-default-selection="true"
+                                                               text="rapportLigne.PersonnelSelectionne"
+                                                               search-max-length="100"
+                                                               search-title="{{resources.Global_ReferentielPersonnel}}"
+                                                               search-placeholder="{{resources.Global_ReferentielPersonnel_Placeholder}}"
+                                                               url="/api/Personnel/SearchLight2/?ciId={{Rapport.CiId}}&dateChantier={{Rapport.DateChantier | date:'MM-dd-yyyy'}}&"
+                                                               on-select="handleLookupSelection('Personnel', item, rapportLigne)"
+                                                               on-delete="popupRemovePersonnel(rapportLigne)"
+                                                               ng-disabled="rapportIsLocked() || rapportLigne.AvecChauffeur || IsFes"
+                                                               class="formulaire middle">
+                                            </lookup-standalone>
+                                        </feature-flag>
+                                        <feature-flag feature-key="PersonnelsNouveauxFiltres">
+                                            <lookup-standalone ng-model="rapportLigne.Personnel"
+                                                               enable-default-selection="true"
+                                                               text="rapportLigne.PersonnelSelectionne"
+                                                               search-max-length="100"
+                                                               search-title="{{resources.Global_ReferentielPersonnel}}"
+                                                               search-placeholder="{{resources.Personnel_PartialGeneral_Nom_Placeholder}}"
+                                                               search-placeholder2="{{resources.Personnel_PartialGeneral_Prenom_Placeholder}}"
+                                                               search-placeholder3="{{resources.Personnel_Filter_Autre_Information_Placeholder}}"
+                                                               active-second-search-input="true"
+                                                               active-third-search-input="true"
+                                                               url="/api/Personnel/SearchLight2/?ciId={{Rapport.CiId}}&dateChantier={{Rapport.DateChantier | date:'MM-dd-yyyy'}}&"
+                                                               on-select="handleLookupSelection('Personnel', item, rapportLigne)"
+                                                               on-delete="popupRemovePersonnel(rapportLigne)"
+                                                               ng-disabled="rapportIsLocked() || rapportLigne.AvecChauffeur || IsFes"
+                                                               class="formulaire middle">
+                                            </lookup-standalone>
+                                        </feature-flag>
+                                    </div>
+                                </td>
+                                <td class="col-personnel col-heure-travail" ng-show="filter.displayPersonnelDetail">
+                                    <input type="text" select-on-click class="input-light-somme" ng-class="{bold: rapportLigne.IsBold}" ng-value="rapportLigne.HeureTotalTravail | number : 2" ng-disabled="true" title="{{resources.Rapport_Detail_Ligne_HeuresNormales_Tooltip}}" />
+                                </td>
+                                <td class="col-personnel col-heure-normal" ng-show="filter.displayPersonnelDetail">
+                                    <input type="text" select-on-click class="input-light-somme" ng-class="{wrongvalue : rapportLigne.HeureNormale < 0, bold: rapportLigne.IsBold}" ng-value="rapportLigne.HeureNormale | number : 2" ng-disabled="true" title="{{resources.Rapport_Detail_Ligne_HeuresNormales_Tooltip}}" />
+                                </td>
+
+                                <!-- BODY - MAJORATION -->
+                                <td class="border-left col-majoration" ng-show="filter.displayPersonnelDetail && !IsFes">
+                                    <lookup-standalone ng-model="rapportLigne.CodeMajoration"
+                                                       text="rapportLigne.CodeMajorationAbrege"
+                                                       tooltip="rapportLigne.CodeMajorationSelectionne"
+                                                       show-delete-button-on-mouse-over="true"
+                                                       show-search-icon-only-when-empty="true"
+                                                       search-icon-class="material-icons"
+                                                       search-title="{{resources.Global_ReferentielCodeMajoration}}"
+                                                       search-placeholder="{{resources.Global_ReferentielCodeMajoration_Placeholder}}"
+                                                       url="{{handleLookupUrl('CodeMajoration', rapportLigne)}}&{{getReferentielRhUrl(rapportLigne.Personnel.Statut)}}"
+                                                       on-select="handleLookupSelection('CodeMajoration', item, rapportLigne)"
+                                                       on-delete="handleDeletePickListCodeMajoration(rapportLigne)"
+                                                       class="boutons maj"
+                                                       ng-disabled="personnelDataLocked(rapportLigne)">
+                                    </lookup-standalone>
+                                </td>
+                                <td class="col-majoration" ng-show="filter.displayPersonnelDetail && !IsFes">
+                                    <input type="text" fred-input-number="2" fred-input-default-value="0" select-on-click class="input-light input-number" ng-class="{inputNotEmpty: rapportLigne.HeureMajoration, bold: rapportLigne.IsBold}" min="0" max="{{rapportLigne.MaxHeuresTravailleesJour}}" ng-model="rapportLigne.HeureMajoration" ng-disabled="rapportLigne.HeureAbsenceReadOnly || personnelDataLocked(rapportLigne)" ng-change="handleChangeHeureMajoration(rapportLigne)" />
+                                </td>
+
+                                <!-- BODY - ABSENCE -->
+                                <td class="border-left col-absence" ng-show="filter.displayPersonnelDetail">
+                                    <lookup-standalone ng-model="rapportLigne.CodeAbsence"
+                                                       text="rapportLigne.CodeAbsenceAbrege"
+                                                       show-delete-button-on-mouse-over="true"
+                                                       show-search-icon-only-when-empty="true"
+                                                       search-icon-class="material-icons"
+                                                       tooltip="rapportLigne.CodeAbsenceSelectionne"
+                                                       search-title="{{resources.Global_ReferentielCodeAbsence}}"
+                                                       search-placeholder="{{resources.Global_ReferentielCodeAbsence_Placeholder}}"
+                                                       url="{{handleLookupUrl('CodeAbsence', rapportLigne)}}&{{getReferentielRhUrl(rapportLigne.Personnel.Statut)}}"
+                                                       on-select="handleLookupSelection('CodeAbsence', item, rapportLigne)"
+                                                       on-delete="handleDeletePickListCodeAbsence(rapportLigne)"
+                                                       class="boutons absence"
+                                                       ng-disabled="personnelDataLocked(rapportLigne)">
+                                    </lookup-standalone>
+                                </td>
+                                <td class="col-absence" ng-show="filter.displayPersonnelDetail">
+                                    <input type="text" fred-input-number="2" fred-input-default-value="0" select-on-click class="input-light input-number" ng-class="{inputNotEmpty: rapportLigne.HeureAbsence, bold: rapportLigne.IsBold}" min="{{HeuresAbsenceMin(rapportLigne)}}" max="{{HeuresAbsenceMax(rapportLigne)}}" ng-model="rapportLigne.HeureAbsence" ng-disabled="rapportLigne.HeureAbsenceReadOnly || personnelDataLocked(rapportLigne)" ng-change="handleChangeHeureAbsence(rapportLigne)" />
+                                </td>
+                                <td class="col-absence" ng-show="filter.displayPersonnelDetail">
+                                    <input type="text" fred-input-number="0" select-on-click class="input-light input-number" ng-class="{inputNotEmpty: rapportLigne.NumSemaineIntemperieAbsence, bold: rapportLigne.IsBold}" min="1" max="52" ng-change="handleIsModified(rapportLigne)" ng-model="rapportLigne.NumSemaineIntemperieAbsence" ng-disabled="!rapportLigne.CodeAbsence.Intemperie || personnelDataLocked(rapportLigne)" />
+                                </td>
+
+                                <!-- BODY - DEPLACEMENT -->
+                                <td class="col-dep border-left" ng-show="(IsRolePaie || PermissionDeplacementVisible) && filter.displayPersonnelDetail">
+                                    <span class="fa fa-refresh" title="{{resources.Rapport_Rafraichir}}" ng-if="IsRolePaie && filter.displayPersonnelDetail" ng-click="handleRefreshIndemniteDeplacement(rapportLigne)"></span>
+                                </td>
+                                <td class="col-dep" ng-show="(IsRolePaie || PermissionDeplacementVisible) && filter.displayPersonnelDetail">
+                                    <lookup-standalone ng-model="rapportLigne.CodeDeplacement"
+                                                       show-delete-button-on-mouse-over="true"
+                                                       show-search-icon-only-when-empty="true"
+                                                       search-icon-class="material-icons"
+                                                       text="rapportLigne.CodeDeplacementAbrege"
+                                                       tooltip="rapportLigne.CodeDeplacementSelectionne"
+                                                       search-title="{{resources.Global_ReferentielCodeDeplacement}}"
+                                                       search-placeholder="{{resources.Global_ReferentielCodeDeplacement_Placeholder}}"
+                                                       url="{{handleLookupUrl('CodeDeplacement', rapportLigne)}}&{{getReferentielRhUrl(rapportLigne.Personnel.Statut)}}"
+                                                       on-select="handleLookupSelection('CodeDeplacement', item, rapportLigne)"
+                                                       on-delete="handleDeletePickListCodeDeplacement(rapportLigne)"
+                                                       class="boutons cDeplacement"
+                                                       ng-disabled="personnelDataLockedExceptPaie(rapportLigne)">
+                                    </lookup-standalone>
+                                </td>
+                                <td class="col-dep" ng-show="(IsRolePaie || PermissionDeplacementVisible) && filter.displayPersonnelDetail">
+                                    <lookup-standalone ng-model="rapportLigne.CodeZoneDeplacement"
+                                                       show-delete-button-on-mouse-over="true"
+                                                       show-search-icon-only-when-empty="true"
+                                                       search-icon-class="material-icons"
+                                                       tooltip="rapportLigne.CodeZoneDeplacementSelectionne"
+                                                       text="rapportLigne.CodeZoneDeplacementAbrege"
+                                                       search-title="{{resources.Global_ReferentielCodeZoneDeplacement}}"
+                                                       search-placeholder="{{resources.Global_ReferentielCodeZoneDeplacement_Placeholder}}"
+                                                       url="{{handleLookupUrl('CodeZoneDeplacement', rapportLigne)}}&{{getReferentielRhUrl(rapportLigne.Personnel.Statut)}}"
+                                                       on-select="handleLookupSelection('CodeZoneDeplacement', item, rapportLigne)"
+                                                       on-delete="handleDeletePickListCodeZoneDeplacement(rapportLigne)"
+                                                       class="boutons cZDeplacement"
+                                                       ng-disabled="disableCodeZone(rapportLigne)">
+                                    </lookup-standalone>
+                                </td>
+                                <td class="col-dep" ng-show="(IsRolePaie || PermissionDeplacementVisible) && filter.displayPersonnelDetail">
+                                    <input id="ivd_{{lindex}}" type="checkbox" ng-model="rapportLigne.DeplacementIV" ng-change="handleIsModified(rapportLigne)" ng-class="{inputNotEmpty: rapportLigne.DeplacementIV}" ng-disabled="personnelDataLockedExceptPaie(rapportLigne)" />
+                                    <label for="ivd_{{lindex}}"><span></span></label>
+                                </td>
+
+                                <!-- BODY - MAJORATIONS -->
+                                <td ng-repeat="ligneMajoration in rapportLigne.tempListRapportLigneMajorations" ng-show="ligneMajoration.IsDeleted == false && filter.displayPersonnelDetail && IsFes" class="dynamic-col border-left col-majoration2">
+                                    <input ng-hide="ligneMajoration.IsTemp" type="text" fred-input-number="1" fred-input-default-value="0" select-on-click class="input-light input-light-prime input-number" min="0" max="10" ng-model="ligneMajoration.HeureMajoration"
+                                           ng-class="{inputNotEmpty: ligneMajoration.HeureMajoration, bold: rapportLigne.IsBold}"
+                                           ng-change="handleChangeHeureMajoration(rapportLigne,ligneMajoration)"
+                                           ng-disabled="personnelMajorationLocked(rapportLigne,ligneMajoration)" />
+                                    <span ng-show="ligneMajoration.IsTemp" class="sapicon-E249 abs-as"></span>
+
+                                </td>
+                                <td ng-show="!ListMajorations.length && filter.displayPersonnelDetail && IsFes" class="dynamic-col border-left col-majoration2">
+                                    <fred-ui-icon icon="add" title=" {{resources.Rapport_Detail_Ligne_Majoration_Info}}" on-click="handleLookupUrl('CodeMajoration', null)"></fred-ui-icon>
+                                </td>
+
+                                <!-- BODY - PRIMES -->
+                                <td ng-repeat="lignePrime in rapportLigne.tempListRapportLignePrimes" ng-show="lignePrime.IsDeleted == false && filter.displayPersonnelDetail" class="dynamic-col border-left col-prime">
+                                    <div ng-show="IsPrimeJournaliere(lignePrime.Prime) && !lignePrime.IsTemp" ng-class="{ 'div-PrimeAstreinte-disabled': lignePrime.Prime.IsPrimeAstreinte}">
+                                        <input id="{{lindex}}_{{lignePrime.PrimeId}}" type="checkbox" class="checkbox-prime" ng-model="lignePrime.IsChecked"
+                                               ng-disabled="personnelPrimeLocked(rapportLigne,lignePrime)" ng-change="handleChangePrime(rapportLigne,lignePrime)" ng-class="{ 'div-PrimeAstreinte-disabled': lignePrime.Prime.IsPrimeAstreinte}" /><label for="{{lindex}}_{{lignePrime.PrimeId}}"><span></span></label>
+                                    </div>
+                                    <input type="text" fred-input-number="2" fred-input-default-value="0" select-on-click class="input-light input-light-prime input-number" min="0" max="{{lignePrime.Prime.NombreHeuresMax}}" ng-model="lignePrime.HeurePrime" ng-show="IsPrimeHoraire(lignePrime.Prime) && !lignePrime.IsTemp" ng-class="{inputNotEmpty: lignePrime.HeurePrime, bold: rapportLigne.IsBold}" ng-disabled="personnelDataLocked(rapportLigne)" ng-change="handleChangePrime(rapportLigne,lignePrime)" />
+                                    <span ng-show="IsPrimeHoraire(lignePrime.Prime) && lignePrime.IsTemp" class="sapicon-E249 abs-as"></span>
+
+                                </td>
+                                <td ng-show="!ListPrimes.length && filter.displayPersonnelDetail" class="dynamic-col border-left col-prime">
+                                    <fred-ui-icon icon="add" title="{{resources.Rapport_Detail_Ligne_Prime_Info}}" on-click="handleLookupUrl('Prime', null)"></fred-ui-icon>
+                                </td>
+                                <!-- BODY - ASTREINTES -->
+                                <td ng-show="IsFes" class="dynamic-col border-left col-astreinte">
+                                    <span ng-hide="Rapport.ListLignes[$index].HasAstreinte" class="sapicon-E249 abs-as"></span>
+                                    <span ng-show="Rapport.ListLignes[$index].HasAstreinte" class="fa fa-plus fa-lg action-icone" title="{{resources.Rapport_Ajout_Sortie_Astreinte}}" ng-click="handleAddSortieAstreinte(rapportLigne)"></span>
+                                    <div style="border: 1px solid white;" ng-repeat="ligneAstreinte in rapportLigne.ListRapportLigneAstreintes track by $index">
+                                        <input style="width: 40px;" type="text" disabled="disabled" value="{{handleGetAstreinteTime(Rapport.ListLignes[$parent.$index].ListRapportLigneAstreintes[$index].DateDebutAstreinte)}}" />
+                                        <span class="glyphicon glyphicon-play"></span>
+                                        <input style="width: 40px;" type="text" disabled="disabled" value="{{handleGetAstreinteTime(Rapport.ListLignes[$parent.$index].ListRapportLigneAstreintes[$index].DateFinAstreinte)}}" />
+                                        &nbsp;&nbsp;&nbsp;
+                                        <span class="fa fa-pencil fa-lg action-icone" ng-click="handleChangeAstreinteDates(rapportLigne, ligneAstreinte)"></span>
+                                        <span class="fa fa-trash fa-lg action-icone" ng-click="handleDeleteSortieAstreinte(rapportLigne, ligneAstreinte)" title="{{resources.Rapport_Suppression_Sortie_Astreinte}}"></span>
+                                    </div>
+
+                                </td>
+
+                                <!-- BODY - MATERIEL -->
+                                <td ng-show="filter.displayMaterial && !IsFes" class="col-materiel-chauffeur border-left" title="{{resources.Rapport_Detail_AvecChauffeur}}">
+                                    <input id="driver_{{lindex}}" type="checkbox" ng-model="rapportLigne.AvecChauffeur" ng-change="handleChangeAvecChauffeur(rapportLigne)" ng-disabled="!rapportLigne.MaterielNomTemporaire || (rapportLigne.PersonnelId && rapportIsLocked())" /><label for="driver_{{lindex}}"><span></span></label>
+                                </td>
+                                <td ng-show="filter.displayMaterial && !IsFes" class="col-materiel">
+                                    <div class="pickListCallerMaterielContainer picks">
+                                        <lookup-standalone ng-model="rapportLigne.Materiel"
+                                                           text="rapportLigne.MaterielSelectionne"
+                                                           enable-default-selection="true"
+                                                           search-title="{{resources.Global_ReferentielMateriel}}"
+                                                           search-placeholder="{{resources.Global_ReferentielMateriel_Placeholder}}"
+                                                           on-click="handleLookupUrl('Materiel', rapportLigne)"
+                                                           on-select="handleLookupSelection('Materiel', item, rapportLigne)"
+                                                           on-delete="popupRemoveMateriel(rapportLigne)"
+                                                           ng-disabled="rapportIsPartialLocked()"
+                                                           class="formulaire middle"
+                                                           ng-show="currentUsers.Societe.Groupe.Code != 'GRZB'">
+                                        </lookup-standalone>
+                                        <feature-flag invert feature-key="AfficherOngletMaterielsExternesRapports">
+                                            <lookup-standalone ng-model="rapportLigne.Materiel"
+                                                               text="rapportLigne.MaterielSelectionne"
+                                                               enable-default-selection="true"
+                                                               search-title="{{resources.Global_ReferentielMateriel}}"
+                                                               search-placeholder="{{resources.Global_ReferentielMateriel_Placeholder}}"
+                                                               on-click="handleLookupUrl('Materiel', rapportLigne)"
+                                                               on-select="handleLookupSelection('Materiel', item, rapportLigne)"
+                                                               on-delete="popupRemoveMateriel(rapportLigne)"
+                                                               ng-disabled="rapportIsPartialLocked()"
+                                                               class="formulaire middle"
+                                                               ng-show="currentUsers.Societe.Groupe.Code == 'GRZB'">
+                                            </lookup-standalone>
+                                        </feature-flag>
+                                        <feature-flag feature-key="AfficherOngletMaterielsExternesRapports">
+                                            <lookup-standalone ng-model="rapportLigne.Materiel"
+                                                               text="rapportLigne.MaterielSelectionne"
+                                                               enable-default-selection="true"
+                                                               search-title="{{resources.Global_ReferentielMateriel}}"
+                                                               search-placeholder="{{resources.Global_ReferentielMateriel_Placeholder}}"
+                                                               url="/api/Materiel/SearchLight/?statut=1&ciId={{Rapport.CiId}}&"
+                                                               custom-template-url="/Scripts/directive/lookup/custom-templates/materiel.template.html"
+                                                               filters="materielTypeList"
+                                                               on-select="handleLookupSelection('Materiel', item, rapportLigne)"
+                                                               on-delete="popupRemoveMateriel(rapportLigne)"
+                                                               ng-disabled="rapportIsPartialLocked()"
+                                                               class="formulaire middle"
+                                                               ng-show="currentUsers.Societe.Groupe.Code == 'GRZB'">
+                                            </lookup-standalone>
+                                        </feature-flag>
+                                    </div>
+                                </td>
+                                <td ng-show="filter.displayMaterial && !IsFes" class="col-materiel-heure"><input type="text" class="input-light-somme" ng-class="{bold: rapportLigne.IsBold}" ng-value="rapportLigne.MaterielMarche" ng-disabled="true" title="{{resources.Rapport_Detail_Ligne_HeuresNormales_Tooltip}}" /></td>
+                                <td ng-show="filter.displayMaterial && !IsFes;filter.displayCol && filter.displayMaterial && !IsFes" class="col-materiel-heure"><input type="text" fred-input-number="1" fred-input-default-value="0" select-on-click class="input-light input-number" min="0" max="{{rapportLigne.MaxHeuresTravailleesJour}}" ng-model="rapportLigne.MaterielArret" ng-class="{inputNotEmpty: rapportLigne.MaterielArret, bold: rapportLigne.IsBold}" ng-disabled="materielDataLocked(rapportLigne)" ng-change="handleIsModified(rapportLigne)" /></td>
+                                <td ng-show="filter.displayMaterial && !IsFes;filter.displayCol && filter.displayMaterial && !IsFes" class="col-materiel-heure"><input type="text" fred-input-number="1" fred-input-default-value="0" select-on-click class="input-light input-number" min="0" max="{{rapportLigne.MaxHeuresTravailleesJour}}" ng-model="rapportLigne.MaterielPanne" ng-class="{inputNotEmpty: rapportLigne.MaterielPanne, bold: rapportLigne.IsBold}" ng-disabled="materielDataLocked(rapportLigne)" ng-change="handleIsModified(rapportLigne)" /></td>
+                                <td ng-show="filter.displayMaterial && !IsFes;filter.displayCol && filter.displayMaterial && !IsFes" class="col-materiel-heure"><input type="text" fred-input-number="1" fred-input-default-value="0" select-on-click class="input-light input-number" min="0" max="{{rapportLigne.MaxHeuresTravailleesJour}}" ng-model="rapportLigne.MaterielIntemperie" ng-class="{inputNotEmpty: rapportLigne.MaterielIntemperie, bold: rapportLigne.IsBold}" ng-disabled="materielDataLocked(rapportLigne)" ng-change="handleIsModified(rapportLigne)" /></td>
+                                <td ng-show="filter.displayMaterial && !IsFes;filter.displayCol && filter.displayMaterial && !IsFes" class="col-materiel-heure"><span ng-class="{bold: rapportLigne.IsBold}">{{GetTotalLigne(summonProp.TotalHeureMateriel, rapportLigne)}}</span></td>
+                                <!-- BODY - TACHES -->
+                                <td class="dynamic-col border-left col-tache" ng-repeat="ligneTache in rapportLigne.tempListRapportLigneTaches track by $index" ng-show="ligneTache.IsDeleted == false">
+                                    <input ng-hide="ligneTache.IsTemp" type="text" fred-input-number="2" fred-input-default-value="0" select-on-click class="input-light input-number" min="0" max="{{IsFes ? 10 : 12}}" ng-model="ligneTache.HeureTache" ng-change="handleChangeHeureTache(rapportLigne,ligneTache)" ng-class="{inputNotEmpty: ligneTache.HeureTache > 0, bold: rapportLigne.IsBold}" ng-disabled="rapportIsPartialLocked()" />
+                                    <span ng-show="ligneTache.IsTemp" class="sapicon-E249 abs-as"></span>
+
+                                </td>
+                                <!-- si aucune tâche > Bouton pour inviter création de tâches-->
+                                <td ng-show="!ListTaches.length" class="dynamic-col border-left col-tache">
+                                    {{resources.Rapport_Detail_Ligne_Tache_Info}}
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                        <!-------------------------------------------------------------------------------------------------------------------->
+                        <!--                                                    FOOTER                                                      -->
+                        <!-------------------------------------------------------------------------------------------------------------------->
+                        <tfoot ng-show="displayTotal">
+                            <tr>
+                                <!-- FOOTER - PERSONNEL -->
+                                <td></td>
+                                <td></td>
+                                <td ng-class="{'rapport-table-child3-RZB' : !displayWeekHoursError}">
+                                    <div class="material-warning" ng-show="handleGetWeekTotalHours(summonProp.HeureNormale, summonProp.TotalHeuresMajorees, summonProp.HeureAbsence)">
+                                        <span class="material-icons"
+                                              popover-trigger="'mouseenter'"
+                                              uib-popover-template="'popoverWeekHoursTemplate'"
+                                              popover-placement="right"
+                                              popover-append-to-body="true">warning</span>
+                                    </div>
+                                </td>
+                                <td ng-show="filter.displayPersonnelDetail">{{handleGetTotalColonne(summonProp.HeureNormale) + (IsFes? handleGetTotalColonne(summonProp.TotalHeuresMajorees) : handleGetTotalColonne(summonProp.HeureMajoration)) | number:2}}</td>
+                                <td ng-show="filter.displayPersonnelDetail">{{handleGetTotalColonne(summonProp.HeureNormale) | number:2}}</td>
+                                <!-- FOOTER - MAJORATION -->
+                                <td class="border-left" colspan="2" ng-show="filter.displayPersonnelDetail && !IsFes">{{resources.Rapport_Detail_Pied_Majoration}} : {{handleGetTotalColonne(summonProp.HeureMajoration)}}</td>
+                                <!-- FOOTER - ABSENCE -->
+                                <td class="border-left col-absence" colspan="3" ng-show="filter.displayPersonnelDetail">{{resources.Rapport_Detail_Pied_Absence}} : {{handleGetTotalColonne(summonProp.HeureAbsence)}}</td>
+                                <!-- FOOTER - DEPLACEMENT -->
+                                <td class="col-dep border-left" ng-show="(IsRolePaie || PermissionDeplacementVisible) && filter.displayPersonnelDetail" colspan="4"></td>
+                                <!-- FOOTER - MAJORATIONS -->
+                                <td class="dynamic-col border-left col-majoration2" colspan="{{ListMajorations.length}}" style="width:{{ListMajorations.length*110}}px; min-width:{{ListMajorations.length === 0 ? 110 : ListMajorations.length*110}}px;"
+                                    ng-show="filter.displayPersonnelDetail && IsFes">
+                                    {{resources.Rapport_Detail_Pied_Majoration}} : {{handleGetTotalColonne(summonProp.TotalHeuresMajorees)}}
+                                </td>
+
+                                <!-- FOOTER - PRIMES -->
+                                <td ng-repeat="prime in ListPrimes track by $index" class="dynamic-col border-left col-prime" ng-show="filter.displayPersonnelDetail"></td>
+                                <td class="dynamic-col border-left col-prime" ng-show="filter.displayPersonnelDetail && !ListPrimes.length">&nbsp;</td>
+                                <!-- FOOTER - ASTREINTES-->
+                                <td ng-show="IsFes" class="dynamic-col border-left col-astreinte"></td>
+
+                                <!-- FOOTER - MATERIEL -->
+                                <td ng-show="filter.displayMaterial && !IsFes" class="col-materiel-chauffeur border-left"></td>
+                                <td ng-show="filter.displayMaterial && !IsFes" class="col-materiel"></td>
+                                <td ng-show="filter.displayMaterial && !IsFes" class="col-materiel-heure">{{handleGetTotalColonne(summonProp.MaterielMarche)}}</td>
+                                <td ng-show="filter.displayMaterial && !IsFes ;filter.displayCol && filter.displayMaterial && !IsFes" class="col-materiel-heure">{{handleGetTotalColonne(summonProp.MaterielArret)}}</td>
+                                <td ng-show="filter.displayMaterial && !IsFes;filter.displayCol && filter.displayMaterial && !IsFes" class="col-materiel-heure">{{handleGetTotalColonne(summonProp.MaterielPanne)}}</td>
+                                <td ng-show="filter.displayMaterial && !IsFes;filter.displayCol && filter.displayMaterial && !IsFes" class="col-materiel-heure">{{handleGetTotalColonne(summonProp.MaterielIntemperie)}}</td>
+                                <td ng-show="filter.displayMaterial && !IsFes;filter.displayCol && filter.displayMaterial && !IsFes" class="col-materiel-heure">{{handleGetTotalColonne(summonProp.TotalHeureMateriel)}}</td>
+                                <!-- FOOTER - TACHES -->
+                                <td class="dynamic-col border-left col-tache" ng-repeat="tache in ListTaches track by $index">{{handleGetTotalTache($index) | number : 2}}</td>
+                                <td class="dynamic-col border-left col-tache" ng-show="!ListTaches.length"></td>
+                            </tr>
+                        </tfoot>
+
+                    </table>
+                </div>
+
+                <!--END : TABLEAU AVEC LES RAPPORTS-->
+
+                <div id="toolbar-commentaire" class="toolbar-commentaire" ng-show="displayComments">
+                    <div class="col-lg-11 col-md-11 col-sm-11">
+                        <h2>Commentaires sur les tâches</h2>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1">
+                        <span class="material-icons pull-right icon-close-commentaire" ng-click="displayComments = !displayComments">close</span>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 overflown">
+                        <table>
+                            <tr>
+                                <th ng-repeat="commentaireTache in ListCommentaires | filter: {IsDeleted: false} track by $index">
+                                    <span title="{{commentaireTache.CodeLibelle}}">{{commentaireTache.CodeLibelle}}</span>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td ng-repeat="commentaireTache in ListCommentaires | filter: {IsDeleted: false} track by $index">
+                                    <textarea class="form-control tache-commentaire" type="text" ng-model="commentaireTache.Commentaire" ng-disabled="Rapport.ValidationSuperieur" maxlength="250"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="toolbar-footer" ng-show="Rapport.CI != null" style="visibility:hidden; display:none;">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 no-pr">
+                            <button type="button" class="btn   btn-primary pull-left" title="{{resources.Rapport_Detail_Bouton_AjouterLigne_Tooltip}}" ng-click="handleClickAddRow()" ng-disabled="rapportIsReadOnly()">{{resources.Rapport_Detail_Bouton_AjouterLigne}}</button>
+                            @*<button type="button" class="btn   btn-primary pull-left" title="{{resources.Rapport_Detail_Bouton_SupprimerLigneSelectionner_Tooltip}}" ng-click="handleClickDeleteRows()" ng-show="checkRowsSelected!=0" ng-disabled="rapportIsLocked()">{{resources.Rapport_Detail_Bouton_SupprimerLigneSelectionner}}</button>
+                            <button type="button" class="btn   btn-primary pull-left" title="{{resources.Rapport_Detail_Bouton_DupliquerLigneSelectionner_Tooltip}}" ng-click="handleClickDuplicateRows()" ng-show="checkRowsSelected!=0" ng-disabled="rapportIsLocked()">{{resources.Rapport_Detail_Bouton_DupliquerLigneSelectionner}}</button>
+                            <div class="counter-line-selected" ng-show="checkRowsSelected!=0">
+                              <span ng-show="checkRowsSelected==1">({{checkRowsSelected}} {{resources.Rapport_Detail_NbrLigneSelectionnee}})</span>
+                              <span ng-show="checkRowsSelected>1">({{checkRowsSelected}} {{resources.Rapport_Detail_NbrLignesSelectionnees}})</span>
+                            </div>*@
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="row">
+                                <button type="button" class="btn btn-primary" title="{{resources.Rapport_Detail_Bouton_NouveauRapport_Tooltip}}" ng-click="handleClickNewRapport(Rapport.CiId)" ng-show="Rapport.RapportId">{{resources.Rapport_Detail_Bouton_NouveauRapport}}</button>
+                                <button type="button" class="btn btn-primary" title="{{resources.Rapport_Detail_Bouton_DupliquerRapport_Tooltip}}" ng-click="handleClickDuplicateRapport()" ng-show="Rapport.RapportId">{{resources.Rapport_Detail_Bouton_DupliquerRapport}}</button>
+                                <button type="button" class="btn btn-primary" title="{{resources.Rapport_Detail_Bouton_SupprimerRapport_Tooltip}}" ng-click="popupDeleteRapport()" ng-show="Rapport.RapportId && Rapport.CanBeDeleted">{{resources.Rapport_Detail_Bouton_SupprimerRapport}}</button>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 no-pl">
+                            <button id="btn-panel-footer-left" class="btn btn-warning pull-right" ng-disabled="rapportIsPartialLocked()" ng-click="handleClickSave()" title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">{{resources.Global_Bouton_Enregistrer}}</button>
+                            <button id="btn-panel-footer-right" class="btn btn-default pull-right" ng-show="!IsRolePaie" ng-disabled="!Rapport.CanBeValidated || Rapport.RapportId == 0" ng-click="handleClickValidate()" title="{{resources.Global_Bouton_Valider_Tooltip}}">{{resources.Global_Bouton_Valider}}</button>
+                            <button id="btn-panel-footer-right" class="btn btn-default pull-right" ng-show="IsRolePaie && !Rapport.Verrouille" ng-click="handleVerrouillerRapport()" ng-disabled="Rapport.RapportId == 0 || !Rapport.CanBeValidated || !Rapport.CanBeLocked || !CanBeLockedBeforeSave" title="{{resources.Rapport_Index_Bouton_Verrouiller_Placeholder}}">{{resources.Rapport_Index_Bouton_Verrouiller}}</button>
+                            <button id="btn-panel-footer-right" class="btn btn-default pull-right" ng-show="IsRolePaie && Rapport.Verrouille" ng-click="handleDeverrouillerRapport()" ng-disabled="Rapport.RapportId == 0 || Rapport.Cloture" title="{{resources.Rapport_Index_Bouton_Deverrouiller_Placeholder}}">{{resources.Rapport_Index_Bouton_Deverrouiller}}</button>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2">
+                            <button id="btn-panel-footer-right" class="btn btn-commentaires pull-right" ng-click="displayComments = !displayComments" ng-show="ListCommentaires.length > 0" title="{{resources.Rapport_Detail_Bouton_Commentaire_Placeholder}}">{{resources.Rapport_Detail_Bouton_Commentaire}}</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </fieldset>
+
+        <!--RefPickList-->
+        <!--Popover template-->
+        <script type="text/ng-template" id="popoverTemplate">
+            <ul ng-show="errorList.length > 0" class="popoverList">
+                <li ng-repeat="erreur in errorList">
+                    {{erreur}}
+                </li>
+            </ul>
+        </script>
+        <script type="text/ng-template" id="popoverWeekHoursTemplate">
+            <ul ng-show="weekHoursError.length > 0" class="popoverList">
+                <li ng-repeat="erreur in weekHoursError">
+                    {{erreur}}
+                </li>
+            </ul>
+        </script>
+        <script type="text/ng-template" id="popoverWarningTemplate">
+            <ul ng-if="warningList.length > 0" class="popoverList">
+                <li ng-repeat="warning in warningList">
+                    {{warning}}
+                </li>
+            </ul>
+        </script>
+
+        @*popupDelete()*@
+
+        @*Modal de confirmation de suppression du rapport*@
+        <div class="modal fade" id="confirmationDeleteRapportModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title"><i class="flaticon flaticon-garbage-2"></i>{{resources.Global_Modal_Confirmation}}</h2>
+                        <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{resources.Global_Modal_Annuler_Tooltip}}"></i>
+                    </div>
+                    <div class="modal-body">
+                        <b>{{resources.Global_Modal_ConfirmationSuppression}}</b>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn  btn-default pull-left" data-dismiss="modal" ng-click="handleDeleteRapport()" title="{{resources.Global_Bouton_Valider_Tooltip}}">{{resources.Global_Bouton_Valider}}</button>
+                        <button type="button" class="btn  btn-link pull-right" data-dismiss="modal" title="{{resources.Global_Bouton_Annuler_Tooltip}}">{{resources.Global_Bouton_Annuler}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*Modal de confirmation de suppression CI*@
+        <div class="modal fade" id="confirmationDeleteCIModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title"><i class="flaticon flaticon-garbage-2"></i>{{resources.Global_Modal_Confirmation}}</h2>
+                        <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{resources.Global_Modal_Annuler_Tooltip}}"></i>
+                    </div>
+                    <div class="modal-body">
+                        <b>{{resources.Rapport_ModalSuppressionCI_MessageConfirmation}}</b>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn  btn-default pull-left" data-dismiss="modal" ng-click="handleDeletePickListCI()" title="{{resources.Global_Bouton_Valider_Tooltip}}">{{resources.Global_Bouton_Valider}}</button>
+                        <button type="button" class="btn  btn-link pull-right" data-dismiss="modal" title="{{resources.Global_Bouton_Annuler_Tooltip}}">{{resources.Global_Bouton_Annuler}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*Modal de confirmation de suppression Personnel*@
+        <div class="modal fade" id="confirmationDeletePersonnelModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title"><i class="flaticon flaticon-garbage-2"></i>{{resources.Global_Modal_Confirmation}}</h2>
+                        <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{resources.Global_Modal_Annuler_Tooltip}}"></i>
+                    </div>
+                    <div class="modal-body">
+                        <b>{{resources.Rapport_ModalSuppressionPersonnel_MessageConfirmation}}</b>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn  btn-default pull-left" data-dismiss="modal" ng-click="handleDeletePickListItemPersonnel()" title="{{resources.Global_Bouton_Valider_Tooltip}}">{{resources.Global_Bouton_Valider}}</button>
+                        <button type="button" class="btn  btn-link pull-right" data-dismiss="modal" title="{{resources.Global_Bouton_Annuler_Tooltip}}">{{resources.Global_Bouton_Annuler}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*Modal de confirmation de suppression Materiel*@
+        <div class="modal fade" id="confirmationDeleteMaterielModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title"><i class="flaticon flaticon-garbage-2"></i>{{resources.Global_Modal_Confirmation}}</h2>
+                        <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{resources.Global_Modal_Annuler_Tooltip}}"></i>
+                    </div>
+                    <div class="modal-body">
+                        <b>{{resources.Rapport_ModalSuppressionMateriel_MessageConfirmation}}</b>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn  btn-default pull-left" data-dismiss="modal" ng-click="handleDeletePickListItemMateriel()" title="{{resources.Global_Bouton_Valider_Tooltip}}">{{resources.Global_Bouton_Valider}}</button>
+                        <button type="button" class="btn  btn-link pull-right" data-dismiss="modal" title="{{resources.Global_Bouton_Annuler_Tooltip}}">{{resources.Global_Bouton_Annuler}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*Modal de confirmation de d'enregistrement malgré les doublons personnel*@
+        <div class="modal fade" id="confirmationDoublonPersonnelModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title"><i class="flaticon flaticon-warning"></i>{{resources.Global_Modal_Confirmation}}</h2>
+                        <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{resources.Global_Modal_Annuler_Tooltip}}"></i>
+                    </div>
+                    <div class="modal-body">
+                        <b>{{resources.Rapport_RapportController_DoublonSaisiePersonnel_Info}}</b>
+                        <b ng-repeat="perso in listPersonnelDoublon">{{perso}}<br></b>
+                        <b>{{resources.Global_Modal_ConfirmationContinuer}}</b>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn  btn-default pull-left" data-dismiss="modal" ng-click="handleCheckTacheVideAndSave()" title="{{resources.Global_Bouton_Valider_Tooltip}}">{{resources.Global_Bouton_Valider}}</button>
+                        <button type="button" class="btn  btn-link pull-right" data-dismiss="modal" title="{{resources.Global_Bouton_Annuler_Tooltip}}">{{resources.Global_Bouton_Annuler}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*Modal de confirmation de d'enregistrement malgré les doublons personnel*@
+        <div class="modal fade" id="confirmationTacheVideModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title"><i class="flaticon flaticon-warning"></i>{{resources.Global_Modal_Confirmation}}</h2>
+                        <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{resources.Global_Modal_Annuler_Tooltip}}"></i>
+                    </div>
+                    <div class="modal-body">
+                        <b>{{resources.Rapport_RapportController_TacheVide_Info}}<br></b>
+                        <b ng-repeat="tacheVide in listTachesVides">{{tacheVide.CodeLibelle}}<br></b>
+                        <b>{{resources.Global_Modal_ConfirmationContinuer}}</b>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn  btn-default pull-left" data-dismiss="modal" ng-click="handleSave()" title="{{resources.Global_Bouton_Valider_Tooltip}}">{{resources.Global_Bouton_Valider}}</button>
+                        <button type="button" class="btn  btn-link pull-right" data-dismiss="modal" title="{{resources.Global_Bouton_Annuler_Tooltip}}">{{resources.Global_Bouton_Annuler}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*Modal de changement des dates d'astreinte*@
+        <div class="modal fade" id="changeAstreinteDateModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title"><i class="fa fa-pencil"></i>{{resources.Rapport_Details_Change_AstreinteDates}}</h2>
+                        <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{resources.Global_Modal_Annuler_Tooltip}}"></i>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <fred-date-picker name="DateDebutAstreinte"
+                                                  locale="fr"
+                                                  format="DD/MM/YYYY HH:mm"
+                                                  min="{{handleGetDebutAstreinteMinDate(Rapport.DateChantier)}}"
+                                                  max="{{handleGetDebutAstreinteMaxDate(Rapport.DateChantier)}}"
+                                                  stepping="15"
+                                                  ng-change="handleCheckAstreinteDateFin()"
+                                                  ng-model="Rapport.ListLignes[RapportLigneIndexToUpdateAstreinte].ListRapportLigneAstreintes[AstreinteIndexToUpdate].DateDebutAstreinte"
+                                                  placeholder="{{resources.Rapport_Debut_Astreinte}}"></fred-date-picker>
+                            </div>
+                            <div class="col-md-5">
+                                <fred-date-picker name="DateFinAstreinte"
+                                                  locale="fr"
+                                                  format="DD/MM/YYYY HH:mm"
+                                                  min="{{Rapport.ListLignes[RapportLigneIndexToUpdateAstreinte].ListRapportLigneAstreintes[AstreinteIndexToUpdate].DateDebutAstreinte}}"
+                                                  max="{{handleGetFinAstreinteMaxDate(Rapport.DateChantier)}}"
+                                                  stepping="15"
+                                                  ng-change="handleCheckAstreinteDateFin()"
+                                                  ng-model="Rapport.ListLignes[RapportLigneIndexToUpdateAstreinte].ListRapportLigneAstreintes[AstreinteIndexToUpdate].DateFinAstreinte"
+                                                  placeholder="{{resources.Rapport_Fin_Astreinte}}"></fred-date-picker>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BEGIN : Modal en fonction du contexte requis-->
+        <fred-overlay ng-init="fredSide=false" class="open" ng-click="CancelEvenements()" ng-class="{'open' :fredSide  ,'close' :!fredSide}"></fred-overlay>
+        <fred-side ng-class="{'open' :fredSide  ,'close' :!fredSide}">
+
+            <!--En tete-->
+            <header>
+                <span class="material-icons icon">add_alert</span>
+            </header>
+
+            <main class="fred-scroll" ng-show="evenement">
+                <!--Titre de la boite de dialogue-->
+                <h2>{{resources.Rapport_Evenement_Du}} {{Rapport.DateChantier | date:'dd/MM/yyyy'}}</h2>
+
+                <section-block>
+                    <section-titre-simple>{{resources.Rapport_Detail_StatutValidation_Horaire_SousTitre}}</section-titre-simple>
+                    <section-content>
+                        <input type="text"
+                               ui-mask="99:99"
+                               ui-mask-placeholder
+                               ui-mask-placeholder-char='-'
+                               ng-pattern="/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"
+                               ng-model="HoraireDebutM"
+                               ng-change="handleCheckTimes()"
+                               name="HoraireDebutM"
+                               class="heureMinute"
+                               ng-disabled="rapportIsLocked()" />
+                        <span class="glyphicon glyphicon-play"></span>
+                        <input type="text"
+                               ui-mask="99:99"
+                               ui-mask-placeholder
+                               ui-mask-placeholder-char='-'
+                               ng-pattern="/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"
+                               ng-model="HoraireFinM"
+                               ng-change="handleCheckTimes()"
+                               name="HoraireFinM"
+                               class="heureMinute"
+                               ng-disabled="rapportIsLocked()" />
+
+                        &nbsp;&nbsp;&nbsp;
+
+                        <input type="text"
+                               ui-mask="99:99"
+                               ui-mask-placeholder
+                               ui-mask-placeholder-char='-'
+                               ng-pattern="/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"
+                               ng-model="HoraireDebutS"
+                               ng-change="handleCheckTimes()"
+                               name="HoraireDebutS"
+                               class="heureMinute"
+                               ng-disabled="rapportIsLocked()" />
+                        <span class="glyphicon glyphicon-play"></span>
+                        <input type="text"
+                               ui-mask="99:99"
+                               ui-mask-placeholder
+                               ui-mask-placeholder-char='-'
+                               ng-pattern="/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"
+                               ng-model="HoraireFinS"
+                               ng-change="handleCheckTimes()"
+                               name="HoraireFinS"
+                               class="heureMinute"
+                               ng-disabled="rapportIsLocked()" />
+                        <span class="text-danger" ng-show="formRapport.HoraireDebutM.$invalid || formRapport.HoraireFinM.$invalid || formRapport.HoraireDebutS.$invalid || formRapport.HoraireFinS.$invalid">
+                            {{resources.Rapport_Detail_StatutValidation_Horaires_ErrorFormat}}
+                        </span>
+                        <span class="text-danger" ng-show="formRapport.$error.trancheNotOk">
+                            {{resources.Rapport_Detail_StatutValidation_Horaire_Tranche_Erreur}}
+                        </span>
+                        <span class="text-danger" ng-show="formRapport.$error.premiereTrancheManquante">
+                            {{resources.Rapport_Detail_StatutValidation_Horaire_PremiereTrancheManquante}}
+                        </span>
+                    </section-content>
+                </section-block>
+                <section-block>
+                    <section-titre-simple>{{resources.Rapport_Detail_StatutValidation_Meteo_SousTitre}}</section-titre-simple>
+                    <section-content>
+                        <textarea class="form-control" type="text" name="txtMeteo" ng-model="Meteo" maxlength="255" ng-disabled="rapportIsLocked()"></textarea>
+                    </section-content>
+                </section-block>
+                <section-block>
+                    <section-titre-simple>{{resources.Rapport_Detail_StatutValidation_Evenement_SousTitre}}</section-titre-simple>
+                    <section-content>
+                        <textarea class="form-control" type="text" name="Evenement" ng-model="Evenements" maxlength="255" ng-disabled="rapportIsLocked()"></textarea>
+                    </section-content>
+                </section-block>
+            </main>
+
+
+
+            <!--Partie validation -->
+            <div style="width:330px; margin-left:auto; margin-right:auto" ng-show="validation">
+
+                <h2 style="text-align : center">{{resources.Rapport_Validation}}</h2>
+
+                <section-block>
+
+                    <section-content>
+                        <cards>
+
+                            <!--Validation Chef de chantier-->
+                            <card class="active" ng-show="Rapport.ValideurCDC != null">
+                                <titre>{{resources.Rapport_Detail_StatutValidation_ChefChantier_SousTitre}}</titre>
+                                <infos>
+                                    <info>
+                                        <fred-label>{{resources.Rapport_Detail_StatutValidation_ChefChantier_Auteur}}</fred-label>
+                                        <fred-val>{{Rapport.ValideurCDC.NomPrenom}}</fred-val>
+                                    </info>
+                                    <info>
+                                        <fred-label>{{resources.Rapport_Detail_StatutValidation_ChefChantier_Date}}</fred-label>
+                                        <fred-val>{{Rapport.DateValidationCDC | date: "dd/MM/yyyy"}}</fred-val>
+                                    </info>
+                                </infos>
+                            </card>
+                            <card class="inactive" ng-show="Rapport.ValideurCDC == null">
+                                <titre>{{resources.Rapport_Detail_StatutValidation_ChefChantier_SousTitre}}</titre>
+                                <infos>
+                                    {{resources.Rapport_Aucune_Validation}}
+                                </infos>
+                            </card>
+
+
+                            <!--Validation ConducteurTravaux-->
+                            <card class="active" ng-show="Rapport.ValideurCDT != null">
+                                <titre>{{resources.Rapport_Detail_StatutValidation_ConducteurTravaux_SousTitre}}</titre>
+                                <infos>
+                                    <info>
+                                        <fred-label>{{resources.Rapport_Detail_StatutValidation_ConducteurTravaux_Auteur}}</fred-label>
+                                        <fred-val>{{Rapport.ValideurCDT.NomPrenom}}</fred-val>
+                                    </info>
+                                    <info>
+                                        <fred-label>{{resources.Rapport_Detail_StatutValidation_ConducteurTravaux_Date}}</fred-label>
+                                        <fred-val>{{Rapport.DateValidationCDT | date: "dd/MM/yyyy"}}</fred-val>
+                                    </info>
+                                </infos>
+                            </card>
+                            <card class="inactive" ng-show="Rapport.ValideurCDT == null">
+                                <titre>{{resources.Rapport_Detail_StatutValidation_ConducteurTravaux_SousTitre}}</titre>
+                                <infos>
+                                    {{resources.Rapport_Aucune_Validation}}
+                                </infos>
+                            </card>
+
+
+                            <!--Validation Directeur de chantier-->
+                            <card class="active" ng-show="Rapport.ValideurDRC != null">
+                                <titre>{{resources.Rapport_Detail_StatutValidation_DirecteurChantier_SousTitre}}</titre>
+                                <infos>
+                                    <info>
+                                        <fred-label>{{resources.Rapport_Detail_StatutValidation_DirecteurChantier_Auteur}}</fred-label>
+                                        <fred-val>{{Rapport.ValideurDRC.NomPrenom}}</fred-val>
+                                    </info>
+                                    <info>
+                                        <fred-label>{{resources.Rapport_Detail_StatutValidation_DirecteurChantier_Date}}</fred-label>
+                                        <fred-val>{{Rapport.DateValidationDRC | date: "dd/MM/yyyy"}}</fred-val>
+                                    </info>
+                                </infos>
+                            </card>
+                            <card class="inactive" ng-show="Rapport.ValideurDRC == null">
+                                <titre>{{resources.Rapport_Detail_StatutValidation_DirecteurChantier_SousTitre}}</titre>
+                                <infos>
+                                    {{resources.Rapport_Aucune_Validation}}
+                                </infos>
+                            </card>
+
+
+                            <!--Validatuon Correspondant Paye-->
+
+                            <card class="active" ng-show="Rapport.AuteurVerrou != null">
+                                <titre>{{resources.Rapport_Detail_StatutValidation_CorrespondantPaye_SousTitre}}</titre>
+                                <infos>
+                                    <info>
+                                        <fred-label>{{resources.Rapport_Detail_StatutValidation_CorrespondantPaye_Auteur}}</fred-label>
+                                        <fred-val>{{Rapport.AuteurVerrou.NomPrenom}}</fred-val>
+                                    </info>
+                                    <info>
+                                        <fred-label>{{resources.Rapport_Detail_StatutValidation_CorrespondantPaye_Date}}</fred-label>
+                                        <fred-val>{{Rapport.DateVerrou | date: "dd/MM/yyyy"}}</fred-val>
+                                    </info>
+                                </infos>
+                            </card>
+                            <card class="inactive" ng-show="Rapport.AuteurVerrou == null">
+                                <titre>{{resources.Rapport_Detail_StatutValidation_CorrespondantPaye_SousTitre}}</titre>
+                                <infos>
+                                    {{resources.Rapport_Aucune_Validation}}
+                                </infos>
+                            </card>
+
+                        </cards>
+                    </section-content>
+                </section-block>
+            </div>
+
+            <footer>
+                <!--BEGIN : Bouton Start-->
+                <action ng-show="evenement">
+                    <button type="button" class="fred-button primary" ng-click="SaveEvenements()"
+                            ng-disabled="rapportIsLocked() || formRapport.HoraireDebutM.$invalid || formRapport.HoraireFinM.$invalid || formRapport.HoraireDebutS.$invalid || formRapport.HoraireFinS.$invalid">
+                        {{resources.Global_Bouton_Valider}}
+                    </button>
+                    <button type="button" class="fred-button cancel" ng-click="CancelEvenements()">{{resources.Global_Bouton_Annuler}}</button>
+                </action>
+                <!--END : Bouton Start-->
+                <close ng-click="CancelEvenements()">
+                    <icon /><label>{{resources.Rapport_Refermer_Panneau}}</label>
+                </close>
+            </footer>
+        </fred-side>
+    </form>
+</div>

@@ -1,0 +1,48 @@
+﻿<div class="row box2">
+  <div class="col-md-2 no-padding">
+    <p class="inline-header">{{$ctrl.resources.Periode_lb}}</p>
+    <p class="inline-description ">#{{$ctrl.monthModel.Periode}}</p>
+  </div>
+  <div class="col-md-2 no-padding">
+    <p class="inline-header">{{$ctrl.resources.Mois_lb}}</p>
+    <p class="inline-description">{{$ctrl.monthDate | date:'MMMM'}} - {{$ctrl.monthModel.Annee}}</p>
+  </div>
+  <div class="col-md-2 no-padding status"
+       ng-if="$ctrl.periodeClosed()">
+    <div class="box-cloture"><div>{{$ctrl.resources.Cloture_Status}}</div></div>
+  </div>
+  <div class="col-md-2 no-padding status"
+       ng-if="$ctrl.periodInactive()">
+    <div class="box-inactif"><div>{{$ctrl.resources.Inactif_Status}}</div></div>
+  </div>
+  <div class="col-md-2 no-padding status"
+       ng-if="$ctrl.periodInProgress()">
+    <div class="box-cours"><div>{{$ctrl.resources.En_Cours_Status}}</div></div>
+  </div>
+
+  <div class="col-md-2 no-padding">
+    <div class="box3 dates paddpadd">
+      {{$ctrl.monthModel.DateTransfertFAR | date:'dd/MM/yyyy'}}
+    </div>
+  </div>
+  <div class="col-md-2 no-padding">
+    <div class="box3 dates paddpadd">
+      {{$ctrl.monthModel.DateCloture | date:'dd/MM/yyyy'}}
+    </div>
+  </div>
+
+  <div class="col-md-2 no-padding box4 date-margin">
+    <fred-authorization key="{{$ctrl.resources.permisssionKeyCloseDateButton}}">
+      <div class="cloture" ng-if="$ctrl.periodeClosed()" ng-click="$ctrl.cancelCloture()" title="{{$ctrl.resources.Btn_ReOuvrir_lb}}">
+        <span class="fa fa-unlock-alt"></span><span>{{$ctrl.resources.ReOuvrir_lb}}</span>
+      </div>
+      <button class="reopen"
+               ng-disabled="$ctrl.isOnClosing"
+              ng-click="$ctrl.confirmCloture()"
+              ng-if="!$ctrl.periodeClosed()"
+              title="{{$ctrl.resources.Btn_Cloturer_lb}}">
+        <span class="fa fa-lock"></span><span>{{$ctrl.resources.Cloture_periode_lb}}</span>
+      </button>
+    </fred-authorization>
+  </div>
+</div>

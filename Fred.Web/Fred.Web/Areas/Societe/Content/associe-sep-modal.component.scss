@@ -1,0 +1,131 @@
+﻿$color_1: grey;
+$color_2: dodgerblue;
+$color_3: tomato;
+$font_family_1: 'Glyphicons Halflings';
+
+.sep-toggle {
+    &:after {
+        font-family: $font_family_1;
+        content: "\e114";
+        float: right;
+        color: $color_1;
+    }
+}
+
+.sep-toggle.collapsed {
+    &:after {
+        content: "\e080";
+    }
+}
+
+.sep-table {
+    .toggle-col {
+        width: 1%;
+    }
+
+    .societe-associee-col {
+        width: 25%;
+    }
+
+    .societe-associee-col.child {
+        padding-left: 60px !important;
+
+        .inputPL {
+            width: 75% !important;
+        }
+
+        .text-danger {
+            width: 75% !important;
+        }
+    }
+
+    .type-participation-col {
+        width: 20%;
+    }
+
+    .quote-part-col {
+        width: 20%;
+    }
+
+    .fournisseur-col {
+        width: 25%;
+    }
+
+    .actions-col {
+        width: 9%;
+        text-align: right;
+
+        .flaticon {
+            font-size: 18px;
+        }
+
+        .flaticon-add-2 {
+            color: $color_2;
+        }
+
+        .flaticon-multiply {
+            margin-left: 5px;
+            color: $color_3;
+        }
+    }
+
+    thead {
+        .fournisseur-col {
+            .btn-add-associe-sep {
+                position: absolute;
+                right: 20px;
+                top: 24px;
+            }
+        }
+    }
+}
+
+.societe-associee-col {
+    .inputPL {
+        .inputPLLabel {
+            width: 150px;
+        }
+    }
+}
+
+.fournisseur-col {
+    .inputPL {
+        .inputPLLabel {
+            width: 150px;
+        }
+    }
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+    .modal-dialog {
+        top: 25% !important;
+        width: 800px !important;
+        margin: 30px auto !important;
+    }
+
+    .sep-table {
+        thead {
+            .fournisseur-col {
+                .btn-add-associe-sep {
+                    top: 17px;
+                }
+            }
+        }
+    }
+
+    .societe-associee-col {
+        .inputPL {
+            .inputPLLabel {
+                width: 120px;
+            }
+        }
+    }
+
+    .fournisseur-col {
+        .inputPL {
+            .inputPLLabel {
+                width: 120px;
+            }
+        }
+    }
+}

@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Fournisseur_Index_PanelDetail_DateCloture" xml:space="preserve">
+    <value>Date de clôture</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelDetail_DateOuverture" xml:space="preserve">
+    <value>Date d'ouverture</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelDetail_Titre" xml:space="preserve">
+    <value>Détail du fournisseur</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Controller_ErrorMetier_AucunFournisseur" xml:space="preserve">
+    <value>L'adresse du fournisseur n'a pas été retrouvée.</value>
+    <comment>fournisseur.controller.js</comment>
+  </data>
+  <data name="Fournisseur_Index_SousTitre_ListeFournisseur" xml:space="preserve">
+    <value>Liste des fournisseurs</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_Table_Bouton_Detail_Tooltip" xml:space="preserve">
+    <value>Cliquez pour obtenir plus d'informations</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_Table_Bouton_Personnel_Tooltip" xml:space="preserve">
+    <value>Cliquez pour voir la liste des personnels rattachés à ce fournisseur</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_Table_Entete_Action" xml:space="preserve">
+    <value>Action</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_Table_Entete_Code" xml:space="preserve">
+    <value>Code</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_Table_Entete_Libelle" xml:space="preserve">
+    <value>Libellé</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_Table_Entete_Siren" xml:space="preserve">
+    <value>SIREN</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_Table_Entete_Siret" xml:space="preserve">
+    <value>SIRET</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_Table_Entete_TypeTiers" xml:space="preserve">
+    <value>Type tiers</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_Titre" xml:space="preserve">
+    <value>Gestion des fournisseurs</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_TitreOnglet" xml:space="preserve">
+    <value>Fournisseur</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Search_Departement_Placeholder" xml:space="preserve">
+    <value>Sélectionner un département</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Search_ETT" xml:space="preserve">
+    <value>ETT</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Search_Locatier" xml:space="preserve">
+    <value>Locatier</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Search_Siren_Placeholder" xml:space="preserve">
+    <value>SIREN</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Search_TitreOnglet" xml:space="preserve">
+    <value>Recherche Fournisseur</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Search_Ville_Placeholder" xml:space="preserve">
+    <value>Ville</value>
+    <comment>SearchFilterTemplate.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelETT_Interimaire" xml:space="preserve">
+    <value>intérimaire(s)</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelETT_Titre" xml:space="preserve">
+    <value>Liste des personnels liés à l'ETT</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelDetail_Bouton_PersonnelETT" xml:space="preserve">
+    <value>Voir les personnels liés à cette ETT</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelDetail_TypeSequence" xml:space="preserve">
+    <value>Séquence</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelDetail_TypeTiers" xml:space="preserve">
+    <value>Type tiers</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelDetail_Code" xml:space="preserve">
+    <value>Code</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelDetail_Fournisseur" xml:space="preserve">
+    <value>Fournisseur</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelDetail_Groupe" xml:space="preserve">
+    <value>Groupe</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelDetail_Identifiant" xml:space="preserve">
+    <value>Identifiant</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelDetail_Siren" xml:space="preserve">
+    <value>SIREN</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelDetail_Siret" xml:space="preserve">
+    <value>SIRET</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelDetail_SousTitre_InfoComptable" xml:space="preserve">
+    <value>Informations comptables</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelDetail_SousTitre_Information" xml:space="preserve">
+    <value>Informations</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelETT_Bouton_Detail_Tooltip" xml:space="preserve">
+    <value>Cliquez pour accéder au détail</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelETT_Entree" xml:space="preserve">
+    <value>Entrée</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelETT_Sortie" xml:space="preserve">
+    <value>Sortie</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelETT_Statut" xml:space="preserve">
+    <value>Statut</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelDetail_ModeReglement" xml:space="preserve">
+    <value>Mode de règlement</value>
+    <comment>Index.cshtml</comment>
+  </data>
+  <data name="Fournisseur_Index_PanelDetail_RegleGestion" xml:space="preserve">
+    <value>Règle de gestion</value>
+  </data>
+</root>

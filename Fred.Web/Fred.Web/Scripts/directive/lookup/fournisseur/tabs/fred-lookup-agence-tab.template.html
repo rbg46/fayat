@@ -1,0 +1,36 @@
+﻿<div class="lookupPane"
+     ng-show="$ctrl.isOpen"
+     style="z-index: 60002;"
+     ng-keydown="$ctrl.handleKeyDown($event)">
+    <span class="grey-closing pull-right"
+          title="Cliquer pour fermer"
+          ng-click="$ctrl.close()">close</span>
+    <fred-lookup-search-component on-search-text-changed="$ctrl.handleChangeSearchText({ searchText })"
+                                  search-text="$ctrl.searchText"
+                                  placeholder1="{{$ctrl.searchMaxLength}}"
+                                  title="{{$ctrl.searchMaxLength}}"
+                                  title1="{{$ctrl.searchMaxLength}}">
+    </fred-lookup-search-component>
+    <fred-lookup-fournisseur-item-component ng-class="{selected : $index == $ctrl.selectedIndexAgence}"
+                                            on-select-fournisseur="$ctrl.selectFournisseur({ item })"
+                                            show-button-agence="false"
+                                            fournisseur="$ctrl.selectedFournisseur">
+    </fred-lookup-fournisseur-item-component>
+    <div id="divScroll"
+         class="fred-scroll"
+         ng-class="$ctrl.scrollName">
+        <div ng-show="$ctrl.busy && !$ctrl.scrolling"
+             class="text-center">
+            <img src="../../../../Content/images/loader.gif" />
+        </div>
+        <div ng-hide="$ctrl.busy && !$ctrl.scrolling"
+             class="lookupBody">
+            <p class="error"
+               ng-show="$ctrl.error">{{$ctrl.error}}</p>
+            <p ng-show="$ctrl.message">{{::$ctrl.resources.AucunReferentielTrouve_lb}}</p>
+            <fred-lookup-agence-item-component ng-repeat="ref in $ctrl.referentiels track by $index" agence="ref"
+                                               textsToHighlight="$ctrl.textsToHighlight">
+            </fred-lookup-agence-item-component>
+        </div>
+    </div>
+</div>

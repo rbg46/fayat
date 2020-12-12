@@ -1,0 +1,91 @@
+﻿.sep-toggle:after {
+    font-family: "Glyphicons Halflings";
+    content: "\e114";
+    float: right;
+    color: grey;
+}
+
+.sep-toggle.collapsed:after {
+    content: "\e080";
+}
+
+.sep-table .toggle-col {
+    width: 1%;
+}
+
+.sep-table .societe-associee-col {
+    width: 25%;
+}
+
+.sep-table .societe-associee-col.child {
+    padding-left: 60px !important;
+}
+
+.sep-table .societe-associee-col.child .inputPL {
+    width: 75% !important;
+}
+
+.sep-table .societe-associee-col.child .text-danger {
+    width: 75% !important;
+}
+
+.sep-table .type-participation-col {
+    width: 20%;
+}
+
+.sep-table .quote-part-col {
+    width: 20%;
+}
+
+.sep-table .fournisseur-col {
+    width: 25%;
+}
+
+.sep-table .actions-col {
+    width: 9%;
+    text-align: right;
+}
+
+.sep-table .actions-col .flaticon {
+    font-size: 18px;
+}
+
+.sep-table .actions-col .flaticon-add-2 {
+    color: dodgerblue;
+}
+
+.sep-table .actions-col .flaticon-multiply {
+    margin-left: 5px;
+    color: tomato;
+}
+
+.sep-table thead .fournisseur-col .btn-add-associe-sep {
+    position: absolute;
+    right: 20px;
+    top: 24px;
+}
+
+.societe-associee-col .inputPL .inputPLLabel {
+    width: 150px;
+}
+
+.fournisseur-col .inputPL .inputPLLabel {
+    width: 150px;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .modal-dialog {
+        top: 25% !important;
+        width: 800px !important;
+        margin: 30px auto !important;
+    }
+    .sep-table thead .fournisseur-col .btn-add-associe-sep {
+        top: 17px;
+    }
+    .societe-associee-col .inputPL .inputPLLabel {
+        width: 120px;
+    }
+    .fournisseur-col .inputPL .inputPLLabel {
+        width: 120px;
+    }
+}

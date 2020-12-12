@@ -1,0 +1,888 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Adresse1_error" xml:space="preserve">
+    <value>Vous devez renseigner CHAMP….</value>
+  </data>
+  <data name="Adresse1_help" xml:space="preserve">
+    <value>Renseigner ce champ….</value>
+  </data>
+  <data name="Adresse1_lb" xml:space="preserve">
+    <value>Adresse1</value>
+  </data>
+  <data name="Adresse1_placeholder" xml:space="preserve">
+    <value>Adresse du personnel</value>
+  </data>
+  <data name="Adresse2_error" xml:space="preserve">
+    <value>Vous devez renseigner CHAMP….</value>
+  </data>
+  <data name="Adresse2_help" xml:space="preserve">
+    <value>Renseigner ce champ….</value>
+  </data>
+  <data name="Adresse2_lb" xml:space="preserve">
+    <value>Adresse2</value>
+  </data>
+  <data name="Adresse2_placeholder" xml:space="preserve">
+    <value>Adresse du personnel</value>
+  </data>
+  <data name="Adresse3_error" xml:space="preserve">
+    <value>Vous devez renseigner CHAMP….</value>
+  </data>
+  <data name="Adresse3_help" xml:space="preserve">
+    <value>Renseigner ce champ….</value>
+  </data>
+  <data name="Adresse3_lb" xml:space="preserve">
+    <value>Adresse3</value>
+  </data>
+  <data name="Adresse3_placeholder" xml:space="preserve">
+    <value>Adresse du personnel</value>
+  </data>
+  <data name="CategoriePerso_error" xml:space="preserve">
+    <value>Vous devez saisir la catégorie de personnel</value>
+  </data>
+  <data name="CodePostal_error" xml:space="preserve">
+    <value>Vous devez renseigner CHAMP….</value>
+  </data>
+  <data name="CodePostal_help" xml:space="preserve">
+    <value>Renseigner ce champ….</value>
+  </data>
+  <data name="CodePostal_lb" xml:space="preserve">
+    <value>Code Postal</value>
+  </data>
+  <data name="CodePostal_placeholder" xml:space="preserve">
+    <value>Code Postal</value>
+  </data>
+  <data name="DateDerniereConnexion_error" xml:space="preserve">
+    <value>Date de dernière connexion</value>
+  </data>
+  <data name="DateDerniereConnexion_help" xml:space="preserve">
+    <value>Date de dernière connexion</value>
+  </data>
+  <data name="DateDerniereConnexion_lb" xml:space="preserve">
+    <value>Date de dernière connexion</value>
+  </data>
+  <data name="DateDerniereConnexion_placeholder" xml:space="preserve">
+    <value>Date de dernière connexion</value>
+  </data>
+  <data name="DateEntree_error" xml:space="preserve">
+    <value>Vous devez saisir la date d'entrée du personnel</value>
+  </data>
+  <data name="DateEntree_help" xml:space="preserve">
+    <value>Renseigner ce champ….</value>
+  </data>
+  <data name="DateEntree_lb" xml:space="preserve">
+    <value>Date d'entrée</value>
+  </data>
+  <data name="DateEntree_placeholder" xml:space="preserve">
+    <value>Saisir la date d'entrée </value>
+  </data>
+  <data name="DateExpiration_error" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="DateExpiration_help" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="DateExpiration_lb" xml:space="preserve">
+    <value>Date d'expiration du compte</value>
+  </data>
+  <data name="DateExpiration_placeholder" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="DateSortie_error" xml:space="preserve">
+    <value>Vous devez saisir la date de sortie du personnel</value>
+  </data>
+  <data name="DateSortie_help" xml:space="preserve">
+    <value>Renseigner ce champ….</value>
+  </data>
+  <data name="DateSortie_lb" xml:space="preserve">
+    <value>Date de sortie</value>
+  </data>
+  <data name="DateSortie_placeholder" xml:space="preserve">
+    <value>Saisir la date de sortie</value>
+  </data>
+  <data name="Email_error" xml:space="preserve">
+    <value>Vous devez saisir l'email</value>
+  </data>
+  <data name="Email_help" xml:space="preserve">
+    <value>Renseigner l'email professionnel du personnel</value>
+  </data>
+  <data name="Email_lb" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Email_placeholder" xml:space="preserve">
+    <value>Email professionnel</value>
+  </data>
+  <data name="isActived_error" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="isActived_help" xml:space="preserve">
+    <value>En désactivant  ce compte, l'utilisateur ne pourra plus accéder à Fred</value>
+  </data>
+  <data name="isActived_lb" xml:space="preserve">
+    <value>Compte Actif </value>
+  </data>
+  <data name="isActived_placeholder" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="IsInterimaire_error" xml:space="preserve">
+    <value>Vous devez renseigner CHAMP….</value>
+  </data>
+  <data name="IsInterimaire_help" xml:space="preserve">
+    <value>Renseigner ce champ….</value>
+  </data>
+  <data name="IsInterimaire_lb" xml:space="preserve">
+    <value>Interimaire</value>
+  </data>
+  <data name="IsInterimaire_placeholder" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+  <data name="Login_error" xml:space="preserve">
+    <value>Vous devez renseigner le login d'authentification</value>
+  </data>
+  <data name="Login_help" xml:space="preserve">
+    <value>Le login de l'utilisateur doit être structuré de préférence avec la première lettre du prenom  nom de famille</value>
+  </data>
+  <data name="Login_lb" xml:space="preserve">
+    <value>Login d'authentification</value>
+  </data>
+  <data name="Login_placeholder" xml:space="preserve">
+    <value>Login de l'utilisateur</value>
+  </data>
+  <data name="Matricule_error" xml:space="preserve">
+    <value>Vous devez renseigner le matricule du personnel</value>
+  </data>
+  <data name="Matricule_help" xml:space="preserve">
+    <value>Renseigner ce champ….</value>
+  </data>
+  <data name="Matricule_lb" xml:space="preserve">
+    <value>Matricule</value>
+  </data>
+  <data name="Matricule_placeholder" xml:space="preserve">
+    <value>Saisir le matricle du personnel ( de préférence Trigramme Societe +  4 chiffres)</value>
+  </data>
+  <data name="MotDePasse_error" xml:space="preserve">
+    <value>Erreur sur le mot de passe</value>
+  </data>
+  <data name="MotDePasse_help" xml:space="preserve">
+    <value>Définir le mot de passe avec 6 caractères minimum</value>
+  </data>
+  <data name="MotDePasse_lb" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="MotDePasse_placeholder" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="Nom_error" xml:space="preserve">
+    <value>Vous devez renseigner le nom du personnel</value>
+  </data>
+  <data name="Nom_help" xml:space="preserve">
+    <value>Renseigner ce champ….</value>
+  </data>
+  <data name="Nom_lb" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="Nom_placeholder" xml:space="preserve">
+    <value>Saisir le nom du personnel externe</value>
+  </data>
+  <data name="PaysId_error" xml:space="preserve">
+    <value>Vous devez renseigner CHAMP….</value>
+  </data>
+  <data name="PaysId_help" xml:space="preserve">
+    <value>Renseigner ce champ….</value>
+  </data>
+  <data name="PaysId_lb" xml:space="preserve">
+    <value>Pays</value>
+  </data>
+  <data name="PaysId_placeholder" xml:space="preserve">
+    <value>Pays</value>
+  </data>
+  <data name="PersonnelExterneId_error" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="PersonnelExterneId_help" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="PersonnelExterneId_lb" xml:space="preserve">
+    <value>Identifiant</value>
+  </data>
+  <data name="PersonnelExterneId_placeholder" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="Prenom_error" xml:space="preserve">
+    <value>Vous devez renseigner le prénom du personnel</value>
+  </data>
+  <data name="Prenom_help" xml:space="preserve">
+    <value>Renseigner ce champ….</value>
+  </data>
+  <data name="Prenom_lb" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="Prenom_placeholder" xml:space="preserve">
+    <value>Saisir le prénom du personnel externe</value>
+  </data>
+  <data name="SocieteId_error" xml:space="preserve">
+    <value>Vous devez renseigner la société à laquelle le personnel externe est rattaché</value>
+  </data>
+  <data name="SocieteId_help" xml:space="preserve">
+    <value>Renseigner la société à laquelle le personnel externe est rattaché</value>
+  </data>
+  <data name="SocieteId_lb" xml:space="preserve">
+    <value>Société</value>
+  </data>
+  <data name="SocieteId_placeholder" xml:space="preserve">
+    <value>Société de rattachement</value>
+  </data>
+  <data name="Tel1_error" xml:space="preserve">
+    <value>Vous devez saisir le téléphone</value>
+  </data>
+  <data name="Tel1_help" xml:space="preserve">
+    <value>Renseigner le téléphone du personnel</value>
+  </data>
+  <data name="Tel1_lb" xml:space="preserve">
+    <value>Téléphone 1</value>
+  </data>
+  <data name="Tel1_placeholder" xml:space="preserve">
+    <value>Téléphone 2</value>
+  </data>
+  <data name="Tel2_error" xml:space="preserve">
+    <value>Vous devez saisir le téléphone</value>
+  </data>
+  <data name="Tel2_help" xml:space="preserve">
+    <value>Renseigner le téléphone du personnel</value>
+  </data>
+  <data name="Tel2_lb" xml:space="preserve">
+    <value>Téléphone 2</value>
+  </data>
+  <data name="Tel2_placeholder" xml:space="preserve">
+    <value>Téléphone 2</value>
+  </data>
+  <data name="Ville_error" xml:space="preserve">
+    <value>Vous devez renseigner CHAMP….</value>
+  </data>
+  <data name="Ville_help" xml:space="preserve">
+    <value>Renseigner ce champ….</value>
+  </data>
+  <data name="Ville_lb" xml:space="preserve">
+    <value>Ville</value>
+  </data>
+  <data name="Ville_placeholder" xml:space="preserve">
+    <value>Ville</value>
+  </data>
+  <data name="Entites_error" xml:space="preserve">
+    <value>Veuillez renseigner une entité</value>
+  </data>
+  <data name="Entites_help" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="Entites_lb" xml:space="preserve">
+    <value>Entités</value>
+  </data>
+  <data name="Entites_placeholder" xml:space="preserve">
+    <value>Entités</value>
+  </data>
+  <data name="Habilitations_error" xml:space="preserve">
+    <value>Veuillez renseigner les habilitations</value>
+  </data>
+  <data name="Habilitations_help" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="Habilitations_lb" xml:space="preserve">
+    <value>Habilitations</value>
+  </data>
+  <data name="Habilitations_placeholder" xml:space="preserve">
+    <value>Habilitations</value>
+  </data>
+  <data name="NouveauRole_error" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="NouveauRole_help" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="NouveauRole_lb" xml:space="preserve">
+    <value>Nouveau Rôle</value>
+  </data>
+  <data name="NouveauRole_placeholder" xml:space="preserve">
+    <value>Nouveau Rôle</value>
+  </data>
+  <data name="NouveauTypeEntite_error" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="NouveauTypeEntite_help" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="NouveauTypeEntite_lb" xml:space="preserve">
+    <value>Nouveau Type Entité</value>
+  </data>
+  <data name="NouveauTypeEntite_placeholder" xml:space="preserve">
+    <value>Nouveau Type Entité</value>
+  </data>
+  <data name="NouvelleEntite_error" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="NouvelleEntite_help" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="NouvelleEntite_lb" xml:space="preserve">
+    <value>Nouvelle Entité</value>
+  </data>
+  <data name="NouvelleEntite_placeholder" xml:space="preserve">
+    <value>Nouvelle Entité</value>
+  </data>
+  <data name="Roles_error" xml:space="preserve">
+    <value>Veuillez renseigner un rôle</value>
+  </data>
+  <data name="Roles_help" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="Roles_lb" xml:space="preserve">
+    <value>Rôles</value>
+  </data>
+  <data name="Roles_placeholder" xml:space="preserve">
+    <value>Rôles</value>
+  </data>
+  <data name="Action_SaveHabilitations_Fail" xml:space="preserve">
+    <value>Enregistrement des habilitation a échoué</value>
+  </data>
+  <data name="Action_SaveHabilitations_Success" xml:space="preserve">
+    <value>Enregistrement des habilitations a réussi</value>
+  </data>
+  <data name="BoutonAjouterPersonnelCommeUtilisateurFred_lb" xml:space="preserve">
+    <value>Ajouter Personnel comme Utilisateur</value>
+  </data>
+  <data name="DetailPersonnel_lb" xml:space="preserve">
+    <value>Détail du personnel</value>
+  </data>
+  <data name="MessagePersonnelEstExterne_error" xml:space="preserve">
+    <value>Ce personnel est un externe</value>
+  </data>
+  <data name="MessagePersonnelUtilisateurFred_error" xml:space="preserve">
+    <value>Ce personnel est déjà utilisateur</value>
+  </data>
+  <data name="AccederAuxInfosComplementaires_help" xml:space="preserve">
+    <value>Accéder aux informations complémentaires liés aux coordonnées téléphoniques et  positionnement géographique</value>
+  </data>
+  <data name="AddAsUtilisateurFred_lb" xml:space="preserve">
+    <value>Ajouter comme utilisateur Fred</value>
+  </data>
+  <data name="AffecterACePersonnelLesDroitsDaccederAFred_help" xml:space="preserve">
+    <value>Affecter à ce personnel les droits d'accéder à Fred</value>
+  </data>
+  <data name="AjouterAFred_lb" xml:space="preserve">
+    <value>Ajouter à Fred</value>
+  </data>
+  <data name="Button_AddCoordonnees_lb" xml:space="preserve">
+    <value>Ajouter les coordonnées</value>
+  </data>
+  <data name="Button_AddPersonneInterne_lb" xml:space="preserve">
+    <value>Créer un personnel externe</value>
+  </data>
+  <data name="ChampsRecherche_lb" xml:space="preserve">
+    <value>Champs de recherche </value>
+  </data>
+  <data name="CodeSociete_lb" xml:space="preserve">
+    <value>Code Societé</value>
+  </data>
+  <data name="Contact_lb" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="CreerNouveauPersonneExterne_help" xml:space="preserve">
+    <value>Créer un nouveau personnel Externe</value>
+  </data>
+  <data name="DetailPersonneInterne_lb" xml:space="preserve">
+    <value>Détail sur le personnel interne</value>
+  </data>
+  <data name="EditInformationSurPersonnelExterne_lb" xml:space="preserve">
+    <value>Gestion du personnel</value>
+  </data>
+  <data name="EditPersonneInterne_lb" xml:space="preserve">
+    <value>Modifier le personnel externe</value>
+  </data>
+  <data name="GererContact_lb" xml:space="preserve">
+    <value>Gérer Contact</value>
+  </data>
+  <data name="GererInformationsContact_lb" xml:space="preserve">
+    <value>Gérer les informations contact</value>
+  </data>
+  <data name="Interne_lb" xml:space="preserve">
+    <value>Interne</value>
+  </data>
+  <data name="LancerNouvelleRecherche_help" xml:space="preserve">
+    <value>Lancer une nouvelle recherche</value>
+  </data>
+  <data name="LibelleSociete_lb" xml:space="preserve">
+    <value>Libellé Societé</value>
+  </data>
+  <data name="NouvelleRecherche_lb" xml:space="preserve">
+    <value>Nouvelle recherche</value>
+  </data>
+  <data name="Personnel_lb" xml:space="preserve">
+    <value>Personnel</value>
+  </data>
+  <data name="ProfilFred_lb" xml:space="preserve">
+    <value>Profil Fred</value>
+  </data>
+  <data name="RechercherPersonnel_lb" xml:space="preserve">
+    <value>Rechercher un Personnel</value>
+  </data>
+  <data name="ResultatRecherche_lb" xml:space="preserve">
+    <value>Résultat de la recherche</value>
+  </data>
+  <data name="SelectAccount_lb" xml:space="preserve">
+    <value>Select Account</value>
+  </data>
+  <data name="Type_lb" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="UtilisateurFred_lb" xml:space="preserve">
+    <value>Utilisateur Fred</value>
+  </data>
+  <data name="ViewInformationsForFredProfil_help" xml:space="preserve">
+    <value>Visualiser les informations liés au profil Fred</value>
+  </data>
+  <data name="ConfirmAddingUtilisateurCommeUtilisateurFred_lb" xml:space="preserve">
+    <value>Souhaitez-vous ajouter ce personnel comme Utilisateur Fred ?</value>
+  </data>
+  <data name="DetailUtilisateurFred_lb" xml:space="preserve">
+    <value>Détail d'un utilisateur Fred</value>
+  </data>
+  <data name="EditionUtilisateur_lb" xml:space="preserve">
+    <value>Edition utilisateur</value>
+  </data>
+  <data name="GererAuthentificationDuPersonnelExterne_lb" xml:space="preserve">
+    <value>Gérer l'authentification du personnel Externe</value>
+  </data>
+  <data name="GererAuthentificationDuPersonnelInterne_lb" xml:space="preserve">
+    <value>Gérer l'authentification du personnel Interne</value>
+  </data>
+  <data name="InformationPersonnel_lb" xml:space="preserve">
+    <value>Information personnel</value>
+  </data>
+  <data name="LoginDejaUtiliser_error" xml:space="preserve">
+    <value>Désolé, ce login est déjà utilisé</value>
+  </data>
+  <data name="MessagePersonnelEstInterne_error" xml:space="preserve">
+    <value>Ce personnel est un interne</value>
+  </data>
+  <data name="MessagePersonnelIsInterneConnexionActiveDirectory_lb" xml:space="preserve">
+    <value>Personnel Is Interne Connexion ActiveDirectory</value>
+  </data>
+  <data name="GererIndemnite_lb" xml:space="preserve">
+    <value>Gérer indemnité</value>
+  </data>
+  <data name="Actif_lb" xml:space="preserve">
+    <value>Actif</value>
+  </data>
+  <data name="Externe_lb" xml:space="preserve">
+    <value>Externe</value>
+  </data>
+  <data name="Interimaire_lb" xml:space="preserve">
+    <value>Intérimaire</value>
+  </data>
+  <data name="ParametrageGeneral_lb" xml:space="preserve">
+    <value>Informations générales</value>
+  </data>
+  <data name="ParametrageIndemniteDeplacement_lb" xml:space="preserve">
+    <value>Indémnités kilométriques</value>
+  </data>
+  <data name="Utilisateur_lb" xml:space="preserve">
+    <value>Utilisateur FRED</value>
+  </data>
+  <data name="ComboEtablissementPaie_lb" xml:space="preserve">
+    <value>Etablissement paie</value>
+  </data>
+  <data name="ComboEtablissementRattachement_lb" xml:space="preserve">
+    <value>Etablissement de rattachement</value>
+  </data>
+  <data name="ComboTypeRattachement_lb" xml:space="preserve">
+    <value>Type de rattachement</value>
+  </data>
+  <data name="IsDeleted" xml:space="preserve">
+    <value>Supprimé</value>
+  </data>
+  <data name="IsDeleted_help" xml:space="preserve">
+    <value>Indique si le personnel est supprimé</value>
+  </data>
+  <data name="SuperAdmin_help" xml:space="preserve">
+    <value>Indique si l'utilisateur est super admin</value>
+  </data>
+  <data name="IsDeleted_lb" xml:space="preserve">
+    <value>Supprimé</value>
+  </data>
+  <data name="IsInterne" xml:space="preserve">
+    <value>Interne</value>
+  </data>
+  <data name="IsInterne_help" xml:space="preserve">
+    <value>Indique si l'utilisateur est interne</value>
+  </data>
+  <data name="IsInterne_lb" xml:space="preserve">
+    <value>Interne</value>
+  </data>
+  <data name="ParametrageContact_lb" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="ParametrageUtilisateur_lb" xml:space="preserve">
+    <value>Informations utilisateur</value>
+  </data>
+  <data name="AddAsUtilisateur_lb" xml:space="preserve">
+    <value>Ajouter comme utilisateur</value>
+  </data>
+  <data name="btnCalculCoordonneeGPS_lb" xml:space="preserve">
+    <value>Calculer les coordonnées GPS</value>
+  </data>
+  <data name="Latitude_lb" xml:space="preserve">
+    <value>Latitude du domicile</value>
+  </data>
+  <data name="Longitude_lb" xml:space="preserve">
+    <value>Longitude du domicile</value>
+  </data>
+  <data name="CreateSuccess" xml:space="preserve">
+    <value>Création effectuée</value>
+  </data>
+  <data name="LoadFail" xml:space="preserve">
+    <value>Erreur lors du chargmeent des données du personnel</value>
+  </data>
+  <data name="LoadSuccess" xml:space="preserve">
+    <value>Chargement des données du personnel effectué</value>
+  </data>
+  <data name="UpdateSuccess" xml:space="preserve">
+    <value>Mise a jour effectuée</value>
+  </data>
+  <data name="UpdateUtilisateur_lb" xml:space="preserve">
+    <value>Mise à jour de l'utilisateur</value>
+  </data>
+  <data name="isDeletedUser" xml:space="preserve">
+    <value>Supprimé</value>
+  </data>
+  <data name="isDeletedUser_help" xml:space="preserve">
+    <value>Indique si l'utilisateur est supprimé</value>
+  </data>
+  <data name="isDeletedUser_lb" xml:space="preserve">
+    <value>Supprimé</value>
+  </data>
+  <data name="ModifUtilisateurFred_lb" xml:space="preserve">
+    <value>Modifier le personnel</value>
+  </data>
+  <data name="Folio" xml:space="preserve">
+    <value>Folio/Trigramme</value>
+  </data>
+  <data name="Folio_lb" xml:space="preserve">
+    <value>Folio/Trigramme</value>
+  </data>
+  <data name="SearchFolio" xml:space="preserve">
+    <value>Folio/Trigramme</value>
+  </data>
+  <data name="SearchLogin" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="SearchFolio_Error" xml:space="preserve">
+    <value>Trigramme déjà utilisé</value>
+  </data>
+  <data name="CreateError" xml:space="preserve">
+    <value>Erreur lors de la création</value>
+  </data>
+  <data name="FolioDejaUtilise_error" xml:space="preserve">
+    <value>Ce trigramme est déjà utilisé par un utilisateur</value>
+  </data>
+  <data name="UpdateError" xml:space="preserve">
+    <value>Erreur lors de la modification</value>
+  </data>
+  <data name="CommandeManuelleAllowed_lb" xml:space="preserve">
+    <value>Commande manuelle</value>
+  </data>
+  <data name="CommandeManuelleAllowed_help" xml:space="preserve">
+    <value>Indique si l'utilisateur peut saisir des commandes manuelles</value>
+  </data>
+  <data name="LibellePersonnelTrouve_lb" xml:space="preserve">
+    <value>personnel(s)</value>
+  </data>
+  <data name="ListePersonnel_lb" xml:space="preserve">
+    <value>Liste du personnel</value>
+  </data>
+  <data name="TypeProfil_lb" xml:space="preserve">
+    <value>Type de profil</value>
+  </data>
+  <data name="AddRole" xml:space="preserve">
+    <value>Ajouter un rôle</value>
+  </data>
+  <data name="ActifsSeulement" xml:space="preserve">
+    <value>Actifs seulement</value>
+  </data>
+  <data name="InterimairesSeulement" xml:space="preserve">
+    <value>Intérimaires seulement</value>
+  </data>
+  <data name="InternesSeulement" xml:space="preserve">
+    <value>Internes seulement</value>
+  </data>
+  <data name="UtilisateursSeulement" xml:space="preserve">
+    <value>Utilisateurs seulement</value>
+  </data>
+  <data name="RetourListePersonnel_help" xml:space="preserve">
+    <value>Cliquer pour retourner à la liste du personnel</value>
+  </data>
+  <data name="RetourListePersonnel_lb" xml:space="preserve">
+    <value>Retourner à la liste du personnel</value>
+  </data>
+  <data name="SaveAdressePersonnel_fail" xml:space="preserve">
+    <value>Echec de l'enregistrement de l'Adresse du personnel</value>
+  </data>
+  <data name="SaveAdressePersonnel_success" xml:space="preserve">
+    <value>L'Adresse du personnel a été mise à jour</value>
+  </data>
+  <data name="Actions_lb" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="AffectationInterimaireHistorique_lb" xml:space="preserve">
+    <value>Historique des affectations à une ETT</value>
+  </data>
+  <data name="AffectationInterimaire_lb" xml:space="preserve">
+    <value>Affectation intérimaire</value>
+  </data>
+  <data name="AjouterAffectation_btn" xml:space="preserve">
+    <value>Ajouter une nouvelle affectation</value>
+  </data>
+  <data name="Etat_lb" xml:space="preserve">
+    <value>Etat</value>
+  </data>
+  <data name="FournisseurETT_lb" xml:space="preserve">
+    <value>Fournisseur ETT</value>
+  </data>
+  <data name="SIRENCodeFournisseur_lb" xml:space="preserve">
+    <value>SIREN / Code fournisseur</value>
+  </data>
+  <data name="SocietePartenaire_lb" xml:space="preserve">
+    <value>Société partenaire</value>
+  </data>
+  <data name="AffectationDesactiveAuto_lb" xml:space="preserve">
+    <value>Le rattachement actuellement actif sera désactivé automatiquement.</value>
+  </data>
+  <data name="AffectationSuccess_lb" xml:space="preserve">
+    <value>Affectation effectuée avec succés</value>
+  </data>
+  <data name="CleSecu_lb" xml:space="preserve">
+    <value>Clé</value>
+  </data>
+  <data name="DesaffectationSuccess_lb" xml:space="preserve">
+    <value>Détachement de l'intérimaire effectué avec succés</value>
+  </data>
+  <data name="Energie_lb" xml:space="preserve">
+    <value>Energie</value>
+  </data>
+  <data name="ModificationAffectation_lb" xml:space="preserve">
+    <value>Modification de l'affectation</value>
+  </data>
+  <data name="NouvelleAffectation_lb" xml:space="preserve">
+    <value>Nouvelle affectation</value>
+  </data>
+  <data name="NumeroSecu_lb" xml:space="preserve">
+    <value>Numéro de sécurité sociale</value>
+  </data>
+  <data name="DateCreation_lb" xml:space="preserve">
+    <value>Date de création</value>
+  </data>
+  <data name="DateModification_lb" xml:space="preserve">
+    <value>Date de modification</value>
+  </data>
+  <data name="DesaffectationInterimConfirmation_lb" xml:space="preserve">
+    <value>Confirmez-vous la suppression de l'affectation ?</value>
+  </data>
+  <data name="DesaffectationInterim_title" xml:space="preserve">
+    <value>Supprimer le rattachement</value>
+  </data>
+  <data name="DesaffectationInterim_tooltip" xml:space="preserve">
+    <value>Cliquer pour désactiver le rattachement</value>
+  </data>
+  <data name="DroitsCommande_lb" xml:space="preserve">
+    <value>Droits sur commande</value>
+  </data>
+  <data name="FinaliserInterimaire_lb" xml:space="preserve">
+    <value>Veuillez ajouter une affectation pour finaliser le paramètrage du personnel intérimaire.</value>
+  </data>
+  <data name="NomPrenomExistant_lb" xml:space="preserve">
+    <value>Ce nom et prénom est déjà utilisé :</value>
+  </data>
+  <data name="NumeroSecuExistant_error" xml:space="preserve">
+    <value>Ce numéro de sécurité sociale est déjà attribué</value>
+  </data>
+  <data name="Ressource_lb" xml:space="preserve">
+    <value>Ressource</value>
+  </data>
+  <data name="CleSecuCorrespondante_lb" xml:space="preserve">
+    <value>La clé correspondante à ce numéro est</value>
+  </data>
+  <data name="CleSecuPattern_lb" xml:space="preserve">
+    <value>2 caractères obligatoires.</value>
+  </data>
+  <data name="InterimaireInactif_lb" xml:space="preserve">
+    <value>Intérimaire inactif</value>
+  </data>
+  <data name="NouvelInterimaire_lb" xml:space="preserve">
+    <value>Nouvel intérimaire</value>
+  </data>
+  <data name="NumeroSecuInvalide_error" xml:space="preserve">
+    <value>Numéro de sécurité sociale invalide.</value>
+  </data>
+  <data name="NumeroSecuLength_error" xml:space="preserve">
+    <value>13 caractères obligatoires.</value>
+  </data>
+  <data name="NumeroSecuValide_lb" xml:space="preserve">
+    <value>Numéro de sécurité sociale valide.</value>
+  </data>
+  <data name="Cadre_lb" xml:space="preserve">
+    <value>Cadre</value>
+  </data>
+  <data name="Categorie_lb" xml:space="preserve">
+    <value>Catégorie</value>
+  </data>
+  <data name="CleSecuPattern_error" xml:space="preserve">
+    <value>La clé n'est pas conforme.</value>
+  </data>
+  <data name="ETAM_lb" xml:space="preserve">
+    <value>ETAM</value>
+  </data>
+  <data name="Horaire_lb" xml:space="preserve">
+    <value>Horaire</value>
+  </data>
+  <data name="Mensuel_lb" xml:space="preserve">
+    <value>Mensuel</value>
+  </data>
+  <data name="NumeroSecuPattern_error" xml:space="preserve">
+    <value>Le numéro n'est pas conforme. Seules les lettres A et B sont autorisées.</value>
+  </data>
+  <data name="Ouvrier_lb" xml:space="preserve">
+    <value>Ouvrier</value>
+  </data>
+  <data name="DateExpirationSup_error" xml:space="preserve">
+    <value>La date d'expiration doit être supérieure à aujourd'hui.</value>
+  </data>
+  <data name="MotDePasseConforme_lb" xml:space="preserve">
+    <value>Mot de passe conforme.</value>
+  </data>
+  <data name="MotDePasseLength_error" xml:space="preserve">
+    <value>Le mot de passe doit comprendre au moins 8 caractères.</value>
+  </data>
+  <data name="MotDePasseLetter_error" xml:space="preserve">
+    <value>Le mot de passe doit comprendre au moins une lettre.</value>
+  </data>
+  <data name="MotDePasseNumber_error" xml:space="preserve">
+    <value>Le mot de passe doit comprendre au moins un chiffre.</value>
+  </data>
+  <data name="FolioLength_error" xml:space="preserve">
+    <value>Le folio doit comprendre exactement 3 lettres.</value>
+  </data>
+</root>

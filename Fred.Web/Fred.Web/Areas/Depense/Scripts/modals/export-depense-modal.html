@@ -1,0 +1,28 @@
+﻿<div class="modal-content">
+  <div class="modal-header">
+    <h2 class="modal-title">
+      <i class="flaticon flaticons flaticon-download"></i>Export Explorateur de Dépenses
+    </h2>
+    <i class="flaticon flaticons flaticon-multiply close pull-right" ng-click="$ctrl.handleCancel()" title="{{$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <input type="radio" name="all" ng-model="$ctrl.exportOption" id="radioAll" value="1"><label for="radioAll"><span></span>Exporter tout le périmètre de recherche</label>
+        <br />
+        <input type="radio" name="selected" ng-disabled="!$ctrl.hasSelectedDepenses" ng-model="$ctrl.exportOption" id="radioSelected" value="2">
+        <label for="radioSelected" ng-class="{'fred-disabled': !$ctrl.hasSelectedDepenses}">
+          <span></span>
+          Exporter seulement la sélection
+          <label ng-class="{'fred-disabled': !$ctrl.hasSelectedDepenses}" ng-show="!$ctrl.hasSelectedDepenses" style="color:red;">(Aucune sélection)</label>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer dummy">
+    <div>
+      <button type="button" class="btn btn-link pull-left" ng-click="$ctrl.handleCancel()" title="{{$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">{{$ctrl.resources.Global_Bouton_Annuler}}</button>
+      <button type="button" class="btn btn-default pull-right" ng-click="$ctrl.handleValidate()" title="{{$ctrl.resources.Global_Bouton_Valider_Tooltip}}">{{$ctrl.resources.Global_Bouton_Valider}}</button>
+    </div>
+  </div>
+</div> 

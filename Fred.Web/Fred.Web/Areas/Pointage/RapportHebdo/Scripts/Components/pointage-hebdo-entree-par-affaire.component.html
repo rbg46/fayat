@@ -1,0 +1,49 @@
+﻿<div class="col-lg-5 col-md-5 no-pad">
+  <div class="select-all crew">
+    <div class="chbx">
+      <input type="checkbox" id="chbxSelectAllCi" ng-model="$ctrl.SelectAllCi" 
+             ng-change="$ctrl.selectAllCi($ctrl.SelectAllCi)">
+      <label for="chbxSelectAllCi"><span></span></label>
+    </div>
+    <span class="lbl">{{$ctrl.resources.Rapport_Hebdo_Select_All_Ci}}</span>
+  </div>
+  <div class="ci-list">
+    <table class="table table-fixed biz-ouv">
+      <thead>
+        <tr>
+          <th class="col-md-1 col-1"></th>
+          <th class="col-md-2 col-1">{{$ctrl.resources.Global_CodeSociete}}</th>
+          <th class="col-md-3 col-2 squeeze">{{$ctrl.resources.Global_CodeEtablissementComptable}}</th>
+          <th class="col-md-4 col-3">{{$ctrl.resources.Rapport_Hebdo_Code_Ci + " - " + $ctrl.resources.Rapport_Hebdo_Ci_Libelle}}</th>
+          <th class="col-md-1 col-2 tots">{{$ctrl.resources.Rapport_Hebdo_Code_Total_Heure}}</th>
+          <th class="col-md-1 col-2 tots">{{$ctrl.resources.Rapport_Hebdo_Code_Total_Heure_Sup}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="ci in $ctrl.ciList">
+          <td class="col-md-1 col-1">
+            <div class="chbx-tab">
+              <input type="checkbox" 
+                     id="chbxTab_{{ci.CiId}}" 
+                     ng-model="ci.Selected" 
+                     ng-change="$ctrl.toggleCiSelection({CiId: ci.CiId, checkState: ci.Selected})">
+              <label for="chbxTab_{{ci.CiId}}"><span></span></label>
+            </div>
+          </td>
+          <td class="col-md-2 col-1">
+            <div class="icon-tab">
+              <span ng-class="{'sapicon-E165 biz':ci.CiTypeRessourceKey == 'CI_Search_CIType_Affaire',
+                                'sapicon-E1E9 etude':ci.CiTypeRessourceKey == 'CI_Search_CIType_Etude',
+                                'sapicon-E011 sections':ci.CiTypeRessourceKey == 'CI_Search_CIType_Section'}"></span>
+                {{ci.CiSocieteCode}}
+            </div>
+          </td>
+          <td class="col-md-3 col-2">{{ci.CiEtablissementComptableCode}}</td>
+          <td class="col-md-4 col-3"><span class="datas" title="{{ci.Libelle}}">{{ci.CiCode + " - " + ci.Libelle}}</span></td>
+          <td class="col-md-1 col-2">{{ci.TotalHeure}}</td>
+          <td class="col-md-1 col-2">{{ci.TotalHeureSup}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

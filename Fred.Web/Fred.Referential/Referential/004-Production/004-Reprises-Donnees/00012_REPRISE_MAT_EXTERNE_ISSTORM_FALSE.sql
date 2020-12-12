@@ -1,0 +1,1 @@
+﻿UPDATE FRED_MATERIEL SET IsStorm = 0 WHERE MaterielId = 21994;

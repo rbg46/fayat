@@ -1,0 +1,591 @@
+﻿@import "https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700";
+.switch-field {
+    padding: 10px;
+    overflow: hidden;
+    display: block;
+}
+
+.switch-field input {
+    display: none;
+}
+
+.switch-field input:checked + label {
+    background-color: #005ba2;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #fff;
+}
+
+.switch-field label {
+    float: left;
+    display: inline-block;
+    width: 60px;
+    background-color: #e4e4e4;
+    color: #000000;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    text-shadow: none;
+    padding: 6px 14px;
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+    cursor: pointer;
+}
+
+.switch-title {
+    width: 55%;
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    padding-left: 0px;
+    padding-right: 10px;
+    text-align: right;
+}
+
+.monCompte {
+    width: 400px;
+    box-shadow: 2px 0px 40px 5px #67757F;
+    z-index: 20000;
+}
+
+.monCompte .title1 {
+    color: #005ba2;
+    font-size: xx-large;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.monCompte .title2 {
+    color: #005ba2;
+    font-size: 16px;
+    width: 100%;
+    font-weight: bold;
+}
+
+.monCompte .manageTeam {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.monCompte .bloc {
+    padding-right: 20px;
+    padding-left: 20px;
+    height: 100%;
+}
+
+.monCompte .line {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: initial;
+}
+
+.monCompte .line:hover {
+    background-color: initial;
+    cursor: initial;
+}
+
+.monCompte .line.bloc-bas {
+    margin-top: 40px;
+    height: 90px;
+    background-color: #fff;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -7px;
+    text-align: center;
+    padding-top: 30px;
+    border: red;
+}
+
+.monCompte .div {
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.monCompte .divFlex {
+    display: flex;
+    height: 80px;
+    margin-bottom: 15px;
+}
+
+.monCompte .blocDeconnexion {
+    width: 30%;
+    background-color: #e1e3e5;
+    color: #67757f;
+    text-align: center;
+    cursor: pointer;
+}
+
+.monCompte .blocDeconnexion #deconnexion-icon::before {
+    font-size: 35px;
+}
+
+.monCompte .blocDeconnexion:hover {
+    background-color: #ffd800;
+}
+
+.monCompte .blocDeconnexion:hover > .deconnexion-label {
+    color: #0052a0;
+}
+
+.monCompte .blocDeconnexion:hover > #deconnexion-icon {
+    color: #0052a0;
+}
+
+.monCompte .blocInfoUtilisateur {
+    height: 65%;
+    overflow-y: auto;
+}
+
+.monCompte .blocInfoUtilisateur .line {
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.monCompte .blocInfoUtilisateur .summary {
+    margin-top: 25px;
+}
+
+.monCompte .blocInfoUtilisateur .summary.myTools {
+    padding-left: 15px;
+    margin-top: 5px;
+}
+
+.monCompte .blocInfoUtilisateur .summary.myTools a {
+    font-weight: normal;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: #9a9a9a;
+}
+
+.monCompte .blocInfoUtilisateur .summary.myTools a:hover {
+    color: #005ba2;
+}
+
+.monCompte .blocInfoUtilisateur .summary.myTools a .saps {
+    font-size: 25px;
+    margin-left: 20px;
+}
+
+.monCompte .infoUtilisateur.centrage {
+    padding-top: 20px;
+    padding-left: 15px;
+}
+
+.monCompte .infoUtilisateur {
+    width: 50%;
+    background-color: lightgray;
+}
+
+.monCompte .logoUtilisateur {
+    width: 20%;
+    background-color: lightgray;
+    font-size: xx-large;
+    text-align: center;
+}
+
+.monCompte .logoUtilisateur.centrage {
+    padding-top: 8px;
+    margin-right: -10px;
+}
+
+.monCompte .separateur {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-color: lightgrey;
+    border-left: none;
+    padding-left: 0;
+}
+
+.monCompte .separateur span {
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    display: block;
+    padding-top: 10px;
+}
+
+.monCompte .divSelectLangue {
+    width: 100%;
+    text-align: center;
+}
+
+.monCompte .selectLangue {
+    width: 80%;
+}
+
+.monCompte .headerInfoCompte {
+    height: 100px;
+    padding-top: 17px;
+    background-color: #e1e3e5;
+    text-align: center;
+    color: gray;
+}
+
+.monCompte .headerInfoCompte div div {
+    pointer-events: none;
+}
+
+.monCompte .headerInfoCompte .text {
+    font-weight: normal;
+    color: #595959;
+}
+
+.monCompte .headerInfoCompte span.flaticon-more-1 {
+    font-size: 35px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.monCompte .headerInfoCompte span.flaticon-more-1::before {
+    font-size: 35px;
+}
+
+.monCompte .line.headerInfoCompte:hover {
+    background-color: #e1e3e5;
+}
+
+.monCompte .societe {
+    color: gray;
+}
+
+.monCompte .blockScreen {
+    z-index: 2999;
+    background-color: #898989;
+    opacity: 0.5;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    position: fixed;
+}
+
+.monCompte .centrage {
+    padding-top: 5px;
+}
+
+.monCompte .centrage.flaticon-exit {
+    display: block;
+    font-size: 26px;
+    color: #000000;
+    cursor: pointer;
+}
+
+.contextUtilisateur {
+    background-color: #fbfbfb;
+    width: 400px;
+    height: 100% !important;
+    position: fixed;
+    visibility: hidden;
+}
+
+.contextUtilisateur .content {
+    padding: 0px;
+    padding-left: 5px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.contextUtilisateurOpen {
+    position: absolute;
+    top: 0;
+    right: 0;
+    visibility: visible;
+    z-index: 1200;
+}
+
+.contextUtilisateurClose {
+    right: -450px;
+    visibility: hidden;
+}
+
+.monCompte.content {
+    margin: 0;
+    padding-left: 0;
+}
+
+.monCompte.content .line i.fa.fa-angle-right {
+    position: absolute;
+    top: 24px;
+    left: 117px;
+    font-size: 40px;
+    color: #67757f;
+    cursor: pointer;
+}
+
+.monCompte.content .line i.fa.fa-angle-right:hover {
+    color: #0052a0;
+}
+
+.monCompte.content .line span.close_it {
+    text-align: center;
+    font-weight: normal;
+    color: grey;
+    display: block;
+    cursor: pointer;
+    margin-top: 7px;
+}
+
+.infoUserRedux {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.infoUserRedux .user-notif {
+    position: relative;
+}
+
+.infoUserRedux .user-notif .counter {
+    background-color: #fff;
+    border: 2px solid red;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: -12px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    display: flex;
+    font-size: 10px;
+    font-weight: bold;
+    color: red;
+}
+
+.infoUserRedux .user-notif .not-bell {
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.infoUserRedux .user-pic {
+    display: flex;
+    width: 300px;
+    justify-content: end;
+    align-items: center;
+}
+
+.infoUserRedux .iconeUser {
+    font-style: normal;
+    font-size: 25px;
+    border-right: 1px solid #333333;
+}
+
+.infoUserRedux .icon-menu {
+    color: #de3f7e;
+    font-size: 40px;
+    cursor: pointer;
+    margin-left: 5%;
+}
+
+.infoUserRedux .icon-menu:hover {
+    color: #fff;
+}
+
+.infoUserRedux .user-identity {
+    margin-left: 5%;
+}
+
+.infoUserRedux .firstname {
+    font-size: 11px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.infoUserRedux .lastname {
+    font-size: 11px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.infoUserRedux .company {
+    color: #fff;
+    font-size: 11px;
+}
+
+.infoUserRedux .action {
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    padding-left: 55px;
+    cursor: pointer;
+}
+
+.profil-image {
+    border-radius: 40px 40px 40px 40px;
+    -moz-border-radius: 40px 40px 40px 40px;
+    -webkit-border-radius: 40px 40px 40px 40px;
+    border: 1px solid #FFF;
+    height: 40px;
+    width: 40px;
+}
+
+.notif-blockscreen {
+    z-index: 1300;
+    background-color: #898989;
+    opacity: 0.5;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    position: fixed;
+}
+
+.notif-tab {
+    position: fixed;
+    overflow: hidden;
+    width: 330px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #fbfbfb;
+    z-index: 1301;
+    box-shadow: 0 5px 5px 0 #aeaeae, 0 -5px 5px 0 #aeaeae;
+}
+
+.notif-tab label {
+    color: #fff;
+    font-size: medium;
+    font-weight: 400;
+    position: relative;
+    margin-bottom: 5px;
+    margin-top: 0 !important;
+}
+
+.notif-tab .form-control {
+    margin-bottom: 10px;
+}
+
+.notif-tab .notif-tab-body {
+    width: 100%;
+    height: calc(100vh - 120px);
+    padding: 8px;
+    background-color: #fff;
+}
+
+.notif-tab .notif-tab-body .notif-tab-body-bloc {
+    border: 1px solid #e4e4e4;
+    padding: 5px;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.notif-tab .notif-tab-body .notif-tab-body-bloc .infos-line {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+}
+
+.notif-tab .notif-tab-body .notif-tab-body-bloc .infos-line .date {
+    font-size: 18px;
+    color: #67757F;
+    font-weight: 400;
+}
+
+.notif-tab .notif-tab-body .notif-tab-body-bloc .infos-line .sap-icon {
+    font-size: 25px;
+    margin-left: 5px;
+}
+
+.notif-tab .notif-tab-body .notif-tab-body-bloc .infos-line .material-icons {
+    margin-left: auto;
+    color: #a6a6a6;
+    cursor: pointer;
+}
+
+.notif-tab .notif-tab-body .notif-tab-body-bloc .notif-mess {
+    font-size: 15px;
+    font-weight: 400;
+    color: #2c77ba;
+}
+
+.notif-tab-header {
+    padding: 15px 8px;
+    height: 120px;
+    background-color: #005ba2;
+}
+
+.notification-modal {
+    z-index: 1500 !important;
+}
+
+.notification-modal + .modal-backdrop {
+    z-index: 1499 !important;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .infoUserRedux .user-notif {
+        margin-right: 5%;
+    }
+    .infoUserRedux .user-notif .not-bell {
+        font-size: 20px;
+    }
+    .infoUserRedux .user-notif .counter {
+        font-size: 8px;
+        width: 20px;
+        height: 13px;
+        border-radius: 20px;
+        left: -10px;
+    }
+    .infoUserRedux .user-pic {
+        width: 150px;
+    }
+    .infoUserRedux .profil-image {
+        width: 25px;
+        height: 25px;
+    }
+    .infoUserRedux .user-identity {
+        line-height: 8px;
+    }
+    .infoUserRedux .user-identity .firstname {
+        font-size: 8px;
+    }
+    .infoUserRedux .user-identity .lastname {
+        font-size: 8px;
+    }
+    .infoUserRedux .user-identity .company {
+        font-size: 8px;
+    }
+    .infoUserRedux .icon-menu {
+        font-size: 30px !important;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .infoUserRedux .company {
+        visibility: hidden !important;
+        display: none !important;
+    }
+    .infoUserRedux .iconeUser {
+        visibility: hidden !important;
+        display: none !important;
+    }
+    .infoUserRedux .firstname {
+        font-size: 13px;
+        display: block;
+    }
+    .infoUserRedux .lastname {
+        font-size: 13px;
+        display: block;
+    }
+}

@@ -1,0 +1,94 @@
+﻿<div class="modal-header">
+  <h2 class="modal-title">
+    <i class="flaticon flaticon-shuffle"></i>{{action}}
+  </h2>
+  <i class="flaticon flaticon-multiply close pull-right"
+     data-dismiss="modal"
+     title="{{resources.Global_Modal_Annuler_Tooltip}}"
+     ng-click="close()"></i>
+</div>
+<form name="moduleForm" novalidate>
+  <div class="modal-body">
+    <div ng-show="ErrorMessage.length > 0" class="alert alert-warning">
+      {{ErrorMessage}}
+    </div>
+
+    <div class="row">
+      <input type="hidden" ng-model="clone.ModuleId" />
+      <div class="col-md-4"
+           ng-class="{'has-error': moduleForm.$submitted && moduleForm.moduleCode.$invalid }">
+        <label for="txtCodeReferentiel">{{resources.Module_Index_ModalModule_Code}}</label>
+        <span class="text-danger"
+              ng-show="moduleForm.$submitted && moduleForm.moduleCode.$error.required">{{resources.Global_Control_DataRequired_Erreur}}</span>
+        <span class="text-danger"
+              ng-show="moduleForm.$submitted && moduleForm.moduleCode.$error.alreadyExist">{{resources.Module_Service_Control_CodeUnique_Erreur}}</span>
+        <input type="text"
+               id="txtCodeReferentiel"
+               name="moduleCode"
+               class="form-control"
+               ng-disabled="clone.ModuleId > 0"
+               ng-model="clone.Code"
+               title="{{resources.Module_Index_ModalModule_Code_Placeholder}}"
+               item-with-same-property-already-exist-validator list-to-check="moduleList" property-name="Code"
+               maxlength="5"
+               ng-required="true"
+               autofocus>
+      </div>
+      <div class="col-md-8"
+           ng-class="{'has-error': moduleForm.$submitted && moduleForm.moduleLibelle.$invalid }">
+        <label for="txtLabelModule">{{resources.Module_Index_ModalModule_Libelle}}</label>
+        <span class="text-danger"
+              ng-show="moduleForm.$submitted && moduleForm.moduleLibelle.$invalid">{{resources.Global_Control_DataRequired_Erreur}}</span>
+        <input type="text"
+               id="txtLabelModule"
+               name="moduleLibelle"
+               class="form-control"
+               ng-model="clone.Libelle"
+               maxlength="125"
+               ng-required="true"
+               title="{{resources.Module_Index_ModalModule_Libelle_Placeholder}}">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <label for="txtDescriptionModule">{{resources.Module_Index_ModalModule_Description}}</label>
+        <textarea class="form-control"
+                  id="txtDescriptionModule"
+                  maxlength="250"
+                  ng-model="clone.Description"></textarea>
+      </div>
+    </div>
+
+    <div class="row" ng-if="isEditionMode">
+      <div class="col-md-12">
+        <div class="pull-right chBox">
+          <label for="">{{clone.isActivedForSociete ? resources.Module_Index_ModalModule_Actif : resources.Module_Index_ModalModule_Inactif}}</label>
+          <label class="switch">
+            <input type="checkbox"
+                   ng-model="clone.isActivedForSociete"
+                   name="">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-default pull-left"
+            type="submit"
+            ng-click="save()"
+            ng-disabled="moduleForm.$submitted && moduleForm.$invalid && isBusy"
+            title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">
+      {{resources.Global_Bouton_Enregistrer}}
+    </button>
+    <button class="btn btn-link pull-right"
+            ng-click="close()"
+            title="{{resources.Global_Bouton_Annuler_Tooltip}}">
+      {{resources.Global_Bouton_Annuler}}
+    </button>
+  </div>
+
+</form>

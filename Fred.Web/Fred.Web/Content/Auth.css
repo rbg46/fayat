@@ -1,0 +1,338 @@
+﻿html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+.page {
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0px;
+    color: #333333;
+    padding: 5px;
+}
+
+.footer .cp-logo {
+    width: 6%;
+}
+
+.login {
+    display: block;
+    position: fixed;
+    top: -50%;
+    width: 380px;
+    height: auto;
+    left: 40%;
+    padding: 25px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.withBorder {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 25px;
+    border-left: 1px solid rgba(225, 227, 229, 0.5);
+    border-top: 1px solid rgba(225, 227, 229, 0.5);
+    border-right: 1px solid rgba(225, 227, 229, 0.5);
+    border-bottom: 1px solid rgba(225, 227, 229, 0.5);
+}
+
+.logo-fred {
+    background: url("/medias/images/picto/FRED_LOGO_WHITE.png") no-repeat center center;
+    height: 150px;
+    width: 100%;
+}
+
+.authentication {
+    color: white;
+    font-family: "Roboto", sans-serif;
+}
+
+.authentication LABEL {
+    font-size: 18px;
+    font-weight: 500;
+    clear: both;
+    display: block;
+    margin-top: 15px;
+    color: #67757f;
+}
+
+.authentication input {
+    border: 0px;
+    height: 40px;
+    display: block;
+    border: none;
+    border: 1px solid #67757f;
+    background-color: white;
+    width: 100%;
+    font-size: 20px;
+    color: #7a7a7a;
+    padding-left: 15px;
+}
+
+.authentication input[type="text"]:focus {
+    border: 0px;
+    color: #0052A0;
+    border: 1px solid #0052A0;
+    box-shadow: none;
+    outline: 0 none;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.authentication input[type="password"]:focus {
+    border: 0px;
+    color: #0052A0;
+    border: 1px solid #0052A0;
+    box-shadow: none;
+    outline: 0 none;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.authentication input[type="email"]:focus {
+    border: 0px;
+    color: #0052A0;
+    border: 1px solid #0052A0;
+    box-shadow: none;
+    outline: 0 none;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.authentication input[type="submit"] {
+    color: #0052a0;
+    margin-top: 25px;
+    background-color: #ffd800 !important;
+}
+
+.authentication input[type="submit"]:hover {
+    color: #ffd800;
+    margin-top: 25px;
+    background-color: #0052a0 !important;
+}
+
+.authentication .information {
+    background-color: #ef3308;
+    margin-top: 15px;
+    padding: 15px;
+}
+
+.authentication .return {
+    text-align: center;
+    padding-top: 5px;
+    margin-top: 10px;
+    height: 40px;
+    display: block;
+    border: 1px solid #67757f;
+    width: 100%;
+    font-size: 20px;
+    color: #0052a0;
+    background-color: white !important;
+}
+
+.authentication .return:hover {
+    color: white;
+    background-color: #0052a0 !important;
+}
+
+.authentication .return:hover .fa.fa-arrow-left:before {
+    color: white;
+    background-color: #0052a0 !important;
+}
+
+.authentication .fa.fa-arrow-left {
+    float: left;
+    padding-left: 10px;
+    line-height: 1.30;
+    margin-right: -10px;
+}
+
+.authentication .fa.fa-arrow-left:before {
+    color: #0052a0;
+}
+
+.authentication .success {
+    background-color: #3178c7;
+    margin-top: 15px;
+    padding: 15px;
+}
+
+.authentication .error {
+    background-color: #ef3308;
+    margin-top: 15px;
+    padding: 15px;
+}
+
+.box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border: 1px solid #BBB;
+}
+
+.ribbon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+    text-align: right;
+}
+
+.ribbon span {
+    font-size: 11px;
+    font-weight: bold;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 35px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    width: 200px;
+    display: block;
+    box-shadow: 0 3px 10px -5px black;
+    position: absolute;
+    top: 41px;
+    left: -42px;
+}
+
+.ribbon .dev {
+    background: #ef6c00;
+}
+
+.ribbon .inno {
+    background: #0288d1;
+}
+
+.ribbon .local {
+    background: #bf360c;
+}
+
+.ribbon .inte {
+    background: #fbc02d;
+}
+
+.ribbon .preprod {
+    background: #7cb342;
+}
+
+.auth {
+    display: none;
+    display: none;
+}
+
+.block-reset-password {
+    display: none;
+}
+
+.reset-password {
+    display: block;
+    position: fixed;
+    top: -50%;
+    width: 400px;
+    height: auto;
+    left: 40%;
+    padding: 25px;
+}
+
+a.link {
+    text-decoration: none;
+}
+
+a.return {
+    text-decoration: none;
+}
+
+.link {
+    float: right;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.marg-bot-neg-10 {
+    margin-bottom: -10px;
+}
+
+.block-new-password {
+    display: none;
+}
+
+.new-password {
+    display: block;
+    position: fixed;
+    top: -50%;
+    width: 400px;
+    height: auto;
+    left: 40%;
+    padding: 25px;
+}
+
+.new-password p {
+    color: #67757f;
+    padding-top: 5px;
+}
+
+.new-password-error {
+    display: block;
+    position: fixed;
+    top: -50%;
+    width: auto;
+    height: auto;
+    left: 40%;
+    padding: 25px;
+    background: rgba(0, 82, 160, 0.9);
+}
+
+.new-password-error h1 {
+    text-align: center;
+    padding-left: 0 !important;
+    color: #ffd800;
+    background-image: none;
+}
+
+.new-password-error h4 {
+    border-bottom: none;
+    color: #ffd800;
+    font-weight: 500;
+}
+
+.pad-top-5 {
+    padding-top: 5px;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .login {
+        left: 36%;
+    }
+    .login.withBorder {
+        top: 15%;
+        padding: 15px;
+        height: auto;
+    }
+    .authentication LABEL {
+        font-size: 12px;
+    }
+    .authentication input {
+        font-size: 15px;
+        height: 25px;
+    }
+    .authentication input[type="submit"] {
+        height: 32px;
+        font-size: 15px;
+    }
+    .authentication input[type="button"] {
+        height: 32px;
+        font-size: 15px;
+    }
+}

@@ -1,0 +1,89 @@
+@*--------------------------------------------------------------------------------------------------------------*@
+@*                                      Suivi des Contrats d'Intérim                                            *@
+@*--------------------------------------------------------------------------------------------------------------*@
+
+<div class="panel panel-default" ng-show="personnelEdit.Personnel.PersonnelId > 0 && personnelEdit.Personnel.IsInterimaire">
+  <div class="panel-heading collapsed" data-toggle="collapse" data-parent="#personnel-accordion" data-target="#collapse-contratInterimaire" id="panel-heading-contratInterimaire">
+    <i class="chevron fa fa-fw"></i> {{personnelEdit.resources.Personnel_PartialContratInterim_Titre}}
+  </div>
+  <div id="collapse-contratInterimaire" class="panel-collapse collapse contratInterimaire">
+    <div class="panel-body">
+      <!--BEGIN : LISTE DES CONTRATS INTÉRIMAIRES-->
+      <div class="row surlign">
+        <div class="col-md-6 no-pl">
+          <div class="input-group input-search">
+            <input type="text" class="form-control" ng-model="personnelEdit.searchContrat" ng-change="personnelEdit.onSearchContratInterim()" placeholder="Rechercher un contrat, une ETT">
+            <span class="input-group-addon button-search">
+              <span class="material-icons">search</span>
+            </span>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <button type="submit" ng-class="personnelEdit.currentFilter === 'Planifie' ? 'planifie': ''"
+          class="btn btn-filter" ng-click="personnelEdit.onFilterContratInterim('Planifie')">{{personnelEdit.resources.Personnel_PartialContratIterim_Planifie}}</button>
+        </div>
+        <div class="col-md-1">
+          <button type="submit" ng-class="personnelEdit.currentFilter === 'Actif' ? 'actif': ''"
+          class="btn btn-filter" ng-click="personnelEdit.onFilterContratInterim('Actif')">{{personnelEdit.resources.Personnel_PartialContratIterim_Actif}}</button>
+        </div>
+        <div class="col-md-1">
+          <button type="submit" ng-class="personnelEdit.currentFilter === 'Cloture' ? 'cloture' : ''"
+          class="btn btn-filter" ng-click="personnelEdit.onFilterContratInterim('Cloture')">{{personnelEdit.resources.Personnel_PartialContratIterim_Cloture}}</button>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-2 no-pr">
+          <button type="button" class="fred-button default pull-right" ng-click="personnelEdit.handleOpenFormContratInterimModal()"
+                  title="Cliquer ici pour ajouter un nouveau contrat">
+            <i class="flaticon-users"></i> 
+            {{personnelEdit.resources.Personnel_PartialContratIterim_AjoutContratInterim}}
+          </button>
+        </div>
+      </div>
+      <div class="interim-list">
+        <table class="table-fixed">
+          <thead>
+            <tr>
+              <th class="col-md-2">{{personnelEdit.resources.Personnel_PartialContratIterim_TableETT_Entete_FournisseurETT}}</th>
+              <th class="col-md-1">{{personnelEdit.resources.Personnel_PartialContratIterim_TableETT_Entete_Source}}</th>
+              <th class="col-md-2">{{personnelEdit.resources.Personnel_PartialContratIterim_TableETT_Entete_Societe}}</th>
+              <th class="col-md-2">{{personnelEdit.resources.Personnel_PartialContratIterim_TableETT_Entete_NumeroContrat}}</th>
+              <th class="col-md-1">{{personnelEdit.resources.Personnel_PartialContratIterim_TableETT_Entete_Etat}}</th>
+              <th class="col-md-1">{{personnelEdit.resources.Personnel_PartialContratIterim_TableETT_Entete_DateDeDebut}}</th>
+              <th class="col-md-1">{{personnelEdit.resources.Personnel_PartialContratIterim_TableETT_Entete_DateDeFin}}</th>
+              <th class="col-md-2">{{personnelEdit.resources.Personnel_PartialContratIterim_TableETT_Entete_Action}}</th>
+            </tr>
+          </thead>
+          <tbody id="contratInterimaireList" class="fred-scroll">
+            <tr title="" ng-repeat="contratInterimaire in personnelEdit.ContratInterimList | orderBy:['-Etat']">
+              <td class="col-md-2" ng-class="contratInterimaire.Etat == 1 ? 'planified' : '' ||
+                                             contratInterimaire.Etat == 2 ? 'activ' : '' ||
+                                             contratInterimaire.Etat  == 3 ? 'clotured' : ''">{{contratInterimaire.Fournisseur.Code}} - {{contratInterimaire.Fournisseur.Libelle}}</td>
+              <td class="col-md-1">{{contratInterimaire.Source}}</td>
+              <td class="col-md-2">{{contratInterimaire.Societe.Code}} - {{contratInterimaire.Societe.Libelle}}</td>
+              <td class="col-md-2">{{contratInterimaire.NumContrat}}</td>
+              <td class="col-md-1">
+                <span class="planifie" ng-show="contratInterimaire.Etat == 1">{{personnelEdit.resources.Personnel_PartialContratIterim_Planifie}}</span>
+                <span class="actif" ng-show="contratInterimaire.Etat == 2">{{personnelEdit.resources.Personnel_PartialContratIterim_Actif}}</span>
+                <span class="cloture" ng-show="contratInterimaire.Etat  == 3">{{personnelEdit.resources.Personnel_PartialContratIterim_Cloture}}</span>
+              </td>
+              <td class="col-md-1">{{contratInterimaire.DateDebut | date:'dd/MM/yyyy'}}</td>
+              <td class="col-md-1">{{contratInterimaire.DateFin | date:'dd/MM/yyyy'}}</td>
+              <td class="col-md-2 icons-td">
+                <span class="material-icons" aria-hidden="true"
+                      title="{{contratInterimaire.ZonesDeTravailString}}">place</span>
+                <span ng-click="personnelEdit.handleOpenFormContratInterimModal(contratInterimaire, 'Duplicate')" class="material-icons" aria-hidden="true"
+                      title="{{personnelEdit.resources.Personnel_PartialContratInterim_TableETT_Bouton_Dupliquer_Tooltip}}">content_copy</span>
+                <span ng-click="personnelEdit.handleOpenFormContratInterimModal(contratInterimaire, 'Update')" class="material-icons chevrons" aria-hidden="true"
+                      title="{{personnelEdit.resources.Personnel_PartialContratInterim_TableETT_Bouton_Modifier_Tooltip}}">more_vert</span>
+                <span ng-show="contratInterimaire.Etat == 1 && contratInterimaire.CommandeContratInterimaires.length == 0" ng-click ="personnelEdit.handleOpenDeleteContratInterimModal(contratInterimaire)" class="material-icons" aria-hidden="true"
+                      title="{{personnelEdit.resources.Personnel_PartialContratInterim_TableETT_Bouton_Supprimer_Tooltip}}">clear</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--END : LISTE DES CONTRATS DES INTÉRIMAIRES-->
+
+    </div>
+  </div>
+</div>

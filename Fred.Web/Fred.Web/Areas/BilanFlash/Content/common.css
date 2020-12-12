@@ -1,0 +1,352 @@
+﻿.flex-table {
+    font-size: 11px;
+    width: 100%;
+    overflow: auto;
+}
+
+.fixed-line-header {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    z-index: 1;
+}
+
+.fixed-line-footer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    z-index: 1;
+}
+
+.flex-line {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.top-header [class*="col-"] {
+    height: 30px;
+    font-size: 11px;
+    font-weight: normal;
+    background-color: #0052a0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+fred-toolbar {
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+
+fred-toolbar .picklist-section {
+    margin-right: auto;
+    flex-grow: 1;
+}
+
+fred-toolbar .action-section {
+    margin-left: 1%;
+}
+
+fred-toolbar .inner-addon.right-addon {
+    width: 100%;
+}
+
+fred-toolbar .inner-addon.right-addon input {
+    cursor: pointer;
+}
+
+fred-toolbar .chev.material-icons {
+    position: absolute;
+    line-height: 0.7;
+    pointer-events: none;
+    background-color: #09ada6;
+    height: 29px;
+    width: 30px;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+    right: 0;
+    top: 0;
+    padding-top: 6px;
+}
+
+fred-toolbar .input-group {
+    width: 100%;
+}
+
+fred-toolbar .input-group-btn .btn.btn-secondary.y_search {
+    height: 28px;
+    width: 30px;
+    padding: 0;
+    background-color: #ffde0e;
+    color: #555555;
+    margin: 0;
+}
+
+fred-toolbar .input-group-btn .btn.btn-secondary.y_search .material-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+fred-toolbar .btn {
+    height: 30px;
+    font-size: 12px;
+    margin: 0 5px;
+}
+
+fred-toolbar .date-section {
+    margin-left: 1%;
+}
+
+.panel-default {
+    border: none;
+}
+
+.panel-default > .panel-heading {
+    border: none;
+}
+
+.panel-group .panel-heading + .panel-collapse > .list-group {
+    border: none;
+}
+
+.panel-group .panel-heading + .panel-collapse > .panel-body {
+    border: none;
+}
+
+.glyphicon-calendar {
+    float: left;
+}
+
+.modal-footer {
+    text-align: left;
+}
+
+.bloc-ressources {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: calc(100%);
+    z-index: 1199;
+    background-color: #fff;
+    max-width: 600px;
+    -webkit-box-shadow: 0 -1px 44px -2px rgba(0, 0, 0, 0.52);
+    -moz-box-shadow: 0 -1px 44px -2px rgba(0, 0, 0, 0.52);
+    box-shadow: 0 -1px 44px -2px rgba(0, 0, 0, 0.52);
+}
+
+.bloc-ressources.opened {
+    -webkit-animation-name: transition_open;
+    -moz-animation-name: transition_open;
+    -o-animation-name: transition_open;
+    animation-name: transition_open;
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    padding: 15px;
+    width: 100%;
+    height: 65px;
+    background: #e1e3e5;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+}
+
+.montant {
+    justify-content: flex-end;
+}
+
+.colorCL {
+    background-color: #666666;
+    color: white;
+}
+
+.colorAC {
+    background-color: #ADCB60;
+    color: white;
+}
+
+.colorBR {
+    background-color: #FEBB5F;
+    color: white;
+}
+
+.line-button-export {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.button-export {
+    width: 130px;
+    height: 100px;
+    border: 1px solid #BBBBBB;
+    font-size: 11px;
+    color: #67757F;
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    margin: 0 5%;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.button-export-txt {
+    margin: auto;
+}
+
+.button-export-icon {
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+}
+
+.button-export-icon.excel {
+    background-image: url("/medias/images/ico/excel-gris.png");
+}
+
+.button-export-icon.pdf {
+    background-image: url("/medias/images/ico/pdf-gris.png");
+}
+
+.button-export.selected {
+    border: 1px solid #09ada6;
+    color: #09ada6;
+}
+
+.button-export.selected .inner-triangle {
+    border-left: 15px solid transparent;
+    border-right: 15px solid #09ada6;
+    border-bottom: 15px solid transparent;
+    height: 0;
+    width: 0;
+    position: absolute;
+    right: 0px;
+    z-index: 2;
+}
+
+.span-date {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.span-date span {
+    padding: 2px 10px;
+}
+
+.report-duplicate-objectif-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+.bloc-stepper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.stepper-line {
+    width: 70%;
+    height: 15px;
+    background-color: #e1e3e5;
+    display: flex;
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stepper-step {
+    height: 25px;
+    width: 25px;
+    background-color: #e1e3e5;
+    border-radius: 50%;
+    border: 1px solid #BBBBBB;
+    display: inline-block;
+    margin-top: -5px;
+    font-size: 17px;
+    font-weight: 700;
+    color: darkgray;
+    text-align: center;
+}
+
+.stepper-step.selected {
+    background-color: #0052a0;
+    border-color: #0052a0;
+    color: #fff;
+}
+
+.stepper-bloc-text {
+    margin-top: 20px;
+    width: 83%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    color: #757575;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stepper-text.central {
+    margin-right: -45px;
+}
+
+.bloc-ed-dep-tiles {
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    flex-flow: wrap;
+}
+
+.or {
+    margin-left: 15px;
+    margin-right: 15px;
+    height: 100px;
+    width: 5px;
+    color: #757575;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    fred-toolbar .date-section .input-group.date .input-group-addon {
+        width: 25px;
+        height: 25px;
+        padding: 0;
+    }
+    fred-toolbar .date-section .input-group.date .input-group-addon .glyphicon {
+        float: none;
+    }
+    fred-toolbar .chev.material-icons {
+        height: 23px;
+        padding-top: 3px;
+    }
+    fred-toolbar .btn {
+        height: 25px;
+        font-size: 9px;
+        margin: 0 5px;
+    }
+}

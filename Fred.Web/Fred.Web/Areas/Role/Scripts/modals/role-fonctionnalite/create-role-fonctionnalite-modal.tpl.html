@@ -1,0 +1,83 @@
+﻿
+<div class="modal-header">
+
+  <h2 class="modal-title">
+    <i class="flaticon flaticon-shuffle"></i>{{ctrl.resources.Role_Index_ModalFonctionnalite_Titre}} 
+  </h2>
+  <i class="flaticon flaticon-multiply close pull-right"
+     data-dismiss="modal" title="{{ctrl.resources.Global_Modal_Annuler_Tooltip}}"
+     ng-click="ctrl.close()">
+  </i>
+</div>
+
+<div class="modal-body">
+  <div ng-show="ctrl.ErrorMessage.length > 0"
+       class="alert alert-warning">
+    {{ctrl.ErrorMessage}}
+  </div> 
+  <div class="row">
+
+    <div class="col-md-12">
+      <label for="ddlModules">{{ctrl.resources.Role_Index_ModalFonctionnalite_Modules}}</label>
+      <select id="ddlModules"
+              class="selectpicker form-control" data-style="btn btn-default btn-sm"
+              ng-options="module as module.Libelle for module in ctrl.modules track by module.ModuleId"
+              ng-model="ctrl.moduleSelected"
+              ng-change="ctrl.selectModule()">
+        <option value="" disabled selected>{{ctrl.resources.Role_Index_ModalFonctionnalite_SelectionnerModule}}</option>
+      </select>  
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div>{{ctrl.moduleSelected.Description}}</div>     
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label for="ddlFonctionnalite">{{ctrl.resources.Role_Index_ModalFonctionnalite_Fonctionnalite}}</label>
+      <select id="ddlFonctionnalite"
+              class="form-control"
+              ng-options="feature as feature.Libelle for feature in ctrl.features track by feature.FonctionnaliteId"
+              ng-model="ctrl.featureSelected">
+        <option value="" disabled selected>{{ctrl.resources.Role_Index_ModalFonctionnalite_SelectionnerFonctionnalite}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div>{{ctrl.featureSelected.Description}}</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label for="ddlPrivilege">{{ctrl.resources.Role_Index_ModalFonctionnalite_Privilege}}</label>    
+      <select id="ddlPrivilege"
+              class="form-control"
+              ng-options="mode as mode.text for mode in ctrl.modes"
+              ng-model="ctrl.modeSelected">
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div>{{ctrl.modeSelected.description}}</div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="modal-footer">
+  <button class="btn  btn-default pull-left"
+          ng-disabled="!ctrl.canSave()"
+          ng-click="ctrl.save()"
+          title="{{ctrl.resources.Global_Bouton_Enregistrer_Tooltip}}">
+    {{ctrl.resources.Global_Bouton_Enregistrer}}
+  </button>
+  <button class="btn  btn-link pull-right"
+          ng-click="ctrl.close()"
+          title="{{ctrl.resources.Global_Bouton_Annuler_Tooltip}}">
+    {{ctrl.resources.Global_Bouton_Annuler}}
+  </button>
+</div>

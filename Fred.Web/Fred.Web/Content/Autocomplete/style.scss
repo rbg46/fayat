@@ -1,0 +1,56 @@
+﻿$color_1: rgb(44, 119, 186);
+$color_2: #67757F;
+$background_color_1: white;
+
+
+.autocomplete {
+    ul {
+        padding: 10px;
+        border: 1px solid #b7b7b7;
+        background: rgb(251,251,251);
+        display: flex;
+        flex-flow: wrap;
+
+        li {
+            width: 299px;
+            min-height: 61px;
+            background-color: $background_color_1;
+            padding: 5px;
+            border: 1px solid #E1E3E5;
+            font-size: 12px;
+            cursor: pointer;
+
+            &:hover {
+                background: rgb(245,245,245);
+                text-decoration: none;
+            }
+
+            a {
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+
+            .zip-code-city {
+                color: $color_1;
+                font-weight: 500;
+                margin-bottom: 2px;
+
+                .zip-code {
+                    font-weight: 700;
+                }
+            }
+
+            .address {
+                font-size: 14px;
+                color: $color_2;
+                font-weight: 500;
+                margin-bottom: 2px;
+            }
+
+            .country {
+                color: $color_1;
+            }
+        }
+    }
+}

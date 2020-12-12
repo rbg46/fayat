@@ -1,0 +1,36 @@
+﻿<div class="modal-content import-excel" id="importExcelModal" role="dialog">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i>{{resources.Commande_Popin_ImportLignes_Title}}</h2>
+                <i class="flaticon flaticon-multiply close pull-right" ng-click="handleCancel()" title="{{resources.Global_Modal_Annuler_Tooltip}}" ></i>
+            </div>
+            <div class="modal-body">
+                <h5>{{resources.Commande_Popin_ImportLignes_Question}}</h5>
+                <div class="bloc-imp-exc-tiles">
+                    <div class="tile" ng-Class="{'selected' : optionImportFile }" >
+                        <label class="tile-txt">
+                            {{resources.Commande_Popin_ImportLignes_ImportFile}}
+                            <input type="file"
+                                   class="ng-hide"
+                                   id="attachment-upload"
+                                   onchange="angular.element(this).scope().handleSelectFile(event, this)"
+                                   accept="{{acceptedAttachmentFormat}}" ng-click="changeOptionImportFile(!optionImportFile)" 
+                                   />
+                        </label>
+                        <div class="inner-triangle"  ng-if="optionImportFile"></div>
+                    </div>
+                    <span class="or">ou</span>
+                    <div class="tile" ng-Class="{'selected' : optionOpenFile}" ng-click="changeOptionOpenFile(!optionOpenFile)">
+                        <span class="tile-txt">{{resources.Commande_Popin_ImportLignes_OpenFile}}</span>
+                        <div class="inner-triangle" ng-if="optionOpenFile"></div>
+                    </div>
+                </div>
+                <div>
+                    <label class="fred-label">{{filename}}</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default pull-left" ng-if="optionOpenFile || optionImportFile " ng-click="handleConfirm()" title="{{resources.Global_Bouton_Continuer_Tooltip
+                    }}">{{resources.Commande_Button_Continue}}</button>
+                    <button class="btn btn-link pull-right" title="{{resources.Global_Bouton_Annuler_Tooltip}}" ng-click="handleCancel()">{{resources.Commande_ValidateCommande_Cancel}}</button>
+                </div>
+</div>

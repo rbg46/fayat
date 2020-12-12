@@ -1,0 +1,55 @@
+﻿<div id="commande-tile" class="fred-scroll" change-height-on-resize='{"size":350,"isActive": true}'>
+  <div id="ci_{{commandesByCI.CI.CiId}}" ng-repeat="commandesByCI in ctrl.listCommandesByCI" class="commandes-par-ci">
+    <div class="ci-header">
+      @*<div class="checkbox">
+          <input type="checkbox" ng-model="commandesByCI.isChecked" id="chkSelectionCI_{{commandesByCI.CI.CiId}}" ng-click="ctrl.handleClickSelectCi(commandesByCI)" />
+          <label for="chkSelectionCI_{{commandesByCI.CI.CiId}}"><span></span>{{commandesByCI.CI.CodeLibelle}}</label>
+        </div>*@
+      <label><span></span>{{commandesByCI.CI.CodeLibelle}}</label>
+    </div>
+
+    <div class="tile commandes">
+      <div id="cmd_{{commande.CommandeId}}" ng-click="ctrl.handleClickDetail(commande)" ng-repeat="commande in commandesByCI.Commandes" class="commande" ng-class="{colorBR: commande.isChecked && commande.IsStatutBrouillon,colorAV: commande.isChecked && commande.IsStatutAValider,colorVA: commande.isChecked && commande.IsStatutValidee,colorCL: commande.isChecked && commande.IsStatutCloturee}">
+
+        <div class="detail">
+          @*<input type="checkbox" id="chkSelectionCmd_{{commande.CommandeId}}" ng-model="commande.isChecked" ng-click="ctrl.handleClickSelectCommande(commande, commandesByCI)" />*@
+          <label for="chkSelectionCmd_{{commande.CommandeId}}"><span></span></label>
+          <span class="status" ng-class="{colorBR: commande.IsStatutBrouillon,colorAV: commande.IsStatutAValider,colorVA: commande.IsStatutValidee,colorCL: commande.IsStatutCloturee}">{{commande.StatutCommande.Libelle}}</span>
+          <span class="numero-commande">{{commande.NumeroCommandeExterne === null || commande.NumeroCommandeExterne === '' ?  commande.Numero : commande.NumeroCommandeExterne}}</span>
+        </div>
+
+        <div class="description">
+          <fred-label>Libellé</fred-label>
+          <fred-val>{{commande.Libelle}}</fred-val>
+        </div>
+
+        <div class="montants">
+          <div class="montant">
+            <fred-label>Com.</fred-label>
+            <fred-val>{{commande.MontantHT | number:2}} {{commande.Devise.Symbole}}</fred-val>
+          </div>
+          <div class="montant">
+            <fred-label>Récept.</fred-label>
+            <fred-val>{{commande.MontantHTReceptionne | number:2}} {{commande.Devise.Symbole}}</fred-val>
+          </div>
+          <div class="montant">
+            <fred-label>Solde</fred-label>
+            <fred-val>{{commande.MontantHTSolde | number:2}} {{commande.Devise.Symbole}}</fred-val>
+          </div>
+          <div class="montant">
+            <fred-label>Avanc.</fred-label>
+            <fred-val>{{commande.PourcentageReceptionne | number:2}} %</fred-val>
+          </div>
+        </div>
+
+        <div class="commande-detail">Détail du CI</div>
+
+        <div class="pourcentage-matrice"></div>
+        <div class="pourcentage-jauge" style="width:100%" ng-show="commande.PourcentageReceptionne >= 100 "></div>
+        <div class="pourcentage-jauge" style="width:{{commande.PourcentageReceptionne}}%" ng-show="commande.PourcentageReceptionne < 100 "></div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

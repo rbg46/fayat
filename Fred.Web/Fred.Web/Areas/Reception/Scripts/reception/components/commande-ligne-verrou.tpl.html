@@ -1,0 +1,11 @@
+﻿<div class="fa fa-unlock txt-link"
+     ng-show="$ctrl.canShowUnLockButton(cmdLigne)"
+     ng-click="$ctrl.lock(cmdLigne)"
+     title="{{$ctrl.getToolTipWhenLineIsUnlocked()}}">
+
+</div>
+<div class="fa fa-lock txt-link"
+     ng-show="$ctrl.canShowLockButton(cmdLigne)"
+     ng-click="$ctrl.unLock(cmdLigne)"
+     title="{{$ctrl.getToolTipWhenLineIsLocked()}}">
+</div>

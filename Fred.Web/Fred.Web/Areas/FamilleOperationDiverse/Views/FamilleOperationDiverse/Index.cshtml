@@ -1,0 +1,276 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+@{
+    ViewBag.Title = FeatureFamilleOperationDiverse.FamilleOperationDiverse_Index_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/FamilleOperationDiverseBundleFactory.css")
+}
+@section scripts {
+    @Scripts.Render("~/FamilleOperationDiverseBundleFactory.js")
+    @this.RenderResources("FeatureFamilleOperationDiverse")
+}
+<div class="FamilleOperationDiverse container" ng-controller="FamilleOperationDiverseController as ctrl">
+
+    <div class="toleft">
+
+        <!-- START : Titre de la page -->
+        <h1>{{ctrl.resources.FamilleOperationDiverse_Index_Titre}}</h1>
+        <!--END : Titre de la page -->
+        <!--START : Barre de recherche + Barre d'outils-->
+        <fred-toolbar>
+
+            <!-- START : Sélectionner une société -->
+            <fred-section class="picklist-section">
+                <fred-section-title>{{ctrl.resources.Global_SelectionnerSociete}}</fred-section-title>
+                <fred-section-controls>
+                    <div class="inner-addon right-addon">
+                        <i class="chev material-icons">chevron_right</i>
+                        <lookup ng-model="ctrl.selectedSociete"
+                                search-placeholder="{{ctrl.resources.Global_ReferentielSociete_Placeholder}}"
+                                search-title="{{ctrl.resources.Global_ReferentielSociete}}"
+                                on-select="ctrl.handleLoadData()"
+                                url="/api/Societe/SearchLightForRoles?{{typeSocieteCodesParams}}">
+                            <input type="text" class="form-control"
+                                   ng-value="ctrl.selectedSociete.CodeLibelle"
+                                   placeholder="{{ctrl.resources.Global_ReferentielSociete_Placeholder}}"
+                                   title="{{ctrl.selectedSociete.CodeLibelle}}" />
+                        </lookup>
+                    </div>
+                </fred-section-controls>
+            </fred-section>
+            <!-- END : Sélectionner une société -->
+            <!--Actions-->
+            <fred-section class="action-section">
+                <fred-section-title>Actions</fred-section-title>
+                <fred-section-controls>
+                    <button type="button" class="btn btn-default" ng-click="ctrl.handleSave();">Enregistrer</button>
+                    <button type="button" class="btn btn-default btn-link" ng-click="ctrl.handleCancel();">Annuler</button>
+                    <button type="button" class="btn param-cont" ng-click="ctrl.handleLaunchControleParametrage();">
+                        <span class="material-icons">check_box</span>
+                        {{ctrl.resources.FamilleOperationDiverse_ControleParametrage_Action}}
+                    </button>
+                </fred-section-controls>
+            </fred-section>
+
+            <!--Export-->
+            <fred-section class="export-section" data-toggle="collapse" data-target="#exportParametrage">
+                <fred-section-title>Export</fred-section-title>
+                <fred-section-controls>
+                    <span class="excel-icon"></span>
+                </fred-section-controls>
+            </fred-section>
+        </fred-toolbar>
+
+        <!--START LISTES-->
+        <div class="container od-journ-bloc">
+
+            <!--OD-->
+            <div class="od-bloc">
+                <fred-toolbar>
+                    <fred-section class="text-search-section">
+                        <fred-section-title>Familles des OD</fred-section-title>
+                        <fred-section-controls>
+                            <div class="input-group input-search">
+                                <input type="text" ng-model="queryFamilleOD" class="form-control" placeholder="{{ctrl.resources.FamilleOperationDiverse_Index_SelectionnerFamille}}" />
+                                <span class="input-group-addon btn button-search">
+                                    <span class="material-icons">search</span>
+                                </span>
+                            </div>
+                        </fred-section-controls>
+                    </fred-section>
+                </fred-toolbar>
+
+                <!--LISTE OD-->
+                <table class="od-table">
+                    <thead class="header1">
+                        <tr>
+                        <th class="col1">
+                            <div class="lbl">{{ctrl.resources.FamilleOperationDivers_Index_NumeroCommande}}</div>
+                        </th>
+                        <th class="col2"></th>
+                        <th class="col3"></th>
+                        <th class="col4"></th>
+                        <th class="col5"></th>
+                    </tr>
+                </thead>
+                        <thead class="header2">
+                            <tr>
+                                <th class="col1">
+                                    <div class="lbl">{{ctrl.resources.FamilleOperationDivers_Index_EnregistrerEnCompta}}</div>
+                                </th>
+                                <th class="col2">{{ctrl.resources.Code_lb}}</th>
+                                <th class="col3">{{ctrl.resources.Libelle_lb}}</th>
+                                <th class="col4"></th>
+                                <th class="col5"></th>
+                            </tr>
+                </thead>
+                        <tbody class="fred-scroll">
+                            <tr ng-class="{'selected': ctrl.selectedFamilly === famille.FamilleOperationDiverseId  }" ng-model="ctrl.selectedFamilly" ng-repeat="(FamilleOperationDiverseId, famille) in ctrl.initialFamilleOperationDiverseList |filter : searchFamilleOD" >
+                                <td class="col1">
+                                    <div class="chb">
+                                        <input type="checkbox" ng-checked="famille.selectedCheckbox" ng-model="famille.selectedCheckbox" id="chbx-{{famille.FamilleOperationDiverseId}}" ng-click="ctrl.handleCheckbox(famille,ctrl.initialFamilleOperationDiverseList)" />
+                                        <label for="chbx-{{famille.FamilleOperationDiverseId}}"><span></span></label>
+                                    </div>
+                                </td>
+                                <td class="col2" ng-click="ctrl.handleLineSelected(famille,ctrl.initialFamilleOperationDiverseList)">{{famille.Code}}</td>
+                                <td class="col3" ng-click="ctrl.handleLineSelected(famille,ctrl.initialFamilleOperationDiverseList)"><span class="more-inf">{{famille.Libelle}}</span></td>
+                                <td class="col4" ng-click="ctrl.handleLineSelected(famille,ctrl.initialFamilleOperationDiverseList)">
+                                    <div class="tiles" ng-show="{{famille.Code === 'MO'}}">
+                                        <button class="btn-tile">{{ctrl.resources.FamilleOperationDiverse_Valorisation}}</button>
+                                    </div>
+                                    <div class="tiles" ng-show="{{famille.Code === 'ACH'}}">
+                                        <button class="btn-tile">{{ctrl.resources.FamilleOperationDiverse_Reception}}</button>
+                                        <button class="btn-tile">{{ctrl.resources.FamilleOperationDiverse_Facture}}</button>
+                                        <button class="btn-tile">{{ctrl.resources.FamilleOperationDiverse_AjustementFAR}}</button>
+                                    </div>
+                                    <div class="tiles" ng-show="{{famille.Code === 'MIT'}}">
+                                        <button class="btn-tile">{{ctrl.resources.FamilleOperationDiverse_Valorisation}}</button>
+                                    </div>
+                                </td>
+                                <td class="col5">
+                                    <span class="material-icons" ng-click="ctrl.handleEdit(famille)">more_vert</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+
+            <!--JOURNAL (pour RAZEL BEC) ou NATURE (pour FAYAT TP)-->
+            <div class="journ-bloc">
+                <fred-toolbar>
+                    <fred-section class="text-search-section">
+                        <fred-section-title ng-show="ctrl.displayJournal">{{ctrl.resources.FamilleOperationDiverse_Index_RechercherJournal_SousTitre}}</fred-section-title>
+                        <fred-section-title ng-show="!ctrl.displayJournal">{{ctrl.resources.FamilleOperationDiverse_Index_RechercherNature_SousTitre}}</fred-section-title>
+                        <fred-section-controls>
+                            <div class="input-group input-search">
+                                <input type="text" ng-model="queryAssociatedItem" class="form-control" ng-show="ctrl.displayJournal" placeholder="{{ctrl.resources.FamilleOperationDiverse_Index_PlaceholderJournal_SousTitre}}" />
+                                <input type="text" ng-model="queryAssociatedItem" class="form-control" ng-show="!ctrl.displayJournal" placeholder="{{ctrl.resources.FamilleOperationDiverse_Index_PlaceholderNature_SousTitre}}" />
+                                <span class="input-group-addon btn button-search">
+                                    <span class="material-icons">search</span>
+                                </span>
+                            </div>
+                        </fred-section-controls>
+                    </fred-section>
+                </fred-toolbar>
+
+                <!--LISTE JOURNAL OU NATURE -->
+                <table class="journ-table">
+                    <thead class="header1">
+                        <tr>
+                            <th class="col1 sel-all">
+                                <div class="chb">
+                                    <input type="checkbox" ng-model="ctrl.SelectedAll" id="s-all" ng-change="ctrl.handleToggleSelectAll(ctrl.SelectedAll)">
+                                    <label for="s-all"><span></span></label>
+                                </div>
+                            </th>
+                            <th class="col2">Tout sélectionner</th>
+                            <th class="col3"></th>
+                        </tr>
+                    </thead>
+                    <thead class="header2">
+                        <tr>
+                            <th class="col1"></th>
+                            <th class="col2">{{ctrl.resources.Code_lb}}</th>
+                            <th class="col3">{{ctrl.resources.Libelle_lb}}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="fred-scroll">
+                        <tr ng-class="{'selected': journal.Selected}" ng-repeat="(JournalId, journal) in (ctrl.filteredItems = (ctrl.initialAssociedItem |filter : searchAssociatedItem))">
+                            <td class="col1">
+                                <div class="chb">
+                                    <input type="checkbox" id="chbxJournal-{{JournalId}}" ng-model="journal.Checked" ng-click="ctrl.handleCheckboxJournal(journal);" />
+                                    <label for="chbxJournal-{{JournalId}}"><span></span></label>
+                                </div>
+                            </td>
+                            <td class="col2">{{journal.Code}}</td>
+                            <td class="col3">{{journal.Libelle}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--DETAILS PANEL : START-->
+        <div ng-show="ctrl.displayEdit" ng-class="checkDisplayOptions" class="blockScreen" style="z-index:99"></div>
+        <div ng-show="ctrl.displayEdit" class="options" id="PanelRight" ng-class="checkDisplayOptions + ' ' + checkFormatOptions">
+
+            <!--HEADER TOOLBAR : BEGIN-->
+            <div class="toolbar">
+                <div class="sapicon-E02F grandicone"></div>
+            </div>
+            <!--HEADER TOOLBAR : END-->
+            <!-- Titre : BEGIN -->
+            <div class="form-header" id="Titre">
+                <h2>
+                    <span>Famille d'OD</span>
+                </h2>
+                <label class="legend">{{ctrl.resources.Global_LegendeAsterisque}}</label>
+            </div>
+            <!-- Titre : END -->
+
+            <div class="form fred-scroll">
+                <form>
+                    <div class="field">
+                        <label>Libellé Famille *</label>
+                        <input type="text" maxlength="250" length="250"  ng-model="ctrl.editFamille.Libelle" class="form-control" ng-value="ctrl.editFamille.Libelle" />
+                    </div>
+
+                    <!--FOOTER TOOLBAR : BEGIN-->
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="btn btn-default" type="submit" ng-click="ctrl.handleEditFamille();" ng-disabled="ctrl.disableSaveWhenLoad" title="{{ctrl.resources.Global_Bouton_Enregistrer_Tooltip}}"> {{ctrl.resources.Global_Bouton_Enregistrer}}</button>
+                            <button class="btn btn-link" type="button" ng-click="ctrl.handleClickCancel();" ng-disabled="ctrl.disableSaveWhenLoad" title="{{ctrl.resources.Global_Bouton_Back}}"> Retour </button>
+                        </div>
+                        <fieldset class="close_panel" ng-disabled="ctrl.disableSaveWhenLoad"
+                             ng-click="ctrl.handleClickCancel();"
+                             title="{{ctrl.resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+                            <i class="fa fa-angle-right"
+                               aria-hidden="true"></i>
+                            <span>{{ctrl.resources.Global_Bouton_RefermerPanneau}}</span>
+                        </fieldset>
+                    </div>
+                    <!--FOOTER TOOLBAR : END-->
+                </form>
+                <!--Formulaire: END-->
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal custom-modal fade exp-exc" id="exportParametrage" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content custom-modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i>{{ctrl.resources.FamilleOperationDiverse_Export_Titre}}</h2>
+                    <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{ctrl.resources.Global_Modal_Annuler_Tooltip}}" data-toggle="collapse" data-target="#exportParametrage"></i>
+                </div>
+                <div class="modal-body">
+                    <h5>{{ctrl.resources.FamilleOperationDiverse_Export_Question_Titre}}</h5>
+                    <div class="excel-choice-container">
+                        <div class="importButton" id="actionChoixImporter">
+                            <label class="importButton-txt" ng-show="ctrl.displayJournal" ng-click="ctrl.handlePrepareDataForExport($event, 'Famille')">{{ctrl.resources.FamilleOperationDiverse_ChoixFamilleJournal_SousTitre}}</label>
+                            <label class="importButton-txt" ng-show="!ctrl.displayJournal" ng-click="ctrl.handlePrepareDataForExport($event, 'Famille')">{{ctrl.resources.FamilleOperationDiverse_ChoixFamilleNature_SousTitre}}</label>
+                            <div class="inner-triangle"></div>
+                        </div>
+                        <span class="or">ou</span>
+                        <div class="importButton" id="actionChoixOuvrir" ng-show="ctrl.displayJournal" ng-click="ctrl.handlePrepareDataForExport($event, 'Journal')">
+                            <span class="importButton-txt">{{ctrl.resources.FamilleOperationDiverse_ChoixJournalFamille_SousTitre}}</span>
+                            <div class="inner-triangle"></div>
+                        </div>
+                        <div class="importButton" id="actionChoixOuvrir" ng-show="!ctrl.displayJournal" ng-click="ctrl.handlePrepareDataForExport($event, 'Nature')">
+                            <span class="importButton-txt">{{ctrl.resources.FamilleOperationDiverse_ChoixNatureFamille_SousTitre}}</span>
+                            <div class="inner-triangle"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default pull-left" data-dismiss="modal" data-toggle="collapse" data-target="#exportParametrage" ng-show="ctrl.btnValiderVisible" ng-click="ctrl.handleGetDataForExport()" title="{{$ctrl.resources.Global_Bouton_Continuer_Tooltip}}">Continuer</button>
+                    <button class="btn btn-link pull-right" data-dismiss="modal" data-toggle="collapse" data-target="#exportParametrage" title="{{$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

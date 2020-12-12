@@ -1,0 +1,15 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title"><i class="flaticon flaticon-garbage-2"></i>{{$ctrl.resources.Global_Modal_Confirmation}}</h2>
+        <i class="flaticon flaticon-multiply close pull-right" ng-click="$ctrl.handleCancel()" title="{{$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+    </div>
+    <div class="modal-body">
+        <b><span>{{$ctrl.resources.Rapport_ModalModificationCI_MessageConfirmation_Partie1}}</span><br />
+        {{$ctrl.resources.Rapport_ModalModificationCI_MessageConfirmation_Partie2}}<br />
+        {{$ctrl.resources.Rapport_ModalModificationCI_MessageConfirmation_Partie3}}</b>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn  btn-default pull-left" ng-click="$ctrl.handleValidate()" title="{{$ctrl.resources.Global_Bouton_Valider_Tooltip}}">{{$ctrl.resources.Global_Bouton_Valider}}</button>
+        <button type="button" class="btn  btn-link pull-right" ng-click="$ctrl.handleCancel()" title="{{$ctrl.resources.Global_Bouton_Annuler_Tooltip}}">{{$ctrl.resources.Global_Bouton_Annuler}}</button>
+    </div>
+</div>

@@ -1,0 +1,588 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = "Gestion des moyens";
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/MoyenBundle.css")
+    @Styles.Render("~/Content/BarreRecherche/barre-recherche.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/MoyenBundle.js")
+    @this.RenderResources("FredResource", "FeatureMoyen")
+    @Scripts.Render("~/Scripts/module/BarreRecherche/barre-recherche.js")
+}
+
+<div class="container gestion-depart" ng-controller="MoyenController as $ctrl">
+
+    <h1>Gestion des moyens</h1>
+
+    <!--START : Barre de recherche-->
+    <fred-toolbar>
+
+        <!--Sélection de l'organisation-->
+        <fred-section class="picklist-section">
+
+            <fred-section-title>{{$ctrl.resources.Global_Filter_Perimeter}}</fred-section-title>
+
+            <fred-section-controls>
+                <fred-authorization is-overflow-hidden="true" key="{{$ctrl.resources.PermissionShowFilterRechercheCi}}">
+                    <div class="ci-controls">
+                        <div class="inner-addon right-addon">
+                            <lookup-standalone ng-model="$ctrl.selectedCi"
+                                               text="$ctrl.selectedCi.CodeLibelle"
+                                               search-title="{{$ctrl.resources.Global_ReferentielCI}}"
+                                               search-placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                               custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                               url="/api/CiForAffectationMoyen/SearchLight/"
+                                               on-select="$ctrl.handleLookupSelection('CI', item)"
+                                               on-delete="$ctrl.handleRemoveCiFilter()"
+                                               class="formulaire long"
+                                               placeholder="Choix d'un CI">
+                            </lookup-standalone>
+                        </div>
+                    </div>
+                </fred-authorization>
+                <fred-authorization is-overflow-hidden="true" key="{{$ctrl.resources.PermissionShowFilterRecherchePersonnelMoyen}}">
+                    <div class="personnel-controls">
+                        <div class="inner-addon right-addon">
+                            <lookup-standalone ng-model="$ctrl.selectedPersonnel"
+                                               text="$ctrl.selectedPersonnel.LibelleRef"
+                                               search-title="{{$ctrl.resources.Global_ReferentielPersonnel}}"
+                                               search-placeholder="{{$ctrl.resources.Global_ReferentielPersonnel_Placeholder}}"
+                                               url="/api/PersonnelForAffectationMoyen/SearchLight/"
+                                               on-select="$ctrl.handleLookupSelection('Personnel', item)"
+                                               on-delete="$ctrl.handleRemovePersonnelFilter()"
+                                               placeholder="Choix d'un personnel"
+                                               tooltip="$ctrl.selectedPersonnel.Nom"
+                                               class="formulaire long">
+                            </lookup-standalone>
+                        </div>
+                    </div>
+                </fred-authorization>
+                <fred-authorization key="{{$ctrl.resources.PermissionShowFieldManagerOrResponsable}}">
+                    <div class="resp-controls">
+                        <label for="">{{$ctrl.resources.Moyen_CiResponsable_OR_Manager}}</label>
+                        <input type="text" class="form-control disabled" disabled="disabled" placeholder="Aucune information" ng-model="$ctrl.responsableOrManagerName">
+                    </div>
+                </fred-authorization>
+                <fred-button class="white icon" ng-click="status ? status=false : status=true;">
+                    <span ng-class="{'fa fa-filter' :!buttonFilterClick  ,'material-icons closing' :buttonFilterClick}"
+                          title="{{!ctrl.buttonFilterClicked ? ctrl.resources.Global_Filtre_Titre : ctrl.resources.Global_Bouton_Fermer}}">
+                        <span ng-show="buttonFilterClick">clear</span>
+                    </span>
+                </fred-button>
+                <button type="button" class="fred-button primary btn-rechercher" ng-click="$ctrl.handleApplyFilter()">Rechercher</button>
+            </fred-section-controls>
+
+            <!-- BEGIN : Bloc de Filtre -->
+            <fred-overlay ng-click="status=false;" ng-class="{'open' :status  ,'close' :!status}"></fred-overlay>
+
+            <fred-side ng-init="status=false;" ng-class="{'open' :status  ,'close' :!status}" esc-key="Test()">
+
+                <!--En tete-->
+                <header>
+                    <icon><label>{{$ctrl.resources.Global_RechercheAffiner}} : </label></icon>
+                </header>
+
+                <!-- Body -->
+                <main style="padding: 5px;">
+                    <div class="row">
+                        <label ng-show="$ctrl.isAffectationView">{{$ctrl.resources.Moyen_Search_Date_Affectation}} : </label>
+                        <div class="selection_filters first col-sm-6">
+                            <app-date-picker id="dateFrom"
+                                             format="DD/MM/YYYY"
+                                             lang="fr"
+                                             placeholder="{{$ctrl.resources.Moyen_Search_DateDebut_Placeholder}}"
+                                             max-date="{{$ctrl.filters.DateTo}}"
+                                             ng-model="$ctrl.filters.DateFrom"
+                                             name="dateFrom">
+                            </app-date-picker>
+                        </div>
+                        <div class="selection_filters col-sm-6">
+                            <app-date-picker id="dateTo"
+                                             format="DD/MM/YYYY"
+                                             lang="fr"
+                                             placeholder="{{$ctrl.resources.Moyen_Search_DateFin_Placeholder}}"
+                                             min-date="{{$ctrl.filters.DateFrom}}"
+                                             ng-model="$ctrl.filters.DateTo"
+                                             name="dateTo">
+                            </app-date-picker>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="selection_filters">
+                            <lookup-standalone ng-model="$ctrl.selectedTypeMoyen"
+                                               text="$ctrl.selectedTypeMoyen.Libelle"
+                                               search-title="{{$ctrl.resources.Moyen_Type_Title}}"
+                                               search-placeholder="{{$ctrl.resources.Moyen_Type_SearchPlaceHolder}}."
+                                               url="{{$ctrl.handleGetLookupUrl('TypeMoyen')}}"
+                                               on-select="$ctrl.handleLookupSelection('TypeMoyen', item)"
+                                               on-delete="$ctrl.handleRemoveTypeMoyenFilter()"
+                                               placeholder="{{$ctrl.resources.Moyen_Type_Title}}"
+                                               tooltip="$ctrl.selectedTypeMoyen.Libelle"
+                                               class="formulaire long">
+                            </lookup-standalone>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="selection_filters">
+                            <lookup-standalone ng-model="$ctrl.selectedSousTypeMoyen"
+                                               text="$ctrl.selectedSousTypeMoyen.Libelle"
+                                               search-title="{{$ctrl.resources.Moyen_SubType_Title}}"
+                                               search-placeholder="{{$ctrl.resources.Moyen_SubType_SearchPlaceHolder}}"
+                                               url="{{$ctrl.handleGetLookupUrl('SousTypeMoyen')}}"
+                                               on-select="$ctrl.handleLookupSelection('SousTypeMoyen', item)"
+                                               on-delete="$ctrl.handleRemoveSousTypeMoyenFilter()"
+                                               placeholder="{{$ctrl.resources.Moyen_SubType_Title}}"
+                                               tooltip="$ctrl.selectedSousTypeMoyen.Libelle"
+                                               class="formulaire long">
+                            </lookup-standalone>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="selection_filters">
+                            <lookup-standalone ng-model="$ctrl.selectedModelMoyen"
+                                               text="$ctrl.selectedModelMoyen.Libelle"
+                                               search-title="{{$ctrl.resources.Moyen_Model_Title}}"
+                                               search-placeholder="{{$ctrl.resources.Moyen_Model_SearchPlaceHolder}}"
+                                               url="{{$ctrl.handleGetLookupUrl('ModelMoyen')}}"
+                                               on-select="$ctrl.handleLookupSelection('ModelMoyen', item)"
+                                               on-delete="$ctrl.handleRemoveModelMoyenFilter()"
+                                               placeholder="{{$ctrl.resources.Moyen_Model_Title}}"
+                                               tooltip="$ctrl.selectedModelMoyen.Libelle"
+                                               class="formulaire long">
+                            </lookup-standalone>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="selection_filters">
+                            <lookup-standalone ng-model="$ctrl.selectedSociete"
+                                               text="$ctrl.selectedSociete.Libelle"
+                                               search-title="{{$ctrl.resources.Moyen_Societe_Title}}"
+                                               search-placeholder="{{$ctrl.resources.Moyen_Societe_SearchPlaceHolder}}."
+                                               url="{{$ctrl.handleGetLookupUrl('Societe')}}"
+                                               on-select="$ctrl.handleLookupSelection('Societe', item)"
+                                               on-delete="$ctrl.handleRemoveSocieteFilter()"
+                                               placeholder="{{$ctrl.resources.Moyen_Societe_Title}}"
+                                               tooltip="$ctrl.selectedSociete.Libelle"
+                                               class="formulaire long">
+                            </lookup-standalone>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="selection_filters">
+                            <lookup-standalone ng-model="$ctrl.selectedEtablissement"
+                                               text="$ctrl.selectedEtablissement.Libelle"
+                                               search-title="{{$ctrl.resources.Moyen_Etablissement_Title}}"
+                                               search-placeholder="{{$ctrl.resources.Moyen_Etablissement_SearchPlaceHolder}}."
+                                               url="{{$ctrl.handleGetLookupUrl('Etablissement')}}"
+                                               on-select="$ctrl.handleLookupSelection('Etablissement', item)"
+                                               on-delete="$ctrl.handleRemoveEtablissementFilter()"
+                                               placeholder="{{$ctrl.resources.Moyen_Etablissement_Title}}"
+                                               tooltip="$ctrl.selectedEtablissement.Libelle"
+                                               class="formulaire long">
+                            </lookup-standalone>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="selection_filters">
+                            <lookup-standalone ng-model="$ctrl.selectedMoyen"
+                                               text="$ctrl.selectedMoyen.Code"
+                                               search-title="{{$ctrl.resources.Moyen_NumParc_Title}}"
+                                               search-placeholder="{{$ctrl.resources.Moyen_NumParc_SearchPlaceHolder}}"
+                                               url="{{$ctrl.handleGetLookupUrl('NumParc')}}"
+                                               on-select="$ctrl.handleLookupSelection('NumParc', item)"
+                                               on-delete="$ctrl.handleRemoveNumParcFilter()"
+                                               placeholder="{{$ctrl.resources.Moyen_NumParc_Title}}"
+                                               tooltip="$ctrl.selectedMoyen.Code"
+                                               class="formulaire long">
+                            </lookup-standalone>
+                        </div>
+
+                        <div class="selection_filters">
+                            <lookup-standalone ng-model="$ctrl.selectedImmatriculation"
+                                               text="$ctrl.selectedImmatriculation.Immatriculation"
+                                               search-title="{{$ctrl.resources.Moyen_NumImmatriculation_Title}}"
+                                               search-placeholder="{{$ctrl.resources.Moyen_NumImmatriculation_SearchPlaceHolder}}"
+                                               url="{{$ctrl.handleGetLookupUrl('NumImmatriculation')}}"
+                                               on-select="$ctrl.handleLookupSelection('NumImmatriculation', item)"
+                                               on-delete="$ctrl.handleRemoveImmatriculationFilter()"
+                                               placeholder="{{$ctrl.resources.Moyen_NumImmatriculation_Title}}"
+                                               tooltip="$ctrl.selectedImmatriculation.Immatriculation"
+                                               class="formulaire long">
+                            </lookup-standalone>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="selection_filters">
+                            <fred-authorization is-to-adjust-css-no-margin="true" key="{{$ctrl.resources.PermissionShowFiltreSiteMoyens}}">
+                                <div class="form-group">
+                                    <input id="IsDateFinPredictedOutdated" type="checkbox" ng-model="$ctrl.filters.IsDateFinPredictedOutdated" />
+                                    <label for="IsDateFinPredictedOutdated"><span></span>{{$ctrl.resources.Moyen_DateFinPredictedOutdated}}</label>
+                                </div>
+                            </fred-authorization>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="selection_filters">
+                            <fred-authorization is-to-adjust-css-no-margin="true" key="{{$ctrl.resources.PermissionShowFiltreSiteMoyens}}">
+                                <div class="form-group">
+                                    <input id="IsToBringBack" type="checkbox" ng-model="$ctrl.filters.IsToBringBack" />
+                                    <label for="IsToBringBack"><span></span>{{$ctrl.resources.Moyen_a_rapatrier}}</label>
+                                </div>
+                            </fred-authorization>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="selection_filters">
+                            <div class="form-group">
+                                <input id="IsActive" type="checkbox" ng-model="$ctrl.filters.IsActive" />
+                                <label for="IsActive"><span></span>{{$ctrl.resources.Moyen_Affectation_Actives}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="selection_filters">
+                            <fred-authorization is-to-adjust-css-no-margin="true" key="{{$ctrl.resources.PermissionShowFiltreSiteMoyens}}">
+                                <lookup-standalone ng-model="$ctrl.selectedSite"
+                                                   text="$ctrl.selectedSite.Libelle"
+                                                   search-title="{{$ctrl.resources.Global_Actual_Site}}"
+                                                   search-placeholder="{{$ctrl.resources.Global_Site_SearchPlaceHolder}}"
+                                                   url="{{$ctrl.handleGetLookupUrl('Site')}}"
+                                                   on-select="$ctrl.handleLookupSelection('Site', item)"
+                                                   on-delete="$ctrl.handleRemoveSiteFilter()"
+                                                   placeholder="{{$ctrl.resources.Global_Actual_Site}}"
+                                                   tooltip="$ctrl.selectedSite.Libelle"
+                                                   class="formulaire long">
+                                </lookup-standalone>
+                            </fred-authorization>
+                        </div>
+                        <div class="selection_filters">
+                            <fred-authorization is-to-adjust-css-no-margin="true" key="{{$ctrl.resources.PermissionShowFiltreSiteMoyens}}">
+                                <lookup-standalone ng-model="$ctrl.selectedAffectationMoyenType"
+                                                   text="$ctrl.selectedAffectationMoyenType.Libelle"
+                                                   search-title="{{$ctrl.resources.Moyen_Statut_Affectation}}"
+                                                   search-placeholder="{{$ctrl.resources.Moyen_Statut_Affectation_SearchPlaceHolder}}"
+                                                   url="{{$ctrl.handleGetLookupUrl('Statut')}}"
+                                                   on-select="$ctrl.handleLookupSelection('Statut', item)"
+                                                   on-delete="$ctrl.handleRemoveAffectationTypeFilter()"
+                                                   placeholder="{{$ctrl.resources.Moyen_Statut_Affectation}}"
+                                                   tooltip="$ctrl.selectedAffectationMoyenType.Code"
+                                                   class="formulaire long">
+                                </lookup-standalone>
+                            </fred-authorization>
+                        </div>
+                    </div>
+                </main>
+
+                <!-- Footer -->
+                <footer>
+                    <!--BEGIN : Bouton Start-->
+                    <action>
+                        <button type="button" class="fred-button primary" ng-click="$ctrl.handleApplyFilter();status=false;">{{$ctrl.resources.Global_Filtre_Bouton_Appliquer}}</button>
+                        <button type="button" class="fred-button " ng-click="$ctrl.handleResetFilter();status=true;">{{$ctrl.resources.Global_Filtre_Bouton_Reinitialiser}}</button>
+                    </action>
+                    <!--END : Bouton Start-->
+                    <close ng-click="status ? status=false : status=true;">
+                        <icon /><label>{{$ctrl.resources.Global_Bouton_RefermerPanneau}}</label>
+                    </close>
+                </footer>
+            </fred-side>
+        </fred-section>
+
+        <!--Sélection des vues : Affectation ou rapport-->
+        <fred-section class="moyens-section">
+            <fred-authorization is-overflow-hidden="true" key="{{$ctrl.resources.PermissionShowRapportMoyen}}">
+                <fred-section-title>{{$ctrl.resources.Moyen_Moyens}}</fred-section-title>
+
+                <fred-section-controls class="action-controls">
+                    <button class="btn btn-default"
+                            type="button"
+                            ng-click="$ctrl.handleChangeView(true)"
+                            ng-class="{'btn btn-default': $ctrl.isAffectationView, 'btn btn-link': !$ctrl.isAffectationView}">
+                        {{$ctrl.resources.Moyen_Affectation}}
+                    </button>
+                    <button class="btn btn-default"
+                            type="button"
+                            ng-click="$ctrl.handleChangeView(false)"
+                            ng-class="{'btn btn-default': !$ctrl.isAffectationView, 'btn btn-link': $ctrl.isAffectationView}">
+                        {{$ctrl.resources.Moyen_Rapport}}
+                    </button>
+                </fred-section-controls>
+            </fred-authorization>
+        </fred-section>
+
+        <!--Sélection des moyens-->
+        <fred-section class="moyens-section b" ng-show="$ctrl.isAffectationView">
+            <fred-authorization is-overflow-hidden="true" key="{{$ctrl.resources.PermissionShowAffectationMoyen}}">
+                <fred-section-title>{{$ctrl.resources.Moyen_Affectation}}</fred-section-title>
+                <fred-section-controls class="action-controls-moyen">
+
+                    <!--Affectation -->
+                    <fred-authorization key="{{$ctrl.resources.PermissionShowAffectationMoyen}}">
+                        <button class="btn btn-default"
+                                ng-show="$ctrl.showAffectationButton"
+                                type="button"
+                                ng-click="$ctrl.handleInitAffectation()"
+                                data-toggle="modal"
+                                data-target="#toAffect">
+                            {{$ctrl.resources.Moyen_Affecter}}
+                        </button>
+                    </fred-authorization>
+                    <fred-authorization key="{{$ctrl.resources.PermissionShowAffectationMoyen}}">
+                        <button class="btn btn-default"
+                                ng-show="!$ctrl.showAffectationButton"
+                                type="button"
+                                ng-click="$ctrl.handleInitAffectationFailure()">
+                            {{$ctrl.resources.Moyen_Affecter}}
+                        </button>
+                    </fred-authorization>
+
+                    <!--Restitution -->
+                    <fred-authorization key="{{$ctrl.resources.PermissionShowRestitutionMoyen}}">
+                        <button class="btn btn-default" type="button"
+                                ng-show="$ctrl.showRestitutionButton"
+                                data-toggle="modal"
+                                ng-click="$ctrl.handleInitRestitution()"
+                                data-target="#return">
+                            {{$ctrl.resources.Moyen_Restituer}}
+                        </button>
+                    </fred-authorization>
+                    <fred-authorization key="{{$ctrl.resources.PermissionShowRestitutionMoyen}}">
+                        <button class="btn btn-default"
+                                type="button"
+                                ng-show="!$ctrl.showRestitutionButton"
+                                ng-click="$ctrl.handleInitRestitutionFailure()">
+                            {{$ctrl.resources.Moyen_Restituer}}
+                        </button>
+                    </fred-authorization>
+
+                    <!--Location -->
+                    <fred-authorization key="{{$ctrl.resources.PermissionShowLocationMoyen}}">
+                        <button class="btn btn-default"
+                                type="button"
+                                data-toggle="modal"
+                                ng-click="$ctrl.handleInitLocation()"
+                                data-target="#location">
+                            {{$ctrl.resources.Moyen_Gerer_Location}}
+                        </button>
+                    </fred-authorization>
+
+                    <!-- Maintenance -->
+                    <fred-authorization key="{{$ctrl.resources.PermissionShowMaintenanceMoyen}}">
+                        <button class="btn btn-default"
+                                type="button"
+                                ng-show="$ctrl.showMaintenanceButton"
+                                data-toggle="modal"
+                                ng-click="$ctrl.handleInitMaintenance()"
+                                data-target="#maintenance">
+                            {{$ctrl.resources.Moyen_Maintenance}}
+                        </button>
+                    </fred-authorization>
+                    <fred-authorization key="{{$ctrl.resources.PermissionShowMaintenanceMoyen}}">
+                        <button class="btn btn-default"
+                                type="button"
+                                ng-show="!$ctrl.showMaintenanceButton"
+                                ng-click="$ctrl.handleInitMaintenanceFailure()">
+                            {{$ctrl.resources.Moyen_Maintenance}}
+                        </button>
+                    </fred-authorization>
+                </fred-section-controls>
+            </fred-authorization>
+        </fred-section>
+
+        <!--Vue des rapports-->
+        <fred-section ng-show="!$ctrl.isAffectationView" class="moyens-section">
+            <fred-section-title>{{$ctrl.resources.Moyen_Rapport}}</fred-section-title>
+
+            <fred-section-controls class="action-controls">
+                <button class="btn btn-error"
+                        type="button"
+                        ng-show="!$ctrl.isAffectationView && $ctrl.errorPersonnel && $ctrl.errorPersonnel.length > 0"
+                        data-toggle="modal"
+                        data-target="#errorPointage">
+                    Erreurs
+                </button>
+                <button class="btn btn-default"
+                        type="button"
+                        data-toggle="modal"
+                        data-target="#datesSelectionToUpdatePointage"
+                        ng-disabled="$ctrl.isBusy">
+                    {{$ctrl.resources.Moyen_Mise_a_jour}}
+                </button>
+                <button type="button" class="btn button-excel" ng-click="$ctrl.handleInitRapportExtraction()" title="{{$ctrl.resources.Global_Bouton_ExportExcel_Tooltip}}">
+                </button>
+                <button class="btn btn-default"
+                        type="button"
+                        data-toggle="modal"
+                        data-target="#datesSelectionToExportPointage">
+                    {{$ctrl.resources.Moyen_Envoyer_Flux}}
+                </button>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Actions-->
+
+        <fred-section class="action-section" ng-show="$ctrl.isAffectationView">
+            <fred-authorization key="{{$ctrl.resources.PermissionShowCancelButton}}">
+
+                <fred-section-title>{{$ctrl.resources.Global_Action}}</fred-section-title>
+                <fred-section-controls class="action-controls">
+                    <button class="btn btn-link" ng-click="$ctrl.handleCancel()">{{$ctrl.resources.Moyen_Annuler}}</button>
+                    <button class="btn btn-validate" ng-click="$ctrl.handleValidateButton()">{{$ctrl.resources.Global_Bouton_Valider}}</button>
+                </fred-section-controls>
+            </fred-authorization>
+
+        </fred-section>
+
+    </fred-toolbar>
+
+    <!-- START Liste -->
+    <table ng-show="$ctrl.isAffectationView" class="moyens-table">
+        @*<thead class="header1">
+                <tr>
+                    <th class="select-all-s">
+                        <fred-authorization is-overflow-hidden="true" key="{{$ctrl.resources.PermissionSelectMoyens}}">
+                            <div class="chb_all">
+                                <input type="checkbox" id="s-all"
+                                       ng-model="$ctrl.SelectedAll"
+                                       ng-change="$ctrl.handleToggleSelectAll($ctrl.SelectedAll)">
+                                <label for="s-all"><span></span></label>
+                                {{$ctrl.resources.Global_Select_All}}
+                            </div>
+                        </fred-authorization>
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>*@
+        <thead class="header2">
+            <tr>
+                <th class="firstCol">
+                    <fred-authorization is-overflow-hidden="true" key="{{$ctrl.resources.PermissionSelectMoyens}}">
+                        <div class="chb">
+                            <input type="checkbox" id="s-all"
+                                   ng-model="$ctrl.SelectedAll"
+                                   ng-change="$ctrl.handleToggleSelectAll($ctrl.SelectedAll)">
+                            <label for="s-all"><span></span></label>
+                        </div>
+                    </fred-authorization>
+                    @*<fred-authorization is-to-adjust-css-no-margin="true" key="{{$ctrl.resources.PermissionSelectMoyens}}">
+                            <div class="chb"></div>
+                        </fred-authorization>*@
+                </th>
+                <th>{{$ctrl.resources.Moyen_Societe_Libelle}}</th>
+                <th>{{$ctrl.resources.Moyen_Etablissement_Libelle}}</th>
+                <th>{{$ctrl.resources.Moyen_Num_Parc}}</th>
+                <th>{{$ctrl.resources.Moyen_Type}}</th>
+                <th>{{$ctrl.resources.Moyen_Modele}}</th>
+                <th>{{$ctrl.resources.Moyen_Num_Immat}}</th>
+                <th>{{$ctrl.resources.Moyen_Site_actuel}}</th>
+                <th>{{$ctrl.resources.Moyen_Affected_To}}</th>
+                <th>{{$ctrl.resources.Moyen_Conducteur}}</th>
+                <th>{{$ctrl.resources.Moyen_Date_Debut_Affectation}}</th>
+                <th>{{$ctrl.resources.Moyen_Date_fin}}</th>
+                <th>{{$ctrl.resources.Moyen_Location}}</th>
+            </tr>
+        </thead>
+        <tbody id="containerTableauAffectations" class="fred-scroll">
+            <tr ng-repeat="affectationMoyen in $ctrl.affectationMoyenList track by $index"
+                ng-class="affectationMoyen.IsActive ? '' : 'odd'">
+                <td class="firstCol">
+                    <fred-authorization is-to-adjust-css-no-margin="true" key="{{$ctrl.resources.PermissionSelectMoyens}}">
+                        <div class="chb">
+                            <input type="checkbox"
+                                   id="chbxMoy_{{affectationMoyen.AffectationMoyenId}}"
+                                   ng-model="affectationMoyen.Selected"
+                                   ng-change="$ctrl.toggleAffectationMoyenSelection()"
+                                   ng-disabled="!affectationMoyen.IsActive">
+                            <label ng-hide="!affectationMoyen.IsActive" for="chbxMoy_{{affectationMoyen.AffectationMoyenId}}"><span></span></label>
+                        </div>
+                    </fred-authorization>
+                </td>
+                <td title="{{affectationMoyen.Moyen.Societe.Libelle}}"><span class="lim">{{affectationMoyen.Moyen.Societe.Libelle}}</span></td>
+                <td title="{{affectationMoyen.Moyen.EtablissementComptable.Libelle}}"><span class="lim">{{affectationMoyen.Moyen.EtablissementComptable.Libelle}}</span></td>
+                <td>{{affectationMoyen.Moyen.Code}}</td>
+                <td>{{affectationMoyen.Moyen.Ressource.SousChapitre.Chapitre.Libelle}}</td>
+                <td title="{{affectationMoyen.Moyen.Ressource.Libelle}}"><span class="lim">{{affectationMoyen.Moyen.Ressource.Libelle}}</span></td>
+                <td>{{affectationMoyen.Immatriculation}}</td>
+                <td title="{{affectationMoyen.Site.Libelle}}"><span class="lim">{{affectationMoyen.Site.Libelle}}</span></td>
+                <td><span class="lim" title="{{affectationMoyen.AffectedTo}}">{{affectationMoyen.AffectedTo}}</span></td>
+                <td><span class="lim" title="{{affectationMoyen.Conducteur.NomPrenom}}">{{affectationMoyen.Conducteur.NomPrenom}}</span></td>
+                <td>{{affectationMoyen.DateDebut | date : 'dd/MM/yyyy'}}</td>
+                <td ng-class="affectationMoyen.IsActive ? 'text_italic' : ''">{{affectationMoyen.DateFin | date : 'dd/MM/yyyy'}}</td>
+                <td>{{affectationMoyen.Moyen.IsLocation ? 'OUI' : 'NON'}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!--Table des rapports -->
+    <rapport-moyen-table-component ng-show="!$ctrl.isAffectationView"></rapport-moyen-table-component>
+
+    <!-- Modal pop in affecter -->
+    <div class="modal fade" id="toAffect" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <affectation-moyen-component></affectation-moyen-component>
+    </div>
+
+    <!-- Modal pop in Créer location -->
+    <div class="modal fade loc-mod" id="location" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <location-moyen-component></location-moyen-component>
+    </div>
+
+    <!-- Modal pop in Restituer -->
+    <div class="modal fade" id="return" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <restitution-moyen-component is-maintenance="false"></restitution-moyen-component>
+    </div>
+
+    <!-- Modal pop in Maintenance -->
+    <div class="modal fade" id="maintenance" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <restitution-moyen-component is-maintenance="true"></restitution-moyen-component>
+    </div>
+
+    <!-- Modal date selection-->
+    <div class="modal fade" id="datesSelectionToUpdatePointage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <date-selection-moyen-component is-update-pointage="true"></date-selection-moyen-component>
+    </div>
+
+    <!-- Modal date selection pour l'export des pointages-->
+    <div class="modal fade" id="datesSelectionToExportPointage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <date-selection-moyen-component is-export-pointage="true"></date-selection-moyen-component>
+    </div>
+
+    <!--Modal pour les erreurs de déversement-->
+    <div class="modal fade" id="errorPointage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i>Les personnes suivantes n'ont pas de pointage dans les dates indiquées : </h2>
+                    <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" aria-label="Close" title="Cliquer pour annuler et fermer"></i>
+                </div>
+                <div class="modal-body">
+                    <div class="row dp">
+                        <div style="overflow:auto; height:400px;">
+                            <ul class="popoverList" ng-repeat="error in $ctrl.errorPersonnel">
+                                <li><h3 ng-click="displayReduce ? displayReduce=false : displayReduce=true" ng-init="displayReduce=false;">{{error.Personnel.PersonnelRef}}</h3></li>
+                                <li class="err-dates" ng-repeat="d in error.Dates" ng-show="displayReduce">
+                                    {{d | date : 'dd/MM/yyyy'}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-link pull-right" data-dismiss="modal">Retour</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

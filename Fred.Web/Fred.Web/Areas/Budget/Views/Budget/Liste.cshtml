@@ -1,0 +1,602 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureBudgetListe.TitrePage;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+    @Styles.Render("~/Areas/Budget/Content/Budget.css")
+    @Styles.Render("~/Content/FormPanel/style.css")
+}
+@section scripts {
+    @Scripts.Render("~/BudgetIndexBundle.js")
+
+    @this.RenderResources("FeatureBudget", "FeatureBudgetListe", "FeatureFavori")
+}
+<div class="container gestion-budget"
+     ng-controller="BudgetListeController as ctrl"
+     ng-init="ctrl.getFilterOrFavoris('@ViewBag.id', '@ViewBag.favoriId')">
+
+
+    <!-- START : Titre de la page -->
+    <h1>Liste des budgets</h1>
+
+    <!--START : Barre de recherche + Barre d'outils-->
+    <fred-toolbar>
+
+        <!--Sélection de l'organisation-->
+        <fred-section class="picklist-section">
+
+            <fred-section-title>Sélectionner votre organisation</fred-section-title>
+
+            <fred-section-controls>
+                <div class="inner-addon right-addon">
+                    @*Copier/coller d'un autre écran pour le design, données érronées*@
+                    <lookup-standalone ng-model="ctrl.ciSelected"
+                                       text="ctrl.ciSelected.CodeLibelle"
+                                       search-title="{{ctrl.resources.Global_ReferentielCI}}"
+                                       search-placeholder="{{ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                       custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                       url="/api/CI/SearchLight"
+                                       on-select="ctrl.onCiSelected()"
+                                       on-delete="ctrl.onClearCiLookup()"
+                                       placeholder="Rechercher un Etablissement ou un CI..."
+                                       tooltip="ctrl.filter.Organisation.CodeLibelle"
+                                       class="formulaire long">
+                    </lookup-standalone>
+                </div>
+        </fred-section>
+
+        <!--START Filtre-->
+        <fred-section class="state-section">
+
+            <fred-section-title>Etat</fred-section-title>
+
+            <fred-section-controls>
+                <fred-button ng-class="ctrl.filters.currentBudgetEtatFilter.includes('brouillon') ? 'active draft' : 'inactive'" ng-click="ctrl.onFilterBudgetBy('brouillon')">
+                    <span class="sapicon-E038" title="Cliquer pour n'afficher que les budgets brouillons"></span>
+                </fred-button>
+                <fred-button ng-class="ctrl.filters.currentBudgetEtatFilter.includes('avalider') ? 'active tovalidate' : 'inactive'" ng-click="ctrl.onFilterBudgetBy('avalider')">
+                    <span class="sapicon-E0DE" title="Cliquer pour n'afficher que les budgets à valider"></span>
+                </fred-button>
+                <fred-button ng-class="ctrl.filters.currentBudgetEtatFilter.includes('valide') ? 'active applicated' : 'inactive'" ng-click="ctrl.onFilterBudgetBy('valide')">
+                    <span class="sapicon-E0C8" title="Cliquer pour n'afficher que les budgets en application"></span>
+                </fred-button>
+                @* A ne supprimer que sur la validation de Carine ou de Maryline*@
+                @*<fred-button ng-class="ctrl.filters.currentBudgetEtatFilter.includes('rejete') ? 'active rejected' : 'inactive'" ng-click="ctrl.onFilterBudgetBy('rejete')">
+                        <span class="sapicon-E157" title="Cliquer pour n'afficher que les budgets rejetés"></span>
+                    </fred-button>*@
+                <fred-button ng-class="ctrl.filters.currentBudgetEtatFilter.includes('archive') ? 'active archived' : 'inactive'" ng-click="ctrl.onFilterBudgetBy('archive')">
+                    <span class="sapicon-E096" title="Cliquer pour n'afficher que les budgets archivé"></span>
+                </fred-button>
+            </fred-section-controls>
+
+        </fred-section>
+
+        <fred-section class="date-section">
+
+            <fred-section-title>Période Comptable</fred-section-title>
+
+            <fred-section-controls>
+                <span class="input-group date">
+                    <app-date-picker id="periode"
+                                     ng-model="ctrl.filters.periode"
+                                     format="MM/YYYY"
+                                     lang="fr"
+                                     ng-change="ctrl.onPeriodChange()">
+                    </app-date-picker>
+                </span>
+                <fred-button ng-click="ctrl.onDeactivatePeriodeFilter()">
+                    <i class="material-icons">close</i>
+                </fred-button>
+            </fred-section-controls>
+
+
+        </fred-section>
+        <!--END Filtre-->
+        <!--START boutons action-->
+        <fred-section class="action-section">
+
+            <fred-section-title>Actions</fred-section-title>
+
+            <fred-section-controls class="action-section-controls">
+                <fred-button class="fred-button default" ng-click="ctrl.onBoutonCreerBudgetClicked()" ng-disabled="!ctrl.ciSelected" title="Cliquer pour ajouter un budget">
+                    <i class="material-icons">add</i>
+                </fred-button>
+                <fred-button class="default" ng-class="ctrl.filters.displayBudgetDeleted ? 'active draft' : 'inactive'" ng-click="ctrl.onRestoreTrashCanClicked()" title="Cliquer pour afficher les budgets supprimés">
+                    <i class="flaticon flaticon-garbage-2"></i>
+                </fred-button>
+                <fred-button class="fred-button white-star" type="button" ng-click="ctrl.addFilter2Favoris()" ng-show="ctrl.ciSelected" title="{{ ctrl.getTooltipFavoris() }}">
+                    <i class="material-icons">star</i>
+                </fred-button>
+                <button class="fred-button default text" type="button" ng-click="ctrl.onOpenModalPeriodeFin()" ng-disabled="!ctrl.ciSelected" title="Lancer un recalage budgétaire">
+                    Recalage Budgétaire
+                </button>
+            </fred-section-controls>
+        </fred-section>
+        <!--END boutons action-->
+    </fred-toolbar>
+
+    <!--START Tableau liste-->
+    <div class="gestion-budget-list table-responsive">
+        <table class="gestion-budget-table">
+            <thead>
+                <tr style="padding-right: 17px;">
+                    <th colspan="1">
+                        <span class="th-txt">Version</span>
+                    </th>
+                    <th colspan="1">
+                        <span class="th-txt">Etat</span>
+                    </th>
+                    <th colspan="1">
+                        <span class="th-txt">Début période</span>
+                    </th>
+                    <th colspan="1">
+                        <span class="th-txt">Fin période</span>
+                    </th>
+                    <th colspan="1">
+                        <span class="th-txt">Crée par</span>
+                    </th>
+                    <th colspan="1">
+                        <span class="th-txt">Validé par</span>
+                    </th>
+                    <th colspan="1" class="th-action">
+                        <span class="th-txt">Action</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="fred-scroll">
+                <tr ng-repeat="budget in ctrl.budgets | orderBy:Version:versionComparer" ng-class="{selected: ctrl.isBudgetEnApplication(budget)}">
+                    <td class="firstcol" ng-class="ctrl.getClassePourEtatbudget(budget);">
+                        <span class="data">{{budget.Version}}</span>
+                    </td>
+                    <td>
+                        <span class="tile" ng-class="ctrl.getClassePourEtatbudget(budget);">{{budget.BudgetEtat.Libelle}}</span>
+                    </td>
+                    <td class="start">
+                        <span class="data">{{budget.PeriodeDebutFormatted}}</span>
+                    </td>
+                    <td class="end">
+                        <span class="data">{{budget.PeriodeFinFormatted}}</span>
+                    </td>
+                    <td>
+                        <span class="data">{{budget.Createur}}</span>
+                    </td>
+                    <td>
+                        <span class="data">{{budget.Valideur}}</span>
+                    </td>
+                    <td class="table-icons" ng-if="!ctrl.isBudgetSupprime(budget)">
+                        <span class="table-icon delete">
+                            <span class="material-icons" ng-show="ctrl.isBudgetBrouillon(budget)" ng-click="ctrl.onSupprimerBudget(budget)" title="Cliquer pour supprimer le budget">clear</span>
+                        </span>
+                        <span class="table-icon share">
+                            <span class="material-icons" ng-class="{'shared': budget.Partage}" ng-show="budget.Partageable" ng-click="ctrl.onPartagerBudget(budget)" title="Cliquer pour partager cette version avec les personnes habilitées">share</span>
+                        </span>
+                        <span class="table-icon dup">
+                            <span class="material-icons" title="Cliquer pour copier cette version de budget. Après duplication, la version nouvellement créée sera accessible via cette liste"
+                                  data-toggle="modal"
+                                  data-target="#dupeBudgetModal"
+                                  ng-click="ctrl.onCopierbudgetBoutonClicked(budget);">content_copy</span>
+                        </span>
+                        <span class="table-icon edit">
+                            <span class="material-icons"
+                                  title="Cliquer pour visualiser les informations, indicateurs et recette de cette version de budget"
+                                  ng-click="ctrl.onShowbudgetInformation(budget);">
+                                more_vert
+                            </span>
+                        </span>
+                        <span class="table-icon show">
+                            <span class="material-icons" ng-click="ctrl.onShowDetailBudget(budget);" title="Cliquer pour visualiser le détail du budget">keyboard_arrow_right</span>
+                        </span>
+                    </td>
+
+                    <td class="table-icons" ng-if="ctrl.isBudgetSupprime(budget)">
+                        <span class="table-icon delete">
+                            <span class="material-icons" ng-click="ctrl.onRestoreDeletedBudget(budget)" title="Cliquer pour restaurer le budget supprimer">restore</span>
+                        </span>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--END Tableau liste-->
+    <!-- START modal duplication d'un budget -->
+    <div class="modal fade" id="dupeBudgetModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i>Duplication d'un budget</h2>
+                    <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title=""></i>
+                </div>
+                <div class="modal-body">
+                    <div ng-show="!ctrl.copyToSameCi">
+                        <div class="bloc-ci-tasks" ng-model="ctrl.budgetSelectionne">
+                            <div class="bloc-ci-txt">
+                                {{::ctrl.resources.BudgetListeCopieChoixCiDestination}} {{ctrl.budgetSelectionne.version}} ?
+                            </div>
+                        </div>
+                        <div class="bloc-ci-tiles" ng-model="ctrl.ciSelected">
+                            <div class="bloc-ci-tile">
+                                <span class="ci-tile-txt" ng-click="ctrl.copyToSameCi = true;">Copier dans le CI {{ctrl.ciSelected.CodeLibelle}}</span>
+                                <div class="inner-triangle"></div>
+                                <span class="material-icons" title="Sélectionner cette option pour copier la version sélectionné sur le CI actuellement sélectionné">live_help</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="ctrl.copyToSameCi">
+
+                        <span class="bloc-ci-txt">{{::ctrl.resources.Global_ConfirmationSouhait}}</span>
+                        <div>
+                            <input type="radio" name="useBibliothequePrixRadios" id="useBudgetSource" ng-value="false" ng-model="ctrl.useBibliothequePrixPendantCopie" value="false">
+                            <label for="useBudgetSource" class="radio-button-label bloc-ci-txt">
+                                <span></span>{{::ctrl.resources.BudgetListeCopieChoixUtilisationBudgetSource}}
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="radio" name="useBibliothequePrixRadios" id="useBibliotheque" ng-value="true" ng-model="ctrl.useBibliothequePrixPendantCopie" value="true">
+                            <label for="useBibliotheque" class="radio-button-label bloc-ci-txt">
+                                <span></span>{{::ctrl.resources.BudgetListeCopieChoixUtilisationBibliothequePrix}}
+                            </label>
+                        </div>
+
+                        <label class="control-label bloc-ci-txt">{{ctrl.resources.BudgetListeCopieWarningT4RecaleesCopieAvecBibliothequePrix}}</label>
+
+                    </div>
+                </div>
+                <div class="modal-footer" ng-show="ctrl.copyToSameCi">
+                    <button class="btn btn-lg btn-default pull-left" ng-click="ctrl.onCopierbudgetDansCICourant();">Continuer</button>
+                    <button class="btn btn-lg btn-link pull-right" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END modal duplication d'un budget -->
+    <!-- Bandeau RESUME et INDICATEUR RECETTE -->
+    <div ng-show="ctrl.displayBanner">
+        <div class="blockScreen"
+             ng-click="ctrl.displayBanner = !ctrl.displayBanner"
+             style="z-index:99">
+        </div>
+        <div class="options" id="optionRightPanel">
+            <!--HEADER TOOLBAR : BEGIN-->
+            <div class="toolbar">
+                <div class="grandicone">
+                    <span class="sapicon-E132"></span>
+                </div>
+            </div>
+            <!--HEADER TOOLBAR : END-->
+            <!-- Titre : BEGIN -->
+            <div class="bandeau-headline">
+                <ul>
+                    <li class="tab-titles active">
+                        <a href="#tab1" data-toggle="tab" class="tab1">
+                            Résumé du budget
+                        </a>
+                    </li>
+                    <li class="tab-titles no-mr">
+                        <a href="#tab2" data-toggle="tab" class="tab2">
+                            Recette
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Titre : END -->
+
+            <div class="tab-content clearfix fred-scroll panneau-ligne">
+
+                <!-- Bloc résumé du budget START -->
+                <div class="tab-pane active" id="tab1" ng-model="ctrl.budgetSelectionne">
+                    <div class="container cadre-panneau">
+                        <div class="bandeau-body">
+                            <div class="row">
+                                <div class="col-md-4 datas no-pad">
+                                    <div class="datas-label">Version</div>
+                                    <div class="datas-value">{{ctrl.budgetSelectionne.Version}}</div>
+                                </div>
+                                <div class="col-md-4 datas no-pad application">
+                                    <div class="datas-label">Etat</div>
+                                    <div class="datas-value">{{ctrl.budgetSelectionne.BudgetEtat.Libelle}}</div>
+                                </div>
+                                <div class="col-md-4 datas br no-pad">
+                                    <div class="datas-label">Date de création</div>
+                                    <div class="datas-value">{{ctrl.budgetSelectionne.DateCreation | date : 'dd/MM/yyyy'}}</div>
+                                </div>
+                            </div>
+                            <div class="row second-data-row">
+                                <div class="col-md-6 datas no-pad">
+                                    <div class="datas-label">Début période</div>
+                                    <div class="datas-value caps">{{ctrl.budgetSelectionne.PeriodeDebutFormatted}}</div>
+                                </div>
+                                <div class="col-md-6 datas br no-pad">
+                                    <div class="datas-label">Fin Période</div>
+                                    <div class="datas-value caps">{{ctrl.budgetSelectionne.PeriodeFinFormatted}}</div>
+                                </div>
+                            </div>
+
+                            <div class="collapsing-chapitre collapsed" data-toggle="collapse" data-target="#indics" aria-expanded="false">
+                                <i class="fa fa-angle-right"></i>
+                                <span>Indicateurs</span>
+                            </div>
+                            <div id="indics" class="collapse">
+                                <div class="devises">
+                                    <div class="bloc-devise selected">€</div>
+                                    <div class="bloc-devise">£</div>
+                                    <div class="bloc-devise">$</div>
+                                </div>
+                                <div class="row second-data-row blue">
+                                    <div class="col-md-6 datas no-pad">
+                                        <div class="datas-label">Montant Total</div>
+                                        <div class="datas-value">{{ctrl.budgetSelectionne.MontantTotal | number:fr}} €</div>
+                                    </div>
+                                    <div class="col-md-6 datas br no-pad">
+                                        <div class="datas-label">Recette</div>
+                                        <div class="datas-value caps"><span href="#tab2" ng-click="ctrl.onRecetteBoutonClicked()" data-toggle="tab" class="blued">{{ctrl.computeSomeRecette(ctrl.budgetSelectionne) | number:fr}} €</span></div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="collapsing-chapitre collapsed" data-toggle="collapse" data-target="#other-infos" aria-expanded="false">
+                                <i class="fa fa-angle-right"></i>
+                                <span>Autres informations</span>
+                            </div>
+                            <div id="other-infos" class="collapse">
+                                <div class="title">Commentaire global du budget</div>
+                                <textarea ng-readonly="!ctrl.isBudgetBrouillon(ctrl.budgetSelectionne)" ng-model="ctrl.budgetSelectionne.Commentaire"></textarea>
+                                <div class="credits">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="sum-bloc">
+                                                <span class="lb">Date de création</span><br>
+                                                <span class="val">{{ctrl.budgetSelectionne.DateCreation | date : 'dd/MM/yyyy'}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="sum-bloc">
+                                                <span class="lb">Auteur</span><br>
+                                                <span class="val">{{ctrl.budgetSelectionne.Createur}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="sum-bloc">
+                                                <span class="lb">Date Modification</span><br>
+                                                <span class="val">{{ctrl.budgetSelectionne.DateDerniereModification | date : 'dd/MM/yyyy' }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="sum-bloc">
+                                                <span class="lb">Auteur</span><br>
+                                                <span class="val">{{ctrl.budgetSelectionne.AuteurDeniereModification}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="sum-bloc">
+                                                <span class="lb">Date validation</span><br>
+                                                <span class="val">{{ctrl.budgetSelectionne.DateValidation | date : 'dd/MM/yyyy'}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="sum-bloc">
+                                                <span class="lb">Auteur</span><br>
+                                                <span class="val">{{ctrl.budgetSelectionne.Valideur}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Informations de copie de budget -->
+                                    <div ng-if="ctrl.budgetSelectionne.CopyHistos.length > 0">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="sum-bloc">
+                                                    <span class="lb">Dernier budget source</span><br>
+                                                    <span class="val">{{ctrl.budgetSelectionne.CopyHistos[0].BudgetSourceVersion}} - CI {{ctrl.budgetSelectionne.CopyHistos[0].BudgetSourceCI.Code}} - {{ctrl.budgetSelectionne.CopyHistos[0].BudgetSourceCI.Libelle}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="sum-bloc">
+                                                    <span class="lb">Dernière bibliothèque source</span><br>
+                                                    <span class="val">{{ctrl.budgetSelectionne.CopyHistos[0].BibliothequePrixSourceCI ? 'CI ' + ctrl.budgetSelectionne.CopyHistos[0].BibliothequePrixSourceCI.Code + ' - ' + ctrl.budgetSelectionne.CopyHistos[0].BibliothequePrixSourceCI.Libelle : '-'}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="sum-bloc">
+                                                    <span class="lb">Date de dernière copie</span><br>
+                                                    <span class="val">{{ctrl.budgetSelectionne.CopyHistos[0].DateCopy | toLocaleDate | date : 'dd/MM/yyyy'}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-hide="true" class="collapsing-chapitre cascade collapsed" data-toggle="collapse" data-target="#histo-modif" aria-expanded="false">
+                                <div class="title-txt">
+                                    <i class="fa fa-angle-right"></i>
+                                    <span>Historique des modifications</span>
+                                </div>
+                            </div>
+                            <div id="histo-modif" class="collapse">
+                                <div class="bordered-bloc">
+                                    <div class="collapsing-sous-chapitre collapsed" data-toggle="collapse" data-target="#crea-draft" aria-expanded="false">
+                                        <div class="title-txt inner">
+                                            <i class="fa fa-angle-right"></i>
+                                            <span>Creation > Brouillon</span>
+                                        </div>
+                                    </div>
+                                    <div id="crea-draft" class="collapse">
+                                        <div class="credits">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="sum-bloc">
+                                                        <span class="lb">Date de création</span><br>
+                                                        <span class="val">15/04/2019</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="sum-bloc">
+                                                        <span class="lb">Auteur</span><br>
+                                                        <span class="val">Allan Thompson</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="sum-bloc">
+                                                        <span class="lb">Commentaire</span><br>
+                                                        <span class="val">Commentaire du créateur</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bordered-bloc">
+                                    <div class="collapsing-sous-chapitre collapsed" data-toggle="collapse" data-target="#draft-validate" aria-expanded="false">
+                                        <div class="title-txt inner">
+                                            <i class="fa fa-angle-right"></i>
+                                            <span>Brouillon > A valider</span>
+                                        </div>
+                                    </div>
+                                    <div id="draft-validate" class="collapse">
+                                        <div class="credits">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="sum-bloc">
+                                                        <span class="lb">Date de création</span><br>
+                                                        <span class="val">15/04/2019</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="sum-bloc">
+                                                        <span class="lb">Auteur</span><br>
+                                                        <span class="val">Allan Thompson</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="sum-bloc">
+                                                        <span class="lb">Commentaire</span><br>
+                                                        <span class="val">Commentaire du créateur</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bordered-bloc">
+                                    <div class="collapsing-sous-chapitre collapsed" data-toggle="collapse" data-target="#validate-validated" aria-expanded="false">
+                                        <div class="title-txt inner">
+                                            <i class="fa fa-angle-right"></i>
+                                            <span>Brouillon > A valider</span>
+                                        </div>
+                                    </div>
+                                    <div id="validate-validated" class="collapse">
+                                        <div class="credits">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="sum-bloc">
+                                                        <span class="lb">Date de création</span><br>
+                                                        <span class="val">15/04/2019</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="sum-bloc">
+                                                        <span class="lb">Auteur</span><br>
+                                                        <span class="val">Allan Thompson</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="sum-bloc">
+                                                        <span class="lb">Commentaire</span><br>
+                                                        <span class="val">Commentaire du créateur</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <div class="buttons" ng-show="ctrl.isBudgetBrouillon(ctrl.budgetSelectionne)">
+                                <button type="button" class="btn btn-default" ng-click="ctrl.onBudgetDetailsSave(ctrl.budgetSelectionne)" ng-disabled="">Enregistrer</button>
+                                <button type="button" class="btn btn-link" ng-click="ctrl.onBudgetDetailsAnnuler()">Annuler</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bloc résumé du budget END -->
+                <!-- Bloc recette START -->
+                <div class="tab-pane" id="tab2">
+                    <div class="recette">
+                        <div class="recette-field">
+                            <label for="">Montant du marché {{ctrl.deviseSymbole}} </label>
+                            <input type="text" fred-input-number class="form-control" ng-readonly="!ctrl.isBudgetBrouillon(ctrl.budgetSelectionne)" ng-model="ctrl.budgetSelectionne.Recettes.MontantMarche">
+                        </div>
+                        <div class="recette-field">
+                            <label for="">Montant des avenants {{ctrl.deviseSymbole}} <span class="material-icons" title="Total de l'ensemble des avenants">live_help</span></label>
+                            <input type="text" fred-input-number class="form-control" ng-readonly="!ctrl.isBudgetBrouillon(ctrl.budgetSelectionne)" ng-model="ctrl.budgetSelectionne.Recettes.MontantAvenants">
+                        </div>
+                        <div class="recette-field">
+                            <label for="">Sommes à valoir {{ctrl.deviseSymbole}} </label>
+                            <input type="text" fred-input-number class="form-control" ng-readonly="!ctrl.isBudgetBrouillon(ctrl.budgetSelectionne)" ng-model="ctrl.budgetSelectionne.Recettes.SommeAValoir">
+                        </div>
+                        <div class="recette-field">
+                            <label for="">Travaux supplémentaires {{ctrl.deviseSymbole}} <span class="material-icons" title="Ordre de service ou travaux supplémentaires notifiés">live_help</span></label>
+                            <input type="text" fred-input-number class="form-control" ng-readonly="!ctrl.isBudgetBrouillon(ctrl.budgetSelectionne)" ng-model="ctrl.budgetSelectionne.Recettes.TravauxSupplementaires">
+                        </div>
+                        <div class="recette-field">
+                            <label for="">Révision {{ctrl.deviseSymbole}} <span class="material-icons" title="Révision de prix. Indices de corrections de marché">live_help</span></label>
+                            <input type="text" fred-input-number class="form-control" ng-readonly="!ctrl.isBudgetBrouillon(ctrl.budgetSelectionne)" ng-model="ctrl.budgetSelectionne.Recettes.Revision">
+                        </div>
+                        <div class="recette-field">
+                            <label for="">Autres recettes {{ctrl.deviseSymbole}} </label>
+                            <input type="text" fred-input-number class="form-control" ng-readonly="!ctrl.isBudgetBrouillon(ctrl.budgetSelectionne)" ng-model="ctrl.budgetSelectionne.Recettes.AutresRecettes">
+                        </div>
+                        <div class="recette-field">
+                            <label for="">Pénalités et retenues {{ctrl.deviseSymbole}} </label>
+                            <input type="text" fred-input-number class="form-control" ng-readonly="!ctrl.isBudgetBrouillon(ctrl.budgetSelectionne)" ng-model="ctrl.budgetSelectionne.Recettes.PenalitesEtRetenues">
+                        </div>
+
+                        <div class="footer">
+                            <div class="buttons" ng-show="ctrl.isBudgetBrouillon(ctrl.budgetSelectionne)">
+                                <button type="button" class="btn btn-default" ng-click="ctrl.onBudgetDetailsSave(ctrl.budgetSelectionne)" ng-disabled="">Enregistrer</button>
+                                <button type="button" class="btn btn-link" ng-click="ctrl.onBudgetDetailsAnnuler()">Annuler</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bloc recette END -->
+            </div>
+
+            <div class="close_panel"
+                 ng-click="ctrl.displayBanner = !ctrl.displayBanner"
+                 title="Cliquer pour refermer le paneau">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                <span>Refermer le panneau</span>
+            </div>
+
+        </div>
+    </div>
+
+    <budget-liste-recalage-component budget-id="ctrl.BudgetEnApplicationId"
+                                     list-periodes="ctrl.listPeriodes"
+                                     resources="ctrl.resources">
+    </budget-liste-recalage-component>
+
+
+</div>
+

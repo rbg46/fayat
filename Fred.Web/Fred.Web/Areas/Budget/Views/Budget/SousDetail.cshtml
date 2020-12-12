@@ -1,0 +1,185 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+    @Styles.Render("~/Areas/Budget/Content/SousDetail.css")
+    @Styles.Render("~/Content/FormPanel/style.css")
+}
+@section scripts {
+    @Scripts.Render("~/BudgetIndexBundle.js")
+
+    @this.RenderResources("FeatureBudget", "FeatureCodeDeplacement", "FeatureReferentielTache")
+}
+
+<div class="container sous-detail">
+
+    <!-- START : Titre de la page -->
+    <h1>Sous détail</h1>
+
+    <!-- START : liste sous détail -->
+    <div class="sous-detail-list table-responsive">
+        <table class="sous-detail-table">
+            <thead>
+                <tr class="top-header" style="padding-right: 17px;">
+                    <th class="col-1" colspan="1"></th>
+                    <th class="col-2" colspan="4"></th>
+                    <th class="col-3" colspan="3">
+                        <div class="textdata">
+                            <span class="title">Sous Détail</span>
+                            <span class="txt">Quantité de base</span>
+                            <input type="text" name="" id="">
+                        </div>
+                    </th>
+                    <th class="sep"></th>
+                    <th class="col-4" colspan="4">
+                        <div class="textdata">
+                            <span class="title">T4</span>
+                            <span class="txt">Quantité à réaliser</span>
+                            <input type="text" name="" id="">
+                        </div>
+                    </th>
+                    <th class="col-5" colspan="2">
+                        <div class="textdata">
+                            <span class="txt">Unité</span>
+                            <input type="text" name="" id="">
+                        </div>
+                    </th>
+                </tr>
+                <tr class="bottom-header" style="padding-right: 17px;">
+                    <th class="col-1" colspan="1">Chapitre</th>
+                    <th class="col-2" colspan="4">Ressources</th>
+                    <th class="col-3" colspan="1">Quantité</th>
+                    <th class="col-4" colspan="1">PU</th>
+                    <th class="col-5" colspan="1">Montant</th>
+                    <th class="sep"></th>
+                    <th class="col-6" colspan="1">Formule</th>
+                    <th class="col-7" colspan="1">Quantité</th>
+                    <th class="col-8" colspan="1">Prix unitaire</th>
+                    <th class="col-9" colspan="1">Montant</th>
+                    <th class="col-10" colspan="2">
+                        <span class="material-icons">add</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-1" colspan="1">
+                        <span class="data">10</span> - <span class="lbl">Libellé du chapitre</span>
+                    </td>
+                    <td class="col-2" colspan="4">
+                        <span class="data">105254</span> <span class="lbl">Chef de chantier - Phase Préparation du chantier Expertise Conseil</span>
+                    </td>
+                    <td class="col-3" colspan="1">
+                        <input type="text" name="" id="">
+                    </td>
+                    <td class="col-4" colspan="1">
+                        <input type="text" name="" id="">
+                    </td>
+                    <td class="col-5" colspan="1">
+                        100
+                    </td>
+                    <td class="sep"></td>
+                    <td class="col-6" colspan="1">
+                        <input type="text" name="" id="">
+                    </td>
+                    <td class="col-7" colspan="1">
+                        105254
+                    </td>
+                    <td class="col-8" colspan="1">
+                        105254
+                    </td>
+                    <td class="col-9" colspan="1">
+                        105254
+                    </td>
+                    <td class="col-10" colspan="2">
+                        <span class="material-icons">clear</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-1" colspan="1">
+                        <span class="data">10</span> - <span class="lbl">Libellé du chapitre</span>
+                    </td>
+                    <td class="col-2" colspan="4">
+                        <span class="material-icons arrows">swap_horiz</span>
+                        <span class="data">105254</span> <span class="lbl">Chef de chantier - Phase Préparation du chantier Expertise Conseil</span>
+                    </td>
+                    <td class="col-3" colspan="1">
+                        <input type="text" name="" id="">
+                    </td>
+                    <td class="col-4" colspan="1">
+                        <input type="text" name="" id="">
+                    </td>
+                    <td class="col-5" colspan="1">
+                        100
+                    </td>
+                    <td class="sep"></td>
+                    <td class="col-6" colspan="1">
+                        <input type="text" name="" id="">
+                    </td>
+                    <td class="col-7" colspan="1">
+                        105254
+                    </td>
+                    <td class="col-8" colspan="1">
+                        105254
+                    </td>
+                    <td class="col-9" colspan="1">
+                        105254
+                    </td>
+                    <td class="col-10" colspan="2">
+                        <span class="material-icons">clear</span>
+                    </td>
+                </tr>
+                <tr class="selected">
+                    <td class="col-1" colspan="1">
+                        <span class="data">10</span> - <span class="lbl">Libellé du chapitre</span>
+                    </td>
+                    <td class="col-2" colspan="4">
+                        <span class="data">105254</span> <span class="lbl">Chef de chantier - Phase Préparation du chantier Expertise Conseil</span>
+                    </td>
+                    <td class="col-3" colspan="1">
+                        <input type="text" name="" id="">
+                    </td>
+                    <td class="col-4" colspan="1">
+                        <input type="text" name="" id="">
+                    </td>
+                    <td class="col-5" colspan="1">
+                        100
+                    </td>
+                    <td class="sep"></td>
+                    <td class="col-6" colspan="1">
+                        <input type="text" name="" id="">
+                    </td>
+                    <td class="col-7" colspan="1">
+                        105254
+                    </td>
+                    <td class="col-8" colspan="1">
+                        105254
+                    </td>
+                    <td class="col-9" colspan="1">
+                        105254
+                    </td>
+                    <td class="col-10" colspan="2">
+                        <span class="material-icons">clear</span>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="col-1" colspan="1"></td>
+                    <td class="col-2" colspan="4"></td>
+                    <td class="col-3" colspan="3">
+                        (Rappel des calculs)
+                    </td>
+                    <td class="sep"></td>
+                    <td class="col-4" colspan="4">
+                       (Rappel des calculs)
+                    </td>
+                    <td class="col-5" colspan="2"></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!-- END : liste sous détail -->
+</div>

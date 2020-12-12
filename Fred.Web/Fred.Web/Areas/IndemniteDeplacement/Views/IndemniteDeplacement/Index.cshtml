@@ -1,0 +1,241 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureIndemniteDeplacement.IndemniteDeplacement_Index_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/IndemniteDeplacementIndexBundle.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/IndemniteDeplacementIndexBundle.js")
+    @this.RenderResources("FeatureIndemniteDeplacement")
+}
+
+<div class="container" ng-controller="IndemniteDeplacementController" ng-init="init('@ViewBag.id')">
+
+    <div class="toleft">
+
+        <h6 ng-click="exit()"><span class="flat">{{resources.IndemniteDeplacement_Index_PanelMain_RetourListePersonnel}}</span></h6>
+
+        <!-- START : Titre de la page -->
+        <h1><span class="flat">{{resources.IndemniteDeplacement_Index_PanelMain_Titre}} #{{personnel.MatriculeNomPrenom}}</span></h1>
+        <!--END : Titre de la page -->
+
+        <div class="row">
+            <!--BEGIN : Recherche -->
+            <div class="col-md-10">
+                <label class="infoFilter">{{resources.Global_RechercheAffiner}}</label>
+                <div class="filter">
+                    <div class="input-group">
+                        <input class="form-control txt" type="text" id="txtRecherche" name="Recherche" placeholder="{{resources.IndemniteDeplacement_Index_PanelMain_Rechercher_Placeholder}}" ng-model="recherche" ng-change="handleSearch()" ng-model-options="{ debounce : 500 }" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary y_search" title="{{resources.Global_RechercheAffiner_Tooltip}}" type="button" ng-click="handleSearch(recherche)"><i class="material-icons">search</i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--END : Recherche -->
+            <!--BEGIN : Bouton pour ajouter Items -->
+            <div class="col-md-2 ">
+                <span class="pull-right">
+                    <label class="infoFilter">{{resources.Global_Ajouter}}</label>
+                    <i class="flaticon flaticon-add icoplus" title="{{resources.Global_Bouton_AjouterReference_Tooltip}}" ng-click="handleClickCreateNew()"></i>
+                </span>
+            </div>
+            <!--END : Bouton pour ajouter Items -->
+        </div>
+
+        <!--LISTE : START-->
+        <div class="row">
+            <div class="col-md-12">
+                <div ng-repeat="item in items">
+                    <div class="row line" ng-click="handleSelect(item)">
+                        <div class="col-md-6">
+                            <div class="lb">{{resources.IndemniteDeplacement_Index_PanelMain_CI}}</div>
+                            <span class="val">{{item.CI.CodeLibelle}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="lb">{{resources.IndemniteDeplacement_Index_PanelMain_CodeDeplacement}}</div>
+                            <span class="val">{{item.CodeDeplacementLibelle}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="lb">{{resources.IndemniteDeplacement_Index_PanelMain_CodeZoneDeplacement}}</div>
+                            <span class="val">{{item.CodeZoneDeplacementLibelle}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="lb">{{resources.IndemniteDeplacement_Index_PanelMain_SaisieManuelle}}</div>
+                            <div class="val ng-binding">
+                                <span ng-if="item.SaisieManuelle">{{resources.Global_Oui}}</span>
+                                <span ng-if="!item.SaisieManuelle">{{resources.Global_Non}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--LISTE : END-->
+
+    </div>
+
+
+    <!--DETAILS PANEL : START-->
+    <div ng-class="checkDisplayOptions" class="blockScreen"></div>
+    <div class="options" id="optionRightPanel" ng-class="checkDisplayOptions + ' ' + checkFormatOptions">
+
+        <!--HEADER TOOLBAR : BEGIN action-icone material-icons -->
+        <div class="toolbar">
+            <i class="action-icone material-icons grandicone" aria-hidden="true">directions_car</i>
+        </div>
+        <!--HEADER TOOLBAR : END-->
+        <!-- Titre : BEGIN -->
+        <div class="form-header">
+            <h2>
+                <span ng-if="indemniteDeplacement.IndemniteDeplacementId === 0">{{resources.IndemniteDeplacement_Index_PanelMain_Titre_Ajouter}}</span>
+                <span ng-if="indemniteDeplacement.IndemniteDeplacementId > 0">{{resources.IndemniteDeplacement_Index_PanelMain_Titre_Modifier}}</span>
+            </h2>
+            <label class="legend">{{resources.Global_LegendeAsterisque}}</label>
+        </div>
+        <!-- Titre : END -->
+
+
+        <div class="form fred-scroll">
+            <!--Formulaire: START-->
+            <form name="formIndemniteDeplacement" autocomplete="off" novalidate>
+                <!--FIELD CI: START-->
+                <div class="form-group">
+                    <label for="txtCI">{{resources.IndemniteDeplacement_Index_PanelRight_CI}} *</label>
+                    <span class="text-danger" ng-show="formIndemniteDeplacement.PickListCI.$error.required && formIndemniteDeplacement.$submitted">{{resources.Global_Control_DataRequired_Erreur}}</span>
+                    <div ng-show="indemniteDeplacement.IndemniteDeplacementId === 0">
+                        <lookup-standalone ng-model="indemniteDeplacement.CI"
+                                           text="CodeCILibelleCourant"
+                                           search-title="{{resources.Global_ReferentielCI}}"
+                                           search-placeholder="{{resources.Global_ReferentielCI_Placeholder}}"
+                                           custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                           on-click="handleShowLookup('CI')"
+                                           on-select="handleLookupSelection('CI', item)"
+                                           on-delete="handleLookupDeletion('CI')"
+                                           style-parent="false"
+                                           name="PickListCI"
+                                           required
+                                           class="formulaire long">
+                        </lookup-standalone>
+                    </div>
+
+                    <div ng-show="indemniteDeplacement.IndemniteDeplacementId != 0">
+                        <input type="text" ng-model="indemniteDeplacement.CI.CodeLibelle" class="form-control" ng-disabled="true" />
+                    </div>
+                </div>
+                <!--FIELD CI: END-->
+                <!--FIELD SaisieManuelle: START-->
+                <div class="form-group">
+                    <input type="radio" ng-model="indemniteDeplacement.SaisieManuelle" id="rbtnAuto" ng-checked="!indemniteDeplacement.SaisieManuelle" ng-value="false"><label for="rbtnAuto"><span></span>{{resources.IndemniteDeplacement_Index_PanelRight_Calcul}}</label>
+                    <input type="radio" ng-model="indemniteDeplacement.SaisieManuelle" id="rbtnManuelle" ng-checked="indemniteDeplacement.SaisieManuelle" ng-value="true"><label for="rbtnManuelle"><span></span>{{resources.IndemniteDeplacement_Index_PanelRight_SaisieManuelle}}</label>
+                    <button class="btn btn-primary pull-right" type="submit" ng-show="!indemniteDeplacement.SaisieManuelle" ng-click="handleClickCalculKm();">{{resources.IndemniteDeplacement_Index_PanelRight_Bouton_Recalculer}}</button>
+                </div>
+                <!--FIELD SaisieManuelle: END-->
+                <!--FIELD CodeDeplacement: START-->
+                <div class="form-group" ng-class="{ 'has-error' : (formIndemniteDeplacement.CodeDeplacement.$invalid && formIndemniteDeplacement.$submitted) || formIndemniteDeplacement.CodeDeplacement.$error.exist || formIndemniteDeplacement.CodeDeplacement.$error.pattern}">
+                    <label for="txtCodeDeplacement">{{resources.IndemniteDeplacement_Index_PanelRight_CodeDeplacement}}</label>
+                    <div ng-show="indemniteDeplacement.SaisieManuelle">
+                        <lookup-standalone ng-model="indemniteDeplacement.CodeDeplacement"
+                                           text="CodeDeplacementLibelleCourant"
+                                           search-title="{{resources.Global_ReferentielCodeDeplacement}}"
+                                           search-placeholder="{{resources.Global_ReferentielCodeDeplacement_Placeholder}}"
+                                           on-click="handleShowLookup('CodeDeplacement')"
+                                           on-select="handleLookupSelection('CodeDeplacement', item)"
+                                           on-delete="handleLookupDeletion('CodeDeplacement')"
+                                           style-parent="true"
+                                           name="PickListCodeDeplacement"
+                                           class="formulaire long"
+                                           ng-disabled="!indemniteDeplacement.CI">
+                        </lookup-standalone>
+                    </div>
+                    <div ng-show="!indemniteDeplacement.SaisieManuelle">
+                        <input type="text"
+                               value="{{indemniteDeplacement.CodeDeplacementLibelle}}"
+                               class="form-control"
+                               ng-disabled="true" />
+                    </div>
+                </div>
+                <!--FIELD CodeDeplacement: END-->
+                <!--FIELD CodeZoneDeplacement: START-->
+                <div class="form-group" ng-class="{ 'has-error' : (formIndemniteDeplacement.CodeZoneDeplacement.$invalid && formIndemniteDeplacement.$submitted) || formIndemniteDeplacement.CodeZoneDeplacement.$error.exist || formIndemniteDeplacement.CodeZoneDeplacement.$error.pattern}">
+                    <label for="txtCodeZoneDeplacement">{{resources.IndemniteDeplacement_Index_PanelRight_CodeZoneDeplacement}}</label>
+                    <div ng-show="indemniteDeplacement.SaisieManuelle">
+                        <lookup-standalone ng-model="indemniteDeplacement.CodeZoneDeplacement"
+                                           text="CodeZoneDeplacementLibelleCourant"
+                                           search-title="{{resources.Global_ReferentielCodeZoneDeplacement}}"
+                                           search-placeholder="{{resources.Global_ReferentielCodeZoneDeplacement_Placeholder}}"
+                                           on-click="handleShowLookup('CodeZoneDeplacement')"
+                                           on-select="handleLookupSelection('CodeZoneDeplacement', item)"
+                                           on-delete="handleLookupDeletion('CodeZoneDeplacement')"
+                                           ng-disabled="!isRolePaie || !indemniteDeplacement.CI"
+                                           style-parent="true"
+                                           name="PickListCodeZoneDeplacement"
+                                           class="formulaire long">
+                        </lookup-standalone>
+                    </div>
+                    <div ng-show="!indemniteDeplacement.SaisieManuelle">
+                        <input type="text" ng-model="indemniteDeplacement.CodeZoneDeplacementLibelle" class="form-control" ng-disabled="true" />
+                    </div>
+                </div>
+                <!--FIELD Code: END-->
+                <!--FIELD NombreKilometres: START-->
+                <div class="form-group">
+                    <label for="txtNombreKilometres">{{resources.IndemniteDeplacement_Index_PanelRight_NbrKm}}</label>
+                    <input class="form-control" id="txtNombreKilometres" name="NombreKilometres" type="text" fred-input-number required ng-model="indemniteDeplacement.NombreKilometres" ng-disabled="!indemniteDeplacement.SaisieManuelle" />
+                    <span class="text-danger" ng-show="formIndemniteDeplacement.NombreKilometres.$error.pattern">{{resources.IndemniteDeplacement_Index_PanelRight_NbrKmInvalide_Erreur}}</span>
+                </div>
+                <!--FIELD NombreKilometres: END-->
+                <div class="form-group">
+                    <label for="NbHeuresETAM">{{resources.IndemniteDeplacement_Index_PanelRight_NbrKmVO}}</label>
+                    <div id="NbKmVO">
+                        <div class="col-md-4 col-lg-4">
+                            <!--FIELD NombreKilometreVODomicileRattachement: START-->
+                            <label for="nbKmVODomicileRattachement">{{resources.IndemniteDeplacement_Index_PanelRight_KmDomicileRattachement}}</label>
+                            <span class="flat">{{indemniteDeplacement.NombreKilometreVODomicileRattachement}}</span>
+                            <!--FIELD NombreKilometreVODomicileRattachement: END-->
+                        </div>
+
+                        <div class="col-md-4 col-lg-4">
+                            <!--FIELD NombreKilometreVODomicileChantier: START-->
+                            <label for="nbKmVODomicileChantier">{{resources.IndemniteDeplacement_Index_PanelRight_KmDomicileChantier}}</label>
+                            <span class="flat">{{indemniteDeplacement.NombreKilometreVODomicileChantier}}</span>
+                            <!--FIELD NombreKilometreVODomicileChantier: END-->
+                        </div>
+                        <div class="col-md-4 col-lg-4">
+                            <!--FIELD NombreKilometreVOChantierRattachement: START-->
+                            <label for="nbKmVOChantierRattachement">{{resources.IndemniteDeplacement_Index_PanelRight_KmChantierRattachement}}</label>
+                            <span class="flat">{{indemniteDeplacement.NombreKilometreVOChantierRattachement}}</span>
+                            <!--FIELD NombreKilometreVOChantierRattachement: END-->
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group last_calc">
+                    <label class="label label-group">{{resources.IndemniteDeplacement_Index_PanelRight_DateDernierCalcul}} : {{ indemniteDeplacement.DateDernierCalcul | date : 'dd/MM/yyyy HH:mm' }}</label>
+                </div>
+
+                <!--FOOTER TOOLBAR : BEGIN-->
+                <div class="footer">
+                    <div class="buttons">
+                        <button class="btn btn-default" type="submit" ng-click="handleClickAddOrUpdate();" title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">{{resources.Global_Bouton_Enregistrer}}</button>
+                        <button class="btn btn-primary" type="submit" ng-click="handleClickAddOrUpdateAndNew();" title="{{resources.Global_Bouton_EnregistrerEtNouveau_Tooltip}}">{{resources.Global_Bouton_EnregistrerEtNouveau}}</button>
+                        <button ng-hide="indemniteDeplacement.IndemniteDeplacementId == 0" class="btn valid-again" type="submit" ng-click="handleClickRemove();" title="{{resources.Global_Bouton_Supprimer_Tooltip}}">{{resources.Global_Bouton_Supprimer}}</button>
+                        <button class="btn btn-link" type="button" ng-click="handleClickCancel();" title="{{resources.Global_Bouton_Annuler_Tooltip}}">{{resources.Global_Bouton_Annuler}}</button>
+                    </div>
+                    <div class="close_panel" ng-click="handleClickCancel();" title="{{resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i> <span>{{resources.Global_Bouton_RefermerPanneau}}</span>
+                    </div>
+                </div>
+                <!--FOOTER TOOLBAR : END-->
+            </form>
+            <!--Formulaire: END-->
+
+        </div>
+    </div>
+</div>

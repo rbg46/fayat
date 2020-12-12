@@ -1,0 +1,19 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+    ViewBag.Title = FeatureTache.PlanTache_TitreOnglet;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/ReferentielTachesIndexBundle.css")
+}
+
+@section scripts {
+
+    @Scripts.Render("~/ReferentielTachesIndexBundle.js")
+    @this.RenderResources("FeatureReferentielTache")
+}
+
+<referentiel-taches-component favori-id="@ViewBag.favoriId" show-task-level-four="false">
+</referentiel-taches-component>

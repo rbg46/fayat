@@ -1,0 +1,1 @@
+﻿UPDATE FRED_STATUT_COMMANDE SET Libelle = 'Clôturée' where Libelle = 'Cloturée'

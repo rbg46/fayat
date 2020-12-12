@@ -1,0 +1,71 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+  ViewBag.Title = FeaturePersonnel.Personnel_Index_TitreGestionEquipe;
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+  @Styles.Render("~/PersonnelEquipeBundle.css")
+}
+
+@section scripts {
+
+  @Scripts.Render("~/PersonnelEquipeBundle.js")
+  @this.RenderResources("FeaturePersonnel")
+}
+
+  <div class="personnel container equipe" ng-controller="PersonnelEquipeController as ctrl">
+    <h1>{{ctrl.resources.Equipe_Gestion_Titre}}</h1>
+    <div class="row teams">
+      <fieldset>
+        <legend class="legend">{{ctrl.resources.Equipe_Affectations}}</legend>
+        <div class="row">
+          <ouvrier-picker-component resources="ctrl.resources"
+                                    ouvrier="ctrl.ouvrier">
+          </ouvrier-picker-component>
+        </div>
+        <h4 class="no-border">{{ctrl.resources.Title_Ouvrier}} :</h4>
+        <div class="col-md-5 col-lg-5">
+          <div class="table-content">
+            <div class="tabline table-responsive">
+              <table class="teams-table">
+                <thead>
+                  <tr class="mid-header">
+                    <th colspan="1" class="blue">{{ctrl.resources.Personnel_Nom}}</th>
+                    <th colspan="1" class="blue">{{ctrl.resources.Personnel_Matricule}}</th>
+                    <th colspan="1" class="blue">{{ctrl.resources.Personnel_InterneStatus}}</th>
+                    <th colspan="1" class="blue">{{ctrl.resources.Global_Action}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="ouvrier in ctrl.ouvrierList">
+                    <td td colspan="1">
+                      {{ouvrier.Prenom}} {{ouvrier.Nom}}
+                    </td>
+                    <td colspan="1">{{ouvrier.Matricule}}</td>
+                    <td colspan="1">
+                      {{ ouvrier.InternStatus }}
+                    </td>
+                    <td colspan="1" class="action-icons">
+                      <span class="material-icons clear"
+                            ng-click="ctrl.handleDeleteOuvrier(ouvrier.PersonnelId)">
+                        clear
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="text-center" ng-show="ctrl.ouvrierList.length === 0"> {{ctrl.resources.Global_Message_AucunElement}} </p>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <div class="panel-footer no-border col-md-5 col-lg-5">
+          <!--BEGIN  > BOUTONS-->
+          <button type="submit" ng-disabled="!ctrl.hasChanges" class="btn btn-link pull-right" ng-click="ctrl.handleCancel()" title="{{resources.Global_Bouton_Annuler_Tooltip}}">{{ctrl.resources.Global_Bouton_Annuler}}</button>
+          <button type="submit" ng-disabled="!ctrl.hasChanges || !ctrl.listNotEmpty" class="btn btn-default pull-left" ng-click="ctrl.handleSave()" title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">{{ctrl.resources.Global_Bouton_Enregistrer}}</button>
+          <!--END  > BOUTONS-->  
+      </div>
+    </div>
+  </div>

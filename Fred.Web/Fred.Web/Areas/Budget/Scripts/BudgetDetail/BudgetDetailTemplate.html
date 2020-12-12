@@ -1,0 +1,25 @@
+﻿<div class="summary">
+    <div class="sum_bloc" ng-repeat="deviseModel in $ctrl.devisesModels track by $index">
+        <p>{{$ctrl.resources.Budget_BudgetDetail_Template_MontantTotal}} ({{deviseModel.devise.Symbole}}) :<br><span>{{deviseModel.total}}</span></p>
+        <p class="text">{{$ctrl.resources.Budget_BudgetDetail_Template_Recette}} ({{deviseModel.devise.Symbole}}) :<br><span>{{deviseModel.recette}}</span></p>
+    </div>
+</div>
+<div class="summary">
+    <div>
+        <div class="sum_bloc">
+            <p>{{$ctrl.resources.Budget_BudgetDetail_Template_CreerLe}}<br><span>{{$ctrl.DateCreation}}</span></p>
+        </div>
+        <div class="sum_bloc">
+            <p>{{$ctrl.resources.Budget_BudgetDetail_Template_Autheur}}<br><span>{{$ctrl.AuteurCreation}}</span></p>
+        </div>
+        <div class="sum_bloc">
+            <p>{{$ctrl.resources.Budget_BudgetDetail_Template_DateModification}}<br><span>{{$ctrl.DateModification}}</span></p>
+        </div>
+        <div class="sum_bloc">
+            <p>{{$ctrl.resources.Budget_BudgetDetail_Template_AuteurModification}}<br><span>{{$ctrl.AuteurModification}}</span></p>
+        </div>
+        <div class="sum_bloc">
+            <p>{{$ctrl.resources.Budget_BudgetDetail_Template_Valideur}}<br><span>{{$ctrl.Valideur}}</span></p>
+        </div>
+    </div>
+</div>

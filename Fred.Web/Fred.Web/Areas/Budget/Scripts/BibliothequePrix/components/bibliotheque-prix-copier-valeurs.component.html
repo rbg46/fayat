@@ -1,0 +1,66 @@
+﻿<div class="bibliotheque-prix-copier-valeurs-dialog modal fade"
+     id="{{$ctrl.Identifiers.Dialog}}"
+     role="dialog"
+     data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="flaticon flaticon-layers"></i>{{::$ctrl.resources.Budget_BibliothequePrix_CopierDialog_Title}}</h2>
+                <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}"></i>
+            </div>
+            <div class="modal-body">
+                {{::$ctrl.resources.Budget_BibliothequePrix_CopierDialog_QueSouhaitezVousFaire}}
+                <div class="row">
+                    <input type="radio"
+                           id="BIBLIOTHEQUE_PRIX_COPIER_ETABLISSEMENT_ID"
+                           ng-model="$ctrl.Action"
+                           value="{{$ctrl.ActionEnum.Etablissement}}"
+                           ng-disabled="$ctrl.Busy"
+                           ng-required="true">
+                    <label for="BIBLIOTHEQUE_PRIX_COPIER_ETABLISSEMENT_ID"><span></span>{{::$ctrl.resources.Budget_BibliothequePrix_CopierDialog_EtablissementRadio_Label}}</label>
+                </div>
+                <div class="row">
+                    <input type="radio"
+                           id="BIBLIOTHEQUE_PRIX_COPIER_CI_ID"
+                           ng-model="$ctrl.Action"
+                           value="{{$ctrl.ActionEnum.CI}}"
+                           ng-disabled="$ctrl.Busy"
+                           ng-change="$ctrl.OnActionChanged()"
+                           ng-required="true">
+                    <label for="BIBLIOTHEQUE_PRIX_COPIER_CI_ID"><span></span>{{::$ctrl.resources.Budget_BibliothequePrix_CopierDialog_CIRadio_Label}}</label>
+                </div>
+                <div class="row lookup-ci">
+                    <lookup-standalone ng-model="$ctrl.CI"
+                                       text="$ctrl.CI.CodeLibelle"
+                                       search-title="{{::$ctrl.resources.Global_ReferentielCI}}"
+                                       search-placeholder="{{::$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                       url="/api/CI/SearchLight"
+                                       placeholder="Rechercher un CI..."
+                                       class="formulaire long"
+                                       ng-disabled="$ctrl.Busy || $ctrl.Action !== $ctrl.ActionEnum.CI"
+                                       showDeleteButton="false"
+                                       show-in-popup="true">
+                    </lookup-standalone>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!--Bouton Valider-->
+                <button class="btn btn-default pull-left"
+                        ng-click="$ctrl.OnValidateButtonClick()"
+                        title="{{::$ctrl.resources.Global_Bouton_Valider_Tooltip}}"
+                        ng-disabled="$ctrl.Busy || !$ctrl.GetValidateButtonEnabled()">
+                    {{::$ctrl.resources.Global_Bouton_Valider}}
+                </button>
+
+                <!--Bouton Annuler-->
+                <button class="btn btn-link pull-right"
+                        data-dismiss="modal"
+                        title="{{::$ctrl.resources.Global_Bouton_Annuler_Tooltip}}"
+                        ng-disabled="$ctrl.Busy">
+                    {{::$ctrl.resources.Global_Bouton_Annuler}}
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>

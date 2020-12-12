@@ -1,0 +1,1225 @@
+﻿$color_1: #fff;
+$color_2: #BBBBBB;
+$color_3: rgb(103, 117, 127);
+$color_4: rgb(51, 122, 183);
+$color_5: rgb(51, 51, 51);
+$color_6: rgb(0, 82, 160);
+$color_7: gray;
+$color_8: #0052A0;
+$color_9: #000000;
+$color_10: white;
+$color_11: #333;
+$color_12: rgb(127,127,127);
+$color_13: rgb(242,242,242);
+$color_14: rgb(255,192,0);
+$color_15: rgb(196,56,111);
+$font_family_1: "Flaticon";
+$font_family_2: 'Glyphicons Halflings';
+$font_family_3: 'Material Icons';
+$background_color_1: #0052A0;
+$background_color_2: #FFFFFF;
+$background_color_3: #cfcfcf;
+$background_color_4: transparent;
+$background_color_5: #F1F2F3;
+$background_color_6: #fff;
+$background_color_7: #ffde0e;
+$background_color_8: lightblue;
+$background_color_9: #fafafa;
+$background_color_10: rgba(159,159,159,0.9);
+$background_color_11: rgba(213,213,213,0.2);
+$background_color_12: rgb(157,187,97);
+$background_color_13: rgb(0,82,160);
+$background_color_14: rgb(127,168,207);
+$background_color_15: rgb(64,125,184);
+$background_color_16: rgb(255,169,13);
+$background_color_17: rgb(255,188,64);
+$background_color_18: rgb(153,185,217);
+$background_color_19: rgb(102,151,198);
+$background_color_20: rgb(255,186,61);
+$background_color_21: rgb(255,201,102);
+$background_color_22: rgb(242,242,242);
+$background_color_23: rgb(222,63,126);
+$background_color_24: rgb(242,246,250);
+$background_color_25: rgb(236,242,248);
+$background_color_26: rgb(255,246,230);
+$background_color_27: rgb(255,248,236);
+$background_color_28: rgb(49,133,155);
+$border_color_1: black;
+$border_color_2: #E1E3E5;
+
+
+.no-padding {
+    padding: 0;
+    padding: 0;
+}
+
+.tableSocPartenaire {
+    width: 100%;
+
+    thead {
+        background-color: $background_color_1;
+    }
+
+    .tdTableSocPartenaire {
+        color: $color_1;
+        padding: 8px;
+    }
+
+    tbody {
+        tr {
+            border-top: 1px solid #ddd;
+
+            td {
+                padding-bottom: 10px;
+                padding-top: 10px;
+            }
+
+            .delete {
+                .flaticon-multiply {
+                    height: 30px;
+                    font-size: 20px;
+                    margin-top: 0;
+                    padding-top: 0;
+                    background-color: $background_color_4 !important;
+                }
+            }
+        }
+    }
+}
+
+.tdTableSocPartenaire {
+    .form-group {
+        margin-bottom: 0;
+
+        .form-control {
+            margin-bottom: 0;
+        }
+    }
+
+    .btn {
+        margin-top: 0;
+    }
+}
+
+.tdTypeParticipation {
+    width: 15%;
+}
+
+.tdSociete {
+    width: 30%;
+}
+
+.tdQuota {
+    width: 20%;
+}
+
+.tdButtons {
+    width: 35%;
+}
+
+.btnAddSocPart {
+    width: 200px;
+}
+
+.pickListCallerDeviseRef {
+    text-align: left;
+
+    > .inputPLSearchParent {
+        background-color: $background_color_2;
+        color: $color_2;
+    }
+}
+
+.pickListCallerDevise {
+    > .inputPLSearchParent {
+        &::before {
+            cursor: pointer;
+            font-family: $font_family_1;
+            font-weight: 100;
+        }
+    }
+}
+
+.pickListCallerDeviseRefContainer {
+    text-align: right;
+}
+
+.no_paddingleft {
+    padding-left: 0;
+}
+
+.no_paddingright {
+    padding-right: 0;
+}
+
+hr {
+    margin-bottom: 0;
+}
+
+#collapse-paie {
+    .panel-body {
+        .table-hover {
+            thead {
+                tr {
+                    th {
+                        height: 45px;
+                        padding-bottom: 5px;
+                        padding-top: 5px;
+                    }
+                }
+            }
+        }
+
+        .table {
+            tbody {
+                tr {
+                    .lat {
+                        padding-left: 0;
+                    }
+
+                    .long {
+                        padding-right: 0;
+                    }
+                }
+            }
+        }
+
+        .search-add {
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+    }
+}
+
+#collapse-devise {
+    .panel-body {
+        .table-hover {
+            thead {
+                tr {
+                    th {
+                        height: 45px;
+                        padding-bottom: 5px;
+                        padding-top: 5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.preLook {
+    margin-bottom: 5px;
+}
+
+.cssDivCIParam {
+    background-color: $background_color_3;
+    border-color: $border_color_1;
+    border-style: outset;
+    border-width: 1px;
+    font-size: larger;
+}
+
+.cssBtnCIParam {
+    background-color: $background_color_4;
+    border-style: none;
+    font-size: larger;
+    text-align: right;
+}
+
+.inputPL {
+    border-width: 0;
+}
+
+.inputPLSearchParent {
+    > span {
+        background: #fafafa;
+        color: $color_3;
+        font-style: normal;
+    }
+
+    text-align: left;
+}
+
+.sm-chb {
+    margin-top: 0;
+    transform: scale(0.5);
+}
+
+.divCheckBoxBorder {
+    background: #fafafa;
+    border-color: $border_color_2;
+    border-style: solid;
+    border-width: 1px;
+    height: 32px;
+    width: 50px;
+}
+
+.heureMinute {
+    background: #fafafa;
+    border: 1px solid #BBBBBB;
+    border-radius: 0;
+    box-shadow: none;
+    color: $color_3;
+    font-size: 16px;
+    height: 32px;
+    margin-bottom: 5px;
+    width: 75px;
+}
+
+.add_currency {
+    background-color: $background_color_5;
+    border: #F1F2F3 1px;
+    color: $color_4;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-right: 3px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-weight: normal;
+
+    &:hover {
+        background-color: $background_color_6;
+        color: $color_5;
+    }
+}
+
+.add_co {
+    &:hover {
+        background-color: $background_color_6;
+        color: $color_5;
+    }
+}
+
+.no_plpr {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.no_pl {
+    padding-left: 0;
+}
+
+.no_pr {
+    padding-right: 0;
+}
+
+#electricite {
+    height: auto;
+}
+
+#essence {
+    height: auto;
+}
+
+#fuel {
+    height: auto;
+}
+
+.carburant {
+    .control-label {
+        font-size: 17px;
+    }
+
+    .dev {
+        font-size: 15px;
+        color: $color_6;
+    }
+
+    .cur_sel {
+        height: 40px;
+        width: 250px;
+        display: inline-block;
+        float: left;
+        margin-bottom: 20px;
+    }
+
+    .glyphicon-chevron-right {
+        font-size: 25px;
+    }
+
+    .glyphicon-chevron-down {
+        font-size: 25px;
+    }
+
+    .res_mat_header {
+        margin-bottom: 0;
+
+        tbody {
+            tr {
+                th {
+                    background-color: $background_color_1;
+                    color: $color_1;
+                    font-weight: 300;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+
+                    &:last-child {
+                        background-color: $background_color_10;
+                        height: 40px;
+                    }
+                }
+            }
+        }
+    }
+
+    .car_prix_header {
+        margin-bottom: 0;
+
+        tbody {
+            tr {
+                th {
+                    background-color: $background_color_1;
+                    color: $color_1;
+                    font-weight: 300;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                }
+            }
+        }
+    }
+
+    #accordion {
+        table {
+            margin-bottom: 0;
+        }
+
+        .panel {
+            .panel-heading {
+                border-width: 0;
+                padding: 10px 6px;
+            }
+
+            .panel-heading.level1 {
+                background-image: url('/medias/images/picto/tree/miniLevels1.png');
+                background-repeat: repeat-y;
+                height: 35px;
+                padding-top: 0px;
+                margin: 0px;
+
+                table {
+                    tbody {
+                        tr {
+                            td {
+                                font-size: 15px;
+                                font-weight: bold;
+                                padding-left: 0px;
+
+                                &:first-child {
+                                    span {
+                                        padding-top: 0px;
+                                    }
+                                }
+                            }
+
+                            .sm_pad {
+                                padding-left: 3px;
+                            }
+                        }
+                    }
+                }
+
+                .t_first {
+                    tbody {
+                        tr {
+                            td {
+                                &:first-child {
+                                    span {
+                                        display: block;
+                                        padding-left: 35px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .panel-heading.level2 {
+                background-image: url(/medias/images/picto/tree/miniLevels2.png);
+                background-repeat: repeat-y;
+
+                table {
+                    tbody {
+                        tr {
+                            td {
+                                font-size: 15px;
+                                font-weight: 500;
+                                color: $color_9;
+                                padding-left: 5px;
+
+                                &:first-child {
+                                    span {
+                                        padding-top: 8px;
+                                    }
+                                }
+
+                                span {
+                                    display: block;
+                                    padding-left: 35px;
+                                }
+                            }
+
+                            .sm_pad {
+                                padding-left: 3px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .panel-body.level3 {
+                .t_third {
+                    tbody {
+                        tr {
+                            td {
+                                &:first-child {
+                                    padding-left: 45px;
+                                }
+
+                                &:last-child {
+                                    background-color: $background_color_11;
+                                }
+                            }
+
+                            .cons_ci {
+                                input {
+                                    width: 85px;
+                                }
+
+                                .flaticon-multiply {
+                                    height: 30px;
+                                    font-size: 20px;
+                                    margin-top: 0;
+                                    padding-top: 0;
+                                    background-color: $background_color_4 !important;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .t_third_param_carburant {
+                    tbody {
+                        tr {
+                            td {
+                                &:first-child {
+                                    padding-left: 45px;
+                                }
+                            }
+
+                            .prix_carburant {
+                                input {
+                                    width: 85px;
+                                }
+
+                                .flaticon-multiply {
+                                    height: 30px;
+                                    font-size: 20px;
+                                    margin-top: 0;
+                                    padding-top: 0;
+                                    background-color: $background_color_4 !important;
+                                }
+                            }
+
+                            .periode_carburant {
+                                height: 25px;
+                                width: 100px;
+                                font-size: 13px;
+                                padding-top: 4px;
+                            }
+                        }
+                    }
+                }
+
+                background-image: url('/medias/images/picto/tree/miniLevels2.png');
+                background-repeat: repeat-y;
+            }
+
+            .panel-body {
+                border: none;
+                padding: 0;
+            }
+        }
+
+        .parent {
+            border-left: none;
+            border-right: none;
+            border-left: 5px yellow solid;
+        }
+    }
+
+    .t_first {
+        width: 100%;
+    }
+
+    .panel-heading {
+        .accordion-toggle.collapsed {
+            &:after {
+                color: $color_10;
+                content: "keyboard_arrow_right";
+                font-size: 20px;
+            }
+        }
+
+        .accordion-toggle {
+            &:after {
+                color: $color_10;
+                content: "keyboard_arrow_down";
+                float: left;
+                font-family: $font_family_3;
+                font-size: 20px;
+            }
+        }
+    }
+
+    .add_carburant {
+        margin-left: 15px;
+    }
+
+    .panel-group {
+        .panel.panel-default {
+            border-bottom-width: 0;
+            border-left: 0;
+            border-right: 0;
+        }
+
+        .panel {
+            & + .panel {
+                margin-top: 0;
+                border-bottom-width: 0;
+            }
+        }
+    }
+
+    .res_mat {
+        .fred-scroll {
+            max-height: 750px;
+        }
+    }
+
+    .car_prix {
+        .fred-scroll {
+            max-height: 550px;
+        }
+    }
+}
+
+.switch.carb {
+    top: 14px;
+    left: 20px;
+}
+
+.devise {
+    tbody {
+        tr {
+            .delete {
+                .flaticon-multiply {
+                    height: 30px;
+                    font-size: 20px;
+                    margin-top: 0;
+                    padding-top: 0;
+                    background-color: $background_color_4 !important;
+                }
+            }
+        }
+    }
+}
+
+.y_search {
+    margin: 0;
+    vertical-align: top;
+    height: 40px;
+    display: inline-block;
+    float: left;
+    background-color: $background_color_7;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.nrj {
+    .main-row {
+        tr {
+            height: 15px;
+        }
+
+        td {
+            height: 50px;
+            background-color: $background_color_8;
+        }
+
+        .add {
+            margin-top: 0;
+        }
+
+        p {
+            &:first-child {
+                font-size: 10px;
+                color: $color_7;
+                margin-bottom: 0;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        a {
+            span {
+                &:before {
+                    font-family: $font_family_2;
+                    content: "\e114";
+                    color: $color_8;
+                    float: left;
+                    font-size: 25px;
+                }
+            }
+        }
+
+        .collapsed {
+            span {
+                &:before {
+                    font-family: $font_family_2;
+                    content: "\e080";
+                    color: $color_8;
+                    float: left;
+                    font-size: 25px;
+                }
+            }
+        }
+    }
+
+    .energie {
+        padding: 0;
+        height: auto;
+
+        table {
+            tbody {
+                tr {
+                    td {
+                        height: 60px;
+                    }
+                }
+            }
+        }
+
+        p {
+            font-size: 10px;
+            color: $color_7;
+            margin-bottom: 0;
+        }
+
+        .unit {
+            font-size: 15px;
+            color: $color_5;
+            margin-top: 14px;
+        }
+
+        .input-filter {
+            height: 25px;
+            width: 100px;
+            font-size: 11px;
+            padding-top: 4px;
+            border: white;
+        }
+
+        .prix {
+            width: 60px;
+            border: none;
+            background-color: $background_color_9;
+        }
+
+        .fx_per {
+            font-size: 11px;
+            padding: 6px 14px;
+        }
+
+        .flaticon-multiply {
+            color: $color_7;
+            font-size: 15px;
+        }
+    }
+
+    #electricite {
+        table {
+            height: 180px;
+            margin: 0;
+
+            tbody {
+                height: 180px;
+            }
+        }
+    }
+
+    #essence {
+        table {
+            height: 120px;
+            margin: 0;
+
+            tbody {
+                height: 120px;
+            }
+        }
+    }
+
+    #fuel {
+        table {
+            height: 120px;
+            margin: 0;
+
+            tbody {
+                height: 120px;
+            }
+        }
+    }
+}
+
+.main-row {
+    padding-left: 0px;
+}
+
+.res_search_input {
+    height: 30px;
+    width: 300px;
+    display: inline-block;
+    float: left;
+    margin-bottom: 20px;
+}
+
+.materiel {
+    thead {
+        tr {
+            .text-center {
+                &:last-child {
+                    background-color: $background_color_10 !important;
+                }
+            }
+        }
+    }
+
+    tbody {
+        height: 450px;
+        overflow: auto;
+    }
+}
+
+.carburant-code-libelle {
+    margin-top: 5px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.inline-header {
+    color: $color_3;
+    font-size: 11px;
+    font-style: normal;
+    margin: 0 0 -2px;
+}
+
+.inline-desctiption {
+    margin: 0;
+}
+
+input[type="radio"] {
+    & + label {
+        margin-right: 10px;
+    }
+}
+
+input[type="checkbox"] {
+    & + label {
+        margin-top: 5px;
+        margin-left: 15px;
+    }
+}
+
+.majoration-table {
+    > thead {
+        width: 100%;
+        display: table;
+        table-layout: fixed;
+    }
+
+    > tbody {
+        max-height: 300px;
+        display: block;
+
+        tr {
+            width: 100%;
+        }
+
+        > tr {
+            display: table;
+            table-layout: fixed;
+        }
+    }
+
+    input[type="checkbox"] {
+        & + label {
+            margin-left: 0;
+        }
+    }
+}
+
+.prime-table {
+    > thead {
+        width: 100%;
+        display: table;
+        table-layout: fixed;
+    }
+
+    > tbody {
+        max-height: 300px;
+        display: block;
+
+        tr {
+            width: 100%;
+        }
+
+        > tr {
+            display: table;
+            table-layout: fixed;
+        }
+    }
+
+    input[type="checkbox"] {
+        & + label {
+            margin-left: 0;
+        }
+    }
+}
+
+#ci-accordion {
+    .panel-heading {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.teams {
+    fred-toolbar {
+        margin-top: 5px;
+    }
+
+    .text-search-section {
+        width: 100%;
+    }
+
+    fred-section-controls {
+        width: 100%;
+
+        .input-group.input-search {
+            width: 40%;
+            margin-right: 1%;
+        }
+
+        .showAll {
+            width: 150px;
+            padding-right: 8px;
+            padding-left: 8px;
+            justify-content: flex-start;
+            margin-right: 3%;
+            border: none;
+
+            .material-icons {
+                margin-left: auto;
+                font-size: 25px;
+            }
+        }
+
+        .txt {
+            font-size: 11px;
+            color: $color_11;
+            font-weight: normal;
+            margin-right: 1%;
+        }
+
+        .switch {
+            margin-bottom: 0;
+            margin-right: 5%;
+        }
+
+        button.add-pers {
+            margin-left: 14%;
+
+            .material-icons {
+                margin-right: 5px;
+            }
+        }
+
+        button.gr {
+            background-color: $background_color_12;
+
+            .material-icons {
+                margin-right: 5px;
+            }
+        }
+    }
+
+    .table-content {
+        margin: 15px 15px 0 15px;
+    }
+
+    .tabline {
+        overflow-y: hidden;
+    }
+
+    .teams-table {
+        thead {
+            tr {
+                padding-right: 16px;
+
+                th {
+                    height: 30px;
+                    color: $color_1;
+                }
+
+                th.white {
+                    background-color: $background_color_6;
+                }
+
+                th.odd-day {
+                    background-color: $background_color_14;
+                }
+
+                th.even-day {
+                    background-color: $background_color_15;
+                }
+
+                th.weekend1 {
+                    background-color: $background_color_16;
+                }
+
+                th.weekend2 {
+                    background-color: $background_color_17;
+                }
+
+                th.blue {
+                    background-color: $background_color_13;
+                    color: $color_1;
+                }
+            }
+
+            tr.top-header {
+                th {
+                    background-color: $background_color_13;
+                    color: $color_1;
+                    font-size: 11px;
+                    font-weight: 700;
+                }
+            }
+
+            tr.mid-header {
+                th {
+                    height: 30px;
+                    text-align: center;
+                    font-size: 11px;
+                    font-weight: 700;
+                }
+            }
+
+            tr.bottom-header {
+                th {
+                    text-align: center;
+                    font-size: 11px;
+                    font-weight: 700;
+                }
+
+                th.odd-day {
+                    background-color: $background_color_18;
+                }
+
+                th.even-day {
+                    background-color: $background_color_19;
+                }
+
+                th.weekend1 {
+                    background-color: $background_color_20;
+                }
+
+                th.weekend2 {
+                    background-color: $background_color_21;
+                }
+            }
+        }
+
+        tbody {
+            overflow-x: auto;
+            overflow-y: auto;
+            width: 100%;
+            max-height: 500px;
+
+            tr {
+                td {
+                    height: 30px;
+                    text-align: center;
+                    font-size: 11px;
+                    border-top: 1px solid #ddd;
+                    position: relative;
+
+                    &:first-child {
+                        &::before {
+                            position: absolute;
+                            z-index: 1;
+                            top: 0;
+                            left: 0;
+                            height: 100%;
+                            width: 2%;
+                            content: "";
+                            background-color: $background_color_22;
+                        }
+                    }
+
+                    .table-tile {
+                        padding: 3px 6px;
+                        text-transform: uppercase;
+                        width: 95px;
+                        display: inline-block;
+                    }
+
+                    .table-tile.duty {
+                        background-color: $background_color_28;
+                        color: $color_1;
+                    }
+
+                    .table-tile.affected {
+                        border: 2px solid rgb(191,191,191);
+                        color: $color_12;
+                        padding: 2px 5px;
+                    }
+
+                    .table-tile.no-duty {
+                        border: 2px solid rgb(191,191,191);
+                        color: $color_12;
+                        font-size: 10px;
+                        padding: 3px 5px;
+                    }
+                }
+
+                td.del {
+                    &:first-child {
+                        &::before {
+                            position: absolute;
+                            z-index: 1;
+                            top: 0;
+                            left: 0;
+                            height: 100%;
+                            width: 2%;
+                            content: "";
+                            background-color: $background_color_23;
+                        }
+                    }
+                }
+
+                td.odd-day {
+                    background-color: $background_color_24;
+                }
+
+                td.even-day {
+                    background-color: $background_color_25;
+                }
+
+                td.weekend1 {
+                    background-color: $background_color_26;
+                }
+
+                td.weekend2 {
+                    background-color: $background_color_27;
+                }
+
+                td.action-icons {
+                    .material-icons {
+                        margin-left: 2%;
+                        margin-right: 2%;
+                        cursor: pointer;
+                    }
+
+                    .recover-auth {
+                        bottom: -1px;
+                    }
+
+                    .material-icons.clear {
+                        color: $color_12;
+                    }
+
+                    .material-icons.star-off {
+                        color: $color_13;
+                    }
+
+                    .material-icons.star-on {
+                        color: $color_14;
+                    }
+
+                    .material-icons.peop-off {
+                        color: $color_13;
+                    }
+
+                    .material-icons.peop-del {
+                        color: $color_15;
+                    }
+                }
+            }
+        }
+
+        .timeline {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-transform: uppercase;
+
+            .material-icons {
+                cursor: pointer;
+            }
+
+            .displayed-week {
+                margin-left: 40px;
+                margin-right: 40px;
+            }
+        }
+    }
+
+    .cal {
+        app-date-picker {
+            .input-group-addon {
+                display: none;
+            }
+        }
+    }
+}
+
+.teams-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+@media (max-width:1366px) and (max-height:768px) {
+    .formulaire.long {
+        .inputPL {
+            .inputPLRemove {
+                height: 23px;
+                width: 25px;
+            }
+        }
+    }
+
+    .carburant {
+        #accordion {
+            .panel {
+                .panel-body.level3 {
+                    .t_third_param_carburant {
+                        tbody {
+                            tr {
+                                .periode_carburant {
+                                    padding-top: 0;
+                                    padding-bottom: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

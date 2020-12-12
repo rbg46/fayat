@@ -1,0 +1,375 @@
+﻿@*--------------------------------------------------------------------------------------------------------------*@
+@*                                           INFORMATIONS GENERALES                                             *@
+@*--------------------------------------------------------------------------------------------------------------*@
+<div class="panel panel-default" ng-show="!personnelEdit.JustDelegationShow">
+    <div class="panel-heading" data-toggle="collapse" data-parent="#personnel-accordion" data-target="#collapse-general" id="panel-heading-general">
+        <i class="chevron fa fa-fw"></i>{{personnelEdit.resources.Personnel_PartialGeneral_Titre}}
+    </div>
+    <div id="collapse-general" class="panel-collapse collapse in">
+        <form class="form-horizontal" autocomplete="off" role="form" name="personnelEdit.formGestionPersonnel" novalidate>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="alert alert-danger" ng-show="personnelEdit.sameNomPrenomPersonnel !== null">
+                        <a class="close" aria-label="close" ng-click="personnelEdit.sameNomPrenomPersonnel = null">&times;</a>
+                        {{personnelEdit.resources.Personnel_PartialGeneral_Avertissement_NomPrenomExistant}} : <a title="{{personnelEdit.resources.Personnel_PartialGeneral_Avertissement_Detail_Tooltip}}" target="_blank" href="/Personnel/Personnel/Edit/{{personnelEdit.sameNomPrenomPersonnel.PersonnelId}}"><b>{{personnelEdit.sameNomPrenomPersonnel.Nom}} {{personnelEdit.sameNomPrenomPersonnel.Prenom}}</b></a> ({{personnelEdit.resources.Global_Matricule}} <b>{{personnelEdit.sameNomPrenomPersonnel.Matricule}}</b>).
+                    </div>
+                    <div class="alert alert-danger" ng-show="personnelEdit.sameSocieteMatriculePersonnel !== null">
+                        <a class="close" aria-label="close" ng-click="personnelEdit.sameSocieteMatriculePersonnel = null">&times;</a>
+                        {{personnelEdit.resources.Personnel_PartialGeneral_Avertissement_SocieteMatriculeExistant}} : <a title="{{personnelEdit.resources.Personnel_PartialGeneral_Avertissement_Detail_Tooltip}}" target="_blank" href="/Personnel/Personnel/Edit/{{personnelEdit.sameSocieteMatriculePersonnel.PersonnelId}}"><b>{{personnelEdit.sameSocieteMatriculePersonnel.Nom}} {{personnelEdit.sameSocieteMatriculePersonnel.Prenom}}</b></a> ({{personnelEdit.resources.Global_Matricule}} <b>{{personnelEdit.sameSocieteMatriculePersonnel.Matricule}}</b>).
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" ng-class="{'has-error': personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.Societe.$invalid}">
+                        <label>
+                            {{personnelEdit.resources.Personnel_PartialGeneral_Societe}} *
+                        </label><br />
+                        <span class="text-danger" ng-show="personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.Societe.$invalid">{{personnelEdit.resources.Global_Control_DataRequired_Erreur}}</span>
+                        <input type="text" class="form-control inputText" id="txtSociete" name="Societe" ng-model="personnelEdit.Personnel.Societe.CodeLibelle" ng-disabled="true" ng-show="personnelEdit.Personnel.IsInterne || personnelEdit.Personnel.IsInterimaire" aria-label="société" />
+                        <div>
+                            <lookup-standalone ng-model="personnelEdit.Personnel.Societe"
+                                               name="Societe"
+                                               text="personnelEdit.Personnel.Societe.CodeLibelle"
+                                               search-title="{{personnelEdit.resources.Global_ReferentielSociete}}"
+                                               search-placeholder="{{personnelEdit.resources.Global_ReferentielSociete_Placeholder}}"
+                                               url="/api/Societe/SearchLightForRoles?{{personnelEdit.typeSocieteCodesParams}}"
+                                               on-select="personnelEdit.loadData('Societe', item)"
+                                               on-delete="personnelEdit.handleDelete('Societe')"
+                                               class="formulaire long no-padding"
+                                               ng-show="!personnelEdit.Personnel.IsInterne && !personnelEdit.Personnel.IsInterimaire"
+                                               style-parent="true"
+                                               ng-required="true">
+                            </lookup-standalone>
+                        </div>
+                    </div>
+                    <div class="col-md-6" ng-class="{'has-error':personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.Matricule.$invalid}">
+                        <label>{{personnelEdit.resources.Global_Matricule}} <span ng-show="!personnelEdit.Personnel.IsInterne && !personnelEdit.Personnel.IsInterimaire">*</span></label><br />
+                        <span class="text-danger" ng-show="personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.Matricule.$invalid">{{personnelEdit.resources.Global_Control_DataRequired_Erreur}}</span>
+                        <input class="form-control inputText"
+                               type="text"
+                               id="txtMatricule"
+                               name="Matricule"
+                               maxlength="10"
+                               ng-model="personnelEdit.Personnel.Matricule"
+                               ng-disabled="personnelEdit.Personnel.IsInterne || personnelEdit.Personnel.IsInterimaire"
+                               ng-required="!personnelEdit.Personnel.IsInterne && !personnelEdit.Personnel.IsInterimaire"
+                               placeholder="{{personnelEdit.resources.Global_Matricule_Placeholder}}"
+                               ng-change="personnelEdit.handleCheckSocieteMatriculeExist()"
+                               ng-model-options='{ debounce: 500 }' />
+                    </div>
+                </div>
+                @*NOM ET PRENOM*@
+                <div class="row">
+                    <div class="col-md-6" ng-class="{'has-error':personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.Nom.$error.required }">
+                        <label>{{personnelEdit.resources.Personnel_PartialGeneral_Nom}} *</label><br />
+                        <span class="text-danger" ng-show="personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.Nom.$error.required">{{personnelEdit.resources.Global_Control_DataRequired_Erreur}}</span>
+                        <input class="form-control inputText"
+                               type="text"
+                               id="txtNom"
+                               name="Nom"
+                               ng-model="personnelEdit.Personnel.Nom"
+                               required
+                               ng-disabled="personnelEdit.Personnel.IsInterne"
+                               ng-change="personnelEdit.handleCheckNomPrenomExist()"
+                               ng-model-options='{ debounce: 500 }'
+                               placeholder="{{personnelEdit.resources.Personnel_PartialGeneral_Nom_Placeholder}}" />
+                    </div>
+                    <div class="col-md-6" ng-class="{'has-error': personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.Prenom.$invalid}">
+                        <label>{{personnelEdit.resources.Personnel_PartialGeneral_Prenom}} *</label><br />
+                        <span class="text-danger" ng-show="personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.Prenom.$invalid">{{personnelEdit.resources.Global_Control_DataRequired_Erreur}}</span>
+                        <input class="form-control inputText"
+                               type="text"
+                               id="txtPrenom"
+                               name="Prenom"
+                               ng-model="personnelEdit.Personnel.Prenom"
+                               ng-required="true"
+                               ng-disabled="personnelEdit.Personnel.IsInterne"
+                               ng-change="personnelEdit.handleCheckNomPrenomExist()"
+                               ng-model-options='{ debounce: 500 }'
+                               placeholder="{{personnelEdit.resources.Personnel_PartialGeneral_Prenom_Placeholder}}" />
+                    </div>
+                </div>
+                @*DATE ENTREE ET DATE SORTIE*@
+                <div class="row" ng-show="!personnelEdit.Personnel.IsInterimaire">
+                    <div class="col-md-3" ng-class="{'has-error': personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.DateEntree.$invalid}">
+                        <label>{{personnelEdit.resources.Personnel_PartialGeneral_DateEntree}} *</label>
+                        <span class="text-danger" ng-show="personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.DateEntree.$error.required">{{personnelEdit.resources.Global_Control_DataRequired_Erreur}}</span>
+                        <span class="text-danger" ng-show="personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.DateEntree.$error.RangeError">{{personnelEdit.resources.Personnel_PartialGeneral_DateSortieInferieurDateEntree_Erreur}}</span>
+                        <input ng-disabled="true"
+                               type="text"
+                               name="DateEntree"
+                               class="form-control inputText"
+                               id="txtDateEntree"
+                               value="{{personnelEdit.Personnel.DateEntree | date : 'dd/MM/yyyy'}}"
+                               ng-if="personnelEdit.Personnel.IsInterne" />
+                        <div>
+                            <app-date-picker id="dtPkEntree"
+                                             name="DateEntree"
+                                             format="DD/MM/YYYY"
+                                             lang="fr"
+                                             placeholder="{{personnelEdit.resources.Personnel_PartialGeneral_DateEntree_Placeholder}}"
+                                             initial-date="{{personnelEdit.Personnel.DateEntree}}"
+                                             ng-model="personnelEdit.Personnel.DateEntree"
+                                             ng-change="personnelEdit.handleValidateDates()"
+                                             ng-if="!personnelEdit.Personnel.IsInterne"
+                                             ng-required="true"
+                                             max-date="{{personnelEdit.Personnel.DateSortie}}" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label>{{personnelEdit.resources.Personnel_PartialGeneral_DateSortie}}</label>
+                        <input ng-disabled="true"
+                               type="text"
+                               name="DateSortie"
+                               class="form-control inputText"
+                               id="txtDateSortie"
+                               value="{{personnelEdit.Personnel.DateSortie | date : 'dd/MM/yyyy'}}"
+                               ng-if="personnelEdit.Personnel.IsInterne" />
+                        <div>
+                            <app-date-picker id="dtPkSortie"
+                                             name="DateSortie"
+                                             format="DD/MM/YYYY"
+                                             lang="fr"
+                                             placeholder="{{personnelEdit.resources.Personnel_PartialGeneral_DateSortie_Placeholder}}"
+                                             ng-model="personnelEdit.Personnel.DateSortie"
+                                             ng-change="personnelEdit.handleValidateDates()"
+                                             ng-if="!personnelEdit.Personnel.IsInterne"
+                                             min-date="{{personnelEdit.Personnel.DateEntree}}" />
+                        </div>
+                    </div>
+                    <div id="personnel-statut-rzb" fred-display-handler="personnelEdit.userOrganisationId" display="hidden">
+                        <div class="col-md-2">
+                            <label>{{personnelEdit.resources.Personnel_PartialGeneral_Statut}}</label> <br />
+                            <div class="btn-radio-wrap">
+                                <div class="btn-radio-combo">
+                                    <input type="radio" name="rbtnOuvrier" ng-model="personnelEdit.Personnel.Statut" id="rbtnOuvrier" value="1" ng-disabled="personnelEdit.Personnel.IsInterne"><label for="rbtnOuvrier"><span></span>{{personnelEdit.resources.Personnel_PartialGeneral_StatutOuvrier}}</label>
+                                </div>
+                                <div class="btn-radio-combo">
+                                    <input type="radio" name="rbtnETAMChantier" ng-model="personnelEdit.Personnel.Statut" id="rbtnETAMChantier" value="2" ng-disabled="personnelEdit.Personnel.IsInterne"><label for="rbtnETAMChantier"><span></span>{{personnelEdit.resources.Personnel_PartialGeneral_StatutEtamChantier}}</label>
+                                </div>
+                                <div class="btn-radio-combo">
+                                    <input type="radio" name="rbtnETAMBureau" ng-model="personnelEdit.Personnel.Statut" id="rbtnETAMBureau" value="4" ng-disabled="personnelEdit.Personnel.IsInterne"><label for="rbtnETAMBureau"><span></span>{{personnelEdit.resources.Personnel_PartialGeneral_StatutEtamBureau}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="ghost">Statut</label> <br />
+                            <div class="btn-radio-wrap">
+                                <div class="btn-radio-combo">
+                                    <input type="radio" name="rbtnETAMArticle36" ng-model="personnelEdit.Personnel.Statut" id="rbtnETAMArticle36" value="5" ng-disabled="personnelEdit.Personnel.IsInterne"><label for="rbtnETAMArticle36"><span></span>{{personnelEdit.resources.Personnel_PartialGeneral_StatutEtamArticle36}}</label>
+                                </div>
+                                <div class="btn-radio-combo">
+                                    <input type="radio" name="rbtnCadre" ng-model="personnelEdit.Personnel.Statut" id="rbtnCadre" value="3" ng-disabled="personnelEdit.Personnel.IsInterne"><label for="rbtnCadre"><span></span>{{personnelEdit.resources.Personnel_PartialGeneral_StatutCadre}}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 no-flex-cent" id="personnel-statut-fes" fred-display-handler="personnelEdit.userOrganisationId" display="visible">
+                        <div>
+                            <label>{{personnelEdit.resources.Personnel_PartialGeneral_Statut}}</label> <br />
+                            <input class="col-md-4" type="radio" name="rbtnOuvrierFes" ng-model="personnelEdit.Personnel.Statut" id="rbtnOuvrierFes" value="1" ng-disabled="personnelEdit.Personnel.IsInterne"><label for="rbtnOuvrierFes"><span></span>{{personnelEdit.resources.Personnel_PartialGeneral_StatutOuvrier}}</label>
+                            <input class="col-md-4" type="radio" name="rbtnETAM" ng-model="personnelEdit.Personnel.Statut" id="rbtnETAM" value="2" ng-disabled="personnelEdit.Personnel.IsInterne"><label for="rbtnETAM"><span></span>{{personnelEdit.resources.Personnel_PartialGeneral_StatutEtam}}</label>
+                            <input class="col-md-4" type="radio" name="rbtnIAC" ng-model="personnelEdit.Personnel.Statut" id="rbtnIAC" value="3" ng-disabled="personnelEdit.Personnel.IsInterne"><label for="rbtnIAC"><span></span>{{personnelEdit.resources.Personnel_PartialGeneral_StatutCadre}}</label>
+                        </div>
+                    </div>
+                </div>
+                @*RESSOURCE ET INTERIMAIRE*@
+                <div class="row ">
+                    <div class="col-md-6 no-flex-cent" id="personnel-manager" fred-display-handler="personnelEdit.userOrganisationId" display="visible">
+                        <div style="width: 100%">
+                            <label>{{personnelEdit.resources.Personnel_PartialGeneral_manager}}</label><br />
+                            <input class="form-control inputText"
+                                   type="text"
+                                   value="{{personnelEdit.Personnel.Manager.Nom+' '+personnelEdit.Personnel.Manager.Prenom+'-'+personnelEdit.Personnel.Manager.Societe.Libelle+'-'+personnelEdit.Personnel.Manager.Matricule}}"
+                                   ng-disabled="true" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 no-flex-cent" id="default-ci" fred-display-handler="personnelEdit.userOrganisationId" display="visible">
+                        <div>
+                            <label>{{personnelEdit.resources.Personnel_PartialGeneral_defaultCi}}</label><br />
+                            <input class="form-control inputText"
+                                   type="text"
+                                   value="{{personnelEdit.defaultCi.Code+'-'+personnelEdit.defaultCi.Libelle}}"
+                                   ng-disabled="true" />
+                        </div>
+                    </div>
+                    <div class="col-md-6" ng-show="!personnelEdit.Personnel.IsInterimaire" ng-class="{'has-error': personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.Ressource.$invalid}">
+                        <label>{{personnelEdit.resources.Personnel_PartialGeneral_Ressource}} <span ng-show="!personnelEdit.Personnel.IsInterimaire">*</span></label><br />
+                        <span class="text-danger" ng-show="personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.Ressource.$invalid">{{personnelEdit.resources.Global_Control_DataRequired_Erreur}}</span>
+                        <input type="text" class="form-control inputText" id="txtRessource" ng-model="personnelEdit.Personnel.Ressource.CodeLibelle" ng-disabled="true" ng-show="personnelEdit.Personnel.Societe==null" />
+                        <div>
+                            <lookup-standalone ng-model="personnelEdit.Personnel.Ressource"
+                                               text="personnelEdit.Personnel.Ressource.CodeLibelle"
+                                               name="Ressource"
+                                               search-title="{{personnelEdit.resources.Global_ReferentielRessource}}"
+                                               search-placeholder="{{personnelEdit.resources.Global_ReferentielRessource_Placeholder}}"
+                                               on-click="personnelEdit.showPickList('RessourcePersonnel', personnelEdit.Personnel.Societe.SocieteId)"
+                                               on-select="personnelEdit.loadData('Ressource', item)"
+                                               on-delete="personnelEdit.handleDelete('Ressource')"
+                                               class="no-padding formulaire long"
+                                               style-parent="true"
+                                               ng-required="!personnelEdit.Personnel.IsInterimaire"
+                                               ng-show="personnelEdit.Personnel.Societe!=null">
+                            </lookup-standalone>
+                        </div>
+                    </div>
+                    <div class="col-md-6" ng-show="personnelEdit.Personnel.Societe.Groupe.Code == 'GFTP'" ng-class="{'has-error': (personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.MatriculeSAP.$invalid) || personnelEdit.errorMatriculeExterneExist}">
+                        <label>{{personnelEdit.resources.Personnel_PartialGeneral_Matricule_SAP}} *</label>
+                        <span class="text-danger" ng-show="personnelEdit.errorMatriculeExterneExist">{{personnelEdit.resources.Personnel_PartialGeneral_Matricule_SAP_Erreur}}</span>
+                        <span class="text-danger" ng-show="personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.MatriculeSAP.$error.required">{{personnelEdit.resources.Global_Control_DataRequired_Erreur}}</span>
+                        <input class="form-control inputText"
+                               type="text"
+                               id="txtMatriculeSAP"
+                               name="MatriculeSAP"
+                               ng-model="personnelEdit.MatriculeSAP"
+                               ng-required="personnelEdit.Personnel.Societe.Groupe.Code == 'GFTP'"
+                               ng-disabled="personnelEdit.hasPointageVerouiller"
+                               placeholder="{{personnelEdit.resources.Personnel_PartialGeneral_Matricule_SAP_Placeholder}}"
+                               ng-change="personnelEdit.handleCheckMatriculeAndSourceExist()"
+                               ng-model-options='{ debounce: 500 }' />
+                    </div>
+                    <div class="col-md-6 no-flex-cent personnel-non-pointable" ng-show="!personnelEdit.Personnel.IsInterimaire" id="personnel-non-pointable-personnel-div" fred-display-handler="personnelEdit.userOrganisationId" display="visible">
+                        <input type="checkbox"
+                               id="personnel-non-pointable-personnel"
+                               ng-model="personnelEdit.Personnel.IsPersonnelNonPointable">
+                        <label for="personnel-non-pointable-personnel"><span></span>{{personnelEdit.resources.Personnel_PartialGeneral_NonPointablePersonnel}}</label>
+                    </div>
+                </div>
+                @*ETS PAIE + TYPE RATTACHEMENT + ETS RATTACHEMENT*@
+                <div class="row mTop" ng-show="!personnelEdit.Personnel.IsInterimaire">
+                    <div class="col-md-4" ng-class="{'has-error': personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.EtablissementPaie.$invalid}">
+                        <label>
+                            {{personnelEdit.resources.Personnel_PartialGeneral_EtablissementPaie}}
+                            <span ng-show="personnelEdit.Personnel.IsInterne">*</span>
+                        </label>
+                        <span class="text-danger" ng-show="personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.EtablissementPaie.$invalid">
+                            {{personnelEdit.resources.Global_Control_DataRequired_Erreur}}
+                        </span>
+                        <input type="text" class="form-control inputText" id="txtEtablissementPaie"
+                               ng-model="personnelEdit.Personnel.EtablissementPaie.CodeLibelle"
+                               ng-disabled="true"
+                               ng-show="personnelEdit.Personnel.Societe==null" />
+                        <div>
+                            <lookup-standalone ng-model="personnelEdit.Personnel.EtablissementPaie"
+                                               name="EtablissementPaie"
+                                               text="personnelEdit.Personnel.EtablissementPaie.CodeLibelle"
+                                               search-title="{{personnelEdit.resources.Global_ReferentielEtablissementPaie}}"
+                                               search-placeholder="{{personnelEdit.resources.Global_ReferentielEtablissementPaie_Placeholder}}"
+                                               url="/api/EtablissementPaie/SearchLight/?societeId={{personnelEdit.Personnel.Societe.SocieteId}}&isHorsRegion=null&isAgenceRattachement=true&"
+                                               on-select="personnelEdit.loadData('EtablissementPaie', item)"
+                                               on-delete="personnelEdit.handleDelete('EtablissementPaie')"
+                                               class="no-padding formulaire long"
+                                               style-parent="true"
+                                               ng-required="personnelEdit.Personnel.IsInterne"
+                                               ng-show="personnelEdit.Personnel.Societe!=null">
+                            </lookup-standalone>
+                        </div>
+                    </div>
+                    <div class="col-md-4"
+                         ng-class="{'has-error': personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.TypeRattachement.$invalid}">
+                        <label>
+                            {{personnelEdit.resources.Personnel_PartialGeneral_TypeRattachement}}
+                            <span ng-show="personnelEdit.Personnel.IsInterne">*</span>
+                        </label><br />
+                        <span class="text-danger"
+                              ng-show="personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.TypeRattachement.$invalid">
+                            {{personnelEdit.resources.Global_Control_DataRequired_Erreur}}
+                        </span>
+                        <select id="ddlTypeRattachement"
+                                name="TypeRattachement"
+                                class="form-control col-lg-9 input-filter"
+                                ng-disabled="personnelEdit.Personnel.Societe === null"
+                                ng-model="personnelEdit.Personnel.TypeRattachementModel"
+                                ng-options="option as option.Libelle for option in personnelEdit.typeRattachementList track by option.TypeRattachementId"
+                                ng-change="personnelEdit.handleChangeTypeRattachement({{personnelEdit.Personnel.TypeRattachementModel}})"
+                                ng-required="personnelEdit.Personnel.IsInterne"></select>
+                    </div>
+                    <div class="col-md-4"
+                         ng-if="personnelEdit.Personnel.Societe!=null && personnelEdit.Personnel.TypeRattachementModel.Code != 'D'"
+                         ng-class="{'has-error': personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.EtablissementRattachement.$invalid}">
+                        <label title="Calcul du déplacement">
+                            {{personnelEdit.resources.Personnel_PartialGeneral_EtablissementRattachement}}
+                            <span ng-show="personnelEdit.Personnel.IsInterne">*</span>
+                        </label>
+                        <span class="text-danger"
+                              ng-show="personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.EtablissementRattachement.$invalid">
+                            {{personnelEdit.resources.Global_Control_DataRequired_Erreur}}
+                        </span>
+                        <input type="text" class="form-control inputText"
+                               id="txtEtablissementRattachement"
+                               ng-model="personnelEdit.Personnel.EtablissementRattachement.CodeLibelle"
+                               ng-disabled="true" ng-show="personnelEdit.Personnel.Societe==null" />
+                        <div>
+                            <lookup-standalone ng-model="personnelEdit.Personnel.EtablissementRattachement"
+                                               name="EtablissementRattachement"
+                                               text="personnelEdit.Personnel.EtablissementRattachement.CodeLibelle"
+                                               search-title="{{personnelEdit.resources.Global_ReferentielEtablissementRattachement}}"
+                                               search-placeholder="{{personnelEdit.resources.Global_ReferentielEtablissementRattachement_Placeholder}}"
+                                               url="/api/EtablissementPaie/SearchLight/?societeId={{personnelEdit.Personnel.Societe.SocieteId}}&isHorsRegion=false&isAgenceRattachement=null&"
+                                               on-select="personnelEdit.loadData('EtablissementRattachement', item)"
+                                               on-delete="personnelEdit.handleDelete('EtablissementRattachement')"
+                                               class="no-padding formulaire long"
+                                               style-parent="true"
+                                               ng-required="personnelEdit.Personnel.IsInterne">
+                            </lookup-standalone>
+                        </div>
+                    </div>
+                </div>
+                <hr ng-show="!personnelEdit.Personnel.IsInterimaire" />
+                <div class="row" ng-show="!personnelEdit.Personnel.IsInterimaire">
+                    <div class="col-md-6" id="materiel-detail" fred-display-handler="personnelEdit.userOrganisationId" display="hidden" ng-class="{'has-error': personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.Materiel.$invalid}">
+                        <label>{{personnelEdit.resources.Personnel_PartialGeneral_MaterielParDefaut}}</label><br />
+                        <input type="text" class="form-control inputText" id="txtMateriel" ng-model="personnelEdit.Personnel.Materiel.LibelleLong" ng-disabled="true" ng-show="personnelEdit.Personnel.Societe==null" />
+                        <div>
+                            <lookup-standalone ng-model="personnelEdit.Personnel.Materiel"
+                                               text="personnelEdit.Personnel.Materiel.LibelleLong"
+                                               name="Materiel"
+                                               search-title="{{personnelEdit.resources.Personnel_PartialGeneral_MaterielParDefaut}}"
+                                               search-placeholder="{{personnelEdit.resources.Personnel_PartialGeneral_MaterielParDefaut_PlaceHolder}}"
+                                               on-click="personnelEdit.showPickList('Materiel', personnelEdit.Personnel.Societe.SocieteId)"
+                                               on-select="personnelEdit.loadData('Materiel', item)"
+                                               on-delete="personnelEdit.handleDelete('Materiel')"
+                                               class="no-padding formulaire long"
+                                               style-parent="true"
+                                               ng-show="personnelEdit.Personnel.Societe!=null">
+                            </lookup-standalone>
+                        </div>
+                    </div>
+                    <div class="col-md-6" id="heure-Insertion" fred-display-handler="personnelEdit.userOrganisationId" display="hidden">
+                        <div class="col-md-3 no-pl">
+                            <input type="checkbox" id="chkHeuresInsertion" ng-change="personnelEdit.handleEmptyDateHeuresInsertion()" ng-model="personnelEdit.Personnel.HeuresInsertion"><label for="chkHeuresInsertion"><span></span>{{personnelEdit.resources.Personnel_PartialGeneral_HeuresInsertion}}</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="col-md-6">
+                                <label>{{personnelEdit.resources.Personnel_PartialGeneral_DateDebut}}</label>
+                                <span class="text-danger" ng-show="personnelEdit.formIsSubmitted() && personnelEdit.formGestionPersonnel.DateDebutInsertion.$invalid">{{personnelEdit.resources.Global_Control_DataRequired_Erreur}}</span>
+                                <span class="text-danger" ng-show="personnelEdit.formIsSubmitted && personnelEdit.formGestionPersonnel.DateDebutInsertion.$error.RangeError">{{personnelEdit.resources.Personnel_PartialGeneral_DateDebutInferieur}}</span>
+                                <app-date-picker name="DateDebutInsertion" format="DD/MM/YYYY" lang="fr"
+                                                 ng-model="personnelEdit.Personnel.DateDebutInsertion"
+                                                 ng-change="personnelEdit.handleValidateDateHeuresInsertion()"
+                                                 placeholder="{{personnelEdit.resources.Personnel_PartialGeneral_DateDebut_Placeholder}}"
+                                                 ng-disabled="!personnelEdit.Personnel.HeuresInsertion"
+                                                 ng-required="personnelEdit.Personnel.HeuresInsertion"
+                                                 readonly />
+                            </div>
+                            <div class="col-md-6 no-pl">
+                                <label>{{personnelEdit.resources.String1Personnel_PartialGeneral_DateFin}}</label>
+                                <app-date-picker name="DateFinInsertion" format="DD/MM/YYYY" lang="fr"
+                                                 ng-model="personnelEdit.Personnel.DateFinInsertion"
+                                                 ng-change="personnelEdit.handleValidateDateHeuresInsertion()"
+                                                 placeholder="{{personnelEdit.resources.String1Personnel_PartialGeneral_DateFin_Placeholder}}"
+                                                 ng-disabled="!personnelEdit.Personnel.HeuresInsertion"
+                                                 readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button type="submit" class="btn btn-default pull-left" ng-click="personnelEdit.handleSave('general')" ng-disabled="personnelEdit.errorMatriculeExterneExist" title="{{personnelEdit.resources.Global_Bouton_Enregistrer_Tooltip}}">{{personnelEdit.resources.Global_Bouton_Enregistrer}}</button>
+                <button type="button" class="btn btn-link pull-right" ng-click="personnelEdit.handleCancel('general')" title="{{personnelEdit.resources.Global_Bouton_Annuler_Tooltip}}">{{personnelEdit.resources.Global_Bouton_Annuler}}</button>
+            </div>
+        </form>
+    </div>
+</div>

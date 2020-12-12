@@ -1,0 +1,225 @@
+﻿<div class="modal-content modal-import">
+    <div class="modal-header">
+        <div ng-switch on="$ctrl.currentExportation">
+            <h2 class="modal-title" ng-switch-when="0"><i class="flaticon flaticon-stopwatch-4"></i>{{::$ctrl.resources.Rapport_ModalImport_Titre_VerificationTemps}}</h2>
+            <h2 class="modal-title" ng-switch-when="2"><i class="flaticon flaticon-stopwatch-4"></i>{{::$ctrl.resources.Rapport_ModalImport_Titre_ControlePointage}}</h2>
+            <h2 class="modal-title" ng-switch-when="1"><i class="flaticon flaticon-calendar-2"></i>{{::$ctrl.resources.Rapport_ModalImport_Titre_ControlePointage}}</h2>
+            <h2 class="modal-title" ng-switch-when="3"><i class="flaticon flaticon-gift"></i>{{::$ctrl.resources.Rapport_ModalImport_Titre_ListePrime}}</h2>
+            <h2 class="modal-title" ng-switch-when="4"><i class="flaticon flaticon-map-1"></i>{{::$ctrl.resources.Rapport_ModalImport_Titre_ListeIGD}}</h2>
+            <h2 class="modal-title" ng-switch-when="5"><i class="flaticon flaticon-map-1"></i>{{::$ctrl.resources.Rapport_ModalImport_Titre_ListeCodeMajoration}}</h2>
+            <h2 class="modal-title" ng-switch-when="6"><i class="flaticon flaticon-map-1"></i>{{::$ctrl.resources.Rapport_Index_Bouton_SalarieAcompte}} </h2>
+            <h2 class="modal-title" ng-switch-when="7"><i class="flaticon flaticon-map-1"></i>{{::$ctrl.resources.Rapport_ModalImport_Titre_ListeAbsence}}</h2>
+            <h2 class="modal-title" ng-switch-default><i class="flaticon flaticon-info"></i>{{::$ctrl.resources.Rapport_ModalImport_Titre_Inconnu}}</h2>
+        </div>
+        <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}" ng-click="$ctrl.handleCancel()"></i>
+    </div>
+    <div class="modal-body modal-import">
+        <div class="row form-horizontal">
+            <div class="col-md-12 text-danger error-message" ng-if="$ctrl.organisationEmpty || $ctrl.etablissementPaieListEmpty">
+                <span ng-if="$ctrl.organisationEmpty">{{::$ctrl.resources.Rapport_ModalImport_ErrorMessage_Organisation}}</span>
+                <span ng-if="$ctrl.etablissementPaieListEmpty">{{::$ctrl.resources.Rapport_ModalImport_ErrorMessage_EtablissementPaie}}</span>
+            </div>
+            <div class="col-sm-6">
+                <div class="row form-group">
+                    <label class="col-sm-12">{{::$ctrl.resources.Rapport_ModalImport_Tri}}</label>
+                    <div class="col-sm-12">
+                        <!--Option Tri par Nom-->
+                        <label class="radio-inline">
+                            <input type="radio" id="txttriRadioNom" name="triRadioNom" ng-model="$ctrl.etatPaieExportModel.Tri" ng-value="false">
+                            <label for="txttriRadioNom"><span></span> {{::$ctrl.resources.Rapport_ModalImport_Radio_Nom}}</label>
+                        </label>
+                        <!--Option Tri par Matricule-->
+                        <label class="radio-inline">
+                            <input type="radio" id="txttriRadioMatricule" name="triRadioMatricule" ng-model="$ctrl.etatPaieExportModel.Tri" ng-value="true">
+                            <label for="txttriRadioMatricule"><span></span> {{::$ctrl.resources.Rapport_ModalImport_Radio_Matricule}}</label>
+                        </label>
+                    </div>
+                </div>
+                <div class="row form-group" ng-if="$ctrl.isUserFes && $ctrl.etatPaieExportModel.Filtre == 3">
+                    <div class="col-md-12 col-lg-12">
+                        <label>{{::$ctrl.resources.Rapport_ModalImport_Statut}}</label>
+                    </div>
+                    <div class="col-md-12 col-lg-12">
+                        <div class="checkbox-inline">
+                            <input id="chbxStatutOuvrier" type="checkbox" ng-model="$ctrl.etatPaieExportModel.StatutOuvrier" ng-click="$ctrl.handleChangePersonnelStatutList('StatutOuvrier')" />
+                            <label for="chbxStatutOuvrier"><span></span>{{::$ctrl.resources.Rapport_ModalImport_Checkbox_StatutOuvrier}}</label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <input id="chbxStatutEtam" type="checkbox" ng-model="$ctrl.etatPaieExportModel.StatutEtam" ng-click="$ctrl.handleChangePersonnelStatutList('StatutEtam')" />
+                            <label for="chbxStatutEtam"><span></span>{{::$ctrl.resources.Rapport_ModalImport_Checkbox_StatutEtam}}</label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <input id="chbxStatutCadre" type="checkbox" ng-model="$ctrl.etatPaieExportModel.StatutCadre" ng-click="$ctrl.handleChangePersonnelStatutList('StatutCadre')" />
+                            <label for="chbxStatutCadre"><span></span>{{::$ctrl.resources.Rapport_ModalImport_Checkbox_StatutCadre}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-sm-12">{{::$ctrl.resources.Rapport_ModalImport_FiltrerPar}}</label>
+                    <div class="col-sm-12">
+                        <!--Option Ma population-->
+                        <label class="radio-inline" ng-show="!$ctrl.isUserFes">
+                            <input type="radio" id="txtRadioPopulation" name="RadioPopulation" ng-model="$ctrl.etatPaieExportModel.Filtre" ng-value="1" ng-change="$ctrl.handleDisplayOrganisationSelector(false)" ng-required="true">
+                            <label for="txtRadioPopulation"><span></span>{{::$ctrl.resources.Rapport_ModalImport_Radio_Population}}</label>
+                        </label>
+
+                        <label class="radio-inline" id="VTMonPerimetreHideFes" fred-display-handler="$ctrl.userOrganizationId" display="hidden">
+                            <input type="radio" id="txtRadioPerimetre" name="RadioPerimetre" ng-model="$ctrl.etatPaieExportModel.Filtre" ng-value="2" ng-change="$ctrl.handleDisplayOrganisationSelector(false)" ng-required="true">
+                            <label for="txtRadioPerimetre"><span></span>{{::$ctrl.resources.Rapport_ModalImport_Radio_Perimetre}}</label>
+                        </label>
+
+
+                        <!--Option Autres-->
+                        <label class="radio-inline">
+                            <input type="radio" id="txtRadioAutres" name="RadioAutres" ng-model="$ctrl.etatPaieExportModel.Filtre" ng-value="3" ng-required="true" ng-change="$ctrl.handleDisplayOrganisationSelector(true)">
+                            <label for="txtRadioAutres"><span></span>{{::$ctrl.resources.Rapport_ModalImport_Radio_Autre}}</label>
+                        </label>
+                    </div>
+
+                    <!--Si on est sur la pop up Liste des Primes-->
+                    <div ng-show="$ctrl.currentExportation === $ctrl.exportation.primes">
+                        <!-- Début filtres par Primes heures/jour ou Primes mensuelles-->
+                        <div class="col-sm-12">
+                            <!--Option Primes heures/jour-->
+                            <div id="radioPrimesHeuresJour" fred-display-handler="$ctrl.userOrganizationId" display="hidden">
+                                <label class="radio-inline">
+                                    <input type="radio" id="txtRadioPrimesHeuresJour" name="RadioPrimesHeuresJour" ng-model="$ctrl.etatPaieExportModel.FiltresPrimesMensuelles " ng-value="false">
+                                    <label for="txtRadioPrimesHeuresJour"><span></span>{{::$ctrl.resources.Rapport_ModalImport_Radio_PrimesHeuresJours}}</label>
+                                </label>
+                            </div>
+                            <!--Option Primes mensuelles-->
+                            <fred-authorization key="menu.show.rapport.prime.index">
+                                <label class="radio-inline">
+                                    <input type="radio" id="txtRadioPrimesMensuelles" name="RadioPrimesMensuelles" ng-model="$ctrl.etatPaieExportModel.FiltresPrimesMensuelles " ng-value="true" ng-required="true">
+                                    <label for="txtRadioPrimesMensuelles"><span></span>{{::$ctrl.resources.Rapport_ModalImport_Radio_PrimesMensuelles}}</label>
+                                </label>
+                            </fred-authorization>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row form-group">
+                    <label class="col-sm-12" for="txtDateComptable">{{::$ctrl.resources.Rapport_ModalImport_DateComptable}}</label>
+                    <div class="col-sm-12" id="pointage_Mensuelle_Date_Comp_FES" fred-display-handler="$ctrl.userOrganizationId" display="visible">
+                        <!--show data picker radio -->
+                        <div class="col-sm-12 radios-bloc" ng-show="$ctrl.currentExportation === $ctrl.exportation.controlePointagesFes">
+
+                            <!--Option Hebdomadaire-->
+                            <label class="radio-inline">
+                                <input type="radio" id="txtRadioHebdomadaire" name="RadioHebdomadaire" ng-model="$ctrl.etatPaieExportModel.DateType" ng-value="1" ng-required="true" ng-change="$ctrl.handleChangeCalendarDate()">
+                                <label for="txtRadioHebdomadaire"><span></span>Hebdomadaire</label>
+                            </label>
+                            <!--Option Mensuel-->
+                            <label class="radio-inline">
+                                <input type="radio" id="txtRadioMensuel" name="RadioMensuel" ng-model="$ctrl.etatPaieExportModel.DateType" ng-value="2" ng-required="true" ng-change="$ctrl.handleChangeCalendarDate()">
+                                <label for="txtRadioMensuel"><span></span>Mensuel</label>
+                            </label>
+                        </div>
+                        <app-date-picker id="txtDateComptable"
+                                         ng-hide="$ctrl.currentExportation === $ctrl.exportation.controlePointagesFes && $ctrl.etatPaieExportModel.DateType==1"
+                                         format="MM/YYYY"
+                                         lang="fr"
+                                         ng-model="$ctrl.etatPaieExportModel.DateComptable"
+                                         ng-required="true"
+                                         placeholder="{{::$ctrl.resources.Rapport_ModalImport_DateComptable_Placeholder}}"></app-date-picker>
+                        <fred-section class="date-section" ng-if="$ctrl.currentExportation === $ctrl.exportation.controlePointagesFes && $ctrl.etatPaieExportModel.DateType==1">
+                            <fred-section-title>{{::$ctrl.resources.Rapport_Hebdo_Select_Date}}</fred-section-title>
+                            <fred-section-controls>
+                                <span class="material-icons cl" ng-click="$ctrl.handleChangeWeek(false)">chevron_left</span>
+                                <div class="label_date">
+                                    <div class="label_date_text">{{$ctrl.etatPaieExportModel.SelectedWeek}}</div>
+                                    <div class="labe_date_date_selector">
+                                        <app-date-picker id="dateRapportEntree" name="dateRapportEntree"
+                                                         format="DD/MM/YYYY" lang="fr"
+                                                         placeholder="{{::$ctrl.resources.RapportHebdo_Date}}"
+                                                         ng-model="$ctrl.etatPaieExportModel.DateForWeek"
+                                                         calendar-weeks="true"
+                                                         input-hiden="true"
+                                                         is-week-calendar="true"
+                                                         on-change="$ctrl.displayWeek({ date })"></app-date-picker>
+                                    </div>
+                                </div>
+                                <span class="material-icons cr" ng-click="$ctrl.handleChangeWeek(true)">chevron_right</span>
+                            </fred-section-controls>
+                        </fred-section>
+                    </div>
+                </div>
+                <div class="row form-group  form-group-organisation-modal" ng-show="$ctrl.etatPaieExportModel.DisplayOrganisationSelector">
+                    <label class="col-sm-12">{{::$ctrl.resources.Rapport_ModalImport_ChoixPerimetre}}</label>
+                    <div class="row">
+                        <div id="search-field" class="col-md-12">
+                            <div>
+                                <lookup-standalone ng-model="$ctrl.etatPaieExportModel.Organisation"
+                                                   enable-default-selection="true"
+                                                   text="$ctrl.etatPaieExportModel.Organisation.CodeLibelle"
+                                                   placeholder="{{::$ctrl.resources.Global_ReferentielOrganisation_Placeholder}}"
+                                                   search-max-length="100"
+                                                   search-title="{{::$ctrl.resources.Global_ReferentielOrganisation}}"
+                                                   search-placeholder="{{::$ctrl.resources.Global_ReferentielOrganisation_Placeholder}}"
+                                                   url="{{$ctrl.PerimetreUrl}}"
+                                                   show-in-popup="true"
+                                                   on-select="$ctrl.handleLookupSelection('Organisation', item)"
+                                                   on-delete="$ctrl.handleLookupDeletion('Organisation')"
+                                                   class="formulaire middle">
+                                </lookup-standalone>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row etablissementPaie-margin-top" ng-show="$ctrl.etatPaieExportModel.Organisation.TypeOrganisationLibelle == 'Société'">
+                        <div class="col-md-6 col-lg-6">
+                            <input type="radio" name="etablissementPaieRB" id="all-eta" ng-model="$ctrl.etatPaieExportModel.IsAllEtablissement" ng-value="true" ng-click="$ctrl.handleSelectAllEtablissement()">
+                            <label for="all-eta"><span></span>{{::$ctrl.resources.Rapport_ModalImport_Radio_TousEtablissementPaie}}</label>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <input type="radio" name="etablissementPaieRB" id="chose-eta" ng-model="$ctrl.etatPaieExportModel.IsAllEtablissement" ng-value="false" ng-click="$ctrl.handleSelectChoseEtablissement()">
+                            <label for="chose-eta"><span></span>{{::$ctrl.resources.Rapport_ModalImport_Radio_ChoixEtablissementPaie}}</label>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="!$ctrl.etatPaieExportModel.IsAllEtablissement && $ctrl.etatPaieExportModel.Organisation.TypeOrganisationLibelle == 'Société'">
+                        <div class="col-md-12 col-lg-12 etablissementPaie-margin-top etablissementPaie">
+                            <table class="table table-hover" id="table-EtablissementPaie">
+                                <thead>
+                                    <tr>
+                                        <th>{{::$ctrl.resources.Rapport_ModalImport_EtablissementPaie}}</th>
+                                        <th>
+                                            <div class="add_currency pull-right">
+                                                <lookup ng-model="$ctrl.selectedEtabPaie"
+                                                        search-placeholder="{{::$ctrl.resources.Global_ReferentielEtablissementPaie_Placeholder}}"
+                                                        search-title="{{::$ctrl.resources.Global_ReferentielEtablissementPaie}}"
+                                                        on-select="$ctrl.handleLookupSelection('EtablissementPaie', item)"
+                                                        on-click="$ctrl.handleShowLookup('EtablissementPaie')"
+                                                        show-in-popup="true"
+                                                        class="lookup-button-no-mrg-top span.btn">
+                                                    <span class="btn btn-link" title="{{::$ctrl.resources.Rapport_ModalImport_AjouterEtablissementPaie_Tooltip }}">{{::$ctrl.resources.Rapport_ModalImport_AjouterEtablissementPaie}}</span>
+                                                </lookup>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="fred-scroll">
+                                    <tr ng-repeat="etablissement in $ctrl.etatPaieExportModel.EtablissementPaieList | orderBy:['+Code']">
+                                        <td>{{etablissement.CodeLibelle}}</td>
+                                        <td class="delete">
+                                            <button class="btn btn-link flaticon flaticon-multiply" title="{{::$ctrl.resources.Rapport_ModalImport_SupprimerEtablissementPaie_Tooltip}}" ng-click="$ctrl.handleLookupDeletion('EtablissementPaie', etablissement)" aria-hidden="true"></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <!-- Début partie Export -->
+        <div class="col-sm-8">
+            <div class="row pull-left">
+                <button class="btn btn-md" ng-disabled="$ctrl.disableDownload" ng-click="$ctrl.handleExport(false)" title="{{::$ctrl.resources.Global_Bouton_ExportExcel_Tooltip}}"><span class="fa fa-file-excel-o"></span> {{::$ctrl.resources.Global_Bouton_ExportExcel}}</button>
+                <button class="btn btn-md" ng-disabled="$ctrl.disableDownload" ng-click="$ctrl.handleExport(true)" title="{{::$ctrl.resources.Global_Bouton_ExportPDF_Tooltip}}"><span class="fa fa-file-pdf-o"></span> {{::$ctrl.resources.Global_Bouton_ExportPDF}}</button>
+            </div>
+        </div>
+        <button type="button" class="btn btn-md btn-link" ng-click="$ctrl.handleCancel()" title="{{::$ctrl.resources.Global_Bouton_Fermer_Tooltip}}">{{::$ctrl.resources.Global_Bouton_Fermer}}</button>
+    </div>
+</div>

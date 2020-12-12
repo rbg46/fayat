@@ -1,0 +1,91 @@
+﻿<div class="row panel-default ressource"
+     ng-class="{'isopen': $ctrl.isOpen ,'empty-ressource':!$ctrl.budgetRessource.hasAnyParametrages}">
+
+  <div class="col-md-1 lev3-firstcol">
+    <div class="arrow"
+         ng-click="$ctrl.handleClickHeader()"
+         ng-show="$ctrl.budgetRessource.RessourcesEnfants.length>0"></div>
+    <div class="empty-warning"
+         ng-show="!$ctrl.budgetRessource.hasAnyParametrages">
+      <i class="material-icons" title="Pas de barème saisit pour cette ressource!">announcement</i>
+    </div>
+  </div>
+
+  <div class="col-md-1 new">
+    <span class="flaticon flaticon-plus"
+          ng-show="$ctrl.budgetRessource.hasAnyParametrages"
+          ng-click="$ctrl.handleClickCreateNew($ctrl.budgetRessource)"
+          title="Cliquer pour ajouter une nouvelle ressource personnalisée à votre référentiel de ressource">
+    </span>
+    <span ng-show="!$ctrl.budgetRessource.hasAnyParametrages">
+    </span>
+  </div>
+
+
+  <div class="col-md-2">
+    <div class="lb">{{$ctrl.resources.Code_lb}}</div>
+    <span>{{$ctrl.budgetRessource.Code}}</span>
+  </div>
+  <div class="col-md-3">
+    <div class="lb">{{$ctrl.resources.Libelle_lb}}</div>
+    <span class="field" title="{{$ctrl.budgetRessource.Libelle}}">{{$ctrl.budgetRessource.Libelle}}</span>
+  </div>
+
+
+  <div class="col-md-1 no_pad_r">
+    <div class="lb">Unité</div>
+    <span>{{$ctrl.budgetRessource.unite.Code}}</span>
+  </div>
+  <div class="col-md-2 no_pad_r">
+    <div class="lb">Prix</div>
+    <span>{{$ctrl.budgetRessource.montant}}</span>
+    <span>{{$ctrl.budgetRessource.symbole}}</span>
+  </div>
+  <div class="col-md-2 no_pad_l">
+    <button class="btn btn-primary add_task pull-right"
+            ng-click="$ctrl.handleClickAddToTask($ctrl.budgetRessource)"
+            title="Cliquer pour ajouter cette ressource à votre budget">
+      <i class="flaticon flaticon-add"></i>
+    </button>
+  </div>
+</div>
+
+
+<div ng-show="$ctrl.budgetRessource.RessourcesEnfants.length>0 && $ctrl.isOpen">
+  <div class="row panel-default ressource child"      
+       ng-repeat="childRessource in $ctrl.budgetRessource.RessourcesEnfants track by $index">
+
+    <div class="col-md-2 new">
+      <span class="action-icone material-icons"
+            ng-click="$ctrl.handleClickEditChild($ctrl.budgetRessource,childRessource)"
+            title="Cliquer pour modifier la ressource personnalisée">more_vert</span>
+    </div>
+
+    <div class="col-md-2">
+      <div class="lb">{{$ctrl.resources.Code_lb}}</div>
+      <span>{{childRessource.Code}}</span>
+    </div>
+    <div class="col-md-3">
+      <div class="lb">{{$ctrl.resources.Libelle_lb}}</div>
+      <span class="field" title="{{childRessource.Libelle}}">{{childRessource.Libelle}}</span>
+    </div>
+
+
+    <div class="col-md-1 no_pad_r">
+      <div class="lb">Unité</div>
+      <span>{{childRessource.unite.Code}}</span>
+    </div>
+    <div class="col-md-2 no_pad_r">
+      <div class="lb">Prix</div>
+      <span>{{childRessource.montant}}</span>
+      <span>{{childRessource.symbole}}</span>
+    </div>
+    <div class="col-md-2 no_pad_l">
+      <button class="btn btn-primary add_task pull-right"
+              ng-click="$ctrl.handleClickAddToTask(childRessource)"
+              title="Cliquer pour ajouter cette ressource à votre budget">
+        <i class="flaticon flaticon-add"></i>
+      </button>
+    </div>
+  </div>
+</div>

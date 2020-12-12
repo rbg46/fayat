@@ -1,0 +1,213 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+  ViewBag.Title = FeatureCI.CI_Index_TitreOnglet;
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+  @Styles.Render("~/CIIndexBundle.css")
+}
+
+@section scripts {
+  @Scripts.Render("~/CIIndexBundle.js")
+  @this.RenderResources("FeatureFavori", "FeatureCI")
+}
+
+<div class="container ci" ng-controller="CIController as ctrl" ng-init="ctrl.getFilterOrFavoris('@ViewBag.favoriId')">
+
+  <h1>{{ctrl.resources.CI_Index_Titre}}</h1>
+  @*<search-filter filter-placeholder="{{ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                 filter-api-controller="/api/CI/Filter"
+                 filter-template-url="/CI/CI/SearchFilterTemplate"
+                 callback-fn-search="ctrl.handleSearch(filter)"
+                 callback-fn-favoris="ctrl.addFilter2Favoris(filter)"
+                 filter="ctrl.filters"
+                 busy="ctrl.busy">
+  </search-filter>*@
+    
+    <div class="row">
+        <div class="container-fluid CI">
+            <div class="search-container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-5 no_padding">
+
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-model="ctrl.filters.ValueText" on-enter="ctrl.handleSearch(ctrl.filters)" placeholder="{{filterPlaceholder}}" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary y_search" type="button" ng-click="ctrl.handleSearch(ctrl.filters)" ng-disabled="busy"><i class="material-icons">search</i></button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-5 btns">
+                        <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="ctrl.filters.IsSEP" ng-click="ctrl.filters.IsSEP=false; ctrl.handleSearch(ctrl.filters)">{{ctrl.resources.CI_Search_Tuile_SEP}}<span class="ico-filter flaticon-multiply"></span></span>
+                        <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="ctrl.filters.ClotureOk" ng-click="ctrl.filters.ClotureOk=false; ctrl.handleSearch(ctrl.filters)">{{ctrl.resources.CI_Search_Tuile_ClotureOk}}<span class="ico-filter flaticon-multiply"></span></span>
+                        <span type="button" ng-repeat="type in ctrl.filters.CITypeList" class="btn btn-sm btn-primary btn-tile" ng-show="type.Selected" ng-click="type.Selected=false;  ctrl.handleSearch(ctrl.filters)">{{type.Designation}}<span class="ico-filter flaticon-multiply"></span></span>
+                        <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="ctrl.filters.DateOuvertureFrom" ng-click="ctrl.filters.DateOuvertureFrom=null; ctrl.handleSearch(ctrl.filters)">{{ctrl.resources.CI_Search_Tuile_DateOuverture}} {{ctrl.filters.DateOuvertureFrom | toLocaleDate | date : 'dd/MM/yy'}}<span class="ico-filter flaticon-multiply"></span></span>
+                        <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="ctrl.filters.DateFermetureTo" ng-click="ctrl.filters.DateFermetureTo=null; ctrl.handleSearch(ctrl.filters)">{{ctrl.resources.CI_Search_Tuile_DateFermeture}} {{ctrl.filters.DateFermetureTo | toLocaleDate | date : 'dd/MM/yy'}}<span class="ico-filter flaticon-multiply"></span></span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 btns">
+                        <fred-button ng-class="{'white icon chip' :ctrl.displayFilterState(),  'white icon' :!ctrl.displayFilterState()}" ng-click="status ? status=false : status=true;">
+                            <span ng-hide="!ctrl.displayFilterState()" class="chip"></span>
+                            <span ng-class="{'fa fa-filter' :!buttonFilterClick  ,'material-icons closing' :buttonFilterClick}"
+                                  title="">
+                                <span ng-show="buttonFilterClick">clear</span>
+                            </span>
+                        </fred-button>
+                        <fred-button class="white-star icon" ng-click="ctrl.addFilter2Favoris(ctrl.filters)" title="{{ ctrl.resources.CI_Search_Favori_Tooltip }}">
+                            <i class="material-icons">star</i>
+                        </fred-button>
+
+                    </div>
+                </div>
+
+                <!-- BEGIN : Bloc de Filtre -->
+                <fred-overlay ng-click="status=false;" ng-class="{'open' :status  ,'close' :!status}"></fred-overlay>
+
+                <fred-side ng-init="status=false;" ng-class="{'open' :status  ,'close' :!status }" esc-key="Test()">
+
+                    <!--En tete-->
+                    <header>
+                        <icon><label>{{ctrl.resources.Global_AffinerRecherche}}</label></icon>
+                    </header>
+
+                    <main class="fred-scroll">
+
+                        <div class="filter-tiles">
+                            <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="ctrl.filters.IsSEP" ng-click="ctrl.filters.IsSEP=false; ctrl.handleSearch(ctrl.filters)">{{ctrl.resources.CI_Search_Tuile_SEP}}<span class="ico-filter flaticon-multiply"></span></span>
+                            <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="ctrl.filters.ClotureOk" ng-click="ctrl.filters.ClotureOk=false; ctrl.handleSearch(ctrl.filters)">{{ctrl.resources.CI_Search_Tuile_ClotureOk}}<span class="ico-filter flaticon-multiply"></span></span>
+                            <span type="button" ng-repeat="type in ctrl.filters.CITypeList" class="btn btn-sm btn-primary btn-tile" ng-show="type.Selected" ng-click="type.Selected=false;  ctrl.handleSearch(ctrl.filters)">{{type.Designation}}<span class="ico-filter flaticon-multiply"></span></span>
+                            <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="ctrl.filters.DateOuvertureFrom" ng-click="ctrl.filters.DateOuvertureFrom=null; ctrl.handleSearch(ctrl.filters)">{{ctrl.resources.CI_Search_Tuile_DateOuverture}} {{ctrl.filters.DateOuvertureFrom | toLocaleDate | date : 'dd/MM/yy'}}<span class="ico-filter flaticon-multiply"></span></span>
+                            <span type="button" class="btn btn-sm btn-primary btn-tile" ng-show="ctrl.filters.DateFermetureTo" ng-click="ctrl.filters.DateFermetureTo=null; ctrl.handleSearch(ctrl.filters)">{{ctrl.resources.CI_Search_Tuile_DateFermeture}} {{ctrl.filters.DateFermetureTo | toLocaleDate | date : 'dd/MM/yy'}}<span class="ico-filter flaticon-multiply"></span></span>
+                        </div>
+
+                        <div>
+
+                            <section-title data-toggle="collapse" data-target="#section1">{{ctrl.resources.Global_Filtre_SousTitre_Selection}} :</section-title>
+
+                            <section-content class="collapse in" id="section1">
+                                <div class="row">
+                                    <div class="selection_filters">
+                                        <div class="col-sm-8 lbl_l">
+                                            <label class="control-label lbl_txt">{{ctrl.resources.CI_Search_SeulementSEP}}</label>
+                                        </div>
+                                        <div class="col-sm-4 no-pad">
+                                            <label class="switch">
+                                                <input type="checkbox" name="IsSEP" ng-model="ctrl.filters.IsSEP" />
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="selection_filters">
+                                        <div class="col-sm-8 lbl_l">
+                                            <label class="control-label lbl_txt">{{ctrl.resources.CI_Search_InclureClotures}}</label>
+                                        </div>
+                                        <div class="col-sm-4 no-pad">
+                                            <label class="switch">
+                                                <input type="checkbox" name="ClotureOk" ng-model="ctrl.filters.ClotureOk" />
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row fes" ng-repeat="type in ctrl.filters.CITypeList">
+                                    <div class="selection_filters">
+                                        <div class="col-sm-8 lbl_l">
+                                            <label class="control-label lbl_txt">{{ctrl.resources[type.RessourceKey]}}</label>
+                                        </div>
+                                        <div class="col-sm-4 no-pad">
+                                            <label class="switch">
+                                                <input type="checkbox"
+                                                    name="ClotureOk"
+                                                    value="{{type.Id}}"
+                                                    ng-model="type.Selected" />
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section-content>
+
+                            <section-title data-toggle="collapse" data-target="#section2">{{ctrl.resources.Global_Filtre_SousTitre_Date}}</section-title>
+
+                            <section-content class="collapse in" id="section2">
+                                <div class="row">
+                                    <div class="selection_filters">
+                                        <div class="col-sm-12 no-pad">
+                                            <app-date-picker format="DD/MM/YYYY" lang="fr" ng-model="ctrl.filters.DateOuvertureFrom" placeholder={{ctrl.resources.CI_Search_DateOuverture_Placeholder}}></app-date-picker>
+                                        </div>
+                                        <div class="col-sm-12 no-pad">
+                                            <app-date-picker format="DD/MM/YYYY" lang="fr" ng-model="ctrl.filters.DateFermetureTo" placeholder="{{ctrl.resources.CI_Search_DateFermeture_Placeholder}}"></app-date-picker>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section-content>
+
+                        </div>
+                    </main>
+
+                    <footer ng-click="status=false;">
+                        <action>
+                            <button type="button" class="fred-button primary" ng-click="ctrl.handleSearch(ctrl.filters)">{{ctrl.resources.Global_Filtre_Bouton_Appliquer}} </button>
+                            <button type="button" class="fred-button cancel" ng-click="ctrl.cancelFilter()">{{ctrl.resources.Global_Bouton_Annuler}} </button>
+                        </action>
+
+                        <close>
+                            <icon /><label>Refermer le panneau</label>
+                        </close>
+                    </footer>
+
+                </fred-side>
+            </div>
+        </div>
+    </div>
+
+  <h4>{{ctrl.resources.CI_Index_SousTitre_ListeCI}}</h4>
+
+  <div class="CI-list">
+    <table id="fixedTable" fred-table fred-fixed-col="1" fred-table-resize-trigger="{{ctrl.CIList.length > 0}}">
+      <thead>
+        <tr>
+          <th class="col-1">{{ctrl.resources.CI_Index_TableCI_Entete_CodeCI}}</th>
+          <th class="col-2">{{ctrl.resources.CI_Index_TableCI_Entete_LibelleCI}}</th>
+          <th class="col-3">{{ctrl.resources.CI_Index_TableCI_Entete_TypeCI}}</th>
+          <th class="col-4">{{ctrl.resources.Global_CodeSociete}}</th>
+          <th class="col-5">{{ctrl.resources.CI_Index_TableCI_Entete_LibelleSoc}}</th>
+          <th class="col-6">{{ctrl.resources.CI_Index_TableCI_Entete_CodeEtab}}</th>
+          <th class="col-7">{{ctrl.resources.CI_Index_TableCI_Entete_LibelleEtab}}</th>
+          <th class="col-8">{{ctrl.resources.CI_Index_TableCI_Entete_DateOuverture}}</th>
+          <th class="col-9">{{ctrl.resources.CI_Index_TableCI_Entete_DateFermeture}}</th>
+          <th class="col-11"></th>
+        </tr>
+      </thead>
+      <tbody id="containerTableauCI" class="fred-scroll">
+        <tr title="{{ctrl.resources.CI_Index_Table_SelectionLigne}} {{ci.Code }} / {{ci.Libelle }}" id="ligne{{$index}}" ng-repeat="ci in ctrl.CIList track by $index" ng-click="ctrl.handleSelectCi(ci)">
+
+          <td class="info-key col-1" ng-class="{'fes-biz':ci.TypeCI == 'CI_Search_CIType_Affaire',
+                                            'fes-study':ci.TypeCI == 'CI_Search_CIType_Etude',
+                                            'fes-section':ci.TypeCI == 'CI_Search_CIType_Section'}">
+            {{ci.Code }}
+          </td>
+          <td class="col-2">{{ci.Libelle }}</td>
+          <td class="col-3">
+            <span ng-class="{'tile-fes-biz':ci.TypeCI == 'CI_Search_CIType_Affaire',
+                               'tile-fes-study':ci.TypeCI == 'CI_Search_CIType_Etude',
+                               'tile-fes-section':ci.TypeCI == 'CI_Search_CIType_Section'}">
+              {{ctrl.resources[ci.TypeCI]}}
+            </span>
+          </td>
+          <td class="col-4">{{ci.Societe.Code }}</td>
+          <td class="col-5">{{ci.Societe.Libelle }}</td>
+          <td class="col-6">{{ci.EtablissementComptable.Code }}</td>
+          <td class="col-7">{{ci.EtablissementComptable.Libelle }}</td>
+          <td class="col-8">{{ci.DateOuverture | date : 'dd/MM/yyyy' }}</td>
+          <td class="col-9">{{ci.DateFermeture | date : 'dd/MM/yyyy'}}</td>
+          <td class="col-11">
+            <i title="{{ctrl.resources.CI_Index_Table_SelectionLigne}} {{ci.Code }} / {{ci.Libelle }}" class="material-icons clic_detail" aria-hidden="true">more_vert</i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+﻿
+<div class="modal-header">
+
+  <h2 class="modal-title">
+    <i class="flaticon flaticon-shuffle"></i>{{ctrl.resources.Role_Index_ModalFonctionnalite_Detail_Titre}}
+  </h2>
+  <i class="flaticon flaticon-multiply close pull-right"
+     data-dismiss="modal" title="{{ctrl.resources.Global_Modal_Annuler_Tooltip}}"
+     ng-click="ctrl.close()">
+  </i>
+</div>
+
+<div class="modal-body">
+
+  <div class="row">
+    <div class="col-md-12" style="text-align: center;">
+      <label>{{ctrl.resources.Role_Index_ModalFonctionnalite_Detail_Module}}</label>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label for="moduleCode">{{ctrl.resources.Code_lb}}</label>
+      <div id="moduleCode">{{ctrl.model.ModuleCode}}</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label for="moduleLibelle">{{ctrl.resources.Libelle_lb}}</label>
+      <div id="moduleLibelle">{{ctrl.model.ModuleLibelle}}</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label for="moduleDescription">{{ctrl.resources.Role_Index_ModalFonctionnalite_Detail_Description}}</label>
+      <div id="moduleDescription">{{ctrl.model.ModuleDescription}}</div>
+    </div>
+  </div>
+  
+
+</div>
+
+<div class="modal-body" style="border-top: 1px solid #e5e5e5;">
+  
+  <div class="row">
+    <div class="col-md-12" style="text-align: center;">
+      <label>{{ctrl.resources.Role_Index_ModalFonctionnalite_Detail_Fonctionnalite}}</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label for="fonctionnaliteCode">{{ctrl.resources.Code_lb}}</label>
+      <div id="fonctionnaliteCode">{{ctrl.model.Fonctionnalite.Code}}</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label for="fonctionnaliteLibelle">{{ctrl.resources.Libelle_lb}}</label>
+      <div id="fonctionnaliteLibelle">{{ctrl.model.Fonctionnalite.Libelle}}</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label for="fonctionnaliteDescription">{{ctrl.resources.Role_Index_ModalFonctionnalite_Detail_Description}}</label>
+      <div id="fonctionnaliteDescription">{{ctrl.model.Fonctionnalite.Description}}</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-body" style="border-top: 1px solid #e5e5e5;">
+  <div class="row">
+    <div class="col-md-12" style="text-align: center;">
+      <label>{{ctrl.resources.Role_Index_ModalFonctionnalite_Detail_Privilege}}</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label for="fonctionnaliteDescription">{{ctrl.resources.Role_Index_ModalFonctionnalite_Detail_Privilege}}</label>
+      <div id="fonctionnaliteDescription">{{ctrl.mode}}</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">  
+  <button class="btn  btn-link pull-right"
+          ng-click="ctrl.close()"
+          title="{{ctrl.resources.Global_Bouton_Annuler_Tooltip}}">
+    {{ctrl.resources.Global_Bouton_Annuler}}
+  </button>
+</div>

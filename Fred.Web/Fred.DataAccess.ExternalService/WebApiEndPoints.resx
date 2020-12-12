@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Authenticate_Post_Token" xml:space="preserve">
+    <value>{0}/oauth/token</value>
+  </data>
+  <data name="Commande_Get_ExportCommandeToSap" xml:space="preserve">
+    <value>api/Commande/ExportCommandToSap</value>
+  </data>
+  <data name="Depense_Get_TransfertDepense" xml:space="preserve">
+    <value>{0}/api/Depense/TransfertDepense/</value>
+  </data>
+  <data name="Depense_Post" xml:space="preserve">
+    <value>{0}/api/Depense/</value>
+  </data>
+  <data name="Depense_Post_TransfertDepense" xml:space="preserve">
+    <value>{0}/api/Depense/TransfertDepense/</value>
+  </data>
+  <data name="Depense_Post_TransfertDepenseStatut" xml:space="preserve">
+    <value>{0}/api/Depense/TransfertDepense/Statut/</value>
+  </data>
+  <data name="Import_Get_Fournisseur" xml:space="preserve">
+    <value>{0}/api/Fournisseur/Import/</value>
+  </data>
+  <data name="EcritureComptable_Post_Import" xml:space="preserve">
+    <value>{0}/api/EcritureComptable/Import/{1}/{2}/{3}/{4}</value>
+  </data>
+  <data name="ValidationPointage_Post_ExecuteControleVrac" xml:space="preserve">
+    <value>{0}/api/ValidationPointage/ControleVrac/</value>
+  </data>
+  <data name="ValidationPointage_Post_ExecuteRemonteeVrac" xml:space="preserve">
+    <value>{0}/api/ValidationPointage/RemonteeVrac/</value>
+  </data>
+  <data name="Reception_Post_ExportReceptionListToSap" xml:space="preserve">
+    <value>api/Reception/ExportReceptions/</value>
+  </data>
+  <data name="EcritureComptable_Get_Check_Import" xml:space="preserve">
+    <value>{0}/api/EcritureComptable/CheckImport/{1}/{2}/{3}/{4}</value>
+  </data>
+  <data name="Rapport_Get_ExportPointageMaterielToStorm" xml:space="preserve">
+    <value>api/Materiel/ExportPointageMaterielToStorm</value>
+  </data>
+  <data name="Commande_Get_ExportCommandeAvenantToSap" xml:space="preserve">
+    <value>api/Commande/ExportCommandAvenantToSap</value>
+  </data>
+  <data name="Rapport_Get_ExportPointagePersonnelToSap" xml:space="preserve">
+    <value>api/Rapport/ExportPointagePersonnelToSap</value>
+  </data>
+  <data name="ValidationPointage_Post_ExecuteRemonteePrime" xml:space="preserve">
+    <value>{0}/api/ValidationPointage/RemonteePrimes/</value>
+  </data>
+  <data name="ExportPointagePersonnelToSap" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Rapport_Post_ExportPointageMaterielToStorm" xml:space="preserve">
+    <value>api/Materiel/ExportPointageMaterielToStorm</value>
+  </data>
+  <data name="Rapport_Post_ExportPointagePersonnelToSap" xml:space="preserve">
+    <value>api/Rapport/ExportPointagePersonnelToSap</value>
+  </data>
+  <data name="EcritureComptable_Post_ImportRange" xml:space="preserve">
+    <value>{0}/api/EcritureComptable/Import/{1}/{2}/{3}/{4}/{5}/{6}</value>
+  </data>
+  <data name="Moyen_Envoi_Pointage" xml:space="preserve">
+    <value>api/Moyen/ExportPointageMoyen</value>
+  </data>
+  <data name="CI_UpdateCis" xml:space="preserve">
+    <value>{0}/api/CI/UpdateCis</value>
+  </data>
+  <data name="Personnel_UpdatePersonnels" xml:space="preserve">
+    <value>{0}/api/Personnel/UpdatePersonnels</value>
+  </data>
+  <data name="EcritureComptable_ImportEcrituresComptablesFromAnael" xml:space="preserve">
+    <value>{0}/api/EcritureComptable/ImportEcrituresComptablesFromAnael</value>
+  </data>
+  <data name="Personnel_Post_ExportReceptionInterimairesToSap" xml:space="preserve">
+    <value>{0}/api/personnel/ExportReceptionInterimairesToSap/{1}</value>
+  </data>
+  <data name="Personnel_Post_ExportReceptionInterimairesByCisToSap" xml:space="preserve">
+    <value>{0}/api/personnel/ExportReceptionInterimairesByCisToSap/{1}</value>
+  </data>
+  <data name="Rapport_Post_ExportPointagePersonnelToTibco" xml:space="preserve">
+    <value>{0}/?userId={1}&amp;simulation={2}&amp;periode={3}&amp;type_periode={4}&amp;societe={5}&amp;etabs={6}</value>
+  </data>
+  <data name="CommandeLigne_Lock" xml:space="preserve">
+    <value>{0}/api/CommandeLigne/ExportManualLockLigneDeCommandeToSap</value>
+  </data>
+  <data name="CommandeLigne_UnLock" xml:space="preserve">
+    <value>{0}/api/CommandeLigne/ExportManualUnLockLigneDeCommandeToSap</value>
+  </data>
+</root>

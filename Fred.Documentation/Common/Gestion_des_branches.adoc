@@ -1,0 +1,138 @@
+= Comment merger, livrer, patcher… ?
+// define images directory relative to pwd if not defined in master.   
+ifndef::imagesdir[:imagesdir: ../]
+
+
+NOTE: Ne vous inquiétez pas, tout ce que vous faite se fait localement. Tant que vous ne commitez pas, il n’y a aucun changement sur le serveur.
+
+
+IMPORTANT: Les merges se font à partir du code qui est sur le serveur pas votre code local. Donc si vous voulez merger du code local, il faut d’abord le commiter.
+
+
+== Normes
+
+____
+*Dans le commentaire de commit : +
+``[MERGE][US/BUG XXX] : Commentaire`` +
+``[MERGE][Branche XXX => Branche YYY] : Commentaire``
+____
+
+== Mettre à jour une branche US_XXX
+
+____
+C’est à dire prendre les fichiers de Dev et les copier (merger) dans votre branche
+____
+
+image:./Images/Gestion_des_branches/DevToUs.jpg[DevToUs.jpg]
+
+[source,sequence]
+----
+Dev->US_XXX: Merger
+US_XXX->US_XXX: Résoudre les conflits
+US_XXX->Compil: Compiler
+Compil->Compil: Tester
+Compil->Commit: Commiter
+Note left of Commit: Maintenant ou plus tard
+Commit->Dieu: Prier
+Note left of Dieu: Obligatoire !
+----
+
+
+. Ouvrir l’explorateur de code source
+. Si besoin, faire un clic droit sur ``Projet FRED`` et choisir ``Obtenir la dernière version``
+. Sélectionner la branche DEV
+. Faire un clic droit et choisir « Création de branche et fusion » / « Fusionner… »
+. Branche source : c’est la branche Dev
+. Branche cible : c’est la branche US/BUG
+. Cocher : ``Toutes les modifications jusqu’à une version spécifique``
+. Type de version : ``Dernière version``
+. Cliquer sur Terminer
+. *S’il y a des conflits, il faut les résoudre : NE PAS ECRASER LE DEV DES AUTRES !*
+. Faire un build
+. Tester
+. Continuer le dev, ou commiter => Merci de respecter le nommage du commentaire
+
+
+== Mettre à jour la branche de Dev depuis la branche US_XXX
+
+____
+*Note* : C’est à dire prendre les fichiers de US_XXX et les copier (merger) dans Dev
+____
+
+image:./Images/Gestion_des_branches/UsToDev.jpg[UsToDev.jpg]
+
+[source,sequence]
+----
+US_XXX->Dev: Merger
+Dev->Dev: Résoudre les conflits
+Dev->Compil: Compiler
+Compil->Compil: Tester
+Compil->Commit: Commiter
+Note left of Commit: Maintenant ou plus tard
+Commit->Dieu: Prier
+Note left of Dieu: Obligatoire !
+----
+
+
+. Ouvrir l’explorateur de code source
+. Si besoin, faire un clic droit sur ``Projet FRED`` et choisir ``Obtenir la dernière version``
+. Sélectionner la branche US_XXX
+. Faire un clic droit et choisir « Création de branche et fusion » / « Fusionner… »
+. Branche source : c’est la branche US_XXX
+. Branche cible : c’est la branche Dev
+. Cocher : ``Toutes les modifications jusqu’à une version spécifique``
+. Type de version : ``Dernière version``
+. Cliquer sur Terminer
+. *S’il y a des conflits, il faut les résoudre : NE PAS ECRASER LE DEV
+DES AUTRES !*
+. Faire un build
+. Tester
+. Continuer le dev, ou commiter => Merci de respecter le nommage du commentaire
+
+*Attention aux modifs dans les web config : ignorer les chaines de connexion*
+
+
+== Créer un patch sur la prod
+
+Faire une commit sur la branche de prod, et une fois valider, le merger obligatoirement sur la branche de dev
+
+== Reporter une migration de la branche de prod sur le dev
+
+*Ceci est appelé une migration blanche.*
+
+Si le patch concerne une modification de la BD (donc Migration), il faut bien évidemment fusionner le .csproj Fred.EntityFramework.
+
+. Votre branche dev doit être à jour + base à jour.
+.. Merger de Prod vers Dev (local) 
+.. Garder toutes les migrations  (dev + prod) dans le .csproj fusionné. 
+.. Garder toutes les modifications des entités.
+. Exécuter Update-Database via la console
+.. Ajouter la migration ``blanche`` Add-Migration Merge[BrancheSource] -IgnoreChanges
+.. Re-exécuter Update-Database ou lancer tout simplement l’application pour tester
+. Et vous pouvez commiter votre code en Dev :)
+
+Lorsque le Dev deviendra une nouvelle Release, l’éxécution des
+migrations sur la base prod s’exécutera normalement, et les migrations déja jouées ne seront pas rejouées.
+
+== Merger la branche Dev vers la branche Prod
+
+Pour effectuer une mise en production, suivre les étapes suivantes : 
+
+* Télécharger toutes les bases de prod, et les restaurer sur votre sql server local 
+** FredWeb, FredIe, FredHangFire, Stair 
+* Dans Tfs, ouvrir les droits de commit et de merge sur la branche de prod * 
+** /!\ ne pas oublier aussi les fichiers web.config /!\, sinon, le fichier ne sera pas mergé, vous aurez un warning de VS *
+* Dans VS, l’*option automatically resolve conflict doit être désactivé !*
+* Véfifier que vous n’avez aucun pending change
+* Faire un get latest sur la branche Dev et la branche Prod 
+* Faire un merge de la branche de dev vers la branche de Prod jusqu’au *dernier changeset testé en Qualif* 
+** Il ne devrait pas y a voir de conflit. 
+** s’il y a des conflits, ce n’est pas normal et ce n’est pas bon, analyser les changesets associés ** les conflits peuvent être dû à de la MCO qui a été commité directement sur Prod et non reporté sur Dev. 
+* En cas de conflits, il faut les résoudre manuellement. Il faut obligatoirement demander aux personnes qui ont modifié les fichiers incriminés. 
+* Verifier les web.conf pour qui pointent sur votre base locale 
+* *Couper le VPN/réseau ou alors mettre la clef Hangfire:Start à false*
+*** en effet, on va tester l’application, et il faut éviter que FredIe relance des jobs de prod 
+* lancer Fred Web et tester, lancer Fred ie et tester 
+* Si vous avez fait des changements dans les web.config, annuler uniquement vos changements 
+* Commiter 
+** Convention : [MERGE][Dev=>Prod] MEP description

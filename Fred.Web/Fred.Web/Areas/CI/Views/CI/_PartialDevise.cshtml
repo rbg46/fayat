@@ -1,0 +1,68 @@
+﻿@*--------------------------------------------------------------------------------------------------------------*@
+@*                                          PARAMETRAGE DEVISE                                                  *@
+@*--------------------------------------------------------------------------------------------------------------*@
+<div class="panel panel-default" id="Ci-Devise" fred-display-handler="userOrganizationId" display="hidden">
+
+  <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse-devise" data-parent="#ci-accordion" id="panel-heading-devise">
+    <i class="chevron fa fa-fw"></i>{{ctrl.resources.CI_Detail_Devise_Titre}}
+  </div>
+  <div id="collapse-devise" class="panel-collapse collapse">
+
+    <div class="panel-body">
+      <!--BEGIN  > FORMULAIRE-->
+      <div class="container devise" id="divDevise">
+        <h4>{{ctrl.resources.CI_Detail_Devise_SousTitre_DeviseRef}}</h4>
+        <div>
+          <lookup-standalone ng-model="ctrl.panels.devise.data.reference.Devise"
+                             text="ctrl.panels.devise.data.reference.Devise.CodeLibelle"
+                             search-title="{{ctrl.resources.Global_ReferentielDevise}}"
+                             search-placeholder="{{ctrl.resources.Global_ReferentielDevise_Placeholder}}"
+                             custom-template-url="~/Scripts/directive/lookup/custom-templates/ci.template.html"
+                             on-click="ctrl.handleShowPickList('Devise')"
+                             on-select="ctrl.handlePickListSelection('DeviseRef', item)"
+                             on-delete="ctrl.handlePickListDeletion('DeviseRef')"
+                             style-parent="true"
+                             class="formulaire long">
+          </lookup-standalone>
+        </div>
+        <br />
+        <h4>{{ctrl.resources.CI_Detail_Devise_SousTitre_AutresDevises}}</h4>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>{{ctrl.resources.CI_Detail_Devise_TableDevise_Devise}}</th>
+              <th>
+                <div class="add_currency pull-right">
+                  <lookup ng-model="ctrl.selectedRef"
+                          search-placeholder="{{ctrl.resources.Global_ReferentielDevise_Placeholder}}"
+                          search-title="{{ctrl.resources.Global_ReferentielDevise}}"
+                          on-click="ctrl.handleShowPickList('Devise')"
+                          on-select="ctrl.handlePickListSelection('DeviseSec', item)">
+                    <span title="{{ctrl.resources.CI_Detail_Devise_TableDevise_AjouterDevise}}">{{ctrl.resources.CI_Detail_Devise_TableDevise_AjouterDevise}}</span>
+                  </lookup>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="cidevise in ctrl.panels.devise.data.secondaireList">
+              <td>{{cidevise.Devise.CodeLibelle}}</td>
+              <td class="delete" align="right">
+                <button class="btn btn-link flaticon flaticon-multiply" title="{{ctrl.resources.CI_Detail_Devise_TableDevise_SupprimerDevise}}" ng-click="ctrl.handleDeleteDeviseSec(cidevise)" aria-hidden="true"></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p ng-show="ctrl.panels.devise.data.secondaireList.length === 0">{{ctrl.resources.Global_Message_AucunElement}}</p>
+        <br />
+      </div>
+      <!--END > FORMULAIRE-->
+    </div>
+    <div class="panel-footer">
+      <!--BEGIN  > BOUTONS-->
+      <button type="submit" class="btn btn-link pull-right" ng-click="ctrl.handleCancel(ctrl.panels.devise)" title="{{resources.Global_Bouton_Annuler_Tooltip}}">{{ctrl.resources.Global_Bouton_Annuler}}</button>
+      <button type="submit" class="btn btn-default pull-left" ng-click="ctrl.handleSave(ctrl.panels.devise)" title="{{resources.Global_Bouton_Enregistrer_Tooltip}}">{{ctrl.resources.Global_Bouton_Enregistrer}}</button>
+      <!--END  > BOUTONS-->
+    </div>
+  </div>
+</div>

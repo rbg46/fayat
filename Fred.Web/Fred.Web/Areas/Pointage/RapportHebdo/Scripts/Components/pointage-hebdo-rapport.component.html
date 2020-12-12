@@ -1,0 +1,206 @@
+﻿<div class="container pointage-hebdo2">
+    <!--START : Barre de recherche + Barre d'outils-->
+    <fred-toolbar>
+        <!--Période-->
+        <fred-section class="date-section">
+            <fred-section-title>{{::$ctrl.resources.RapportHebdo_Select_Semaine}}</fred-section-title>
+            <fred-section-controls>
+                <span class="material-icons cl" ng-click="$ctrl.handleChangeWeekRapport(false)">chevron_left</span>
+                <div class="label_date">
+                    <div class="label_date_text">{{$ctrl.selectedWeek}}</div>
+                    <div class="labe_date_date_selector">
+                        <app-date-picker id="dateRapport"
+                                         name="dateRapport"
+                                         format="DD/MM/YYYY"
+                                         lang="fr"
+                                         placeholder="{{::$ctrl.resources.RapportHebdo_Date}}"
+                                         initial-date="{{$ctrl.selectedDate}}"
+                                         ng-model="$ctrl.selectedDate"
+                                         ng-change="$ctrl.handleChangeCalendarDate()"
+                                         calendar-weeks="true"
+                                         input-hiden="true"
+                                         is-week-calendar="true"></app-date-picker>
+                    </div>
+                </div>
+                <span class="material-icons cr" ng-click="$ctrl.handleChangeWeekRapport(true)">chevron_right</span>
+            </fred-section-controls>
+        </fred-section>
+        <fred-section class="selection-section" ng-hide="$ctrl.isEtamIac && !$ctrl.isManagerPointing">
+            <fred-section-title>{{::$ctrl.resources.RapportHebdo_Modifier_Selection}}</fred-section-title>
+            <fred-section-controls>
+                <a href="{{$ctrl.fillRedirectionUrl()}}" class="btn btn-default">
+                    {{::$ctrl.resources.RapportHebdo_Ecran_Entree}}
+                </a>
+            </fred-section-controls>
+        </fred-section>
+        <!--Actions-->
+        <fred-section class="action-section">
+            <fred-section-title>{{::$ctrl.resources.Global_Action}}</fred-section-title>
+            <fred-section-controls class="action-controls">
+                <button class="btn btn-link" ng-click="$ctrl.handleCancel()">{{::$ctrl.resources.Global_Bouton_Annuler}}</button>
+                <button class="btn btn-default" ng-disabled="!$ctrl.isValidAstreinteToSave || !$ctrl.isValidToSave || $ctrl.disableSaveWhenLoad || $ctrl.isValidatedByManager" ng-click="$ctrl.handleSave()" title="{{$ctrl.tooltipSave}}">{{::$ctrl.resources.Global_Bouton_Enregistrer}}</button>
+                <button ng-show="$ctrl.isForValidationAffaires || $ctrl.isForValidationService" class="btn btn-validate" ng-click="$ctrl.handleValidate()" ng-disabled="!$ctrl.isValidAstreinteToSave || !$ctrl.isValidToSave || !$ctrl.isValidToValidate || $ctrl.disableSaveWhenLoad">{{::$ctrl.resources.Global_Bouton_Valider}}</button>
+            </fred-section-controls>
+        </fred-section>
+
+        <!--Totaux heures-->
+        <fred-section class="heures-section">
+            <fred-section-title style="color: transparent">{{::$ctrl.resources.RapportHebdo_Total_Heure}}</fred-section-title>
+            <div class="heure">
+                <div class="amount" ng-hide="$ctrl.isIac">
+                    <span class="txt">{{::$ctrl.resources.RapportHebdo_Total_Heure}}</span>
+                    <span class="data">{{$ctrl.TotalHours | number : 2}} h</span>
+                </div>
+                <div class="amount" ng-show="$ctrl.isIac">
+                    <span class="txt">{{::$ctrl.resources.RapportHebdo_Total_Jour}}</span>
+                    <span class="data">{{($ctrl.TotalHours/7) | number : 2}} jours</span>
+                </div>
+            </div>
+        </fred-section>
+        <fred-section ng-hide="$ctrl.isIac || ($ctrl.isManagerPointing && $ctrl.personnelToShowIsIac)">
+            <fred-section-title style="color: transparent">{{::$ctrl.resources.RapportHebdo_Total_Heure_Sup}}</fred-section-title>
+            <div class="heure-sup">
+                <div class="amount">
+                    <span class="txt">{{::$ctrl.resources.RapportHebdo_Total_Heure_Sup}}</span>
+                    <span class="data">{{$ctrl.TotalHoursSup}} h</span>
+                </div>
+            </div>
+        </fred-section>
+        <!-- etat de la semaine -->
+        <fred-section class="statut-rapport">
+            <fred-section-title>&nbsp;</fred-section-title>
+            <fred-section-controls ng-class="{colorVE: $ctrl.weekPointageStatutCode =='VE', colorVA: $ctrl.weekPointageStatutCode=='V2', colorEC: $ctrl.weekPointageStatutCode=='EC'}">
+                <div class="title">{{::$ctrl.resources.RapportHebdo_Etat_Rapport}}</div>
+                <div class="libelle">{{$ctrl.weekPointageStatutLibelle}}</div>
+            </fred-section-controls>
+        </fred-section>
+
+    </fred-toolbar>
+
+    <span class="material-icons warns" style="color:red"
+          uib-popover-template="'popoverValidationErrorsTemplate'"
+          popover-trigger="'click'"
+          popover-placement="right"
+          popover-append-to-body="true"
+          ng-show="$ctrl.validation && $ctrl.validation.PersonnelErrorList"
+          title="{{::$ctrl.resources.RapportHebdo_Erreur_Tooltip}}">warning</span>
+
+    <script type="text/ng-template" id="popoverValidationErrorsTemplate">
+        <ul class="popoverList" ng-repeat="personnelValidation in $ctrl.validation.PersonnelErrorList">
+            <li ng-repeat="warning in personnelValidation">
+                {{warning}}
+            </li>
+        </ul>
+    </script>
+
+    <span class="material-icons warns" style="color:red"
+          uib-popover-template="'popoverDailyRapportErrorTemplate'"
+          popover-trigger="'click'"
+          popover-placement="right"
+          popover-append-to-body="true"
+          ng-show="$ctrl.validation && $ctrl.validation.DailyRapportErrorList"
+          title="{{::$ctrl.resources.RapportHebdo_Erreur_Tooltip}}">warning</span>
+
+    <script type="text/ng-template" id="popoverDailyRapportErrorTemplate">
+        <ul class="popoverList" ng-repeat="rapportValidation in $ctrl.validation.DailyRapportErrorList">
+            <li ng-repeat="error in rapportValidation">
+                {{error}}
+            </li>
+        </ul>
+    </script>
+
+    <span class="material-icons warns" style="color:sandybrown"
+          uib-popover-template="'popoverValidationWarningsTemplate'"
+          popover-trigger="'click'"
+          popover-placement="right"
+          popover-append-to-body="true"
+          ng-show="$ctrl.validation && $ctrl.validation.PersonnelWarningList"
+          title="{{::$ctrl.resources.RapportHebdo_Erreur_Tooltip}}">warning</span>
+
+    <script type="text/ng-template" id="popoverValidationWarningsTemplate">
+        <ul class="popoverList" ng-repeat="personnelValidation in $ctrl.validation.PersonnelWarningList">
+            <li ng-repeat="warning in personnelValidation">
+                {{warning}}
+            </li>
+        </ul>
+    </script>
+
+    <!-- START : liste pointage hebdo -->
+    <div class="pointage-hebdo-list"
+         ng-class="{'hide-tenth' : $ctrl.isAffichageParOuvrier||$ctrl.isAbsenceColumnHidden || $ctrl.selectedTabItem.Id == 4 || $ctrl.selectedTabItem.Id == 3 || $ctrl.selectedTabItem.Id == 2 }">
+
+        <!-- bloc en-têtes -->
+        <div class="headers-bloc">
+            <!--Premier en-tête-->
+            <div class="top-header">
+                <div ng-repeat="item in $ctrl.tabItems" ng-class="{'active' : item.Id == $ctrl.selectedTabItem.Id }"
+                     class="col-{{item.cssTag}}" ng-click="item.Id && $ctrl.handleChangeTab(item)">
+                    {{item.Libelle}}
+                </div>
+                <div class="col-5"></div>
+                <div class="col-6">{{::$ctrl.resources.RapportHebdo_Lundi}}</div>
+                <div class="col-7">{{::$ctrl.resources.RapportHebdo_Mardi}}</div>
+                <div class="col-8">{{::$ctrl.resources.RapportHebdo_Mercredi}}</div>
+                <div class="col-9">{{::$ctrl.resources.RapportHebdo_Jeudi}}</div>
+                <div class="col-10">{{::$ctrl.resources.RapportHebdo_Vendredi}}</div>
+                <div class="col-11">{{::$ctrl.resources.RapportHebdo_Samedi}}</div>
+                <div class="col-12">{{::$ctrl.resources.RapportHebdo_Dimanche}}</div>
+                <div class="col-13"></div>
+                <div class="col-14"></div>
+            </div>
+
+            <!--Second en-tête-->
+            <div class="bottom-header">
+                <div class="col-1">{{$ctrl.isAffichageParOuvrier ? 'Affichage par personnel' : 'Affichage par Ci'}}</div>
+                <div class="col-2">{{$ctrl.mondayFormattedDate}}</div>
+                <div class="col-3">{{$ctrl.tuesdayFormattedDate}}</div>
+                <div class="col-4">{{$ctrl.wednesdayFormattedDate}}</div>
+                <div class="col-5">{{$ctrl.thursdayFormattedDate}}</div>
+                <div class="col-6">{{$ctrl.fridaydayFormattedDate}}</div>
+                <div class="col-7">{{$ctrl.saturdayFormattedDate}}</div>
+                <div class="col-8">{{$ctrl.sundayFormattedDate}}</div>
+                <div class="col-9">Total</div>
+                <div class="col-10"
+                     ng-hide="$ctrl.isAffichageParOuvrier||$ctrl.isAbsenceColumnHidden || $ctrl.selectedTabItem.Id == 4 || $ctrl.selectedTabItem.Id == 3 || $ctrl.selectedTabItem.Id == 2">
+                    {{::$ctrl.resources.RapportHebdo_Heures_Sup}}
+                </div>
+            </div>
+        </div>
+
+        <div class="pointage-hebdo-list-body">
+            <!--Tab pointage-->
+            <pointage-hebdo-rapport-pointage-tab-component ng-show="$ctrl.selectedTabItem.Id == 1" resources="$ctrl.resources"
+                                                           limit-hour-per-day-blocking="10"
+                                                           limit-hour-per-day-blocking-for-iac="7"
+                                                           limit-hour-per-week-blocking="48"
+                                                           limit-hour-per-week-blocking-for-etam="35"
+                                                           limit-hour-per-week-not-blocking="35"
+                                                           is-etam-iac="$ctrl.isEtamIac"
+                                                           is-manager-pointing="$ctrl.isManagerPointing"
+                                                           personnel-id-list="$ctrl.personnelIdList"
+                                                           list-pointage-personnel-for-week-Par-Ci="$ctrl.listPointagePersonnelForWeekParCi"
+                                                           monday-date="$ctrl.mondayDate">
+
+            </pointage-hebdo-rapport-pointage-tab-component>
+            <!---------------->
+            <!--Tab Majoration-->
+            <pointage-hebdo-rapport-majoration-tab-component ng-show="$ctrl.selectedTabItem.Id == 2" is-etam-iac="$ctrl.isEtamIac"
+                                                             groupe-id="$ctrl.groupeId" monday-date="$ctrl.mondayDate" is-manager-pointing="$ctrl.isManagerPointing">
+            </pointage-hebdo-rapport-majoration-tab-component>
+            <!---------------->
+            <!--Tab prime-->
+            <pointage-hebdo-rapport-prime-tab-component ng-show="$ctrl.selectedTabItem.Id == 3" is-etam-iac="$ctrl.isEtamIac"
+                                                        groupe-id="$ctrl.groupeId" monday-date="$ctrl.mondayDate" is-affichage-worker="$ctrl.isAffichageParOuvrier"
+                                                        is-manager-pointing="$ctrl.isManagerPointing">
+            </pointage-hebdo-rapport-prime-tab-component>
+            <!---------------->
+            <!--Tab astreinte-->
+            <pointage-hebdo-rapport-astreinte-tab-component ng-show="$ctrl.selectedTabItem.Id == 4"
+                                                            is-manager-pointing="$ctrl.isManagerPointing"
+                                                            monday-date="$ctrl.mondayDate">
+            </pointage-hebdo-rapport-astreinte-tab-component>
+            <!---------------->
+        </div>
+
+    </div>
+</div>

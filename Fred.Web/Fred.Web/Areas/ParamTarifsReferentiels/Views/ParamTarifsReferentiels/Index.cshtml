@@ -1,0 +1,338 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+  ViewBag.Title = FeatureParamReferentielEtendu.ParamTarifsReferentiels_Index_TitreOnglet;
+  Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+  @Styles.Render("~/ParamTarifsReferentielsIndexBundle.css")
+}
+
+@section scripts {
+  @Scripts.Render("~/ParamTarifsReferentielsIndexBundle.js")
+  @this.RenderResources("FeatureParamReferentielEtendu")
+}
+
+<div class="tarifs_referentiels container" ng-controller="ParamTarifsReferentielsCtrl" ng-cloak>
+
+  <!-- START : Titre de la page -->
+  <h1><span class="flat">{{resources.ParamTarifsReferentiels_Index_Titre}}</span></h1>
+  <!-- END : Titre de la page -->
+  <!-- START : Bandeau choix Organisation -->
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <fred-section>
+        <label>{{resources.ParamTarifsReferentiels_Index_SousTitre_Organisation}}</label>
+      </fred-section>
+      <div class="row search-container">
+        <!-- BEGIN : Picklist Organisation -->
+        <div class="col-lg-8 col-md-8 no-pl">
+          <div class="inner-addon right-addon">
+            <span class="material-icons chevron-search">chevron_right</span>
+
+            <lookup class="bizness"
+                    ng-model="organisation"
+                    search-placeholder="{{resources.Global_ReferentielOrganisation_Placeholder}}"
+                    search-title="{{resources.Global_ReferentielOrganisation}}"
+                    on-select="loadData(true)"
+                    url="/api/Organisation/SearchLightOrganisation/?typeOrganisation=SOCIETE,PUO,UO,ETABLISSEMENT&">
+
+              <input type="text"
+                     class="form-control"
+                     ng-value="organisation.CodeLibelle"
+                     placeholder="{{resources.Global_ReferentielOrganisation_Placeholder}}"
+                     readonly />
+            </lookup>
+          </div>
+        </div>
+        <!-- END : Picklist Organisation -->
+        <!-- BEGIN : Bouton Exporter -->
+        <div class="div col-lg-4 col-md-4 add no-pr" ng-if="organisation != undefined">
+          <button type="button"
+                  class="btn btn-success pull-right"
+                  ng-click="extractExcel()"
+                  title="{{resources.Global_Bouton_ExportExcel_Tooltip}}">
+            <span class="glyphicon glyphicon-export">
+            </span>{{resources.Global_Bouton_ExportExcel}}
+          </button>
+          <input type="button"
+                 class="btn btn-link  pull-right"
+                 ng-disabled="ListParamRefEtenduModified.length == 0"
+                 ng-click="cancel()"
+                 title="{{resources.Global_Bouton_Annuler_Tooltip}}"
+                 value="{{resources.Global_Bouton_Annuler}}" />
+          <input type="button"
+                 class="btn btn-default  pull-right"
+                 ng-click="save()"
+                 title="{{resources.Global_Bouton_Enregistrer_Tooltip}}"
+                 value="{{resources.Global_Bouton_Enregistrer}}" />
+        </div>
+        <!-- END : Bouton Exporter -->
+      </div>
+    </div>
+  </div>
+  <!-- END : Bandeau choix Organisation -->
+  <!-- START : Bandeau Information -->
+  <div class="row information" ng-show="organisation == undefined">
+    <div class="col-md-4 icon">
+      <i class="flaticon flaticon-warning"></i>
+    </div>
+    <div class="col-md-4 msg">
+      <h3>{{resources.ParamTarifsReferentiels_Index_AucuneOrganisationSelectionnee}}</h3>
+    </div>
+  </div>
+  <!-- END : Bandeau Information -->
+
+  <div class="row" ng-if="organisation != undefined">
+    <div class="col-lg-12 col-md-12">
+      <fred-section>
+        <label>{{resources.Global_RechercheAffiner}}</label>
+      </fred-section>
+      <!-- START : Bandeau Recherche -->
+      <div class="row search-container">
+        <div class="col-lg-6 col-md-6 no-pl">
+          <div class="input-group input-search">
+            <input type="text" placeholder="{{resources.Global_ReferentielRessource_Placeholder}}" ng-model="search" class="form-control">
+            <span class="input-group-addon button-search"> <i class="material-icons">search</i> </span>
+          </div>
+        </div>
+        <div class="div col-lg-6 col-md-6 add no-pr">
+          <div class="row pull-left folded" ng-show="tarifsReferentiels.length > 0">
+            <input type="button" class="btn btn-default bg-inverse-light" ng-click="openall2()" value="{{resources.Global_Bouton_ToutDeplier}}" />
+            <input type="button" class="btn btn-default bg-inverse-light" ng-click="closeall2()" value="{{resources.Global_Bouton_ToutReplier}}" />
+          </div>
+          <div class="btn-group pull-right devises" ng-repeat="dev in ListDevises | orderBy:'+Reference'">
+            <button ng-if="dev.Reference" type="button" class="btn btn-default ref" aria-label="Left Align" title="{{resources.ParamTarifsReferentiels_Index_Bouton_DeviseReference_Tooltip}} {{dev.Libelle}}" ng-class="{active: dev.DeviseId === devise.DeviseId }" ng-model="devise" ng-click="changeDevise(dev)">{{dev.Symbole}}</button>
+            <button ng-if="!dev.Reference" type="button" class="btn btn-default sec" aria-label="Left Align" title="{{resources.ParamTarifsReferentiels_Index_Bouton_DeviseSecondaire_Tooltip}} {{dev.Libelle}}" ng-class="{active: dev.DeviseId === devise.DeviseId }" ng-model="devise" ng-click="changeDevise(dev)">{{dev.Symbole}}</button>
+          </div>
+        </div>
+      </div>
+      <!-- END : Bandeau Recherche -->
+
+      <div id="accordion">
+
+        <div class="row ff-hack">
+          <table class="table level0">
+            <colgroup>
+              <col>
+              <col>
+              <col ng-repeat="header in headersTitles" ng-show="!loadingBusy && responseMessage.length == 0">
+              <col>
+            </colgroup>
+            <tr>
+              <th class="header-referentiel-etendu">{{resources.ParamTarifsReferentiels_Index_Entete_Ressource}}</th>
+              <th class="header-unite">{{resources.ParamTarifsReferentiels_Index_Entete_Unite}}</th>
+              <th class="header-societe" ng-repeat="header in headersTitles" ng-show="!loadingBusy && responseMessage.length == 0">{{header.Text}}</th>
+              <th class="synthese">{{resources.ParamTarifsReferentiels_Index_Entete_Synthese}}</th>
+            </tr>
+          </table>
+        </div>
+        
+        <div id="divReferentielResults" class="fred-scroll" change-height-on-resize='{"size":480,"isActive": true}'>
+          <p ng-show="loadingBusy" class="text-center">{{resources.ParamTarifsReferentiels_Index_ChargementEnCours}}</p>
+          <p ng-show="responseMessage.length > 0" class="text-center">{{responseMessage}}</p>
+
+          <div class="panel-group" id="accordion">
+            <div class="row panel panel-default" ng-repeat="referentiel in tarifsReferentiels | orderBy: '+Code' | filter: chapitresFilter(search)" ng-show="!loadingBusy && responseMessage.length == 0">
+
+              <div class="panel-heading level1">
+                <table>
+                  <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                  </colgroup>
+                  <tr>
+                    <td>
+                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                         data-target="#souschapitre-{{referentiel.ChapitreId}}" title="{{resources.ParamTarifsReferentiels_Index_Niveau1_Deplier_Tooltip}}"></a>
+                    </td>
+                    <td class="code">
+                      <p class="inline-header">{{resources.ParamTarifsReferentiels_Index_Niveau1_Code}}</p>
+                      <p class="inline-desctiption">{{referentiel.Code}}</p>
+                    </td>
+                    <td class="Libelle">
+                      <p class="inline-header">{{resources.ParamTarifsReferentiels_Index_Niveau1_Libelle}}</p>
+                      <p class="inline-desctiption">{{referentiel.Libelle}}</p>
+                    </td>
+                    <td class="warning">
+                      <span ng-show="referentiel.CountParamRefEtenduToBeTreated > 0" class="material-icons badge-notify pull-right">warning</span>
+                    </td>
+                    <td>
+                      <p class="inline-header">{{referentiel.SousChapitres.length}} {{resources.ParamTarifsReferentiels_Index_Niveau1_NbrSousChapitre}}</p>
+                      <p class="inline-header" ng-show="referentiel.CountParamRefEtenduToBeTreated > 0">{{referentiel.CountParamRefEtenduToBeTreated}} {{resources.ParamTarifsReferentiels_Index_Niveau1_NbrRessourceAParametrer}}</p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <div id="souschapitre-{{referentiel.ChapitreId}}" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <div class="row panel panel-default" ng-repeat="souschapitre in referentiel.SousChapitres | orderBy: '+Code' | filter: sousChapitresFilter(search)">
+                    <div class="panel-heading level2">
+                      <table>
+                        <colgroup>
+                          <col>
+                          <col>
+                          <col>
+                          <col>
+                        </colgroup>
+                        <tr>
+                          <td>
+                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#souschapitre-{{referentiel.ChapitreId}}"
+                               data-target="#ressource-{{souschapitre.SousChapitreId}}" title="{{resources.ParamTarifsReferentiels_Index_Niveau2_Deplier_Tooltip}}"></a>
+                          </td>
+                          <td class="code">
+                            <p class="inline-header">{{resources.ParamTarifsReferentiels_Index_Niveau2_Code}}</p>
+                            <p class="inline-desctiption">{{souschapitre.Code}}</p>
+                          </td>
+                          <td class="Libelle">
+                            <p class="inline-header">{{resources.ParamTarifsReferentiels_Index_Niveau2_Libelle}}</p>
+                            <p class="inline-desctiption">{{souschapitre.Libelle}}</p>
+                          </td>
+                          <td class="warning">
+                            <span ng-show="souschapitre.CountParamRefEtenduToBeTreated > 0" class="material-icons badge-notify pull-right">warning</span>
+                          </td>
+                          <td>
+                            <p class="inline-header">{{souschapitre.Ressources.length}} {{resources.ParamTarifsReferentiels_Index_Niveau2_NbrRessource}}</p>
+                            <p class="inline-header" ng-show="souschapitre.CountParamRefEtenduToBeTreated > 0">{{souschapitre.CountParamRefEtenduToBeTreated}} {{resources.ParamTarifsReferentiels_Index_Niveau2_NbrRessourceAParametrer}}</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+
+                    <div id="ressource-{{souschapitre.SousChapitreId}}" class="panel-collapse collapse">
+                      <div class="panel-body level3">
+                        <div class="row"
+                             ng-repeat="ressource in souschapitre.Ressources | orderBy: '+Code' | filter: ressourcesFilter(search)"
+                             ng-click="select(ressource)">
+
+                          <div id="display" ng-if="ressource.RessourceId !== selected.RessourceId" title="{{resources.ParamTarifsReferentiels_Index_Niveau3_Editer_Tooltip}}">
+                            <table class="table table_first">
+                              <colgroup>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col ng-repeat="item in ressource.ReferentielEtendus[0].ParametrageReferentielEtendus | orderBy: '+Organisation.TypeOrganisationId'">
+                                <col>
+                              </colgroup>
+                              <tr>
+                                <td class="no_pr"></td>
+                                <td>
+                                  <p class="inline-header">{{resources.ParamTarifsReferentiels_Index_Niveau3_Code}}</p>
+                                  <p class="inline-desctiption">{{ressource.Code}}</p>
+                                </td>
+                                <td>
+                                  <p class="inline-header">{{resources.ParamTarifsReferentiels_Index_Niveau3_Libelle}}</p>
+                                  <p class="inline-desctiption">{{ressource.Libelle}}</p>
+                                </td>
+                                <td class="unit">
+                                  <p class="inline-header">{{resources.ParamTarifsReferentiels_Index_Niveau3_Unite}}</p>
+                                  <p class="inline-desctiption">{{ressource.ReferentielEtendus[0].ParametrageReferentielEtendus[ressource.ReferentielEtendus[0].ParametrageReferentielEtendus.length - 1].Unite.Code || "-"}}</p>
+                                </td>
+                                <td ng-repeat="item in ressource.ReferentielEtendus[0].ParametrageReferentielEtendus | orderBy: '+Organisation.TypeOrganisationId'" class="price">
+                                  <p class="inline-header">Prix</p>
+                                  <p class="inline-desctiption">
+                                    <span ng-show="item.Montant !== null ">{{item.Montant}}</span>
+                                    <span ng-show="item.Montant === null ">-</span>
+                                    <span ng-show="item.Montant > 0">{{devise.Symbole}}</span>
+                                    <span ng-show="item.Montant !== null && item.Unite">/{{item.Unite.Code}}</span>
+                                  </p>
+                                </td>
+                                <td class="amountHT">
+                                  <p class="inline-header">{{resources.ParamTarifsReferentiels_Index_Niveau3_MontantHT}}</p>
+                                  <p class="inline-desctiption">
+                                    <span ng-show="ressource.ReferentielEtendus[0].Synthese.Montant === null">-</span>
+                                    <span ng-show="ressource.ReferentielEtendus[0].Synthese.Montant !== null">{{ressource.ReferentielEtendus[0].Synthese.Montant}}</span>
+                                    <span ng-show="ressource.ReferentielEtendus[0].Synthese">{{devise.Symbole}}</span>
+                                    <span ng-show="ressource.ReferentielEtendus[0].Synthese.Unite">/{{ressource.ReferentielEtendus[0].Synthese.Unite.Code}}</span>
+                                  </p>
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+
+                          <div ng-if="ressource.RessourceId === selected.RessourceId" id="edit">
+                            <table class="table table_second">
+                              <colgroup>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col ng-repeat="item in ressource.ReferentielEtendus[0].ParametrageReferentielEtendus | orderBy: '+Organisation.TypeOrganisationId'">
+                                <col>
+                              </colgroup>
+                              <tr ng-class="{selected: ressource.RessourceId === selected.RessourceId}">
+                                <td class="no_pr"></td>
+                                <td>
+                                  <p class="inline-header">{{resources.ParamTarifsReferentiels_Index_Niveau3_Code}}</p>
+                                  <p class="inline-desctiption">{{ressource.Code}}</p>
+                                </td>
+                                <td>
+                                  <p class="inline-header">{{resources.ParamTarifsReferentiels_Index_Niveau3_Libelle}}</p>
+                                  <p class="inline-desctiption">{{ressource.Libelle}}</p>
+                                </td>
+                                <td>
+                                  <p class="inline-header">{{resources.ParamTarifsReferentiels_Index_Niveau3_Unite}}</p>
+                                  <lookup-standalone name="unite"
+                                                     ng-model="ressource.ReferentielEtendus[0].ParametrageReferentielEtendus[ressource.ReferentielEtendus[0].ParametrageReferentielEtendus.length - 1].Unite"
+                                                     text="ressource.ReferentielEtendus[0].ParametrageReferentielEtendus[ressource.ReferentielEtendus[0].ParametrageReferentielEtendus.length - 1].Unite.Code"
+                                                     search-title="{{resources.Global_ReferentielUnite}}"
+                                                     search-placeholder="{{resources.Global_ReferentielUnite_Placeholder}}"
+                                                     url="/api/Unite/SearchLight"
+                                                     show-delete-button="false"
+                                                     on-select="handleSelectUnite(item, ressource)"
+                                                     on-delete="handleDeleteUnite(ressource)"
+                                                     class="formulaire long">
+                                  </lookup-standalone>
+                                </td>
+                                <td id="{{item.OrganisationId}}" ng-repeat="item in ressource.ReferentielEtendus[0].ParametrageReferentielEtendus | orderBy: '+Organisation.TypeOrganisationId'">
+                                  <p class="inline-header">Prix</p>
+                                  <p ng-if="item.Organisation.TypeOrganisationId !== organisation.TypeOrganisationId"
+                                     class="inline-desctiption">
+                                    <span ng-show="item.Montant !== null ">{{item.Montant}}</span>
+                                    <span ng-show="item.Montant === null ">-</span>
+                                    <span ng-show="item.Montant">{{devise.Symbole}}</span>
+                                    <span ng-show="item.Unite">/{{item.Unite.Code}}</span>
+                                  </p>
+                                  <input ng-if="item.Organisation.TypeOrganisationId === organisation.TypeOrganisationId"
+                                         type="text"
+                                         fred-input-number
+                                         min="0"
+                                         max="999999999.99"
+                                         class="form-control amount"
+                                         ng-model="item.Montant"
+                                         ng-blur="inlineUpdateParametrage(item)" />
+                                </td>
+                                <td>
+                                  <p class="inline-header">{{resources.ParamTarifsReferentiels_Index_Niveau3_MontantHT}}</p>
+
+                                  <p class="inline-desctiption">
+                                    <span ng-show="ressource.ReferentielEtendus[0].Synthese.Montant === null">-</span>
+                                    <span ng-show="ressource.ReferentielEtendus[0].Synthese.Montant !== null">{{ressource.ReferentielEtendus[0].Synthese.Montant}}</span>
+                                    <span ng-show="ressource.ReferentielEtendus[0].Synthese">{{devise.Symbole}}</span>
+                                    <span ng-show="ressource.ReferentielEtendus[0].Synthese.Unite">/{{ressource.ReferentielEtendus[0].Synthese.Unite.Code}}</span>
+                                  </p>
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

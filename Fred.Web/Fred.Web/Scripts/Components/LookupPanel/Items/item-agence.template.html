@@ -1,0 +1,14 @@
+﻿
+<div ng-show="item.IsAgencePrincipale" class="paddingV-05 paddingH-10 bold color-grey2 txt-size-170">Fournisseur principal</div>
+<div class="lookup-panel-item"
+     ng-class="{'lookup-panel-item-selected' : $ctrl.currentItem.AgenceId == item.AgenceId}"
+     title="{{'Libelle('+ item.Libelle + ')------Code('+ item.Code + ')------TypeSequence('+ item.TypeSequence + ')------Siret('+ item.Siret + ')'}}">
+    <div class="lookup-panel-item-line1">{{item.Libelle}}</div>
+    <div class="lookup-panel-item-line2">
+        {{item.Code}}
+        <span ng-show="!!item.TypeSequence"> ({{item.TypeSequence}})</span>
+        <span ng-show="!!item.SIREN"> - {{item.SIREN}}</span>
+    </div>
+    <div class="lookup-panel-item-line3">{{item.Adresse.Ligne}} - {{item.Adresse.Ville}} ({{item.Adresse.CodePostal}})</div>
+</div>
+<div ng-show="item.IsAgencePrincipale" class="paddingH-10 bold color-grey2 txt-size-170">Agence(s)</div>

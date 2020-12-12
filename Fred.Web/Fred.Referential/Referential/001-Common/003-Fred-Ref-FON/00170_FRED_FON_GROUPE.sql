@@ -1,0 +1,5 @@
+﻿-- Mise à jour du code du Groupe FONDATION ('FON' => 'GFON')
+IF EXISTS (SELECT GroupeId FROM FRED_GROUPE WHERE Code = 'FON')
+BEGIN
+	UPDATE FRED_GROUPE SET Code = 'GFON' WHERE Code = 'FON'
+END

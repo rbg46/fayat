@@ -1,0 +1,145 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+@{
+    ViewBag.Title = FeatureFamilleOperationDiverse.FamilleOperationDiverse_List_Titre;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/FamilleOperationDiverseBundleFactory.css")
+}
+@section scripts {
+    @Scripts.Render("~/FamilleOperationDiverseBundleFactory.js")
+    @this.RenderResources("FeatureFamilleOperationDiverse")
+}
+<div class="FamilleOperationDiverse container" ng-controller="FamilleOperationDiverseController as ctrl">
+
+    <div class="toleft">
+
+        <!-- START : Titre de la page -->
+        <h1>{{ctrl.resources.FamilleOperationDiverse_List_Titre}}</h1>
+        <!--END : Titre de la page -->
+        <!--START : Barre de recherche + Barre d'outils-->
+        <fred-toolbar>
+
+            <!-- START : Sélectionner une société -->
+            <fred-section class="picklist-section">
+                <fred-section-title>{{ctrl.resources.Global_SelectionnerSociete}}</fred-section-title>
+                <fred-section-controls>
+                    <div class="inner-addon right-addon">
+                        <i class="chev material-icons">chevron_right</i>
+                        <lookup ng-model="ctrl.selectedSociete"
+                                search-placeholder="{{ctrl.resources.Global_ReferentielSociete_Placeholder}}"
+                                search-title="{{ctrl.resources.Global_ReferentielSociete}}"
+                                on-select="ctrl.handleLoadData()"
+                                url="/api/Societe/SearchLightForRoles?{{typeSocieteCodesParams}}">
+                            <input type="text" class="form-control"
+                                   ng-value="ctrl.selectedSociete.CodeLibelle"
+                                   placeholder="{{ctrl.resources.Global_ReferentielSociete_Placeholder}}"
+                                   title="{{ctrl.selectedSociete.CodeLibelle}}" />
+                        </lookup>
+                    </div>
+                </fred-section-controls>
+            </fred-section>
+            <!-- END : Sélectionner une société -->
+            <!-- START : Recherche Famille -->
+            <fred-section class="text-search-section">
+                <fred-section-title>Familles d'OD</fred-section-title>
+                <fred-section-controls>
+                    <div class="input-group input-search">
+                        <input type="text" ng-model="queryFamilleOD" class="form-control" placeholder="{{ctrl.resources.FamilleOperationDiverse_Index_SelectionnerFamille}}" />
+                        <span class="input-group-addon btn button-search">
+                            <span class="material-icons">search</span>
+                        </span>
+                    </div>
+                </fred-section-controls>
+            </fred-section>
+            <!-- Fin Search Famille -->
+        </fred-toolbar>
+
+        <!--START LISTES-->
+        <div class="container od-journ-bloc">
+
+            <!--OD-->
+            <div class="od-bloc">
+                <!--LISTE OD-->
+                <table class="od-table">
+                    <tbody class="fred-scroll">
+                        <tr ng-class="{'selected': ctrl.selectedFamilly === famille.FamilleOperationDiverseId }" ng-model="ctrl.selectedFamilly" ng-repeat="(FamilleOperationDiverseId, famille) in ctrl.initialFamilleOperationDiverseList |filter : searchFamilleOD">
+                            <td class="col2" ng-click="ctrl.handleEdit(famille)">{{famille.Code}}</td>
+                            <td class="col3" ng-click="ctrl.handleEdit(famille)">
+                                <div class="lb">{{ctrl.resources.FamilleOperationDiverse_Libelle}}</div>
+                                <span class="more-inf">{{famille.Libelle}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col2"></td>
+                            <td class="col3"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--DETAILS PANEL : START-->
+        <div ng-show="ctrl.displayEdit" ng-class="checkDisplayOptions" class="blockScreen" style="z-index:99"></div>
+        <div ng-show="ctrl.displayEdit" class="options" id="PanelRight" ng-class="checkDisplayOptions + ' ' + checkFormatOptions">
+
+            <!--HEADER TOOLBAR : BEGIN-->
+            <div class="toolbar">
+                <div class="sapicon-E02F grandicone"></div>
+            </div>
+            <!--HEADER TOOLBAR : END-->
+            <!-- Titre : BEGIN -->
+            <div class="form-header" id="Titre">
+                <h2>
+                    <span>{{ctrl.resources.FamilleOperationDiverse_EditFod_Titre}}</span>
+                </h2>
+                <label class="legend">{{ctrl.resources.Global_LegendeAsterisque}}</label>
+            </div>
+            <!-- Titre : END -->
+
+            <div class="form fred-scroll">
+                <form>
+                    <div class="field">
+                        <label>Code *</label>
+                        <input type="text" maxlength="250" length="50" ng-disabled="true" ng-model="ctrl.editFamille.Code" class="form-control" ng-value="ctrl.editFamille.Code" />
+                    </div>
+                    <div class="field">
+                        <label>Libellé famille *</label>
+                        <input type="text" maxlength="250" length="250" ng-model="ctrl.editFamille.Libelle" class="form-control" ng-value="ctrl.editFamille.Libelle" />
+                    </div>
+                    <div class="field">
+                        <label>Libellé court *</label>
+                        <input type="text" lowercase maxlength="20" length="250" ng-model="ctrl.editFamille.LibelleCourt" class="form-control" ng-value="ctrl.editFamille.LibelleCourt" ng-change="ctrl.editFamille.LibelleCourt = ctrl.editFamille.LibelleCourt.toLowerCase();" />
+                    </div>
+                    <div class="field">
+                        <input type="checkbox" ng-checked="ctrl.editFamille.MustHaveOrder" ng-model="ctrl.editFamille.MustHaveOrder" id="chbx-{{ctrl.editFamille.FamilleOperationDiverseId}}" />
+                        <label for="chbx-{{ctrl.editFamille.FamilleOperationDiverseId}}"><span></span>{{ctrl.resources.FamilleOperationDivers_Index_NumeroCommande}} {{ctrl.resources.FamilleOperationDivers_Index_EnregistrerEnCompta}}</label>
+                    </div>
+                    <div class="field">
+                        <label>Ordre</label>
+                        <input type="text" maxlength="250" length="50" ng-model="ctrl.editFamille.Order" class="form-control" ng-value="ctrl.editFamille.Order" />
+                    </div>
+
+                    <!--FOOTER TOOLBAR : BEGIN-->
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="btn btn-default" type="submit" ng-click="ctrl.handleEditFamille();" ng-disabled="ctrl.disableSaveWhenLoad" title="{{ctrl.resources.Global_Bouton_Enregistrer_Tooltip}}"> {{ctrl.resources.Global_Bouton_Enregistrer}}</button>
+                            <button class="btn btn-link" type="button" ng-click="ctrl.handleCancelEdit();" title="{{ctrl.resources.Global_Bouton_Annuler}}"> {{ctrl.resources.Global_Bouton_Annuler}} </button>
+                        </div>
+                        <fieldset class="close_panel" ng-disabled="ctrl.disableSaveWhenLoad"
+                                    ng-click="ctrl.handleClickCancel();"
+                                    title="{{ctrl.resources.Global_Bouton_RefermerPanneau_Tooltip}}">
+                            <i class="fa fa-angle-right"
+                                aria-hidden="true"></i>
+                            <span>{{ctrl.resources.Global_Bouton_RefermerPanneau}}</span>
+                        </fieldset>
+                    </div>
+                    <!--FOOTER TOOLBAR : END-->
+                </form>
+                <!--Formulaire: END-->
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+= Config Sonar dans Fred IE
+
+La solution Fred.ImportExport utilise des projets de la solution Fred.Web. Sonar ne sait pas filtrer ces projets, il les considère tous comme étant de la même solution même si l’on ajoute un filtre d’exclusion dans l’administration du projet Sonar. => Le problème est que le sonar de  Fred.ImportExport contient donc aussi l’analyse des projets de Fred.Web. Il y a donc une double analyse et le rapport Sonar de Fred.ImportExport est erroné puisqu’il ne contient pas uniquement les
+projets de Fred.ImportExport mais aussi les projets de Fred.Web.
+
+Il faut donc utiliser une variable, prise en compte par Sonar, lui indiquant si un projet doit être analysé : $(SonarQubeExclude)
+
+== Fichier target
+
+Pour injecter cette variable dans les csproj, on passe par un fichier target. Pour éviter de modifier tous les csproj en y important ce fichier target, on l’injecte via la ligne de commande msbuild. 
+
+Soit :
+/p:CustomBeforeMicrosoftCSharpTargets=``$(Build.SourcesDirectory).ImportExport.target``
+
+Ce target prend une variable pour calculer si le projet doit être analysé ou non : $(SonarQubePathFilter) Dans cette variable, on indique le chemin de la solution, si le csproj est dans ce chemin alors il est analysé, sinon, on considère qu’il fait parti d’un autre projet et alors
+il n’est pas analysé : la variable SonarQubeExclude est égale = False.
+
+Pour éviter de modifier tous les csproj en ajoutant cette variable, on l’injecte via la ligne de commande msbuild. 
+
+Soit :
+/p:SonarQubePathFilter=Fred.ImportExport
+
+....
+Le fichier target est situé dans Fred.ImportExport\SonarQube\SonarFilter.target 
+....
+
+== Documentation Sonar originale
+
+Lien :
+https://github.com/SonarSource/sonar-.net-documentation/blob/master/doc/appendix-3.md#excluding-projects-based-on-the-file-path
+
+=== Excluding projects based on the file path
+
+Depending on the layout of the projects on disk, it might be possible to specify the projects to analyse based on the file paths. For example, suppose the projects above are laid out on disk as follows:
+
+....
+c:WebProjectA
+c:WebProjectB
+c:FrameworkProjectC
+c:FrameworkProjectD
+c:FrameworkProjectX
+....
+
+The following custom targets file selects the projects to analyse based on the file path:
+
+....
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<!-- This target customises the SonarQube Scanner for MSBuild targets to limit the projects that are analysed.
+Projects whose full path and file name do not match the specified filter will be marked as "excluded".
+The regular expression uses the normal .NET regular expression syntax.
+-->
+<PropertyGroup Condition=" $(SonarQubeExclude) == `` AND $(SonarQubePathFilter) != `` ">
+    <MatchesSQPathFilter Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectFullPath), $(SonarQubePathFilter), System.Text.RegularExpressions.RegexOptions.IgnoreCase)) ">true</MatchesSQPathFilter>
+    <SonarQubeExclude Condition="$(MatchesSQPathFilter) != 'true' " >true</SonarQubeExclude>
+</PropertyGroup>
+</Project>
+....
+
+This targets file would allow the projects to be filtered as follows:
+
+....
+REM Only analyse the web projects, regardless of which projects are included in the solution
+REM Note: the backslash in the supplied path is escaped
+msbuild Solution1.sln /p:SonarQubePathFilter=c:\web
+
+REM Only analyse the framework projects
+msbuild Solution2.sln /p:SonarQubePathFilter=c:\framework
+....

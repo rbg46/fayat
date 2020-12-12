@@ -1,0 +1,4 @@
+﻿
+$("table").tableExport({
+    bootstrap: false
+});

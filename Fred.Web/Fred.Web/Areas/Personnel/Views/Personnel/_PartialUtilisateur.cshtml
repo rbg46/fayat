@@ -1,0 +1,225 @@
+﻿@*--------------------------------------------------------------------------------------------------------------*@
+@*                                          INFORMATIONS UTILISATEUR                                            *@
+@*--------------------------------------------------------------------------------------------------------------*@
+<div class="panel panel-default" ng-show="personnelEdit.Personnel.PersonnelId > 0 && !personnelEdit.JustDelegationShow && personnelEdit.showPartialUtilisateur">
+    <div class="panel-heading collapsed" data-toggle="collapse" data-parent="#personnel-accordion" data-target="#collapse-utilisateur" id="panel-heading-utilisateur">
+        <i class="chevron fa fa-fw"></i> {{personnelEdit.resources.Personnel_PartialUtilisateur_Titre}}
+    </div>
+    <div id="collapse-utilisateur" class="panel-collapse collapse">
+        <form class="form-horizontal" autocomplete="off" role="form" name="personnelEdit.formGestionUtilisateur" novalidate>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <input id="chbxIsUtilisateurActif" type="checkbox" name="IsDeleted" ng-model="personnelEdit.persoForUser.Utilisateur.IsActived" ng-click="personnelEdit.handleChangeUser()" />
+                        <label class="lb_mr" for="chbxIsUtilisateurActif"><span></span>{{personnelEdit.resources.Personnel_PartialUtilisateur_UtilisateurActif}}</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input id="chbxIsSuperAdmin" type="checkbox" disabled="disabled" name="SuperAdmin" ng-model="personnelEdit.persoForUser.Utilisateur.SuperAdmin" />
+                        <label class="lb_mr" for="chbxIsSuperAdmin"><span></span>{{personnelEdit.resources.Personnel_PartialUtilisateur_SuperAdmin}}</label>
+                    </div>
+                    <div class="col-md-4">
+                        <fred-authorization key="button.show.personnel.souscription.email.activity">
+                            <input id="chbxHasSubscribeToEmailSummary"
+                                   type="checkbox"
+                                   ng-disabled="!personnelEdit.handleCanChangeActiveEmailSummary()"
+                                   name="HasSubscribeToEmailSummary"
+                                   ng-model="personnelEdit.persoForUser.hasSubscribeToEmailSummary" />
+                            <label class="lb_mr" for="chbxHasSubscribeToEmailSummary">
+                                <span></span>
+                                {{personnelEdit.resources.Personnel_ControllerEdit_Label_Subscribe_To_Email_Summary}}
+                            </label>
+                        </fred-authorization>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="small text-muted sub-info" ng-show="personnelEdit.settings_help || personnelEdit.resources.Personnel_PartialUtilisateur_UtilisateurActif_Info !=null">{{personnelEdit.resources.Personnel_PartialUtilisateur_UtilisateurActif_Info}}</div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="small text-muted sub-info" ng-show="personnelEdit.settings_help || personnelEdit.resources.Personnel_PartialUtilisateur_SuperAdmin_Info !=null">{{personnelEdit.resources.Personnel_PartialUtilisateur_SuperAdmin_Info}}</div>
+                    </div>
+                    <div class="col-md-4">
+                        <fred-authorization key="button.show.personnel.souscription.email.activity">
+                            <div class="small text-muted sub-info"
+                                 ng-show="personnelEdit.settings_help || personnelEdit.resources.Personnel_ControllerEdit_Label_Subscribe_To_Email_Summary !=null">
+                                {{personnelEdit.handleGetSubscribeToEmailSummaryLabel()}}
+                            </div>
+                        </fred-authorization>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-4" ng-show="personnelEdit.persoForUser.Utilisateur.DateCreation!=''">
+                        <label>{{personnelEdit.resources.Personnel_PartialUtilisateur_DateCreation}}</label>
+                        <p>{{personnelEdit.persoForUser.Utilisateur.DateCreation | date : 'dd/MM/yyyy' }}</p>
+                    </div>
+                    <div class="col-md-4" ng-show="personnelEdit.persoForUser.Utilisateur.DateModification!=''">
+                        <label>{{personnelEdit.resources.Personnel_PartialUtilisateur_DateModification}}</label>
+                        <p>{{personnelEdit.persoForUser.Utilisateur.DateModification | date : 'dd/MM/yyyy'}}</p>
+                    </div>
+                    <div class="col-md-4" ng-show="personnelEdit.persoForUser.Utilisateur.DateDerniereConnexion!=''">
+                        <label>{{personnelEdit.resources.Personnel_PartialUtilisateur_DateDerniereConnexion}}</label>
+                        <p>{{personnelEdit.persoForUser.Utilisateur.DateDerniereConnexion | date : 'dd/MM/yyyy à HH:mm:ss'}}</p>
+                    </div>
+                </div>
+                <div id="personnel-droit-commande" fred-display-handler="personnelEdit.userOrganisationId" display="hidden">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h4>{{personnelEdit.resources.Personnel_PartialUtilisateur_SousTitre_DroitCommande}}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input id="chkB" type="checkbox" name="CommandeManuelleAllowed" ng-model="personnelEdit.persoForUser.Utilisateur.CommandeManuelleAllowed" /><label class="lb_mr" for="chkB"><span></span>{{personnelEdit.resources.Personnel_PartialUtilisateur_CommandeManuelle}}</label>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                @* -------------------------------------------------------------------------------------------------------------------------------------------------*@
+                @*                                        Gestion de l'authentification pour un personnel INTERNE                                                   *@
+                @* -------------------------------------------------------------------------------------------------------------------------------------------------*@
+                <div ng-if="personnelEdit.Personnel.IsInterne">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h4>{{personnelEdit.resources.Personnel_PartialUtilisateur_SousTitre_AuthentificationPersonnelInterne}}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <label>{{personnelEdit.resources.Global_Login}} *</label>
+                            <span class="text-danger" ng-show="personnelEdit.formGestionUtilisateur.Login.$error.validLogin">{{personnelEdit.resources.Personnel_PartialUtilisateur_LoginExistant_Erreur}}</span>
+                            <span class="text-danger" ng-show="(personnelEdit.persoForUser.Utilisateur.IsActived || personnelEdit.persoForUser.Utilisateur.UtilisateurId > 0) && personnelEdit.formGestionUtilisateur.$submitted && personnelEdit.formGestionUtilisateur.Login.$error.required">{{personnelEdit.resources.Global_Control_DataRequired_Erreur}}</span>
+                            <input class="form-control inputText"
+                                   id="txtLogin"
+                                   name="Login"
+                                   type="text"
+                                   ng-model="personnelEdit.persoForUser.Utilisateur.Login"
+                                   maxlength="50"
+                                   ng-change="personnelEdit.handleChangeLogin()"
+                                   ng-required="personnelEdit.persoForUser.Utilisateur.IsActived || personnelEdit.persoForUser.Utilisateur.UtilisateurId > 0"
+                                   autocomplete="off"
+                                   placeholder="{{personnelEdit.resources.Global_Login_Placeholder}}" />
+                            <div class="small text-muted" ng-show="settings_help || personnelEdit.resources.Global_Login_Info !=null">{{personnelEdit.resources.Global_Login_Info}}</div>
+                        </div>
+                        <div class="col-md-4" ng-class="{'has-error': personnelEdit.formGestionUtilisateur.$submitted && personnelEdit.formGestionUtilisateur.Folio.$invalid}">
+                            <label>{{personnelEdit.resources.Personnel_PartialUtilisateur_Folio}}</label>
+                            <span class="text-danger" ng-show="personnelEdit.formGestionUtilisateur.$submitted && personnelEdit.formGestionUtilisateur.Folio.$error.validFolioExist">{{personnelEdit.resources.Personnel_PartialUtilisateur_FolioExistant_Erreur}}</span>
+                            <span class="text-danger" ng-show="personnelEdit.formGestionUtilisateur.$submitted && personnelEdit.formGestionUtilisateur.Folio.$error.validFolio">{{personnelEdit.resources.Personnel_PartialUtilisateur_FolioNbrLettre_Erreur}}</span>
+                            <input type="text" autocomplete="off" class="form-control" name="Folio" ng-model="personnelEdit.persoForUser.Utilisateur.Folio" ng-change="personnelEdit.handleChangeFolio()" maxlength="3" />
+                        </div>
+                    </div>
+                    <br />
+                    @*Recherche de la correspondance avec l'Active Directory*@
+                    @*<div ng-if="false">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <label>Recherche de la correspondance avec l'Active Directory*</label>
+                              <input class="form-control" ng-model="personnelEdit.persoForUser.Utilisateur.Login" ng-change="personnelEdit.handleChangeLoginInterne(personnelEdit.persoForUser.Utilisateur.Login)" />
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="autocomplete">
+                                <ul ng-show="personnelEdit.showAddressList" role="menu" class="inputSelectItems">
+                                  <li ng-repeat="item in usersActiveDirectory" class="inputSelectItem list-unstyled">
+                                    <a href="#" ng-click="personnelEdit.handleSelectLoginFromActiveDirectory(item)">{{item.DisplayName}} / {{item.SAMAccountName}}</a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>*@
+                </div>
+                @* -------------------------------------------------------------------------------------------------------------------------------------------------*@
+                @*                                        Gestion de l'authentification pour un personnel EXTERNE                                                   *@
+                @* -------------------------------------------------------------------------------------------------------------------------------------------------*@
+                <div ng-if="!personnelEdit.Personnel.IsInterne">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h4>{{personnelEdit.resources.Personnel_PartialUtilisateur_SousTitre_AuthentificationPersonnelExterne}}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4" ng-class="{'has-error': personnelEdit.formGestionUtilisateur.$submitted && personnelEdit.formGestionUtilisateur.LoginExterne.$invalid }">
+                            <label>{{personnelEdit.resources.Global_Login}} *</label>
+                            <span class="text-danger" ng-show="personnelEdit.persoForUser.Utilisateur.IsActived && personnelEdit.formGestionUtilisateur.LoginExterne.$error.validLogin">{{personnelEdit.resources.Personnel_PartialUtilisateur_LoginExistant_Erreur}}</span>
+                            <span class="text-danger" ng-show="personnelEdit.persoForUser.Utilisateur.IsActived && personnelEdit.formGestionUtilisateur.$submitted && personnelEdit.formGestionUtilisateur.LoginExterne.$error.required">{{personnelEdit.resources.Global_Control_DataRequired_Erreur}}</span>
+                            <input class="form-control inputText"
+                                   id="txtLoginExterne"
+                                   name="LoginExterne"
+                                   type="text"
+                                   ng-model="personnelEdit.persoForUser.Utilisateur.Login"
+                                   maxlength="50"
+                                   ng-change="personnelEdit.handleChangeLogin()"
+                                   ng-required="personnelEdit.persoForUser.Utilisateur.IsActived"
+                                   ng-disabled="!personnelEdit.persoForUser.Utilisateur.IsActived"
+                                   placeholder="{{personnelEdit.resources.Global_Login_Placeholder}}" />
+                            <div class="small text-muted" ng-show="personnelEdit.settings_help || personnelEdit.resources.Global_Login_Info !=null">{{personnelEdit.resources.Global_Login_Info}}</div>
+                        </div>
+                        <div class="col-md-4" ng-class="{'has-error': personnelEdit.persoForUser.Utilisateur.IsActived && personnelEdit.formGestionUtilisateur.$submitted && personnelEdit.formGestionUtilisateur.MotDePasse.$invalid, 'has-success':  personnelEdit.formGestionUtilisateur.$submitted && personnelEdit.formGestionUtilisateur.MotDePasse.$valid }">
+                            <label>{{personnelEdit.resources.Personnel_PartialUtilisateur_MotDePasse}} *</label>
+                            <span class="text-danger" ng-show="personnelEdit.persoForUser.Utilisateur.IsActived && personnelEdit.formGestionUtilisateur.$submitted && personnelEdit.formGestionUtilisateur.MotDePasse.$error.required">{{personnelEdit.resources.Global_Control_DataRequired_Erreur}}</span>
+                            <span class="conforme" ng-show="personnelEdit.persoForUser.Utilisateur.IsActived && personnelEdit.formGestionUtilisateur.$submitted && personnelEdit.formGestionUtilisateur.MotDePasse.$valid">{{personnelEdit.resources.Personnel_PartialUtilisateur_MotDePasseConforme}}</span>
+                            <span class="text-danger" ng-show="personnelEdit.persoForUser.Utilisateur.IsActived && ersonnelEdit.formGestionUtilisateur.$submitted && personnelEdit.formGestionUtilisateur.MotDePasse.$error.minlength">{{personnelEdit.resources.Personnel_PartialUtilisateur_MotDePasseTailleMin_Erreur}}</span>
+                            <span class="text-danger" ng-show="personnelEdit.persoForUser.Utilisateur.IsActived && personnelEdit.formGestionUtilisateur.$submitted && personnelEdit.formGestionUtilisateur.MotDePasse.$error.validPasswordLetter">{{personnelEdit.resources.Personnel_PartialUtilisateur_MotDePasseLettre_Erreur}}</span>
+                            <input class="form-control inputText"
+                                   id="txtMotDePasse"
+                                   name="MotDePasse"
+                                   type="password"
+                                   autocomplete="new-password"
+                                   ng-model="personnelEdit.persoForUser.Utilisateur.ExternalDirectory.MotDePasse"
+                                   maxlength="50"
+                                   minlength="6"
+                                   ng-change="personnelEdit.handleChangePassword()"
+                                   ng-required="personnelEdit.persoForUser.Utilisateur.IsActived"
+                                   ng-disabled="!personnelEdit.persoForUser.Utilisateur.IsActived"
+                                   placeholder="{{personnelEdit.resources.Personnel_PartialUtilisateur_MotDePasse_Placeholder}}">
+                            <div class="small text-muted" ng-show="personnelEdit.settings_help || personnelEdit.resources.Personnel_PartialUtilisateur_MotDePasse_Info !=null">{{personnelEdit.resources.Personnel_PartialUtilisateur_MotDePasse_Info}}</div>
+                        </div>
+                        <div class="col-md-4" ng-class="{'has-error': personnelEdit.formGestionUtilisateur.$submitted && personnelEdit.formGestionUtilisateur.FolioExterne.$invalid}">
+                            <label>{{personnelEdit.resources.Personnel_PartialUtilisateur_Folio}}</label>
+                            <span class="text-danger" ng-show="personnelEdit.formGestionUtilisateur.$submitted && personnelEdit.formGestionUtilisateur.FolioExterne.$error.validFolioExist">{{personnelEdit.resources.Personnel_PartialUtilisateur_FolioExistant_Erreur}}</span>
+                            <span class="text-danger" ng-show="personnelEdit.formGestionUtilisateur.$submitted && personnelEdit.formGestionUtilisateur.FolioExterne.$error.validFolio">{{personnelEdit.resources.Personnel_PartialUtilisateur_FolioNbrLettre_Erreur}}</span>
+                            <input type="text" class="form-control" autocomplete="off" name="FolioExterne" ng-model="personnelEdit.persoForUser.Utilisateur.Folio" ng-change="personnelEdit.handleChangeFolio()" maxlength="3" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>{{personnelEdit.resources.Personnel_PartialUtilisateur_DateExpiration}} *</label>
+                            <span class="text-danger" ng-show="personnelEdit.formGestionUtilisateur.$submitted && personnelEdit.formGestionUtilisateur.DateExpiration.$invalid">{{personnelEdit.resources.Personnel_PartialUtilisateur_DateExpirationSup_Erreur}}</span>
+                            <div>
+                                <app-date-picker id="dtPkDateExpiration"
+                                                 name="DateExpiration"
+                                                 format="DD/MM/YYYY"
+                                                 lang="fr"
+                                                 placeholder="{{personnelEdit.resources.Personnel_PartialUtilisateur_DateExpiration_Placeholder}}"
+                                                 initial-date="{{personnelEdit.persoForUser.Utilisateur.ExternalDirectory.DateExpiration}}"
+                                                 ng-model="personnelEdit.persoForUser.Utilisateur.ExternalDirectory.DateExpiration"
+                                                 min-date="{{ personnelEdit.today }}"
+                                                 ng-required="personnelEdit.persoForUser.Utilisateur.IsActived"
+                                                 ng-disabled="!personnelEdit.persoForUser.Utilisateur.IsActived || personnelEdit.Personnel.IsInterimaire" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <br />
+                            <input id="CompteActif" type="checkbox" name="CompteActif" ng-disabled="!personnelEdit.persoForUser.Utilisateur.IsActived" ng-model="personnelEdit.persoForUser.Utilisateur.ExternalDirectory.IsActived" /><label class="lb_mr" for="CompteActif"><span></span>{{personnelEdit.resources.Personnel_PartialUtilisateur_CompteActif}}</label>
+                            <div class="small text-muted col-md-12 sub-info-ca" ng-show="settings_help || personnelEdit.resources.Global_Login_Info !=null">{{personnelEdit.resources.Personnel_PartialUtilisateur_CompteActif_Info}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <!--BEGIN  > BOUTONS-->
+                <button type="submit" class="btn btn-default pull-left" ng-click="personnelEdit.handleSave('utilisateur')"
+                        title="{{personnelEdit.resources.Global_Bouton_Enregistrer_Tooltip}}">
+                    {{personnelEdit.resources.Global_Bouton_Enregistrer}}
+                </button>
+                <button type="button" class="btn btn-link pull-right" ng-click="personnelEdit.handleCancel('utilisateur')"
+                        title="{{personnelEdit.resources.Global_Bouton_Annuler_Tooltip}}">
+                    {{personnelEdit.resources.Global_Bouton_Annuler}}
+                </button>
+                <!--END  > BOUTONS-->
+            </div>
+        </form>
+    </div>
+</div>

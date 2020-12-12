@@ -1,0 +1,42 @@
+﻿<div class="modal-header">
+    <h2 class="modal-title">
+        <i class="falticon flaticon flaticon-shuffle-1"></i>
+        {{$ctrl.resources.EcartModal_Title}}
+    </h2>
+    <span class="modal-title ng-binding flaticon flaticon-multiply close-modal pull-right" ng-click="$ctrl.handleCancel(); $ctrl.close();" title="{{$ctrl.resources.EcartModal_Cancel}}"></span>
+</div>
+
+<div class="modal-body">
+    <div class="modal-body-content" ng-show="$ctrl.canClosePeriode();">
+        <p>{{$ctrl.EcartModal_GapOnPeriod}}</p>
+        <br />
+        {{$ctrl.resources.EcartModal_Option}}
+        <ul>
+            <li>{{$ctrl.resources.EcartModal_AutomaticTreatement}}</li>
+            <li>{{$ctrl.resources.EcartModal_ManualTreatement}}</li>
+        </ul>
+        <p ng-show="$ctrl.listPeriodClosed">{{$ctrl.resources.EcartModal_PeriodesClosedWithGap}}</p>
+        <ul>
+            <li ng-repeat=" periodClose in $ctrl.listPeriodClosed">
+                {{$ctrl.monthNames[periodClose.Mois]}}  - {{periodClose.Annee}} :
+                <select ng-model="periodClose.Option">
+                    <option value="odauto"> {{$ctrl.resources.EcartModal_ODAutoOption}} </option>
+                    <option value="odmanuel"> {{$ctrl.resources.EcartModal_ODManualOption}}</option>
+                </select><br />
+            </li>
+        </ul>
+        <p><i><br />{{$ctrl.resources.EcartModal_RefreshRequired}}</i></p>
+    </div>
+    <div class="modal-body-content" ng-show="!$ctrl.canClosePeriode();">
+        <p><b>{{$ctrl.resources.EcartModal_NoRights}}</b></p>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-lg btn-default pull-left" ng-click="$ctrl.handleValider(); $ctrl.close();" title="{{$ctrl.resources.EcartModal_Validate}}">
+        {{$ctrl.resources.EcartModal_Validate}}
+    </button>
+    <button type="button" class="btn btn-lg btn-link pull-right" ng-click="$ctrl.handleCancel(); $ctrl.close();" title="{{$ctrl.resources.EcartModal_Cancel}}">
+        {{$ctrl.resources.EcartModal_Cancel}}
+    </button>
+</div>

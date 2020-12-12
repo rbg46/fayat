@@ -1,0 +1,34 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title" ng-if="$ctrl.duplicate"><i class="flaticon flaticon-shuffle-1"></i>{{::$ctrl.resources.BilanFlash_Modal_ReporterEtDupliquer_Objectif_Dupliquer_Titre}}</h2>
+        <h2 class="modal-title" ng-if="!$ctrl.duplicate"><i class="flaticon flaticon-shuffle-1"></i>{{::$ctrl.resources.BilanFlash_Modal_ReporterEtDupliquer_Objectif_Reporter_Titre}}</h2>
+        <i class="flaticon flaticon-multiply close pull-right" title="{{::$ctrl.resources.Global_Modal_Annuler_Tooltip}}" ng-click="$ctrl.handleCancel()"></i>
+    </div>
+
+    <div class="modal-body">
+        <div class="report-duplicate-objectif-line">
+            <div class="col-md-7">
+                {{::$ctrl.resources.BilanFlash_Modal_ReporterEtDupliquer_Objectif_PeriodeInitiale}}
+            </div>
+            <div class="col-md-5">
+                {{::$ctrl.dateDebut | date : 'dd/MM/yyyy'}} {{::$ctrl.resources.BilanFlash_Modal_ReporterEtDupliquer_Objectif_Au}} {{::$ctrl.dateFin | date : 'dd/MM/yyyy'}}
+            </div>
+        </div>
+        <div class="report-duplicate-objectif-line">  
+            <div class="col-md-7">
+                {{::$ctrl.resources.BilanFlash_Modal_ReporterEtDupliquer_Objectif_NouvelleDate}} 
+            </div>
+            <div class="col-md-5">
+                <div class="input-group date">
+                    <app-date-picker format="DD/MM/YYYY" lang="fr" ng-model="$ctrl.dateReport" min-date ="{{$ctrl.dateMin}}" placeholder="{{::$ctrl.resources.BilanFlash_DateDebut}}" readonly />
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-default pull-left" ng-click="$ctrl.handleValidate()" ng-disabled="!$ctrl.dateReport" >{{::$ctrl.resources.Global_Bouton_Valider}}</button>
+        <button class="btn btn-link pull-right" ng-click="$ctrl.handleCancel()">{{::$ctrl.resources.Global_Bouton_Annuler}} </button>
+    </div>
+</div>

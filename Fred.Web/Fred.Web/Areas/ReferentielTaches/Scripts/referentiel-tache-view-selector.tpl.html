@@ -1,0 +1,18 @@
+﻿ <!--Bouton permettant de sélectionner les modes d'affichage : BEGIN-->
+<div class="display-mode-buttons pull-right">
+  <button class="btn btn-warning btn-options"
+          title="{{resources.ReferencielTache_Template_Bouton_ModeArboresence}}"
+          ng-class="{'btn-on' : $ctrl.viewArbo, 'btn-off' : !$ctrl.viewArbo}"
+          ng-click="$ctrl.handleChangeModeDisplay('viewArbo')">
+    <i class="material-icons xpand">view_headline</i>
+  </button>
+
+  <button class="btn btn-warning btn-options"
+          title="{{resources.ReferencielTache_Template_Bouton_ModeColonne}}"
+          ng-class="{'btn-on' : $ctrl.viewSplitted, 'btn-off' : !$ctrl.viewSplitted}"
+          ng-click="$ctrl.handleChangeModeDisplay('viewSplitted')">
+    <span class="material-icons xpand list">view_list</span>
+  </button>
+  <!--Bouton permettant de sélectionner les modes d'affichage : END-->
+</div>
+

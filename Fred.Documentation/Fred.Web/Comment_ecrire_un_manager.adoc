@@ -1,0 +1,165 @@
+= How to write a manager ?
+
+== Règles :
+
+*Les règles indiquées ici ne sont pas dérogeables !*
+
+=== Un manager doit :
+
+* définir une interface
+* hériter de Manager<TEntity, TRepository>
+* Valider les données et les RG dans une classe IValidator.
+* Utiliser Ioc pour pouvoir être mocké
+* être testé avec des TUs automatisés mocké sans accès à la base :
+Objectif 80% de couverture de code
+
+=== Un manager ne doit pas :
+
+* Ne pas utiliser IQueryable sur un repo
+* Utiliser directement un repository qui ne correspond pas à son
+entité.
+** Donc pour accéder à d’autres entités, un manager utilise les autres managers.
+** Pourquoi ? : Car passer directement par le repo revient à accéder directement à la
+base de données sans passer par les règles de gestion du manager. Donc
+les règles de gestion ne sont pas appelées.
+
+=== Un manager s’occupe de son entité et ne fait pas aussi le café :
+
+* Respecter les principes SOLID. Une classe = une responsablité. Si votre manager fait plus de 500 lignes, alors c’est qu’il commence à y avoir un problème.
+
+Pour l’imiter la taille de votre manager, utiliser des classes qui implémentent les fonctionnalités. Vous pouvez utiliser IManagerFeature pour vous aider.
+
+=== Refactorer un manager trop gros
+
+Voir comme exemple IndemniteDeplacementManager
+
+*Avant* :
+
+[source,csharp]
+----
+interface IMyBigManager : IManager<MyEntity> 
+{
+  void Funct1()
+  void Funct2()
+  void Funct3()
+  void Funct4()
+}
+class MyBigManager <MyEntity, MyRepo> : Manager<MyEntity, MyRepo>, IMyBigManager
+{
+  MyBigManager(IUnitOfWork, IOtherManager) {}
+  void Funct1()
+  {
+    // implémentation de Func
+  }
+  void Funct2()
+  {
+    // implémentation de Func
+  }
+  void Funct3()
+  {
+    // implémentation de Func
+  }
+  void Funct4()
+  {
+    // implémentation de Func
+  }
+  etc...
+}
+----
+
+*Solution 1* : Non préférée
+
+Regroupe les fonctions dans des classes sans toucher à la signature du manager. Utilise l’héritage Ceci permet de masquer le refactoring aux classes appelantes. Le manager ne change pas.
+
+[source,csharp]
+----
+interface IFeature1
+{
+  void Funct1()
+  void Funct2() 
+}
+interface IFeature2
+{
+  void Funct3()
+  void Funct4() 
+}
+interface IMyBigManager : IManager<MyEntity>, IFeature1, IFeature2 // par héritage et non par aggrégation
+{
+  // vide, tout est dans les interfaces d'implémentation
+}
+class MyBigManager <MyEntity, MyRepo> : Manager<MyEntity, MyRepo>, IMyBigManager
+{
+
+  MyBigManager(IUnitOfWork, IFeature1 feature1, IFeature2 feature2) 
+  {
+    Feature1 = feature1;
+    Feature2 = feature2;
+  }
+  
+  private IFeature1 Feature1 {get;}
+  private IFeature2 Feature2 {get;}
+  
+  void Funct1()
+  {
+    Feature1.Funct1();
+  }
+  void Funct2()
+  {
+    Feature1.Funct2();
+  }
+  void Funct3()
+  {
+    Feature2.Funct3();
+  }
+  void Funct4()
+  {
+    Feature2.Funct3();
+  }
+  etc...
+}
+----
+
+
+*Solution 2* : Préférée => Solution à utiliser
+
+Regroupe les fonctions dans des classes et supprime le code du manager. Utilise l’aggrégation. +
+Avantage : plus rien dans le manager, juste l’accès aux features. Limitation des dépendances. Inconvénient : Il faut refactorer un peu le code appelant.
+
+[source,csharp]
+----
+interface IFeature1
+{
+  void Funct1()
+  void Funct2() 
+}
+interface IFeature2
+{
+  void Funct3()
+  void Funct4() 
+}
+interface IMyBigManager : IManager<MyEntity> // Par aggrégation et non par héritage
+{
+  IFeature1 Feature1();
+  IFeature2 Feature2();
+}
+class MyBigManager <MyEntity, MyRepo> : Manager<MyEntity, MyRepo>, IMyBigManager
+{
+  private readonly IFeature1 feature1;
+  private readonly IFeature2 feature2;
+  
+  MyBigManager(IUnitOfWork, IFeature1 feature1, IFeature2 feature2)
+  {
+    this.feature1 = feature1;
+    this.feature2 = feature2;
+  }
+  
+  public IFeature1 feature1 {return feature1;}
+  public IFeature2 feature2 {return feature2;}
+  
+  // rien d'autre dans le manager, tout est dans les classes d'implémentations.
+}
+----
+
+=== Eviter qu’un manager ne grossisse
+
+Utiliser la solution 2 dès le début.

@@ -1,0 +1,79 @@
+= Petit traité de l’export excel
+
+Tout d’abord la librairie utilisée est syncfusion https://help.syncfusion.com/file-formats/xlsio/overview
+
+L’idée est de remplir un fichier excel avec la mise en forme en partie existante (cartouche, tableaux etc.)
+
+On va y insérer des données fixes (dans le cartouche), et des données dynamiques (sous forme de liste)
+
+== Mise en place du template
+
+Créez votre fichier excel classiquement (Tableau, cartouche)
+
+Créez les variables de cartouche avec la nomenclature suivante : %NOMDELAVARIABLE
+
+Dans le cas où vous allez passer une liste de données pour construire un tableau il faudra créer la ligne de données avec dans chaque case la nomenclature suivante : %NOMDUTEMPLATE.NOMDUCHAMP
+
+== Utilisation de la classe ExcelFormat
+
+Une classe englobant syncfusion a été créée pour faciliter la créeation de workbooks et l’ajout de ligne / style
+
+Elle nécessite probablement une refacto car il y a des méthodes spécifiques à certains exports (ex GenerateExcelDepenses)
+
+== Mise en forme
+
+Pour que chaque ligne soit mise en forme de la même manière que la ligne 1 du tableau de données ajoutez *;insert:copystyles* à la fin du 1er champ texte de la ligne.
+
+Avec le framework il est possible de générer directement les styles d’affichage par ligne/colonne/cellule. A l’usage je me suis aperçu que ça ne fonctionnait pas bien (appliquer des styles sur des plages de données)
+
+La meilleure méthode est de créer directement des styles Excel (Onglet Affichage ==> Styles de cellules) Ex : Méthode CreateLineStyles
+
+Ensuite appliquez les styles créés à des plages de données (ex: A3:B8)
+
+Pour de la mise en forme conditionnelle une astuce est d’insérer une donnée ``cachée'' (booléen dans une colonne) puis soit cacher la colonne dans le template ou bien via le code Ex : Méthode HideTechnicalColumns
+
+== Insertion des données
+
+Voir le fichier de référence *CompteExploitationControler* et la méthode *ComputeExport4CMultiAxes* pour exemple.
+
+Le principe général est de générer une liste de données avec un modèle défini dans le template. Le framework se chargera de remplir automatiquement et de générer les lignes
+
+== Insertion de formules
+
+Il est bien évidemment possible d’insérer des formules de calcul (évite de le faire en backoffice) Ex de méthode : AddExcelFormulas
+
+A noter que les formules doivent être écrites sous forme anglaise (et non traduites comme sous Office FR)
+
+== Nota Bene
+
+Je n’ai pas réussi à faire fonctionner l’ajout de variables dans l’entête et dans le pied de page’ => Voir si c’est un bug de la librairie ou une limitation
+
+== Exemple de code complet
+
+....
+// Instanciation de la classe   
+ExcelFormat excelFormat = new ExcelFormat();
+// Ouverture du template
+IWorkbook excelTemplate = excelFormat.OpenTemplateWorksheet(AppDomain.CurrentDomain.BaseDirectory + NomDuTemplate);
+var workSheetTemplate = excelTemplate.ActiveSheet;
+// Création de la liste de données à passer au template
+List<VotreModele> rows = Classe.BuildFinalDataList(listGroupedDepenses);
+
+// Calcul du nombre de lignes
+ int endLineNum = rows.Count + 5;
+ int totalLineNum = rows.Count + 7;
+
+// Appel méthode de fusion des données 'VotreModele' étant le modèle de données à passer
+// staticMarkers est un dictionnaire des données de cartouche
+excelTemplate = excelFormat.AddWorkSheetTemplate(excelTemplate, workSheetTemplate, rows, ExcelSheetName, "VotreModele", staticMarkers);
+
+// Ajout du formatage des lignes
+ CompleteExcelFormating(ref excelTemplate, totalLineNum, endLineNum, nbAxes, 4);
+
+// Sauvegarde PDF/ Excel
+ SaveToCorrectFormat(ref excelFormat, excelTemplate, ref memoryStream, exportFormat);
+....
+
+== Exemple de code dans le projet
+
+Vous pouvez vous inspirer de ce qui est codé dans la classe CompteExploitationController et dérouler les appels.

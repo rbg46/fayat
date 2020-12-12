@@ -1,0 +1,146 @@
+﻿$color_1: #90A4AE;
+$color_2: lightgrey;
+$color_3: #0052A0;
+$background_color_1: red;
+$background_color_2: transparent;
+$background_color_3: lightgrey;
+$border_color_1: #0990B7;
+
+
+.tile {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.commandes {
+    border-left: 5px #78C1DD solid;
+    padding-left: 15px;
+    margin-left: 15px;
+}
+
+.commande {
+    border: 1px solid #E3E9FC;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+    margin-bottom: 8px;
+    height: 120px;
+    width: 250px;
+    margin: 5px;
+    padding-left: 15px;
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+        border-color: $border_color_1;
+    }
+
+    .detail {
+        input[type="checkbox"] {
+            & + label {
+                span {
+                    border: 1.5px #0052A0 solid !important;
+                    width: 10px;
+                    height: 10px;
+                }
+            }
+        }
+
+        background-color: $background_color_2;
+        padding-right: 5px;
+    }
+}
+
+.commande-detail {
+    float: left;
+    position: absolute;
+    left: 25px;
+    top: 25px;
+    background-color: $background_color_1;
+    width: 250px;
+    visibility: hidden;
+    z-index: 1000;
+    height: 250px;
+}
+
+.commande-selected {
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-bottom: 15px solid white;
+        border-right: 15px solid red;
+        width: 0;
+    }
+}
+
+.status {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 5px;
+    font-size: 10px;
+}
+
+.numero-commande {
+    font-size: 9px;
+    float: right;
+    padding-top: 5px;
+}
+
+fred-label {
+    display: block;
+    font-size: 9px;
+    color: $color_1;
+    z-index: 2;
+}
+
+fred-val {
+    display: block;
+    font-size: 12px;
+    z-index: 2;
+}
+
+.pourcentage-jauge {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    font-size: 10px;
+    color: $color_2;
+    z-index: 1;
+    height: 5px;
+    background: #0052A0;
+}
+
+.pourcentage-matrice {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    font-size: 10px;
+    color: $color_2;
+    z-index: 1;
+    height: 5px;
+    background-color: $background_color_3;
+    width: 100%;
+}
+
+.pourcentage-text {
+    position: absolute;
+    bottom: 6px;
+    left: 5px;
+    font-size: 10px;
+    color: $color_3;
+}
+
+.montants {
+    display: inline-flex;
+    margin: 0px;
+    padding: 0px;
+}
+
+.montant {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    text-align: left;
+    width: 60px;
+    padding: 0px;
+}

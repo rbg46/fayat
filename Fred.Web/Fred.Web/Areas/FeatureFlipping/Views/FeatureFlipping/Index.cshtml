@@ -1,0 +1,54 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+@{
+    ViewBag.Title = FeatureFeatureFlipping.FeatureFlipping_Index_Titre;
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+@section styles {
+    @Styles.Render("~/FeatureFlippingIndexBundleFactory.css")
+}
+
+@section scripts {
+    @Scripts.Render("~/FeatureFlippingIndexBundleFactory.js")
+    @this.RenderResources("FeatureFeatureFlipping")
+}
+
+<div class="container" ng-controller="FeatureFlippingController as ctrl">
+
+    <div class="toleft">
+
+        <!-- START : Titre de la page -->
+        <h1><span class="flat">{{ctrl.resources.FeatureFlipping_Index_Titre}}</span></h1>
+        <!--END : Titre de la page -->
+
+        <!--LISTE : START-->
+        <div class="row">
+            <div class="col-md-12">
+                <div ng-repeat="item in ctrl.featureList">
+                    <div class="row line">
+                        <div class="col-md-2">
+                            <div class="lb">{{ctrl.resources.FeatureFlipping_Index_PanelMain_FeatureName}}</div>
+                            <div class="val">{{item.Name}}</div>
+                        </div>
+                        <div class="col-md-4">
+                            <div ng-if="item.IsActived" class="lb">{{ctrl.resources.FeatureFlipping_Index_PanelMain_DateActivation}}</div>
+                            <div ng-if="!item.IsActived" class="lb">{{ctrl.resources.FeatureFlipping_Index_PanelMain_DateDesactivation}}</div>
+                            <div class="val">{{item.DateActivation | date: 'dd/MM/yyyy HH:mm'}}</div>
+                        </div>
+                        <div class="col-md-4">
+
+                            <div ng-if="item.IsActived" class="lb">{{ctrl.resources.FeatureFlipping_Index_PanelMain_UserActivation}}</div>
+                            <div ng-if="!item.IsActived" class="lb">{{ctrl.resources.FeatureFlipping_Index_PanelMain_UserDesactivation}}</div>
+                            <div class="val">{{item.UserActivation}}</div>
+                        </div>
+                        <div class="col-md-1" ng-click="ctrl.handleUpdate(item)">
+                            <div class="bdg actif" ng-if="item.IsActived">{{ctrl.resources.Global_Actif}}</div>
+                            <div class="bdg inactif" ng-if="!item.IsActived">{{ctrl.resources.Global_Inactif}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <!--LISTE : END-->
+        </div>
+    </div>
+</div>

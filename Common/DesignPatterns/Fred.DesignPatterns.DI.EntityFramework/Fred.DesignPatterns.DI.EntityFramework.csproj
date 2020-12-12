@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Fred.ImportExport\Fred.ImportExport.DataAccess.Interfaces\Fred.ImportExport.DataAccess.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\Fred.ImportExport\Fred.ImportExport.DataAccess\Fred.ImportExport.DataAccess.csproj" />
+    <ProjectReference Include="..\..\..\Fred.ImportExport\Fred.ImportExport.Database\Fred.ImportExport.Database.csproj" />
+    <ProjectReference Include="..\..\..\Fred.Web\Fred.DataAccess\Fred.DataAccess.csproj" />
+    <ProjectReference Include="..\..\..\Fred.Web\Fred.EntityFramework\Fred.EntityFramework.csproj" />
+    <ProjectReference Include="..\Fred.DesignPatterns.DI\Fred.DesignPatterns.DI.csproj" />
+  </ItemGroup>
+
+</Project>

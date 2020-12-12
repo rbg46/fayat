@@ -1,0 +1,19 @@
+﻿<div class="row_container col-md-5 col-lg-5">
+  <label class="infofilter">{{$ctrl.resources.resources.Title_Gerer_Equipe_Chercher_Ouvrier}}</label>
+  <div class="filterOuvrier">
+    <div class="inner-addon right-addon">
+      <i class="chev material-icons">chevron_right</i>
+      <lookup ng-model="$ctrl.ouvrier"
+              search-placeholder="{{$ctrl.resources.Title_Ouvrier}}"
+              search-title="{{$ctrl.resources.Title_Ouvrier}}"
+              url="/api/Personnel/SearchLight/?statut=1&"
+              on-select="$ctrl.handleChangeOuvrier(item)">
+
+
+        <input type="text"
+               class="form-control"
+               placeholder="{{$ctrl.resources.Title_Ouvrier}}" />
+      </lookup>
+    </div>
+  </div>
+</div>

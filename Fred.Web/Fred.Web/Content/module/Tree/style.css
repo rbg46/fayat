@@ -1,0 +1,158 @@
+﻿.tree {
+    height: 600px;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 300px;
+}
+
+.tree::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+}
+
+.tree::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F5F5F5;
+}
+
+.tree::-webkit-scrollbar-thumb {
+    background-color: #276AC5;
+}
+
+.level1 {
+    background-image: url("/medias/images/picto/tree/level1.png");
+}
+
+.level1 .detail .label2 {
+    color: #0253A2;
+    font-weight: 500;
+}
+
+.level2 {
+    background-image: url("/medias/images/picto/tree/level2.png");
+}
+
+.level2 .detail .label2 {
+    color: #09ADA6;
+}
+
+.level3 {
+    background-image: url("/medias/images/picto/tree/level3.png");
+}
+
+.level3 .detail .label2 {
+    color: #0990B7;
+}
+
+.level4 {
+    background-image: url("/medias/images/picto/tree/level4.png");
+}
+
+.level4 .nbr {
+    color: #09ADA6;
+}
+
+.level4 .detail .label2 {
+    color: #6A6C8C;
+}
+
+.level5 {
+    background-image: url("/medias/images/picto/tree/level5.png");
+}
+
+.level6 {
+    background-image: url("/medias/images/picto/tree/level6.png");
+}
+
+.level7 {
+    background-image: url("/medias/images/picto/tree/level7.png");
+}
+
+.level8 {
+    background-image: url("/medias/images/picto/tree/level8.png");
+}
+
+.level9 {
+    background-image: url("/medias/images/picto/tree/level9.png");
+}
+
+.level10 {
+    background-image: url("/medias/images/picto/tree/level10.png");
+}
+
+.level1s {
+    background-image: url("/medias/images/picto/tree/level1s.png");
+}
+
+.level2s {
+    background-image: url("/medias/images/picto/tree/level2s.png");
+}
+
+.level3s {
+    background-image: url("/medias/images/picto/tree/level3s.png");
+}
+
+.level4s {
+    background-image: url("/medias/images/picto/tree/level4s.png");
+}
+
+.level {
+    width: 300px;
+    display: flex;
+    background-repeat: repeat-y;
+    background-position: left;
+    cursor: pointer;
+}
+
+.level .nbr {
+    padding-top: 15px;
+    width: 80px;
+    text-align: right;
+    font-size: 15px;
+    font-weight: 400;
+    color: white;
+    padding-right: 5px;
+    vertical-align: middle;
+}
+
+.level .infos {
+    padding-left: 15px;
+    display: flex;
+    width: 300px;
+    padding-right: 15px;
+}
+
+.level .infos:hover {
+    background-color: #e1e3e5;
+}
+
+.level .detail label {
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    padding-left: 5px;
+}
+
+.separateur {
+    width: 300px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 1px;
+    background-color: #CCCCCC;
+}
+
+.limiteur {
+    border-bottom: #CCCCCC 1px solid;
+}
+
+.compteur {
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 45px;
+    border-radius: 20rem;
+    height: 20px;
+    font-weight: 400;
+    color: black;
+    margin-top: 10px;
+    background-color: #e1e3e5;
+}

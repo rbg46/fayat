@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{17451402-6778-4A17-8DB1-542D50DB8C94}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fred.DataAccess.ExternalService</RootNamespace>
+    <AssemblyName>Fred.DataAccess.ExternalService</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Fred.DataAccess.ExternalService.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Fred.DataAccess.ExternalService.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'SpeedDebug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\SpeedDebug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>Fred.DataAccess.ExternalService.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.Client.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NLog.4.6.7\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FredImportExport\Ci\CIRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\Ci\ICIRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\Commande\ICommandeRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\CommandeLigne\CommandeLigneRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\CommandeLigne\ICommandeLigneRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\EcritureComptable\CloturePeriodeWebModel.cs" />
+    <Compile Include="FredImportExport\Fournisseur\IFournisseurRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\Materiel\IMaterielRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\Materiel\MaterielRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\Moyen\IMoyenRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\Moyen\MoyenRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\Notification\INotificationRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\Notification\NotificationRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\Personnel\PersonnelRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\Personnel\IPersonnelRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\Rapport\IRapportRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\Rapport\RapportRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\BaseExternalRepositoy.cs" />
+    <Compile Include="FredImportExport\Reception\IReceptionRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\Reception\ReceptionRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\EcritureComptable\IEcritureComptableRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\Fournisseur\FournisseurRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\Commande\CommandeRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\EcritureComptable\EcritureComptableRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\ValidationPointage\IValidationPointageRepositoryExterne.cs" />
+    <Compile Include="FredImportExport\ValidationPointage\ValidationPointageRepositoryExterne.cs" />
+    <Compile Include="IExternalRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebApiEndPoints.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebApiEndPoints.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\Fred.Analysis\LogicalWebArchitecture.layerdiagram">
+      <Link>LogicalWebArchitecture.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
+    <AdditionalFiles Include="..\Fred.Analysis\LogicalFredIEArchitecture.layerdiagram">
+      <Link>LogicalFredIEArchitecture.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
+    <None Include="app.config" />
+    <None Include="Fred.DataAccess.ExternalService.ruleset" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\GroupSpecific\Fred.GroupSpecific.Infrastructure\Fred.GroupSpecific.Infrastructure.csproj">
+      <Project>{1D92BA5A-088D-490F-B4BF-A651DE44D4F3}</Project>
+      <Name>Fred.GroupSpecific.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.Entities\Fred.Entities.csproj">
+      <Project>{D84768F7-F096-4E6D-997E-AC1D9232B47A}</Project>
+      <Name>Fred.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.Framework\Fred.Framework.csproj">
+      <Project>{92478535-02C7-44E0-975E-E31D77E78CCA}</Project>
+      <Name>Fred.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.Notifications.Interfaces\Fred.Notifications.Interfaces.csproj">
+      <Project>{2D1182CF-6EA5-48F3-838F-98C3D9DA0B8E}</Project>
+      <Name>Fred.Notifications.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.SignalR\Fred.SignalR.csproj">
+      <Project>{179072C3-BC2E-4001-9072-059A0291599F}</Project>
+      <Name>Fred.SignalR</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fred.Web.Shared\Fred.Web.Shared.csproj">
+      <Project>{8EA425DA-8EEC-45C5-B5A1-B150FB84AE7E}</Project>
+      <Name>Fred.Web.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="WebApiEndPoints.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>WebApiEndPoints.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.10.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
+    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.10.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\Google.Protobuf.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.6.6.0.3969\analyzers\SonarAnalyzer.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

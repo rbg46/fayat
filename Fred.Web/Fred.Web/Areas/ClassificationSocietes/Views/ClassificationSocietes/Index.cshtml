@@ -1,0 +1,214 @@
+﻿@using Fred.Web.Shared.App_LocalResources
+
+@{
+
+    ViewBag.Title = "ClassificationSocietes";
+
+
+    Layout = "~/Views/Shared/_Layout.new.cshtml";
+}
+
+@section scripts {
+    @Scripts.Render("~/ClassificationSocietesIndexBundle.js")
+    @this.RenderResources("FeatureClassificationSocietes")
+}
+
+@section styles {
+    @Styles.Render("~/ClassificationSocietesIndexBundle.css")
+}
+
+<div class="container Classificationsocietes" ng-controller="ClassificationSocietesController as $ctrl">
+
+    <div id="PanelMain" class="toleft">
+
+        <!-- START : Titre de la page -->
+        <h1>{{$ctrl.resources.Title_ClassSoc}}</h1>
+        <!--END : Titre de la page -->
+
+        <div class="row">
+            <!--BEGIN : Picklist Societe -->
+            <div class="col-md-5">
+                <label class="infoFilter"></label>
+                <div class="filter">
+                    <div class="inner-addon right-addon">
+                        <i class="chev material-icons">chevron_right</i>
+                        <lookup ng-model="$ctrl.GrpSelected"
+                                search-placeholder="{{$ctrl.resources.PlaceHolder_GroupeSociete}}"
+                                search-title="{{$ctrl.resources.TitleSearch_Lookup_Groupe}}"
+                                on-select="$ctrl.GrpSelectedChanged();"
+                                url="/api/Groupe/GetAllGroupForConnectedUser">
+                            <input type="text"
+                                   class="form-control"
+                                   ng-value="$ctrl.GrpSelected.Libelle"
+                                   placeholder="{{$ctrl.resources.PlaceHolder_GroupeSociete}}"
+                                   title="{{$ctrl.GrpSelected.Libelle}}"
+                                   readonly />
+                        </lookup>
+                    </div>
+                </div>
+            </div>
+            <!--END : Picklist Societe -->
+            <!--BEGIN : Recherche -->
+            <div class="col-md-5" ng-if="$ctrl.IsGroupSelected">
+                <label class="infoFilter"></label>
+                <div class="filter">
+                    <div class="input-group">
+                        <input class="form-control txt"
+                               type="text"
+                               id="txtRecherche"
+                               name="Recherche"
+                               placeholder="{{$ctrl.resources.PlaceHolder_ClasseSociete}}"
+                               ng-model="$ctrl.FilterInput"
+                               ng-change="" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary y_search"
+                                    title=""
+                                    type="button"
+                                    ng-click="">
+                                <i class="material-icons">search</i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--END : Recherche -->
+            <!--BEGIN : Bouton pour ajouter Items -->
+            <div class="col-md-2 add-search" ng-if="$ctrl.IsGroupSelected">
+                <span class="pull-right">
+                    <label class="infoFilter"></label>
+                    <i class="flaticon flaticon-add  icoplus " title="" ng-click="$ctrl.handleClickOpen()"></i>
+                </span>
+            </div>
+            <!--END : Bouton pour ajouter Items -->
+        </div>
+
+        <!--LISTE : START-->
+        <div class="row results" id="Table">
+            <div class="col-md-12 refs-list">
+                <div ng-repeat="item in $ctrl.classSocieteList | codeLibelleFilter: $ctrl.FilterInput">
+                    @*repeat*@
+                    <div class="row line" ng-click="$ctrl.handleSelect(item)">
+                        <div class="col-md-2">
+                            <span class="t1">{{item.Code}}</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="lb">Libellé</div>
+                            <span class="t2">{{item.Libelle}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="bdg actif" ng-if="item.Statut === true">Actif</div>
+                            <div class="bdg inactif" ng-if="item.Statut === false">Inactif</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--LISTE : END-->
+
+    </div>
+
+
+    <!--DETAILS PANEL : START-->
+    <div ng-class="$ctrl.IsOpen ? 'blockScreen' : '' "
+         style="z-index:99"></div>
+    <!-- ng-class="checkDispl=yOptions + ' ' + checkFormatOptions" AK -->
+    <div class="options"
+         id="PanelRight"
+         ng-if="$ctrl.IsOpen">
+
+
+        <!--HEADER TOOLBAR :  {'is-already-used':isAlreadyUsed} AK BEGIN-->
+        <div class="toolbar"
+             ng-class="">
+            <div class="flaticon flaticon-home-2 grandicone"></div>
+        </div>
+        <!--HEADER TOOLBAR : END-->
+        <!-- Titre : BEGIN -->
+        <div class="form-header" id="Titre">
+            <h2>
+                <span ng-show="!$ctrl.ModeCreation">{{$ctrl.resources.ModifClass}}</span>
+                <span ng-show="$ctrl.ModeCreation">{{$ctrl.resources.AddClass}}</span>
+            </h2>
+            <label class="legend">{{$ctrl.resources.RequiredFieldMessage}}</label>
+        </div>
+        <!-- Titre : END -->
+
+        <div class="form fred-scroll">
+            <!--Formulaire: START-->
+            <form autocomplete="off" name="$ctrl.formClassificationSociete" novalidate>
+                <!--FIELD Active: START-->
+                <div class="col-md-offset-8 chb_r">
+                    <input id="chkActif" type="checkbox" ng-model="$ctrl.class.Statut"/>
+                    <label for="chkActif"><span></span>Actif</label>
+                </div>
+                <!--FIELD Active: END-->
+                <!--FIELD Code: START-->
+                <div class="form-group">
+                    <label for="txtCode">{{$ctrl.resources.inputCode_Title}}</label>
+                    <input class="form-control" type="text" id="txtCode" name="Code" required placeholder="{{$ctrl.resources.PlaceHolder_InputCode}}" ng-model="$ctrl.class.Code" maxlength="20" />
+                    <span class="text-danger"
+                          ng-show="$ctrl.formClassificationSociete.Code.$error.required && $ctrl.formClassificationSociete.$submitted">
+                        * {{$ctrl.resources.Global_Control_DataRequired_Erreur}}
+                    </span>
+                </div>
+                <!--FIELD Code: END-->
+                <!--FIELD Libelle: START-->
+                <div class="form-group">
+                    <label for="txtLibelle">{{$ctrl.resources.Text_Libelle}} *</label>
+                    <input class="form-control" type="text" id="txtLibelle" name="Libelle" required placeholder="{{$ctrl.resources.Text_Libelle}}" ng-model="$ctrl.class.Libelle" maxlength="500" />
+                    <span class="text-danger"
+                          ng-show="$ctrl.formClassificationSociete.Libelle.$error.required && $ctrl.formClassificationSociete.$submitted">
+                        * {{$ctrl.resources.Global_Control_DataRequired_Erreur}}
+                    </span>
+                </div>
+                <!--FIELD Libelle: END-->
+                <!--FOOTER TOOLBAR : BEGIN-->
+                <div class="footer">
+                    <div class="buttons">
+                        <button class="btn btn-default"
+                                type="submit"
+                                ng-disabled=""
+                                ng-click="$ctrl.handleClickSave();"
+                                title="">
+                            {{$ctrl.resources.btn_Save}}
+                        </button>
+                        <button class="btn btn-primary"
+                                type="submit"
+                                ng-disabled=""
+                                ng-click="$ctrl.handleClickSaveCreat();"
+                                title="">
+                            {{$ctrl.resources.btn_Save_New}}
+                        </button>
+                        <button class="btn" type="submit"
+                                ng-if="$ctrl.class.SocieteClassificationId > 0"
+                                ng-click="$ctrl.handleClickDelete();"
+                                title="">
+                            {{$ctrl.resources.btn_Delete}}
+                        </button>
+                        <button class="btn btn-link"
+                                type="button"
+                                ng-click="$ctrl.handleClickCancel();"
+                                title="">
+                            {{$ctrl.resources.btn_Cancel}}
+                        </button>
+                    </div>
+                </div>
+                <!--FOOTER TOOLBAR : END-->
+                <div class="close_panel"
+                     ng-click="$ctrl.handleClickCancel();"
+                     title="">
+                    <i class="fa fa-angle-right"
+                       aria-hidden="true"></i>
+                    <span>{{$ctrl.resources.btn_ClosePanel}}</span>
+                </div>
+            </form>
+            <!--Formulaire: END-->
+
+        </div>
+    </div>
+    <!--DETAILS PANEL : END-->
+
+
+</div>
+

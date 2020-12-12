@@ -1,0 +1,104 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title"><i class="flaticon flaticon-shuffle-1"></i> {{$ctrl.resources.Entete_Commande_Energie}}</h2>
+        <i class="flaticon flaticon-multiply close pull-right" data-dismiss="modal" ng-click="$ctrl.handleCancel()" title="{{resources.Global_Modal_Annuler_Tooltip}}"></i>
+    </div>
+    <form name="$ctrl.form" autocomplete="off">
+        <div class="modal-body">
+            <div class="row">
+                <!--Type d'Energie-->
+                <div class="col-lg-6 col-md-6 no-pl" ng-class="{'has-error': $ctrl.form.$submitted && $ctrl.form.typeEnergieInput.$invalid }">
+                    <label class="control-label">{{$ctrl.resources.Type_Energie_Commande_Energie}} <span class="required_BR"> *</span> </label>
+                    <span class="text-danger" ng-show="$ctrl.form.$submitted && $ctrl.form.typeEnergieInput.$invalid">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                    <select id="nrg-type" class="form-control input-filter" name="typeEnergieInput"
+                            ng-model="$ctrl.commande.TypeEnergieId"
+                            ng-options="item.TypeEnergieId as item.Libelle for item in $ctrl.typeEnergies"
+                            ng-selected="$ctrl.commande.TypeEnergieId === item.TypeEnergieId"
+                            ng-change="$ctrl.handleChangeTypeEnergie()"
+                            ng-required="true"></select>
+                </div>
+                <!--Période-->
+                <div class="col-lg-6 col-md-6 no-pr" ng-class="{'has-error': $ctrl.form.$submitted && $ctrl.form.periodeInput.$invalid }">
+                    <label class="control-label">{{$ctrl.resources.Global_Period}} <span class="required_BR"> *</span></label>
+                    <span class="text-danger" ng-show="$ctrl.form.$submitted && $ctrl.form.periodeInput.$invalid">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                    <app-date-picker id="Periode"
+                                     format="MM/YYYY"
+                                     lang="fr"
+                                     initial-date="{{$ctrl.today}}"
+                                     placeholder="Période"
+                                     ng-model="$ctrl.commande.Date"
+                                     name="periodeInput"
+                                     ng-required="true">
+                    </app-date-picker>
+                </div>
+            </div>
+            <div class="row">
+                <!--Chantier-->
+                <div class="col-lg-12 col-md-12 no-padding" ng-class="{'has-error': $ctrl.form.$submitted && $ctrl.form.ciInput.$invalid }">
+                    <label class="control-label">{{$ctrl.resources.Libelle_Chantier_SEP}}<span class="required_BR"> *</span></label>
+                    <span class="text-danger" ng-show="$ctrl.form.$submitted && $ctrl.form.ciInput.$invalid">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                    <lookup-standalone ng-model="$ctrl.commande.CI"
+                                       text="$ctrl.commande.CI.CodeLibelle"
+                                       name="ciInput"
+                                       search-title="{{$ctrl.resources.Global_ReferentielCI}}"
+                                       search-placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                       custom-template-url="/Scripts/directive/lookup/custom-templates/ci.template.html"
+                                       url="/api/CommandeEnergie/Search/Ci"
+                                       placeholder="{{$ctrl.resources.Global_ReferentielCI_Placeholder}}"
+                                       on-select="$ctrl.handleLookupSelection('CI', item)"
+                                       show-delete-button="false"
+                                       tooltip="$ctrl.commande.CI.CodeLibelle"
+                                       show-in-popup="true"
+                                       class="formulaire long"
+                                       ng-required="true">
+                    </lookup-standalone>
+                </div>
+            </div>
+            <div class="row">
+                <!--Fournisseur Partenaire-->
+                <div class="col-lg-12 col-md-12 no-padding" ng-class="{'has-error': $ctrl.form.$submitted && $ctrl.form.fournisseurInput.$invalid }">
+                    <label class="control-label">{{$ctrl.resources.Libelle_Fournisseur_Partenaire}}<span class="required_BR"> *</span></label>
+                    <span class="text-danger" ng-show="$ctrl.form.$submitted && $ctrl.form.fournisseurInput.$invalid">{{$ctrl.resources.Global_Control_DataRequired_Erreur}}</span>
+                    <lookup-standalone ng-model="$ctrl.commande.Fournisseur"
+                                       text="$ctrl.commande.Fournisseur.CodeLibelle"
+                                       name="fournisseurInput"
+                                       search-title="{{$ctrl.resources.Global_ReferentielFournisseur}}"
+                                       search-placeholder="{{$ctrl.resources.Global_ReferentielFournisseur_Placeholder}}"
+                                       on-select="$ctrl.handleLookupSelection('Fournisseur', item);"
+                                       show-delete-button="false"
+                                       placeholder="{{$ctrl.resources.Global_ReferentielFournisseur_Placeholder}}"
+                                       tooltip="$ctrl.commande.Fournisseur.CodeLibelle"
+                                       class="formulaire long"
+                                       url="/api/CommandeEnergie/Search/Fournisseur?&ciId={{$ctrl.commande.CI.CiId}}&"
+                                       custom-template-url="/Scripts/directive/Lookup/custom-templates/fournisseur.template.html"
+                                       active-second-search-input="true"
+                                       show-in-popup="true"
+                                       search-placeholder2="Autres informations...(Adresse, Code, SIREN)"
+                                       search-tooltip='Commencez votre saisie par * si vous ne connaissez pas le début du nom (exemple : "*location").'
+                                       ng-required="true"
+                                       ng-disabled="$ctrl.commande.CI!=null ? disabled:!disabled">
+                    </lookup-standalone>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-default" ng-click="$ctrl.handleValidate()" title="{{$ctrl.resources.Global_Bouton_Valider_Tooltip}}" ng-disabled=$ctrl.busy>{{$ctrl.resources.Global_Bouton_Valider}}</button>
+            <span class="material-icons error-icon"
+                  ng-if="$ctrl.commandeHeaderErrors.length > 0"
+                  popover-title="{{$ctrl.resources.Commande_Detail_ListeErreurs}}"
+                  uib-popover-template="'popoverTemplateHeader'"
+                  popover-trigger="'mouseenter'"
+                  popover-placement="top-left">warning</span>
+        </div>
+    </form>
+
+    <!-- Popover Liste d'erreurs de validation-->
+    <script type="text/ng-template" id="popoverTemplateHeader">
+        <ul class="popoverList" ng-if="$ctrl.commandeHeaderErrors.length > 0">
+            <li ng-repeat="erreur in $ctrl.commandeHeaderErrors track by $index">
+                {{erreur}}
+            </li>
+        </ul>
+    </script>
+
+</div>
